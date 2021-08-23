@@ -5,20 +5,25 @@ import PASSWORD_MINIMUM_LENGTH from '../service/Constants';
 import SubmitButton from './SubmitButton';
 
 export default function LoginForms() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
 
-  const handleClick = () => {};
+  const handleClick = (event) => {
+    event.preventDefault();
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email: userEmail }));
+  };
 
   const emailInputProps = {
     testId: 'email-input',
     id: 'emailInputField',
     label: 'Login',
     name: 'email',
-    onChange: ({ target: { value } }) => setEmail(value),
+    onChange: ({ target: { value } }) => setUserEmail(value),
     placeholder: 'Digite seu email',
     type: 'email',
-    value: email,
+    value: userEmail,
   };
 
   const passwordInputProps = {
@@ -26,14 +31,14 @@ export default function LoginForms() {
     id: 'passwordInputField',
     label: 'Senha',
     name: 'password',
-    onChange: ({ target: { value } }) => setPassword(value),
+    onChange: ({ target: { value } }) => setUserPassword(value),
     placeholder: 'Digite sua senha',
     type: 'password',
-    value: password,
+    value: userPassword,
   };
 
   const submitButtonInputProps = {
-    disabled: !(password.length >= PASSWORD_MINIMUM_LENGTH && emailChecker(email)),
+    disabled: !(userPassword.length > PASSWORD_MINIMUM_LENGTH && emailChecker(userEmail)),
     id: 'loginButton',
     name: 'loginButton',
     onClick: handleClick,
