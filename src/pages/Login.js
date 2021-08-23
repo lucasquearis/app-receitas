@@ -16,6 +16,12 @@ function Login() {
     });
   }
 
+  const { email, password } = user;
+  
+  const validEmail = /\S+@\S+\.\w+/.test(email);
+  const validPassword = password.length >= 6;
+  const disabled = !(validEmail && validPassword);
+
   return (
     <main>
       <form>
@@ -39,6 +45,7 @@ function Login() {
           text="Entrar"
           onClick={ () => {} }
           testId="login-submit-btn"
+          disabled={ disabled }
         />
       </form>
     </main>
