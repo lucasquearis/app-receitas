@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import verifyLogin from '../helpers/verifyLogin';
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({
@@ -9,17 +10,15 @@ export default function Login() {
 
   function checkValid() {
     const { email, password } = loginForm;
-    const MIN_LENGTH = 7;
-    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    if (regex.test(email) && password.length >= MIN_LENGTH) {
-      setBtnDisable(false);
-    } else {
-      setBtnDisable(true);
-    }
+    setBtnDisable(!verifyLogin(email, password));
   }
 
   function handleChange({ target: { name, value } }) {
     setLoginForm({ ...loginForm, [name]: value });
+  }
+
+  function handleClick() {
+
   }
 
   useEffect(checkValid, [loginForm]);
@@ -52,7 +51,7 @@ export default function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ btnDisable }
-        // onClick={ handleClick }
+        onClick={ handleClick }
       >
         Entrar
       </button>
