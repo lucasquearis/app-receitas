@@ -18,7 +18,8 @@ export default function Login() {
   }
 
   function handleClick() {
-
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
   }
 
   useEffect(checkValid, [loginForm]);
