@@ -21,6 +21,11 @@ function Home() {
     console.log(value);
   };
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   return (
     <div>
       <h2>Login</h2>
@@ -50,6 +55,7 @@ function Home() {
             type="button"
             data-testid="login-submit-btn"
             disabled={ button }
+            onClick={ handleClick }
           >
             Entrar
           </button>
