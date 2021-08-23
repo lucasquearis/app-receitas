@@ -12,6 +12,10 @@ function App() {
         path="/"
         component={ () => <Login /> }
       />
+      <Route
+        exact
+        path="/comidas"
+      />
     </Switch>
   );
 }

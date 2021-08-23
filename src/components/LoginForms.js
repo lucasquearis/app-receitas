@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router';
 import emailChecker from '../service/AuxiliaryFunctions';
 import Input from './Input';
 import PASSWORD_MINIMUM_LENGTH from '../service/Constants';
@@ -7,12 +8,14 @@ import SubmitButton from './SubmitButton';
 export default function LoginForms() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   const handleClick = (event) => {
     event.preventDefault();
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: userEmail }));
+    setRedirect(true);
   };
 
   const emailInputProps = {
@@ -51,6 +54,7 @@ export default function LoginForms() {
       <Input { ...emailInputProps } />
       <Input { ...passwordInputProps } />
       <SubmitButton { ...submitButtonInputProps } />
+      { redirect ? <Redirect to="/comidas" /> : null }
     </form>
   );
 }
