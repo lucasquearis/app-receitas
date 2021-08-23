@@ -33,7 +33,7 @@ function Login() {
   if (shouldRedirect) return <Redirect to="/comidas" />;
 
   return (
-    <form className="p-3" onSubmit={ (event) => handleSubmit(event) }>
+    <form className="px-3 py-4" onSubmit={ (event) => handleSubmit(event) }>
       <InputGroup className="mb-2">
         <FormControl
           data-testid="email-input"
@@ -42,7 +42,7 @@ function Login() {
           onChange={ ({ target: { value } }) => setEmail(value) }
         />
       </InputGroup>
-      <InputGroup className="mb-2">
+      <InputGroup className="mb-3">
         <FormControl
           data-testid="password-input"
           placeholder="Password"
