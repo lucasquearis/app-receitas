@@ -26,7 +26,7 @@ function Header({ title, renderSearchIcon }) {
           </Nav>
         )}
       </Navbar>
-      { showSearch && <p>test</p>}
+      { showSearch && <SearchBar />}
     </header>
   );
 }
