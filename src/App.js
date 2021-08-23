@@ -3,10 +3,13 @@ import { Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer/index';
 
 import Login from './pages/Login';
+import Provider from './context/Provider';
+
+import './App.css';
 
 function App() {
   return (
-    <>
+    <Provider>
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/comidas" />
@@ -24,8 +27,7 @@ function App() {
         <Route path="/receitas-favoritas" />
       </Switch>
       <Footer />
-      <Route path="/" />
-    </>
+    </Provider>
   );
 }
 
