@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { arrayOf, string } from 'prop-types';
+import AppContext from '../context/AppContext';
 import verifyLogin from '../helpers/verifyLogin';
 
-export default function Login() {
+export default function Login({ history }) {
+  const { user, setUser } = useContext(AppContext);
   const [loginForm, setLoginForm] = useState({
     email: '',
     password: '',
@@ -18,8 +21,10 @@ export default function Login() {
   }
 
   function handleClick() {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
+    const { email } = loginForm;
+    setUser({ ...user, email });
+    console.log(history);
+    history.push('/comidas');
   }
 
   useEffect(checkValid, [loginForm]);
@@ -59,3 +64,7 @@ export default function Login() {
     </form>
   );
 }
+
+Login.propTypes = {
+  history: arrayOf(string).isRequired,
+};
