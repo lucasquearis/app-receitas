@@ -7,7 +7,6 @@ function Provider({ children }) {
     email: '',
     password: '',
   });
-
   const [buttonDisabled, setButtonDisabled] = useState({
     disabled: true,
   });
@@ -32,7 +31,15 @@ function Provider({ children }) {
       [name]: value,
     });
     validButton();
+    const inputEmail = document.getElementById('email-input');
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email: `${inputEmail.value}` }));
   };
+
+  // const submitButton = () => {
+
+  // };
 
   const context = {
     buttonDisabled,
