@@ -1,14 +1,16 @@
-import React, { useEffect, useContext } from 'react';
-import FetchFood from '../fetchs/FetchFood';
-import myContext from '../context/MyContext';
+import React, { useContext } from 'react';
+import MyContext from '../context/MyContext';
+import fetchFoods from '../fetchs/FetchFood';
 
 function Login() {
-  console.log(useContext(myContext));
+  const { handleClick, data, name, setName } = useContext(MyContext);
+  console.log(data);
   return (
     <section>
+      <input type="text" onChange={ (event) => setName(event.target.value) } />
       <button
         type="button"
-        onClick={ () => FetchFood('procuraComida', 'rice') }
+        onClick={ () => handleClick('procuraComida', name) }
       >
         ABC
       </button>
