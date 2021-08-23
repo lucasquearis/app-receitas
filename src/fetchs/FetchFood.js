@@ -1,15 +1,25 @@
 import React, { useEffect, useContext, useState } from 'react';
+import myContext from '../context/MyContext';
 
-function FetchFood() {
-  const food = 'rice';
-  const [data, setData] = useState([]);
+function FetchFood(action, food = '') {
+  // const { context } = useContext(myContext);
+  // console.log(context);
+  const actions = {
+    procuraComida: 'search.php?s=',
+    random: 'random.php',
+  };
+
   const fetchFoods = async () => {
-    const endPoint = `www.themealdb.com/api/json/v1/1/search.php?s=${food}`;
-    const results = await fetch(endPoint).then((resolve) => resolve.json());
-    setData(results);
+    const endPoint = `https://www.themealdb.com/api/json/v1/1/${actions[action]}${food}`;
+    console.log(endPoint);
+    const response = await fetch(endPoint);
+    const resolve = await response.json();
+    console.log(resolve);
   };
   fetchFoods();
-  console.log(data);
+  return (
+    <p>carregando...</p>
+  );
 }
 
 export default FetchFood;
