@@ -21,6 +21,11 @@ function Login() {
     func(value);
   };
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   return (
     <div>
       <h1>Login</h1>
@@ -40,6 +45,7 @@ function Login() {
         data-testid="login-submit-btn"
         type="button"
         disabled={ buttonDisabled }
+        onClick={ handleClick }
       >
         Entrar
       </button>
