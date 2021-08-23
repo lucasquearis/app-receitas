@@ -21,7 +21,7 @@ function Input(props) {
         type={ type }
         name={ name }
         value={ value }
-        onChange={ onChange }
+        onChange={ (event) => onChange(event.target.value) }
         id={ id }
         data-testid={ testId }
         placeholder={ holder }

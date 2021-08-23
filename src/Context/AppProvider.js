@@ -21,7 +21,7 @@ const INITIAL_AVAILABLE_FILTERS = [
   'surface_water',
 ];
 
-function Provider({ children }) {
+function AppProvider({ children }) {
   const [data, setData] = useState([]);
   const [filters, setFilters] = useState(INITIAL_FILTERS);
   const [filteredData, setFilteredData] = useState([]);
@@ -108,8 +108,8 @@ function Provider({ children }) {
   );
 }
 
-Provider.propTypes = {
+AppProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Provider;
+export default AppProvider;
