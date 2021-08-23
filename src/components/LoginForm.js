@@ -30,7 +30,9 @@ function Login() {
   function isValid() {
     const passwordLength = 7;
     const validPassword = login.password.length >= passwordLength;
-    const validEmail = (/^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/i).test(login.email);
+    const validEmail = (
+      /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/i
+    ).test(login.email);
     return (validEmail && validPassword);
   }
 
