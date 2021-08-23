@@ -8,8 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <Provider>
-      <Routes>
-        <div className="meals">
+      <div className="meals">
           <span className="logo">TRYBE</span>
           <object
             className="rocksGlass"
@@ -19,7 +18,7 @@ function App() {
             Glass
           </object>
         </div>
-      </Routes>
+      <Routes />
     </Provider>
   );
 }
