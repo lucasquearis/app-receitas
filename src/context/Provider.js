@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Context from './Context';
 
 function Provider({ children }) {
-  const contextValue = { };
+  const [user, setUser] = useState({
+    user: {
+      email: '',
+    },
+  });
+
+  const contextValue = { user, setUser };
 
   return (
-    <Provider.Context value={ contextValue }>
+    <Context.Provider value={ contextValue }>
       {children}
-    </Provider.Context>
+    </Context.Provider>
   );
 }
 
