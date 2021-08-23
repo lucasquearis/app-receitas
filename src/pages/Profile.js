@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function MainFoods() {
+function Profile() {
   return (
     <Header />
   );
 }
 
-export default MainFoods;
+export default Profile;
