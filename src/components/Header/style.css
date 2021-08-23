@@ -1,0 +1,28 @@
+header {
+  background-color: #c4c4c4;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+header p {
+  font-size: 28px;
+  margin: auto;
+}
+
+header img {
+  height: 80%;
+}
+
+header button {
+  background-color: transparent;
+  border: none;
+}
+
+.header-space {
+  height: 62px;
+  width: 320px;
+}

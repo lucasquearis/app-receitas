@@ -1,0 +1,23 @@
+footer {
+  background-color: #c4c4c4;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+}
+
+footer p {
+  font-size: 28px;
+  margin: auto;
+}
+
+footer img {
+  height: 80%;
+}
+
+footer button {
+  background-color: transparent;
+  border: none;
+}
