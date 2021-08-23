@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,6 +11,7 @@ import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import MyRecipes from './pages/MyRecipes';
 import Favorites from './pages/Favorites';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -30,6 +33,7 @@ function App() {
         path="/bebidas:id/in-progress"
         render={ (props) => <Drinks { ...props } /> }
       />
+      <Route component={ Search } />
     </Switch>
   );
 }
