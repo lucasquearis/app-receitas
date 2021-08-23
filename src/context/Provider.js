@@ -7,8 +7,8 @@ function Provider({ children }) {
   const [name, setName] = useState('');
   const [data, setData] = useState();
 
-  const handleClick = async (action, value, callback) => {
-    const result = await fetchFoods(action, value);
+  const handleClick = async (type, action, value, callback) => {
+    const result = await fetchFoods(type, action, value);
     callback(result);
   };
 
@@ -19,6 +19,7 @@ function Provider({ children }) {
     name,
     setData,
   };
+
   return (
     <MyContext.Provider value={ context }>
       {children}

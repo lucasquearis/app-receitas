@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route to="/" component={ Login } />
-          <Route to="/comidas" component={ Login } />
+          {/* <Route to="/comidas" component={ Login } />
           <Route to="/bebidas" component={ Login } />
           <Route to="/comidas/{id-da-receita}" component={ Login } />
           <Route to="/bebidas/{id-da-receita}" component={ Login } />
@@ -25,7 +25,7 @@ function App() {
           <Route to="/explorar/comidas/area" component={ Login } />
           <Route to="/perfil" component={ Login } />
           <Route to="/receitas-feitas" component={ Login } />
-          <Route to="/receitas-favoritas" component={ Login } />
+          <Route to="/receitas-favoritas" component={ Login } /> */}
         </Switch>
       </BrowserRouter>
     </Provider>
