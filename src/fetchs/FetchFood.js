@@ -1,9 +1,9 @@
-const fetchFoods = async (action, food = '') => {
+const fetchFoods = async (action, value = '') => {
   const actions = {
     procuraComida: 'search.php?s=',
     random: 'random.php',
   };
-  const endPoint = `https://www.themealdb.com/api/json/v1/1/${actions[action]}${food}`;
+  const endPoint = `https://www.themealdb.com/api/json/v1/1/${actions[action]}${value}`;
   const response = await fetch(endPoint);
   const resolve = await response.json();
   const result = await resolve;

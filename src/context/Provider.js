@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
 import fetchFoods from '../fetchs/FetchFood';
@@ -6,16 +6,12 @@ import fetchFoods from '../fetchs/FetchFood';
 function Provider({ children }) {
   const [name, setName] = useState('');
   const [data, setData] = useState();
-  // useEffect(() => {
-  //   // fetchFoods('random').then((value) => setData(value));
-  // }, []);
 
-  const handleClick = async (action, food) => {
-    const result = await fetchFoods(action, food);
-    setData(result);
+  const handleClick = async (action, value, callback) => {
+    const result = await fetchFoods(action, value);
+    callback(result);
   };
 
-  console.log(name);
   const context = {
     handleClick,
     data,
