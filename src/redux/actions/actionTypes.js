@@ -1,0 +1,2 @@
+export const LOGIN = 'LOGIN';
+export const EXAMPLE_REQUEST_SUCCESS = 'EXAMPLE_REQUEST_SUCCESS';
