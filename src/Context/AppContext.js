@@ -1,16 +1,16 @@
-import { createContext } from 'react';
+// import { createContext } from 'react';
 
-const INITIAL_CONTEXT = {
-  data: [],
-  filters: {
-    filterByName: {
-      name: '',
-    },
-    filterByNumericValues: [],
-  },
-  filteredData: [],
-};
+// const INITIAL_CONTEXT = {
+//   data: [],
+//   filters: {
+//     filterByName: {
+//       name: '',
+//     },
+//     filterByNumericValues: [],
+//   },
+//   filteredData: [],
+// };
 
-const AppContext = createContext(INITIAL_CONTEXT);
+// const AppContext = createContext(INITIAL_CONTEXT);
 
-export default AppContext;
+// export default AppContext;
