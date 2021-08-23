@@ -21,7 +21,7 @@ function Header({ title, renderSearchIcon }) {
         </Nav>
         <p className="title" data-testid="search-top-btn">{title}</p>
         { renderSearchIcon && (
-          <Nav onClick={ () => setShowSearch(!showSearch) }>
+          <Nav data-testid="search-top-btn" onClick={ () => setShowSearch(!showSearch) }>
             <img className="icon" src={ search } alt="search-icon" />
           </Nav>
         )}

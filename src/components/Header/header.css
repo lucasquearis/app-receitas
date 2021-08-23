@@ -3,13 +3,13 @@
 }
 
 .header-navbar {
+  align-items: center;
+  background-color: cornflowerblue;
   display: flex;
   flex-flow: row nowrap;
-  width: 100%;
-  background-color: cornflowerblue;
   justify-content: space-between;
-  align-items: center;
   padding: 5px;
+  width: 100%;
 }
 
 .title {
