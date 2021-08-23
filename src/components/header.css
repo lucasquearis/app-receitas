@@ -1,0 +1,18 @@
+.header-container {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  background-color: cornflowerblue;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.title {
+  font-size: x-large;
+  margin: auto;
+}
+
+.icon {
+  width: 90%;
+}
