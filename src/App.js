@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import MyRecipes from './pages/MyRecipes';
 import Favorites from './pages/Favorites';
 
+
 function App() {
   return (
     <Switch>
