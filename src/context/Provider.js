@@ -17,8 +17,6 @@ function Provider({ children }) {
     const { disabled } = buttonDisabled;
     const rgeex = /(.*)@(.*).com/;
     const magicNumber = 6;
-    const ifRegex = rgeex.test(email) && (password.length >= magicNumber);
-    console.log(ifRegex);
     if (rgeex.test(email) && (password.length >= magicNumber)) {
       setButtonDisabled({
         disabled: false,
@@ -29,7 +27,6 @@ function Provider({ children }) {
 
   const handleInputs = ({ target }) => {
     const { name, value } = target;
-    console.log(value);
     setUser({
       ...user,
       [name]: value,
