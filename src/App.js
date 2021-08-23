@@ -1,13 +1,12 @@
 import React from 'react';
-import './App.css';
-
+import { AppProvider } from './Context/ContextApp';
 import Header from './components/Header';
 
 function App() {
   return (
-    <div>
+    <AppProvider>
       <Header title="Comida" />
-    </div>
+    </AppProvider>
   );
 }
 
