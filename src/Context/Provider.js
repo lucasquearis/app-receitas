@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from './LoginContext';
 
-export default function LoginProvider({ children }) {
+export default function Provider({ children }) {
   const [email, setEmail] = useState('');
   const contextValue = { email, setEmail };
 
@@ -13,6 +13,6 @@ export default function LoginProvider({ children }) {
   );
 }
 
-LoginProvider.propTypes = {
+Provider.propTypes = {
   children: PropTypes.node.isRequired,
 };
