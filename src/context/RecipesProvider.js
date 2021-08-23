@@ -1,5 +1,7 @@
+// vitals
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// context
 import myContext from './myContext';
 
 function RecipesProvider({ children }) {

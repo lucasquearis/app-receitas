@@ -1,12 +1,13 @@
+// vitals
 import React from 'react';
+import Routes from './Routes';
+// styles
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="meals">
-      Olá
-    </div>
+    <Routes />
   );
 }
 
