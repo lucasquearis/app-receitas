@@ -22,9 +22,9 @@ describe('Header tests', () => {
     expect(pathname).toBe('/profile');
   });
 
-  it.skip('Show search bar when clicking search icon', () => {
+  it('Show search bar when clicking search icon', () => {
     renderWithRouter(<Comidas />);
     fireEvent.click(screen.getByTestId(SEARCH_BTN_SELECTOR));
-    expect(screen.findByTestId('search-input')).toBeInTheDocument();
+    expect(screen.getByTestId('search-input')).toBeInTheDocument();
   });
 });

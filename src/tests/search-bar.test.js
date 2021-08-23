@@ -1,18 +1,23 @@
-// import React from 'react';
-// import { fireEvent, screen } from '@testing-library/react';
-// import Page from '../pages/Page';
+import React from 'react';
+import { fireEvent, screen } from '@testing-library/react';
+import Comidas from '../pages/Comidas';
+import renderWithRouter from '../services/renderWithRouter';
 
-// describe('Testa SearchBar', () => {
-//   beforeEach(() => { renderWithRouter(<Page />); });
+describe('Testa SearchBar', () => {
+  beforeEach(() => { renderWithRouter(<Comidas />); });
 
-//   it(`13 - Implemente os elementos da barra
-//   de busca respeitando os atributos descritos no protótipo`, () => {
-//     fireEvent.click(getByTestId('search-top-btn'));
-//     const searchInput = screen.findByTestId('search-input');
-//     const searchBtn = screen.findByTestId('exec-search-btn');
-//     const searchRadioName = screen.findByTestId('name-search-radio');
-//     const searchRadioIngredient = screen.findByTestId('ingredient-search-radio');
-//     const searchRadioLetter = screen.findByTestId('first-letter-search-radio');
+  it('Should have search form', () => {
+    fireEvent.click(screen.getByTestId('search-top-btn'));
+    const searchInput = screen.getByTestId('search-input');
+    const searchBtn = screen.getByTestId('exec-search-btn');
+    const searchRadioName = screen.getByTestId('name-search-radio');
+    const searchRadioIngredient = screen.getByTestId('ingredient-search-radio');
+    const searchRadioLetter = screen.getByTestId('first-letter-search-radio');
 
-//   });
-// });
+    expect(searchInput).toBeInTheDocument();
+    expect(searchRadioName).toBeInTheDocument();
+    expect(searchRadioIngredient).toBeInTheDocument();
+    expect(searchRadioLetter).toBeInTheDocument();
+    expect(searchBtn).toBeInTheDocument();
+  });
+});
