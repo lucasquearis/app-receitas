@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './routes';
-import myProvider from './context/myProvider';
+import MyProvider from './context/MyProvider';
 
 function App() {
   return (
-    <myProvider>
+    <MyProvider>
       <Routes />
-    </myProvider>
+    </MyProvider>
   );
 }
 
