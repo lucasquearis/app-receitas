@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function SubmitButton(props) {
-  const { className, id, name, onClick, testId, text } = props;
+  const { className, disabled, id, name, onClick, testId, text } = props;
   return (
     <button
       className={ className }
       data-testid={ testId }
+      disabled={ disabled }
       id={ id }
       name={ name }
       onClick={ onClick }
@@ -19,6 +20,7 @@ export default function SubmitButton(props) {
 
 SubmitButton.propTypes = {
   className: PropTypes.string,
+  disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
@@ -28,5 +30,6 @@ SubmitButton.propTypes = {
 
 SubmitButton.defaultProps = {
   className: '',
+  disabled: false,
   testId: '',
 };

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import emailChecker from '../service/AuxiliaryFunctions';
 import Input from './Input';
+import PASSWORD_MINIMUM_LENGTH from '../service/Constants';
 import SubmitButton from './SubmitButton';
 
 export default function LoginForms() {
@@ -31,10 +33,11 @@ export default function LoginForms() {
   };
 
   const submitButtonInputProps = {
-    testId: 'login-submit-btn',
+    disabled: !(password.length >= PASSWORD_MINIMUM_LENGTH && emailChecker(email)),
     id: 'loginButton',
     name: 'loginButton',
     onClick: handleClick,
+    testId: 'login-submit-btn',
     text: 'Entrar',
   };
 

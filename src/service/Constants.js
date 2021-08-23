@@ -1,0 +1,3 @@
+const PASSWORD_MINIMUM_LENGTH = 6;
+
+export default PASSWORD_MINIMUM_LENGTH;
