@@ -29,7 +29,7 @@ function Login() {
 
   const SIX = 6;
   const validEmail = /\S+@\S+\.\w+/.test(email);
-  const validPassword = password.length >= SIX;
+  const validPassword = password.length > SIX;
   const disabled = !(validEmail && validPassword);
 
   return (
