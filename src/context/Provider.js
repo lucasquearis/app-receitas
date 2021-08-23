@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Context from './Context';
 
 function Provider({ children }) {
@@ -23,6 +24,7 @@ function Provider({ children }) {
     }
     return disabled;
   };
+  const history = useHistory();
 
   const handleInputs = ({ target }) => {
     const { name, value } = target;
@@ -37,14 +39,15 @@ function Provider({ children }) {
     localStorage.setItem('user', JSON.stringify({ email: `${inputEmail.value}` }));
   };
 
-  // const submitButton = () => {
-
-  // };
+  const handleClick = () => {
+    history.push('/comidas');
+  };
 
   const context = {
     buttonDisabled,
     handleInputs,
     user,
+    handleClick,
   };
   return (
     <Context.Provider value={ context }>

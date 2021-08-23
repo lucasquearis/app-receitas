@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Login() {
-  const { buttonDisabled, handleInputs, user } = useContext(Context);
+  const { buttonDisabled, handleInputs, user, handleClick } = useContext(Context);
 
   return (
     <div>
@@ -32,6 +32,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ buttonDisabled.disabled }
+        onClick={ handleClick }
       >
         Entrar
       </button>
