@@ -20,7 +20,7 @@ function SearchBar() {
       />
       <InputRadio
         value="first-letter"
-        label="Primeira Letra"
+        label="Primeira letra"
         data-testid="first-letter-search-radio"
       />
       <Button
