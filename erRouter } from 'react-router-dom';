@@ -1,0 +1,63 @@
+[33mcommit 841ab5318ae80d49178415a595419578da11ed69[m[33m ([m[1;36mHEAD -> [m[1;32mmain-group-4-react-redux[m[33m, [m[1;31morigin/main-group-4-react-redux[m[33m)[m
+Merge: 518f1f3 4c0eeb0
+Author: Ygor Saturnino <ygorsaturnino@gmail.com>
+Date:   Mon Aug 23 17:55:43 2021 -0300
+
+    fazendo pull e arrumando conflitos
+
+[33mcommit 518f1f3026f22018757629cf2bd89005fc98f970[m
+Author: Ygor Saturnino <ygorsaturnino@gmail.com>
+Date:   Mon Aug 23 17:49:49 2021 -0300
+
+    Subindo os arquivos
+
+[33mcommit 3779da204f09c2b24ca99b8e05ba9cde0217f33e[m[33m ([m[1;31morigin/main-group-4-redux[m[33m)[m
+Author: Ygor Saturnino <ygorsaturnino@gmail.com>
+Date:   Mon Aug 23 17:33:20 2021 -0300
+
+    ajustando problema no merge
+
+[33mcommit 4c0eeb0b217cfa8b1433688e360cce338ada8078[m
+Author: Ygor Saturnino <82230734+YgorSaturnino@users.noreply.github.com>
+Date:   Mon Aug 23 17:22:24 2021 -0300
+
+    Faz merge dos primeiros arquivos
+
+[33mcommit 63cccfd9418e253d936db185c7d6e93735e9a6a7[m
+Merge: fa71e3b 8d2c49b
+Author: Bruno Davi <48166556+brunodavi@users.noreply.github.com>
+Date:   Mon Aug 23 17:15:34 2021 -0300
+
+    Merge pull request #29 from tryber/main-group-4-redux
+    
+    [ Group 4 ] Redux e Rotas
+
+[33mcommit 8d2c49bd2b53fc13bb74e6da154742539f096d2c[m
+Author: Bruno Davi <brunodaviandrade2000@gmail.com>
+Date:   Mon Aug 23 17:00:50 2021 -0300
+
+    Rotas Criadas
+
+[33mcommit 61d82e8fe80cfef65325f49a929b2b3ddd122083[m
+Author: Bruno Davi <brunodaviandrade2000@gmail.com>
+Date:   Mon Aug 23 16:29:46 2021 -0300
+
+    Configurando Redux
+
+[33mcommit fa71e3bc9516b259286a4848476cdfb630d101dc[m[33m ([m[1;31morigin/main-group-9[m[33m, [m[1;31morigin/main-group-7[m[33m, [m[1;31morigin/main-group-6[m[33m, [m[1;31morigin/main-group-5[m[33m, [m[1;31morigin/main-group-35[m[33m, [m[1;31morigin/main-group-34[m[33m, [m[1;31morigin/main-group-29[m[33m, [m[1;31morigin/main-group-28[m[33m, [m[1;31morigin/main-group-26[m[33m, [m[1;31morigin/main-group-25[m[33m, [m[1;31morigin/main-group-22[m[33m, [m[1;31morigin/main-group-21[m[33m, [m[1;31morigin/main-group-20[m[33m, [m[1;31morigin/main-group-17[m[33m, [m[1;31morigin/main-group-16[m[33m, [m[1;31morigin/main-group-15[m[33m, [m[1;31morigin/main-group-13[m[33m, [m[1;31morigin/main-group-11[m[33m, [m[1;31morigin/main-group-1[m[33m)[m
+Author: Jean Paulo Silva Vasconcelos <jean.vasconcelos6@gmail.com>
+Date:   Sat Aug 21 23:34:11 2021 -0300
+
+    Updating .github/workflows/main.yml
+
+[33mcommit b6089f7f9c18ab0339d02b744af038ac6ea91f56[m
+Author: Jean Paulo Silva Vasconcelos <jean.vasconcelos6@gmail.com>
+Date:   Sat Aug 21 23:34:11 2021 -0300
+
+    Updating README.md
+
+[33mcommit 1c0def24efaad3d600512b1331f591f536748b2d[m
+Author: Jean Paulo Silva Vasconcelos <jean.vasconcelos6@gmail.com>
+Date:   Sat Aug 21 23:34:06 2021 -0300
+
+    Initial commit

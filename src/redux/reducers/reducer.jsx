@@ -1,4 +1,6 @@
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  email: '',
+};
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
