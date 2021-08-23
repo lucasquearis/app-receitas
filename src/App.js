@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Footer from './components/Footer/index';
 
 import Login from './pages/Login';
 
@@ -22,7 +23,7 @@ function App() {
         <Route path="/receitas-feitas" />
         <Route path="/receitas-favoritas" />
       </Switch>
-      {/* Nav Bar */}
+      <Footer />
       <Route path="/" />
     </>
   );
