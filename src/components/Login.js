@@ -3,7 +3,6 @@ import Context from '../context/Context';
 
 function Login() {
   const { buttonDisabled, handleInputs, user } = useContext(Context);
-  console.log(buttonDisabled);
 
   return (
     <div>
