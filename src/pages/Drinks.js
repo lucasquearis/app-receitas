@@ -2,7 +2,9 @@ import React from 'react';
 
 function Drinks() {
   return (
-    <div />
+    <div>
+      Drinks
+    </div>
   );
 }
 
