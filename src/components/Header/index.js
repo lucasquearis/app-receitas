@@ -14,8 +14,8 @@ function Header({ title }) {
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   return (
-    <header>
-      <div className="header-top">
+    <div>
+      <header className="header-top">
         <IconButton
           image={ profileIcon }
           data-testid="profile-top-btn"
@@ -29,11 +29,9 @@ function Header({ title }) {
           data-testid="search-top-btn"
           onClick={ () => setShowSearchBar(!showSearchBar) }
         />
-      </div>
-      <div>
-        { showSearchBar && <SearchBar /> }
-      </div>
-    </header>
+      </header>
+      { showSearchBar && <SearchBar /> }
+    </div>
   );
 }
 
