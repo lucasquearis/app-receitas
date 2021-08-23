@@ -14,7 +14,7 @@ function Login() {
     // Regular expression from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript"
     const PASSWORD_MIN_CHARS = 6;
 
-    setIsValid(EMAIL_REGEX.test(email) && password.length >= PASSWORD_MIN_CHARS);
+    setIsValid(EMAIL_REGEX.test(email) && password.length > PASSWORD_MIN_CHARS);
   }, [password, email]);
 
   const handleSubmit = (event) => {
