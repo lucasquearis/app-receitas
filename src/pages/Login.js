@@ -5,10 +5,11 @@ function Login() {
   const { buttonDisabled, handleInputs, user, handleClick } = useContext(Context);
 
   return (
-    <div>
+    <form>
       <label htmlFor="email-input">
         E-mail:
         <input
+          className="email"
           name="email"
           id="email-input"
           type="email"
@@ -17,9 +18,10 @@ function Login() {
           onChange={ handleInputs }
         />
       </label>
-      Password:
-      <label htmlFor="password-input">
+      <label className="password" htmlFor="password-input">
+        Password:
         <input
+          className="password"
           name="password"
           id="password-input"
           type="password"
@@ -36,7 +38,7 @@ function Login() {
       >
         Entrar
       </button>
-    </div>
+    </form>
   );
 }
 
