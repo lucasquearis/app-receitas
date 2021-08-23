@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function Provider({ children }) {
-  const [teste, setTeste] = useState('');
+  const [email, setEmail] = useState('');
 
-  const contextValue = { teste, setTeste };
+  const contextValue = { email, setEmail };
 
   return (
     <RecipesContext.Provider value={ contextValue }>
