@@ -6,20 +6,20 @@ function Login() {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   const [disabled, setDisabled] = useState(true);
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   const Validations = () => {
-    const emailVerification = () => {
-      const { email } = loginState;
-      return emailRegex.test(email);
-    };
-
     const SIX = 6;
-    const passwordVerification = () => loginState.password.length > SIX;
+    const eRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const { email, password } = loginState;
+
+    const emailVerification = () => eRegex.test(email);
+
+    const passwordVerification = () => password.length > SIX;
 
     if (emailVerification() && passwordVerification() === true) {
       setDisabled(false);
     }
+
+    if (eRegex.test(email) === false || password.length <= SIX) return setDisabled(true);
   };
 
   useEffect(() => {
@@ -32,6 +32,14 @@ function Login() {
       ...loginState,
       [name]: value,
     });
+  };
+
+  const handleClick = () => {
+    const { email } = loginState;
+    const user = { email };
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify(user));
   };
 
   return (
@@ -53,6 +61,7 @@ function Login() {
       <Button
         btnText="Entrar"
         disabled={ disabled }
+        onClick={ () => handleClick() }
         datatestId="login-submit-btn"
       />
     </>
