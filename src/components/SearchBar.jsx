@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function SearchBar() {
+  // const [searchEntries, setSearchEntries] = useState({});
 
   return (
     <div>
