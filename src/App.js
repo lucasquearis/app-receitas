@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Login } from './pages';
+import { Login, Comidas } from './pages';
 import './App.css';
 
 function App() {
@@ -19,8 +19,8 @@ function App() {
       <Route exact path="/comidas/{id-da-receita}/in-progress" component={  } />
       <Route exact path="/bebidas/{id-da-receita}" component={  } />
       <Route exact path="/comidas/{id-da-receita}" component={  } />
-      <Route exact path="/bebidas" component={  } />
-      <Route exact path="/comidas" component={  } /> */}
+      <Route exact path="/bebidas" component={  } /> */}
+      <Route exact path="/comidas" component={ Comidas } />
       <Route exact path="/" component={ Login } />
     </Switch>
   );
