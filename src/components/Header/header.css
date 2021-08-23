@@ -1,4 +1,8 @@
-.header-container {
+.navbar {
+  padding: 0;
+}
+
+.header-navbar {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
