@@ -1,4 +1,5 @@
 import React from 'react';
+import Provider from './context/Provider';
 import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
