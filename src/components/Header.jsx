@@ -10,7 +10,7 @@ export default function Header({ title }) {
   return (
     <>
       <header>
-        <Link to="/profile">
+        <Link to="/perfil">
           <button
             type="button"
             className="profile-top-btn"

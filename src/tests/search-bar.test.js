@@ -1,10 +1,10 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
-import Comidas from '../pages/Comidas';
+import Foods from '../pages/Foods';
 import renderWithRouter from '../services/renderWithRouter';
 
 describe('Testa SearchBar', () => {
-  beforeEach(() => { renderWithRouter(<Comidas />); });
+  beforeEach(() => { renderWithRouter(<Foods />); });
 
   it('Should have search form', () => {
     fireEvent.click(screen.getByTestId('search-top-btn'));

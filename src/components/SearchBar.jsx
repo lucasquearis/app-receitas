@@ -16,7 +16,7 @@ export default function SearchBar() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    alert('do something');
+    console.log('do something');
   };
 
   const { value } = search;
