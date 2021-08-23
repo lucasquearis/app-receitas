@@ -4,7 +4,7 @@ import Header from '../components/Header';
 export default function ExploreDrink() {
   return (
     <section>
-      <Header isExplore pageTitle="Explorar Bebidas" />
+      <Header showExploreIcon pageTitle="Explorar Bebidas" />
     </section>
   );
 }

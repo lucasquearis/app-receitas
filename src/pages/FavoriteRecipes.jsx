@@ -4,7 +4,7 @@ import Header from '../components/Header';
 export default function FavoriteRecipes() {
   return (
     <section>
-      <Header isExplore pageTitle="Receitas Favoritas" />
+      <Header showExploreIcon pageTitle="Receitas Favoritas" />
     </section>
   );
 }

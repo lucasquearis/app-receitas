@@ -4,7 +4,7 @@ import Header from '../components/Header';
 export default function DoneRecipes() {
   return (
     <section>
-      <Header isExplore pageTitle="Receitas Feitas" />
+      <Header showExploreIcon pageTitle="Receitas Feitas" />
     </section>
   );
 }
