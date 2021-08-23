@@ -1,15 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
     <header>
-      <button
-        type="button"
-        className="profile"
-        data-testid="profile-btn"
-      >
-        <img src="../images/profileIcon.svg" alt="profile icon" />
-      </button>
+      <Link to="/profile">
+        <button
+          type="button"
+          className="profile-top-btn"
+          data-testid="profile-top-btn"
+        >
+          <img src="../images/profileIcon.svg" alt="profile icon" />
+        </button>
+      </Link>
       <h1 data-testid="page-title">
         Recipes App
       </h1>
