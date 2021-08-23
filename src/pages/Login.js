@@ -18,17 +18,18 @@ function Login() {
       ...user,
       [id]: value,
     });
-  }
+  };
 
   const handleOnClick = () => {
     setEmail(email);
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     localStorage.setItem('user', JSON.stringify({ email }));
-  }
+  };
 
+  const SIX = 6;
   const validEmail = /\S+@\S+\.\w+/.test(email);
-  const validPassword = password.length >= 6;
+  const validPassword = password.length >= SIX;
   const disabled = !(validEmail && validPassword);
 
   return (

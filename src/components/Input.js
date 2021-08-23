@@ -11,7 +11,7 @@ function Input(props) {
         value={ value }
         data-testid={ testId }
         id={ id }
-        onChange= { onChange }
+        onChange={ onChange }
         className={ className }
       />
     </label>
