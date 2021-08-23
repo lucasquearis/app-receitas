@@ -10,28 +10,30 @@ function Header() {
   const showBar = () => {
     if (showSearchBar) {
       setShowSearchBar(false);
+    } else {
+      setShowSearchBar(true);
     }
-    setShowSearchBar(true);
   };
+
   return (
     <header>
       <Link to="/perfil">
         <img
-          datatestid="profile-top-btn"
+          data-testid="profile-top-btn"
           src={ profileIcon }
           alt="Icone de perfil"
         />
       </Link>
       <button onClick={ showBar } type="button">
         <img
-          datatestid="search-top-btn"
+          data-testid="search-top-btn"
           src={ searchIcon }
           alt="Icone de busca"
         />
       </button>
-      <h1 datatestid="page-title">Titulo</h1>
+      <h1 data-testid="page-title">Comidas</h1>
       <div>
-        { showSearchBar ? SearchBar : null }
+        { showSearchBar ? <SearchBar /> : null }
       </div>
     </header>
   );
