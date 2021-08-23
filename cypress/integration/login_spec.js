@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe.only('2 - Crie todos os elementos que devem respeitar os atributos descritos no protótipo para a tela de login', () => {
+describe('2 - Crie todos os elementos que devem respeitar os atributos descritos no protótipo para a tela de login', () => {
   it('Tem os data-testids email-input, password-input e login-submit-btn', () => {
     cy.visit('http://localhost:3000/');
 
@@ -67,7 +67,7 @@ describe('5 - Desenvolva a tela de maneira que o formulário só seja válido ap
   });
 });
 
-describe('6 - Salve 2 tokens no localStorage após a submissão, identificados pelas chaves mealsToken e cocktailsToken', () => {
+describe.skip('6 - Salve 2 tokens no localStorage após a submissão, identificados pelas chaves mealsToken e cocktailsToken', () => {
   it('Após a submissão mealsToken e cocktailsToken devem estar salvos em localStorage', () => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {
@@ -94,7 +94,7 @@ describe('6 - Salve 2 tokens no localStorage após a submissão, identificados p
   });
 });
 
-describe('7 - Salve o e-mail da pessoa usuária no localStorage na chave user após a submissão', () => {
+describe.skip('7 - Salve o e-mail da pessoa usuária no localStorage na chave user após a submissão', () => {
   it('Após a submissão a chave user deve estar salva em localStorage', () => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {
@@ -119,7 +119,7 @@ describe('7 - Salve o e-mail da pessoa usuária no localStorage na chave user ap
   });
 });
 
-describe('8 - Redirecione a pessoa usuária para a tela principal de receitas de comidas após a submissão e validação com sucesso do login', () => {
+describe.skip('8 - Redirecione a pessoa usuária para a tela principal de receitas de comidas após a submissão e validação com sucesso do login', () => {
   it('A rota muda para a tela principal de receitas de comidas', () => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {

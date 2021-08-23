@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({
@@ -7,9 +7,22 @@ export default function Login() {
   });
   const [btnDisable, setBtnDisable] = useState(true);
 
+  function checkValid() {
+    const { email, password } = loginForm;
+    const MIN_LENGTH = 7;
+    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (regex.test(email) && password.length >= MIN_LENGTH) {
+      setBtnDisable(false);
+    } else {
+      setBtnDisable(true);
+    }
+  }
+
   function handleChange({ target: { name, value } }) {
     setLoginForm({ ...loginForm, [name]: value });
   }
+
+  useEffect(checkValid, [loginForm]);
 
   return (
     <form action="">
