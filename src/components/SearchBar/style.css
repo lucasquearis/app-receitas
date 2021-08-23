@@ -2,3 +2,8 @@
   background-color: seagreen;
   color: white;
 }
+
+.search-bar-container{
+  display: flex;
+  flex-direction: column;
+}
