@@ -6,17 +6,15 @@ function Header() {
   return (
     <header>
       <img
-        className="profileIcon"
         src={ profileIcon }
         alt="Avatar do usuário"
-        testId="testid" // inserir testid
+        testId="profile-top-btn"
       />
-      <p className="header-title" data-testid="">Comidas</p>
+      <h1 data-testid="page-title">Comidas</h1>
       <img
-        className="searchIcon"
         src={ searchIcon }
         alt="Ícone de pesquisa"
-        testId="testid" // inserir testid
+        testId="search-top-btn"
       />
     </header>
   );
