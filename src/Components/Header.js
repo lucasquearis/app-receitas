@@ -31,14 +31,23 @@ export default function Header(props) {
     );
   };
 
+  const searchBar = () => (
+    <section>
+      Barra de Busca!
+    </section>
+  );
+
   return (
-    <header className="header">
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ PerfilIcon } alt="perfil" />
-      </Link>
-      <h3 data-testid="page-title">{ title }</h3>
-      { showSearchIcon() }
-    </header>
+    <section>
+      <header className="header">
+        <Link to="/perfil">
+          <img data-testid="profile-top-btn" src={ PerfilIcon } alt="perfil" />
+        </Link>
+        <h3 data-testid="page-title">{ title }</h3>
+        { showSearchIcon() }
+      </header>
+      { showSearch && searchBar() }
+    </section>
   );
 }
 
