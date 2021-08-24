@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 
 import './style.css';
 
-import RecipesProvider from '../../Context/ContextRecipes';
 import IconButton from '../IconButton';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
@@ -15,26 +14,24 @@ function Header({ title, searchButton = true }) {
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   return (
-    <RecipesProvider>
-      <div>
-        <header className="header-top">
-          <IconButton
-            image={ profileIcon }
-            data-testid="profile-top-btn"
-            onClick={ () => history.push('/perfil') }
-          />
-          <h1 data-testid="page-title">
-            {title}
-          </h1>
-          { searchButton && <IconButton
-            image={ searchIcon }
-            data-testid="search-top-btn"
-            onClick={ () => setShowSearchBar(!showSearchBar) }
-          />}
-        </header>
-        { showSearchBar && <SearchBar /> }
-      </div>
-    </RecipesProvider>
+    <div>
+      <header className="header-top">
+        <IconButton
+          image={ profileIcon }
+          data-testid="profile-top-btn"
+          onClick={ () => history.push('/perfil') }
+        />
+        <h1 data-testid="page-title">
+          {title}
+        </h1>
+        { searchButton && <IconButton
+          image={ searchIcon }
+          data-testid="search-top-btn"
+          onClick={ () => setShowSearchBar(!showSearchBar) }
+        />}
+      </header>
+      { showSearchBar && <SearchBar /> }
+    </div>
   );
 }
 
