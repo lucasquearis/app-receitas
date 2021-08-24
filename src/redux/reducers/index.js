@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import foodsAndDrinks from './foodDrinksReducer';
 
-const rootReducer = combineReducers({ foodsAndDrinks });
+const rootReducer = combineReducers({ });
 export default rootReducer;
