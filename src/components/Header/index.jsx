@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import './style.css';
 
+import HeaderProvider from '../../Context/ContextHeader';
 import IconButton from '../IconButton';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
@@ -14,24 +15,26 @@ function Header({ title }) {
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   return (
-    <div>
-      <header className="header-top">
-        <IconButton
-          image={ profileIcon }
-          data-testid="profile-top-btn"
-          onClick={ () => history.push('/perfil') }
-        />
-        <h1 data-testid="page-title">
-          {title}
-        </h1>
-        <IconButton
-          image={ searchIcon }
-          data-testid="search-top-btn"
-          onClick={ () => setShowSearchBar(!showSearchBar) }
-        />
-      </header>
-      { showSearchBar && <SearchBar /> }
-    </div>
+    <HeaderProvider>
+      <div>
+        <header className="header-top">
+          <IconButton
+            image={ profileIcon }
+            data-testid="profile-top-btn"
+            onClick={ () => history.push('/perfil') }
+          />
+          <h1 data-testid="page-title">
+            {title}
+          </h1>
+          <IconButton
+            image={ searchIcon }
+            data-testid="search-top-btn"
+            onClick={ () => setShowSearchBar(!showSearchBar) }
+          />
+        </header>
+        { showSearchBar && <SearchBar /> }
+      </div>
+    </HeaderProvider>
   );
 }
 
