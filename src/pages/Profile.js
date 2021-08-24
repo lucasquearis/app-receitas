@@ -1,5 +1,5 @@
 import React from 'react';
 
-const MealsInProgress = () => <div />;
+const Profile = () => <div />;
 
-export default MealsInProgress;
+export default Profile;
