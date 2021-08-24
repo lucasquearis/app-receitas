@@ -1,8 +1,6 @@
 import React from 'react';
 
 function SearchBar() {
-  // const [searchEntries, setSearchEntries] = useState({});
-
   return (
     <div>
       <input type="text" data-testid="search-input" />
