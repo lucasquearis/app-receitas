@@ -5,7 +5,7 @@ import Input from './Input';
 import Button from './Button';
 import RecipeCard from './RecipeCard';
 
-function SearchBar(props) {
+function HeaderSearch(props) {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [searchMode, setSearchMode] = useState('name');
@@ -131,8 +131,8 @@ function SearchBar(props) {
   );
 }
 
-SearchBar.propTypes = {
+HeaderSearch.propTypes = {
   location: objectOf(string).isRequired,
 };
 
-export default SearchBar;
+export default HeaderSearch;
