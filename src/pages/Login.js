@@ -15,11 +15,9 @@ function Login() {
 
     const passwordVerification = () => password.length > SIX;
 
-    if (emailVerification() && passwordVerification() === true) {
-      setDisabled(false);
-    }
+    if (emailVerification() && passwordVerification() === true) setDisabled(false);
 
-    if (eRegex.test(email) === false || password.length <= SIX) return setDisabled(true);
+    if (eRegex.test(email) === false || password.length <= SIX) setDisabled(true);
   };
 
   useEffect(() => {
