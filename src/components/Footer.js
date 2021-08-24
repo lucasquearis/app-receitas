@@ -8,10 +8,10 @@ import './Footer.css';
 function Footer() {
   return (
     <footer data-testid="footer" className="app-footer">
-      <Link to="/bebidas" src={ mealIcon } data-testid="drinks-bottom-btn">
+      <Link to="/bebidas" src={ drinkIcon } data-testid="drinks-bottom-btn">
         <img src={ drinkIcon } alt="icone bebidas" />
       </Link>
-      <Link to="/explorar" src={ mealIcon } data-testid="explore-bottom-btn">
+      <Link to="/explorar" src={ exploreIcon } data-testid="explore-bottom-btn">
         <img src={ exploreIcon } alt="icone bebidas" />
       </Link>
       <Link to="/comidas" src={ mealIcon } data-testid="food-bottom-btn">
