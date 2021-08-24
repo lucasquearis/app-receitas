@@ -11,29 +11,28 @@ function App() {
     <Provider>
       <BrowserRouter>
         <Switch>
-
-          <Route exact to="/" component={ Login } />
-          <Route to="/comidas" component={ Comidas } />
+          <Route exact path="/" component={ Login } />
+          <Route path="/comidas" component={ Comidas } />
           {/*
-          <Route to="/" component={ Login } />
-          <Route to="/bebidas" component={ Login } />
-          <Route to="/comidas/{id-da-receita}" component={ Login } />
-          <Route to="/bebidas/{id-da-receita}" component={ Login } />
-          <Route to="/comidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route to="/bebidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route to="/explorar" component={ Login } />
-          <Route to="/explorar/comidas" component={ Login } />
-          <Route to="/explorar/bebidas" component={ Login } />
-          <Route to="/explorar/comidas/ingredientes" component={ Login } />
-          <Route to="/explorar/bebidas/ingredientes" component={ Login } />
-          <Route to="/explorar/comidas/area" component={ Login } />
-          <Route to="/perfil" component={ Login } />
-          <Route to="/receitas-feitas" component={ Login } />
-          <Route to="/receitas-favoritas" component={ Login } /> */}
+          <Route path="/" component={ Login } />
+          {/* <Route path="/comidas" component={ Login } />
+          <Route path="/bebidas" component={ Login } />
+          <Route path="/comidas/{id-da-receita}" component={ Login } />
+          <Route path="/bebidas/{id-da-receita}" component={ Login } />
+          <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
+          <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
+          <Route path="/explorar" component={ Login } />
+          <Route path="/explorar/comidas" component={ Login } />
+          <Route path="/explorar/bebidas" component={ Login } />
+          <Route path="/explorar/comidas/ingredientes" component={ Login } />
+          <Route path="/explorar/bebidas/ingredientes" component={ Login } />
+          <Route path="/explorar/comidas/area" component={ Login } />
+          <Route path="/perfil" component={ Login } />
+          <Route path="/receitas-feitas" component={ Login } />
+          <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
       </BrowserRouter>
     </Provider>
   );
 }
-
 export default App;
