@@ -6,7 +6,7 @@ import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
 const FooterMenu = () => (
-  <footer data-testis="footer">
+  <footer data-testid="footer">
     <Link to="/bebidas">
       <Button
         type="button"
