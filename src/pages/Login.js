@@ -41,7 +41,7 @@ function Login() {
           type="password"
         />
       </label>
-      <Link to="/">
+      <Link to="/comidas">
         <button
           data-testid="login-submit-btn"
           onClick={ handleBtnClick }
