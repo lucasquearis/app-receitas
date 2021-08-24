@@ -3,6 +3,7 @@ import UseSearchBar from '../../hook/UseSearchBar';
 
 function SearchBar() {
   const { searchObj: { searchText }, handleChange, handleClick } = UseSearchBar();
+  
   return (
     <form>
       <input
