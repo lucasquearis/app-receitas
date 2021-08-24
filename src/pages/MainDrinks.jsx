@@ -1,7 +1,7 @@
 import React from 'react';
+import { Header, RecipeList, Footer } from '../components';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Header, Footer } from '../components';
 
 function MainDrinks() {
   const recipes = useSelector(({ meals }) => meals.recipes);
@@ -12,6 +12,7 @@ function MainDrinks() {
   return (
     <div>
       <Header title="Bebidas" searchIcon />
+      <RecipeList />
       <Footer />
     </div>
   );
