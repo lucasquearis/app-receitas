@@ -3,6 +3,7 @@ export async function fetchMeals(callback, endpoint = 'https://www.themealdb.com
     const request = await fetch(endpoint);
     const response = await request.json();
     callback(response.meals);
+    console.log(response);
   } catch (err) {
     console.log(err);
   }

@@ -5,7 +5,7 @@ import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
 
 export default function () {
-  const { meals } = useContext(Context);
+  const { meals, mealCategories, setMealsCategoryFilter } = useContext(Context);
 
   // ficou assim para passar no teste, mas fica meio quebrado ainda
   if (!meals) {
@@ -19,6 +19,21 @@ export default function () {
   return (
     <div className="foods-page">
       <Header title="Comidas" />
+      {mealCategories.map(({ strCategory }, i) => {
+        const maxLength = 5;
+        if (i < maxLength) {
+          return (
+            <button
+              type="button"
+              data-testid={ `${strCategory}-category-filter` }
+              onClick={ () => setMealsCategoryFilter(strCategory) }
+            >
+              {strCategory}
+            </button>
+          );
+        }
+        return false;
+      })}
       {meals.map(({ strMealThumb, strMeal }, i) => {
         const mealLength = 12;
         if (i < mealLength) {

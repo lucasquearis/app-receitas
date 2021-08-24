@@ -22,10 +22,10 @@ describe('Test meals list', async () => {
     history.push('/bebidas');
     expect(mockedDrinks).toBeCalledWith(endpoint);
     // const recipes = await screen.findAllByTestId('recipe-card');
-    const firstRecipe = screen.findByTestId('0-recipe-card');
-    const lastRecipe = screen.findByTestId('11-recipe-card');
-    expect(firstRecipe).toBeDefined();
-    expect(lastRecipe).toBeDefined();
+    const firstRecipe = await screen.findByTestId('0-recipe-card');
+    const lastRecipe = await screen.findByTestId('11-recipe-card');
+    expect(firstRecipe).toBeInTheDocument();
+    expect(lastRecipe).toBeInTheDocument();
   });
   it('First item must be "GG"', async () => {
     const { history } = renderWithRouter(<App />);
