@@ -19,6 +19,9 @@ export const searchOnClick = async (search, setItems) => {
     if (search.textValue.length === 1) {
       const firstLetter = await fetchApi(`https://www.${type}.com/api/json/v1/1/search.php?f=${search.textValue}`);
       setItems(firstLetter);
-    } else alert('Sua busca deve conter somente 1 (um) caracter');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
   }
 };
