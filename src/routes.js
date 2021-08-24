@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
+import RecipesMainPage from './pages/RecipesMainPage';
 import NotFound from './pages/NotFound';
 
 export default function Routes() {
@@ -9,8 +10,8 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ NotFound } />
-        <Route path="/bebidas" component={ NotFound } />
+        <Route path="/comidas" component={ RecipesMainPage } />
+        <Route path="/bebidas" component={ RecipesMainPage } />
         <Route path={ `/comidas/${id}` } component={ NotFound } />
         <Route path={ `/bebidas/${id}` } component={ NotFound } />
         <Route path={ `/comidas/${id}/in-progress` } component={ NotFound } />
