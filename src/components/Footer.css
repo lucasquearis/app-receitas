@@ -3,6 +3,7 @@
   bottom: 0;
   display: flex;
   justify-content: space-between;
+  padding: 0 15px;
   position: fixed;
   width: 100%;
 }
