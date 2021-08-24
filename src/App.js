@@ -1,20 +1,39 @@
 import React from 'react';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Provider from './Context/Provider';
+import * as Pages from './Pages';
 
 function App() {
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-    </div>
+    <Provider>
+      <Switch>
+        <Route exact path="/" component={ Pages.Login } />
+        <Route path="/comidas" component={ Pages.Comidas } />
+        <Route path="/bebidas" component={ Pages.Bebidas } />
+        <Route path="/comidas/:id" component={ Pages.DetalheComida } />
+        <Route path="/bebidas/:id" component={ Pages.DetalheBebida } />
+        <Route path="/comidas/:id/in-progress" component={ Pages.DetalheReceitaComida } />
+        <Route path="/bebidas/:id/in-progress" component={ Pages.DetalheReceitaBebida } />
+        <Route path="/explorar" component={ Pages.Explorar } />
+        <Route path="/explorar/comidas" component={ Pages.ExplorarComidas } />
+        <Route path="/explorar/bebidas" component={ Pages.ExplorarBebidas } />
+        <Route
+          path="/explorar/comidas/ingredientes"
+          component={ Pages.ExplorarComidaIngrediente }
+        />
+        <Route
+          path="/explorar/bebidas/ingredientes"
+          component={ Pages.ExplorarBebidaIngrediente }
+        />
+        <Route path="/explorar/comidas/area" component={ Pages.ExplorarLocalOrigem } />
+        <Route path="/perfil" component={ Pages.Perfil } />
+        <Route path="/receitas-feitas" component={ Pages.ReceitasFeitas } />
+        <Route path="/receitas-favoritas" component={ Pages.ReceitasFavoritas } />
+        <Route path="*" component={ Pages.Erro } />
+      </Switch>
+    </Provider>
   );
 }
 
