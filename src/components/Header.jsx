@@ -9,7 +9,7 @@ export default function Header(
 ) {
   const [showInput, setShowInput] = useState(false);
   return (
-    <header style={ { display: 'flex', justifyContent: 'space-around' } }>
+    <header>
       <nav>
         {!showProfileIcon
           ? (
