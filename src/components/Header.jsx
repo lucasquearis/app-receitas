@@ -31,7 +31,7 @@ function Header() {
       </button>
       <h1 datatestid="page-title">Titulo</h1>
       <div>
-        { showSearchBar ? SearchBar : null }
+        { showSearchBar ? <SearchBar /> : null }
       </div>
     </header>
   );

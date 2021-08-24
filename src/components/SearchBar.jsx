@@ -5,7 +5,6 @@ function SearchBar() {
 
   return (
     <div>
-      {/* <button data-testid="search-top-btn"> search </button> */}
       <input type="text" data-testid="search-input" />
       <div>
         <label htmlFor="ingrediente">
