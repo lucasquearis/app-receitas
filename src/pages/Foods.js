@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import CategoryButton from '../components/CategoryButton';
 import RecipeCard from '../components/RecipeCard';
 
@@ -56,15 +57,23 @@ function Foods() {
         }
         return null;
       }) }
-      { foodRecipes.map(({ strMealThumb, strMeal }, index) => {
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ getAllFoods }
+      >
+        All
+      </button>
+      { foodRecipes.map(({ strMealThumb, strMeal, idMeal }, index) => {
         if (index < MAX_RECIPES) {
           return (
-            <RecipeCard
-              key={ strMeal }
-              thumb={ strMealThumb }
-              name={ strMeal }
-              index={ index }
-            />
+            <Link key={ strMeal } to={ `/comidas/${idMeal}` }>
+              <RecipeCard
+                thumb={ strMealThumb }
+                name={ strMeal }
+                index={ index }
+              />
+            </Link>
           );
         }
         return null;
