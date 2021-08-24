@@ -12,7 +12,7 @@ export default function MainFoods() {
   const { foods, categories } = useContext(FoodContext);
 
   return (
-    <>
+    <div>
       <Header title="Comidas" />
       <CategoryButtons categories={ categories } />
 
@@ -28,6 +28,6 @@ export default function MainFoods() {
           ))}
       </ul>
       <Footer />
-    </>
+    </div>
   );
 }
