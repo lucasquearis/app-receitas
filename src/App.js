@@ -1,9 +1,14 @@
-import React from 'react';
-import Footer from './Components/Footer';
+import React from 'react';  
+import { Switch, Route } from 'react-router-dom';
+import Login from './Pages/Login';
+import MainPage from './Pages/MainPage';
 
 function App() {
   return (
-    <Footer />
+    <Switch>
+      <Route exact path="/" component={ Login } />
+      <Route exact path="/mainpage" component={ MainPage } />
+    </Switch>
   );
 }
 
