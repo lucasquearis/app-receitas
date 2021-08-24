@@ -23,12 +23,12 @@ export default function Login() {
 
   useEffect(() => {
     function isEmailValid() {
-      const regex = /^[a-z0-9_.-]+@[a-z]+.[a-z]{2,3}(?:.[a-z]{2})?$/;
+      const regex = /^[a-z0-9_.-]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/;
       return regex.test(loginInfo.email);
     }
     function isPasswordValid() {
       const pwMinLenght = 6;
-      return loginInfo.password.length >= pwMinLenght;
+      return loginInfo.password.length > pwMinLenght;
     }
 
     if (isEmailValid() && isPasswordValid()) {
