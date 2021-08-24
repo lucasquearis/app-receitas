@@ -4,8 +4,9 @@ import Drinks from '../Pages/Drinks';
 import DrinkInProgress from '../Pages/DrinkInProgress';
 import DrinkRecipeDetails from '../Pages/DrinkRecipeDetails';
 import Explore from '../Pages/Explore';
-import ExploreDrinksAndFoods from '../Pages/ExploreDrinksAndFoods';
+import ExploreDrinks from '../Pages/ExploreDrinks';
 import ExploreDrinksByIngredients from '../Pages/ExploreDrinksByIngredients';
+import ExploreFoods from '../Pages/ExploreFoods';
 import ExploreFoodsByIngredient from '../Pages/ExploreFoodsByIngredient';
 import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
 import FavoriteRecipes from '../Pages/FavoriteRecipes';
@@ -27,13 +28,13 @@ function Routes() {
       />
       <Route exact path="/bebidas/:id-da-receita" component={ DrinkRecipeDetails } />
       <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/explorar/bebidas" component={ ExploreDrinksAndFoods } />
+      <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route
         exact
         path="/explorar/bebidas/ingredientes"
         component={ ExploreDrinksByIngredients }
       />
-      <Route exact path="/explorar/comidas" component={ ExploreDrinksAndFoods } />
+      <Route exact path="/explorar/comidas" component={ ExploreFoods } />
       <Route
         exact
         path="/explorar/comidas/ingredientes"
