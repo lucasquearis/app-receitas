@@ -4,9 +4,17 @@ import { node } from 'prop-types';
 const DataContext = createContext();
 
 export default function DataProvider({ children }) {
-  const [data, setData] = useState({});
-
-  const contextValue = { data, setData };
+  const [recipesData, setRecipesData] = useState([]);
+  const [exploreData, setExploreData] = useState([]);
+  const [detailsData, setDetailsData] = useState([]);
+  const contextValue = {
+    recipesData,
+    setRecipesData,
+    exploreData,
+    setExploreData,
+    detailsData,
+    setDetailsData,
+  };
 
   return (
     <DataContext.Provider value={ contextValue }>

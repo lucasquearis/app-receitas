@@ -1,11 +1,11 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
-import { string, objectOf } from 'prop-types';
-import Input from './Input';
-import Button from './Button';
-import RecipeCard from './RecipeCard';
+import { useLocation } from 'react-router-dom';
+import Input from '../Input';
+import Button from '../Button';
+import RecipeCard from '../RecipeCard';
 
-function HeaderSearch(props) {
+function HeaderSearch() {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [searchMode, setSearchMode] = useState('name');
@@ -13,7 +13,7 @@ function HeaderSearch(props) {
   const [database, setDatabase] = useState('themealdb');
   const [databaseKey, setDatabaseKey] = useState('meals');
   const [recipeKey, setRecipeKey] = useState('Meal');
-  const { location } = props;
+  const location = useLocation();
 
   useEffect(() => {
     switch (location.pathname) {
@@ -42,7 +42,7 @@ function HeaderSearch(props) {
       break;
     default:
     }
-  }, [searchMode, keyword, database, location.path, location]);
+  }, [searchMode, keyword, database, location.pathname, location]);
 
   const getRecipes = async () => {
     if (keyword.length > 1 && searchMode === 'letter') {
@@ -130,9 +130,5 @@ function HeaderSearch(props) {
     </div>
   );
 }
-
-HeaderSearch.propTypes = {
-  location: objectOf(string).isRequired,
-};
 
 export default HeaderSearch;

@@ -4,13 +4,14 @@ import { string } from 'prop-types';
 import Profile from './Profile';
 import Search from './Search';
 import Title from './Title';
+import HeaderSearch from './HeaderSearch';
 import './index.css';
 
 export default function Header({ title }) {
   const { pathname: pn } = useLocation();
   const [showSearch, setShowSearch] = useState(false);
 
-  if (pn === '/comidas' || pn === '/explorar/comidas/area') {
+  if (pn === '/comidas' || pn === '/explorar/comidas/area' || pn === '/bebidas') {
     return (
       <div>
         <header className="header-container">
@@ -20,7 +21,7 @@ export default function Header({ title }) {
             onClick={ () => (showSearch ? setShowSearch(false) : setShowSearch(true)) }
           />
         </header>
-        {showSearch && <div>Chamar a SeachBar Aqui</div>}
+        {showSearch && <div><HeaderSearch /></div>}
       </div>
     );
   }
