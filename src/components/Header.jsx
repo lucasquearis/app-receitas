@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import SearchBar from './SearchBar';
 
 export default function Header(
   {
     pageTitle,
     showProfileIcon,
     showExploreIcon,
+    onClickShowInput,
   },
 ) {
-  const [showInput, setShowInput] = useState(false);
-
   return (
     <div>
       <header style={ { display: 'flex', justifyContent: 'space-around' } }>
@@ -34,7 +32,7 @@ export default function Header(
             ? (
               <button
                 type="button"
-                onClick={ () => setShowInput((prevCheck) => !prevCheck) }
+                onClick={ () => onClickShowInput((prevCheck) => !prevCheck) }
               >
                 <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
               </button>
@@ -42,9 +40,6 @@ export default function Header(
             : null}
         </nav>
       </header>
-      <div style={ { display: 'flex', flexDirection: 'row' } }>
-        {showInput && <SearchBar />}
-      </div>
     </div>
   );
 }
@@ -53,6 +48,7 @@ Header.propTypes = {
   pageTitle: PropTypes.string.isRequired,
   showProfileIcon: PropTypes.bool,
   showExploreIcon: PropTypes.bool,
+  onClickShowInput: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {
