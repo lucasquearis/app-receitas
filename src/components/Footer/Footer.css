@@ -1,4 +1,7 @@
 .footer-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
   background-color: #ddd;
   bottom: 0;
   overflow: hidden;
@@ -9,20 +12,10 @@
 .footer-item {
   background-color: #ddd;
   color: #f2f2f2;
-  display: block;
-  float: left;
   font-size: 17px;
   padding: 14px 16px;
   text-align: center;
   text-decoration: none;
-}
-
-.footer-middle {
-  margin-left: 5%;
-}
-
-.footer-end {
-  margin-left: 5%;
 }
 
 .footer-item a:hover {
