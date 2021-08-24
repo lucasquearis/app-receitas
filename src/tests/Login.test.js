@@ -11,8 +11,8 @@ describe('Testando pagina Login', () => {
     const passwordInput = screen.getByTestId('password-input');
     const submitButton = screen.getByTestId('login-submit-btn');
 
-    expect(emailInput).toHaveLength(1);
-    expect(passwordInput).toHaveLength(1);
+    expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
     expect(submitButton).toBeDisable();
   });
 });
