@@ -2,14 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Provider from './context/Provider';
 import './App.css';
-<<<<<<< HEAD
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header';
-
-function App() {
-  return (
-    <Header />
-=======
 import {
   Login,
   Meals,
@@ -51,7 +43,6 @@ function App() {
         <Route path="/receitas-favoritas" component={ FavouriteRecipes } />
       </Switch>
     </Provider>
->>>>>>> main-group-11
   );
 }
 

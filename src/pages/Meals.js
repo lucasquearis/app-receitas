@@ -1,5 +1,8 @@
 import React from 'react';
+import Header from '../components/Header';
 
-const Meals = () => <div />;
+const Meals = () => (
+  <Header title="Comidas" />
+);
 
 export default Meals;

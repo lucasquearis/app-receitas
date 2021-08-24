@@ -1,5 +1,8 @@
 import React from 'react';
+import Header from '../components/Header';
 
-const Explorer = () => <div />;
+const Explorer = () => (
+  <Header title="Explorar" noSearchButton />
+);
 
 export default Explorer;
