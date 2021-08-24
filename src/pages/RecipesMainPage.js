@@ -9,7 +9,7 @@ function RecipesMainPage() {
   const location = useLocation();
   const { recipesData, setRecipesData } = useData();
   const [categories, setCategories] = useState([]);
-  const [selCategory, setSelCategory] = useState('');
+  const [selCategory, setSelCategory] = useState('All');
   const [database, setDatabase] = useState('');
   const [databaseKey, setDatabaseKey] = useState('');
   const [recipeKey, setRecipeKey] = useState('');
@@ -32,70 +32,75 @@ function RecipesMainPage() {
   }, [location.pathname]);
 
   useEffect(() => {
+    let URL = `https://www.${database}.com/api/json/v1/1/search.php?s=`;
+    if (selCategory !== 'All') URL = `https://www.${database}.com/api/json/v1/1/filter.php?c=${selCategory}`;
     const getRecipes = async () => {
-      const URL = `https://www.${database}.com/api/json/v1/1/search.php?s=`;
       const max = 12;
       const results = await fetch(URL).then((stuff) => stuff.json());
       if (results[databaseKey].length > max) results[databaseKey].length = max;
       setRecipesData(results[databaseKey]);
     };
     const getCategories = async () => {
-      const URL = `https://www.${database}.com/api/json/v1/1/list.php?c=list`;
+      const URLCat = `https://www.${database}.com/api/json/v1/1/list.php?c=list`;
       const max = 5;
-      const results = await fetch(URL).then((stuff) => stuff.json());
-      if (results[databaseKey].length > max) results[databaseKey].length = max;
+      const results = await fetch(URLCat).then((stuff) => stuff.json());
+      results[databaseKey].length = max;
       setCategories(results[databaseKey]);
     };
     getRecipes();
     getCategories();
-  }, [database, databaseKey, setRecipesData]);
+  }, [database, databaseKey, setRecipesData, selCategory]);
 
   const handleCategoryClick = (category) => {
-    setSelCategory(category);
-    const getRecipesCategory = async () => {
-      let URL = `https://www.${database}.com/api/json/v1/1/filter.php?c=${category}`;
-      if (category === selCategory) {
-        URL = `https://www.${database}.com/api/json/v1/1/search.php?s=`;
-        setSelCategory('');
-      }
-      const max = 12;
-      const results = await fetch(URL).then((stuff) => stuff.json());
-      if (results[databaseKey].length > max) results[databaseKey].length = max;
-      setRecipesData(results[databaseKey]);
-    };
-    getRecipesCategory();
+    if (category === selCategory) setSelCategory('All');
+    else setSelCategory(category);
   };
 
   const renderRecipesList = () => recipesData.map((recipe, index) => {
     const title = `str${recipeKey}`;
     const thumb = `str${recipeKey}Thumb`;
     const id = `id${recipeKey}`;
-    console.log(categories);
+    let path = '';
+    if (recipeKey === 'Meal') path = 'comidas';
+    if (recipeKey === 'Drink') path = 'bebidas';
     return (
       <RecipeCard
         key={ recipe[id] }
+        id={ recipe[id] }
         thumb={ recipe[thumb] }
         title={ recipe[title] }
         index={ index }
+        path={ path }
       />);
   });
 
-  const renderCategoryButtons = () => categories.map(({ strCategory }, index) => {
-    console.log(categories);
-    return (
-      <Button
-        key={ index }
-        testId={ `${strCategory}-category-filter` }
-        name={ strCategory }
-        disabled={ false }
-        onClick={ () => handleCategoryClick(strCategory) }
-      />);
-  });
+  const renderAllButton = () => {
+    if (selCategory !== 'All') {
+      return (
+        <Button
+          testId="All-category-filter"
+          name="All"
+          disabled={ false }
+          onClick={ () => handleCategoryClick('All') }
+        />
+      );
+    }
+  };
+
+  const renderCategoryButtons = () => categories.map(({ strCategory }, index) => (
+    <Button
+      key={ index }
+      testId={ `${strCategory}-category-filter` }
+      name={ strCategory }
+      disabled={ false }
+      onClick={ () => handleCategoryClick(strCategory) }
+    />));
 
   return (
     <div>
       <Header />
       { renderCategoryButtons() }
+      { renderAllButton() }
       { renderRecipesList() }
     </div>
   );
