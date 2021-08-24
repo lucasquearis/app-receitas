@@ -1,21 +1,21 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Drinks from './Pages/Drinks';
-import DrinkInProgress from './Pages/DrinkInProgress';
-import DrinkRecipeDetails from './Pages/DrinkRecipeDetails';
-import Explore from './Pages/Explore';
-import ExploreDrinks from './Pages/ExploreDrinks';
-import ExploreDrinksByIngredients from './Pages/ExploreDrinksByIngredients';
-import ExploreFoods from './Pages/ExploreFoods';
-import ExploreFoodsByIngredient from './Pages/ExploreFoodsByIngredient';
-import ExploreFoodsByOrigin from './Pages/ExploreFoodsByOrigin';
-import FavoriteRecipes from './Pages/FavoriteRecipes';
-import Foods from './Pages/Foods';
-import FoodInProgress from './Pages/FoodInProgress';
-import FoodRecipeDetails from './Pages/FoodRecipeDetails';
-import Login from './Pages/Login';
-import MadeRecipes from './Pages/MadeRecipes';
-import Profile from './Pages/Profile';
+import Drinks from '../Pages/Drinks';
+import DrinkInProgress from '../Pages/DrinkInProgress';
+import DrinkRecipeDetails from '../Pages/DrinkRecipeDetails';
+import Explore from '../Pages/Explore';
+import ExploreDrinks from '../Pages/ExploreDrinks';
+import ExploreDrinksByIngredients from '../Pages/ExploreDrinksByIngredients';
+import ExploreFoods from '../Pages/ExploreFoods';
+import ExploreFoodsByIngredient from '../Pages/ExploreFoodsByIngredient';
+import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
+import FavoriteRecipes from '../Pages/FavoriteRecipes';
+import Foods from '../Pages/Foods';
+import FoodInProgress from '../Pages/FoodInProgress';
+import FoodRecipeDetails from '../Pages/FoodRecipeDetails';
+import Login from '../Pages/Login';
+import MadeRecipes from '../Pages/MadeRecipes';
+import Profile from '../Pages/Profile';
 
 function Routes() {
   return (
