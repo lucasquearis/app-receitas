@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import './css/Header.css';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -45,5 +46,13 @@ function Header() {
     </div>
   );
 }
+=======
+
+const Header = () => (
+  <header className="header">
+    Header
+  </header>
+);
+>>>>>>> main-group-11
 
 export default Header;
