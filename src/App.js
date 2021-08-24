@@ -12,7 +12,7 @@ const App = () => (
     <AppProvider>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ Profile } />
+          <Route exact path="/perfil" component={ Profile } />
         </Switch>
       </BrowserRouter>
     </AppProvider>
