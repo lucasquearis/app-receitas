@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
-import MainContext from '../context/MainContext';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login() {
-  const context = useContext(MainContext);
-  console.log(context);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleForm = ({ target: { value, id } }) => {
-    console.log(id, value);
-  };
+  useEffect(() => {
+    const loginSubmitBtn = document.getElementsByTagName('button')[0];
+    const MIN_PASSWORD_LENGTH = 7;
+    // Conteudo sobre regex lido em: https://www.horadecodar.com.br/2020/09/07/expressao-regular-para-validar-e-mail-javascript-regex/
+    if ((/\S+@\S+\.\S+/.test(email)) && password.length >= MIN_PASSWORD_LENGTH) {
+      loginSubmitBtn.disabled = false;
+    } else loginSubmitBtn.disabled = true;
+  }, [email, password]);
 
   return (
     <form>
@@ -16,8 +21,9 @@ function Login() {
         <input
           data-testid="email-input"
           id="email-input"
-          onChange={ handleForm }
+          onChange={ ({ target: { value } }) => setEmail(value) }
           type="email"
+          value={ email }
         />
       </label>
       <label htmlFor="password-input">
@@ -25,11 +31,18 @@ function Login() {
         <input
           data-testid="password-input"
           id="password-input"
-          onChange={ handleForm }
+          onChange={ ({ target: { value } }) => setPassword(value) }
           type="password"
         />
       </label>
-      <button data-testid="login-submit-btn" type="button">Entrar</button>
+      <Link to="/">
+        <button
+          data-testid="login-submit-btn"
+          type="button"
+        >
+          Entrar
+        </button>
+      </Link>
     </form>
   );
 }
