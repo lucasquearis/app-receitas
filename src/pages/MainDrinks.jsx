@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header, RecipeList, Footer } from '../components';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Header, RecipeList, Footer } from '../components';
 
 function MainDrinks() {
   const recipes = useSelector(({ meals }) => meals.recipes);
