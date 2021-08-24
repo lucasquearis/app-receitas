@@ -8,7 +8,6 @@ import './css/Footer.css';
 const Footer = () => (
   <footer className="footer" data-testid="footer">
     <Link to="/bebidas">
-  
       <input
         data-testid="drinks-bottom-btn"
         alt="bebidas"
@@ -17,7 +16,6 @@ const Footer = () => (
       />
     </Link>
     <Link to="/explorar">
-    
       <input
         data-testid="explore-bottom-btn"
         alt="explorar"
@@ -26,7 +24,6 @@ const Footer = () => (
       />
     </Link>
     <Link to="/comidas">
-     
       <input
         data-testid="food-bottom-btn"
         alt="comida"
