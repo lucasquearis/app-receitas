@@ -1,0 +1,9 @@
+.header-container {
+  width: 360px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
