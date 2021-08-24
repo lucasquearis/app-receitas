@@ -2,7 +2,7 @@
   width: 360px;
 }
 
-.recipe-container {
+.drinks-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
