@@ -88,12 +88,9 @@ describe('Test if buttons are disabled until conditions checked', () => {
   });
 });
 
-describe('Test keys mealsToken and cocktailsToken on localStorage', () => {
-  beforeEach(() => {
+describe('Test Login submit', () => {
+  it('Test if \'mealsToken\' and \'cocktailsToken\' is a key on localStorage', () => {
     renderWithRouter(<App />);
-  });
-
-  it('Test if mealsToken is a key on localStorage', () => {
     const emailInput = screen.getByTestId(inputEmailId);
     const passwordInput = screen.getByTestId(inputPasswordId);
     const loginBtn = screen.getByTestId(loginBtnId);
@@ -108,14 +105,9 @@ describe('Test keys mealsToken and cocktailsToken on localStorage', () => {
     expect(mealsToken).toEqual(1);
     expect(cocktailsToken).toEqual(1);
   });
-});
 
-describe('Test if user is a key in localStorage', () => {
-  beforeEach(() => {
+  it('Test if \'user\' is a key in localStorage', () => {
     renderWithRouter(<App />);
-  });
-
-  it('Test if user is a key in localStorage', () => {
     const emailInput = screen.getByTestId(inputEmailId);
     const passwordInput = screen.getByTestId(inputPasswordId);
     const loginBtn = screen.getByTestId(loginBtnId);
@@ -126,5 +118,19 @@ describe('Test if user is a key in localStorage', () => {
 
     const { email } = JSON.parse(localStorage.getItem('user'));
     expect(email).toEqual(validEmail);
+  });
+
+  it('Should redirect user to \'/comidas\'', () => {
+    const { history } = renderWithRouter(<App />);
+
+    const emailInput = screen.getByTestId(inputEmailId);
+    const passwordInput = screen.getByTestId(inputPasswordId);
+    const loginBtn = screen.getByTestId(loginBtnId);
+
+    userEvent.type(emailInput, validEmail);
+    userEvent.type(passwordInput, validPassword);
+    userEvent.click(loginBtn);
+
+    expect(history.location.pathname).toEqual('/comidas');
   });
 });

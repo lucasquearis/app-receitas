@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router';
 import AppContext from '../../context/AppContext';
 
 const LoginPage = () => {
@@ -22,10 +23,13 @@ const LoginPage = () => {
     setDisabled(!logicValidation);
   }, [email, password]);
 
+  const history = useHistory();
+
   const saveLoginInfoLocalStorage = () => {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('mealsToken', JSON.stringify(mealsToken));
     localStorage.setItem('cocktailsToken', JSON.stringify(cocktailsToken));
+    history.push('/comidas');
   };
 
   return (
@@ -39,25 +43,25 @@ const LoginPage = () => {
           name="email"
           onChange={ ({ target }) => setEmail(target.value) }
         />
-        <label htmlFor="password-input">
-          Password
-          <input
-            type="password"
-            id="password-input"
-            data-testid="password-input"
-            name="password"
-            onChange={ ({ target }) => setPassword(target.value) }
-          />
-        </label>
-        <button
-          type="submit"
-          disabled={ disabled }
-          data-testid="login-submit-btn"
-          onClick={ () => saveLoginInfoLocalStorage() }
-        >
-          Entrar
-        </button>
       </label>
+      <label htmlFor="password-input">
+        Password
+        <input
+          type="password"
+          id="password-input"
+          data-testid="password-input"
+          name="password"
+          onChange={ ({ target }) => setPassword(target.value) }
+        />
+      </label>
+      <button
+        type="submit"
+        disabled={ disabled }
+        data-testid="login-submit-btn"
+        onClick={ () => saveLoginInfoLocalStorage() }
+      >
+        Entrar
+      </button>
     </form>
   );
 };
