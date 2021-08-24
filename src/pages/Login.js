@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import RecipesContext from '../context/RecipesContext';
+import drinksAPI from '../service/drinksAPI';
+import foodAPI from '../service/foodAPI';
 
 function Login() {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-  const { setEmail } = useContext(RecipesContext);
+  const { setEmail, foodData, drinkData } = useContext(RecipesContext);
   const { email, password } = user;
 
   const handleOnChange = ({ target }) => {
@@ -19,6 +21,13 @@ function Login() {
       [id]: value,
     });
   };
+
+  drinksAPI();
+  foodAPI();
+
+  console.log(foodData);
+  console.log('=================');
+  console.log(drinkData);
 
   const handleOnClick = () => {
     setEmail(email);
