@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import CategoryButtons from '../components/CategoryButtons';
 import RecipeCard from '../components/RecipeCard';
 import DrinkContext from '../context/DrinkContext';
@@ -26,6 +27,7 @@ export default function MainDrinks() {
             />
           ))}
       </ul>
+      <Footer />
     </>
   );
 }
