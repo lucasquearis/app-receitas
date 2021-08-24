@@ -8,9 +8,9 @@ const getCategories = () => ({
   type: MEAL_CATEGORIE,
 });
 
-const getCategoriesSuccess = (meals) => ({
+const getCategoriesSuccess = (mealsCategories) => ({
   type: MEAL_CATEGORIE_SUCCESS,
-  payload: meals,
+  payload: mealsCategories,
 });
 
 const getCategoriesError = (error) => ({

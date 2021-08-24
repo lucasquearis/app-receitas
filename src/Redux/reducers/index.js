@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import user from './user';
-import categories from './categories';
+import foods from './foods';
 
 const rootReducer = combineReducers({
   user,
-  categories,
+  foods,
 });
 
 export default rootReducer;
