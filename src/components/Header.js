@@ -32,6 +32,7 @@ const renderSearchButton = (showSearchBar, setShowSearchBar) => (
     <img
       src={ searchIcon }
       alt="Ícone que indica o botão pra ativar a barra de busca"
+      data-testid="search-top-btn"
     />
   </button>
 );
@@ -46,14 +47,14 @@ function Header() {
   // Ao renderizar o componente vai verificar a URL, e se for uma URL elegível pra ter o botão da lupa,
   // irá setar a variável como true
   useEffect(() => {
-    if (pathname === '/comidas'
+    if (pathname !== '/'
+      || pathname === '/comidas'
       || pathname === '/bebidas'
       || pathname.endsWith('/area')) {
       setShowSearchButton(true);
+      console.log(pathname);
     }
   }, [pathname]);
-
-  console.log(pathname);
 
   return (
     <>
@@ -66,10 +67,15 @@ function Header() {
           <img
             src={ profilePicture }
             alt="Ícone que indica o botão pra ir para o perfil de usuário"
+            data-testid="profile-top-btn"
           />
         </button>
         <div>
-          <h1>{renderTitle(pathname)}</h1>
+          <h1
+            data-testid="page-title"
+          >
+            {renderTitle(pathname)}
+          </h1>
         </div>
         <div>
           {showSearchButton ? renderSearchButton(showSearchBar, setShowSearchBar) : null }
