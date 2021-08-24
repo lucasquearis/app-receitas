@@ -14,6 +14,11 @@ function Login() {
     } else loginSubmitBtn.disabled = true;
   }, [email, password]);
 
+  const handleBtnClick = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+  };
+
   return (
     <form>
       <label htmlFor="email-input">
@@ -38,6 +43,7 @@ function Login() {
       <Link to="/">
         <button
           data-testid="login-submit-btn"
+          onClick={ handleBtnClick }
           type="button"
         >
           Entrar
