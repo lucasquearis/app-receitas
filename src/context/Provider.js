@@ -32,14 +32,6 @@ function Provider({ children }) {
     }
   };
 
-  const alertFirstLetter = () => {
-    const { type, search } = filter;
-    if (type === 'first-letter' && search.length > 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
-      setFilter({ ...filter, search: '' });
-    }
-  };
-
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
@@ -48,7 +40,6 @@ function Provider({ children }) {
 
   useEffect(() => {
     switchAPI(filter);
-    alertFirstLetter();
   }, [filter, API]);
 
   const contextValue = { user, setUser, filter, setFilter, API, RequestAPI };

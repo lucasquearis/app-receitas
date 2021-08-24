@@ -5,9 +5,20 @@ import InputRadio from './InputRadio';
 
 function RadiosButtonsSearch() {
   const { filter, setFilter } = useContext(Context);
+
+  const alertFirstLetter = () => {
+    const { type, search } = filter;
+    if (type === 'first-letter' && search.length === 1) {
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
+      setFilter({ ...filter, search: '' });
+    }
+  };
+
   const handeChangeSearch = ({ target: { name, value } }) => {
     setFilter({ ...filter, [name]: value });
+    alertFirstLetter();
   };
+
   return (
     <div>
       <input
