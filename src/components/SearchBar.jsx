@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   getDataByIngredient,
   getDataByName,
@@ -16,19 +17,26 @@ export default function SearchBar() {
     setInputValue(value);
   };
 
+  const currentPage = window.location.href;
+  const foodPage = 'http://localhost:3000/comidas';
+
   const handleClick = async () => {
     if (filterIngredient && !filterName && !filterFirstLetter) {
       await getDataByIngredient(inputValue)
         .then((response) => setData(response));
     } else if (filterName && !filterIngredient && !filterFirstLetter) {
       await getDataByName(inputValue)
-        .then((response) => setData(response.meals));
+        .then((response) => (
+          currentPage === foodPage ? setData(response.meals) : setData(response.drinks)
+        ));
     } else if (filterFirstLetter && !filterIngredient && !filterName) {
       await getDataByFirstLetter(inputValue)
         .then((response) => setData(response));
     }
     return data;
   };
+
+  console.log(data);
 
   return (
     <div>
@@ -68,6 +76,15 @@ export default function SearchBar() {
       <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
         Buscar
       </button>
+      {data.length === 1
+        ? (
+          data.map(({ idMeal, idDrink }) => (
+            currentPage === foodPage ? (
+              <Redirect key={ idMeal } to={ `/comidas/${idMeal}` } />
+            ) : (
+              <Redirect key={ idMeal } to={ `/bebidas/${idDrink}` } />
+            )))
+        ) : null}
     </div>
   );
 }
