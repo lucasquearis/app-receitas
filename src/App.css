@@ -1,3 +1,18 @@
+footer {
+  bottom: 0px;
+  position: fixed;
+}
+
+header, footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+header > button {
+  background-color: transparent;
+  border: none;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;

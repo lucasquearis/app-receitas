@@ -17,10 +17,14 @@ const useUser = () => {
   };
 
   const shouldRedirect = () => {
+    setRedirect(true);
+  };
+
+  const setTokenToLocal = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: user.email }));
-    setRedirect(true);
+    shouldRedirect();
   };
 
   useEffect(() => {
@@ -34,6 +38,7 @@ const useUser = () => {
   return {
     handleChange,
     shouldRedirect,
+    setTokenToLocal,
     user,
     redirect,
     minLength,
