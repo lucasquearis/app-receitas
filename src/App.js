@@ -1,11 +1,14 @@
 import React from 'react';
+import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
-import Header from './components/Header';
+import Header from './components/Header/index';
 
 function App() {
   return (
     <AppProvider>
-      <Header title="Comida" />
+      <Switch>
+        <Route exact path="/" render={ () => <Header title="Comida" /> } />
+      </Switch>
     </AppProvider>
   );
 }
