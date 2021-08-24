@@ -2,17 +2,19 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from 'react-router-dom';
-import DrinkDetails from './pages/DrinkDetails';
-import FoodDetails from './pages/FoodDetails';
+import Foods from './pages/Foods';
+import Drinks from './pages/Drinks';
+import FoodsDetails from './pages/FoodsDetails';
+import DrinksDetails from './pages/DrinksDetails';
 
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={ <h1>AppReceitas</h1> } />
-      {/* <Route path="/comidas" component={ } />
-      <Route path="/bebidas" component={ } /> */}
-      <Route path="/comidas/:{id-da-receita}" component={ FoodDetails } />
-      <Route path="/bebidas/:{id-da-receita}" component={ DrinkDetails } />
+      <Route exact path="/" component={ Foods } />
+      <Route path="/comidas" component={ Foods } />
+      <Route path="/bebidas" component={ Drinks } />
+      <Route path="/comidas/:{id-da-receita}" component={ FoodsDetails } />
+      <Route path="/bebidas/:{id-da-receita}" component={ DrinksDetails } />
       {/* <Route path="/explorar" component={ } />
       <Route path="/explorar/comidas" component={ } />
       <Route path="/explorar/bebidas" component={ } />

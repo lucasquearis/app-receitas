@@ -9,16 +9,16 @@ function FoodInfo() {
       <p data-testid="favorite-btn">Favorito</p>
       <p data-testid="recipe-category">Texto da Categoria</p>
       <ul>
-        <li data-testid={ `${index}-ingredient-name-and-measure` }>
+        {/* <li data-testid={ `${index}-ingredient-name-and-measure` }>
           Ingredientes
-        </li>
+        </li> */}
       </ul>
       <p data-testid="instructions">Instruções</p>
       <p data-testid="video">Vídeo</p>
       <section>
-        <p data-testid={ `${index}-recomendation-card` }>
+        {/* <p data-testid={ `${index}-recomendation-card` }>
           Card de receitas recomendadas
-        </p>
+        </p> */}
       </section>
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
