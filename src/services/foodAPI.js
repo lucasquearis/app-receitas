@@ -39,4 +39,22 @@ export const getFood = (term, type) => {
   }
 };
 
-export const a = 1;
+export const getFoodByArea = async (term) => {
+  // try {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${term}`);
+  const { meals } = await response.json();
+  return meals;
+  // } catch (error) {
+  //   return `Algo deu errado na busca por ingredientes: ${error}`;
+  // }
+};
+
+export const getAreas = async () => {
+  // try {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+  const { meals } = await response.json();
+  return meals;
+  // } catch (error) {
+  //   return `Algo deu errado na busca por ingredientes: ${error}`;
+  // }
+};

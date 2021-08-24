@@ -41,6 +41,7 @@ const FoodList = () => {
   }
 
   if (!meals) {
+    // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return <p>Nenhuma receita encontrada...</p>;
   }

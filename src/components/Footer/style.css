@@ -21,3 +21,7 @@ footer button {
   background-color: transparent;
   border: none;
 }
+
+.footer-space {
+  height: 62px;
+}

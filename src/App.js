@@ -19,6 +19,7 @@ import {
   DrinkRecipe,
   InProgressFood,
   InProgressDrink,
+  NotFound,
 } from './pages';
 import store from './redux';
 import './App.css';
@@ -45,6 +46,7 @@ const App = () => (
           component={ ExploreDrinksIngredients }
         />
         <Route path="/explorar/comidas/area" component={ ExploreArea } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route path="/explorar/comidas" component={ ExploreFoods } />
         <Route path="/explorar" component={ Explore } />
@@ -52,6 +54,7 @@ const App = () => (
         <Route path="/receitas-feitas" component={ Made } />
         <Route path="/receitas-favoritas" component={ Favorites } />
         <Route exact path="/" component={ Home } />
+        <Route component={ NotFound } />
       </Switch>
     </BrowserRouter>
   </Provider>

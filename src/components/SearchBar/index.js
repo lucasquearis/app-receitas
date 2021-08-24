@@ -25,6 +25,7 @@ const SearchBar = () => {
     e.preventDefault();
     if (searchType === 'Primeira Letra'
         && searchTerm.length > 1) {
+      // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     } else if (pathname.includes('comidas')) {
       try {

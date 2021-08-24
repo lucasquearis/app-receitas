@@ -14,3 +14,4 @@ export { default as FoodRecipe } from './FoodRecipe';
 export { default as DrinkRecipe } from './DrinkRecipe';
 export { default as InProgressFood } from './InProgressFood';
 export { default as InProgressDrink } from './InProgressDrink';
+export { default as NotFound } from './NotFound';

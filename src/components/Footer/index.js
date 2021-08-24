@@ -9,17 +9,20 @@ const Footer = () => {
   const history = useHistory();
 
   return (
-    <footer data-testid="footer">
-      <button type="button" onClick={ () => history.push('/bebidas') }>
-        <img src={ drinkIcon } alt="Perfil" data-testid="drinks-bottom-btn" />
-      </button>
-      <button type="button" onClick={ () => history.push('/explorar') }>
-        <img src={ exploreIcon } alt="Perfil" data-testid="explore-bottom-btn" />
-      </button>
-      <button type="button" onClick={ () => history.push('/comidas') }>
-        <img src={ mealIcon } alt="Perfil" data-testid="food-bottom-btn" />
-      </button>
-    </footer>
+    <>
+      <div className="footer-space" />
+      <footer data-testid="footer">
+        <button type="button" onClick={ () => history.push('/bebidas') }>
+          <img src={ drinkIcon } alt="Perfil" data-testid="drinks-bottom-btn" />
+        </button>
+        <button type="button" onClick={ () => history.push('/explorar') }>
+          <img src={ exploreIcon } alt="Perfil" data-testid="explore-bottom-btn" />
+        </button>
+        <button type="button" onClick={ () => history.push('/comidas') }>
+          <img src={ mealIcon } alt="Perfil" data-testid="food-bottom-btn" />
+        </button>
+      </footer>
+    </>
   );
 };
 

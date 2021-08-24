@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ExploreAreaComponent,
   Footer,
   Header,
 } from '../components';
@@ -9,7 +10,7 @@ const ExploreArea = () => {
   return (
     <div>
       <Header page={ pageName } search />
-      Explorar Comida por Local de Origem
+      <ExploreAreaComponent />
       <Footer />
     </div>
   );

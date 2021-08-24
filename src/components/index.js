@@ -7,3 +7,5 @@ export { default as LoginForm } from './LoginForm';
 export { default as MealCard } from './MealCard';
 export { default as SearchBar } from './MealCard';
 export { default as Loading } from './Loading';
+export { default as ExploreAreaComponent } from './ExploreAreaComponent';
+export { default as NotFoundComponent } from './NotFoundComponent';
