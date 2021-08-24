@@ -37,7 +37,7 @@ function Routes() {
       <Route path="/explorar/comidas" component={ FoodsExplore } />
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route path="/receitas-feitas" component={ DoneRecipes } />
-      <Route path="/profile" component={ Profile } />
+      <Route path="/perfil" component={ Profile } />
       <Route path="/explorar" component={ Explore } />
       <Route path="/bebidas" component={ MainDrinks } />
       <Route path="/comidas" component={ MainFoods } />
