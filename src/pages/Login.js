@@ -15,6 +15,11 @@ function Login() {
     });
   };
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   const verifyPassword = () => {
     const emailVerify = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i;
     const passwordVerify = 6;
@@ -51,7 +56,7 @@ function Login() {
           <button
             data-testid="login-submit-btn"
             type="button"
-            onClick={ submit }
+            onClick={ handleClick }
             disabled={ verifyPassword() }
           >
             Entrar
