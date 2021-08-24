@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
-import FooterMenu from '../components/FooterMenu';
+import FooterMenu from '../components/FooterMenu/FooterMenu';
 import renderWithRouter from './renderWithRouter';
 
 describe('19 - Verifica os elementos contidos no menu inferior.', () => {

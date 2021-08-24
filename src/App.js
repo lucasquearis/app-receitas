@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.css';
+import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Switch } from 'react-router-dom';
-import FooterMenu from './components/FooterMenu';
 
-const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <FooterMenu />
-    </Switch>
-  </BrowserRouter>
-);
+function App() {
+  return (
+    <div className="meals">
+      <span className="logo">TRYBE</span>
+      <object
+        className="rocksGlass"
+        type="image/svg+xml"
+        data={ rockGlass }
+      >
+        Glass
+      </object>
+    </div>
+  );
+}
 
 export default App;
