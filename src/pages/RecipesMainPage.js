@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useData } from '../Context/DataContext';
-import RecipeCard from '../components/RecipeCard';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import RecipesList from '../components/RecipesList';
 
 function RecipesMainPage() {
   const location = useLocation();
@@ -56,24 +56,6 @@ function RecipesMainPage() {
     else setSelCategory(category);
   };
 
-  const renderRecipesList = () => recipesData.map((recipe, index) => {
-    const title = `str${recipeKey}`;
-    const thumb = `str${recipeKey}Thumb`;
-    const id = `id${recipeKey}`;
-    let path = '';
-    if (recipeKey === 'Meal') path = 'comidas';
-    if (recipeKey === 'Drink') path = 'bebidas';
-    return (
-      <RecipeCard
-        key={ recipe[id] }
-        id={ recipe[id] }
-        thumb={ recipe[thumb] }
-        title={ recipe[title] }
-        index={ index }
-        path={ path }
-      />);
-  });
-
   const renderAllButton = () => {
     if (selCategory !== 'All') {
       return (
@@ -101,7 +83,10 @@ function RecipesMainPage() {
       <Header />
       { renderCategoryButtons() }
       { renderAllButton() }
-      { renderRecipesList() }
+      <RecipesList
+        recipesData={ recipesData }
+        recipeKey={ recipeKey }
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { useData } from '../../Context/DataContext';
 import Input from '../Input';
 import Button from '../Button';
@@ -11,17 +11,21 @@ function HeaderSearch() {
   const [URL, setURL] = useState('');
   const [database, setDatabase] = useState('themealdb');
   const [databaseKey, setDatabaseKey] = useState('meals');
+  const [recipeKey, setRecipeKey] = useState('');
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     switch (location.pathname) {
     case '/comidas':
       setDatabase('themealdb');
       setDatabaseKey('meals');
+      setRecipeKey('Meal');
       break;
     case '/bebidas':
       setDatabase('thecocktaildb');
       setDatabaseKey('drinks');
+      setRecipeKey('Drink');
       break;
     default:
       console.log('Failed to set database!');
@@ -50,18 +54,25 @@ function HeaderSearch() {
     const max = 12;
     const results = await fetch(URL).then((stuff) => stuff.json());
     if (results[databaseKey] === null) {
+      console.log('entrou no null');
       const alertMsg = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
       // eslint-disable-next-line no-alert
       alert(alertMsg);
       return null;
     }
-    console.log(keyword.length);
+    if (results[databaseKey].length === 1) {
+      const id = results[databaseKey][0][`id${recipeKey}`];
+      let path = '';
+      if (recipeKey === 'Meal') path = 'comidas';
+      if (recipeKey === 'Drink') path = 'bebidas';
+      history.push(`/${path}/${id}`);
+    }
     if (results[databaseKey].length > max) results[databaseKey].length = max;
     setRecipesData(results[databaseKey]);
   };
 
   return (
-    <form>
+    <form className="header-search">
       <div>
         <Input
           type="text"

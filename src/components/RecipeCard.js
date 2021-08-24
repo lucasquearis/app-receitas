@@ -27,7 +27,7 @@ RecipeCard.propTypes = {
   title: string.isRequired,
   path: string.isRequired,
   index: number.isRequired,
-  id: number.isRequired,
+  id: string.isRequired,
 
 };
 
