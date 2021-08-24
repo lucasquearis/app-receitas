@@ -11,7 +11,7 @@ import Login from './pages/Login';
 // import DrinkIngredients from './pages/Explore/DrinkIngredients';
 // import FoodIngredients from './pages/Explore/FoodIngredients';
 // import FoodAreaExp from './pages/Explore/FoodAreaExp';
-// import Profile from './pages/Profile';
+import Profile from './pages/Profile';
 // import FavoriteRecipes from './pages/FavoriteRecipes';
 // import DoneRecipes from './pages/DoneRecipes';
 
@@ -29,9 +29,9 @@ function Routes() {
         <Route path="/explorar/bebidas" component={ DrinkExp } />
         <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ FoodIngredients } />
-        <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
+        <Route path="/explorar/comidas/area" component={ FoodAreaExp } /> */}
         <Route path="/perfil" component={ Profile } />
-        <Route path="/receitas-feitas" component={ FavoriteRecipes } />
+        {/* <Route path="/receitas-feitas" component={ FavoriteRecipes } />
         <Route path="/receitas-favoritas" component={ DoneRecipes } /> */}
       </Switch>
     </Router>
