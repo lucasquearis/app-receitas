@@ -19,7 +19,7 @@ class Foods extends Component {
     return (
       <div>
         <CategoriesFilter categories={ mealCategories } />
-        <RecipesList meals={ meals } />
+        <RecipesList recipes={ meals } type="foods" />
       </div>
     );
   }
