@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import AppContext from '../context/AppContext';
+import './Header.css';
 
 function Header({ nomeDaPagina }) { //
   const [redirect, setRedirect] = useState(false); // esse estado local começa como false.
+  const { showBar, setShowBar } = useContext(AppContext);
 
   if (redirect) {
     return <Redirect to="/Perfil" />;
@@ -29,8 +32,9 @@ function Header({ nomeDaPagina }) { //
         data-testid="search-top-btn"
         alt="icone-busca"
         src={ searchIcon }
+        onClick={ () => setShowBar(!showBar) }
       />
-    </header>
+    </header> // ao clicar no ícone de busca, vai mudar o estado Global.
   );
 }
 Header.propTypes = {

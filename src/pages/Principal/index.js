@@ -1,9 +1,16 @@
-import React from 'react';
-import Header from '../../Components/Header';
+import React, { useContext, useEffect } from 'react';
+import Header from '../../components/Header';
+import BarraDeBusca from '../../components/BarraDeBusca';
+import AppContext from '../../context/AppContext';
 
-function Principal() { // Nome provisório
+function Principal() {
+  const { showBar, setShowBar } = useContext(AppContext);
+  useEffect(() => () => setShowBar(false), [setShowBar]); // willUnmount. Muda o estado G. pra false de novo ao sair de "comidas"
   return (
-    <Header nomeDaPagina="Principal" /> // Nome provisório. Acho que tenho q fazer um ternário pra ser comidas ou bebidas nessa props nomeDaPágina.
+    <div>
+      <Header nomeDaPagina="Comidas" />
+      { showBar ? <BarraDeBusca /> : null }
+    </div>
   );
 }
 
