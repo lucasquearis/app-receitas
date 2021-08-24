@@ -4,6 +4,6 @@ import App from './App';
 
 test('Farewell, front-end', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/TRYBE/i);
+  const linkElement = getByText(/Login/i);
   expect(linkElement).toBeInTheDocument();
 });
