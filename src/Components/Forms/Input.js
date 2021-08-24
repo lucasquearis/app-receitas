@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Input({ handleChange, name, text, type, testId, value }) {
   return (
