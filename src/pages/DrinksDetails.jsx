@@ -1,8 +1,11 @@
 import React from 'react';
+import DrinkInfo from '../components/DrinkInfo';
 
 function DrinksDetails() {
   return (
-    <span>Drink details</span>
+    <section>
+      <DrinkInfo />
+    </section>
   );
 }
 

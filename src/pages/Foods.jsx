@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFoodRedux, fetchFoodsCategoriesRedux } from '../redux/actions/foodActions';
-import RecipeCard from '../components/RecipeCard';
+import FoodsCards from '../components/FoodsCard';
 import CategoryButton from '../components/CategoryButton';
 
 function Foods() {
@@ -29,7 +29,9 @@ function Foods() {
       )}
 
       {foods.slice(0, foodsLimits).map(
-        (food) => RecipeCard(food.idMeal, food.strMealThumb, food.strMeal, 'comidas'),
+        (food, id) => FoodsCards(
+          food, 'comidas', id,
+        ),
       )}
 
     </div>

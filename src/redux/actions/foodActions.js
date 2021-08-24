@@ -7,7 +7,9 @@ import {
   ADD_DRINKS,
   ADD_DRINKS_CATEGORIES,
   ADD_FOODS_CATEGORIES,
-  ADD_MEAL_DETAIL } from './actionTypes';
+  ADD_MEAL_DETAIL,
+  ADD_DRINK_DETAIL,
+} from './actionTypes';
 
 export const addFoods = (payload) => ({
   type: ADD_FOODS,
@@ -31,6 +33,11 @@ const addFoodsCategories = (payload) => ({
 
 const addMealDetail = (payload) => ({
   type: ADD_MEAL_DETAIL,
+  payload,
+});
+
+const addDrinkDetail = (payload) => ({
+  type: ADD_DRINK_DETAIL,
   payload,
 });
 
@@ -58,4 +65,10 @@ export const fetchMealDetails = (id) => async (dispatch) => {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
   const results = await response.json();
   dispatch(addMealDetail(results));
+};
+
+export const fetchDrinkDetails = (id) => async (dispatch) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const results = await response.json();
+  dispatch(addDrinkDetail(results));
 };

@@ -18,8 +18,9 @@ function FoodInfo() {
   }
 
   const foodDetails = details.meals[0];
-  console.log(typeof foodDetails);
-  const objEntriesFood = Object.values(foodDetails);
+  const objKeyFood = Object.keys(foodDetails);
+  const filterObjFood = objKeyFood.filter((obj) => obj.includes('strIngredient'));
+  const otherFilterObjFood = filterObjFood.filter((obj) => foodDetails[obj] !== '');
   return (
     <section>
       <img
@@ -32,17 +33,22 @@ function FoodInfo() {
       <p data-testid="favorite-btn">Favorito</p>
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
       <ul>
-        <li>{objEntriesFood.filter((item) => item === 'strIngredient')}</li>
+        { otherFilterObjFood.map((ingredient, index) => (
+          <li
+            data-testid={ `${index}-ingredient-name-and-measure` }
+            key={ index }
+          >
+            { foodDetails[ingredient] }
+          </li>)) }
       </ul>
-      {/* data-testid={ `${index}-ingredient-name-and-measure` } */}
-      { console.log(Object.entries(foodDetails)) }
       <p data-testid="instructions">{ foodDetails.strInstructions }</p>
       <iframe
         data-testid="video"
-        width="420"
+        width="360"
         height="315"
         src={ foodDetails.strYoutube }
         title={ foodDetails.strMeal }
+        allowFullScreen
       />
       <section>
         {/* <p data-testid={ `${index}-recomendation-card` }>

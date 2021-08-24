@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDrinksRedux,
   fetchDrinksCategoriesRedux } from '../redux/actions/foodActions';
-import RecipeCard from '../components/RecipeCard';
+import DrinksCards from '../components/DrinksCard';
 import CategoryButton from '../components/CategoryButton';
 
 function Drinks() {
@@ -31,8 +31,8 @@ function Drinks() {
       )}
 
       { drinks.slice(0, drinksLimits).map(
-        (drink) => RecipeCard(
-          drink.idDrink, drink.strDrinkThumb, drink.strDrink, 'bebidas',
+        (drink, id) => DrinksCards(
+          drink, 'bebidas', id,
         ),
       )}
 
