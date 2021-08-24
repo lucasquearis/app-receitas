@@ -1,0 +1,36 @@
+.header-container {
+  align-items: center;
+  background-color: #c4c4c4;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  justify-content: space-around;
+  line-height: 35px;
+  padding: 5px;
+  width: 360px;
+}
+
+.header-container2 {
+  align-items: center;
+  background-color: #c4c4c4;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  height: 58px;
+  justify-content: flex-start;
+  line-height: 35px;
+  padding: 5px;
+  width: 360px;
+}
+
+.profile-header {
+  margin-left: 10px;
+}
+
+.title-header {
+  margin: 0 110px;
+}
