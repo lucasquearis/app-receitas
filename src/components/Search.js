@@ -4,6 +4,7 @@ import Radios from './Radios';
 function Search() {
   const name = 'name';
   const values = ['name', 'ingredient', 'first'];
+  const labels = ['Ingrediente', 'Nome', 'Primeira letra'];
 
   const tests = [
     'name-search-radio',
@@ -18,7 +19,7 @@ function Search() {
   return (
     <div>
       <input type="search" data-testid="search-input" placeholder="Pesquisa" />
-      <Radios { ...{ name, change, tests, values } } />
+      <Radios { ...{ name, change, tests, labels, values } } />
       <button type="button" data-testid="exec-search-btn">
         Pesquisar
       </button>
