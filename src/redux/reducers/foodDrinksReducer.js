@@ -1,4 +1,5 @@
-import { ADD_DRINKS, ADD_FOODS } from '../actions/actionTypes';
+import { ADD_DRINKS,
+  ADD_FOODS, ADD_DRINKS_CATEGORIES, ADD_FOODS_CATEGORIES } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
 
@@ -10,6 +11,10 @@ const foodsAndDrinks = (state = INITIAL_STATE, action) => {
     return { ...state, ...action.payload };
   case ADD_DRINKS:
     return { ...state, ...action.payload };
+  case ADD_FOODS_CATEGORIES:
+    return { ...state, categories: action.payload };
+  case ADD_DRINKS_CATEGORIES:
+    return { ...state, categories: action.payload };
   default:
     return state;
   }
