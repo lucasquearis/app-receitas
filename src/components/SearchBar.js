@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button(props) {
+function SearchBar(props) {
   const { onClick, search } = props;
   return (
     <button type="button" onClick={ onClick }>
@@ -15,9 +15,9 @@ function Button(props) {
   );
 }
 
-Button.propTypes = {
+SearchBar.propTypes = {
   onClick: PropTypes.func.isRequired,
   search: PropTypes.string.isRequired,
 };
 
-export default Button;
+export default SearchBar;
