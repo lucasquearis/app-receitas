@@ -1,10 +1,20 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import RecomendationCard from './RecomendationCard';
+import { getMealById, getDrinkById } from '../services/apiRequisitions';
 
 function RecipeDetail() {
   const { pathname } = useLocation();
+  const { id: recipeId } = useParams();
+
+  const recipe = {};
+
+  if (pathname.includes('comidas')) {
+    getMealById(recipeId);
+  } else getDrinkById(recipeId);
+
   const ingredients = [{ title: 1 }, { title: 2 }, { title: 3 }];
+
   return (
     <section>
       <img data-testid="recipe-photo" alt="recipe" />
