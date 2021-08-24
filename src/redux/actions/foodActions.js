@@ -1,4 +1,7 @@
-import { fetchFoods, fetchDrinks, drinkCategories, foodCategories } from '../../services';
+import { fetchFoods,
+  fetchDrinks,
+  drinkCategories, foodCategories, fetchCategoriesFoods,
+  fetchCategoriesDrinks } from '../../services';
 import {
   ADD_FOODS,
   ADD_DRINKS,
@@ -43,4 +46,14 @@ export const fetchFoodsCategoriesRedux = async (dispatch) => {
 export const fetchDrinksCategoriesRedux = async (dispatch) => {
   const results = await drinkCategories();
   dispatch(addDrinksCategories(results));
+};
+
+export const fetchFoodByCategory = (name) => async (dispatch) => {
+  const results = await fetchCategoriesFoods(name);
+  dispatch(addFoods(results));
+};
+
+export const fetchDrinksByCategory = (name) => async (dispatch) => {
+  const results = await fetchCategoriesDrinks(name);
+  dispatch(addDrinks(results));
 };
