@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  getMealsByIngredients,
-  getMealsByName,
-  getMealsByFirstLetter,
+  getDataByIngredient,
+  getDataByName,
+  getDataByFirstLetter,
 } from '../services/api';
 
 export default function SearchBar() {
@@ -15,16 +15,17 @@ export default function SearchBar() {
   const handleChange = ({ target: { value } }) => {
     setInputValue(value);
   };
+  console.log(window.location.href);
 
   const handleClick = async () => {
     if (filterIngredient && !filterName && !filterFirstLetter) {
-      await getMealsByIngredients(inputValue)
+      await getDataByIngredient(inputValue)
         .then((response) => setData(response));
     } else if (filterName && !filterIngredient && !filterFirstLetter) {
-      await getMealsByName(inputValue)
+      await getDataByName(inputValue)
         .then((response) => setData(response.meals));
     } else if (filterFirstLetter && !filterIngredient && !filterName) {
-      await getMealsByFirstLetter(inputValue)
+      await getDataByFirstLetter(inputValue)
         .then((response) => setData(response));
     }
     return data;
