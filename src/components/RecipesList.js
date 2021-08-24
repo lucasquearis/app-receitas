@@ -45,15 +45,8 @@ class RecipesList extends Component {
   render() {
     const { type } = this.props;
 
-    return (
-      <div>
-        {
-          type === 'foods'
-            ? this.renderFoods()
-            : this.renderDrinks()
-        }
-      </div>
-    );
+    if (type === 'foods') return this.renderFoods();
+    if (type === 'drinks') return this.renderDrinks();
   }
 }
 
