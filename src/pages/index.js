@@ -1,2 +1,16 @@
 export { default as Login } from './Login';
-export { default as Comidas } from './Comidas';
+export { default as Profile } from './Profile';
+export { default as MainMeals } from './MainMeals';
+export { default as MainDrinks } from './MainDrinks';
+export { default as MealDetails } from './MealDetails';
+export { default as DrinkDetails } from './DrinkDetails';
+export { default as InProgressMeals } from './InProgressMeals';
+export { default as InProgressDrinks } from './InProgressDrinks';
+export { default as Explore } from './Explore';
+export { default as MealIngredients } from './MealIngredients';
+export { default as DrinkIngredients } from './DrinkIngredients';
+export { default as ExploreMeals } from './ExploreMeals';
+export { default as ExploreDrinks } from './ExploreDrinks';
+export { default as ExploreOrigin } from './ExploreOrigin';
+export { default as FavoriteRecipes } from './FavoriteRecipes';
+export { default as DoneRecipes } from './DoneRecipes';
