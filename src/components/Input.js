@@ -16,7 +16,6 @@ function Input(props) {
   } = props;
   return (
     <label htmlFor={ name }>
-      { label }
       <input
         type={ type }
         name={ name }
@@ -28,6 +27,7 @@ function Input(props) {
         checked={ checked }
         className={ className }
       />
+      { label }
     </label>
   );
 }
