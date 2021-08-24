@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
+import { setInitialLocalStorage } from '../helpers';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
-  const [userEmail, setUserEmail] = useState({ email: '' });
+  const [user, setUser] = useState({ email: '' });
+
+  useEffect(() => setInitialLocalStorage(user), [user]);
 
   const context = {
-    userEmail,
-    setUserEmail,
+    user,
+    setUser,
   };
 
   return (
