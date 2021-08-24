@@ -5,12 +5,14 @@ import LoginHook from '../Hooks/LoginHook';
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
-  const { handleInput, Login, disabled } = LoginHook();
+  const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
 
   const ContProps = {
     disabled,
     handleInput,
     Login,
+    handleClick,
+    redirect,
   };
 
   return (

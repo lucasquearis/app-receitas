@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import Inp from '../../Components/Inp';
 import Btn from '../../Components/Btn';
 import { ContextApp } from '../../Context/ContextApp';
 
 function Login() {
-  const { handleInput, disabled } = useContext(ContextApp);
+  const { handleInput, disabled, handleClick, redirect } = useContext(ContextApp);
   const emailProps = {
     testid: 'email-input',
     name: 'Email',
@@ -19,7 +20,9 @@ function Login() {
     testid: 'login-submit-btn',
     name: 'Login',
     disabled,
+    handleClick,
   };
+  if (redirect) return <Redirect to="/comidas" />;
   return (
     <>
       <Inp { ...emailProps } />

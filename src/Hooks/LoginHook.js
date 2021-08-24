@@ -11,10 +11,19 @@ const bana = true;
 const LoginHook = () => {
   const [Login, setLogin] = useState(INITIAL_LOGIN);
   const [disabled, setDisable] = useState(bana);
+  const [redirect, setRedirect] = useState(false);
 
   const handleInput = (({ target: { name, value } }) => {
     setLogin({ ...Login, [name]: value });
   });
+
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    const user = { email: Login.Email };
+    localStorage.setItem('user', JSON.stringify(user));
+    setRedirect(true);
+  };
 
   useEffect(() => {
     const { Email, Password } = Login;
@@ -26,6 +35,8 @@ const LoginHook = () => {
     Login,
     handleInput,
     disabled,
+    handleClick,
+    redirect,
   };
 };
 
