@@ -9,3 +9,12 @@
 .header h3 {
   margin: 0;
 }
+
+button {
+  background: none;
+  border: none;
+}
+
+button:active, button:focus {
+  outline: none;
+}
