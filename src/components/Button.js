@@ -14,10 +14,12 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
     }
   };
 
-  return (
-    ((redirect && (pathname.length > 0) && !isDisable) ? (
-      <Redirect to={ pathname } />
-    ) : (
+  if ((redirect && (pathname.length > 0) && !isDisable)) {
+    return (<Redirect to={ pathname } />);
+  }
+
+  if (id !== undefined) {
+    return (
       <button
         id={ id }
         className={ className }
@@ -29,7 +31,17 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
       >
         { buttonText }
       </button>
-    ))
+    );
+  } return (
+    <button
+      className={ className }
+      data-testid={ className }
+      type={ (type === 'submit' ? 'submit' : 'button') }
+      onClick={ handleClick }
+      disabled={ isDisable }
+    >
+      { buttonText }
+    </button>
   );
 };
 
