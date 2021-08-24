@@ -4,7 +4,7 @@ import Header from '../components/Header';
 export default function ExploreOrigin() {
   return (
     <section>
-      <Header showExploreIcon pageTitle="Explorar Origem" />
+      <Header pageTitle="Explorar Origem" />
     </section>
   );
 }
