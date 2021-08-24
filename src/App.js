@@ -6,6 +6,7 @@ import Provider from './context/Provider';
 import Login from './pages/Login';
 import Comidas from './pages/Comidas';
 import Explorar from './pages/Explorar';
+import BebidasOuComidas from './pages/BebidasOuComidas';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
       <Route exact path="/" component={ Login } />
       <Route path="/comidas" component={ Comidas } />
       <Route path="/explorar/" component={ Explorar } />
+      <Route exact path="/explorar/comidas" component={ BebidasOuComidas } />
+      <Route path="/explorar/bebidas" component={ BebidasOuComidas } />
     </Provider>
   );
 }
