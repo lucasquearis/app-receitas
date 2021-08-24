@@ -4,20 +4,20 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CategoryButtons from '../components/CategoryButtons';
 import RecipeCard from '../components/RecipeCard';
-import FoodContext from '../context/FoodContext';
+import DrinkContext from '../context/DrinkContext';
 
-export default function MainFoods() {
+export default function MainDrinks() {
   const NUMBER_OF_RECIPES = 12;
   const { pathname } = useLocation();
-  const { foods, categories } = useContext(FoodContext);
+  const { drinks, categories } = useContext(DrinkContext);
 
   return (
     <>
-      <Header title="Comidas" />
+      <Header title="Bebidas" />
       <CategoryButtons categories={ categories } />
 
       <ul>
-        { foods && foods.slice(0, NUMBER_OF_RECIPES)
+        {drinks && drinks.slice(0, NUMBER_OF_RECIPES)
           .map((recipe, index) => (
             <RecipeCard
               key={ index }
@@ -28,6 +28,6 @@ export default function MainFoods() {
           ))}
       </ul>
       <Footer />
-    </div>
+    </>
   );
 }
