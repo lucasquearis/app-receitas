@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 export default function Explore() {
   return (
     <>
-      <Header title="Explorar" />
+      <Header title="Explorar" showButton={ false } />
       Explore
     </>
   );

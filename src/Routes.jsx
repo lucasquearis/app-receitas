@@ -29,11 +29,13 @@ export default function Routes() {
         />
 
         <Route
+          exact
           path="/comidas"
           component={ Foods }
         />
 
         <Route
+          exact
           path="/bebidas"
           component={ Drinks }
         />
@@ -65,11 +67,13 @@ export default function Routes() {
         />
 
         <Route
+          exact
           path="/explorar/comidas"
           component={ ExploreFoods }
         />
 
         <Route
+          exact
           path="/explorar/bebidas"
           component={ ExploreDrinks }
         />

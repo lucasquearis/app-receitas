@@ -1,10 +1,10 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { string, bool } from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './header.css';
 
-function Header({ title }) {
+function Header({ title, showButton }) {
   return (
     <header className="container-header">
       <img
@@ -12,22 +12,40 @@ function Header({ title }) {
         src={ profileIcon }
         alt="Profile user"
       />
-      <h2
-        data-testid="page-title"
-      >
-        {title}
-      </h2>
-      <img
-        data-testid="search-top-btn"
-        src={ searchIcon }
-        alt="Profile user"
-      />
+      {
+        title
+          ? (
+            <h2
+              data-testid="page-title"
+            >
+              {title}
+            </h2>
+          )
+          : ''
+      }
+      {
+        showButton
+          ? (
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="Profile user"
+            />
+          )
+          : ''
+      }
     </header>
   );
 }
 
 Header.propTypes = {
-  title: string.isRequired,
+  title: string,
+  showButton: bool,
+};
+
+Header.defaultProps = {
+  title: '',
+  showButton: false,
 };
 
 export default Header;

@@ -6,6 +6,7 @@ export default function Foods() {
     <>
       <Header
         title="Comidas"
+        showButton
       />
       foods
     </>
