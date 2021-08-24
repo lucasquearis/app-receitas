@@ -1,36 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import AppContext from '../../context/AppContext';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { saveLoginInfoLocalStorage, validateEmailPassword } from '../../functions';
 
 const LoginPage = () => {
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-
-  const {
-    user,
-    user: { email },
-    setEmail,
-    password,
-    setPassword,
-    mealsToken,
-    cocktailsToken,
-  } = useContext(AppContext);
+  const history = useHistory();
 
   useEffect(() => {
-    const re = /\w+@\w+.com/.test(email);
-    const minimumPasswordLength = 7;
-    const validPassword = password.length >= minimumPasswordLength;
-    const logicValidation = re && validPassword;
-    setDisabled(!logicValidation);
-  }, [email, password]);
+    setDisabled(!validateEmailPassword(userEmail, password));
+  }, [userEmail, password]);
 
-  const saveLoginInfoLocalStorage = () => {
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('mealsToken', JSON.stringify(mealsToken));
-    localStorage.setItem('cocktailsToken', JSON.stringify(cocktailsToken));
+  const handleBtnSubmit = (event) => {
+    event.preventDefault();
+    saveLoginInfoLocalStorage(userEmail);
+    Object.assign(history, { ...history, location: { pathname: '/comidas' } });
   };
-
   return (
-    <form>
+    <form
+      onSubmit={ handleBtnSubmit }
+    >
       <label htmlFor="email-input">
         E-mail
         <input
@@ -38,7 +28,7 @@ const LoginPage = () => {
           id="email-input"
           data-testid="email-input"
           name="email"
-          onChange={ ({ target }) => setEmail(target.value) }
+          onChange={ ({ target }) => setUserEmail(target.value) }
         />
       </label>
       <label htmlFor="password-input">
@@ -51,16 +41,13 @@ const LoginPage = () => {
           onChange={ ({ target }) => setPassword(target.value) }
         />
       </label>
-      <Link to="/comidas">
-        <button
-          type="submit"
-          disabled={ disabled }
-          data-testid="login-submit-btn"
-          onClick={ () => saveLoginInfoLocalStorage() }
-        >
-          Entrar
-        </button>
-      </Link>
+      <button
+        type="submit"
+        disabled={ disabled }
+        data-testid="login-submit-btn"
+      >
+        Entrar
+      </button>
     </form>
   );
 };
