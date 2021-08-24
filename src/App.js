@@ -1,11 +1,16 @@
 import React from 'react';
+import { Switch, Route } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
-import Trybe from './Pages/Trybe/Trybe';
+import Login from './Pages/Login/Login';
+import Comidas from './Pages/Comidas/Comidas';
 
 function App() {
   return (
     <AppProvider>
-      <Trybe />
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/comidas" component={ Comidas } />
+      </Switch>
     </AppProvider>
   );
 }
