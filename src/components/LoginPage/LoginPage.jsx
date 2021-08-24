@@ -15,7 +15,7 @@ const LoginPage = () => {
   const handleBtnSubmit = (event) => {
     event.preventDefault();
     saveLoginInfoLocalStorage(userEmail);
-    Object.assign(history, { ...history, location: { pathname: '/comidas' } });
+    history.push('/comidas');
   };
   return (
     <form

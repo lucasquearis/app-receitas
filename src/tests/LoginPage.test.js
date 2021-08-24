@@ -131,6 +131,6 @@ describe('Test Login submit', () => {
     userEvent.type(passwordInput, validPassword);
     userEvent.click(loginBtn);
 
-    expect(history.location.pathname).toEqual('/comidas');
+    expect(history.location.pathname).toBe('/comidas');
   });
 });
