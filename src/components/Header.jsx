@@ -27,7 +27,7 @@ function Header({ brand, dataId, className, src, alt }) {
             />
           </button>
         </Link>
-        <h3 data-testid="page-title">
+        <h3 className="title" data-testid="page-title">
           {brand}
         </h3>
         <button
