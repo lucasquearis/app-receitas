@@ -1,9 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 // import { Link, Redirect } from 'react-router-dom';
 // import Header from '../components/Header';
 // import AppContext from '../context/AppContext';
 
 function Login() {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = ({ target: { name, value } }) => {
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
   return (
     <div>
       <div>
@@ -37,7 +49,6 @@ function Login() {
           </button>
         </form>
       </div>
-      {/* <footer></footer> */}
     </div>
   );
 }
