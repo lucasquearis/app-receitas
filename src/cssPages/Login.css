@@ -1,0 +1,35 @@
+.login-container {
+  align-items: center;
+  border: solid black 1px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-evenly;
+  width: 300px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.login {
+  border: solid black 1px;
+  height: 5%;
+  width: 70%;
+}
+
+.btn {
+  background-color: rgb(96, 206, 96);
+  border: white solid 1px;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  height: 10%;
+  width: 50%;
+}
+
+.btn:hover {
+  background-color: rgb(57, 138, 57);
+}
