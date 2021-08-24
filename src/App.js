@@ -8,6 +8,7 @@ import Comidas from './pages/Comidas';
 import Explorar from './pages/Explorar';
 import BebidasExp from './pages/BebidasExp';
 import ComidasExp from './pages/ComidasExp';
+import Perfil from './pages/Perfil';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/explorar" component={ Explorar } />
           <Route path="/explorar/comidas" component={ ComidasExp } />
           <Route path="/explorar/bebidas" component={ BebidasExp } />
+          <Route path="/perfil" component={ Perfil } />
           {/*
           <Route path="/" component={ Login } />
           {/* <Route path="/comidas" component={ Login } />
@@ -30,7 +32,6 @@ function App() {
           <Route path="/explorar/comidas/ingredientes" component={ Login } />
           <Route path="/explorar/bebidas/ingredientes" component={ Login } />
           <Route path="/explorar/comidas/area" component={ Login } />
-          <Route path="/perfil" component={ Login } />
           <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
