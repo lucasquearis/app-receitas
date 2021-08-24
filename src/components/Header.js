@@ -24,7 +24,7 @@ function Header(props) {
   };
 
   const revealIconSearch = () => {
-    if (showProfileIcon) {
+    if (showProfileIcon === 'sim') {
       return (
         <button type="button" onClick={ revealSearchBar }>
           <img
