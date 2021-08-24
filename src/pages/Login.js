@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 
 function Login() {
   // const { history } = useHistory;
-  const [user, setUser] = useState({
+  const [inputLogin, setInputLogin] = useState({
     email: '',
     password: '',
   });
 
   const handleChange = ({ target: { name, value } }) => {
-    setUser({
-      ...user,
+    setInputLogin({
+      ...inputLogin,
       [name]: value,
     });
   };
@@ -18,13 +18,14 @@ function Login() {
   const handleClick = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email: inputLogin.email }));
   };
 
   const verifyPassword = () => {
     const emailVerify = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i;
     const passwordVerify = 6;
-    if (emailVerify.test(user.email)
-    && passwordVerify < user.password.length) {
+    if (emailVerify.test(inputLogin.email)
+    && passwordVerify < inputLogin.password.length) {
       return false;
     }
     return true;
@@ -41,7 +42,7 @@ function Login() {
               onChange={ handleChange }
               type="email"
               name="email"
-              placeholder={ placeholderUser }
+              placeholder="Email"
             />
           </label>
           <label htmlFor="password">
