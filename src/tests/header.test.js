@@ -19,7 +19,7 @@ describe('Header tests', () => {
     const { history } = renderWithRouter(<Foods />);
     fireEvent.click(screen.getByTestId(PROFILE_BTN_SELECTOR));
     const { pathname } = history.location;
-    expect(pathname).toBe('/profile');
+    expect(pathname).toBe('/perfil');
   });
 
   it('Show search bar when clicking search icon', () => {
