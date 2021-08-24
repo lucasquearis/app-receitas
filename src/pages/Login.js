@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+import myContext from '../context/myContext';
 
 function Login() {
-  const { history } = useHistory;
+  const history = useHistory();
+  const { setInfoUser } = useContext(myContext);
   const [inputLogin, setInputLogin] = useState({
     email: '',
     password: '',
@@ -16,9 +19,7 @@ function Login() {
   };
 
   const handleClick = () => {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify({ email: inputLogin.email }));
+    setInfoUser(inputLogin);
     history.push('/comidas');
   };
 
@@ -31,6 +32,8 @@ function Login() {
     }
     return true;
   };
+
+  // if (redirect === 'true') return <Redirect to="/" />;
 
   return (
     <div>
