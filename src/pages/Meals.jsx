@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
 
 export default function () {
   const { meals } = useContext(Context);
+
+  if (!meals) {
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    return (<Redirect to="/comidas" />);
+  }
   if (!meals.length) { return <span>LOADING...</span>; }
 
   return (

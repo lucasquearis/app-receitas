@@ -6,7 +6,6 @@ import { fetchMeals, fetchDrinks } from '../services/fechRecipes';
 export default function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  // const [recepieType, setRecepieType] = useState('');
 
   useEffect(() => {
     fetchMeals(setMeals);

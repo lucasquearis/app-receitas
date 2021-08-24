@@ -1,11 +1,20 @@
 import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
 
 export default function () {
   const { drinks } = useContext(Context);
-  if (!drinks.length) { return <span>LOADING...</span>; }
+
+  if (!drinks) {
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    return (<Redirect to="/bebidas" />);
+  }
+
+  if (!drinks.length) {
+    return <span>LOADING...</span>;
+  }
 
   return (
     <div className="drinks-page">

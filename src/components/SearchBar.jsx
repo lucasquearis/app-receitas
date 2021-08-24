@@ -29,6 +29,10 @@ export default function SearchBar() {
       fetchType(setRecipeType, `https://www.the${recipeType}db.com/api/json/v1/1/filter.php?i=${value}`);
     }
     if (searchType === 'firstLetter') {
+      if (value.length > 1) {
+        alert('Sua busca deve conter somente 1 (um) caracter');
+        return;
+      }
       fetchType(setRecipeType, `https://www.the${recipeType}db.com/api/json/v1/1/search.php?f=${value}`);
     }
     if (searchType === 'name') {
