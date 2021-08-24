@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import MenuInferior from '../components/MenuInferior';
 
 function Profile() {
   if (!localStorage.user) {
@@ -38,6 +39,7 @@ function Profile() {
       >
         Sair
       </button>
+      <MenuInferior />
     </div>
   );
 }

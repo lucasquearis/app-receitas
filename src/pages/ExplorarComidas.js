@@ -1,10 +1,10 @@
 import React from 'react';
 import MenuInferior from '../components/MenuInferior';
 
-export default function Comidas() {
+export default function ExplorarComidas() {
   return (
     <div>
-      Comidas
+      ExplorarComidas
       <MenuInferior />
     </div>
   );
