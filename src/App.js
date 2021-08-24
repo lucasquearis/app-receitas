@@ -3,11 +3,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes';
+import MyProvider from './context/MyProvider';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes />
+      <MyProvider>
+        <Routes />
+      </MyProvider>
     </BrowserRouter>
   );
 }
