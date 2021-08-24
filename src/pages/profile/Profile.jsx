@@ -5,7 +5,7 @@ export default function Profile() {
   return (
     <>
       <div>
-        Profile
+        Perfil
       </div>
       <Footer />
     </>
