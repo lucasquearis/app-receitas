@@ -4,14 +4,16 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/Provider';
 import Login from './pages/Login';
+import PrincipalPage from './pages/PrincipalPage';
 
 function App() {
   return (
     <Provider>
       <BrowserRouter>
         <Switch>
-          <Route to="/" component={ Login } />
-          {/* <Route to="/comidas" component={ Login } />
+          <Route exact to="/" component={ Login } />
+          <Route to="/comidas" component={ PrincipalPage } />
+          {/*
           <Route to="/bebidas" component={ Login } />
           <Route to="/comidas/{id-da-receita}" component={ Login } />
           <Route to="/bebidas/{id-da-receita}" component={ Login } />
