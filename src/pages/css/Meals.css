@@ -1,0 +1,36 @@
+body {
+  border: 2px dotted black;
+  height: 640px;
+  width: 360px;
+}
+
+.meals-cards-container {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+}
+
+.meals-categories-container {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  height: 5em;
+  justify-content: space-evenly;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.meals-categories {
+  background-color: rgb(195, 195, 195);
+  border: transparent;
+  font-size: 1em;
+  height: 1.6em;
+  text-align: start;
+  text-indent: 0.5em;
+  width: 6em;
+}
+
+.meal-card-link {
+  color: black;
+  text-decoration: none;
+}

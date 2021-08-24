@@ -1,0 +1,21 @@
+.card {
+  border: transparent;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 2px rgb(195, 195, 195);
+  height: 11em;
+  margin-bottom: 0.8em;
+  width: 10em;
+}
+
+.thumb {
+  border-radius: 12px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 80%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.name {
+  margin-left: 0.5em;
+}

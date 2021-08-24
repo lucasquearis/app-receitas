@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Button = ({ className, type, buttonText, pathname, isDisable, onClick }) => {
+const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick }) => {
   const [redirect, setRedirect] = useState(false);
 
   const handleRedirect = () => setRedirect(true);
@@ -19,10 +19,12 @@ const Button = ({ className, type, buttonText, pathname, isDisable, onClick }) =
       <Redirect to={ pathname } />
     ) : (
       <button
+        id={ id }
         className={ className }
-        data-testid={ className }
+        name={ buttonText }
+        data-testid={ id }
         type={ (type === 'submit' ? 'submit' : 'button') }
-        onClick={ handleClick }
+        onClick={ isDisable ? handleClick : onClick }
         disabled={ isDisable }
       >
         { buttonText }
@@ -32,6 +34,7 @@ const Button = ({ className, type, buttonText, pathname, isDisable, onClick }) =
 };
 
 Button.propTypes = {
+  id: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   type: PropTypes.string,
   buttonText: PropTypes.string.isRequired,

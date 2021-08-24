@@ -1,0 +1,36 @@
+body {
+  border: 2px dotted black;
+  height: 640px;
+  width: 360px;
+}
+
+.drinks-cards-container {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+}
+
+.drinks-categories-container {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  height: 6em;
+  justify-content: space-evenly;
+  margin: 0.5em 0;
+  width: 100%;
+}
+
+.drinks-categories {
+  background-color: rgb(195, 195, 195);
+  border: transparent;
+  font-size: 0.8em;
+  height: 3em;
+  text-align: start;
+  text-indent: 0.2em;
+  width: 8em;
+}
+
+.drink-card-link {
+  color: black;
+  text-decoration: none;
+}
