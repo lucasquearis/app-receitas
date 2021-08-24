@@ -1,9 +1,9 @@
-.header-top{
+.header-top {
   display: flex;
   justify-content: space-between;
 }
 
-.header-top button{
+.header-top button {
   background-color: transparent;
   border: none;
 }
