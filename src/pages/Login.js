@@ -22,8 +22,9 @@ function Login() {
 
   const handleClick = () => {
     setRegister(login);
-    setLocalStorage('user', { email: login.email } )
-    console.log(getLocalStorage('user'))
+    setLocalStorage('user', { email: login.email } );
+    setLocalStorage('mealsToken', 1);
+    setLocalStorage('cocktailsToken', 1);
     setLogin({
       email:'',
       password: '',
