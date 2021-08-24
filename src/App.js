@@ -4,7 +4,6 @@ import { AppProvider } from './Context/ContextApp';
 import Header from './components/Header/index';
 import Foods from './Pages/Foods';
 import Login from './Pages/Login/Login';
-
 import Profile from './Pages/Profile/Profile';
 import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
 import ReceitasFeitas from './Pages/ReceitasFeitas/ReceitasFeitas';
