@@ -26,7 +26,6 @@ function Profile() {
         <img src={ ProfileIcon } alt="profile icon" />
         <h1>Perfil</h1>
       </header>
-      {getEmail}
       <section>
         <Link to="/receitas-feitas">
           <Btn { ...receitasFeitasProps } />
