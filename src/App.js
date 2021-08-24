@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Routes from './Routes';
+import Routes from './services/Routes';
 
 function App() {
   return (
