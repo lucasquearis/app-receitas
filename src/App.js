@@ -22,9 +22,9 @@ function App() {
       <Route path="/perfil" component={ Profile } />
       <Route path="/receitas-feitas" component={ MyRecipes } />
       <Route path="/receitas-favoritas" component={ Favorites } />
-      <Route path="/:type:id" render={ (props) => <RecipeDetails { ...props } /> } />
+      <Route path="/:type/:id" render={ (props) => <RecipeDetails { ...props } /> } />
       <Route
-        path="/:type:id/in-progress"
+        path="/:type/:id/in-progress"
         render={ (props) => <RecipeDetails { ...props } /> }
       />
       {/* <Route

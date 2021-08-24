@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
-function RecipeDetails() {
+function RecipeDetails(props) {
+  const [recipe, setRecipe] = useState({});
+  useEffect(() => {
+    const getRecipe = async () => {
+      const { match } = props;
+      const { type, id } = match.params;
+      let endpoint = '';
+      if (type === 'comidas') {
+        endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      } else {
+        endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+      }
+      const result = await fetch(endpoint).then((response) => response.json());
+      setRecipe(result);
+    };
+    getRecipe();
+  }, []);
   const index = 0;
   return (
     <div>
@@ -31,5 +48,14 @@ function RecipeDetails() {
     </div>
   );
 }
+
+RecipeDetails.propTypes = {
+  match: PropTypes.arrayOf([
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  ]).isRequired,
+};
 
 export default RecipeDetails;
