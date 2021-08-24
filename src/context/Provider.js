@@ -13,21 +13,26 @@ export default function Provider({ children }) {
   const [mealsCategoryFilter, setMealsCategoryFilter] = useState();
 
   useEffect(() => {
-    fetchMeals(setMeals);
-    fetchDrinks(setDrinks);
     fetchCategories(setDrinkCategories, 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', false);
     fetchCategories(setMealCategories, 'https://www.themealdb.com/api/json/v1/1/list.php?c=list', true);
   }, []);
 
   useEffect(() => {
-    if (!mealsCategoryFilter) { return; }
+    if (!mealsCategoryFilter) {
+      fetchMeals(setMeals);
+
+      return;
+    }
     fetchMeals(
       setMeals, `https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealsCategoryFilter}`,
     );
   }, [mealsCategoryFilter]);
 
   useEffect(() => {
-    if (!drinksCategoryFilter) { return; }
+    if (!drinksCategoryFilter) {
+      fetchDrinks(setDrinks);
+      return;
+    }
     fetchDrinks(
       setDrinks, `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinksCategoryFilter}`,
     );
