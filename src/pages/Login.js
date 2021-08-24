@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { arrayOf, string } from 'prop-types';
-import { Input } from '../components';
+import { Input, Button } from '../components';
 import AppContext from '../context/AppContext';
 import verifyLogin from '../helpers/verifyLogin';
 
-export default function Login({ history }) {
+export default function Login() {
   const { user, setUser } = useContext(AppContext);
   const [loginForm, setLoginForm] = useState({
     email: '',
@@ -24,7 +23,6 @@ export default function Login({ history }) {
   function handleClick() {
     const { email } = loginForm;
     setUser({ ...user, email });
-    history.push('/comidas');
   }
 
   useEffect(checkValid, [loginForm]);
@@ -45,18 +43,14 @@ export default function Login({ history }) {
         name="password"
         onChange={ handleChange }
       />
-      <button
+      <Button
+        className="login-submit-btn"
         type="button"
-        data-testid="login-submit-btn"
-        disabled={ btnDisable }
+        buttonText="Entrar"
+        pathname="/comidas"
+        isDisable={ btnDisable }
         onClick={ handleClick }
-      >
-        Entrar
-      </button>
+      />
     </form>
   );
 }
-
-Login.propTypes = {
-  history: arrayOf(string).isRequired,
-};
