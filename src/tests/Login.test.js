@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import App from './App';
+import App from '../App';
 
 describe('Testes tela de Login', () => {
   const emailMock = 'test@test.test';
@@ -67,8 +67,6 @@ describe('Testes tela de Login', () => {
     const mealsToken = localStorage.getItem('mealsToken');
     const cocktailsToken = localStorage.getItem('cocktailsToken');
     const user = JSON.parse(localStorage.getItem('user'));
-
-    console.log(user);
 
     expect(mealsToken).toBe('1');
     expect(cocktailsToken).toBe('1');
