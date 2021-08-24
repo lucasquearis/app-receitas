@@ -1,8 +1,15 @@
 import React from 'react';
+import Input from './Input';
 
 export default function SearchBar() {
   return (
     <nav>
+      <Input
+        id="search-input"
+        type="text"
+        onChange={ () => {} }
+        name="search"
+      />
       <label htmlFor="search-input">
         <input id="search-input" type="text" data-testid="search-input" />
       </label>
