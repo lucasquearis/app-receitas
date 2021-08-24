@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../components/Header';
 import { useHistory } from 'react-router-dom';
 
 function Profile() {
@@ -7,6 +8,7 @@ function Profile() {
 
   return (
     <main>
+      <Header name="Perfil" search={ false } />
       <h1
         data-testid="profile-email"
       >
