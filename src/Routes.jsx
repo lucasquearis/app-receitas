@@ -59,6 +59,7 @@ export default function Routes() {
         />
 
         <Route
+          exact
           path="/explorar"
           component={ Explore }
         />
