@@ -1,5 +1,9 @@
 footer {
+<<<<<<< HEAD
   bottom: 0px;
+=======
+  bottom: 0;
+>>>>>>> 961421f1f714937a675f21953cd684729a2ba980
   position: fixed;
 }
 
