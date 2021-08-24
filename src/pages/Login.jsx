@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { sendUserInfo } from '../redux/actions/userActions';
 
 export default function Login() {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -29,8 +33,14 @@ export default function Login() {
     localStorage.setItem('user', userObjctString);
   };
 
+  const emailToStore = () => {
+    const { email } = state;
+    dispatch(sendUserInfo({ email }));
+  };
+
   const handleClick = (event) => {
     event.preventDefault();
+    emailToStore();
     tokensToStorage();
     emailToStorage();
     history.push('/comidas');
