@@ -7,7 +7,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = () => {
-    localStorage.setItem('email', JSON.stringify({
+    localStorage.setItem('user', JSON.stringify({
       email,
     }));
     localStorage.setItem('cocktailsToken', 1);
@@ -31,10 +31,11 @@ function Login() {
           onChange={ ({ target: { value } }) => setPassword(value) }
         />
         <Link
-          to="/mainpage"
+          to="/comidas"
         >
           <button
             type="button"
+            data-testid="login-submit-btn"
             disabled={ !loginValidator({ email, password }) }
             onClick={ handleSubmit }
           >
