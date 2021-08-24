@@ -1,0 +1,10 @@
+.containerLogin{
+    width: 400px;
+    height: 750px;
+    background-color: rgb(243, 152, 140);
+    align-items: center;
+    margin: auto;
+    text-align: center;
+    margin-top: center;
+    border-radius: 4px;
+}
