@@ -5,9 +5,14 @@ import Routes from './Routes';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import SearchBar from './components/SearchBar';
+
 function App() {
   return (
-    <Routes />
+    <>
+      <SearchBar />
+      <Routes />
+    </>
   );
 }
 
