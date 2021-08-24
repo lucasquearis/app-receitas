@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
+import MenuInferior from '../components/MenuInferior';
+
 export default function Explorar() {
   const history = useHistory();
   return (
@@ -19,6 +21,7 @@ export default function Explorar() {
       >
         Explorar Bebidas
       </button>
+      <MenuInferior />
     </div>
   );
 }

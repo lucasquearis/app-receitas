@@ -1,7 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-export default function BebidasOuComidas() {
+import MenuInferior from '../components/MenuInferior';
+
+export default function ExplorarComidas() {
   const history = useHistory();
   return (
     <div>
@@ -22,10 +24,11 @@ export default function BebidasOuComidas() {
       <button
         data-testid="explore-surprise"
         type="button"
-        onClick={ () => history.push('explore/surpresas') }
+        onClick={ () => history.push('explore/surpresas') } // Este path aponta para qual componente? Requisito 70.
       >
         Me Surpreenda!
       </button>
+      <MenuInferior />
     </div>
   );
 }
