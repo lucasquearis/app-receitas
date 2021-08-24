@@ -5,6 +5,9 @@ import {
   MEALS_CATEGORIES,
   MEALS_CATEGORIES_SUCCESS,
   MEALS_CATEGORIES_ERROR,
+  MEALS_FILTERED_CATEGORY,
+  MEALS_FILTERED_CATEGORY_SUCCESS,
+  MEALS_FILTERED_CATEGORY_ERROR,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -27,6 +30,12 @@ export default (state = INITIAL_STATE, action) => {
   case MEALS_CATEGORIES_SUCCESS:
     return { ...state, categories: [...action.payload], loading: false };
   case MEALS_CATEGORIES_ERROR:
+    return { ...state, error: action.payload, loading: false };
+  case MEALS_FILTERED_CATEGORY:
+    return { ...state, loading: true };
+  case MEALS_FILTERED_CATEGORY_SUCCESS:
+    return { ...state, meals: [...action.payload], loading: false };
+  case MEALS_FILTERED_CATEGORY_ERROR:
     return { ...state, error: action.payload, loading: false };
   default:
     return state;

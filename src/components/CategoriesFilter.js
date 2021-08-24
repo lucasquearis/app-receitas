@@ -16,6 +16,7 @@ class CategoriesFilter extends Component {
   }
 
   render() {
+    const { handleClick } = this.props;
     const categories = this.filterFiveCategories();
 
     return (
@@ -26,6 +27,7 @@ class CategoriesFilter extends Component {
               key={ strCategory }
               type="button"
               data-testid={ `${strCategory}-category-filter` }
+              onClick={ handleClick }
             >
               { strCategory }
             </button>

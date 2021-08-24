@@ -5,6 +5,9 @@ import {
   DRINKS_CATEGORIES,
   DRINKS_CATEGORIES_SUCCESS,
   DRINKS_CATEGORIES_ERROR,
+  DRINKS_FILTERED_CATEGORY,
+  DRINKS_FILTERED_CATEGORY_SUCCESS,
+  DRINKS_FILTERED_CATEGORY_ERROR,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -27,6 +30,12 @@ export default (state = INITIAL_STATE, action) => {
   case DRINKS_CATEGORIES_SUCCESS:
     return { ...state, categories: [...action.payload], loading: false };
   case DRINKS_CATEGORIES_ERROR:
+    return { ...state, error: action.payload, loading: false };
+  case DRINKS_FILTERED_CATEGORY:
+    return { ...state, loading: true };
+  case DRINKS_FILTERED_CATEGORY_SUCCESS:
+    return { ...state, drinks: [...action.payload], loading: false };
+  case DRINKS_FILTERED_CATEGORY_ERROR:
     return { ...state, error: action.payload, loading: false };
   default:
     return state;
