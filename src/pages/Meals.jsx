@@ -14,6 +14,8 @@ export default function () {
   }
   if (!meals.length) { return <span>LOADING...</span>; }
 
+  if (meals.length === 1) { return (<Redirect to={ `comidas/${meals[0].idMeal}` } />); }
+
   return (
     <div className="foods-page">
       <Header title="Comidas" />

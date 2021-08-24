@@ -13,9 +13,9 @@ export default function () {
     return (<Redirect to="/bebidas" />);
   }
 
-  if (!drinks.length) {
-    return <span>LOADING...</span>;
-  }
+  if (!drinks.length) { return <span>LOADING...</span>; }
+
+  if (drinks.length === 1) { return <Redirect to={ `bebidas/${drinks[0].idDrink}` } />; }
 
   return (
     <div className="drinks-page">
