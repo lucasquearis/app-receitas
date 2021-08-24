@@ -1,32 +1,32 @@
 import {
-  MEALS,
-  MEALS_SUCCESS,
-  MEALS_ERROR,
-  MEALS_CATEGORIES,
-  MEALS_CATEGORIES_SUCCESS,
-  MEALS_CATEGORIES_ERROR,
+  DRINKS,
+  DRINKS_SUCCESS,
+  DRINKS_ERROR,
+  DRINKS_CATEGORIES,
+  DRINKS_CATEGORIES_SUCCESS,
+  DRINKS_CATEGORIES_ERROR,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   loading: false,
-  meals: [],
+  drinks: [],
   categories: [],
   error: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case MEALS:
+  case DRINKS:
     return { ...state, loading: true };
-  case MEALS_SUCCESS:
-    return { ...state, meals: [...action.payload], loading: false };
-  case MEALS_ERROR:
+  case DRINKS_SUCCESS:
+    return { ...state, drinks: [...action.payload], loading: false };
+  case DRINKS_ERROR:
     return { ...state, error: action.payload, loading: false };
-  case MEALS_CATEGORIES:
+  case DRINKS_CATEGORIES:
     return { ...state, loading: true };
-  case MEALS_CATEGORIES_SUCCESS:
+  case DRINKS_CATEGORIES_SUCCESS:
     return { ...state, categories: [...action.payload], loading: false };
-  case MEALS_CATEGORIES_ERROR:
+  case DRINKS_CATEGORIES_ERROR:
     return { ...state, error: action.payload, loading: false };
   default:
     return state;

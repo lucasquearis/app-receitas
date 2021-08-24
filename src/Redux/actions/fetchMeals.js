@@ -1,33 +1,33 @@
 import {
-  MEAL,
-  MEAL_SUCCESS,
-  MEAL_ERROR,
+  MEALS,
+  MEALS_SUCCESS,
+  MEALS_ERROR,
 } from './actionTypes';
 
-const getMeal = () => ({
-  type: MEAL,
+const getMeals = () => ({
+  type: MEALS,
 });
 
-const getMealSuccess = (meal) => ({
-  type: MEAL_SUCCESS,
+const getMealsSuccess = (meal) => ({
+  type: MEALS_SUCCESS,
   payload: meal,
 });
 
-const getMealError = (error) => ({
-  type: MEAL_ERROR,
+const getMealsError = (error) => ({
+  type: MEALS_ERROR,
   payload: error,
 });
 
 const fetchMeals = () => async (dispatch) => {
-  dispatch(getMeal());
+  dispatch(getMeals());
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(endPoint);
   const json = await response.json();
 
   try {
-    dispatch(getMealSuccess(json.meals));
+    dispatch(getMealsSuccess(json.meals));
   } catch (error) {
-    dispatch(getMealError(error));
+    dispatch(getMealsError(error));
   }
 };
 

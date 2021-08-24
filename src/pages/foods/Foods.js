@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchCategories from '../../Redux/actions/fetchCategories';
+import fetchMealsCategories from '../../Redux/actions/fetchMealsCategories';
 import fetchMeals from '../../Redux/actions/fetchMeals';
 import CategoriesFilter from '../../components/CategoriesFilter';
 import RecipesList from '../../components/RecipesList';
 
 class Foods extends Component {
   componentDidMount() {
-    const { setCategories, setMeals } = this.props;
-    setCategories();
+    const { setMealsCategories, setMeals } = this.props;
+
+    setMealsCategories();
     setMeals();
   }
 
@@ -26,7 +27,7 @@ class Foods extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setCategories: () => dispatch(fetchCategories()),
+  setMealsCategories: () => dispatch(fetchMealsCategories()),
   setMeals: () => dispatch(fetchMeals()),
 });
 
