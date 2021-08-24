@@ -3,7 +3,7 @@ import './App.css';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes';
-// apenas comentario para commit
+
 function App() {
   return (
     <div className="meals">
