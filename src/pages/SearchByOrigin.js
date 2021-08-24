@@ -1,4 +1,5 @@
 import React from 'react';
+import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
@@ -11,6 +12,7 @@ const SearchByOrigin = () => (
     <button type="button">
       <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
     </button>
+    <FooterMenu />
   </div>
 );
 
