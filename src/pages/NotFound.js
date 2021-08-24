@@ -1,10 +1,14 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function NotFound() {
   return (
-    <p>
-      Not found
-    </p>
+    <>
+      <Header />
+      <p>
+        Not found
+      </p>
+    </>
   );
 }
 

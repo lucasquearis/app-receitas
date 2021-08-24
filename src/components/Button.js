@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { string, func, bool } from 'prop-types';
+import { string, func, bool, objectOf } from 'prop-types';
 
 function Button(props) {
-  const { link, testId, name, onClick, disabled } = props;
+  const { link, testId, name, onClick, disabled, style } = props;
   if (link !== '') {
     return (
       <div>
@@ -13,6 +13,7 @@ function Button(props) {
             data-testid={ testId }
             onClick={ onClick }
             disabled={ disabled }
+            style={ style }
           >
             { name }
           </button>
@@ -27,6 +28,7 @@ function Button(props) {
         data-testid={ testId }
         onClick={ onClick }
         disabled={ disabled }
+        style={ style }
       >
         { name }
       </button>
@@ -40,12 +42,14 @@ Button.propTypes = {
   name: string.isRequired,
   onClick: func,
   disabled: bool.isRequired,
+  style: objectOf(string),
 };
 
 Button.defaultProps = {
   link: '',
   testId: '',
   onClick: null,
+  style: {},
 };
 
 export default Button;
