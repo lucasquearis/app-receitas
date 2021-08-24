@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
-  // const { history } = useHistory;
+  const { history } = useHistory;
   const [inputLogin, setInputLogin] = useState({
     email: '',
     password: '',
@@ -19,6 +19,7 @@ function Login() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: inputLogin.email }));
+    history.push('/comidas');
   };
 
   const verifyPassword = () => {

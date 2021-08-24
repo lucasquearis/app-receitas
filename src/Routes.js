@@ -1,12 +1,13 @@
 // vitals
 import React from 'react';
-import { Switch } from 'react-router-dom';
-// importar Route depois
+import { Switch, Route } from 'react-router-dom';
+// components
+import Login from './pages/Login';
 
 function Routes() {
   return (
     <Switch>
-      Provisório
+      <Route exact path="/" component={ Login } />
     </Switch>
   );
 }
