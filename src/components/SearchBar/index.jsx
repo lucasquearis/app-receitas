@@ -6,33 +6,17 @@ import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import InputRadio from '../InputRadio';
 
-import { ContextHeader } from '../../Context/ContextHeader';
-import fetchApi from '../../Helpers/fetchApi';
+import { ContextApp } from '../../Context/ContextApp';
 
 function SearchBar() {
   const [previousSearch, setPreviousSearch] = useState({});
-  const { showAlert, setProducts } = useContext(ContextHeader);
+  const { searchRecipes } = useContext(ContextApp);
 
   const history = useHistory();
   const { location: { pathname } } = history;
-  const url = pathname === '/' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-  const handleSearch = async () => {
-    const { type, input } = previousSearch;
-    switch (type) {
-    case 'name':
-      return setProducts(await fetchApi(url, 'search.php?s=', input));
-    case 'ingredient':
-      return setProducts(await fetchApi(url, 'filter.php?i=', input));
-    case 'first-letter':
-      if (input.length > 1) {
-        return showAlert(alert, 'Sua busca deve conter somente 1 (um) caracter');
-      }
-      return setProducts(await fetchApi(url, 'search.php?f=', input));
-    default:
-      break;
-    }
-  };
+  const currentRout = pathname.includes('comidas');
+  const url = currentRout === true ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
 
   const handleChange = ({ target: { name, value } }) => {
     setPreviousSearch({
@@ -74,7 +58,7 @@ function SearchBar() {
       <Button
         variant="contained"
         data-testid="exec-search-btn"
-        onClick={ handleSearch }
+        onClick={ () => searchRecipes(previousSearch, currentRout, url, history) }
       >
         Pesquisar
       </Button>
