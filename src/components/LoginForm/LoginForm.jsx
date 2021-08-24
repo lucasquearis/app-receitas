@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import useUser from '../hook/UseUser';
+import useUser from '../../hook/UseUser';
 
 const LoginForm = () => {
   const { handleChange, shouldRedirect,

@@ -30,7 +30,10 @@ function Header({ title, searchIcon }) {
 
 Header.propTypes = {
   title: propTypes.string.isRequired,
-  searchIcon: propTypes.bool.isRequired,
+  searchIcon: propTypes.bool,
+};
+Header.defaultProps = {
+  searchIcon: false,
 };
 
 export default Header;
