@@ -1,0 +1,8 @@
+.FooterPags {
+  bottom: 0;
+  height: 40px;
+  margin: auto;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
