@@ -2,6 +2,6 @@ import React from 'react';
 
 export default function () {
   return (
-    <div>GENERIC PAGE</div>
+    <div>Login</div>
   );
 }
