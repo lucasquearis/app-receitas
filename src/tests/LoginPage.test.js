@@ -109,3 +109,22 @@ describe('Test keys mealsToken and cocktailsToken on localStorage', () => {
     expect(cocktailsToken).toEqual(1);
   });
 });
+
+describe('Test if user is a key in localStorage', () => {
+  beforeEach(() => {
+    renderWithRouter(<App />);
+  });
+
+  it('Test if user is a key in localStorage', () => {
+    const emailInput = screen.getByTestId(inputEmailId);
+    const passwordInput = screen.getByTestId(inputPasswordId);
+    const loginBtn = screen.getByTestId(loginBtnId);
+
+    userEvent.type(emailInput, validEmail);
+    userEvent.type(passwordInput, validPassword);
+    userEvent.click(loginBtn);
+
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    expect(email).toEqual(validEmail);
+  });
+});
