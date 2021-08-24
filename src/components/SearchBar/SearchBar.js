@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { searchOnClick } from '../utils';
 
 const SearchBar = () => {
   const [search, setSearch] = useState({
@@ -6,6 +8,28 @@ const SearchBar = () => {
     radioValue: '',
   });
   const [items, setItems] = useState();
+  const [redirect, setRedirect] = useState({
+    bool: false,
+  });
+
+  useEffect(() => {
+    const checkItems = () => {
+      if (items !== undefined && Object.values(items)[0].length === 1) {
+        let pathName;
+        if (Object.keys(items)[0] === 'meals') {
+          pathName = 'comidas';
+        } else {
+          pathName = 'bebidas';
+        }
+        setRedirect({
+          bool: true,
+          pathName,
+          id: Object.values(Object.values(items[Object.keys(items)[0]])[0])[0],
+        });
+      }
+    };
+    checkItems();
+  }, [items]);
 
   const handleChange = ({ target: { name, value } }) => {
     setSearch({
@@ -14,26 +38,9 @@ const SearchBar = () => {
     });
   };
 
-  const fetchApi = async (url) => {
-    const response = await fetch(url);
-    const obj = await response.json();
-    return obj;
-  };
-
-  const searchOnClick = async () => {
-    if (search.radioValue === 'Ingredientes') {
-      const ingredients = await fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search.textValue}`);
-      setItems(ingredients);
-    } else if (search.radioValue === 'Nome') {
-      const name = await fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search.textValue}`);
-      setItems(name);
-    } else if (search.textValue.length === 1) {
-      const firstLetter = await fetchApi(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search.textValue}`);
-      setItems(firstLetter);
-    } else alert('Sua busca deve conter somente 1 (um) caracter');
-  };
-
-  console.log(items);
+  if (redirect.bool) {
+    return <Redirect to={ `/${redirect.pathName}/${redirect.id}` } />;
+  }
 
   return (
     <div data-testid="search-top-btn">
@@ -79,7 +86,7 @@ const SearchBar = () => {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ searchOnClick }
+        onClick={ () => searchOnClick(search, setItems) }
       >
         Buscar
       </button>
