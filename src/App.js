@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
 import Header from './components/Header/index';
 import Foods from './Pages/Foods';
+import Drinks from './Pages/Drinks/index';
 
 function App() {
   const exploreFoodDrink = (
@@ -16,7 +17,7 @@ function App() {
     <AppProvider>
       <Switch>
         <Route exact path="/comidas" component={ Foods } />
-        <Route exact path="/bebidas" render={ () => <Header title="Bebidas" /> } />
+        <Route exact path="/bebidas" component={ Drinks } />
         <Route
           exact
           path="/explorar"
