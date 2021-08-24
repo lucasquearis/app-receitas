@@ -1,0 +1,92 @@
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function Login() {
+  const [dataLogin, setDataLogin] = useState({
+    email: '',
+    password: '',
+    disabledButton: true,
+    redirect: false,
+  });
+
+  // validação dos campos
+  useEffect(() => {
+    const regexEmail = /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/;
+    const minPasswordLength = 6;
+    const validation = !(regexEmail.test(dataLogin.email)
+      && dataLogin.password.length > minPasswordLength);
+
+    setDataLogin({
+      ...dataLogin,
+      disabledButton: validation,
+    });
+  }, [dataLogin.email, dataLogin.password]);
+
+  const handleChangeEmail = ({ target: { value } }) => {
+    setDataLogin({
+      ...dataLogin,
+      email: value,
+    });
+  };
+
+  const handleChangePassword = ({ target: { value } }) => {
+    setDataLogin({
+      ...dataLogin,
+      password: value,
+    });
+  };
+
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email: dataLogin.email }));
+    setDataLogin({
+      ...dataLogin,
+      redirect: true,
+    });
+  };
+
+  if (dataLogin.redirect) return <Redirect to="/comidas" />;
+
+  return (
+    <Container>
+      <Form>
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            data-testid="email-input"
+            value={ dataLogin.email }
+            onChange={ handleChangeEmail }
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Senha</Form.Label>
+          <Form.Control
+            type="password"
+            data-testid="password-input"
+            value={ dataLogin.password }
+            onChange={ handleChangePassword }
+          />
+        </Form.Group>
+
+        <Button
+          variant="primary"
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ dataLogin.disabledButton }
+          onClick={ handleClick }
+        >
+          Entrar
+        </Button>
+      </Form>
+    </Container>
+  );
+}
+
+export default Login;
