@@ -15,7 +15,7 @@ function DrinkCard({ drink, index }) {
       <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
     </div>
   );
-};
+}
 
 DrinkCard.propTypes = {
   drink: PropTypes.shape({

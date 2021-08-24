@@ -15,7 +15,7 @@ function FoodCard({ meal, index }) {
       <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
     </div>
   );
-};
+}
 
 FoodCard.propTypes = {
   meal: PropTypes.shape({
