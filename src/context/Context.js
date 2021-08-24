@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const recepieContext = createContext();
+const recipeContext = createContext();
 
-export default recepieContext;
+export default recipeContext;
