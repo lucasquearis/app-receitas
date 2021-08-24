@@ -7,6 +7,9 @@ const UseRecipes = () => {
   const maxItensIndexOnScreen = 11;
 
   const chooser = () => {
+    if (recipes.meals === null || recipes.drinks === null) {
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
     if (recipes.meals) {
       return recipes.meals.map((e, index) => index <= maxItensIndexOnScreen
       && <RecipeCard index={ index } key={ e.idMeal } recipe={ e } />);
