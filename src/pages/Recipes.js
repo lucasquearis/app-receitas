@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import HeaderFood from '../components/HeaderFood';
+import FooterMenu from '../components/FooterMenu';
 import './recipes.css';
 import RecipeCard from '../components/RecipeCard';
 import FoodContext from '../context/FoodContext';
@@ -22,6 +23,7 @@ const Recipes = () => {
             />
           ))}
       </div>
+      <FooterMenu />
     </div>
   );
 };

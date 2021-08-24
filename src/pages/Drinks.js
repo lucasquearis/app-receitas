@@ -4,6 +4,7 @@ import DrinksCard from '../components/DrinksCard';
 import DrinksContext from '../context/DrinksContext';
 import './drinks.css';
 import '../components/drinksCard.css';
+import FooterMenu from '../components/FooterMenu';
 
 const Drinks = () => {
   const { drinks } = useContext(DrinksContext);
@@ -22,6 +23,7 @@ const Drinks = () => {
             />
           ))}
       </div>
+      <FooterMenu />
     </div>
   );
 };
