@@ -31,7 +31,9 @@ function Drinks() {
       )}
 
       { drinks.slice(0, drinksLimits).map(
-        (drink) => RecipeCard(drink.idDrink, drink.strDrinkThumb, drink.strDrink),
+        (drink) => RecipeCard(
+          drink.idDrink, drink.strDrinkThumb, drink.strDrink, 'bebidas',
+        ),
       )}
 
     </div>

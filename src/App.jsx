@@ -11,7 +11,7 @@ function App() {
       <Route exact path="/" component={ Foods } />
       <Route path="/comidas" component={ Foods } />
       <Route path="/bebidas" component={ Drinks } />
-      <Route path="/comidas/{id-da-receita}" component={ Foods } />
+      <Route path="/comidas/:{id-da-receita}" component={ Foods } />
       {/* <Route path="/bebidas/{id-da-receita}" component={ } />
       <Route path="/explorar" component={ } />
       <Route path="/explorar/comidas" component={ } />
