@@ -27,10 +27,6 @@ function App() {
         path="/:type/:id/in-progress"
         render={ (props) => <RecipeDetails { ...props } /> }
       />
-      {/* <Route
-        path="/bebidas:id/in-progress"
-        render={ (props) => <Drinks { ...props } /> }
-      /> */}
     </Switch>
   );
 }
