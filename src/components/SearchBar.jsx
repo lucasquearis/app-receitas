@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import {
   getDataByIngredient,
   getDataByName,
@@ -30,10 +29,6 @@ export default function SearchBar() {
     }
     return data;
   };
-
-  const currentPage = window.location.href;
-  const foodPage = 'http://localhost:3000/comidas';
-  console.log(data);
 
   return (
     <div>
@@ -73,15 +68,6 @@ export default function SearchBar() {
       <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
         Buscar
       </button>
-      {data.length === 1
-        ? (
-          data.map(({ idMeal }) => (
-            currentPage === foodPage ? (
-              <Redirect key={ idMeal } to={ `/comidas/${idMeal}` } />
-            ) : (
-              <Redirect key={ idMeal } to={ `/bebidas/${idMeal}` } />
-            )))
-        ) : <Redirect to={ currentPage } />}
     </div>
   );
 }
