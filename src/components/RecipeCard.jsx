@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 export default function RecipeCard({ name, thumb, id }) {
   return (
-    <div className="meal" data-testid="recipe-card">
+    <div className="meal" data-testid={ `${id}-recipe-card` }>
       <img src={ thumb } alt={ name } data-testid={ `${id}-card-img` } />
-      <h2>{name}</h2>
+      <h2 data-testid={ `${id}-card-name` }>{name}</h2>
     </div>
   );
 }

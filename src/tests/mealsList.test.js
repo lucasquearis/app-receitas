@@ -4,16 +4,9 @@ import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 import meals from '../../cypress/mocks/meals';
 
-const recipesLength = 12;
 const mealApiResponse = Promise.resolve({
   json: () => Promise.resolve(meals),
 });
-// const drinksApiResponse = Promise.resolve({
-//   json: () => Promise.resolve(drinks),
-// });
-
-// const mockedDrinks = jest.spyOn(global, 'fetch')
-//   .mockImplementation(() => drinksApiResponse);
 
 afterEach(() => jest.clearAllMocks());
 
@@ -25,8 +18,10 @@ describe('Test meals list', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
     expect(mockedMeals).toBeCalledWith(endpoint);
-    const recipes = await screen.findAllByTestId('recipe-card');
-    expect(recipes.length).toBe(recipesLength);
+    const firstRecipe = screen.findByTestId('0-recipe-card');
+    const lastRecipe = screen.findByTestId('11-recipe-card');
+    expect(firstRecipe).toBeDefined();
+    expect(lastRecipe).toBeDefined();
   });
   it('First item must be "Corba"', async () => {
     const { history } = renderWithRouter(<App />);

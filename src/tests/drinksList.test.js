@@ -4,8 +4,6 @@ import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 import drinks from '../../cypress/mocks/drinks';
 
-const recipesLength = 12;
-
 const drinksApiResponse = Promise.resolve({
   json: () => Promise.resolve(drinks),
 });
@@ -23,8 +21,11 @@ describe('Test meals list', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
     expect(mockedDrinks).toBeCalledWith(endpoint);
-    const recipes = await screen.findAllByTestId('recipe-card');
-    expect(recipes.length).toBe(recipesLength);
+    // const recipes = await screen.findAllByTestId('recipe-card');
+    const firstRecipe = screen.findByTestId('0-recipe-card');
+    const lastRecipe = screen.findByTestId('11-recipe-card');
+    expect(firstRecipe).toBeDefined();
+    expect(lastRecipe).toBeDefined();
   });
   it('First item must be "GG"', async () => {
     const { history } = renderWithRouter(<App />);
