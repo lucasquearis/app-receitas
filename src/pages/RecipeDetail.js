@@ -1,8 +1,9 @@
 import React from 'react';
+import RecipeDetailCard from '../components/RecipeDetailCard';
 
 function RecipeDetail() {
   return (
-    <p>Recipe Detail</p>
+    <RecipeDetailCard />
   );
 }
 
