@@ -1,0 +1,11 @@
+.header {
+  align-items: center;
+  background-color: rgb(204, 204, 204);
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.header h3 {
+  margin: 0;
+}
