@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-// import { Link, Redirect } from 'react-router-dom';
-// import Header from '../components/Header';
-// import AppContext from '../context/AppContext';
+// import { useHistory } from 'react-router-dom';
 
 function Login() {
+  // const { history } = useHistory;
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -14,6 +13,16 @@ function Login() {
       ...user,
       [name]: value,
     });
+  };
+
+  const verifyPassword = () => {
+    const emailVerify = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i;
+    const passwordVerify = 6;
+    if (emailVerify.test(user.email)
+    && passwordVerify < user.password.length) {
+      return false;
+    }
+    return true;
   };
 
   return (
