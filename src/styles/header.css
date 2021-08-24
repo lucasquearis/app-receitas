@@ -1,0 +1,20 @@
+.header {
+  min-width: 100vw;
+}
+
+.header :first-child {
+  border: 0;
+  left: 0;
+  position: absolute;
+}
+
+.header h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.header-search {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100vw;
+}

@@ -1,7 +1,10 @@
 import React from 'react';
+import Header from '../../components/Header';
 
 export default function Explorer() {
   return (
-    <div />
+    <div>
+      <Header>Explorar</Header>
+    </div>
   );
 }
