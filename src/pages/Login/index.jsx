@@ -58,23 +58,31 @@ function Login() {
     <Container>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            data-testid="email-input"
-            value={ email }
-            onChange={ handleChangeEmail }
-          />
+          <Form.Label
+            htmlFor="email-input"
+          >
+            Email
+            <Form.Control
+              type="email"
+              data-testid="email-input"
+              value={ email }
+              onChange={ handleChangeEmail }
+            />
+          </Form.Label>
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control
-            type="password"
-            data-testid="password-input"
-            value={ password }
-            onChange={ handleChangePassword }
-          />
+          <Form.Label
+            htmlFor="password-input"
+          >
+            Senha
+            <Form.Control
+              type="password"
+              data-testid="password-input"
+              value={ password }
+              onChange={ handleChangePassword }
+            />
+          </Form.Label>
         </Form.Group>
 
         <Button
