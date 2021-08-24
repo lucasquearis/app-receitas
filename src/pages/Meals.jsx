@@ -4,21 +4,21 @@ import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
 
 export default function () {
-  const { drinks } = useContext(Context);
-  if (!drinks.length) { return <span>LOADING...</span>; }
+  const { meals } = useContext(Context);
+  if (!meals.length) { return <span>LOADING...</span>; }
 
   return (
-    <div className="drinks-page">
-      <Header title="Bebidas" />
-      {drinks.map(({ strDrinkThumb, strDrink }, i) => {
-        const recipesLength = 12;
-        if (i < recipesLength) {
+    <div className="foods-page">
+      <Header title="Comidas" />
+      {meals.map(({ strMealThumb, strMeal }, i) => {
+        const mealLength = 12;
+        if (i < mealLength) {
           return (
             <RecipeCard
               key={ i }
               id={ i }
-              thumb={ strDrinkThumb }
-              name={ strDrink }
+              thumb={ strMealThumb }
+              name={ strMeal }
             />);
         }
         return false;

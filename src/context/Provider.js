@@ -13,8 +13,6 @@ export default function Provider({ children }) {
     fetchDrinks(setDrinks);
   }, []);
 
-  console.log(meals, drinks);
-
   const defaultValue = {
     meals,
     drinks,
