@@ -56,7 +56,7 @@ export const responseMeal =   {
   ]
 }
 
-export const responseCockTail =   {
+export const responseDrink =   {
   "drinks":[
       {
         "idDrink":"17256",
@@ -117,8 +117,7 @@ export const responseCockTail =   {
 }
 
 export const initialStateHeader = {
-  register: {
+  reducer: {
     email: 'teste@teste.com'
   },
-
 }
