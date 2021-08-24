@@ -1,6 +1,6 @@
 footer {
+  bottom: 0;
   position: fixed;
-  bottom: 0px;
 }
 
 header, footer {
@@ -12,9 +12,6 @@ header > button {
   background-color: transparent;
   border: none;
 }
-
-
-
 
 .meals {
   align-items: center;
