@@ -24,6 +24,7 @@ function Header({ name, search }) {
       );
     }
   };
+
   return (
     <header>
       <Link to="/perfil">
