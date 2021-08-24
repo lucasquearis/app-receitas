@@ -1,10 +1,10 @@
 .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   bottom: 0;
   position: fixed;
-  align-items: center;
-  display: flex;
   width: 100%;
-  justify-content: space-between;
 }
 
 .meals {
