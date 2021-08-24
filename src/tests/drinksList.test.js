@@ -8,9 +8,6 @@ const drinksApiResponse = Promise.resolve({
   json: () => Promise.resolve(drinks),
 });
 
-// const mockedDrinks = jest.spyOn(global, 'fetch')
-//   .mockImplementation(() => drinksApiResponse);
-
 afterEach(() => jest.clearAllMocks());
 
 describe('Test meals list', async () => {
@@ -21,7 +18,6 @@ describe('Test meals list', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
     expect(mockedDrinks).toBeCalledWith(endpoint);
-    // const recipes = await screen.findAllByTestId('recipe-card');
     const firstRecipe = await screen.findByTestId('0-recipe-card');
     const lastRecipe = await screen.findByTestId('11-recipe-card');
     expect(firstRecipe).toBeInTheDocument();
@@ -32,11 +28,5 @@ describe('Test meals list', async () => {
     history.push('/bebidas');
     const firstItemTitle = await screen.findAllByRole('heading');
     expect(firstItemTitle[1]).toHaveTextContent('GG');
-  });
-  it('First item thumb must be GG\'s thumbnail', async () => {
-    const { history } = renderWithRouter(<App />);
-    history.push('/bebidas');
-    const firstItemImg = await screen.findByTestId('0-card-img');
-    expect(firstItemImg.src).toBe(drinks.drinks[0].strDrinkThumb);
   });
 });
