@@ -23,7 +23,6 @@ export default function Login({ history }) {
   function handleClick() {
     const { email } = loginForm;
     setUser({ ...user, email });
-    console.log(history);
     history.push('/comidas');
   }
 
