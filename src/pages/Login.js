@@ -19,7 +19,6 @@ function Login() {
     }));
   }
 
-
   const handleClick = () => {
     setRegister(login);
     setLocalStorage('user', { email: login.email } );
