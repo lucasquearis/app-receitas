@@ -1,14 +1,14 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { string, number } from 'prop-types';
 
 function RecipeCard(props) {
-  const { thumb, title } = props;
+  const { thumb, title, index } = props;
   return (
-    <li>
-      <h2>
+    <li data-testid={ `${index}-recipe-card` }>
+      <img src={ thumb } alt="Recipe" data-testid={ `${index}-card-img` } />
+      <h2 data-testid={ `${index}-card-name` }>
         { title }
       </h2>
-      <img src={ thumb } alt="Recipe" />
     </li>
   );
 }
@@ -16,6 +16,7 @@ function RecipeCard(props) {
 RecipeCard.propTypes = {
   thumb: string.isRequired,
   title: string.isRequired,
+  index: number.isRequired,
 };
 
 export default RecipeCard;
