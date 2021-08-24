@@ -5,7 +5,7 @@ function Title(props) {
   let { title } = props;
   title = title.replace('/', '').replace('-', ' ');
   if (title) title = (title[0].toUpperCase() + title.substr(1));
-  return <div>{title}</div>;
+  return <div data-testid="page-title">{title}</div>;
 }
 
 Title.propTypes = {

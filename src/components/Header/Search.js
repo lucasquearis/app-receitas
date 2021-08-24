@@ -11,7 +11,7 @@ function Search({ onClick }) {
       style={ buttonStyle }
       onClick={ onClick }
     >
-      <img src={ SearchIcon } alt="Search Icon" />
+      <img src={ SearchIcon } alt="Search Icon" data-testid="search-top-btn" />
     </button>
   );
 }
