@@ -1,7 +1,10 @@
 import React from 'react';
+import SearchHeader from '../../components/SearchHeader';
 
 export default function Drinks() {
   return (
-    <div />
+    <div>
+      <SearchHeader>Bebidas</SearchHeader>
+    </div>
   );
 }
