@@ -1,5 +1,5 @@
 // vitals
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 // styles
 import '../styles/Header.css';
@@ -23,33 +23,57 @@ const renderTitle = (path) => {
   return `${possiblePaths[path]}`;
 };
 
+const renderSearchButton = (showSearchBar, setShowSearchBar) => (
+  <button
+    type="button"
+    className="header-button"
+    onClick={ () => { setShowSearchBar(!showSearchBar); } }
+  >
+    <img
+      src={ searchIcon }
+      alt="Ícone que indica o botão pra ativar a barra de busca"
+    />
+  </button>
+);
+
 function Header() {
+  // states
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [showSearchButton, setShowSearchButton] = useState(false);
   const history = useHistory();
   const { location: { pathname } } = history;
+
+  // Ao renderizar o componente vai verificar a URL, e se for uma URL elegível pra ter o botão da lupa,
+  // irá setar a variável como true
+  useEffect(() => {
+    if (pathname === '/comidas'
+      || pathname === '/bebidas'
+      || pathname.endsWith('/area')) {
+      setShowSearchButton(true);
+    }
+  }, [pathname]);
+
+  console.log(pathname);
 
   return (
     <>
       <header className="header-div">
-        <div>
+        <button
+          type="button"
+          className="header-button"
+          onClick={ () => history.push('/profile') }
+        >
           <img
             src={ profilePicture }
             alt="Ícone que indica o botão pra ir para o perfil de usuário"
           />
-        </div>
+        </button>
         <div>
           <h1>{renderTitle(pathname)}</h1>
         </div>
-        <button
-          type="button"
-          className="search-button"
-          onClick={ () => { setShowSearchBar(!showSearchBar); } }
-        >
-          <img
-            src={ searchIcon }
-            alt="Ícone que indica o botão pra ativar a barra de busca"
-          />
-        </button>
+        <div>
+          {showSearchButton ? renderSearchButton(showSearchBar, setShowSearchBar) : null }
+        </div>
       </header>
       <div>
         {showSearchBar
