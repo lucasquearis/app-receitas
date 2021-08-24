@@ -26,7 +26,7 @@ describe('Testando pagina Login', () => {
     expect(passwordInput).toBeInTheDocument();
     expect(submitButton).toBeDisabled();
     userEvent.type(emailInput, 'email@email.com');
-    userEvent.type(passwordInput, '1324141');
+    userEvent.type(passwordInput, '1234567');
     expect(submitButton).not.toBeDisabled();
     userEvent.click(submitButton);
     const { pathname } = history.location;
