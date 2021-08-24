@@ -5,10 +5,10 @@ function Radios({ name, change, tests, labels, values }) {
   return (
     <div onChange={ ({ target }) => change(target) }>
       {values.map((value, i) => (
-        <div key={ i }>
+        <span key={ i }>
           <input type="radio" data-testid={ tests[i] } { ...{ name, value } } />
           <span>{labels[i]}</span>
-        </div>
+        </span>
       ))}
     </div>
   );
