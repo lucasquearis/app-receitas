@@ -3,7 +3,6 @@ import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../redux/actions/mainActions';
 import useLocalStorage from '../helpers/useLocalStorage';
-
 import Input from '../components/Input';
 
 function Login(props) {

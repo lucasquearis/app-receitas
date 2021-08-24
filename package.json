@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -12,10 +13,12 @@
     "clipboard-copy": "^3.1.0",
     "history": "^4.7.2",
     "lodash": "^4.17.15",
+    "mdbreact": "^5.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
+    "react-icons": "^4.2.0",
     "react-logger": "^1.1.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.1.2",
@@ -50,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.3.2",
     "clipboardy": "^2.1.0",
     "cypress": "^3.7.0",
     "cypress-multi-reporters": "^1.4.0",
@@ -61,8 +65,10 @@
     "mochawesome": "^6.1.1",
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
+    "postcss": "^8.3.6",
     "stylelint": "^13.8.0",
-    "stylelint-order": "^4.1.0"
+    "stylelint-order": "^4.1.0",
+    "tailwindcss": "^2.2.7"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
