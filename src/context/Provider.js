@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import recepieContext from './Context';
-import { fetchMeals, fetchDrinks } from '../services/fechRecepies';
+import { fetchMeals, fetchDrinks } from '../services/fechRecipes';
 
 export default function Provider({ children }) {
   const [meals, setMeals] = useState([]);
@@ -14,6 +14,8 @@ export default function Provider({ children }) {
   }, []);
 
   const defaultValue = {
+    setMeals,
+    setDrinks,
     meals,
     drinks,
   };

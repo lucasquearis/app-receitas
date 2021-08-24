@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import Context from '../context/Context';
+import { fetchMeals, fetchDrinks } from '../services/fechRecipes';
 
 export default function SearchBar() {
   const INITIAL_STATE = {
@@ -7,19 +10,31 @@ export default function SearchBar() {
   };
 
   const [search, setSearch] = useState(INITIAL_STATE);
+  const { value, searchType } = search;
+  const { setDrinks, setMeals } = useContext(Context);
+  const { location } = useHistory();
+
+  const recipeType = location.pathname === '/comidas' ? 'meal' : 'cocktail';
+  const fetchType = location.pathname === '/comidas' ? fetchMeals : fetchDrinks;
+  const setRecipeType = location.pathname === '/comidas' ? setMeals : setDrinks;
 
   const handleChange = ({ target }) => {
-    const { name, value } = target;
-    console.log(name, value);
-    setSearch({ ...search, [name]: value });
+    const { name, value: v } = target;
+    setSearch({ ...search, [name]: v });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('do something');
+    if (searchType === 'ingredient') {
+      fetchType(setRecipeType, `https://www.the${recipeType}db.com/api/json/v1/1/filter.php?i=${value}`);
+    }
+    if (searchType === 'firstLetter') {
+      fetchType(setRecipeType, `https://www.the${recipeType}db.com/api/json/v1/1/search.php?f=${value}`);
+    }
+    if (searchType === 'name') {
+      fetchType(setRecipeType, `https://www.the${recipeType}db.com/api/json/v1/1/search.php?s=${value}`);
+    }
   };
-
-  const { value } = search;
 
   return (
     <section className="search-bar">
