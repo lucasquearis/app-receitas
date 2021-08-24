@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import '../cssPages/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -29,28 +30,32 @@ function Login() {
   }
   if (redirect) return <Redirect to="/comidas" />;
   return (
-    <form onSubmit={ onSubmit }>
-      <input
-        type="email"
-        value={ email }
-        onChange={ (event) => setEmail(event.target.value) }
-        data-testid="email-input"
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        value={ password }
-        onChange={ (event) => setPassword(event.target.value) }
-      />
+    <form onSubmit={ onSubmit } className="container">
+      <div className="login-container">
+        <input
+          type="email"
+          className="login"
+          value={ email }
+          onChange={ (event) => setEmail(event.target.value) }
+          data-testid="email-input"
+        />
+        <input
+          type="password"
+          className="login"
+          data-testid="password-input"
+          value={ password }
+          onChange={ (event) => setPassword(event.target.value) }
+        />
 
-      <button
-        type="submit"
-        disabled={ validation }
-        data-testid="login-submit-btn"
-      >
-        Entrar
-      </button>
-
+        <button
+          className="btn"
+          type="submit"
+          disabled={ validation }
+          data-testid="login-submit-btn"
+        >
+          Entrar
+        </button>
+      </div>
     </form>
   );
 }

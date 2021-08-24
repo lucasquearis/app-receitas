@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/Provider';
 import Login from './pages/Login';
-import PrincipalPage from './pages/PrincipalPage';
+import Comidas from './pages/Comidas';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact to="/" component={ Login } />
-          <Route to="/comidas" component={ PrincipalPage } />
+          <Route to="/comidas" component={ Comidas } />
           {/*
           <Route to="/bebidas" component={ Login } />
           <Route to="/comidas/{id-da-receita}" component={ Login } />
