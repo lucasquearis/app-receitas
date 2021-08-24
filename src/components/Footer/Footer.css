@@ -1,9 +1,9 @@
 .footer-container {
+  background-color: #ddd;
+  bottom: 0;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  background-color: #ddd;
-  bottom: 0;
   overflow: hidden;
   position: fixed;
   width: 100%;
