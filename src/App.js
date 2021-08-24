@@ -11,9 +11,11 @@ function App() {
     <Provider>
       <BrowserRouter>
         <Switch>
+
           <Route exact to="/" component={ Login } />
           <Route to="/comidas" component={ Comidas } />
           {/*
+          <Route to="/" component={ Login } />
           <Route to="/bebidas" component={ Login } />
           <Route to="/comidas/{id-da-receita}" component={ Login } />
           <Route to="/bebidas/{id-da-receita}" component={ Login } />
