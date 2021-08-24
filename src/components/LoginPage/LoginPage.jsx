@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AppContext from '../../context/AppContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+
+  const { mealsToken, cocktailsToken } = useContext(AppContext);
 
   useEffect(() => {
     const re = /\w+@\w+.com/.test(email);
@@ -12,6 +15,11 @@ const LoginPage = () => {
     const logicValidation = re && validPassword;
     setDisabled(!logicValidation);
   }, [email, password]);
+
+  const saveLoginInfoLocalStorage = () => {
+    localStorage.setItem('mealsToken', JSON.stringify(mealsToken));
+    localStorage.setItem('cocktailsToken', JSON.stringify(cocktailsToken));
+  };
 
   return (
     <form>
@@ -38,6 +46,7 @@ const LoginPage = () => {
           type="submit"
           disabled={ disabled }
           data-testid="login-submit-btn"
+          onClick={ () => saveLoginInfoLocalStorage() }
         >
           Entrar
         </button>
