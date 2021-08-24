@@ -1,10 +1,12 @@
 import React from 'react';
-import DefaultHeader from '../components/Header';
+import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
 
 export default function Foods() {
   return (
     <section>
-      <DefaultHeader pageTitle="Comidas" />
+      <Header pageTitle="Comidas" />
+      <SearchBar />
     </section>
   );
 }
