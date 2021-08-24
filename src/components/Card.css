@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-flow: wrap;
+  width: 80%;
+}
+
+.card {
+  display: flex;
+  flex-flow: column;
+  margin: 10px;
+  width: 40%;
+}
+
+.card-image {
+  width: 100%;
+}
+
+.recipe-name {
+  font-size: 15px;
+}

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
-import SearchBar from './SearcBar';
+import DrinksSearchBar from './DrinksSearchBar';
+import RecipesSearchBar from './RecipesSearchBar';
 import profileIcon from '../images/profileIcon.svg';
 
 function Header(props) {
-  const { titulo, showProfileIcon } = props;
+  const { titulo, showProfileIcon, pathname } = props;
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   const revealSearchBar = () => {
@@ -18,8 +19,11 @@ function Header(props) {
   };
 
   const searchBar = () => {
-    if (showSearchBar) {
-      return <SearchBar />;
+    if (pathname === '/comidas' && showSearchBar === true) {
+      return <RecipesSearchBar />;
+    }
+    if (pathname === '/bebidas' && showSearchBar === true) {
+      return <DrinksSearchBar />;
     }
   };
 
@@ -59,6 +63,7 @@ function Header(props) {
 Header.propTypes = {
   titulo: PropTypes.string.isRequired,
   showProfileIcon: PropTypes.bool,
+  pathname: PropTypes.string.isRequired,
 };
 
 Header.defaultProps = {
