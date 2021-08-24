@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
 import Header from './components/Header/index';
 import Foods from './Pages/Foods';
+import Login from './Pages/Login/Login';
 
 function App() {
   const exploreFoodDrink = (
@@ -15,6 +17,7 @@ function App() {
   return (
     <AppProvider>
       <Switch>
+        <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ Foods } />
         <Route exact path="/bebidas" render={ () => <Header title="Bebidas" /> } />
         <Route
