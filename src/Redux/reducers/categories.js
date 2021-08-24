@@ -16,19 +16,17 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       loading: true,
-      // acrescentei a logica do loading caso nessessario pra tratar erros de assincronicidade
     };
   case MEAL_CATEGORIE_SUCCESS:
     return {
       ...state,
       categories: [...action.payload],
-      // aqui interamos o nosso estado com as categorias fazendo uma copia do estado
       loading: false,
     };
   case MEAL_CATEGORIE_ERROR:
     return {
       ...state,
-      error: action.payload.erro,
+      error: action.payload,
       loading: false,
     };
   default:

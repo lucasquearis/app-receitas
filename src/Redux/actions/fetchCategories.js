@@ -4,31 +4,30 @@ import {
   MEAL_CATEGORIE_ERROR,
 } from './actionTypes';
 
-const getMeals = () => ({
+const getCategories = () => ({
   type: MEAL_CATEGORIE,
 });
 
-const getMealsSuccess = (responseMeals) => ({
+const getCategoriesSuccess = (meals) => ({
   type: MEAL_CATEGORIE_SUCCESS,
-  payload: responseMeals,
+  payload: meals,
 });
 
-const getMealsError = (error) => ({
+const getCategoriesError = (error) => ({
   type: MEAL_CATEGORIE_ERROR,
   payload: error,
 });
 
-export const fetchMealsCategories = () => async (dispatch) => {
-  dispatch(getMeals());
+const fetchCategories = () => async (dispatch) => {
+  dispatch(getCategories());
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const response = await fetch(endPoint);
   const json = await response.json();
   try {
-    dispatch(getMealsSuccess(json.meals));
-    // a chave meals é um array de objetos podendo assim usarmos o spreed operator la no reducer
+    dispatch(getCategoriesSuccess(json.meals));
   } catch (error) {
-    dispatch(getMealsError(error));
+    dispatch(getCategoriesError(error));
   }
 };
 
-export default fetchMealsCategories;
+export default fetchCategories;
