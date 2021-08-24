@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { arrayOf, string } from 'prop-types';
+import { Input } from '../components';
 import AppContext from '../context/AppContext';
 import verifyLogin from '../helpers/verifyLogin';
 
@@ -30,28 +31,20 @@ export default function Login({ history }) {
 
   return (
     <form action="">
-      <label htmlFor="email-input" className="form-label">
-        Email:
-        <input
-          id="email-input"
-          data-testid="email-input"
-          name="email"
-          type="email"
-          onChange={ handleChange }
-        />
-      </label>
-
-      <label htmlFor="pass-input">
-        Senha:
-        <input
-          id="pass-input"
-          data-testid="password-input"
-          name="password"
-          type="password"
-          onChange={ handleChange }
-        />
-      </label>
-
+      <Input
+        labelText="Email:"
+        type="email"
+        id="email-input"
+        name="email"
+        onChange={ handleChange }
+      />
+      <Input
+        labelText="Senha:"
+        type="password"
+        id="password-input"
+        name="password"
+        onChange={ handleChange }
+      />
       <button
         type="button"
         data-testid="login-submit-btn"
