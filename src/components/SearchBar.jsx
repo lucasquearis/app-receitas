@@ -17,10 +17,9 @@ export default function SearchBar() {
     setInputValue(value);
   };
 
-  const currentPage = window.location.href;
-  const foodPage = 'http://localhost:3000/comidas';
-
   const handleClick = async () => {
+    const currentPage = window.location.href;
+    const foodPage = 'http://localhost:3000/comidas';
     if (filterIngredient && !filterName && !filterFirstLetter) {
       await getDataByIngredient(inputValue)
         .then((response) => setData(response));
@@ -35,8 +34,6 @@ export default function SearchBar() {
     }
     return data;
   };
-
-  console.log(data);
 
   return (
     <div>
