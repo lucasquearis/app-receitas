@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import recipeContext from './Context';
+import recepieContext from './Context';
+import { fetchMeals, fetchDrinks } from '../services/fechRecepies';
 
 export default function Provider({ children }) {
-  const defaultValue = '';
+  const [meals, setMeals] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  // const [recepieType, setRecepieType] = useState('');
+
+  useEffect(() => {
+    fetchMeals(setMeals);
+    fetchDrinks(setDrinks);
+  }, []);
+
+  const defaultValue = {
+    meals,
+    drinks,
+  };
   return (
-    <recipeContext.Provider value={ defaultValue }>
+    <recepieContext.Provider value={ defaultValue }>
       {children}
-    </recipeContext.Provider>
+    </recepieContext.Provider>
   );
 }
 
