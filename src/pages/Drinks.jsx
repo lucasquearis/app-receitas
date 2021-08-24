@@ -5,7 +5,7 @@ import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
 
 export default function () {
-  const { drinks, drinkCategories } = useContext(Context);
+  const { drinks, drinkCategories, setDrinksCategoryFilter } = useContext(Context);
 
   // ficou assim para passar no teste, mas fica meio quebrado ainda
   if (!drinks) {
@@ -24,18 +24,23 @@ export default function () {
         const maxLength = 5;
         if (i < maxLength) {
           return (
-            <button type="button" data-testid={ `${strCategory}-category-filter` }>
+            <button
+              type="button"
+              data-testid={ `${strCategory}-category-filter` }
+              onClick={ () => setDrinksCategoryFilter(strCategory) }
+            >
               {strCategory}
             </button>
           );
         }
         return false;
       })}
-      {drinks.map(({ strDrinkThumb, strDrink }, i) => {
+      {drinks.map(({ strDrinkThumb, strDrink, idDrink }, i) => {
         const recipesLength = 12;
         if (i < recipesLength) {
           return (
             <RecipeCard
+              link={ `bebidas/${idDrink}` }
               key={ i }
               id={ i }
               thumb={ strDrinkThumb }

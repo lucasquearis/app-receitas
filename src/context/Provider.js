@@ -9,8 +9,8 @@ export default function Provider({ children }) {
   const [drinks, setDrinks] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [mealCategories, setMealCategories] = useState([]);
-  const [drinksCategoryFilter, setDrinksCategoryFilter] = useState('');
-  const [mealsCategoryFilter, setMealsCategoryFilter] = useState('');
+  const [drinksCategoryFilter, setDrinksCategoryFilter] = useState();
+  const [mealsCategoryFilter, setMealsCategoryFilter] = useState();
 
   useEffect(() => {
     fetchMeals(setMeals);
@@ -20,14 +20,16 @@ export default function Provider({ children }) {
   }, []);
 
   useEffect(() => {
+    if (!mealsCategoryFilter) { return; }
     fetchMeals(
-      setMeals, `www.themealdb.com/api/json/v1/1/filter.php?c=${mealsCategoryFilter}`,
+      setMeals, `https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealsCategoryFilter}`,
     );
   }, [mealsCategoryFilter]);
 
   useEffect(() => {
+    if (!drinksCategoryFilter) { return; }
     fetchDrinks(
-      setDrinks, `www.themealdb.com/api/json/v1/1/filter.php?c=${drinksCategoryFilter}`,
+      setDrinks, `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinksCategoryFilter}`,
     );
   }, [drinksCategoryFilter]);
 

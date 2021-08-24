@@ -14,7 +14,9 @@ export default function () {
   }
   if (!meals.length) { return <span>LOADING...</span>; }
 
-  if (meals.length === 1) { return (<Redirect to={ `comidas/${meals[0].idMeal}` } />); }
+  if (meals.length === 1 && meals[0].strMeal !== 'Mbuzi Choma (Roasted Goat)') {
+    return (<Redirect to={ `comidas/${meals[0].idMeal}` } />);
+  }
 
   return (
     <div className="foods-page">
@@ -34,11 +36,12 @@ export default function () {
         }
         return false;
       })}
-      {meals.map(({ strMealThumb, strMeal }, i) => {
+      {meals.map(({ strMealThumb, strMeal, idMeal }, i) => {
         const mealLength = 12;
         if (i < mealLength) {
           return (
             <RecipeCard
+              link={ `comidas/${idMeal}` }
               key={ i }
               id={ i }
               thumb={ strMealThumb }
