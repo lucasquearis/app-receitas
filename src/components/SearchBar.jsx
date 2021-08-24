@@ -1,22 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  getMealsByIngredients,
+  getMealsByName,
+  getMealsByFirstLetter,
+} from '../services/api';
 
 export default function SearchBar() {
+  const [inputValue, setInputValue] = useState('');
+  const [data, setData] = useState([]);
+  const [filterIngredient, setFilterIngredient] = useState(false);
+  const [filterName, setFilterName] = useState(false);
+  const [filterFirstLetter, setFilterFirstLetter] = useState(false);
+
+  const handleChange = ({ target: { value } }) => {
+    setInputValue(value);
+  };
+
+  const handleClick = async () => {
+    if (filterIngredient && !filterName && !filterFirstLetter) {
+      await getMealsByIngredients(inputValue)
+        .then((response) => setData(response));
+    } else if (filterName && !filterIngredient && !filterFirstLetter) {
+      await getMealsByName(inputValue)
+        .then((response) => setData(response.meals));
+    } else if (filterFirstLetter && !filterIngredient && !filterName) {
+      await getMealsByFirstLetter(inputValue)
+        .then((response) => setData(response));
+    }
+    return data;
+  };
+
   return (
     <div>
-      <input data-testid="search-input" type="text" />
+      <input
+        data-testid="search-input"
+        type="text"
+        value={ inputValue }
+        onChange={ (e) => handleChange(e) }
+      />
       <label htmlFor="ingredient-radio">
         Ingrediente
-        <input id="ingredient-radio" data-testid="ingredient-search-radio" type="radio" />
+        <input
+          onChange={ () => setFilterIngredient(true) }
+          id="ingredient-radio"
+          data-testid="ingredient-search-radio"
+          type="radio"
+        />
       </label>
       <label htmlFor="name-radio">
         Nome
-        <input id="name-radio" data-testid="name-search-radio" type="radio" />
+        <input
+          onChange={ () => setFilterName(true) }
+          id="name-radio"
+          data-testid="name-search-radio"
+          type="radio"
+        />
       </label>
       <label htmlFor="letter-radio">
         Primeira letra
-        <input id="letter-radio" data-testid="first-letter-search-radio" type="radio" />
+        <input
+          onChange={ () => setFilterFirstLetter(true) }
+          id="letter-radio"
+          data-testid="first-letter-search-radio"
+          type="radio"
+        />
       </label>
-      <button type="button" data-testid="exec-search-btn">
+      <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
         Buscar
       </button>
     </div>

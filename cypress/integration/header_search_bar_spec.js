@@ -4,7 +4,7 @@ const fetchMock = require('../mocks/fetch');
 const soupMeals = require('../mocks/soupMeals');
 const ginDrinks = require('../mocks/ginDrinks');
 
-describe.only('13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
+describe('13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
   it('Tem os data-testids tanto da barra de busca quanto de todos os radio-buttons', () => {
     cy.visit('http://localhost:3000/comidas');
 
@@ -18,7 +18,7 @@ describe.only('13 - Implemente os elementos da barra de busca respeitando os atr
   });
 });
 
-describe('14 - Posicione a barra logo abaixo do header e implemente 3 radio buttons: Ingrediente, Nome e Primeira letra', () => {
+describe.only('14 - Posicione a barra logo abaixo do header e implemente 3 radio buttons: Ingrediente, Nome e Primeira letra', () => {
   it('Se o radio selecionado for Ingrediente, a busca na API é feita corretamente pelo ingrediente', () => {
     cy.visit('http://localhost:3000/comidas', {
       onBeforeLoad(win) {
