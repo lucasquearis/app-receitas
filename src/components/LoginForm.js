@@ -1,55 +1,41 @@
-import React, { useContext, useState } from 'react';
-import Context from '../context/Context';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-};
 function Login() {
-  const [login, setLogin] = useState(INITIAL_STATE);
-
-  const { user, setUser } = useContext(Context);
-
-  function handleChange({ target: { name, value } }) {
-    setLogin({
-      ...login,
-      [name]: value,
-    });
-  }
+  const [email, setEmail] = useState([]);
+  const [password, setPassword] = useState([]);
+  const history = useHistory();
 
   function handleClick() {
-    setUser({
-      ...user,
-      user: {
-        email: login.email,
-      },
-    });
-    setLogin(INITIAL_STATE);
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/comidas');
   }
 
   function isValid() {
     const passwordLength = 7;
-    const validPassword = login.password.length >= passwordLength;
+    const validPassword = password.length >= passwordLength;
     const validEmail = (
       /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/i
-    ).test(login.email);
+    ).test(email);
     return (validEmail && validPassword);
   }
 
   return (
-    <div>
+    <form>
       <input
         data-testid="email-input"
         placeholder="Email"
-        value={ login.email }
-        onChange={ handleChange }
+        value={ email }
+        onChange={ (e) => setEmail(e.target.value) }
         name="email"
       />
       <input
         data-testid="password-input"
         placeholder="Senha"
-        value={ login.password }
-        onChange={ handleChange }
+        value={ password }
+        onChange={ (e) => setPassword(e.target.value) }
         name="password"
         type="password"
       />
@@ -61,7 +47,7 @@ function Login() {
       >
         Entrar
       </button>
-    </div>
+    </form>
   );
 }
 
