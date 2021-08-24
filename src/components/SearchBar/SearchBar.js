@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { searchOnClick } from '../utils';
+import { searchOnClick } from './utils';
 
 const SearchBar = () => {
   const [search, setSearch] = useState({
