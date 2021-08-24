@@ -1,4 +1,4 @@
-.meals {
+/* .meals {
   align-items: center;
   background: #0fa36b;
   color: #464646;
@@ -13,7 +13,7 @@
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
-}
+} */
 
 /*
 #iceLeft {
@@ -28,7 +28,7 @@
   transform-origin: 60px 78px;
 }
 */
-
+/* 
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
@@ -65,4 +65,18 @@
   100% {
     transform: rotate(-10deg);
   }
+} */
+
+.footer {
+  position: fixed;
+  margin-top: 100vh;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: yellow;
+}
+
+.footer input {
+  margin-left: 1%;
 }

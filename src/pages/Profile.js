@@ -1,4 +1,5 @@
 import React from 'react';
+import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
 
 const Profile = () => (
@@ -7,6 +8,7 @@ const Profile = () => (
       <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
     </button>
     <p data-testid="page-title">Perfil</p>
+    <FooterMenu />
   </div>
 );
 
