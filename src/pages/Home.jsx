@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [button, setButton] = useState(true);
+
+  // const redirect = () => (
+  //   (goFood ? <Redirect to="/comidas" /> : null)
+  // );
 
   useEffect(() => {
     const validEntries = () => {
@@ -52,14 +57,16 @@ function Home() {
               onChange={ (event) => handleChange(setPassword, event) }
             />
           </label>
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            disabled={ button }
-            onClick={ handleClick }
-          >
-            Entrar
-          </button>
+          <Link to="/comidas">
+            <button
+              type="button"
+              data-testid="login-submit-btn"
+              disabled={ button }
+              onClick={ handleClick }
+            >
+              Entrar
+            </button>
+          </Link>
         </form>
       </div>
     </div>

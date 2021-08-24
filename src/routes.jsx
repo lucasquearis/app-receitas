@@ -11,8 +11,8 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={ Home } />
-        <Route path="/comidas" component={ Food } />
+        <Route  exact path="/" component={ Home } />
+        <Route  exact path="/comidas" component={ Food } />
         <Route path="/bebidas" component={ Drink } />
         {/* <Route path={ `/comidas/${id}` } component={ null } />
         <Route path={ `/bebidas/${id}` } component={ null } />
