@@ -73,7 +73,7 @@ describe('25 - Implemente os elementos da tela principal de receitas respeitando
   });
 });
 
-describe.only('26 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em cada card', () => {
+describe('26 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em cada card', () => {
   it('Caso as receitas sejam de comida, deve-se carregar as 12 primeiras receitas', () => {
     cy.visit('http://localhost:3000/comidas', {
       onBeforeLoad(win) {

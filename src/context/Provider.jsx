@@ -16,6 +16,15 @@ export default function Provider({ children }) {
     getMealsApi();
   }, []);
 
+  // faz requisicao para drinksApi
+  useEffect(() => {
+    const getDrinksApi = async () => {
+      const result = await fetchAPI('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      setDataDrinks(result);
+    };
+    getDrinksApi();
+  }, []);
+
   const context = {
     dataMeals,
     setDataMeals,

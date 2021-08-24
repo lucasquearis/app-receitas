@@ -2,31 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './RecipeCard.css';
 
-export default function MealCard({ meal, index }) {
-  const { strMeal, strMealThumb } = meal;
+export default function DrinkCard({ drink, index }) {
+  const { strDrink, strDrinkThumb } = drink;
   return (
     <li
       className="recipe-card"
       data-testid={ `${index}-recipe-card` }
     >
       <img
-        alt={ strMeal }
-        src={ strMealThumb }
+        alt={ strDrink }
+        src={ strDrinkThumb }
         data-testid={ `${index}-card-img` }
       />
       <p
         data-testid={ `${index}-card-name` }
       >
-        { strMeal }
+        { strDrink }
       </p>
     </li>
   );
 }
 
-MealCard.propTypes = {
-  meal: PropTypes.shape({
-    strMeal: PropTypes.string,
-    strMealThumb: PropTypes.string,
+DrinkCard.propTypes = {
+  drink: PropTypes.shape({
+    strDrink: PropTypes.string,
+    strDrinkThumb: PropTypes.string,
   }),
   index: PropTypes.number,
 }.isRequired;
