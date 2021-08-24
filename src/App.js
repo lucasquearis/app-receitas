@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const App = () => (
   <div>
