@@ -3,11 +3,11 @@ import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
 
-function Comidas() {
+function Drinks() {
   return (
     <div>
       <Header
-        brand="Comidas"
+        brand="Bebidas"
         src={ searchIcon }
         alt="search-icon"
         dataId="search-top-btn"
@@ -17,4 +17,4 @@ function Comidas() {
   );
 }
 
-export default Comidas;
+export default Drinks;

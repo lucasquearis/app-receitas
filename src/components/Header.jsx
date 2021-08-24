@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 import SearchBar from './SearchBar';
-import profile from '../images/profileIcon.svg';
-import search from '../images/searchIcon.svg';
-import '../styles/Header.css';
+import profileIcon from '../images/profileIcon.svg';
 
-function Header({ brand }) {
+function Header({ brand, dataId, className, src, alt }) {
   const [showInput, setShowInput] = useState(false);
 
   const showInputClick = () => {
@@ -24,7 +22,7 @@ function Header({ brand }) {
             <img
               data-testid="profile-top-btn"
               className="img-profile"
-              src={ profile }
+              src={ profileIcon }
               alt="profile"
             />
           </button>
@@ -38,10 +36,10 @@ function Header({ brand }) {
           onClick={ showInputClick }
         >
           <img
-            data-testid="search-top-btn"
-            className="img-search"
-            src={ search }
-            alt="search"
+            data-testid={ dataId }
+            className={ className }
+            src={ src }
+            alt={ alt }
           />
         </button>
       </header>
@@ -54,6 +52,10 @@ function Header({ brand }) {
 
 Header.propTypes = {
   brand: string.isRequired,
+  dataId: string.isRequired,
+  className: string.isRequired,
+  src: string.isRequired,
+  alt: string.isRequired,
 };
 
 export default Header;
