@@ -9,7 +9,7 @@ function Provider({ children }) {
   const [apiData, setApiData] = useState(null);
   const [radioValue, setRadioValue] = useState('s');
   const requestApiData = useCallback(async (URL) => {
-    const searchType = radioValue === 'i' ? 'filter' : 'search';
+    const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
     setApiData([await fetchAPI(URL, searchType, radioValue, inputText)]);
     setIsFetching(false);
@@ -23,6 +23,7 @@ function Provider({ children }) {
     isFetching,
     requestApiData,
   };
+
   return (
     <Context.Provider value={ contextValue }>
       {children}
@@ -31,7 +32,7 @@ function Provider({ children }) {
 }
 
 Provider.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Provider;

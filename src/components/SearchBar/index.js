@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Proptypes from 'prop-types';
 import Context from '../../context';
 
 const radioSearchOptions = [
@@ -7,7 +8,7 @@ const radioSearchOptions = [
   ['first-letter', 'Primeira letra', 'f'],
 ];
 
-function SearchBar() {
+function SearchBar({ url }) {
   const {
     inputText,
     setInputText,
@@ -20,7 +21,7 @@ function SearchBar() {
     e.preventDefault();
     return (radioValue === 'f' && inputText.length !== 1)
       ? console.log('Sua busca deve conter somente 1 (um) caracter')
-      : requestApiData();
+      : requestApiData(url);
   }
 
   return (
@@ -65,5 +66,9 @@ function SearchBar() {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  url: Proptypes.string.isRequired,
+};
 
 export default SearchBar;
