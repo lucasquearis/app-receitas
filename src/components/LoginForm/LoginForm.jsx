@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import useUser from '../../hook/UseUser';
 
 const LoginForm = () => {
-  const { handleChange, shouldRedirect,
+  const { handleChange, setTokenToLocal,
     disableBtn, redirect, minLength, user: { email, password } } = useUser();
 
   if (redirect) {
@@ -37,7 +37,7 @@ const LoginForm = () => {
         disabled={ disableBtn || password.length <= minLength }
         type="button"
         data-testid="login-submit-btn"
-        onClick={ () => shouldRedirect() }
+        onClick={ () => setTokenToLocal() }
       >
         Entrar
       </button>
