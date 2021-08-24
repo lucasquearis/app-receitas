@@ -1,9 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
 test('Farewell, front-end', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/Login/i);
-  expect(linkElement).toBeInTheDocument();
+  const { getByText } = renderWithRouter(<App />);
+  const emailLabel = getByText(/Email:/i);
+  const passwordlLabel = getByText(/Senha:/i);
+  expect(emailLabel).toBeInTheDocument();
+  expect(passwordlLabel).toBeInTheDocument();
 });
