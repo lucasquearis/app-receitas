@@ -10,13 +10,13 @@ export default function Header(props) {
     <header className="header">
       <img data-testid="profile-top-btn" src={ PerfilIcon } alt="perfil" />
       <h3 data-testid="page-title">{ title }</h3>
-      { searchIcon && <img src={ SearchIcon } alt="procurar" /> }
+      { searchIcon ? <img src={ SearchIcon } alt="procurar" /> : <div /> }
     </header>
   );
 }
 
 Header.defaultProps = {
-  searchIcon: true,
+  searchIcon: false,
 };
 
 Header.propTypes = {

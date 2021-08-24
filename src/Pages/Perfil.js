@@ -1,7 +1,10 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 export default function Perfil() {
   return (
-    <h1>Tela de Perfil</h1>
+    <section>
+      <Header title="Perfil" />
+    </section>
   );
 }
