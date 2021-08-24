@@ -1,20 +1,52 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  fetchIngredientAPI,
+  fetchNameAPI,
+  fetchLetterAPI,
+} from '../redux/actions/mainActions';
 
 function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
+  const dispatch = useDispatch();
 
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const requestIngredient = (value) => {
+    dispatch(fetchIngredientAPI(value));
+  };
+
+  const requestName = (value) => {
+    dispatch(fetchNameAPI(value));
+  };
+
+  const requestLetter = (value) => {
+    dispatch(fetchLetterAPI(value));
+  };
+
+  const handleClick = (e) => {
     e.preventDefault();
+    const { result } = search;
+    if (search.type === 'ingredient') {
+      return requestIngredient(result);
+    }
+    if (search.type === 'name') {
+      return requestName(result);
+    }
+    if (search.type === 'letter') {
+      if (result.length > 1) {
+        return alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      return requestLetter(result);
+    }
   };
 
   const { result } = search;
   return (
     <div>
-      <form onSubmit={ handleSubmit }>
+      <form>
         <input
           value={ result }
           name="result"
@@ -56,7 +88,13 @@ function SearchBar() {
             data-testid="first-letter-search-radio"
           />
         </label>
-        <button data-testid="exec-search-btn" type="submit">Pesquisar</button>
+        <button
+          data-testid="exec-search-btn"
+          type="submit"
+          onClick={ handleClick }
+        >
+          Pesquisar
+        </button>
       </form>
     </div>
   );
