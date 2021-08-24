@@ -9,4 +9,19 @@ describe('19 - Verifica os elementos contidos no menu inferior.', () => {
     const footer = screen.getByTestId('footer');
     expect(footer).toBeInTheDocument();
   });
+  it('O menu inferior contém um botão que redireciona para página de Drinks.', () => {
+    renderWithRouter(<FooterMenu />);
+    const buttonDrink = screen.getByTestId('drinks-bottom-btn');
+    expect(buttonDrink).toBeInTheDocument();
+  });
+  it('O menu inferior contém um botão que redireciona para página de Refeição.', () => {
+    renderWithRouter(<FooterMenu />);
+    const buttonFood = screen.getByTestId('food-bottom-btn');
+    expect(buttonFood).toBeInTheDocument();
+  });
+  it('O menu inferior contém um botão que redireciona para página de Pesquisa.', () => {
+    renderWithRouter(<FooterMenu />);
+    const buttonExplore = screen.getByTestId('explore-bottom-btn');
+    expect(buttonExplore).toBeInTheDocument();
+  });
 });
