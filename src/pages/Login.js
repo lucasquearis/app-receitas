@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -22,27 +23,33 @@ function Login() {
   }
 
   return (
-    <form>
-      <Input
-        type="email"
-        testId="email-input"
-        onChange={ setEmail }
-        value={ email }
-      />
-      <Input
-        type="password"
-        testId="password-input"
-        onChange={ setPassword }
-        value={ password }
-      />
-      <Button
-        testId="login-submit-btn"
-        name="Entrar"
-        link="/comidas"
-        disabled={ checkInput() }
-        onClick={ handleSubmit }
-      />
-    </form>
+    <div className="login-container">
+      <h2>Login</h2>
+      <form className="login-form">
+        <Input
+          type="email"
+          testId="email-input"
+          onChange={ setEmail }
+          value={ email }
+          holder="Email"
+        />
+        <Input
+          type="password"
+          testId="password-input"
+          onChange={ setPassword }
+          value={ password }
+          holder="Senha"
+        />
+        <Button
+          testId="login-submit-btn"
+          name="Entrar"
+          link="/comidas"
+          disabled={ checkInput() }
+          onClick={ handleSubmit }
+          style={ !checkInput() ? { background: '#6ce34f' } : {} }
+        />
+      </form>
+    </div>
   );
 }
 
