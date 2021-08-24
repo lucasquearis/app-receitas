@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/Provider';
 import Login from './pages/Login';
 import Comidas from './pages/Comidas';
+import Perfil from './pages/Perfil';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route path="/comidas" component={ Comidas } />
+          <Route path="/perfil" component={ Perfil } />
           {/*
           <Route path="/" component={ Login } />
           {/* <Route path="/comidas" component={ Login } />
@@ -27,7 +29,6 @@ function App() {
           <Route path="/explorar/comidas/ingredientes" component={ Login } />
           <Route path="/explorar/bebidas/ingredientes" component={ Login } />
           <Route path="/explorar/comidas/area" component={ Login } />
-          <Route path="/perfil" component={ Login } />
           <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
