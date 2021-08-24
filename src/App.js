@@ -28,11 +28,11 @@ function App() {
         <Route
           path="/comidas:id/in-progress"
           render={ (props) => <Foods { ...props } /> }
-          />
+        />
         <Route
           path="/bebidas:id/in-progress"
           render={ (props) => <Drinks { ...props } /> }
-          />
+        />
       </Switch>
     </ProviderContext>
   );
