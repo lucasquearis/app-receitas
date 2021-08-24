@@ -1,11 +1,11 @@
 import React from 'react';
 import { AppProvider } from './Context/ContextApp';
-import Trybe from './Pages/Trybe/Trybe';
+import Login from './Pages/Login/Login';
 
 function App() {
   return (
     <AppProvider>
-      <Trybe />
+      <Login />
     </AppProvider>
   );
 }
