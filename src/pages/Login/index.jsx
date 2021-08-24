@@ -13,18 +13,20 @@ function Login() {
     redirect: false,
   });
 
+  const { email, password, disabledButton, redirect } = dataLogin;
+
   // validação dos campos
   useEffect(() => {
     const regexEmail = /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/;
     const minPasswordLength = 6;
-    const validation = !(regexEmail.test(dataLogin.email)
-      && dataLogin.password.length > minPasswordLength);
+    const validation = !(regexEmail.test(email)
+      && password.length > minPasswordLength);
 
     setDataLogin({
       ...dataLogin,
       disabledButton: validation,
     });
-  }, [dataLogin.email, dataLogin.password]);
+  }, [email, password]);
 
   const handleChangeEmail = ({ target: { value } }) => {
     setDataLogin({
@@ -43,14 +45,14 @@ function Login() {
   const handleClick = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify({ email: dataLogin.email }));
+    localStorage.setItem('user', JSON.stringify({ email }));
     setDataLogin({
       ...dataLogin,
       redirect: true,
     });
   };
 
-  if (dataLogin.redirect) return <Redirect to="/comidas" />;
+  if (redirect) return <Redirect to="/comidas" />;
 
   return (
     <Container>
@@ -60,7 +62,7 @@ function Login() {
           <Form.Control
             type="email"
             data-testid="email-input"
-            value={ dataLogin.email }
+            value={ email }
             onChange={ handleChangeEmail }
           />
         </Form.Group>
@@ -70,7 +72,7 @@ function Login() {
           <Form.Control
             type="password"
             data-testid="password-input"
-            value={ dataLogin.password }
+            value={ password }
             onChange={ handleChangePassword }
           />
         </Form.Group>
@@ -79,7 +81,7 @@ function Login() {
           variant="primary"
           type="button"
           data-testid="login-submit-btn"
-          disabled={ dataLogin.disabledButton }
+          disabled={ disabledButton }
           onClick={ handleClick }
         >
           Entrar
