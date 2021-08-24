@@ -4,7 +4,7 @@ const fetchMock = require('../mocks/fetch');
 const soupMeals = require('../mocks/soupMeals');
 const ginDrinks = require('../mocks/ginDrinks');
 
-describe('13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
+describe.only('13 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
   it('Tem os data-testids tanto da barra de busca quanto de todos os radio-buttons', () => {
     cy.visit('http://localhost:3000/comidas');
 

@@ -1,0 +1,9 @@
+.search-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-container {
+  display: flex;
+  justify-content: space-around;
+}
