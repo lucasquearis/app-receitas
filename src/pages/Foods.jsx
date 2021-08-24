@@ -29,7 +29,7 @@ function Foods() {
       )}
 
       {foods.slice(0, foodsLimits).map(
-        (food) => RecipeCard(food.idMeal, food.strMealThumb, food.strMeal),
+        (food) => RecipeCard(food.idMeal, food.strMealThumb, food.strMeal, 'comidas'),
       )}
 
     </div>

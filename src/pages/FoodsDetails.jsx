@@ -4,7 +4,9 @@ import FoodInfo from '../components/FoodInfo';
 
 function FoodsDetails() {
   return (
-    <FoodInfo />
+    <section>
+      <FoodInfo />
+    </section>
   );
 }
 

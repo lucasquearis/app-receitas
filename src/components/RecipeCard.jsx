@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function RecipeCard(key, img, name) {
+function RecipeCard(key, img, name, foodOrDrink) {
   return (
     <div key={ key }>
-      <Link to="/">
+      <Link to={ `/${foodOrDrink}/${key}` }>
         <img src={ img } alt={ name } />
       </Link>
 
