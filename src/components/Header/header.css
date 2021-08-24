@@ -1,0 +1,22 @@
+.navbar {
+  padding: 0;
+}
+
+.header-navbar {
+  align-items: center;
+  background-color: cornflowerblue;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 5px;
+  width: 100%;
+}
+
+.title {
+  font-size: x-large;
+  margin: auto;
+}
+
+.icon {
+  width: 90%;
+}

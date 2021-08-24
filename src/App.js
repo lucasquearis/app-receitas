@@ -1,11 +1,17 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Footer from './components/Footer';
+
+import Login from './pages/Login';
+import Provider from './context/Provider';
+
+import './App.css';
 
 function App() {
   return (
-    <>
+    <Provider>
       <Switch>
-        <Route exact path="/" />
+        <Route exact path="/" component={ Login } />
         <Route path="/comidas" />
         <Route path="/bebidas" />
         <Route path="/comidas/:id" />
@@ -20,9 +26,8 @@ function App() {
         <Route path="/receitas-feitas" />
         <Route path="/receitas-favoritas" />
       </Switch>
-      {/* Nav Bar */}
-      <Route path="/" />
-    </>
+      <Footer />
+    </Provider>
   );
 }
 

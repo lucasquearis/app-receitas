@@ -1,0 +1,24 @@
+.footer-container {
+  background-color: #ddd;
+  bottom: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+.footer-item {
+  background-color: #ddd;
+  color: #f2f2f2;
+  font-size: 17px;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer-item a:hover {
+  background-color: #ddd;
+  color: #ddd;
+}
