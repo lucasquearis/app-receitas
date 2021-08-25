@@ -1,11 +1,16 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+
+import useAPI from '../hooks/useAPI';
 import Radios from './Radios';
 
-function Search() {
+function Search({ history }) {
   const name = 'name';
   const values = ['name', 'ingredient', 'first'];
   const labels = ['Nome', 'Ingrediente', 'Primeira letra'];
 
+  const msg = alert;
+  const [, functions] = useAPI();
   const [radio, setRadio] = useState('s');
 
   const tests = [
@@ -25,7 +30,6 @@ function Search() {
     case 'first':
       setRadio('f');
       break;
-
     default:
       break;
     }
@@ -33,7 +37,46 @@ function Search() {
 
   function click() {
     const search = document.querySelector('input[type="search"]');
-    console.log(radio, search.value);
+    const { location: { pathname } } = history;
+    const { value } = search;
+    let searcher;
+
+    switch (pathname) {
+    case '/comidas':
+      searcher = functions.searchFoods;
+      break;
+
+    case '/bebidas':
+      searcher = functions.searchDrinks;
+      break;
+
+    default:
+      break;
+    }
+
+    console.log(radio, value.length);
+
+    switch (radio) {
+    case 'i':
+      if (value.length > 0) {
+        searcher(radio, value);
+      } else {
+        msg('Escreva um ingrediente!');
+      }
+      break;
+
+    case 'f':
+      if (value.length === 1) {
+        searcher(radio, value);
+      } else {
+        msg('Sua busca deve conter somente 1 (um) caracter');
+      }
+      break;
+
+    default:
+      searcher(radio, value);
+      break;
+    }
   }
 
   return (
@@ -46,5 +89,9 @@ function Search() {
     </div>
   );
 }
+
+Search.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default Search;

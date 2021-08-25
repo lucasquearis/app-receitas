@@ -11,12 +11,13 @@ import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import MyRecipes from './pages/MyRecipes';
 import Favorites from './pages/Favorites';
+import Search from './components/Search';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ Foods } />
+      {/* <Route path="/comidas" component={ Foods } /> */}
       <Route path="/bebidas" component={ Drinks } />
       <Route path="/explorar" component={ Explore } />
       <Route path="/explorar" component={ Profile } />
@@ -32,6 +33,7 @@ function App() {
         path="/bebidas:id/in-progress"
         render={ (props) => <Drinks { ...props } /> }
       />
+      <Route render={ (props) => <Search { ...props } /> } />
     </Switch>
   );
 }
