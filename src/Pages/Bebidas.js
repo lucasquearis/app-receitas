@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import * as BebidasAPI from '../service/BebidasAPI';
 import Card from '../Components/Card';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
 export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);
@@ -13,11 +15,18 @@ export default function Bebidas() {
 
   fetchFoods();
   if (bebidas.length <= 0) {
-    return <p>Loading...</p>;
+    return (
+      <section>
+        <Header title="Bebidas" searchIcon />
+        <p>Loading...</p>
+        <Footer />
+      </section>
+    );
   }
 
   return (
     <section>
+      <Header title="Bebidas" searchIcon />
       {
         bebidas.map(
           (bebida, index) => (
@@ -25,6 +34,7 @@ export default function Bebidas() {
           ),
         )
       }
+      <Footer />
     </section>
   );
 }

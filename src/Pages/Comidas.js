@@ -17,7 +17,7 @@ export default function Comidas() {
   if (comidas.length <= 0) {
     return (
       <section>
-        <Header />
+        <Header title="Comidas" searchIcon />
         <p>Loading...</p>
         <Footer />
       </section>
@@ -26,7 +26,7 @@ export default function Comidas() {
 
   return (
     <section>
-      <Header />
+      <Header title="Comidas" searchIcon />
       {
         comidas.map(
           (comida, index) => (
