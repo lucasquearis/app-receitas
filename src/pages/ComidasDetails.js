@@ -57,29 +57,29 @@ function ComidasDetails(props) {
   const renderRecomendationCard = () => {
     const SIX = 6;
     const links = [];
-    if(drinks.length > 0){
-      for (let index = 0; index < SIX; index += 1){
+    if (drinks.length > 0) {
+      for (let index = 0; index < SIX; index += 1) {
         links.push(
           <Link
-            to={`/bebidas/${drinks[index].idDrink}`}
-            data-testid={`${index}-recomendation-card`}
+            to={ `/bebidas/${drinks[index].idDrink}` }
+            data-testid={ `${index}-recomendation-card` }
             key={ index }
           >
             <div>
               <img
-                src={drinks[index].strDrinkThumb}
+                src={ drinks[index].strDrinkThumb }
                 alt={ drinks[index].strDrink }
               />
               <p>{drinks[index].strAlcoholic}</p>
               <p>{drinks[index].strDrink}</p>
             </div>
-          </Link>
-        )
+          </Link>,
+        );
       }
     }
-    
+
     return links;
-  }
+  };
 
   console.log(renderRecomendationCard());
 

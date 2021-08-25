@@ -48,33 +48,31 @@ function BebidasDetails(props) {
     getRecomendations();
   }, [id]);
 
-
   const renderRecomendationCard = () => {
     const SIX = 6;
     const links = [];
-    if(meals.length > 0){
-      for (let index = 0; index < SIX; index += 1){
+    if (meals.length > 0) {
+      for (let index = 0; index < SIX; index += 1) {
         links.push(
           <Link
-            to={`/bebidas/${meals[index].idMeal}`}
-            data-testid={`${index}-recomendation-card`}
+            to={ `/bebidas/${meals[index].idMeal}` }
+            data-testid={ `${index}-recomendation-card` }
             key={ index }
           >
             <div>
               <img
-                src={meals[index].strMealThumb}
+                src={ meals[index].strMealThumb }
                 alt={ meals[index].strMeal }
               />
               <p>{meals[index].strCategory}</p>
               <p>{meals[index].strMeal}</p>
             </div>
-          </Link>
-        )
+          </Link>,
+        );
       }
     }
-    
     return links;
-  }
+  };
 
   const link = (
     <Link
@@ -88,7 +86,11 @@ function BebidasDetails(props) {
   return (
     <main>
       <div>
-        <img data-testid="recipe-photo" src={ drink.strDrinkThumb } alt="imagem do prato" />
+        <img
+          data-testid="recipe-photo"
+          src={ drink.strDrinkThumb }
+          alt="imagem do prato"
+        />
       </div>
       <div>
         <h1 data-testid="recipe-title">{drink.strDrink}</h1>
