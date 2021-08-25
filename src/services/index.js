@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 // Hook para receber os dados da API de acordo com os filtros do usuário;
 
 // Primeiro parâmetro será 'food' ou 'drinks';
@@ -43,7 +42,7 @@ const useFilters = (type, parameters) => {
       // Caso o usuário escreva mais que uma letra no filtro de "Primeira letra" fará um alert();
       // (Requisito 15)
       if (parameters[type].text.length > 1) {
-        alert('Sua busca deve conter somente 1 (um) caracter');
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
       }
       return requestAPI.fetchFirstLetter();
     default:

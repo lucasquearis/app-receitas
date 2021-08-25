@@ -46,8 +46,7 @@ export default function FoodAndDrinksProvider({ children }) {
 
   // Alert do Requisito 18;
   const notFoundAlert = () => (
-    // eslint-disable-next-line no-alert
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
   );
 
   // Função que salva no estado os filtros do usuário;
