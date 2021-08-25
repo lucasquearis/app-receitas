@@ -18,3 +18,46 @@ describe('Testes para o Footer', () => {
     expect(sair).toBeInTheDocument();
   });
 
+  it('Verifica se ao clicar no botao receitas feitas vai a pagina correta', () => {
+    const { history } = renderWithRouter(<Perfil />);
+    const receitasFeitas = screen.getByTestId(/profile-done-btn/i);
+    userEvent.click(receitasFeitas);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/receitas-feitas');
+  });
+
+  it('Verifica se ao clicar no botao receitas favoritas vai a pagina correta', () => {
+    const { history } = renderWithRouter(<Perfil />);
+    const receitasFavoritas = screen.getByTestId(/profile-favorite-btn/i);
+    userEvent.click(receitasFavoritas);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/receitas-favoritas');
+  });
+
+  it('Verifica se ao clicar em sair vai a pagina correta e apaga local storage', () => {
+    const { history } = renderWithRouter(<Perfil />);
+    const sair = screen.getByTestId(/profile-logout-btn/i);
+
+    const mealsToken = localStorage.getItem('mealsToken');
+    const cocktailsToken = localStorage.getItem('cocktailsToken');
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    expect(mealsToken).toBe('1');
+    expect(cocktailsToken).toBe('1');
+    expect(user).toStrictEqual({ email: emailMock });
+
+    userEvent.click(sair);
+    const { location: { pathname } } = history;
+
+    const newMealsToken = localStorage.getItem('mealsToken');
+    const newCocktailsToken = localStorage.getItem('cocktailsToken');
+    const newUser = JSON.parse(localStorage.getItem('user'));
+
+    expect(pathname).toBe('/');
+    expect(newMealsToken).not.toBeDefined();
+    expect(newCocktailsToken).not.toBeDefined();
+    expect(newUser).not.toBeDefined();
+  });
+});
