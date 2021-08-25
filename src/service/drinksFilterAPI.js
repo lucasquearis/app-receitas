@@ -11,7 +11,9 @@ function FoodFilterDAPI() {
           setDrinkData(drinks);
         });
     };
+    console.log(filter);
     const newFilter = filter === 'Ordinary Drink' ? filter.replace(' ', '_') : filter;
+    console.log(newFilter);
     response(newFilter);
   }, [setDrinkData, filter]);
 }

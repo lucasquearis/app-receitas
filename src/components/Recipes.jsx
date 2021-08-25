@@ -27,9 +27,7 @@ const DrinkOrFood = ({ food }) => {
       return saveData;
     }
     test2API(food, filter);
-    console.log(drinkData);
     const saveData = drinkData !== null ? [...drinkData].slice(0, endNumber) : [];
-    console.log(saveData);
     return saveData;
   };
   const show = filter2data();

@@ -6,7 +6,7 @@ import Recipes from '../components/Recipes';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Comidas() {
+function Bebidas() {
   const { drinkCategory } = useContext(RecipesContext);
   DrinksAPI();
   const [food] = useState(false);
@@ -23,4 +23,4 @@ function Comidas() {
   return <p> Loading... </p>;
 }
 
-export default Comidas;
+export default Bebidas;
