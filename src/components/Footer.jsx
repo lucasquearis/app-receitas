@@ -8,7 +8,7 @@ function Footer() {
   return (
     <footer
       style={ {
-        position: 'absolute',
+        position: 'fixed',
         bottom: '0',
       } }
       data-testid="footer"

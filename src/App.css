@@ -37,6 +37,13 @@
   font-weight: 900;
 }
 
+footer {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(209, 233, 241);
+  justify-content: space-around;
+}
+
 @keyframes shake {
 
   0% {

@@ -1,11 +1,10 @@
 import React from 'react';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-export default function Profile() {
+export default function () {
   return (
     <div>
-      <Header title="Perfil" />
+      <div>Explore</div>
       <Footer />
     </div>
   );
