@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMealRecipe } from '../services/fetchRecipe';
 import { IngredientsTaskList } from '../components';
+import {
+  addMealIngInProgressStorage,
+  rmvMealIngInProgressStorage,
+} from '../helpers/inProgressLocalStorage';
 
 function MealsInProgress() {
   const { id } = useParams();
@@ -32,9 +36,11 @@ function MealsInProgress() {
         ...ingList.slice(0, ingredientIndex),
         { ing: name, checked },
         ...ingList.slice(ingredientIndex + 1),
-
       ],
     });
+
+    if (checked) return addMealIngInProgressStorage(id, name);
+    return rmvMealIngInProgressStorage(id, name);
   };
 
   return (
