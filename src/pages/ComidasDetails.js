@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -10,9 +11,12 @@ function ComidasDetails(props) {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const favorite = favoriteRecipes
     && favoriteRecipes.find((recipe) => recipe.idMeal === id);
+
   const [meal, setMeal] = useState({});
   const [isFav, setIsFav] = useState(favorite);
   const [drinks, setDrinks] = useState([]);
+  const { favoritingRecipe, renderingIngredients } = useContext(RecipesContext);
+  console.log(drinks);
 
   useEffect(() => {
     const getMeal = async () => {
@@ -35,36 +39,11 @@ function ComidasDetails(props) {
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     getRecomendations();
   }, [id]);
 
-  const favoritingRecipe = () => {
-    if (isFav) {
-      setIsFav(false);
-      const newFavoriteRecipes = favoriteRecipes.filter((recipe) => recipe.idMeal !== id);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-    } else {
-      setIsFav(true);
-      const newFavoriteRecipes = favoriteRecipes ? [...favoriteRecipes, meal] : [meal];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-    }
-  };
-
-  const renderingIngredients = () => {
-    const ingredients = [];
-    const measures = [];
-    const TWENTY = 20;
-    for (let index = 1; index <= TWENTY; index += 1) {
-      if (meal[`strIngredient${index}`]) {
-        ingredients.push(meal[`strIngredient${index}`]);
-        measures.push(meal[`strMeasure${index}`]);
-      }
-    }
-    return { ingredients, measures };
-  };
-
-  const { ingredients, measures } = renderingIngredients();
+  const { ingredients, measures } = renderingIngredients(meal);
 
   return (
     <main>
@@ -80,7 +59,7 @@ function ComidasDetails(props) {
             data-testid="share-btn"
           />
           <button
-            onClick={ favoritingRecipe }
+            onClick={ () => favoritingRecipe(isFav, setIsFav, favoriteRecipes, id, meal) }
             type="button"
           >
             <img
@@ -108,11 +87,17 @@ function ComidasDetails(props) {
           <p data-testid="instructions">{ meal.strInstructions }</p>
         </div>
         <div data-testid="video">
+          Video
         </div>
         <div>
           <h3>Recomendadas</h3>
         </div>
-        <Link data-testid="start-recipe-btn" to={`/comidas/${id}/in-progress`}>Iniciar Receita</Link>
+        <Link
+          data-testid="start-recipe-btn"
+          to={ `/comidas/${id}/in-progress` }
+        >
+          Iniciar Receita
+        </Link>
       </div>
     </main>
   );
