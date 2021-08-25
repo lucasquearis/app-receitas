@@ -1,4 +1,4 @@
-export function addMealIngInProgressStorage(id, ing, type) {
+export function addIngInProgressStorage(id, ing, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const typeToAdd = inProgressRecipes[type];
 
@@ -15,7 +15,7 @@ export function addMealIngInProgressStorage(id, ing, type) {
   }
 }
 
-export function rmvMealIngInProgressStorage(id, ing, type) {
+export function rmvIngFromProgressStorage(id, ing, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const typeToAdd = inProgressRecipes[type];
 

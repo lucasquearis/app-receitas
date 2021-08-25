@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { fetchMealRecipe } from '../services/fetchRecipe';
 import { IngredientsTaskList } from '../components';
 import {
-  addMealIngInProgressStorage,
-  rmvMealIngInProgressStorage,
+  addIngInProgressStorage,
+  rmvIngFromProgressStorage,
 } from '../helpers/inProgressLocalStorage';
 
 function MealsInProgress() {
@@ -12,12 +12,6 @@ function MealsInProgress() {
   const [rcp, setRcp] = useState({
     ingList: [],
   });
-
-  // function isInLocalStorage(ing) {
-  //   const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //   if (!meals[id]) return false;
-  //   return meals[id].some((ingredient) => ingredient === ing);
-  // }
 
   useEffect(() => {
     function isInLocalStorage(ing) {
@@ -50,8 +44,8 @@ function MealsInProgress() {
       ],
     });
 
-    if (checked) return addMealIngInProgressStorage(id, name, 'meals');
-    rmvMealIngInProgressStorage(id, name, 'meals');
+    if (checked) return addIngInProgressStorage(id, name, 'meals');
+    rmvIngFromProgressStorage(id, name, 'meals');
   };
 
   return (
