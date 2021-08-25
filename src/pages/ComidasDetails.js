@@ -147,7 +147,7 @@ function ComidasDetails(props) {
         <div>
           <h3>Recomendadas</h3>
           <div>
-            { renderRecomendationCard().map((recepi) => recepi) }
+            { renderRecomendationCard().map((recipe) => recipe) }
           </div>
         </div>
         { !done && link }
