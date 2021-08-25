@@ -54,6 +54,35 @@ function ComidasDetails(props) {
     videoURL = meal.strYoutube.split('=');
   }
 
+  const renderRecomendationCard = () => {
+    const SIX = 6;
+    const links = [];
+    if(drinks.length > 0){
+      for (let index = 0; index < SIX; index += 1){
+        links.push(
+          <Link
+            to={`/bebidas/${drinks[index].idDrink}`}
+            data-testid={`${index}-recomendation-card`}
+            key={ index }
+          >
+            <div>
+              <img
+                src={drinks[index].strDrinkThumb}
+                alt={`${drinks[index].strDrink} photo` }
+              />
+              <p>{drinks[index].strAlcoholic}</p>
+              <p>{drinks[index].strDrink}</p>
+            </div>
+          </Link>
+        )
+      }
+    }
+    
+    return links;
+  }
+
+  console.log(renderRecomendationCard());
+
   const link = (
     <Link
       data-testid="start-recipe-btn"
@@ -116,8 +145,10 @@ function ComidasDetails(props) {
           />
         </div>
         <div>
-          {/* {data-testid="${index}-recomendation-card"} */}
           <h3>Recomendadas</h3>
+          <div>
+            { renderRecomendationCard().map((recepi) => recepi) }
+          </div>
         </div>
         { !done && link }
       </div>
