@@ -2,7 +2,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import FooterMenu from './pages/FooterMenu';
-import Explorer from './pages/Explorer';
 
 function Routes() {
   return (
