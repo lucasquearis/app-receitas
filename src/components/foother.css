@@ -1,16 +1,17 @@
 .foother {
+  background-color: #ffd12d;
   border: 1px solid black;
+  bottom: 0;
   box-shadow: 0 0 25px currentColor;
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
   display: flex;
   justify-content: space-around;
-  background-color: #FFD12D;
   padding: 15px;
+  position: fixed;
+  width: 100%;
 }
+
 .img-link {
-  background-color:transparent;
+  background-color: transparent;
   margin-left: auto;
   margin-right: auto;
 }
