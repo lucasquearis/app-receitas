@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import { useFetchCategoryApiMeals } from '../customHooks/useFetchCategoryApi';
+import { useFetchCategoryListApiMeals } from '../customHooks/useFetchCategoryListApi';
 
 export default function MealCategoryButtons() {
   const { btnCategoryMeals, setListCategoryMeals } = useContext(Context);
   const CINCO = 5;
+
+  useFetchCategoryApiMeals();
+  useFetchCategoryListApiMeals();
 
   const handleClick = ({ target }) => {
     const { name } = target;

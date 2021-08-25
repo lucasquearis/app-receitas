@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import { useFetchCategoryApiDrinks } from '../customHooks/useFetchCategoryApi';
+import { useFetchCategoryListApiDrinks } from '../customHooks/useFetchCategoryListApi';
 
 export default function DrinkCategoryButtons() {
   const { btnCategoryDrinks, setListCategoryDrinks } = useContext(Context);
   const CINCO = 5;
+
+  useFetchCategoryApiDrinks();
+  useFetchCategoryListApiDrinks();
 
   const handleClick = ({ target }) => {
     const { name } = target;
