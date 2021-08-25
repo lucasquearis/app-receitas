@@ -11,6 +11,7 @@ const Header = ({ children }) => {
   const onOffSearchBar = () => {
     setWithSearchBar(!withSearchBar);
   };
+
   return (
     <div>
       <header>
@@ -25,15 +26,15 @@ const Header = ({ children }) => {
         </Link>
         <h1 data-testid="page-title">{ children }</h1>
         <button type="button" onClick={ onOffSearchBar }>
-          <div>
-            <img
-              src={ searchIcon }
-              alt="search icon"
-              data-testid="search-top-btn"
-            />
-            { withSearchBar && <SearchBar /> }
-          </div>
+          <img
+            src={ searchIcon }
+            alt="search icon"
+            data-testid="search-top-btn"
+          />
         </button>
+        <div>
+          <SearchBar bool={ withSearchBar } />
+        </div>
       </header>
     </div>
   );

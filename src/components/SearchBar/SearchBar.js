@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { actionSaveItems } from '../../actions/index';
 import { searchOnClick } from './utils';
 
-const SearchBar = ({ saveItems }) => {
+const SearchBar = ({ bool, saveItems }) => {
   const [search, setSearch] = useState({
     textValue: '',
     radioValue: '',
@@ -53,56 +53,59 @@ const SearchBar = ({ saveItems }) => {
     return <Redirect to={ `/${redirect.pathName}/${redirect.id}` } />;
   }
 
-  return (
-    <div>
-      <input
-        type="text"
-        name="textValue"
-        data-testid="search-input"
-        placeholder="Busque por uma receita"
-        onChange={ handleChange }
-      />
-      <div name="radioValue" onChange={ handleChange }>
-        <label htmlFor="ingredients">
-          Ingredientes
-          <input
-            type="radio"
-            id="ingredients"
-            name="radioValue"
-            value="Ingredientes"
-            data-testid="ingredient-search-radio"
-          />
-        </label>
-        <label htmlFor="name">
-          Nome
-          <input
-            type="radio"
-            id="name"
-            name="radioValue"
-            value="Nome"
-            data-testid="name-search-radio"
-          />
-        </label>
-        <label htmlFor="first-letter">
-          Primeira letra
-          <input
-            type="radio"
-            id="first-letter"
-            name="radioValue"
-            value="Primeira letra"
-            data-testid="first-letter-search-radio"
-          />
-        </label>
+  if (bool) {
+    return (
+      <div>
+        <input
+          type="text"
+          name="textValue"
+          data-testid="search-input"
+          placeholder="Busque por uma receita"
+          onChange={ handleChange }
+        />
+        <div name="radioValue" onChange={ handleChange }>
+          <label htmlFor="ingredients">
+            Ingredientes
+            <input
+              type="radio"
+              id="ingredients"
+              name="radioValue"
+              value="Ingredientes"
+              data-testid="ingredient-search-radio"
+            />
+          </label>
+          <label htmlFor="name">
+            Nome
+            <input
+              type="radio"
+              id="name"
+              name="radioValue"
+              value="Nome"
+              data-testid="name-search-radio"
+            />
+          </label>
+          <label htmlFor="first-letter">
+            Primeira letra
+            <input
+              type="radio"
+              id="first-letter"
+              name="radioValue"
+              value="Primeira letra"
+              data-testid="first-letter-search-radio"
+            />
+          </label>
+        </div>
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ () => searchOnClick(search, setItems) }
+        >
+          Buscar
+        </button>
       </div>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ () => searchOnClick(search, setItems) }
-      >
-        Buscar
-      </button>
-    </div>
-  );
+    );
+  }
+  return null;
 };
 
 function mapDispatchToProps(dispatch) {
@@ -112,6 +115,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 SearchBar.propTypes = {
+  bool: PropTypes.bool.isRequired,
   saveItems: PropTypes.func.isRequired,
 };
 
