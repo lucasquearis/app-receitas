@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
-import Header from './components/Header/index';
+import Header from './Components/Header/index';
 import Foods from './Pages/Foods';
 import Drinks from './Pages/Drinks/index';
 import Login from './Pages/Login/Login';

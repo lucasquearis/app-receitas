@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/Header';
-import RecipesContainer from '../../components/RecipesContainer';
+import Header from '../../Components/Header';
+import RecipesContainer from '../../Components/RecipesContainer';
 
 function Foods() {
   return (
