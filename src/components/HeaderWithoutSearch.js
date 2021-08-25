@@ -19,9 +19,12 @@ function HeaderWithoutSearch({ children }) {
     </header>
   );
 }
+HeaderWithoutSearch.defaultProps = {
+  children: undefined,
+};
 
 HeaderWithoutSearch.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default HeaderWithoutSearch;

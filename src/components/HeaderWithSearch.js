@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import useRedirect from '../hooks/useRedirect';
 
 function HeaderWithSearch({ children }) {
-  const history = useHistory();
-
+  const { shouldRedirect, redirect } = useRedirect();
   const [visibleSearch, setVisibleSearch] = useState(false);
+
+  if (redirect.should) return <Redirect to={ redirect.path } />;
 
   const handleToggleClass = () => setVisibleSearch((currState) => !currState);
 
   return (
     <div>
       <header className="header-search">
-        <button type="button" onClick={ () => history.push('/perfil') }>
+        <button type="button" onClick={ () => shouldRedirect('/perfil') }>
           <img
             data-testid="profile-top-btn"
             src={ profileIcon }
