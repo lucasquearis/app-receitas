@@ -6,7 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 import './header.css';
 import SearchBar from './SearchBar';
 
-function Header({ title, showButton }) {
+function Header({ title, showButton, foodPage }) {
   const [showAndHideSearchBar, setShowAndHideSearchBar] = useState(false);
   return (
     <>
@@ -47,7 +47,7 @@ function Header({ title, showButton }) {
             : ''
         }
       </header>
-      {showAndHideSearchBar && <SearchBar /> }
+      {showAndHideSearchBar && <SearchBar foodPage={ foodPage } /> }
     </>
   );
 }
@@ -55,11 +55,13 @@ function Header({ title, showButton }) {
 Header.propTypes = {
   title: string,
   showButton: bool,
+  foodPage: bool,
 };
 
 Header.defaultProps = {
   title: '',
   showButton: false,
+  foodPage: false,
 };
 
 export default Header;
