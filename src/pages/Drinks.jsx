@@ -1,7 +1,11 @@
 import React from 'react';
+import Footer from '../components/Footer/Footer';
 
 export default function Drinks() {
   return (
-    <span>Drinks</span>
+    <main>
+      Drinks
+      <Footer />
+    </main>
   );
 }

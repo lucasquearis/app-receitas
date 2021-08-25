@@ -1,7 +1,11 @@
 import React from 'react';
+import Footer from '../components/Footer/Footer';
 
 export default function ExploreMealByArea() {
   return (
-    <span>ExploreMealByArea</span>
+    <main>
+      ExploreMealByArea
+      <Footer />
+    </main>
   );
 }

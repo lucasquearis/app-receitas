@@ -1,7 +1,12 @@
 import React from 'react';
+import Footer from '../components/Footer/Footer';
 
 export default function Meals() {
   return (
-    <span>Meals</span>
+    <main>
+      Meals
+      <Footer />
+    </main>
+
   );
 }
