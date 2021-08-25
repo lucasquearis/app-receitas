@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
-// import Foods from './pages/Foods';
-// import Drinks from './pages/Drinks';
+import Foods from './pages/Foods';
+import MenuInferior from './components/MenuInferior';
+import Drinks from './pages/Drinks';
+import Explore from './pages/Explore/Explore';
 // import FoodsDet from './pages/Details/FoodDet';
 // import DrinksDet from './pages/Details/DrinksDet';
-// import Explore from './pages/Explore/Explore';
 // import FoodExp from './pages/Explore/FoodExp';
 // import DrinksExp from './pages/Explore/DrinkExp';
 // import DrinkIngredients from './pages/Explore/DrinkIngredients';
@@ -20,11 +21,12 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Login } />
-        {/* <Route path="/comidas" component={ Foods } />
+        <Route path="/menu" component={ MenuInferior } />
+        <Route path="/comidas" component={ Foods } />
         <Route path="/bebidas" component={ Drinks } />
-        <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
-        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/explorar" component={ Explore } />
+        {/* <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
+        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/explorar/comidas" component={ FoodExp } />
         <Route path="/explorar/bebidas" component={ DrinkExp } />
         <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
