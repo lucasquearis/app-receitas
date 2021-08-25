@@ -1,0 +1,53 @@
+export async function fetchRecipesAPI(URL) {
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.meals;
+}
+
+export async function fetchDrinksAPI(URL) {
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.drinks;
+}
+
+export async function filteredRecipes(type, search) {
+  const ingredientURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`;
+  const nameURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
+  const firstLetterURL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`;
+
+  try {
+    switch (type) {
+    case 'ingredient':
+      return fetchRecipesAPI(ingredientURL);
+    case 'name':
+      return fetchRecipesAPI(nameURL);
+    case 'firstLetter':
+      return fetchRecipesAPI(firstLetterURL);
+    default:
+      return null;
+    }
+  } catch (err) {
+    alert(err);
+  }
+}
+
+export async function filteredDrinks(type, search) {
+  const ingredientURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`;
+  const nameURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`;
+  const firstLetterURL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`;
+
+  try {
+    switch (type) {
+    case 'ingredient':
+      return fetchDrinksAPI(ingredientURL);
+    case 'name':
+      return fetchDrinksAPI(nameURL);
+    case 'firstLetter':
+      return fetchDrinksAPI(firstLetterURL);
+    default:
+      return null;
+    }
+  } catch (err) {
+    alert(err);
+  }
+}

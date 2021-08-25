@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CategoryButton from '../components/CategoryButton';
+import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
+import MyContext from '../context/MyContext';
 
-function Drinks() {
+function Bebidas(props) {
+  const { history: { location: { pathname } } } = props;
   const [drinkRecipes, setDrinkRecipes] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
   const drinkEndpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const drinkCategoriesEndpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+
+  const newDrinkRecipes = (data) => {
+    setDrinkRecipes(data);
+  };
 
   const getAllDrinks = () => {
     fetch(drinkEndpoint)
@@ -45,6 +53,9 @@ function Drinks() {
 
   return (
     <div>
+      <MyContext.Provider value={ newDrinkRecipes }>
+        <Header titulo="Bebidas" showProfileIcon="sim" pathname={ pathname } />
+      </MyContext.Provider>
       { drinkCategories.map(({ strCategory }, index) => {
         if (index < MAX_CATEGORIES) {
           return (
@@ -83,4 +94,12 @@ function Drinks() {
   );
 }
 
-export default Drinks;
+Bebidas.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }),
+}.isRequired;
+
+export default Bebidas;

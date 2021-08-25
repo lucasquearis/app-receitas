@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MyContext from './Context';
+import MyContext from './MyContext';
 
 export default function Provider({ children }) {
   const contextValue = {};
