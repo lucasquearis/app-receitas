@@ -25,7 +25,7 @@ class Login extends React.Component {
   }
 
   validation() {
-    const { email, password, } = this.state
+    const { email, password } = this.state;
     const emailValid = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     const passwordValid = 7;
     if (emailValid.test(email) && passwordValid <= password.length) {
@@ -38,11 +38,11 @@ class Login extends React.Component {
   saveStateEmailStore() {
     const { email } = this.state;
     const userTokens = {
-     email,
-   };
-   localStorage.setItem('user', JSON.stringify(userTokens));
-   localStorage.setItem('mealsToken', 1);
-   localStorage.setItem('cocktailsToken', 1);
+      email,
+    };
+    localStorage.setItem('user', JSON.stringify(userTokens));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
   }
 
   submitLogin(event) {
@@ -68,7 +68,7 @@ class Login extends React.Component {
               value={ email }
               placeholder="Email"
               onChange={ this.handleChange }
-              />
+            />
           </label>
           <label htmlFor="input-password">
             <input
@@ -79,7 +79,7 @@ class Login extends React.Component {
               value={ password }
               placeholder="Password"
               onChange={ this.handleChange }
-              />
+            />
           </label>
         </form>
         <button
@@ -87,15 +87,15 @@ class Login extends React.Component {
           data-testid="login-submit-btn"
           onClick={ (event) => this.submitLogin(event) }
           disabled={ button }
-          >
+        >
           Entrar
         </button>
-       </div>    
+      </div>
     );
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  
+
   setEmailAction: (payload) => dispatch(actionEmail(payload)),
 });
 
