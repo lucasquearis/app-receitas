@@ -17,8 +17,12 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
     "react-logger": "^1.1.0",
-    "react-router-dom": "^5.1.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
     "websocket-extensions": ">=0.1.4"
   },
   "scripts": {
@@ -55,6 +59,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "fs-extra": "^9.0.1",
     "mocha": "^8.0.1",
+    "eslint-plugin-import": "^2.22.1",
     "mochawesome": "^6.1.1",
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
