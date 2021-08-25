@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MainContext from './MainContext';
 
-const value = {
-  teste: 1,
-};
-
 function MainProvider({ children }) {
+  const value = { number: 4 };
+
   return (
     <MainContext.Provider value={ value }>
       { children }
