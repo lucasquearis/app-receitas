@@ -10,12 +10,12 @@ function RecipesProvider({ children }) {
   const [firstState, setFirstState] = useState(true);
   const [searchValues, setSearchValues] = useState({
     textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
-  const [filterdMealsOrDrinks, setFilterdMealsOrDrinks] = useState(false);
+  const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
 
   useEffect(() => {
     const resultFilter = async () => {
       const result = await getFoodByIngredient(searchValues);
-      setFilterdMealsOrDrinks(result);
+      setFilteredMealsOrDrinks(result);
     };
     resultFilter();
   },
