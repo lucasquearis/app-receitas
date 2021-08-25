@@ -22,17 +22,31 @@ export default function DetalheComida(/* props */) {
       const ingredientsKeys = Object.entries(foodResult[0]).filter((ingredient) => (
         ingredient[0].includes('strIngredient')
       ));
+
+      const ingredientsMeasure = Object.entries(foodResult[0]).filter((measureAll) => (
+        measureAll[0].includes('strMeasure')
+      ));
+
       const ingredients = ingredientsKeys.filter((key) => (
         key[1] !== '' && key[1] !== null
       ));
-      setFoodIngredients(ingredients);
+
+      const measure = ingredientsMeasure.filter((currMeasure) => (
+        currMeasure[1] !== '' && currMeasure[1] !== null
+      ));
+
+      const readyIngredients = ingredients.map((ingredient, index) => (
+        `- ${ingredient[1]} - ${measure[index][1]}`
+      ));
+      console.log(readyIngredients);
+      setFoodIngredients(readyIngredients);
       setLoading(false);
     };
 
     getFood();
   }, []);
-  console.log(food);
-  console.log(foodIngredients);
+  // console.log(food);
+  // console.log(`ingredientes = ${foodIngredients}`);
 
   if (loading) {
     return (
@@ -40,7 +54,7 @@ export default function DetalheComida(/* props */) {
     );
   }
 
-  const getYoutubeURL = () => {
+  const getEmbedURL = () => {
     const url = food.strYoutube;
     const minIndex = 24;
     const maxIndex = 31;
@@ -91,9 +105,9 @@ export default function DetalheComida(/* props */) {
             foodIngredients.map((ingredient, index) => (
               <li
                 data-testid={ `${index}-ingredient-name-and-measure` }
-                key={ ingredient[1] }
+                key={ `${index}` }
               >
-                { `- ${ingredient[1]}` }
+                { ingredient }
               </li>
             ))
           }
@@ -105,7 +119,7 @@ export default function DetalheComida(/* props */) {
       </div>
       <div className="video-section">
         <h5>Video</h5>
-        <iframe data-testid="video" title="food-video" src={ getYoutubeURL() } />
+        <iframe data-testid="video" title="food-video" src={ getEmbedURL() } />
       </div>
     </section>
   );
