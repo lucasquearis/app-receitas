@@ -22,12 +22,14 @@ class RecipesList extends Component {
     return (
       <div className="row row-cols-3 row-cols-md-3 g-4">
         {
-          recipes.map(({ strMeal, strMealThumb }, index) => (
+          recipes.map(({ idMeal, strMeal, strMealThumb }, index) => (
             <RecipeCard
               key={ index }
+              id={ idMeal }
               index={ index }
               name={ strMeal }
               thumb={ strMealThumb }
+              type="food"
             />
           ))
         }
@@ -38,14 +40,22 @@ class RecipesList extends Component {
   renderDrinks() {
     const recipes = this.filterTwelveRecipes();
 
-    return recipes.map(({ strDrink, strDrinkThumb }, index) => (
-      <RecipeCard
-        key={ index }
-        index={ index }
-        name={ strDrink }
-        thumb={ strDrinkThumb }
-      />
-    ));
+    return (
+      <div className="row row-cols-3 row-cols-md-3 g-4">
+        {
+          recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
+            <RecipeCard
+              key={ index }
+              id={ idDrink }
+              index={ index }
+              name={ strDrink }
+              thumb={ strDrinkThumb }
+              type="drink"
+            />
+          ))
+        }
+      </div>
+    )
   }
 
   render() {
