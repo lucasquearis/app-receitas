@@ -40,14 +40,9 @@ function Drink() {
 
   return (
     <div>
-<<<<<<< HEAD
       <Header />
       { searchedRecipe.length > 1
         ? searchedDrinkRecipes() : redirectDrink()}
-=======
-      <Header titulo="Bebidas" />
-      <h1>Drink</h1>
->>>>>>> e9f39c4f4e1208d479998ff84a9cd96c5893785d
       <Footer />
     </div>
   );
