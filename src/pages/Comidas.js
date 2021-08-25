@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Comidas(props) {
   const { history: { location: { pathname } } } = props;
@@ -8,6 +9,7 @@ function Comidas(props) {
   return (
     <div>
       <Header titulo="Comidas" showProfileIcon="sim" pathname={ pathname } />
+      <Footer />
     </div>
   );
 }

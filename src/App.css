@@ -1,6 +1,15 @@
+.footer {
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+}
+
 html {
   background: #0fa36b;
 }
+
 
 .meals {
   align-items: center;
