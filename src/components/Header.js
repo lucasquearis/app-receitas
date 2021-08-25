@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Navbar, Container, Form } from 'react-bootstrap';
+import { Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Profile from '../images/profileIcon.svg';
 import Search from '../images/searchIcon.svg';
 import SearchIcon from './SearchIcon';
+import SearchBar from './SearchBar';
 
 function Header(props) {
   const [searchBar, setSearchBar] = useState(false);
@@ -26,8 +27,7 @@ function Header(props) {
         {renderSearch
           ? <SearchIcon onClick={ showAndHide } search={ Search } /> : <div />}
         { searchBar
-          ? <div data-testid="search-input"><Form.Control type="text" /></div>
-          : null}
+          ? <SearchBar /> : null}
       </Container>
     </Navbar>
   );
