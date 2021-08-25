@@ -1,27 +1,30 @@
 // vitals
 import React, { useContext, useState } from 'react';
-// import { useLocation } from 'react-router-dom'; // QUANDO TIVER A PAGINA DE COMIDAS/BEBIDAS ATIVAR
+import { useLocation, Redirect } from 'react-router-dom';
 import myContext from '../context/myContext';
 // constants
-import { TEXT_ALERT_ONE } from '../services/data';
+import { ALERT_ONE } from '../services/data';
 
 export default function SearchBar() {
-  // const location = useLocation(); // ATIVAR
-  const { setSearchValues } = useContext(myContext);
+  const { setSearchValues, filteredMealsOrDrinks } = useContext(myContext);
+  const { pathname } = useLocation();
   const [textValue, setTextValue] = useState('');
   const [radioValue, setRadioValue] = useState('ingredient');
+  const { meals } = filteredMealsOrDrinks;
 
   const settings = ({ target: { name, value } }) => {
     if (name === 'filter-radio-button') return setRadioValue(value);
     if (name === 'search-text') return setTextValue(value);
   };
   const submit = () => {
-    if (radioValue === 'letter'
-        && textValue.length > 1) return global.alert(TEXT_ALERT_ONE);
-    // const pathName = location.pathname; //ATIVAR
-    const pathName = '/comidas';
-    setSearchValues({ textValue, radioValue, pathName });
+    if (radioValue === 'letter' && textValue.length > 1) return global.alert(ALERT_ONE);
+    setSearchValues({ textValue, radioValue, pathname });
   };
+
+  if (meals !== 'empty' && meals !== null && Object.keys(meals).length === 1) {
+    // return <Redirect to={ `${pathname}/${meals[0].idMeal}` } />;
+    console.log(meals);
+  }
 
   return (
     <section className="search-container">

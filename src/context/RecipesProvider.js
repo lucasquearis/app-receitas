@@ -5,16 +5,15 @@ import PropTypes from 'prop-types';
 import myContext from './myContext';
 // API
 import getFoodByIngredient from '../services/foodAPI';
+import { ALERT_TWO } from '../services/data';
 
 function RecipesProvider({ children }) {
   const [searchValues, setSearchValues] = useState({
-    textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
+    textValue: '', radioValue: 'ingredient', pathname: '/comidas' });
   const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
 
   const globalState = {
-    firstState,
-    setFirstState,
     infoUser,
     setInfoUser,
     setSearchValues,
@@ -25,10 +24,13 @@ function RecipesProvider({ children }) {
     const resultFilter = async () => {
       const result = await getFoodByIngredient(searchValues);
       setFilteredMealsOrDrinks(result);
+      if (result.meals === null) global.alert(ALERT_TWO);
     };
     resultFilter();
   },
   [searchValues]);
+
+  // console.log(filteredMealsOrDrinks.meals);
 
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
