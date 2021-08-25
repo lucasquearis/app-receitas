@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
 
-export default class Comidas extends Component {
+export default class Perfil extends Component {
   render() {
     return (
       <div>
-        <Header titulo="Comidas" />
+        <Header titulo="Perfil" />
       </div>
     );
   }
