@@ -75,6 +75,7 @@ function FoodDetails({ history, match: { params: { id } } }) {
         </button>
       );
     }
+
     return (
       <button
         className="fixedbutton"
