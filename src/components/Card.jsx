@@ -6,7 +6,6 @@ import { Link, useLocation } from 'react-router-dom';
 export default function CardItems({ title, thumb, index, id }) {
   const location = useLocation();
   const currentPage = location.pathname;
-
   return (
     <Link to={ `${currentPage}/${id}` }>
       <Card
