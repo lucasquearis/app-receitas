@@ -22,6 +22,7 @@ function CategoryButton({ category, path, selected, select }) {
   return (
     <button
       type="button"
+      value={ category }
       data-testid={ `${category}-category-filter` }
       onClick={ handleClick }
     >
