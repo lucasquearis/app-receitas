@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function DoingFoods() {
+export default function DoingFood() {
   return (
     <div />
   );
