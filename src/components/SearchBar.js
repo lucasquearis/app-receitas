@@ -13,11 +13,11 @@ function SearchBar() {
       <div className="form-check">
         <label className="form-check-label" htmlFor="ingredientes">
           Ingredientes
-          <input type="radio" data-testid="ingredient-search-radio" checked />
+          <input type="radio" data-testid="ingredient-search-radio" />
         </label>
         <label className="form-check-label" htmlFor="ingredientes">
           Primeira Letra
-          <input type="radio" data-testid="first-letter-search-radio" checked />
+          <input type="radio" data-testid="first-letter-search-radio" />
         </label>
         <button type="button" data-testid="exec-search-btn">
           Buscar
