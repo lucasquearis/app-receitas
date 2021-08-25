@@ -1,5 +1,10 @@
 import {
-  fetchFoods, fetchDrinks, drinkCategories, foodCategories,
+  fetchFoods,
+  fetchDrinks,
+  drinkCategories,
+  foodCategories,
+  fetchCategoriesFoods,
+  fetchCategoriesDrinks,
 } from '../../services';
 
 import {
@@ -71,4 +76,14 @@ export const fetchDrinkDetails = (id) => async (dispatch) => {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
   const results = await response.json();
   dispatch(addDrinkDetail(results));
+};
+
+export const fetchFoodByCategory = (name) => async (dispatch) => {
+  const results = await fetchCategoriesFoods(name);
+  dispatch(addFoods(results));
+};
+
+export const fetchDrinksByCategory = (name) => async (dispatch) => {
+  const results = await fetchCategoriesDrinks(name);
+  dispatch(addDrinks(results));
 };

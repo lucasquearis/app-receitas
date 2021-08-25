@@ -11,6 +11,7 @@ function FoodInfo() {
   useEffect(() => {
     dispatch(fetchMealDetails(id));
   }, [dispatch, id]);
+
   if (!details) {
     return (
       <h1>Loading</h1>
@@ -50,11 +51,7 @@ function FoodInfo() {
         title={ foodDetails.strMeal }
         allowFullScreen
       />
-      <section>
-        {/* <p data-testid={ `${index}-recomendation-card` }>
-          Card de receitas recomendadas
-        </p> */}
-      </section>
+      <ul />
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
       </button>

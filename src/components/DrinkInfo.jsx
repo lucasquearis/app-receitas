@@ -43,6 +43,9 @@ function DrinkInfo() {
           </li>)) }
       </ul>
       <p data-testid="instructions">{ drinkDetails.strInstructions }</p>
+      {/* <p data-testid={ `${index}-recomendation-card` }>
+        Card de receitas recomendadas
+      </p> */}
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
       </button>
