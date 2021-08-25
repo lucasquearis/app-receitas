@@ -1,11 +1,33 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import Header from '../../components/Header';
 import MenuInferior from '../../components/MenuInferior';
 
-export default function Explore() {
+function Foods() {
+  const history = useHistory();
+
   return (
     <div>
-      <h2>Explorar</h2>
+      <Header name="Explorar" search={ false } />
+      <button
+        data-testid="explore-food"
+        type="button"
+        onClick={ () => history.push('/explorar/comidas') }
+      >
+        Explorar Comidas
+
+      </button>
+      <button
+        data-testid="explore-drinks"
+        type="button"
+        onClick={ () => history.push('/explorar/bebidas') }
+      >
+        Explorar Bebidas
+
+      </button>
       <MenuInferior />
     </div>
   );
 }
+
+export default Foods;
