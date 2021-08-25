@@ -1,8 +1,8 @@
 footer {
-  box-shadow: 8px 0px 10px rgba(110, 116, 134, 0.24);
-  position: fixed;
-  left: 0;
   bottom: 0;
+  box-shadow: 8px 1px 10px rgba(110, 116, 134, 0.24);
+  left: 0;
+  position: fixed;
   right: 0;
 }
 
@@ -13,11 +13,6 @@ footer {
   padding: 16px 0;
 }
 
-.icons button {
-  background-color: white;
-  border: none;
-}
-
-.icons button img {
+.icons img {
   height: 30px;
 }
