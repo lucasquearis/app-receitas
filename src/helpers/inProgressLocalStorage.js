@@ -19,6 +19,15 @@ export function rmvMealIngInProgressStorage(id, ing) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const { meals } = inProgressRecipes;
 
+  if (meals[id].length <= 1) {
+    const newMeals = { ...meals };
+    delete (newMeals[id]);
+    return localStorage.setItem('inProgressRecipes', JSON.stringify({
+      ...inProgressRecipes,
+      meals: { ...newMeals },
+    }));
+  }
+
   localStorage.setItem('inProgressRecipes', JSON.stringify({
     ...inProgressRecipes,
     meals: { ...meals, [id]: meals[id].filter((e) => e !== ing) },

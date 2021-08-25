@@ -40,7 +40,7 @@ function MealsInProgress() {
     });
 
     if (checked) return addMealIngInProgressStorage(id, name);
-    return rmvMealIngInProgressStorage(id, name);
+    rmvMealIngInProgressStorage(id, name);
   };
 
   return (
