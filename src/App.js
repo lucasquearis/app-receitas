@@ -1,9 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Footer from './components/Footer';
 
-import Login from './pages/Login';
 import Provider from './context/Provider';
+import Footer from './components/Footer';
+import Login from './pages/Login';
+import Recipes from './pages/Recipes';
 
 import './App.css';
 
@@ -12,8 +13,8 @@ function App() {
     <Provider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas" />
-        <Route path="/bebidas" />
+        <Route exact path="/comidas" component={ Recipes } />
+        <Route exact path="/bebidas" component={ Recipes } />
         <Route path="/comidas/:id" />
         <Route path="/bebidas/:id" />
         <Route path="/explorar" />

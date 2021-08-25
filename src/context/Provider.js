@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Context from '.';
-import fetchAPI from '../services/API';
+import { fetchAPI } from '../services/API';
 
 function Provider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
@@ -9,7 +9,7 @@ function Provider({ children }) {
   const [apiData, setApiData] = useState(null);
   const [radioValue, setRadioValue] = useState('s');
   const requestApiData = useCallback(async (URL) => {
-    const searchType = radioValue === 'i' ? 'filter' : 'search';
+    const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
     setApiData([await fetchAPI(URL, searchType, radioValue, inputText)]);
     setIsFetching(false);
@@ -23,6 +23,7 @@ function Provider({ children }) {
     isFetching,
     requestApiData,
   };
+
   return (
     <Context.Provider value={ contextValue }>
       {children}
@@ -31,7 +32,7 @@ function Provider({ children }) {
 }
 
 Provider.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Provider;
