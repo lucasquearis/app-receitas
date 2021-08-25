@@ -1,8 +1,9 @@
 import React from 'react';
+import { MealDetails } from '../components';
 
 const FoodRecipe = () => (
   <div>
-    Receita de Comida
+    <MealDetails />
   </div>
 );
 

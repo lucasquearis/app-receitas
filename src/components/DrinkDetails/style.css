@@ -1,0 +1,57 @@
+.recipe-details {
+  text-align: center;
+}
+
+.recipe-title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.recomendations-title {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.recipe-photo {
+  height: auto;
+  margin-bottom: 20px;
+  max-height: 300px;
+  max-width: 300px;
+  width: auto;
+}
+
+.ingredients {
+  text-align: left;
+}
+
+.instructions {
+  padding: 20px;
+}
+
+.slider {
+  margin-bottom: 60px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  white-space: nowrap;
+  width: 290px;
+}
+
+.slides {
+  display: inline-block;
+  width: 150px;
+}
+
+.share-btn, .favorite-btn {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.start-recipe {
+  bottom: 0;
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+}
