@@ -7,7 +7,7 @@ afterEach(() => {
 });
 
 describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredientes com suas respectivas quantidade e suas instruções', () => {
-  it.only('verifica elementos de uma receita de comida', () => {
+  it('verifica elementos de uma receita de comida', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;

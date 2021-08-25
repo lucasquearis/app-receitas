@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import fetchRecipe from '../services/fetchRecipe';
+import { fetchMealRecipe } from '../services/fetchRecipe';
 import { IngredientsTaskList } from '../components';
 
 function MealsInProgress() {
@@ -11,7 +11,7 @@ function MealsInProgress() {
 
   useEffect(() => {
     async function getRcps() {
-      const response = await fetchRecipe(id);
+      const response = await fetchMealRecipe(id, 'meal');
       console.log(response);
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
