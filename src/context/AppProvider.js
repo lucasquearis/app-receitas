@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
-const context = {};
+const context = {
+
+};
 
 const AppProvider = ({ children }) => (
   <AppContext.Provider value={ context }>
