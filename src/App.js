@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 // import Provider from './provider/Provider';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Explore from './pages/Explore';
 import MainFoods from './pages/MainFoods';
 import FoodProvider from './provider/FoodProvider';
 import MainDrinks from './pages/MainDrinks';
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route exact path="/comidas" component={ MainFoods } />
           <Route exact path="/bebidas" component={ MainDrinks } />
+          <Route exact path="/explorar" component={ Explore } />
           <Route exact path="/perfil" component={ Profile } />
           <Route exact path="/comidas/:id" component={ FoodDetails } />
           <Route exact path="/bebidas/:id" component={ DrinkDetails } />
