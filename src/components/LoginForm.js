@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState([]);
@@ -16,10 +16,10 @@ function Login() {
   function isValid() {
     const passwordLength = 7;
     const validPassword = password.length >= passwordLength;
-    const validEmail = (
-      /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/i
-    ).test(email);
-    return (validEmail && validPassword);
+    const validEmail = /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/i.test(
+      email,
+    );
+    return validEmail && validPassword;
   }
 
   return (
@@ -39,14 +39,16 @@ function Login() {
         name="password"
         type="password"
       />
-      <button
-        data-testid="login-submit-btn"
-        onClick={ handleClick }
-        type="button"
-        disabled={ !isValid() }
-      >
-        Entrar
-      </button>
+      <Link to="/menu">
+        <button
+          data-testid="login-submit-btn"
+          onClick={ handleClick }
+          type="button"
+          disabled={ !isValid() }
+        >
+          Entrar
+        </button>
+      </Link>
     </form>
   );
 }
