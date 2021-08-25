@@ -37,16 +37,16 @@ describe('Testa SearchBar', () => {
   it('Test input and radio buttons', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
+
     const searchTopBtn = await screen.findByTestId('search-top-btn');
+
     expect(mockedMeals).toBeCalledWith(endpoint);
 
     fireEvent.click(searchTopBtn);
 
     const searchInput = screen.getByTestId('search-input');
     const searchBtn = screen.getByTestId('exec-search-btn');
-    // const searchRadioName = screen.getByTestId('name-search-radio');
     const searchRadioIngredient = screen.getByTestId('ingredient-search-radio');
-    // const searchRadioLetter = screen.getByTestId('first-letter-search-radio');
 
     fireEvent.change(searchInput, { target: { value: 'chicken' } });
     fireEvent.click(searchRadioIngredient);

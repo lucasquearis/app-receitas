@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
 
-export default function Header({ title }) {
+export default function Header({ title, search = true }) {
   const [showSearch, setShowSearch] = useState(false);
-  const { location } = useHistory();
+  const renderSearch = () => (
+    <button
+      type="button"
+      className="search-btn"
+      onClick={ () => setShowSearch(!showSearch) }
+    >
+      <img data-testid="search-top-btn" src={ searchIcon } alt="search icon" />
+    </button>
+  );
   return (
     <>
       <header>
@@ -22,16 +30,7 @@ export default function Header({ title }) {
         <h1 data-testid="page-title">
           {title}
         </h1>
-        {
-          location.pathname !== '/perfil'
-          && <button
-            type="button"
-            className="search-btn"
-            onClick={ () => setShowSearch(!showSearch) }
-          >
-            <img data-testid="search-top-btn" src={ searchIcon } alt="search icon" />
-             </button>
-        }
+        {search && renderSearch()}
       </header>
       { showSearch && <SearchBar /> }
     </>
@@ -41,4 +40,9 @@ export default function Header({ title }) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  search: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  search: PropTypes.bool,
 };
