@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
-import RecipesContext from '../context/RecipesContext';
-import { setLocalStorage, getLocalStorage } from '../components/LocalStorage';
 import { Redirect } from 'react-router-dom';
+import RecipesContext from '../context/RecipesContext';
+import { setLocalStorage } from '../components/LocalStorage';
 
 function Login() {
   const { setRegister } = useContext(RecipesContext);
   const MAX_LENGTH = 6;
   const [login, setLogin] = useState({
-    email:'',
+    email: '',
     password: '',
     button: false,
   });
@@ -17,37 +17,35 @@ function Login() {
       ...initialState,
       [name]: value,
     }));
-  }
-
+  };
 
   const handleClick = () => {
     setRegister(login);
-    setLocalStorage('user', { email: login.email } )
-    console.log(getLocalStorage('user'))
+    setLocalStorage('user', { email: login.email });
+    setLocalStorage('mealsToken', 1);
+    setLocalStorage('cocktailsToken', 1);
     setLogin({
-      email:'',
+      email: '',
       password: '',
       button: true,
-    })
-  }
+    });
+  };
 
   const checkEmail = () => {
     const { email } = login;
     return /\S+@\S+\.\S+/.test(email);
-  }
+  };
 
   const checkPassword = () => {
     const { password } = login;
     return password.length > MAX_LENGTH;
-  }
+  };
 
-  const checkLogin = () => {
-    return checkEmail() && checkPassword();
-  }
+  const checkLogin = () => checkEmail() && checkPassword();
 
   const { email, password } = login;
-  if(login.button) {
-    return <Redirect to="/comidas" />
+  if (login.button) {
+    return <Redirect to="/comidas" />;
   }
   return (
     <section>
@@ -61,7 +59,7 @@ function Login() {
             type="text"
             value={ email }
             onChange={ handleChange }
-            />
+          />
         </label>
         <label htmlFor="password">
           Senha:
@@ -72,7 +70,7 @@ function Login() {
             type="password"
             value={ password }
             onChange={ handleChange }
-            />
+          />
         </label>
       </form>
       <button
