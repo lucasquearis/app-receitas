@@ -134,7 +134,7 @@ class Login extends React.Component {
           </button>
         </Link>
       </form>
-      </div>
+    </div>
     );
   }
 }
