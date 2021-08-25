@@ -5,16 +5,21 @@ import fetchMealApi from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
   const [foods, setFoods] = useState([]);
+  const [foodFilter, setFoodFilter] = useState({
+    searchText: '',
+    search: '',
+  });
 
   useEffect(() => {
-    fetchMealApi().then((data) => {
+    fetchMealApi(foodFilter).then((data) => {
       setFoods(data.meals);
     });
-  }, []);
+  }, [foodFilter]);
 
   const contextValue = {
     foods,
-    setFoods,
+    foodFilter,
+    setFoodFilter,
   };
   return (
     <FoodContext.Provider value={ contextValue }>

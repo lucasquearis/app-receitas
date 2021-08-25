@@ -5,15 +5,21 @@ import fetchDrinksApi from '../services/fetchDrinksApi';
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
+  const [drinkFilter, setDrinkFilter] = useState({
+    searchText: '',
+    search: '',
+  });
 
   useEffect(() => {
-    fetchDrinksApi().then((data) => {
+    fetchDrinksApi(drinkFilter).then((data) => {
       setDrinks(data.drinks);
     });
-  }, []);
+  }, [drinkFilter]);
 
   const contextValue = {
     drinks,
+    drinkFilter,
+    setDrinkFilter,
   };
 
   return (

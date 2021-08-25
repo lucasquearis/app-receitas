@@ -34,7 +34,6 @@ function Login({ history }) {
   };
 
   const handleClick = () => {
-    console.log(history);
     const { email } = loginState;
     const user = { email };
     localStorage.setItem('mealsToken', 1);
