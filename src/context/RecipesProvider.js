@@ -11,7 +11,7 @@ function RecipesProvider({ children }) {
     textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
   const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
-  
+
   const globalState = {
     firstState,
     setFirstState,
@@ -20,7 +20,7 @@ function RecipesProvider({ children }) {
     setSearchValues,
     filteredMealsOrDrinks,
   };
-  
+
   useEffect(() => {
     const resultFilter = async () => {
       const result = await getFoodByIngredient(searchValues);
@@ -29,7 +29,7 @@ function RecipesProvider({ children }) {
     resultFilter();
   },
   [searchValues]);
-  
+
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
