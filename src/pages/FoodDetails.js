@@ -4,25 +4,14 @@ import { fetchFoodById } from '../services/mealAPI';
 import { fetchCocktails } from '../services/cocktailAPI';
 import '../styles/Details.css';
 import shareImage from '../images/shareIcon.svg';
-import favImageBlack from '../images/blackHeartIcon.svg';
-import favImageWhite from '../images/whiteHeartIcon.svg';
+import Carousel from '../components/Carousel';
+import { getFavorites, handleButton, handleShare, handleFavoriteAuxiliar }
+  from '../auxiliar/auxiliarFunctions';
 
 const youtubeEmbed = 'https://www.youtube.com/embed/';
 
 function FoodDetails({ history, match: { params: { id } } }) {
-  const getFavorites = () => {
-    const allFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (allFavorites === null) {
-      return favImageWhite;
-    }
-    const itemFound = allFavorites.find((item) => item.id === id);
-    if (itemFound) {
-      return favImageBlack;
-    }
-    return favImageWhite;
-  };
-
-  const isFavorite = getFavorites();
+  const isFavorite = getFavorites(id);
   const [foodInfo, setFoodInfo] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recDrink, setRecDrinks] = useState([]);
@@ -56,73 +45,20 @@ function FoodDetails({ history, match: { params: { id } } }) {
     }
   }, [foodInfo, ingredients]);
 
-  const handleClick = () => {
-    const { location: { pathname } } = history;
-    history.push(`${pathname}/in-progress`);
-  };
-
-  const handleButton = () => {
-    const obj = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (!obj) {
-      return (
-        <button
-          className="fixedbutton"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          Iniciar Receita
-        </button>
-      );
-    }
-    return (
-      <button
-        className="fixedbutton"
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ handleClick }
-      >
-        Continuar Receita
-      </button>
-    );
-  };
-
   const handleFavorite = () => {
-    if (icon === favImageWhite) {
-      setIcon(favImageBlack);
-      console.log(foodInfo);
-      const objSave = foodInfo.map((item) => {
-        const obj = {
-          id: item.idMeal,
-          type: 'comida',
-          area: item.strArea,
-          category: item.strCategory,
-          alcoholicOrNot: '',
-          name: item.strMeal,
-          image: item.strMealThumb,
-        };
-        return obj;
-      })[0];
-      const actual = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (actual !== null) {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([...actual, objSave]));
-      } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([objSave]));
-      }
-    } else {
-      setIcon(favImageWhite);
-    }
-  };
-
-  const handleShare = () => {
-    setLink('Link copiado!');
-    const actualLocation = window.location.href;
-    const dummy = document.createElement('input');
-    document.body.appendChild(dummy);
-    dummy.value = actualLocation;
-    dummy.select();
-    document.execCommand('copy');
-    document.body.removeChild(dummy);
+    const objSave = foodInfo.map((item) => {
+      const obj = {
+        id: item.idMeal,
+        type: 'comida',
+        area: item.strArea,
+        category: item.strCategory,
+        alcoholicOrNot: '',
+        name: item.strMeal,
+        image: item.strMealThumb,
+      };
+      return obj;
+    })[0];
+    handleFavoriteAuxiliar(objSave, setIcon, icon);
   };
 
   return (
@@ -142,7 +78,7 @@ function FoodDetails({ history, match: { params: { id } } }) {
               alt="share"
               src={ shareImage }
               data-testid="share-btn"
-              onClick={ handleShare }
+              onClick={ () => handleShare(setLink) }
             />
             <p>{ link }</p>
             <input
@@ -172,9 +108,8 @@ function FoodDetails({ history, match: { params: { id } } }) {
               title="recipe"
               src={ `${youtubeEmbed}${item.strYoutube.split('?v=')[1]}` }
             />
-            { console.log(recDrink) }
-            <div data-testid="0-recomendation-card">card</div>
-            { handleButton() }
+            <Carousel recommendation={ recDrink } />
+            { handleButton(history) }
           </div>
         );
         return all;
