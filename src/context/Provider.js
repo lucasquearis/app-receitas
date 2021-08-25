@@ -5,16 +5,20 @@ import RecipesContext from './RecipesContext';
 function Provider({ children }) {
   const [email, setEmail] = useState('');
 
-  const favoritingRecipe = (...params) => {
-    if (params.isFav) {
-      params.setIsFav(false);
-      const newFavoriteRecipes = params.favoriteRecipes
-        .filter((recipe) => recipe.idMeal !== params.id);
+  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+  const favoritingRecipe = (isFav, setIsFav, id, meal) => {
+    if (isFav) {
+      setIsFav(false);
+      const newFavoriteRecipes = favoriteRecipes
+        .filter((recipe) => recipe.idMeal !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     } else {
-      params.setIsFav(true);
-      const newFavoriteRecipes = params.favoriteRecipes
-        ? [...params.favoriteRecipes, params.meal] : [params.meal];
+      setIsFav(true);
+      const newFavoriteRecipes = favoriteRecipes
+        ? [...favoriteRecipes, meal] : [meal];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     }
   };
@@ -31,8 +35,23 @@ function Provider({ children }) {
     }
     return { ingredients, measures };
   };
+  const verifyingRecipe = (id, type) => {
+    const favorite = favoriteRecipes
+      && favoriteRecipes.find((recipe) => recipe.idMeal === id);
+    const done = doneRecipes
+      && doneRecipes.find((recipe) => recipe.idMeal === id);
+    const inProgress = inProgressRecipes
+      && inProgressRecipes[type].find((recipe) => recipe.idMeal === id);
+    return { favorite, done, inProgress };
+  };
 
-  const contextValue = { email, setEmail, favoritingRecipe, renderingIngredients };
+  const contextValue = {
+    email,
+    setEmail,
+    favoritingRecipe,
+    renderingIngredients,
+    verifyingRecipe,
+  };
 
   return (
     <RecipesContext.Provider value={ contextValue }>

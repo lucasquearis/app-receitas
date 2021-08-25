@@ -8,21 +8,21 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function ComidasDetails(props) {
   const { match: { params: { id } } } = props;
-  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const favorite = favoriteRecipes
-    && favoriteRecipes.find((recipe) => recipe.idMeal === id);
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const done = doneRecipes
-    && doneRecipes.find((recipe) => recipe.idMeal === id);
-  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const inProgress = inProgressRecipes
-    && inProgressRecipes.meals.find((recipe) => recipe.idMeal === id);
+
+  const {
+    favoritingRecipe,
+    renderingIngredients,
+    verifyingRecipe,
+  } = useContext(RecipesContext);
+
+  const { favorite, done, inProgress } = verifyingRecipe(id, 'meals');
 
   const [meal, setMeal] = useState({});
   const [isFav, setIsFav] = useState(favorite);
   const [drinks, setDrinks] = useState([]);
-  const { favoritingRecipe, renderingIngredients } = useContext(RecipesContext);
   console.log(drinks);
+
+  const { ingredients, measures } = renderingIngredients(meal);
 
   useEffect(() => {
     const getMeal = async () => {
@@ -49,11 +49,19 @@ function ComidasDetails(props) {
     getRecomendations();
   }, [id]);
 
-  const { ingredients, measures } = renderingIngredients(meal);
   let videoURL = '';
-  if(meal.strYoutube) {
+  if (meal.strYoutube) {
     videoURL = meal.strYoutube.split('=');
   }
+
+  const link = (
+    <Link
+      data-testid="start-recipe-btn"
+      to={ `/comidas/${id}/in-progress` }
+    >
+      {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+    </Link>
+  );
 
   return (
     <main>
@@ -69,7 +77,7 @@ function ComidasDetails(props) {
             data-testid="share-btn"
           />
           <button
-            onClick={ () => favoritingRecipe(isFav, setIsFav, favoriteRecipes, id, meal) }
+            onClick={ () => favoritingRecipe(isFav, setIsFav, id, meal) }
             type="button"
           >
             <img
@@ -100,9 +108,10 @@ function ComidasDetails(props) {
           <iframe
             width="280"
             height="160"
-            src={`https://www.youtube.com/embed/${videoURL[1]}`}title="YouTube video player"
+            src={ `https://www.youtube.com/embed/${videoURL[1]}` }
+            title="YouTube video player"
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; picture-in-picture"
             allowFullScreen
           />
         </div>
@@ -110,14 +119,7 @@ function ComidasDetails(props) {
           {/* {data-testid="${index}-recomendation-card"} */}
           <h3>Recomendadas</h3>
         </div>
-        { !done &&
-          <Link
-            data-testid="start-recipe-btn"
-            to={ `/comidas/${id}/in-progress` }
-          >
-            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-          </Link>
-        }
+        { !done && link }
       </div>
     </main>
   );
