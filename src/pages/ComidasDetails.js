@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -24,7 +25,7 @@ function ComidasDetails(props) {
       }
     };
     getMeal();
-  });
+  }, [id]);
 
   const favoritingRecipe = () => {
     if (isFav) {
@@ -79,6 +80,7 @@ function ComidasDetails(props) {
         </div>
         <p data-testid="recipe-category">{meal.strCategory}</p>
         <div>
+          <h3>Ingredients</h3>
           <ul>
             {
               ingredients
@@ -89,6 +91,13 @@ function ComidasDetails(props) {
             }
           </ul>
         </div>
+        <div>
+          <h3>Instructions</h3>
+          <p data-testid="instructions">{ meal.strInstructions }</p>
+        </div>
+        <div data-testid="video">
+        </div>
+        <Link data-testid="start-recipe-btn" to={`/comidas/${id}/in-progress`}>Iniciar Receita</Link>
       </div>
     </main>
   );
