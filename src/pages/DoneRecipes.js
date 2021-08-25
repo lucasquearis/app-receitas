@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, DoneCard } from '../components';
 import './css/DoneRecipes.css';
 
-import recipes from '../tests/mocks/recipes';
-
 const copy = require('clipboard-copy');
 
 const DoneRecipes = () => {
@@ -20,10 +18,8 @@ const DoneRecipes = () => {
       setRawDoneRecipes(getDoneRecipes);
       setDoneRecipes(getDoneRecipes);
     } else {
-      // setRawDoneRecipes([]);
-      // setDoneRecipes([]);
-      setRawDoneRecipes(recipes);
-      setDoneRecipes(recipes);
+      setRawDoneRecipes([]);
+      setDoneRecipes([]);
     }
   }, []);
 
