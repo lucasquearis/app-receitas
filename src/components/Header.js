@@ -4,7 +4,7 @@ import { Navbar, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Profile from '../images/profileIcon.svg';
 import Search from '../images/searchIcon.svg';
-import SearchBar from './SearchBar';
+import SearchIcon from './SearchIcon';
 
 function Header(props) {
   const [searchBar, setSearchBar] = useState(false);
@@ -19,13 +19,12 @@ function Header(props) {
   return (
     <Navbar bg="light" variant="light">
       <Container>
-        <Navbar.Brand>
-          <Link to="/perfil">
-            <img src={ Profile } data-testid="profile-top-btn" alt="Icone de Perfil" />
-          </Link>
-        </Navbar.Brand>
+        <Link to="/perfil">
+          <img src={ Profile } data-testid="profile-top-btn" alt="Icone de Perfil" />
+        </Link>
         <h1 data-testid="page-title" className="justify-content-center">{ title }</h1>
-        {renderSearch ? <SearchBar onClick={ showAndHide } search={ Search } /> : <div />}
+        {renderSearch
+          ? <SearchIcon onClick={ showAndHide } search={ Search } /> : <div />}
         { searchBar
           ? <div data-testid="search-input"><Form.Control type="text" /></div>
           : null}
