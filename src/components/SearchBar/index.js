@@ -8,20 +8,22 @@ const radioSearchOptions = [
   ['first-letter', 'Primeira letra', 'f'],
 ];
 
-function SearchBar({ url }) {
+function SearchBar({ endpoint }) {
   const {
     inputText,
     setInputText,
     radioValue,
     setRadioValue,
     requestApiData,
+    setToggle,
   } = useContext(Context);
 
   function handleClick(e) {
     e.preventDefault();
+    setToggle(false);
     return (radioValue === 'f' && inputText.length !== 1)
-      ? console.log('Sua busca deve conter somente 1 (um) caracter')
-      : requestApiData(url);
+      ? global.alert('Sua busca deve conter somente 1 (um) caracter')
+      : requestApiData(endpoint);
   }
 
   return (
@@ -68,7 +70,7 @@ function SearchBar({ url }) {
 }
 
 SearchBar.propTypes = {
-  url: Proptypes.string.isRequired,
+  endpoint: Proptypes.string.isRequired,
 };
 
 export default SearchBar;

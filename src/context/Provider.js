@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [inputText, setInputText] = useState('');
   const [apiData, setApiData] = useState(null);
   const [radioValue, setRadioValue] = useState('s');
+  const [toggle, setToggle] = useState(false);
   const requestApiData = useCallback(async (URL) => {
     const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
@@ -22,6 +23,8 @@ function Provider({ children }) {
     setRadioValue,
     isFetching,
     requestApiData,
+    setToggle,
+    toggle,
   };
 
   return (
