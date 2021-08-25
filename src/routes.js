@@ -6,18 +6,16 @@ import RecipeInProgress from './pages/RecipeInProgress';
 import NotFound from './pages/NotFound';
 
 export default function Routes() {
-  const id = '52772';
-  const id2 = '11007';
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ RecipesMainPage } />
-        <Route path="/bebidas" component={ RecipesMainPage } />
-        <Route path={ `/comidas/${id}` } component={ NotFound } />
-        <Route path={ `/bebidas/${id}` } component={ NotFound } />
-        <Route exact path="/comidas/52772/in-progress" component={ RecipeInProgress } />
-        <Route exact path={ `/bebidas/${id2}/in-progress` } component={ RecipeInProgress } />
+        <Route exact path="/comidas" component={ RecipesMainPage } />
+        <Route exact path="/bebidas" component={ RecipesMainPage } />
+        <Route exact path="/comidas/:id" component={ NotFound } />
+        <Route exact path="/bebidas/:id" component={ NotFound } />
+        <Route exact path="/comidas/:id/in-progress" component={ RecipeInProgress } />
+        <Route exact path="/bebidas/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/explorar" component={ NotFound } />
         <Route path="/explorar/comidas" component={ NotFound } />
         <Route path="/explorar/bebidas" component={ NotFound } />
