@@ -1,8 +1,9 @@
-footer {
+footer, .start-recipe {
   bottom: 0;
   position: fixed;
 }
 
+/* O código acima é necessário para os testes */
 header, footer {
   display: flex;
   justify-content: space-between;
@@ -13,7 +14,7 @@ header > button {
   border: none;
 }
 
-.meals {
+/* .meals {
   align-items: center;
   background: #0fa36b;
   color: #464646;
@@ -28,7 +29,7 @@ header > button {
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
-}
+} */
 
 /*
 #iceLeft {
@@ -44,7 +45,7 @@ header > button {
 }
 */
 
-.meals > .logo {
+/* .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
@@ -80,4 +81,4 @@ header > button {
   100% {
     transform: rotate(-10deg);
   }
-}
+} */
