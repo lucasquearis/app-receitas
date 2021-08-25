@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { actionSaveItems } from '../../actions/index';
 import { searchOnClick } from './utils';
 
-const SearchBar = () => {
+const SearchBar = ({ saveItems }) => {
   const [search, setSearch] = useState({
     textValue: '',
     radioValue: '',
@@ -29,7 +32,13 @@ const SearchBar = () => {
       }
     };
     checkItems();
-  }, [items]);
+    const saveItemsStore = () => {
+      if (items !== undefined) {
+        saveItems(Object.values(items)[0]);
+      }
+    };
+    saveItemsStore();
+  }, [items, saveItems]);
 
   const handleChange = ({ target: { name, value } }) => {
     setSearch({
@@ -94,4 +103,14 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+function mapDispatchToProps(dispatch) {
+  return {
+    saveItems: (items) => dispatch(actionSaveItems(items)),
+  };
+}
+
+SearchBar.propTypes = {
+  saveItems: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(SearchBar);
