@@ -7,6 +7,7 @@ import {
   rmvIngFromProgressStorage,
   isMealInLocalStorage,
 } from '../helpers/inProgressLocalStorage';
+import './css/MealsInProgress.css';
 
 function MealsInProgress() {
   const { id } = useParams();
@@ -51,9 +52,7 @@ function MealsInProgress() {
 
   function isFinished() {
     const { ingList } = rcp;
-    if (ingList.length && ingList.every(({ checked }) => checked)) {
-      setBtnDisable(false);
-    }
+    setBtnDisable(!ingList.every(({ checked }) => checked));
   }
 
   useEffect(isFinished, [rcp]);
@@ -69,7 +68,7 @@ function MealsInProgress() {
         Favoritar
       </button>
       <p data-testid="instructions">{rcp.strInstructions}</p>
-      <h1 data-testid="recipe-category">{rcp.strCategory}</h1>
+      <h3 data-testid="recipe-category">{rcp.strCategory}</h3>
       <IngredientsTaskList
         ingList={ rcp.ingList }
         handleCheckIngredient={ handleCheckIngredient }
