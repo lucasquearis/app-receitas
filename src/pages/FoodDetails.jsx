@@ -34,5 +34,6 @@ function FoodDetails() {
     </div>
   );
 }
+// requisito 33
 
 export default FoodDetails;
