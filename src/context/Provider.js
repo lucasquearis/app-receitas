@@ -44,7 +44,7 @@ function Provider({ children }) {
     switchAPI(filter);
   }, [filter, API]);
 
-  const contextValue = { user, setUser, filter, setFilter, API, RequestAPI };
+  const contextValue = { user, setUser, filter, setFilter, API, RequestAPI, recipes };
 
   return (
     <Context.Provider value={ contextValue }>

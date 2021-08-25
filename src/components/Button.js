@@ -4,10 +4,16 @@ import Context from '../context/Context';
 
 function Button({ name, datatestid }) {
   const { filter: { search, type }, RequestAPI } = useContext(Context);
+  const handleClick = async () => {
+    const response = await RequestAPI();
+    if (!response) {
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+  };
   return (
     <button
       data-testid={ datatestid }
-      onClick={ () => RequestAPI() }
+      onClick={ () => handleClick() }
       type="button"
       disabled={ search === '' || type === '' }
     >
