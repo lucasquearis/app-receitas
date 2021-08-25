@@ -88,7 +88,7 @@ const DoneRecipes = () => {
         let type = '';
         if (Object.keys(doneRecipe).some((key) => key === 'idMeal')) {
           type = 'meal';
-        } else type = 'drikn';
+        } else type = 'drink';
         return (
           <DoneCard
             key={ index }
