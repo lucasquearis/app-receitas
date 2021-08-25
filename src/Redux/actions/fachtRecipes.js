@@ -22,9 +22,9 @@ export const fetchRecipe = () => async (dispatch) => {
   dispatch(getRecipe());
   const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${1}`;
   const response = await fetch(endPoint);
-  console.log(response);
+  // console.log(response);
   const responseJson = await response.json();
-  console.log(responseJson);
+  // console.log(responseJson);
   try {
     dispatch(getRecipeSuccess(responseJson));
   } catch (error) {
