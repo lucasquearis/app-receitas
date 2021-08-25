@@ -4,17 +4,14 @@ import RecipesContext from '../context/RecipesContext';
 function FoodFilterDAPI() {
   const { setDrinkData, filter } = useContext(RecipesContext);
   useEffect(() => {
-    const response = async (filterError) => {
-      const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterError}`;
+    const response = async () => {
+      const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filter}`;
       await fetch(url).then((packJason) => packJason.json())
         .then(({ drinks }) => {
           setDrinkData(drinks);
         });
     };
-    console.log(filter);
-    const newFilter = filter === 'Ordinary Drink' ? filter.replace(' ', '_') : filter;
-    console.log(newFilter);
-    response(newFilter);
+    response();
   }, [setDrinkData, filter]);
 }
 
