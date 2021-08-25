@@ -9,7 +9,8 @@ export default function InProgress(
   { name, img, category, ingredients, instructions, id },
 ) {
   const [favorite, setFavorite] = useState(false);
-  const [checked, setChecked] = useState([]);
+  const [finishedSteps, setFinishedSteps] = useState([]);
+  const [checkBoxes, setcheckBoxes] = useState([]);
 
   useEffect(() => {
     if (localStorage.recipeProgess) {
@@ -18,7 +19,7 @@ export default function InProgress(
       console.log(recipes);
       const recipe = recipes.find((r) => r.id === id);
       console.log(recipe);
-      if (recipe) setChecked(recipe.checked);
+      if (recipe) setFinishedSteps(recipe.checked);
       localStorage.setItem('recipeProgess', JSON.stringify({
         recipes: [...recipes, { id }],
       }));
@@ -27,7 +28,7 @@ export default function InProgress(
     localStorage.setItem('recipeProgess', JSON.stringify({
       recipes: [{
         id,
-        checked,
+        checked: finishedSteps,
       }],
     }));
   }, []);
@@ -41,10 +42,10 @@ export default function InProgress(
         ...recipes.filter(((r) => r.id !== id)),
         {
           id,
-          checked,
+          checked: finishedSteps,
         }],
     }));
-  }, [checked]);
+  }, [finishedSteps]);
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
   return (
     <div className="in-progress">
@@ -71,23 +72,23 @@ export default function InProgress(
           <li key={ i }>
             <label
               data-testid={ `${i}-ingredient-step` }
-              className={ checked.includes(i) ? 'step-done' : '' }
+              className={ finishedSteps.includes(i) ? 'step-done' : '' }
               htmlFor={ `ingredient${i}` }
             >
               {ingredient[1]}
               <input
                 onChange={ () => {
-                  if (checked.includes(i)) {
-                    setChecked(checked.filter((check) => check !== i));
+                  if (finishedSteps.includes(i)) {
+                    setFinishedSteps(finishedSteps.filter((check) => check !== i));
                     return;
                   }
-                  setChecked([...checked, i]);
-                  console.log(checked, 'else');
+                  setFinishedSteps([...finishedSteps, i]);
+                  console.log(finishedSteps, 'else');
                 } }
                 type="checkbox"
                 name={ ingredient[1] }
                 id={ `ingredient${i}` }
-                checked={ checked.includes(i) ? 'step-done' : '' }
+                checked={ finishedSteps.includes(i) ? 'step-done' : '' }
               />
             </label>
           </li>))}
@@ -100,7 +101,7 @@ export default function InProgress(
         <button
           type="button"
           data-testid="finish-recipe-btn"
-          disabled={ checked.length !== ingredients.length }
+          disabled={ finishedSteps.length !== ingredients.length }
         >
           Finish
 
