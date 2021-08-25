@@ -10,6 +10,8 @@ import {
   Explore,
   InProgressDrink,
   InProgressMeal,
+  FavoritesRecipes,
+  DoneRecipes,
 } from './pages';
 import Provider from './context/Provider';
 
@@ -25,7 +27,14 @@ function App() {
         <Route path="/bebidas/:id" component={ RecipeDetails } />
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/perfil" component={ Profile } />
+        <Route path="/explorar/comidas/ingredientes" component={ Explore } />
+        <Route path="/explorar/comidas/area" component={ Explore } />
+        <Route path="/explorar/comidas" component={ Explore } />
+        <Route path="/explorar/bebidas/ingredientes" component={ Explore } />
+        <Route path="/explorar/bebidas" component={ Explore } />
         <Route path="/explorar" component={ Explore } />
+        <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
+        <Route path="/receitas-feitas" component={ DoneRecipes } />
       </Switch>
     </Provider>
   );

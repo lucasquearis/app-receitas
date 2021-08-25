@@ -69,8 +69,9 @@ export default function InProgress(
       <h2 data-testid="recipe-category">{category}</h2>
       <ul>
         {ingredients.map((ingredient, i) => (
-          <li key={ i } data-testid={ `${i}-ingredient-step` }>
+          <li key={ i }>
             <label
+              data-testid={ `${i}-ingredient-step` }
               className={ checked.includes(i) ? 'step-done' : '' }
               htmlFor={ `ingredient${i}` }
             >

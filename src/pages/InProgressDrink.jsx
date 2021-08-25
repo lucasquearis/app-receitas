@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
 // import Footer from '../components/Footer';
 import InProgress from '../components/InProgress';
 import { fetchDrinksDetails } from '../services/fechRecipes';
@@ -17,7 +16,6 @@ export default function InProgressMeal(props) {
   const { strDrink, strDrinkThumb, strAlcoholic, strInstructions } = details.drinks[0];
   return (
     <div>
-      <Header title="Receita em progresso" />
       <InProgress
         name={ strDrink }
         img={ strDrinkThumb }

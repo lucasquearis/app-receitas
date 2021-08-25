@@ -6,3 +6,5 @@ export { default as RecipeDetails } from './RecipeDetails';
 export { default as Explore } from './Explore';
 export { default as InProgressMeal } from './InProgressMeal';
 export { default as InProgressDrink } from './InProgressDrink';
+export { default as DoneRecipes } from './DoneRecipes';
+export { default as FavoritesRecipes } from './FavoritesRecipes';
