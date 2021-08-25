@@ -1,12 +1,15 @@
-body {
-  align-items: flex-end;
+.footer {
+  background-color: darkgoldenrod;
+  bottom: 0;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-end;
+  justify-content: space-around;
+  padding-bottom: 5px;
+  padding-top: 5px;
   position: fixed;
+  width: 100%;
 }
 
-.image-icons {
-  height: 15px;
-  width: 15px;
+.buttons {
+  background-color: transparent;
+  border: none;
 }
