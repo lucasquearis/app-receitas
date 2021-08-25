@@ -31,6 +31,7 @@ function Login() {
           testId="email-input"
           onChange={ setEmail }
           value={ email }
+          id="email-id"
           holder="Email"
         />
         <Input
@@ -38,6 +39,7 @@ function Login() {
           testId="password-input"
           onChange={ setPassword }
           value={ password }
+          id="pass-id"
           holder="Senha"
         />
         <Button
