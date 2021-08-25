@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
 function Explore() {
   return (
     <main>
-
+      <Header tittle="Comidas" loading={ false } />
       <Link
         to="/explorar/comidas"
       >
@@ -25,6 +27,7 @@ function Explore() {
           Explorar Bebidas
         </button>
       </Link>
+      <Footer />
     </main>
   );
 }

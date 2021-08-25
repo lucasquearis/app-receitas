@@ -8,6 +8,6 @@ export const getFetchCategories = (resposta) => ({
 });
 
 export const getCategoriesFood = () => async (dispatch) => {
-  const resp = await getFoodCategories();
-  dispatch(getFetchCategories(resp));
+  const resposta = await getFoodCategories();
+  dispatch(getFetchCategories(resposta));
 };
