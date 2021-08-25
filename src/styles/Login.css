@@ -1,0 +1,16 @@
+.login-div {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-input {
+  text-align: center;
+}
