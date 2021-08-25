@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Profile from './pages/Profile';
+import Profile from './pages/profile/Profile';
 import AppProvider from './context/AppProvider';
 import Drinks from './pages/drinks/Drinks';
 import Food from './pages/food/Food';
@@ -17,6 +17,7 @@ import ExploreDrinkIng from './pages/exploreDrinkIng/ExploreDrinkIng';
 import ExploreFoodArea from './pages/exploreFoodArea/ExploreFoodArea';
 import RecipesMade from './pages/recipesMade/RecipesMade';
 import FavoriteRecipes from './pages/favoriteRecipes/FavoriteRecipes';
+import LoginPage from './pages/loginPage/LoginPage';
 // import Header from './components/header/Header';
 
 const App = () => (

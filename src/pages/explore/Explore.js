@@ -1,7 +1,10 @@
 import React from 'react';
+import HeaderWithoutSearch from '../../components/HeaderWithoutSearch';
 
 const Explore = () => (
-  <div />
+  <div>
+    <HeaderWithoutSearch>Explorar</HeaderWithoutSearch>
+  </div>
 );
 
 export default Explore;

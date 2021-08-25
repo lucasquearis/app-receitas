@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 
-const Header = () => (
+const Header = ({ children }) => (
   <div>
     <header>
       <Link to="/perfil">
@@ -15,7 +16,7 @@ const Header = () => (
           />
         </button>
       </Link>
-      <h1 data-testid="page-title">Page title</h1>
+      <h1 data-testid="page-title">{ children }</h1>
       <button type="button">
         <img
           src={ searchIcon }
@@ -26,5 +27,9 @@ const Header = () => (
     </header>
   </div>
 );
+
+Header.propTypes = {
+  children: PropTypes.string.isRequired,
+};
 
 export default Header;
