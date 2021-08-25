@@ -31,7 +31,7 @@ function UseSearchBar() {
       if (searchText.length === 1) {
         dispatch(requestByFirstLetter(searchText, pathname));
       } else {
-        alert('Sua busca deve conter somente 1 (um) caracter');
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
       }
     }
   }
