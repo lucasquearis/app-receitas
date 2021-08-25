@@ -8,8 +8,9 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/Comidas" component={ Principal } />
-      <Route exact path="/Perfil" component={ Perfil } />
+      <Route exact path="/comidas" component={ Principal } />
+      <Route exact path="/bebidas" component={ Principal } />
+      <Route exact path="/perfil" component={ Perfil } />
     </Switch>
   );
 }
