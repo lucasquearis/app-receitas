@@ -1,0 +1,21 @@
+.food-image {
+  width: 100%;
+  height: 35vh;
+}
+
+.title-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding: 10px;
+}
+
+.share-favorite-section {
+  display: flex;
+  padding: 10px;
+}
+
+.share-icon {
+  margin-right: 10px;
+}
