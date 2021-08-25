@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
+import Details from './pages/Details';
 
 export default function Routes() {
   const id = 'olar';
@@ -9,10 +10,10 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ NotFound } />
-        <Route path="/bebidas" component={ NotFound } />
-        <Route path={ `/comidas/${id}` } component={ NotFound } />
-        <Route path={ `/bebidas/${id}` } component={ NotFound } />
+        <Route path="/comidas" component={ Details } />
+        <Route path="/bebidas" component={ Details } />
+        <Route path={ `/comidas/${id}` } component={ Details } />
+        <Route path={ `/bebidas/${id}` } component={ Details } />
         <Route path={ `/comidas/${id}/in-progress` } component={ NotFound } />
         <Route path={ `/bebidas/${id}/in-progress` } component={ NotFound } />
         <Route path="/explorar" component={ NotFound } />
