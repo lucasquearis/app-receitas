@@ -1,11 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
 import Footer from '../components/Footer';
 
 function Perfil() {
+  const handleOnClickProfile = () => {
+    localStorage.clear();
+  };
+
   const { email }= JSON.parse(localStorage.getItem('user'));
+
   return (
     <div>
       <Header title="Perfil" />
@@ -15,7 +19,14 @@ function Perfil() {
           Receitas Feitas
         </Link>
         <Link to="/receitas-favoritas" data-testid="profile-favorite-btn">
-          Receitas Feitas
+          Receitas Favoritas
+        </Link>
+        <Link
+          to="/"
+          onClick={ handleOnClickProfile }
+          data-testid="login-submit-btn"
+        >
+          Sair
         </Link>
       </main>
       <Footer />
