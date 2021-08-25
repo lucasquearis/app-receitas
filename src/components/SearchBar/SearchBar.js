@@ -10,7 +10,9 @@ const SearchBar = ({ saveItems }) => {
     textValue: '',
     radioValue: '',
   });
+
   const [items, setItems] = useState();
+
   const [redirect, setRedirect] = useState({
     bool: false,
   });
