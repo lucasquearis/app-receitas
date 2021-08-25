@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 import MealCard from './MealCard';
 
-export default function Meals() {
+export default function MealsCard() {
   const { dataMeals } = useContext(Context);
   const DOZE = 12;
 

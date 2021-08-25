@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './RecipeCard.css';
 
 export default function MealCard({ meal, index }) {
+  // console.log(index);
   const { strMeal, strMealThumb } = meal;
   return (
     <li
