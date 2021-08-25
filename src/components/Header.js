@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
+import Context from '../context/Context';
 import ProfileIcon from '../images/profileIcon.svg';
 import SearchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-function Header({ name, search }) {
+function Header({ name, title, search }) {
   const [searchBar, setSearchBar] = useState(false);
+  const { setFilter, filter } = useContext(Context);
+  const setSrc = (param) => {
+    setFilter({ ...param, src: name });
+  };
+
+  const handleClick = () => {
+    setSrc(filter);
+    setSearchBar(!searchBar);
+  };
+
   const searchButton = (bool) => {
     if (bool === true) {
       return (
         <button
           type="button"
-          onClick={ () => setSearchBar(!searchBar) }
+          onClick={ () => handleClick() }
         >
           <img
             src={ SearchIcon }
@@ -32,7 +43,7 @@ function Header({ name, search }) {
           <img src={ ProfileIcon } alt="profile button" data-testid="profile-top-btn" />
         </Button>
       </Link>
-      <h1 data-testid="page-title">{name}</h1>
+      <h1 data-testid="page-title" name={ name } id="header">{title}</h1>
       {searchButton(search)}
       <SearchBar display={ searchBar } />
     </header>
@@ -41,6 +52,7 @@ function Header({ name, search }) {
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   search: PropTypes.bool.isRequired,
 };
 

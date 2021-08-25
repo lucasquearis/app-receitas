@@ -12,20 +12,22 @@ function Provider({ children }) {
   const [filter, setFilter] = useState({
     type: '',
     search: '',
+    src: '',
   });
 
-  const [API, setAPI] = useState('');
+  const [recipes, setRecipes] = useState([]);
 
+  const [API, setAPI] = useState('');
   const switchAPI = (searchFilter) => {
     switch (searchFilter.type) {
     case 'ingredient':
-      setAPI(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchFilter.search}`);
+      setAPI(`https://www.the${searchFilter.src}db.com/api/json/v1/1/filter.php?i=${searchFilter.search}`);
       break;
     case 'name':
-      setAPI(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchFilter.search}`);
+      setAPI(`https://www.the${searchFilter.src}db.com/api/json/v1/1/search.php?s=${searchFilter.search}`);
       break;
     case 'first-letter':
-      setAPI(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchFilter.search}`);
+      setAPI(`https://www.the${searchFilter.src}db.com/api/json/v1/1/search.php?f=${searchFilter.search}`);
       break;
     default:
       break;
@@ -35,7 +37,7 @@ function Provider({ children }) {
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
-    console.log(result);
+    setRecipes(result);
   };
 
   useEffect(() => {
