@@ -19,7 +19,10 @@ function MealsInProgress() {
       const response = await fetchMealRecipe(id, 'meal');
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
-        .map((e) => ({ ing: response[e], checked: isMealInLocalStorage(response[e], id) }));
+        .map((e) => ({
+          ing: response[e],
+          checked: isMealInLocalStorage(response[e], id),
+        }));
 
       setRcp({ ...response, ingList: ingredients });
     }
