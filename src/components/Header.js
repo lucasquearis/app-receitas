@@ -8,7 +8,7 @@ import SearchBar from './SearchBar';
 
 function Header(props) {
   const [searchBar, setSearchBar] = useState(false);
-  const { title } = props;
+  const { title, renderSearch } = props;
   const showAndHide = () => {
     if (searchBar === true) {
       setSearchBar(false);
@@ -19,14 +19,13 @@ function Header(props) {
   return (
     <Navbar bg="light" variant="light">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <Link to="/perfil">
             <img src={ Profile } data-testid="profile-top-btn" alt="Icone de Perfil" />
           </Link>
-
         </Navbar.Brand>
         <h1 data-testid="page-title" className="justify-content-center">{ title }</h1>
-        <SearchBar onClick={ showAndHide } search={ Search } />
+        {renderSearch ? <SearchBar onClick={ showAndHide } search={ Search } /> : <div />}
         { searchBar
           ? <div data-testid="search-input"><Form.Control type="text" /></div>
           : null}
@@ -37,6 +36,11 @@ function Header(props) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  renderSearch: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  renderSearch: true,
 };
 
 export default Header;

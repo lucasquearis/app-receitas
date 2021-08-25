@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function ComidasArea() {
   return (
     <div>
-      <Header title="Comidas por Região" />
+      <Header title="Explorar Origem" />
       <Footer />
     </div>
   );

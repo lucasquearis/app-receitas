@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function Perfil() {
   return (
     <div>
-      <Header title="Perfil" />
+      <Header title="Perfil" renderSearch={ false } />
       <Footer />
     </div>
   );
