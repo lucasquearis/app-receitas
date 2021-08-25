@@ -1,38 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function InProgress({ recipe, details }) {
+export default function InProgress(
+  { name, img, category, ingredients, instructions, id },
+) {
   const [favorite, setFavorite] = useState(false);
+  const [checked, setChecked] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.recipeProgess) {
+      const { recipes } = JSON
+        .parse(localStorage.getItem('recipeProgess'));
+      console.log(recipes);
+      const recipe = recipes.find((r) => r.id === id);
+      console.log(recipe);
+      if (recipe) setChecked(recipe.checked);
+      localStorage.setItem('recipeProgess', JSON.stringify({
+        recipes: [...recipes, { id }],
+      }));
+      return;
+    }
+    localStorage.setItem('recipeProgess', JSON.stringify({
+      recipes: [{
+        id,
+        checked,
+      }],
+    }));
+  }, []);
+  useEffect(() => {
+    if (!localStorage.recipeProgess) { return; }
+    const { recipes } = JSON
+      .parse(localStorage.getItem('recipeProgess'));
+    console.log('update');
+    localStorage.setItem('recipeProgess', JSON.stringify({
+      recipes: [
+        ...recipes.filter(((r) => r.id !== id)),
+        {
+          id,
+          checked,
+        }],
+    }));
+  }, [checked]);
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
+  console.log(name);
   return (
     <div className="in-progress">
-      <img src="" alt="" data-testid="recipe-photo" />
+      <img src={ img } alt={ name } data-testid="recipe-photo" />
       <div className="main-infos">
-        <h1 data-testid="recipe-title">Title</h1>
-        <input
+        <h1 data-testid="recipe-title">{name}</h1>
+        <button
           type="button"
           data-testid="share-btn"
-          src={ shareIcon }
-          onClick={ () => setFavorite(!favorite) }
-        />
-        <input
+        >
+          <img src={ shareIcon } alt="share" />
+        </button>
+        <button
           data-testid="favorite-btn"
           type="button"
-          src={ favoriteIcon }
           onClick={ () => setFavorite(!favorite) }
-        />
+        >
+          <img src={ favoriteIcon } alt="favorite" />
+        </button>
       </div>
-      <h2 data-testid="recipe-category">Category</h2>
+      <h2 data-testid="recipe-category">{category}</h2>
       <ul>
-        <li data-testid={ `${favorite}-ingredient-step` } />
+        {ingredients.map((ingredient, i) => (
+          <li key={ i } data-testid={ `${i}-ingredient-step` }>
+            <label
+              className={ checked.includes(i) ? 'step-done' : '' }
+              htmlFor={ `ingredient${i}` }
+            >
+              {ingredient[1]}
+              <input
+                onChange={ () => {
+                  if (checked.includes(i)) {
+                    setChecked(checked.filter((check) => check !== i));
+                    return;
+                  }
+                  setChecked([...checked, i]);
+                  console.log(checked, 'else');
+                } }
+                checked={ checked.includes(i) }
+                type="checkbox"
+                name={ ingredient[1] }
+                id={ `ingredient${i}` }
+              />
+            </label>
+          </li>))}
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, repudiandae.
+        {instructions}
       </p>
-      <button type="button" data-testid="finish-recipe-btn">Finish</button>
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ checked.length !== ingredients.length }
+        >
+          Finish
+
+        </button>
+      </Link>
     </div>
   );
 }
+
+InProgress.propTypes = {
+  name: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  ingredients: PropTypes.string.isRequired,
+  instructions: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired };
