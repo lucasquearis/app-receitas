@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 
 export default function ExploreFoods() {
@@ -6,6 +7,7 @@ export default function ExploreFoods() {
     <>
       <Header title="Explorar Comidas" />
       ExploreFoods
+      <Footer />
     </>
   );
 }
