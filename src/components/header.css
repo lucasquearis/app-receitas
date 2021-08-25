@@ -14,12 +14,6 @@ input {
 }
 
 .search-button {
-  background-color: #fa9500;
-  border: none;
-  text-decoration: none;
-}
-
-.search-button {
   background: #fa9500;
   border: none;
   cursor: pointer;
@@ -27,21 +21,20 @@ input {
   font-size: 1rem;
   margin: 0;
   padding: 1rem 2rem;
-  text-decoration: none;
   text-align: center;
+  text-decoration: none;
   transition: background 250ms ease-in-out , transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
-.search-button:hover,
-.search-button:focus {
+.search-button:hover {
   background: #fa9500;
 }
 
+
 .search-button:focus {
+  background-color: #fa9500;
   outline: none;
-  outline-offset: 0px;
+  outline-offset: none;
 }
 
 .search-button:active {
