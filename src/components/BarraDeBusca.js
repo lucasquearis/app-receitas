@@ -5,7 +5,7 @@ function BarraDeBusca() {
 
     <input
       type="text"
-      data-testid="search-top-btn"
+      data-testid="search-input"
       placeholder="Busque alguma receita"
     />
 

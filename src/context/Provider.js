@@ -6,6 +6,7 @@ import { fetchApi, MEALS_LIST, DRINKS_LIST } from '../services';
 function Provider({ children }) {
   const [mealsList, setMealsList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
+  const [showBar, setShowBar] = useState(false);
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -26,6 +27,8 @@ function Provider({ children }) {
   const contextValue = {
     mealsList,
     drinksList,
+    showBar,
+    setShowBar,
   };
   return (
     <AppContext.Provider value={ contextValue }>
