@@ -6,7 +6,7 @@ import Header from '../Components/Header';
 function Explore() {
   return (
     <main>
-      <Header tittle="Comidas" loading={ false } />
+      <Header title="Comidas" loading={ false } />
       <Link
         to="/explorar/comidas"
       >

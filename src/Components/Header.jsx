@@ -20,7 +20,7 @@ function Header({ title, loading }) {
           />
         </Link>
         <h2 data-testid="page-title">{ title }</h2>
-        <Link to="/">
+        <Link to="/explorar">
           <button
             type="button"
             data-test-id="search-top-btn"
