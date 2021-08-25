@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard/RecipeCard';
 
 const UseRecipes = () => {
@@ -12,10 +13,16 @@ const UseRecipes = () => {
     }
     if (recipes.meals) {
       return recipes.meals.map((e, index) => index <= maxItensIndexOnScreen
-      && <RecipeCard index={ index } key={ e.idMeal } recipe={ e } />);
+       && (
+         <Link to={ `/comidas/${e.idMeal}` }>
+           <RecipeCard index={ index } key={ e.idMeal } recipe={ e } />
+         </Link>));
     } if (recipes.drinks) {
       return recipes.drinks.map((e, index) => index <= maxItensIndexOnScreen
-      && <RecipeCard index={ index } key={ e.idDrink } recipe={ e } />);
+      && (
+        <Link to={ `/bebidas/${e.idDrink}` }>
+          <RecipeCard index={ index } key={ e.idDrink } recipe={ e } />
+        </Link>));
     }
   };
 
