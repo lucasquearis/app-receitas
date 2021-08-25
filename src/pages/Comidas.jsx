@@ -1,32 +1,41 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
-import MyContext from '../context/MyContext';
-import fetchFoods from '../fetchs/FetchFood';
 import HookComidas from '../hooks/HookComidas';
+import CardList from '../components/CardList';
+import Categories from '../components/Categories';
+import '../cssPages/Comidas.css';
 
 function Comidas() {
-  // const { data, setData, loading, setLoading } = useContext(MyContext);
-
   const [foodData, setFoodData] = useState({});
-  const [food, loading] = HookComidas();
+  const [foodCategories, setFoodCategories] = useState([]);
+  const [food, loading, categories, setLoading] = HookComidas();
 
   useEffect(() => {
     setFoodData({
-      food,
+      ...food,
     });
-  }, [food]);
+    setFoodCategories(
+      categories.meals,
+    );
+  }, [food, categories, setFoodData]);
 
-  return (
-    <>
-      <section>
-        a
-      </section>
-      <main>
-        a
-      </main>
-      <Footer />
-    </>
-  );
+  return loading
+    ? <div>Loading... </div>
+    : (
+      <>
+        <Categories
+          list={ foodCategories }
+          callback={ setFoodData }
+          setLoading={ setLoading }
+        />
+        <CardList
+          list={ foodData.meals }
+          thumbValue="strMealThumb"
+          nameValue="strMeal"
+        />
+        <Footer />
+      </>
+    );
 }
 
 export default Comidas;
