@@ -1,13 +1,26 @@
-import { SEND_RECIPE_DATA } from '../actions/recipeActions';
+import {
+  LOADING_RECIPES,
+  GET_RECIPES,
+} from '../actions/recipesActions';
 
 const INITIAL_STATE = {
-  data: [],
+  recipes: [],
+  isLoading: true,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case SEND_RECIPE_DATA:
-    return { ...state, data: action.info.data.meals };
+  case LOADING_RECIPES:
+    return {
+      ...state,
+      isLoading: true,
+    };
+  case GET_RECIPES:
+    return {
+      ...state,
+      recipes: action.recipes,
+      isLoading: false,
+    };
   default:
     return state;
   }

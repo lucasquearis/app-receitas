@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestDrinks } from '../redux/actions/recipesActions';
 import { sendCocktailData } from '../redux/actions/cocktailsActions';
 import {
   getDataByIngredient,
@@ -16,16 +17,22 @@ export default function Drinks() {
   const [inputValue, setInputValue] = useState('');
   const [searched, setSearched] = useState(false);
   const dispatch = useDispatch();
-
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [filterIngredient, setFilterIngredient] = useState(false);
   const [filterName, setFilterName] = useState(false);
   const [filterFirstLetter, setFilterFirstLetter] = useState(false);
 
+  const drinks = useSelector((state) => state.recipes.recipes);
+
+  useEffect(() => {
+    dispatch(requestDrinks());
+  }, [dispatch]);
+
   const location = useLocation();
   const currentPage = location.pathname;
 
   const qtd = 12;
+  console.log(drinks);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -55,6 +62,7 @@ export default function Drinks() {
     searched]);
 
   if (data === null) {
+    // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return data;
   }
@@ -77,16 +85,27 @@ export default function Drinks() {
           <Redirect key={ idDrink } to={ `${currentPage}/${idDrink}` } />
         ))
       ) : null}
-      {data
-        .slice(0, qtd)
-        .map(({ strDrink, idDrink, strDrinkThumb }, index) => (
+      {searched ? (
+        data
+          .slice(0, qtd)
+          .map(({ strDrink, idDrink, strDrinkThumb }, index) => (
+            <Card
+              key={ idDrink }
+              thumb={ strDrinkThumb }
+              title={ strDrink }
+              index={ index }
+            />
+          ))
+      ) : (
+        drinks.map((drink, index) => (
           <Card
-            key={ idDrink }
-            cardImg={ strDrinkThumb }
-            cardName={ strDrink }
+            key={ drink.idDrink }
+            title={ drink.strDrink }
+            thumb={ drink.strDrinkThumb }
             index={ index }
           />
-        ))}
+        ))
+      )}
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestFoods } from '../redux/actions/recipesActions';
 import { sendRecipeData } from '../redux/actions/recipeActions';
 import {
   getDataByIngredient,
@@ -15,6 +16,11 @@ export default function Foods() {
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
+  const foods = useSelector((state) => state.recipes.recipes);
+
+  useEffect(() => {
+    dispatch(requestFoods());
+  }, [dispatch]);
 
   const [searched, setSearched] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -55,6 +61,7 @@ export default function Foods() {
     searched]);
 
   if (data === null) {
+    // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return data;
   }
@@ -77,16 +84,27 @@ export default function Foods() {
           <Redirect key={ idMeal } to={ `${currentPage}/${idMeal}` } />
         ))
       ) : null}
-      {data
-        .slice(0, qtd)
-        .map(({ strMeal, idMeal, strMealThumb }, index) => (
+      {searched ? (
+        data
+          .slice(0, qtd)
+          .map(({ strMeal, idMeal, strMealThumb }, index) => (
+            <Card
+              key={ idMeal }
+              thumb={ strMealThumb }
+              title={ strMeal }
+              index={ index }
+            />
+          ))
+      ) : (
+        foods.map((food, index) => (
           <Card
-            key={ idMeal }
-            cardImg={ strMealThumb }
-            cardName={ strMeal }
+            key={ food.idMeal }
+            title={ food.strMeal }
+            thumb={ food.strMealThumb }
             index={ index }
           />
-        ))}
+        ))
+      )}
     </section>
   );
 }
