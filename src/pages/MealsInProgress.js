@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { fetchMealRecipe } from '../services/fetchRecipe';
 import { IngredientsTaskList } from '../components';
 import {
@@ -10,6 +10,7 @@ import {
 
 function MealsInProgress() {
   const { id } = useParams();
+  const history = useHistory();
   const [rcp, setRcp] = useState({
     ingList: [],
   });
@@ -73,7 +74,12 @@ function MealsInProgress() {
         ingList={ rcp.ingList }
         handleCheckIngredient={ handleCheckIngredient }
       />
-      <button data-testid="finish-recipe-btn" type="button" disabled={ btnDisable }>
+      <button
+        data-testid="finish-recipe-btn"
+        type="button"
+        disabled={ btnDisable }
+        onClick={ () => history.push('/receitas-feitas') }
+      >
         Finalizar
       </button>
     </>
