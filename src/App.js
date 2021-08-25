@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-import Login from './pages/Login';
+import Login from './pages/Login/index';
 import {
   Meals,
   Profile,
   Drinks,
-  RecipeDetails } from './pages';
+  RecipeDetails,
+  Explore } from './pages';
 import Provider from './context/Provider';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/bebidas/:id" component={ RecipeDetails } />
         <Route path="/perfil" component={ Profile } />
+        <Route path="/explorar" component={ Explore } />
       </Switch>
     </Provider>
   );
