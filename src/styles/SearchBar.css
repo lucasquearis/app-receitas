@@ -16,7 +16,7 @@
   margin-bottom: 7px;
 }
 
-#ingredient-search-radio, #name-search-radio, #first-letter-search-radio {
+.radio-form label input {
   margin: 7px 0;
 }
 
