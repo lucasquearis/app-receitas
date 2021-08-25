@@ -15,36 +15,39 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 # Sumário
 
 - [Habilidades](#habilidades)
+
 - [Entregáveis](#entregáveis)
   - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
     - [Protótipo do projeto](#protótipo-do-projeto)
+  - [Desenvolvimento](#desenvolvimento)
   - [Data de entrega](#data-de-entrega)
-- [Intruções para entregar](#intruções-para-entregar)
+
+- [Intruções para entregar seu projeto](#intruções-para-entregar-seu-projeto)
   - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
   - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-  - [Depois de terminar o desenvolvimento (opcional)](#depois-de-terminar-o-desenvolvimento-opcional)
+
 - [Como desenvolver](#como-desenvolver)
-- [Requisitos do projeto](#requisitos-do-projeto)
   - [Linter](#linter)
   - [Execução de testes de requisito](#execução-de-testes-de-requisito)
-  - [API's](#apis)
-  - [TheMealDB API](#themealdb-api)
-  - [The CockTailDB API](#the-cocktaildb-api)
-  - [Grupos de prioridade](#grupos-de-prioridade)
+  - [APIs](#apis)
+    - [TheMealDB API](#themealdb-api)
+    - [The CockTailDB API](#the-cocktaildb-api)
+
+- [Requisitos do projeto](#requisitos-do-projeto)
   - [Observações técnicas](#observações-técnicas)
     - [Rotas](#rotas)
-    - [localStorage](#localStorage)
-    - [Ícones](#icones)
+    - [localStorage](#localstorage)
+    - [Ícones](#ícones)
     - [Biblioteca clipboard-copy](#biblioteca-clipboard-copy)
     - [Biblioteca Bootstrap (opcional)](#biblioteca-bootstrap-opcional)
   - [Lista de requisitos](#lista-de-requisitos)
+  
   <details>
     <summary>Testes unitários</summary>
 
-    <!-- - [Testes unitários](#testes-unitários) -->
     - [1 - Desenvolva os testes unitários de maneira que a seja de, no mínimo, 90%](#1---desenvolva-os-testes-unitários-de-maneira-que-a-seja-de-no-mínimo-90)
-
   </details>
+  
   <details>
     <summary>Tela de Login</summary>
 
@@ -89,6 +92,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [23 - Redirecione a pessoa usuária para a tela de explorar ao clicar no ícone de exploração](#23---redirecione-a-pessoa-usuária-para-a-tela-de-explorar-ao-clicar-no-ícone-de-exploração)
     - [24 - Redirecione a pessoa usuárua para uma lista de comidas ao clicar no ícone de comidas](#24---redirecione-a-pessoa-usuárua-para-uma-lista-de-comidas-ao-clicar-no-ícone-de-comidas)
   </details>
+
   <details>
     <summary>Tela principal de receitas</summary>
 
@@ -162,7 +166,6 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
     - [67 - Implemente os elementos da tela de explorar respeitando os atributos descritos no protótipo](#67---implemente-os-elementos-da-tela-de-explorar-respeitando-os-atributos-descritos-no-protótipo)
     - [68 - Desenvolva a tela de maneira que tenha 2 botões: um para explorar comidas e o outro para explorar bebidas](#68---desenvolva-a-tela-de-maneira-que-tenha-2-botões-um-para-explorar-comidas-e-o-outro-para-explorar-bebidas)
     - [69 - Redirecione a pessoa usuária ao clicar em um dos botões, a rota deve mudar para a página de explorar comidas ou de explorar bebidas](#69---redirecione-a-pessoa-usuária-ao-clicar-em-um-dos-botões-a-rota-deve-mudar-para-a-página-de-explorar-comidas-ou-de-explorar-bebidas)
-
   </details>
 
   <details>
@@ -203,6 +206,8 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   - [87 - Redirecione a pessoa usuária que, ao clicar no botão de "Sair", o `localStorage` deve ser limpo e a rota deve mudar para a tela de login](#87---redirecione-a-pessoa-usuária-que-ao-clicar-no-botão-de-sair-o-localstorage-deve-ser-limpo-e-a-rota-deve-mudar-para-a-tela-de-login)
   </details>
 
+- [Depois de terminar o desenvolvimento (opcional)](#depois-de-terminar-o-desenvolvimento-opcional)
+- [Revisando um pull request](#revisando-um-pull-request)
 - [Avisos finais](#avisos-finais)
 
 ---
@@ -211,12 +216,12 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 Nesse projeto, você será capaz de:
 
-  - Utilizar Redux para gerenciar estado
-  - Utilizar a biblioteca React-Redux
-  - Utilizar a Context API do React para gerenciar estado
-  - Utilizar o React Hook useState
-  - Utilizar o React Hook useContext
-  - Utilizar o React Hook useEffect
+  - Utilizar _Redux_ para gerenciar estado
+  - Utilizar a biblioteca _React-Redux_
+  - Utilizar a Context API do _React_ para gerenciar estado
+  - Utilizar o _React Hook useState_
+  - Utilizar o _React Hook useContext_
+  - Utilizar o _React Hook useEffect_
   - Criar Hooks customizados
 
 ---
@@ -227,7 +232,7 @@ Para entregar o seu projeto você deverá criar um Pull Request neste repositór
 
 Lembre-se que você pode consultar nosso conteúdo sobre Git & GitHub sempre que precisar!
 
-## O QUE DEVERÁ SER DESENVOLVIDO
+## O que deverá ser desenvolvido
 
 Você irá desenvolver um app de receitas, utilizando o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
 
@@ -245,7 +250,6 @@ https://www.figma.com/file/WatDxtKl7g54QxhDi9qdbq/App-Receitas?node-id=0%3A1
 
 Lembre-se de escrever testes unitários e sinta-se livre para alterar a UI, só respeite os atributos `data-testid`, eles serão usados na correção do exercício.
 
-Você pode ler mais sobre atributos para testes [nesse link](https://www.eduardopedroso.com.br/?p=494)
 
 #### ⚠️ Lembre-se de escrever testes unitários e sinta-se livre para alterar a UI, só respeite os atributos `data-testid`, eles serão usados na correção do exercício.
 
@@ -253,16 +257,26 @@ Você pode ler mais sobre atributos para testes [nesse link](https://www.eduardo
 
 ![image](https://res.cloudinary.com/drdpedroso/image/upload/c_scale,w_400/v1575815877/Screenshot_2019-12-08_at_11.37.25_kzt7rl.png)
 
+## Desenvolvimento
+
+### Data de entrega
+
+- Projeto em grupo.
+
+- Serão `10` dias de projeto.
+
+- Data de entrega para avaliação final do projeto: `10/09/2021 - 14:00h`.
+
 ---
 
-# Intruções para entregar
+# Intruções para entregar seu projeto
 
 ### Antes de começar a desenvolver:
 
 1. Clone o repositório
-  * `git clone git@github.com:tryber/sd-012-project-recipes-app.git`.
+  * `git clone https://github.com/tryber/sd-012-project-recipes-app.git`.
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-012-project-recipes-app`
+    * `cd sd-012-project-recipes-app-rubric`
   * Vá para a branch do seu grupo, com `git checkout main-group-XX && git pull`, onde `XX` é o número do seu grupo. Exemplos: `main-group-1`, `main-group-22`.
 
 2. Instale as dependências e inicialize o projeto
@@ -306,6 +320,7 @@ Você pode ler mais sobre atributos para testes [nesse link](https://www.eduardo
   * **Não se preocupe em preencher mais nada por enquanto!**
   * Volte até a [página de _Pull Requests_ do repositório](https://github.com/tryber/sd-012-project-recipes-app/pulls) e confira que o seu _Pull Request_ está criado
 
+
 7. Assim que aprovado por pelo menos duas pessoas do seu grupo e o _Linter_ estiver adereçado, acesse **SEU** _Pull Request_ e clique no botão _"Merge pull request"_
 
 ### Durante o desenvolvimento
@@ -331,35 +346,6 @@ Você pode ler mais sobre atributos para testes [nesse link](https://www.eduardo
 
 ---
 
-### Depois de terminar o desenvolvimento (opcional)
-
-Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
-
-* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
-
-  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
-
-  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
-
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-06`.
-
-Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
-
-#### Revisando um pull request
-
-Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
-
-
-## Data de entrega
-
-Projeto em grupo.
-
-Serão dez dias de projeto.
-
-Data de entrega para avaliação final do projeto: `DD/MM/YYYY - 14:00h`.
-
----
-
 # Como desenvolver
 
 Este repositório **já conta com uma `main-group` para cada grupo**, identificada como `main-group-1` para o grupo 1, `main-group-2` para o grupo 2, e assim por diante. Para desenvolver, você sempre deve:
@@ -373,9 +359,7 @@ Este repositório **já conta com uma `main-group` para cada grupo**, identifica
 
 ⚠ **ATENÇÃO! É POSSÍVEL COMMITAR, POR ENGANO, NA BRANCH DE OUTRO GRUPO, ENTÃO TOME MUITO CUIDADO** ⚠
 
-Para o bom andamento deste projeto disponibilizamos, além do README a seguir, um quadro Kanban com as demandas a realizar para o projeto ser concluído com sucesso. Confira o Slack para saber como acessar o quadro! É de suma importância que o grupo se organize utilizando o quadro para maior eficiência e para que se minimizem os conflitos que a união de vários códigos trará.
-
-Além disso, você verá que os requisitos do projeto tem, além das observações técnicas e do que será validado, descrições tais quais se veriam em um projeto real. É muito importante ser capaz de ler descrições como essa e transformá-las em produtos ou, se houver dúvida, saber tirar tais dúvidas! Seguimos à disposição no Slack para isso.
+Você verá que os requisitos do projeto possuem, além das observações técnicas e do que será validado, descrições tais quais se veriam em um projeto real. É muito importante ser capaz de ler descrições como essa e transformá-las em produtos ou, se houver dúvida, saber tirar tais dúvidas! Seguimos à disposição no Slack para isso.
 
 
 Este repositório já contem um _template_ com um App React criado, configurado e com os testes automatizados que fazem parte da correção. Ele também conta com uma branch **main-group** para cada grupo, identificada como `main-group-1` para o grupo 1, `main-group-2` para o grupo 2 e assim por diante.
@@ -400,14 +384,22 @@ Esses testes não consideram o layout de maneira geral, mas sim os atributos e i
 
 #### Além dos testes da avaliação automatizada, um dos requisitos do projeto se baseia em **escrever testes unitários que cubram pelo menos 90% do projeto**. Na [documentação do Jest CLI](https://jestjs.io/docs/en/cli) é possível ver como essa cobertura é coletada.
 
-### Dica: desativando testes
+---
 
-Para rodar somente um arquivo de teste, você precisa utilizar o comando `npm run cy -- --spec cypress/integration/login_spec.js`, sendo que após o "spec" é preciso acrescentar todo o caminho até o arquivo de testes.
+### Usando o Trello como ferramenta kanban
 
-Para rodar apenas um teste, basta utilizar a função `.only` após o describe. Com isso, será possível que apenas um requisito rode localmente e seja avaliado.
+Uma forma para seu grupo organizar as atividades e dividir as tarefas é através de um modelo de kanban. A Trybe disponibiliza um [board pré-configurado para vocês](https://trello.com/b/WHmyvnt7/app-de-receitas) duplicarem no [Trello](https://trello.com/).
 
-![image](describe-only.png)
-![image](only-all-green.png)
+Para duplicar, basta seguir os passos:
+
+- Acesse o [link do board](https://trello.com/b/WHmyvnt7/app-de-receitas)
+- Abra o menu no canto superior direito
+- Selecione "copiar quadros"
+- Defina o time do seu grupo e um título para o board
+- Clique em `criar`
+- Personalize seu novo kanban!
+
+---
 
 ## APIs
 
@@ -481,6 +473,8 @@ O modelo de resposta para uma `meal` é o seguinte:
     }
   ```
   </details>
+
+---
 
 Os ingredientes seguem uma ordem lógica onde o nome dele (`strIngredient1`) e a quantidade (`strMeasure1`) tem o mesmo número no final (1, nesse caso).
 
@@ -574,9 +568,22 @@ As respostas seguem a mesma estrutura, com algumas particularidade relativas as 
   ```
   </details>
 
+---
+
 Os ingredientes seguem uma ordem lógica onde o nome dele (`strIngredient1`) e a quantidade (`strMeasure1`) tem o mesmo número no final (1, nesse caso).
 
 ---
+
+# Requisitos do projeto
+
+Os requisitos são organizados por telas e dessa vez, vocês que irão definir as prioridades! Usem com sabedoria!
+
+Recomendamos que os requisitos de uma mesma tela sejam feitos em sequência ou paralelamente por pessoas se comunicando bastante, para não haver conflitos. Embora requisitos de uma mesma tela com prioridades iguais possam ser feitos em paralelo, mas isso exigirá organização por parte das pessoas que estão dividindo a tarefa para não ter conflitos.
+
+* Os requisitos do seu projeto são avaliados automaticamente, sendo utilizada a resolução de tela de `360 x 640` (360 pixels de largura por 640 pixels de altura).
+
+    - ⚠️ Logo, recomenda-se desenvolver seu projeto usando a mesma resolução, via instalação [deste plugin](https://chrome.google.com/webstore/detail/window-resizer/kkelicaakdanhinjdeammmilcgefonfh?hl=en) do `Chrome` para facilitar a configuração da resolução. ⚠️
+
 
 ## Observações técnicas
 
@@ -605,7 +612,7 @@ As rotas a serem utilizadas na aplicação devem ser as seguintes:
 * Tela de receitas feitas: `/receitas-feitas`;
 * Tela de receitas favoritas: `/receitas-favoritas`.
 
-### `localStorage`
+### localStorage
 
 O uso de `localStorage` é necessário para que as informações não se percam caso a pessoa atualize a página.
 O correto é usar os valores para iniciar sua store ou seu context.
@@ -715,22 +722,11 @@ Para mais informações, consulte a [documentação](https://react-bootstrap.git
 
 ---
 
-# Requisitos do projeto
-
-Os requisitos são organizados por telas e dessa vez, vocês que irão definir as prioridades! Usem com sabedoria!
-
-Recomendamos que os requisitos de uma mesma tela sejam feitos em sequência ou paralelamente por pessoas se comunicando bastante, para não haver conflitos. Embora requisitos de uma mesma tela com prioridades iguais possam ser feitos em paralelo, mas isso exigirá organização por parte das pessoas que estão dividindo a tarefa para não ter conflitos.
-
-* Os requisitos do seu projeto são avaliados automaticamente, sendo utilizada a resolução de tela de `360 x 640` (360 pixels de largura por 640 pixels de altura).
-
-    - ⚠️ Logo, recomenda-se desenvolver seu projeto usando a mesma resolução, via instalação [deste plugin](https://chrome.google.com/webstore/detail/window-resizer/kkelicaakdanhinjdeammmilcgefonfh?hl=en) do `Chrome` para facilitar a configuração da resolução. ⚠️
-
-## LISTA DE REQUISITOS
+## Lista de requisitos
 
 Nesse projeto, a pessoa que estiver utilizando o app pode procurar uma receita especifica, explorar receitas baseado em diferentes critérios, favoritar e fazer as receitas entre outras funcionalidades.
 
 As telas sofrem variações dependendo do tipo da receita (se é comida ou bebida, no caso).
-
 
 ## Testes unitários
 
@@ -853,10 +849,7 @@ Todas as [rotas](#rotas) serão verificadas. Os ícones podem ser encontrados em
   ```
 
 ### 12 - Desenvolva o botão de busca que, ao ser clicado, a barra de busca deve aparecer. O mesmo serve para escondê-la
-
-  O que será verificado:
-  ```
-  - Ao clicar no botão de busca pela primeira vez a barra de busca aparece
+"la primeira vez a barra de busca aparece
   - Ao clicar no botão de busca pela segunda vez a barra de busca desaparece
   ```
 
@@ -1220,8 +1213,6 @@ A verificação será feita através das receitas retornadas pela API, como por 
 
 ### 39 - Implemente a solução de forma que caso a receita já tenha sido feita, o botão "Iniciar Receita" deve sumir
 
-As receitas finalizadas devem ser recuperadas do `localStorage` na chave` doneRecipes` no formato especificado na seção [`localStorage`](#localStorage);
-
   O que será verificado:
   ```
   - Verifica se botão de iniciar receita não é visível na tela de detalhes de uma comida
@@ -1286,15 +1277,14 @@ Os ícones dos botões podem ser encontrados em `src/images/whiteHeartIcon.svg` 
 
 ### 46 - Salve as receitas favoritas no `localStorage` na chave `favoriteRecipes`
 
-  * As receitas feitas devem ser salvas em `localStorage` na chave `favoriteRecipes` no formato especificado na seção [`localStorage`](#localStorage).
+  * O formato deve ser `[{ id, type, area, category, alcoholicOrNot, name, image }]`.
+  * As receitas feitas devem ser salvas em `localStorage` na chave `favoriteRecipes` no formato `[{ id, type, area, category, alcoholicOrNot, name, image, doneDate, tags }]`.
 
   O que será verificado:
   ```
   - Verifica se após favoritar receita de uma comida, ela é salva corretamente no localStorage
   - Verifica se após favoritar receita de uma bebida, ela é salva corretamente no localStorage
   ```
-
-<!-- ### 47 - A cobertura de testes unitários deve ser de no mínimo 90% -->
 
 ## Tela de receita em progresso
 
@@ -1725,6 +1715,23 @@ A rota `/explorar/bebidas/area` não deve estar disponível, retornando um erro 
 
 ***Obs: A maneira como as APIs devem ser estruturadas segue os seguintes modelos: https://www.themealdb.com/api.php e https://www.thecocktaildb.com/api.php***
 
+# Depois de terminar o desenvolvimento (opcional)
+
+Para sinalizar que o seu projeto está pronto para o _"Code Review"_ dos seus colegas, faça o seguinte:
+
+* Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas:
+
+  * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**;
+
+  * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**;
+
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-06`.
+
+Caso tenha alguma dúvida, [aqui tem um video explicativo](https://vimeo.com/362189205).
+
+# Revisando um pull request
+
+Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
 
 # Avisos finais
 
@@ -1735,6 +1742,3 @@ Link: [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/Z
 O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?
 
 ---
-
-Você sabia que o LinkedIn é a principal rede social profissional e compartilhar o seu aprendizado lá é muito importante para quem deseja construir uma carreira de sucesso?
-Compartilhe esse projeto no seu LinkedIn, marque o perfil da Trybe (@trybe) e mostre para a sua rede toda a sua evolução.
