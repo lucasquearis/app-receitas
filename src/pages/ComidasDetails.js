@@ -12,6 +12,7 @@ function ComidasDetails(props) {
     && favoriteRecipes.find((recipe) => recipe.idMeal === id);
   const [meal, setMeal] = useState({});
   const [isFav, setIsFav] = useState(favorite);
+  const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
     const getMeal = async () => {
@@ -25,6 +26,17 @@ function ComidasDetails(props) {
       }
     };
     getMeal();
+    const getRecomendations = async () => {
+      const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      try {
+        const response = await fetch(URL);
+        const data = await response.json();
+        setDrinks(data.drinks);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getRecomendations();
   }, [id]);
 
   const favoritingRecipe = () => {
@@ -96,6 +108,9 @@ function ComidasDetails(props) {
           <p data-testid="instructions">{ meal.strInstructions }</p>
         </div>
         <div data-testid="video">
+        </div>
+        <div>
+          <h3>Recomendadas</h3>
         </div>
         <Link data-testid="start-recipe-btn" to={`/comidas/${id}/in-progress`}>Iniciar Receita</Link>
       </div>
