@@ -1,23 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Form } from 'react-bootstrap';
 
-function SearchBar(props) {
-  const { onClick, search } = props;
+function SearchBar() {
   return (
-    <button type="button" onClick={ onClick }>
-      <img
-        src={ search }
-        className="justify-content-end"
-        data-testid="search-top-btn"
-        alt="Icone de Perfil"
-      />
-    </button>
+    <div data-testid="search-input">
+      <Form.Control type="text" />
+    </div>
   );
 }
-
-SearchBar.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  search: PropTypes.string.isRequired,
-};
 
 export default SearchBar;

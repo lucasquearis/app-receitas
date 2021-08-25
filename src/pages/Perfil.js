@@ -12,7 +12,7 @@ function Perfil() {
 
   return (
     <div>
-      <Header title="Perfil" />
+      <Header title="Perfil" renderSearch={ false } />
       <main>
         <div data-testid="profile-email">{ email }</div>
         <Link to="/receitas-feitas" data-testid="profile-done-btn">
