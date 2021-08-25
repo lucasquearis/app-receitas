@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import LOGIN from '../redux/actions/loginAction';
+import { LOGIN } from '../redux/actions/loginAction';
 
-const useLogin = () => {
+export default function useLogin() {
   const dispatch = useDispatch();
 
   const handleSubmit = (email) => {
@@ -12,6 +12,4 @@ const useLogin = () => {
   };
 
   return handleSubmit;
-};
-
-export default useLogin;
+}

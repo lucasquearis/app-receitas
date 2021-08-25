@@ -37,9 +37,10 @@ describe('Tests correct rendering of email element with', () => {
     expect(screen.getByTestId(profileEmailId)).toBeInTheDocument();
   });
 
-  it('Element should have correct email', () => {
+  it('Element should have email store in localStorage', () => {
     const profileEmail = screen.getByTestId(profileEmailId);
-    expect(profileEmail).toHaveTextContent(VALID_EMAIL);
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    expect(profileEmail).toHaveTextContent(email);
   });
 });
 
@@ -71,5 +72,36 @@ describe('Tests correct rendering of logout button', () => {
 
   it('Element should have text value "Sair"', () => {
     expect(screen.getByRole('button', { name: 'Sair' })).toBeInTheDocument();
+  });
+});
+
+describe('Tests correct routing of done recipes button', () => {
+  it('Should redirect to path \'/receitas-feitas\'', () => {
+    const doneRecipes = screen.getByRole('button', { name: 'Receitas Feitas' });
+    userEvent.click(doneRecipes);
+    expect(currentHistory.location.pathname).toEqual('/receitas-feitas');
+  });
+});
+
+describe('Tests correct routing of favorite recipes button', () => {
+  it('Should redirect to path \'/receitas-favoritas\'', () => {
+    const favoriteRecipes = screen.getByRole('button', { name: 'Receitas Favoritas' });
+    userEvent.click(favoriteRecipes);
+    expect(currentHistory.location.pathname).toEqual('/receitas-favoritas');
+  });
+});
+
+describe('Tests correct routing of logout button and if clear localStorage', () => {
+  beforeEach(() => {
+    const logoutButton = screen.getByRole('button', { name: 'Sair' });
+    userEvent.click(logoutButton);
+  });
+
+  it('Should redirect to path \'/\'', () => {
+    expect(currentHistory.location.pathname).toEqual('/');
+  });
+
+  it('Should clear localStorage', () => {
+    expect(localStorage.length).toEqual(0);
   });
 });
