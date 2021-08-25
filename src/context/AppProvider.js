@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
-  const [state, setState] = useState();
+  const [recipeList, setRecipeList] = useState();
 
   return (
-    <AppContext.Provider value={ { state, setState } }>
+    <AppContext.Provider value={ { recipeList, setRecipeList } }>
       {children}
     </AppContext.Provider>
   );
