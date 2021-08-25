@@ -1,7 +1,10 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 export default function Explorar() {
   return (
-    <h1>Tela de Explorar</h1>
+    <section>
+      <Header title="Explorar" />
+    </section>
   );
 }

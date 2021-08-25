@@ -1,0 +1,34 @@
+.header {
+  align-items: center;
+  background-color: rgb(204, 204, 204);
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.header h3 {
+  margin: 0;
+}
+
+.search-icon-button {
+  background: none;
+  border: none;
+}
+
+.search-icon-button:active, .search-icon-button:focus {
+  outline: none;
+}
+
+.search-form {
+  align-items: center;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  padding: 10px;
+  width: 95%;
+}
+
+.input-radio {
+  margin: 0 8px;
+}

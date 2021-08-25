@@ -10,15 +10,15 @@ function App() {
     <Provider>
       <Switch>
         <Route exact path="/" component={ Pages.Login } />
-        <Route path="/comidas" component={ Pages.Comidas } />
-        <Route path="/bebidas" component={ Pages.Bebidas } />
+        <Route exact path="/comidas" component={ Pages.Comidas } />
+        <Route exact path="/bebidas" component={ Pages.Bebidas } />
         <Route path="/comidas/:id" component={ Pages.DetalheComida } />
         <Route path="/bebidas/:id" component={ Pages.DetalheBebida } />
         <Route path="/comidas/:id/in-progress" component={ Pages.DetalheReceitaComida } />
         <Route path="/bebidas/:id/in-progress" component={ Pages.DetalheReceitaBebida } />
-        <Route path="/explorar" component={ Pages.Explorar } />
-        <Route path="/explorar/comidas" component={ Pages.ExplorarComidas } />
-        <Route path="/explorar/bebidas" component={ Pages.ExplorarBebidas } />
+        <Route exact path="/explorar" component={ Pages.Explorar } />
+        <Route exact path="/explorar/comidas" component={ Pages.ExplorarComidas } />
+        <Route exact path="/explorar/bebidas" component={ Pages.ExplorarBebidas } />
         <Route
           path="/explorar/comidas/ingredientes"
           component={ Pages.ExplorarComidaIngrediente }
