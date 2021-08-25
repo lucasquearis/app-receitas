@@ -7,6 +7,8 @@ import {
   Drinks,
   RecipeDetails,
   Login } from './pages';
+import RecipesFavorites from './pages/RecipesFavorites';
+import RecipesDone from './pages/RecipesDone';
 import Provider from './context/Provider';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/bebidas/:id" component={ RecipeDetails } />
         <Route path="/perfil" component={ Profile } />
+        <Route path="/receitas-favoritas" component={ RecipesFavorites } />
+        <Route path="/receitas-feitas" component={ RecipesDone } />
       </Switch>
     </Provider>
   );
