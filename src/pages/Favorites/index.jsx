@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { getFavorites } from '../../services/localStorage';
 import Header from '../../components/Header';
-import Filter from './Components/Filter';
-import Card from '../../components/Card';
+import Filter from './components/Filter';
+import FavoriteCard from './components/Card';
 
 function Favorites() {
   const [currentFavorites, setCurrentFavorites] = useState();
@@ -18,6 +18,7 @@ function Favorites() {
     <div className="favorite-page">
       <Header title="Receitas Favoritas" renderSearchIcon={ false } />
       <Filter setFilteredList={ setFilteredList } list={ currentFavorites } />
+      {filteredList.map((item) => <FavoriteCard key={ item.id } item={ item } />)}
     </div>
   );
 }
