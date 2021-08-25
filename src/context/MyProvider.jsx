@@ -31,7 +31,9 @@ function MyProvider({ children }) {
   };
 
   function nullAlert() {
-    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    return global.alert(
+      'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+    );
   }
 
   async function handleFoodResults() {
@@ -54,7 +56,7 @@ function MyProvider({ children }) {
     }
     if (selectedOption.filter === 'first-letter') {
       if (searchValue.length > 1) {
-        return alert('Sua busca deve conter somente 1 (um) caracter');
+        return global.alert('Sua busca deve conter somente 1 (um) caracter');
       }
       setSearchedRecipe(await byFoodFirstLetter(searchValue));
     }
@@ -80,7 +82,7 @@ function MyProvider({ children }) {
     }
     if (selectedOption.filter === 'first-letter') {
       if (searchValue.length > 1) {
-        return alert('Sua busca deve conter somente 1 (um) caracter');
+        return global.alert('Sua busca deve conter somente 1 (um) caracter');
       }
       setSearchedRecipe(await byDrinkFirstLetter(searchValue));
     }
