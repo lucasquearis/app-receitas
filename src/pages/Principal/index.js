@@ -1,16 +1,37 @@
 import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import AppContext from '../../context/AppContext';
 import Header from '../../components/Header';
 import BarraDeBusca from '../../components/BarraDeBusca';
-import AppContext from '../../context/AppContext';
+import Card from '../../components/Card';
+import MenuInferior from '../../components/MenuInferior';
 
-function Principal() {
-  const { showBar, setShowBar } = useContext(AppContext);
+function Principal() { // Nome provisório
+  const { pathname } = useLocation();
+  const { mealsList, drinksList, showBar, setShowBar } = useContext(AppContext);
+
+  const recipes = (pathname === '/comidas') ? mealsList : drinksList;
   useEffect(() => () => setShowBar(false), [setShowBar]); // willUnmount. Muda o estado G. pra false de novo ao sair de "comidas"
+
   return (
-    <div>
-      <Header nomeDaPagina="Comidas" />
+    <>
+      <Header nomeDaPagina={ (pathname === '/comidas') ? 'Comidas' : 'Bebidas ' } />
       { showBar ? <BarraDeBusca /> : null }
-    </div>
+      {
+        recipes.map((recipe, index) => {
+          const type = (pathname === '/comidas') ? 'Meal' : 'Drink';
+          return (
+            <Card
+              img={ recipe[`str${type}Thumb`] }
+              index={ index }
+              key={ `${type}-card-${index}` }
+              name={ recipe[`str${type}`] }
+            />
+          );
+        })
+      }
+      <MenuInferior />
+    </>
   );
 }
 

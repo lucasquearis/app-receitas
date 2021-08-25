@@ -8,12 +8,10 @@ import Provider from './context/Provider';
 
 ReactDOM.render(
   <Provider>
-
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,
-
   document.getElementById('root'),
 );
 

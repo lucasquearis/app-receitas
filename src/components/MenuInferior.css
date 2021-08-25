@@ -1,0 +1,17 @@
+.footer-bar {
+  background-color: white;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+}
+
+.footer-bar a {
+  max-width: 80px;
+  width: 20%;
+}
+
+.footer-bar img {
+  width: 100%;
+}
