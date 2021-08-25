@@ -5,7 +5,6 @@ import './style.css';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import InputRadio from '../InputRadio';
-import Inp from '../Inp';
 
 import { ContextApp } from '../../Context/ContextApp';
 
@@ -26,18 +25,14 @@ function SearchBar() {
     })
   );
 
-  const inpProps = {
-    name: 'input',
-    'data-testid': 'search-input',
-    label: 'name',
-    variant: 'outlined',
-    type: 'text',
-    handleInput: (event) => handleChange(event),
-  };
-
   return (
     <div className="search-bar-container">
-      <Inp { ...inpProps } />
+      <input
+        type="text"
+        name="input"
+        data-testid="search-input"
+        onChange={ (event) => handleChange(event) }
+      />
       <RadioGroup
         row
         name="type"
