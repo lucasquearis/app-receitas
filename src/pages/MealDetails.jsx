@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import propTypes from 'prop-types';
 import { RecipeDetails } from '../components';
+import UseRecomendationRecipes from '../hook/UseRecomendationRecipes';
 
 function MealDetails({ match: { params: { id } } }) {
   const dispatch = useDispatch();
-  const [recipe, setRecipe] = useState(undefined);
+  const [recipe, setRecipe] = useState([]);
+  const recomendation = UseRecomendationRecipes('drinks');
 
   useEffect(() => {
     const fetchRecipe = async () => {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
       const result = await response.json();
-      setRecipe(result);
+      const details = result.meals || result.drinks;
+      setRecipe(details);
     };
     fetchRecipe();
   }, [id]);
@@ -21,9 +24,13 @@ function MealDetails({ match: { params: { id } } }) {
   }, [dispatch]);
 
   return (
-    <div>
-      { recipe && <RecipeDetails recipe={ recipe } type="Meal" />}
-    </div>
+    <article>
+      { recipe.map((oneRecipe) => (
+        <RecipeDetails key="0" recipe={ oneRecipe } type="Meal" />)) }
+      <section className="horizontal-slider">
+        {recomendation}
+      </section>
+    </article>
   );
 }
 
