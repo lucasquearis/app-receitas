@@ -69,7 +69,10 @@ export default function Drinks() {
 
   return (
     <section>
-      <Header onClickShowInput={ () => setShowSearchBar(true) } pageTitle="Comidas" />
+      <Header
+        onClickShowInput={ () => setShowSearchBar((prevShow) => !prevShow) }
+        pageTitle="Bebidas"
+      />
       {showSearchBar ? (
         <SearchBar
           handleChange={ (e) => setInputValue(e) }
