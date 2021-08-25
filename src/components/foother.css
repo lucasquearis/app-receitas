@@ -3,7 +3,8 @@
   border: 1px solid black;
   bottom: 0;
   box-shadow: 0 0 25px currentColor;
-  display: flex;
+
+  /* display: flex; */
   justify-content: space-around;
   padding: 15px;
   position: fixed;
