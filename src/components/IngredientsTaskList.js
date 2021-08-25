@@ -5,11 +5,12 @@ import './css/IngredientsTaskList.css';
 function IngredientsTaskList({ ingList, handleCheckIngredient }) {
   return (
     <ul>
-      {ingList.map(({ ing }, index) => (
+      {ingList.map(({ ing, checked }, index) => (
         <li key={ ing }>
           <label
             data-testid={ `${index}-ingredient-step` }
             htmlFor={ `${ing}-check-input` }
+            className={ checked ? 'ing-checked' : '' }
           >
             <input
               type="checkbox"

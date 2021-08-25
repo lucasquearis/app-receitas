@@ -21,6 +21,22 @@ function DrinksInProgress() {
     getRcps();
   }, [id]);
 
+  const handleCheckIngredient = ({ target }) => {
+    const { checked, name } = target;
+    const { ingList } = rcp;
+    const ingredientIndex = ingList.findIndex((e) => e.ing === name);
+
+    setRcp({
+      ...rcp,
+      ingList: [
+        ...ingList.slice(0, ingredientIndex),
+        { ing: name, checked },
+        ...ingList.slice(ingredientIndex + 1),
+
+      ],
+    });
+  };
+
   return (
     <>
       <img data-testid="recipe-photo" src={ rcp.strDrinkThumb } alt={ rcp.strDrink } />
@@ -29,7 +45,10 @@ function DrinksInProgress() {
       <button data-testid="favorite-btn" type="button">Favoritar</button>
       <p data-testid="instructions">{rcp.strInstructions}</p>
       <h1 data-testid="recipe-category">{rcp.strAlcoholic}</h1>
-      <IngredientsTaskList ingList={ rcp.ingList } />
+      <IngredientsTaskList
+        ingList={ rcp.ingList }
+        handleCheckIngredient={ handleCheckIngredient }
+      />
       <button data-testid="finish-recipe-btn" type="button">Finalizar</button>
     </>
   );
