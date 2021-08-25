@@ -6,7 +6,9 @@ import Footer from '../components/Footer';
 function Explore() {
   return (
     <section>
-      <Header title="Explorar" />
+      <Header>
+        <h1>Explorar</h1>
+      </Header>
       <Link to="/explorar/comidas">
         <button data-testid="explore-food" type="button">Explorar Comidas</button>
       </Link>
