@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Context from '.';
-import fetchAPI from '../services/API';
+import { fetchAPI } from '../services/API';
 
 function Provider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
