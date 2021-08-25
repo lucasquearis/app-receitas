@@ -75,7 +75,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
-        <Link to="/telaprincipal">
+        <Link to="/explorar">
           <button
             data-testid="login-submit-btn"
             type="submit"

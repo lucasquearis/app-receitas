@@ -44,20 +44,20 @@ describe(`2 - Realize as seguintes verificações
     const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
     const button = screen.getByTestId(BUTTON_TEST_ID);
 
-    fireEvent.type(email, 'email');
-    fireEvent.type(senha, VALID_PASSWORD);
+    userEvent.type(email, 'email');
+    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
 
-    fireEvent.type(email, 'email@com@');
-    fireEvent.type(senha, VALID_PASSWORD);
+    userEvent.type(email, 'email@com@');
+    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
 
-    fireEvent.type(email, 'emailcom@');
-    fireEvent.type(senha, VALID_PASSWORD);
+    userEvent.type(email, 'emailcom@');
+    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
 
-    fireEvent.type(email, 'alguem@email.');
-    fireEvent.type(senha, VALID_PASSWORD);
+    userEvent.type(email, 'alguem@email.');
+    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
   });
 
