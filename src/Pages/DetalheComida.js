@@ -80,6 +80,25 @@ export default function DetalheComida(/* props */) {
     }
     return embededURL;
   };
+  console.log(randomDrinks);
+  const randomDrinkCard = () => (
+    <section className="recomended">
+      <h5>Recomendadas</h5>
+      <div className="recomended-section-infos">
+        { randomDrinks.map((drink, index) => (
+          <div
+            data-testid={ `${index}-recomendation-card` }
+            className="recomended-info"
+            key={ drink.idDrink }
+          >
+            <img src={ drink.strDrinkThumb } alt="foto da bebida" />
+            <p>{ drink.strCategory }</p>
+            <h5>{ drink.strDrink }</h5>
+          </div>
+        )) }
+      </div>
+    </section>
+  );
 
   return (
     <section className="food-info">
@@ -129,6 +148,7 @@ export default function DetalheComida(/* props */) {
         <h5>Video</h5>
         <iframe data-testid="video" title="food-video" src={ getEmbedURL() } />
       </div>
+      { randomDrinkCard() }
       <button
         className="start-recipe-btn"
         data-testid="start-recipe-btn"
