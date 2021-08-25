@@ -1,35 +1,35 @@
-export function addMealIngInProgressStorage(id, ing) {
+export function addMealIngInProgressStorage(id, ing, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const { meals } = inProgressRecipes;
+  const typeToAdd = inProgressRecipes[type];
 
-  if (Object.keys(meals).some((k) => k === id)) {
+  if (Object.keys(typeToAdd).some((k) => k === id)) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...inProgressRecipes,
-      meals: { ...meals, [id]: [...meals[id], ing] },
+      [type]: { ...typeToAdd, [id]: [...typeToAdd[id], ing] },
     }));
   } else {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...inProgressRecipes,
-      meals: { ...meals, [id]: [ing] },
+      [type]: { ...typeToAdd, [id]: [ing] },
     }));
   }
 }
 
-export function rmvMealIngInProgressStorage(id, ing) {
+export function rmvMealIngInProgressStorage(id, ing, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const { meals } = inProgressRecipes;
+  const typeToAdd = inProgressRecipes[type];
 
-  if (meals[id].length <= 1) {
-    const newMeals = { ...meals };
+  if (typeToAdd[id].length <= 1) {
+    const newMeals = { ...typeToAdd };
     delete (newMeals[id]);
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...inProgressRecipes,
-      meals: { ...newMeals },
+      [type]: { ...newMeals },
     }));
   } else {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...inProgressRecipes,
-      meals: { ...meals, [id]: meals[id].filter((e) => e !== ing) },
+      [type]: { ...typeToAdd, [id]: typeToAdd[id].filter((e) => e !== ing) },
     }));
   }
 }

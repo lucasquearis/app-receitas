@@ -50,20 +50,9 @@ function MealsInProgress() {
       ],
     });
 
-    if (checked) return addMealIngInProgressStorage(id, name);
-    rmvMealIngInProgressStorage(id, name);
+    if (checked) return addMealIngInProgressStorage(id, name, 'meals');
+    rmvMealIngInProgressStorage(id, name, 'meals');
   };
-
-  // function checkLocalStorage() {
-  //   const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //   if (meals[id]) {
-  //     meals[id]
-  //   } else {
-  //     console.log('nao');
-  //   }
-  // }
-
-  // useEffect(checkLocalStorage, [id]);
 
   return (
     <>
