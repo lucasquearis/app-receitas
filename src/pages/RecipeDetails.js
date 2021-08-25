@@ -4,6 +4,9 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import rockGlass from '../images/rockGlass.svg';
 import IngredientsList from '../components/IngredientsList';
+import Recomendations from '../components/Recomendations';
+import StartRecipeButton from '../components/StartRecipeButton';
+import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
@@ -11,7 +14,6 @@ function RecipeDetails(props) {
   const [enCasedType, setEnCasedType] = useState('Drink');
   const { match } = props;
   const { type, id } = match.params;
-  // const maxIngredients = 15;
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -31,10 +33,6 @@ function RecipeDetails(props) {
     };
     getRecipe();
   }, []);
-
-  useEffect(() => {
-
-  }, [recipe]);
 
   return (
     <div>
@@ -73,21 +71,9 @@ function RecipeDetails(props) {
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
               <iframe title="Video" data-testid="video" src="https://www.youtube.com/embed/kJkQFVqySUw" />
               {
-                recipe && recipe[enType].map((rec, index) => (
-                  <div
-                    key={ index }
-                    data-testid={ `${index}-recomendation-card` }
-                  >
-                    Recomendações
-                  </div>
-                ))
+                recipe && <Recomendations type={ type } />
               }
-              <button
-                type="button"
-                data-testid="start-recipe-btn"
-              >
-                Iniciar Receita
-              </button>
+              <StartRecipeButton id={ id } type={ type } enType={ enType } />
             </div>
           )
           : (
