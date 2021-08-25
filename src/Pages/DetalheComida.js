@@ -11,6 +11,7 @@ export default function DetalheComida(/* props */) {
 
   const [food, setFood] = useState({});
   const [foodIngredients, setFoodIngredients] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getFood = async () => {
@@ -25,12 +26,20 @@ export default function DetalheComida(/* props */) {
         key[1] !== '' && key[1] !== null
       ));
       setFoodIngredients(ingredients);
+      setLoading(false);
     };
 
     getFood();
   }, []);
   console.log(food);
   console.log(foodIngredients);
+
+  if (loading) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
+
   return (
     <section className="food-info">
       <img
@@ -57,7 +66,7 @@ export default function DetalheComida(/* props */) {
       </div>
       <p className="food-category" data-testid="recipe-category">{ food.strCategory }</p>
       <div className="ingredients-section">
-        <h5>Ingredientes</h5>
+        <h5>Ingredients</h5>
         <ul>
           {
             foodIngredients.map((ingredient, index) => (
@@ -70,6 +79,10 @@ export default function DetalheComida(/* props */) {
             ))
           }
         </ul>
+      </div>
+      <div className="instructions-section">
+        <h5>Instructions</h5>
+        <p data-testid="instrucions">{ food.strInstructions }</p>
       </div>
     </section>
   );
