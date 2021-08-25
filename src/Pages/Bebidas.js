@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import buscarTodasBebidasPorLetra from '../service/BebidasAPI';
+import * as BebidasAPI from '../service/BebidasAPI';
 import Card from '../Components/Card';
 
 export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);
   const fetchFoods = async () => {
     const maxFood = 12;
-    const results = await buscarTodasBebidasPorLetra('b');
+    const results = await BebidasAPI.buscarBebidaPorNome('');
     const comidasFiltered = results.filter((result, index) => index < maxFood);
     setBebidas(comidasFiltered);
   };
