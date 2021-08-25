@@ -1,16 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import FoodContext from '../context/FoodContext';
+import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 
 const FoodDetails = () => {
-  const { foodDetails } = useContext(FoodContext);
+  const { foodDetailsId } = useContext(FoodContext);
+  const [foodDetails, setFoodDetails] = useState(FoodContext);
+
+  useEffect(() => {
+    fetchMealDetailsApi(foodDetailsId).then((data) => setFoodDetails(data));
+  }, [foodDetailsId]);
+
   return (
     <div>
       Detalhes da comida
-      <div>
+      {/* <div>
         <img data-testid="recipe-photo" />
         <h3 data-testid="recipe-title" />
         <button data-testid="share-btn" />
-      </div>
+        <button data-testid="favorite-btn" />
+        <p data-testid="recipe-category" />
+      </div> */}
     </div>
   );
 };

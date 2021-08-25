@@ -5,10 +5,10 @@ import FoodContext from '../context/FoodContext';
 
 const RecipeCard = ({ recipe, index }) => {
   const history = useHistory();
-  const { setFoodDetails } = useContext(FoodContext);
+  const { setFoodDetailsId } = useContext(FoodContext);
 
   const handleClick = ({ idMeal }) => {
-    setFoodDetails(idMeal);
+    setFoodDetailsId(idMeal);
     history.push(`/comidas/${idMeal}`);
   };
 
