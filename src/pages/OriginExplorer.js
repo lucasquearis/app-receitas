@@ -1,11 +1,11 @@
 import React from 'react';
 
-function DrinksExplorer() {
+function OriginExplorer() {
   return (
     <div>
-      <h1>FoodsExplorer</h1>
+      <h1>OriginExplorer</h1>
     </div>
   );
 }
 
-export default DrinksExplorer;
+export default OriginExplorer;
