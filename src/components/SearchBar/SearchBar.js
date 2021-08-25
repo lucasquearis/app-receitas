@@ -43,7 +43,7 @@ const SearchBar = () => {
   }
 
   return (
-    <div data-testid="search-top-btn">
+    <div>
       <input
         type="text"
         name="textValue"
