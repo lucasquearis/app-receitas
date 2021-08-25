@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
-import DrinksCard from './DrinksCard';
 
 function DrinksSearchBar() {
   const [type, setType] = useState('');
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const newDrinkRecipes = useContext(MyContext);
 
   const handleChange = ({ target }) => {
-    const { id, value, name } = target;
+    const { id, value: word, name } = target;
     if (name === 'newSearch') {
-      setSearch(value);
+      setSearch(word);
     } else {
       setType(id);
     }
@@ -30,6 +31,7 @@ function DrinksSearchBar() {
     if (drinks === null) {
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
+    newDrinkRecipes(drinks === null ? [] : drinks);
   };
 
   if (data.length === 1) return <Redirect to={ `/bebidas/${data[0].idDrink}` } />;
@@ -74,7 +76,6 @@ function DrinksSearchBar() {
       >
         Buscar
       </button>
-      <DrinksCard data={ data } />
     </>
   );
 }

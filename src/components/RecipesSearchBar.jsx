@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
-import RecipesCard from './RecipesCard';
 
 function RecipesSearchBar() {
   const [type, setType] = useState('');
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const newFoodRecipes = useContext(MyContext);
 
   const handleChange = ({ target }) => {
-    const { id, value, name } = target;
+    const { id, value: word, name } = target;
     if (name === 'newSearch') {
-      setSearch(value);
+      setSearch(word);
     } else {
       setType(id);
     }
@@ -30,6 +31,7 @@ function RecipesSearchBar() {
     if (recipes === null) {
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
+    newFoodRecipes(recipes === null ? [] : recipes);
   };
 
   if (data.length === 1) return <Redirect to={ `/comidas/${data[0].idMeal}` } />;
@@ -75,7 +77,6 @@ function RecipesSearchBar() {
       >
         Buscar
       </button>
-      <RecipesCard data={ data } />
     </>
   );
 }
