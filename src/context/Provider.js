@@ -4,6 +4,11 @@ import RecipesContext from './RecipesContext';
 
 function Provider({ children }) {
   const [email, setEmail] = useState('');
+  const [foodData, setFoodData] = useState([]);
+  const [drinkData, setDrinkData] = useState([]);
+  const [drinkCategory, setDrinkCategory] = useState([]);
+  const [foodCategory, setFoodCategory] = useState([]);
+  const [filter, setFilter] = useState('');
 
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -48,6 +53,16 @@ function Provider({ children }) {
   const contextValue = {
     email,
     setEmail,
+    foodData,
+    setFoodData,
+    drinkData,
+    setDrinkData,
+    drinkCategory,
+    setDrinkCategory,
+    foodCategory,
+    setFoodCategory,
+    filter,
+    setFilter,
     favoritingRecipe,
     renderingIngredients,
     verifyingRecipe,

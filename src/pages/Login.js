@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import RecipesContext from '../context/RecipesContext';
+import DrinksAPI from '../service/drinksAPI';
 
 function Login() {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-  const { setEmail } = useContext(RecipesContext);
+  const { setEmail, drinkCategory } = useContext(RecipesContext);
   const { email, password } = user;
+
+  DrinksAPI();
+  console.log(drinkCategory);
 
   const handleOnChange = ({ target }) => {
     const { id, value } = target;
@@ -19,7 +23,6 @@ function Login() {
       [id]: value,
     });
   };
-
   const handleOnClick = () => {
     setEmail(email);
     localStorage.setItem('mealsToken', '1');
