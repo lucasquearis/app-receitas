@@ -50,13 +50,14 @@ Button.propTypes = {
   className: PropTypes.string.isRequired,
   type: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   isDisable: PropTypes.bool.isRequired,
 };
 
 Button.defaultProps = {
   type: undefined,
+  pathname: undefined,
 };
 
 export default Button;

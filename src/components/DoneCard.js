@@ -4,22 +4,14 @@ import { Link } from 'react-router-dom';
 import shareIconPath from '../images/shareIcon.svg';
 import './css/DoneCard.css';
 
-const DoneCard = ({ type, doneRecipe, index, handleClickShare }) => (
-  <div className="done-recipe-container" key={ index }>
+const DoneCard = ({ doneRecipe, index, handleClickShare }) => (
+  <div className="done-recipe-container">
     <Link
-      to={ type === 'meal' ? (
-        `comidas/${doneRecipe.idMeal}`
-      ) : (
-        `bebidas/${doneRecipe.idDrink}`
-      ) }
+      to={ `${doneRecipe.type}s/${doneRecipe.id}` }
       className="horizontal-image-link"
     >
       <img
-        src={ type === 'meal' ? (
-          doneRecipe.strMealThumb
-        ) : (
-          doneRecipe.strDrinkThumb
-        ) }
+        src={ doneRecipe.image }
         alt="Imagem da Receita"
         data-testid={ `${index}-horizontal-image` }
         className="horizontal-image"
@@ -31,19 +23,15 @@ const DoneCard = ({ type, doneRecipe, index, handleClickShare }) => (
           className="done-recipe-category"
           data-testid={ `${index}-horizontal-top-text` }
         >
-          { type === 'meal' ? (
-            `${doneRecipe.strArea} - ${doneRecipe.strCategory}`
+          { doneRecipe.type === 'comida' ? (
+            `${doneRecipe.area} - ${doneRecipe.category}`
           ) : (
-            `${doneRecipe.strAlcoholic}`
+            `${doneRecipe.alcoholicOrNot}`
           ) }
         </span>
         <input
           type="image"
-          id={ type === 'meal' ? (
-            `comidas-${doneRecipe.idMeal}`
-          ) : (
-            `bebidas-${doneRecipe.idDrink}`
-          ) }
+          id={ `${doneRecipe.type}s-${doneRecipe.id} ${index}` }
           className="done-recipe-share-icon"
           data-testid={ `${index}-horizontal-share-btn` }
           src={ shareIconPath }
@@ -52,47 +40,44 @@ const DoneCard = ({ type, doneRecipe, index, handleClickShare }) => (
         />
       </div>
       <Link
-        to={ type === 'meal' ? (
-          `comidas/${doneRecipe.idMeal}`
-        ) : (
-          `bebidas/${doneRecipe.idDrink}`
-        ) }
+        to={ `${doneRecipe.type}s/${doneRecipe.id}` }
         className="done-recipe-name-link"
       >
         <span
           className="done-recipe-name"
           data-testid={ `${index}-horizontal-name` }
         >
-          { type === 'meal' ? doneRecipe.strMeal : doneRecipe.strDrink }
+          { doneRecipe.name }
         </span>
       </Link>
       <span
         className="done-recipe-date"
+        id={ `done-recipe-date-${index}` }
         data-testid={ `${index}-horizontal-done-date` }
       >
-        { `Feita em: ${doneRecipe.date}` }
+        { `Feita em: ${doneRecipe.doneDate}` }
       </span>
-      { (type === 'meal') && (doneRecipe.strTags !== null) ? (
-        doneRecipe.strTags.split(',', 2).map((tag) => (
-          <div key={ index } className="done-recipe-tag-container">
+      <div className="done-recipe-tag-container">
+        { (doneRecipe.type === 'comida') && (doneRecipe.tags.length > 0) ? (
+          (doneRecipe.tags.slice(0, 2)).map((tag, tagIndex) => (
             <span
+              key={ tagIndex }
               className="done-recipe-tag"
               data-testid={ `${index}-${tag}-horizontal-tag` }
             >
               { tag }
             </span>
-          </div>
-        ))
-      ) : (
-        <> </>
-      )}
+          ))
+        ) : (
+          <> </>
+        )}
+      </div>
     </div>
   </div>
 );
 
 DoneCard.propTypes = {
-  type: PropTypes.string.isRequired,
-  doneRecipe: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  doneRecipe: PropTypes.PropTypes.shape().isRequired,
   index: PropTypes.number.isRequired,
   handleClickShare: PropTypes.func.isRequired,
 };

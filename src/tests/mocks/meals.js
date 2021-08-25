@@ -14,7 +14,7 @@ const meals = [
     strCategory: 'Side',
     strArea: 'Croatian',
     strMealThumb: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
-    strTags: 'Streetfood, Onthego',
+    strTags: 'Streetfood,Onthego',
     date: '13/08/2021',
   },
   {

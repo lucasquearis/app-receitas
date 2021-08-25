@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DoneCard } from '../components';
+import './css/DoneRecipes.css';
 
 import recipes from '../tests/mocks/recipes';
 
@@ -10,20 +11,25 @@ const DoneRecipes = () => {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [filterOption, setFilterOption] = useState('');
   const [applyFilter, setApplyFilter] = useState(false);
-  const [shareRecipe, setShareRecipe] = useState('');
+  const [shareData, setShareData] = useState([]);
   const [shareAlert, setShareAlert] = useState(false);
 
   useEffect(() => {
-    // const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    const getDoneRecipes = recipes;
-    setRawDoneRecipes(getDoneRecipes);
-    setDoneRecipes(getDoneRecipes);
+    const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (getDoneRecipes !== null) {
+      setRawDoneRecipes(getDoneRecipes);
+      setDoneRecipes(getDoneRecipes);
+    } else {
+      // setRawDoneRecipes([]);
+      // setDoneRecipes([]);
+      setRawDoneRecipes(recipes);
+      setDoneRecipes(recipes);
+    }
   }, []);
 
   useEffect(() => {
     if (applyFilter && (filterOption !== 'all')) {
-      setDoneRecipes(rawDoneRecipes.filter((recipe) => Object.keys(recipe)
-        .some((key) => key === filterOption)));
+      setDoneRecipes(rawDoneRecipes.filter((recipe) => recipe.type === filterOption));
     }
     if (applyFilter && (filterOption === 'all')) {
       setDoneRecipes(rawDoneRecipes);
@@ -33,12 +39,18 @@ const DoneRecipes = () => {
 
   useEffect(() => {
     const INTERVAL = 5000;
-    if (shareRecipe.length > 0) {
-      copy(shareRecipe);
-      setInterval(() => setShareAlert(false), INTERVAL);
+    if (shareData.length > 1) {
+      copy(shareData[0]);
+      const parentNode = document.querySelector(`#${shareData[1]}`);
+      const alertElement = document.createElement('span');
+      alertElement.className = 'share-alert';
+      alertElement.innerHTML = 'Link copiado!';
+      parentNode.after(alertElement);
+      setInterval(() => alertElement.remove(), INTERVAL);
     }
-    setShareRecipe('');
-  }, [shareRecipe]);
+    setShareAlert(false);
+    setShareData([]);
+  }, [shareAlert]);
 
   const handleFilterClick = ({ target: { className } }) => {
     setFilterOption(className.split(' ', 2)[1]);
@@ -46,9 +58,11 @@ const DoneRecipes = () => {
   };
 
   const handleClickShare = ({ target: { id } }) => {
-    const recipeDetailURL = `http://localhost:3000/${id.replace('-', '/')}`;
+    const formatId = (id.replace('-', '/')).split(' ', 2);
+    const recipeDetailURL = `http://localhost:3000/${formatId[0]}`;
+    const parentNodeId = `done-recipe-date-${formatId[1]}`;
+    setShareData([recipeDetailURL, parentNodeId]);
     setShareAlert(true);
-    setShareRecipe(recipeDetailURL);
   };
 
   return (
@@ -65,7 +79,7 @@ const DoneRecipes = () => {
         <Button
           type="button"
           id="filter-by-food-btn"
-          className="recipes-categories idMeal"
+          className="recipes-categories comida"
           buttonText="Food"
           onClick={ handleFilterClick }
           isDisable={ false }
@@ -73,32 +87,22 @@ const DoneRecipes = () => {
         <Button
           type="button"
           id="filter-by-drink-btn"
-          className="recipes-categories idDrink"
+          className="recipes-categories bebida"
           buttonText="Drinks"
           onClick={ handleFilterClick }
           isDisable={ false }
         />
       </div>
-      { shareAlert ? (
-        <span className="share-alert">Link copiado!</span>
-      ) : (
-        <> </>
-      ) }
-      { doneRecipes.map((doneRecipe, index) => {
-        let type = '';
-        if (Object.keys(doneRecipe).some((key) => key === 'idMeal')) {
-          type = 'meal';
-        } else type = 'drink';
-        return (
+      <div className="done-cards-container">
+        { doneRecipes.map((doneRecipe, index) => (
           <DoneCard
-            key={ index }
-            type={ type }
+            key={ doneRecipe.id }
             doneRecipe={ doneRecipe }
             index={ index }
             handleClickShare={ handleClickShare }
           />
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 };
