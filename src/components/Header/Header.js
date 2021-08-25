@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileicon from '../../images/profileIcon.svg';
 import searchicon from '../../images/searchIcon.svg';
+import HEADERSEARCHBAR from '../../services/data';
 
 function Header({ children }) {
+  const history = useHistory();
+  console.log(history);
   return (
     <header>
       <Link to="/perfil">
@@ -20,15 +23,20 @@ function Header({ children }) {
       <h4 data-testid="page-title">
         {children}
       </h4>
-      <button type="button">
-        <input
-          type="image"
-          data-testid="search-top-btn"
-          src={ searchicon }
-          alt="Search"
-        />
-      </button>
+
+      { HEADERSEARCHBAR
+        .find((item) => item === history.location.pathname)
+          && (
+            <button type="button">
+              <input
+                type="image"
+                data-testid="search-top-btn"
+                src={ searchicon }
+                alt="Search"
+              />
+            </button>)}
     </header>
+
   );
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import HeaderSemSearchBar from '../components/Header/HeaderSemSearchBar';
+import Header from '../components/Header/Header';
 
 export default function ReceitasFavoritas() {
   return (
     <div>
-      <HeaderSemSearchBar>
+      <Header>
         Receitas Favoritas
-      </HeaderSemSearchBar>
+      </Header>
     </div>
   );
 }

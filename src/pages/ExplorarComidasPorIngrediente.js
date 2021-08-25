@@ -1,13 +1,13 @@
 import React from 'react';
-import HeaderSemSearchBar from '../components/Header/HeaderSemSearchBar';
+import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior';
 
 export default function ExplorarComidasPorIngrediente() {
   return (
     <div>
-      <HeaderSemSearchBar>
+      <Header>
         Explorar Ingredientes
-      </HeaderSemSearchBar>
+      </Header>
       <MenuInferior />
     </div>
   );
