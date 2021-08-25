@@ -33,8 +33,8 @@ function FoodInfo() {
         data-testid="recipe-photo"
       />
       <h2 data-testid="recipe-title">{ foodDetails.strMeal }</h2>
-      <p data-testid="share-btn">Compartilhar</p>
-      <p data-testid="favorite-btn">Favorito</p>
+      <button type="button" data-testid="share-btn">Compartilhar</button>
+      <button type="button" data-testid="favorite-btn">Favorito</button>
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
       <ul>
         { otherFilterObjFood.map((ingredient, index) => (
