@@ -1,3 +1,8 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+}
+
 @font-face {
   font-family: MinhaFonte;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
