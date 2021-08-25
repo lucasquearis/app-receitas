@@ -28,6 +28,7 @@ function Comidas() {
           callback={ setFoodData }
           setLoading={ setLoading }
         />
+        {/* TESTEEEE */}
         <CardList
           list={ foodData.meals }
           thumbValue="strMealThumb"
