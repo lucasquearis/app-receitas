@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
-import fetchRecipesAPI from '../../API/fetchRecipesAPI';
+import fetchFoodAPI from '../../API/fetchFoodAPI';
+import fetchDrinksAPI from '../../API/fetchDrinksAPI';
 
 // Action Creators - Login Actions
 
@@ -58,30 +59,63 @@ export const nameRequestError = (payload) => ({
 
 export const fetchIngredientAPI = (value) => async (dispatch) => {
   dispatch(ingredientRequest());
-  try {
-    const data = await fetchRecipesAPI(value, 'ingredient');
-    return dispatch(ingredientRequestSuccess(data));
-  } catch (error) {
-    return dispatch(ingredientRequestError(error));
+  const path = window.location.pathname;
+  if (path === '/comidas') {
+    try {
+      const data = await fetchFoodAPI(value, 'ingredient');
+      return dispatch(ingredientRequestSuccess(data));
+    } catch (error) {
+      return dispatch(ingredientRequestError(error));
+    }
+  }
+  if (path === '/bebidas') {
+    try {
+      const data = await fetchDrinksAPI(value, 'ingredient');
+      return dispatch(ingredientRequestSuccess(data));
+    } catch (error) {
+      return dispatch(ingredientRequestError(error));
+    }
   }
 };
 
 export const fetchNameAPI = (value) => async (dispatch) => {
-  dispatch(ingredientRequest());
-  try {
-    const data = await fetchRecipesAPI(value, 'name');
-    return dispatch(nameRequestSuccess(data));
-  } catch (error) {
-    return dispatch(nameRequestError(error));
+  dispatch(nameRequest());
+  const path = window.location.pathname;
+  if (path === '/comidas') {
+    try {
+      const data = await fetchFoodAPI(value, 'name');
+      return dispatch(nameRequestSuccess(data));
+    } catch (error) {
+      return dispatch(nameRequestError(error));
+    }
+  }
+  if (path === '/bebidas') {
+    try {
+      const data = await fetchDrinksAPI(value, 'name');
+      return dispatch(nameRequestSuccess(data));
+    } catch (error) {
+      return dispatch(nameRequestError(error));
+    }
   }
 };
 
 export const fetchLetterAPI = (value) => async (dispatch) => {
-  dispatch(ingredientRequest());
-  try {
-    const data = await fetchRecipesAPI(value, 'letter');
-    return dispatch(letterRequestSuccess(data));
-  } catch (error) {
-    return dispatch(letterRequestError(error));
+  dispatch(letterRequest());
+  const path = window.location.pathname;
+  if (path === '/comidas') {
+    try {
+      const data = await fetchFoodAPI(value, 'letter');
+      return dispatch(letterRequestSuccess(data));
+    } catch (error) {
+      return dispatch(letterRequestError(error));
+    }
+  }
+  if (path === '/bebidas') {
+    try {
+      const data = await fetchDrinksAPI(value, 'letter');
+      return dispatch(letterRequestSuccess(data));
+    } catch (error) {
+      return dispatch(letterRequestError(error));
+    }
   }
 };
