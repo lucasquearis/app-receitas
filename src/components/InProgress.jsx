@@ -85,10 +85,10 @@ export default function InProgress(
                   setChecked([...checked, i]);
                   console.log(checked, 'else');
                 } }
-                checked={ checked.includes(i) }
                 type="checkbox"
                 name={ ingredient[1] }
                 id={ `ingredient${i}` }
+                checked={ checked.includes(i) }
               />
             </label>
           </li>))}
