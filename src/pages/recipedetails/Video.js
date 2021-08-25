@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Video extends Component {
-  render () {
+  render() {
     return (
       <section data-testid="video">
         Video

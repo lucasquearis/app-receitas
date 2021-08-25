@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class Recomendations extends Component {
-  render () {
+  render() {
     return (
       <section>
         <div data-testid="0-recomendation-card">Recomendations</div>

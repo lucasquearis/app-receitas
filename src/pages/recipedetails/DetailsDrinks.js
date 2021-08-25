@@ -11,13 +11,13 @@ class DetailsFoods extends Component {
     return (
       <div>
         <header>
-        <div>
-          <img data-testid="recipe-photo" />
-        </div>
-        <div>
-          <h1 data-testid="recipe-title">Title</h1>
-          <h2 data-testid="recipe-category">Recipe category</h2>
-        </div>
+          <div>
+            <img data-testid="recipe-photo" />
+          </div>
+          <div>
+            <h1 data-testid="recipe-title">Title</h1>
+            <h2 data-testid="recipe-category">Recipe category</h2>
+          </div>
         </header>
         <Ingredients />
         <Instructions />
