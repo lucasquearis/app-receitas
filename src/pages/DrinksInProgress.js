@@ -13,6 +13,7 @@ function DrinksInProgress() {
   const [rcp, setRcp] = useState({
     ingList: [],
   });
+  const [btnDisable, setBtnDisable] = useState(true);
 
   useEffect(() => {
     async function getRcps() {
@@ -40,7 +41,6 @@ function DrinksInProgress() {
         ...ingList.slice(0, ingredientIndex),
         { ing: name, checked },
         ...ingList.slice(ingredientIndex + 1),
-
       ],
     });
 
@@ -48,19 +48,34 @@ function DrinksInProgress() {
     rmvIngFromProgressStorage(id, name, 'cocktails');
   };
 
+  function isFinished() {
+    const { ingList } = rcp;
+    if (ingList.length && ingList.every(({ checked }) => checked)) {
+      setBtnDisable(false);
+    }
+  }
+
+  useEffect(isFinished, [rcp]);
+
   return (
     <>
       <img data-testid="recipe-photo" src={ rcp.strDrinkThumb } alt={ rcp.strDrink } />
       <h1 data-testid="recipe-title">{rcp.strDrink}</h1>
-      <button data-testid="share-btn" type="button">Compartilhar</button>
-      <button data-testid="favorite-btn" type="button">Favoritar</button>
+      <button data-testid="share-btn" type="button">
+        Compartilhar
+      </button>
+      <button data-testid="favorite-btn" type="button">
+        Favoritar
+      </button>
       <p data-testid="instructions">{rcp.strInstructions}</p>
       <h1 data-testid="recipe-category">{rcp.strAlcoholic}</h1>
       <IngredientsTaskList
         ingList={ rcp.ingList }
         handleCheckIngredient={ handleCheckIngredient }
       />
-      <button data-testid="finish-recipe-btn" type="button">Finalizar</button>
+      <button data-testid="finish-recipe-btn" type="button" disabled={ btnDisable }>
+        Finalizar
+      </button>
     </>
   );
 }

@@ -13,6 +13,7 @@ function MealsInProgress() {
   const [rcp, setRcp] = useState({
     ingList: [],
   });
+  const [btnDisable, setBtnDisable] = useState(true);
 
   useEffect(() => {
     async function getRcps() {
@@ -47,6 +48,15 @@ function MealsInProgress() {
     rmvIngFromProgressStorage(id, name, 'meals');
   };
 
+  function isFinished() {
+    const { ingList } = rcp;
+    if (ingList.length && ingList.every(({ checked }) => checked)) {
+      setBtnDisable(false);
+    }
+  }
+
+  useEffect(isFinished, [rcp]);
+
   return (
     <>
       <img data-testid="recipe-photo" src={ rcp.strMealThumb } alt={ rcp.strMeal } />
@@ -63,7 +73,7 @@ function MealsInProgress() {
         ingList={ rcp.ingList }
         handleCheckIngredient={ handleCheckIngredient }
       />
-      <button data-testid="finish-recipe-btn" type="button">
+      <button data-testid="finish-recipe-btn" type="button" disabled={ btnDisable }>
         Finalizar
       </button>
     </>
