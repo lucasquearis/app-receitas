@@ -68,7 +68,7 @@ function ComidasDetails(props) {
             <div>
               <img
                 src={drinks[index].strDrinkThumb}
-                alt={`${drinks[index].strDrink} photo` }
+                alt={ drinks[index].strDrink }
               />
               <p>{drinks[index].strAlcoholic}</p>
               <p>{drinks[index].strDrink}</p>

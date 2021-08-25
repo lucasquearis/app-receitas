@@ -29,7 +29,6 @@ function BebidasDetails(props) {
       try {
         const response = await fetch(URL);
         const data = await response.json();
-        console.log(data);
         setDrink(data.drinks[0]);
       } catch (error) {
         console.log(error);
@@ -64,7 +63,7 @@ function BebidasDetails(props) {
             <div>
               <img
                 src={meals[index].strMealThumb}
-                alt={`${meals[index].strMeal} photo` }
+                alt={ meals[index].strMeal }
               />
               <p>{meals[index].strCategory}</p>
               <p>{meals[index].strMeal}</p>
@@ -76,8 +75,6 @@ function BebidasDetails(props) {
     
     return links;
   }
-
-  console.log(renderRecomendationCard());
 
   const link = (
     <Link
