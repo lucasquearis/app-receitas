@@ -11,6 +11,12 @@ function ComidasDetails(props) {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const favorite = favoriteRecipes
     && favoriteRecipes.find((recipe) => recipe.idMeal === id);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const done = doneRecipes
+    && doneRecipes.find((recipe) => recipe.idMeal === id);
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const inProgress = inProgressRecipes
+    && inProgressRecipes.meals.find((recipe) => recipe.idMeal === id);
 
   const [meal, setMeal] = useState({});
   const [isFav, setIsFav] = useState(favorite);
@@ -44,6 +50,10 @@ function ComidasDetails(props) {
   }, [id]);
 
   const { ingredients, measures } = renderingIngredients(meal);
+  let videoURL = '';
+  if(meal.strYoutube) {
+    videoURL = meal.strYoutube.split('=');
+  }
 
   return (
     <main>
@@ -87,17 +97,27 @@ function ComidasDetails(props) {
           <p data-testid="instructions">{ meal.strInstructions }</p>
         </div>
         <div data-testid="video">
-          Video
+          <iframe
+            width="280"
+            height="160"
+            src={`https://www.youtube.com/embed/${videoURL[1]}`}title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
         <div>
+          {/* {data-testid="${index}-recomendation-card"} */}
           <h3>Recomendadas</h3>
         </div>
-        <Link
-          data-testid="start-recipe-btn"
-          to={ `/comidas/${id}/in-progress` }
-        >
-          Iniciar Receita
-        </Link>
+        { !done &&
+          <Link
+            data-testid="start-recipe-btn"
+            to={ `/comidas/${id}/in-progress` }
+          >
+            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+          </Link>
+        }
       </div>
     </main>
   );
