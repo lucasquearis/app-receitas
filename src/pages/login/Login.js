@@ -53,6 +53,7 @@ class Login extends React.Component {
         <label htmlFor="input-email">
           E-mail:
           <input
+            data-testid="email-input"
             id="input-email"
             label="Email"
             type="email"
@@ -65,6 +66,7 @@ class Login extends React.Component {
           Senha:
           <input
             required
+            data-testid="password-input"
             id="input-password"
             label="Senha"
             type="password"
@@ -75,6 +77,7 @@ class Login extends React.Component {
         </label>
         <Link to="/telaprincipal">
           <button
+            data-testid="login-submit-btn"
             type="submit"
             onClick={ this.saveStateEmailStore() }
             disabled={ button }
