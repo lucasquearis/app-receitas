@@ -5,6 +5,7 @@ import Provider from './context/Provider';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
+import Profile from './pages/Profile';
 
 import './App.css';
 
@@ -23,7 +24,7 @@ function App() {
         <Route path="/explorar/comidas/ingredientes" />
         <Route path="/explorar/bebidas/ingredientes" />
         <Route path="/explorar/comidas/area" />
-        <Route path="/perfil" />
+        <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" />
         <Route path="/receitas-favoritas" />
       </Switch>
