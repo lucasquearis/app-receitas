@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../components/Header';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Perfil() {
@@ -8,7 +8,7 @@ function Perfil() {
     localStorage.clear();
   };
 
-  const { email }= JSON.parse(localStorage.getItem('user'));
+  const { email } = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div>
@@ -24,7 +24,7 @@ function Perfil() {
         <Link
           to="/"
           onClick={ handleOnClickProfile }
-          data-testid="login-submit-btn"
+          data-testid="profile-logout-btn"
         >
           Sair
         </Link>
