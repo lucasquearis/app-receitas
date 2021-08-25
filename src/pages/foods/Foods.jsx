@@ -1,12 +1,12 @@
 import React from 'react';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 export default function Foods() {
   return (
     <>
-      <div>
-        foods
-      </div>
+      <Header title="Comidas" showButton />
+      foods
       <Footer />
     </>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 export default function ExploreIngredientsFood() {
   return (
     <>
-      <div>
-        Explore Igredients Food
-      </div>
+      <Header title="Explorar Ingredientes" />
+      ExploreIngredientsFood
       <Footer />
     </>
   );
