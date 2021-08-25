@@ -16,7 +16,8 @@ export default function SearchBar() {
     if (name === 'search-text') return setTextValue(value);
   };
   const submit = () => {
-    if (radioValue === 'letter' && textValue.length > 1) return global.alert(TEXT_ALERT_ONE);
+    if (radioValue === 'letter'
+        && textValue.length > 1) return global.alert(TEXT_ALERT_ONE);
     // const pathName = location.pathname; //ATIVAR
     const pathName = '/comidas';
     setSearchValues({ textValue, radioValue, pathName });
