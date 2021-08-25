@@ -18,7 +18,6 @@ function DrinkProvider({ children }) {
     drinksCategories,
     setDrinksCategories,
   };
-
   return (
     <DrinkContext.Provider value={ context }>
       { children }
