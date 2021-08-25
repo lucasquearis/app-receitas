@@ -23,7 +23,6 @@ function Home() {
 
   const handleChange = async (handle, { target: { value } }) => {
     handle(value);
-    console.log(value);
   };
 
   const handleClick = () => {

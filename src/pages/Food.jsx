@@ -36,9 +36,14 @@ function Food() {
 
   return (
     <div>
+<<<<<<< HEAD
       <Header />
       { searchedRecipe.length > 1
         ? searchedFoodRecipes() : redirectFood()}
+=======
+      <Header titulo="Comidas" />
+      <h1>Food</h1>
+>>>>>>> e9f39c4f4e1208d479998ff84a9cd96c5893785d
       <Footer />
     </div>
   );

@@ -5,7 +5,7 @@ import Header from '../components/Header';
 function FoodRecipe() {
   return (
     <div>
-      <Header />
+      <Header titulo="comidas" />
       <h2>Food-Recipe</h2>
       <Footer />
     </div>
