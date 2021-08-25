@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '../components';
-import shareIconPath from '../images/shareIcon.svg';
+import { Button, DoneCard } from '../components';
 
 import recipes from '../tests/mocks/recipes';
 
 const copy = require('clipboard-copy');
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 const DoneRecipes = () => {
   const [rawDoneRecipes, setRawDoneRecipes] = useState([]);
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -93,83 +90,13 @@ const DoneRecipes = () => {
           type = 'meal';
         } else type = 'drikn';
         return (
-          <div className="done-recipe-container" key={ index }>
-            <Link
-              to={ type === 'meal' ? (
-                `comidas/${doneRecipe.idMeal}`
-              ) : (
-                `bebidas/${doneRecipe.idDrink}`
-              ) }
-            >
-              <img
-                src={ type === 'meal' ? (
-                  doneRecipe.strMealThumb
-                ) : (
-                  doneRecipe.strDrinkThumb
-                ) }
-                alt="Imagem da Receita"
-                data-testid={ `${index}-horizontal-image` }
-              />
-            </Link>
-            <div className="done-recipe-detais">
-              <span
-                className="done-recipe-category"
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { type === 'meal' ? (
-                  `${doneRecipe.strArea} - ${doneRecipe.strCategory}`
-                ) : (
-                  `${doneRecipe.strAlcoholic}`
-                ) }
-              </span>
-              <Link
-                to={ type === 'meal' ? (
-                  `comidas/${doneRecipe.idMeal}`
-                ) : (
-                  `bebidas/${doneRecipe.idDrink}`
-                ) }
-              >
-                <span
-                  className="done-recipe-name"
-                  data-testid={ `${index}-horizontal-name` }
-                >
-                  { type === 'meal' ? doneRecipe.strMeal : doneRecipe.strDrink }
-                </span>
-              </Link>
-              <span
-                className="done-recipe-date"
-                data-testid={ `${index}-horizontal-done-date` }
-              >
-                { doneRecipe.date }
-              </span>
-              <input
-                type="image"
-                id={ type === 'meal' ? (
-                  `comidas-${doneRecipe.idMeal}`
-                ) : (
-                  `bebidas-${doneRecipe.idDrink}`
-                ) }
-                className="done-recipe-share-icon"
-                data-testid={ `${index}-horizontal-share-btn` }
-                src={ shareIconPath }
-                alt="Share"
-                onClick={ handleClickShare }
-              />
-              { (type === 'meal') && (doneRecipe.strTags !== null) ? (
-                doneRecipe.strTags.split(',', 2).map((tag) => (
-                  <span
-                    key={ index }
-                    className="done-recipe-tag"
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                  >
-                    { tag }
-                  </span>
-                ))
-              ) : (
-                <> </>
-              )}
-            </div>
-          </div>
+          <DoneCard
+            key={ index }
+            type={ type }
+            doneRecipe={ doneRecipe }
+            index={ index }
+            handleClickShare={ handleClickShare }
+          />
         );
       })}
     </div>
