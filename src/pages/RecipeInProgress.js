@@ -13,8 +13,19 @@ function RecipeInProgress() {
   const [databaseKey, setDatabaseKey] = useState('meals');
   const [recipeKey, setRecipeKey] = useState('Meal');
   const [ingredients, setIngredients] = useState([]);
-  const [areChecked, setAreChecked] = useState(new Array(max).fill(false));
+  const [checked, setChecked] = useState([]);
   const [completed, setCompleted] = useState(false);
+
+  useEffect(() => {
+    const currentStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(currentStorage);
+    if (currentStorage !== null
+      && `${databaseKey}` in currentStorage
+      && `${id}` in currentStorage[databaseKey]) {
+      console.log(currentStorage[databaseKey][`${id}`]);
+      setChecked(currentStorage[databaseKey][`${id}`]);
+    }
+  }, [id, databaseKey]);
 
   useEffect(() => {
     setId(pathname.split('/')[2]);
@@ -33,60 +44,67 @@ function RecipeInProgress() {
       const response = await fetch(URL);
       const data = await response.json();
       setRecipeDetails(data[databaseKey][0]);
+      const newIng = [];
+      for (let index = 1; index <= max; index += 1) {
+        const ing = data[databaseKey][0][`strIngredient${index}`];
+        const mea = data[databaseKey][0][`strMeasure${index}`];
+        if (ing === '' || ing === null || ing === undefined) break;
+        newIng.push(`${ing} - ${mea}`);
+      }
+      setIngredients(newIng);
     };
     getRecipeDetails();
   }, [pathname, database, id, databaseKey, setRecipeDetails]);
 
   useEffect(() => {
-    const newIng = [];
-    for (let index = 1; index <= max; index += 1) {
-      const ing = recipeDetails[`strIngredient${index}`];
-      const mea = recipeDetails[`strMeasure${index}`];
-      if (ing === '' || ing === null || ing === undefined) break;
-      newIng.push(`${ing} - ${mea}`);
-    }
-    setIngredients(newIng);
-  }, [recipeDetails]);
-
-  useEffect(() => {
-    const checker = areChecked.slice(0, ingredients.length);
-    setCompleted(checker.every((value) => value === true));
-  }, [areChecked, ingredients.length]);
+    const currentStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    let newStorage = {};
+    if (currentStorage) {
+      newStorage = { ...currentStorage,
+        [databaseKey]: { ...currentStorage[databaseKey],
+          [`${id}`]: checked,
+        },
+      };
+    } else newStorage = { [databaseKey]: { [id]: checked } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+  }, [checked, databaseKey, id]);
 
   const handleCheck = (index) => {
-    const newState = [...areChecked];
-    newState[index] = !newState[index];
-    setAreChecked(newState);
+    let newChecked = [...checked];
+    if (checked.includes(index)) newChecked = checked.filter((item) => item !== index);
+    else newChecked.push(index);
+    setChecked(newChecked);
+    if (newChecked.length >= ingredients.length) setCompleted(true);
+    else setCompleted(false);
   };
 
-  const renderIngredientList = () => {
-    console.log(ingredients);
-    return ingredients.map((ingredient, index) => (
-      <li
-        key={ index }
-        style={ areChecked[index] ? { textDecoration: 'line-through' } : {} }
-        data-testid={ `${index}-ingredient-step` }
-      >
-        <Input
-          type="checkbox"
-          checked={ areChecked[index] }
-          onChange={ () => handleCheck(index) }
+  const renderIngredientList = () => ingredients.map((ingredient, index) => (
+    <li
+      key={ index }
+      style={ checked.includes(index) ? { textDecoration: 'line-through' } : {} }
+      data-testid={ `${index}-ingredient-step` }
+    >
+      <Input
+        type="checkbox"
+        checked={ checked.includes(index) }
+        onChange={ () => handleCheck(index) }
         // testId={ `${index}-ingredient-step` }
-        />
-        { ingredient }
-      </li>
-    ));
-  };
-  const title = `str${recipeKey}`;
-  const thumb = `str${recipeKey}Thumb`;
+      />
+      { ingredient }
+    </li>
+  ));
 
   return (
     <div className="progress-container">
-      <img src={ recipeDetails[thumb] } data-testid="recipe-photo" alt="Recipe" />
-      <h2 data-testid="recipe-title">{ recipeDetails[title] }</h2>
+      <img
+        src={ recipeDetails[`str${recipeKey}Thumb`] }
+        data-testid="recipe-photo"
+        alt="Recipe"
+      />
+      <h3 data-testid="recipe-title">{ recipeDetails[`str${recipeKey}`] }</h3>
       <Button testId="share-btn" name="Share" disabled={ false } />
       <Button testId="favorite-btn" name="Favoritar" disabled={ false } />
-      <h3 data-testid="recipe-category">{ recipeDetails.strCategory }</h3>
+      <h4 data-testid="recipe-category">{ recipeDetails.strCategory }</h4>
       <ul>{ renderIngredientList() }</ul>
       <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
       <Button
