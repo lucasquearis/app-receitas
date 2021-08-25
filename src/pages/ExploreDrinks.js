@@ -21,9 +21,8 @@ function ExploreDrinks() {
 
   return (
     <section>
-      <Header>
-        <h1>Explorar Bebidas</h1>
-      </Header>
+      <Header title="Explorar Bebidas" />
+
       <Link to="/explorar/bebidas/ingredientes">
         { createBtn('explore-by-ingredient', 'Por Ingredientes') }
       </Link>

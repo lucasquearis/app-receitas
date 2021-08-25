@@ -21,12 +21,12 @@ function ExploreFoods() {
 
   return (
     <section>
-      <Header>
-        <h1>Explorar Comidas</h1>
-      </Header>
+      <Header title="Explorar Comidas" />
+
       <Link to="/explorar/comidas/ingredientes">
         { createBtn('explore-by-ingredient', 'Por Ingredientes') }
       </Link>
+
       <Link to="/explorar/comidas/area">
         { createBtn('explore-by-area', 'Por Local de Origem') }
       </Link>
