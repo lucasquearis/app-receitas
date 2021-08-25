@@ -4,6 +4,7 @@ const COCKTAIL_BY_FIRST_LETTER = 'https://www.thecocktaildb.com/api/json/v1/1/se
 const COCKTAIL_CATEGORIES_API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const DRINK_BY_CATEGORY = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 const DRINK_BY_ID = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const RANDOM_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
 export async function fetchCocktails() {
   const fetchURL = await fetch(COCKTAIL_API_URL);
@@ -48,4 +49,9 @@ export async function fetchCocktailByFilters(filters) {
     response = drinks;
   }
   return response;
+}
+
+export async function fetchRandomDrink() {
+  const fetchURL = await fetch(RANDOM_DRINK);
+  return fetchURL.json();
 }
