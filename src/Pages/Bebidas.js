@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as BebidasAPI from '../service/BebidasAPI';
 import Card from '../Components/Card';
 
+
 export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);
   const fetchFoods = async () => {
@@ -18,6 +19,7 @@ export default function Bebidas() {
 
   return (
     <section>
+      <Header title="Bebidas" searchIcon />
       {
         bebidas.map(
           (bebida, index) => (

@@ -1,7 +1,10 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 export default function ExplorarBebidas() {
   return (
-    <h1>Tela de ExplorarBebidas</h1>
+    <section>
+      <Header title="Explorar Bebidas" />
+    </section>
   );
 }

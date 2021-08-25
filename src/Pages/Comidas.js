@@ -26,7 +26,7 @@ export default function Comidas() {
 
   return (
     <section>
-      <Header />
+    <Header title="Comidas" searchIcon />
       {
         comidas.map(
           (comida, index) => (
