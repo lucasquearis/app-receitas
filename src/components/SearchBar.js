@@ -18,8 +18,7 @@ export default function SearchBar() {
   const submit = () => {
     if (radioValue === 'letter' && textValue.length > 1) return alert(TEXT_ALERT_ONE);
     // const pathName = location.pathname; //ATIVAR
-    // const pathName = '/bebidas'; // EXCLUIR
-    const pathName = '/comidas'; // EXCLUIR
+    const pathName = '/comidas';
     setSearchValues({ textValue, radioValue, pathName });
   };
 
