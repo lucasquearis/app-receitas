@@ -1,5 +1,5 @@
 import React from 'react';
 
-const MainFood = () => <>Main Food Page</>;
+const MainFood = () => <>Main Fooooood Page</>;
 
 export default MainFood;
