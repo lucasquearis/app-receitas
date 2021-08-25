@@ -76,21 +76,23 @@ function Bebidas(props) {
       >
         All
       </button>
-      { drinkRecipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => {
-        if (index < MAX_RECIPES) {
-          return (
-            <Link key={ strDrink } to={ `/bebidas/${idDrink}` }>
-              <RecipeCard
-                key={ strDrink }
-                thumb={ strDrinkThumb }
-                name={ strDrink }
-                index={ index }
-              />
-            </Link>
-          );
-        }
-        return null;
-      }) }
+      <div className="card-container">
+        { drinkRecipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => {
+          if (index < MAX_RECIPES) {
+            return (
+              <Link key={ strDrink } to={ `/bebidas/${idDrink}` } className="card">
+                <RecipeCard
+                  key={ strDrink }
+                  thumb={ strDrinkThumb }
+                  name={ strDrink }
+                  index={ index }
+                />
+              </Link>
+            );
+          }
+          return null;
+        }) }
+      </div>
       <Footer />
     </div>
   );
