@@ -3,19 +3,32 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // context
 import myContext from './myContext';
+// API
+import getFoodByIngredient from '../services/foodAPI';
 
 function RecipesProvider({ children }) {
-  const [firstState, setFirstState] = useState(true);
-  const [infoUser, setInfoUser] = useState({
-    email: '',
-    password: '',
-  });
+  const [searchValues, setSearchValues] = useState({
+    textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
+  const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
+  const [infoUser, setInfoUser] = useState({ email: '', password: '' });
+
   const globalState = {
     firstState,
     setFirstState,
     infoUser,
     setInfoUser,
+    setSearchValues,
+    filteredMealsOrDrinks,
   };
+
+  useEffect(() => {
+    const resultFilter = async () => {
+      const result = await getFoodByIngredient(searchValues);
+      setFilteredMealsOrDrinks(result);
+    };
+    resultFilter();
+  },
+  [searchValues]);
 
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
