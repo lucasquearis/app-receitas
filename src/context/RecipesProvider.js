@@ -11,6 +11,8 @@ function RecipesProvider({ children }) {
   const [searchValues, setSearchValues] = useState({
     textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
   const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
+  
+  console.log(filteredMealsOrDrinks)
 
   useEffect(() => {
     const resultFilter = async () => {
