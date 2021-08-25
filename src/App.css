@@ -3,6 +3,23 @@ footer, .start-recipe {
   position: fixed;
 }
 
+.horizontal-slider {
+  display: block;
+  overflow-x: scroll;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.recomendation-card {
+  display: inline-block;
+  margin: 0 15px;
+  width: fit-content;
+}
+
+.recomendation-card img {
+  width: 150px;
+}
+
 /* O código acima é necessário para os testes */
 header, footer {
   display: flex;
