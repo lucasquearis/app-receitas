@@ -1,12 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
+import Footer from '../components/Footer/Footer';
 
 export default function Meals() {
   return (
-    <span>
+    <main>
       <Header title="Comidas" searchIcon={ searchIcon } />
-      Page Meals
-    </span>
+      <Footer />
+    </main>
   );
 }

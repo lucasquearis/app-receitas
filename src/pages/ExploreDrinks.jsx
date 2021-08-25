@@ -1,11 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer/Footer';
 
 export default function ExploreDrinks() {
   return (
-    <span>
+    <main>
       <Header title="Explorar Bebidas" />
-      ExploreDrinks
-    </span>
+      <Footer />
+    </main>
   );
 }
