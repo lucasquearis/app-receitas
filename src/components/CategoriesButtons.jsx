@@ -29,7 +29,6 @@ function CategoriesButtons({ categories, type }) {
       setFoods(meals);
     }
   }
-
   return (
     <div>
       <label htmlFor="All">
