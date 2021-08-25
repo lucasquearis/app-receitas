@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import '../styles/login.css';
+import '../styles/Login.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
