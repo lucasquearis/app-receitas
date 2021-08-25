@@ -161,3 +161,73 @@ describe('Testes do componente Header na pagina de Perfil', () => {
     expect(titleExploreDrinkIngredients.innerHTML).toBe('Perfil');
   });
 });
+
+describe('Testes do componente Header na pagina de Receitas Feitas', () => {
+  const page = '/receitas-feitas';
+  it('verifica se o header aparece em Receitas Feitas', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(page);
+
+    const perfilDoneRecipes = screen.getByTestId(perfilBtnID);
+    const titleDoneRecipes = screen.getByTestId(pageTitleID);
+
+    expect(perfilDoneRecipes).toBeDefined();
+    expect(titleDoneRecipes).toBeDefined();
+  });
+
+  it('verifica se ao clicar no botão perfil em Receitas Feitas, é redirecionado',
+    () => {
+      const { history } = renderWithRouter(<App />);
+      history.push(page);
+
+      const perfilDoneRecipes = screen.getByTestId(perfilBtnID);
+      userEvent.click(perfilDoneRecipes);
+      const path = history.location.pathname;
+
+      expect(path).toBe('/perfil');
+    });
+
+  it('verifa se o nome da pagina é "Receitas Feitas"', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(page);
+
+    const titleDoneRecipes = screen.getByTestId(pageTitleID);
+
+    expect(titleDoneRecipes.innerHTML).toBe('Receitas Feitas');
+  });
+});
+
+describe('Testes do componente Header na pagina de Receitas Favoritas', () => {
+  const page = '/receitas-favoritas';
+  it('verifica se o header aparece em Receitas Favoritas', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(page);
+
+    const perfilFavoriteRecipes = screen.getByTestId(perfilBtnID);
+    const titleFavoriteRecipes = screen.getByTestId(pageTitleID);
+
+    expect(perfilFavoriteRecipes).toBeDefined();
+    expect(titleFavoriteRecipes).toBeDefined();
+  });
+
+  it('verifica se ao clicar no botão perfil em Receitas Favoritas, é redirecionado',
+    () => {
+      const { history } = renderWithRouter(<App />);
+      history.push(page);
+
+      const perfilFavoriteRecipes = screen.getByTestId(perfilBtnID);
+      userEvent.click(perfilFavoriteRecipes);
+      const path = history.location.pathname;
+
+      expect(path).toBe('/perfil');
+    });
+
+  it('verifa se o nome da pagina é "Receitas Feitas"', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(page);
+
+    const titleFavoriteRecipes = screen.getByTestId(pageTitleID);
+
+    expect(titleFavoriteRecipes.innerHTML).toBe('Receitas Favoritas');
+  });
+});
