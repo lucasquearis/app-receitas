@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { Redirect } from 'react-router-dom';
 import myContext from '../context/myContext';
 
 function Login() {
@@ -32,8 +31,6 @@ function Login() {
     }
     return true;
   };
-
-  // if (redirect === 'true') return <Redirect to="/" />;
 
   return (
     <div>
