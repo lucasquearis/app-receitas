@@ -1,0 +1,12 @@
+.container-header {
+  align-items: center;
+  background-color: turquoise;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-search {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+}
