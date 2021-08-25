@@ -66,3 +66,8 @@
     transform: rotate(-10deg);
   }
 }
+
+.container {
+  max-width: 375px;
+  max-height: 667px;
+}

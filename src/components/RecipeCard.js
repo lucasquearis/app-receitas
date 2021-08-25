@@ -6,15 +6,18 @@ class RecipeCard extends Component {
     const { name, thumb, index } = this.props;
 
     return (
-      <div
-        data-testid={ `${index}-recipe-card` }
-      >
-        <img
-          src={ thumb }
-          alt={ name }
-          data-testid={ `${index}-card-img` }
-        />
-        <p data-testid={ `${index}-card-name` }>{name}</p>
+      <div className="col">
+        <div
+          className="card"
+          data-testid={ `${index}-recipe-card` }
+        >
+          <img
+            src={ thumb }
+            alt={ name }
+            data-testid={ `${index}-card-img` }
+          />
+          <p data-testid={ `${index}-card-name` }>{name}</p>
+        </div>
       </div>
     );
   }

@@ -11,7 +11,12 @@ class Drinks extends Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      filteredCategory: 'All',
+    }
+
+    this.setDrinkCategory = this.setDrinkCategory.bind(this);
+    this.filterMealsByCategory = this.filterMealsByCategory.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +26,27 @@ class Drinks extends Component {
     setDrinksCategories();
   }
 
-  handleClick({ target }) {
-    const { setDrinksByCategory } = this.props;
+  setDrinkCategory(filteredCategory) {
+    this.setState({ filteredCategory });
+  }
+
+  filterMealsByCategory({ target }) {
+    const { setDrinks, setDrinksByCategory } = this.props;
+    const { filteredCategory } = this.state;
     const category = target.innerText;
 
-    setDrinksByCategory(category);
+    if (category !== 'All') {
+      if(category === filteredCategory) {
+        setDrinks();
+        this.setDrinkCategory('All');
+      } else {
+        setDrinksByCategory(category);
+        this.setDrinkCategory(category);
+      }
+    } else {
+      setDrinks();
+      this.setDrinkCategory(category);
+    }
   }
 
   render() {
@@ -35,7 +56,7 @@ class Drinks extends Component {
       <div>
         <CategoriesFilter
           categories={ drinksCategories }
-          handleClick={ this.handleClick }
+          handleClick={ this.filterMealsByCategory }
         />
         <RecipesList recipes={ drinks } type="drinks" />
       </div>

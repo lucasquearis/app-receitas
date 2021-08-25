@@ -19,14 +19,20 @@ class RecipesList extends Component {
   renderFoods() {
     const recipes = this.filterTwelveRecipes();
 
-    return recipes.map(({ strMeal, strMealThumb }, index) => (
-      <RecipeCard
-        key={ index }
-        index={ index }
-        name={ strMeal }
-        thumb={ strMealThumb }
-      />
-    ));
+    return (
+      <div className="row row-cols-3 row-cols-md-3 g-4">
+        {
+          recipes.map(({ strMeal, strMealThumb }, index) => (
+            <RecipeCard
+              key={ index }
+              index={ index }
+              name={ strMeal }
+              thumb={ strMealThumb }
+            />
+          ))
+        }
+      </div>
+    );
   }
 
   renderDrinks() {

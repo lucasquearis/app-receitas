@@ -17,12 +17,19 @@ class CategoriesFilter extends Component {
 
   render() {
     const { handleClick } = this.props;
-    const categories = this.filterFiveCategories();
+    const filteredCategories = this.filterFiveCategories();
 
     return (
       <div>
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={ handleClick }
+        >
+          All
+        </button>
         {
-          categories.map(({ strCategory }) => (
+          filteredCategories.map(({ strCategory }) => (
             <button
               key={ strCategory }
               type="button"

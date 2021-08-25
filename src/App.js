@@ -7,11 +7,13 @@ import Drinks from './pages/drinks/Drinks';
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/comidas" component={ Foods } />
-      <Route exact path="/bebidas" component={ Drinks } />
-      <Route exact path="/" component={ Login } />
-    </Switch>
+    <div className="container">
+      <Switch>
+        <Route exact path="/comidas" component={ Foods } />
+        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/" component={ Login } />
+      </Switch>
+    </div>
   );
 }
 

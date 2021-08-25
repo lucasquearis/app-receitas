@@ -11,21 +11,42 @@ class Foods extends Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      filteredCategory: 'All',
+    }
+
+    this.setMealCategory = this.setMealCategory.bind(this);
+    this.filterMealsByCategory = this.filterMealsByCategory.bind(this);
   }
 
   componentDidMount() {
-    const { setMealsCategories, setMeals } = this.props;
+    const { setMeals, setMealsCategories } = this.props;
 
     setMealsCategories();
     setMeals();
   }
 
-  handleClick({ target }) {
-    const { setMealsByCategory } = this.props;
+  setMealCategory(filteredCategory) {
+    this.setState({ filteredCategory });
+  }
+
+  filterMealsByCategory({ target }) {
+    const { setMeals, setMealsByCategory } = this.props;
+    const { filteredCategory } = this.state;
     const category = target.innerText;
 
-    setMealsByCategory(category);
+    if (category !== 'All') {
+      if (category === filteredCategory) {
+        setMeals();
+        this.setMealCategory('All');
+      } else {
+        setMealsByCategory(category);
+        this.setMealCategory(category);
+      }
+    } else {
+      setMeals();
+      this.setMealCategory(category);
+    }
   }
 
   render() {
@@ -35,7 +56,7 @@ class Foods extends Component {
       <div>
         <CategoriesFilter
           categories={ mealCategories }
-          handleClick={ this.handleClick }
+          handleClick={ this.filterMealsByCategory }
         />
         <RecipesList recipes={ meals } type="foods" />
       </div>
