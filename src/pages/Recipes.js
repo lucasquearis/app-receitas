@@ -5,14 +5,18 @@ import './recipes.css';
 import RecipeCard from '../components/RecipeCard';
 import FoodContext from '../context/FoodContext';
 import '../components/recipeCard.css';
+import ButtonCategories from '../components/ButtonsCategory';
 
 const Recipes = () => {
-  const { foods } = useContext(FoodContext);
+  const { foods, categoriesMeal } = useContext(FoodContext);
   const RECIPES = 12;
 
   return (
     <div className="container">
       <HeaderFood />
+
+      <ButtonCategories categories={ categoriesMeal } />
+
       <div className="recipe-container">
         {foods && foods.slice(0, RECIPES)
           .map((recipe, index) => (

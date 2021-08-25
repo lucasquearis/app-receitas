@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DrinksContext from './DrinksContext';
-import fetchDrinksApi from '../services/fetchDrinksApi';
+import { fetchDrinksApi, fetchCategoriesDrinksApi } from '../services/fetchDrinksApi';
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
+  const [categoriesDrinks, setCategoriesDrinks] = useState([]);
 
   useEffect(() => {
     fetchDrinksApi().then((data) => {
@@ -12,8 +13,16 @@ const DrinksProvider = ({ children }) => {
     });
   }, []);
 
+  useEffect(() => {
+    fetchCategoriesDrinksApi().then((categories) => {
+      setCategoriesDrinks(categories.drinks);
+    });
+  }, []);
+
   const contextValue = {
     drinks,
+    categoriesDrinks,
+    setDrinks,
   };
 
   return (
