@@ -95,9 +95,46 @@ class Login extends React.Component {
         >
           Entrar
         </button>
-
+        <div className="text-center">
+          <h1>Login</h1>
+        </div>
+        <label htmlFor="input-email">
+          E-mail:
+          <input
+            data-testid="email-input"
+            id="input-email"
+            label="Email"
+            type="email"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="input-password">
+          Senha:
+          <input
+            required
+            data-testid="password-input"
+            id="input-password"
+            label="Senha"
+            type="password"
+            name="password"
+            value={ password }
+            onChange={ this.handleChange }
+          />
+        </label>
+        <Link to="/explorar">
+          <button
+            data-testid="login-submit-btn"
+            type="submit"
+            onClick={ this.saveStateEmailStore() }
+            disabled={ button }
+          >
+            Entrar
+          </button>
+        </Link>
+      </form>
       </div>
-
     );
   }
 }
