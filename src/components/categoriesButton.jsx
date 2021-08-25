@@ -14,7 +14,7 @@ const CategoriesButton = ({ food }) => {
   const foodOrDrink = food ? foodCategory : drinkCategory;
   return (
     <div>
-      <Button text="All" onClick={ onClick } />
+      <Button text="All" onClick={ onClick } testId="All-category-filter" />
       { foodOrDrink
         .map(({ strCategory }) => (
           <Button

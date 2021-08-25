@@ -2,21 +2,26 @@ import { useContext, useEffect } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
 function FoodDAPI() {
-  const { setFoodData, setFoodCategory } = useContext(RecipesContext);
+  const empthRequest = 'search.php?s=';
+  const { setFoodData, setFoodCategory, foodCategory } = useContext(RecipesContext);
   const numberCategory = 5;
   useEffect(() => {
     const response = async (request) => {
       const url = `https://www.themealdb.com/api/json/v1/1/${request}`;
       await fetch(url).then((packJason) => packJason.json())
         .then(({ meals }) => {
-          if (request === 'search.php?s=') {
+          if (request === empthRequest) {
             setFoodData(meals);
           } else setFoodCategory(meals.slice(0, numberCategory));
         });
     };
-    response('list.php?c=list');
-    response('search.php?s=');
-  }, [setFoodData, setFoodCategory]);
+    if (foodCategory.length > 1) {
+      response(empthRequest);
+    } else {
+      response(empthRequest);
+      response('list.php?c=list');
+    }
+  }, [setFoodData, setFoodCategory, foodCategory]);
 }
 
 export default FoodDAPI;

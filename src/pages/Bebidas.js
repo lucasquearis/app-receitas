@@ -8,10 +8,9 @@ import Footer from '../components/Footer';
 
 function Comidas() {
   const { drinkCategory } = useContext(RecipesContext);
-  FoodDAPI();
   DrinksAPI();
   const [food] = useState(false);
-  if (drinkCategory.length) {
+  if (drinkCategory.length > 0) {
     return (
       <div>
         <Header title="Bebidas" />
