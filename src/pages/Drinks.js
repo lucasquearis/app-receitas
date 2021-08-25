@@ -4,15 +4,23 @@ import DrinkCard from '../components/DrinkCard';
 import drinks from '../components/mocks/drinks';
 
 function Drinks() {
-  const Cards = [];
+  const cards = [];
   const maxCards = 12;
   for (let index = 0; index < maxCards; index += 1) {
-    Cards.push(<DrinkCard drink={ drinks.drinks[index] } index={ index } />);
+    cards.push(<DrinkCard drink={ drinks.drinks[index] } index={ index } />);
   }
+
+  const filterButtons = [];
+  const maxButtons = 5;
+  for (let index = 0; index < maxButtons; index += 1) {
+    filterButtons.push(<FilterButton categoryName={  } />);
+  }
+  
   return (
     <div>
       <Header name="Bebidas" search />
-      { Cards }
+      { filterButtons }
+      { cards }
     </div>
   );
 }
