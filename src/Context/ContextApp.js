@@ -7,10 +7,9 @@ import recipesHooks from '../Hooks/recipesHooks';
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
-
   const { searchRecipes, recipes } = recipesHooks();
   const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
-  
+
   const ContProps = {
     recipes,
     searchRecipes,
