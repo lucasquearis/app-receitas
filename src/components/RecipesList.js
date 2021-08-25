@@ -55,7 +55,7 @@ class RecipesList extends Component {
           ))
         }
       </div>
-    )
+    );
   }
 
   render() {

@@ -13,7 +13,7 @@ class Foods extends Component {
 
     this.state = {
       filteredCategory: 'All',
-    }
+    };
 
     this.setMealCategory = this.setMealCategory.bind(this);
     this.filterMealsByCategory = this.filterMealsByCategory.bind(this);

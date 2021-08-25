@@ -13,7 +13,7 @@ class Drinks extends Component {
 
     this.state = {
       filteredCategory: 'All',
-    }
+    };
 
     this.setDrinkCategory = this.setDrinkCategory.bind(this);
     this.filterMealsByCategory = this.filterMealsByCategory.bind(this);
@@ -36,7 +36,7 @@ class Drinks extends Component {
     const category = target.innerText;
 
     if (category !== 'All') {
-      if(category === filteredCategory) {
+      if (category === filteredCategory) {
         setDrinks();
         this.setDrinkCategory('All');
       } else {

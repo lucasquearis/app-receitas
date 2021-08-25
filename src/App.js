@@ -18,14 +18,14 @@ function App() {
           path="/comidas/:id"
           render={ (props) => (
             <DetailsFood { ...props } />
-          )}
+          ) }
         />
         <Route
           exact
           path="/bebidas/:id"
           render={ (props) => (
             <DetailsDrink { ...props } />
-          )}
+          ) }
         />
         <Route exact path="/" component={ Login } />
       </Switch>
