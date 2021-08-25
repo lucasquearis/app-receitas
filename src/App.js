@@ -6,6 +6,7 @@ import Foods from './Pages/Foods';
 import Drinks from './Pages/Drinks/index';
 import Login from './Pages/Login/Login';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
+import Explore from './Pages/Explore';
 
 function App() {
   const exploreFoodDrink = (
@@ -25,12 +26,7 @@ function App() {
         <Route
           exact
           path="/explorar"
-          render={ () => (
-            <Header
-              title="Explorar"
-              searchButton={ false }
-            />
-          ) }
+          component={ Explore }
         />
         <Route
           exact
