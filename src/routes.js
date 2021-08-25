@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import RecipesMainPage from './pages/RecipesMainPage';
 import NotFound from './pages/NotFound';
+import Perfil from './pages/Perfil';
 
 export default function Routes() {
   const id = 'olar';
@@ -22,7 +23,7 @@ export default function Routes() {
         <Route path="/explorar/comidas/ingredientes" component={ NotFound } />
         <Route path="/explorar/bebidas/ingredientes" component={ NotFound } />
         <Route path="/explorar/comidas/area" component={ NotFound } />
-        <Route path="/perfil" component={ NotFound } />
+        <Route path="/perfil" component={ Perfil } />
         <Route path="/receitas-feitas" component={ NotFound } />
         <Route path="/receitas-favoritas" component={ NotFound } />
       </Switch>
