@@ -1,6 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
-import useFilters from '../services';
+import { getDefaultData, useFilters } from '../services';
 
 const FoodAndDrinksContext = createContext();
 
@@ -44,6 +50,20 @@ export default function FoodAndDrinksProvider({ children }) {
   const filtredFood = useFilters('food', parameters);
   const filtredDrinks = useFilters('drinks', parameters);
 
+  // Seta o estado inicial "data";
+  const setInitialData = useCallback(async () => {
+    const defaultFood = getDefaultData('food');
+    const defaultDrinks = getDefaultData('drinks');
+
+    setLoading(true);
+    const { meals } = await defaultFood();
+    const { drinks } = await defaultDrinks();
+    setLoading(false);
+    setData((prevData) => ({ ...prevData, food: meals, drinks }));
+  }, []);
+
+  useEffect(() => { setInitialData(); }, [setInitialData]);
+
   // Alert do Requisito 18;
   const notFoundAlert = () => (
     global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
@@ -85,54 +105,43 @@ export default function FoodAndDrinksProvider({ children }) {
     });
   };
 
-  useEffect(() => {
-    /// Se o usuário clicou em "buscar" na tela de comida executará a função "getFood";
+  const getFiltredData = useCallback(async () => {
+    // Recebendo o array com as comidas da API;
     if (applyFilters.food) {
-      const getFood = async () => {
-        setLoading(true);
-        // Recebendo o array com as comidas da API;
-        const { meals } = await filtredFood();
-        setLoading(false);
-        // Caso a resposta da API exista, salva no estado "data" as comidas;
-        if (meals) {
-          setData((prevData) => ({ ...prevData, food: meals }));
-          // Se houver somente uma comida, mudará o estado para redirecionar o usuário (Requisito 16);
-          if (meals.length === 1) {
-            setRedirect((prevRedirect) => ({ ...prevRedirect, food: true }));
-          } else {
-            setRedirect((prevRedirect) => ({ ...prevRedirect, food: false }));
-          }
-        } else {
-          notFoundAlert();
+      setLoading(true);
+      const { meals } = await filtredFood();
+      setLoading(false);
+      // Caso a resposta da API exista, salva no estado "data" as comidas;
+      if (meals) {
+        setData((prevData) => ({ ...prevData, food: meals }));
+        // Se houver somente uma comida, mudará o estado para redirecionar o usuário (Requisito 16);
+        if (meals.length === 1) {
+          setRedirect((prevRedirect) => ({ ...prevRedirect, food: true }));
         }
-        setApplyFilters((prevApplies) => ({ ...prevApplies, food: false }));
-      };
-      getFood();
+        setRedirect((prevRedirect) => ({ ...prevRedirect, food: false }));
+      } else {
+        notFoundAlert();
+      }
+      setApplyFilters((prevApplies) => ({ ...prevApplies, food: false }));
     }
-  }, [applyFilters.food, filtredFood]);
-
-  // "useEffect" para bebidas, mas é a mesma funcionalidade que o "useEffect" da linha 89;
-  useEffect(() => {
     if (applyFilters.drinks) {
-      const getDrinks = async () => {
-        setLoading(true);
-        const { drinks } = await filtredDrinks();
-        setLoading(false);
-        if (drinks) {
-          setData((prevData) => ({ ...prevData, drinks }));
-          if (drinks.length === 1) {
-            setRedirect((prevRedirect) => ({ ...prevRedirect, drinks: true }));
-          } else {
-            setRedirect((prevRedirect) => ({ ...prevRedirect, drinks: false }));
-          }
-        } else {
-          notFoundAlert();
+      setLoading(true);
+      const { drinks } = await filtredDrinks();
+      setLoading(false);
+      if (drinks) {
+        setData((prevData) => ({ ...prevData, drinks }));
+        if (drinks.length === 1) {
+          setRedirect((prevRedirect) => ({ ...prevRedirect, drinks: true }));
         }
-        setApplyFilters((prevApplies) => ({ ...prevApplies, drinks: false }));
-      };
-      getDrinks();
+        setRedirect((prevRedirect) => ({ ...prevRedirect, drinks: false }));
+      } else {
+        notFoundAlert();
+      }
+      setApplyFilters((prevApplies) => ({ ...prevApplies, drinks: false }));
     }
-  }, [applyFilters.drinks, filtredDrinks]);
+  }, [applyFilters.drinks, applyFilters.food, filtredDrinks, filtredFood]);
+
+  useEffect(() => { getFiltredData(); }, [getFiltredData]);
 
   const contextValue = {
     data,
