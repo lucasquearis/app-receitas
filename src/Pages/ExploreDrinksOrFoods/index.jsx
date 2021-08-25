@@ -24,7 +24,10 @@ function ExploreDrinksOrFoods() {
 
   return (
     <div className="page-explore-drinks-or-foods">
-      <Header title="Explorar" />
+      <Header
+        title={ `Explorar ${currentRoute === 'comidas' ? 'Comidas' : 'Bebidas'}` }
+        searchButton={ false }
+      />
       <div className="explore-buttons">
         <Btn
           name="Por Ingredientes"
