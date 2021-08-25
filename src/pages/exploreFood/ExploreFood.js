@@ -8,7 +8,9 @@ const ExploreFood = () => (
     <Link to="/explorar/comidas/ingredientes">
       <button type="button" data-testid="explore-by-ingredient">Por Ingredientes</button>
     </Link>
-    <button type="button" data-testid="explore-by-area">Por Local de Origem</button>
+    <Link to="/explorar/comidas/area">
+      <button type="button" data-testid="explore-by-area">Por Local de Origem</button>
+    </Link>
     <button type="button" data-testid="explore-surprise">Me Surpreenda!</button>
   </div>
 );
