@@ -60,3 +60,21 @@
   width: 95%;
   height: 35vh;
 }
+
+.start-recipe-btn {
+  background-color: rgb(0, 255, 0);
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 25px;
+  height: 55px;
+  width: 85%;
+}
+
+.start-recipe-btn:active {
+  background-color: rgb(0, 187, 0);
+}
+
+.start-recipe-btn:focus {
+  outline: none;
+}

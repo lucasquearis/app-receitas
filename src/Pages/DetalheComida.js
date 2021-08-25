@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
+import buscarBebidaAleatoria from '../service/BebidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -10,6 +11,7 @@ export default function DetalheComida(/* props */) {
   // const { match: { params: { id } } } = props;
 
   const [food, setFood] = useState({});
+  const [randomDrinks, setRandomDrinks] = useState([]);
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,15 +40,21 @@ export default function DetalheComida(/* props */) {
       const readyIngredients = ingredients.map((ingredient, index) => (
         `- ${ingredient[1]} - ${measure[index][1]}`
       ));
-      console.log(readyIngredients);
       setFoodIngredients(readyIngredients);
       setLoading(false);
     };
 
+    const getRandomDrink = async () => {
+      const drink1 = await buscarBebidaAleatoria();
+      const drink2 = await buscarBebidaAleatoria();
+
+      const drinks = [drink1.drinks[0], drink2.drinks[0]];
+      setRandomDrinks(drinks);
+    };
+
     getFood();
+    getRandomDrink();
   }, []);
-  // console.log(food);
-  // console.log(`ingredientes = ${foodIngredients}`);
 
   if (loading) {
     return (
@@ -121,6 +129,13 @@ export default function DetalheComida(/* props */) {
         <h5>Video</h5>
         <iframe data-testid="video" title="food-video" src={ getEmbedURL() } />
       </div>
+      <button
+        className="start-recipe-btn"
+        data-testid="start-recipe-btn"
+        type="button"
+      >
+        Iniciar Receita
+      </button>
     </section>
   );
 }
