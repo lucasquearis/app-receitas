@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import BarraDeBusca from '../../components/BarraDeBusca';
 import Card from '../../components/Card';
 import MenuInferior from '../../components/MenuInferior';
+import BarraCategorias from './BarraCategorias';
 
 function Principal() { // Nome provisório
   const { pathname } = useLocation();
@@ -17,6 +18,7 @@ function Principal() { // Nome provisório
     <>
       <Header nomeDaPagina={ (pathname === '/comidas') ? 'Comidas' : 'Bebidas ' } />
       { showBar ? <BarraDeBusca /> : null }
+      <BarraCategorias whatIsTheType={ pathname } />
       {
         recipes.map((recipe, index) => {
           const type = (pathname === '/comidas') ? 'Meal' : 'Drink';
