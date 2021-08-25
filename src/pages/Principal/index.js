@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../../Components/Header';
+import AppContext from '../../context/AppContext';
+import Card from '../../Components/Card';
 
 function Principal() { // Nome provisório
+  const { pathname } = useLocation();
+  const { mealsList, drinksList } = useContext(AppContext);
+
+  const recipes = (pathname === '/comidas') ? mealsList : drinksList;
+
   return (
-    <Header nomeDaPagina="Principal" /> // Nome provisório. Acho que tenho q fazer um ternário pra ser comidas ou bebidas nessa props nomeDaPágina.
+    <>
+      <Header nomeDaPagina={ (pathname === '/comidas') ? 'Comidas' : 'Bebidas ' } />
+      {
+        recipes.map((recipe, index) => {
+          const type = (pathname === '/comidas') ? 'Meal' : 'Drink';
+          return (
+            <Card
+              img={ recipe[`str${type}Thumb`] }
+              index={ index }
+              key={ `${type}-card-${index}` }
+              name={ recipe[`str${type}`] }
+            />
+          );
+        })
+      }
+    </>
   );
 }
 
