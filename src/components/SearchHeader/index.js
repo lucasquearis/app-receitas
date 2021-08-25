@@ -15,16 +15,16 @@ export default function SearchHeader({ children }) {
 
   // Estado dos inputs;
   const [text, setText] = useState('');
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState('ingredient');
 
   // Objeto com todos os filtros, que sempre será atualizado conforme o estado;
   const filters = useMemo(() => ({ filter, text }), [text, filter]);
 
   const handleToggleInput = () => setVisibleSearch((currState) => !currState);
 
-  const handleSetFilter = ({ target: { value } }) => setFilter(value);
-
   const handleSetText = ({ target: { value } }) => setText(value);
+
+  const handleSetFilter = ({ target: { value } }) => setFilter(value);
 
   return (
     <div>
@@ -63,6 +63,7 @@ export default function SearchHeader({ children }) {
               name="filter"
               value="ingredient"
               type="radio"
+              checked={ filter === 'ingredient' }
               onChange={ handleSetFilter }
             />
           </label>

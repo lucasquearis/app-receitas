@@ -1,32 +1,38 @@
-// Hook para receber os dados da API de acordo com os filtros do usuário;
+// endPoints das diferentes APIs;
+const endPoints = {
+  food: 'https://www.themealdb.com/api/json/v1/1/',
+  drinks: 'https://www.thecocktaildb.com/api/json/v1/1/',
+};
 
+// Função que auxilia uma requisição;
+const getResponse = async (url) => {
+  const response = await fetch(url);
+  return response.json();
+};
+
+const defaultFetch = (type) => {
+  const apiURL = `${endPoints[type]}search.php?s=`;
+  return getResponse(apiURL);
+};
+
+export const getDefaultData = (type) => () => defaultFetch(type);
+
+// Hook para receber os dados da API de acordo com os filtros do usuário;
 // Primeiro parâmetro será 'food' ou 'drinks';
 // Segundo parâmetro será um objeto com os filtros do usuário;
-const useFilters = (type, parameters) => {
-  // endPoints das diferentes APIs;
-  const data = {
-    food: 'https://www.themealdb.com/api/json/v1/1/',
-    drinks: 'https://www.thecocktaildb.com/api/json/v1/1/',
-  };
-
-  // Função que auxilia uma requisição;
-  const getResponse = async (url) => {
-    const response = await fetch(url);
-    return response.json();
-  };
-
+export const useFilters = (type, parameters) => {
   // Cada método deste objeto é uma requisição específica;
   const requestAPI = {
     fetchIngredient: () => {
-      const apiURL = `${data[type]}filter.php?i=${parameters[type].text}`;
+      const apiURL = `${endPoints[type]}filter.php?i=${parameters[type].text}`;
       return getResponse(apiURL);
     },
     fetchName: () => {
-      const apiURL = `${data[type]}search.php?s=${parameters[type].text}`;
+      const apiURL = `${endPoints[type]}search.php?s=${parameters[type].text}`;
       return getResponse(apiURL);
     },
     fetchFirstLetter: () => {
-      const apiURL = `${data[type]}search.php?f=${parameters[type].text}`;
+      const apiURL = `${endPoints[type]}search.php?f=${parameters[type].text}`;
       return getResponse(apiURL);
     },
   };
@@ -46,9 +52,7 @@ const useFilters = (type, parameters) => {
       }
       return requestAPI.fetchFirstLetter();
     default:
-      break;
+      return defaultFetch(type);
     }
   };
 };
-
-export default useFilters;
