@@ -45,7 +45,7 @@ function Header({ title, searchIcon = '' }) {
         <h3 data-testid="page-title">{ title }</h3>
         { renderSearchIcon() }
       </div>
-      { showSearchBar && <SearchBar /> }
+      { showSearchBar && <SearchBar title={ title } /> }
     </header>
   );
 }

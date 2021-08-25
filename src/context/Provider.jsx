@@ -5,12 +5,15 @@ import Context from './Context';
 export default function Provider({ children }) {
   const [dataMeals, setDataMeals] = useState('');
   const [dataDrinks, setDataDrinks] = useState('');
+  const [searchDataMeals, setSearchDataMeals] = useState([]);
 
   const context = {
     dataMeals,
     setDataMeals,
     dataDrinks,
     setDataDrinks,
+    searchDataMeals,
+    setSearchDataMeals,
   };
 
   return (
