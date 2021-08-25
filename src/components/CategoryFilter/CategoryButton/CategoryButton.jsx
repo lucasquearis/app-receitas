@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React /* , { useState } */ from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { requestByCategory } from '../../../redux/actions/fetchActions';
 
 function CategoryButton({ category, path }) {
-  const [selected, setSelected] = useState('false');
+  // const [selected, setSelected] = useState('false');
   const dispatch = useDispatch();
 
   function handleClick({ target }) {
@@ -25,6 +25,7 @@ function CategoryButton({ category, path }) {
 
 CategoryButton.propTypes = {
   category: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default CategoryButton;

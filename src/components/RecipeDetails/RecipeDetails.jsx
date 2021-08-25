@@ -1,13 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Ingredients from '../Ingredients/Ingredients';
 import HeroDetails from '../HeroDetails/HeroDetails';
 import Video from '../Video/Video';
+import UseRecipeStatus from '../../hook/UseRecipeStatus';
 
 function RecipeDetails({ recipe, type }) {
-  const doneRecipes = useSelector((state) => state.doneRecipes);
-  const recipeIsDone = doneRecipes.some((done) => recipe[`id${type}`] === done.id);
+  const { recipeIsDone, recipeInProgress } = UseRecipeStatus(recipe, type);
   return (
     <>
       <HeroDetails recipe={ recipe } type={ type } />
@@ -19,9 +19,14 @@ function RecipeDetails({ recipe, type }) {
       { recipe.strYoutube && <Video recipe={ recipe } />}
       <h3>Recomendados</h3>
       {!recipeIsDone && (
-        <button type="button" data-testid="start-recipe-btn" className="start-recipe">
-          Iniciar Receita
-        </button>
+        <Link
+          to={ (type === 'Meal') ? `/comidas/${recipe[`id${type}`]}/in-progress`
+            : `/bebidas/${recipe[`id${type}`]}/in-progress` }
+        >
+          <button type="button" data-testid="start-recipe-btn" className="start-recipe">
+            { recipeInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+          </button>
+        </Link>
       )}
     </>
   );
