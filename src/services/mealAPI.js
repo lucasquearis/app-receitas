@@ -1,4 +1,6 @@
+const FOOD_BY_INGREDIENT = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 const FOOD_API_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const FOOD_BY_FIRST_LETTER = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
 const FOOD_CATEGORIES_API_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const FOODS_BY_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const FOOD_BY_ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
@@ -22,4 +24,28 @@ export async function fetchFoodById(id) {
   const fetchURL = await fetch(`${FOOD_BY_ID}${id}`);
   const data = await fetchURL.json();
   return data;
+}
+
+export async function fetchFoodByFilters(filters) {
+  const { inputSearch, ingredient, name, firstLetter } = filters;
+  let response = [];
+  if (ingredient) {
+    const fetchURL = await fetch(FOOD_BY_INGREDIENT + inputSearch);
+    const { meals } = await fetchURL.json();
+    response = meals;
+  }
+  if (name) {
+    const fetchURL = await fetch(FOOD_API_URL + inputSearch);
+    const { meals } = await fetchURL.json();
+    response = meals;
+  }
+  if (firstLetter) {
+    if (inputSearch.length > 1) {
+      response = global.alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+    const fetchURL = await fetch(FOOD_BY_FIRST_LETTER + inputSearch);
+    const { meals } = await fetchURL.json();
+    response = meals;
+  }
+  return response;
 }

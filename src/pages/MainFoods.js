@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CategoryButtons from '../components/CategoryButtons';
@@ -10,6 +10,13 @@ export default function MainFoods() {
   const NUMBER_OF_RECIPES = 12;
   const { pathname } = useLocation();
   const { foods, categories } = useContext(FoodContext);
+
+  if (foods === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+  if (foods !== null && foods.length === 1) {
+    return <Redirect to={ `comidas/${foods[0].idMeal}` } />;
+  }
 
   return (
     <div>
