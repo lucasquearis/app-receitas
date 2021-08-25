@@ -28,7 +28,7 @@ function SearchBar() {
 
   const inpProps = {
     name: 'input',
-    testid: 'search-input',
+    'data-testid': 'search-input',
     label: 'name',
     variant: 'outlined',
     type: 'text',
