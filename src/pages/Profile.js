@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import MenuInferior from '../components/MenuInferior';
 
 function Profile() {
-  const user = JSON.parse(localStorage.getItem('user'))/*  || 'marcela@hotmail.com' */;
+  const user = JSON.parse(localStorage.getItem('user')) || {};
   const { push } = useHistory();
 
   return (
