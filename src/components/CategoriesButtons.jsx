@@ -5,7 +5,6 @@ import FoodContext from '../context/FoodContext';
 import { fetchDrinkByCategorie, fetchInicialDrinks } from '../services/cocktailAPI';
 import { fetchFoodByCategorie, fetchInicialFoods } from '../services/mealAPI';
 
-
 function CategoriesButtons({ categories, type }) {
   const { setDrinks } = useContext(DrinkContext);
   const { setFoods } = useContext(FoodContext);
