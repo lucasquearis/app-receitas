@@ -4,23 +4,33 @@ import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function DetalheComida(props) {
-  const { match: { params: { id } } } = props;
+export default function DetalheComida(/* props */) {
+  // const { match: { params: { id } } } = props;
 
   const [food, setFood] = useState({});
+  const [foodIngredients, setFoodIngredients] = useState([]);
 
   useEffect(() => {
     const getFood = async () => {
       const testID = '52772';
       const foodResult = await ComidasAPI.buscarComidaPeloID(testID);
       setFood(foodResult[0]);
+
+      const ingredientsKeys = Object.entries(foodResult[0]).filter((ingredient) => (
+        ingredient[0].includes('strIngredient')
+      ));
+      const ingredients = ingredientsKeys.filter((key) => (
+        key[1] !== '' && key[1] !== null
+      ));
+      setFoodIngredients(ingredients);
     };
 
     getFood();
   }, []);
   console.log(food);
+  console.log(foodIngredients);
   return (
     <section className="food-info">
       <img
@@ -38,8 +48,28 @@ export default function DetalheComida(props) {
             src={ shareIcon }
             alt="icone de compartilhar"
           />
-          <img src={ whiteHeartIcon } alt="icone de favoritar" />
+          <img
+            data-testid="favorite-btn"
+            src={ whiteHeartIcon }
+            alt="icone de favoritar"
+          />
         </div>
+      </div>
+      <p className="food-category" data-testid="recipe-category">{ food.strCategory }</p>
+      <div className="ingredients-section">
+        <h5>Ingredientes</h5>
+        <ul>
+          {
+            foodIngredients.map((ingredient, index) => (
+              <li
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ ingredient[1] }
+              >
+                { `- ${ingredient[1]}` }
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </section>
   );
