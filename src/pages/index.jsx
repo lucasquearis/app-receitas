@@ -4,3 +4,5 @@ export { default as Drinks } from './Drinks';
 export { default as Profile } from './Profile';
 export { default as RecipeDetails } from './RecipeDetails';
 export { default as Explore } from './Explore';
+export { default as InProgressMeal } from './InProgressMeal';
+export { default as InProgressDrink } from './InProgressDrink';
