@@ -25,7 +25,8 @@ function Routes() {
         <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
         <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
-        <Route path="/explorar/bebidas/ingredientes" component={ FoodIngredients } />
+        {/* <Route
+          path="/explorar/bebidas/ingredientes" component={ FoodIngredients } /> */}
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
         <Route path="/explorar/bebidas/area" component={ DrinkAreaExp } />
         <Route path="/comidas" component={ Foods } />
