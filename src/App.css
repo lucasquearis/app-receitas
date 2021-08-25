@@ -15,6 +15,12 @@
   max-height: 80vh;
 }
 
+#footer {
+  bottom: 0;
+  position: fixed;
+  background-color: blue;
+}
+
 /*
 #iceLeft {
   animation: clink .8s infinite ease;
