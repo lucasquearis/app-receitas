@@ -1,0 +1,50 @@
+.div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5%;
+  padding-left: 5%;
+  padding-top: 7%;
+}
+
+.div2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 5%;
+  padding-left: 5%;
+  padding-top: 7%;
+}
+
+.btn {
+  background-color: white;
+  border: black solid 1px;
+  box-shadow: 3px 5px gray;
+  color: black;
+  margin-bottom: 2%;
+  margin-right: 5%;
+  margin-top: 5%;
+  width: 80%;
+}
+
+.btn:hover {
+  background-color: white;
+}
+
+.btn2 {
+  background-color: white;
+  border: black solid 1px;
+  box-shadow: 3px 5px gray;
+  color: black;
+  height: 20%;
+  margin-bottom: 2%;
+  margin-right: 5%;
+  margin-top: 5%;
+  padding: 4%;
+  text-align: left;
+  width: 40%;
+}
+
+.btn2:hover {
+  background-color: white;
+}
