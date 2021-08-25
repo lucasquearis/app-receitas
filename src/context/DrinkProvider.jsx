@@ -30,4 +30,4 @@ DrinkProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Drink.Provider;
+export default DrinkProvider;

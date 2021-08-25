@@ -20,7 +20,12 @@ function Cards({ element, index, type }) {
 }
 
 Cards.propTypes = {
-  element: PropTypes.shape({}).isRequired,
+  element: PropTypes.shape({
+    strDrink: PropTypes.string,
+    strDrinkThumb: PropTypes.string,
+    strMeal: PropTypes.string,
+    strMealThumb: PropTypes.string,
+  }).isRequired,
   index: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
 };

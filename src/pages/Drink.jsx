@@ -6,6 +6,7 @@ import DrinkContext from '../context/DrinkContext';
 import MyContext from '../context/MyContext';
 import '../css/Card.css';
 import Cards from '../components/Cards';
+import CategoriesButtons from '../components/CategoriesButtons';
 
 function Drink() {
   const { searchedRecipe, redirectDrink } = useContext(MyContext);
@@ -47,13 +48,17 @@ function Drink() {
       { searchedRecipe.length > 1
         ? searchedDrinkRecipes() : redirectDrink()}
 
+      <div>
+        <CategoriesButtons type="bebidas" categories={ drinksCategories } />
+      </div>
+
       <main>
         {
           Drinks.splice(0, recipeLimit).map((element, index) => (
             <Cards
               key={ index }
               index={ index }
-              type="comidas"
+              type="bebidas"
               element={ element }
             />
           ))
