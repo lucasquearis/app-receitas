@@ -6,8 +6,8 @@ import Header from '../Components/Header';
 function FoodExplore() {
   const getRandomId = () => {
     const DUZENTOS = 282;
-    min = Math.ceil(1);
-    max = Math.floor(DUZENTOS);
+    const min = Math.ceil(1);
+    const max = Math.floor(DUZENTOS);
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
