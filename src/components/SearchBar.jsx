@@ -19,6 +19,7 @@ export default function SearchBar() {
         <label htmlFor="radio-ingredients">
           Ingredientes
           <input
+            name="radio-btns-search"
             data-testid="ingredient-search-radio"
             id="radio-ingredients"
             type="radio"
@@ -28,6 +29,7 @@ export default function SearchBar() {
         <label htmlFor="radio-name">
           Nome
           <input
+            name="radio-btns-search"
             data-testid="name-search-radio"
             id="radio-name"
             type="radio"
@@ -37,6 +39,7 @@ export default function SearchBar() {
         <label htmlFor="radio-first-letter">
           Primeira letra
           <input
+            name="radio-btns-search"
             data-testid="first-letter-search-radio"
             id="radio-first-letter"
             type="radio"
