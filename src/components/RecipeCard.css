@@ -22,3 +22,19 @@ ul {
 .recipe-card p {
   margin: 0;
 }
+
+.filter-button {
+  background-color: #eb6424;
+  border: none;
+  border-radius: 5px;
+  color: #fff7eb;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3px;
+  padding: 5px 15px;
+}
+
+.filter-button:hover {
+  background-color: #fa9500;
+}
+

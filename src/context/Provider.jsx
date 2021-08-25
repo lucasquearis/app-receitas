@@ -6,52 +6,74 @@ import fetchAPI from '../services/fetchAPI';
 export default function Provider({ children }) {
   const [dataMeals, setDataMeals] = useState('');
   const [dataDrinks, setDataDrinks] = useState('');
-  const [categoryMeals, setCategoryMeals] = useState('');
-  const [categoryDrinks, setCategoryDrinks] = useState('');
+  const [btnCategoryMeals, setBtnCategoryMeals] = useState('');
+  const [btnCategoryDrinks, setBtnCategoryDrinks] = useState('');
+  const [listCategoryMeals, setListCategoryMeals] = useState();
+  const [listCategoryDrinks, setListCategoryDrinks] = useState();
 
-  // faz requisicao para mealsApi
+  // faz requisicao para receber a lista principal da mealsApi
   useEffect(() => {
     const getMealsApi = async () => {
-      const result = await fetchAPI('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      setDataMeals(result);
+      const { meals } = await fetchAPI('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      setDataMeals(meals);
     };
     getMealsApi();
   }, []);
 
-  // faz requisicao para drinksApi
+  // faz requisicao para receber a lista principal da drinksApi
   useEffect(() => {
     const getDrinksApi = async () => {
-      const result = await fetchAPI('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-      setDataDrinks(result);
+      const { drinks } = await fetchAPI('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      setDataDrinks(drinks);
     };
     getDrinksApi();
   }, []);
 
-  // faz requisicao para categorias da mealsApi
+  // faz requisicao para receber os botoes de categorias da mealsApi
   useEffect(() => {
-    const getMealCategoryApi = async () => {
-      const result = await fetchAPI('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
-      setCategoryMeals(result);
+    const getCategoryMealApi = async () => {
+      const { meals } = await fetchAPI('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      setBtnCategoryMeals(meals);
     };
-    getMealCategoryApi();
+    getCategoryMealApi();
   }, []);
 
-  // faz requisicao para categorias da drinksApi
+  // faz requisicao para receber os botoes de categorias da drinksApi
   useEffect(() => {
-    const getDrinkCategoryApi = async () => {
-      const result = await fetchAPI('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
-      setCategoryDrinks(result);
+    const getCategoryDrinkApi = async () => {
+      const { drinks } = await fetchAPI('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+      setBtnCategoryDrinks(drinks);
     };
-    getDrinkCategoryApi();
+    getCategoryDrinkApi();
   }, []);
+
+  // faz requisicao para receber a lista de cada categoria da mealsApi
+  useEffect(() => {
+    const getListCategoryMealApi = async () => {
+      const { meals } = await fetchAPI(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${listCategoryMeals}`);
+      setDataMeals(meals);
+    };
+    getListCategoryMealApi();
+  }, [listCategoryMeals]);
+
+  // faz requisicao para receber a lista de cada categoria da drinksApi
+  useEffect(() => {
+    const getListCategoryDrinkApi = async () => {
+      const { drinks } = await fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${listCategoryDrinks}`);
+      setDataDrinks(drinks);
+    };
+    getListCategoryDrinkApi();
+  }, [listCategoryDrinks]);
 
   const context = {
     dataMeals,
     setDataMeals,
     dataDrinks,
     setDataDrinks,
-    categoryMeals,
-    categoryDrinks,
+    btnCategoryMeals,
+    btnCategoryDrinks,
+    setListCategoryMeals,
+    setListCategoryDrinks,
   };
 
   return (

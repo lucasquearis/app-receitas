@@ -1,22 +1,31 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
-import CategoryButton from './CategoryButton';
 
 export default function MealCategoryButtons() {
-  const { categoryMeals } = useContext(Context);
-  const { meals } = categoryMeals;
+  const { btnCategoryMeals, setListCategoryMeals } = useContext(Context);
   const CINCO = 5;
+
+  const handleClick = ({ target }) => {
+    const { name } = target;
+    setListCategoryMeals(name);
+  };
 
   return (
     <ul>
-      { meals ? (
-        meals
+      { btnCategoryMeals ? (
+        btnCategoryMeals
           .filter((_item, index) => index < CINCO)
           .map((category) => (
-            <CategoryButton
+            <button
+              type="button"
+              name={ category.strCategory }
+              data-testid={ `${category.strCategory}-category-filter` }
+              onClick={ handleClick }
               key={ category.strCategory }
-              category={ category.strCategory }
-            />
+              className="filter-button"
+            >
+              { category.strCategory }
+            </button>
           ))
       ) : null }
     </ul>

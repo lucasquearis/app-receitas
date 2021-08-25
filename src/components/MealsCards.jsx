@@ -2,15 +2,14 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 import MealCard from './MealCard';
 
-export default function MealsCards() {
+export default function Meals() {
   const { dataMeals } = useContext(Context);
-  const { meals } = dataMeals;
   const DOZE = 12;
 
   return (
     <ul>
-      { meals ? (
-        meals
+      { dataMeals ? (
+        dataMeals
           .filter((_item, index) => index < DOZE)
           .map((meal, index) => (
             <MealCard
