@@ -2,7 +2,7 @@
 import React, { useContext, useState } from 'react';
 // import { useLocation } from 'react-router-dom'; // QUANDO TIVER A PAGINA DE COMIDAS/BEBIDAS ATIVAR
 import myContext from '../context/myContext';
-// contants
+// constants
 import { TEXT_ALERT_ONE } from '../services/data';
 
 export default function SearchBar() {
