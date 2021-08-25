@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionEmail } from '../../../src/Redux/actions/user';
+import { actionEmail } from '../../Redux/actions/user';
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Login extends React.Component {
   }
 
   validation() {
-    const { email, password, } = this.state;
+    const { email, password, } = this.state
     const emailValid = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     const passwordValid = 7;
     if (emailValid.test(email) && passwordValid <= password.length) {
@@ -35,24 +35,24 @@ class Login extends React.Component {
   }
 
   // Salva o email no Store que é chamada ao clicar no botão Entrar
-    saveStateEmailStore() {
-    const { email } = this.state;
-    const userTokens = {
-      email,
-    };
-    localStorage.setItem('user', JSON.stringify(userTokens));
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    }
+  saveStateEmailStore() {
+  const { email } = this.state;
+  const userTokens = {
+    email,
+  };
+  localStorage.setItem('user', JSON.stringify(userTokens));
+  localStorage.setItem('mealsToken', 1);
+  localStorage.setItem('cocktailsToken', 1);
+  }
 
-    submitLogin(event) {
-      event.preventDefault();
-      const { setEmailAction, history } = this.props;
-      const { email } = this.state;
-      setEmailAction(email);
-      history.push('/comidas');
-      this.saveStateEmailStore();
-    }
+  submitLogin(event) {
+    event.preventDefault();
+    const { setEmailAction, history } = this.props;
+    const { email } = this.state;
+    setEmailAction(email);
+    history.push('/comidas');
+    this.saveStateEmailStore();
+  }
 
   render() {
     const {
@@ -86,16 +86,16 @@ class Login extends React.Component {
             />
           </label>
         </form>
-        
-          <button
-            type="submit"
-            data-testid="login-submit-btn"
-            onClick={ (event) => this.submitLogin(event) }
-            disabled={ button }
-          >
-            Entrar
-          </button>
-       
+
+        <button
+          type="submit"
+          data-testid="login-submit-btn"
+          onClick={ (event) => this.submitLogin(event) }
+          disabled={ button }
+        >
+          Entrar
+        </button>
+
       </div>
 
     );
