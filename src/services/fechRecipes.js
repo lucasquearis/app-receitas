@@ -38,7 +38,7 @@ export async function fetchDrinksDetails(callback, id) {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     const request = await fetch(endpoint);
     const results = await request.json();
-    callback({ drink: results, allDrinkDetails: {} });
+    callback({ ...results, drinks: true });
   } catch (err) {
     console.log(err);
   }

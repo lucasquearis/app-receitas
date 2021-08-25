@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { fetchFoodDetails } from '../services/fechRecipes';
+import { fetchFoodDetails, fetchDrinksDetails } from '../services/fechRecipes';
 import FoodDetails from '../components/FoodDetails';
 
 export default function RecipeDetails(props) {
   const { match: { params: { id }, url } } = props;
   const [foodDetails, setFoodDetails] = useState({ meals: [], food: false });
+  const [drinkDetails, setDrinkDetails] = useState({ drinks: [], drink: false });
   useEffect(() => {
-    fetchFoodDetails(setFoodDetails, id);
+    if (url === `/comidas/${id}`) {
+      fetchFoodDetails(setFoodDetails, id);
+    } else { fetchDrinksDetails(setDrinkDetails, id); }
   }, []);
   const { meals, food } = foodDetails;
+  console.log(drinkDetails);
 
   if (url === `/comidas/${id}` && food) {
     const { strMeal, strMealThumb, strCategory,
