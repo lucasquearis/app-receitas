@@ -1,0 +1,7 @@
+body {
+  align-items: flex-end;
+  background-color: aqua;
+  display: flex;
+  flex-flow: row wrap;
+  position: fixed;
+}

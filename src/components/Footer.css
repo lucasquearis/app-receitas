@@ -1,0 +1,12 @@
+body {
+  align-items: flex-end;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  position: fixed;
+}
+
+.image-icons {
+  height: 15px;
+  width: 15px;
+}
