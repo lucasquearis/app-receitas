@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import loginValidation from '../services/loginValidation';
 import actionLogin from '../redux/actions/actionLogin';
 
@@ -40,16 +41,18 @@ const Login = () => {
             data-testid="password-input"
           />
         </Form.Label>
-        <Button
-          data-testid="login-submit-btn"
-          disabled={ !loginValidation({ email, password }) }
-          onClick={ () => {
-            dispatch(actionLogin(email));
-            handleLocalStorage(email);
-          } }
-        >
-          Entrar
-        </Button>
+        <Link to="/comidas">
+          <Button
+            data-testid="login-submit-btn"
+            disabled={ !loginValidation({ email, password }) }
+            onClick={ () => {
+              dispatch(actionLogin(email));
+              handleLocalStorage(email);
+            } }
+          >
+            Entrar
+          </Button>
+        </Link>
       </Form.Group>
     </Form>
   );
