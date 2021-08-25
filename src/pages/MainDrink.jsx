@@ -1,5 +1,10 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
-const MainDrink = () => <>Main DRINK Page</>;
+function MainDrink() {
+  return (
+    <Footer />
+  );
+}
 
 export default MainDrink;
