@@ -5,6 +5,7 @@ import fetchMealApi from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
   const [foods, setFoods] = useState([]);
+  const [foodDetails, setFoodDetails] = useState([]);
 
   useEffect(() => {
     fetchMealApi().then((data) => {
@@ -15,6 +16,8 @@ const FoodProvider = ({ children }) => {
   const contextValue = {
     foods,
     setFoods,
+    foodDetails,
+    setFoodDetails,
   };
   return (
     <FoodContext.Provider value={ contextValue }>
