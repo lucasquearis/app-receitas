@@ -10,8 +10,11 @@ import Comidas from './pages/comidas/Comidas';
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ Comidas } />
+      <div className="containerBoby">
+
+        <Route exact path="/" component={ Login } />
+        <Route path="/comidas" component={ Comidas } />
+      </div>
     </Switch>
   );
 }
