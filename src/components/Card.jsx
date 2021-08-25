@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 
-export default function RecipeCard({ title, thumb, index }) {
+export default function CardItems({ title, thumb, index }) {
   return (
     <Card
       data-testid={ `${index}-recipe-card` }
@@ -23,7 +23,7 @@ export default function RecipeCard({ title, thumb, index }) {
   );
 }
 
-RecipeCard.propTypes = {
+CardItems.propTypes = {
   title: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   thumb: PropTypes.string.isRequired,
