@@ -40,6 +40,25 @@ export default function DetalheComida(/* props */) {
     );
   }
 
+  const getYoutubeURL = () => {
+    const url = food.strYoutube;
+    const minIndex = 24;
+    const maxIndex = 31;
+    let embededURL = '';
+    if (url.length !== 0) {
+      const splitedURL = url.split('');
+      splitedURL.forEach((word, index) => {
+        if (index === minIndex) {
+          embededURL += 'embed/';
+        }
+        if (index < minIndex || index > maxIndex) {
+          embededURL += word;
+        }
+      });
+    }
+    return embededURL;
+  };
+
   return (
     <section className="food-info">
       <img
@@ -83,6 +102,10 @@ export default function DetalheComida(/* props */) {
       <div className="instructions-section">
         <h5>Instructions</h5>
         <p data-testid="instrucions">{ food.strInstructions }</p>
+      </div>
+      <div className="video-section">
+        <h5>Video</h5>
+        <iframe data-testid="video" title="food-video" src={ getYoutubeURL() } />
       </div>
     </section>
   );
