@@ -22,6 +22,13 @@ function App() {
       {/* <Route
         exact
         path="/comidas"
+        component={ Foods }
+      />
+      <Route
+        exact
+        path="/bebidas"
+        component={ Drinks }
+      />
         component={ RecipesSearchBar }
       /> */}
       <Route path="/bebidas/:id" component={ DrinkDetails } />
