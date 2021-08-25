@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 function DrinksDetails() {
-  const [recipesDrink, setRecipesDrink] = useState([]);
-  useEffect(() => {
-    const getRecipesDrink = async () => {
-      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319'; // alterar id
-      const { results } = await fetch(endpoint).then((data) => data.json());
-      setRecipesDrink(results);
-    };
-    getRecipesDrink();
-  }, []);
+  // const [recipesDrink, setRecipesDrink] = useState([]);
+  // useEffect(() => {
+  //   const getRecipesDrink = async () => {
+  //     const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319'; // alterar id
+  //     const { results } = await fetch(endpoint).then((data) => data.json());
+  //     setRecipesDrink(results);
+  //   };
+  //   getRecipesDrink();
+  // }, []);
 
   // const dataRecipesDrink = [...recipesDrink];
   const index = 0; // Valor dinâmico

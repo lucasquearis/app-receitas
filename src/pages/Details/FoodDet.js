@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 function FoodDetails() {
-  const [recipesFood, setRecipesFood] = useState([]);
-  useEffect(() => {
-    const getRecipesFood = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id
-      const { results } = await fetch(endpoint).then((data) => data.json());
-      setRecipesFood(results);
-      console.log(results);
-    };
-    getRecipesFood();
-  }, []);
+  // const [recipesFood, setRecipesFood] = useState([]);
+  // useEffect(() => {
+  //   const getRecipesFood = async () => {
+  //     const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id
+  //     const { results } = await fetch(endpoint).then((data) => data.json());
+  //     setRecipesFood(results);
+  //     console.log(results);
+  //   };
+  //   getRecipesFood();
+  // }, []);
 
   // const dataRecipesFood = [...recipesFood];
   const index = 0; // valor dinâmico
