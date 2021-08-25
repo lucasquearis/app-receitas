@@ -9,6 +9,12 @@ export default function SearchBar() {
         data-testid="search-input"
         type="text"
       />
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+      >
+        Buscar
+      </button>
       <div className="search-radio-btns">
         <label htmlFor="radio-ingredients">
           Ingredientes
