@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
+import Favorites from './pages/Favorites';
 
 import './App.css';
 
@@ -30,12 +31,13 @@ function App() {
         <Route path="/explorar/comidas/area" />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" />
-        <Route path="/receitas-favoritas" />
+        <Route path="/receitas-favoritas" component={ Favorites } />
       </Switch>
       <Switch>
         <Route exact path="/" />
         <Route path="/comidas/:id" />
         <Route path="/bebidas/:id" />
+        <Route path="/receitas-favoritas" />
         <Route path="/" component={ Footer } />
       </Switch>
     </Provider>
