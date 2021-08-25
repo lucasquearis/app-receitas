@@ -7,7 +7,7 @@ const B_FIRST_LETTER_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.p
 const B_NAME_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const B_INGREDIENT_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 
-const getRecipes = (payload) => ({
+export const getRecipes = (payload) => ({
   type: GET_RECIPES,
   payload,
 });

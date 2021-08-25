@@ -1,10 +1,13 @@
 import React from 'react';
-import { Header, RecipeList, Footer } from '../components';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Header, RecipeList, Footer } from '../components';
+import UseInitialRecipes from '../hook/UseInitialRecipes';
 
 function MainDrinks() {
+  UseInitialRecipes('drinks');
   const recipes = useSelector(({ meals }) => meals.recipes);
+
   if (recipes.drinks && recipes.drinks.length === 1) {
     const drinkId = recipes.drinks[0].idDrink;
     return <Redirect to={ `/bebidas/${drinkId}` } />;
