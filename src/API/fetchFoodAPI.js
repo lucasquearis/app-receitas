@@ -1,4 +1,4 @@
-const fetchRecipesAPI = async (value, type) => {
+const fetchFoodAPI = async (value, type) => {
   if (type === 'ingredient') {
     console.log(value, type);
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`);
@@ -17,4 +17,4 @@ const fetchRecipesAPI = async (value, type) => {
   }
 };
 
-export default fetchRecipesAPI;
+export default fetchFoodAPI;
