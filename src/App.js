@@ -8,20 +8,11 @@ import Login from './pages/login/Login';
 import Comidas from './pages/comidas/Comidas';
 
 function App() {
-  return ( <
-    Switch >
-    <
-    Route exact path = "/"
-    component = {
-      Login
-    }
-    /> <
-    Route path = "/comidas"
-    component = {
-      Comidas
-    }
-    /> <
-    /Switch>
+  return ( 
+    <Switch >
+      <Route exact path="/"component={ Login } />
+      <Route path="/comidas"component={Comidas} />
+    </Switch>
   );
 }
 

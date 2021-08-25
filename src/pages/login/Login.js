@@ -36,13 +36,13 @@ class Login extends React.Component {
 
   // Salva o email no Store que é chamada ao clicar no botão Entrar
   saveStateEmailStore() {
-  const { email } = this.state;
-  const userTokens = {
-    email,
-  };
-  localStorage.setItem('user', JSON.stringify(userTokens));
-  localStorage.setItem('mealsToken', 1);
-  localStorage.setItem('cocktailsToken', 1);
+    const { email } = this.state;
+    const userTokens = {
+     email,
+   };
+   localStorage.setItem('user', JSON.stringify(userTokens));
+   localStorage.setItem('mealsToken', 1);
+   localStorage.setItem('cocktailsToken', 1);
   }
 
   submitLogin(event) {
@@ -55,11 +55,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const {
-      email,
-      password,
-      button,
-    } = this.state;
+    const { email, password, button } = this.state;
     return (
       <div>
         <form>
@@ -86,7 +82,6 @@ class Login extends React.Component {
               />
           </label>
         </form>
-
         <button
           type="submit"
           data-testid="login-submit-btn"
@@ -95,46 +90,7 @@ class Login extends React.Component {
           >
           Entrar
         </button>
-        <div className="text-center">
-          <h1>Login</h1>
-        </div>
-        <label htmlFor="input-email">
-          E-mail:
-          <input
-            data-testid="email-input"
-            id="input-email"
-            label="Email"
-            type="email"
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-            />
-        </label>
-        <label htmlFor="input-password">
-          Senha:
-          <input
-            required
-            data-testid="password-input"
-            id="input-password"
-            label="Senha"
-            type="password"
-            name="password"
-            value={ password }
-            onChange={ this.handleChange }
-            />
-        </label>
-        <Link to="/explorar">
-          <button
-            data-testid="login-submit-btn"
-            type="submit"
-            onClick={ this.saveStateEmailStore() }
-            disabled={ button }
-            >
-            Entrar
-          </button>
-        </Link>
-      </form>
-    </div>
+       </div>    
     );
   }
 }
