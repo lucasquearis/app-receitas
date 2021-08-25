@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [drinkData, setDrinkData] = useState([]);
   const [drinkCategory, setDrinkCategory] = useState([]);
   const [foodCategory, setFoodCategory] = useState([]);
+  const [filter, setFilter] = useState('');
 
   const contextValue = {
     email,
@@ -20,6 +21,8 @@ function Provider({ children }) {
     setDrinkCategory,
     foodCategory,
     setFoodCategory,
+    filter,
+    setFilter,
   };
 
   return (

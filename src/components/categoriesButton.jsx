@@ -1,0 +1,34 @@
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import RecipesContext from '../context/RecipesContext';
+import Button from './Button';
+
+const CategoriesButton = ({ food }) => {
+  const { drinkCategory, foodCategory, filter, setFilter } = useContext(RecipesContext);
+  const onClick = ({ target }) => {
+    const toggle = (filter === target
+      .value) || (target
+      .value === 'All') ? '' : target.value;
+    setFilter(toggle);
+  };
+  const foodOrDrink = food ? foodCategory : drinkCategory;
+  return (
+    <div>
+      <Button text="All" onClick={ onClick } />
+      { foodOrDrink
+        .map(({ strCategory }) => (
+          <Button
+            key={ strCategory }
+            text={ strCategory }
+            testId={ `${strCategory}-category-filter` }
+            onClick={ onClick }
+          />))}
+    </div>
+  );
+};
+
+CategoriesButton.propTypes = {
+  food: PropTypes.bool.isRequired,
+};
+
+export default CategoriesButton;

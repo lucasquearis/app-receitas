@@ -11,6 +11,7 @@ function Button(props) {
       data-testid={ testId }
       className={ className }
       disabled={ disabled }
+      value={ text }
     >
       { text }
     </button>

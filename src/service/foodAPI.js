@@ -1,21 +1,21 @@
 import { useContext, useEffect } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
-function FoodDAPI(request) {
+function FoodDAPI() {
   const { setFoodData, setFoodCategory } = useContext(RecipesContext);
-  const numberFoods = 12;
   const numberCategory = 5;
   useEffect(() => {
-    const response = async () => {
+    const response = async (request) => {
       const url = `https://www.themealdb.com/api/json/v1/1/${request}`;
       await fetch(url).then((packJason) => packJason.json())
         .then(({ meals }) => {
           if (request === 'search.php?s=') {
-            setFoodData(meals.slice(0, numberFoods));
+            setFoodData(meals);
           } else setFoodCategory(meals.slice(0, numberCategory));
         });
     };
-    response();
+    response('list.php?c=list');
+    response('search.php?s=');
   }, [setFoodData, setFoodCategory]);
 }
 
