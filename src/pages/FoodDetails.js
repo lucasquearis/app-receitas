@@ -1,14 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import FoodContext from '../context/FoodContext';
-import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 
 const FoodDetails = () => {
-  const { foodDetailsId } = useContext(FoodContext);
-  const [foodDetails, setFoodDetails] = useState(FoodContext);
+  const { foodDetails } = useContext(FoodContext);
 
-  useEffect(() => {
-    fetchMealDetailsApi(foodDetailsId).then((data) => setFoodDetails(data));
-  }, [foodDetailsId]);
+  foodDetails.map(({ idMeal }) => console.log(idMeal));
 
   return (
     <div>
@@ -20,7 +16,9 @@ const FoodDetails = () => {
         <button data-testid="favorite-btn" />
         <p data-testid="recipe-category" />
       </div> */}
+      {/* { foodDetails && foodDetails.slice(0, 1).map((data) => console.log(data)) } */}
     </div>
+
   );
 };
 
