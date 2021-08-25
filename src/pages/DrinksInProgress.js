@@ -12,7 +12,6 @@ function DrinksInProgress() {
   useEffect(() => {
     async function getRcps() {
       const response = await fetchDrinkRecipe(id);
-      console.log(response);
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
         .map((e) => response[e]);
