@@ -7,4 +7,5 @@ test('Farewell, front-end', () => {
   const linkElement = getByText(/TRYBE/i);
   expect(linkElement).toBeInTheDocument();
 });
+
 */
