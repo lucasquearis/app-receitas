@@ -14,6 +14,7 @@ function CategoryFilter() {
           <CategoryButton
             key={ strCategory }
             category={ strCategory }
+            path={ pathname }
           />)) }
       </div>
     );
