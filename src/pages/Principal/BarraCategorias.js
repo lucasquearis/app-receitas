@@ -14,12 +14,13 @@ function BarraCategorias({ whatIsTheType }) {
       >
         All
       </button>
-      {categories.map((category, index) => (
+      {categories.map(({ strCategory }, index) => (
         <button
+          data-testid={ `${strCategory}-category-filter` }
           key={ `category-filter-${index}` }
           type="button"
         >
-          { category.strCategory }
+          { strCategory }
         </button>
       ))}
     </>
