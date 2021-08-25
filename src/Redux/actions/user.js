@@ -4,4 +4,3 @@ export const actionEmail = (payload) => ({
   type: USER_EMAIL,
   payload,
 });
-
