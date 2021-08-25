@@ -1,5 +1,5 @@
 import React from 'react';
-import './header.css';
+import '../styles/Header.css';
 
 export default function SearchBar() {
   return (
