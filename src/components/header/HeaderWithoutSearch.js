@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import profileIcon from '../images/profileIcon.svg';
+import profileIcon from '../../images/profileIcon.svg';
 
 const HeaderWithoutSearch = ({ children }) => (
   <div>
