@@ -62,9 +62,9 @@ describe('Testes para o Perfil', () => {
     expect(user).toStrictEqual({ email: 'email@mail.com' });
     expect(mealsToken).toBe('1');
     expect(cocktailsToken).toBe('1');
-    expect(doneRecipes).toStrictEqual([]);
-    expect(favoriteRecipes).toStrictEqual([]);
-    expect(inProgressRecipes).toStrictEqual({});
+    expect(doneRecipes).toBe('[]');
+    expect(favoriteRecipes).toBe('[]');
+    expect(inProgressRecipes).toBe('{}');
 
     userEvent.click(sair);
     const { location: { pathname } } = history;
