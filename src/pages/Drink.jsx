@@ -2,11 +2,14 @@ import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import DrinkContext from '../context/DrinkContext';
 import MyContext from '../context/MyContext';
 import '../css/Card.css';
+import Cards from '../components/Cards';
 
 function Drink() {
   const { searchedRecipe, redirectDrink } = useContext(MyContext);
+  const { Drinks, drinksCategories } = useContext(DrinkContext);
   const recipeLimit = 12;
 
   function searchedDrinkRecipes() {
@@ -40,9 +43,23 @@ function Drink() {
 
   return (
     <div>
-      <Header />
+      <Header titulo="Bebidas" />
       { searchedRecipe.length > 1
         ? searchedDrinkRecipes() : redirectDrink()}
+
+      <main>
+        {
+          Drinks.splice(0, recipeLimit).map((element, index) => (
+            <Cards
+              key={ index }
+              index={ index }
+              type="comidas"
+              element={ element }
+            />
+          ))
+        }
+      </main>
+
       <Footer />
     </div>
   );
