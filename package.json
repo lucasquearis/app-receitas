@@ -6,7 +6,6 @@
     "@material-ui/core": "^3.9.3",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
@@ -53,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^12.0.0",
     "autoprefixer": "^10.3.2",
     "clipboardy": "^2.1.0",
     "cypress": "^3.7.0",

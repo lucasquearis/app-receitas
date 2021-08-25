@@ -27,7 +27,7 @@ function Header({ brand, dataId, className, src, alt }) {
             />
           </button>
         </Link>
-        <h3 data-testid="page-title">
+        <h3 className="title" data-testid="page-title">
           {brand}
         </h3>
         <button
@@ -51,11 +51,11 @@ function Header({ brand, dataId, className, src, alt }) {
 }
 
 Header.propTypes = {
-  brand: string.isRequired,
-  dataId: string.isRequired,
-  className: string.isRequired,
-  src: string.isRequired,
-  alt: string.isRequired,
-};
+  brand: string,
+  dataId: string,
+  className: string,
+  src: string,
+  alt: string,
+}.isRequired;
 
 export default Header;

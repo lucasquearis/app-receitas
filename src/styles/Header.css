@@ -19,7 +19,11 @@ header {
 }
 
 .img-profile, .img-search {
-  height: 17px;
+  height: 18px;
+}
+
+.title {
+  color: #24997f;
 }
 
 .profile-btn:focus, .search-btn:focus {
