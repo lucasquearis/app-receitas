@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchMealDetails } from '../redux/actions/foodActions';
+import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
+import DrinksCards from './DrinksCard';
 
 function FoodInfo() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { details } = useSelector((state) => state.foodsAndDrinks);
+  const { details, drinks } = useSelector((state) => state.foodsAndDrinks);
+  const sixRecomendations = 6;
 
   useEffect(() => {
     dispatch(fetchMealDetails(id));
+    dispatch(fetchDrinksRedux);
   }, [dispatch, id]);
 
-  if (!details) {
+  if (!drinks) {
     return (
       <h1>Loading</h1>
     );
@@ -52,6 +55,16 @@ function FoodInfo() {
         allowFullScreen
       />
       <ul />
+      <ul>
+        { drinks.slice(0, sixRecomendations)
+          .map((drink, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-recomendation-card` }
+            >
+              { DrinksCards(drink, 'bebidas', index) }
+            </li>))}
+      </ul>
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
       </button>
