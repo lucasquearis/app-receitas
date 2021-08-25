@@ -14,6 +14,7 @@ function IngredientsTaskList({ ingList, handleCheckIngredient }) {
           >
             <input
               type="checkbox"
+              checked={ checked }
               name={ ing }
               id={ `${ing}-check-input` }
               onChange={ handleCheckIngredient }

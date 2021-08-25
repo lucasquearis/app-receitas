@@ -13,12 +13,23 @@ function MealsInProgress() {
     ingList: [],
   });
 
+  // function isInLocalStorage(ing) {
+  //   const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   if (!meals[id]) return false;
+  //   return meals[id].some((ingredient) => ingredient === ing);
+  // }
+
   useEffect(() => {
+    function isInLocalStorage(ing) {
+      const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (!meals[id]) return false;
+      return meals[id].some((ingredient) => ingredient === ing);
+    }
     async function getRcps() {
       const response = await fetchMealRecipe(id, 'meal');
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
-        .map((e) => ({ ing: response[e] }));
+        .map((e) => ({ ing: response[e], checked: isInLocalStorage(response[e]) }));
 
       setRcp({ ...response, ingList: ingredients });
     }
@@ -42,6 +53,17 @@ function MealsInProgress() {
     if (checked) return addMealIngInProgressStorage(id, name);
     rmvMealIngInProgressStorage(id, name);
   };
+
+  // function checkLocalStorage() {
+  //   const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   if (meals[id]) {
+  //     meals[id]
+  //   } else {
+  //     console.log('nao');
+  //   }
+  // }
+
+  // useEffect(checkLocalStorage, [id]);
 
   return (
     <>
