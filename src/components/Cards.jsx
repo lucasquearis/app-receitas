@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 function Cards({ element, index, type }) {
@@ -23,6 +24,7 @@ function Cards({ element, index, type }) {
         </p>
       </section>
     </Link>
+
   );
 }
 
