@@ -3,42 +3,54 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components';
 import shareIconPath from '../images/shareIcon.svg';
 
+import recipes from '../tests/mocks/recipes';
+
 const copy = require('clipboard-copy');
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const DoneRecipes = () => {
   const [rawDoneRecipes, setRawDoneRecipes] = useState([]);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [filterOption, setFilterOption] = useState('');
   const [applyFilter, setApplyFilter] = useState(false);
   const [shareRecipe, setShareRecipe] = useState('');
+  const [shareAlert, setShareAlert] = useState(false);
 
   useEffect(() => {
-    const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    // const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const getDoneRecipes = recipes;
     setRawDoneRecipes(getDoneRecipes);
     setDoneRecipes(getDoneRecipes);
   }, []);
 
   useEffect(() => {
-    if (applyFilter) {
+    if (applyFilter && (filterOption !== 'all')) {
       setDoneRecipes(rawDoneRecipes.filter((recipe) => Object.keys(recipe)
         .some((key) => key === filterOption)));
     }
+    if (applyFilter && (filterOption === 'all')) {
+      setDoneRecipes(rawDoneRecipes);
+    }
     setApplyFilter(false);
-  }, applyFilter);
+  }, [applyFilter]);
 
   useEffect(() => {
-    copy(shareRecipe);
-    // eslint-disable-next-line no-alert
-    alert('Link copiado!');
-  }, shareRecipe);
+    const INTERVAL = 5000;
+    if (shareRecipe.length > 0) {
+      copy(shareRecipe);
+      setInterval(() => setShareAlert(false), INTERVAL);
+    }
+    setShareRecipe('');
+  }, [shareRecipe]);
 
-  const handleFilterClick = ({ target: { name } }) => {
-    setFilterOption(name);
+  const handleFilterClick = ({ target: { className } }) => {
+    setFilterOption(className.split(' ', 2)[1]);
     setApplyFilter(true);
   };
 
-  const handleClickShare = ({ target: { name } }) => {
-    const recipeDetailURL = `http://localhost:3000/${name.replace('-', '/')}`;
+  const handleClickShare = ({ target: { id } }) => {
+    const recipeDetailURL = `http://localhost:3000/${id.replace('-', '/')}`;
+    setShareAlert(true);
     setShareRecipe(recipeDetailURL);
   };
 
@@ -48,7 +60,7 @@ const DoneRecipes = () => {
         <Button
           type="button"
           id="filter-by-all-btn"
-          className="recipes-categories"
+          className="recipes-categories all"
           buttonText="All"
           onClick={ handleFilterClick }
           isDisable={ false }
@@ -56,8 +68,7 @@ const DoneRecipes = () => {
         <Button
           type="button"
           id="filter-by-food-btn"
-          className="recipes-categories"
-          name="idMeal"
+          className="recipes-categories idMeal"
           buttonText="Food"
           onClick={ handleFilterClick }
           isDisable={ false }
@@ -65,13 +76,17 @@ const DoneRecipes = () => {
         <Button
           type="button"
           id="filter-by-drink-btn"
-          className="recipes-categories"
-          name="idDrink"
+          className="recipes-categories idDrink"
           buttonText="Drinks"
           onClick={ handleFilterClick }
           isDisable={ false }
         />
       </div>
+      { shareAlert ? (
+        <span className="share-alert">Link copiado!</span>
+      ) : (
+        <> </>
+      ) }
       { doneRecipes.map((doneRecipe, index) => {
         let type = '';
         if (Object.keys(doneRecipe).some((key) => key === 'idMeal')) {
