@@ -1,0 +1,16 @@
+.footer-wrapper {
+  position:absolute;
+  left:0;
+  bottom:0;
+  right:0;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.icons img {
+  height: 34px;
+}
