@@ -1,0 +1,11 @@
+.page-explore{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.page-explore .explore-buttons{
+  display: flex;
+  flex-direction: column;
+}
