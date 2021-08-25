@@ -3,7 +3,7 @@ import Context from '../context/Context';
 import Button from './Button';
 import InputRadio from './InputRadio';
 
-function RadiosButtonsSearch() {
+function InputsSearch() {
   const { filter, setFilter } = useContext(Context);
 
   const alertFirstLetter = () => {
@@ -54,4 +54,4 @@ function RadiosButtonsSearch() {
   );
 }
 
-export default RadiosButtonsSearch;
+export default InputsSearch;
