@@ -1,36 +1,72 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  // DRINK_ERROR_RESPONSE,
-  DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
+import Button from 'react-bootstrap/Button';
+import { DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
 import DrinkCard from '../DrinkCard';
+import { getDrinkTypesList, getDrinkByFilter } from '../../services/drinkAPI';
 import Loading from '../Loading';
 
-const NUMBER_ELEVEN = 11;
-
 const DrinkList = () => {
+  const TWELVE = 12;
+  const FIVE = 5;
   const loading = useSelector(({ drink }) => drink.loading);
   const drinks = useSelector(({ drink }) => drink.drinks);
   const error = useSelector(({ drink }) => drink.error);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [drinkTypesList, setDrinkTypesList] = useState(false);
+  const [loadingList, setLoadingList] = useState(true);
+  const [drinkFilter, setDrinkFilter] = useState(false);
+  const [filteredDrinks, setFilteredDrinks] = useState(drinks);
 
   useEffect(() => {
     const getFirstMeals = async () => {
-      // try {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
       const { drinks: startDrinks } = await response.json();
       dispatch({ type: DRINK_RESPONSE, payload: startDrinks });
-      // } catch (errorType) {
-      //   console.log(`Algo deu errado na busca por bebidas: ${errorType}`);
-      //   dispatch({ type: DRINK_ERROR_RESPONSE });
-      // }
+      setFilteredDrinks(startDrinks);
     };
     getFirstMeals();
   }, [dispatch]);
 
-  if (loading) return <Loading />;
+  useEffect(() => {
+    getDrinkTypesList().then((list) => {
+      const reducedList = list.filter((el, index) => index < FIVE);
+      setDrinkTypesList(reducedList);
+      setLoadingList(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (drinkFilter) {
+      const getFilteredDrinks = async () => {
+        const response = await getDrinkByFilter(drinkFilter);
+        setFilteredDrinks(response);
+      };
+      getFilteredDrinks();
+    }
+  }, [drinkFilter]);
+
+  useEffect(() => {
+    setFilteredDrinks(drinks);
+  }, [drinks]);
+
+  const clickHandler = (drinkType) => {
+    if (drinkType === drinkFilter) {
+      setDrinkFilter(false);
+      setFilteredDrinks(drinks);
+    } else {
+      setDrinkFilter(drinkType);
+    }
+  };
+
+  const clickHandlerAll = () => {
+    setFilteredDrinks(drinks);
+    setDrinkFilter(false);
+  };
+
+  if (loading || loadingList) return <Loading />;
 
   if (error) {
     return (
@@ -40,25 +76,52 @@ const DrinkList = () => {
     );
   }
 
-  if (!drinks) {
+  if (!filteredDrinks) {
     // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return <p>Nenhuma receita encontrada...</p>;
   }
 
-  if (drinks.length === 1) {
-    history.push(`/bebidas/${drinks[0].idDrink}`);
+  if (filteredDrinks.length === 1 && !drinkFilter) {
+    history.push(`/bebidas/${filteredDrinks[0].idDrink}`);
   }
 
   return (
-    <div className="d-flex flex-row flex-wrap">
-      {
-        drinks.filter((e, index) => index <= NUMBER_ELEVEN)
-          .map((drink, index) => (
-            <DrinkCard key={ `${index}-card-name` } drink={ drink } index={ index } />
+    <>
+      <div>
+        <Button
+          data-testid="All-category-filter"
+          size="lg"
+          onClick={ clickHandlerAll }
+        >
+          All
+        </Button>
+        {
+          drinkTypesList.map((drinkType, index) => (
+            <Button
+              key={ index }
+              data-testid={ `${drinkType}-category-filter` }
+              size="lg"
+              onClick={ () => clickHandler(drinkType) }
+            >
+              { drinkType }
+            </Button>
           ))
-      }
-    </div>
+        }
+      </div>
+      <div className="d-flex flex-row flex-wrap">
+        {
+          filteredDrinks.filter((e, index) => index < TWELVE)
+            .map((drink, index) => (
+              <DrinkCard
+                key={ `${index}-card-name` }
+                drink={ drink }
+                index={ index }
+              />
+            ))
+        }
+      </div>
+    </>
   );
 };
 

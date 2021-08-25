@@ -28,6 +28,20 @@ const getDrinkByFirstLetter = async (term) => {
   // }
 };
 
+export const getDrinkTypesList = async () => {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+  const { drinks } = await response.json();
+  const drinkTypes = drinks.map(({ strCategory }) => strCategory);
+  return drinkTypes;
+};
+
+export const getDrinkByFilter = async (term) => {
+  console.log(term);
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${term}`);
+  const { drinks } = await response.json();
+  return drinks;
+};
+
 export const getDrink = (term, type) => {
   switch (type) {
   case 'Primeira Letra':

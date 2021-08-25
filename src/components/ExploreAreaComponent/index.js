@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
-// import useFetch from 'react-fetch-hook';
 import { getAreas, getFood, getFoodByArea } from '../../services/foodAPI';
 import Loading from '../Loading';
 import MealCard from '../MealCard';
@@ -13,7 +12,6 @@ const ExploreAreaComponent = () => {
   const [loading, setLoading] = useState(true);
   const [loadingAreas, setLoadingAreas] = useState(true);
   const [areas, setAreas] = useState([]);
-  // const { isLoading: loadingAreas, data: areasData } = useFetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
 
   useEffect(() => {
     const getAreasFromApi = async () => {
@@ -41,8 +39,6 @@ const ExploreAreaComponent = () => {
   }, [selectedArea]);
 
   if (loadingAreas) return <Loading />;
-
-  // const { meals: areas } = areasData;
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">

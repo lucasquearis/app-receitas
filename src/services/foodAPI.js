@@ -28,6 +28,19 @@ const getFoodByFirstLetter = async (term) => {
   // }
 };
 
+export const getFoodTypesList = async () => {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const { meals } = await response.json();
+  const foodTypes = meals.map(({ strCategory }) => strCategory);
+  return foodTypes;
+};
+
+export const getFoodByFilter = async (term) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${term}`);
+  const { meals } = await response.json();
+  return meals;
+};
+
 export const getFood = (term, type) => {
   switch (type) {
   case 'Primeira Letra':

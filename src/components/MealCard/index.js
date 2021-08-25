@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
 import { useHistory } from 'react-router-dom';
+import './style.css';
 
 const MealCard = ({ meal, index }) => {
   const { strMealThumb, strMeal, idMeal } = meal;
@@ -32,5 +32,4 @@ MealCard.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
-
 export default MealCard;
