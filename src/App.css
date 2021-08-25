@@ -15,10 +15,9 @@
   max-height: 80vh;
 }
 
-#footer {
+footer {
   bottom: 0;
   position: fixed;
-  background-color: blue;
 }
 
 /*
