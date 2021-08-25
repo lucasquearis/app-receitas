@@ -1,7 +1,7 @@
 import { USER_EMAIL } from '../actions/actionTypes';
 
 const INITIAL_USER_STATE = {
-  email: '',
+  email: '',  
 };
 
 const user = (state = INITIAL_USER_STATE, action) => {
