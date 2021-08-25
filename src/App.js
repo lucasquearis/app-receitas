@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
 import Header from './Components/Header/index';
 import Foods from './Pages/Foods';
 import Drinks from './Pages/Drinks/index';
 import Login from './Pages/Login/Login';
+import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 
 function App() {
   const exploreFoodDrink = (
@@ -19,6 +19,7 @@ function App() {
     <AppProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route path="/:feedType/:id" component={ RecipeDetails } />
         <Route exact path="/comidas" component={ Foods } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route
