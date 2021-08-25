@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
-// import Foods from './pages/Foods';
-// import Drinks from './pages/Drinks';
-import FoodsDet from './pages/Details/FoodDet';
+
+import Foods from './pages/Foods';
+import Drinks from './pages/Drinks';
+import FoodDet from './pages/Details/FoodDet';
 import DrinksDet from './pages/Details/DrinksDet';
 // import Explore from './pages/Explore/Explore';
 // import FoodExp from './pages/Explore/FoodExp';
@@ -20,9 +21,9 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Login } />
-        {/* <Route path="/comidas" component={ Foods } /> */}
-        {/* <Route path="/bebidas" component={ Drinks } /> */}
-        <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
+        <Route path="/comidas" component={ Foods } />
+        <Route path="/bebidas" component={ Drinks } />
+        <Route path="/comidas/:id" render={ (props) => <FoodDet { ...props } /> } />
         <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         {/* <Route path="/explorar" component={ Explore } />
         <Route path="/explorar/comidas" component={ FoodExp } />
