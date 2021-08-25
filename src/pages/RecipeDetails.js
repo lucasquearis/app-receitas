@@ -5,6 +5,8 @@ import shareIcon from '../images/shareIcon.svg';
 import rockGlass from '../images/rockGlass.svg';
 import IngredientsList from '../components/IngredientsList';
 import Recomendations from '../components/Recomendations';
+import StartRecipeButton from '../components/StartRecipeButton';
+import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
@@ -71,12 +73,7 @@ function RecipeDetails(props) {
               {
                 recipe && <Recomendations type={ type } />
               }
-              <button
-                type="button"
-                data-testid="start-recipe-btn"
-              >
-                Iniciar Receita
-              </button>
+              <StartRecipeButton id={ id } type={ type } enType={ enType } />
             </div>
           )
           : (
