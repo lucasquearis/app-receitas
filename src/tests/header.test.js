@@ -19,17 +19,24 @@ describe('Header tests', () => {
   it('Redirect to profile page when clicking profile button', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
+
     const profileBtn = await screen.findByTestId(PROFILE_BTN_SELECTOR);
+
     fireEvent.click(profileBtn);
+
     const { pathname } = history.location;
+
     expect(pathname).toBe('/perfil');
   });
 
   it('Show search bar when clicking search icon', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
+
     const searchBtn = await screen.findByTestId(SEARCH_BTN_SELECTOR);
+
     fireEvent.click(searchBtn);
+
     expect(screen.findByTestId('search-input')).toBeDefined();
   });
 });
