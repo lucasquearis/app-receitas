@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import '../styles/login.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -38,7 +39,7 @@ export default function Login() {
 
   return (
     <div>
-      <form>
+      <form className="form">
         <input
           data-testid="email-input"
           value={ email }
