@@ -6,7 +6,7 @@ import Perfil from '../pages/Perfil';
 
 describe('Testes para o Perfil', () => {
   beforeEach(() => {
-    localStorage.setItem('user', JSON.stringify({ "email": "email@mail.com" }));
+    localStorage.setItem('user', JSON.stringify({ email: 'email@mail.com' }));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     localStorage.setItem('doneRecipes', '[]');
