@@ -7,21 +7,34 @@ import { ContextApp } from '../../Context/ContextApp';
 function Login() {
   const { handleInput, disabled, handleClick, redirect } = useContext(ContextApp);
   const emailProps = {
-    testid: 'email-input',
     name: 'Email',
-    handleInput,
+    inputProps: {
+      'data-testid': 'email-input',
+    },
+    label: 'Email',
+    variant: 'outlined',
+    type: 'Email',
+    onChange: handleInput,
   };
   const passwordProps = {
-    testid: 'password-input',
     name: 'Password',
-    handleInput,
+    inputProps: {
+      'data-testid': 'password-input',
+    },
+    label: 'Password',
+    variant: 'outlined',
+    type: 'Password',
+    onChange: handleInput,
   };
   const buttonProps = {
-    testid: 'login-submit-btn',
     name: 'Login',
+    'data-testid': 'login-submit-btn',
+    type: 'button',
+    variant: 'contained',
     disabled,
-    handleClick,
+    onClick: handleClick,
   };
+
   if (redirect) return <Redirect to="/comidas" />;
   return (
     <>

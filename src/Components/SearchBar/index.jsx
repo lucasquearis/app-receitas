@@ -5,6 +5,7 @@ import './style.css';
 import Button from '@material-ui/core/Button';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import InputRadio from '../InputRadio';
+import Inp from '../Inp';
 
 import { ContextApp } from '../../Context/ContextApp';
 
@@ -18,21 +19,25 @@ function SearchBar() {
   const currentRout = pathname.includes('comidas');
   const url = currentRout === true ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = ({ target: { name, value } }) => (
     setPreviousSearch({
       ...previousSearch,
       [name]: value,
-    });
+    })
+  );
+
+  const inpProps = {
+    name: 'input',
+    testid: 'search-input',
+    label: 'name',
+    variant: 'outlined',
+    type: 'text',
+    handleInput: (event) => handleChange(event),
   };
 
   return (
     <div className="search-bar-container">
-      <input
-        type="text"
-        data-testid="search-input"
-        name="input"
-        onChange={ (event) => handleChange(event) }
-      />
+      <Inp { ...inpProps } />
       <RadioGroup
         row
         name="type"
