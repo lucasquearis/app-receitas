@@ -6,6 +6,7 @@ import Provider from './context/Provider';
 import Login from './pages/Login';
 import Comidas from './pages/Comidas';
 import Perfil from './pages/Perfil';
+import ReceitasFeitas from './pages/ReceitasFeitas';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route path="/comidas" component={ Comidas } />
           <Route path="/perfil" component={ Perfil } />
+          <Route path="/receitas-feitas" component={ ReceitasFeitas } />
           {/*
           <Route path="/" component={ Login } />
           {/* <Route path="/comidas" component={ Login } />
@@ -29,7 +31,6 @@ function App() {
           <Route path="/explorar/comidas/ingredientes" component={ Login } />
           <Route path="/explorar/bebidas/ingredientes" component={ Login } />
           <Route path="/explorar/comidas/area" component={ Login } />
-          <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
       </BrowserRouter>
