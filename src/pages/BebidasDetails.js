@@ -77,7 +77,8 @@ function BebidasDetails(props) {
   const link = (
     <Link
       data-testid="start-recipe-btn"
-      to={ `/comidas/${id}/in-progress` }
+      to={ `/bebidas/${id}/in-progress` }
+      className="details-button"
     >
       {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
     </Link>
@@ -111,14 +112,14 @@ function BebidasDetails(props) {
             />
           </button>
         </div>
-        <p data-testid="recipe-category">{drink.strAlcoolic}</p>
+        <p data-testid="recipe-category">{drink.strAlcoholic}</p>
         <div>
           <h3>Ingredients</h3>
           <ul>
             {
               ingredients
                 .map((ingredient, index) => (
-                  <li key={ ingredient }>
+                  <li key={ ingredient } data-testid={`${index}-ingredient-name-and-measure`}>
                     { `${ingredient} - ${measures[index]}`}
                   </li>))
             }

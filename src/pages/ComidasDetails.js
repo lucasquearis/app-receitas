@@ -123,7 +123,7 @@ function ComidasDetails(props) {
             {
               ingredients
                 .map((ingredient, index) => (
-                  <li key={ ingredient }>
+                  <li key={ ingredient } data-testid={`${index}-ingredient-name-and-measure`}>
                     { `${ingredient} - ${measures[index]}`}
                   </li>))
             }

@@ -10,11 +10,8 @@ function Provider({ children }) {
   const [foodCategory, setFoodCategory] = useState([]);
   const [filter, setFilter] = useState('');
 
-  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
   const favoritingRecipe = (isFav, setIsFav, id, meal) => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (isFav) {
       setIsFav(false);
       const newFavoriteRecipes = favoriteRecipes
@@ -28,19 +25,22 @@ function Provider({ children }) {
     }
   };
 
-  const renderingIngredients = (meal) => {
+  const renderingIngredients = (food) => {
     const ingredients = [];
     const measures = [];
     const TWENTY = 20;
     for (let index = 1; index <= TWENTY; index += 1) {
-      if (meal[`strIngredient${index}`]) {
-        ingredients.push(meal[`strIngredient${index}`]);
-        measures.push(meal[`strMeasure${index}`]);
+      if (food[`strIngredient${index}`]) {
+        ingredients.push(food[`strIngredient${index}`]);
+        measures.push(food[`strMeasure${index}`]);
       }
     }
     return { ingredients, measures };
   };
   const verifyingRecipe = (id, type) => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const favorite = favoriteRecipes
       && favoriteRecipes.find((recipe) => recipe.idMeal === id);
     const done = doneRecipes
