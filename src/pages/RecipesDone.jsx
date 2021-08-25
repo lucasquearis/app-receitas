@@ -1,7 +1,10 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function RecipesDone() {
   return (
-    <span>RecipesDone</span>
+    <span>
+      <Header title="Receitas Feitas" />
+    </span>
   );
 }

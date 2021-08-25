@@ -1,0 +1,54 @@
+header {
+  background-color: #fa9500;
+  display: block;
+}
+
+input {
+  margin: 5px;
+}
+
+.header-div {
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: space-between;
+}
+
+.search-button {
+  background: #fa9500;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background 250ms ease-in-out , transform 150ms ease;
+}
+
+.search-button:hover {
+  background: #fa9500;
+}
+
+
+.search-button:focus {
+  background-color: #fa9500;
+  outline: none;
+  outline-offset: none;
+}
+
+.search-button:active {
+  transform: scale(0.99);
+}
+
+.profile-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
