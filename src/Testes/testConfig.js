@@ -11,3 +11,20 @@ export const getStore = (initialState) => {
   if(!initialState) return createStore(rootReducers, applyMiddleware(thunk));
   return createStore(rootReducers, initialState, applyMiddleware(thunk));
 };
+
+export const renderWithRouterAndStore = (component, routeConfigs = {}, initialState) => {
+  const route = routeConfigs.route || '/';
+  const store = getStore(initialState);
+  const history = routeConfigs.history
+    || createMemoryHistory({ initialEntries: [route] });
+
+  return {
+    ...render(
+      <Provider store={ store }>
+        <Router history={ history }>{component}</Router>
+      </Provider>,
+    ),
+    history,
+    store,
+  };
+};

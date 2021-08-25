@@ -5,7 +5,7 @@ import { setLocalStorage } from '../components/LocalStorage';
 
 function Login() {
   const { setRegister } = useContext(RecipesContext);
-  const MAX_LENGTH = 6;
+  const MAX_LENGTH = 5;
   const [login, setLogin] = useState({
     email: '',
     password: '',
