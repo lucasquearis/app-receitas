@@ -72,7 +72,7 @@ class Login extends React.Component {
               value={ email }
               placeholder="Email"
               onChange={ this.handleChange }
-            />
+              />
           </label>
           <label htmlFor="input-password">
             <input
@@ -83,7 +83,7 @@ class Login extends React.Component {
               value={ password }
               placeholder="Password"
               onChange={ this.handleChange }
-            />
+              />
           </label>
         </form>
 
@@ -92,7 +92,7 @@ class Login extends React.Component {
           data-testid="login-submit-btn"
           onClick={ (event) => this.submitLogin(event) }
           disabled={ button }
-        >
+          >
           Entrar
         </button>
         <div className="text-center">
@@ -108,7 +108,7 @@ class Login extends React.Component {
             name="email"
             value={ email }
             onChange={ this.handleChange }
-          />
+            />
         </label>
         <label htmlFor="input-password">
           Senha:
@@ -121,7 +121,7 @@ class Login extends React.Component {
             name="password"
             value={ password }
             onChange={ this.handleChange }
-          />
+            />
         </label>
         <Link to="/explorar">
           <button
@@ -129,7 +129,7 @@ class Login extends React.Component {
             type="submit"
             onClick={ this.saveStateEmailStore() }
             disabled={ button }
-          >
+            >
             Entrar
           </button>
         </Link>
@@ -139,7 +139,7 @@ class Login extends React.Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-
+  
   setEmailAction: (payload) => dispatch(actionEmail(payload)),
 });
 
