@@ -1,16 +1,23 @@
-.footer-wrapper {
-  position:absolute;
-  left:0;
-  bottom:0;
-  right:0;
+footer {
+  box-shadow: 8px 0px 10px rgba(110, 116, 134, 0.24);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .icons {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding: 16px 0;
 }
 
-.icons img {
-  height: 34px;
+.icons button {
+  background-color: white;
+  border: none;
+}
+
+.icons button img {
+  height: 30px;
 }

@@ -9,9 +9,15 @@ function Footer() {
     <div className="footer-wrapper">
       <footer data-testid="footer">
         <div className="icons">
-          <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="drinks-bottom" />
-          <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="explore" />
-          <img data-testid="food-bottom-btn" src={ mealIcon } alt="meal" />
+          <button type="button">
+            <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="drinks-bottom" />
+          </button>
+          <button type="button">
+            <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="explore" />
+          </button>
+          <button type="button">
+            <img data-testid="food-bottom-btn" src={ mealIcon } alt="meal" />
+          </button>
         </div>
       </footer>
     </div>
