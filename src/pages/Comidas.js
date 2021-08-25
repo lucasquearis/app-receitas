@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CategoryButton from '../components/CategoryButton';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import MyContext from '../context/MyContext';
 
@@ -89,6 +90,7 @@ function Comidas(props) {
         }
         return null;
       }) }
+      <Footer />
     </div>
   );
 }
