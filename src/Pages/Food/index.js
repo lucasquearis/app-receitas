@@ -4,26 +4,26 @@ import SearchHeader from '../../components/SearchHeader';
 import Footer from '../../components/Footer';
 import { useFoodAndDrinksContext } from '../../context/FoodAndDrinksProvider';
 
-export default function Drinks() {
+export default function Food() {
   // Recebendo informações do provider "useFoodAndDrinksContext"
   const { data, redirect, loading } = useFoodAndDrinksContext();
 
-  // Cria os cards de bebida;
-  const drinksCards = () => data.drinks
-    .reduce((acc, { strDrink, idDrink, strDrinkThumb }, index) => {
+  // Cria os cards de comida;
+  const foodCards = () => data.food
+    .reduce((acc, { strMeal, idMeal, strMealThumb }, index) => {
       // Apenas os 12 primeiros da resposta da API (Requisito 17);
       const maxLength = 12;
       if (index < maxLength) {
         // Caso esteja entre os 12 primeiros, adicionará ao accumulator;
         acc = [
           ...acc,
-          <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
+          <div data-testid={ `${index}-recipe-card` } key={ idMeal }>
             <img
               data-testid={ `${index}-card-img` }
-              src={ strDrinkThumb }
-              alt={ strDrink }
+              src={ strMealThumb }
+              alt={ strMeal }
             />
-            <h4 data-testid={ `${index}-card-name` }>{ strDrink }</h4>
+            <h4 data-testid={ `${index}-card-name` }>{ strMeal }</h4>
           </div>,
         ];
       }
@@ -32,12 +32,12 @@ export default function Drinks() {
 
   return (
     <div>
-      <SearchHeader>Bebidas</SearchHeader>
+      <SearchHeader>Comidas</SearchHeader>
       {/* Se não estiver carregando, exibirá os cards */}
-      { loading ? <h1>Loading...</h1> : drinksCards() }
-      { redirect.drinks
-        && data.drinks.length > 0
-        && <Redirect to={ `/bebidas/${data.drinks[0].idDrink}` } /> }
+      { loading ? <h1>Loading...</h1> : foodCards() }
+      { redirect.food
+        && data.food.length > 0
+        && <Redirect to={ `/comidas/${data.food[0].idMeal}` } /> }
       <Footer />
     </div>
   );
