@@ -1,5 +1,6 @@
 export const LOADING_RECIPES = 'LOADING_RECIPES';
 export const GET_RECIPES = 'GET_RECIPES';
+export const SEND_RECIPE_DATA = 'SEND_RECIPE_DATA';
 const FOODS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const RECIPES_QUANTITY = 12;
@@ -10,6 +11,10 @@ export const loadingRecipes = () => ({
 
 export const getRecipes = (recipes) => ({
   type: GET_RECIPES, recipes,
+});
+
+export const sendRecipeData = (recipes) => ({
+  type: SEND_RECIPE_DATA, recipes,
 });
 
 export const requestFoods = () => async (dispatch) => {

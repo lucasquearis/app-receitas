@@ -14,6 +14,7 @@ if (currentPage === foodPage) {
 const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
 const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
 const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
+const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
 
 export const getDataByIngredient = async (ingredient) => {
   const response = await fetch(`${ingredientURL}${ingredient}`);
@@ -39,4 +40,14 @@ export const getDataByFirstLetter = async (letter) => {
   }
 
   return data;
+};
+
+export const getDataDetails = async (id) => {
+  const response = await fetch(`${detailsURL}${id}`);
+  if (currentPage === foodPage) {
+    const { meals } = await response.json();
+    return meals;
+  }
+  const { drinks } = await response.json();
+  return drinks;
 };

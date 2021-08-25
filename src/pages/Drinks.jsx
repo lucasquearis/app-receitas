@@ -32,7 +32,6 @@ export default function Drinks() {
   const currentPage = location.pathname;
 
   const qtd = 12;
-  console.log(drinks);
 
   const handleClick = async (e) => {
     e.preventDefault();

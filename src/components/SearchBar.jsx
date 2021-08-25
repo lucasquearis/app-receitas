@@ -23,7 +23,6 @@ export default function SearchBar(
         Ingrediente
         <input
           onChange={ () => setIngredientValue(true) }
-          setIngredientValue
           id="ingredient-radio"
           data-testid="ingredient-search-radio"
           type="radio"
@@ -58,7 +57,7 @@ SearchBar.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
-  setIngredientValue: PropTypes.bool.isRequired,
-  setNameValue: PropTypes.bool.isRequired,
-  setLetterValue: PropTypes.bool.isRequired,
+  setIngredientValue: PropTypes.func.isRequired,
+  setNameValue: PropTypes.func.isRequired,
+  setLetterValue: PropTypes.func.isRequired,
 };

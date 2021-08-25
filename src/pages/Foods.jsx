@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { requestFoods } from '../redux/actions/recipesActions';
-import { sendRecipeData } from '../redux/actions/recipeActions';
+import { requestFoods, sendRecipeData } from '../redux/actions/recipesActions';
 import {
   getDataByIngredient,
   getDataByName,
@@ -18,26 +17,26 @@ export default function Foods() {
   const dispatch = useDispatch();
   const foods = useSelector((state) => state.recipes.recipes);
 
-  useEffect(() => {
-    dispatch(requestFoods());
-  }, [dispatch]);
-
   const [searched, setSearched] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [filterIngredient, setFilterIngredient] = useState(false);
   const [filterName, setFilterName] = useState(false);
   const [filterFirstLetter, setFilterFirstLetter] = useState(false);
 
-  const location = useLocation();
-  const currentPage = location.pathname;
-
   const qtd = 12;
 
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch(sendRecipeData({ data }));
     setSearched(true);
   };
+
+  useEffect(() => {
+    dispatch(requestFoods());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(sendRecipeData({ data }));
+  }, [dispatch, data]);
 
   useEffect(() => {
     if (searched) {
@@ -56,7 +55,6 @@ export default function Foods() {
     filterIngredient,
     filterName,
     filterFirstLetter,
-    currentPage,
     inputValue,
     searched]);
 
@@ -84,7 +82,7 @@ export default function Foods() {
       ) : null}
       {data.length === 1 ? (
         data.map(({ idMeal }) => (
-          <Redirect key={ idMeal } to={ `${currentPage}/${idMeal}` } />
+          <Redirect key={ idMeal } to={ `comidas/${idMeal}` } />
         ))
       ) : null}
       {searched ? (
@@ -93,6 +91,7 @@ export default function Foods() {
           .map(({ strMeal, idMeal, strMealThumb }, index) => (
             <Card
               key={ idMeal }
+              id={ idMeal }
               thumb={ strMealThumb }
               title={ strMeal }
               index={ index }
@@ -102,6 +101,7 @@ export default function Foods() {
         foods.map((food, index) => (
           <Card
             key={ food.idMeal }
+            id={ food.idMeal }
             title={ food.strMeal }
             thumb={ food.strMealThumb }
             index={ index }
