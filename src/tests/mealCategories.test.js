@@ -14,12 +14,16 @@ describe('Test meals list', async () => {
   const mockedMeals = jest.spyOn(global, 'fetch')
     .mockImplementation(() => categoriesApiResponse);
   const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+
   it('Filter buttons should be in the screen', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
+
     expect(mockedMeals).toBeCalledWith(endpoint);
+
     const firstCategory = await screen.findByTestId('Beef-category-filter');
     const lastCategory = await screen.findByTestId('Goat-category-filter');
+
     expect(firstCategory).toBeInTheDocument();
     expect(lastCategory).toBeInTheDocument();
   });

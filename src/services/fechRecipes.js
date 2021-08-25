@@ -2,8 +2,6 @@ export async function fetchMeals(callback, endpoint = 'https://www.themealdb.com
   try {
     const request = await fetch(endpoint);
     const response = await request.json();
-    console.log(response);
-    console.log(endpoint);
     callback(response.meals);
   } catch (err) {
     console.log(endpoint);
@@ -15,7 +13,6 @@ export async function fetchDrinks(callback, endpoint = 'https://www.thecocktaild
   try {
     const request = await fetch(endpoint);
     const response = await request.json();
-    console.log(response);
     callback(response.drinks);
   } catch (err) {
     console.log(err);
