@@ -33,3 +33,15 @@ export function rmvIngFromProgressStorage(id, ing, type) {
     }));
   }
 }
+
+export function isMealInLocalStorage(ing, id) {
+  const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!meals[id]) return false;
+  return meals[id].some((ingredient) => ingredient === ing);
+}
+
+export function isDrinkInLocalStorage(ing, id) {
+  const { cocktails } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!cocktails[id]) return false;
+  return cocktails[id].some((ingredient) => ingredient === ing);
+}

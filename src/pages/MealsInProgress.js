@@ -5,6 +5,7 @@ import { IngredientsTaskList } from '../components';
 import {
   addIngInProgressStorage,
   rmvIngFromProgressStorage,
+  isMealInLocalStorage,
 } from '../helpers/inProgressLocalStorage';
 
 function MealsInProgress() {
@@ -14,16 +15,11 @@ function MealsInProgress() {
   });
 
   useEffect(() => {
-    function isInLocalStorage(ing) {
-      const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      if (!meals[id]) return false;
-      return meals[id].some((ingredient) => ingredient === ing);
-    }
     async function getRcps() {
       const response = await fetchMealRecipe(id, 'meal');
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
-        .map((e) => ({ ing: response[e], checked: isInLocalStorage(response[e]) }));
+        .map((e) => ({ ing: response[e], checked: isMealInLocalStorage(response[e], id) }));
 
       setRcp({ ...response, ingList: ingredients });
     }

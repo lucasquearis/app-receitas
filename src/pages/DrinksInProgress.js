@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchDrinkRecipe } from '../services/fetchRecipe';
 import { IngredientsTaskList } from '../components';
+import {
+  addIngInProgressStorage,
+  rmvIngFromProgressStorage,
+  isDrinkInLocalStorage,
+} from '../helpers/inProgressLocalStorage';
 
 function DrinksInProgress() {
   const { id } = useParams();
@@ -14,7 +19,10 @@ function DrinksInProgress() {
       const response = await fetchDrinkRecipe(id);
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
-        .map((e) => ({ ing: response[e] }));
+        .map((e) => ({
+          ing: response[e],
+          checked: isDrinkInLocalStorage(response[e], id),
+        }));
 
       setRcp({ ...response, ingList: ingredients });
     }
@@ -35,6 +43,9 @@ function DrinksInProgress() {
 
       ],
     });
+
+    if (checked) return addIngInProgressStorage(id, name, 'cocktails');
+    rmvIngFromProgressStorage(id, name, 'cocktails');
   };
 
   return (
