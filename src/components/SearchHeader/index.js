@@ -4,16 +4,20 @@ import { useHistory } from 'react-router-dom';
 import '../../styles/header.css';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
-import { useMyContext } from '../../context/MyProvider';
+import { useFoodAndDrinksContext } from '../../context/FoodAndDrinksProvider';
 
 export default function SearchHeader({ children }) {
   const history = useHistory();
-  const { handleSetParameters } = useMyContext();
+  // Função do context que recebe filtros do usuário de acordo com a página;
+  const { handleSetParameters } = useFoodAndDrinksContext();
 
   const [visibleSearch, setVisibleSearch] = useState(false);
+
+  // Estado dos inputs;
   const [text, setText] = useState('');
   const [filter, setFilter] = useState('');
 
+  // Objeto com todos os filtros, que sempre será atualizado conforme o estado;
   const filters = useMemo(() => ({ filter, text }), [text, filter]);
 
   const handleToggleInput = () => setVisibleSearch((currState) => !currState);

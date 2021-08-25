@@ -2,15 +2,19 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import SearchHeader from '../../components/SearchHeader';
 import Footer from '../../components/Footer';
-import { useMyContext } from '../../context/MyProvider';
+import { useFoodAndDrinksContext } from '../../context/FoodAndDrinksProvider';
 
 export default function Drinks() {
-  const { data, redirect, loading } = useMyContext();
+  // Recebendo informações do provider "useFoodAndDrinksContext"
+  const { data, redirect, loading } = useFoodAndDrinksContext();
 
+  // Cria os cards de bebida;
   const drinksCards = () => data.drinks
     .reduce((acc, { strDrink, idDrink, strDrinkThumb }, index) => {
+      // Apenas os 12 primeiros da resposta da API (Requisito 17);
       const maxLength = 12;
       if (index < maxLength) {
+        // Caso esteja entre os 12 primeiros, adicionará ao accumulator;
         acc = [
           ...acc,
           <div data-testid={ `${index}-recipe-card` } key={ idDrink }>
@@ -29,6 +33,7 @@ export default function Drinks() {
   return (
     <div>
       <SearchHeader>Bebidas</SearchHeader>
+      {/* Se não estiver carregando, exibirá os cards */}
       { loading ? <h1>Loading...</h1> : drinksCards() }
       { redirect.drinks
         && data.drinks.length > 0
