@@ -1,11 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Context from '../../context';
 
 function Profile() {
-  const { email } = useContext(Context);
+  const { email, setEmail } = useContext(Context);
+
+  useEffect(() => {
+    if (localStorage.length === 0) {
+      setEmail('email@email.com');
+    } if (localStorage.length !== 0) {
+      setEmail(JSON.parse(localStorage.user).email);
+    }
+  }, [setEmail]);
+
+  const clearLocalStorage = () => {
+    if (localStorage.length > 0) {
+      localStorage.clear();
+      setEmail('');
+    }
+  };
+
   return (
     <div>
       <Header title="Perfil" renderSearchIcon={ false } />
@@ -36,6 +52,7 @@ function Profile() {
             <button
               type="button"
               data-testeid="profile-logout-btn"
+              onClick={ () => clearLocalStorage() }
             >
               Sair
             </button>
