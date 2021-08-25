@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import SearchBar from '../SearchBar/SearchBar';
+import CategoryFilter from '../CategoryFilter/CategoryFilter';
 import profileIconImg from '../../images/profileIcon.svg';
 import searchIconImg from '../../images/searchIcon.svg';
 
@@ -24,6 +25,7 @@ function Header({ title, searchIcon }) {
           <img src={ searchIconImg } alt="search-button" width="50px" height="50px" />
         </button>)}
       {displaySearchBar && <SearchBar />}
+      <CategoryFilter />
     </header>
   );
 }

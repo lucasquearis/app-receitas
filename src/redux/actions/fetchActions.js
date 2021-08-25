@@ -1,4 +1,5 @@
 export const GET_RECIPES = 'GET_RECIPES';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 
 const C_INGREDIENT_URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 const C_NAME_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -9,6 +10,11 @@ const B_INGREDIENT_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php
 
 export const getRecipes = (payload) => ({
   type: GET_RECIPES,
+  payload,
+});
+
+export const getCategories = (payload) => ({
+  type: GET_CATEGORIES,
   payload,
 });
 
