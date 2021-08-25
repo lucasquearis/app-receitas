@@ -25,6 +25,7 @@ function RecipesProvider({ children }) {
     firstState,
     setFirstState,
     setSearchValues,
+    filterdMealsOrDrinks,
   };
 
   return (
