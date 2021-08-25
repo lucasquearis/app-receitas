@@ -1,12 +1,17 @@
 import React from 'react';
 import MealsCards from '../components/MealsCards';
 import MealCategoryButtons from '../components/MealCategoryButtons';
+import Header from '../components/Header';
+import searchIcon from '../images/searchIcon.svg';
+import Footer from '../components/Footer/Footer';
 
 export default function Meals() {
   return (
-    <div>
+    <main>
+      <Header title="Comidas" searchIcon={ searchIcon } />
       <MealCategoryButtons />
       <MealsCards />
-    </div>
+      <Footer />
+    </main>
   );
 }
