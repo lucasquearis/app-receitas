@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-import { Meals, Login, Profile, Drinks, RecipeDetails } from './pages';
+import {
+  Meals,
+  Login,
+  Profile,
+  Drinks,
+  RecipeDetails } from './pages';
 import Provider from './context/Provider';
 
 function App() {
