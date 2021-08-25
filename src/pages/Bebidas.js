@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import FoodDAPI from '../service/foodAPI';
+import DrinksAPI from '../service/drinksAPI';
 import Buttons from '../components/categoriesButton';
 import RecipesContext from '../context/RecipesContext';
 import Recipes from '../components/Recipes';
@@ -10,11 +10,11 @@ function Comidas() {
   const { drinkCategory } = useContext(RecipesContext);
   FoodDAPI();
   DrinksAPI();
-  const [food] = useState(true);
+  const [food] = useState(false);
   if (drinkCategory.length) {
     return (
       <div>
-        <Header title="Comidas" />
+        <Header title="Bebidas" />
         <Buttons food={ food } />
         <Recipes food={ food } />
         <Footer />
