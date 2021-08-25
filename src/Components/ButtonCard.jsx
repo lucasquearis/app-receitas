@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function ButtonCard({ buttonText, onClick, testId, page }) {
+function ButtonCard({ buttonText, onClick, testId, page, disabled }) {
   return (
     <Link
       to={ page }
@@ -11,6 +11,7 @@ function ButtonCard({ buttonText, onClick, testId, page }) {
         type="button"
         data-testid={ testId }
         onClick={ onClick }
+        disabled={ disabled }
       >
         { buttonText }
       </button>
@@ -21,6 +22,7 @@ function ButtonCard({ buttonText, onClick, testId, page }) {
 ButtonCard.defaultProps = {
   testId: '',
   onClick: () => {},
+  disabled: () => {},
 };
 
 ButtonCard.propTypes = {
@@ -28,6 +30,7 @@ ButtonCard.propTypes = {
   testId: PropTypes.string,
   page: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  disabled: PropTypes.func,
 };
 
 export default ButtonCard;
