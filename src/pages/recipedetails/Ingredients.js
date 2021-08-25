@@ -12,5 +12,4 @@ class Ingredients extends Component {
   }
 }
 
-
 export default Ingredients;
