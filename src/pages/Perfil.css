@@ -1,0 +1,39 @@
+.perfil-container {
+  border: solid #c4c4c4 1px;
+  height: 640px;
+  width: 360px;
+}
+
+.perfil-container h5 {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.perfil-buttons {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.perfil-btn, .logout-btn {
+  background-color: #c4c4c4;
+  border: none;
+  margin-top: 20px;
+  padding: 15px 0;
+  transition: all 0.4s ease;
+  width: 300px;
+}
+
+.perfil-btn:hover {
+  background-color: green;
+  border-radius: 20px;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: red;
+  border-radius: 20px;
+  color: white;
+}

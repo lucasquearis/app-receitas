@@ -21,7 +21,7 @@ function Login() {
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
   }
-
+  const newBtnColor = { background: '#6ce34f', color: 'white' };
   return (
     <div className="login-container">
       <h2>Login</h2>
@@ -46,7 +46,7 @@ function Login() {
           link="/comidas"
           disabled={ checkInput() }
           onClick={ handleSubmit }
-          style={ !checkInput() ? { background: '#6ce34f' } : {} }
+          style={ !checkInput() ? newBtnColor : {} }
         />
       </form>
     </div>
