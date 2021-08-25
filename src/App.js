@@ -27,31 +27,39 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ Comidas } />
         <Route exact path="/bebidas" component={ Bebidas } />
+        <Route exact path="/perfil" component={ Profile } />
+        <Route exact path="/explorar" component={ Explorar } />
+        <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
+        <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ ExplorarComidasPorIngrediente }
+        />
         <Route path="/comidas/:id" component={ ComidasDetalhes } />
         <Route path="/bebidas/:id" component={ BebidasDetalhes } />
         <Route
+          exact
           path="/comidas/:id/in-progress"
           component={ ComidasEmProcesso }
         />
         <Route
+          exact
           path="/bebidas/:id/in-progress"
           component={ BebidasEmProcesso }
         />
-        <Route path="/explorar" component={ Explorar } />
-        <Route path="/explorar/comidas" component={ ExplorarComidas } />
-        <Route path="/explorar/bebidas" component={ ExplorarBebidas } />
         <Route
-          path="/explorar/comidas/ingredientes"
-          component={ ExplorarComidasPorIngrediente }
-        />
-        <Route
+          exact
           path="/explorar/bebidas/ingredientes"
           component={ ExplorarBebidasPorIngrediente }
         />
-        <Route path="/explorar/comidas/area" component={ ExplorarBebidasPorLocalidade } />
-        <Route path="/perfil" component={ Profile } />
+        <Route
+          exact
+          path="/explorar/comidas/area"
+          component={ ExplorarBebidasPorLocalidade }
+        />
         <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
-        <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+        <Route exact path="/receitas-favoritas" component={ ReceitasFavoritas } />
       </Switch>
     </Provider>
   );

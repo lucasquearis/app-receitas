@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import HeaderSemSearchBar from '../components/Header/HeaderSemSearchBar';
 import MenuInferior from '../components/MenuInferior';
 
 function Profile() {
@@ -16,8 +17,10 @@ function Profile() {
 
   return (
     <div>
-      <h2>Perfil</h2>
-      <h4 data-testid="profile-email">{ email }</h4>
+      <HeaderSemSearchBar>
+        Perfil
+      </HeaderSemSearchBar>
+      <h4>{ email }</h4>
       <button
         data-testid="profile-done-btn"
         type="button"

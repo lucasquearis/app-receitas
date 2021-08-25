@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import HeaderSemSearchBar from '../components/Header/HeaderSemSearchBar';
 
 import MenuInferior from '../components/MenuInferior';
 
@@ -7,6 +8,12 @@ export default function ExplorarBebidas() {
   const history = useHistory();
   return (
     <div>
+      <HeaderSemSearchBar>
+        <h4>
+          Explorar Bebidas
+        </h4>
+      </HeaderSemSearchBar>
+
       <button
         data-testid="explore-by-ingredient"
         type="button"
