@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import fetchRecipe from '../services/fetchRecipe';
+import { IngredientsTaskList } from '../components';
 
 function MealsInProgress() {
   const { id } = useParams();
-  const [rcp, setRcp] = useState({});
-  const [ingList, setIngList] = useState([]);
+  const [rcp, setRcp] = useState({
+    ingList: [],
+  });
 
   useEffect(() => {
     async function getRcps() {
@@ -15,13 +17,10 @@ function MealsInProgress() {
         .filter((e) => e.includes('strIngredient') && response[e])
         .map((e) => response[e]);
 
-      setIngList(ingredients);
-      setRcp(response);
+      setRcp({ ...response, ingList: ingredients });
     }
     getRcps();
   }, [id]);
-
-  // useEffect(() => console.log(rcp, ingList), [rcp, ingList]);
 
   return (
     <>
@@ -31,9 +30,7 @@ function MealsInProgress() {
       <button data-testid="favorite-btn" type="button">Favoritar</button>
       <p data-testid="instructions">{rcp.strInstructions}</p>
       <h1 data-testid="recipe-category">{rcp.strCategory}</h1>
-      {ingList.map((ing, index) => (
-        <span key={ ing } data-testid={ `${index}-ingredient-step` }>{ing}</span>
-      ))}
+      <IngredientsTaskList ingList={ rcp.ingList } />
       <button data-testid="finish-recipe-btn" type="button">Finalizar</button>
     </>
   );
