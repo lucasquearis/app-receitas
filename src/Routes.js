@@ -1,12 +1,11 @@
 // vitals
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import FooterMenu from './pages/FooterMenu';
+import { Switch } from 'react-router-dom';
 
 function Routes() {
   return (
     <Switch>
-      //colocar as rotas aqui
+      <div>Colocar Rotas aqui</div>
     </Switch>
   );
 }
