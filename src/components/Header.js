@@ -41,18 +41,17 @@ function Header() {
   // states
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
+
   const history = useHistory();
   const { location: { pathname } } = history;
 
   // Ao renderizar o componente vai verificar a URL, e se for uma URL elegível pra ter o botão da lupa,
   // irá setar a variável como true
   useEffect(() => {
-    if (pathname !== '/'
-      || pathname === '/comidas'
+    if (pathname === '/comidas'
       || pathname === '/bebidas'
       || pathname.endsWith('/area')) {
       setShowSearchButton(true);
-      console.log(pathname);
     }
   }, [pathname]);
 
