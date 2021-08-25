@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Foods from './pages/Foods';
 import Profile from './pages/Profile';
 import Drinks from './pages/Drinks';
+import FoodDetails from './pages/FoodDetails';
+import DrinkDetails from './pages/DrinkDetails';
 import ExploreFoods from './pages/explore-pages/ExploreFoods';
 import Explore from './pages/explore-pages/Explore';
 import ExploreIngredients from './pages/explore-pages/ExploreIngredients';
@@ -36,6 +38,16 @@ export default function App() {
         exact
         path="/explorar/bebidas/ingredientes"
         component={ ExploreDrinkIngredient }
+      />
+      <Route
+        exact
+        path="/comidas/:id"
+        render={ (props) => <FoodDetails { ...props } /> }
+      />
+      <Route
+        exact
+        path="/bebidas/:id"
+        render={ (props) => <DrinkDetails { ...props } /> }
       />
     </Switch>
   );
