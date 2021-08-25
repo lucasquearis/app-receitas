@@ -3,9 +3,11 @@ const fetchFoods = async (type, action, value = '') => {
     procuraComida: 'search.php?s=',
     random: 'random.php',
     categories: 'list.php?c=list',
+    filterIngredient: 'filter.php?i=',
+    filterCategory: 'filter.php?c=',
   };
   const endPoints = {
-    drink: 'www.thecocktaildb.com/api/json/v1/1/',
+    drink: 'https://www.thecocktaildb.com/api/json/v1/1/',
     food: 'https://www.themealdb.com/api/json/v1/1/',
   };
   const endPoint = `${endPoints[type]}${actions[action]}${value}`;
