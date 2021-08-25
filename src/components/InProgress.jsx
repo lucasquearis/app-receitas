@@ -46,7 +46,6 @@ export default function InProgress(
     }));
   }, [checked]);
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
-  console.log(name);
   return (
     <div className="in-progress">
       <img src={ img } alt={ name } data-testid="recipe-photo" />
@@ -88,7 +87,7 @@ export default function InProgress(
                 type="checkbox"
                 name={ ingredient[1] }
                 id={ `ingredient${i}` }
-                checked={ checked.includes(i) }
+                checked={ checked.includes(i) ? 'step-done' : '' }
               />
             </label>
           </li>))}
