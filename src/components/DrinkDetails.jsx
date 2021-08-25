@@ -4,9 +4,9 @@ import { Button } from 'react-bootstrap';
 import ShareIcon from '../images/shareIcon.svg';
 import Heart from '../images/whiteHeartIcon.svg';
 
-export default function FoodDetails(props) {
-  const { meal, thumb, category,
-    instructions, youTube, ingredientEndMeasure } = props;
+export default function DrinksDetails(props) {
+  const { drink, thumb, category,
+    instructions, ingredientEndMeasure, alcoholic } = props;
 
   return (
     <main>
@@ -23,8 +23,8 @@ export default function FoodDetails(props) {
       <button type="button" data-testid="favorite-btn">
         <img src={ Heart } alt="favorit" />
       </button>
-      <h1 data-testid="recipe-title">{meal}</h1>
-      <p data-testid="recipe-category">{category}</p>
+      <h1 data-testid="recipe-title">{drink}</h1>
+      <p data-testid="recipe-category">{`${category} (${alcoholic})`}</p>
       <div>
         <h2>Ingredients</h2>
         <ul>
@@ -50,16 +50,6 @@ export default function FoodDetails(props) {
         <span>{instructions}</span>
       </div>
       <div>
-        <h3>Video</h3>
-        <a
-          data-testid="video"
-          href={ youTube }
-          target="blank"
-        >
-          Veja O Video
-        </a>
-      </div>
-      <div>
         <h2>Redomendadas</h2>
         <div data-testid={ `${0}-recomendation-card` }>
           cards
@@ -75,11 +65,11 @@ export default function FoodDetails(props) {
   );
 }
 
-FoodDetails.propTypes = {
-  meal: PropTypes.string.isRequired,
+DrinksDetails.propTypes = {
+  drink: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
-  youTube: PropTypes.string.isRequired,
   ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
+  alcoholic: PropTypes.string.isRequired,
 };

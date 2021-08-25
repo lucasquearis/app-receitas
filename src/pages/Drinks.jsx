@@ -1,11 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
+import Footer from '../components/Footer';
 
 export default function () {
   const { drinks, drinkCategories, setDrinksCategoryFilter } = useContext(Context);
+
+  const [category, setCategory] = useState('');
+
+  useEffect(() => {
+    setDrinksCategoryFilter(category);
+  }, [category, setDrinksCategoryFilter]);
 
   // ficou assim para passar no teste, mas fica meio quebrado ainda
   if (!drinks) {
@@ -20,6 +27,13 @@ export default function () {
   return (
     <div className="drinks-page">
       <Header title="Bebidas" />
+      <button
+        type="button"
+        onClick={ () => setCategory('') }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {drinkCategories.map(({ strCategory }, i) => {
         const maxLength = 5;
         if (i < maxLength) {
@@ -27,7 +41,15 @@ export default function () {
             <button
               type="button"
               data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => setDrinksCategoryFilter(strCategory) }
+              onClick={ () => {
+                if (category === strCategory) {
+                  setCategory('');
+                } else {
+                  // console.log(mealsCategoryFilter);
+                  console.log(strCategory);
+                  setCategory(strCategory);
+                }
+              } }
             >
               {strCategory}
             </button>
@@ -49,6 +71,7 @@ export default function () {
         }
         return false;
       })}
+      <Footer />
     </div>
   );
 }
