@@ -10,13 +10,13 @@ function Footer() {
     <div className="footer-wrapper">
       <footer data-testid="footer">
         <div className="icons">
-          <Link to="/bebidas">
+          <Link to="/bebidas" data-testid="icone-bebida">
             <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="drinks-bottom" />
           </Link>
-          <Link to="/explorar">
+          <Link to="/explorar" data-testid="icone-explorar">
             <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="explore" />
           </Link>
-          <Link to="/comidas">
+          <Link to="/comidas" data-testid="icone-comida">
             <img data-testid="food-bottom-btn" src={ mealIcon } alt="meal" />
           </Link>
         </div>

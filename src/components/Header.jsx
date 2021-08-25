@@ -14,7 +14,7 @@ function Header({ brand, dataId, className, src, alt }) {
   return (
     <div>
       <header>
-        <Link to="/perfil">
+        <Link to="/perfil" data-testid="perfil-link">
           <button
             className="profile-btn"
             type="button"

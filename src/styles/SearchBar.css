@@ -16,13 +16,12 @@
   margin-bottom: 7px;
 }
 
-input[type="radio"] {
+#ingredient-search-radio, #name-search-radio, #first-letter-search-radio {
   margin: 7px 0;
 }
 
 ::placeholder {
   color: #8c94af;
-  font-family: Palanquin;
 }
 
 .radio-form {
@@ -32,12 +31,11 @@ input[type="radio"] {
 }
 
 .btn-search-bar {
-  background: #FD8061;
+  background: #fd8061;
   border: none;
   border-radius: 8px;
-  box-shadow: 0px 3px 6px rgba(110, 116, 134, 0.24);
+  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
   color: white;
-  font-family: Palanquin;
   font-size: 16px;
   height: 25px;
   margin-top: 7px;
