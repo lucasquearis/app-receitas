@@ -84,7 +84,7 @@ describe('Testando a Tela de Login (Tela inicial da Aplicação', () => {
     expect(pathname).toBe('/');
   });
 
-  it('Testando se a página redireciona com email e senha corretos', async () => {
+  it('Testando se a página redireciona com email e senha corretos', () => {
     const emailInput = screen.getByTestId(EMAIL_TESTID);
     const passwordInput = screen.getByTestId(PASSWORD_TESTID);
     const submitButton = screen.getByTestId(BUTTON_TESTID);
@@ -97,5 +97,21 @@ describe('Testando a Tela de Login (Tela inicial da Aplicação', () => {
 
     userEvent.click(submitButton);
     expect(history.location.pathname).toEqual('/comidas');
+  });
+
+  it('Testando se as informações ficam salvas no Local Storage', () => {
+    const emailInput = screen.getByTestId(EMAIL_TESTID);
+    const passwordInput = screen.getByTestId(PASSWORD_TESTID);
+    const submitButton = screen.getByTestId(BUTTON_TESTID);
+
+    userEvent.type(emailInput, EMAIL_TEST);
+    expect(emailInput).toHaveValue(EMAIL_TEST);
+    userEvent.type(passwordInput, '123456');
+    expect(passwordInput).toHaveValue('123456');
+
+    userEvent.click(submitButton);
+    expect(localStorage.getItem('user')).toEqual('{"email":"teste@teste.com"}');
+    expect(localStorage.getItem('mealsToken')).toEqual('1');
+    expect(localStorage.getItem('cocktailsToken')).toEqual('1');
   });
 });
