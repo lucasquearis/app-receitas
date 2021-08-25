@@ -17,6 +17,8 @@ function Provider({ children }) {
 
   const [recipes, setRecipes] = useState([]);
 
+  const [categories, setCategories] = useState([]);
+
   const [API, setAPI] = useState('');
   const switchAPI = (searchFilter) => {
     switch (searchFilter.type) {
@@ -34,6 +36,12 @@ function Provider({ children }) {
     }
   };
 
+  const requestCategory = async () => {
+    const response = await fetch();
+    const result = await response.json();
+    setCategories(result);
+  };
+
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
@@ -44,7 +52,17 @@ function Provider({ children }) {
     switchAPI(filter);
   }, [filter, API]);
 
-  const contextValue = { user, setUser, filter, setFilter, API, RequestAPI, recipes };
+  const contextValue = {
+    user,
+    setUser,
+    filter,
+    setFilter,
+    API,
+    RequestAPI,
+    recipes,
+    categories,
+    requestCategory,
+  };
 
   return (
     <Context.Provider value={ contextValue }>
