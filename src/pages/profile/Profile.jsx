@@ -4,7 +4,9 @@ import Header from '../../components/Header';
 
 export default function Profile() {
   const profileEmail = JSON.parse(localStorage.getItem('user')).email;
-
+  function clearStorage() {
+    localStorage.clear();
+  }
   return (
     <>
       <Header title="Perfil" />
@@ -29,6 +31,7 @@ export default function Profile() {
         <button
           data-testid="profile-logout-btn"
           type="button"
+          onClick={ clearStorage }
         >
           Sair
         </button>
