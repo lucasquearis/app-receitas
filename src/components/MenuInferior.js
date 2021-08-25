@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
+import './MenuInferior.css';
 
 function MenuInferior() {
   return (
-    <footer data-testid="footer">
+    <footer className="footer-bar" data-testid="footer">
       <Link to="/comidas">
         <img data-testid="food-bottom-btn" alt="Food" src={ mealIcon } />
       </Link>

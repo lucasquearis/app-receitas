@@ -4,6 +4,7 @@ import AppContext from '../../context/AppContext';
 import Header from '../../components/Header';
 import BarraDeBusca from '../../components/BarraDeBusca';
 import Card from '../../components/Card';
+import MenuInferior from '../../components/MenuInferior';
 
 function Principal() { // Nome provisório
   const { pathname } = useLocation();
@@ -29,6 +30,7 @@ function Principal() { // Nome provisório
           );
         })
       }
+      <MenuInferior />
     </>
   );
 }
