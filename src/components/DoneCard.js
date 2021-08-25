@@ -12,6 +12,7 @@ const DoneCard = ({ type, doneRecipe, index, handleClickShare }) => (
       ) : (
         `bebidas/${doneRecipe.idDrink}`
       ) }
+      className="horizontal-image-link"
     >
       <img
         src={ type === 'meal' ? (
@@ -21,25 +22,42 @@ const DoneCard = ({ type, doneRecipe, index, handleClickShare }) => (
         ) }
         alt="Imagem da Receita"
         data-testid={ `${index}-horizontal-image` }
+        className="horizontal-image"
       />
     </Link>
-    <div className="done-recipe-detais">
-      <span
-        className="done-recipe-category"
-        data-testid={ `${index}-horizontal-top-text` }
-      >
-        { type === 'meal' ? (
-          `${doneRecipe.strArea} - ${doneRecipe.strCategory}`
-        ) : (
-          `${doneRecipe.strAlcoholic}`
-        ) }
-      </span>
+    <div className="done-recipe-details">
+      <div className="category-share-container">
+        <span
+          className="done-recipe-category"
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          { type === 'meal' ? (
+            `${doneRecipe.strArea} - ${doneRecipe.strCategory}`
+          ) : (
+            `${doneRecipe.strAlcoholic}`
+          ) }
+        </span>
+        <input
+          type="image"
+          id={ type === 'meal' ? (
+            `comidas-${doneRecipe.idMeal}`
+          ) : (
+            `bebidas-${doneRecipe.idDrink}`
+          ) }
+          className="done-recipe-share-icon"
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ shareIconPath }
+          alt="Share"
+          onClick={ handleClickShare }
+        />
+      </div>
       <Link
         to={ type === 'meal' ? (
           `comidas/${doneRecipe.idMeal}`
         ) : (
           `bebidas/${doneRecipe.idDrink}`
         ) }
+        className="done-recipe-name-link"
       >
         <span
           className="done-recipe-name"
@@ -52,30 +70,18 @@ const DoneCard = ({ type, doneRecipe, index, handleClickShare }) => (
         className="done-recipe-date"
         data-testid={ `${index}-horizontal-done-date` }
       >
-        { doneRecipe.date }
+        { `Feita em: ${doneRecipe.date}` }
       </span>
-      <input
-        type="image"
-        id={ type === 'meal' ? (
-          `comidas-${doneRecipe.idMeal}`
-        ) : (
-          `bebidas-${doneRecipe.idDrink}`
-        ) }
-        className="done-recipe-share-icon"
-        data-testid={ `${index}-horizontal-share-btn` }
-        src={ shareIconPath }
-        alt="Share"
-        onClick={ handleClickShare }
-      />
       { (type === 'meal') && (doneRecipe.strTags !== null) ? (
         doneRecipe.strTags.split(',', 2).map((tag) => (
-          <span
-            key={ index }
-            className="done-recipe-tag"
-            data-testid={ `${index}-${tag}-horizontal-tag` }
-          >
-            { tag }
-          </span>
+          <div key={ index } className="done-recipe-tag-container">
+            <span
+              className="done-recipe-tag"
+              data-testid={ `${index}-${tag}-horizontal-tag` }
+            >
+              { tag }
+            </span>
+          </div>
         ))
       ) : (
         <> </>
