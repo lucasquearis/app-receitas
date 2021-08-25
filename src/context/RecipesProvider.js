@@ -1,5 +1,5 @@
 // vitals
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // context
 import myContext from './myContext';
@@ -7,11 +7,20 @@ import myContext from './myContext';
 import getFoodByIngredient from '../services/foodAPI';
 
 function RecipesProvider({ children }) {
-  const [firstState, setFirstState] = useState(true);
   const [searchValues, setSearchValues] = useState({
     textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
   const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
-  console.log(filteredMealsOrDrinks);
+  const [infoUser, setInfoUser] = useState({ email: '', password: '' });
+  
+  const globalState = {
+    firstState,
+    setFirstState,
+    infoUser,
+    setInfoUser,
+    setSearchValues,
+    filteredMealsOrDrinks,
+  };
+  
   useEffect(() => {
     const resultFilter = async () => {
       const result = await getFoodByIngredient(searchValues);
@@ -20,13 +29,12 @@ function RecipesProvider({ children }) {
     resultFilter();
   },
   [searchValues]);
-
-  const globalState = {
-    firstState,
-    setFirstState,
-    setSearchValues,
-    filterdMealsOrDrinks,
-  };
+  
+  useEffect(() => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email: infoUser.email }));
+  }, [infoUser]);
 
   return (
     <myContext.Provider value={ globalState }>

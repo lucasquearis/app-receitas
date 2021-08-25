@@ -1,11 +1,15 @@
 // vitals
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+// components
+import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 function Routes() {
   return (
     <Switch>
-      Provisório
+      <Route exact path="/" component={ Login } />
+      <Route exact path="/profile" component={ Profile } />
     </Switch>
   );
 }
