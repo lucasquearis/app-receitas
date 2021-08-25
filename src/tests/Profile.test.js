@@ -17,7 +17,7 @@ describe('Testes para o Perfil', () => {
   afterEach(() => {
     localStorage.clear();
   });
-  
+
   it('Verifica se os elementos estao presentes', () => {
     renderWithRouter(<Perfil />);
     const email = screen.getByTestId(/profile-email/i);
@@ -52,16 +52,36 @@ describe('Testes para o Perfil', () => {
   it('Verifica se ao clicar em sair vai a pagina correta e apaga local storage', () => {
     const { history } = renderWithRouter(<Perfil />);
     const sair = screen.getByTestId(/profile-logout-btn/i);
-    const user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('user'));
+    let mealsToken = localStorage.getItem('mealsToken');
+    let cocktailsToken = localStorage.getItem('cocktailsToken');
+    let doneRecipes = localStorage.getItem('doneRecipes');
+    let favoriteRecipes = localStorage.getItem('favoriteRecipes');
+    let inProgressRecipes = localStorage.getItem('inProgressRecipes');
 
     expect(user).toStrictEqual({ email: 'email@mail.com' });
+    expect(mealsToken).toBe('1');
+    expect(cocktailsToken).toBe('1');
+    expect(doneRecipes).toStrictEqual([]);
+    expect(favoriteRecipes).toStrictEqual([]);
+    expect(inProgressRecipes).toStrictEqual({});
 
     userEvent.click(sair);
     const { location: { pathname } } = history;
 
-    const newUser = JSON.parse(localStorage.getItem('user'));
+    user = JSON.parse(localStorage.getItem('user'));
+    mealsToken = localStorage.getItem('mealsToken');
+    cocktailsToken = localStorage.getItem('cocktailsToken');
+    doneRecipes = localStorage.getItem('doneRecipes');
+    favoriteRecipes = localStorage.getItem('favoriteRecipes');
+    inProgressRecipes = localStorage.getItem('inProgressRecipes');
 
     expect(pathname).toBe('/');
-    expect(newUser).toBeNull();
+    expect(user).toBeNull();
+    expect(mealsToken).toBeNull();
+    expect(cocktailsToken).toBeNull();
+    expect(doneRecipes).toBeNull();
+    expect(favoriteRecipes).toBeNull();
+    expect(inProgressRecipes).toBeNull();
   });
 });
