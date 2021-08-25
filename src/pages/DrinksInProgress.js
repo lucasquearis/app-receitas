@@ -14,7 +14,7 @@ function DrinksInProgress() {
       const response = await fetchDrinkRecipe(id);
       const ingredients = Object.keys(response)
         .filter((e) => e.includes('strIngredient') && response[e])
-        .map((e) => response[e]);
+        .map((e) => ({ ing: response[e] }));
 
       setRcp({ ...response, ingList: ingredients });
     }
