@@ -7,6 +7,7 @@ import SearchBar from './SearchBar';
 
 export default function Header({ title }) {
   const [showSearch, setShowSearch] = useState(false);
+
   return (
     <>
       <header>
@@ -25,6 +26,7 @@ export default function Header({ title }) {
           type="button"
           className="search-btn"
           onClick={ () => setShowSearch(!showSearch) }
+          style={ title === 'Refeitas Feitas' ? { display: 'none' } : { display: '' } }
         >
           <img data-testid="search-top-btn" src={ searchIcon } alt="search icon" />
         </button>
