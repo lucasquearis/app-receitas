@@ -35,7 +35,11 @@ function Footer({ handleClick }) {
 }
 
 Footer.propTypes = {
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
+};
+
+Footer.defaultProps = {
+  handleClick: undefined,
 };
 
 export default Footer;
