@@ -66,11 +66,7 @@ function RecipesProvider({ children }) {
     resultBaseDrinks();
   },
   [searchValues]);
-
-  // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=cachaça
-  // https://www.themealdb.com/api/json/v1/1/filter.php?i=""
-  // https://www.themealdb.com/api/json/v1/1/filter.php?i=''
-
+ 
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
