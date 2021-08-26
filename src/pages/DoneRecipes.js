@@ -49,40 +49,41 @@ function DoneRecipes() {
       >
         Drinks
       </button>
-      { filteredList && filteredList.map((recipe, index) => (
-        <div key={ index }>
-          <Link to={ `/${recipe.type}s/${recipe.id}` }>
-            <img
-              className="recipe-image"
-              src={ recipe.image }
-              data-testid={ `${index}-horizontal-image` }
-              alt="Foto do Prato"
-            />
-          </Link>
-          <h3
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            { `${recipe.type === 'comida'
-              ? recipe.area
-              : recipe.alcoholicOrNot} - ${recipe.category}` }
-          </h3>
-          <Link to={ `/${recipe.type}s/${recipe.id}` }>
-            <h2 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h2>
-          </Link>
-          <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
-          <ShareButton index={ index } address={ `/${recipe.type}s/${recipe.id}` } />
-          {recipe.tags.map(
-            (tag) => (
-              <p
-                key={ tag }
-                data-testid={ `${index}-${tag}-horizontal-tag` }
-              >
-                { tag }
-              </p>
-            ),
-          )}
-        </div>
-      ))}
+      { filteredList
+        && filteredList.map((recipe, index) => (
+          <div key={ index }>
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
+              <img
+                className="recipe-image"
+                src={ recipe.image }
+                data-testid={ `${index}-horizontal-image` }
+                alt="Foto do Prato"
+              />
+            </Link>
+            <h3
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { `${recipe.type === 'comida'
+                ? recipe.area
+                : recipe.alcoholicOrNot} - ${recipe.category}` }
+            </h3>
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
+              <h2 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h2>
+            </Link>
+            <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
+            <ShareButton index={ index } address={ `/${recipe.type}s/${recipe.id}` } />
+            {recipe.tags.map(
+              (tag) => (
+                <p
+                  key={ tag }
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  { tag }
+                </p>
+              ),
+            )}
+          </div>
+        ))}
     </div>
   );
 }
