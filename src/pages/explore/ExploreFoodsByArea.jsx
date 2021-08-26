@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 export default function ExploreFoodsByArea() {
   return (
     <>
-      <Header title="Explorar Origem" showButton />
+      <Header title="Explorar Origem" showButton foodPage />
       ExploreFoodsByArea
       <Footer />
     </>
