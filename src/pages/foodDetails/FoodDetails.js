@@ -6,6 +6,7 @@ import IngredientsDetails from '../../components/IngredientsDetails/IngredientsD
 import Instructions from '../../components/InstructionsDetails/InstructionsDetails';
 import VideoDetails from '../../components/VideoDetails/VideoDetails';
 import Recomendation from '../../components/Recomentation/Recomendation';
+import './FoodDetails.css';
 
 const FoodDetails = ({ match: { params: id } }) => {
   const [meal, setMeal] = useState(0);
