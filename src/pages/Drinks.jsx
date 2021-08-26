@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@material-ui/core';
 import { fetchDrinksRedux,
-  fetchDrinksCategoriesRedux, fetchDrinksByCategory } from '../redux/actions/foodActions';
+  fetchDrinksCategoriesRedux,
+  fetchDrinksByCategory } from '../redux/actions/foodActions';
 import DrinksCards from '../components/DrinksCard';
 import CategoryButton from '../components/CategoryButton';
 
@@ -36,13 +38,14 @@ function Drinks() {
   }
 
   return (
-    <div>
-      <button
-        type="button"
+    <div className="recipes-list">
+      <Button
+        color="secondary"
+        variant="contained"
         onClick={ () => onClick('All') }
       >
         All
-      </button>
+      </Button>
       { categories.drinks.slice(0, buttonLimits).map(
         (category, id) => CategoryButton(category.strCategory, id, onClick),
       )}

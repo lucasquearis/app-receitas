@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@material-ui/core';
 import {
   fetchFoodRedux, fetchFoodsCategoriesRedux, fetchFoodByCategory,
 } from '../redux/actions/foodActions';
@@ -38,13 +39,14 @@ function Foods() {
   }
 
   return (
-    <div>
-      <button
-        type="button"
+    <div className="recipes-list">
+      <Button
+        color="secondary"
+        variant="contained"
         onClick={ () => onClick('All') }
       >
         All
-      </button>
+      </Button>
       { categories.meals.slice(0, buttonLimits).map(
         (category, id) => CategoryButton(category.strCategory, id, onClick),
       )}
