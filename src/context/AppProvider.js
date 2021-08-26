@@ -4,9 +4,11 @@ import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
   const [recipeList, setRecipeList] = useState();
+  const [recipeDetails, setRecipeDetails] = useState();
+  const context = { recipeList, setRecipeList, recipeDetails, setRecipeDetails };
 
   return (
-    <AppContext.Provider value={ { recipeList, setRecipeList } }>
+    <AppContext.Provider value={ context }>
       {children}
     </AppContext.Provider>
   );
