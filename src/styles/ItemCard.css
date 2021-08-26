@@ -3,25 +3,25 @@
 }
 
 .section-card {
+  align-items: center;
+  background-color: #FEC0A0;
+  border-radius: 8px;
+  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
   display: flex;
   flex-direction: column;
-  width: 160px;
   height: 100%;
-  background-color: #FEC0A0;
-  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
-  border-radius: 8px;
   margin: 10px;
-  align-items: center;
+  width: 160px;
 }
 
 .card-img {
-  width: 90%;
   border-radius: 50%;
   padding: 10% 0;
+  width: 90%;
 }
 
 .card-title {
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
   padding-top: 10px;
 }
