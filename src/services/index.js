@@ -10,6 +10,15 @@ const getResponse = async (url) => {
   return response.json();
 };
 
+// Receber lista de categorias;
+const fetchCategories = (type) => {
+  const apiURL = `${endPoints[type]}list.php?c=list`;
+  return getResponse(apiURL);
+};
+
+export const getCategories = (type) => fetchCategories(type);
+
+// Requisição padrão;
 const defaultFetch = (type) => {
   const apiURL = `${endPoints[type]}search.php?s=`;
   return getResponse(apiURL);

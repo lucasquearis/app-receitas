@@ -1,16 +1,18 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useFoodAndDrinksContext } from '../../../context/FoodAndDrinksProvider';
 
-export default function FormFilter({
-  text,
-  filter,
-  handleSetFilter,
-  handleSetText,
-}) {
+export default function FormFilter() {
   const history = useHistory();
   const { handleSetParameters } = useFoodAndDrinksContext();
+
+  // Estado dos inputs;
+  const [text, setText] = useState('');
+  const [filter, setFilter] = useState('ingredient');
+
+  const handleSetText = ({ target: { value } }) => setText(value);
+
+  const handleSetFilter = ({ target: { value } }) => setFilter(value);
 
   // Objeto com todos os filtros, que sempre será atualizado conforme o estado;
   const filters = useMemo(() => ({ filter, text }), [text, filter]);
@@ -68,10 +70,3 @@ export default function FormFilter({
     </form>
   );
 }
-
-FormFilter.propTypes = {
-  text: PropTypes.string.isRequired,
-  filter: PropTypes.string.isRequired,
-  handleSetFilter: PropTypes.func.isRequired,
-  handleSetText: PropTypes.func.isRequired,
-};

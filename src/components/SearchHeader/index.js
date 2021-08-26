@@ -5,22 +5,12 @@ import '../../styles/header.css';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import FormFilter from './FormFilter';
+import CategoryContainer from './CategoryContainer';
 
 export default function SearchHeader({ children }) {
   const history = useHistory();
-  // Função do context que recebe filtros do usuário de acordo com a página;
-
   const [visibleSearch, setVisibleSearch] = useState(false);
-
-  // Estado dos inputs;
-  const [text, setText] = useState('');
-  const [filter, setFilter] = useState('ingredient');
-
   const handleToggleInput = () => setVisibleSearch((currState) => !currState);
-
-  const handleSetText = ({ target: { value } }) => setText(value);
-
-  const handleSetFilter = ({ target: { value } }) => setFilter(value);
 
   return (
     <div>
@@ -42,15 +32,8 @@ export default function SearchHeader({ children }) {
           />
         </button>
       </header>
-      { visibleSearch
-      && (
-        <FormFilter
-          text={ text }
-          filter={ filter }
-          handleSetFilter={ handleSetFilter }
-          handleSetText={ handleSetText }
-        />
-      ) }
+      <CategoryContainer />
+      { visibleSearch && <FormFilter /> }
     </div>
   );
 }
