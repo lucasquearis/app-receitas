@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import CategoryButton from './CategoryButton/CategoryButton';
+import AllButton from './AllButton/AllButton';
 
 function CategoryFilter() {
   const { pathname } = useLocation();
   const categories = useSelector(({ meals }) => meals.categories);
+  const [selected, setSelected] = useState('');
 
   function btnMap(firstFive) {
     return (
       <div>
+        <AllButton path={ pathname } select={ setSelected } />
         { firstFive.map(({ strCategory }) => (
           <CategoryButton
             key={ strCategory }
             category={ strCategory }
             path={ pathname }
+            selected={ selected }
+            select={ setSelected }
           />)) }
       </div>
     );

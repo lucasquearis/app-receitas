@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { changeFilterType } from '../redux/actions/filterAction';
 import {
   requestByFirstLetter,
   requestByName,
@@ -11,6 +12,7 @@ function UseSearchBar() {
   const [searchObj, setSearchObj] = useState({ searchText: '', searchRadio: '' });
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+
   function handleChange({ target }) {
     const { name, value } = target;
     setSearchObj({
@@ -34,6 +36,7 @@ function UseSearchBar() {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       }
     }
+    dispatch(changeFilterType('searchBar'));
   }
   return { searchObj, handleChange, handleClick };
 }
