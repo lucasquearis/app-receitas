@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../cssPages/Explore.css';
 import fetchFoods from '../fetchs/FetchFood';
+import CardList from '../components/CardList';
 
 function LocalDeOrigem() {
   const [area, setArea] = useState([]);
@@ -18,22 +19,7 @@ function LocalDeOrigem() {
     const all = { strArea: 'All' };
     setArea([...meals, all]);
     const receitasList = await fetchFoods('food', 'procuraComida');
-    console.log(receitasList.meals);
     setReceitas([...receitasList.meals]);
-  };
-
-  const getReceitas = async () => {
-    if (areaSelected.selected === 'All') {
-      const list = await fetchFoods('food', 'procuraComida');
-      const { meals } = list;
-      console.log(meals);
-      setReceitas([...meals]);
-    } else {
-      const list = await fetchFoods('food', 'filterByArea', areaSelected.selected);
-      const { meals } = list;
-      console.log(meals);
-      setReceitas([...meals]);
-    }
   };
 
   useEffect(() => {
@@ -41,8 +27,21 @@ function LocalDeOrigem() {
   }, []);
 
   useEffect(() => {
+    const getReceitas = async () => {
+      if (areaSelected.selected === 'All') {
+        const list = await fetchFoods('food', 'procuraComida');
+        const { meals } = list;
+        console.log(meals);
+        setReceitas([...meals]);
+      } else {
+        const list = await fetchFoods('food', 'filterByArea', areaSelected.selected);
+        const { meals } = list;
+        console.log(meals);
+        setReceitas([...meals]);
+      }
+    };
     getReceitas();
-  }, []);
+  }, [areaSelected]);
 
   function onClick(event) {
     const { name } = event.target;
@@ -75,6 +74,11 @@ function LocalDeOrigem() {
             ))}
           </Dropdown.Menu>
         </Dropdown>
+        <CardList
+          list={ receitas }
+          apiType="Meal"
+          page="comidas"
+        />
       </main>
       <Footer />
     </div>
