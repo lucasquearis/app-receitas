@@ -44,7 +44,6 @@ const Input = ({
     </label>
   )
 );
-
 Input.propTypes = {
   labelText: PropTypes.string,
   type: PropTypes.string.isRequired,

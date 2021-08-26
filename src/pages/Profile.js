@@ -1,5 +1,8 @@
 import React from 'react';
+import Header from '../components/Header';
 
-const Profile = () => <div />;
+const Profile = () => (
+  <Header title="Perfil" />
+);
 
 export default Profile;
