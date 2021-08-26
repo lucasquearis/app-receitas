@@ -26,10 +26,14 @@ const SearchBar = ({ bool, saveItems }) => {
         } else {
           pathName = 'bebidas';
         }
+        const mealDrink = Object.values(items)[0];
+        const mealDrinkDetails = Object.values(mealDrink)[0];
+        const mealDrinkIdKey = Object.keys(mealDrinkDetails)[0];
+        const mealDrinkId = mealDrinkDetails[mealDrinkIdKey];
         setRedirect({
           bool: true,
           pathName,
-          id: Object.values(Object.values(items[Object.keys(items)[0]])[0])[0],
+          id: mealDrinkId,
         });
       }
     };
