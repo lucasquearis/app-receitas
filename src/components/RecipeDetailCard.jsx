@@ -46,6 +46,10 @@ export default function RecipeDetailCard({
     navigator.clipboard.writeText(`${curretPageURL}`);
   };
 
+  const onClickFavorite = () => {
+    setFavorited((prevState) => !prevState);
+  };
+
   return (
     <section>
       <div>
@@ -68,6 +72,7 @@ export default function RecipeDetailCard({
         <button
           type="button"
           style={ { border: 'none', background: 'none' } }
+          onClick={ onClickFavorite }
         >
           <img
             data-testid="favorite-btn"
