@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { Button } from 'react-bootstrap';
 import Context from '../../context';
 import Footer from '../../components/Footer';
 
@@ -58,48 +59,54 @@ function Recipes(props) {
   if (isFetching || loadingCategories) return 'Loading';
 
   return (
-    <div>
-      <button
-        type="button"
-        onClick={ handleRemoveFilter }
-        data-testid="All-category-filter"
-      >
-        All
-      </button>
-      {categories[`${query}s`]
-        .slice(0, catSize).map((cat) => (
-          <button
-            key={ cat.strCategory }
-            onClick={ handleFilter }
-            type="button"
-            data-testid={ `${cat.strCategory}-category-filter` }
-          >
-            {cat.strCategory}
-          </button>
-        ))}
+    <>
+      <main className="p-2">
+        <Button
+          type="button"
+          onClick={ handleRemoveFilter }
+          data-testid="All-category-filter"
+          className="mb-1 mr-1"
+          variant="primary"
+        >
+          All
+        </Button>
+        {categories[`${query}s`]
+          .slice(0, catSize).map((cat) => (
+            <Button
+              key={ cat.strCategory }
+              onClick={ handleFilter }
+              type="button"
+              data-testid={ `${cat.strCategory}-category-filter` }
+              variant="primary"
+              className="mb-1 mr-1"
+            >
+              {cat.strCategory}
+            </Button>
+          ))}
 
-      {apiData[0][`${query}s`]
-        .slice(0, recipesSize).map((item, index) => {
-          const name = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}`];
-          const src = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}Thumb`];
-          const id = item[`id${query.charAt(0).toUpperCase() + query.slice(1)}`];
-          const subpage = query === 'meal' ? 'comidas' : 'bebidas';
+        {apiData[0][`${query}s`]
+          .slice(0, recipesSize).map((item, index) => {
+            const name = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}`];
+            const src = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}Thumb`];
+            const id = item[`id${query.charAt(0).toUpperCase() + query.slice(1)}`];
+            const subpage = query === 'meal' ? 'comidas' : 'bebidas';
 
-          return (
-            <Link to={ `/${subpage}/${id}` } key={ id }>
-              <div data-testid={ `${index}-recipe-card` }>
-                <h3 data-testid={ `${index}-card-name` }>{name}</h3>
-                <img
-                  src={ src }
-                  alt={ name }
-                  data-testid={ `${index}-card-img` }
-                />
-              </div>
-            </Link>
-          );
-        })}
+            return (
+              <Link to={ `/${subpage}/${id}` } key={ id }>
+                <div data-testid={ `${index}-recipe-card` }>
+                  <h3 data-testid={ `${index}-card-name` }>{name}</h3>
+                  <img
+                    src={ src }
+                    alt={ name }
+                    data-testid={ `${index}-card-img` }
+                  />
+                </div>
+              </Link>
+            );
+          })}
+      </main>
       <Footer handleClick={ setLoadingCategories } />
-    </div>
+    </>
   );
 }
 
