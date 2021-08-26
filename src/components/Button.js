@@ -9,7 +9,7 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
 
   const handleClick = () => {
     if (!isDisable) {
-      // onClick();
+      onClick();
       handleRedirect();
     }
   };
@@ -36,7 +36,7 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
       className={ className }
       data-testid={ className }
       type={ (type === 'submit' ? 'submit' : 'button') }
-      onClick={ handleClick }
+      onClick={ !onClick ? handleRedirect : handleClick }
       disabled={ isDisable }
     >
       { buttonText }
