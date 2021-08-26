@@ -1,4 +1,4 @@
-async function fetchAPI(type, filter, searchInput) {
+async function fetchAPIFilter(type, filter, searchInput) {
   let response = null;
   let bodyURL = null;
   let key = null;
@@ -25,4 +25,4 @@ async function fetchAPI(type, filter, searchInput) {
   }
 }
 
-export default fetchAPI;
+export default fetchAPIFilter;

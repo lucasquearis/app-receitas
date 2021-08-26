@@ -1,4 +1,20 @@
-img {
-  height: 109px;
+.recipe-card {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 6px;
+  height: 172px;
   width: 161px;
+}
+
+.recipe-card img {
+  height: 109px;
+  width: 100%;
+}
+
+.recipe-card div {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-top: 5px;
 }
