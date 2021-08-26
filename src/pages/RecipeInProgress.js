@@ -102,11 +102,8 @@ function RecipeInProgress() {
         alt="Recipe"
       />
       <h3 data-testid="recipe-title">{ recipeDetails[`str${recipeKey}`] }</h3>
-      <ShareButton />
-      <FavoriteButton
-        recipeDetails={ recipeDetails }
-        recipeKey={ recipeKey }
-      />
+      <ShareButton recipeDetails={ recipeDetails } />
+      <FavoriteButton recipeDetails={ recipeDetails } />
       <h4 data-testid="recipe-category">{ recipeDetails.strCategory }</h4>
       <ul>{ renderIngredientList() }</ul>
       <p data-testid="instructions">{ recipeDetails.strInstructions }</p>

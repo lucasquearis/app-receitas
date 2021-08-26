@@ -63,6 +63,7 @@ function FavoriteButton({ recipeDetails }) {
       type="button"
       data-testid="favorite-btn"
       onClick={ handleFavorite }
+      src={ isFavorite ? full : empty }
     >
       <img
         src={ isFavorite ? full : empty }
