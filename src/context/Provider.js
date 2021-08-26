@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Context from './Context';
+import * as RequestMealsAPI from '../services/requestMealsAPI';
+import * as RequestCocktailsAPI from '../services/requestCocktailsAPI';
 
 function Provider({ children }) {
   const [user, setUser] = useState({
@@ -11,6 +13,19 @@ function Provider({ children }) {
   const [buttonDisabled, setButtonDisabled] = useState({
     disabled: true,
   });
+  const [meals, setMeals] = useState([]);
+  const [cocktails, setCocktails] = useState([]);
+  const [recipeType, setRecipeType] = useState('meals');
+
+  useEffect(() => {
+    async function fetchAPI() {
+      const responseMeals = await RequestMealsAPI.fetchMeals();
+      setMeals(responseMeals);
+      const responseCocktails = await RequestCocktailsAPI.fetchCocktails();
+      setCocktails(responseCocktails);
+    }
+    fetchAPI();
+  }, []);
 
   const validButton = () => {
     const { email, password } = user;
@@ -48,7 +63,14 @@ function Provider({ children }) {
     handleInputs,
     user,
     handleClick,
+    cocktails,
+    setCocktails,
+    meals,
+    setMeals,
+    recipeType,
+    setRecipeType,
   };
+
   return (
     <Context.Provider value={ context }>
       { children }

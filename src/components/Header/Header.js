@@ -45,7 +45,6 @@ function Header({ children }) {
 
   );
 }
-
 Header.propTypes = {
   children: PropTypes.string.isRequired,
 };
