@@ -10,9 +10,6 @@ export default function FoodDetails() {
 
   const [recipes, setRecipes] = useState({ id });
   const [loading, setLoading] = useState(true);
-  const [mealIndex, setMealIndex] = useState(0);
-
-  // Falta adicionar index para passar no teste
 
   useEffect(() => {
     const getRecipes = async (drinkId) => {
@@ -22,20 +19,14 @@ export default function FoodDetails() {
     getRecipes(id);
   }, [id]);
 
-  useEffect(() => {
-    setMealIndex(((prevState) => prevState));
-  }, [recipes]);
-
   const {
     idDrink,
     strDrinkThumb,
     strDrink,
     strInstructions,
-    strCategory,
+    strAlcoholic,
     strVideo,
   } = recipes;
-
-  console.log(ingredientsDetails(recipes));
 
   return (
     <div>
@@ -45,11 +36,17 @@ export default function FoodDetails() {
         <RecipeDetailCard
           key={ idDrink }
           img={ strDrinkThumb }
-          index={ mealIndex }
           title={ strDrink }
-          category={ strCategory }
+          category={ strAlcoholic }
           ingredients={
-            idDrink ? ingredientsDetails(recipes).map((item) => item) : []
+            idDrink ? ingredientsDetails(recipes).map((item, index) => (
+              <li
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ index }
+              >
+                {item}
+              </li>
+            )) : []
           }
           instructions={ strInstructions }
           video={ strVideo }

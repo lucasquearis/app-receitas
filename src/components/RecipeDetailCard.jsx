@@ -12,7 +12,6 @@ export default function RecipeDetailCard({
   ingredients,
   instructions,
   video,
-  index,
 }) {
   function embedVideo(youtubeLink) {
     if (youtubeLink === null) {
@@ -36,7 +35,7 @@ export default function RecipeDetailCard({
       </div>
       <div>
         <h3>Ingredients</h3>
-        <p data-testid={ `${index}-ingredient-name-and-measure` }>{ingredients}</p>
+        <ul>{ingredients}</ul>
       </div>
       <div>
         <h3>Instructions</h3>
@@ -77,5 +76,4 @@ RecipeDetailCard.propTypes = {
   ingredients: PropTypes.arrayOf(
     PropTypes.string,
   ).isRequired,
-  index: PropTypes.number.isRequired,
 };
