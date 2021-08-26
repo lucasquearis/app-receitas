@@ -8,7 +8,7 @@ import Header from '../../components/Header';
 function Explore() {
   return (
     <>
-      <Header title="Explorar" />
+      <Header title="Explorar" renderSearchIcon={ false } />
       <main className="p-2">
         <Link to="/explorar/comidas">
           <Button
