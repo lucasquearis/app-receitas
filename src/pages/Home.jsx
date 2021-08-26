@@ -6,10 +6,6 @@ function Home() {
   const [password, setPassword] = useState('');
   const [button, setButton] = useState(true);
 
-  // const redirect = () => (
-  //   (goFood ? <Redirect to="/comidas" /> : null)
-  // );
-
   useEffect(() => {
     const validEntries = () => {
       const minLength = 6;
@@ -59,6 +55,7 @@ function Home() {
           <Link to="/comidas">
             <button
               type="button"
+              name="login-submit-btn"
               data-testid="login-submit-btn"
               disabled={ button }
               onClick={ handleClick }
