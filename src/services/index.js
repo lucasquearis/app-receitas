@@ -1,3 +1,5 @@
+const copy = require('clipboard-copy');
+
 const FOODS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const FOOD_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -66,8 +68,8 @@ export const fetchCategoriesDrinks = async (name) => {
 };
 
 export const copyToClipboard = () => {
-  const myUrl = window.location.href;
-  localStorage.setItem('clipboard', JSON.stringify(myUrl));
+  const myUrl = copy(window.location.href);
+  return myUrl;
 };
 
 export const favoriteRecipe = (bool) => {
