@@ -6,7 +6,7 @@ function FoodDetails() {
   const index = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
-  const [getRecipe, setGetRecipe] = useState({});
+  const [setGetRecipe] = useState({});
 
   useEffect(() => {
     try {
@@ -25,7 +25,7 @@ function FoodDetails() {
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname]);
+  }, [id, getHistory, pathname, setGetRecipe]);
 
   return (
     <div>
