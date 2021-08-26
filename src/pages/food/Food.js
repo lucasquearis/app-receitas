@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionRequestItems, actionRequestSuccess } from '../../actions';
 import CardsList from '../../components/CardsList/CardsList';
+import CategoriesFilterButtons from
+  '../../components/FilterCategoriesButtons.js/CategoriesFilterButtons';
 import Header from '../../components/header/Header';
 import { fetchApi } from '../../components/SearchBar/utils';
 
@@ -29,6 +31,7 @@ const Food = () => {
     return (
       <div>
         <Header>Comidas</Header>
+        <CategoriesFilterButtons />
         <CardsList array={ items } />
       </div>
     );

@@ -4,6 +4,8 @@ import CardsList from '../../components/CardsList/CardsList';
 import Header from '../../components/header/Header';
 import { actionRequestItems, actionRequestSuccess } from '../../actions';
 import { fetchApi } from '../../components/SearchBar/utils';
+import CategoriesFilterButtons from
+  '../../components/FilterCategoriesButtons.js/CategoriesFilterButtons';
 
 const Drinks = () => {
   const [erro, setErro] = useState(false);
@@ -29,6 +31,7 @@ const Drinks = () => {
     return (
       <div>
         <Header>Bebidas</Header>
+        <CategoriesFilterButtons />
         <CardsList array={ items } />
       </div>
     );
