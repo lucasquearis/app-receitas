@@ -3,6 +3,11 @@ import React/* , { useState }  */from 'react';
 function FoodsRecipeInProgress() {
   const ingredientsList = ['tomate', 'azeite', 'sal'];
   // const index ->  ainda n tem
+
+  const handleCheked = () => (
+    'desenvolver lógica p dar check qd é apertado a caixinha de check'
+  );
+
   return (
     <div className="food-in-progress">
       <p>Componente FoodsRecipeInProgress</p>
@@ -23,7 +28,10 @@ function FoodsRecipeInProgress() {
         <div className="indredients">
           { ingredientsList.map((ingredient, index) => (
             <div key={ index } data-testid={ `${index}-ingredient-step` }>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={ handleCheked() }
+              />
               { `${ingredient}` }
             </div>
 
