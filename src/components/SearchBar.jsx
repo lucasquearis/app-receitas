@@ -1,12 +1,26 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
 import '../styles/Header.css';
 import context from '../context/Context';
 
 export default function SearchBar({ title }) {
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
-  const { setSearchDataMeals, setSearchDataDrinks } = useContext(context);
+  const {
+    searchDataMeals,
+    searchDataDrinks,
+    setSearchDataMeals,
+    setSearchDataDrinks } = useContext(context);
+
+  // const UM = 1;
+  // if (searchDataMeals.length === UM) {
+  //   return <Redirect to={ `/comidas/${searchDataMeals[0].idMeal}` } />;
+  // }
+
+  // if (searchDataDrinks.length === UM) {
+  //   return <Redirect to={ `/bebidas/${searchDataDrinks[0].idDrink}` } />;
+  // }
 
   const fetchRecipesMeals = async (url) => {
     try {
@@ -30,6 +44,7 @@ export default function SearchBar({ title }) {
 
   const msgCharacter = 'Sua busca deve conter somente 1 (um) caracter';
   const msgFilter = 'Preencha o campo de busca e selecione o filtro';
+  const msgNotRecipe = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
   const showAlert = (func, mensagem) => func(mensagem);
 
   const handleSearchMeals = () => {
@@ -46,6 +61,7 @@ export default function SearchBar({ title }) {
     } else {
       return showAlert(alert, msgFilter);
     }
+    if (searchDataMeals.length === 0) return showAlert(alert, msgNotRecipe);
   };
 
   const handleSearchDrinks = () => {
@@ -62,6 +78,7 @@ export default function SearchBar({ title }) {
     } else {
       return showAlert(alert, msgFilter);
     }
+    if (searchDataDrinks.length === 0) return showAlert(alert, msgNotRecipe);
   };
 
   const handleSearch = () => {
