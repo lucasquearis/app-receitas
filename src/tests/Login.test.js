@@ -99,7 +99,5 @@ describe('Verifica interações do usuário com Login', () => {
     pathName = history.location.pathname;
 
     expect(pathName).toBe('/comidas');
-
-    expect();
   });
 });

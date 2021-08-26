@@ -10,9 +10,8 @@ import {
   Explore,
   InProgressDrink,
   InProgressMeal,
-  FavoritesRecipes,
   DoneRecipes,
-} from './pages';
+  FavoritesRecipes } from './pages';
 import Provider from './context/Provider';
 
 function App() {
