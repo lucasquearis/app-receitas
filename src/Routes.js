@@ -10,10 +10,7 @@ import Login from './pages/Login';
 import OneMeal from './pages/OneMeal';
 import OneDrink from './pages/OneDrink';
 import Profile from './pages/Profile';
-<<<<<<< HEAD
-=======
 import Drinks from './pages/Drinks';
->>>>>>> 15bd7c685fcfecd598821de24e2ca3c852ab098b
 
 function Routes() {
   return (
