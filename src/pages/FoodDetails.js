@@ -1,24 +1,108 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import FoodContext from '../context/FoodContext';
+import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const FoodDetails = () => {
   const { foodDetails } = useContext(FoodContext);
+  const [ingredients, setIngredients] = useState();
+  const [measures, setMeasures] = useState();
+  foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
-  foodDetails.map(({ idMeal }) => console.log(idMeal));
+  const getIngredients = () => {
+    const ingredientsArr = foodDetails.map((item) => Object.entries(item)
+      .filter((i) => i[0].includes('Ingredient') && i[1] !== ''));
+    const ingredientsOnly = ingredientsArr.map((item) => item
+      .map((i) => i.pop())).map((item) => item);
+    setIngredients(ingredientsOnly);
+  };
+
+  const getMeasure = () => {
+    const measuresArr = foodDetails.map((item) => Object.entries(item)
+      .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
+    const measuresOnly = measuresArr.map((item) => item
+      .map((i) => i.pop())).map((item) => item);
+    setMeasures(measuresOnly);
+  };
+
+  useEffect(() => {
+    getIngredients();
+    getMeasure();
+  }, [foodDetails]);
 
   return (
     <div>
-      Detalhes da comida
-      {/* <div>
-        <img data-testid="recipe-photo" />
-        <h3 data-testid="recipe-title" />
-        <button data-testid="share-btn" />
-        <button data-testid="favorite-btn" />
-        <p data-testid="recipe-category" />
-      </div> */}
-      {/* { foodDetails && foodDetails.slice(0, 1).map((data) => console.log(data)) } */}
+      {
+        foodDetails.map(({
+          strMealThumb,
+          strMeal,
+          strCategory,
+          strInstructions,
+          strYoutube,
+          strDrinkAlternate,
+        }, i) => (
+          <div key={ i }>
+            <img
+              key={ strMealThumb }
+              src={ strMealThumb }
+              alt="thumbnail"
+              data-testid="recipe-photo"
+            />
+            <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
+            <button
+              type="button"
+              data-testid="share-btn"
+              key={ shareIcon }
+            >
+              <img src={ shareIcon } alt="share-icon" />
+            </button>
+            <button
+              type="button"
+              data-testid="favorite-btn"
+              key={ blackHeartIcon }
+            >
+              <img src={ blackHeartIcon } alt="favorite-icon" />
+            </button>
+            <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
+            <h3>Ingredients</h3>
+            <ul>
+              {
+                ingredients.map((ingredient) => ingredient.map((item, index) => (
+                  <li
+                    key={ item }
+                    datatest-Id={ `${index}-` }
+                  >
+                    {`${item} - ${measures[0][index]}`}
+                  </li>
+                )))
+              }
+            </ul>
+            <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
+            <iframe
+              data-testid="video"
+              key={ strYoutube }
+              frameBorder="0"
+              title="video"
+              width="200"
+              height="200"
+              src={ strYoutube }
+            />
+            <p
+              data-testid={ `${i}-recomendation-card` }
+              key={ strDrinkAlternate }
+            >
+              {strDrinkAlternate}
+            </p>
+            <button
+              data-testid="start-recipe-btn"
+              key={ i }
+              type="button"
+            >
+              Iniciar receita
+            </button>
+          </div>))
+      }
     </div>
-
   );
 };
 
