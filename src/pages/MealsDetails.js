@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
-import Loading from '../components/Loagind';
+import Loading from '../components/Loading';
+import Sugestions from '../components/Sugestions';
 
 function MealsDetails() {
   // const history = useHistory();
@@ -12,8 +13,6 @@ function MealsDetails() {
     measure: [],
   });
   const [url, setUrl] = useState();
-  const [sugestions, setSugestions] = useState([]);
-  console.log(sugestions);
 
   useEffect(() => {
     const filterIngredients = () => {
@@ -39,20 +38,12 @@ function MealsDetails() {
     try {
       setLoading(true);
       const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-      const urlSugestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const fetchRecipe = async () => {
         const request = await fetch(`${urlFoods}52862`);
         const response = await request.json();
         setRecipe(response.meals[0]);
       };
-      const fetchSugestions = async () => {
-        const request = await fetch(`${urlSugestions}`); // colocar o id dinânmico
-        const { drinks } = await request.json();
-        const resSugestion = drinks.filter((item, key) => key < Number('6'));
-        setSugestions(resSugestion);
-      };
       setLoading(false);
-      fetchSugestions();
       fetchRecipe();
     } catch (error) {
       console.log(error);
@@ -103,9 +94,7 @@ function MealsDetails() {
         height="315"
         src={ url }
       />
-      {/* <div>
-        <p data-testid={ `${index}-recomendation-card` }>recomendations</p>
-      </div> */}
+      <Sugestions type="drinks" />
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </section>
   );
