@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Header from '../components/Header/Header';
+import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
+import Header from '../components/Header';
 
-export default function Foods() {
+export default function Meals() {
   const { searchBarResult } = useContext(MyContext);
   const [resultList, setResultList] = useState();
 
@@ -32,8 +33,9 @@ export default function Foods() {
   };
   return (
     <>
-      <Header page="foods" />
+      <Header title="Comidas" />
       {renderList()}
+      <BottomMenu />
     </>
   );
 }

@@ -1,22 +1,22 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import MyContext from '../../../context';
+import MyContext from '../context/index';
 // FOODS API'S
 import nameSearchFoodsAPI
-  from '../../../services/Header-SearchBar/Foods/searchFoodsByName';
+  from '../services/Header-SearchBar/Foods/searchFoodsByName';
 import ingredientSearcFoodsAPI
-  from '../../../services/Header-SearchBar/Foods/searchFoodsByIngredient';
+  from '../services/Header-SearchBar/Foods/searchFoodsByIngredient';
 import firstLetterSearchFoodsAPI
-  from '../../../services/Header-SearchBar/Foods/searchFoodsByFirstLetter';
+  from '../services/Header-SearchBar/Foods/searchFoodsByFirstLetter';
 // DRINKS API'S
 import firstLetterSearchDrinkdsAPI
-  from '../../../services/Header-SearchBar/Drinks/searchDrinksByFirstLetter';
+  from '../services/Header-SearchBar/Drinks/searchDrinksByFirstLetter';
 import ingredientSearchDrinksAPI
-  from '../../../services/Header-SearchBar/Drinks/searchDrinksByIngredient';
+  from '../services/Header-SearchBar/Drinks/searchDrinksByIngredient';
 import nameSearchDrinksAPI
-  from '../../../services/Header-SearchBar/Drinks/searchDrinksByName';
+  from '../services/Header-SearchBar/Drinks/searchDrinksByName';
 
-const HeaderSearchBar = ({ page }) => {
+function SearchBar({ title }) {
   const [searchBy, setSearchBy] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { setSearchBarResult } = useContext(MyContext);
@@ -24,8 +24,6 @@ const HeaderSearchBar = ({ page }) => {
   const handleChange = ({ target: { value } }) => {
     setSearchInput(value);
   };
-
-  console.log(page);
 
   const alertFirstLetterBiggerThanOne = () => {
     global.alert('Sua busca deve conter somente 1 (um) caracter');
@@ -78,10 +76,10 @@ const HeaderSearchBar = ({ page }) => {
   };
 
   const checkPages = () => {
-    if (page === 'foods') {
+    if (title === 'Comidas') {
       renderFoods();
     }
-    if (page === 'drinks') {
+    if (title === 'Bebidas') {
       renderDrinks();
     }
   };
@@ -144,10 +142,10 @@ const HeaderSearchBar = ({ page }) => {
       </form>
     </div>
   );
-};
+}
 
-HeaderSearchBar.propTypes = {
+SearchBar.propTypes = {
   page: PropTypes.string,
 }.isRequired;
 
-export default HeaderSearchBar;
+export default SearchBar;

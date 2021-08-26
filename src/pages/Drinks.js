@@ -1,14 +1,41 @@
-import React from 'react';
-import Header from '../components/Header/Header';
+import React, { useEffect, useState, useContext } from 'react';
+import BottomMenu from '../components/BottomMenu';
+import Header from '../components/Header';
+import MyContext from '../context';
 
-const Drinks = (props) => {
-  console.log(props);
+export default function Drinks() {
+  const { searchBarResult } = useContext(MyContext);
+  const [resultList, setResultList] = useState();
+
+  useEffect(() => {
+    const resolveApi = async () => {
+      const result = await searchBarResult;
+      const { drinks } = result;
+      setResultList(drinks);
+    };
+    resolveApi();
+  }, [resultList, searchBarResult]);
+
+  const renderList = () => {
+    if (!resultList) {
+      return (<h1>Search something... </h1>);
+    }
+    return (
+      <ul>
+        {resultList.map((item) => (
+          <li key={ item.strDrink }>
+            <h2>{item.strDrink}</h2>
+            <img src={ item.strDrinkThumb } alt={ item.strDrink } />
+          </li>
+        ))}
+      </ul>
+    );
+  };
   return (
     <>
-      <Header page="drinks" />
-      <h1>Im Drinks</h1>
+      <Header title="Bebidas" />
+      {renderList()}
+      <BottomMenu />
     </>
   );
-};
-
-export default Drinks;
+}

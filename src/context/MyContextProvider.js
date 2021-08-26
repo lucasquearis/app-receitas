@@ -4,10 +4,17 @@ import MyContext from '.';
 
 export default function Provider({ children }) {
   const [searchBarResult, setSearchBarResult] = useState({});
+  const [search, setSearch] = useState(false);
+
   const context = {
     setSearchBarResult,
     searchBarResult,
+    search,
+    setSearch,
   };
+
+  console.log(searchBarResult);
+
   return (
     <MyContext.Provider value={ context }>
       {children}
