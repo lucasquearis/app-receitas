@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import * as BebidasAPI from '../service/BebidasAPI';
 import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import { Link } from 'react-router-dom';
 
 export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);
