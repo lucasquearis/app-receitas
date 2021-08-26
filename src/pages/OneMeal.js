@@ -56,5 +56,3 @@ export default function OneRecept() {
     </div>
   );
 }
-
-// https://www.thedatadb.com/api/json/v1/1/search.php?s=Egyptian+Fatteh
