@@ -6,11 +6,14 @@ import myContext from '../context/myContext';
 import { ALERT_ONE } from '../services/data';
 
 export default function SearchBar() {
-  const { setSearchValues, filteredMealsOrDrinks } = useContext(myContext);
+  const {
+    setSearchValues,
+    filteredMeals,
+    filteredDrinks,
+    setUpdateData } = useContext(myContext);
   const { pathname } = useLocation();
   const [textValue, setTextValue] = useState('');
   const [radioValue, setRadioValue] = useState('ingredient');
-  const { meals } = filteredMealsOrDrinks;
 
   const settings = ({ target: { name, value } }) => {
     if (name === 'filter-radio-button') return setRadioValue(value);
@@ -21,8 +24,20 @@ export default function SearchBar() {
     setSearchValues({ textValue, radioValue, pathname });
   };
 
-  if (meals !== 'empty' && meals !== null && Object.keys(meals).length === 1) {
-    return <Redirect to={ `${pathname}/${meals[0].idMeal}` } />;
+  if (pathname === '/comidas') {
+    const { meals } = filteredMeals;
+    if (meals !== null && Object.keys(meals).length === 1) {
+      setUpdateData(meals);
+      return <Redirect to={ `${pathname}/${meals[0].idMeal}` } />;
+    }
+  }
+
+  if (pathname === '/bebidas') {
+    const { drinks } = filteredDrinks;
+    if (drinks !== null && Object.keys(drinks).length === 1) {
+      setUpdateData(drinks);
+      return <Redirect to={ `${pathname}/${drinks[0].idDrink}` } />;
+    }
   }
 
   return (

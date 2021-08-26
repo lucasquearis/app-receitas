@@ -1,0 +1,17 @@
+.container-cards {
+  max-width: 340px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(6, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.container-cards img {
+  width: 100%;
+}
+
+.card {
+  height: 280px;
+  text-align: center;
+}

@@ -3,15 +3,23 @@ const URL_RADIO_BUTTON = {
   name: 'search.php?s',
   letter: 'search.php?f',
 };
-
-const URL_PAGE = new Map([['/comidas', 'themealdb'], ['/bebidas', 'thecocktaildb']]);
-const BODY_URL = '.com/api/json/v1/1/';
+const MEAL_OBJ = { textValue: '', radioValue: 'ingredient', pathname: '/comidas' };
+const DRINK_OBJ = { textValue: 'water', radioValue: 'ingredient', pathname: '/bebidas' };
 const ALERT_ONE = 'Sua busca deve conter somente 1 (um) caracter';
 const ALERT_TWO = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+const START_CARD = 0;
+const NUMBER_CARDS = 12;
 
 export {
   URL_RADIO_BUTTON,
-  URL_PAGE,
   ALERT_ONE,
   ALERT_TWO,
-  BODY_URL };
+  START_CARD,
+  NUMBER_CARDS,
+  MEAL_OBJ,
+  DRINK_OBJ,
+};
+
+// https://www.thecocktaildb.com/api/json/v1/1/search.php?i=
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=
+// https://www.themealdb.com/api/json/v1/1/filter.php?i=
