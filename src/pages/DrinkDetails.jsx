@@ -6,7 +6,7 @@ function DrinkDetails() {
   const index = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
-  const [setGetRecipe] = useState({});
+  const [getRecipe, setGetRecipe] = useState({});
 
   useEffect(() => {
     try {
@@ -18,8 +18,9 @@ function DrinkDetails() {
         console.log(pathname);
         const request = await fetch(`${goURL}${id}`);
         const response = await request.json();
-        console.log(response);
-        setGetRecipe(response);
+        const resolve = await response.drinks[0];
+        console.log(resolve);
+        setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
@@ -29,22 +30,27 @@ function DrinkDetails() {
   return (
     <div>
       <div>
-        <img alt="foto da bebida" data-testid="recipe-photo" />
+        <img
+          alt="foto da bebida"
+          data-testid="recipe-photo"
+          src={ getRecipe.strDrinkThumb }
+          style={ { width: '10rem' } }
+        />
       </div>
       <div>
-        <h2 data-testid="recipe-title">titulo</h2>
+        <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <button type="button" data-testid="share-btn">compartilhar</button>
         <button type="button" data-testid="favorite-btn">favorito</button>
-        <p data-testid="recipe-category"> categoria</p>
+        <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>
       <section>
-        <h3>ingredientes</h3>
+        <h3>Ingredientes</h3>
         <ul>
           <li data-testid={ `${index}-ingredient-name-and-measure` }>items</li>
         </ul>
       </section>
       <section>
-        <p data-testid="instructions">Instruçoes</p>
+        <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
       <div>
         <p data-testid={ `${index}-recomendation-card` }>cards</p>

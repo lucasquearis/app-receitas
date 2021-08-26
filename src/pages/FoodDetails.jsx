@@ -6,20 +6,19 @@ function FoodDetails() {
   const index = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
-  const [setGetRecipe] = useState({});
+  const [getRecipe, setGetRecipe] = useState({});
 
   useEffect(() => {
     try {
       const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        console.log(getHistory);
         const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
-        console.log(pathname);
         const request = await fetch(`${goURL}${id}`);
         const response = await request.json();
-        console.log(response);
-        setGetRecipe(response);
+        const resolve = await response.meals[0];
+        console.log(resolve);
+        setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
@@ -30,22 +29,27 @@ function FoodDetails() {
   return (
     <div>
       <div>
-        <img alt="foto da comida" data-testid="recipe-photo" />
+        <img
+          alt="foto da comida"
+          data-testid="recipe-photo"
+          src={ getRecipe.strMealThumb }
+          style={ { width: '10rem' } }
+        />
       </div>
       <div>
-        <h2 data-testid="recipe-title">titulo</h2>
+        <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
         <button type="button" data-testid="share-btn">compartilhar</button>
         <button type="button" data-testid="favorite-btn">favorito</button>
-        <p data-testid="recipe-category"> categoria</p>
+        <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>
       <section>
-        <h3>ingredientes</h3>
+        <h3>Ingredientes</h3>
         <ul data-testid={ `${index}-ingredient-name-and-measure` }>
           <li>item</li>
         </ul>
       </section>
       <section>
-        <p data-testid="instructions">Instruçoes</p>
+        <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
       <div>
         <p data-testid="video">video</p>
