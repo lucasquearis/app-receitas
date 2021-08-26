@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import { Carousel, Button, Image } from 'react-bootstrap';
 import * as fetchAPI from '../service/fetchAPI';
@@ -11,10 +12,11 @@ function DrinkDetails(props) {
   const [loading, setLoading] = useState(true);
   const [tip, setTip] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const [copied, setCopied] = useState(false);
   const { strDrinkThumb, strDrink, strInstructions, strAlcoholic } = data;
 
+  const { history: { location: { pathname } } } = props;
   useEffect(() => {
-    const { history: { location: { pathname } } } = props;
     const id = pathname.split('/')[2];
     fetchAPI.fetchDrinkById(id).then(({ drinks }) => setData(drinks[0]));
     fetchAPI.fetchRecipeSuggestions().then(({ meals }) => setTip(meals));
@@ -51,6 +53,11 @@ function DrinkDetails(props) {
 
   const handleClick = () => setRedirect(true);
 
+  const shareHandleClick = () => {
+    setCopied(true);
+    copy(`http://localhost:3000${pathname}`);
+  };
+
   if (redirect) return <Redirect to={ `/bebidas/${data.idDrink}/in-progress` } />;
 
   if (loading) return <h1>Loading...</h1>;
@@ -59,8 +66,9 @@ function DrinkDetails(props) {
       <Image fluid data-testid="recipe-photo" src={ strDrinkThumb } alt="recipe" />
       <div className="favorite-container">
         <h2 data-testid="recipe-title">{strDrink}</h2>
-        <button data-testid="share-btn" type="button">
+        <button data-testid="share-btn" type="button" onClick={ () => shareHandleClick() }>
           <img src={ shareIcon } alt="share icon" />
+          {copied && <span>Link copiado!</span>}
         </button>
         <button data-testid="favorite-btn" type="button">
           <img src={ whiteHeartIcon } alt="share icon" />
