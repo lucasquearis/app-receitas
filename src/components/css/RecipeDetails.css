@@ -1,0 +1,41 @@
+.recipe-container {
+  background-color: azure;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.recipe-photo {
+  height: 10%;
+  width: 100%;
+}
+
+.recipe-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-buttons-container {
+  display: flex;
+}
+
+.recipe-title {
+  margin: 0 auto;
+}
+
+.recipe-video {
+  width: 100%;
+}
+
+.share-btn {
+  background-color: transparent;
+  border: 0;
+}
+
+.favorite-btn {
+  background-color: transparent;
+  border: 0;
+}

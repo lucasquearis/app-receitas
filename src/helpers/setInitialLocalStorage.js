@@ -14,6 +14,12 @@ const setInitialLocalStorage = (user) => {
       JSON.stringify([]),
     );
   }
+  if (!localStorage.favoriteRecipes) {
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify([]),
+    );
+  }
 };
 
 export default setInitialLocalStorage;

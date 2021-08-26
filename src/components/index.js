@@ -4,3 +4,7 @@ export { default as Select } from './Select';
 export { default as Card } from './Card';
 export { default as IngredientsTaskList } from './IngredientsTaskList';
 export { default as DoneCard } from './DoneCard';
+export { default as RecipeDetails } from './RecipeDetails';
+export { default as Recomendations } from './Recomendations';
+export { default as StartRecipeBtn } from './StartRecipeBtn';
+export { default as ContinueRecipeBtn } from './ContinueRecipeBtn';
