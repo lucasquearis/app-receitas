@@ -1,8 +1,7 @@
 import fetchSearchRecipes from './fetchSearchRecipes';
-
-const tempFunc = () => {}; // função feita para manter padrão de exportação
+import fetchRecipesForCategory from './fetchRecipesForCategory';
 
 export {
   fetchSearchRecipes,
-  tempFunc,
+  fetchRecipesForCategory,
 };

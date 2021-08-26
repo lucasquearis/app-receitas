@@ -1,17 +1,18 @@
 import React from 'react';
-import { arrayOf, string, shape, func } from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import RecipeCard from '../../components/RecipeCard';
 
 const num = 12;
 
-function FoodRecipeCards({ recipes, push }) {
+function FoodRecipeCards({ recipes }) {
   const firstTwelve = recipes.filter((_recipe, index) => index < num);
 
   return (
     <>
       {recipes.length === 1
-        ? push(`/comidas/${recipes[0].idMeal}`)
+        ? <Redirect to={ `/comidas/${recipes[0].idMeal}` } />
         : ''}
 
       {firstTwelve.map((recipe, index) => (
@@ -32,8 +33,7 @@ const mapStateToProps = (state) => ({
 });
 
 FoodRecipeCards.propTypes = {
-  recipes: arrayOf(shape(string)).isRequired,
-  push: func.isRequired,
+  recipes: arrayOf(shape()).isRequired,
 };
 
 export default connect(mapStateToProps)(FoodRecipeCards);
