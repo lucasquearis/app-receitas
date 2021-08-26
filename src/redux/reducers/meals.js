@@ -1,9 +1,10 @@
-import { GET_RECIPES, GET_CATEGORIES } from '../actions/fetchActions';
+import { GET_RECIPES, GET_CATEGORIES, GET_INGREDIENTS } from '../actions/fetchActions';
 import { FILTER_CHANGE } from '../actions/filterAction';
 
 const INITIAL_STATE = {
   recipes: [],
   filter: '',
+  ingredients: {},
 };
 
 const meals = (state = INITIAL_STATE, action) => {
@@ -14,6 +15,8 @@ const meals = (state = INITIAL_STATE, action) => {
     return { ...state, recipes: action.payload };
   case GET_CATEGORIES:
     return { ...state, categories: action.payload };
+  case GET_INGREDIENTS:
+    return { ...state, ingredients: action.payload };
   case 'CLEAR':
     return { ...state, recipes: [] };
   default:
