@@ -12,22 +12,22 @@ import DrinksExplore from './pages/DrinksExplore';
 import FoodIngredients from './pages/FoodIngredients';
 import DrinkIngredients from './pages/DrinkIngredients';
 import FoodByOrigin from './pages/FoodByOrigin';
+import ProgressFood from './pages/ProgressFood';
+import ProgressDrink from './pages/ProgressDrink';
 import FoodDetails from './pages/FoodDetails';
 import DrinkDetails from './pages/DrinkDetails';
-// import ProgressFood from './pages/ProgressFood';
-// import ProgressDrink from './pages/ProgressDrink';
 
 function Routes() {
   return (
     <Switch>
-      {/* <Route
-        path={ `/bebidas/${id - da - receita}/in-progress` }
+      <Route
+        path="/bebidas/:id/in-progress"
         component={ ProgressDrink }
-      /> */}
-      {/* <Route
-        path={ `/comidas/${id - da - receita}/in-progress` }
+      />
+      <Route
+        path="/comidas/:id/in-progress"
         component={ ProgressFood }
-      /> */}
+      />
       <Route path="/bebidas/:id" component={ DrinkDetails } />
       <Route path="/comidas/:id" component={ FoodDetails } />
       <Route path="/explorar/comidas/area" component={ FoodByOrigin } />
