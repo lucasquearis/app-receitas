@@ -15,7 +15,7 @@ function BebidasDetails(props) {
     verifyingRecipe,
   } = useContext(RecipesContext);
 
-  const { favorite, done, inProgress } = verifyingRecipe(id, 'meals');
+  const { favorite, done, inProgress } = verifyingRecipe(id, 'drinks');
 
   const [drink, setDrink] = useState({});
   const [isFav, setIsFav] = useState(favorite);

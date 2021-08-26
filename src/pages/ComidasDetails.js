@@ -87,6 +87,7 @@ function ComidasDetails(props) {
     <Link
       data-testid="start-recipe-btn"
       to={ `/comidas/${id}/in-progress` }
+      className="details-button"
     >
       {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
     </Link>

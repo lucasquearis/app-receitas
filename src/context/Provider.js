@@ -15,7 +15,7 @@ function Provider({ children }) {
     if (isFav) {
       setIsFav(false);
       const newFavoriteRecipes = favoriteRecipes
-        .filter((recipe) => recipe.idMeal !== id);
+        .filter((recipe) => recipe.idMeal ? recipe.idMeal !== id : recipe.idDrink !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     } else {
       setIsFav(true);
@@ -44,7 +44,7 @@ function Provider({ children }) {
     const favorite = favoriteRecipes
       && favoriteRecipes.find((recipe) => recipe.idMeal === id);
     const done = doneRecipes
-      && doneRecipes.find((recipe) => recipe.idMeal === id);
+      && doneRecipes.find((recipe) => recipe.id === id);
     const inProgress = inProgressRecipes
       && inProgressRecipes[type].find((recipe) => recipe.idMeal === id);
     return { favorite, done, inProgress };
