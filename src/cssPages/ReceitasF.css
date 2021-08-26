@@ -22,3 +22,8 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.button-filtro {
+  border: none;
+  background-color: white;
+}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { Redirect } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
 import foodsEdrinks from '../mocks/foodsEdrinks';
 import Header from '../components/Header';
@@ -10,21 +9,11 @@ import '../cssPages/ReceitasF.css';
 
 function ReceitasFeitas() {
   const [finishRecipes, SetFinishRecipes] = useState([]);
-  const [redirect, setRedirect] = useState(null);
   const minNumber = 2;
-  const copy = require('clipboard-copy');
 
   useEffect(() => {
     SetFinishRecipes(foodsEdrinks);
   }, []);
-
-  function onCopy() {
-
-  }
-
-  function onLink(type, id) {
-    setRedirect(`/${type}s/${id}`);
-  }
 
   function onClick({ target: { name } }) {
     const filtroBebidas = foodsEdrinks.filter((bebida) => bebida.type === 'bebida');
@@ -34,7 +23,6 @@ function ReceitasFeitas() {
     if (name === 'all') SetFinishRecipes(foodsEdrinks);
   }
 
-  if (redirect) return <Redirect to={ redirect } />;
   return (
     <div>
       <Header titulo="Receitas Feitas" pesquisa="false" />
@@ -73,29 +61,26 @@ function ReceitasFeitas() {
             name={ recipe.name }
             style={ { width: '18rem' } }
             key={ index }
+            // onClick={ onClick }
           >
             <Card.Img
               data-testid={ `${index}-horizontal-image` }
               variant="top"
-              onClick={ () => onLink(recipe.type, recipe.id) }
               src={ `${recipe.image}` }
             />
             <Card.Body>
               <div className="paizao">
                 <Card.Title
                   data-testid={ `${index}-horizontal-name` }
-                  onClick={ () => onLink(recipe.type, recipe.id) }
                 >
                   { recipe.name }
                 </Card.Title>
-                <button type="button" className="button-filtro">
-                  <img
-                    className="shareIcon"
-                    alt={ recipe.name }
-                    src={ shareIcon }
-                    data-testid={ `${index}-horizontal-share-btn` }
-                  />
-                </button>
+                <img
+                  className="shareIcon"
+                  alt={ recipe.name }
+                  src={ shareIcon }
+                  data-testid={ `${index}-horizontal-share-btn` }
+                />
               </div>
               <Card.Subtitle
                 className="mb-2 text-muted"
