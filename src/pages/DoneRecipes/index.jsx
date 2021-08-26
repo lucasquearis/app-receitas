@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import doneRecipes from './mockDoneRecipes';
+import ShareIcon from '../../components/Icons/ShareIcon';
+
+const THREE_SECONDS = 3000;
 
 function DoneRecipes() {
-  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('');
   const [filteredDoneRecipes, setFilteredDoneRecipes] = useState([]);
+  const [copied, SetCopied] = useState(false);
+
+  // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
   useEffect(() => {
     setFilteredDoneRecipes(doneRecipes);
-    setLoading(false);
-  }, [setFilteredDoneRecipes, setLoading]);
+    // Por doneRecipes nas depêndencias quando trocar pro localStorage
+  }, [setFilteredDoneRecipes]);
+
+  const handleCopy = () => {
+    SetCopied(true);
+    setTimeout(() => { SetCopied(false); }, THREE_SECONDS);
+  };
 
   const handleRemoveFilter = () => {
     setActiveFilter('');
@@ -18,21 +28,20 @@ function DoneRecipes() {
   };
 
   const handleFilter = ({ target }) => {
-    if (target.innerHTML === activeFilter) {
+    const filter = target.innerHTML;
+    if (filter === activeFilter) {
       handleRemoveFilter();
       setFilteredDoneRecipes(doneRecipes);
     }
-    if (target.innerHTML !== activeFilter && target.innerHTML === 'Food') {
-      setActiveFilter(target.innerHTML);
+    if (filter !== activeFilter && filter === 'Food') {
+      setActiveFilter(filter);
       setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'meals'));
     }
-    if (target.innerHTML !== activeFilter && target.innerHTML === 'Drinks') {
-      setActiveFilter(target.innerHTML);
+    if (filter !== activeFilter && filter === 'Drinks') {
+      setActiveFilter(filter);
       setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'drinks'));
     }
   };
-
-  if (loading) return 'Loading';
 
   return (
     <div>
@@ -104,11 +113,12 @@ function DoneRecipes() {
                 data-testid={ `${index}-horizontal-image` }
               />
             </Link>
-            <img
+            <ShareIcon
               data-testid={ `${index}-horizontal-share-btn` }
-              src=""
-              alt="Ícone compartilhar"
+              url={ `/receitas-feitas/${index}` }
+              onClick={ handleCopy }
             />
+            { copied && <div>Copiado!</div> }
             {
               type === 'meals' ? (
                 <div>
