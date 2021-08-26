@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
 import { copyToClipboard, favoriteRecipe } from '../services';
 import DrinksCards from './DrinksCard';
@@ -31,9 +28,9 @@ function FoodInfo() {
   const filterObjFood = objKeyFood.filter((obj) => obj.includes('strIngredient'));
   const otherFilterObjFood = filterObjFood.filter((obj) => foodDetails[obj] !== '');
 
-  const favoriteHeart = <img src={ blackHeartIcon } alt="black heart" />;
-  const notFavoriteHeart = <img src={ whiteHeartIcon } alt="white-heart" />;
-  const shareTag = <img src={ shareIcon } alt="" />;
+  const favoriteHeart = <img src="/images/blackHeartIcon.svg" alt="black heart" />;
+  const notFavoriteHeart = <img src="/images/whiteHeartIcon.svg" alt="white-heart" />;
+  const shareTag = <img src="/images/shareIcon.svg" alt="shareIt" />;
   return (
     <section>
       <img
