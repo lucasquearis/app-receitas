@@ -1,0 +1,14 @@
+.recommendedShow {
+display: flex;
+flex-wrap: wrap;
+}
+
+.recommendedCard {
+  height: 36vw;
+  width: 30vw;
+  border: 3px solid black;
+}
+
+.recommendedCard img{
+  width: 100%;
+}

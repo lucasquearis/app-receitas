@@ -6,7 +6,7 @@ function Comidas() {
   return (
     <div>
       <Header titulo="Comidas" pesquisa="true" />
-      <h1>olaaaaaaaaaaaaaaaaaaaaa</h1>
+      <h1>COMIDA</h1>
       <Footer />
     </div>
   );
