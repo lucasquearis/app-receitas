@@ -7,8 +7,8 @@ import UseInitialRecipes from '../hook/UseInitialRecipes';
 function MainDrinks() {
   UseInitialRecipes('drinks');
   const recipes = useSelector(({ meals }) => meals.recipes);
-
-  if (recipes.drinks && recipes.drinks.length === 1) {
+  const filter = useSelector(({ meals }) => meals.filter);
+  if (recipes.drinks && recipes.drinks.length === 1 && filter === 'searchBar') {
     const drinkId = recipes.drinks[0].idDrink;
     return <Redirect to={ `/bebidas/${drinkId}` } />;
   }
