@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidaAleatoria } from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import './DetalheBebida.css';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function DetalheBebida() {
+export default function DetalheBebida(/* props */) {
+  // const { match: { params: { id } } } = props;
+
   const [drink, setDrink] = useState({});
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [randomFood, setRamdomFood] = useState([]);
