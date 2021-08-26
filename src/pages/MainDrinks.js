@@ -20,7 +20,7 @@ export default function MainDrinks() {
 
   return (
     <>
-      <Header title="Bebidas" />
+      <Header title="Bebidas" icon="true" />
       <CategoryButtons categories={ categories } />
 
       <ul>

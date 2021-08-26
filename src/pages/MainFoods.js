@@ -20,7 +20,7 @@ export default function MainFoods() {
 
   return (
     <div>
-      <Header title="Comidas" />
+      <Header title="Comidas" icon="true" />
       <CategoryButtons categories={ categories } />
 
       <ul>

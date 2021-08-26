@@ -130,7 +130,7 @@ describe('10 - Implemente um ícone para a tela de perfil, um título e um ícon
   });
 });
 
-describe.only('11 - Redirecione a pessoa usuária para a tela de perfil ao clicar no botão de perfil', () => {
+describe('11 - Redirecione a pessoa usuária para a tela de perfil ao clicar no botão de perfil', () => {
   it('A mudança de tela ocorre corretamente', () => {
     cy.visit('http://localhost:3000/comidas');
 
