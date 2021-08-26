@@ -47,8 +47,8 @@ function MealsDetails() {
       };
       const fetchSugestions = async () => {
         const request = await fetch(`${urlSugestions}`); // colocar o id dinânmico
-        const { meals } = await request.json();
-        const resSugestion = meals.filter((item, key) => key < Number('6'));
+        const { drinks } = await request.json();
+        const resSugestion = drinks.filter((item, key) => key < Number('6'));
         setSugestions(resSugestion);
       };
       setLoading(false);
