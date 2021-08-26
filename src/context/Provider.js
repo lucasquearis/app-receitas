@@ -15,7 +15,10 @@ function Provider({ children }) {
     src: '',
   });
 
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState({
+    list: [],
+    loading: true,
+  });
 
   const [foodRecipes, setFoodRecipes] = useState({
     list: [],
@@ -36,7 +39,7 @@ function Provider({ children }) {
     list: [],
     loading: true,
   });
-
+  
   const [API, setAPI] = useState('');
 
   const switchAPI = (searchFilter) => {
@@ -55,6 +58,12 @@ function Provider({ children }) {
     }
   };
 
+  const requestRandomAPI = async (type) => {
+    const response = await fetch(`https://www.the${type}db.com/api/json/v1/1/random.php`);
+    const result = await response.json();
+    setRecipes({ ...recipes, list: result, loading: false });
+  };
+
   const requestCategory = async (categories, func) => {
     const response = await fetch(categories);
     const result = await response.json();
@@ -67,7 +76,7 @@ function Provider({ children }) {
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
-    setRecipes(result);
+    setRecipes({ ...recipes, list: result, loading: false });
   };
 
   const foodCategoryAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -103,7 +112,9 @@ function Provider({ children }) {
     drinkCategoryAPI,
     setDrinkRecipes,
     setDrinkCategories,
-  };
+    setRecipes,
+    requestRandomAPI,
+    };
 
   return (
     <Context.Provider value={ contextValue }>

@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
+import MenuInferior from '../components/MenuInferior';
+import Recipes from '../components/Recipes';
 import DrinkCard from '../components/DrinkCard';
 import Context from '../context/Context';
 import DrinkFilterButton from '../components/DrinkFilterButton';
@@ -36,6 +38,8 @@ function Drinks() {
           <Header title="Bebidas" name="cocktail" search />
           <DrinkFilterButton />
           { cards }
+          <MenuInferior />
+          <Recipes />
         </div>
       );
     }
@@ -47,5 +51,3 @@ function Drinks() {
     </main>
   );
 }
-
-export default Drinks;

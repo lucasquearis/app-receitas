@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
+import MenuInferior from '../components/MenuInferior';
+import Recipes from '../components/Recipes';
 import FoodCard from '../components/FoodCard';
 import FoodFilterButton from '../components/FoodFilterButton';
 import Context from '../context/Context';
@@ -35,6 +37,8 @@ function Foods() {
           <Header title="Comidas" name="meal" search />
           <FoodFilterButton />
           { cards }
+          <Recipes />
+          <MenuInferior />
         </div>
       );
     }
@@ -46,5 +50,3 @@ function Foods() {
     </main>
   );
 }
-
-export default Foods;
