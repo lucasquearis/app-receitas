@@ -1,10 +1,10 @@
-import React from 'react';
+import React/* , { useState }  */from 'react';
 
 function FoodsRecipeInProgress() {
-  // const listaDeIngredientes = ['tomate', 'azeite', 'sal'];
-
+  const ingredientsList = ['tomate', 'azeite', 'sal'];
+  // const index ->  ainda n tem
   return (
-    <div>
+    <div className="food-in-progress">
       <p>Componente FoodsRecipeInProgress</p>
       <img data-testid="recipe-photo" alt="recipe" />
       <h1 data-testid="recipe-title">Título receita</h1>
@@ -12,19 +12,23 @@ function FoodsRecipeInProgress() {
       <button data-testid="favorite-btn" type="button">btn favoritar</button>
 
       <h4 data-testid="recipe-category">categoria</h4>
+
       <div className="indredients">
         <h3>Ingredientes</h3>
+        {/* <li>
+          <input data-testid={ `${index}-ingredient-step` } type="checkbox " />
+          5gr de sal
+        </li> */}
 
-        {/* { listaDeIngredientes.map((ingredient, index) => (
-          <div data-testid={ `${index}-ingredient-step` } key={ index }>
-            <input type="checkbox">
+        <div className="indredients">
+          { ingredientsList.map((ingredient, index) => (
+            <div key={ index } data-testid={ `${index}-ingredient-step` }>
+              <input type="checkbox" />
               { `${ingredient}` }
-            />
+            </div>
 
-          </div>
-        ))
-      }
-      </div> */}
+          ))}
+        </div>
       </div>
 
       <h3>Instruções</h3>

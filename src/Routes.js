@@ -16,6 +16,8 @@ import DrinkAreaExp from './pages/Explore/DrinkAreaExp';
 import Profile from './pages/Profile';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
+import DrinksRecipeInProgress from './pages/RecipeInProgress/DrinksRecipeInProgress';
+import FoodsRecipeInProgress from './pages/RecipeInProgress/FoodsRecipeInProgress';
 
 function Routes() {
   return (
@@ -24,6 +26,8 @@ function Routes() {
         <Route exact path="/" component={ Login } />
         <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
         <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
+        <Route path="/comidas/:id/in-progress" component={ FoodsRecipeInProgress } />
+        <Route path="/bebidas/:id/in-progress" component={ DrinksRecipeInProgress } />
         <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
         {/* <Route
           path="/explorar/bebidas/ingredientes" component={ FoodIngredients } /> */}
