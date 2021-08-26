@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import Header from '../pages/Meals';
 
+const SEARCH_BTN = 'search-top-btn';
+
 describe('Teste elementos do header na tela principal de receitas', () => {
   test('O botão de perfil deve possuir o atributo data-testid', () => {
     renderWithRouter(<Header />);
@@ -17,7 +19,7 @@ describe('Teste elementos do header na tela principal de receitas', () => {
   });
   test('O botão pesquisar deve possuir o atributo data-testid', () => {
     renderWithRouter(<Header />);
-    const searchBtn = screen.getByTestId('search-top-btn');
+    const searchBtn = screen.getByTestId(SEARCH_BTN);
     expect(searchBtn).toBeInTheDocument();
   });
 });
@@ -49,14 +51,14 @@ describe(`Verifica se a barra de busca renderiza
    ao clicar no icone`, () => {
   test('Verifica se aparece', () => {
     renderWithRouter(<Header />);
-    const searchBtn = screen.getByTestId('search-top-btn');
+    const searchBtn = screen.getByTestId(SEARCH_BTN);
     userEvent.click(searchBtn);
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toBeInTheDocument();
   });
   test('Verifica se desaparece', () => {
     renderWithRouter(<Header />);
-    const searchBtn = screen.getByTestId('search-top-btn');
+    const searchBtn = screen.getByTestId(SEARCH_BTN);
     userEvent.click(searchBtn);
     const searchInput = screen.getByTestId('search-input');
     expect(searchInput).toBeInTheDocument();
