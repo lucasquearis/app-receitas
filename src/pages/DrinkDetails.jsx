@@ -9,16 +9,16 @@ function DrinkDetails(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tip, setTip] = useState([]);
-  const { strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic } = data;
+  const { strDrinkThumb, strDrink, strInstructions, strAlcoholic } = data;
 
   useEffect(() => {
     const { history: { location: { pathname } } } = props;
     const id = pathname.split('/')[2];
     fetchAPI.fetchDrinkById(id).then(({ drinks }) => setData(drinks[0]));
+    fetchAPI.fetchDrinkSuggestions().then(({ drinks }) => setTip(drinks));
   }, []);
 
   useEffect(() => {
-    fetchAPI.fetchDrinkByCategory(strCategory).then(({ drinks }) => setTip(drinks));
     setLoading(false);
   }, [data]);
 
@@ -69,7 +69,12 @@ function DrinkDetails(props) {
             </Carousel.Item>))
         }
       </Carousel>
-      <Button type="button" data-testid="start-recipe-btn" className="btn-success">
+      <Button
+        style={ { position: 'fixed', bottom: '0' } }
+        type="button"
+        data-testid="start-recipe-btn"
+        className="btn-success"
+      >
         Iniciar Receita
       </Button>
     </div>

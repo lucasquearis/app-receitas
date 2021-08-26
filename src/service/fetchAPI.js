@@ -38,6 +38,18 @@ export async function fetchDrinkByCategory(category) {
   return data;
 }
 
+export async function fetchDrinkSuggestions() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchRecipeSuggestions() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
+}
+
 export async function filteredRecipes(type, search) {
   const ingredientURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`;
   const nameURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;

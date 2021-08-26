@@ -16,11 +16,11 @@ function RecipesDetails(props) {
     const { history: { location: { pathname } } } = props;
     const id = pathname.split('/')[2];
     fetchAPI.fetchRecipeById(id).then(({ meals }) => setData(meals[0]));
+    fetchAPI.fetchRecipeSuggestions().then(({ meals }) => setTip(meals));
   }, []);
 
   useEffect(() => {
     if (strYoutube) { setURLId(strYoutube.split('=')[1]); }
-    fetchAPI.fetchRecipeByCategory(strCategory).then(({ meals }) => setTip(meals));
     setLoading(false);
   }, [data]);
 
@@ -83,7 +83,12 @@ function RecipesDetails(props) {
             </Carousel.Item>))
         }
       </Carousel>
-      <Button type="button" data-testid="start-recipe-btn" className="btn-success">
+      <Button
+        style={ { position: 'fixed', bottom: '0' } }
+        type="button"
+        data-testid="start-recipe-btn"
+        className="btn-success"
+      >
         Iniciar Receita
       </Button>
     </div>
