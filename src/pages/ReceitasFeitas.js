@@ -15,6 +15,16 @@ function ReceitasFeitas() {
     }
   }
 
+  const renderCards = () => (
+    <div>
+      { filteredRecipes.map((recipe, index) => (
+        <div key={ recipe.name } className="card-container">
+          <img src={recipe.image} alt={recipe.name} />
+        </div>
+      ))}
+    </div>
+  );
+
   console.log(filteredRecipes);
 
   return (
@@ -38,9 +48,7 @@ function ReceitasFeitas() {
             testId="filter-by-drink-btn"
           />
         </div>
-        <div>
-
-        </div>
+        { filteredRecipes.length > 0 && renderCards() }
       </main>
     </div>
   );
