@@ -67,7 +67,8 @@
   font-size: 18px;
   font-weight: 600;
   height: 55px;
-  margin: 35px 25px;
+  margin: 90vh 25px 0 25px;
+  position: fixed;
   width: 85%;
 }
 
@@ -80,7 +81,7 @@
 }
 
 .drink-recomended {
-  margin-left: 12px;
+  margin: 35px 0 100px 12px;
 }
 
 .recomended-drink-section-infos {

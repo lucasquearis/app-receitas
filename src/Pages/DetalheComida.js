@@ -100,6 +100,13 @@ export default function DetalheComida(props) {
 
   return (
     <section className="food-info">
+      <button
+        className="start-recipe-btn"
+        data-testid="start-recipe-btn"
+        type="button"
+      >
+        Iniciar Receita
+      </button>
       <img
         className="food-image"
         data-testid="recipe-photo"
@@ -147,13 +154,6 @@ export default function DetalheComida(props) {
         <iframe data-testid="video" title="food-video" src={ getEmbedURL() } />
       </div>
       { randomDrinkCard() }
-      <button
-        className="start-recipe-btn"
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        Iniciar Receita
-      </button>
     </section>
   );
 }
