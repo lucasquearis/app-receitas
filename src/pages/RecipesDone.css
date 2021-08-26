@@ -3,3 +3,22 @@
   height: 640px;
   width: 360px;
 }
+
+.rd-btns-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.rd-btn {
+  background-color: #c4c4c4;
+  border: none;
+  padding: 8px 35px;
+  transition: all 0.4s ease;
+}
+
+.rd-btn:hover {
+  background-color: green;
+  border-radius: 20px;
+  color: white;
+}
