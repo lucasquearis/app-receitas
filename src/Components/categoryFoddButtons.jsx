@@ -4,26 +4,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesFood } from '../Redux/actions/categorieButtonsAct';
 
 function CategoryFoodButtons() {
-  const { categories, isLoading } = useSelector((state) => state);
+  const { foodcategories: { foodCategories, isLoading } } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategoriesFood());
-  });
+  }, [dispatch]);
 
   if (!isLoading) {
-    console.log(categories);
     return (
       <session>
-        { categories.map((category) => (
+        { foodCategories.map((category) => (
           <button
             type="button"
             key={ category.idCategory }
             onClick={ () => {} }
+            data-testid={ `${category.strCategory}-category-filter` }
           >
             { category.strCategory }
           </button>
         ))}
+        <button
+          type="button"
+          key="6"
+          onClick={ () => {} }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
       </session>
     );
   }
