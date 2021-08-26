@@ -1,5 +1,5 @@
 // vitals
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // components
 import Header from '../components/Header';
 import Footer from '../components/FooterMenu';
@@ -7,80 +7,49 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
 // styles
 import '../styles/FavoriteRecipes.css';
 
-// remover isso aqui, só serve pra simular localstorage
-const favorites = [
-  {
-    id: '30',
-    type: 'comida',
-    area: 'África',
-    category: 'Beef',
-    alcoholicOrNot: '',
-    name: 'Big Mac',
-    image: 'https://www.themealdb.com/images/media/meals/urzj1d1587670726.jpg',
-  },
-  {
-    id: '17225',
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Ace',
-    image: 'https://www.thecocktaildb.com/images/media/drink/l3cd7f1504818306.jpg',
-
-  },
-  {
-    alcoholicOrNot: 'Optional alcohol',
-    area: '',
-    category: 'Ordinary Drink',
-    id: '15997',
-    image: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
-    name: 'GG',
-    type: 'bebida',
-
-  },
-  {
-    alcoholicOrNot: 'Non alcoholic',
-    area: '',
-    category: 'Cocoa',
-    id: '12744',
-    image: 'https://www.thecocktaildb.com/images/media/drink/8y4x5f1487603151.jpg',
-    name: 'Microwave Hot Cocoa',
-    type: 'bebida',
-  },
-];
-
 function FavoriteRecipes() {
-  // retirar esta linha, só serve pra simular algo que já está no localstorage
-  localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
+  const [favoritesArray, setFavoritesArray] = useState();
 
   const localStorageData = localStorage.getItem('favoriteRecipes');
-  const recipesArray = JSON.parse(localStorageData);
+
+  // retirar esta linha, só serve pra simular algo que já está no localstorage
+  // localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
+
+  useEffect(() => {
+    if (localStorageData) {
+      setFavoritesArray(JSON.parse(localStorageData));
+    }
+  }, [localStorageData]);
 
   return (
     <main>
       <Header />
       <div className="filter-buttons">
-        <button type="button">
+        <button data-testid="filter-by-all-btn" type="button">
           All
         </button>
-        <button type="button">
+        <button data-testid="filter-by-food-btn" type="button">
           Food
         </button>
-        <button type="button">
+        <button data-testid="filter-by-drink-btn" type="button">
           Drinks
         </button>
       </div>
       <div className="favorites-container">
-        {recipesArray ? recipesArray
-          .map(({ id, alcoholicOrNot, area, category, image, name, type }) => (
+        {favoritesArray ? favoritesArray
+          .map(({ id, alcoholicOrNot, area, category, image, name, type }, index) => (
             <FavoriteRecipeCard
               key={ id }
+              id={ id }
+              index={ index }
               alcoholicOrNot={ alcoholicOrNot }
               area={ area }
               category={ category }
               image={ image }
               name={ name }
               type={ type }
+              favoritesArray={ favoritesArray }
+              setFavoritesArray={ setFavoritesArray }
             />
 
           )) : <h4>Sem favoritos salvos.</h4>}
