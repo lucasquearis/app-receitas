@@ -1,5 +1,5 @@
 export async function buscarBebidaAleatoria() {
-  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
   const response = fetch(ENDPOINT).then((data) => data.json());
   return response;
