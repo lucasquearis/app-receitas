@@ -10,7 +10,7 @@ function Provider({ children }) {
   const [foodCategory, setFoodCategory] = useState([]);
   const [filter, setFilter] = useState('');
 
-  const favoritingRecipe = (isFav, setIsFav, id, meal) => {
+  const favoritingRecipe = (isFav, setIsFav, id, food) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (isFav) {
       setIsFav(false);
@@ -20,7 +20,7 @@ function Provider({ children }) {
     } else {
       setIsFav(true);
       const newFavoriteRecipes = favoriteRecipes
-        ? [...favoriteRecipes, meal] : [meal];
+        ? [...favoriteRecipes, food] : [food];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     }
   };
@@ -42,11 +42,11 @@ function Provider({ children }) {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const favorite = favoriteRecipes
-      && favoriteRecipes.find((recipe) => recipe.idMeal === id);
+      && favoriteRecipes.find((recipe) => recipe.id === id);
     const done = doneRecipes
       && doneRecipes.find((recipe) => recipe.id === id);
     const inProgress = inProgressRecipes
-      && inProgressRecipes[type].find((recipe) => recipe.idMeal === id);
+      && Object.keys(inProgressRecipes[type]).find((recipeId) => recipeId === id);
     return { favorite, done, inProgress };
   };
 
