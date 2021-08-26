@@ -78,6 +78,13 @@ export default function SearchBar() {
 
   return (
     <>
+      <div>
+        <input
+          type="image"
+          data-testid="search-input"
+          alt="Search"
+        />
+      </div>
       <input
         id="search-input"
         type="text"
