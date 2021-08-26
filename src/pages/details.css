@@ -1,0 +1,8 @@
+.recomended-drinks {
+    display: flex;
+    flex-direction: row;
+}
+
+.recomended-drinks-card  img{
+    width: 40%;
+}

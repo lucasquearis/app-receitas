@@ -1,13 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
 import FoodContext from '../context/FoodContext';
+import DrinksContext from '../context/DrinksContext';
+import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
+import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const FoodDetails = () => {
   const { foodDetails } = useContext(FoodContext);
+  const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState();
   const [measures, setMeasures] = useState();
+
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
+
+  // drinks.map((drink) => console.log(drink));
 
   const getIngredients = () => {
     const ingredientsArr = foodDetails.map((item) => Object.entries(item)
@@ -39,7 +46,6 @@ const FoodDetails = () => {
           strCategory,
           strInstructions,
           strYoutube,
-          strDrinkAlternate,
         }, i) => (
           <div key={ i }>
             <img
@@ -70,7 +76,7 @@ const FoodDetails = () => {
                 ingredients.map((ingredient) => ingredient.map((item, index) => (
                   <li
                     key={ item }
-                    datatest-Id={ `${index}-` }
+                    datatest-Id={ `${index}-ingredient-name-and-measure` }
                   >
                     {`${item} - ${measures[0][index]}`}
                   </li>
@@ -87,12 +93,13 @@ const FoodDetails = () => {
               height="200"
               src={ strYoutube }
             />
-            <p
-              data-testid={ `${i}-recomendation-card` }
-              key={ strDrinkAlternate }
-            >
-              {strDrinkAlternate}
-            </p>
+            { drinks.map((drink, indice) => (
+              <div className="recomended-drinks" key={ drink.strDrink }>
+                { DrinkRecomendationCard(drink, indice) }
+              </div>
+            ))}
+            {/* console.log(drink.strDrink)
+            ))} */}
             <button
               data-testid="start-recipe-btn"
               key={ i }
