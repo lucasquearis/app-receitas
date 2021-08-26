@@ -19,12 +19,13 @@ function FinishRecipeButton(props) {
   }, [id, newEnType, type]);
 
   return (
-    <Link to={ `/${type}/${id}/in-progress` }>
+    <Link to="/receitas-feitas">
       <button
         hidden={ done }
-        className="start-recipe-button"
+        className="finish-recipe-button"
         type="button"
         data-testid="finish-recipe-btn"
+        disabled
       >
         {inProgress ? 'Continuar Receita' : 'Finalizar Receita'}
       </button>

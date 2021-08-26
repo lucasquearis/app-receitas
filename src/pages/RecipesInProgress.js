@@ -51,7 +51,7 @@ function RecipesInProgress(props) {
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
-              <ShareButton pathname={ pathname } />
+              <ShareButton pathname={ pathname.split('/in')[0] } />
               <FavoriteButton
                 recipe={
                   { id,
