@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import Proptypes from 'prop-types';
 import Context from '../../context';
 
+//  Iniciando
+
 const radioSearchOptions = [
   ['ingredient', 'Ingrediente', 'i'],
   ['name', 'Nome', 's'],
