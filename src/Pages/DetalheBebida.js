@@ -12,7 +12,7 @@ export default function DetalheBebida(props) {
 
   const [drink, setDrink] = useState({});
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const [randomFood, setRamdomFood] = useState([]);
+  const [randomFood, setRandomFood] = useState([]);
 
   useEffect(() => {
     const getDrink = async () => {
@@ -51,11 +51,11 @@ export default function DetalheBebida(props) {
     };
 
     const getRandomFood = async () => {
-      const food1 = await buscarComidaAleatoria();
-      const food2 = await buscarComidaAleatoria();
+      const foods = await buscarComidaAleatoria();
+      const foodsCount = 6;
 
-      const foods = [food1[0], food2[0]];
-      setRamdomFood(foods);
+      const firstFoods = foods.filter((food, index) => index < foodsCount);
+      setRandomFood(firstFoods);
     };
 
     getDrink();
@@ -76,7 +76,7 @@ export default function DetalheBebida(props) {
           >
             <img src={ food.strMealThumb } alt="foto da bebida" />
             <p>{ food.strCategory }</p>
-            <h5>{ food.strMeal }</h5>
+            <h5 data-testid={ `${index}-recomendation-title` }>{ food.strMeal }</h5>
           </div>
         )) }
       </div>

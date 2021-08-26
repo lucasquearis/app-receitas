@@ -72,17 +72,22 @@
 
 .food-recomended {
   margin-left: 12px;
+  width: 85%;
 }
 
 .recomended-food-section-infos {
   display: flex;
-  justify-content: space-around;
+  overflow-x: scroll;
+  padding: 15px 5px;
+  width: 100%;
 }
 
 .recomended-food-info {
+  flex-shrink: 0;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
-  width: 150px;
+  margin: 0 10px;
+  width: 140px;
 }
 
 .recomended-food-info img {
