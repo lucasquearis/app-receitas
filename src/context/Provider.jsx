@@ -6,6 +6,7 @@ export default function Provider({ children }) {
   const [dataMeals, setDataMeals] = useState('');
   const [dataDrinks, setDataDrinks] = useState('');
   const [searchDataMeals, setSearchDataMeals] = useState([]);
+  const [searchDataDrinks, setSearchDataDrinks] = useState([]);
 
   const context = {
     dataMeals,
@@ -14,6 +15,8 @@ export default function Provider({ children }) {
     setDataDrinks,
     searchDataMeals,
     setSearchDataMeals,
+    searchDataDrinks,
+    setSearchDataDrinks,
   };
 
   return (

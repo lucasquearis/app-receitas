@@ -5,9 +5,9 @@ import context from '../context/Context';
 export default function SearchBar({ title }) {
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
-  const { setSearchDataMeals } = useContext(context);
+  const { setSearchDataMeals, setSearchDataDrinks } = useContext(context);
 
-  const fetchRecipes = async (url) => {
+  const fetchRecipesMeals = async (url) => {
     try {
       const request = await fetch(url);
       const { meals } = await request.json();
@@ -18,32 +18,52 @@ export default function SearchBar({ title }) {
     }
   };
 
-  // const fetchDrinks = async (url) => {
-  //   try {
-  //     const request = await fetch(url);
-  //     const { drinks } = await request.json();
-  //     console.log(drinks);
-  //     setSearchDataMeals(drinks);
-  //   } catch (error) {
-  //     return console.log(error);
-  //   }
-  // };
+  const fetchRecipesDrinks = async (url) => {
+    try {
+      const request = await fetch(url);
+      const { drinks } = await request.json();
+      console.log(drinks);
+      setSearchDataDrinks(drinks);
+    } catch (error) {
+      return console.log(error);
+    }
+  };
 
-  const msg = 'Sua busca deve conter somente 1 (um) caracter';
+  const msgCharacter = 'Sua busca deve conter somente 1 (um) caracter';
+  const msgFilter = 'Preencha o campo de busca e selecione o filtro';
   const showAlert = (func, mensagem) => func(mensagem);
 
-  const handleSearch = () => {
+  const handleSearchMeals = () => {
+    console.log('searchMeals');
     if (searchInput && searchRadio) {
       if (searchRadio === 'ingrediente') {
-        fetchRecipes(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`);
+        fetchRecipesMeals(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`);
       } else if (searchRadio === 'nome') {
-        fetchRecipes(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`);
+        fetchRecipesMeals(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`);
       } else if (searchRadio === 'primeira-letra' && searchInput.length === 1) {
-        fetchRecipes(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`);
+        fetchRecipesMeals(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`);
       } else {
-        console.log('Alert falso');
-        return showAlert(alert, msg);
+        return showAlert(alert, msgCharacter);
       }
+    } else {
+      return showAlert(alert, msgFilter);
+    }
+  };
+
+  const handleSearchDrinks = () => {
+    console.log('searchDrinks');
+    if (searchInput && searchRadio) {
+      if (searchRadio === 'ingrediente') {
+        fetchRecipesDrinks(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`);
+      } else if (searchRadio === 'nome') {
+        fetchRecipesDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchInput}`);
+      } else if (searchRadio === 'primeira-letra' && searchInput.length === 1) {
+        fetchRecipesDrinks(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchInput}`);
+      } else {
+        return showAlert(alert, msgCharacter);
+      }
+    } else {
+      return showAlert(alert, msgFilter);
     }
   };
 
@@ -58,7 +78,7 @@ export default function SearchBar({ title }) {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ handleSearch }
+        onClick={ title === 'Comidas' ? handleSearchMeals : handleSearchDrinks }
       >
         Buscar
       </button>
