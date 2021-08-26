@@ -53,6 +53,11 @@ export const nameRequestError = (payload) => ({
   payload,
 });
 
+export const clearSearch = (payload) => ({
+  type: types.CLEAR_SEARCH,
+  payload,
+});
+
 // Fetch APIs
 
 // Fetch Recipes APIs
