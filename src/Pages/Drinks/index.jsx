@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../../Components/Header';
 import RecipesContainer from '../../Components/RecipesContainer';
 
-function Foods() {
+function Drinks() {
   return (
     <div>
-      <Header title="Comidas" />
+      <Header title="Bebidas" />
       <RecipesContainer />
     </div>
   );
 }
 
-export default Foods;
+export default Drinks;

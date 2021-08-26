@@ -1,12 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
-import Header from './components/Header/index';
+import Header from './Components/Header/index';
 import Foods from './Pages/Foods';
+import Drinks from './Pages/Drinks/index';
 import Login from './Pages/Login/Login';
 import Profile from './Pages/Profile/Profile';
 import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
 import ReceitasFeitas from './Pages/ReceitasFeitas/ReceitasFeitas';
+import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
+import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
+import Explore from './Pages/Explore';
 
 function App() {
   const exploreFoodDrink = (
@@ -24,26 +28,16 @@ function App() {
         <Route path="/receitas-feitas" component={ ReceitasFeitas } />
         <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
         <Route exact path="/comidas" component={ Foods } />
-        <Route exact path="/bebidas" render={ () => <Header title="Bebidas" /> } />
+        <Route exact path="/bebidas" component={ Drinks } />
         <Route
           exact
           path="/explorar"
-          render={ () => (
-            <Header
-              title="Explorar"
-              searchButton={ false }
-            />
-          ) }
+          component={ Explore }
         />
         <Route
           exact
           path="/explorar/comidas"
-          render={ () => (
-            <Header
-              title="Explorar Comidas"
-              searchButton={ false }
-            />
-          ) }
+          component={ ExploreDrinksOrFoods }
         />
         <Route
           exact
@@ -62,12 +56,7 @@ function App() {
         <Route
           exact
           path="/explorar/bebidas"
-          render={ () => (
-            <Header
-              title="Explorar Bebidas"
-              searchButton={ false }
-            />
-          ) }
+          component={ ExploreDrinksOrFoods }
         />
         <Route
           exact
@@ -104,6 +93,7 @@ function App() {
             />
           ) }
         />
+        <Route path="/:feedType/:id" component={ RecipeDetails } />
       </Switch>
     </AppProvider>
   );

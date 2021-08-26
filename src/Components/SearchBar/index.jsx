@@ -18,19 +18,19 @@ function SearchBar() {
   const currentRout = pathname.includes('comidas');
   const url = currentRout === true ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleChange = ({ target: { name, value } }) => (
     setPreviousSearch({
       ...previousSearch,
       [name]: value,
-    });
-  };
+    })
+  );
 
   return (
     <div className="search-bar-container">
       <input
         type="text"
-        data-testid="search-input"
         name="input"
+        data-testid="search-input"
         onChange={ (event) => handleChange(event) }
       />
       <RadioGroup
