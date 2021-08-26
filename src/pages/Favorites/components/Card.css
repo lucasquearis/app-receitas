@@ -1,0 +1,11 @@
+.card-container {
+  border-radius: 0.3em;
+  box-shadow: black 1px 4px 6px;
+  display: flex;
+  flex-flow: row nowrap;
+  max-width: 100vw;
+}
+
+.card-image {
+  width: 40%;
+}
