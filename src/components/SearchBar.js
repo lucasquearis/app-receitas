@@ -1,13 +1,17 @@
 // vitals
 import React, { useContext, useState } from 'react';
-// import { useLocation } from 'react-router-dom'; // QUANDO TIVER A PAGINA DE COMIDAS/BEBIDAS ATIVAR
+import { useLocation, Redirect } from 'react-router-dom';
 import myContext from '../context/myContext';
 // constants
-import { TEXT_ALERT_ONE } from '../services/data';
+import { ALERT_ONE } from '../services/data';
 
 export default function SearchBar() {
-  // const location = useLocation(); // ATIVAR
-  const { setSearchValues } = useContext(myContext);
+  const {
+    setSearchValues,
+    filteredMeals,
+    filteredDrinks,
+    setUpdateData } = useContext(myContext);
+  const { pathname } = useLocation();
   const [textValue, setTextValue] = useState('');
   const [radioValue, setRadioValue] = useState('ingredient');
 
@@ -16,12 +20,25 @@ export default function SearchBar() {
     if (name === 'search-text') return setTextValue(value);
   };
   const submit = () => {
-    if (radioValue === 'letter'
-        && textValue.length > 1) return global.alert(TEXT_ALERT_ONE);
-    // const pathName = location.pathname; //ATIVAR
-    const pathName = '/comidas';
-    setSearchValues({ textValue, radioValue, pathName });
+    if (radioValue === 'letter' && textValue.length > 1) return global.alert(ALERT_ONE);
+    setSearchValues({ textValue, radioValue, pathname });
   };
+
+  if (pathname === '/comidas') {
+    const { meals } = filteredMeals;
+    if (meals !== null && Object.keys(meals).length === 1) {
+      setUpdateData(meals);
+      return <Redirect to={ `${pathname}/${meals[0].idMeal}` } />;
+    }
+  }
+
+  if (pathname === '/bebidas') {
+    const { drinks } = filteredDrinks;
+    if (drinks !== null && Object.keys(drinks).length === 1) {
+      setUpdateData(drinks);
+      return <Redirect to={ `${pathname}/${drinks[0].idDrink}` } />;
+    }
+  }
 
   return (
     <section className="search-container">

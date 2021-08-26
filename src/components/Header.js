@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import '../styles/Header.css';
 import profilePicture from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 const renderTitle = (path) => {
   if (path.endsWith('/ingredientes')) return 'Explorar Ingredientes';
@@ -82,8 +83,8 @@ function Header() {
       </header>
       <div>
         {showSearchBar
-          ? 'SearchBar Component'
-          : 'not showing '}
+          ? <SearchBar />
+          : ''}
       </div>
     </>
   );
