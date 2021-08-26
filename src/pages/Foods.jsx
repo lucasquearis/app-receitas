@@ -10,8 +10,6 @@ function Foods() {
   const dispatch = useDispatch();
   const foodsLimits = 12;
   const buttonLimits = 5;
-  const categoriesLimit = 5;
-  const [limit, setLimit] = useState(foodsLimits);
   const [current, setCurrent] = useState('');
 
   const foods = useSelector((state) => state.foodsAndDrinks.meals);
@@ -23,14 +21,12 @@ function Foods() {
   }, [dispatch]);
 
   const onClick = (name) => {
-    if (current === name) {
+    if (current === name || name === 'All') {
       setCurrent('');
-      setLimit(foodsLimits);
 
       dispatch(fetchFoodRedux);
     } else {
       dispatch(fetchFoodByCategory(name));
-      setLimit(categoriesLimit);
       setCurrent(name);
     }
   };
@@ -43,11 +39,17 @@ function Foods() {
 
   return (
     <div>
+      <button
+        type="button"
+        onClick={ () => onClick('All') }
+      >
+        All
+      </button>
       { categories.meals.slice(0, buttonLimits).map(
         (category, id) => CategoryButton(category.strCategory, id, onClick),
       )}
 
-      {foods.slice(0, limit).map(
+      {foods.slice(0, foodsLimits).map(
         (food, id) => FoodsCards(
           food, 'comidas', id,
         ),
