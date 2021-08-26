@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Input from './Input';
@@ -6,13 +6,15 @@ import './css/Header.css';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AppContext from '../context/AppContext';
+
+const MEALS_LENGTH = 12;
 
 const HeaderMeals = ({ title }) => {
-  const IMGLIMIT = 12;
   const [searchBar, setShowBar] = useState(false);
   const [searchInput, setInput] = useState('');
   const [searchRadio, setRadio] = useState('');
-  const [result, setResult] = useState('');
+  const { data, setData } = useContext(AppContext);
 
   const showSearch = () => setShowBar(!searchBar);
 
@@ -47,17 +49,16 @@ const HeaderMeals = ({ title }) => {
 
   const getRecipe = async () => {
     const endpoint = pickChoice();
-    const data = await fetch(endpoint).then((recipe) => recipe.json());
-    if (data.meals === null) {
+    const response = await fetch(endpoint).then((recipe) => recipe.json());
+    if (response.meals === null) {
       return renderAlert();
     }
-    setResult(data.meals);
+    setData(response.meals.slice(0, MEALS_LENGTH));
   };
-
   return (
     <>
       {
-        result.length === 1 ? <Redirect to={ `/comidas/${result[0].idMeal}` } /> : ''
+        data.length === 1 ? <Redirect to={ `/comidas/${data[0].idMeal}` } /> : ''
       }
       <div
         className="header-container"
@@ -163,35 +164,6 @@ const HeaderMeals = ({ title }) => {
             </div>)
           : ''
       }
-      <div
-        className="grid-cards"
-      >
-        {
-          result.length > 1
-            ? result.slice(0, IMGLIMIT).map((meal, index) => (
-              <div
-                key={ `${index}` }
-                data-testid={ `${index}-recipe-card` }
-                className="c-card"
-              >
-                <img
-                  key={ `${index}` }
-                  data-testid={ `${index}-card-img` }
-                  alt={ `Uma foto de um prato de ${meal.strMeal}` }
-                  src={ `${meal.strMealThumb}` }
-                  className="card-img-top"
-
-                />
-                <p
-                  data-testid={ `${index}-card-name` }
-                  className="card-title"
-                >
-                  {meal.strMeal}
-                </p>
-              </div>
-            )) : ''
-        }
-      </div>
     </>
   );
 };

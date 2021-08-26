@@ -22,7 +22,7 @@ const Card = ({ type, index, thumb, name }) => (
     >
       { name }
     </span>
-    { console.log(type, index, thumb, name) }
+    {/* { console.log(type, index, thumb, name) } */}
   </div>
 );
 
