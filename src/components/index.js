@@ -8,3 +8,5 @@ export { default as RecipeDetails } from './RecipeDetails';
 export { default as Recomendations } from './Recomendations';
 export { default as StartRecipeBtn } from './StartRecipeBtn';
 export { default as ContinueRecipeBtn } from './ContinueRecipeBtn';
+export { default as ShareButton } from './ShareButton';
+export { default as FavoriteButton } from './FavoriteButton';
