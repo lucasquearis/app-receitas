@@ -49,7 +49,7 @@ export default function InProgress(
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
   return (
     <div className="in-progress">
-      <img src={ img } alt={ name } data-testid="recipe-photo" />
+      <img width="200px" src={ img } alt={ name } data-testid="recipe-photo" />
       <div className="main-infos">
         <h1 data-testid="recipe-title">{name}</h1>
         <button
@@ -75,8 +75,11 @@ export default function InProgress(
               className={ finishedSteps.includes(i) ? 'step-done' : '' }
               htmlFor={ `ingredient${i}` }
             >
-              {ingredient[1]}
               <input
+                type="checkbox"
+                checked={ finishedSteps.some((step) => step === i) ? 'step-done' : '' }
+                name={ ingredient[1] }
+                id={ `ingredient${i}` }
                 onChange={ () => {
                   if (finishedSteps.includes(i)) {
                     setFinishedSteps(finishedSteps.filter((check) => check !== i));
@@ -85,13 +88,11 @@ export default function InProgress(
                   setFinishedSteps([...finishedSteps, i]);
                   console.log(finishedSteps, 'else');
                 } }
-                type="checkbox"
-                name={ ingredient[1] }
-                id={ `ingredient${i}` }
-                checked={ finishedSteps.includes(i) ? 'step-done' : '' }
               />
+              {ingredient[1]}
             </label>
-          </li>))}
+          </li>
+        ))}
       </ul>
       <h3>Instructions</h3>
       <p data-testid="instructions">
