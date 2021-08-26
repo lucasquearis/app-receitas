@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
-// import FoodByDetails from './FoodDetails';
 import { useHistory } from 'react-router-dom';
 
 function FoodDetails() {
-  const id = 52772;
+  const id = 52771;
   const index = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
 
   useEffect(() => {
-    const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-    const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-    const fetchDetailsRecipe = async () => {
-      const goURL = pathname === 'food' ? urlFoods : urlDrinks;
-      const request = await fetch(`${goURL}${id}`);
-      const response = await request.json();
-      return setGetRecipe(response);
-    };
-    fetchDetailsRecipe();
-  }, [index, getRecipe, pathname]);
+    try {
+      const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+      const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+      const fetchDetailsRecipe = async () => {
+        console.log(getHistory);
+        const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
+        console.log(pathname);
+        const request = await fetch(`${goURL}${id}`);
+        const response = await request.json();
+        console.log(response);
+        setGetRecipe(response);
+      };
+      fetchDetailsRecipe();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, getHistory, pathname]);
 
   return (
     <div>
@@ -34,8 +40,8 @@ function FoodDetails() {
       </div>
       <section>
         <h3>ingredientes</h3>
-        <ul>
-          <li data-testid={ `${index}-ingredient-name-and-measure` }>items</li>
+        <ul data-testid={ `${index}-ingredient-name-and-measure` }>
+          <li>item</li>
         </ul>
       </section>
       <section>

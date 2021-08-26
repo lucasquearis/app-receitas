@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-// import { Link } from 'react-router-dom';
 
 function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [button, setButton] = useState(true);
-
-  // const redirect = () => (
-  //   (goFood ? <Redirect to="/comidas" /> : null)
-  // );
 
   useEffect(() => {
     const validEntries = () => {
