@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import renderRecomendationCard from '../service/RecomendationCards';
 import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -20,6 +22,8 @@ function BebidasDetails(props) {
   const [drink, setDrink] = useState({});
   const [isFav, setIsFav] = useState(favorite);
   const [meals, setMeals] = useState([]);
+  const [share, setShare] = useState(false);
+  const location = useLocation();
 
   const { ingredients, measures } = renderingIngredients(drink);
 
@@ -48,31 +52,17 @@ function BebidasDetails(props) {
     getRecomendations();
   }, [id]);
 
-  const renderRecomendationCard = () => {
-    const SIX = 6;
-    const links = [];
-    if (meals.length > 0) {
-      for (let index = 0; index < SIX; index += 1) {
-        links.push(
-          <Link
-            to={ `/bebidas/${meals[index].idMeal}` }
-            data-testid={ `${index}-recomendation-card` }
-            key={ index }
-          >
-            <div>
-              <img
-                src={ meals[index].strMealThumb }
-                alt={ meals[index].strMeal }
-              />
-              <p>{meals[index].strCategory}</p>
-              <p>{meals[index].strMeal}</p>
-            </div>
-          </Link>,
-        );
-      }
-    }
-    return links;
+  const handleShare = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+    setShare(true);
   };
+
+  if (share) {
+    const threeSeconds = 3000;
+    setTimeout(() => {
+      setShare(false);
+    }, threeSeconds);
+  }
 
   const link = (
     <Link
@@ -96,11 +86,16 @@ function BebidasDetails(props) {
       <div>
         <h1 data-testid="recipe-title">{drink.strDrink}</h1>
         <div>
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-            data-testid="share-btn"
-          />
+          <button
+            onClick={ handleShare }
+            type="button"
+          >
+            <img
+              src={ shareIcon }
+              alt="imagem de compartilhar"
+              data-testid="share-btn"
+            />
+          </button>
           <button
             onClick={ () => favoritingRecipe(isFav, setIsFav, id, drink) }
             type="button"
@@ -119,7 +114,10 @@ function BebidasDetails(props) {
             {
               ingredients
                 .map((ingredient, index) => (
-                  <li key={ ingredient } data-testid={`${index}-ingredient-name-and-measure`}>
+                  <li
+                    key={ ingredient }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
                     { `${ingredient} - ${measures[index]}`}
                   </li>))
             }
@@ -132,7 +130,7 @@ function BebidasDetails(props) {
         <div>
           <h3>Recomendadas</h3>
           <div>
-            { renderRecomendationCard().map((recipe) => recipe) }
+            { renderRecomendationCard(meals, 'Meal').map((recipe) => recipe) }
           </div>
         </div>
         { !done && link }

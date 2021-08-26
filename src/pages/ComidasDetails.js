@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import renderRecomendationCard from '../service/RecomendationCards';
 import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -20,7 +22,8 @@ function ComidasDetails(props) {
   const [meal, setMeal] = useState({});
   const [isFav, setIsFav] = useState(favorite);
   const [drinks, setDrinks] = useState([]);
-  console.log(drinks);
+  const [share, setShare] = useState(false);
+  const location = useLocation();
 
   const { ingredients, measures } = renderingIngredients(meal);
 
@@ -49,39 +52,7 @@ function ComidasDetails(props) {
     getRecomendations();
   }, [id]);
 
-  let videoURL = '';
-  if (meal.strYoutube) {
-    videoURL = meal.strYoutube.split('=');
-  }
-
-  const renderRecomendationCard = () => {
-    const SIX = 6;
-    const links = [];
-    if (drinks.length > 0) {
-      for (let index = 0; index < SIX; index += 1) {
-        links.push(
-          <Link
-            to={ `/bebidas/${drinks[index].idDrink}` }
-            data-testid={ `${index}-recomendation-card` }
-            key={ index }
-          >
-            <div>
-              <img
-                src={ drinks[index].strDrinkThumb }
-                alt={ drinks[index].strDrink }
-              />
-              <p>{drinks[index].strAlcoholic}</p>
-              <p>{drinks[index].strDrink}</p>
-            </div>
-          </Link>,
-        );
-      }
-    }
-
-    return links;
-  };
-
-  console.log(renderRecomendationCard());
+  const videoURL = meal.strYoutube ? meal.strYoutube.split('=') : '';
 
   const link = (
     <Link
@@ -101,11 +72,20 @@ function ComidasDetails(props) {
       <div>
         <h1 data-testid="recipe-title">{meal.strMeal}</h1>
         <div>
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-            data-testid="share-btn"
-          />
+          <button
+            onClick={ () => {
+              copy(`http://localhost:3000${location.pathname}`);
+              setShare(true);
+            } }
+            type="button"
+          >
+            <img
+              src={ shareIcon }
+              alt="imagem de compartilhar"
+              data-testid="share-btn"
+            />
+          </button>
+          { share && <p>Link copiado!</p> }
           <button
             onClick={ () => favoritingRecipe(isFav, setIsFav, id, meal) }
             type="button"
@@ -124,7 +104,10 @@ function ComidasDetails(props) {
             {
               ingredients
                 .map((ingredient, index) => (
-                  <li key={ ingredient } data-testid={`${index}-ingredient-name-and-measure`}>
+                  <li
+                    key={ ingredient }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
                     { `${ingredient} - ${measures[index]}`}
                   </li>))
             }
@@ -148,7 +131,7 @@ function ComidasDetails(props) {
         <div>
           <h3>Recomendadas</h3>
           <div>
-            { renderRecomendationCard().map((recipe) => recipe) }
+            { renderRecomendationCard(drinks, 'Drink').map((recipe) => recipe) }
           </div>
         </div>
         { !done && link }

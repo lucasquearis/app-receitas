@@ -15,7 +15,7 @@ function Provider({ children }) {
     if (isFav) {
       setIsFav(false);
       const newFavoriteRecipes = favoriteRecipes
-        .filter((recipe) => recipe.idMeal ? recipe.idMeal !== id : recipe.idDrink !== id);
+        .filter((rcp) => (rcp.idMeal ? rcp.idMeal !== id : rcp.idDrink !== id));
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     } else {
       setIsFav(true);
