@@ -1,40 +1,89 @@
-import React, { useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import EstruturaPrincipal from '../../components/EstruturaPrincipal';
 import AppContext from '../../context/AppContext';
-import Header from '../../components/Header';
-import BarraDeBusca from '../../components/BarraDeBusca';
-import Card from '../../components/Card';
-import MenuInferior from '../../components/MenuInferior';
-import BarraCategorias from './BarraCategorias';
+import {
+  fetchApi,
+} from '../../services';
 
-function Principal() { // Nome provisório
-  const { pathname } = useLocation();
-  const { mealsList, drinksList, showBar, setShowBar } = useContext(AppContext);
+function Principal({
+  listEndPoint,
+  categoriesEndPoint,
+  getByCategoryEndPoint,
+  type,
+}) {
+  const { setShowBar } = useContext(AppContext);
 
-  const recipes = (pathname === '/comidas') ? mealsList : drinksList;
-  useEffect(() => () => setShowBar(false), [setShowBar]); // willUnmount. Muda o estado G. pra false de novo ao sair de "comidas"
+  const [isLoading, setIsLoading] = useState(true);
+  const [mealsCategories, setMealsCategories] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  useEffect(() => {
+    const getApiData = async () => {
+      try {
+        const recipesList = await fetchApi(listEndPoint);
+        setRecipes(recipesList[type]);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const getCategories = async () => {
+      try {
+        const categoriesList = await fetchApi(categoriesEndPoint);
+        setMealsCategories(categoriesList[type]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    setIsLoading(true);
+
+    getApiData();
+    getCategories();
+
+    return () => {
+      setSelectedCategory('');
+      setShowBar(false);
+    };
+  }, [categoriesEndPoint, getByCategoryEndPoint, listEndPoint, setShowBar, type]);
+
+  useEffect(() => {
+    const getApiData = async () => {
+      try {
+        let endPoint = listEndPoint;
+        if (selectedCategory) endPoint = `${getByCategoryEndPoint}${selectedCategory}`;
+        const recipesList = await fetchApi(endPoint);
+        setRecipes((recipesList[type]) ? recipesList[type] : []);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    setIsLoading(true);
+
+    getApiData();
+  }, [getByCategoryEndPoint, listEndPoint, selectedCategory, type]);
 
   return (
-    <>
-      <Header nomeDaPagina={ (pathname === '/comidas') ? 'Comidas' : 'Bebidas ' } />
-      { showBar ? <BarraDeBusca /> : null }
-      <BarraCategorias whatIsTheType={ pathname } />
-      {
-        recipes.map((recipe, index) => {
-          const type = (pathname === '/comidas') ? 'Meal' : 'Drink';
-          return (
-            <Card
-              img={ recipe[`str${type}Thumb`] }
-              index={ index }
-              key={ `${type}-card-${index}` }
-              name={ recipe[`str${type}`] }
-            />
-          );
-        })
-      }
-      <MenuInferior />
-    </>
+    <EstruturaPrincipal
+      isLoading={ isLoading }
+      categoriesList={ mealsCategories }
+      recipes={ recipes }
+      selectedCategory={ selectedCategory }
+      setSelectedCategory={ setSelectedCategory }
+    />
   );
 }
+
+Principal.propTypes = {
+  listEndPoint: PropTypes.string.isRequired,
+  categoriesEndPoint: PropTypes.string.isRequired,
+  getByCategoryEndPoint: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+};
 
 export default Principal;
