@@ -7,8 +7,14 @@ export function useFetchCategoryListApiMeals() {
 
   // faz requisicao para receber a lista de cada categoria da mealsApi
   useEffect(() => {
+    // logica para passar no requisito 31 de meals
+    let END_POINT = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${listCategoryMeals}`;
+    if (listCategoryMeals === 'All') {
+      END_POINT = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+    }
+
     const getListCategoryMealApi = async () => {
-      const { meals } = await fetchAPI(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${listCategoryMeals}`);
+      const { meals } = await fetchAPI(END_POINT);
       setDataMeals(meals);
     };
     getListCategoryMealApi();
@@ -20,8 +26,14 @@ export function useFetchCategoryListApiDrinks() {
 
   // faz requisicao para receber a lista de cada categoria da drinksApi
   useEffect(() => {
+    // logica para passar no requisito 31 de drinks
+    let END_POINT = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${listCategoryDrinks}`;
+    if (listCategoryDrinks === 'All') {
+      END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+    }
+
     const getListCategoryDrinkApi = async () => {
-      const { drinks } = await fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${listCategoryDrinks}`);
+      const { drinks } = await fetchAPI(END_POINT);
       setDataDrinks(drinks);
     };
     getListCategoryDrinkApi();

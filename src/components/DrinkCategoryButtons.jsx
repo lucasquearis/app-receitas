@@ -17,6 +17,15 @@ export default function DrinkCategoryButtons() {
 
   return (
     <ul>
+      <button
+        type="button"
+        name="All"
+        data-testid="All-category-filter"
+        onClick={ handleClick }
+        className="filter-button"
+      >
+        All
+      </button>
       { btnCategoryDrinks ? (
         btnCategoryDrinks
           .filter((_item, index) => index < CINCO)
