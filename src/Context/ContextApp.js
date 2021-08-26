@@ -10,7 +10,15 @@ export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes } = recipesHooks();
-  const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
+
+  const {
+    handleInput,
+    Login,
+    disabled,
+    handleClick,
+    redirect,
+    setRedirect } = LoginHook();
+
   const { drinks, meal } = foodHook();
 
   const ContProps = {
@@ -21,6 +29,7 @@ export const AppProvider = ({ children }) => {
     Login,
     handleClick,
     redirect,
+    setRedirect,
     drinks,
     meal,
   };
