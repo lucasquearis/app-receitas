@@ -7,6 +7,7 @@ function MainDrink() {
     <div>
       <Header title="Bebidas" />
       <Footer />
+      <p>apague este texto</p>
     </div>
   );
 }
