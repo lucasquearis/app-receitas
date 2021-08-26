@@ -1,13 +1,14 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import MenuInferior from '../components/MenuInferior';
 import Header from '../components/Header';
+import Recipes from '../components/Recipes';
 
-function Foods() {
+export default function Foods() {
   return (
-    <main>
+    <div>
       <Header title="Comidas" name="meal" search />
-    </main>
+      <Recipes />
+      <MenuInferior />
+    </div>
   );
 }
-
-export default Foods;

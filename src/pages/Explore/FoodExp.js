@@ -1,10 +1,14 @@
 import React from 'react';
+import MenuInferior from '../../components/MenuInferior';
 import Header from '../../components/Header';
+import ExploreButtons from '../../components/ExploreButtons';
 
-function FoodExp() {
+export default function FoodExp() {
   return (
-    <Header name="Explorar Comidas" search={ false } />
+    <div>
+      <Header name="Explorar Comidas" search={ false } />
+      <ExploreButtons type="foods" />
+      <MenuInferior />
+    </div>
   );
 }
-
-export default FoodExp;

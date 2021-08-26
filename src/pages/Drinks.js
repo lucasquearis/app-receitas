@@ -1,10 +1,14 @@
 import React from 'react';
+import MenuInferior from '../components/MenuInferior';
 import Header from '../components/Header';
+import Recipes from '../components/Recipes';
 
-function Drinks() {
+export default function Drinks() {
   return (
-    <Header title="Bebidas" name="cocktail" search />
+    <div>
+      <Header title="Bebidas" name="cocktail" search />
+      <Recipes />
+      <MenuInferior />
+    </div>
   );
 }
-
-export default Drinks;

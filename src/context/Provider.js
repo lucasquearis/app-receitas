@@ -15,7 +15,10 @@ function Provider({ children }) {
     src: '',
   });
 
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState({
+    list: [],
+    loading: true,
+  });
 
   const [categories, setCategories] = useState([]);
 
@@ -45,7 +48,7 @@ function Provider({ children }) {
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
-    setRecipes(result);
+    setRecipes({ ...recipes, list: result, loading: false });
   };
 
   useEffect(() => {
@@ -62,6 +65,7 @@ function Provider({ children }) {
     recipes,
     categories,
     requestCategory,
+    setRecipes,
   };
 
   return (

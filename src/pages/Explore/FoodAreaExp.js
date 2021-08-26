@@ -1,10 +1,12 @@
 import React from 'react';
+import MenuInferior from '../../components/MenuInferior';
 import Header from '../../components/Header';
 
-function FoodAreaExp() {
+export default function FoodAreaExp() {
   return (
-    <Header name="Explorar Origem" search />
+    <div>
+      <Header name="Explorar Origem" search />
+      <MenuInferior />
+    </div>
   );
 }
-
-export default FoodAreaExp;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
+import MenuInferior from '../../components/MenuInferior';
 
 function Foods() {
   const history = useHistory();
@@ -24,6 +25,7 @@ function Foods() {
         Explorar Bebidas
 
       </button>
+      <MenuInferior />
     </div>
   );
 }
