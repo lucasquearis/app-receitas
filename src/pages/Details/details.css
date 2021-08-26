@@ -1,0 +1,32 @@
+.hero {
+  height: 30vh;
+  width: 100%;
+}
+
+.thumb {
+  position: absolute;
+  z-index: -1;
+}
+
+.drink-details-container {
+  background-color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 70px;
+  max-width: 100vw;
+  min-height: 70vh;
+}
+
+.start-recipe-btn {
+  height: 50px;
+  width: 100%;
+}
+
+.start-recipe-btn-container {
+  background-color: white;
+  bottom: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  position: fixed;
+  width: 100%;
+}

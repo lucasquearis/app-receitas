@@ -1,0 +1,39 @@
+.header-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.header-title-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 75%;
+}
+
+.header-title {
+  font-size: 9vw;
+}
+
+button {
+  background-color: white;
+  border: none;
+}
+
+.header-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.buttons-container {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-icons-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 25%;
+}
