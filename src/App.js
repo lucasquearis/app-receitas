@@ -6,7 +6,8 @@ import {
   Profile,
   Drinks,
   RecipeDetails,
-  Login } from './pages';
+  Login,
+  Explore} from './pages';
 import RecipesFavorites from './pages/RecipesFavorites';
 import RecipesDone from './pages/RecipesDone';
 import Provider from './context/Provider';
@@ -23,6 +24,7 @@ function App() {
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-favoritas" component={ RecipesFavorites } />
         <Route path="/receitas-feitas" component={ RecipesDone } />
+        <Route path="/explorar" component={ Explore } />
       </Switch>
     </Provider>
   );
