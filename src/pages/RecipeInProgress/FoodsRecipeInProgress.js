@@ -1,7 +1,7 @@
 import React from 'react';
 
 function FoodsRecipeInProgress() {
-  const listaDeIngredientes = ['tomate', 'azeite', 'sal'];
+  // const listaDeIngredientes = ['tomate', 'azeite', 'sal'];
 
   return (
     <div>
@@ -10,18 +10,21 @@ function FoodsRecipeInProgress() {
       <h1 data-testid="recipe-title">Título receita</h1>
       <button data-testid="share-btn" type="button">btn compartilhar</button>
       <button data-testid="favorite-btn" type="button">btn favoritar</button>
+
       <h4 data-testid="recipe-category">categoria</h4>
       <div className="indredients">
         <h3>Ingredientes</h3>
 
-        { listaDeIngredientes.map((ingredient, index) => (
+        {/* { listaDeIngredientes.map((ingredient, index) => (
           <div data-testid={ `${index}-ingredient-step` } key={ index }>
             <input type="checkbox">
               { `${ingredient}` }
             />
 
           </div>
-        ))}
+        ))
+      }
+      </div> */}
       </div>
 
       <h3>Instruções</h3>
