@@ -21,7 +21,6 @@ function Provider({ children }) {
   });
 
   const [categories, setCategories] = useState([]);
-
   const [API, setAPI] = useState('');
   const switchAPI = (searchFilter) => {
     switch (searchFilter.type) {
@@ -37,6 +36,12 @@ function Provider({ children }) {
     default:
       break;
     }
+  };
+
+  const requestRandomAPI = async (type) => {
+    const response = await fetch(`https://www.the${type}db.com/api/json/v1/1/random.php`);
+    const result = await response.json();
+    setRecipes({ ...recipes, list: result, loading: false });
   };
 
   const requestCategory = async () => {
@@ -66,6 +71,7 @@ function Provider({ children }) {
     categories,
     requestCategory,
     setRecipes,
+    requestRandomAPI,
   };
 
   return (
