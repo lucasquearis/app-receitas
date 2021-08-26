@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionSaveItems } from '../../actions/index';
+import { actionStoreItems } from '../../actions/index';
 import { searchOnClick } from './utils';
 
 const SearchBar = ({ bool }) => {
@@ -41,7 +41,7 @@ const SearchBar = ({ bool }) => {
     checkItems();
     const saveItemsStore = () => {
       if (items !== undefined) {
-        dispatch(actionSaveItems(Object.values(items)[0]));
+        dispatch(actionStoreItems(Object.values(items)[0]));
       }
     };
     saveItemsStore();
