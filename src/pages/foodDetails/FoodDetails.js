@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Spinner } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import HeaderDetails from '../../components/HeaderDetails/HeaderDetails';
 import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails';
 import Instructions from '../../components/InstructionsDetails/InstructionsDetails';
@@ -27,6 +27,7 @@ const FoodDetails = ({ match: { params: id } }) => {
       <Instructions instruction={ strInstructions } />
       <VideoDetails linkVideo={ strYoutube } />
       <Recomendation />
+      <Button data-testid="start-recipe-btn">Começar Receita</Button>
     </div>
   );
 };
