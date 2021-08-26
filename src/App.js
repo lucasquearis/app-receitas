@@ -4,13 +4,16 @@ import Routes from './Routes';
 import DataProvider from './context/DataProvider';
 import CategoriesProvider from './context/CategoriesProvider';
 import FiltersProvider from './context/FiltersProvider';
+import AreaProvider from './context/AreasProvider';
 
 function App() {
   return (
     <DataProvider>
       <FiltersProvider>
         <CategoriesProvider>
-          <Routes />
+          <AreaProvider>
+            <Routes />
+          </AreaProvider>
         </CategoriesProvider>
       </FiltersProvider>
     </DataProvider>

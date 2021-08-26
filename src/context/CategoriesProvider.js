@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { getCategories, fetchCategories } from '../services';
+import { fetchCategories } from '../services';
 import { useDataContext } from './DataProvider';
 
 const CategoriesContext = createContext();
@@ -15,11 +15,6 @@ export const useCategoriesContext = () => useContext(CategoriesContext);
 
 export default function CategoriesProvider({ children }) {
   const { setData, setLoading } = useDataContext();
-
-  const [categories, setCategories] = useState({
-    food: [],
-    drinks: [],
-  });
 
   const [selected, setSelected] = useState({
     food: '',
@@ -30,18 +25,6 @@ export default function CategoriesProvider({ children }) {
     food: false,
     drinks: false,
   });
-
-  const sendCategories = useCallback(async () => {
-    const { meals } = await getCategories('food');
-    const { drinks } = await getCategories('drinks');
-    setCategories((prevCategories) => ({
-      ...prevCategories,
-      food: meals,
-      drinks,
-    }));
-  }, []);
-
-  useEffect(() => { sendCategories(); }, [sendCategories]);
 
   const handleSetSelected = (type, value) => {
     setSelected((prevSelects) => {
@@ -78,7 +61,6 @@ export default function CategoriesProvider({ children }) {
   }, [getCategoriesData]);
 
   const contextValue = {
-    categories,
     selected,
     handleSetSelected,
     handleReset,

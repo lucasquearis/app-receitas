@@ -30,7 +30,6 @@ export default function FiltersProvider({ children }) {
     setLoading(true);
     const recipes = await getFilters(types.type, filters);
     setLoading(false);
-    // Caso a resposta da API exista, salva no estado "data" as comidas;
 
     if (recipes[types.response]) {
       setData((prevData) => ({

@@ -16,7 +16,6 @@ export default function Profile() {
       setUserEmail(user.email);
     }
   }, [userEmail]);
-  console.log(userEmail);
 
   const handleLogoutButton = () => {
     localStorage.clear();

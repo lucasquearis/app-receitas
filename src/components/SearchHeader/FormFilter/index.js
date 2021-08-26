@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { useFiltersContext } from '../../../context/FiltersProvider';
 
 export default function FormFilter() {
-  const history = useHistory();
+  const { location: { pathname } } = useHistory();
   const { handleFilterAPI } = useFiltersContext();
 
   // Estado dos inputs;
@@ -63,7 +63,7 @@ export default function FormFilter() {
       <button
         type="submit"
         data-testid="exec-search-btn"
-        onClick={ () => handleFilterAPI(filters, history.location.pathname) }
+        onClick={ () => handleFilterAPI(filters, pathname) }
       >
         Buscar
       </button>

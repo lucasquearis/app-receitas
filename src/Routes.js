@@ -21,13 +21,14 @@ export default function Routes() {
         <Route path="/receitas-feitas" component={ Pages.DoneRecipes } />
         <Route path="/bebidas/:id" component={ Pages.DrinkDetails } />
         <Route path="/comidas/:id" component={ Pages.FoodDetails } />
-        <Route path="/explorar/bebidas" component={ Pages.DrinkExplorer } />
-        <Route path="/explorar/comidas" component={ Pages.FoodExplorer } />
-        <Route path="/explorar" component={ Pages.Explorer } />
+        <Route exact path="/explorar/bebidas" component={ Pages.DrinkExplorer } />
+        <Route exact path="/explorar/comidas" component={ Pages.FoodExplorer } />
+        <Route exact path="/explorar" component={ Pages.Explorer } />
         <Route exact path="/bebidas" component={ Pages.Home } />
         <Route exact path="/comidas" component={ Pages.Home } />
         <Route path="/perfil" component={ Pages.Profile } />
         <Route exact path="/" component={ Pages.Login } />
+        <Route path="/" component={ Pages.NotFound } />
       </Switch>
     </div>
   );
