@@ -4,12 +4,21 @@ import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Card from '../components/Card';
-import useDrinks from '../hooks/useDrinks';
+import Categories from '../components/Categories';
+import useRecipes from '../hooks/useRecipes';
+import useCategories from '../hooks/useCategories';
 
 export default function Drinks() {
+  const drinks = useSelector((state) => state.recipes.recipes);
+  const categories = [
+    { strCategory: 'All' },
+    ...useSelector((state) => state.recipes.categories),
+  ];
   const [showSearchBar, setShowSearchBar] = useState(false);
   const location = useLocation();
   const currentPage = location.pathname;
+  const [redirectToDetails, setRedirectToDetails] = useState(false);
+
   const {
     setInputValue,
     setFilterIngredient,
@@ -17,12 +26,21 @@ export default function Drinks() {
     setFilterFirstLetter,
     setSearched,
     inputValue,
-  } = useDrinks();
-  const drinks = useSelector((state) => state.recipes.recipes);
+  } = useRecipes(setRedirectToDetails);
 
-  const handleClick = async (e) => {
+  const { filterCategory, setFilterCategory } = useCategories(setRedirectToDetails);
+
+  const handleClickSearch = async (e) => {
     e.preventDefault();
     setSearched(true);
+  };
+
+  const handleClickFilter = (category) => {
+    if (category !== filterCategory) {
+      setFilterCategory(category);
+    } else {
+      setFilterCategory('All');
+    }
   };
 
   return (
@@ -37,11 +55,15 @@ export default function Drinks() {
           setIngredientValue={ setFilterIngredient }
           setNameValue={ setFilterName }
           setLetterValue={ setFilterFirstLetter }
-          handleClick={ handleClick }
+          handleClick={ handleClickSearch }
           inputValue={ inputValue }
         />
       ) : null}
-      {drinks.length === 1 ? (
+      <Categories
+        categories={ categories }
+        onClick={ handleClickFilter }
+      />
+      {redirectToDetails ? (
         drinks.map(({ idDrink }) => (
           <Redirect key={ idDrink } to={ `${currentPage}/${idDrink}` } />
         ))
@@ -52,6 +74,7 @@ export default function Drinks() {
             key={ drink.idDrink }
             title={ drink.strDrink }
             thumb={ drink.strDrinkThumb }
+            id={ drink.idDrink }
             index={ index }
           />
         ))

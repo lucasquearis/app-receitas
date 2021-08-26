@@ -6,7 +6,8 @@ import Header from '../components/Header';
 
 export default function Profile() {
   const reduxEmail = useSelector((state) => state.user.email);
-  const storageEmail = JSON.parse(localStorage.getItem('user')).email;
+  const userStorage = JSON.parse(localStorage.getItem('user'));
+  const storageEmail = userStorage && userStorage.email;
 
   const exitApp = () => {
     localStorage.clear();

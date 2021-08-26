@@ -22,6 +22,7 @@ export default function SearchBar(
       <label htmlFor="ingredient-radio">
         Ingrediente
         <input
+          name="search"
           onChange={ () => setIngredientValue(true) }
           setIngredientValue
           id="ingredient-radio"
@@ -32,6 +33,7 @@ export default function SearchBar(
       <label htmlFor="name-radio">
         Nome
         <input
+          name="search"
           onChange={ () => setNameValue(true) }
           id="name-radio"
           data-testid="name-search-radio"
@@ -41,6 +43,7 @@ export default function SearchBar(
       <label htmlFor="letter-radio">
         Primeira letra
         <input
+          name="search"
           onChange={ () => setLetterValue(true) }
           id="letter-radio"
           data-testid="first-letter-search-radio"
