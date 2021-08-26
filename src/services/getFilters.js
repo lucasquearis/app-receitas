@@ -19,7 +19,6 @@ export const getFilters = (type, filters) => {
     },
   };
 
-  // o Retorno é uma função que verificará o filtro e retornará a requisição correta;
   switch (filters.filter) {
   case 'ingredient':
     return requestAPI.fetchIngredient();

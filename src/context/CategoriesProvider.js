@@ -51,12 +51,16 @@ export default function CategoriesProvider({ children }) {
     setApplyCategories((prevApplies) => ({ ...prevApplies, [type]: true }));
   };
 
+  const handleReset = (type) => {
+    setSelected((prevSelects) => ({ ...prevSelects, [type]: '' }));
+    setApplyCategories((prevApplies) => ({ ...prevApplies, [type]: true }));
+  };
+
   const getCategoriesData = useCallback(async () => {
     if (applyCategories.food) {
       setLoading(true);
       const { meals } = await fetchCategories('food', selected);
       setLoading(false);
-      console.log(meals);
       setData((prevData) => ({ ...prevData, food: meals }));
       setApplyCategories((prevApplies) => ({ ...prevApplies, food: false }));
     }
@@ -77,6 +81,7 @@ export default function CategoriesProvider({ children }) {
     categories,
     selected,
     handleSetSelected,
+    handleReset,
   };
 
   return (
