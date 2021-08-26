@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
-import share from '../../../images/shareIcon.svg';
+import ShareIcon from '../../../components/Icons/ShareIcon';
 import heart from '../../../images/whiteHeartIcon.svg';
 import fullHeart from '../../../images/blackHeartIcon.svg';
 import './Card.css';
@@ -23,7 +23,7 @@ function FavoriteCard({ item }) {
             )}
           <h5 className="card-name">{item.name}</h5>
           <div className="icons-container">
-            {/* <img src={} /> */}
+            <ShareIcon />
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ function FavoriteCard({ item }) {
   );
 }
 
-Card.propTypes = {
+FavoriteCard.propTypes = {
   item: PropTypes.shape({
     alcoholicOrNot: PropTypes.string,
     area: PropTypes.string,
