@@ -54,6 +54,13 @@ function ComidasDetails(props) {
 
   const videoURL = meal.strYoutube ? meal.strYoutube.split('=') : '';
 
+  if (share) {
+    const threeSeconds = 3000;
+    setTimeout(() => {
+      setShare(false);
+    }, threeSeconds);
+  }
+
   const link = (
     <Link
       data-testid="start-recipe-btn"

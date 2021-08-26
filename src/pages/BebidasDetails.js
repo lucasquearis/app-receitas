@@ -96,6 +96,7 @@ function BebidasDetails(props) {
               data-testid="share-btn"
             />
           </button>
+          { share && <p>Link copiado!</p> }
           <button
             onClick={ () => favoritingRecipe(isFav, setIsFav, id, drink) }
             type="button"
