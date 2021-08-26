@@ -3,7 +3,10 @@ import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router';
 import Header from '../components/Header';
 
-const { email } = JSON.parse(localStorage.getItem('user'));
+let email = '';
+if (JSON.parse(localStorage.getItem('user')) !== null) {
+  email = JSON.parse(localStorage.getItem('user')).email;
+}
 
 export default function Profile() {
   const [routes, setRoutes] = useState({
