@@ -13,8 +13,6 @@ function RecipesProvider({ children }) {
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
 
   const globalState = {
-    firstState,
-    setFirstState,
     infoUser,
     setInfoUser,
     setSearchValues,

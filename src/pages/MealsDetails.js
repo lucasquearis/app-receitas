@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import Loading from '../components/Loagind';
 
 function MealsDetails() {
-  const history = useHistory();
-  const { location: { pathname } } = history;
+  // const history = useHistory();
+  // const { location: { pathname } } = history;
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
-  const [ingredients, setIngredients] = useState({});
+  const [ingredients, setIngredients] = useState([]);
+  console.log(ingredients);
+  const [url, setUrl] = useState();
 
   useEffect(() => {
     const filterIngredients = () => {
@@ -24,8 +26,7 @@ function MealsDetails() {
       setLoading(true);
       const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const fetchRecipe = async () => {
-        const correctURL = pathname === 'food' ? urlFoods : urlDrinks;
-        const request = await fetch(`${correctURL}${idRecipe}`);
+        const request = await fetch(`${urlFoods}52862`);
         const response = await request.json();
         setRecipe(response.meals[0]);
       };
@@ -39,7 +40,7 @@ function MealsDetails() {
   useEffect(() => {
     const correctUrl = () => {
       const ytUrl = recipe.strYoutube;
-      if (ytUrl) return ytUrl.replace('watch?v=', 'embed/');
+      if (ytUrl) setUrl(ytUrl.replace('watch?v=', 'embed/'));
     };
     correctUrl();
   }, [recipe]);
@@ -86,11 +87,11 @@ function MealsDetails() {
         title={ recipe.srtMeal }
         width="420"
         height="315"
-        src={ videoUrl }
+        src={ url }
       />
-      <div>
+      {/* <div>
         <p data-testid={ `${index}-recomendation-card` }>recomendations</p>
-      </div>
+      </div> */}
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </section>
   );
