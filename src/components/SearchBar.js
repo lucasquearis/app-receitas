@@ -54,7 +54,6 @@ export default function SearchBar() {
       response = await fetchCocktailsByFirstLetter(searchInput);
     }
     if (response !== null && searchRadio !== '') {
-      console.log(response);
       return setCocktails(response.slice(0, maxRecipes));
     }
 
