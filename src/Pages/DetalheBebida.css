@@ -1,0 +1,103 @@
+.food-drink-image {
+  height: 35vh;
+  width: 100%;
+}
+
+.title-drink-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding: 10px;
+}
+
+.title-drink-info h4 {
+  margin: 0;
+}
+
+.share-favorite-drink-section {
+  display: flex;
+}
+
+.share-drink-icon {
+  margin-right: 10px;
+}
+
+.food-drink-category {
+  color: rgb(139, 139, 139);
+  font-size: 18px;
+  font-weight: 00;
+  margin-left: 12px;
+}
+
+.ingredients-drink-section {
+  margin-left: 12px;
+}
+
+.ingredients-drink-section ul {
+  background-color: rgb(216, 216, 216);
+  list-style: none;
+  padding: 10px;
+  width: 95%;
+}
+
+.instructions-drink-section {
+  margin-left: 12px;
+}
+
+.instructions-drink-section p {
+  background-color: rgb(216, 216, 216);
+  padding: 20px;
+  text-align: left;
+  width: 95%;
+}
+
+.start-drink-recipe-btn {
+  background-color: lime;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  height: 55px;
+  margin: 35px 25px;
+  width: 85%;
+}
+
+.start-drink-recipe-btn:active {
+  background-color: rgb(0, 187, 0);
+}
+
+.start-drink-recipe-btn:focus {
+  outline: none;
+}
+
+.food-recomended {
+  margin-left: 12px;
+}
+
+.recomended-food-section-infos {
+  display: flex;
+  justify-content: space-around;
+}
+
+.recomended-food-info {
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+  width: 150px;
+}
+
+.recomended-food-info img {
+  border-radius: 8px;
+  height: 100px;
+  width: 100%;
+}
+
+.recomended-food-info p {
+  color: rgb(139, 139, 139);
+  font-size: 16px;
+  font-weight: 00;
+  margin: 8px;
+}
+
+.recomended-food-info h5 {
+  margin: 8px;
+}
