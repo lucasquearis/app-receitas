@@ -1,0 +1,13 @@
+footer {
+  background-color: #eb6424;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  position: fixed;
+  width: 100vw;
+}
+
+footer img {
+  filter: invert(100%);
+}
