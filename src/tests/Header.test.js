@@ -1,23 +1,66 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import Login from '../pages/Login';
+import Header from '../pages/Meals';
 
-describe('Teste da tela de login', () => {
-  test('O input de email deve possuir o atributo data-testid', () => {
-    renderWithRouter(<Login />);
-    const inputEmail = screen.getByTestId(DATA_TESTID_EMAIL);
-    expect(inputEmail).toBeInTheDocument();
+describe('Teste elementos do header na tela principal de receitas', () => {
+  test('O botão de perfil deve possuir o atributo data-testid', () => {
+    renderWithRouter(<Header />);
+    const profileBtn = screen.getByTestId('profile-top-btn');
+    expect(profileBtn).toBeInTheDocument();
   });
-  test('O input de senha deve possuir o atributo data-testid', () => {
-    renderWithRouter(<Login />);
-    const inputPassword = screen.getByTestId(DATA_TESTID_PASSWORD);
-    expect(inputPassword).toBeInTheDocument();
+  test('O titulo deve possuir o atributo data-testid', () => {
+    renderWithRouter(<Header />);
+    const titleH1 = screen.getByTestId('page-title');
+    expect(titleH1).toBeInTheDocument();
   });
-  test('O botão "Entrar" deve possuir o atributo data-testid', () => {
-    renderWithRouter(<Login />);
-    const buttonSubmit = screen.getByTestId(DATA_TESTID_PASSWORD);
-    expect(buttonSubmit).toBeInTheDocument();
+  test('O botão pesquisar deve possuir o atributo data-testid', () => {
+    renderWithRouter(<Header />);
+    const searchBtn = screen.getByTestId('search-top-btn');
+    expect(searchBtn).toBeInTheDocument();
+  });
+});
+
+describe('Teste ícone para a tela de perfil,  título e  ícone para a busca', () => {
+  test('O botão de perfil e pesquisar devem possuir icone correpondente', () => {
+    renderWithRouter(<Header />);
+    const icon = 'profileIcon.svg';
+    const icon2 = 'searchIcon.svg';
+    const locations = screen.getAllByRole('img', { name: /button-icon/i });
+    expect(locations.length).toBe(2);
+    expect(locations[0]).toHaveAttribute('src', icon);
+    expect(locations[1]).toHaveAttribute('src', icon2);
+  });
+});
+
+describe(`Verifica se o usuário é redirecionado à pagina de perfil
+  ao clicar no icone`, () => {
+  test('Verifica redirecionamento', () => {
+    const { history } = renderWithRouter(<Header />);
+    const btnProfile = screen.getByTestId('profile-top-btn');
+    userEvent.click(btnProfile);
+    const URL_PROFILE = history.location.pathname;
+    expect(URL_PROFILE).toEqual('/perfil');
+  });
+});
+
+describe(`Verifica se a barra de busca renderiza
+   ao clicar no icone`, () => {
+  test('Verifica se aparece', () => {
+    renderWithRouter(<Header />);
+    const searchBtn = screen.getByTestId('search-top-btn');
+    userEvent.click(searchBtn);
+    const searchInput = screen.getByTestId('search-input');
+    expect(searchInput).toBeInTheDocument();
+  });
+  test('Verifica se desaparece', () => {
+    renderWithRouter(<Header />);
+    const searchBtn = screen.getByTestId('search-top-btn');
+    userEvent.click(searchBtn);
+    const searchInput = screen.getByTestId('search-input');
+    expect(searchInput).toBeInTheDocument();
+    userEvent.click(searchBtn);
+    expect(searchInput).not.toBeInTheDocument();
   });
 });
