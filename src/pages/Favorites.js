@@ -1,10 +1,10 @@
 import React from 'react';
-import { Header } from '../components';
+import { Header, FavoriteRecipes } from '../components';
 
 const Favorites = () => (
   <div>
     <Header page="Receitas Favoritas" />
-    Receitas Favoritas
+    <FavoriteRecipes />
   </div>
 );
 
