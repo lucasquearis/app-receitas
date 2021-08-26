@@ -1,43 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Image } from 'react-bootstrap';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import FavoriteIcon from '../../components/Icons/FavoriteIcon';
+import ShareIcon from '../../components/Icons/ShareIcon';
 import './DetailsHeader.css';
-import copy from 'clipboard-copy';
-import share from '../../images/shareIcon.svg';
-import heart from '../../images/whiteHeartIcon.svg';
-import fullHeart from '../../images/blackHeartIcon.svg';
 
-function DetailsHeader({ title, subtitle, favorite, url }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+function DetailsHeader({ title, subtitle, favorite }) {
   const [isCopied, setIsCopied] = useState(false);
 
-  useEffect(() => {
-    const key = 'favoriteRecipes';
-    const data = JSON.parse(localStorage.getItem(key)) || [];
-    const findFavorite = data.find((item) => item.id === favorite.id);
-    const bool = !!findFavorite;
-    setIsFavorite(bool);
-  }, [setIsFavorite, favorite]);
-
-  const setLocalStorage = () => {
-    const key = 'favoriteRecipes';
-    const data = JSON.parse(localStorage.getItem(key));
-    if (isFavorite) {
-      const value = data.filter((item) => item.id !== favorite.id);
-      localStorage.setItem(key, JSON.stringify(value));
-      setIsFavorite(!isFavorite);
-    } else {
-      const value = data ? [...data, favorite] : [favorite];
-      localStorage.setItem(key, JSON.stringify(value));
-      setIsFavorite(!isFavorite);
-    }
-  };
-
-  const handleCopy = () => {
-    const currentUrl = `localhost:3000${url}`;
-    console.log(currentUrl);
-    copy(`http://localhost:3000${url}`);
+  const handleClick = () => {
     setIsCopied(true);
   };
 
@@ -49,21 +20,8 @@ function DetailsHeader({ title, subtitle, favorite, url }) {
       </div>
       <div className="header-icons-container">
         <div className="buttons-container">
-          <button onClick={ handleCopy } data-testid="share-btn" type="button">
-            <Image
-              className="header-icon"
-              src={ share }
-              alt="share-icon"
-            />
-          </button>
-          <button type="button" onClick={ setLocalStorage }>
-            <Image
-              data-testid="favorite-btn"
-              className="header-icon"
-              src={ isFavorite ? fullHeart : heart }
-              alt="heart-icon"
-            />
-          </button>
+          <ShareIcon dataTestId="share-btn" onClick={ handleClick } />
+          <FavoriteIcon dataTestId="favorite-btn" recipe={ favorite } />
         </div>
         {isCopied && <p className="copied-msg">Link copiado!</p>}
       </div>
@@ -83,7 +41,6 @@ DetailsHeader.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
   }).isRequired,
-  url: PropTypes.string.isRequired,
 };
 
 export default DetailsHeader;

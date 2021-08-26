@@ -7,6 +7,7 @@ import MealDetails from './pages/Details/Meal';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
+import Favorites from './pages/Favorites';
 import InProgress from './pages/InProgress';
 import Explore from './pages/Explore';
 import ExploreIngredients from './pages/ExploreIngredients';
@@ -32,7 +33,7 @@ function App() {
         <Route path="/explorar/comidas/area" />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" />
-        <Route path="/receitas-favoritas" />
+        <Route path="/receitas-favoritas" component={ Favorites } />
       </Switch>
     </Provider>
   );

@@ -15,7 +15,7 @@ function Header({ title, renderSearchIcon }) {
     <header>
       <Navbar className="header-navbar">
         <Nav>
-          <Link data-testid="profile-top-btn" to="/profile">
+          <Link data-testid="profile-top-btn" to="/perfil">
             <img className="icon" src={ profile } alt="profile-icon" />
           </Link>
         </Nav>
