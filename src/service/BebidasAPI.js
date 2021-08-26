@@ -11,3 +11,10 @@ export async function buscarBebidaPorNome(nome) {
   const response = await fetch(ENDPOINT).then((data) => data.json());
   return response.drinks;
 }
+
+export async function buscarCategorias() {
+  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response.drinks;
+}
