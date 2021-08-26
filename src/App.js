@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Drinks from './pages/Drinks';
 import FoodDetails from './pages/FoodDetails';
+import DrinkDetails from './pages/DrinkDetails';
 import Search from './pages/Search';
 import SearchDetailsFood from './pages/SeachDetailsFood';
 import SearchDetailsDrinks from './pages/SearchDetailsDrinks';
@@ -16,9 +17,11 @@ import Profile from './pages/Profile';
 import FinishedRecipes from './pages/FinishedRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import FoodContext from './context/FoodContext';
+import DrinkContext from './context/DrinksContext';
 
 function App() {
   const { foodDetailsId } = useContext(FoodContext);
+  const { drinkDetailsId } = useContext(DrinkContext);
   return (
     <BrowserRouter>
       <Switch>
@@ -26,6 +29,7 @@ function App() {
         <Route exact path="/comidas" component={ Recipes } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path={ `/comidas/${foodDetailsId}` } component={ FoodDetails } />
+        <Route exact path={ `/bebidas/${drinkDetailsId}` } component={ DrinkDetails } />
         <Route exact path="/explorar" component={ Search } />
         <Route exact path="/explorar/comidas" component={ SearchDetailsFood } />
         <Route exact path="/explorar/bebidas" component={ SearchDetailsDrinks } />

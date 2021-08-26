@@ -14,8 +14,6 @@ const FoodDetails = () => {
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
-  // drinks.map((drink) => console.log(drink));
-
   const getIngredients = () => {
     const ingredientsArr = foodDetails.map((item) => Object.entries(item)
       .filter((i) => i[0].includes('Ingredient') && i[1] !== ''));
@@ -93,13 +91,13 @@ const FoodDetails = () => {
               height="200"
               src={ strYoutube }
             />
-            { drinks.map((drink, indice) => (
-              <div className="recomended-drinks" key={ drink.strDrink }>
-                { DrinkRecomendationCard(drink, indice) }
+            <div className="recomended-wrapper">
+              <div className="recomended-drinks">
+                { drinks.map((drink, indice) => (
+                  DrinkRecomendationCard(drink, indice)
+                ))}
               </div>
-            ))}
-            {/* console.log(drink.strDrink)
-            ))} */}
+            </div>
             <button
               data-testid="start-recipe-btn"
               key={ i }
