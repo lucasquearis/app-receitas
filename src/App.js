@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
 import InProgress from './pages/InProgress';
+import ExploreFoods from './pages/Explore/ExploreFoods';
 
 import './App.css';
 
@@ -24,7 +25,11 @@ function App() {
         <Route path="/comidas/:id/in-progress" component={ InProgress } />
         <Route path="/bebidas/:id/in-progress" component={ InProgress } />
         <Route exact path="/explorar" />
-        <Route exact path="/explorar/comidas" />
+        <Route
+          exact
+          path="/explorar/comidas"
+          render={ (props) => <ExploreFoods { ...props } endpoint="themealdb" /> }
+        />
         <Route exact path="/explorar/bebidas" />
         <Route path="/explorar/comidas/ingredientes" />
         <Route path="/explorar/bebidas/ingredientes" />
