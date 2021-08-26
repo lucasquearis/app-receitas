@@ -32,8 +32,15 @@ export default function MealCategoryButtons() {
 
   return (
     <ul>
-      { console.log(listCategoryMeals) }
-      { console.log('teste', toggled)}
+      <button
+        type="button"
+        name="All"
+        data-testid="All-category-filter"
+        onClick={ handleClick }
+        className="filter-button"
+      >
+        All
+      </button>
       { btnCategoryMeals ? (
         btnCategoryMeals
           .filter((_item, index) => index < CINCO)
