@@ -14,3 +14,15 @@ export const saveLoginInfoLocalStorage = (userEmail) => {
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
 };
+
+export const filterIngredientsDetails = (recipe) => {
+  const ingredientsMeaseure = [];
+  const ingredients = Object.entries(recipe)
+    .filter((value) => value[0].includes('strIngredient') && value[1]);
+  const measures = Object.entries(recipe)
+    .filter((value) => value[0].includes('strMeasure') && value[1]);
+  for (let index = 0; index < ingredients.length; index += 1) {
+    ingredientsMeaseure.push([ingredients[index][1], measures[index][1]]);
+  }
+  return ingredientsMeaseure;
+};

@@ -1,0 +1,49 @@
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: Roboto;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+p {
+  font-family: Roboto;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #A9A9A9;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.buttons-container {
+  display: inline;
+  width: 105px;
+}
+
+.img-header {
+  height: 155px;
+  width: 360px;
+  left: 0px;
+  top: 0px;
+  border-radius: 0px;
+}
+
+.icons {
+  height: 26px;
+  width: 26px;
+}
