@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
 import './RecipeInProgress.css';
 
 function RecipeInProgress() {
@@ -18,11 +20,9 @@ function RecipeInProgress() {
 
   useEffect(() => {
     const currentStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(currentStorage);
     if (currentStorage !== null
       && `${databaseKey}` in currentStorage
       && `${id}` in currentStorage[databaseKey]) {
-      console.log(currentStorage[databaseKey][`${id}`]);
       setChecked(currentStorage[databaseKey][`${id}`]);
     }
   }, [id, databaseKey]);
@@ -102,8 +102,11 @@ function RecipeInProgress() {
         alt="Recipe"
       />
       <h3 data-testid="recipe-title">{ recipeDetails[`str${recipeKey}`] }</h3>
-      <Button testId="share-btn" name="Share" disabled={ false } />
-      <Button testId="favorite-btn" name="Favoritar" disabled={ false } />
+      <ShareButton />
+      <FavoriteButton
+        recipeDetails={ recipeDetails }
+        recipeKey={ recipeKey }
+      />
       <h4 data-testid="recipe-category">{ recipeDetails.strCategory }</h4>
       <ul>{ renderIngredientList() }</ul>
       <p data-testid="instructions">{ recipeDetails.strInstructions }</p>

@@ -1,55 +1,80 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { string, func, bool, objectOf } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import Proptypes from 'prop-types';
+import empty from '../images/whiteHeartIcon.svg';
+import full from '../images/blackHeartIcon.svg';
 
-function Button(props) {
-  const { link, testId, name, onClick, disabled, style } = props;
-  if (link !== '') {
-    return (
-      <div>
-        <Link to={ link }>
-          <button
-            type="button"
-            data-testid={ testId }
-            onClick={ onClick }
-            disabled={ disabled }
-            style={ style }
-          >
-            { name }
-          </button>
-        </Link>
-      </div>
-    );
-  }
+function FavoriteButton({ recipeDetails }) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  let recipeKey = 'Drink';
+  if ('idMeal' in recipeDetails) recipeKey = 'Meal';
+
+  const { strCategory: category } = recipeDetails;
+  const id = recipeDetails[`id${recipeKey}`];
+  const name = recipeDetails[`str${recipeKey}`];
+  const image = recipeDetails[`str${recipeKey}Thumb`];
+  let type = 'comida';
+  let area = '';
+  let alcoholicOrNot = '';
+  if (recipeKey === 'Drink') {
+    type = 'bebida';
+    alcoholicOrNot = recipeDetails.strAlcoholic;
+  } else area = recipeDetails.strArea;
+
+  const entry = {
+    id,
+    type,
+    area,
+    category,
+    alcoholicOrNot,
+    name,
+    image,
+  };
+
+  useEffect(() => {
+    const currentStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (currentStorage) {
+      setFavoriteRecipes(currentStorage);
+      const find = currentStorage.find((recipe) => recipe.id === id);
+      if (find !== undefined) {
+        setIsFavorite(true);
+      }
+    }
+  }, [id]);
+
+  useEffect(() => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  }, [favoriteRecipes]);
+
+  const handleFavorite = () => {
+    const find = favoriteRecipes.find((recipe) => recipe.id === id);
+    if (find === undefined) {
+      setFavoriteRecipes([...favoriteRecipes, entry]);
+      setIsFavorite(true);
+    }
+    if (find !== undefined) {
+      setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe.id !== id));
+      setIsFavorite(false);
+    }
+  };
+
   return (
-    <div>
-      <button
-        type="button"
-        data-testid={ testId }
-        onClick={ onClick }
-        disabled={ disabled }
-        style={ style }
-      >
-        { name }
-      </button>
-    </div>
+    <button
+      type="button"
+      data-testid="favorite-btn"
+      onClick={ handleFavorite }
+    >
+      <img
+        src={ isFavorite ? full : empty }
+        alt={ isFavorite ? 'favorite' : 'not favorite' }
+        style={ { width: '58px' } }
+      />
+    </button>
   );
 }
 
-Button.propTypes = {
-  link: string,
-  testId: string,
-  name: string.isRequired,
-  onClick: func,
-  disabled: bool.isRequired,
-  style: objectOf(string),
+FavoriteButton.propTypes = {
+  recipeDetails: Proptypes.objectOf(Proptypes.string).isRequired,
 };
 
-Button.defaultProps = {
-  link: '',
-  testId: '',
-  onClick: null,
-  style: {},
-};
-
-export default Button;
+export default FavoriteButton;
