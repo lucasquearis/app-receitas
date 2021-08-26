@@ -9,6 +9,7 @@ import '../styles/FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   const [favoritesArray, setFavoritesArray] = useState();
+  const [filterByType, setFilterByType] = useState('');
 
   const localStorageData = localStorage.getItem('favoriteRecipes');
 
@@ -25,18 +26,43 @@ function FavoriteRecipes() {
     <main>
       <Header />
       <div className="filter-buttons">
-        <button data-testid="filter-by-all-btn" type="button">
+        <button
+          data-testid="filter-by-all-btn"
+          type="button"
+          onClick={ () => setFilterByType('') }
+        >
           All
         </button>
-        <button data-testid="filter-by-food-btn" type="button">
+        <button
+          data-testid="filter-by-food-btn"
+          type="button"
+          onClick={ () => {
+            if (filterByType === 'comida') {
+              setFilterByType('');
+            } else {
+              setFilterByType('comida');
+            }
+          } }
+        >
           Food
         </button>
-        <button data-testid="filter-by-drink-btn" type="button">
+        <button
+          data-testid="filter-by-drink-btn"
+          type="button"
+          onClick={ () => {
+            if (filterByType === 'bebida') {
+              setFilterByType('');
+            } else {
+              setFilterByType('bebida');
+            }
+          } }
+        >
           Drinks
         </button>
       </div>
       <div className="favorites-container">
         {favoritesArray ? favoritesArray
+          .filter((item) => item.type.includes(filterByType))
           .map(({ id, alcoholicOrNot, area, category, image, name, type }, index) => (
             <FavoriteRecipeCard
               key={ id }
