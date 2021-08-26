@@ -20,6 +20,10 @@ footer, .start-recipe {
   width: 150px;
 }
 
+input[type="checkbox"]:checked + label{
+  text-decoration: line-through;
+}
+
 /* O código acima é necessário para os testes */
 header, footer {
   display: flex;
