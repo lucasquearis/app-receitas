@@ -13,9 +13,8 @@ input {
   justify-content: space-between;
 }
 
-#profile-icon {
+.profile-icon {
   filter: invert(100%);
-
 }
 
 .search-button {
@@ -63,5 +62,5 @@ h3 {
 }
 
 .search-form {
-  background-color: #fa9500 ;
+  background-color: #fa9500;
 }
