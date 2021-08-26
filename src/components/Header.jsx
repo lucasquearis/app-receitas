@@ -5,38 +5,23 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ title }) {
-  const [showInput, setShowInput] = useState(true);
+  const [showInput, setShowInput] = useState(false);
 
   const handleClick = () => (
-    showInput ? setShowInput(false) : setShowInput(true));
+    !showInput ? setShowInput(true) : setShowInput(false));
 
-  const renderButton = () => {
-    if (showInput) {
-      return (
-        <>
-          <button type="button" onClick={ handleClick }>
-            <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="iconProfile"
-            />
-          </button>
-          <input type="text" data-testid="search-input" hidden={ showInput } />
-        </>
-      );
-    }
-    if (showInput) {
-      return (
-        <button type="button" onClick={ handleClick }>
-          <img
-            data-testid="search-top-btn"
-            src={ searchIcon }
-            alt="iconProfile"
-          />
-        </button>
-      );
-    }
-  };
+  const renderButton = () => (
+    <>
+      <button type="button" onClick={ handleClick }>
+        <img
+          data-testid="search-top-btn"
+          src={ searchIcon }
+          alt="iconProfile"
+        />
+      </button>
+      { showInput ? <input type="text" data-testid="search-input" /> : '' }
+    </>
+  );
 
   return (
     <div>
