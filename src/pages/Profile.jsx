@@ -1,10 +1,11 @@
-import { Button } from 'bootstrap';
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Footer from '../components/Footer';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import useLogout from '../hooks/useLogout';
 import useRedirect from '../hooks/useRedirect';
+import Footer from '../components/Footer';
 
 function Profile() {
   const { user } = useSelector((state) => state.login);
