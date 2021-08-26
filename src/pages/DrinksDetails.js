@@ -7,13 +7,22 @@ function DrinksDetails() {
   // const { location: { pathname } } = history;
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
+  const [lists, setLists] = useState({
+    ingredients: [],
+    measure: [],
+  });
 
   useEffect(() => {
     const filterIngredients = () => {
       const keys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
       const list = keys.map((key) => recipe[key]);
-      setIngredients(list.filter((item) => item));
+      const measureQnt = Object.keys(recipe).filter((key) => key.includes('Measure'));
+      const measureList = measureQnt.map((key) => recipe[key]);
+      setLists({
+        ...lists,
+        ingredients: list.filter((item) => item),
+        measure: measureList.filter((item) => item),
+      });
     };
 
     filterIngredients();
@@ -56,12 +65,12 @@ function DrinksDetails() {
         <h3>Ingredients</h3>
         <ul>
           {
-            ingredients.map((item, key) => (
+            lists.ingredients.map((item, key) => (
               <li
                 key={ key }
                 data-testid={ `${key}-ingredient-name-and-measure` }
               >
-                { item }
+                { `${item} - ${lists.measure[key]}` }
               </li>
             ))
           }
