@@ -19,7 +19,7 @@ export default function DrinkCategoryButtons() {
   const handleToggle = async () => {
     getDrinksApi();
     setToggled(!toggled);
-    setListCategoryDrinks('');
+    // setListCategoryDrinks('');
   };
 
   const handleClick = ({ target }) => {
