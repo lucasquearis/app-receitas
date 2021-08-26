@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   items: [],
 };
 
-const items = (state = INITIAL_STATE, action) => {
+const itemsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case SAVE_ITEMS:
     return { items: action.value };
@@ -13,4 +13,4 @@ const items = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default items;
+export default itemsReducer;

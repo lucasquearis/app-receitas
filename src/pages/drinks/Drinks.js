@@ -1,15 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import CardsList from '../../components/CardsList/CardsList';
 import Header from '../../components/header/Header';
 
-const Drinks = ({ storeItems }) => {
-  if (storeItems.length > 0) {
+const Drinks = () => {
+  const { items } = useSelector((state) => state.itemsReducer);
+  if (items.length > 0) {
     return (
       <div>
         <Header>Bebidas</Header>
-        <CardsList array={ storeItems } />
+        <CardsList array={ items } />
       </div>
     );
   }
@@ -20,16 +20,4 @@ const Drinks = ({ storeItems }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    storeItems: state.items.items,
-  };
-}
-
-Drinks.propTypes = {
-  storeItems: PropTypes.arrayOf(
-    PropTypes.object.isRequired,
-  ).isRequired,
-};
-
-export default connect(mapStateToProps)(Drinks);
+export default Drinks;
