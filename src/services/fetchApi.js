@@ -16,9 +16,10 @@ export const fetchSearchFoodsApi = async (consultBy, query) => {
   try {
     const response = await fetch(`${endPoint}${query}`);
     const data = await response.json();
-    return data.meals;
+    return data.meals || [];
   } catch (error) {
-    console.log(error);
+    console.log('error');
+    return [];
   }
 };
 
@@ -34,8 +35,9 @@ export const fetchSearchDrinksApi = async (consultBy, query) => {
   try {
     const response = await fetch(`${endPoint}${query}`);
     const data = await response.json();
-    return data.drinks;
+    return data.drinks || [];
   } catch (error) {
     console.log(error);
+    return [];
   }
 };

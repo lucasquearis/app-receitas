@@ -31,13 +31,13 @@ export default function Routes() {
         <Route
           exact
           path="/comidas"
-          component={ Foods }
+          render={ (props) => <Foods { ...props } /> }
         />
 
         <Route
           exact
           path="/bebidas"
-          component={ Drinks }
+          render={ (props) => <Drinks { ...props } /> }
         />
 
         <Route
