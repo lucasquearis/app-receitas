@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
-import { useFoodAndDrinksContext } from '../../../context/FoodAndDrinksProvider';
+import { useFiltersContext } from '../../../context/FiltersProvider';
 
 export default function FormFilter() {
   const history = useHistory();
-  const { handleSetParameters } = useFoodAndDrinksContext();
+  const { handleSetParameters } = useFiltersContext();
 
   // Estado dos inputs;
   const [text, setText] = useState('');

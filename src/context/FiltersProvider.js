@@ -1,18 +1,21 @@
 import React, {
   createContext,
-  useCallback,
   useContext,
-  useEffect,
   useState,
+  useEffect,
+  useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
-import { getDefaultData, useFilters } from '../services';
 
-const FoodAndDrinksContext = createContext();
+import { getFilters } from '../services';
+import { useDataContext } from './DataProvider';
 
-export const useFoodAndDrinksContext = () => useContext(FoodAndDrinksContext);
+const FiltersContext = createContext();
 
-export default function FoodAndDrinksProvider({ children }) {
+export const useFiltersContext = () => useContext(FiltersContext);
+
+export default function FiltersProvider({ children }) {
+  const { setData, setLoading } = useDataContext();
   // Estado que será atualizado quando o usuário clicar em "buscar"
   const [applyFilters, setApplyFilters] = useState({
     food: false,
@@ -31,38 +34,11 @@ export default function FoodAndDrinksProvider({ children }) {
     },
   });
 
-  // Armazena os dados de comida e bebida recebidos da API;
-  const [data, setData] = useState({
-    food: [],
-    drinks: [],
-  });
-
   // Caso a API retorne apenas um resultado este estado será verdadeiro para redirecionar;
   const [redirect, setRedirect] = useState({
     food: false,
     drinks: false,
   });
-
-  // Este estado será verdadeiro quando uma requisição estiver em andamento;
-  const [loading, setLoading] = useState(false);
-
-  // Funções que retornam os resultados da API de acordo com os filtros;
-  const filtredFood = useFilters('food', parameters);
-  const filtredDrinks = useFilters('drinks', parameters);
-
-  // Seta o estado inicial "data";
-  const setInitialData = useCallback(async () => {
-    const defaultFood = getDefaultData('food');
-    const defaultDrinks = getDefaultData('drinks');
-
-    setLoading(true);
-    const { meals } = await defaultFood();
-    const { drinks } = await defaultDrinks();
-    setLoading(false);
-    setData((prevData) => ({ ...prevData, food: meals, drinks }));
-  }, []);
-
-  useEffect(() => { setInitialData(); }, [setInitialData]);
 
   // Alert do Requisito 18;
   const notFoundAlert = () => (
@@ -106,6 +82,10 @@ export default function FoodAndDrinksProvider({ children }) {
   };
 
   const getFiltredData = useCallback(async () => {
+    // Funções que retornam os resultados da API de acordo com os filtros;
+    const filtredFood = getFilters('food', parameters);
+    const filtredDrinks = getFilters('drinks', parameters);
+
     // Recebendo o array com as comidas da API;
     if (applyFilters.food) {
       setLoading(true);
@@ -139,24 +119,22 @@ export default function FoodAndDrinksProvider({ children }) {
       }
       setApplyFilters((prevApplies) => ({ ...prevApplies, drinks: false }));
     }
-  }, [applyFilters.drinks, applyFilters.food, filtredDrinks, filtredFood]);
+  }, [applyFilters.drinks, applyFilters.food, parameters, setData, setLoading]);
 
   useEffect(() => { getFiltredData(); }, [getFiltredData]);
 
   const contextValue = {
-    data,
-    redirect,
-    loading,
     handleSetParameters,
+    redirect,
   };
 
   return (
-    <FoodAndDrinksContext.Provider value={ contextValue }>
+    <FiltersContext.Provider value={ contextValue }>
       { children }
-    </FoodAndDrinksContext.Provider>
+    </FiltersContext.Provider>
   );
 }
 
-FoodAndDrinksProvider.propTypes = {
+FiltersProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

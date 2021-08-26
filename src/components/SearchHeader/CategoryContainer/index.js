@@ -4,10 +4,10 @@ import { useCategoriesContext } from '../../../context/CategoriesProvider';
 
 export default function CategoryContainer() {
   const { location: { pathname } } = useHistory();
-  const { categories } = useCategoriesContext();
-  const list = pathname.includes('/comidas') ? 'food' : 'drinks';
+  const { categories, handleSetSelected } = useCategoriesContext();
+  const type = pathname.includes('/comidas') ? 'food' : 'drinks';
 
-  const createButtons = () => categories[list]
+  const createButtons = () => categories[type]
     .reduce((acc, { strCategory }, index) => {
       const maxLength = 5;
       if (index < maxLength) {
@@ -16,6 +16,7 @@ export default function CategoryContainer() {
           <button
             key={ strCategory }
             type="button"
+            onClick={ () => handleSetSelected(type, strCategory) }
             data-testid={ `${strCategory}-category-filter` }
           >
             {strCategory}

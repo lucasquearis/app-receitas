@@ -10,26 +10,21 @@ const getResponse = async (url) => {
   return response.json();
 };
 
-// Receber lista de categorias;
-const fetchCategories = (type) => {
-  const apiURL = `${endPoints[type]}list.php?c=list`;
-  return getResponse(apiURL);
-};
-
-export const getCategories = (type) => fetchCategories(type);
-
 // Requisição padrão;
-const defaultFetch = (type) => {
+export const getDefaultData = (type) => {
   const apiURL = `${endPoints[type]}search.php?s=`;
   return getResponse(apiURL);
 };
 
-export const getDefaultData = (type) => () => defaultFetch(type);
+// Receber lista de categorias;
+export const getCategories = (type) => {
+  const apiURL = `${endPoints[type]}list.php?c=list`;
+  return getResponse(apiURL);
+};
 
-// Hook para receber os dados da API de acordo com os filtros do usuário;
 // Primeiro parâmetro será 'food' ou 'drinks';
 // Segundo parâmetro será um objeto com os filtros do usuário;
-export const useFilters = (type, parameters) => {
+export const getFilters = (type, parameters) => {
   // Cada método deste objeto é uma requisição específica;
   const requestAPI = {
     fetchIngredient: () => {
@@ -46,7 +41,7 @@ export const useFilters = (type, parameters) => {
     },
   };
 
-  // O hook retorna uma função que verificará o filtro e retornará a requisição correta;
+  // o Retorno é uma função que verificará o filtro e retornará a requisição correta;
   return () => {
     switch (parameters[type].filter) {
     case 'ingredient':
@@ -61,7 +56,13 @@ export const useFilters = (type, parameters) => {
       }
       return requestAPI.fetchFirstLetter();
     default:
-      return defaultFetch(type);
+      return getDefaultData(type);
     }
   };
+};
+
+export const fetchCategories = (type, selected) => {
+  if (!selected[type]) return getDefaultData(type);
+  const apiURL = `${endPoints[type]}filter.php?c=${selected[type]}`;
+  return getResponse(apiURL);
 };

@@ -2,11 +2,13 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import SearchHeader from '../../components/SearchHeader';
 import Footer from '../../components/Footer';
-import { useFoodAndDrinksContext } from '../../context/FoodAndDrinksProvider';
+import { useFiltersContext } from '../../context/FiltersProvider';
+import { useDataContext } from '../../context/DataProvider';
 
 export default function Drinks() {
   // Recebendo informações do provider "useFoodAndDrinksContext"
-  const { data, redirect, loading } = useFoodAndDrinksContext();
+  const { data, loading } = useDataContext();
+  const { redirect } = useFiltersContext();
 
   // Cria os cards de bebida;
   const drinksCards = () => data.drinks

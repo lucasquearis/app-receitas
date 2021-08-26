@@ -32,8 +32,7 @@ export default function SearchHeader({ children }) {
           />
         </button>
       </header>
-      <CategoryContainer />
-      { visibleSearch && <FormFilter /> }
+      { visibleSearch ? <FormFilter /> : <CategoryContainer /> }
     </div>
   );
 }
