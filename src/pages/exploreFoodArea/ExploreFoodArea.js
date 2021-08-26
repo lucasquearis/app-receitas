@@ -64,6 +64,7 @@ const ExploreFoodArea = () => {
               { strArea }
             </option>
           )) }
+          <option data-testid="All-option">All</option>
         </select>
         { filteredFoods.bool && (<CardsList array={ filteredFoods.foods } />) }
       </div>
