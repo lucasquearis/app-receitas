@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
 import Favorites from './pages/Favorites';
+import InProgress from './pages/InProgress';
 
 import './App.css';
 
@@ -21,8 +22,8 @@ function App() {
         <Route exact path="/bebidas" component={ Recipes } />
         <Route exact path="/comidas/:id" component={ MealDetails } />
         <Route exact path="/bebidas/:id" component={ DrinkDetails } />
-        <Route path="/comidas/:id/in-progress" />
-        <Route path="/bebidas/:id/in-progress" />
+        <Route path="/comidas/:id/in-progress" component={ InProgress } />
+        <Route path="/bebidas/:id/in-progress" component={ InProgress } />
         <Route exact path="/explorar" />
         <Route exact path="/explorar/comidas" />
         <Route exact path="/explorar/bebidas" />
