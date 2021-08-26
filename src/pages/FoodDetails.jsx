@@ -39,7 +39,11 @@ function FoodDetails({ match: { params: { id } } }) {
           {sliceRecomended.map((drink, index) => (
             <div data-testid={ `${index}-recomendation-card` } key={ drink.strDrink }>
               <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
-              <img src={ drink.strDrinkThumb } alt={ drink.strDrink } style={ imgStyle } />
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ drink.strDrink }
+                style={ imgStyle }
+              />
             </div>
           ))}
         </div>
