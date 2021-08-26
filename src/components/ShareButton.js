@@ -4,10 +4,9 @@ import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import '../styles/RecipeDetails.css';
 
-function ShareButton({ index, address }) {
+function ShareButton({ index, address, pathname }) {
   const [copied, setCopied] = useState(false);
   const localHostAddress = 'http://localhost:3000';
-  const { pathname } = props;
   const handleClick = () => {
     copy(`${localHostAddress}${address || pathname}`);
     setCopied(true);
