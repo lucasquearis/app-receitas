@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 // context
 import myContext from './myContext';
 // API
-import getMeals from '../services/mealAPI';
-import getDrinks from '../services/drinkAPI';
+import { getMeals, getMealsCategories } from '../services/mealAPI';
+import { getDrinks, getDrinksCategories } from '../services/drinkAPI';
 import { ALERT_TWO, MEAL_OBJ, DRINK_OBJ } from '../services/data';
 
 function RecipesProvider({ children }) {
@@ -17,6 +17,8 @@ function RecipesProvider({ children }) {
   const [updateData, setUpdateData] = useState(false);
   const [baseDataMeals, setBaseDataMeals] = useState();
   const [baseDataDrinks, setBaseDataDrinks] = useState();
+  const [baseCategoryDrinks, setBaseCategoryDrinks] = useState();
+  const [baseCategoryMeal, setBaseCategoryMeal] = useState();
 
   const globalState = {
     infoUser,
@@ -28,6 +30,8 @@ function RecipesProvider({ children }) {
     setUpdateData,
     baseDataMeals,
     baseDataDrinks,
+    baseCategoryDrinks,
+    baseCategoryMeal,
   };
   useEffect(() => {
     const resultBaseMeals = async () => {
@@ -35,6 +39,24 @@ function RecipesProvider({ children }) {
       setBaseDataMeals(baseMeals);
     };
     resultBaseMeals();
+  },
+  [searchValues]);
+
+  useEffect(() => {
+    const resultBaseMealsCategories = async () => {
+      const baseMeals = await getMealsCategories(MEAL_OBJ);
+      setBaseCategoryMeal(baseMeals);
+    };
+    resultBaseMealsCategories();
+  },
+  [searchValues]);
+
+  useEffect(() => {
+    const resultBaseDrinksCategories = async () => {
+      const baseMeals = await getDrinksCategories();
+      setBaseCategoryDrinks(baseMeals);
+    };
+    resultBaseDrinksCategories();
   },
   [searchValues]);
 

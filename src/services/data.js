@@ -1,5 +1,6 @@
 const URL_RADIO_BUTTON = {
   ingredient: 'filter.php?i',
+  category: 'filter.php?c',
   name: 'search.php?s',
   letter: 'search.php?f',
 };
@@ -9,6 +10,7 @@ const ALERT_ONE = 'Sua busca deve conter somente 1 (um) caracter';
 const ALERT_TWO = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
 const START_CARD = 0;
 const NUMBER_CARDS = 12;
+const NUMBER_CATEGORIES = 5;
 
 export {
   URL_RADIO_BUTTON,
@@ -16,6 +18,7 @@ export {
   ALERT_TWO,
   START_CARD,
   NUMBER_CARDS,
+  NUMBER_CATEGORIES,
   MEAL_OBJ,
   DRINK_OBJ,
 };
