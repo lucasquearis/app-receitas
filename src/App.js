@@ -10,6 +10,7 @@ import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
 import InProgress from './pages/InProgress';
 import ExploreFoods from './pages/Explore/ExploreFoods';
+import ExplorarDrinks from './pages/Explore/ExploreDrinks';
 
 import './App.css';
 
@@ -30,7 +31,11 @@ function App() {
           path="/explorar/comidas"
           render={ (props) => <ExploreFoods { ...props } endpoint="themealdb" /> }
         />
-        <Route exact path="/explorar/bebidas" />
+        <Route
+          exact
+          path="/explorar/bebidas"
+          render={ (props) => <ExplorarDrinks { ...props } endpoint="thecocktaildb" /> }
+        />
         <Route path="/explorar/comidas/ingredientes" />
         <Route path="/explorar/bebidas/ingredientes" />
         <Route path="/explorar/comidas/area" />
