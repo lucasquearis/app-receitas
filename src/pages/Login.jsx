@@ -34,7 +34,7 @@ function Login() {
   if (redirect) {
     return <Redirect to="/comidas" />;
   }
-  
+
   return (
     <div>
       <input
