@@ -6,8 +6,9 @@ import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
-  const [DrinkDetailsId, setDrinkDetailsId] = useState([]);
+  const [drinkDetailsId, setDrinkDetailsId] = useState('');
   const [drinkDetails, setDrinkDetails] = useState([]);
+  console.log(drinkDetailsId);
 
   useEffect(() => {
     fetchDrinksApi().then((data) => {
@@ -16,12 +17,12 @@ const DrinksProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    fetchDrinkDetailsApi(DrinkDetailsId).then((data) => setDrinkDetails(data.meals));
-  }, [DrinkDetailsId]);
+    fetchDrinkDetailsApi(drinkDetailsId).then((data) => setDrinkDetails(data.drinks));
+  }, [drinkDetailsId]);
 
   const contextValue = {
     drinks,
-    DrinkDetailsId,
+    drinkDetailsId,
     setDrinkDetailsId,
     drinkDetails,
   };
