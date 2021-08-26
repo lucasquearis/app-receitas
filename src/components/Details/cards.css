@@ -1,9 +1,9 @@
 .container {
   display: flex;
   flex-flow: row nowrap;
-  padding: 0;
   overflow-x: scroll;
   overflow-y: hidden;
+  padding: 0;
 }
 
 .card {
