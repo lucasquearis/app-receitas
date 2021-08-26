@@ -3,6 +3,7 @@ import * as BebidasAPI from '../service/BebidasAPI';
 import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);

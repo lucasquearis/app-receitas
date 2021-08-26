@@ -1,10 +1,14 @@
 import React from 'react';
 import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Explorar() {
   return (
-    <section>
-      <Header title="Explorar" />
-    </section>
+    <>
+      <section>
+        <Header title="Explorar" searchIcon />
+      </section>
+      <Footer />
+    </>
   );
 }
