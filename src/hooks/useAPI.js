@@ -12,9 +12,7 @@ function useAPI() {
   const foodAPI = `${apis.protocol}://${apis.food}/${apis.path}`;
 
   const [drinks, setDrinks] = useState({ drinks: [] });
-  const [foods, setFoods] = useState({ foods: [] });
-
-  const mockFoods = (data) => setFoods({ foods: [...data.meals] });
+  const [foods, setFoods] = useState({ meals: [] });
 
   function request(url, setter) {
     fetch(url)
@@ -35,17 +33,17 @@ function useAPI() {
     // Category
     // 's' pesquisar por nome
     // 'f' pesquisar por pela primeira letra - precisa de uma letra
-    request(`${foodAPI}/search.php?${category}=${query}`, mockFoods);
+    request(`${foodAPI}/search.php?${category}=${query}`, setFoods);
   }
+
+  const data = {
+    drinks: drinks.drinks,
+    foods: foods.meals,
+  };
 
   const functions = {
     searchDrinks,
     searchFoods,
-  };
-
-  const data = {
-    drinks,
-    foods,
   };
 
   return [data, functions];

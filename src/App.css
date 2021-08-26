@@ -15,6 +15,19 @@
   max-height: 80vh;
 }
 
+.cardFlex {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cardTumb {
+  width: 200px;
+  height: 200px;
+}
+
 /*
 #iceLeft {
   animation: clink .8s infinite ease;
