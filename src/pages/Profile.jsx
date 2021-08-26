@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 let email = '';
 if (JSON.parse(localStorage.getItem('user')) !== null) {
@@ -54,6 +55,7 @@ export default function Profile() {
           Sair
         </Button>
       </main>
+      <Footer />
     </>
   );
 }

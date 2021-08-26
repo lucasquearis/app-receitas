@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../context/Context';
 import RecipeCard from '../components/RecipeCard';
+import Footer from '../components/Footer';
 
 export default function () {
   const { drinks, drinkCategories, setDrinksCategoryFilter } = useContext(Context);
@@ -70,6 +71,7 @@ export default function () {
         }
         return false;
       })}
+      <Footer />
     </div>
   );
 }
