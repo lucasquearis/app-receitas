@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import rockGlass from '../images/rockGlass.svg';
 import IngredientsList from '../components/IngredientsList';
 import Recomendations from '../components/Recomendations';
 import StartRecipeButton from '../components/StartRecipeButton';
 import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
   const [enType, setEnType] = useState('drinks');
   const [enCasedType, setEnCasedType] = useState('Drink');
+  const [favoriteType, setFavoriteType] = useState('bebida');
   const { match, history } = props;
   const { type, id } = match.params;
   const { pathname } = history.location;
@@ -23,6 +24,7 @@ function RecipeDetails(props) {
         endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
         setEnType('meals');
         setEnCasedType('Meal');
+        setFavoriteType('comida');
       } else {
         endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
       }
@@ -52,13 +54,17 @@ function RecipeDetails(props) {
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
               <ShareButton pathname={ pathname } />
-              <object
-                type="image/svg+xml"
-                data={ blackHeartIcon }
-                data-testid="favorite-btn"
-              >
-                Adicionar a favoritos
-              </object>
+              <FavoriteButton
+                recipe={
+                  { id,
+                    type: favoriteType,
+                    area: recipe[enType][0].strArea || '',
+                    category: recipe[enType][0].strCategory,
+                    alcoholicOrNot: recipe[enType][0].strAlcoholic || '',
+                    name: recipe[enType][0][`str${enCasedType}`],
+                    image: recipe[enType][0][`str${enCasedType}Thumb`] }
+                }
+              />
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
                   ? recipe[enType][0].strCategory
@@ -68,11 +74,24 @@ function RecipeDetails(props) {
                 <IngredientsList recipe={ recipe[enType][0] } />
               </ul>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
-              <iframe title="Video" data-testid="video" src="https://www.youtube.com/embed/kJkQFVqySUw" />
+              {
+                type === 'comidas'
+                && (
+                  <iframe
+                    title="Video"
+                    data-testid="video"
+                    src={ recipe[enType][0].strYoutube }
+                  />
+                )
+              }
               {
                 recipe && <Recomendations type={ type } />
               }
-              <StartRecipeButton id={ id } type={ type } enType={ enType } />
+              <StartRecipeButton
+                id={ id }
+                type={ type }
+                enType={ enType }
+              />
             </div>
           )
           : (
