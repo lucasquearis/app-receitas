@@ -32,6 +32,8 @@ export default function FoodDetails() {
     strVideo,
   } = recipes;
 
+  console.log(recipes);
+
   const { progress, doneRecipes } = useLocalStorageRecipes();
 
   return (

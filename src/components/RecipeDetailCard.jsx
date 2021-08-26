@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
@@ -20,6 +20,8 @@ export default function RecipeDetailCard({
 }) {
   const location = useLocation();
   const currentPage = location.pathname;
+  const curretPageURL = window.location.href;
+  const [msgLink, setMsgLink] = useState('');
 
   function embedVideo(youtubeLink) {
     if (youtubeLink === null) {
@@ -27,6 +29,11 @@ export default function RecipeDetailCard({
     }
     return youtubeLink.replace('watch?v=', 'embed/');
   }
+
+  const onClickShare = () => {
+    setMsgLink('Link copiado!');
+    navigator.clipboard.writeText(`${curretPageURL}`);
+  };
 
   return (
     <section>
@@ -39,8 +46,20 @@ export default function RecipeDetailCard({
         />
         <h3 data-testid="recipe-title">{title}</h3>
         <p data-testid="recipe-category">{category}</p>
-        <img data-testid="share-btn" src={ shareIcon } alt="Compartilhar" />
-        <img data-testid="favorite-btn" src={ favIcon } alt="Favoritar" />
+        <p>{msgLink}</p>
+        <button
+          type="button"
+          style={ { border: 'none', background: 'none' } }
+          onClick={ onClickShare }
+        >
+          <img data-testid="share-btn" src={ shareIcon } alt="Compartilhar" />
+        </button>
+        <button
+          type="button"
+          style={ { border: 'none', background: 'none' } }
+        >
+          <img data-testid="favorite-btn" src={ favIcon } alt="Favoritar" />
+        </button>
       </div>
       <div>
         <h3>Ingredients</h3>
