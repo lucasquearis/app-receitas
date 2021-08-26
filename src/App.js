@@ -13,9 +13,10 @@ import ExploreOrigin from './pages/ExploreOrigin';
 import IngredientsExploreFood from './pages/IngredientsExploreFood';
 import IngredientsExploreDrink from './pages/IngredientsExploreDrink';
 import Profile from './pages/Profile';
-import RecipiesDone from './pages/RecipiesDone';
-import FavoritesRecipies from './pages/FavoritesRecipies';
+import DoneRecipes from './pages/DoneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails';
+import RecipesInProgress from './pages/RecipesInProgress';
 
 function App() {
   return (
@@ -39,8 +40,8 @@ function App() {
           component={ IngredientsExploreDrink }
         />
         <Route exact path="/perfil" component={ Profile } />
-        <Route exact path="/receitas-feitas" component={ RecipiesDone } />
-        <Route exact path="/receitas-favoritas" component={ FavoritesRecipies } />
+        <Route exact path="/receitas-feitas" component={ DoneRecipes } />
+        <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route
           exact
           path="/:type/:id"
@@ -49,7 +50,7 @@ function App() {
         <Route
           exact
           path="/:type/:id/in-progress"
-          render={ (props) => <RecipeDetails { ...props } /> }
+          render={ (props) => <RecipesInProgress { ...props } /> }
         />
       </Switch>
     </ProviderContext>
