@@ -1,10 +1,30 @@
-import React from 'react';
-import { useAreaContext } from '../../../../context/AreasProvider';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDataContext } from '../../../../context/DataProvider';
+import { fetchAreas } from '../../../../services';
 
 export default function DropDown() {
   const { areas } = useDataContext();
-  const { handleSetSelected, selected } = useAreaContext();
+  const { setLocationData, setLoading } = useDataContext();
+
+  const [selected, setSelected] = useState('');
+  const [applyArea, setApplyArea] = useState(false);
+
+  const handleSetSelected = ({ target: { value } }) => {
+    setSelected(value);
+    setApplyArea(true);
+  };
+
+  const getCategoriesData = useCallback(async () => {
+    if (applyArea) {
+      setLoading(true);
+      const { meals } = await fetchAreas(selected);
+      setLoading(false);
+      setLocationData(meals);
+      setApplyArea(false);
+    }
+  }, [applyArea, selected, setLoading, setLocationData]);
+
+  useEffect(() => { getCategoriesData(); }, [getCategoriesData]);
 
   const createButtons = () => areas.map(({ strArea }) => (
     <option
