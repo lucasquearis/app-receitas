@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Context from '.';
-import { fetchAPI } from '../services/API';
+import { fetchAPI,
+  fetchRandomRecipe } from '../services/API';
 
 import useFavorite from '../hooks/useFavorite';
 
@@ -20,6 +21,12 @@ function Provider({ children }) {
     setIsFetching(false);
   }, [inputText, radioValue]);
 
+  async function requestRandomRecipe(endpoint) {
+    setIsFetching(true);
+    setApiData([await fetchRandomRecipe(endpoint)]);
+    setIsFetching(false);
+  }
+
   const contextValue = {
     apiData,
     inputText,
@@ -33,6 +40,7 @@ function Provider({ children }) {
     setEmail,
     favoriteList,
     setFavoriteList,
+    requestRandomRecipe,
   };
 
   return (
