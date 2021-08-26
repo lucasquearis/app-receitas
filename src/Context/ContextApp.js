@@ -6,12 +6,15 @@ import foodHook from '../Hooks/FoodHook';
 
 import recipesHooks from '../Hooks/recipesHooks';
 
+import BtnFilterCategory from '../Hooks/BtnFilterCategory';
+
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes } = recipesHooks();
   const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
   const { drinks, meal } = foodHook();
+  const { categoryMeal, categoryDrinks } = BtnFilterCategory();
 
   const ContProps = {
     recipes,
@@ -23,6 +26,8 @@ export const AppProvider = ({ children }) => {
     redirect,
     drinks,
     meal,
+    categoryMeal,
+    categoryDrinks,
   };
 
   return (
