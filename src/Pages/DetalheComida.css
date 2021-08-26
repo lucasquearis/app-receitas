@@ -79,34 +79,38 @@
   outline: none;
 }
 
-.recomended {
+.drink-recomended {
   margin-left: 12px;
 }
 
-.recomended-section-infos {
+.recomended-drink-section-infos {
   display: flex;
-  justify-content: space-around;
+  overflow-x: scroll;
+  padding: 20px 5px;
+  width: 100%;
 }
 
-.recomended-info {
+.recomended-drink-info {
+  flex-shrink: 0;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
-  width: 150px;
+  margin: 0 10px;
+  width: 140px;
 }
 
-.recomended-info img {
+.recomended-drink-info img {
   border-radius: 8px;
   height: 100px;
   width: 100%;
 }
 
-.recomended-info p {
+.recomended-drink-info p {
   color: rgb(139, 139, 139);
   font-size: 16px;
   font-weight: 00;
   margin: 8px;
 }
 
-.recomended-info h5 {
+.recomended-drink-info h5 {
   margin: 8px;
 }

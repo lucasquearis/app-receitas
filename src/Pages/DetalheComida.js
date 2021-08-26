@@ -80,13 +80,13 @@ export default function DetalheComida(props) {
   };
   console.log(randomDrinks);
   const randomDrinkCard = () => (
-    <section className="recomended">
+    <section className="drink-recomended">
       <h5>Recomendadas</h5>
-      <div className="recomended-section-infos">
+      <div className="recomended-drink-section-infos">
         { randomDrinks.map((drink, index) => (
           <div
             data-testid={ `${index}-recomendation-card` }
-            className="recomended-info"
+            className="recomended-drink-info"
             key={ drink.idDrink }
           >
             <img src={ drink.strDrinkThumb } alt="foto da bebida" />
