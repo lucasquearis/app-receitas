@@ -12,6 +12,8 @@ function MealsDetails() {
     measure: [],
   });
   const [url, setUrl] = useState();
+  const [sugestions, setSugestions] = useState([]);
+  console.log(sugestions);
 
   useEffect(() => {
     const filterIngredients = () => {
@@ -25,7 +27,11 @@ function MealsDetails() {
         measure: measureList.filter((item) => item),
       });
     };
-
+    const correctUrl = () => {
+      const ytUrl = recipe.strYoutube;
+      if (ytUrl) setUrl(ytUrl.replace('watch?v=', 'embed/'));
+    };
+    correctUrl();
     filterIngredients();
   }, [recipe]);
 
@@ -33,25 +39,25 @@ function MealsDetails() {
     try {
       setLoading(true);
       const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+      const urlSugestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const fetchRecipe = async () => {
         const request = await fetch(`${urlFoods}52862`);
         const response = await request.json();
         setRecipe(response.meals[0]);
       };
+      const fetchSugestions = async () => {
+        const request = await fetch(`${urlSugestions}`); // colocar o id dinânmico
+        const { meals } = await request.json();
+        const resSugestion = meals.filter((item, key) => key < Number('6'));
+        setSugestions(resSugestion);
+      };
       setLoading(false);
+      fetchSugestions();
       fetchRecipe();
     } catch (error) {
       console.log(error);
     }
   }, []);
-
-  useEffect(() => {
-    const correctUrl = () => {
-      const ytUrl = recipe.strYoutube;
-      if (ytUrl) setUrl(ytUrl.replace('watch?v=', 'embed/'));
-    };
-    correctUrl();
-  }, [recipe]);
 
   if (loading) return <Loading />;
 

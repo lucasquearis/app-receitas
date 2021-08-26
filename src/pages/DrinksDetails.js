@@ -11,6 +11,8 @@ function DrinksDetails() {
     ingredients: [],
     measure: [],
   });
+  const [sugestions, setSugestions] = useState([]);
+  console.log(sugestions);
 
   useEffect(() => {
     const filterIngredients = () => {
@@ -32,12 +34,20 @@ function DrinksDetails() {
     try {
       setLoading(true);
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+      const urlSugestions = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
       const fetchRecipe = async () => {
         const request = await fetch(`${urlDrinks}17015`); // colocar o id dinânmico
         const response = await request.json();
         setRecipe(response.drinks[0]);
       };
+      const fetchSugestions = async () => {
+        const request = await fetch(`${urlSugestions}`); // colocar o id dinânmico
+        const { meals } = await request.json();
+        const resSugestion = meals.filter((item, key) => key < Number('6'));
+        setSugestions(resSugestion);
+      };
       setLoading(false);
+      fetchSugestions();
       fetchRecipe();
     } catch (error) {
       console.log(error);
