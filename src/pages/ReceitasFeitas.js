@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Button from '../components/Button';
 
 function ReceitasFeitas() {
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
+
+  const handleClickFilteredRecipes = (type) => {
+    if(type) {
+      const recipes = doneRecipes.filter((recipe) => recipe.type === type);
+      setFilteredRecipes(recipes);
+    } else {
+      setFilteredRecipes(doneRecipes);
+    }
+  }
+
+  console.log(filteredRecipes);
+
   return (
     <div>
       <Header title="Receitas Feitas" renderSearch={ false } />
@@ -10,19 +24,22 @@ function ReceitasFeitas() {
         <div className="button-container">
           <Button
             text="All"
-            onClick={ () => { }}
+            onClick={ () => handleClickFilteredRecipes() }
             testId="filter-by-all-btn"
-            />
+          />
           <Button
             text="Food"
-            onClick={ () => { }}
+            onClick={ () => handleClickFilteredRecipes('comida') }
             testId="filter-by-food-btn"
-            />
+          />
           <Button
             text="Drinks"
-            onClick={ () => { }}
+            onClick={ () => handleClickFilteredRecipes('bebida') }
             testId="filter-by-drink-btn"
-            />
+          />
+        </div>
+        <div>
+
         </div>
       </main>
     </div>
