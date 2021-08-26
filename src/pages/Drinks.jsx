@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
@@ -17,6 +17,7 @@ export default function Drinks() {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const location = useLocation();
   const currentPage = location.pathname;
+  const history = useHistory();
   const [redirectToDetails, setRedirectToDetails] = useState(false);
 
   const {
@@ -41,6 +42,10 @@ export default function Drinks() {
     } else {
       setFilterCategory('All');
     }
+  };
+
+  const handleClickCard = (id) => {
+    history.push(`${currentPage}/${id}`);
   };
 
   return (
@@ -74,7 +79,8 @@ export default function Drinks() {
             key={ drink.idDrink }
             title={ drink.strDrink }
             thumb={ drink.strDrinkThumb }
-            id={ drink.idDrink }
+            onClick={ () => handleClickCard(drink.idDrink) }
+            type="recipe"
             index={ index }
           />
         ))
