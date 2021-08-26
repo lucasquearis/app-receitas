@@ -14,7 +14,10 @@ function ShareIcon({ onClick, dataTestId, url }) {
     onClick();
   };
   return (
-    <button onClick={ handleClick } type="button">
+    <button
+      type="button"
+      onClick={ handleClick }
+    >
       <Image
         data-testid={ dataTestId }
         className="header-icon"
