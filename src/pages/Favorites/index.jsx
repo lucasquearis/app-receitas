@@ -18,7 +18,15 @@ function Favorites() {
     <div className="favorite-page">
       <Header title="Receitas Favoritas" renderSearchIcon={ false } />
       <Filter setFilteredList={ setFilteredList } list={ favoriteList } />
-      {filteredList.map((item) => <FavoriteCard key={ item.id } item={ item } />)}
+      {
+        filteredList.map((item, index) => (
+          <FavoriteCard
+            key={ item.id }
+            item={ item }
+            index={ index }
+          />
+        ))
+      }
 
     </div>
   );

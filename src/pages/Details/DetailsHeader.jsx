@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Image } from 'react-bootstrap';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import FavoriteIcon from '../../components/Icons/FavoriteIcon';
@@ -21,8 +20,8 @@ function DetailsHeader({ title, subtitle, favorite }) {
       </div>
       <div className="header-icons-container">
         <div className="buttons-container">
-          <ShareIcon onClick={ handleClick } />
-          <FavoriteIcon recipe={ favorite } />
+          <ShareIcon dataTestId="share-btn" onClick={ handleClick } />
+          <FavoriteIcon dataTestId="favorite-btn" recipe={ favorite } />
         </div>
         {isCopied && <p className="copied-msg">Link copiado!</p>}
       </div>
@@ -42,7 +41,6 @@ DetailsHeader.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
   }).isRequired,
-  url: PropTypes.string.isRequired,
 };
 
 export default DetailsHeader;

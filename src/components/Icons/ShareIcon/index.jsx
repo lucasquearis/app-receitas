@@ -6,16 +6,17 @@ import PropTypes from 'prop-types';
 
 import share from '../../../images/shareIcon.svg';
 
-function ShareIcon({ onClick }) {
+function ShareIcon({ onClick, dataTestId, url }) {
   const { pathname } = useLocation();
   const handleClick = () => {
-    const URL = `http://localhost:3000${pathname}`;
-    copy(URL);
+    const copyUrl = url ? `http://localhost:3000${url}` : `http://localhost:3000${pathname}`;
+    copy(copyUrl);
     onClick();
   };
   return (
-    <button onClick={ handleClick } data-testid="share-btn" type="button">
+    <button onClick={ handleClick } type="button">
       <Image
+        data-testid={ dataTestId }
         className="header-icon"
         src={ share }
         alt="share-icon"
@@ -26,10 +27,13 @@ function ShareIcon({ onClick }) {
 
 ShareIcon.defaultProps = {
   onClick: () => {},
+  url: null,
 };
 
 ShareIcon.propTypes = {
   onClick: PropTypes.func,
+  dataTestId: PropTypes.string.isRequired,
+  url: PropTypes.string,
 };
 
 export default ShareIcon;

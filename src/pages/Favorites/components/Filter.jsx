@@ -13,9 +13,9 @@ function Filter({ list, setFilteredList }) {
   };
   return (
     <div className="filters-container">
-      <Button onClick={ () => filter('all') }>All</Button>
-      <Button onClick={ () => filter('comida') }>Food</Button>
-      <Button onClick={ () => filter('bebida') }>Drinks</Button>
+      <Button data-testid="filter-by-all-btn" onClick={ () => filter('all') }>All</Button>
+      <Button data-testid="filter-by-food-btn" onClick={ () => filter('comida') }>Food</Button>
+      <Button data-testid="filter-by-drink-btn" onClick={ () => filter('bebida') }>Drinks</Button>
     </div>
   );
 }

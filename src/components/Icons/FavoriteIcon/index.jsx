@@ -6,7 +6,7 @@ import Context from '../../../context';
 import heart from '../../../images/whiteHeartIcon.svg';
 import fullHeart from '../../../images/blackHeartIcon.svg';
 
-function FavoriteIcon({ recipe }) {
+function FavoriteIcon({ recipe, dataTestId }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const { favoriteList, setFavoriteList } = useContext(Context);
 
@@ -18,7 +18,7 @@ function FavoriteIcon({ recipe }) {
   return (
     <button type="button" onClick={ () => setFavoriteList(recipe) }>
       <Image
-        data-testid="favorite-btn"
+        data-testid={ dataTestId }
         className="header-icon"
         src={ isFavorite ? fullHeart : heart }
         alt="heart-icon"
@@ -37,6 +37,7 @@ FavoriteIcon.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string,
   }).isRequired,
+  dataTestId: PropTypes.string.isRequired,
 };
 
 export default FavoriteIcon;
