@@ -18,8 +18,8 @@ function ReceitasFeitas() {
     SetFinishRecipes(foodsEdrinks);
   }, []);
 
-  function onCopy() {
-
+  function onCopy(type, id) {
+    copy(`http://localhost:3000/${type}/${id}`);
   }
 
   function onLink(type, id) {
