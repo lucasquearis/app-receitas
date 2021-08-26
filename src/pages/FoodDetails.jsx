@@ -6,20 +6,19 @@ function FoodDetails() {
   const index = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
-  const [setGetRecipe] = useState({});
+  const [getRecipe, setGetRecipe] = useState({});
 
   useEffect(() => {
     try {
       const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        console.log(getHistory);
         const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
-        console.log(pathname);
         const request = await fetch(`${goURL}${id}`);
         const response = await request.json();
-        console.log(response);
-        setGetRecipe(response);
+        const resolve = await response.meals[0];
+        console.log(resolve);
+        setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
@@ -30,7 +29,12 @@ function FoodDetails() {
   return (
     <div>
       <div>
-        <img alt="foto da comida" data-testid="recipe-photo" />
+        <img
+          alt="foto da comida"
+          data-testid="recipe-photo"
+          src={ getRecipe.strMealThumb }
+          style={ { width: '10rem' } }
+        />
       </div>
       <div>
         <h2 data-testid="recipe-title">titulo</h2>

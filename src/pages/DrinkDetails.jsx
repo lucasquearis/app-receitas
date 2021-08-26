@@ -6,7 +6,7 @@ function DrinkDetails() {
   const index = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
-  const [setGetRecipe] = useState({});
+  const [ getRecipe, setGetRecipe] = useState({});
 
   useEffect(() => {
     try {
@@ -18,8 +18,9 @@ function DrinkDetails() {
         console.log(pathname);
         const request = await fetch(`${goURL}${id}`);
         const response = await request.json();
-        console.log(response);
-        setGetRecipe(response);
+        const resolve = await response.drinks[0];
+        console.log(resolve);
+        setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
@@ -29,7 +30,7 @@ function DrinkDetails() {
   return (
     <div>
       <div>
-        <img alt="foto da bebida" data-testid="recipe-photo" />
+        <img alt="foto da bebida" data-testid="recipe-photo" src={ getRecipe.strDrinkThumb } style={ { width: '10rem' } }/>
       </div>
       <div>
         <h2 data-testid="recipe-title">titulo</h2>
