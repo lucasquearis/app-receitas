@@ -8,7 +8,7 @@ import renderWithReduxAndRouter from '../helpers/renderWithReduxAndRouter';
 const drinks = 'drinks-bottom-btn';
 const profile = 'profile-top-btn';
 
-describe('Testes no componente Footer', () => {
+describe('Testes no componente Foods', () => {
   it('verifica se esta na pagina de comidas', () => {
     const { history } = renderWithReduxAndRouter(<App />);
     history.push('/comidas');

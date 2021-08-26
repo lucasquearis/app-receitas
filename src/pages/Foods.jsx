@@ -4,6 +4,7 @@ import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
 import Footer from '../components/Footer';
 import '../styles/Footer.css';
+import RecipesCard from '../components/RecipesCard';
 
 function Foods() {
   return (
@@ -15,6 +16,7 @@ function Foods() {
         dataId="search-top-btn"
         className="img-search"
       />
+      <RecipesCard />
       <Footer />
     </div>
   );
