@@ -29,7 +29,7 @@ function Routes() {
       />
       <Route
         exact
-        path="/bebidas/details"
+        path="/bebidas/:recipeID"
         render={ (props) => <RecipesDetails { ...props } type="food" /> }
       />
       <Route exact path="/explorar" component={ Explore } />

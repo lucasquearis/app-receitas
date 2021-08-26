@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import getCocktailByID from '../Services/fetchCocktalis';
+import getMealByID from '../Services/fetchMeals';
 
 import RecipeDetailHeader from '../Components/RecipeDetailHeader';
 import RecipeDetailIngredients from '../Components/RecipeDetailIngredients';
@@ -12,26 +16,17 @@ import './RecipesDetails.css';
 
 function RecipesDetails({ type }) {
   const [recipe, setRecipe] = useState({});
+  const { recipeID } = useParams();
 
   useEffect(() => {
     if (type === 'food') {
-      const getFoodRecipe = async () => {
-        const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772';
-        const { meals } = await fetch(endpoint).then((data) => data.json());
-        setRecipe(meals[0]);
-      };
-      getFoodRecipe();
+      getMealByID(recipeID).then((data) => setRecipe(data));
     }
 
     if (type === 'drink') {
-      const getDrinkRecipe = async () => {
-        const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007';
-        const { drinks } = await fetch(endpoint).then((data) => data.json());
-        setRecipe(drinks[0]);
-      };
-      getDrinkRecipe();
+      getCocktailByID(recipeID).then((data) => setRecipe(data));
     }
-  }, [type]);
+  }, [type, recipeID]);
 
   if (recipe !== {}) {
     return (
@@ -48,7 +43,7 @@ function RecipesDetails({ type }) {
         <RecipeDetailInstructions recipe={ recipe } />
         {(type === 'food') && <RecipeDetailVideo videoSource={ recipe.strYoutube } />}
         <RecipeDetailsRecomendations type={ type } />
-        <RecipeDetailButton />
+        <RecipeDetailButton recipeID={ recipeID } />
       </div>
     );
   }

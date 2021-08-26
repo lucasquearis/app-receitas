@@ -13,7 +13,6 @@ function RecipeDetailVideo({ videoSource }) {
   return (
     <div className="videoContainer">
       <h3>Video</h3>
-      {console.log(videoSource)}
       <iframe
         width="100%"
         src={ `https://www.youtube.com/embed/${videoID}` }
