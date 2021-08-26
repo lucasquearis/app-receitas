@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function Explore() {
   return (
-    <p>Explore</p>
+    <div>
+      <Header title="Explorar" hideSearch />
+      <p>Explore</p>
+    </div>
   );
 }
 

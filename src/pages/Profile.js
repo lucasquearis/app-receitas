@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function Profile() {
   return (
-    <p>Profile</p>
+    <div>
+      <Header title="Perfil" hideSearch />
+      <p>Profile</p>
+    </div>
   );
 }
 

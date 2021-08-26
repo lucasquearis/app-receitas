@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function DoneRecipes() {
   return (
-    <p>Done Recipes</p>
+    <div>
+      <Header title="Receitas Feitas" hideSearch />
+      <p>Done Recipes</p>
+    </div>
   );
 }
 
