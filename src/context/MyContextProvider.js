@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from '.';
 
 export default function Provider({ children }) {
+  const [search, setSearch] = useState(false);
+  const MyContextProvider = {
+    search,
+    setSearch,
+  };
+
   return (
-    <MyContext.Provider value={ {} }>
+
+    <MyContext.Provider value={ MyContextProvider }>
       {children}
     </MyContext.Provider>
   );
