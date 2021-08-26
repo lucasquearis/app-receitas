@@ -21,13 +21,20 @@ function Checkbox({ recipe }) {
   return (
     <section>
       <h3>Ingredientes</h3>
-      <ul>
+      <div>
         {ingredients.map((ingredient, index) => (
-          <li key={ index } data-testid={ `${index}-ingredient-step` }>
-            {`${ingredient} - ${measures[index]}`}
-          </li>
+          <div key={ index } data-testid={ `${index}-ingredient-step` }>
+            <input
+              type="checkbox"
+              id={ ingredient }
+              name={ ingredient }
+            />
+            <label htmlFor={ ingredient }>
+              {`${ingredient} - ${measures[index]}`}
+            </label>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
