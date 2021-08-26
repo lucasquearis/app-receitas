@@ -3,17 +3,17 @@ import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/Login';
 import MainFood from '../pages/MainFood';
 import MainDrink from '../pages/MainDrink';
-import Explore from './Explore';
-import ExploreFood from './ExploreFood';
-import ExploreDrink from './ExploreDrink';
+import Explore from '../pages/Explore';
+import ExploreFood from '../pages/ExploreFood';
+import ExploreDrink from '../pages/ExploreDrink';
 import FoodPerIngredient from '../pages/FoodPerIngredient';
 import DrinkPerIngredient from '../pages/DrinkPerIngredient';
 import ExplorePerArea from '../pages/ExplorePerArea';
 import Profile from '../pages/Profile';
-import CookedRecipies from './CookedRecipies';
-import FavoriteRecipies from './FavoriteRecipies';
 import InProgressDrink from '../pages/InProgressDrink';
 import InProgressFood from '../pages/InProgressFood';
+import CookedRecipies from '../pages/CookedRecipies';
+import FavoriteRecipies from '../pages/FavoriteRecipies';
 
 function Routes() {
   return (
@@ -28,11 +28,7 @@ function Routes() {
         path="/comidas/{id-da-receita}/in-progress"
         component={ InProgressFood }
       />
-      <Route
-        exact
-        path="/bebidas/{id-da-receita}/in-progress"
-        component={ InProgressDrink }
-      />
+      <Route exact path="/bebidas/{id-da-receita}/in-progress" component={ InProgressDrink } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
       <Route exact path="/explorar/bebidas" component={ ExploreDrink } />

@@ -1,3 +1,8 @@
+.buttons {
+  background-color: transparent;
+  border: none;
+}
+
 .footer {
   background-color: darkgoldenrod;
   bottom: 0;
@@ -7,9 +12,5 @@
   padding-top: 5px;
   position: fixed;
   width: 100%;
-}
-
-.buttons {
-  background-color: transparent;
-  border: none;
+  left: 0;
 }

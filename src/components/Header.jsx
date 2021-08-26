@@ -1,28 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { string } from 'prop-types';
+import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-const Header = ({ title }) => {
-  const renderButton = () => (
-    <button type="button">
-      <img
-        data-testid="search-top-btn"
-        src={ searchIcon }
-        alt="iconProfile"
-      />
-    </button>
-  );
-  return (
-    <div>
-      <header>
-        <button type="button">
+function Header({ title }) {
+  const [showInput, setShowInput] = useState(true);
+
+  const handleClick = () => (
+    showInput ? setShowInput(false) : setShowInput(true));
+
+  const renderButton = () => {
+    if (showInput) {
+      return (
+        <>
+          <button type="button" onClick={ handleClick }>
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="iconProfile"
+            />
+          </button>
+          <input type="text" data-testid="search-input" hidden={ showInput } />
+        </>
+      );
+    }
+    if (showInput) {
+      return (
+        <button type="button" onClick={ handleClick }>
           <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
+            data-testid="search-top-btn"
+            src={ searchIcon }
             alt="iconProfile"
           />
         </button>
+      );
+    }
+  };
+
+  return (
+    <div>
+      <header>
+        <Link to="/perfil">
+          <button type="button">
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="iconProfile"
+            />
+          </button>
+        </Link>
         <h1 data-testid="page-title">{ title }</h1>
         {
           title !== 'Explorar'
@@ -37,7 +64,7 @@ const Header = ({ title }) => {
       </header>
     </div>
   );
-};
+}
 
 Header.propTypes = {
   title: string.isRequired,

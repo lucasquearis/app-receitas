@@ -1,10 +1,12 @@
 import React from 'react';
-import Header from './Header';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Explore() {
   return (
     <div>
       <Header title="Explorar" />
+      <Footer />
     </div>
   );
 }
