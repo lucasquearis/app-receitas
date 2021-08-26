@@ -11,7 +11,6 @@ function App() {
   return (
     <Switch>
       <div className="containerBoby">
-
         <Route exact path="/" component={ Login } />
         <Route path="/comidas" component={ Comidas } />
       </div>
