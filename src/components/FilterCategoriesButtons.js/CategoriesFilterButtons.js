@@ -5,10 +5,12 @@ import { fetchApi } from '../SearchBar/utils';
 
 const CategoriesFilterButtons = () => {
   const [categories, setCategories] = useState([]);
-  const [itemType, setItemType] = useState('');
+  const [erro, setErro] = useState(false);
+  const [toggled, setToggled] = useState(false);
   const [apiUrl, setApiUrl] = useState('');
   const dispatch = useDispatch();
   const categoriesQuantity = 5;
+
   useEffect(() => {
     const path = window.location.pathname;
     let type;
@@ -23,39 +25,51 @@ const CategoriesFilterButtons = () => {
     const fetchCategories = async () => {
       const response = await fetchApi(`https://www.${type}.com/api/json/v1/1/list.php?c=list`);
       const responseKey = Object.keys(response);
-      if (responseKey[0] === 'meals'
-        && response[responseKey].length > categoriesQuantity) {
+      if (response[responseKey].length > categoriesQuantity) {
         const categoriesArray = response[responseKey].slice(0, categoriesQuantity);
         setCategories(categoriesArray);
-        setItemType('meals');
-      } else {
-        const categoriesArray = response[responseKey].slice(0, categoriesQuantity);
-        setCategories(categoriesArray);
-        setItemType('drinks');
       }
     };
     fetchCategories();
   }, []);
 
-  const handleClick = async (category, apiURl) => {
+  const fetchItems = async (apiURL) => {
     dispatch(actionRequestItems());
-    const response = await fetchApi(`https://www.${apiURl}.com/api/json/v1/1/filter.php?c=${category}`);
-    const responseKey = Object.keys(response);
-    dispatch(actionRequestSuccess(response[responseKey]));
+    try {
+      const response = await fetchApi(`https://www.${apiURL}.com/api/json/v1/1/search.php?s=`);
+      const responseKey = Object.keys(response);
+      dispatch(actionRequestSuccess(response[responseKey]));
+      setToggled(false);
+    } catch (error) {
+      setErro(true);
+      console.log(`Erro ao carregar as primeiras receitas: ${error}`);
+    }
   };
 
+  const handleClick = async (category, apiURl, toggle) => {
+    if (!toggle) {
+      dispatch(actionRequestItems());
+      const response = await fetchApi(`https://www.${apiURl}.com/api/json/v1/1/filter.php?c=${category}`);
+      const responseKey = Object.keys(response);
+      dispatch(actionRequestSuccess(response[responseKey]));
+      setToggled(true);
+    } else {
+      fetchItems(apiUrl);
+    }
+  };
+
+  if (erro) return <p>Algo deu errado. Tente novamente.</p>;
   return (
     <div>
       {
         categories.map((categorie, index) => {
-          // console.log(categories);
           const name = Object.values(categorie);
           return (
             <button
               key={ index }
               data-testid={ `${categorie.strCategory}-category-filter` }
               type="button"
-              onClick={ () => handleClick(categorie.strCategory, apiUrl) }
+              onClick={ () => handleClick(categorie.strCategory, apiUrl, toggled) }
             >
               {name[0]}
             </button>);
