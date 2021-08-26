@@ -5,7 +5,7 @@ import { GET_FOODS_SUCCESS,
 const INICIAL_STATE = {
   meals: [],
   drinks: [],
-  details: [],
+  details: {},
   search: {
     type: '',
     entry: '',
