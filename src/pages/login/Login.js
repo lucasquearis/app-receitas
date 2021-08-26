@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionEmail } from '../../Redux/actions/user';
+import './Login.css';
+import logo from './salad.png';
 
 class Login extends React.Component {
   constructor(props) {
@@ -57,10 +59,14 @@ class Login extends React.Component {
   render() {
     const { email, password, button } = this.state;
     return (
-      <div>
+      <div className="styleLogin">
+        <img src={ logo } className="imageLogoIcon" alt="Logo" />
+        <h2>Trybe Recipes</h2>
+        <h4 className="textLogin">Login</h4>
         <form>
           <label htmlFor="input-email">
             <input
+              className="imput"
               type="email"
               data-testid="email-input"
               name="email"
@@ -72,6 +78,7 @@ class Login extends React.Component {
           </label>
           <label htmlFor="input-password">
             <input
+              className="imput"
               type="password"
               data-testid="password-input"
               name="password"
@@ -83,6 +90,7 @@ class Login extends React.Component {
           </label>
         </form>
         <button
+          className="btn btn-warning btnButon"
           type="submit"
           data-testid="login-submit-btn"
           onClick={ (event) => this.submitLogin(event) }
@@ -90,6 +98,7 @@ class Login extends React.Component {
         >
           Entrar
         </button>
+        <p className="group7">By Group 07</p>
       </div>
     );
   }
