@@ -6,7 +6,8 @@ import {
   addIngInProgressStorage,
   rmvIngFromProgressStorage,
   isDrinkInLocalStorage,
-} from '../helpers/inProgressLocalStorage';
+  saveDoneRecipe,
+} from '../helpers';
 import './css/DrinksInProgress.css';
 
 function DrinksInProgress() {
@@ -55,6 +56,11 @@ function DrinksInProgress() {
     setBtnDisable(!ingList.every(({ checked }) => checked));
   }
 
+  function doneRecipeHandler() {
+    saveDoneRecipe(rcp, 'drink');
+    history.push('/receitas-feitas');
+  }
+
   useEffect(isFinished, [rcp]);
 
   return (
@@ -77,7 +83,7 @@ function DrinksInProgress() {
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ btnDisable }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ doneRecipeHandler }
       >
         Finalizar
       </button>
