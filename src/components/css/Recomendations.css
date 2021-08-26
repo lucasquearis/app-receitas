@@ -1,0 +1,31 @@
+.recomendations-container {
+  width: 100%;
+}
+
+.recomendations-cards {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.recipe-card {
+  height: 300px;
+  min-width: 48%;
+  overflow: hidden;
+  padding: 2%;
+  width: 50%;
+}
+
+.card-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 40%;
+  width: 100%;
+}
+
+.card-info {
+  height: 60%;
+  width: 100%;
+}
