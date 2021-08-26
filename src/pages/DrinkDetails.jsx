@@ -4,11 +4,13 @@ import { Spinner } from 'react-bootstrap';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import { getDataDetails } from '../services/api';
 import ingredientsDetails from '../helpers/getIngredients';
+import useLocalStorageRecipes from '../hooks/useLocalStorageRecipes';
 
 export default function FoodDetails() {
   const { id } = useParams();
 
   const [recipes, setRecipes] = useState({ id });
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,6 +29,8 @@ export default function FoodDetails() {
     strAlcoholic,
     strVideo,
   } = recipes;
+
+  const { progress, doneRecipes } = useLocalStorageRecipes();
 
   return (
     <div>
@@ -50,6 +54,8 @@ export default function FoodDetails() {
           }
           instructions={ strInstructions }
           video={ strVideo }
+          doneRecipe={ doneRecipes }
+          progressRecipe={ progress }
         />
       )}
     </div>

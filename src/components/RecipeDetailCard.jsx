@@ -14,6 +14,9 @@ export default function RecipeDetailCard({
   ingredients,
   instructions,
   video,
+  doneRecipe,
+  progressRecipe,
+  handleClick,
 }) {
   const location = useLocation();
   const currentPage = location.pathname;
@@ -24,6 +27,7 @@ export default function RecipeDetailCard({
     }
     return youtubeLink.replace('watch?v=', 'embed/');
   }
+
   return (
     <section>
       <div>
@@ -65,13 +69,17 @@ export default function RecipeDetailCard({
           ? <FoodRecomendations />
           : <DrinkRecomendations /> }
       </div>
-      <Button
-        style={ { position: 'fixed', bottom: '0', width: '100%' } }
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        Iniciar Receita
-      </Button>
+      {!doneRecipe ? (
+        <Button
+          style={ { position: 'fixed', bottom: '0', width: '100%' } }
+          data-testid="start-recipe-btn"
+          type="button"
+          onClick={ handleClick }
+        >
+          {progressRecipe ? 'Continuar Receita' : 'Iniciar Receita'}
+        </Button>
+
+      ) : null}
     </section>
   );
 }
@@ -81,8 +89,15 @@ RecipeDetailCard.propTypes = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
-  video: PropTypes.string.isRequired,
+  video: PropTypes.string,
   ingredients: PropTypes.arrayOf(
-    PropTypes.string,
+    PropTypes.object,
   ).isRequired,
+  progressRecipe: PropTypes.bool.isRequired,
+  doneRecipe: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
+
+RecipeDetailCard.defaultProps = {
+  video: null,
 };
