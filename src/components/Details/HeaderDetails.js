@@ -1,14 +1,14 @@
 import React from 'react';
-import { string } from 'prop-types';
-import Button from '../Button';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import { string, objectOf } from 'prop-types';
+import ShareButton from '../ShareButton';
+import FavoriteButton from '../FavoriteButton';
 
 export default function HeaderDetails(props) {
   const {
     title,
     photo,
     category,
+    data,
   } = props;
 
   return (
@@ -19,14 +19,8 @@ export default function HeaderDetails(props) {
         <h4 data-testid="recipe-category">{ category }</h4>
       </div>
       <div>
-        <Button
-          testId="share-btn"
-          name={ <img src={ shareIcon } alt="share" /> }
-        />
-        <Button
-          testId="favorite-btn"
-          name={ <img src={ whiteHeartIcon } alt="favorite" /> }
-        />
+        <ShareButton recipeDetails={ data } />
+        <FavoriteButton recipeDetails={ data } />
       </div>
     </div>
   );
@@ -36,4 +30,5 @@ HeaderDetails.propTypes = {
   title: string.isRequired,
   photo: string.isRequired,
   category: string.isRequired,
+  data: objectOf.isRequired,
 };

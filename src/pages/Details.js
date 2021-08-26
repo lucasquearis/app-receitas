@@ -59,6 +59,7 @@ export default function Details() {
         title={ detailsData.strMeal || detailsData.strDrink }
         category={ `${detailsData.strAlcoholic || detailsData.strCategory}` }
         photo={ detailsData.strMealThumb || detailsData.strDrinkThumb }
+        data={ detailsData }
       />
       <Ingredients data={ detailsData } />
       <Instructions instructions={ detailsData.strInstructions } />
