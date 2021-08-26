@@ -68,5 +68,11 @@ export const fetchCategoriesDrinks = async (name) => {
 export const copyToClipboard = () => {
   const myUrl = window.location.href;
   localStorage.setItem('clipboard', JSON.stringify(myUrl));
-  return true;
+};
+
+export const favoriteRecipe = (bool) => {
+  if (!bool) {
+    return true;
+  }
+  return false;
 };

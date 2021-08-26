@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
-import { copyToClipboard } from '../services';
+import { copyToClipboard, favoriteRecipe } from '../services';
 import DrinksCards from './DrinksCard';
 
 function FoodInfo() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { details, drinks } = useSelector((state) => state.foodsAndDrinks);
-  const [copy, setCopy] = useState(false);
+  const [favorite, setFavorite] = useState(false);
   const sixRecomendations = 6;
 
   useEffect(() => {
@@ -27,6 +30,10 @@ function FoodInfo() {
   const objKeyFood = Object.keys(foodDetails);
   const filterObjFood = objKeyFood.filter((obj) => obj.includes('strIngredient'));
   const otherFilterObjFood = filterObjFood.filter((obj) => foodDetails[obj] !== '');
+
+  const favoriteHeart = <img src={ blackHeartIcon } alt="black heart" />;
+  const notFavoriteHeart = <img src={ whiteHeartIcon } alt="white-heart" />;
+  const shareTag = <img src={ shareIcon } alt="" />;
   return (
     <section>
       <img
@@ -36,13 +43,19 @@ function FoodInfo() {
       />
       <h2 data-testid="recipe-title">{ foodDetails.strMeal }</h2>
       <button
-        onClick={ () => setCopy(copyToClipboard) }
+        onClick={ copyToClipboard }
         type="button"
         data-testid="share-btn"
       >
-        { !copy ? 'Compartilhar' : 'Link copiado' }
+        { shareTag }
       </button>
-      <button type="button" data-testid="favorite-btn">Favorito</button>
+      <button
+        type="button"
+        data-testid="favorite-btn"
+        onClick={ () => setFavorite(favoriteRecipe(favorite)) }
+      >
+        { favorite ? favoriteHeart : notFavoriteHeart }
+      </button>
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
       <ul>
         { otherFilterObjFood.map((ingredient, index) => (
