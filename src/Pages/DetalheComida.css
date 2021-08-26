@@ -1,6 +1,6 @@
 .food-image {
-  width: 100%;
   height: 35vh;
+  width: 100%;
 }
 
 .title-info {
@@ -47,8 +47,8 @@
 
 .instructions-section p {
   background-color: rgb(216, 216, 216);
-  text-align: left;
   padding: 20px;
+  text-align: left;
   width: 95%;
 }
 
@@ -57,17 +57,17 @@
 }
 
 .video-section iframe {
-  width: 95%;
   height: 35vh;
+  width: 95%;
 }
 
 .start-recipe-btn {
-  background-color: rgb(0, 255, 0);
+  background-color: lime;
   border: none;
   font-size: 18px;
   font-weight: 600;
-  margin: 35px 25px;
   height: 55px;
+  margin: 35px 25px;
   width: 85%;
 }
 
