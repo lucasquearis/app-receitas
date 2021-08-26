@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DrinksRecipeInProgress() {
+function DrinksInProgress() {
   const ingredientsList = ['tomate', 'azeite', 'sal'];
 
   const handleCheked = () => (
@@ -46,4 +46,4 @@ function DrinksRecipeInProgress() {
   );
 }
 
-export default DrinksRecipeInProgress;
+export default DrinksInProgress;
