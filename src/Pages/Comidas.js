@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as ComidasAPI from '../service/ComidasAPI';
 import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
 export default function Comidas() {
-  const [comidas, setComidas] = useState([]);
-  const fetchFoods = async () => {
-    const maxFood = 12;
-    const results = await ComidasAPI.buscarComidaPorNome('');
-    const comidasFiltered = results.filter((result, index) => index < maxFood);
-    setComidas(comidasFiltered);
-  };
+  const obj = [];
+  const [comidas, setComidas] = useState(obj);
 
-  fetchFoods();
+  useEffect(() => {
+    const fetchFoods = async () => {
+      const maxFood = 12;
+      const results = await ComidasAPI.buscarComidaPorNome('');
+      setComidas(results.filter((result, index) => index < maxFood));
+    };
+    fetchFoods();
+    if (comidas === obj) return;
+    setComidas(obj);
+  }, [obj]);
+
+  // fetchFoods();
   if (comidas.length <= 0) {
     return (
       <section>
@@ -34,6 +40,7 @@ export default function Comidas() {
           ),
         )
       }
+      { console.log(comidas) }
       <Footer />
     </section>
   );
