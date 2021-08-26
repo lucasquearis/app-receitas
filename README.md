@@ -849,10 +849,7 @@ Todas as [rotas](#rotas) serão verificadas. Os ícones podem ser encontrados em
   ```
 
 ### 12 - Desenvolva o botão de busca que, ao ser clicado, a barra de busca deve aparecer. O mesmo serve para escondê-la
-
-  O que será verificado:
-  ```
-  - Ao clicar no botão de busca pela primeira vez a barra de busca aparece
+"la primeira vez a barra de busca aparece
   - Ao clicar no botão de busca pela segunda vez a barra de busca desaparece
   ```
 
