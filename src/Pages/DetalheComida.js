@@ -53,7 +53,7 @@ export default function DetalheComida(props) {
 
     getFood();
     getRandomDrink();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return (

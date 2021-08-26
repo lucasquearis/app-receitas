@@ -60,7 +60,7 @@ export default function DetalheBebida(props) {
 
     getDrink();
     getRandomFood();
-  }, []);
+  }, [id]);
 
   const randomFoodCard = () => (
     <section className="food-recomended">
