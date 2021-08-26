@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import copy from 'clipboard-copy';
 import { useLocation } from 'react-router-dom';
 
@@ -11,8 +12,12 @@ function ShareIcon() {
     copy(URL);
   };
   return (
-    <button onClick={ handleClick } type="button">
-      <img src={ share } alt="share-icon" />
+    <button onClick={ handleClick } data-testid="share-btn" type="button">
+      <Image
+        className="header-icon"
+        src={ share }
+        alt="share-icon"
+      />
     </button>
   );
 }

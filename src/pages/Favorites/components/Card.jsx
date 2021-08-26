@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 
 import ShareIcon from '../../../components/Icons/ShareIcon';
-import heart from '../../../images/whiteHeartIcon.svg';
-import fullHeart from '../../../images/blackHeartIcon.svg';
+import FavoriteIcon from '../../../components/Icons/FavoriteIcon';
 import './Card.css';
 
 function FavoriteCard({ item }) {
@@ -24,6 +23,7 @@ function FavoriteCard({ item }) {
           <h5 className="card-name">{item.name}</h5>
           <div className="icons-container">
             <ShareIcon />
+            <FavoriteIcon recipe={ item } />
           </div>
         </div>
       </div>
