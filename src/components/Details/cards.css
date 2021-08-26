@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 0;
+}
+
+.card {
+  height: auto;
+  margin-right: 5px;
+  min-width: 49.6%;
+  width: 50%;
+}
