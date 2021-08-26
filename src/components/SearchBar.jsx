@@ -5,6 +5,7 @@ import {
   fetchNameAPI,
   fetchLetterAPI,
 } from '../redux/actions/mainActions';
+import '../styles/SearchBar.css';
 
 function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
@@ -41,12 +42,13 @@ function SearchBar() {
       }
       return requestLetter(result);
     }
+    console.log(window.location.pathname);
   };
 
   const { result } = search;
   return (
-    <div>
-      <form>
+    <div className="div-search-bar">
+      <form className="search-bar-form">
         <input
           value={ result }
           name="result"
@@ -54,44 +56,48 @@ function SearchBar() {
           type="text"
           data-testid="search-input"
           className="toggle-input"
+          placeholder="Procure por alguma receita..."
         />
-        <label htmlFor="ingredient-radio">
-          Ingrediente
-          <input
-            type="radio"
-            value="ingredient"
-            name="type"
-            data-testid="ingredient-search-radio"
-            id="ingredient-search-radio"
-            onChange={ handleChange }
-          />
-        </label>
-        <label htmlFor="dish-name">
-          Nome do prato
-          <input
-            type="radio"
-            value="name"
-            name="type"
-            onChange={ handleChange }
-            id="name-search-radio"
-            data-testid="name-search-radio"
-          />
-        </label>
-        <label htmlFor="first-letter">
-          Primeira letra
-          <input
-            type="radio"
-            value="letter"
-            name="type"
-            onChange={ handleChange }
-            id="first-letter-search-radio"
-            data-testid="first-letter-search-radio"
-          />
-        </label>
+        <form className="radio-form">
+          <label htmlFor="ingredient-radio">
+            <input
+              type="radio"
+              value="ingredient"
+              name="type"
+              data-testid="ingredient-search-radio"
+              id="ingredient-search-radio"
+              onChange={ handleChange }
+            />
+            Ingrediente
+          </label>
+          <label htmlFor="dish-name">
+            <input
+              type="radio"
+              value="name"
+              name="type"
+              onChange={ handleChange }
+              id="name-search-radio"
+              data-testid="name-search-radio"
+            />
+            Nome do prato
+          </label>
+          <label htmlFor="first-letter">
+            <input
+              type="radio"
+              value="letter"
+              name="type"
+              onChange={ handleChange }
+              id="first-letter-search-radio"
+              data-testid="first-letter-search-radio"
+            />
+            Primeira letra
+          </label>
+        </form>
         <button
           data-testid="exec-search-btn"
           type="submit"
           onClick={ handleClick }
+          className="btn-search-bar"
         >
           Pesquisar
         </button>

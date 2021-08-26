@@ -1,0 +1,46 @@
+.div-search-bar {
+  margin-top: 10px;
+}
+
+.search-bar-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.toggle-input {
+  border: 1px solid #bfc6dc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 25px;
+  margin-bottom: 7px;
+}
+
+.radio-form label input {
+  margin: 7px 0;
+}
+
+::placeholder {
+  color: #8c94af;
+}
+
+.radio-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-search-bar {
+  background: #fd8061;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
+  color: white;
+  font-size: 16px;
+  height: 25px;
+  margin-top: 7px;
+}
+
+.toggle-input:focus {
+  outline: none;
+}
