@@ -5,7 +5,7 @@ import Card from './Card';
 
 const MAXIMUM_INDEX = 11;
 
-function CardList({ list, apiType }) {
+function CardList({ list, apiType, page }) {
   return (
     <main>
       {
@@ -13,7 +13,7 @@ function CardList({ list, apiType }) {
           list.map((item, index) => index > MAXIMUM_INDEX
           || (
             <Link
-              to={ `/comidas/${item[`id${apiType}`]}` }
+              to={ `/${page}/${item[`id${apiType}`]}` }
               key={ index }
             >
               <Card
@@ -32,6 +32,7 @@ function CardList({ list, apiType }) {
 CardList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object),
   apiType: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
 };
 
 CardList.defaultProps = {

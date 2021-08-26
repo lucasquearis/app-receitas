@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/Provider';
 import Login from './pages/Login';
 import Comidas from './pages/Comidas';
+import Bebidas from './pages/Bebidas';
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route path="/comidas" component={ Comidas } />
           <Route path="/comidas/:id" component={ Comidas } />
-          <Route path="/bebidas" component={ Login } />
-          <Route path="/bebidas/:id" component={ Login } />
+          <Route path="/bebidas" component={ Bebidas } />
+          <Route path="/bebidas/:id" component={ Bebidas } />
 
           {/* <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />

@@ -16,13 +16,13 @@ function Categories({
 
   const fetchActions = {
     food: 'procuraComida',
-    drink: '',
+    drink: 'procuraBebida',
   };
 
   const handleCategoryButton = async ({ target }) => {
     setLoading(true);
     const value = target.innerText;
-    const result = toggle === value
+    const result = toggle === value || value === 'All'
       ? await fetchFoods(type, fetchActions[type])
       : await fetchFoods(type, action, value);
     callback(result);
@@ -62,7 +62,7 @@ Categories.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
   callback: PropTypes.func.isRequired,
   setLoading: PropTypes.func.isRequired,
-  toggle: PropTypes.bool.isRequired,
+  toggle: PropTypes.string.isRequired,
   toggleCallback: PropTypes.func.isRequired,
 };
 

@@ -1,46 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
-import HookComidas from '../hooks/HookComidas';
+import HookBebidas from '../hooks/HookBebidas';
 import CardList from '../components/CardList';
 import Categories from '../components/Categories';
 import '../cssPages/Refeicao.css';
 
-function Comidas() {
-  const [foodData, setFoodData] = useState({});
-  const [foodCategories, setFoodCategories] = useState([]);
-  const [food, loading, categories, setLoading] = HookComidas();
+function Bebidas() {
+  const [drinkData, setDrinkData] = useState({});
+  const [drinkCategories, setDrinkCategories] = useState([]);
+  const [drink, loading, categories, setLoading] = HookBebidas();
   const [toggleCategory, setToggleCategory] = useState('');
 
   useEffect(() => {
-    setFoodData({
-      ...food,
+    setDrinkData({
+      ...drink,
     });
-    setFoodCategories(
-      categories.meals,
+    setDrinkCategories(
+      categories.drinks,
     );
-  }, [food, categories]);
+  }, [drink, categories]);
 
   return loading
     ? <div>Loading... </div>
     : (
       <>
         <Categories
-          type="food"
+          type="drink"
           action="filterCategory"
-          list={ foodCategories }
-          callback={ setFoodData }
+          list={ drinkCategories }
+          callback={ setDrinkData }
           setLoading={ setLoading }
           toggle={ toggleCategory }
           toggleCallback={ setToggleCategory }
         />
         <CardList
-          list={ foodData.meals }
-          apiType="Meal"
-          page="comidas"
+          list={ drinkData.drinks }
+          apiType="Drink"
+          page="bebidas"
         />
         <Footer />
       </>
     );
 }
 
-export default Comidas;
+export default Bebidas;
