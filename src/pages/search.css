@@ -1,6 +1,6 @@
 .container-search {
-  width: 360px;
   margin: 0 auto;
+  width: 360px;
 }
 
 .header {
@@ -38,7 +38,7 @@
   border: 0;
   border-radius: 8px;
   font-size: 20px;
-  padding: 8px;
   margin-bottom: 32px;
+  padding: 8px;
   width: 240px;
 }
