@@ -1,5 +1,5 @@
 import React from 'react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { cleanup, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderWithRouter from './helpers/renderWithRouter';
@@ -66,5 +66,69 @@ describe('testa pagina de receita em progresso', () => {
     INGREDIENTS_LIST.forEach((item) => {
       screen.getByText(item);
     });
+  });
+
+  it('ações da lista de ingredientes', async () => {
+    await act(async () => {
+      renderWithRouter(<App />, PATH);
+    });
+    expect(global.fetch).toHaveBeenCalledWith(ENDPOINT);
+    const list = await screen.findByRole('list');
+    expect(list.childNodes.length).toBe(INGREDIENTS_LIST.length);
+
+    const li0 = screen.getByLabelText(INGREDIENTS_LIST[0]);
+    userEvent.click(li0);
+    expect(li0).toBeChecked();
+    userEvent.click(li0);
+    expect(li0).not.toBeChecked();
+
+    const li1 = screen.getByLabelText(INGREDIENTS_LIST[1]);
+    userEvent.click(li1);
+    expect(li1).toBeChecked();
+    userEvent.click(li1);
+    expect(li1).not.toBeChecked();
+
+    const li2 = screen.getByLabelText(INGREDIENTS_LIST[2]);
+    userEvent.click(li2);
+    expect(li2).toBeChecked();
+    userEvent.click(li2);
+    expect(li2).not.toBeChecked();
+  });
+
+  it('botao de finalizar', async () => {
+    await act(async () => {
+      renderWithRouter(<App />, PATH);
+    });
+    expect(global.fetch).toHaveBeenCalledWith(ENDPOINT);
+    const finishBtn = await screen.findByRole('button', { name: /finalizar/i });
+    expect(finishBtn).toBeDisabled();
+
+    const li0 = screen.getByLabelText(INGREDIENTS_LIST[0]);
+    const li1 = screen.getByLabelText(INGREDIENTS_LIST[1]);
+    const li2 = screen.getByLabelText(INGREDIENTS_LIST[2]);
+    userEvent.click(li0);
+    expect(li0).toBeChecked();
+
+    userEvent.click(li1);
+    expect(li1).toBeChecked();
+
+    userEvent.click(li2);
+    expect(li2).toBeChecked();
+
+    userEvent.click(li0);
+    userEvent.click(li1);
+    userEvent.click(li2);
+    expect(finishBtn).toBeDisabled();
+
+    INGREDIENTS_LIST.forEach((ingredient) => {
+      const ingInput = screen.getByLabelText(ingredient);
+      userEvent.click(ingInput);
+    });
+
+    expect(finishBtn).toBeEnabled();
+  });
+
+  it('a rota deve ser mudada ao clicar em finalizar', async () => {
+
   });
 });
