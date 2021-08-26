@@ -3,7 +3,10 @@ import { useLocation } from 'react-router-dom';
 import HeaderDetails from '../components/Details/HeaderDetails';
 import Ingredients from '../components/Details/Ingredients';
 import Instructions from '../components/Details/Instructions';
+import Recommendations from '../components/Details/Recommendations';
+import Video from '../components/Details/Video';
 import { useData } from '../Context/DataContext';
+import './Details.css';
 
 export default function Details() {
   const { pathname } = useLocation();
@@ -11,7 +14,12 @@ export default function Details() {
   const id = pathname.split('/')[2];
   const category = pathname.split('/')[1];
 
-  const { detailsData, setDetailsData } = useData();
+  const {
+    detailsData,
+    setDetailsData,
+    recommendationsData,
+    setRecommendationsData,
+  } = useData();
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -28,15 +36,41 @@ export default function Details() {
     fetchAPI();
   }, [category, id, setDetailsData]);
 
+  useEffect(() => {
+    const fetchAPI = async () => {
+      let url = '';
+      if (category === 'comidas') url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      if (category === 'bebidas') url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      const reps = 6;
+
+      if (category === 'bebidas') setRecommendationsData(data.meals.slice(0, reps));
+      if (category === 'comidas') setRecommendationsData(data.drinks.slice(0, reps));
+    };
+    fetchAPI();
+  }, [category, setRecommendationsData]);
+
   return (
     <div>
       <HeaderDetails
         title={ detailsData.strMeal || detailsData.strDrink }
-        category={ detailsData.strCategory }
+        category={ `${detailsData.strAlcoholic || detailsData.strCategory}` }
         photo={ detailsData.strMealThumb || detailsData.strDrinkThumb }
       />
       <Ingredients data={ detailsData } />
       <Instructions instructions={ detailsData.strInstructions } />
+      {(category === 'comidas') && <div><Video src={ detailsData.strYoutube } /></div>}
+      <Recommendations data={ recommendationsData } />
+      <button
+        className="btn"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar receita
+      </button>
     </div>
   );
 }

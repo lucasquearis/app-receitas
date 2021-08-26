@@ -6,7 +6,8 @@ export default function Ingredients(props) {
   const ingredients = [];
   for (let index = 1; index <= max; index += 1) {
     if (props.data[`strIngredient${index}`]) {
-      ingredients.push(props.data[`strIngredient${index}`]);
+      ingredients.push(`${props.data[`strIngredient${index}`]}
+        - ${props.data[`strMeasure${index}`]}`);
     }
   }
   return (
