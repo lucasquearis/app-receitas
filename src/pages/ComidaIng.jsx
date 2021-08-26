@@ -41,7 +41,7 @@ function ComidaIng() {
   if (!ingredients) return <p>Loading...</p>;
   return (
     <div>
-      <Header titulo="Explorar Comidas" />
+      <Header titulo="Explorar Ingredientes" />
       <main className="div">
         { ingredients.map(({ strIngredient }, index) => (
           <Card
