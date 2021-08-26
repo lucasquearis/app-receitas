@@ -40,6 +40,13 @@ function DrinkDetails(props) {
     });
   };
 
+  const buttonName = () => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const condition = inProgress ? inProgress.cocktails[data.idDrink] : undefined;
+    if (condition === undefined) return 'Iniciar Receita';
+    return 'Continuar Receita';
+  };
+
   if (loading) return <h1>Loading...</h1>;
   return (
     <div>
@@ -79,7 +86,7 @@ function DrinkDetails(props) {
         data-testid="start-recipe-btn"
         className="btn-success"
       >
-        Iniciar Receita
+        {buttonName()}
       </Button>
     </div>
   );
