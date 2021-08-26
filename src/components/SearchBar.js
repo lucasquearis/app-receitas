@@ -10,8 +10,8 @@ const SearchBar = (location) => {
     search: '',
   });
   const [disabled, setDisabled] = useState(true);
-  const { setFoodFilter } = useContext(FoodContext);
-  const { setDrinkFilter } = useContext(DrinksContext);
+  const { setFoodFilter, setMealsByCategories } = useContext(FoodContext);
+  const { setDrinkFilter, setDrinksByCategories } = useContext(DrinksContext);
 
   function handleChange({ target }) {
     const { name, value } = target;
@@ -38,8 +38,10 @@ const SearchBar = (location) => {
     }
     if (pathname === '/comidas' || pathname === '/comidas/') {
       setFoodFilter(filterState);
+      setMealsByCategories(false);
     } else if (pathname === '/bebidas' || pathname === '/bebidas/') {
       setDrinkFilter(filterState);
+      setDrinksByCategories(false);
     }
   }
 

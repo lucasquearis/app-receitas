@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
-import fetchMealApi from '../services/fetchMealApi';
+import { fetchMealApi, fetchCategoriesMealApi } from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
   const [foods, setFoods] = useState([]);
@@ -9,6 +9,8 @@ const FoodProvider = ({ children }) => {
     searchText: '',
     search: '',
   });
+  const [categoriesMeal, setCategoriesMeal] = useState([]);
+  const [mealsByCategories, setMealsByCategories] = useState(false);
 
   useEffect(() => {
     fetchMealApi(foodFilter).then((data) => {
@@ -16,10 +18,20 @@ const FoodProvider = ({ children }) => {
     });
   }, [foodFilter]);
 
+  useEffect(() => {
+    fetchCategoriesMealApi().then((category) => {
+      setCategoriesMeal(category.meals);
+    });
+  }, []);
+
   const contextValue = {
     foods,
     foodFilter,
     setFoodFilter,
+    setFoods,
+    categoriesMeal,
+    mealsByCategories,
+    setMealsByCategories,
   };
   return (
     <FoodContext.Provider value={ contextValue }>
