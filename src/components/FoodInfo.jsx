@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchMealDetails } from '../redux/actions/foodActions';
+import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
+import { copyToClipboard, favoriteRecipe } from '../services';
+import DrinksCards from './DrinksCard';
 
 function FoodInfo() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { details } = useSelector((state) => state.foodsAndDrinks);
+  const { details, drinks } = useSelector((state) => state.foodsAndDrinks);
+  const [favorite, setFavorite] = useState(false);
+  const sixRecomendations = 6;
 
   useEffect(() => {
     dispatch(fetchMealDetails(id));
+    dispatch(fetchDrinksRedux);
   }, [dispatch, id]);
 
-  if (!details) {
+  if (!drinks) {
     return (
       <h1>Loading</h1>
     );
@@ -22,6 +27,10 @@ function FoodInfo() {
   const objKeyFood = Object.keys(foodDetails);
   const filterObjFood = objKeyFood.filter((obj) => obj.includes('strIngredient'));
   const otherFilterObjFood = filterObjFood.filter((obj) => foodDetails[obj] !== '');
+
+  const favoriteHeart = <img src="/images/blackHeartIcon.svg" alt="black heart" />;
+  const notFavoriteHeart = <img src="/images/whiteHeartIcon.svg" alt="white-heart" />;
+  const shareTag = <img src="/images/shareIcon.svg" alt="shareIt" />;
   return (
     <section>
       <img
@@ -30,8 +39,20 @@ function FoodInfo() {
         data-testid="recipe-photo"
       />
       <h2 data-testid="recipe-title">{ foodDetails.strMeal }</h2>
-      <p data-testid="share-btn">Compartilhar</p>
-      <p data-testid="favorite-btn">Favorito</p>
+      <button
+        onClick={ copyToClipboard }
+        type="button"
+        data-testid="share-btn"
+      >
+        { shareTag }
+      </button>
+      <button
+        type="button"
+        data-testid="favorite-btn"
+        onClick={ () => setFavorite(favoriteRecipe(favorite)) }
+      >
+        { favorite ? favoriteHeart : notFavoriteHeart }
+      </button>
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
       <ul>
         { otherFilterObjFood.map((ingredient, index) => (
@@ -52,6 +73,16 @@ function FoodInfo() {
         allowFullScreen
       />
       <ul />
+      <ul>
+        { drinks.slice(0, sixRecomendations)
+          .map((drink, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-recomendation-card` }
+            >
+              { DrinksCards(drink, 'bebidas', index) }
+            </li>))}
+      </ul>
       <button type="button" data-testid="start-recipe-btn">
         Iniciar receita
       </button>
