@@ -17,8 +17,8 @@ function Routes() {
       <Route exact path="/bebidas" component={ Drink } />
       <Route path="/comidas/:id" component={ FoodDetails } />
       <Route path="/bebidas/:id" component={ DrinkDetails } />
-      {/* <Route path={ `/comidas/${id}/in-progress` } component={ null } /> */}
-      {/* <Route path={ `/bebidas/${id}/in-progress` } component={ null } /> */}
+      <Route path={ `/comidas/${1}/in-progress` } component={ FoodDetails } />
+      <Route path={ `/bebidas/${1}/in-progress` } component={ DrinkDetails } />
       <Route exact path="/explorar" component={ Explore } />
       <Route path="/explorar/comidas" component={ null } />
       <Route path="/explorar/bebidas" component={ null } />
