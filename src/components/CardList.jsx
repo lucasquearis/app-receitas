@@ -1,22 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Card from './Card';
 
 const MAXIMUM_INDEX = 11;
 
-function CardList({ list, thumbValue, nameValue }) {
+function CardList({ list, apiType }) {
   return (
     <main>
       {
         !list ? <div>Empty List</div> : (
           list.map((item, index) => index > MAXIMUM_INDEX
           || (
-            <Card
+            <Link
+              to={ `/comidas/${item[`id${apiType}`]}` }
               key={ index }
-              index={ index }
-              thumb={ item[thumbValue] }
-              name={ item[nameValue] }
-            />
+            >
+              <Card
+                index={ index }
+                thumb={ item[`str${apiType}Thumb`] }
+                name={ item[`str${apiType}`] }
+              />
+            </Link>
           ))
         )
       }
@@ -26,8 +31,7 @@ function CardList({ list, thumbValue, nameValue }) {
 
 CardList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.object),
-  thumbValue: PropTypes.string.isRequired,
-  nameValue: PropTypes.string.isRequired,
+  apiType: PropTypes.string.isRequired,
 };
 
 CardList.defaultProps = {

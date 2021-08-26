@@ -3,15 +3,31 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import fetchFoods from '../fetchs/FetchFood';
 
-function Categories({ list, callback, setLoading }) {
+function Categories({
+  type,
+  action,
+  list,
+  callback,
+  setLoading,
+  toggle,
+  toggleCallback,
+}) {
   const MAXIMUM_INDEX = 4;
+
+  const fetchActions = {
+    food: 'procuraComida',
+    drink: '',
+  };
 
   const handleCategoryButton = async ({ target }) => {
     setLoading(true);
     const value = target.innerText;
-    const result = await fetchFoods('food', 'procuraComida', value);
+    const result = toggle === value
+      ? await fetchFoods(type, fetchActions[type])
+      : await fetchFoods(type, action, value);
     callback(result);
     setLoading(false);
+    toggleCallback(value);
   };
 
   return (
@@ -28,6 +44,7 @@ function Categories({ list, callback, setLoading }) {
         || (
           <Button
             data-testid={ `${item.strCategory}-category-filter` }
+            variant="dark"
             key={ index }
             onClick={ handleCategoryButton }
           >
@@ -40,9 +57,13 @@ function Categories({ list, callback, setLoading }) {
 }
 
 Categories.propTypes = {
+  type: PropTypes.string.isRequired,
+  action: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
   callback: PropTypes.func.isRequired,
   setLoading: PropTypes.func.isRequired,
+  toggle: PropTypes.bool.isRequired,
+  toggleCallback: PropTypes.func.isRequired,
 };
 
 export default Categories;

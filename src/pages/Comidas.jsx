@@ -9,6 +9,7 @@ function Comidas() {
   const [foodData, setFoodData] = useState({});
   const [foodCategories, setFoodCategories] = useState([]);
   const [food, loading, categories, setLoading] = HookComidas();
+  const [toggleCategory, setToggleCategory] = useState('');
 
   useEffect(() => {
     setFoodData({
@@ -17,22 +18,27 @@ function Comidas() {
     setFoodCategories(
       categories.meals,
     );
-  }, [food, categories, setFoodData]);
+  }, [food, categories]);
+
+  console.log(toggleCategory);
 
   return loading
     ? <div>Loading... </div>
     : (
       <>
         <Categories
+          type="food"
+          action="filterCategory"
           list={ foodCategories }
           callback={ setFoodData }
           setLoading={ setLoading }
+          toggle={ toggleCategory }
+          toggleCallback={ setToggleCategory }
         />
         {/* TESTEEEE */}
         <CardList
           list={ foodData.meals }
-          thumbValue="strMealThumb"
-          nameValue="strMeal"
+          apiType="Meal"
         />
         <Footer />
       </>
