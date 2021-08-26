@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import Carousel from 'react-elastic-carousel';
+// import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
@@ -15,6 +15,7 @@ function FoodDetails({ match: { params: { id } } }) {
   const [ingredientList, setIngredientList] = useState([]);
   const location = useLocation();
   const [share, setShare] = useState(false);
+  const [visible, setVisible] = useState([false, false, true, true, true, true]);
   const mystyle = {
     bottom: '0px',
     position: 'fixed',
@@ -35,7 +36,7 @@ function FoodDetails({ match: { params: { id } } }) {
     const sliceRecomended = recomendedDrink.slice(0, SEIS);
     if (sliceRecomended.length > 0) {
       return (
-        <Carousel data-testid="recomendation-card" itemsToShow={ 2 }>
+        <ul>
           {sliceRecomended.map((drink, index) => (
             <RecomendedCard
               title={ drink.strDrink }
@@ -43,9 +44,21 @@ function FoodDetails({ match: { params: { id } } }) {
               id={ drink.idDrink }
               index={ index }
               img={ drink.strDrinkThumb }
+              visible={ visible[index] }
             />
           ))}
-        </Carousel>
+        </ul>
+      //   <Carousel data-testid="recomendation-card" itemsToShow={ 2 } itemsToScroll={ 2 }>
+      //   {sliceRecomended.map((drink, index) => (
+      //     <RecomendedCard
+      //       title={ drink.strDrink }
+      //       key={ drink.idDrink }
+      //       id={ drink.idDrink }
+      //       index={ index }
+      //       img={ drink.strDrinkThumb }
+      //     />
+      //   ))}
+      // </Carousel>
       );
     }
   };
