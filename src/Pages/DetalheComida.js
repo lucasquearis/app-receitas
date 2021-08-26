@@ -142,7 +142,7 @@ export default function DetalheComida(/* props */) {
       </div>
       <div className="instructions-section">
         <h5>Instructions</h5>
-        <p data-testid="instrucions">{ food.strInstructions }</p>
+        <p data-testid="instructions">{ food.strInstructions }</p>
       </div>
       <div className="video-section">
         <h5>Video</h5>
