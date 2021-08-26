@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from '../components/Header';
 
-const MealsInProgress = () => (
+const Profile = () => (
   <Header title="Perfil" />
 );
 
-export default MealsInProgress;
+export default Profile;

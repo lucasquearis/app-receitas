@@ -1,5 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Input, Button } from '../components';
+import AppContext from '../context/AppContext';
+import verifyLogin from '../helpers/verifyLogin';
 
-const Login = () => <div />;
+export default function Login() {
+  const { user, setUser } = useContext(AppContext);
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: '',
+  });
+  const [btnDisable, setBtnDisable] = useState(true);
 
-export default Login;
+  function checkValid() {
+    const { email, password } = loginForm;
+    setBtnDisable(!verifyLogin(email, password));
+  }
+
+  function handleChange({ target: { name, value } }) {
+    setLoginForm({ ...loginForm, [name]: value });
+  }
+
+  function handleClick() {
+    const { email } = loginForm;
+    setUser({ ...user, email });
+  }
+
+  useEffect(checkValid, [loginForm]);
+
+  return (
+    <form action="">
+      <Input
+        labelText="Email:"
+        type="email"
+        id="email-input"
+        name="email"
+        onChange={ handleChange }
+      />
+      <Input
+        labelText="Senha:"
+        type="password"
+        id="password-input"
+        name="password"
+        onChange={ handleChange }
+      />
+      <Button
+        className="login-submit-btn"
+        type="button"
+        buttonText="Entrar"
+        pathname="/comidas"
+        isDisable={ btnDisable }
+        onClick={ handleClick }
+      />
+    </form>
+  );
+}

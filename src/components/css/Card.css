@@ -1,0 +1,38 @@
+.card {
+  border: transparent;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 2px rgb(195, 195, 195);
+  height: 12em;
+  margin: 0.4em 0.1em;
+  width: 13.2em;
+}
+
+.thumb {
+  border-radius: 12px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 74%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.name {
+  margin-left: 0.5em;
+}
+
+@media screen and ( min-width : 340px ) and ( max-width : 380px ) {
+
+  .card {
+    height: 8.6em;
+    width: 9.5em;
+  }
+
+  .thumb {
+    height: 65%;
+  }
+
+  .name {
+    font-size: 0.9em;
+  }
+
+}
