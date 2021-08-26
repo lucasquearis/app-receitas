@@ -98,7 +98,7 @@ function BebidasDetails(props) {
           </button>
           { share && <p>Link copiado!</p> }
           <button
-            onClick={ () => favoritingRecipe(isFav, setIsFav, id, drink) }
+            onClick={ () => favoritingRecipe(isFav, setIsFav, id, drink, 'Drink') }
             type="button"
           >
             <img

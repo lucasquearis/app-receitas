@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
+import generatingFavoriteObj from '../service/auxiliarFunctions';
 
 function Provider({ children }) {
   const [email, setEmail] = useState('');
@@ -10,17 +11,18 @@ function Provider({ children }) {
   const [foodCategory, setFoodCategory] = useState([]);
   const [filter, setFilter] = useState('');
 
-  const favoritingRecipe = (isFav, setIsFav, id, food) => {
+  const favoritingRecipe = (isFav, setIsFav, id, recipe) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (isFav) {
       setIsFav(false);
       const newFavoriteRecipes = favoriteRecipes
-        .filter((rcp) => (rcp.idMeal ? rcp.idMeal !== id : rcp.idDrink !== id));
+        .filter((rcp) => (rcp.idMeal ? rcp.id !== id : rcp.id !== id));
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     } else {
       setIsFav(true);
+      const favRecipe = generatingFavoriteObj(recipe);
       const newFavoriteRecipes = favoriteRecipes
-        ? [...favoriteRecipes, food] : [food];
+        ? [...favoriteRecipes, favRecipe] : [favRecipe];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     }
   };
@@ -37,6 +39,7 @@ function Provider({ children }) {
     }
     return { ingredients, measures };
   };
+
   const verifyingRecipe = (id, type) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
