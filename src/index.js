@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { ContextProvider } from './context/RecipesContext';
 
 ReactDOM.render(
-  <ContextProvider>
-    <App />
-  </ContextProvider>,
+  <App />,
   document.getElementById('root'),
 );
 

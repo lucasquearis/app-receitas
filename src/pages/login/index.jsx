@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Main, Form, Input, Span, Button, Label, Gif, P } from './styles';
-import regexEmail from '../../services';
+import { emailRegex } from '../../services';
 import { RecipesContext } from '../../context/RecipesContext';
 
 const passwordLength = 6;
@@ -40,7 +40,7 @@ const Login = () => {
         </Label>
         <Span>Esqueceu a senha ?</Span>
         <Button
-          disabled={ !(regexEmail.test(email) && password.length > passwordLength) }
+          disabled={ !(emailRegex.test(email) && password.length > passwordLength) }
           onClick={ () => loginHandle(email) }
           data-testid="login-submit-btn"
           type="button"
