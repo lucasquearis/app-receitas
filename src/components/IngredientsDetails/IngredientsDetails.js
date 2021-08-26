@@ -4,7 +4,6 @@ import { filterIngredientsDetails } from '../../functions';
 
 const IngredientsDetails = ({ recipe }) => {
   const ingredients = filterIngredientsDetails(recipe);
-  console.log(ingredients);
   return (
     <div>
       <h1>Ingredients</h1>
@@ -22,7 +21,9 @@ const IngredientsDetails = ({ recipe }) => {
 };
 
 IngredientsDetails.propTypes = {
-  recipe: PropTypes.arrayOf(PropTypes.array).isRequired,
+  recipe: PropTypes.shape({
+    strIngredient1: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default IngredientsDetails;

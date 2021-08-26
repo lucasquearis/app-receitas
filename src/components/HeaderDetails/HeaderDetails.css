@@ -1,9 +1,9 @@
-header {
+.header-details {
   display: flex;
   flex-direction: column;
 }
 
-h1 {
+.title-details {
   font-family: Roboto;
   font-size: 30px;
   font-style: normal;
@@ -13,7 +13,7 @@ h1 {
   text-align: left;
 }
 
-p {
+.subtitle-details {
   font-family: Roboto;
   font-size: 21px;
   font-style: normal;

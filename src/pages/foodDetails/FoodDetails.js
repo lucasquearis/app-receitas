@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from 'react-bootstrap';
+import HeaderDetails from '../../components/HeaderDetails/HeaderDetails';
+import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails';
+import Instructions from '../../components/InstructionsDetails/InstructionsDetails';
+import VideoDetails from '../../components/VideoDetails/VideoDetails';
+import Recomendation from '../../components/Recomentation/Recomendation';
 
 const FoodDetails = ({ match: { params: id } }) => {
   const [meal, setMeal] = useState(0);
@@ -13,9 +18,15 @@ const FoodDetails = ({ match: { params: id } }) => {
     fecthDetails();
   }, [id.id]);
   if (!meal) return <Spinner animation="border" />;
-  // const { strMeal, strMealThumb, strCategory } = meal;
+  const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meal;
   return (
-    <div />
+    <div>
+      <HeaderDetails title={ strMeal } image={ strMealThumb } category={ strCategory } />
+      <IngredientsDetails recipe={ meal } />
+      <Instructions instruction={ strInstructions } />
+      <VideoDetails linkVideo={ strYoutube } />
+      <Recomendation />
+    </div>
   );
 };
 

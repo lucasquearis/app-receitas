@@ -6,12 +6,12 @@ import favoriteIcon from '../../images/whiteHeartIcon.svg';
 import './HeaderDetails.css';
 
 const HeaderDetails = ({ image, title, category }) => (
-  <header>
+  <header className="header-details">
     <img src={ image } alt={ title } data-testid="recipe-photo" className="img-header" />
     <div className="info-container">
       <section>
-        <h1 data-testid="recipe-title">{title}</h1>
-        <p data-testid="recipe-category">{category}</p>
+        <h1 data-testid="recipe-title" className="title-details">{title}</h1>
+        <p data-testid="recipe-category" className="subtitle-details">{category}</p>
       </section>
       <section className="buttons-container">
         <Button

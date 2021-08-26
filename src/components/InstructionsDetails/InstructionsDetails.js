@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InstructionsDetails = ({ instruction }) => (
-  <div>
+  <div className="component-details">
     <h1>Instructions</h1>
     <p data-testid="instructions">{instruction}</p>
   </div>
