@@ -126,3 +126,4 @@ export default function SearchBar({ title }) {
 SearchBar.propTypes = {
   title: PropTypes.string,
 }.isRequired;
+

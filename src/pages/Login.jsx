@@ -38,18 +38,22 @@ export default function Login() {
   if (shouldRedirect) return <Redirect to="/comidas" />;
 
   return (
-    <div>
+    <div className="login-div">
       <form className="form">
         <input
+          className="login-input"
           data-testid="email-input"
           value={ email }
           onChange={ handleEmail }
+          placeholder="Email"
         />
         <input
+          className="login-input"
           type="password"
           data-testid="password-input"
           value={ password }
           onChange={ handlePassword }
+          placeholder="Senha"
         />
         <button
           type="button"
