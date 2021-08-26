@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import profileicon from '../../images/profileIcon.svg';
 import searchicon from '../../images/searchIcon.svg';
 import HEADERSEARCHBAR from '../../services/data';
+import SearchBar from '../SearchBar';
 
 function Header({ children }) {
   const history = useHistory();
-  console.log(history);
+  const [hideSearchBar, setHideSearchBar] = React.useState(false);
+  const ShowHideSearchBar = () => setHideSearchBar(!hideSearchBar);
   return (
     <header>
       <Link to="/perfil">
@@ -24,8 +26,9 @@ function Header({ children }) {
         {children}
       </h4>
 
-      { HEADERSEARCHBAR
-        .find((item) => item === history.location.pathname)
+      {
+        HEADERSEARCHBAR
+          .find((item) => item === history.location.pathname)
           && (
             <button type="button">
               <input
@@ -33,8 +36,11 @@ function Header({ children }) {
                 data-testid="search-top-btn"
                 src={ searchicon }
                 alt="Search"
+                onClick={ ShowHideSearchBar }
               />
-            </button>)}
+              {hideSearchBar && <SearchBar />}
+            </button>)
+      }
     </header>
 
   );
