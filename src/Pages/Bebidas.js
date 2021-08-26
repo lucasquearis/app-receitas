@@ -17,7 +17,9 @@ export default function Bebidas() {
     const maxCategorias = 6;
     const botaoALL = { strCategory: 'All' };
     const results = await BebidasAPI.buscarCategorias('');
-    results.unshift(botaoALL);
+    if (results[0].strCategory !== 'All') {
+      results.unshift(botaoALL);
+    }
     const myCategories = results.filter((result, index) => index < maxCategorias);
     setCategorias(myCategories);
   };
