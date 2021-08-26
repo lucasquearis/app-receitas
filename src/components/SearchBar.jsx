@@ -42,7 +42,6 @@ function SearchBar() {
       }
       return requestLetter(result);
     }
-    console.log(window.location.pathname);
   };
 
   const { result } = search;
@@ -58,7 +57,7 @@ function SearchBar() {
           className="toggle-input"
           placeholder="Procure por alguma receita..."
         />
-        <form className="radio-form">
+        <div className="radio-form">
           <label htmlFor="ingredient-radio">
             <input
               type="radio"
@@ -92,7 +91,7 @@ function SearchBar() {
             />
             Primeira letra
           </label>
-        </form>
+        </div>
         <button
           data-testid="exec-search-btn"
           type="submit"

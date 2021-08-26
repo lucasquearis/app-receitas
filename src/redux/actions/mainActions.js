@@ -11,6 +11,34 @@ export const loginAction = (payload) => ({
 
 // Action Creators - SearchBar Actions
 
+export const foodsRequest = () => ({
+  type: types.FOODS_API,
+});
+
+export const foodsRequestSuccess = (payload) => ({
+  type: types.FOODS_API_SUCCESS,
+  payload,
+});
+
+export const foodsRequestError = (payload) => ({
+  type: types.FOODS_API_ERROR,
+  payload,
+});
+
+export const drinksRequest = () => ({
+  type: types.DRINKS_API,
+});
+
+export const drinksRequestSuccess = (payload) => ({
+  type: types.DRINKS_API_SUCCESS,
+  payload,
+});
+
+export const drinksRequestError = (payload) => ({
+  type: types.DRINKS_API_ERROR,
+  payload,
+});
+
 export const ingredientRequest = () => ({
   type: types.INGREDIENT_REQUEST,
 });
@@ -53,9 +81,36 @@ export const nameRequestError = (payload) => ({
   payload,
 });
 
+export const clearSearch = (payload) => ({
+  type: types.CLEAR_SEARCH,
+  payload,
+});
+
 // Fetch APIs
 
 // Fetch Recipes APIs
+
+export const fetchFoods = () => async (dispatch) => {
+  dispatch(foodsRequest());
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return dispatch(foodsRequestSuccess(data));
+  } catch (error) {
+    return dispatch(foodsRequestError(error));
+  }
+};
+
+export const fetchDrinks = () => async (dispatch) => {
+  dispatch(drinksRequest());
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return dispatch(foodsRequestSuccess(data));
+  } catch (error) {
+    return dispatch(drinksRequestError(error));
+  }
+};
 
 export const fetchIngredientAPI = (value) => async (dispatch) => {
   dispatch(ingredientRequest());
