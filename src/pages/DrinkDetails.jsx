@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
@@ -27,6 +28,21 @@ function DrinkDetails({ match: { params: { id } } }) {
     const request = await fetch(endPointRecomendedFood);
     const response = await request.json();
     setRecomendedFood(response);
+  };
+
+  const renderRecomendedFood = () => {
+    const SEIS = 6;
+    const sliceRecomended = recomendedFood.slice(0, SEIS);
+    return (
+      <Carousel itemsToShow={ 1 }>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+      </Carousel>
+    );
   };
 
   useEffect(() => {
@@ -103,12 +119,11 @@ function DrinkDetails({ match: { params: { id } } }) {
             </li>))}
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
-        {/* <p
-          key={ index }
-          data-testid={ `${index}-recomendation-card` }
+        <p
+          data-testid={ `${0}-recomendation-card` }
         >
-          { recomendedFood }
-        </p> */}
+          Recomendações aqui
+        </p>
         <Button
           style={ mystyle }
           variant="contained"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
@@ -8,7 +9,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
-  const [recomendedDrink, setRecomendedDrink] = useState({});
+  const [recomendedDrink, setRecomendedDrink] = useState([]);
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = food;
   const [ingredientList, setIngredientList] = useState([]);
   const location = useLocation();
@@ -25,7 +26,25 @@ function FoodDetails({ match: { params: { id } } }) {
     const endPointRecomendedDrink = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
     const request = await fetch(endPointRecomendedDrink);
     const response = await request.json();
-    setRecomendedDrink(response);
+    setRecomendedDrink(response.drinks);
+  };
+
+  const renderRecomendedDrink = () => {
+    const SEIS = 6;
+    console.log(recomendedDrink);
+    const sliceRecomended = recomendedDrink.slice(0, SEIS);
+    if (recomendedDrink.length > 0) {
+      return (
+        <div>
+          {sliceRecomended.map((drink, index) => (
+            <div data-testid={ `${index}-recomendation-card` } key={ drink.strDrink }>
+              <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
+              <img src={ drink.strDrinkThumb } alt={ drink.strDrink } style={ imgStyle } />
+            </div>
+          ))}
+        </div>
+      );
+    }
   };
 
   useEffect(() => {
@@ -105,12 +124,10 @@ function FoodDetails({ match: { params: { id } } }) {
           src={ strYoutube }
           data-testid="video"
         />
-        {/* <p
-          key={ index }
-          data-testid={ `${index}-recomendation-card` }
-        >
-          Recomendações aqui
-        </p> */}
+        <p
+          data-testid={ `${0}-recomendation-card` }
+        />
+        {renderRecomendedDrink()}
         <Button
           style={ mystyle }
           variant="contained"
