@@ -1,6 +1,6 @@
 // vitals
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 // styles
@@ -8,36 +8,44 @@ import '../styles/FavoriteRecipes.css';
 import favoriteButton from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
-const renderTitle = (alcoholicOrNot, area, category, type, index) => {
-  if (type === 'bebida') {
-    return (
-      <div className="title-container">
-        <h5 data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</h5>
-      </div>
-    );
-  }
-
-  if (type === 'comida' && area) {
-    return (
-      <div className="title-container">
-        <h4 data-testid={ `${index}-horizontal-top-text` }>{`${area} - ${category}`}</h4>
-      </div>
-    );
-  }
-
-  return (
-    <div className="title-container">
-      <h4 data-testid={ `${index}-horizontal-top-text` }>{category}</h4>
-    </div>
-  );
-};
-
 function FavoriteRecipeCard(
   { id, index, alcoholicOrNot, area, category, image,
     name, type, favoritesArray, setFavoritesArray },
 ) {
   const [copiedURL, setCopiedURL] = useState(false);
   const history = useHistory();
+
+  const renderTitle = () => {
+    if (type === 'bebida') {
+      return (
+        <div className="title-container">
+          <h5 data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</h5>
+        </div>
+      );
+    }
+
+    if (type === 'comida' && area) {
+      return (
+        <div className="title-container">
+          <h4
+            data-testid={ `${index}-horizontal-top-text` }
+          >
+            {`${area} - ${category}`}
+          </h4>
+        </div>
+      );
+    }
+
+    return (
+      <div className="title-container">
+        <h4
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          {category}
+        </h4>
+      </div>
+    );
+  };
 
   return (
     <div className="card-element">
@@ -53,7 +61,7 @@ function FavoriteRecipeCard(
         />
       </div>
       <div className="info-container">
-        { renderTitle(alcoholicOrNot, area, category, type, index)}
+        { renderTitle()}
         <div className="name-container">
           <button
             type="button"
@@ -91,7 +99,6 @@ function FavoriteRecipeCard(
           />
           {copiedURL ? <span>Link copiado!</span> : null}
         </div>
-
       </div>
     </div>
   );
