@@ -1,5 +1,4 @@
-.containerBoby {
-  align-items: center;
+.containerBody {
   background: linear-gradient(90deg, rgb(241, 213, 237) 0%, rgb(245, 178, 225)100%);
   width: 375px;
   height: 667px;
