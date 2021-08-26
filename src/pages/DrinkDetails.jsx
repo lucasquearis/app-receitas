@@ -9,7 +9,7 @@ function DrinkDetails(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tip, setTip] = useState([]);
-  const { strDrinkThumb, strDrink, strCategory, strInstructions } = data;
+  const { strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic } = data;
 
   useEffect(() => {
     const { history: { location: { pathname } } } = props;
@@ -23,25 +23,20 @@ function DrinkDetails(props) {
   }, [data]);
 
   const getIngredients = () => {
-    const negEight = -16;
-    const negNine = -17;
-    const keys = Object.keys(data);
+    const keys = Object.keys(data).filter((key) => key.includes('strIngredient'));
     return keys.map((key, index) => {
-      if (key.includes('strIngredient')) {
-        const measure = `strMeasure${index + negEight}`;
-        return (
-          (data[key] !== '' && data[key] !== null)
-            && (
-              <p
-                key={ index + negNine }
-                data-testid={ `${index + negNine}-ingredient-name-and-measure` }
-              >
-                { `- ${data[key]} - ${data[measure]}` }
-              </p>
-            )
-        );
-      }
-      return null;
+      const measure = `strMeasure${index + 1}`;
+      return (
+        (data[key] !== '' && data[key] !== null)
+          && (
+            <p
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { `- ${data[key]} - ${data[measure]}` }
+            </p>
+          )
+      );
     });
   };
 
@@ -57,7 +52,7 @@ function DrinkDetails(props) {
         <button data-testid="favorite-btn" type="button">
           <img src={ whiteHeartIcon } alt="share icon" />
         </button>
-        <h4 data-testid="recipe-category">{ strCategory }</h4>
+        <h4 data-testid="recipe-category">{ strAlcoholic }</h4>
       </div>
       <h4>Ingredientes</h4>
       <div className="ingredients-container">
