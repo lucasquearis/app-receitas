@@ -9,7 +9,7 @@ import DetailsDrink from './pages/drinks/DetailsDrink';
 
 function App() {
   return (
-    <div className="container">
+    <div className="containerBody">
       <Switch>
         <Route exact path="/comidas" component={ Foods } />
         <Route exact path="/bebidas" component={ Drinks } />

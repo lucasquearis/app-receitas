@@ -40,7 +40,6 @@ class Login extends React.Component {
     const userTokens = {
       email,
     };
-
     localStorage.setItem('user', JSON.stringify(userTokens));
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
