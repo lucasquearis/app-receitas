@@ -19,10 +19,10 @@ export default function Provider({ children }) {
     setBtnCategoryMeals,
     btnCategoryDrinks,
     setBtnCategoryDrinks,
-    setListCategoryMeals,
     listCategoryMeals,
-    setListCategoryDrinks,
+    setListCategoryMeals,
     listCategoryDrinks,
+    setListCategoryDrinks,
   };
 
   return (

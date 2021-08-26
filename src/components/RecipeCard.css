@@ -34,7 +34,7 @@ ul {
   padding: 5px 15px;
 }
 
-.filter-button:hover {
+.filter-button:active {
   background-color: #fa9500;
 }
 
