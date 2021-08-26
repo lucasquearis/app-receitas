@@ -9,7 +9,10 @@ function Perfil() {
 
   return (
     <div className="perfil-container">
-      <Header title="Perfil" />
+      <Header label="Perfil" Search={ () => '' } />
+      <br />
+      <br />
+      <br />
       <Footer />
       <h5 data-testid="profile-email">{email}</h5>
       <section className="perfil-buttons">
