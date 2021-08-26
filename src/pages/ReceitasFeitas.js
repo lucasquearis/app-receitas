@@ -7,7 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 
 function ReceitasFeitas() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
+  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes || []);
   const [linkShare, setLinkShare] = useState(false);
 
   const handleClickFilteredRecipes = (type) => {
@@ -78,8 +78,6 @@ function ReceitasFeitas() {
       }) }
     </div>
   );
-
-  console.log(filteredRecipes);
 
   return (
     <div>
