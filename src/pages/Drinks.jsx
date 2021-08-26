@@ -3,7 +3,7 @@ import DrinksCards from '../components/DrinksCards';
 import DrinkCategoryButtons from '../components/DrinkCategoryButtons';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
-import Footer from '../components/Footer/Footer';
+import Footer from '../components/Footer';
 
 export default function Drinks() {
   return (

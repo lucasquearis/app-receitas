@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
-import Footer from '../components/Footer/Footer';
+import Footer from '../components/Footer';
 
 export default function ExploreMealByArea() {
   return (

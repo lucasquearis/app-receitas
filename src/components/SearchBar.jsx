@@ -1,5 +1,5 @@
 import React from 'react';
-import './header.css';
+import '../styles/Header.css';
 
 export default function SearchBar() {
   return (
@@ -23,6 +23,7 @@ export default function SearchBar() {
             id="radio-ingredients"
             type="radio"
             value="Ingredientes"
+            name="teste"
           />
         </label>
         <label htmlFor="radio-name">
@@ -32,6 +33,7 @@ export default function SearchBar() {
             id="radio-name"
             type="radio"
             value="Nome"
+            name="teste"
           />
         </label>
         <label htmlFor="radio-first-letter">
@@ -41,6 +43,7 @@ export default function SearchBar() {
             id="radio-first-letter"
             type="radio"
             value="Primeira letra"
+            name="teste"
           />
         </label>
       </div>
