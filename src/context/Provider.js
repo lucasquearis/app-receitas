@@ -55,11 +55,10 @@ function Provider({ children }) {
     }
   };
 
-  const requestCategory = async (categories, func, state) => {
+  const requestCategory = async (categories, func) => {
     const response = await fetch(categories);
     const result = await response.json();
     func({
-      ...state,
       list: result,
       loading: false,
     });
@@ -76,11 +75,14 @@ function Provider({ children }) {
 
   useEffect(() => {
     switchAPI(filter);
-    requestCategory('https://www.themealdb.com/api/json/v1/1/search.php?s=', setFoodRecipes, foodRecipes);
-    requestCategory('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setDrinkRecipes, drinkRecipes);
-    requestCategory(foodCategoryAPI, setFoodCategories, foodCategories);
-    requestCategory(drinkCategoryAPI, setDrinkCategories, drinkCategories);
-  }, [filter, API, drinkCategories, drinkRecipes, foodCategories, foodRecipes]);
+  }, [filter, API]);
+
+  // useEffect(() => {
+  //   requestCategory('https://www.themealdb.com/api/json/v1/1/search.php?s=', setFoodRecipes);
+  //   requestCategory('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setDrinkRecipes);
+  //   requestCategory(foodCategoryAPI, setFoodCategories);
+  //   requestCategory(drinkCategoryAPI, setDrinkCategories);
+  // })
 
   const contextValue = {
     user,
@@ -95,6 +97,12 @@ function Provider({ children }) {
     drinkCategories,
     foodRecipes,
     drinkRecipes,
+    setFoodRecipes,
+    foodCategoryAPI,
+    setFoodCategories,
+    drinkCategoryAPI,
+    setDrinkRecipes,
+    setDrinkCategories,
   };
 
   return (

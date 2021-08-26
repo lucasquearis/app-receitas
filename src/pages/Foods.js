@@ -1,13 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import FoodCard from '../components/FoodCard';
 import FoodFilterButton from '../components/FoodFilterButton';
 import Context from '../context/Context';
 
 function Foods() {
-  const { foodRecipes, foodCategories: { loading } } = useContext(Context);
+  const { foodRecipes,
+    requestCategory,
+    setFoodRecipes,
+    setFoodCategories,
+    foodCategoryAPI } = useContext(Context);
   const { loading: loadcard } = foodRecipes;
   const { list: recipes } = foodRecipes;
+
+  useEffect(() => {
+    if (loadcard) {
+      requestCategory('https://www.themealdb.com/api/json/v1/1/search.php?s=', setFoodRecipes);
+      requestCategory(foodCategoryAPI, setFoodCategories);
+    }
+  });
 
   const cards = [];
   const maxCards = 12;
@@ -31,7 +42,7 @@ function Foods() {
 
   return (
     <main>
-      { foodPage(loading) }
+      { foodPage(loadcard) }
     </main>
   );
 }
