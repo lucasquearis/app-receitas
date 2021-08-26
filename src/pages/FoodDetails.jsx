@@ -37,10 +37,10 @@ function FoodDetails() {
         />
       </div>
       <div>
-        <h2 data-testid="recipe-title">titulo</h2>
+        <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
         <button type="button" data-testid="share-btn">compartilhar</button>
         <button type="button" data-testid="favorite-btn">favorito</button>
-        <p data-testid="recipe-category"> categoria</p>
+        <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>
       <section>
         <h3>ingredientes</h3>
