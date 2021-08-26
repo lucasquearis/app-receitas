@@ -12,8 +12,4 @@ const renderWithRouter = (component) => {
   ),
   history: mockHistory };
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> aab90121ee155f2e58066ba46c48667897c617a2
 export default renderWithRouter;

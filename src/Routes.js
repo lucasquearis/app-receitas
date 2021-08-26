@@ -6,7 +6,6 @@ import ExplorerDrinks from './pages/ExplorerDrinks';
 // components
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import SurpriseDrink from './pages/SurpriseDrink';
 
 function Routes() {
   return (
