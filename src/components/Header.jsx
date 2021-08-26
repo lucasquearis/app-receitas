@@ -1,25 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import './componentCSS/HeaderFood.css';
+import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-export default function Header() {
+export default function Header({ title }) {
+  const [search, setSearch] = useState(false);
+  const showSearch = () => setSearch(true);
+
   return (
     <header className="header-food">
-      <button
+      <Link
+        to="/perfil"
         className="profile-btn"
-        data-testid="profile-top-btn"
-        type="button"
       >
-        <img alt="button-icon" src={ profileIcon } />
-      </button>
-      <h1 data-testid="page-title">Comida</h1>
+        <img
+          alt="button-icon"
+          src={ profileIcon }
+          data-testid="profile-top-btn"
+        />
+      </Link>
+      {search ? <SearchBar /> : <h1 data-testid="page-title">{ title }</h1>}
       <button
-        className="search-btn"
-        data-testid="search-top-btn"
         type="button"
+        className="search-btn"
+        onClick={ showSearch }
       >
-        <img alt="button-icon" src={ searchIcon } />
+        <img
+          alt="button-icon"
+          src={ searchIcon }
+          data-testid="search-top-btn"
+        />
       </button>
     </header>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};

@@ -1,11 +1,12 @@
 import React from 'react';
 import './pageCSS/ExploreMeals.css';
 import BottomMenu from '../components/BottomMenu';
+import HeaderNoSearch from '../components/HeaderNoSearch';
 
 export default function ExploreMeals() {
   return (
     <>
-      <h1>I&apos;m the Explore Meals!</h1>
+      <HeaderNoSearch title="Explorar Comidas" />
       <BottomMenu />
     </>
   );
