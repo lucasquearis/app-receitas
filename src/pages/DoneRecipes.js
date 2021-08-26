@@ -1,42 +1,64 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
+import '../styles/RecipeDetails.css';
 
 function DoneRecipes() {
   const [doneList, setDoneList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {
     setDoneList(JSON.parse(localStorage.getItem('doneRecipes')));
   }, []);
+
+  useEffect(() => {
+    setFilteredList([...doneList]);
+  }, [doneList]);
+
+  const handleClickFilter = (filter) => {
+    if (filter === 'comida' || filter === 'bebida') {
+      setFilteredList([...doneList].filter((recipe) => recipe.type === filter));
+    }
+    if (filter === 'all') {
+      setFilteredList([...doneList]);
+    }
+  };
 
   return (
     <div>
       <Header title="Receitas Feitas" />
       <button
         type="button"
+        onClick={ () => handleClickFilter('all') }
         data-testid="filter-by-all-btn"
       >
         All
       </button>
       <button
         type="button"
+        onClick={ () => handleClickFilter('comida') }
         data-testid="filter-by-food-btn"
       >
         Food
       </button>
       <button
         type="button"
+        onClick={ () => handleClickFilter('bebida') }
         data-testid="filter-by-drink-btn"
       >
         Drinks
       </button>
-      { doneList && doneList.map((recipe, index) => (
+      { filteredList && filteredList.map((recipe, index) => (
         <div key={ index }>
-          <img
-            src={ recipe.image }
-            data-testid={ `${index}-horizontal-image` }
-            alt="Foto do Prato"
-          />
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <img
+              className="recipe-image"
+              src={ recipe.image }
+              data-testid={ `${index}-horizontal-image` }
+              alt="Foto do Prato"
+            />
+          </Link>
           <h3
             data-testid={ `${index}-horizontal-top-text` }
           >
@@ -44,7 +66,9 @@ function DoneRecipes() {
               ? recipe.area
               : recipe.alcoholicOrNot} - ${recipe.category}` }
           </h3>
-          <h2 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h2>
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <h2 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h2>
+          </Link>
           <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
           <ShareButton index={ index } address={ `/${recipe.type}s/${recipe.id}` } />
           {recipe.tags.map(
