@@ -3,22 +3,19 @@ import * as ComidasAPI from '../service/ComidasAPI';
 import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 
 export default function Comidas() {
-  const obj = [];
-  const [comidas, setComidas] = useState(obj);
-
+  const [comidas, setComidas] = useState([]);
+  const fetchFoods = async () => {
+    const maxFood = 12;
+    const results = await ComidasAPI.buscarComidaPorNome('');
+    setComidas(results.filter((result, index) => index < maxFood));
+  };
   useEffect(() => {
-    const fetchFoods = async () => {
-      const maxFood = 12;
-      const results = await ComidasAPI.buscarComidaPorNome('');
-      setComidas(results.filter((result, index) => index < maxFood));
-    };
-    fetchFoods();
-    if (comidas === obj) return;
-    setComidas(obj);
-  }, [obj]);
+    if (comidas.length <= 0) {
+      fetchFoods();
+    }
+  }, [comidas]);
 
   // fetchFoods();
   if (comidas.length <= 0) {
