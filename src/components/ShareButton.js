@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
-=======
-import { useHistory } from 'react-router-dom';
->>>>>>> main-group-4
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
@@ -39,6 +35,7 @@ function ShareButton({ index, address }) {
 }
 
 ShareButton.propTypes = {
+  pathname: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
 };
