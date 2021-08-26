@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Context from '.';
 import { fetchAPI } from '../services/API';
 
+import useFavorite from '../hooks/useFavorite';
+
 function Provider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
   const [inputText, setInputText] = useState('');
@@ -10,6 +12,7 @@ function Provider({ children }) {
   const [radioValue, setRadioValue] = useState('s');
   const [toggle, setToggle] = useState(false);
   const [email, setEmail] = useState('');
+  const [favoriteList, setFavoriteList] = useFavorite([]);
   const requestApiData = useCallback(async (URL) => {
     const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
@@ -28,6 +31,8 @@ function Provider({ children }) {
     toggle,
     email,
     setEmail,
+    favoriteList,
+    setFavoriteList,
   };
 
   return (

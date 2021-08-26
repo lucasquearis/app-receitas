@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import { getFavorites } from '../../services/localStorage';
+import Context from '../../context';
 import Header from '../../components/Header';
 import Filter from './components/Filter';
 import FavoriteCard from './components/Card';
 
 function Favorites() {
-  const [currentFavorites, setCurrentFavorites] = useState();
+  const { favoriteList } = useContext(Context);
+  console.log(favoriteList);
   const [filteredList, setFilteredList] = useState([]);
-  console.log(filteredList);
+
   useEffect(() => {
-    const data = getFavorites();
-    setCurrentFavorites(data);
-    setFilteredList(data);
-  }, [setCurrentFavorites, setFilteredList]);
+    setFilteredList(favoriteList);
+  }, [setFilteredList, favoriteList]);
+
   return (
     <div className="favorite-page">
       <Header title="Receitas Favoritas" renderSearchIcon={ false } />
-      <Filter setFilteredList={ setFilteredList } list={ currentFavorites } />
+      <Filter setFilteredList={ setFilteredList } list={ favoriteList } />
       {filteredList.map((item) => <FavoriteCard key={ item.id } item={ item } />)}
+
     </div>
   );
 }

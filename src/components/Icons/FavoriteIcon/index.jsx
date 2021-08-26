@@ -1,37 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import Context from '../../../context';
 import heart from '../../../images/whiteHeartIcon.svg';
 import fullHeart from '../../../images/blackHeartIcon.svg';
 
 function FavoriteIcon({ recipe }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { favoriteList, setFavoriteList } = useContext(Context);
 
   useEffect(() => {
-    const key = 'favoriteRecipes';
-    const data = JSON.parse(localStorage.getItem(key)) || [];
-    const findFavorite = data.find((item) => item.id === recipe.id);
-    const bool = !!findFavorite;
+    const bool = !!favoriteList.find((item) => item.id === recipe.id);
     setIsFavorite(bool);
-  }, [setIsFavorite, recipe]);
-
-  const setLocalStorage = () => {
-    const key = 'favoriteRecipes';
-    const data = JSON.parse(localStorage.getItem(key));
-    if (isFavorite) {
-      const value = data.filter((item) => item.id !== recipe.id);
-      localStorage.setItem(key, JSON.stringify(value));
-      setIsFavorite(!isFavorite);
-    } else {
-      const value = data ? [...data, recipe] : [recipe];
-      localStorage.setItem(key, JSON.stringify(value));
-      setIsFavorite(!isFavorite);
-    }
-  };
+  }, [favoriteList, setIsFavorite, recipe]);
 
   return (
-    <button type="button" onClick={ setLocalStorage }>
+    <button type="button" onClick={ () => setFavoriteList(recipe) }>
       <Image
         data-testid="favorite-btn"
         className="header-icon"
