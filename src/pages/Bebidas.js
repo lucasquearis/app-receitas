@@ -11,7 +11,6 @@ export default function Bebidas() {
       <Header recipeType="drinks">
         Bebidas
       </Header>
-      Bebidas
       <MenuInferior />
     </div>
   );

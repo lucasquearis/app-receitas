@@ -44,10 +44,10 @@ export default function SearchBar() {
     if (searchRadio === firstLetterSearch && searchInput.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    if (searchRadio === 'ingredient-search-radio') {
+    if (searchRadio === 'ingredient-search') {
       response = await fetchCocktailsByIngredient(searchInput);
     }
-    if (searchRadio === 'name-search-radio') {
+    if (searchRadio === 'name-search') {
       response = await fetchCocktailsByName(searchInput);
     }
     if (searchRadio === firstLetterSearch) {
@@ -78,13 +78,13 @@ export default function SearchBar() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <input
           type="image"
           data-testid="search-input"
           alt="Search"
         />
-      </div>
+      </div> */}
       <input
         id="search-input"
         type="text"
