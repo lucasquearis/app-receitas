@@ -8,9 +8,11 @@ import './DetailsHeader.css';
 
 function DetailsHeader({ title, subtitle, favorite }) {
   const [isCopied, setIsCopied] = useState(false);
+
   const handleClick = () => {
     setIsCopied(true);
   };
+
   return (
     <header className="header-container">
       <div className="header-title-container">

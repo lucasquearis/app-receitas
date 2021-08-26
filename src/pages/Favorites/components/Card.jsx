@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import ShareIcon from '../../../components/Icons/ShareIcon';
 import FavoriteIcon from '../../../components/Icons/FavoriteIcon';
 import './Card.css';
 
 function FavoriteCard({ item }) {
-  console.log(item.area);
   return (
     <Container>
       <div className="card-container">
-        <img className="card-image" src={ item.image } alt={ item.name } />
+        <Link className="card-image" to={ `${item.type}s/${item.id}` }>
+          <img src={ item.image } alt={ item.name } />
+        </Link>
         <div className="text-container">
           { item.area
             ? (
@@ -20,7 +22,9 @@ function FavoriteCard({ item }) {
             : (
               <p>{item.category}</p>
             )}
-          <h5 className="card-name">{item.name}</h5>
+          <Link to={ `${item.type}s/${item.id}` }>
+            <h5 className="card-name">{item.name}</h5>
+          </Link>
           <div className="icons-container">
             <ShareIcon />
             <FavoriteIcon recipe={ item } />
