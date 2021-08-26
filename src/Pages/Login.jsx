@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import InputCard from '../Components/InputCard';
 import { loginValidator } from '../helper';
+import ButtonCard from '../Components/ButtonCard';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = () => {
-    localStorage.setItem('email', JSON.stringify({
+    localStorage.setItem('user', JSON.stringify({
       email,
     }));
     localStorage.setItem('cocktailsToken', 1);
@@ -30,17 +30,13 @@ function Login() {
           testId="password-input"
           onChange={ ({ target: { value } }) => setPassword(value) }
         />
-        <Link
-          to="/mainpage"
-        >
-          <button
-            type="button"
-            disabled={ !loginValidator({ email, password }) }
-            onClick={ handleSubmit }
-          >
-            Entrar
-          </button>
-        </Link>
+        <ButtonCard
+          page="/comidas"
+          testId="login-submit-btn"
+          buttonText="Entrar"
+          onClick={ handleSubmit }
+          disabled={ !loginValidator({ email, password }) }
+        />
       </form>
     </main>
   );
