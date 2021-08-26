@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../cssPages/Ingredients.css';
 import fetchFoods from '../fetchs/FetchFood';
+import MyContext from '../context/MyContext';
 
-function IngredientesComida() {
+function ComidaIng() {
+  const { setFilterByIng } = useContext(MyContext);
   const [ingredients, setIngredients] = useState();
   const [redirect, setRedirect] = useState({
     redirect: false,
-    path: '',
   });
   const getIngredients = async () => {
     const list = await fetchFoods('food', 'ingredients');
@@ -25,7 +26,9 @@ function IngredientesComida() {
     event.preventDefault();
     setRedirect({
       redirect: true,
-      path: name,
+    });
+    setFilterByIng({
+      ingredient: name,
     });
   }
 
@@ -34,28 +37,30 @@ function IngredientesComida() {
   }, []);
 
   console.log(ingredients);
-  if (redirect.redirect) return <Redirect to={ `/Comidas/${redirect.path}` } />;
+  if (redirect.redirect) return <Redirect to="/Comidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (
     <div>
       <Header titulo="Explorar Comidas" />
       <main className="div">
-        { ingredients.map(({ idIngredient, strIngredient }, index) => (
+        { ingredients.map(({ strIngredient }, index) => (
           <Card
             data-testid={ `${index}-ingredient-card` }
-            name={ idIngredient }
             style={ { width: '18rem' } }
+            name={ strIngredient }
             key={ index }
             onClick={ onClick }
           >
             <Card.Img
               data-testid={ `${index}-card-img` }
               variant="top"
-              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}.png` }
+              name={ strIngredient }
+              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
             />
             <Card.Body>
               <Card.Title
                 data-testid={ `${index}-card-name` }
+                name={ strIngredient }
               >
                 { strIngredient }
               </Card.Title>
@@ -68,4 +73,4 @@ function IngredientesComida() {
   );
 }
 
-export default IngredientesComida;
+export default ComidaIng;

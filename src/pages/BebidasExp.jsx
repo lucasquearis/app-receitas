@@ -24,29 +24,31 @@ function BebidasExp() {
   return (
     <div>
       <Header titulo="Explorar Bebidas" />
-      <main className="main">
-        <Button
-          data-testid="explore-by-ingredient"
-          className="btn"
-          type="button"
-          name="ingredientes"
-          variant="light"
-          size="lg"
-          onClick={ onClick }
-        >
-          Por Ingredientes
-        </Button>
-        <Button
-          data-testid="explore-surprise"
-          className="btn"
-          type="button"
-          name="bebidas"
-          variant="light"
-          size="lg"
-          onClick={ onClick }
-        >
-          Me Surpreenda!
-        </Button>
+      <main>
+        <div className="div2">
+          <Button
+            data-testid="explore-by-ingredient"
+            className="btn"
+            type="button"
+            name="ingredientes"
+            variant="light"
+            size="lg"
+            onClick={ onClick }
+          >
+            Por Ingredientes
+          </Button>
+          <Button
+            data-testid="explore-surprise"
+            className="btn"
+            type="button"
+            name="bebidas"
+            variant="light"
+            size="lg"
+            onClick={ onClick }
+          >
+            Me Surpreenda!
+          </Button>
+        </div>
       </main>
       <Footer />
     </div>

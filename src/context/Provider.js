@@ -6,6 +6,7 @@ import fetchFoods from '../fetchs/FetchFood';
 function Provider({ children }) {
   const [name, setName] = useState('');
   const [data, setData] = useState();
+  const [filterByIng, setFilterByIng] = useState();
 
   const handleClick = async (type, action, value, callback) => {
     const result = await fetchFoods(type, action, value);
@@ -18,6 +19,8 @@ function Provider({ children }) {
     setName,
     name,
     setData,
+    filterByIng,
+    setFilterByIng,
   };
 
   return (

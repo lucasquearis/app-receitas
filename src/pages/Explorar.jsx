@@ -38,7 +38,7 @@ function Explorar() {
             Explorar Comidas
           </Button>
           <Button
-            data-testid="explore-food"
+            data-testid="explore-drinks"
             className="btn"
             type="button"
             name="bebidas"

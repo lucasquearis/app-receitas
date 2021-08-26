@@ -5,7 +5,7 @@ const fetchFoods = async (type, action, value = '') => {
     ingredients: 'list.php?i=list',
   };
   const endPoints = {
-    drink: 'www.thecocktaildb.com/api/json/v1/1/',
+    drink: 'https://www.thecocktaildb.com/api/json/v1/1/',
     food: 'https://www.themealdb.com/api/json/v1/1/',
   };
   const endPoint = `${endPoints[type]}${actions[action]}${value}`;

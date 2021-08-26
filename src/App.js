@@ -9,9 +9,9 @@ import Explorar from './pages/Explorar';
 import BebidasExp from './pages/BebidasExp';
 import ComidasExp from './pages/ComidasExp';
 import Perfil from './pages/Perfil';
-import OrigemComida from './pages/OrigemExp';
-import IngredientesComida from './pages/IngredientesExp';
-import ComidasIngredients from './pages/ComidasIngredients';
+import LocalDeOrigem from './pages/LocalDeOrigem';
+import ComidaIng from './pages/ComidaIng';
+import BebidasIng from './pages/BebidasIng';
 
 function App() {
   return (
@@ -19,22 +19,22 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/comidas/:id-da-receita" component={ ComidasIngredients } />
           <Route exact path="/comidas" component={ Comidas } />
-          <Route path="/explorar/comidas/ingredientes" component={ IngredientesComida } />
-          <Route path="/explorar/comidas/area" component={ OrigemComida } />
+          <Route path="/explorar/comidas/ingredientes" component={ ComidaIng } />
+          <Route path="/explorar/comidas/area" component={ LocalDeOrigem } />
           <Route path="/explorar/comidas" component={ ComidasExp } />
+          <Route path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
           <Route path="/explorar/bebidas" component={ BebidasExp } />
           <Route exect path="/explorar" component={ Explorar } />
           <Route path="/perfil" component={ Perfil } />
           {/*
           <Route path="/" component={ Login } />
+          <Route path="/comidas/:id" component={ ComidaExpIngId } />
           {/* <Route path="/comidas" component={ Login } />
           <Route path="/bebidas" component={ Login } />
           <Route path="/bebidas/{id-da-receita}" component={ Login } />
           <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route path="/explorar/bebidas/ingredientes" component={ Login } />
           <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
