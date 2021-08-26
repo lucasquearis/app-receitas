@@ -11,7 +11,11 @@ const foodcategories = (state = INITIAL_STATE, action) => {
 
   switch (type) {
   case GET_CATEGORIES_FOOD:
-    return { ...state, foodCategories: payload.slice(0, CINCO), isLoading: false };
+    console.log(payload);
+    return {
+      ...state,
+      foodCategories: payload.categories.slice(0, CINCO),
+      isLoading: false };
 
   default:
     return state;
