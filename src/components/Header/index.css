@@ -17,15 +17,16 @@
   background-color: #c4c4c4;
   display: flex;
   font-family: Roboto , sans-serif;
-  font-size: 30px;
+  font-size: 26px;
   font-style: normal;
   font-weight: 500;
   height: 58px;
-  justify-content: flex-start;
+  justify-content: space-between;
   line-height: 35px;
   padding: 5px;
   width: 360px;
 }
+
 
 .header-search {
   align-items: center;
@@ -40,9 +41,6 @@
 }
 
 .profile-header {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
-.title-header {
-  margin: 0 110px;
-}

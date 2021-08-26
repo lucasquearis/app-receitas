@@ -4,6 +4,7 @@ import { useData } from '../Context/DataContext';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import RecipesList from '../components/RecipesList';
+import Footer from '../components/Footer';
 
 function RecipesMainPage() {
   const location = useLocation();
@@ -80,13 +81,14 @@ function RecipesMainPage() {
 
   return (
     <div>
-      <Header />
+      <Header title="Comidas" />
       { renderCategoryButtons() }
       { renderAllButton() }
       <RecipesList
         recipesData={ recipesData }
         recipeKey={ recipeKey }
       />
+      <Footer />
     </div>
   );
 }

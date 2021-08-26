@@ -6,6 +6,7 @@ import RecipeInProgress from './pages/RecipeInProgress';
 import Details from './pages/Details';
 import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
+import RecipesDone from './pages/RecipesDone';
 
 export default function Routes() {
   return (
@@ -25,7 +26,7 @@ export default function Routes() {
         <Route path="/explorar/bebidas/ingredientes" component={ NotFound } />
         <Route path="/explorar/comidas/area" component={ NotFound } />
         <Route path="/perfil" component={ Perfil } />
-        <Route path="/receitas-feitas" component={ NotFound } />
+        <Route path="/receitas-feitas" component={ RecipesDone } />
         <Route path="/receitas-favoritas" component={ NotFound } />
       </Switch>
     </BrowserRouter>

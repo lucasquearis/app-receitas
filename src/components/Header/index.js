@@ -33,6 +33,7 @@ export default function Header({ title }) {
       <span className="title-header">
         <Title title={ title || pn } />
       </span>
+      <span>{' '}</span>
     </header>
   );
 }
