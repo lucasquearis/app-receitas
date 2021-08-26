@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Spinner } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import { getDataDetails } from '../services/api';
 import ingredientsDetails from '../helpers/getIngredients';
@@ -8,6 +9,7 @@ import useLocalStorageRecipes from '../hooks/useLocalStorageRecipes';
 
 export default function FoodDetails() {
   const { id } = useParams();
+  const history = useHistory();
 
   const [recipes, setRecipes] = useState({ id });
   const [loading, setLoading] = useState(true);
@@ -55,6 +57,7 @@ export default function FoodDetails() {
           video={ strYoutube }
           doneRecipe={ doneRecipes }
           progressRecipe={ progress }
+          handleClick={ () => history.push(`/comidas/${id}/in-progress`) }
         />
       )}
     </div>
