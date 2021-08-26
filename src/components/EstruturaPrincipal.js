@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
@@ -24,12 +24,14 @@ function EstruturaPrincipal({
     const recipesListLimit = 12;
     if (index < recipesListLimit) {
       return (
-        <Card
-          img={ recipe[`str${keyType}Thumb`] }
-          index={ index }
-          key={ `${keyType}-card-${index}` }
-          name={ recipe[`str${keyType}`] }
-        />
+        <Link to={ `${pathname}/${recipe[`id${keyType}`]}` }>
+          <Card
+            img={ recipe[`str${keyType}Thumb`] }
+            index={ index }
+            key={ `${keyType}-card-${index}` }
+            name={ recipe[`str${keyType}`] }
+          />
+        </Link>
       );
     }
     return null;

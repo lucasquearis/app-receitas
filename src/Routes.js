@@ -44,6 +44,8 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
       />
       <Route exact path="/perfil" component={ Perfil } />
       <Route exact path="/explorar" component={ Explorar } />
+      {/* <Route exact path="/comidas/:id" component={ Detalhe } />
+      <Route exact path="/bebidas/:id" component={ Detalhe } /> */}
     </Switch>
   );
 }
