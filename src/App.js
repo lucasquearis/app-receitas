@@ -1,13 +1,19 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './Routes';
-import FoodAndDrinksProvider from './context/FoodAndDrinksProvider';
+import DataProvider from './context/DataProvider';
+import CategoriesProvider from './context/CategoriesProvider';
+import FiltersProvider from './context/FiltersProvider';
 
 function App() {
   return (
-    <FoodAndDrinksProvider>
-      <Routes />
-    </FoodAndDrinksProvider>
+    <DataProvider>
+      <FiltersProvider>
+        <CategoriesProvider>
+          <Routes />
+        </CategoriesProvider>
+      </FiltersProvider>
+    </DataProvider>
   );
 }
 
