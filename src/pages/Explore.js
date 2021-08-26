@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ExploreComponent,
   Footer,
   Header,
 } from '../components';
@@ -7,7 +8,7 @@ import {
 const Explore = () => (
   <div>
     <Header page="Explorar" />
-    Explorar
+    <ExploreComponent />
     <Footer />
   </div>
 );
