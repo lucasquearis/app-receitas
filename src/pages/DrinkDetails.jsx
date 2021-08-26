@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Carousel, Button, Image } from 'react-bootstrap';
 import * as fetchAPI from '../service/fetchAPI';
@@ -9,6 +10,7 @@ function DrinkDetails(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tip, setTip] = useState([]);
+  const [redirect, setRedirect] = useState(false);
   const { strDrinkThumb, strDrink, strInstructions, strAlcoholic } = data;
 
   useEffect(() => {
@@ -46,6 +48,10 @@ function DrinkDetails(props) {
     if (condition === undefined) return 'Iniciar Receita';
     return 'Continuar Receita';
   };
+
+  const handleClick = () => setRedirect(true);
+
+  if (redirect) return <Redirect to={ `/bebidas/${data.idDrink}/in-progress` } />;
 
   if (loading) return <h1>Loading...</h1>;
   return (
@@ -85,6 +91,7 @@ function DrinkDetails(props) {
         type="button"
         data-testid="start-recipe-btn"
         className="btn-success"
+        onClick={ handleClick }
       >
         {buttonName()}
       </Button>

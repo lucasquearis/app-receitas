@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Carousel, Button, Image } from 'react-bootstrap';
 import * as fetchAPI from '../service/fetchAPI';
@@ -10,6 +11,7 @@ function RecipesDetails(props) {
   const [loading, setLoading] = useState(true);
   const [tip, setTip] = useState([]);
   const [URLId, setURLId] = useState('');
+  const [redirect, setRedirect] = useState(false);
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = data;
 
   useEffect(() => {
@@ -49,12 +51,14 @@ function RecipesDetails(props) {
 
   const buttonName = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    // console.log(inProgress.cocktails[data.idMeal]);
     const condition = inProgress ? inProgress.meals[data.idMeal] : undefined;
     if (condition === undefined) return 'Iniciar Receita';
     return 'Continuar Receita';
   };
 
+  const handleClick = () => setRedirect(true);
+
+  if (redirect) return <Redirect to={ `/comidas/${data.idMeal}/in-progress` } />;
   if (loading) return <h1>Loading...</h1>;
   return (
     <div>
@@ -100,6 +104,7 @@ function RecipesDetails(props) {
         type="button"
         data-testid="start-recipe-btn"
         className="btn-success"
+        onClick={ handleClick }
       >
         {buttonName()}
       </Button>

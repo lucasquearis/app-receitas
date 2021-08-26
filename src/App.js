@@ -15,10 +15,14 @@ import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ExplorarIngredientes from './pages/ExplorarIngredientes';
 import ExplorarOrigem from './pages/ExplorarOrigem';
+import bebidasEmProgresso from './pages/bebidasEmProgresso';
+import comidasEmProgresso from './pages/comidasEmProgresso';
 
 function App() {
   return (
     <Switch>
+      <Route path="/bebidas/:id/in-progress" component={ bebidasEmProgresso } />
+      <Route path="/comidas/:id/in-progress" component={ comidasEmProgresso } />
       <Route path="/bebidas/:id" component={ DrinkDetails } />
       <Route path="/comidas/:id" component={ RecipesDetails } />
       <Route path="/perfil" component={ Perfil } />
