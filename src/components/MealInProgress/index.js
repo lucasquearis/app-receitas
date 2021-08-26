@@ -1,42 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router';
+import { Button } from 'react-bootstrap';
 import { getFood } from '../../services/foodAPI';
-import { getDrinksForRecommendation } from '../../services/drinkAPI';
-import { doesItExist, createIngredients } from '../../utils';
+import { doesItExist } from '../../utils';
 import {
   // FOOD_ERROR_RESPONSE,
   NEW_FOOD_SEARCH,
   FOOD_RESPONSE } from '../../redux/reducers/foodReducer';
 import Ingredients from '../Ingredients';
-import Recommendations from '../Recommendations';
-import StartRecipe from '../StartRecipe';
 import DetailsButtonsField from '../DetailsButtonsField';
 import Loading from '../Loading';
 import './style.css';
 
-const MealDetails = () => {
+const MealInProgress = () => {
+  const history = useHistory();
   const loading = useSelector(({ food }) => food.loading);
   const meals = useSelector(({ food }) => food.meals);
   const error = useSelector(({ food }) => food.error);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [ingredients, setIngredients] = useState([]);
-  const [recommendations, setRecommendations] = useState([]);
+  const location = useLocation();
+  const [disabled, setDisabled] = useState(true);
   const maxIngredients = 20;
 
   useEffect(() => {
-    const fetchDrinks = async () => {
-      const response = await getDrinksForRecommendation();
-      setRecommendations(response);
-    };
     const fetchFood = async () => {
       // try {
       dispatch({ type: NEW_FOOD_SEARCH });
       const response = await getFood(id, 'id');
-      const getIngredients = createIngredients(response, maxIngredients);
-      await setIngredients(getIngredients);
-      await fetchDrinks();
       dispatch({ type: FOOD_RESPONSE, payload: response });
       // } catch (error) {
       //   console.log(error);
@@ -44,7 +37,7 @@ const MealDetails = () => {
       // }
     };
     fetchFood();
-  }, [id, dispatch]);
+  }, [id, dispatch, location]);
 
   const handleFavorite = () => {
     const { idMeal, strMeal, strMealThumb, strCategory, strArea } = meals[0];
@@ -70,6 +63,28 @@ const MealDetails = () => {
     }
   };
 
+  const handleFinish = () => {
+    const { idMeal, strMeal, strMealThumb, strCategory, strArea, strTags } = meals[0];
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const oldDoneRecipes = doesItExist(doneRecipes);
+    const newDoneRecipes = [
+      ...oldDoneRecipes,
+      {
+        id: idMeal,
+        type: 'comida',
+        area: strArea,
+        category: strCategory,
+        alcoholicOrNot: '',
+        name: strMeal,
+        image: strMealThumb,
+        doneDate: new Date(),
+        tags: strTags.split(','),
+      },
+    ];
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
+    history.push('/receitas-feitas');
+  };
+
   if (loading) return <Loading />;
 
   if (error) {
@@ -80,7 +95,7 @@ const MealDetails = () => {
     );
   }
 
-  const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meals[0];
+  const { strMeal, strMealThumb, strCategory, strInstructions } = meals[0];
 
   return (
     <div className="recipe-details">
@@ -94,13 +109,19 @@ const MealDetails = () => {
       <br />
       <DetailsButtonsField recipeType="comidas" handleFavorite={ handleFavorite } />
       <p data-testid="recipe-category">{ strCategory }</p>
-      <Ingredients max={ maxIngredients } page="details" />
+      <Ingredients max={ maxIngredients } page="inProgress" setDisabled={ setDisabled } />
       <p className="instructions" data-testid="instructions">{ strInstructions }</p>
-      <iframe src={ strYoutube } title="video" data-testid="video" />
-      <Recommendations recommendations={ recommendations } />
-      <StartRecipe recipeType="meals" ingredients={ ingredients } />
+      <Button
+        className="finish-recipe-btn"
+        type="button"
+        data-testid="finish-recipe-btn"
+        onClick={ handleFinish }
+        disabled={ disabled }
+      >
+        Finish recipe
+      </Button>
     </div>
   );
 };
 
-export default MealDetails;
+export default MealInProgress;

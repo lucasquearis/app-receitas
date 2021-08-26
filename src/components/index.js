@@ -15,5 +15,7 @@ export { default as ExploreAreaComponent } from './ExploreAreaComponent';
 export { default as NotFoundComponent } from './NotFoundComponent';
 export { default as StartRecipe } from './StartRecipe';
 export { default as DetailsButtonsField } from './DetailsButtonsField';
+export { default as DrinkInProgress } from './DrinkInProgress';
+export { default as MealInProgress } from './MealInProgress';
 export { default as DoneRecipes } from './DoneRecipes';
 export { default as FavoriteRecipes } from './FavoriteRecipes';

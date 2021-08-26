@@ -1,42 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router';
+import { Button } from 'react-bootstrap';
 import { getDrink } from '../../services/drinkAPI';
-import { getMealsForRecommendation } from '../../services/foodAPI';
-import { doesItExist, createIngredients } from '../../utils';
+import { doesItExist } from '../../utils';
 import {
   // DRINK_ERROR_RESPONSE,
   NEW_DRINK_SEARCH,
   DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
 import Ingredients from '../Ingredients';
-import Recommendations from '../Recommendations';
-import StartRecipe from '../StartRecipe';
 import DetailsButtonsField from '../DetailsButtonsField';
 import Loading from '../Loading';
 import './style.css';
 
-const DrinkDetails = () => {
+const DrinkInProgress = () => {
+  const history = useHistory();
   const loading = useSelector(({ drink }) => drink.loading);
   const drinks = useSelector(({ drink }) => drink.drinks);
   const error = useSelector(({ drink }) => drink.error);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [ingredients, setIngredients] = useState([]);
-  const [recommendations, setRecommendations] = useState([]);
+  const location = useLocation();
+  const [disabled, setDisabled] = useState(true);
   const maxIngredients = 15;
 
   useEffect(() => {
-    const fetchMeals = async () => {
-      const response = await getMealsForRecommendation();
-      setRecommendations(response);
-    };
     const fetchDrink = async () => {
       // try {
       dispatch({ type: NEW_DRINK_SEARCH });
       const response = await getDrink(id, 'id');
-      const getIngredients = createIngredients(response, maxIngredients);
-      await setIngredients(getIngredients);
-      await fetchMeals();
       dispatch({ type: DRINK_RESPONSE, payload: response });
       // } catch (error) {
       //   console.log(error);
@@ -44,7 +37,7 @@ const DrinkDetails = () => {
       // }
     };
     fetchDrink();
-  }, [id, dispatch]);
+  }, [id, dispatch, location]);
 
   const handleFavorite = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -68,6 +61,28 @@ const DrinkDetails = () => {
       const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idDrink);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     }
+  };
+
+  const handleFinish = () => {
+    const { idDrink, strDrink, strDrinkThumb, strCategory, strAlcoholic } = drinks[0];
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const oldDoneRecipes = doesItExist(doneRecipes);
+    const newDoneRecipes = [
+      ...oldDoneRecipes,
+      {
+        id: idDrink,
+        type: 'bebida',
+        area: '',
+        category: strCategory,
+        alcoholicOrNot: strAlcoholic,
+        name: strDrink,
+        image: strDrinkThumb,
+        doneDate: new Date(),
+        tags: [],
+      },
+    ];
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
+    history.push('/receitas-feitas');
   };
 
   if (loading) return <Loading />;
@@ -94,12 +109,18 @@ const DrinkDetails = () => {
       <br />
       <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
       <p data-testid="recipe-category">{ strAlcoholic }</p>
-      <Ingredients max={ maxIngredients } page="details" />
+      <Ingredients max={ maxIngredients } page="inProgress" setDisabled={ setDisabled } />
       <p className="instructions" data-testid="instructions">{ strInstructions }</p>
-      <Recommendations recommendations={ recommendations } />
-      <StartRecipe recipeType="cocktails" ingredients={ ingredients } />
+      <Button
+        type="button"
+        data-testid="finish-recipe-btn"
+        onClick={ handleFinish }
+        disabled={ disabled }
+      >
+        Finish recipe
+      </Button>
     </div>
   );
 };
 
-export default DrinkDetails;
+export default DrinkInProgress;

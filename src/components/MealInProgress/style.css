@@ -1,0 +1,39 @@
+.recipe-details {
+  text-align: center;
+}
+
+.recipe-title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.recipe-photo {
+  height: auto;
+  margin-bottom: 20px;
+  max-height: 300px;
+  max-width: 300px;
+  width: auto;
+}
+
+.ingredients-container {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.ingredient-check {
+  margin-right: 10px;
+}
+
+.instructions {
+  padding: 20px;
+}
+
+.share-btn, .favorite-btn {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.finish-recipe-btn {
+  margin-bottom: 20px;
+}

@@ -18,3 +18,41 @@ export const doesItExist = (key) => {
   if (key) return key;
   return [];
 };
+
+export const doesInprogressExist = (key) => {
+  if (key) return key;
+  return {
+    cocktails: {},
+    meals: {},
+  };
+};
+
+export const createIngredients = (response, max) => {
+  const newIngredients = [];
+  for (let index = 1; index <= max; index += 1) {
+    const name = response[0][`strIngredient${index}`];
+    const measure = response[0][`strMeasure${index}`];
+    if (name) {
+      const ingredient = {
+        name,
+        measure,
+        done: false,
+      };
+      newIngredients.push(ingredient);
+    }
+  }
+  return newIngredients;
+};
+
+export const createDecorations = (ingredients) => {
+  const newDecorations = ingredients.map((ingredient) => {
+    if (ingredient.done) {
+      return ({ textDecoration: 'line-through' });
+    }
+    return {};
+  });
+  return newDecorations;
+};
+
+export const handleDisabled = (ingredients) => !ingredients
+  .every((ingredient) => ingredient.done);

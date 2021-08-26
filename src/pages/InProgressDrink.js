@@ -1,8 +1,9 @@
 import React from 'react';
+import { DrinkInProgress } from '../components';
 
 const InProgressDrink = () => (
   <div>
-    Drink em Preparo
+    <DrinkInProgress />
   </div>
 );
 

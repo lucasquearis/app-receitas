@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { bool, func, string } from 'prop-types';
+import { useParams } from 'react-router';
+import { func, string } from 'prop-types';
 import { Button } from 'react-bootstrap';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
-const DetailsButtonsField = (props) => {
-  const { handleShare, handleFavorite, shared, recipeId } = props;
+const copy = require('clipboard-copy');
+
+const DetailsButtonsField = ({ recipeType, handleFavorite }) => {
+  const { id } = useParams();
+  const [shared, setShared] = useState(false);
   const [heart, setHeart] = useState(whiteHeartIcon);
 
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes && favoriteRecipes.some((recipe) => recipe.id === recipeId)) {
+    if (favoriteRecipes && favoriteRecipes.some((recipe) => recipe.id === id)) {
       setHeart(blackHeartIcon);
     }
-  }, [recipeId]);
+  }, [id]);
+
+  const handleShare = () => {
+    copy(`http://localhost:3000/${recipeType}/${id}`);
+    setShared(true);
+  };
 
   const handleClick = () => {
     handleFavorite();
@@ -39,10 +48,8 @@ const DetailsButtonsField = (props) => {
 };
 
 DetailsButtonsField.propTypes = {
-  handleShare: func.isRequired,
+  recipeType: string.isRequired,
   handleFavorite: func.isRequired,
-  shared: bool.isRequired,
-  recipeId: string.isRequired,
 };
 
 export default DetailsButtonsField;
