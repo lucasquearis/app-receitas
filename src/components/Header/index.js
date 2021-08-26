@@ -15,14 +15,24 @@ function Header({ title, renderSearchIcon }) {
     <header>
       <Navbar className="header-navbar">
         <Nav>
-          <Link data-testid="profile-top-btn" to="/perfil">
-            <img className="icon" src={ profile } alt="profile-icon" />
+          <Link to="/perfil">
+            <img
+              data-testid="profile-top-btn"
+              className="icon"
+              src={ profile }
+              alt="profile-icon"
+            />
           </Link>
         </Nav>
-        <p className="title" data-testid="search-top-btn">{title}</p>
+        <p className="title" data-testid="page-title">{title}</p>
         { renderSearchIcon && (
-          <Nav data-testid="search-top-btn" onClick={ () => setShowSearch(!showSearch) }>
-            <img className="icon" src={ search } alt="search-icon" />
+          <Nav onClick={ () => setShowSearch(!showSearch) }>
+            <img
+              data-testid="search-top-btn"
+              className="icon"
+              src={ search }
+              alt="search-icon"
+            />
           </Nav>
         )}
       </Navbar>
