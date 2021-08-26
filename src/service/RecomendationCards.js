@@ -11,6 +11,7 @@ export default function renderRecomendationCard(recipe, type) {
           to={ `/bebidas/${recipe[index][`id${type}`]}` }
           data-testid={ `${index}-recomendation-card` }
           key={ index }
+          className="recomendation-card"
         >
           <div>
             <img
@@ -20,7 +21,11 @@ export default function renderRecomendationCard(recipe, type) {
             <p>
               {type === 'Drinks' ? recipe[index].strAlcoholic : recipe[index].strCategory}
             </p>
-            <p>{recipe[index][`str${type}`]}</p>
+            <p
+              data-testid={ `${index}-recomendation-title` }
+            >
+              {recipe[index][`str${type}`]}
+            </p>
           </div>
         </Link>,
       );

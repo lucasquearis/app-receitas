@@ -71,3 +71,18 @@
   bottom: 0;
   position: fixed;
 }
+
+.recomendations-container {
+  display: flex;
+  overflow: scroll;
+  width: 300px;
+}
+
+.recomendation-card {
+  height: 100px;
+  width: 50%;
+}
+
+.recomendation-card img {
+  width: 170px;
+}

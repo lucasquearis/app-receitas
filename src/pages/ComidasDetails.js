@@ -137,7 +137,7 @@ function ComidasDetails(props) {
         </div>
         <div>
           <h3>Recomendadas</h3>
-          <div>
+          <div className="recomendations-container">
             { renderRecomendationCard(drinks, 'Drink').map((recipe) => recipe) }
           </div>
         </div>
