@@ -14,10 +14,11 @@
 .paizao img {
   display: flex;
   margin-bottom: 10px;
-  
 }
 
-.paizinho {
+.paiDeTodos {
+  align-items: center;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
 }

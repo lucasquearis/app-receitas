@@ -1,47 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { ListGroup } from 'react-bootstrap';
+import foodsEdrinks from '../mocks/foodsEdrinks';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import '../cssPages/ReceitasF.css';
 
 function ReceitasFeitas() {
-  const doneRecipes = [
-    {
-      id: '52771',
-      type: 'comida',
-      area: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '23/06/2020',
-      tags: ['Pasta', 'Curry'],
-    },
-    {
-      id: '178319',
-      type: 'bebida',
-      area: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '23/06/2020',
-      tags: [],
-    },
-  ];
+  const [finishRecipes, SetFinishRecipes] = useState([]);
   const minNumber = 2;
+
+  useEffect(() => {
+    SetFinishRecipes(foodsEdrinks);
+  }, []);
+
+  function onClick({ target: { name } }) {
+    const filtroBebidas = foodsEdrinks.filter((bebida) => bebida.type === 'bebida');
+    const filtroComidas = foodsEdrinks.filter((comida) => comida.type === 'comida');
+    if (name === 'bebida') SetFinishRecipes(filtroBebidas);
+    if (name === 'comida') SetFinishRecipes(filtroComidas);
+    if (name === 'all') SetFinishRecipes(foodsEdrinks);
+  }
+
   return (
     <div>
       <Header titulo="Receitas Feitas" pesquisa="false" />
       <div className="buttons">
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          name="all"
+          type="button"
+          onClick={ onClick }
+          data-testid="filter-by-all-btn"
+        >
+          All
+
+        </button>
+        <button
+          name="comida"
+          type="button"
+          onClick={ onClick }
+          data-testid="filter-by-food-btn"
+        >
+          Food
+
+        </button>
+        <button
+          name="bebida"
+          type="button"
+          onClick={ onClick }
+          data-testid="filter-by-drink-btn"
+        >
+          Drinks
+
+        </button>
       </div>
-      <CardGroup>
-        {doneRecipes.map((recipe, index) => (
+      <CardGroup className="paiDeTodos">
+        {finishRecipes.map((recipe, index) => (
           <Card
             name={ recipe.name }
             style={ { width: '18rem' } }
@@ -71,7 +86,7 @@ function ReceitasFeitas() {
                 className="mb-2 text-muted"
                 data-testid={ `${index}-horizontal-top-text` }
               >
-                {`${recipe.area.length === 0 ? recipe.alcoholicOrNot : recipe.area}  -  
+                {`${recipe.area.length === 0 ? recipe.alcoholicOrNot : recipe.area} - 
                 ${recipe.category}`}
 
               </Card.Subtitle>
@@ -93,11 +108,9 @@ function ReceitasFeitas() {
                       </ListGroup.Item>))
                 }
               </ListGroup>
-
             </Card.Body>
           </Card>
         ))}
-
       </CardGroup>
 
     </div>
