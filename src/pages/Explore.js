@@ -7,12 +7,12 @@ function Explore() {
   return (
     <div>
       <Header title="Explorar" />
-      <Link>
+      <Link to="/explorar/comidas">
         <button data-testid="explore-food">
           Explorar Comidas
         </button>
       </Link>
-      <Link>
+      <Link to="/explorar/bebidas">
         <button data-testid="explore-drinks">
           Explorar Bebidas
         </button>
