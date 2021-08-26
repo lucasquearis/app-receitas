@@ -64,3 +64,9 @@ export const fetchCategoriesDrinks = async (name) => {
     console.log(error);
   }
 };
+
+export const copyToClipboard = () => {
+  const myUrl = window.location.href;
+  localStorage.setItem('clipboard', JSON.stringify(myUrl));
+  return true;
+};

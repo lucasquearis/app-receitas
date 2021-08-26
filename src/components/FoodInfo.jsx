@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
+import { copyToClipboard } from '../services';
 import DrinksCards from './DrinksCard';
 
 function FoodInfo() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { details, drinks } = useSelector((state) => state.foodsAndDrinks);
+  const [copy, setCopy] = useState(false);
   const sixRecomendations = 6;
 
   useEffect(() => {
@@ -33,7 +35,13 @@ function FoodInfo() {
         data-testid="recipe-photo"
       />
       <h2 data-testid="recipe-title">{ foodDetails.strMeal }</h2>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
+      <button
+        onClick={ () => setCopy(copyToClipboard) }
+        type="button"
+        data-testid="share-btn"
+      >
+        { !copy ? 'Compartilhar' : 'Link copiado' }
+      </button>
       <button type="button" data-testid="favorite-btn">Favorito</button>
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
       <ul>
