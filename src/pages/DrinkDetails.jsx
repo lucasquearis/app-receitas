@@ -32,8 +32,6 @@ export default function FoodDetails() {
     strVideo,
   } = recipes;
 
-  console.log(recipes);
-
   const { progress, doneRecipes } = useLocalStorageRecipes();
 
   return (
@@ -42,6 +40,7 @@ export default function FoodDetails() {
         <Spinner animation="border" />
       ) : (
         <RecipeDetailCard
+          data={ recipes }
           id={ idDrink }
           key={ idDrink }
           img={ strDrinkThumb }
