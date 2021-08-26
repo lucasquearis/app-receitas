@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { FOOD_RESPONSE } from '../../redux/reducers/foodReducer';
 import { getFoodTypesList, getFoodByFilter } from '../../services/foodAPI';
@@ -14,11 +14,11 @@ const FoodList = () => {
   const meals = useSelector(({ food }) => food.meals);
   const error = useSelector(({ food }) => food.error);
   const dispatch = useDispatch();
-  const history = useHistory();
   const [foodTypesList, setFoodTypesList] = useState(false);
   const [loadingList, setLoadingList] = useState(true);
   const [foodFilter, setFoodFilter] = useState(false);
   const [filteredMeals, setFilteredMeals] = useState(meals);
+  const [originalMeals, setOriginalMeals] = useState(meals);
 
   useEffect(() => {
     const getFirstMeals = async () => {
@@ -26,6 +26,7 @@ const FoodList = () => {
       const { meals: startMeals } = await response.json();
       dispatch({ type: FOOD_RESPONSE, payload: startMeals });
       setFilteredMeals(startMeals);
+      setOriginalMeals(startMeals);
     };
     getFirstMeals();
   }, [dispatch]);
@@ -79,11 +80,12 @@ const FoodList = () => {
   if (!filteredMeals) {
     // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    setFilteredMeals(originalMeals);
     return <p>Nenhuma receita encontrada...</p>;
   }
 
   if (filteredMeals.length === 1 && !foodFilter) {
-    history.push(`/comidas/${filteredMeals[0].idMeal}`);
+    return <Redirect to={ `/comidas/${filteredMeals[0].idMeal}` } />;
   }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
 import DrinkCard from '../DrinkCard';
@@ -14,11 +14,11 @@ const DrinkList = () => {
   const drinks = useSelector(({ drink }) => drink.drinks);
   const error = useSelector(({ drink }) => drink.error);
   const dispatch = useDispatch();
-  const history = useHistory();
   const [drinkTypesList, setDrinkTypesList] = useState(false);
   const [loadingList, setLoadingList] = useState(true);
   const [drinkFilter, setDrinkFilter] = useState(false);
   const [filteredDrinks, setFilteredDrinks] = useState(drinks);
+  const [originalDrinks, setOriginalDrinks] = useState(drinks);
 
   useEffect(() => {
     const getFirstMeals = async () => {
@@ -26,6 +26,7 @@ const DrinkList = () => {
       const { drinks: startDrinks } = await response.json();
       dispatch({ type: DRINK_RESPONSE, payload: startDrinks });
       setFilteredDrinks(startDrinks);
+      setOriginalDrinks(startDrinks);
     };
     getFirstMeals();
   }, [dispatch]);
@@ -79,11 +80,12 @@ const DrinkList = () => {
   if (!filteredDrinks) {
     // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    setFilteredDrinks(originalDrinks);
     return <p>Nenhuma receita encontrada...</p>;
   }
 
   if (filteredDrinks.length === 1 && !drinkFilter) {
-    history.push(`/bebidas/${filteredDrinks[0].idDrink}`);
+    return <Redirect to={ `/bebidas/${filteredDrinks[0].idDrink}` } />;
   }
 
   return (
