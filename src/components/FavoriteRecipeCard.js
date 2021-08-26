@@ -1,6 +1,6 @@
 // vitals
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 // styles
@@ -9,10 +9,10 @@ import favoriteButton from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
 const renderTitle = (alcoholicOrNot, area, category, type, index) => {
-  if (type === 'bebida' && alcoholicOrNot.includes('Non')) {
+  if (type === 'bebida') {
     return (
       <div className="title-container">
-        <h5>{alcoholicOrNot}</h5>
+        <h5 data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</h5>
       </div>
     );
   }
@@ -48,7 +48,7 @@ function FavoriteRecipeCard(
           alt={ `Foto do produto ${name}` }
           data-testid={ `${index}-horizontal-image` }
           onClick={ () => {
-            history.push(`/${type}/${id}`);
+            history.push(`/${type}s/${id}`);
           } }
         />
       </div>
@@ -57,13 +57,10 @@ function FavoriteRecipeCard(
         <div className="name-container">
           <button
             type="button"
-            onClick={ () => history.push(`/${type}/${id}`) }
+            data-testid={ `${index}-horizontal-name` }
+            onClick={ () => history.push(`/${type}s/${id}`) }
           >
-            <h4
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {name}
-            </h4>
+            {name}
           </button>
         </div>
         <div className="favorite-and-share-buttons">
