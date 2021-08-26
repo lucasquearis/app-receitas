@@ -1,5 +1,5 @@
 header {
-  background-color: #fa9500;
+  background-color: #eb6424;
   display: block;
 }
 
@@ -13,8 +13,13 @@ input {
   justify-content: space-between;
 }
 
+#profile-icon {
+  filter: invert(100%);
+
+}
+
 .search-button {
-  background: #fa9500;
+  background-color: #eb6424;
   border: none;
   cursor: pointer;
   display: inline-block;
@@ -27,12 +32,15 @@ input {
 }
 
 .search-button:hover {
-  background: #fa9500;
+  background-color: #eb6424;
 }
 
+.search-button img {
+  filter: invert(100%);
+}
 
 .search-button:focus {
-  background-color: #fa9500;
+  background-color: #eb6424;
   outline: none;
   outline-offset: none;
 }
@@ -48,7 +56,12 @@ input {
 }
 
 h3 {
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.search-form {
+  background-color: #fa9500 ;
 }

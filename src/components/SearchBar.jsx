@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import '../styles/Header.css';
 import context from '../context/Context';
 
@@ -11,7 +12,6 @@ export default function SearchBar({ title }) {
     try {
       const request = await fetch(url);
       const { meals } = await request.json();
-      console.log(meals);
       setSearchDataMeals(meals);
     } catch (error) {
       return console.log(error);
@@ -22,7 +22,6 @@ export default function SearchBar({ title }) {
     try {
       const request = await fetch(url);
       const { drinks } = await request.json();
-      console.log(drinks);
       setSearchDataDrinks(drinks);
     } catch (error) {
       return console.log(error);
@@ -34,7 +33,6 @@ export default function SearchBar({ title }) {
   const showAlert = (func, mensagem) => func(mensagem);
 
   const handleSearchMeals = () => {
-    console.log('searchMeals');
     if (searchInput && searchRadio) {
       if (searchRadio === 'ingrediente') {
         fetchRecipesMeals(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`);
@@ -51,7 +49,6 @@ export default function SearchBar({ title }) {
   };
 
   const handleSearchDrinks = () => {
-    console.log('searchDrinks');
     if (searchInput && searchRadio) {
       if (searchRadio === 'ingrediente') {
         fetchRecipesDrinks(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`);
@@ -67,6 +64,11 @@ export default function SearchBar({ title }) {
     }
   };
 
+  const handleSearch = () => {
+    const search = title === 'Comidas' ? handleSearchMeals() : handleSearchDrinks();
+    return search;
+  };
+
   return (
     <form className="search-form">
       <input
@@ -78,7 +80,7 @@ export default function SearchBar({ title }) {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ title === 'Comidas' ? handleSearchMeals : handleSearchDrinks }
+        onClick={ handleSearch }
       >
         Buscar
       </button>
@@ -120,3 +122,7 @@ export default function SearchBar({ title }) {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
