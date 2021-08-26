@@ -6,7 +6,7 @@ function ExploreDrink() {
   return (
     <div>
       <Header title="Explorar Bebidas" />
-      <Link>
+      <Link to="/explorar/bebidas/ingredientes">
         <button data-testid="explore-by-ingredient">
           Por Ingredientes
         </button>

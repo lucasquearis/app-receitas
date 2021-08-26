@@ -6,7 +6,7 @@ function ExploreFood() {
   return (
     <div>
       <Header title="Explorar Comidas" />
-      <Link>
+      <Link to="/explorar/comidas/ingredientes">
         <button data-testid="explore-by-ingredient">
           Por Ingredientes
         </button>
