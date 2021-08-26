@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
@@ -6,10 +6,13 @@ import FoodRecomendations from './FoodRecomendations';
 import DrinkRecomendations from './DrinkRecomendations';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
+import favIconChecked from '../images/blackHeartIcon.svg';
+import { getDataFromLocalStorage } from '../helpers/saveOnLocalStorage';
 
 export default function RecipeDetailCard({
   img,
   title,
+  id,
   category,
   ingredients,
   instructions,
@@ -22,6 +25,7 @@ export default function RecipeDetailCard({
   const currentPage = location.pathname;
   const curretPageURL = window.location.href;
   const [msgLink, setMsgLink] = useState('');
+  const [favorited, setFavorited] = useState(false);
 
   function embedVideo(youtubeLink) {
     if (youtubeLink === null) {
@@ -29,6 +33,13 @@ export default function RecipeDetailCard({
     }
     return youtubeLink.replace('watch?v=', 'embed/');
   }
+
+  useEffect(() => {
+    const favorites = getDataFromLocalStorage('favoriteRecipes');
+    favorites.forEach((favorite) => {
+      if (favorite.id === id) setFavorited(true);
+    });
+  }, [id]);
 
   const onClickShare = () => {
     setMsgLink('Link copiado!');
@@ -58,7 +69,11 @@ export default function RecipeDetailCard({
           type="button"
           style={ { border: 'none', background: 'none' } }
         >
-          <img data-testid="favorite-btn" src={ favIcon } alt="Favoritar" />
+          <img
+            data-testid="favorite-btn"
+            src={ !favorited ? favIcon : favIconChecked }
+            alt="Favoritar"
+          />
         </button>
       </div>
       <div>
@@ -104,6 +119,7 @@ export default function RecipeDetailCard({
 }
 
 RecipeDetailCard.propTypes = {
+  id: PropTypes.number.isRequired,
   img: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,

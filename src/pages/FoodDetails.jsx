@@ -39,6 +39,7 @@ export default function FoodDetails() {
         <Spinner animation="border" />
       ) : (
         <RecipeDetailCard
+          id={ idMeal }
           key={ idMeal }
           img={ strMealThumb }
           title={ strMeal }
