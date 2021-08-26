@@ -8,7 +8,7 @@ function RecipeInProgress({ recipe, type }) {
   return (
     <>
       <HeroDetails recipe={ recipe } type={ type } />
-      <Checkbox recipe={ recipe } />
+      <Checkbox recipe={ recipe } type={ type } />
       <section>
         <h3>Instructions</h3>
         <p data-testid="instructions">{recipe.strInstructions}</p>

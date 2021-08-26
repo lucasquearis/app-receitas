@@ -20,7 +20,7 @@ footer, .start-recipe {
   width: 150px;
 }
 
-input[type="checkbox"]:checked + label{
+input[ type = 'checkbox' ]:checked + label {
   text-decoration: line-through;
 }
 
