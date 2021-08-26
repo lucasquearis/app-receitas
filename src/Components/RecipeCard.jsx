@@ -25,11 +25,14 @@ function RecipeCard(props) {
 }
 
 const { string, number } = PropTypes;
-
+RecipeCard.defaultProps = {
+  id: null,
+  thumbnail: '',
+};
 RecipeCard.propTypes = {
-  id: string.isRequired,
+  id: string,
+  thumbnail: string,
   dataId: string.isRequired,
-  thumbnail: string.isRequired,
   title: string.isRequired,
   index: number.isRequired,
 };

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// import RecipeCard from '../Components/RecipeCard';
 
 function FoodIngredientesExplore() {
-  const [ingredient, setIngredient] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -11,16 +9,35 @@ function FoodIngredientesExplore() {
       const response = await fetch(END_POINT);
       const { meals } = await response.json();
       setData(meals);
-      const ingredientMap = data.map(({ strIngredient }) => strIngredient);
-      setIngredient(ingredientMap);
     };
     getIngredient();
-  }, [setIngredient]);
+  }, [data]);
 
+  const srcImg = (name) => `https://www.themealdb.com/images/ingredients/${name}-Small.png`;
+  const MNumber = '12';
   return (
     <>
-      { console.log(ingredient) }
-      {/* <RecipeCard /> */}
+      {data
+        .filter((_, item) => (item < MNumber))
+        .map(({ strIngredient }, index) => (
+          <div
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+          >
+            <img
+              src={ srcImg(strIngredient) }
+              data-testid={ `${index}-card-img` }
+              alt={ strIngredient }
+            />
+            <div>
+              <h4
+                data-testid={ `${index}-card-name` }
+              >
+                { strIngredient }
+              </h4>
+            </div>
+          </div>
+        ))}
     </>
   );
 }
