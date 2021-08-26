@@ -2,21 +2,21 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import RecipesMainPage from './pages/RecipesMainPage';
+import RecipeInProgress from './pages/RecipeInProgress';
 import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
 
 export default function Routes() {
-  const id = 'olar';
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ RecipesMainPage } />
-        <Route path="/bebidas" component={ RecipesMainPage } />
-        <Route path={ `/comidas/${id}` } component={ NotFound } />
-        <Route path={ `/bebidas/${id}` } component={ NotFound } />
-        <Route path={ `/comidas/${id}/in-progress` } component={ NotFound } />
-        <Route path={ `/bebidas/${id}/in-progress` } component={ NotFound } />
+        <Route exact path="/comidas" component={ RecipesMainPage } />
+        <Route exact path="/bebidas" component={ RecipesMainPage } />
+        <Route exact path="/comidas/:id" component={ NotFound } />
+        <Route exact path="/bebidas/:id" component={ NotFound } />
+        <Route exact path="/comidas/:id/in-progress" component={ RecipeInProgress } />
+        <Route exact path="/bebidas/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/explorar" component={ NotFound } />
         <Route path="/explorar/comidas" component={ NotFound } />
         <Route path="/explorar/bebidas" component={ NotFound } />
