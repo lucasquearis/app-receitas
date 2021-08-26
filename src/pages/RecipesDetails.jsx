@@ -16,7 +16,7 @@ function RecipesDetails(props) {
     const { history: { location: { pathname } } } = props;
     const id = pathname.split('/')[2];
     fetchAPI.fetchRecipeById(id).then(({ meals }) => setData(meals[0]));
-    fetchAPI.fetchRecipeSuggestions().then(({ meals }) => setTip(meals));
+    fetchAPI.fetchDrinkSuggestions().then(({ drinks }) => setTip(drinks));
   }, []);
 
   useEffect(() => {
@@ -77,10 +77,14 @@ function RecipesDetails(props) {
       <Carousel>
         {
           tip && tip.map((recipe, index) => (
-            <Carousel.Item key={ index } data-testid={ `${index}-recomendation-card` }>
-              <Image fluid src={ recipe.strMealThumb } />
-              <h4>{ recipe.strMeal }</h4>
-            </Carousel.Item>))
+            index < 6
+            && (
+              <Carousel.Item key={ index } data-testid={ `${index}-recomendation-card` }>
+                <Image fluid src={ recipe.strDrinkThumb } />
+                <h4 data-testid={ `${index}-recomendation-title` }>
+                  { recipe.strDrink }
+                </h4>
+              </Carousel.Item>)))
         }
       </Carousel>
       <Button
