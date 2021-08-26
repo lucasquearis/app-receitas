@@ -65,6 +65,7 @@ function Provider({ children }) {
     recipes,
     categories,
     requestCategory,
+    setRecipes,
   };
 
   return (

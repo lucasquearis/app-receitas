@@ -7,11 +7,18 @@ function Button({ name, datatestid }) {
   const {
     filter: { search, type, src },
     RequestAPI,
+    setRecipes,
+    recipes,
     recipes: { list, loading },
   } = useContext(Context);
 
   const handleClick = () => {
     RequestAPI();
+  };
+
+  const throwAlert = () => {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    setRecipes({ ...recipes, list: [], loading: true });
   };
 
   return (
@@ -33,7 +40,7 @@ function Button({ name, datatestid }) {
       && <Redirect to={ `/bebidas/${list.drinks[0].idDrink}` } />}
       {!loading
       && (list.drinks === null || list.meals === null)
-      && global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
+      && throwAlert()}
       { name }
     </button>
   );
