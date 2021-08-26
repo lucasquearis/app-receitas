@@ -4,49 +4,46 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import initialStore from '../helpers/setLocalStorage';
 
 export default function InProgress(
   { name, img, category, ingredients, instructions, id },
 ) {
   const [favorite, setFavorite] = useState(false);
-  const [finishedSteps, setFinishedSteps] = useState([]);
-  const [checkBoxes, setcheckBoxes] = useState([]);
+  const [steps, setSteps] = useState([]);
 
   useEffect(() => {
-    if (localStorage.recipeProgess) {
-      const { recipes } = JSON
-        .parse(localStorage.getItem('recipeProgess'));
-      console.log(recipes);
-      const recipe = recipes.find((r) => r.id === id);
-      console.log(recipe);
-      if (recipe) setFinishedSteps(recipe.checked);
-      localStorage.setItem('recipeProgess', JSON.stringify({
-        recipes: [...recipes, { id }],
-      }));
-      return;
-    }
-    localStorage.setItem('recipeProgess', JSON.stringify({
-      recipes: [{
-        id,
-        checked: finishedSteps,
-      }],
-    }));
+    initialStore(id, setSteps, ingredients);
   }, []);
+
   useEffect(() => {
     if (!localStorage.recipeProgess) { return; }
     const { recipes } = JSON
       .parse(localStorage.getItem('recipeProgess'));
-    console.log('update');
     localStorage.setItem('recipeProgess', JSON.stringify({
       recipes: [
         ...recipes.filter(((r) => r.id !== id)),
         {
           id,
-          checked: finishedSteps,
+          steps,
         }],
     }));
-  }, [finishedSteps]);
+  }, [steps]);
+
+  const handleCheckBoxChange = ({ target }) => {
+    const { name: n, checked } = target;
+    const ingIndex = steps.findIndex(({ step }) => step === n);
+    console.log(ingIndex);
+    setSteps([
+      ...steps.slice(0, ingIndex),
+      { step: n, checked },
+      ...steps.slice(ingIndex + 1),
+    ]);
+    console.log(steps);
+  };
+
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
+
   return (
     <div className="in-progress">
       <img width="200px" src={ img } alt={ name } data-testid="recipe-photo" />
@@ -68,28 +65,21 @@ export default function InProgress(
       </div>
       <h2 data-testid="recipe-category">{category}</h2>
       <ul>
-        {ingredients.map((ingredient, i) => (
+        {steps.map(({ step, checked }, i) => (
           <li key={ i }>
             <label
               data-testid={ `${i}-ingredient-step` }
-              className={ finishedSteps.includes(i) ? 'step-done' : '' }
+              className={ checked ? 'step-done' : '' }
               htmlFor={ `ingredient${i}` }
             >
               <input
                 type="checkbox"
-                checked={ finishedSteps.some((step) => step === i) ? 'step-done' : '' }
-                name={ ingredient[1] }
+                checked={ checked }
+                name={ step }
                 id={ `ingredient${i}` }
-                onChange={ () => {
-                  if (finishedSteps.includes(i)) {
-                    setFinishedSteps(finishedSteps.filter((check) => check !== i));
-                    return;
-                  }
-                  setFinishedSteps([...finishedSteps, i]);
-                  console.log(finishedSteps, 'else');
-                } }
+                onChange={ handleCheckBoxChange }
               />
-              {ingredient[1]}
+              {step}
             </label>
           </li>
         ))}
@@ -102,7 +92,7 @@ export default function InProgress(
         <button
           type="button"
           data-testid="finish-recipe-btn"
-          disabled={ finishedSteps.length !== ingredients.length }
+          disabled={ !steps.every(({ checked }) => checked) }
         >
           Finish
 
