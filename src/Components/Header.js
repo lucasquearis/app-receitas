@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,12 +6,17 @@ import PerfilIcon from '../images/profileIcon.svg';
 import SearchIcon from '../images/searchIcon.svg';
 import Input from './Forms/Input';
 import InputRadio from './Forms/InputRadio';
+import RecipesContext from '../Context/RecipesContext';
+import * as comidasAPI from '../service/ComidasAPI';
+import * as bebidasAPI from '../service/BebidasAPI';
 
 export default function Header(props) {
   const [showSearch, setShowSearch] = useState(false);
   const [searchForm, setSearchFor] = useState({ searchValue: '', searchType: '' });
 
   const { title, searchIcon } = props;
+
+  const { recipes, setRecipes } = useContext(RecipesContext);
 
   const handleSearchClick = () => {
     setShowSearch(!showSearch);
@@ -39,8 +44,63 @@ export default function Header(props) {
     setSearchFor({ ...searchForm, [name]: value });
   };
 
+  const searchDrinkRecipe = () => {
+    const { searchType, searchValue } = searchForm;
+    if (searchType === 'ingredientes') {
+      const result = bebidasAPI.buscarBebidasIngrediente(searchValue);
+      return setRecipes(result);
+    }
+
+    if (searchType === 'primeira-letra') {
+      if (searchValue.length > 1) {
+        return alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      const result = bebidasAPI.buscarBebidasLetra(searchValue);
+      return setRecipes(result);
+    }
+
+    if (searchType === 'nome') {
+      const result = bebidasAPI.buscarBebidaNome(searchValue);
+      return setRecipes(result);
+    }
+
+    return alert('Digite um valor no campo!');
+  };
+
+  const searchFoodRecipe = () => {
+    const { searchType, searchValue } = searchForm;
+    if (searchType === 'ingredientes') {
+      const result = comidasAPI.buscarComidasIngrediente(searchValue);
+      return setRecipes(result);
+    }
+
+    if (searchType === 'primeira-letra') {
+      if (searchValue.length > 1) {
+        return alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      const result = comidasAPI.buscarComidasLetra(searchValue);
+      return setRecipes(result);
+    }
+
+    if (searchType === 'nome') {
+      const result = comidasAPI.buscarComidaNome(searchValue);
+      return setRecipes(result);
+    }
+
+    return alert('Digite um valor no campo!');
+  };
+
+  const searchRecipeByPath = () => {
+    const { location: { pathname } } = window;
+    if (pathname === '/comidas') {
+      return searchFoodRecipe();
+    }
+    return searchDrinkRecipe();
+  };
+
   const searchBar = () => (
     <form className="search-form">
+      {console.log(recipes)}
       <Input
         value={ searchForm.searchValue }
         name="searchValue"
@@ -73,7 +133,13 @@ export default function Header(props) {
           testid="first-letter-search-radio"
         />
       </div>
-      <button type="button" data-testid="exec-search-btn">Buscar</button>
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+        onClick={ searchRecipeByPath }
+      >
+        Buscar
+      </button>
     </form>
   );
 
