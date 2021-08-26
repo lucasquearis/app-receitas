@@ -15,7 +15,7 @@ export default function () {
 
   // ficou assim para passar no teste, mas fica meio quebrado ainda
   if (!drinks) {
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    console.log('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (<Redirect to="/bebidas" />);
   }
 
