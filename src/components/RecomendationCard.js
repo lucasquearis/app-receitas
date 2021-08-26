@@ -3,27 +3,29 @@ import {
   getRecomendationsDrinks,
   getRecomendationsMeals } from '../services/apiRequisitions';
 
-function RecomendationCard(type) {
+function RecomendationCard({ type }) {
   const [recomendations, setRecomendations] = useState([]);
+  const MAX_CARD_RECOMENDATIONS = 6;
 
   useEffect(() => {
     const getRecomendations = async () => {
       if (type === 'meals') setRecomendations(await getRecomendationsMeals());
       else setRecomendations(await getRecomendationsDrinks());
-      console.log('mamaue');
     };
     getRecomendations();
   }, [type]);
 
+  useEffect(() => console.log(recomendations), [recomendations]);
+
   return recomendations.length ? (
     <section>
-      {recomendations.map((recipe, index) => (
+      {recomendations.map((recipe, index) => (index < MAX_CARD_RECOMENDATIONS ? (
         <div data-testid={ `${index}-recomendation-card` } key={ index }>
           {`${index}-teste`}
         </div>
-      ))}
+      ) : null))}
     </section>
-  ) : null;
+  ) : <p>Loading</p>;
 }
 
 export default RecomendationCard;
