@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import fetch from '../services/fetch';
 
 export default class Search extends Component {
@@ -11,6 +10,8 @@ export default class Search extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleDrinks = this.handleDrinks.bind(this);
+    this.handleFoods = this.handleFoods.bind(this);
   }
 
   handleChange({ target }) {
@@ -18,31 +19,41 @@ export default class Search extends Component {
     this.setState({ [name]: value });
   }
 
-  async handleClick() {
+  async handleDrinks() {
     const { radio, text } = this.state;
-    const { titulo } = this.props;
-    if (titulo === 'Comidas') {
-      if (radio === 'Ingrediente') {
-        const ingredientes = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`);
-        return ingredientes;
-      } if (radio === 'Nome') {
-        const nomes = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`);
-        return nomes;
-      } if (radio === 'Primeira letra' && text.length === 1) {
-        const primeiras = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`);
-        return primeiras;
-      } alert('Sua busca deve conter somente 1 (um) caracter');
-    } if (titulo === 'Bebidas') {
-      if (radio === 'Ingrediente') {
-        const ingredientes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`);
-        return ingredientes;
-      } if (radio === 'Nome') {
-        const nomes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`);
-        return nomes;
-      } if (radio === 'Primeira letra' && text.length === 1) {
-        const primeiras = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`);
-        return primeiras;
-      } alert('Sua busca deve conter somente 1 (um) caracter');
+    if (radio === 'Ingrediente') {
+      const ingredientes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`);
+      return ingredientes;
+    } if (radio === 'Nome') {
+      const nomes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`);
+      return nomes;
+    } if (radio === 'Primeira letra' && text.length === 1) {
+      const primeiras = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`);
+      return primeiras;
+    } alert('Sua busca deve conter somente 1 (um) caracter');
+  }
+
+  async handleFoods() {
+    const { radio, text } = this.state;
+    if (radio === 'Ingrediente') {
+      const ingredientes = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`);
+      return ingredientes;
+    } if (radio === 'Nome') {
+      const nomes = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`);
+      return nomes;
+    } if (radio === 'Primeira letra' && text.length === 1) {
+      const primeiras = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`);
+      return primeiras;
+    } alert('Sua busca deve conter somente 1 (um) caracter');
+  }
+
+  handleClick() {
+    const path = window.location.pathname;
+    if (path === '/comidas') {
+      this.handleFoods();
+    }
+    if (path === '/bebidas') {
+      this.handleDrinks();
     }
   }
 
@@ -101,7 +112,3 @@ export default class Search extends Component {
     );
   }
 }
-
-Search.propTypes = {
-  titulo: PropTypes.string.isRequired,
-};
