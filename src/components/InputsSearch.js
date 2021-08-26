@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
-import Button from './Button';
+import SearchButton from './SearchButton';
 import InputRadio from './InputRadio';
 
 function InputsSearch() {
@@ -46,7 +46,7 @@ function InputsSearch() {
         value="first-letter"
         id="first-letter"
       />
-      <Button
+      <SearchButton
         datatestid="exec-search-btn"
         name="Buscar"
       />
