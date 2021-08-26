@@ -1,10 +1,11 @@
-.footer__navigation {
+.footer_navigation {
+
   /* Não é possível utilizar flexbox, em razão da necessidade de ser fixo */
-  position: fixed;
   bottom: 0;
+  position: fixed;
 }
 
-.footer__navigation img {
+.footer_navigation img {
   height: 35px;
   margin: 0 27.5px;
   padding: 5px;
