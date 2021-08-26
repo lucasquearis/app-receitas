@@ -85,6 +85,13 @@ export default function DetalheBebida(props) {
 
   return (
     <section className="food-info">
+      <button
+        className="start-drink-recipe-btn"
+        data-testid="start-recipe-btn"
+        type="button"
+      >
+        Iniciar Receita
+      </button>
       <img
         className="food-drink-image"
         data-testid="recipe-photo"
@@ -133,13 +140,6 @@ export default function DetalheBebida(props) {
         <p data-testid="instructions">{ drink.strInstructions }</p>
       </div>
       { randomFoodCard() }
-      <button
-        className="start-drink-recipe-btn"
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        Iniciar Receita
-      </button>
     </section>
   );
 }
