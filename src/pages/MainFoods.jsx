@@ -1,9 +1,15 @@
 import React from 'react';
+import FoodList from '../components/FoodList';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function MainFoods() {
   return (
-    <Header name="Comidas" />
+    <div>
+      <Header name="Comidas" />
+      <FoodList />
+      <Footer />
+    </div>
   );
 }
 

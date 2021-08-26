@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 function Login() {
   const SEIS = 6;
+  const [redirect, setRedirect] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -27,8 +28,13 @@ function Login() {
     localStorage.setItem('user', JSON.stringify({
       email: user.email,
     }));
+    setRedirect(true);
   };
 
+  if (redirect) {
+    return <Redirect to="/comidas" />;
+  }
+  
   return (
     <div>
       <input
@@ -48,18 +54,16 @@ function Login() {
         onChange={ handleChange }
         type="password"
       />
-      <Link to="/comidas">
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={ !(emailIsValid(user.email) && user.password.length > SEIS) }
-          color="primary"
-          data-testid="login-submit-btn"
-          onClick={ handleClick }
-        >
-          Entrar
-        </Button>
-      </Link>
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={ !(emailIsValid(user.email) && user.password.length > SEIS) }
+        color="primary"
+        data-testid="login-submit-btn"
+        onClick={ () => handleClick() }
+      >
+        Entrar
+      </Button>
     </div>
   );
 }
