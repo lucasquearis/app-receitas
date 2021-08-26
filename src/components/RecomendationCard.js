@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  getRecomendationsDrinks,
+  getRecomendationsMeals } from '../services/apiRequisitions';
 
-function RecomendationCard() {
-  const recipes = ['1', '2', '3', '4', '5', '6'];
-  return (
+function RecomendationCard(type) {
+  const [recomendations, setRecomendations] = useState([]);
+
+  useEffect(() => {
+    const getRecomendations = async () => {
+      if (type === 'meals') setRecomendations(await getRecomendationsMeals());
+      else setRecomendations(await getRecomendationsDrinks());
+      console.log('mamaue');
+    };
+    getRecomendations();
+  }, [type]);
+
+  return recomendations.length ? (
     <section>
-      {recipes.map((recipe, index) => (
+      {recomendations.map((recipe, index) => (
         <div data-testid={ `${index}-recomendation-card` } key={ index }>
-          {recipe}
+          {`${index}-teste`}
         </div>
       ))}
     </section>
-  );
+  ) : null;
 }
 
 export default RecomendationCard;

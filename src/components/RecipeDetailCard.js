@@ -67,7 +67,7 @@ function RecipeDetail() {
           title="video"
           data-testid="video"
         />) : null}
-      <RecomendationCard />
+      <RecomendationCard type="meals" />
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </section>
   ) : <p>Loading</p>;

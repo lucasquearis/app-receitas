@@ -9,3 +9,15 @@ export function getDrinkById(id) {
     .then((result) => result.json())
     .then((resolve) => resolve.drinks[0]);
 }
+
+export function getRecomendationsMeals() {
+  return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+    .then((result) => result.json())
+    .then((resolve) => resolve);
+}
+
+export function getRecomendationsDrinks() {
+  return fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+    .then((result) => result.json())
+    .then((resolve) => resolve);
+}
