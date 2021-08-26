@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PerfilIcon from '../images/profileIcon.svg';
 import SearchIcon from '../images/searchIcon.svg';
@@ -47,21 +47,21 @@ export default function Header(props) {
   const searchDrinkRecipe = () => {
     const { searchType, searchValue } = searchForm;
     if (searchType === 'ingredientes') {
-      const result = bebidasAPI.buscarBebidasIngrediente(searchValue);
-      return setRecipes(result);
+      return bebidasAPI.buscarBebidasIngrediente(searchValue)
+        .then((result) => setRecipes(result));
     }
 
     if (searchType === 'primeira-letra') {
       if (searchValue.length > 1) {
         return alert('Sua busca deve conter somente 1 (um) caracter');
       }
-      const result = bebidasAPI.buscarBebidasLetra(searchValue);
-      return setRecipes(result);
+      return bebidasAPI.buscarBebidasLetra(searchValue)
+        .then((result) => setRecipes(result));
     }
 
     if (searchType === 'nome') {
-      const result = bebidasAPI.buscarBebidaNome(searchValue);
-      return setRecipes(result);
+      return bebidasAPI.buscarBebidaNome(searchValue)
+        .then((result) => setRecipes(result));
     }
 
     return alert('Digite um valor no campo!');
@@ -70,21 +70,21 @@ export default function Header(props) {
   const searchFoodRecipe = () => {
     const { searchType, searchValue } = searchForm;
     if (searchType === 'ingredientes') {
-      const result = comidasAPI.buscarComidasIngrediente(searchValue);
-      return setRecipes(result);
+      return comidasAPI.buscarComidasIngrediente(searchValue)
+        .then((result) => setRecipes(result));
     }
 
     if (searchType === 'primeira-letra') {
       if (searchValue.length > 1) {
         return alert('Sua busca deve conter somente 1 (um) caracter');
       }
-      const result = comidasAPI.buscarComidasLetra(searchValue);
-      return setRecipes(result);
+      return comidasAPI.buscarComidasLetra(searchValue)
+        .then((result) => setRecipes(result));
     }
 
     if (searchType === 'nome') {
-      const result = comidasAPI.buscarComidaNome(searchValue);
-      return setRecipes(result);
+      return comidasAPI.buscarComidaNome(searchValue)
+        .then((result) => setRecipes(result));
     }
 
     return alert('Digite um valor no campo!');
@@ -98,9 +98,21 @@ export default function Header(props) {
     return searchDrinkRecipe();
   };
 
+  const redirect = () => {
+    let id = 'idMeal';
+    if (window.location.pathname === '/bebidas') {
+      id = 'idDrink';
+    }
+    return (
+      recipes.length === 1 && <Redirect
+        to={ `${window.location.pathname}/${recipes[0][id]}` }
+      />
+    );
+  };
+
   const searchBar = () => (
     <form className="search-form">
-      {console.log(recipes)}
+      { redirect() }
       <Input
         value={ searchForm.searchValue }
         name="searchValue"
