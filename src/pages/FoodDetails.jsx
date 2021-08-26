@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -9,6 +11,8 @@ function FoodDetails({ match: { params: { id } } }) {
   const [recomendedDrink, setRecomendedDrink] = useState({});
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = food;
   const [ingredientList, setIngredientList] = useState([]);
+  const location = useLocation();
+  const [share, setShare] = useState(false);
   const mystyle = {
     bottom: '0px',
     position: 'fixed',
@@ -65,11 +69,19 @@ function FoodDetails({ match: { params: { id } } }) {
       <div>
         <h3 data-testid="recipe-title">{ strMeal }</h3>
         <Button
+          onClick={ () => {
+            copy(`http://localhost:3000${location.pathname}`);
+            setShare(true);
+          } }
           type="button"
-          data-testid="share-btn"
         >
-          <img src={ shareIcon } alt="share" />
+          <img
+            src={ shareIcon }
+            alt="imagem de compartilhar"
+            data-testid="share-btn"
+          />
         </Button>
+        { share && <p>Link copiado!</p> }
         <Button
           type="button"
           data-testid="favorite-btn"
