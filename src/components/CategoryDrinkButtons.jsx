@@ -9,7 +9,7 @@ function CategoryDrinkButtons() {
   );
   // const loading = useSelector((state) => state.reducerCategories.isLoading);
   const dispatch = useDispatch();
-  console.log(categories);
+  // console.log(categories);
 
   useEffect(() => {
     dispatch(fetchDrinksCategories());
