@@ -1,19 +1,21 @@
-const URL_SETUP_BY_RADIO_BUTTON = {
+const URL_RADIO_BUTTON = {
   ingredient: 'filter.php?i',
   name: 'search.php?s',
   letter: 'search.php?f',
 };
-
-const URL_SETUP_BY_PAGE = new Map();
-URL_SETUP_BY_PAGE.set('/comidas', 'themealdb');
-URL_SETUP_BY_PAGE.set('/bebidas', 'thecocktaildb');
-
-const BODY_URL = '.com/api/json/v1/1/';
-
-const TEXT_ALERT_ONE = 'Sua busca deve conter somente 1 (um) caracter';
+const MEAL_OBJ = { textValue: '', radioValue: 'ingredient', pathname: '/comidas' };
+const DRINK_OBJ = { textValue: 'water', radioValue: 'ingredient', pathname: '/bebidas' };
+const ALERT_ONE = 'Sua busca deve conter somente 1 (um) caracter';
+const ALERT_TWO = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+const START_CARD = 0;
+const NUMBER_CARDS = 12;
 
 export {
-  URL_SETUP_BY_RADIO_BUTTON,
-  URL_SETUP_BY_PAGE,
-  TEXT_ALERT_ONE,
-  BODY_URL };
+  URL_RADIO_BUTTON,
+  ALERT_ONE,
+  ALERT_TWO,
+  START_CARD,
+  NUMBER_CARDS,
+  MEAL_OBJ,
+  DRINK_OBJ,
+};
