@@ -38,7 +38,7 @@ function RecipesDetails({ type }) {
           alt="Recipe"
           data-testid="recipe-photo"
         />
-        <RecipeDetailHeader type={ type } recipe={ recipe } />
+        <RecipeDetailHeader type={ type } recipe={ recipe } recipeID={ recipeID } />
         <RecipeDetailIngredients recipe={ recipe } />
         <RecipeDetailInstructions recipe={ recipe } />
         {(type === 'food') && <RecipeDetailVideo videoSource={ recipe.strYoutube } />}
