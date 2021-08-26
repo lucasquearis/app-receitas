@@ -8,15 +8,9 @@ import Login from './Pages/Login/Login';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
 import Explore from './Pages/Explore';
+import ExploreIngredients from './Pages/ExploreIngredients';
 
 function App() {
-  const exploreFoodDrink = (
-    <Header
-      title="Explorar Ingredientes"
-      searchButton={ false }
-    />
-  );
-
   return (
     <AppProvider>
       <Switch>
@@ -36,7 +30,7 @@ function App() {
         <Route
           exact
           path="/explorar/comidas/ingredientes"
-          render={ () => exploreFoodDrink }
+          component={ ExploreIngredients }
         />
         <Route
           exact
@@ -55,7 +49,7 @@ function App() {
         <Route
           exact
           path="/explorar/bebidas/ingredientes"
-          render={ () => exploreFoodDrink }
+          component={ ExploreIngredients }
         />
         <Route
           exact
