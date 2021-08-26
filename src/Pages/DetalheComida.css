@@ -64,10 +64,11 @@
 .start-recipe-btn {
   background-color: lime;
   border: none;
+  bottom: 0;
   font-size: 18px;
   font-weight: 600;
   height: 55px;
-  margin: 90vh 25px 0 25px;
+  margin-left: 30px;
   position: fixed;
   width: 85%;
 }
