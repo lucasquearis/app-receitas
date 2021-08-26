@@ -5,7 +5,10 @@ import fetchFoods from '../fetchs/FetchFood';
 
 function Provider({ children }) {
   const [name, setName] = useState('');
-  const [data, setData] = useState();
+  const [data, setData] = useState({
+    food: {},
+    drink: {},
+  });
 
   const handleClick = async (type, action, value, callback) => {
     const result = await fetchFoods(type, action, value);
