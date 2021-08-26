@@ -103,16 +103,20 @@ export default function Header(props) {
     if (window.location.pathname === '/bebidas') {
       id = 'idDrink';
     }
-    return (
-      recipes.length === 1 && <Redirect
-        to={ `${window.location.pathname}/${recipes[0][id]}` }
-      />
-    );
+
+    if (!recipes) {
+      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+
+    if (recipes.length === 1) {
+      return <Redirect to={ `${window.location.pathname}/${recipes[0][id]}` } />;
+    }
   };
 
   const searchBar = () => (
     <form className="search-form">
       { redirect() }
+      {console.log(recipes)}
       <Input
         value={ searchForm.searchValue }
         name="searchValue"
