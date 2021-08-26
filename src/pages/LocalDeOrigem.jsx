@@ -42,7 +42,7 @@ function LocalDeOrigem() {
 
   useEffect(() => {
     getReceitas();
-  }, [geitas]);
+  }, []);
 
   function onClick(event) {
     const { name } = event.target;

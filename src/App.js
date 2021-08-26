@@ -8,6 +8,7 @@ import Comidas from './pages/Comidas';
 import Explorar from './pages/Explorar';
 import BebidasExp from './pages/BebidasExp';
 import ComidasExp from './pages/ComidasExp';
+import Bebidas from './pages/Bebidas';
 import Perfil from './pages/Perfil';
 import LocalDeOrigem from './pages/LocalDeOrigem';
 import ComidaIng from './pages/ComidaIng';
@@ -20,6 +21,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route exact path="/comidas" component={ Comidas } />
+          <Route path="/bebidas" component={ Bebidas } />
           <Route path="/explorar/comidas/ingredientes" component={ ComidaIng } />
           <Route path="/explorar/comidas/area" component={ LocalDeOrigem } />
           <Route path="/explorar/comidas" component={ ComidasExp } />
@@ -31,9 +33,15 @@ function App() {
           <Route path="/" component={ Login } />
           <Route path="/comidas/:id" component={ ComidaExpIngId } />
           {/* <Route path="/comidas" component={ Login } />
-          <Route path="/bebidas" component={ Login } />
           <Route path="/bebidas/{id-da-receita}" component={ Login } />
           <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
+          <Route path="/comidas" component={ Comidas } />
+          <Route path="/comidas/:id" component={ Comidas } />
+          <Route path="/bebidas" component={ Bebidas } />
+          <Route path="/bebidas/:id" component={ Bebidas } />
+          <Route path="/perfil" component={ Perfil } />
+
+          {/* <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
