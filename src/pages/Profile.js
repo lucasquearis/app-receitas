@@ -7,9 +7,9 @@ function Profile(props) {
   const [email, SetEmail] = useState();
 
   useEffect(() => {
-    const local = localStorage.getItem('user');
-    const getLocal = JSON.parse(local);
-    SetEmail(getLocal.email);
+    const getLocal = JSON.parse(localStorage.getItem('user'));
+    if (getLocal) SetEmail(getLocal.email);
+    else SetEmail('');
   }, [email]);
 
   const FavoriteRecipes = () => {
