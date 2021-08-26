@@ -1,0 +1,40 @@
+.styleLogin {  
+  border: none;
+  display: flex;
+  flex-direction: column;   
+  border-radius: 4px; 
+  margin: auto; 
+  text-align: center; 
+  width: 300px;
+  height: 585px; 
+}
+.imput{
+  margin-top: 5%;
+  background-color: rgba(0, 0, 1, 0.603);
+  border: none;
+  width: 298px;
+  height: 45px;
+  border-radius: 4px;
+  color: aliceblue;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.imageLogoIcon{
+  margin: auto;
+  width: 50%;
+}
+
+.btnButon{
+  margin-top: 10px;
+  height: 45px;  
+}
+
+.group7{
+  color: white;
+  margin-top: 30px;
+}
+
+.textLogin{
+  color: white;
+}

@@ -1,8 +1,6 @@
-import USER_EMAIL from './actionTypes';
+export const USER_EMAIL = 'USER_EMAIL';
 
-const actionEmail = (payloademail) => ({
+export const actionEmail = (payload) => ({
   type: USER_EMAIL,
-  payloademail,
+  payload,
 });
-
-export default actionEmail;
