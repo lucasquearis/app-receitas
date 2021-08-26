@@ -10,6 +10,7 @@ const VideoDetails = ({ linkVideo }) => {
       {/** iframe retirado do próprio youtube,
       indo em um video, clicando em "compartilhar", escolhendo a opção "incorporar". */}
       <iframe
+        data-testid="video"
         width="340"
         height="160"
         src={ newLink }
