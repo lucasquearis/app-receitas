@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import fetchFoodAPI from '../../API/fetchFoodAPI';
 import fetchDrinksAPI from '../../API/fetchDrinksAPI';
+import { fetchFoodCategoryAPI, fetchDrinlCategoryAPI } from '../../API/fetchCategoryAPI';
 
 // Action Creators - Login Actions
 
@@ -47,12 +48,22 @@ export const letterRequest = () => ({
   type: types.LETTER_REQUEST,
 });
 
+export const categoryRequest = (payload) => ({
+  type: types.CATEGORY_API,
+  payload,
+});
+
 export const nameRequest = () => ({
   type: types.NAME_REQUEST,
 });
 
 export const ingredientRequestSuccess = (payload) => ({
   type: types.INGREDIENT_REQUEST_SUCCESS,
+  payload,
+});
+
+export const categoryRequestSuccess = (payload) => ({
+  type: types.SUCCESS_CATEGORY_API,
   payload,
 });
 
@@ -78,6 +89,11 @@ export const letterRequestError = (payload) => ({
 
 export const nameRequestError = (payload) => ({
   type: types.NAME_REQUEST_ERROR,
+  payload,
+});
+
+export const categoryRequestError = (payload) => ({
+  type: types.ERROR_CATEGORY_API,
   payload,
 });
 
@@ -173,4 +189,10 @@ export const fetchLetterAPI = (value) => async (dispatch) => {
       return dispatch(letterRequestError(error));
     }
   }
+};
+
+export const fetchCategory = () => async (dispatch) => {
+  dispatch(categoryRequest());
+  const path = window.location.pathname;
+  if (path === )
 };
