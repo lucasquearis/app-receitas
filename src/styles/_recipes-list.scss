@@ -1,0 +1,36 @@
+.selected-drink {
+  background-color: $steel-blue;
+}
+
+.selected-meal {
+  background-color: $honey-yellow;
+}
+
+.cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100vw;
+  margin-bottom: 50px;
+}
+
+.recipe-card {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 2px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px black;
+  align-items: center;
+  padding: 0;
+  border: none;
+
+  img {
+    width: 175px;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+.card-name {
+  height: fit-content;
+}

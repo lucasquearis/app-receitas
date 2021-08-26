@@ -1,4 +1,13 @@
 .footer {
   position: fixed;
   bottom: 0;
+  width: 100vw;
+  background-color: $alice-blue;
+  justify-content: space-around;
+  display: flex;
+  padding: 5px;
+
+  img {
+    width: 10vw;
+  }
 }

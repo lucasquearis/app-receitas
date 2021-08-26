@@ -6,11 +6,16 @@ import HeaderWithSearch from '../components/HeaderWithSearch';
 import Footer from '../components/Footer';
 import useCategories from '../hooks/useCategories';
 import { setLoading } from '../redux/actions/loading';
+import useRedirect from '../hooks/useRedirect';
 
 function MealsList() {
   const { reducerAPI: { loading, meals } } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [renderedMeals, setRenderedMeals] = useState([]);
+  const [selected, setSelected] = useState('all');
+  const TWELVE = 12;
+  const SELECTED_MEAL = 'selected-meal';
+  const { shouldRedirect, redirect } = useRedirect();
 
   useEffect(() => {
     dispatch(getMeal());
@@ -21,7 +26,6 @@ function MealsList() {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (meals !== null && meals.length > 1) {
-      const TWELVE = 12;
       const newMeals = [...meals.slice(0, TWELVE)];
       setRenderedMeals(newMeals);
     }
@@ -34,29 +38,35 @@ function MealsList() {
     setCatList(categories);
   }, [categories]);
 
-  if (loading) {
-    return <h1>Carregando...</h1>;
-  }
+  // if (loading) {
+  //   return <h1>Carregando...</h1>;
+  // }
 
   if (meals !== null && meals.length === 1) {
     return <Redirect to={ `/comidas/${meals[0].idMeal}` } />;
   }
 
-  const handleClick = async (name) => {
-    dispatch(setLoading(true));
-    const TWELVE = 12;
-    const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${name}`;
-    const results = await fetch(url).then((response) => response.json());
-    const firstTwelve = await results.meals.slice(0, TWELVE);
-    setRenderedMeals(firstTwelve);
-    dispatch(setLoading(false));
-  };
-
   const handleClickAll = () => {
-    const TWELVE = 12;
     const newMeals = [...meals.slice(0, TWELVE)];
     setRenderedMeals(newMeals);
   };
+
+  const handleClick = async (target, name) => {
+    dispatch(setLoading(true));
+    if (target.className !== SELECTED_MEAL) {
+      setSelected(name);
+      const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${name}`;
+      const results = await fetch(url).then((response) => response.json());
+      const firstTwelve = await results.meals.slice(0, TWELVE);
+      setRenderedMeals(firstTwelve);
+    } else {
+      setSelected('all');
+      handleClickAll();
+    }
+    dispatch(setLoading(false));
+  };
+
+  if (redirect.should) return <Redirect to={ redirect.path } />;
 
   return (
     <div>
@@ -64,34 +74,44 @@ function MealsList() {
         <HeaderWithSearch>
           Comidas
         </HeaderWithSearch>
-        { catList.map((category, index) => (
+        { catList.map(({ strCategory }, index) => (
           <button
             type="button"
             key={ index }
-            onClick={ () => handleClick(category.strCategory) }
-            data-testid={ `${category.strCategory}-category-filter` }
+            onClick={ ({ target }) => handleClick(target, strCategory) }
+            data-testid={ `${strCategory}-category-filter` }
+            className={ selected === strCategory ? SELECTED_MEAL : 'not-selected' }
           >
-            {category.strCategory}
+            {strCategory}
           </button>
         ))}
         <button
           type="button"
           onClick={ handleClickAll }
           data-testid="All-category-filter"
+          className={ selected === 'all' ? SELECTED_MEAL : 'not-selected' }
         >
           All
         </button>
       </div>
-      { renderedMeals.map((item, index) => (
-        <div key={ index } data-testid={ `${index}-recipe-card` }>
-          <img
-            alt="meal"
-            src={ item.strMealThumb }
-            data-testid={ `${index}-card-img` }
-          />
-          <h4 data-testid={ `${index}-card-name` }>{item.strMeal}</h4>
-        </div>
-      ))}
+      <div className="cards-list">
+        { loading ? 'Loading' : renderedMeals.map((item, index) => (
+          <button
+            type="button"
+            onClick={ () => shouldRedirect(`/comidas/${item.idMeal}`) }
+            key={ index }
+            data-testid={ `${index}-recipe-card` }
+            className="recipe-card"
+          >
+            <img
+              alt="meal"
+              src={ item.strMealThumb }
+              data-testid={ `${index}-card-img` }
+            />
+            <h4 data-testid={ `${index}-card-name` }>{item.strMeal}</h4>
+          </button>
+        ))}
+      </div>
       <Footer />
     </div>
   );

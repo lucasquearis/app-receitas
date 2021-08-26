@@ -1,19 +1,44 @@
 .footer {
   position: fixed;
   bottom: 0;
+  width: 100vw;
+  background-color: #ebf2fa;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px;
 }
 
-@font-face {
-  font-family: MinhaFonte;
-  src: url("./fonts/KitchenHome-rg0gB.ttf");
+.footer img {
+  width: 10vw;
 }
 
-.meals {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background: #0fa36b;
-  color: #464646;
+.selected-drink {
+  background-color: #4279a1;
+}
+
+.selected-meal {
+  background-color: #f7b32b;
+}
+
+.cards-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100vw;
+  margin-bottom: 50px;
+}
+
+.recipe-card {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,115 +46,30 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 100%;
+  margin: 5px 2px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 5px black;
+          box-shadow: 0 2px 5px black;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0;
+  border: none;
 }
 
-.rocksGlass {
-  -webkit-animation: shake 1s infinite ease;
-          animation: shake 1s infinite ease;
-  max-height: 80vh;
+.recipe-card img {
+  width: 175px;
+  border-radius: 5px 5px 0 0;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.card-name {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
+@font-face {
+  font-family: MinhaFonte;
+  src: url("./fonts/KitchenHome-rg0gB.ttf");
 }
-*/
-.meals > .logo {
-  -webkit-animation: shake 1.5s infinite ease;
-          animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-@-webkit-keyframes shake {
-  0% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-  }
-  50% {
-    -webkit-transform: rotate(-5deg);
-            transform: rotate(-5deg);
-  }
-  100% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-  }
-}
-
-@keyframes shake {
-  0% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-  }
-  50% {
-    -webkit-transform: rotate(-5deg);
-            transform: rotate(-5deg);
-  }
-  100% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-  }
-}
-
-@-webkit-keyframes clink {
-  0% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-  50% {
-    -webkit-transform: rotate(20deg);
-            transform: rotate(20deg);
-  }
-  100% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-}
-
-@keyframes clink {
-  0% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-  50% {
-    -webkit-transform: rotate(20deg);
-            transform: rotate(20deg);
-  }
-  100% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-}
-
-img {
-  display: flex;
-  margin: auto;
-  align-content: center;
-  width: 50%;
-  border-radius: 7%;
-}
-
-h4 {
-  display: flex;
-  width: 50%;
-  margin: auto;
-  justify-content: center;
-}
-
 /*# sourceMappingURL=index.css.map */

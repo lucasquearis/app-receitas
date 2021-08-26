@@ -6,11 +6,16 @@ import HeaderWithSearch from '../components/HeaderWithSearch';
 import useCategories from '../hooks/useCategories';
 import Footer from '../components/Footer';
 import { setLoading } from '../redux/actions/loading';
+import useRedirect from '../hooks/useRedirect';
 
 function DrinksList() {
   const { reducerAPI: { loading, cocktails } } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [renderedCocktails, setRenderedCocktails] = useState([]);
+  const [selected, setSelected] = useState('all');
+  const TWELVE = 12;
+  const SELECTED_DRINK = 'selected-drink';
+  const { shouldRedirect, redirect } = useRedirect();
 
   useEffect(() => {
     dispatch(getCocktail());
@@ -27,34 +32,41 @@ function DrinksList() {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (cocktails !== null && cocktails.length > 1) {
-      const TWELVE = 12;
       const newCocktails = [...cocktails.slice(0, TWELVE)];
       setRenderedCocktails(newCocktails);
     }
   }, [cocktails]);
 
-  if (loading) {
-    return <h1>Carregando...</h1>;
-  }
+  // if (loading) {
+  //   return <h1>Carregando...</h1>;
+  // }
+
   if (cocktails !== null && cocktails.length === 1) {
     return <Redirect to={ `/bebidas/${cocktails[0].idDrink}` } />;
   }
 
-  const handleClick = async (name) => {
+  const handleClickAll = async () => {
+    const newCocktails = [...cocktails.slice(0, TWELVE)];
+    setRenderedCocktails(newCocktails);
+    setSelected('all');
+  };
+
+  const handleClick = async (target, name) => {
     dispatch(setLoading(true));
-    const TWELVE = 12;
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`;
-    const results = await fetch(url).then((response) => response.json());
-    const firstTwelve = results.drinks.slice(0, TWELVE);
-    setRenderedCocktails(firstTwelve);
+    if (target.className !== SELECTED_DRINK) {
+      setSelected(name);
+      const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`;
+      const results = await fetch(url).then((response) => response.json());
+      const firstTwelve = results.drinks.slice(0, TWELVE);
+      setRenderedCocktails(firstTwelve);
+    } else {
+      setSelected('all');
+      handleClickAll();
+    }
     dispatch(setLoading(false));
   };
 
-  const handleClickAll = async () => {
-    const TWELVE = 12;
-    const newCocktails = [...cocktails.slice(0, TWELVE)];
-    setRenderedCocktails(newCocktails);
-  };
+  if (redirect.should) return <Redirect to={ redirect.path } />;
 
   return (
     <div>
@@ -63,34 +75,49 @@ function DrinksList() {
           Bebidas
         </HeaderWithSearch>
 
-        { catList.map((category, index) => (
+        { catList.map(({ strCategory }, index) => (
           <button
             type="button"
             key={ index }
-            onClick={ () => handleClick(category.strCategory) }
-            data-testid={ `${category.strCategory}-category-filter` }
+            onClick={ ({ target }) => handleClick(target, strCategory) }
+            data-testid={ `${strCategory}-category-filter` }
+            className={ selected === strCategory ? SELECTED_DRINK : 'not-selected' }
           >
-            {category.strCategory}
+            {strCategory}
           </button>
         ))}
         <button
           type="button"
           onClick={ () => handleClickAll() }
           data-testid="All-category-filter"
+          className={ selected === 'all' ? SELECTED_DRINK : 'not-selected' }
         >
           All
         </button>
       </div>
-      { renderedCocktails.map((item, index) => (
-        <div key={ index } data-testid={ `${index}-recipe-card` }>
-          <img
-            alt="drink"
-            src={ item.strDrinkThumb }
-            data-testid={ `${index}-card-img` }
-          />
-          <h4 data-testid={ `${index}-card-name` }>{item.strDrink}</h4>
-        </div>
-      ))}
+      <div className="cards-list">
+        { loading ? 'Loading' : renderedCocktails.map((item, index) => (
+          <button
+            type="button"
+            onClick={ () => shouldRedirect(`/bebidas/${item.idDrink}`) }
+            key={ index }
+            data-testid={ `${index}-recipe-card` }
+            className="recipe-card"
+          >
+            <img
+              alt="drink"
+              src={ item.strDrinkThumb }
+              data-testid={ `${index}-card-img` }
+            />
+            <h4
+              data-testid={ `${index}-card-name` }
+              className="card-name"
+            >
+              {item.strDrink}
+            </h4>
+          </button>
+        ))}
+      </div>
       <Footer />
     </div>
   );
