@@ -51,3 +51,5 @@ function Drinks() {
     </main>
   );
 }
+
+export default Drinks;

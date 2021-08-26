@@ -50,3 +50,5 @@ function Foods() {
     </main>
   );
 }
+
+export default Foods;

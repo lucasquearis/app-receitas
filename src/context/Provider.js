@@ -39,7 +39,7 @@ function Provider({ children }) {
     list: [],
     loading: true,
   });
-  
+
   const [API, setAPI] = useState('');
 
   const switchAPI = (searchFilter) => {
@@ -86,13 +86,6 @@ function Provider({ children }) {
     switchAPI(filter);
   }, [filter, API]);
 
-  // useEffect(() => {
-  //   requestCategory('https://www.themealdb.com/api/json/v1/1/search.php?s=', setFoodRecipes);
-  //   requestCategory('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setDrinkRecipes);
-  //   requestCategory(foodCategoryAPI, setFoodCategories);
-  //   requestCategory(drinkCategoryAPI, setDrinkCategories);
-  // })
-
   const contextValue = {
     user,
     setUser,
@@ -114,7 +107,7 @@ function Provider({ children }) {
     setDrinkCategories,
     setRecipes,
     requestRandomAPI,
-    };
+  };
 
   return (
     <Context.Provider value={ contextValue }>
