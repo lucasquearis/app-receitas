@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import useLogout from '../hooks/useLogout';
@@ -8,8 +7,6 @@ import useRedirect from '../hooks/useRedirect';
 import Footer from '../components/Footer';
 
 function Profile() {
-  const { user } = useSelector((state) => state.login);
-
   const storageUser = JSON.parse(localStorage.getItem('user'));
 
   const { redirect, shouldRedirect } = useRedirect();
@@ -20,8 +17,8 @@ function Profile() {
 
   return (
     <div>
-      <HeaderWithoutSearch />
-      <h3 data-testid="profile-email">{user || storageUser.email}</h3>
+      <HeaderWithoutSearch>Perfil</HeaderWithoutSearch>
+      <h3 data-testid="profile-email">{localStorage.length && storageUser.email}</h3>
       <Button
         variant="success"
         data-testid="profile-done-btn"

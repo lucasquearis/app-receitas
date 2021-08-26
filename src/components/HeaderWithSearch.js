@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 import useRedirect from '../hooks/useRedirect';
 
 function HeaderWithSearch({ children }) {
@@ -35,10 +36,7 @@ function HeaderWithSearch({ children }) {
       { visibleSearch
         && (
           <div>
-            <input
-              data-testid="search-input"
-              type="text"
-            />
+            <SearchBar />
           </div>) }
     </div>
   );

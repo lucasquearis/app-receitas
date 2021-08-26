@@ -116,4 +116,20 @@
             transform: rotate(-10deg);
   }
 }
+
+img {
+  display: flex;
+  margin: auto;
+  align-content: center;
+  width: 50%;
+  border-radius: 7%;
+}
+
+h4 {
+  display: flex;
+  width: 50%;
+  margin: auto;
+  justify-content: center;
+}
+
 /*# sourceMappingURL=index.css.map */
