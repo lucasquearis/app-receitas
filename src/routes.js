@@ -25,6 +25,7 @@ export default function Routes() {
         <Route exact path="/explorar/comidas/ingredientes" component={ NotFound } />
         <Route exact path="/explorar/bebidas/ingredientes" component={ NotFound } />
         <Route exact path="/explorar/comidas/area" component={ ExploreByArea } />
+        <Route exact path="/explorar/bebidas/area" component={ NotFound } />
         <Route exact path="/perfil" component={ Perfil } />
         <Route exact path="/receitas-feitas" component={ NotFound } />
         <Route exact path="/receitas-favoritas" component={ NotFound } />

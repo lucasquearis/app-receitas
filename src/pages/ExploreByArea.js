@@ -40,7 +40,7 @@ function ExploreByArea() {
 
   return (
     <div>
-      <Header />
+      <Header title="Explorar Origem" />
       <select
         data-testid="explore-by-area-dropdown"
         onChange={ (event) => setSelArea(event.target.value) }
@@ -51,7 +51,6 @@ function ExploreByArea() {
         recipesData={ recipesData }
         recipeKey="Meal"
       />
-      <p>teste</p>
       <Footer />
     </div>
   );
