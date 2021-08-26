@@ -1,5 +1,4 @@
 import React from 'react';
-import './pageCSS/Drinks.css';
 import BottomMenu from '../components/BottomMenu';
 import Header from '../components/Header';
 

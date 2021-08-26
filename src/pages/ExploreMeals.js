@@ -1,5 +1,4 @@
 import React from 'react';
-import './pageCSS/ExploreMeals.css';
 import BottomMenu from '../components/BottomMenu';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
