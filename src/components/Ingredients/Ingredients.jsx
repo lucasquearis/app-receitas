@@ -20,7 +20,7 @@ function Ingredients({ recipe }) {
 
   return (
     <section>
-      <h3 data-testid={ `${0}-ingredient-name-and-measure` }>Ingredientes</h3>
+      <h3>Ingredientes</h3>
       <ul>
         {ingredients.map((ingredient, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
