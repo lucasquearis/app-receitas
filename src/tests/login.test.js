@@ -2,16 +2,17 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import renderWithRouter from '../renderWithRouter';
-
-const emailInputId = 'email-input';
-const passwordInputId = 'password-input';
-const buttonId = 'login-submit-btn';
-
-const VALID_EMAIL = 'valid123@trybe.com.br';
-const VALID_PASSWORD = 'grupo24';
-const INVALID_EMAIL = 'invalid@invalid';
-const INVALID_PASSWORD = '123456';
+import renderWithRouter from './helpers/renderWithRouter';
+import {
+  emailInputId,
+  passwordInputId,
+  buttonId,
+  VALID_EMAIL,
+  VALID_PASSWORD,
+  INVALID_EMAIL,
+  INVALID_PASSWORD,
+} from './helpers/mocks';
+import loginSteps from './helpers/loginSteps';
 
 describe('Test Login route', () => {
   it('Route should be \'/\'', () => {
@@ -62,38 +63,27 @@ describe('Tests Login validation', () => {
   });
 
   it('Button remains disabled with invalid data on both inputs', () => {
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(INVALID_EMAIL, INVALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, INVALID_EMAIL);
-    userEvent.type(passwordInput, INVALID_PASSWORD);
     expect(loginButton).toBeDisabled();
   });
 
   it('Button remains disabled with invalid email, but valid password inputs', () => {
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(INVALID_EMAIL, VALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, INVALID_EMAIL);
-    userEvent.type(passwordInput, VALID_PASSWORD);
+
     expect(loginButton).toBeDisabled();
   });
 
   it('Button remains disabled with valid email, but invalid password inputs', () => {
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(VALID_EMAIL, INVALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, VALID_EMAIL);
-    userEvent.type(passwordInput, INVALID_PASSWORD);
     expect(loginButton).toBeDisabled();
   });
 
   it('Button enables with both valid inputs', () => {
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(VALID_EMAIL, VALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, VALID_EMAIL);
-    userEvent.type(passwordInput, VALID_PASSWORD);
     expect(loginButton).not.toBeDisabled();
   });
 });
@@ -101,11 +91,8 @@ describe('Tests Login validation', () => {
 describe('Tests Login submit', () => {
   it('Should save email under \'user\' key in localStorage ', () => {
     renderWithRouter(<App />);
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(VALID_EMAIL, VALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, VALID_EMAIL);
-    userEvent.type(passwordInput, VALID_PASSWORD);
     userEvent.click(loginButton);
 
     const { email } = JSON.parse(localStorage.getItem('user'));
@@ -114,11 +101,8 @@ describe('Tests Login submit', () => {
 
   it('Should save tokens in localStorage with values equal to 1', () => {
     renderWithRouter(<App />);
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(VALID_EMAIL, VALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, VALID_EMAIL);
-    userEvent.type(passwordInput, VALID_PASSWORD);
     userEvent.click(loginButton);
 
     const mealsToken = JSON.parse(localStorage.getItem('mealsToken'));
@@ -129,12 +113,8 @@ describe('Tests Login submit', () => {
 
   it('Should redirect user to path \'/comidas\'', () => {
     const { history } = renderWithRouter(<App />);
-
-    const emailInput = screen.getByTestId(emailInputId);
-    const passwordInput = screen.getByTestId(passwordInputId);
+    loginSteps(VALID_EMAIL, VALID_PASSWORD);
     const loginButton = screen.getByTestId(buttonId);
-    userEvent.type(emailInput, VALID_EMAIL);
-    userEvent.type(passwordInput, VALID_PASSWORD);
     userEvent.click(loginButton);
 
     expect(history.location.pathname).toEqual('/comidas');
