@@ -62,7 +62,7 @@ function Header(props) {
 
 Header.propTypes = {
   titulo: PropTypes.string.isRequired,
-  showProfileIcon: PropTypes.bool,
+  showProfileIcon: PropTypes.string,
   pathname: PropTypes.string.isRequired,
 };
 

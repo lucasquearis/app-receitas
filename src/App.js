@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
-import DrinkDetails from './components/DrinkDetails';
-import RecipesDetails from './components/RecipesDetails';
+import DrinkDetails from './pages/DrinkDetails';
+import RecipesDetails from './pages/RecipesDetails';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import ExplorarComidas from './pages/ExplorarComidas';
@@ -19,26 +19,8 @@ import ExplorarOrigem from './pages/ExplorarOrigem';
 function App() {
   return (
     <Switch>
-      {/* <Route
-        exact
-        path="/comidas"
-        component={ Foods }
-      />
-      <Route
-        exact
-        path="/bebidas"
-        component={ Drinks }
-      />
-        component={ RecipesSearchBar }
-      /> */}
       <Route path="/bebidas/:id" component={ DrinkDetails } />
       <Route path="/comidas/:id" component={ RecipesDetails } />
-      {/* <Route
-        exact
-        path="/bebidas"
-        component={ DrinksSearchBar }
-      /> */}
-      {/* <Route exact path="/" component={ Home } /> */}
       <Route path="/perfil" component={ Perfil } />
       <Route exact path="/comidas" component={ (props) => <Comidas { ...props } /> } />
       <Route exact path="/bebidas" component={ Bebidas } />
