@@ -1,8 +1,13 @@
 import React from 'react';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
 function MainPage() {
   return (
-    <p>HI</p>
+    <>
+      <Header title="Comidas" loading />
+      <Footer />
+    </>
   );
 }
 export default MainPage;
