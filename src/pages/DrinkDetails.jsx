@@ -24,13 +24,13 @@ function DrinkDetails({ match: { params: { id } } }) {
   }, [dispatch]);
 
   return (
-    <div>
+    <article>
       { recipe.map((oneRecipe) => (
         <RecipeDetails key="0" recipe={ oneRecipe } type="Drink" />)) }
       <section className="horizontal-slider">
         {recomendation}
       </section>
-    </div>
+    </article>
   );
 }
 

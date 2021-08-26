@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-function Ingredients({ recipe }) {
+function Checkbox({ recipe }) {
   const ingredients = [];
   const measures = [];
   const maxIngredients = 20;
@@ -23,7 +23,7 @@ function Ingredients({ recipe }) {
       <h3>Ingredientes</h3>
       <ul>
         {ingredients.map((ingredient, index) => (
-          <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+          <li key={ index } data-testid={ `${index}-ingredient-step` }>
             {`${ingredient} - ${measures[index]}`}
           </li>
         ))}
@@ -32,10 +32,10 @@ function Ingredients({ recipe }) {
   );
 }
 
-Ingredients.propTypes = {
+Checkbox.propTypes = {
   recipe: propTypes.shape({
     strIngredient1: propTypes.string,
   }).isRequired,
 };
 
-export default Ingredients;
+export default Checkbox;
