@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function DrinkDetails() {
-  const index = 1;
+  const id = 52772;
+  const index = 0;
+  const getHistory = useHistory();
+  const { location: { pathname } } = getHistory;
+  const [getRecipe, setGetRecipe] = useState({});
+
+  useEffect(() => {
+    const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+    const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+    const fetchDetailsRecipe = async () => {
+      const goURL = pathname === 'food' ? urlFoods : urlDrinks;
+      const request = await fetch(`${goURL}${id}`);
+      const response = await request.json();
+      return setGetRecipe(response);
+    };
+    fetchDetailsRecipe();
+  }, [index, getRecipe, pathname]);
   return (
     <div>
       <div>

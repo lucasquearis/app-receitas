@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
+// import { Link } from 'react-router-dom';
 
 function Home() {
   const [email, setEmail] = useState('');
@@ -25,10 +26,12 @@ function Home() {
     handle(value);
   };
 
+  const setHistory = useHistory();
   const handleClick = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
+    setHistory.push('/comidas');
   };
 
   return (
@@ -56,16 +59,14 @@ function Home() {
               onChange={ (event) => handleChange(setPassword, event) }
             />
           </label>
-          <Link to="/comidas">
-            <button
-              type="button"
-              data-testid="login-submit-btn"
-              disabled={ button }
-              onClick={ handleClick }
-            >
-              Entrar
-            </button>
-          </Link>
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={ button }
+            onClick={ handleClick }
+          >
+            Entrar
+          </button>
         </form>
       </div>
     </div>
