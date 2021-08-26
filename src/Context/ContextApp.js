@@ -1,6 +1,9 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import LoginHook from '../Hooks/LoginHook';
+
+import foodHook from '../Hooks/FoodHook';
+
 import recipesHooks from '../Hooks/recipesHooks';
 import IngredientHooks from '../Hooks/IngredientsHooks';
 
@@ -8,8 +11,17 @@ export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes } = recipesHooks();
-  const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
   const { ingredients, getIngredients } = IngredientHooks();
+
+  const {
+    handleInput,
+    Login,
+    disabled,
+    handleClick,
+    redirect,
+    setRedirect } = LoginHook();
+
+  const { drinks, meal } = foodHook();
 
   const ContProps = {
     recipes,
@@ -21,6 +33,9 @@ export const AppProvider = ({ children }) => {
     redirect,
     ingredients,
     getIngredients,
+    setRedirect,
+    drinks,
+    meal,
   };
 
   return (

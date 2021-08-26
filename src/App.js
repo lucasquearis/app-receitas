@@ -9,6 +9,7 @@ import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
 import Explore from './Pages/Explore';
 import ExploreIngredients from './Pages/ExploreIngredients';
+import Profile from './Pages/Profile/Profile';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               searchButton={ false }
             />
           ) }
+          component={ Profile }
         />
         <Route
           exact
