@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import LoginContext from './LoginContext';
 
 export default function Provider({ children }) {
-  const [email, setEmail] = useState('');
-  const contextValue = { email, setEmail };
+  const [userInfo, setUserInfo] = useState({ email: '', password: '', redirect: false });
+  const contextLogin = { userInfo, setUserInfo };
 
   return (
-    <LoginContext.Provider value={ contextValue }>
+    <LoginContext.Provider value={ contextLogin }>
       {children}
     </LoginContext.Provider>
   );
