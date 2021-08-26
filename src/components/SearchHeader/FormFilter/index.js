@@ -4,7 +4,7 @@ import { useFiltersContext } from '../../../context/FiltersProvider';
 
 export default function FormFilter() {
   const history = useHistory();
-  const { handleSetParameters } = useFiltersContext();
+  const { handleFilterAPI } = useFiltersContext();
 
   // Estado dos inputs;
   const [text, setText] = useState('');
@@ -63,7 +63,7 @@ export default function FormFilter() {
       <button
         type="submit"
         data-testid="exec-search-btn"
-        onClick={ () => handleSetParameters(filters, history.location.pathname) }
+        onClick={ () => handleFilterAPI(filters, history.location.pathname) }
       >
         Buscar
       </button>

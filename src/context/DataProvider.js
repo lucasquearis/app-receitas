@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { getDefaultData } from '../services';
+import { getDefaultData } from '../services/data';
 
 const DataContext = createContext();
 
