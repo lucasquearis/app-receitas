@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderDrinks from '../components/HeaderDrinks';
 
 const Drinks = () => (
-  <Header title="Bebidas" />
+  <HeaderDrinks title="Bebidas" />
 );
 
 export default Drinks;

@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderMeals from '../components/HeaderMeals';
 
 const MealsByArea = () => (
-  <Header title="Explorar Origem" />
+  <HeaderMeals title="Explorar Origem" />
 );
 
 export default MealsByArea;

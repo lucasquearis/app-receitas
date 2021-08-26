@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderMeals from '../components/HeaderMeals';
 
 const Meals = () => (
-  <Header title="Comidas" />
+  <HeaderMeals title="Comidas" />
 );
 
 export default Meals;
