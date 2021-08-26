@@ -10,8 +10,6 @@ const DrinkDetails = () => {
   //   const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState();
   const [measures, setMeasures] = useState();
-  console.log(ingredients, measures);
-  console.log(drinkDetails);
 
   const getIngredients = () => {
     const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
@@ -50,6 +48,7 @@ const DrinkDetails = () => {
               src={ strDrinkThumb }
               alt="thumbnail"
               data-testid="recipe-photo"
+              className="describe-image"
             />
             <h1 key={ strDrink } data-testid="recipe-title">{strDrink}</h1>
             <button
@@ -74,7 +73,7 @@ const DrinkDetails = () => {
                 ingredients.map((ingredient) => ingredient.map((item, index) => (
                   <li
                     key={ item }
-                    datatest-Id={ `${index}-ingredient-name-and-measure` }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
                   >
                     {`${item} - ${measures[0][index]}`}
                   </li>

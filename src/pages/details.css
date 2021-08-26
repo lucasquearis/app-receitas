@@ -1,12 +1,17 @@
 /* .recomended-wrapper{
     
-}
+} */
 
 .recomended-drinks{
     display: flex;
     flex-direction: row;
 }
 
-.recomended-drinks-card{
+.recomended-drinks-card img{
     width: 100%;
-} */
+}
+
+.details-image{
+    width: 100vw;
+    height: 50vw;
+}

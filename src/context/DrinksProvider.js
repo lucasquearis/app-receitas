@@ -8,7 +8,6 @@ const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
   const [drinkDetailsId, setDrinkDetailsId] = useState('');
   const [drinkDetails, setDrinkDetails] = useState([]);
-  console.log(drinkDetailsId);
 
   useEffect(() => {
     fetchDrinksApi().then((data) => {

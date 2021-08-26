@@ -51,6 +51,7 @@ const FoodDetails = () => {
               src={ strMealThumb }
               alt="thumbnail"
               data-testid="recipe-photo"
+              className="details-image"
             />
             <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
             <button
@@ -74,7 +75,7 @@ const FoodDetails = () => {
                 ingredients.map((ingredient) => ingredient.map((item, index) => (
                   <li
                     key={ item }
-                    datatest-Id={ `${index}-ingredient-name-and-measure` }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
                   >
                     {`${item} - ${measures[0][index]}`}
                   </li>
