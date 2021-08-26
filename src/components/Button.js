@@ -9,11 +9,10 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
 
   const handleClick = () => {
     if (!isDisable) {
-      onClick();
+      // onClick();
       handleRedirect();
     }
   };
-
   if ((redirect && (pathname.length > 0) && !isDisable)) {
     return (<Redirect to={ pathname } />);
   }
