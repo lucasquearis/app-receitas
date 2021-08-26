@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import FooterMenu from './FooterMenu';
 import Header from '../components/Header';
+import '../styles/Explorer.css';
 
 function Explorer() {
   const history = useHistory();
@@ -10,6 +11,7 @@ function Explorer() {
       <Header />
       <button
         type="button"
+        className="button"
         onClick={ () => history.push('/explorar/comidas') }
         data-testid="explore-food"
       >
@@ -17,8 +19,9 @@ function Explorer() {
       </button>
       <button
         type="button"
+        className="button"
         onClick={ () => history.push('/explorar/bebidas') }
-        data-testid="explore-drink"
+        data-testid="explore-drinks"
       >
         Explorar Bebidas
       </button>
