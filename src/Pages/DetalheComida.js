@@ -91,7 +91,7 @@ export default function DetalheComida(props) {
           >
             <img src={ drink.strDrinkThumb } alt="foto da bebida" />
             <p>{ drink.strCategory }</p>
-            <h5>{ drink.strDrink }</h5>
+            <h5 data-testid={ `${index}-recomendation-title` }>{ drink.strDrink }</h5>
           </div>
         )) }
       </div>
