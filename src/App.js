@@ -1,7 +1,15 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-import { Meals, Login, Profile, Drinks, RecipeDetails, Explore } from './pages';
+import {
+  Meals,
+  Profile,
+  Drinks,
+  RecipeDetails,
+  Login,
+  Explore } from './pages';
+import RecipesFavorites from './pages/RecipesFavorites';
+import RecipesDone from './pages/RecipesDone';
 import Provider from './context/Provider';
 
 function App() {
@@ -14,6 +22,8 @@ function App() {
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/bebidas/:id" component={ RecipeDetails } />
         <Route path="/perfil" component={ Profile } />
+        <Route path="/receitas-favoritas" component={ RecipesFavorites } />
+        <Route path="/receitas-feitas" component={ RecipesDone } />
         <Route path="/explorar" component={ Explore } />
       </Switch>
     </Provider>
