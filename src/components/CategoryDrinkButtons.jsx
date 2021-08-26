@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategory } from '../redux/actions/mainActions';
+import { fetchDrinksCategories } from '../redux/actions/mainActions';
 
-function CategoryFoodButtons() {
+function CategoryDrinkButtons() {
   const cinco = 5;
-  const categories = useSelector((state) => state.reducerCategories.categories.meals);
+  const categories = useSelector(
+    (state) => state.reducerCategories.drinksCategories.drinks,
+  );
   // const loading = useSelector((state) => state.reducerCategories.isLoading);
   const dispatch = useDispatch();
+  console.log(categories);
 
   useEffect(() => {
-    dispatch(fetchCategory());
+    dispatch(fetchDrinksCategories());
   }, [dispatch]);
 
   return (
@@ -29,4 +32,4 @@ function CategoryFoodButtons() {
   );
 }
 
-export default CategoryFoodButtons;
+export default CategoryDrinkButtons;

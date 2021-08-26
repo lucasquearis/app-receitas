@@ -48,6 +48,10 @@ export const letterRequest = () => ({
   type: types.LETTER_REQUEST,
 });
 
+export const drinksCategory = () => ({
+  type: types.DRINKS_CATEGORY,
+});
+
 export const categoryRequest = (payload) => ({
   type: types.CATEGORY_API,
   payload,
@@ -72,6 +76,11 @@ export const letterRequestSuccess = (payload) => ({
   payload,
 });
 
+export const drinksCategorySuccess = (payload) => ({
+  type: types.DRINKS_SUCCESS_CATEGORY,
+  payload,
+});
+
 export const nameRequestSuccess = (payload) => ({
   type: types.NAME_REQUEST_SUCCESS,
   payload,
@@ -89,6 +98,11 @@ export const letterRequestError = (payload) => ({
 
 export const nameRequestError = (payload) => ({
   type: types.NAME_REQUEST_ERROR,
+  payload,
+});
+
+export const drinksCategoryError = (payload) => ({
+  type: types.DRINKS_ERROR_CATEGORY,
   payload,
 });
 
@@ -193,8 +207,6 @@ export const fetchLetterAPI = (value) => async (dispatch) => {
 
 export const fetchCategory = () => async (dispatch) => {
   dispatch(categoryRequest());
-  // const path = window.location.pathname;
-  // if (path === '/comidas') {
   try {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
     const data = await response.json();
@@ -202,13 +214,15 @@ export const fetchCategory = () => async (dispatch) => {
   } catch (error) {
     return dispatch(categoryRequestError(error));
   }
-  // }
-  // if (path === '/bebidas') {
-  //   try {
-  //     const data = await fetch(fetchDrinkCategoryAPI());
-  //     return dispatch(categoryRequestSuccess(data));
-  //   } catch (error) {
-  //     return dispatch(categoryRequestError(error));
-  //   }
-  // }
+};
+
+export const fetchDrinksCategories = () => async (dispatch) => {
+  dispatch(drinksCategory());
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return dispatch(drinksCategorySuccess(data));
+  } catch (error) {
+    return dispatch(drinksCategoryError(error));
+  }
 };

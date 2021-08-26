@@ -7,6 +7,7 @@ import '../styles/Header.css';
 import ItemCard from '../components/ItemCard';
 import DrinksCard from '../components/DrinksCard';
 import Footer from '../components/Footer';
+import CategoryDrinkButtons from '../components/CategoryDrinkButtons';
 
 function Drinks(props) {
   const { history } = props;
@@ -37,6 +38,7 @@ function Drinks(props) {
         dataId="search-top-btn"
         className="img-search"
       />
+      <CategoryDrinkButtons />
 
       <main>
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard

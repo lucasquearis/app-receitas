@@ -18,6 +18,9 @@ import {
   CATEGORY_API,
   SUCCESS_CATEGORY_API,
   ERROR_CATEGORY_API,
+  DRINKS_CATEGORY,
+  DRINKS_ERROR_CATEGORY,
+  DRINKS_SUCCESS_CATEGORY,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -25,6 +28,7 @@ const INITIAL_STATE = {
   drinks: [],
   foods: [],
   categories: [],
+  drinksCategories: [],
   error: '',
   isLoading: false,
 };
@@ -100,12 +104,14 @@ export function recipeDrinks(state = INITIAL_STATE, action) {
 export function reducerCategories(state = INITIAL_STATE, action) {
   switch (action.type) {
   case ERROR_CATEGORY_API:
+  case DRINKS_ERROR_CATEGORY:
     return {
       ...state,
       isLoading: false,
       error: action.payload,
     };
   case CATEGORY_API:
+  case DRINKS_CATEGORY:
     return {
       ...state,
       isLoading: true,
@@ -115,6 +121,12 @@ export function reducerCategories(state = INITIAL_STATE, action) {
       ...state,
       isLoading: false,
       categories: action.payload,
+    };
+  case DRINKS_SUCCESS_CATEGORY:
+    return {
+      ...state,
+      isLoading: false,
+      drinksCategories: action.payload,
     };
   default:
     return state;
