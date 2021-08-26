@@ -47,8 +47,7 @@ function HeaderSearch() {
   const getRecipes = async () => {
     if (keyword.length > 1 && searchMode === 'letter') {
       const alertMsg = 'Sua busca deve conter somente 1 (um) caracter';
-      // eslint-disable-next-line no-alert
-      alert(alertMsg);
+      global.alert(alertMsg);
       return null;
     }
     const max = 12;
@@ -56,8 +55,7 @@ function HeaderSearch() {
     if (results[databaseKey] === null) {
       console.log('entrou no null');
       const alertMsg = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
-      // eslint-disable-next-line no-alert
-      alert(alertMsg);
+      global.alert(alertMsg);
       return null;
     }
     if (results[databaseKey].length === 1) {

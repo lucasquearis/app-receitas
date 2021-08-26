@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { string, func, bool, objectOf } from 'prop-types';
 
 function Button(props) {
-  const { link, testId, name, onClick, disabled, style } = props;
+  const { link, testId, name, onClick, disabled, style, className } = props;
   if (link !== '') {
     return (
       <div>
@@ -14,6 +14,7 @@ function Button(props) {
             onClick={ onClick }
             disabled={ disabled }
             style={ style }
+            className={ className }
           >
             { name }
           </button>
@@ -29,6 +30,7 @@ function Button(props) {
         onClick={ onClick }
         disabled={ disabled }
         style={ style }
+        className={ className }
       >
         { name }
       </button>
@@ -41,8 +43,9 @@ Button.propTypes = {
   testId: string,
   name: string.isRequired,
   onClick: func,
-  disabled: bool.isRequired,
+  disabled: bool,
   style: objectOf(string),
+  className: string,
 };
 
 Button.defaultProps = {
@@ -50,6 +53,8 @@ Button.defaultProps = {
   testId: '',
   onClick: null,
   style: {},
+  disabled: false,
+  className: '',
 };
 
 export default Button;
