@@ -66,7 +66,7 @@ function RecipesProvider({ children }) {
     resultBaseDrinks();
   },
   [searchValues]);
- 
+
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
