@@ -9,6 +9,15 @@ flex-wrap: wrap;
   border: 3px solid black;
 }
 
+.hideCard{
+  display: none;
+}
+
 .recommendedCard img{
   width: 100%;
+}
+
+.mainBtn {
+  position: fixed;
+  bottom: 0;
 }
