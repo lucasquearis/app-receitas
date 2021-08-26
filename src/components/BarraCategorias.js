@@ -5,9 +5,10 @@ function BarraCategorias({ categoriesList, setSelectedCategory }) {
   return (
     <>
       <button
+        data-testid="All-category-filter"
         key="category-filter-all"
-        type="button"
         onClick={ () => setSelectedCategory('') }
+        type="button"
       >
         All
       </button>
