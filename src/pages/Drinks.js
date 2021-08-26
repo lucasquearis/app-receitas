@@ -1,27 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../components/Header';
 import DrinkCard from '../components/DrinkCard';
-import drinks from '../components/mocks/drinks';
+import Context from '../context/Context';
+import DrinkFilterButton from '../components/DrinkFilterButton';
 
 function Drinks() {
+  const { drinkRecipes, drinkCategories: { loading } } = useContext(Context);
+  const { list: recipes } = drinkRecipes;
+  const { loading: loadcard } = drinkRecipes;
+
   const cards = [];
   const maxCards = 12;
   for (let index = 0; index < maxCards; index += 1) {
-    cards.push(<DrinkCard drink={ drinks.drinks[index] } index={ index } />);
+    if (loadcard === false) {
+      cards.push(<DrinkCard drink={ recipes.drinks[index] } index={ index } />);
+    }
   }
 
-  const filterButtons = [];
-  const maxButtons = 5;
-  for (let index = 0; index < maxButtons; index += 1) {
-    filterButtons.push(<FilterButton categoryName={  } />);
-  }
-  
+  const drinkPage = (bool) => {
+    if (bool === false) {
+      return (
+        <div>
+          <Header title="Bebidas" name="cocktail" search />
+          <DrinkFilterButton />
+          { cards }
+        </div>
+      );
+    }
+  };
+
   return (
-    <div>
-      <Header name="Bebidas" search />
-      { filterButtons }
-      { cards }
-    </div>
+    <main>
+      { drinkPage(loading) }
+    </main>
   );
 }
 

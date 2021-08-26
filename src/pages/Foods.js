@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../components/Header';
 import FoodCard from '../components/FoodCard';
-import meals from '../components/mocks/meals';
-import FilterButton from '../components/FilterButton';
+import FoodFilterButton from '../components/FoodFilterButton';
+import Context from '../context/Context';
 
 function Foods() {
+  const { foodRecipes, foodCategories: { loading } } = useContext(Context);
+  const { loading: loadcard } = foodRecipes;
+  const { list: recipes } = foodRecipes;
+
   const cards = [];
   const maxCards = 12;
   for (let index = 0; index < maxCards; index += 1) {
-    cards.push(<FoodCard meal={ meals.meals[index] } index={ index } />);
+    if (loadcard === false) {
+      cards.push(<FoodCard meal={ recipes.meals[index] } index={ index } />);
+    }
   }
 
-  const filterButtons = [];
-  const maxButtons = 5;
-  for (let index = 0; index < maxButtons; index += 1) {
-    filterButtons.push(<FilterButton categoryName={  } />);
-  }
+  const foodPage = (bool) => {
+    if (bool === false) {
+      return (
+        <div>
+          <Header title="Comidas" name="meal" search />
+          <FoodFilterButton />
+          { cards }
+        </div>
+      );
+    }
+  };
 
   return (
-    <div>
-      <Header name="Comidas" search />
-      { filterButtons }
-      { cards }
-    </div>
+    <main>
+      { foodPage(loading) }
+    </main>
   );
 }
 
