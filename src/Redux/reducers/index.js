@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import user from './user';
-import foods from './foods';
-import drinks from './drinks';
+import foods from './foods'
+import drinks from './drinks'
 
 const rootReducer = combineReducers({
   user,
