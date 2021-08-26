@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const CardsList = ({ array }) => {
+const CardsList = ({ array, teste }) => {
   if (array !== undefined) {
     let type;
     let path;
@@ -29,7 +29,7 @@ const CardsList = ({ array }) => {
         { newArray.map((obj, index) => (
           <div
             key={ index }
-            data-testid={ `${index}-recipe-card` }
+            data-testid={ `${index}-${teste}` }
           >
             <Link to={ `/${path}/${obj[`id${type}`]}` }>
               <img
