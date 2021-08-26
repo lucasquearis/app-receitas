@@ -4,10 +4,10 @@ import Footer from '../components/Footer';
 
 function MainFood() {
   return (
-    <div>
+    <>
       <Header title="Comidas" />
       <Footer />
-    </div>
+    </>
   );
 }
 

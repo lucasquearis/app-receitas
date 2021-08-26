@@ -3,9 +3,7 @@ import Header from '../components/Header';
 
 function CookedRecipies() {
   return (
-    <div>
-      <Header title="Receitas Feitas" />
-    </div>
+    <Header title="Receitas Feitas" />
   );
 }
 
