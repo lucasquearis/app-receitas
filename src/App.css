@@ -1,5 +1,6 @@
-footer, .start-recipe {
+footer, .start-recipe, .finish-recipe {
   bottom: 0;
+  left: 0;
   position: fixed;
 }
 
