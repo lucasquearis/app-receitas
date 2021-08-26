@@ -6,6 +6,7 @@ import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import RecomendedCard from '../components/RecomendedCard';
 
 function DrinkDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -33,16 +34,21 @@ function DrinkDetails({ match: { params: { id } } }) {
   const renderRecomendedFood = () => {
     const SEIS = 6;
     const sliceRecomended = recomendedFood.slice(0, SEIS);
-    return (
-      <Carousel itemsToShow={ 1 }>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-      </Carousel>
-    );
+    if (sliceRecomended.length > 0) {
+      return (
+        <Carousel data-testid="recomendation-card" itemsToShow={ 2 }>
+          {sliceRecomended.map((meal, index) => (
+            <RecomendedCard
+              title={ meal.strMeal }
+              key={ meal.idMeal }
+              id={ meal.idMeal }
+              index={ index }
+              img={ meal.strMealThumb }
+            />
+          ))}
+        </Carousel>
+      );
+    }
   };
 
   useEffect(() => {
@@ -119,11 +125,7 @@ function DrinkDetails({ match: { params: { id } } }) {
             </li>))}
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
-        <p
-          data-testid={ `${0}-recomendation-card` }
-        >
-          Recomendações aqui
-        </p>
+        {renderRecomendedFood()}
         <Button
           style={ mystyle }
           variant="contained"

@@ -6,6 +6,7 @@ import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import RecomendedCard from '../components/RecomendedCard';
 
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
@@ -31,22 +32,20 @@ function FoodDetails({ match: { params: { id } } }) {
 
   const renderRecomendedDrink = () => {
     const SEIS = 6;
-    console.log(recomendedDrink);
     const sliceRecomended = recomendedDrink.slice(0, SEIS);
-    if (recomendedDrink.length > 0) {
+    if (sliceRecomended.length > 0) {
       return (
-        <div>
+        <Carousel data-testid="recomendation-card" itemsToShow={ 2 }>
           {sliceRecomended.map((drink, index) => (
-            <div data-testid={ `${index}-recomendation-card` } key={ drink.strDrink }>
-              <p data-testid={ `${index}-recomendation-title` }>{drink.strDrink}</p>
-              <img
-                src={ drink.strDrinkThumb }
-                alt={ drink.strDrink }
-                style={ imgStyle }
-              />
-            </div>
+            <RecomendedCard
+              title={ drink.strDrink }
+              key={ drink.idDrink }
+              id={ drink.idDrink }
+              index={ index }
+              img={ drink.strDrinkThumb }
+            />
           ))}
-        </div>
+        </Carousel>
       );
     }
   };
@@ -127,9 +126,6 @@ function FoodDetails({ match: { params: { id } } }) {
           title={ strMeal }
           src={ strYoutube }
           data-testid="video"
-        />
-        <p
-          data-testid={ `${0}-recomendation-card` }
         />
         {renderRecomendedDrink()}
         <Button
