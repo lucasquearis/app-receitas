@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function StartRecipeButton(props) {
   const { id, type, enType } = props;
@@ -18,14 +19,16 @@ function StartRecipeButton(props) {
   }, []);
 
   return (
-    <button
-      hidden={ done }
-      className="start-recipe-button"
-      type="button"
-      data-testid="start-recipe-btn"
-    >
-      {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-    </button>
+    <Link to={ `/${type}/${id}/in-progress` }>
+      <button
+        hidden={ done }
+        className="start-recipe-button"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+      </button>
+    </Link>
   );
 }
 

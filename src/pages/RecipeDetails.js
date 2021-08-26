@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import rockGlass from '../images/rockGlass.svg';
 import IngredientsList from '../components/IngredientsList';
 import Recomendations from '../components/Recomendations';
 import StartRecipeButton from '../components/StartRecipeButton';
+import ShareButton from '../components/ShareButton';
 import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
   const [enType, setEnType] = useState('drinks');
   const [enCasedType, setEnCasedType] = useState('Drink');
-  const { match } = props;
+  const { match, history } = props;
   const { type, id } = match.params;
+  const { pathname } = history.location;
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -50,9 +51,7 @@ function RecipeDetails(props) {
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
-              <object type="image/svg+xml" data={ shareIcon } data-testid="share-btn">
-                Compartilhar
-              </object>
+              <ShareButton pathname={ pathname } />
               <object
                 type="image/svg+xml"
                 data={ blackHeartIcon }
@@ -97,6 +96,11 @@ RecipeDetails.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   ]).isRequired,
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default RecipeDetails;
