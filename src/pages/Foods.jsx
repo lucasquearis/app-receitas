@@ -4,13 +4,20 @@ import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Card from '../components/Card';
-import useFoods from '../hooks/useFoods';
+import Categories from '../components/Categories';
+import useRecipes from '../hooks/useRecipes';
+import useCategories from '../hooks/useCategories';
 
 export default function Foods() {
   const foods = useSelector((state) => state.recipes.recipes);
+  const categories = [
+    { strCategory: 'All' },
+    ...useSelector((state) => state.recipes.categories),
+  ];
   const [showSearchBar, setShowSearchBar] = useState(false);
   const location = useLocation();
   const currentPage = location.pathname;
+  const [redirectToDetails, setRedirectToDetails] = useState(false);
 
   const {
     setInputValue,
@@ -19,11 +26,21 @@ export default function Foods() {
     setFilterFirstLetter,
     setSearched,
     inputValue,
-  } = useFoods();
+  } = useRecipes(setRedirectToDetails);
 
-  const handleClick = async (e) => {
+  const { filterCategory, setFilterCategory } = useCategories(setRedirectToDetails);
+
+  const handleClickSearch = async (e) => {
     e.preventDefault();
     setSearched(true);
+  };
+
+  const handleClickFilter = (category) => {
+    if (category !== filterCategory) {
+      setFilterCategory(category);
+    } else {
+      setFilterCategory('All');
+    }
   };
 
   return (
@@ -38,11 +55,15 @@ export default function Foods() {
           setIngredientValue={ setFilterIngredient }
           setNameValue={ setFilterName }
           setLetterValue={ setFilterFirstLetter }
-          handleClick={ handleClick }
+          handleClick={ handleClickSearch }
           inputValue={ inputValue }
         />
       ) : null}
-      {foods.length === 1 ? (
+      <Categories
+        categories={ categories }
+        onClick={ handleClickFilter }
+      />
+      {redirectToDetails ? (
         foods.map(({ idMeal }) => (
           <Redirect key={ idMeal } to={ `${currentPage}/${idMeal}` } />
         ))

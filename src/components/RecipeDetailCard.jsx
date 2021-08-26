@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Recomendations from './Recomendations';
+import { useLocation } from 'react-router-dom';
+import FoodRecomendations from './FoodRecomendations';
+import DrinkRecomendations from './DrinkRecomendations';
 import shareIcon from '../images/shareIcon.svg';
 import favIcon from '../images/whiteHeartIcon.svg';
 
@@ -13,6 +15,9 @@ export default function RecipeDetailCard({
   instructions,
   video,
 }) {
+  const location = useLocation();
+  const currentPage = location.pathname;
+
   function embedVideo(youtubeLink) {
     if (youtubeLink === null) {
       return;
@@ -54,15 +59,19 @@ export default function RecipeDetailCard({
           allowFullScreen
         />
       </div>
-      <div>
-        <Button data-testid="start-recipe-btn" type="button">
-          Iniciar Receita
-        </Button>
-      </div>
       <div />
       <div>
-        <Recomendations />
+        {currentPage.includes('bebidas')
+          ? <FoodRecomendations />
+          : <DrinkRecomendations /> }
       </div>
+      <Button
+        style={ { position: 'fixed', bottom: '0', width: '100%' } }
+        data-testid="start-recipe-btn"
+        type="button"
+      >
+        Iniciar Receita
+      </Button>
     </section>
   );
 }

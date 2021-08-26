@@ -17,6 +17,7 @@ const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
 const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
 const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
 const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
+const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
 
 export const getRecomendations = async () => {
   if (currentPage.includes(foodPage)) {
@@ -71,4 +72,11 @@ export const getDataDetails = async (id) => {
   }
   const { drinks } = await response.json();
   return drinks[0];
+};
+
+export const getDataByCategory = async (category) => {
+  const response = await fetch(`${categoryFilterURL}${category}`);
+  const data = await response.json();
+
+  return data;
 };

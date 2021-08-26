@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
 
 export default function CardItems({ title, thumb, index, id }) {
   const location = useLocation();
   const currentPage = location.pathname;
+
   return (
     <Link to={ `${currentPage}/${id}` }>
       <Card
@@ -30,7 +31,7 @@ export default function CardItems({ title, thumb, index, id }) {
 
 CardItems.propTypes = {
   title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   thumb: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
 };
