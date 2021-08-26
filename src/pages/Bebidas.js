@@ -7,10 +7,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Bebidas() {
-  const { drinkCategory, drinkData } = useContext(RecipesContext);
+  const { drinkCategory } = useContext(RecipesContext);
   DrinksAPI();
   const [food] = useState(false);
-  console.log(drinkData);
   if (drinkCategory.length > 0) {
     return (
       <div>
