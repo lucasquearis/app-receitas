@@ -88,7 +88,6 @@ function RecipeInProgress() {
         type="checkbox"
         checked={ checked.includes(index) }
         onChange={ () => handleCheck(index) }
-        // testId={ `${index}-ingredient-step` }
       />
       { ingredient }
     </li>
