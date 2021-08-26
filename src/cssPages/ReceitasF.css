@@ -6,3 +6,18 @@
   margin-top: 60px;
 }
 
+.paizao {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paizao img {
+  display: flex;
+  margin-bottom: 10px;
+  
+}
+
+.paizinho {
+  display: flex;
+  justify-content: space-between;
+}

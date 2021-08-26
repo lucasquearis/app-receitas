@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import { ListGroup } from 'react-bootstrap';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import '../cssPages/ReceitasF.css';
-import { ListGroup } from 'react-bootstrap';
 
 function ReceitasFeitas() {
   const doneRecipes = [
@@ -31,6 +31,7 @@ function ReceitasFeitas() {
       tags: [],
     },
   ];
+  const minNumber = 2;
   return (
     <div>
       <Header titulo="Receitas Feitas" pesquisa="false" />
@@ -40,42 +41,59 @@ function ReceitasFeitas() {
         <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
       </div>
       <CardGroup>
-        {doneRecipes.map((recipe) => (
+        {doneRecipes.map((recipe, index) => (
           <Card
             name={ recipe.name }
             style={ { width: '18rem' } }
-            key={ recipe.id }
+            key={ index }
             // onClick={ onClick }
           >
             <Card.Img
-              data-testid={ `${recipe.id}-horizontal-image` }
+              data-testid={ `${index}-horizontal-image` }
               variant="top"
               src={ `${recipe.image}` }
             />
             <Card.Body>
-              <Card.Title
-                data-testid={ `${recipe.id}-horizontal-name` }
-              >
-                { recipe.name }
-              </Card.Title>
+              <div className="paizao">
+                <Card.Title
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  { recipe.name }
+                </Card.Title>
+                <img
+                  className="shareIcon"
+                  alt={ recipe.name }
+                  src={ shareIcon }
+                  data-testid={ `${index}-horizontal-share-btn` }
+                />
+              </div>
               <Card.Subtitle
                 className="mb-2 text-muted"
-                data-testid={ `${recipe.id}-horizontal-top-text` }
+                data-testid={ `${index}-horizontal-top-text` }
               >
-                {`${recipe.category} - 
-                ${recipe.area.length === 0 ? recipe.alcoholicOrNot : recipe.area}`}
+                {`${recipe.area.length === 0 ? recipe.alcoholicOrNot : recipe.area}  -  
+                ${recipe.category}`}
 
               </Card.Subtitle>
-              <Card.Text data-testid={ `${recipe.id}-horizontal-done-date` }>
+              <Card.Text data-testid={ `${index}-horizontal-done-date` }>
                 {recipe.doneDate}
               </Card.Text>
+
               <ListGroup variant="flush">
-                {recipe.tags.map((tag, index) => (
-                  <ListGroup.Item key={ index }>
-                    {tag}
-                  </ListGroup.Item>
-                ))}
+                {
+                  recipe.tags.length === 0 ? ''
+                    : recipe.tags.map((tag, count) => count > minNumber || (
+                      <ListGroup.Item
+                        key={ count }
+                        data-testid={ `${index}-${tag}-horizontal-tag` }
+                      >
+                        {' '}
+                        {tag}
+                        {' '}
+                      </ListGroup.Item>))
+                }
               </ListGroup>
+
             </Card.Body>
           </Card>
         ))}
