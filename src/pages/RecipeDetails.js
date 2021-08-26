@@ -56,15 +56,13 @@ function RecipeDetails(props) {
               <ShareButton pathname={ pathname } />
               <FavoriteButton
                 recipe={
-                  {
-                    id,
+                  { id,
                     type: favoriteType,
-                    area: recipe[enType][0]['strArea'] || '',
-                    category: recipe[enType][0]['strCategory'],
-                    alcoholicOrNot: recipe[enType][0]['strAlcoholic'] || '',
+                    area: recipe[enType][0].strArea || '',
+                    category: recipe[enType][0].strCategory,
+                    alcoholicOrNot: recipe[enType][0].strAlcoholic || '',
                     name: recipe[enType][0][`str${enCasedType}`],
-                    image: recipe[enType][0][`str${enCasedType}Thumb`],
-                  }
+                    image: recipe[enType][0][`str${enCasedType}Thumb`] }
                 }
               />
               <h2 data-testid="recipe-category">
