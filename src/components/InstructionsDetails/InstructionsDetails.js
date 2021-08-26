@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const InstructionsDetails = ({ instruction }) => (
   <div>
     <h1>Instructions</h1>
-    <p>{instruction}</p>
+    <p data-testid="instructions">{instruction}</p>
   </div>
 );
 
