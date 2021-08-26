@@ -5,7 +5,7 @@ import { fetchMealsByCategoryName, fetchMealApi } from '../services/fetchMealApi
 import './buttonsCategory.css';
 
 const ButtonCategories = ({ categories }) => {
-  const { setFoods } = useContext(FoodContext);
+  const { setFoods, setMealsByCategories } = useContext(FoodContext);
   const CATEGORIES = 5;
   const buttons = document.getElementsByName('category-buttons');
   const checked = false;
@@ -19,6 +19,7 @@ const ButtonCategories = ({ categories }) => {
   const filterByCategoryName = (event, categoryName) => {
     if (event.target.checked) {
       fetchMealsByCategoryName(categoryName).then((data) => setFoods(data.meals));
+      setMealsByCategories(true);
       clearFilter();
       event.target.checked = true;
     } else if (event.target.checked === false) {

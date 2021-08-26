@@ -5,13 +5,18 @@ import { fetchDrinksApi, fetchCategoriesDrinksApi } from '../services/fetchDrink
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
+  const [drinkFilter, setDrinkFilter] = useState({
+    searchText: '',
+    search: '',
+  });
   const [categoriesDrinks, setCategoriesDrinks] = useState([]);
+  const [drinksByCategories, setDrinksByCategories] = useState(false);
 
   useEffect(() => {
-    fetchDrinksApi().then((data) => {
+    fetchDrinksApi(drinkFilter).then((data) => {
       setDrinks(data.drinks);
     });
-  }, []);
+  }, [drinkFilter]);
 
   useEffect(() => {
     fetchCategoriesDrinksApi().then((categories) => {
@@ -21,8 +26,12 @@ const DrinksProvider = ({ children }) => {
 
   const contextValue = {
     drinks,
+    drinkFilter,
+    setDrinkFilter,
     categoriesDrinks,
     setDrinks,
+    drinksByCategories,
+    setDrinksByCategories,
   };
 
   return (

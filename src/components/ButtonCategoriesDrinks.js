@@ -5,7 +5,7 @@ import { fetchDrinksByCategoryName, fetchDrinksApi } from '../services/fetchDrin
 import './buttonsCategory.css';
 
 const ButtonCategoriesDrinks = ({ categories }) => {
-  const { setDrinks } = useContext(DrinksContext);
+  const { setDrinks, setDrinksByCategories } = useContext(DrinksContext);
   const CATEGORIES = 5;
   const buttons = document.getElementsByName('category-buttons');
   const checked = false;
@@ -19,6 +19,7 @@ const ButtonCategoriesDrinks = ({ categories }) => {
   const filterByCategoryName = (event, categoryName) => {
     if (event.target.checked) {
       fetchDrinksByCategoryName(categoryName).then((data) => setDrinks(data.drinks));
+      setDrinksByCategories(true);
       clearFilter();
       event.target.checked = true;
     } else if (event.target.checked === false) {
