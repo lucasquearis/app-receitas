@@ -1,9 +1,9 @@
 .container-cards {
-  max-width: 340px;
   display: grid;
+  max-width: 340px;
   grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(6, 1fr);
   column-gap: 10px;
+  grid-template-rows: repeat(6, 1fr);
   row-gap: 10px;
 }
 
