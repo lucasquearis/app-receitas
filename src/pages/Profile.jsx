@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import useLogout from '../hooks/useLogout';
 import useRedirect from '../hooks/useRedirect';
+import Footer from '../components/Footer';
 
 function Profile() {
   const { user } = useSelector((state) => state.login);
@@ -45,6 +46,7 @@ function Profile() {
       >
         Sair
       </Button>
+      <Footer />
     </div>
   );
 }
