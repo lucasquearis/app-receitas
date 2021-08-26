@@ -11,7 +11,7 @@ function ExploreFood() {
           Por Ingredientes
         </button>
       </Link>
-      <Link>
+      <Link to="/explorar/comidas/area">
         <button data-testid="explore-by-area">
           Por Local de Origem
         </button>
