@@ -44,11 +44,10 @@ export default function DetalheComida(props) {
     };
 
     const getRandomDrink = async () => {
-      const drink1 = await BebidasAPI.buscarBebidaAleatoria();
-      const drink2 = await BebidasAPI.buscarBebidaAleatoria();
-
-      const drinks = [drink1.drinks[0], drink2.drinks[0]];
-      setRandomDrinks(drinks);
+      const drink = await BebidasAPI.buscarBebidaAleatoria();
+      const drinksCount = 6;
+      const firstDrinks = drink.drinks.filter((_drink, index) => index < drinksCount);
+      setRandomDrinks(firstDrinks);
     };
 
     getFood();

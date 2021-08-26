@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
-import { buscarComidaAleatoria } from '../service/ComidasAPI';
+import { buscarComidasAleatoria } from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -51,10 +51,10 @@ export default function DetalheBebida(props) {
     };
 
     const getRandomFood = async () => {
-      const foods = await buscarComidaAleatoria();
+      const foods = await buscarComidasAleatoria();
       const foodsCount = 6;
 
-      const firstFoods = foods.filter((food, index) => index < foodsCount);
+      const firstFoods = foods.filter((_food, index) => index < foodsCount);
       setRandomFood(firstFoods);
     };
 
