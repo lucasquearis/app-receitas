@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import fetchFoodAPI from '../../API/fetchFoodAPI';
 import fetchDrinksAPI from '../../API/fetchDrinksAPI';
-import { fetchFoodCategoryAPI, fetchDrinlCategoryAPI } from '../../API/fetchCategoryAPI';
+// import { fetchFoodCategoryAPI, fetchDrinkCategoryAPI } from '../../API/fetchCategoryAPI';
 
 // Action Creators - Login Actions
 
@@ -193,6 +193,22 @@ export const fetchLetterAPI = (value) => async (dispatch) => {
 
 export const fetchCategory = () => async (dispatch) => {
   dispatch(categoryRequest());
-  const path = window.location.pathname;
-  if (path === )
+  // const path = window.location.pathname;
+  // if (path === '/comidas') {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return dispatch(categoryRequestSuccess(data));
+  } catch (error) {
+    return dispatch(categoryRequestError(error));
+  }
+  // }
+  // if (path === '/bebidas') {
+  //   try {
+  //     const data = await fetch(fetchDrinkCategoryAPI());
+  //     return dispatch(categoryRequestSuccess(data));
+  //   } catch (error) {
+  //     return dispatch(categoryRequestError(error));
+  //   }
+  // }
 };

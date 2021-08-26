@@ -7,7 +7,7 @@ function ItemCard(props) {
   return (
     <div className="div-card" data-testid={ `${index}-recipe-card` }>
       <section className="section-card">
-        <sapn className="card-title" data-testid={ `${index}-card-name` }>{title}</sapn>
+        <span className="card-title" data-testid={ `${index}-card-name` }>{title}</span>
         <img
           className="card-img"
           src={ thumb }
