@@ -12,7 +12,7 @@ function saveDoneMeal(rcp) {
         name: rcp.strMeal,
         image: rcp.strMealThumb,
         doneDate: new Date().toLocaleDateString('pt-BR'),
-        tags: rcp.strTags ? rcp.strTags : '',
+        tags: rcp.strTags ? rcp.strTags.split(',') : [],
       },
     ]));
   }
