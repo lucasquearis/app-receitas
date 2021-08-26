@@ -1,4 +1,4 @@
-const meals = {
+const meals = [{
   idMeal: '52882',
   strMeal: 'Three Fish Pie',
   strDrinkAlternate: null,
@@ -50,9 +50,9 @@ const meals = {
   strMeasure20: '',
   strSource: 'https:\/\/www.bbc.co.uk\/food\/recipes\/three_fish_pie_58875',
   dateModified: null,
-};
+}];
 
-export const drinks = {
+export const drinks = [{
   idDrink: '17256',
   strDrink: 'Martinez 2',
   strDrinkAlternate: null,
@@ -106,6 +106,6 @@ export const drinks = {
   strMeasure15: null,
   strCreativeCommonsConfirmed: 'No',
   dateModified: '2017-12-19 18:34:15',
-};
+}];
 
 export default meals;
