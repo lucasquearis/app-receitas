@@ -5,7 +5,15 @@ import PropTypes from 'prop-types';
 import { Carousel, Button, Image } from 'react-bootstrap';
 import * as fetchAPI from '../service/fetchAPI';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+
+const maxSuggestions = 6;
+
+const heartIcon = () => {
+  const isFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  return isFavorite ? blackHeartIcon : whiteHeartIcon;
+};
 
 function DrinkDetails(props) {
   const [data, setData] = useState([]);
@@ -66,13 +74,15 @@ function DrinkDetails(props) {
       <Image fluid data-testid="recipe-photo" src={ strDrinkThumb } alt="recipe" />
       <div className="favorite-container">
         <h2 data-testid="recipe-title">{strDrink}</h2>
-        <button data-testid="share-btn" type="button" onClick={ () => shareHandleClick() }>
+        <button
+          data-testid="share-btn"
+          type="button"
+          onClick={ () => shareHandleClick() }
+        >
           <img src={ shareIcon } alt="share icon" />
           {copied && <span>Link copiado!</span>}
         </button>
-        <button data-testid="favorite-btn" type="button">
-          <img src={ whiteHeartIcon } alt="share icon" />
-        </button>
+        <Image data-testid="favorite-btn" alt="heart" src={ heartIcon() } />
         <h4 data-testid="recipe-category">{ strAlcoholic }</h4>
       </div>
       <h4>Ingredientes</h4>
@@ -84,7 +94,7 @@ function DrinkDetails(props) {
       <Carousel>
         {
           tip && tip.map((recipe, index) => (
-            index < 6
+            index < maxSuggestions
             && (
               <Carousel.Item key={ index } data-testid={ `${index}-recomendation-card` }>
                 <Image fluid src={ recipe.strMealThumb } />
