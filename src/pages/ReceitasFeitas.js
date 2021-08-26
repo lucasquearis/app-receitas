@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import shareIcon from '../images/shareIcon.svg';
-import copy from 'clipboard-copy';
 
 function ReceitasFeitas() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));

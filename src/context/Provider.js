@@ -57,7 +57,7 @@ function Provider({ children }) {
   useEffect(() => {
     const searchAlert = () => {
       if (search === 'primeira letra' && filter.length > 1) {
-        alert('Sua busca deve conter somente 1 (um) caracter');
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
       }
     };
     searchAlert();
