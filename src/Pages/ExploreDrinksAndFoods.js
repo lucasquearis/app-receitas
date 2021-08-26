@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
+import useRandom from '../Hooks/useRandom';
 
-function ExploreDrinks(props) {
-  const id = 0;
-  const { location } = props;
+function ExploreDrinksAndFoods() {
+  const { pathname } = useLocation();
   const [redirectTo, setRedirectTo] = useState({
     ingredients: false,
     area: false,
     surprise: false });
+  const [id] = useRandom();
 
   const handleClick = ({ target }) => {
     setRedirectTo({ [target.name]: true });
   };
 
-  if (location.pathname === '/explorar/comidas') {
+  const handleSurpriseClick = () => {
+    if (id !== '') {
+      console.log(id);
+      setRedirectTo({ ...redirectTo, surprise: true });
+    }
+  };
+
+  if (pathname === '/explorar/comidas') {
     if (redirectTo.ingredients === true) {
       return <Redirect to="/explorar/comidas/ingredientes" />;
     }
@@ -46,7 +54,7 @@ function ExploreDrinks(props) {
           name="surprise"
           data-testid="explore-surprise"
           variant="link"
-          onClick={ handleClick }
+          onClick={ handleSurpriseClick }
         >
           Me Surpreenda!
         </Button>
@@ -54,12 +62,12 @@ function ExploreDrinks(props) {
     );
   }
 
-  if (location.pathname === '/explorar/bebidas') {
+  if (pathname === '/explorar/bebidas') {
     if (redirectTo.ingredients === true) {
       return <Redirect to="/explorar/bebidas/ingredientes" />;
     }
     if (redirectTo.surprise === true) {
-      return <Redirect to={ `/comidas/${id}` } />;
+      return <Redirect to={ `/bebidas/${id}` } />;
     }
     return (
       <>
@@ -75,7 +83,7 @@ function ExploreDrinks(props) {
           name="surprise"
           data-testid="explore-surprise"
           variant="link"
-          onClick={ handleClick }
+          onClick={ handleSurpriseClick }
         >
           Me Surpreenda!
         </Button>
@@ -84,4 +92,4 @@ function ExploreDrinks(props) {
   }
 }
 
-export default ExploreDrinks;
+export default ExploreDrinksAndFoods;
