@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { requestByCategory } from '../../../redux/actions/fetchActions';
+import { changeFilterType } from '../../../redux/actions/filterAction';
+import { requestByCategory, requestDefault } from '../../../redux/actions/fetchActions';
 
-function CategoryButton({ category, path }) {
-  const [selected, setSelected] = useState('false');
+function CategoryButton({ category, path, selected, select }) {
   const dispatch = useDispatch();
 
   function handleClick({ target }) {
-    const { value } = target;
-    console.log(typeof value);
-    dispatch(requestByCategory(value, path));
+    const { innerText } = target;
+    if (selected === innerText) {
+      dispatch(changeFilterType(''));
+      dispatch(requestDefault(path));
+      select('');
+    } else {
+      dispatch(changeFilterType(''));
+      dispatch(requestByCategory(innerText, path));
+      select(innerText);
+    }
   }
   return (
     <button
@@ -25,6 +32,9 @@ function CategoryButton({ category, path }) {
 
 CategoryButton.propTypes = {
   category: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  selected: PropTypes.string.isRequired,
+  select: PropTypes.func.isRequired,
 };
 
 export default CategoryButton;
