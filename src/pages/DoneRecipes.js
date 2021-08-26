@@ -13,14 +13,16 @@ function DoneRecipes() {
   }, []);
 
   useEffect(() => {
-    setFilteredList([...doneList]);
+    if (doneList && doneList.length > 0) {
+      setFilteredList([...doneList]);
+    }
   }, [doneList]);
 
   const handleClickFilter = (filter) => {
-    if (filter === 'comida' || filter === 'bebida') {
+    if (doneList && (filter === 'comida' || filter === 'bebida') && doneList.length > 0) {
       setFilteredList([...doneList].filter((recipe) => recipe.type === filter));
     }
-    if (filter === 'all') {
+    if (doneList && filter === 'all' && doneList.length > 0) {
       setFilteredList([...doneList]);
     }
   };
@@ -49,7 +51,7 @@ function DoneRecipes() {
       >
         Drinks
       </button>
-      { filteredList
+      { filteredList && filteredList.length > 0
         && filteredList.map((recipe, index) => (
           <div key={ index }>
             <Link to={ `/${recipe.type}s/${recipe.id}` }>
