@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
-import { ContextApp } from '../../Context/ContextApp';
+import React from 'react';
+import PropTypes from 'prop-types';
 import RecipeCard from '../RecipeCard';
 
-const Food = () => {
-  const { meal } = useContext(ContextApp);
+const Food = ({ recipes }) => {
   const maxRecipes = 12;
-  if (meal === undefined) {
+  if (recipes === undefined) {
     return <div>loding</div>;
   }
 
   return (
     <div>
-      {meal.slice(0, maxRecipes).map((recipe, index) => (
+      {recipes.slice(0, maxRecipes).map((recipe, index) => (
         <RecipeCard
           key={ index }
           name={ recipe.strMeal || recipe.strDrink }
@@ -26,4 +25,7 @@ const Food = () => {
   );
 };
 
+Food.propTypes = {
+  recipes: PropTypes.objectOf(PropTypes.object).isRequired,
+};
 export default Food;
