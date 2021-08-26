@@ -42,6 +42,7 @@ function SearchBar() {
       }
       return requestLetter(result);
     }
+    console.log(window.location.pathname);
   };
 
   const { result } = search;
