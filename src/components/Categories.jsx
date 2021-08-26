@@ -31,7 +31,7 @@ function Categories({
   };
 
   return (
-    <aside>
+    <aside className="categoryButtons">
       <Button
         data-testid="All-category-filter"
         variant="dark"

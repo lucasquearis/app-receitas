@@ -5,3 +5,8 @@
 .cardRecipe img {
   width: 100%;
 }
+
+.categoryButtons {
+  margin-bottom: 20px;
+  margin-top: 70px;
+}

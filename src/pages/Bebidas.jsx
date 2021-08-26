@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import HookBebidas from '../hooks/HookBebidas';
 import CardList from '../components/CardList';
 import Categories from '../components/Categories';
@@ -24,6 +25,7 @@ function Bebidas() {
     ? <div>Loading... </div>
     : (
       <>
+        <Header titulo="Bebidas" pesquisa="true" />
         <Categories
           type="drink"
           action="filterCategory"
