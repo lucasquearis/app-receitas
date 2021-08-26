@@ -6,6 +6,7 @@ import Provider from './context/Provider';
 import Login from './pages/Login';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
+import Perfil from './pages/Perfil';
 
 function App() {
   return (
