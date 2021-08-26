@@ -33,13 +33,11 @@ export default function InProgress(
   const handleCheckBoxChange = ({ target }) => {
     const { name: n, checked } = target;
     const ingIndex = steps.findIndex(({ step }) => step === n);
-    console.log(ingIndex);
     setSteps([
       ...steps.slice(0, ingIndex),
       { step: n, checked },
       ...steps.slice(ingIndex + 1),
     ]);
-    console.log(steps);
   };
 
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
@@ -106,6 +104,6 @@ InProgress.propTypes = {
   name: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  ingredients: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   instructions: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired };
