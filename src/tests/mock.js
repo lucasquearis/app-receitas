@@ -1,15 +1,17 @@
-import mockDrinks from '../../cypress/mocks/drinks';
 import mockMeals from '../../cypress/mocks/meals';
 import mockBeef from '../../cypress/mocks/beefMeals';
 import mockBreakFast from '../../cypress/mocks/breakfastMeals';
 import mockChicken from '../../cypress/mocks/chickenMeals';
 import mockDessert from '../../cypress/mocks/dessertMeals';
 import mockGoat from '../../cypress/mocks/goatMeals';
+import mockCategoryM from '../../cypress/mocks/mealCategories';
+import mockDrinks from '../../cypress/mocks/drinks';
 import mockCocktail from '../../cypress/mocks/cocktailDrinks';
 import mockCocoa from '../../cypress/mocks/cocoaDrinks';
 import mockOrdinary from '../../cypress/mocks/ordinaryDrinks';
 import mockOther from '../../cypress/mocks/otherDrinks';
 import mockMilk from '../../cypress/mocks/milkDrinks';
+import mockCategoryD from '../../cypress/mocks/drinkCategories';
 
 export const mockAllDrinks = { json: jest.fn().mockResolvedValue(mockDrinks) };
 export const mockAllMeals = { json: jest.fn().mockResolvedValue(mockMeals) };
@@ -23,3 +25,5 @@ export const mockCocoaDrinks = { json: jest.fn().mockResolvedValue(mockCocoa) };
 export const mockOrdinaryDrinks = { json: jest.fn().mockResolvedValue(mockOrdinary) };
 export const mockOtherDrinks = { json: jest.fn().mockResolvedValue(mockOther) };
 export const mockMilkDrinks = { json: jest.fn().mockResolvedValue(mockMilk) };
+export const mockDrinksCategory = { json: jest.fn().mockResolvedValue(mockCategoryD) };
+export const mockMealsCategory = { json: jest.fn().mockResolvedValue(mockCategoryM) };
