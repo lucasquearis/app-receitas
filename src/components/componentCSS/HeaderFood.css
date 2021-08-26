@@ -1,0 +1,80 @@
+.header-food {
+  background-color: #c4c4c4;
+  display: flex;
+  height: 58px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
+
+.search-btn {
+  background-color: #c4c4c4;
+  border: none;
+  left: 270px;
+  margin: 0 27.5px;
+  padding: 5px;
+  position: absolute;
+  top: 12px;
+}
+
+.search-btn img {
+  height: 28px;
+}
+
+.profile-btn img {
+  height: 35px;
+  margin: 0 27.5px;
+  padding: 5px;
+}
+
+.profile-btn {
+  border: none;
+  height: 35px;
+  left: 15;
+  position: absolute;
+  top: 12px;
+  width: 30px;
+}
+
+.header-food h1 {
+  align-items: flex-end;
+  color: black;
+  display: flex;
+  font-size: 30px;
+  font-style: normal;
+  height: 35px;
+  left: 123px;
+  line-height: 35px;
+  position: absolute;
+  top: 12px;
+  width: 119px;
+}
+
+.header-no-search h1 {
+  align-items: flex-end;
+  color: black;
+  display: flex;
+  font-size: 30px;
+  font-style: normal;
+  height: 35px;
+  left: 100px;
+  line-height: 35px;
+  position: absolute;
+  top: 12px;
+  width: 211px;
+}
+
+.header-no-search {
+  background-color: #c4c4c4;
+  display: flex;
+  height: 58px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
