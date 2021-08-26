@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function RecipiesDone() {
+function DoneRecipes() {
   return (
     <div>
       <Header title="Receitas Feitas" />
@@ -9,4 +9,4 @@ function RecipiesDone() {
   );
 }
 
-export default RecipiesDone;
+export default DoneRecipes;
