@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Header, RecipeList, Footer } from '../components';
+import { Header, RecipeList, Footer, CategoryFilter } from '../components';
 import UseInitialRecipes from '../hook/UseInitialRecipes';
 
 function MainDrinks() {
@@ -15,6 +15,7 @@ function MainDrinks() {
   return (
     <div>
       <Header title="Bebidas" searchIcon />
+      <CategoryFilter />
       <RecipeList />
       <Footer />
     </div>
