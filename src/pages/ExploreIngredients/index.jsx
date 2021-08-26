@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 import { Card } from 'react-bootstrap';
+import Footer from '../../components/Footer';
 
 function ExploreIngredients() {
   const { pathname } = useLocation();
@@ -61,6 +62,7 @@ function ExploreIngredients() {
           </Link>
         );
       })}
+      <Footer />
     </main>
   );
 }
