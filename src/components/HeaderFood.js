@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
@@ -8,6 +8,7 @@ import './searchBar.css';
 
 const Header = () => {
   const [showBar, setShowBar] = useState(false);
+  const location = useLocation();
 
   return (
     <div className="header-container">
@@ -23,7 +24,7 @@ const Header = () => {
         </button>
       </div>
       <div>
-        {showBar && <SearchBar className="search-bar" />}
+        {showBar && <SearchBar location={ location } />}
       </div>
     </div>
   );

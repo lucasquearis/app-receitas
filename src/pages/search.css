@@ -1,0 +1,44 @@
+.container-search {
+  margin: 0 auto;
+  width: 360px;
+}
+
+.header {
+  background-color: #9e9a9a;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+  padding: 8px;
+}
+
+.header button {
+  background: none;
+  border: none;
+  margin-left: 8px;
+}
+
+.header img {
+  width: 24px;
+}
+
+.header p {
+  font-size: 24px;
+  margin-bottom: 0;
+  margin-left: 80px;
+}
+
+.buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+}
+
+.buttons button {
+  border: 0;
+  border-radius: 8px;
+  font-size: 20px;
+  margin-bottom: 32px;
+  padding: 8px;
+  width: 240px;
+}

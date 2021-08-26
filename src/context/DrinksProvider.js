@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DrinksContext from './DrinksContext';
-import fetchDrinksApi from '../services/fetchDrinksApi';
+import { fetchDrinksApi, fetchCategoriesDrinksApi } from '../services/fetchDrinksApi';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
   const [drinkDetailsId, setDrinkDetailsId] = useState('');
   const [drinkDetails, setDrinkDetails] = useState([]);
+  const [drinkFilter, setDrinkFilter] = useState({
+    searchText: '',
+    search: '',
+  });
+  const [categoriesDrinks, setCategoriesDrinks] = useState([]);
+  const [drinksByCategories, setDrinksByCategories] = useState(false);
 
   useEffect(() => {
-    fetchDrinksApi().then((data) => {
+    fetchDrinksApi(drinkFilter).then((data) => {
       setDrinks(data.drinks);
+    });
+  }, [drinkFilter]);
+
+  useEffect(() => {
+    fetchCategoriesDrinksApi().then((categories) => {
+      setCategoriesDrinks(categories.drinks);
     });
   }, []);
 
@@ -24,6 +36,12 @@ const DrinksProvider = ({ children }) => {
     drinkDetailsId,
     setDrinkDetailsId,
     drinkDetails,
+    drinkFilter,
+    setDrinkFilter,
+    categoriesDrinks,
+    setDrinks,
+    drinksByCategories,
+    setDrinksByCategories,
   };
 
   return (
