@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../../context/Context';
 
 function DrinksDetails() {
+  const { recipes } = useContext(Context);
+  console.log(recipes);
   // const [recipesDrink, setRecipesDrink] = useState([]);
   // useEffect(() => {
   //   const getRecipesDrink = async () => {

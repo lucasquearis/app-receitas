@@ -21,9 +21,9 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route path="/comidas/:id" render={ (props) => <FoodDet { ...props } /> } />
         <Route path="/comidas" component={ Foods } />
         <Route path="/bebidas" component={ Drinks } />
-        <Route path="/comidas/:id" render={ (props) => <FoodDet { ...props } /> } />
         <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         {/* <Route path="/explorar" component={ Explore } />
         <Route path="/explorar/comidas" component={ FoodExp } />
