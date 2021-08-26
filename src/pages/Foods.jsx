@@ -5,6 +5,8 @@ import {
 } from '../redux/actions/foodActions';
 import FoodsCards from '../components/FoodsCard';
 import CategoryButton from '../components/CategoryButton';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Foods() {
   const dispatch = useDispatch();
@@ -37,25 +39,33 @@ function Foods() {
     );
   }
 
+  const headerProps = {
+    title: 'Comidas',
+    renderSearchBar: true,
+  };
+
   return (
-    <div>
-      <button
-        type="button"
-        onClick={ () => onClick('All') }
-      >
-        All
-      </button>
-      { categories.meals.slice(0, buttonLimits).map(
-        (category, id) => CategoryButton(category.strCategory, id, onClick),
-      )}
+    <>
+      <Header { ...headerProps } />
+      <div>
+        <button
+          type="button"
+          onClick={ () => onClick('All') }
+        >
+          All
+        </button>
+        { categories.meals.slice(0, buttonLimits).map(
+          (category, id) => CategoryButton(category.strCategory, id, onClick),
+        )}
 
-      {foods.slice(0, foodsLimits).map(
-        (food, id) => FoodsCards(
-          food, 'comidas', id,
-        ),
-      )}
-
-    </div>
+        {foods.slice(0, foodsLimits).map(
+          (food, id) => FoodsCards(
+            food, 'comidas', id,
+          ),
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 

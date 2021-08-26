@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import IconBtn from '../IconBtn';
+import TextInput from '../TextInput';
 import './style.css';
 
 function SearchBar() {
@@ -21,24 +23,28 @@ function SearchBar() {
     }
   };
 
+  const searchBtnProps = {
+    onClick: handleClick,
+    dataId: 'search-top-btn',
+    src: '/images/searchIcon.svg',
+    alt: 'search-button',
+  };
+
+  const searchInputProps = {
+    id: 'search-input',
+    onChange: handleChange,
+    dataId: 'search-input',
+    placeholder: 'Digite sua busca',
+    name: 'searchInput',
+  };
+
   return (
     <>
-      <button type="button" onClick={ handleClick } data-testid="search-top-btn">
-        <img src="/images/searchIcon.svg" alt="search-button" />
-      </button>
+      <IconBtn { ...searchBtnProps } />
       {
         searchInputs && (
           <form>
-            <label htmlFor="search-input">
-              <input
-                id="search-input"
-                type="text"
-                onChange={ handleChange }
-                data-testid="search-input"
-                placeholder="Digite sua busca"
-                name="searchInput"
-              />
-            </label>
+            <TextInput { ...searchInputProps } />
 
             <label htmlFor="ingredient-search-radio">
               Ingrediente
