@@ -13,7 +13,6 @@ function EstruturaPrincipal({
   categoriesList,
   isLoading,
   recipes,
-  setSelectedCategory,
 }) { // Nome provisório
   const { showBar } = useContext(AppContext);
 
@@ -41,7 +40,6 @@ function EstruturaPrincipal({
       <Header nomeDaPagina={ (pathIsMeals) ? 'Comidas' : 'Bebidas ' } />
       { showBar ? <BarraDeBusca /> : <BarraCategorias
         categoriesList={ categoriesList }
-        setSelectedCategory={ setSelectedCategory }
         whatIsTheType={ pathname }
       /> }
       { isLoading ? <h1>Loading...</h1> : renderCards() }
@@ -55,7 +53,6 @@ EstruturaPrincipal.propTypes = {
   categoriesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   isLoading: PropTypes.bool.isRequired,
   recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setSelectedCategory: PropTypes.func.isRequired,
 };
 
 export default EstruturaPrincipal;

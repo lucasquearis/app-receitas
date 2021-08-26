@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import AppContext from '../context/AppContext';
 
-function BarraCategorias({ categoriesList, setSelectedCategory }) {
+function BarraCategorias({ categoriesList }) {
+  const { selectedCategory, setSelectedCategory } = useContext(AppContext);
+
   return (
     <>
       <button
@@ -20,7 +23,10 @@ function BarraCategorias({ categoriesList, setSelectedCategory }) {
             <button
               data-testid={ `${strCategory}-category-filter` }
               key={ `category-filter-${index}` }
-              onClick={ () => setSelectedCategory(strCategory) }
+              onClick={ () => {
+                const checkedCate = (selectedCategory === strCategory) ? '' : strCategory;
+                setSelectedCategory(checkedCate);
+              } }
               type="button"
             >
               { strCategory }
@@ -35,7 +41,6 @@ function BarraCategorias({ categoriesList, setSelectedCategory }) {
 
 BarraCategorias.propTypes = {
   categoriesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setSelectedCategory: PropTypes.string.isRequired,
 };
 
 export default BarraCategorias;

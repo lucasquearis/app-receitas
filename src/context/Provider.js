@@ -4,8 +4,11 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [showBar, setShowBar] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const contextValue = {
+    selectedCategory,
+    setSelectedCategory,
     showBar,
     setShowBar,
   };

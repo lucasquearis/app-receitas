@@ -12,12 +12,11 @@ function Principal({
   getByCategoryEndPoint,
   type,
 }) {
-  const { setShowBar } = useContext(AppContext);
+  const { selectedCategory, setSelectedCategory, setShowBar } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [mealsCategories, setMealsCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     const getApiData = async () => {
@@ -33,7 +32,7 @@ function Principal({
     const getCategories = async () => {
       try {
         const categoriesList = await fetchApi(categoriesEndPoint);
-        setMealsCategories(categoriesList[type]);
+        setCategories(categoriesList[type]);
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +47,14 @@ function Principal({
       setSelectedCategory('');
       setShowBar(false);
     };
-  }, [categoriesEndPoint, getByCategoryEndPoint, listEndPoint, setShowBar, type]);
+  }, [
+    categoriesEndPoint,
+    getByCategoryEndPoint,
+    listEndPoint,
+    setSelectedCategory,
+    setShowBar,
+    type,
+  ]);
 
   useEffect(() => {
     const getApiData = async () => {
@@ -71,7 +77,7 @@ function Principal({
   return (
     <EstruturaPrincipal
       isLoading={ isLoading }
-      categoriesList={ mealsCategories }
+      categoriesList={ categories }
       recipes={ recipes }
       selectedCategory={ selectedCategory }
       setSelectedCategory={ setSelectedCategory }
