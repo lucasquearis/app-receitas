@@ -7,8 +7,8 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function DetalheComida(/* props */) {
-  // const { match: { params: { id } } } = props;
+export default function DetalheComida(props) {
+  const { match: { params: { id } } } = props;
 
   const [food, setFood] = useState({});
   const [randomDrinks, setRandomDrinks] = useState([]);
@@ -17,8 +17,7 @@ export default function DetalheComida(/* props */) {
 
   useEffect(() => {
     const getFood = async () => {
-      const testID = '52772';
-      const foodResult = await ComidasAPI.buscarComidaPeloID(testID);
+      const foodResult = await ComidasAPI.buscarComidaPeloID(id);
       setFood(foodResult[0]);
 
       const ingredientsKeys = Object.entries(foodResult[0]).filter((ingredient) => (

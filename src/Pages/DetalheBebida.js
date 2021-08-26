@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidaAleatoria } from '../service/ComidasAPI';
@@ -6,8 +7,8 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function DetalheBebida(/* props */) {
-  // const { match: { params: { id } } } = props;
+export default function DetalheBebida(props) {
+  const { match: { params: { id } } } = props;
 
   const [drink, setDrink] = useState({});
   const [drinkIngredients, setDrinkIngredients] = useState([]);
@@ -15,9 +16,7 @@ export default function DetalheBebida(/* props */) {
 
   useEffect(() => {
     const getDrink = async () => {
-      const testID = '11007';
-
-      const drinkResult = await BebidasAPI.buscarBebidaPeloID(testID);
+      const drinkResult = await BebidasAPI.buscarBebidaPeloID(id);
       setDrink(drinkResult.drinks[0]);
 
       const ingredientsKeys = Object.entries(
@@ -142,3 +141,11 @@ export default function DetalheBebida(/* props */) {
     </section>
   );
 }
+
+DetalheBebida.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
