@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Button } from 'react-bootstrap';
 import Context from '../../context';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function Recipes(props) {
+function Recipes() {
   const {
     requestApiData, apiData, isFetching,
     setRadioValue, setInputText,
@@ -15,6 +15,11 @@ function Recipes(props) {
   const [categories, setCategories] = React.useState([]);
   const [loadingCategories, setLoadingCategories] = React.useState(true);
   const [activeFilter, setActiveFilter] = React.useState('');
+
+  const location = useLocation();
+  const query = location.pathname === '/comidas' ? 'meal' : 'drink';
+  const api = query === 'meal' ? 'themealdb' : 'thecocktaildb';
+  const page = query === 'meal' ? 'comidas' : 'bebidas';
 
   const handleRemoveFilter = () => {
     setRadioValue('s');
@@ -32,17 +37,12 @@ function Recipes(props) {
     }
   };
 
-  const { location: { pathname } } = props;
-  const query = pathname === '/comidas' ? 'meal' : 'drink';
-
   React.useEffect(() => {
-    const url = query === 'meal' ? 'themealdb' : 'thecocktaildb';
-    requestApiData(url);
-  }, [requestApiData, query]);
+    requestApiData(api);
+  }, [requestApiData, api]);
 
   React.useEffect(() => {
     const fetchCategores = async () => {
-      const api = query === 'meal' ? 'themealdb' : 'thecocktaildb';
       const categoriesUrl = `https://www.${api}.com/api/json/v1/1/list.php?c=list`;
 
       const res = await fetch(categoriesUrl);
@@ -51,7 +51,7 @@ function Recipes(props) {
       setLoadingCategories(false);
     };
     fetchCategores();
-  }, [query]);
+  }, [api]);
 
   const recipesSize = 12;
   const catSize = 5;
@@ -60,6 +60,7 @@ function Recipes(props) {
 
   return (
     <>
+      <Header title={ page.charAt(0).toUpperCase() + page.slice(1) } />
       <main className="p-2">
         <Button
           type="button"
@@ -89,10 +90,10 @@ function Recipes(props) {
             const name = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}`];
             const src = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}Thumb`];
             const id = item[`id${query.charAt(0).toUpperCase() + query.slice(1)}`];
-            const subpage = query === 'meal' ? 'comidas' : 'bebidas';
+            // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
 
             return (
-              <Link to={ `/${subpage}/${id}` } key={ id }>
+              <Link to={ `/${page}/${id}` } key={ id }>
                 <div data-testid={ `${index}-recipe-card` }>
                   <h3 data-testid={ `${index}-card-name` }>{name}</h3>
                   <img
@@ -109,11 +110,5 @@ function Recipes(props) {
     </>
   );
 }
-
-Recipes.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }).isRequired,
-};
 
 export default Recipes;
