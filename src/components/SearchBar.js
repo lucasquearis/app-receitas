@@ -22,8 +22,7 @@ export default function SearchBar() {
   };
 
   if (meals !== 'empty' && meals !== null && Object.keys(meals).length === 1) {
-    // return <Redirect to={ `${pathname}/${meals[0].idMeal}` } />;
-    console.log(meals);
+    return <Redirect to={ `${pathname}/${meals[0].idMeal}` } />;
   }
 
   return (
