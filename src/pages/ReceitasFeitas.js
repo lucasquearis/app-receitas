@@ -20,8 +20,9 @@ function ReceitasFeitas() {
 
   const renderCardDetails = (recipe, index, path) => (
     <div>
-      <div data-testid={ `${index}-horizontal-top-text`} >
-        { recipe.category === 'Cocktail' ? recipe.Alcoholic : `${recipe.area} - ${recipe.category}` }
+      <div data-testid={ `${index}-horizontal-top-text` }>
+        { recipe.category === 'Cocktail'
+          ? recipe.AlcoholicOrNot : `${recipe.area} - ${recipe.category}` }
         <button
           onClick={ () => {
             // copy(`http://localhost:3000${location.pathname}`);
@@ -56,22 +57,24 @@ function ReceitasFeitas() {
   const renderCards = () => (
     <div>
       { filteredRecipes.map((recipe, index) => {
-        const pathToRecipe = recipe.type === 'comida' ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`;
+        const pathToRecipe = recipe.type === 'comida'
+          ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`;
         return (
-        <div
-          key={ recipe.name }
-          className="card-container"
-        >
-          <Link to={ pathToRecipe }>
-            <img
-              data-testid={ `${index}-horizontal-image` }
-              src={ recipe.image }
-              alt={ recipe.name }
-            />  
-          </Link>
-          { renderCardDetails(recipe, index, pathToRecipe) }
-        </div>
-      );})}
+          <div
+            key={ recipe.name }
+            className="card-container"
+          >
+            <Link to={ pathToRecipe }>
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                src={ recipe.image }
+                alt={ recipe.name }
+              />
+            </Link>
+            { renderCardDetails(recipe, index, pathToRecipe) }
+          </div>
+        );
+      }) }
     </div>
   );
 
