@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from 'react-bootstrap';
 import HeaderDetails from '../../components/CardDetails/HeaderDetails';
+import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails';
 
 const FoodDetails = ({ match: { params: id } }) => {
   const [meal, setMeal] = useState(0);
@@ -18,6 +19,7 @@ const FoodDetails = ({ match: { params: id } }) => {
   return (
     <div>
       <HeaderDetails image={ strMealThumb } title={ strMeal } category={ strCategory } />
+      <IngredientsDetails />
     </div>
   );
 };
