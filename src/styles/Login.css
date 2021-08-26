@@ -6,11 +6,6 @@
   width: 100%;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
 .login-input {
   text-align: center;
 }

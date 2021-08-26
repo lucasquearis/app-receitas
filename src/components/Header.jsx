@@ -36,7 +36,7 @@ function Header({ title, searchIcon = '' }) {
       <div className="header-div">
         <Link to="/perfil" className="profile-link">
           <img
-            id="profile-icon"
+            className="profile-icon"
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="icone do perfil"
@@ -45,7 +45,7 @@ function Header({ title, searchIcon = '' }) {
         <h3 data-testid="page-title">{ title }</h3>
         { renderSearchIcon() }
       </div>
-      { showSearchBar && <SearchBar /> }
+      { showSearchBar && <SearchBar title={ title } /> }
     </header>
   );
 }
