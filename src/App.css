@@ -86,3 +86,12 @@
 .recomendation-card img {
   width: 170px;
 }
+
+.card-container {
+  display: flex;
+  width: 340px;
+}
+
+.card-container img {
+  width: 50%;
+}

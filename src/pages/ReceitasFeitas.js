@@ -20,8 +20,8 @@ function ReceitasFeitas() {
 
   const renderCardDetails = (recipe, index, path) => (
     <div>
-      <div>
-        { recipe.category === 'Cocktail' ? recipe.Alcoholic : recipe.category }
+      <div data-testid={ `${index}-horizontal-top-text`} >
+        { recipe.category === 'Cocktail' ? recipe.Alcoholic : `${recipe.area} - ${recipe.category}` }
         <button
           onClick={ () => {
             // copy(`http://localhost:3000${location.pathname}`);
@@ -45,7 +45,7 @@ function ReceitasFeitas() {
       </p>
       <div className="tag-container">
         {recipe.tags.map((tag) => (
-          <p data-testid={ `${index}-${tag}-horizontal-tag` }>
+          <p key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
             { tag }
           </p>
         ))}
