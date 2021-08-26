@@ -10,10 +10,12 @@ import Bebidas from './pages/bebidas/Bebidas';
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ Comidas } />
-      <Route path="/perfil" component={ Perfil } />
-      <Route path="/bebidas" component={ Bebidas } />
+      <div className="containerBoby">
+        <Route exact path="/" component={ Login } />
+        <Route path="/comidas" component={ Comidas } />
+        <Route path="/perfil" component={ Perfil } />
+        <Route path="/bebidas" component={ Bebidas } />
+      </div>
     </Switch>
   );
 }
