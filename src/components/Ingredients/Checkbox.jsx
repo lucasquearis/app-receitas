@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import UseCheckbox from '../../hook/UseCheckbox';
 
-function Checkbox({ recipe, type }) {
+function Checkbox({ recipe, type, allChecked }) {
   const { ingredients, measures,
     checkedOptions, handleClick } = UseCheckbox(recipe, type);
+
+  useEffect(() => {
+    allChecked(ingredients, checkedOptions);
+  }, [allChecked, checkedOptions, ingredients]);
 
   return (
     <section>
@@ -37,6 +41,7 @@ Checkbox.propTypes = {
     strIngredient1: propTypes.string,
   }).isRequired,
   type: propTypes.string.isRequired,
+  allChecked: propTypes.func.isRequired,
 };
 
 export default Checkbox;
