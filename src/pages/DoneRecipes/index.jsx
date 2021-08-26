@@ -5,38 +5,30 @@ import doneRecipes from './mockDoneRecipes';
 function DoneRecipes() {
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('');
-  let filteredDoneRecipes = doneRecipes;
+  const [filteredDoneRecipes, setFilteredDoneRecipes] = useState([]);
 
   useEffect(() => {
-    switch (activeFilter) {
-    case 'Food':
-      filteredDoneRecipes = doneRecipes.filter(
-        (recipe) => recipe.type === 'meals',
-      );
-      setLoading(false);
-      return filteredDoneRecipes;
-    case 'Drinks':
-      filteredDoneRecipes = doneRecipes.filter(
-        (recipe) => recipe.type === 'drinks',
-      );
-      setLoading(false);
-      return filteredDoneRecipes;
-    default:
-      setLoading(false);
-      return filteredDoneRecipes;
-    }
-  }, [activeFilter, setActiveFilter]);
+    setFilteredDoneRecipes(doneRecipes);
+    setLoading(false);
+  }, [setFilteredDoneRecipes, setLoading]);
 
   const handleRemoveFilter = () => {
     setActiveFilter('');
+    setFilteredDoneRecipes(doneRecipes);
   };
 
   const handleFilter = ({ target }) => {
     if (target.innerHTML === activeFilter) {
       handleRemoveFilter();
-      setActiveFilter('');
-    } else {
+      setFilteredDoneRecipes(doneRecipes);
+    }
+    if (target.innerHTML !== activeFilter && target.innerHTML === 'Food') {
       setActiveFilter(target.innerHTML);
+      setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'meals'));
+    }
+    if (target.innerHTML !== activeFilter && target.innerHTML === 'Drinks') {
+      setActiveFilter(target.innerHTML);
+      setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'drinks'));
     }
   };
 
@@ -69,21 +61,43 @@ function DoneRecipes() {
       </button>
 
       {filteredDoneRecipes.map((recipe, index) => {
-        const { id, type, category, name, image, doneDate, tags } = recipe;
+        const {
+          id,
+          type,
+          category,
+          area,
+          name,
+          image,
+          doneDate,
+          tags,
+          alcoholicOrNot,
+        } = recipe;
 
         const subpage = type === 'meals' ? 'comidas' : 'bebidas';
 
         return (
-          <div key="done-recipe-card">
-            <h2 data-testid={ `${index}-horizontal-top-text` }>{category}</h2>
-            <Link to={ `/${subpage}/${id}` } key={ id }>
+          <div key={ `${type}-${index}` }>
+            {
+              type === 'meals'
+                ? (
+                  <div>
+                    <span data-testid={ `${index}-horizontal-top-text` }>{category}</span>
+                    <span data-testid={ `${index}-horizontal-top-text` }>{area}</span>
+                  </div>
+                ) : (
+                  <span data-testid={ `${index}-horizontal-top-text` }>
+                    {alcoholicOrNot}
+                  </span>
+                )
+            }
+            <Link to={ `/${subpage}/${id}` } key={ `name-link/${id} ` }>
               <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
             </Link>
             <h4 data-testid={ `${index}-horizontal-done-date` }>
               Feita em:
               { doneDate }
             </h4>
-            <Link to={ `/${subpage}/${id}` } key={ id }>
+            <Link to={ `/${subpage}/${id}` } key={ `img-link/${id} ` }>
               <img
                 src={ image }
                 alt={ name }
@@ -95,8 +109,18 @@ function DoneRecipes() {
               src=""
               alt="Ícone compartilhar"
             />
-            <div data-testid={ `${index}-${tags[0]}-horizontal-tag` }>{tags[0]}</div>
-            <div data-testid={ `${index}-${tags[1]}-horizontal-tag` }>{tags[1]}</div>
+            {
+              type === 'meals' ? (
+                <div>
+                  <div data-testid={ `${index}-${tags[0]}-horizontal-tag` }>
+                    {tags[0]}
+                  </div>
+                  <div data-testid={ `${index}-${tags[1]}-horizontal-tag` }>
+                    {tags[1]}
+                  </div>
+                </div>
+              ) : <span />
+            }
           </div>
         );
       })}
