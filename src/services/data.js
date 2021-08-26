@@ -19,7 +19,3 @@ export {
   MEAL_OBJ,
   DRINK_OBJ,
 };
-
-// https://www.thecocktaildb.com/api/json/v1/1/search.php?i=
-// https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=
-// https://www.themealdb.com/api/json/v1/1/filter.php?i=
