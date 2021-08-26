@@ -1,25 +1,55 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import RecipesContext from '../context/RecipesContext';
 
 function SearchBar() {
+  const { setFilter, setSearch } = useContext(RecipesContext);
+  const [searchTerm, setSearchTerm] = useState('');
   return (
     <div>
-      <input type="text" className="form-control" data-testid="search-input" />
+      <input
+        type="text"
+        className="form-control"
+        data-testid="search-input"
+        onChange={ ({ target: { value } }) => setSearchTerm(value) }
+      />
       <div className="form-check">
         <label className="form-check-label" htmlFor="flexRadioDefault1">
           Name
-          <input type="radio" data-testid="name-search-radio" />
+          <input
+            type="radio"
+            name="radioinput"
+            data-testid="name-search-radio"
+            value="nome"
+            onChange={ ({ target: { value } }) => setSearch(value) }
+          />
         </label>
       </div>
       <div className="form-check">
         <label className="form-check-label" htmlFor="ingredientes">
           Ingredientes
-          <input type="radio" data-testid="ingredient-search-radio" />
+          <input
+            type="radio"
+            name="radioinput"
+            data-testid="ingredient-search-radio"
+            value="ingrediente"
+            onChange={ ({ target: { value } }) => setSearch(value) }
+          />
         </label>
         <label className="form-check-label" htmlFor="ingredientes">
           Primeira Letra
-          <input type="radio" data-testid="first-letter-search-radio" />
+          <input
+            type="radio"
+            name="radioinput"
+            data-testid="first-letter-search-radio"
+            value="primeira letra"
+            onChange={ ({ target: { value } }) => setSearch(value) }
+          />
         </label>
-        <button type="button" data-testid="exec-search-btn">
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ () => setFilter(searchTerm) }
+        >
           Buscar
         </button>
       </div>

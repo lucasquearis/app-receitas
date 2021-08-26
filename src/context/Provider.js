@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 import generatingFavoriteObj from '../service/auxiliarFunctions';
@@ -10,6 +10,7 @@ function Provider({ children }) {
   const [drinkCategory, setDrinkCategory] = useState([]);
   const [foodCategory, setFoodCategory] = useState([]);
   const [filter, setFilter] = useState('');
+  const [search, setSearch] = useState('');
 
   const favoritingRecipe = (isFav, setIsFav, id, recipe) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -53,6 +54,15 @@ function Provider({ children }) {
     return { favorite, done, inProgress };
   };
 
+  useEffect(() => {
+    const searchAlert = () => {
+      if (search === 'primeira letra' && filter.length > 1) {
+        alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+    };
+    searchAlert();
+  }, [search, filter]);
+
   const contextValue = {
     email,
     setEmail,
@@ -66,6 +76,8 @@ function Provider({ children }) {
     setFoodCategory,
     filter,
     setFilter,
+    search,
+    setSearch,
     favoritingRecipe,
     renderingIngredients,
     verifyingRecipe,
