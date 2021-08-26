@@ -7,6 +7,7 @@ import { useDataContext } from '../../context/DataProvider';
 
 export default function Home() {
   const history = useHistory();
+
   const types = history.location.pathname.includes('/comidas')
     ? { type: 'food', url: '/comidas' }
     : { type: 'drinks', url: '/bebidas' };
@@ -21,16 +22,27 @@ export default function Home() {
   const maxLength = 12;
   const recipeCards = () => data[types.type].slice(0, maxLength)
     .map((recipe, index) => (
-      <div data-testid={ `${index}-recipe-card` } key={ recipe.idMeal || recipe.idDrink }>
-        <img
-          data-testid={ `${index}-card-img` }
-          src={ recipe.strMealThumb || recipe.strDrinkThumb }
-          alt={ recipe.strMeal || recipe.strDrink }
-        />
-        <h4 data-testid={ `${index}-card-name` }>
-          { recipe.strMeal || recipe.strDrink }
-        </h4>
-      </div>));
+      <section
+        key={ recipe.idMeal || recipe.idDrink }
+        data-testid={ `${index}-recipe-card` }
+      >
+        <button
+          type="button"
+          onClick={ () => (
+            history.push(`${types.url}/${recipe.idMeal || recipe.idDrink}`)
+          ) }
+        >
+          <img
+            data-testid={ `${index}-card-img` }
+            src={ recipe.strMealThumb || recipe.strDrinkThumb }
+            alt={ recipe.strMeal || recipe.strDrink }
+          />
+          <h4 data-testid={ `${index}-card-name` }>
+            { recipe.strMeal || recipe.strDrink }
+          </h4>
+        </button>
+      </section>
+    ));
 
   return (
     <div>
