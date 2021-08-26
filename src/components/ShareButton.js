@@ -8,7 +8,8 @@ const ShareButton = () => {
   const timeOut = 2000;
 
   const handleShareBtn = () => {
-    clipboardCopy(window.location.href);
+    const five = 5;
+    clipboardCopy(window.location.href.split('/', five).join('/'));
     setIsVisible(true);
     setTimeout(() => {
       setIsVisible(false);

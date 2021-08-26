@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DoneCard } from '../components';
+import Header from '../components/Header';
 import './css/DoneRecipes.css';
 
 const copy = require('clipboard-copy');
@@ -63,6 +64,7 @@ const DoneRecipes = () => {
 
   return (
     <div className="done-recipes-container">
+      <Header title="Receitas Feitas" />
       <div className="filter-recipes-container">
         <Button
           type="button"

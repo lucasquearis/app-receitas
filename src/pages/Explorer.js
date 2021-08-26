@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+<<<<<<< HEAD
 import Button from '../components/Button';
 
 const Explorer = () => (
@@ -22,6 +23,11 @@ const Explorer = () => (
       pathname="/explorar/bebidas"
     />
   </div>
+=======
+
+const Explorer = () => (
+  <Header title="Explorar" />
+>>>>>>> main-group-11
 );
 
 export default Explorer;

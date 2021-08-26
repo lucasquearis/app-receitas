@@ -5,12 +5,15 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [user, setUser] = useState({ email: '' });
+  const [data, setData] = useState({ data: [] });
 
   useEffect(() => setInitialLocalStorage(user), [user]);
 
   const context = {
     user,
     setUser,
+    data,
+    setData,
   };
 
   return (
