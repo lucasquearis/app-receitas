@@ -2,8 +2,9 @@ import React from 'react';
 import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
 
 const Profile = () => {
-  const { email } = JSON.parse(localStorage.getItem('user'));
-  console.log(email);
+  const emailObject = JSON.parse(localStorage.getItem('user')) === null ? ''
+    : JSON.parse(localStorage.getItem('user'));
+  const email = emailObject === '' ? '' : emailObject.email;
   return (
     <div>
       <HeaderWithoutSearch>Perfil</HeaderWithoutSearch>
