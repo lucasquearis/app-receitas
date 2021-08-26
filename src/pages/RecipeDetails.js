@@ -74,11 +74,24 @@ function RecipeDetails(props) {
                 <IngredientsList recipe={ recipe[enType][0] } />
               </ul>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
-              <iframe title="Video" data-testid="video" src="https://www.youtube.com/embed/kJkQFVqySUw" />
+              {
+                type === 'comidas'
+                && (
+                  <iframe
+                    title="Video"
+                    data-testid="video"
+                    src={ recipe[enType][0].strYoutube }
+                  />
+                )
+              }
               {
                 recipe && <Recomendations type={ type } />
               }
-              <StartRecipeButton id={ id } type={ type } enType={ enType } />
+              <StartRecipeButton
+                id={ id }
+                type={ type }
+                enType={ enType }
+              />
             </div>
           )
           : (
