@@ -62,6 +62,8 @@ export default function DetalheBebida(props) {
     getRandomFood();
   }, [id]);
 
+  console.log(drink);
+
   const randomFoodCard = () => (
     <section className="food-recomended">
       <h5>Recomendadas</h5>
@@ -70,7 +72,7 @@ export default function DetalheBebida(props) {
           <div
             data-testid={ `${index}-recomendation-card` }
             className="recomended-food-info"
-            key={ food.idMeal }
+            key={ `${index}-${food.idMeal}` }
           >
             <img src={ food.strMealThumb } alt="foto da bebida" />
             <p>{ food.strCategory }</p>
@@ -109,7 +111,7 @@ export default function DetalheBebida(props) {
         className="food-drink-category"
         data-testid="recipe-category"
       >
-        { drink.strCategory }
+        { drink.strAlcoholic }
       </p>
       <div className="ingredients-drink-section">
         <h5>Ingredients</h5>
