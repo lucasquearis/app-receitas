@@ -1,17 +1,36 @@
-function ingredientsMealDetails(details) {
-  const four = 4;
+// https://github.com/tryber/sd-011-project-recipes-app/pull/1280/files
+
+function ingredientsDetails(details) {
+  const currentPage = window.location.pathname;
+  let num1;
+  let num2;
+  let num3;
+
   const nine = 9;
-  const fourtyEigth = 48;
+  const four = 4;
+  const fifteen = 15;
+  const seventeen = 17;
   const twenty = 20;
+  const fourtySix = 46;
+  const fourtyEigth = 48;
+  if (currentPage.includes('comidas')) {
+    num1 = nine;
+    num2 = twenty;
+    num3 = fourtyEigth;
+  } else if (currentPage.includes('bebidas')) {
+    num1 = seventeen;
+    num2 = fifteen;
+    num3 = fourtySix;
+  }
 
   const ingredientsList = (Object.entries(details).filter((entrie, index) => {
-    if (index >= nine && index <= fourtyEigth) {
+    if (index >= num1 && index <= num3) {
       return entrie;
     }
     return null;
   }).map((ingredient, index, array) => {
-    if (index < twenty) {
-      return `${ingredient[1]} - ${array[index + twenty][1]}`;
+    if (index < num2) {
+      return `${ingredient[1]} - ${array[index + num2][1]}`;
     }
     return null;
   }).filter((ingredient) => (
@@ -19,4 +38,4 @@ function ingredientsMealDetails(details) {
   return ingredientsList;
 }
 
-export default ingredientsMealDetails;
+export default ingredientsDetails;

@@ -10,32 +10,32 @@ export default function FoodDetails() {
 
   const [recipes, setRecipes] = useState({ id });
   const [loading, setLoading] = useState(true);
-  const [drinkIndex, setDrinkIndex] = useState(0);
+  const [mealIndex, setMealIndex] = useState(0);
 
   // Falta adicionar index para passar no teste
 
   useEffect(() => {
-    const getRecipes = async (foodId) => {
-      await getDataDetails(foodId).then((response) => setRecipes(response));
+    const getRecipes = async (drinkId) => {
+      await getDataDetails(drinkId).then((response) => setRecipes(response));
       setLoading(false);
     };
     getRecipes(id);
   }, [id]);
 
   useEffect(() => {
-    setDrinkIndex(((prevState) => prevState));
+    setMealIndex(((prevState) => prevState));
   }, [recipes]);
 
   const {
-    idMeal,
-    strMealThumb,
-    strMeal,
-    strCategory,
+    idDrink,
+    strDrinkThumb,
+    strDrink,
     strInstructions,
-    strYoutube,
+    strCategory,
+    strVideo,
   } = recipes;
 
-  console.log(drinkIndex);
+  console.log(ingredientsDetails(recipes));
 
   return (
     <div>
@@ -43,16 +43,16 @@ export default function FoodDetails() {
         <Spinner animation="border" />
       ) : (
         <RecipeDetailCard
-          key={ idMeal }
-          img={ strMealThumb }
-          index={ drinkIndex }
-          title={ strMeal }
+          key={ idDrink }
+          img={ strDrinkThumb }
+          index={ mealIndex }
+          title={ strDrink }
           category={ strCategory }
           ingredients={
-            idMeal ? ingredientsDetails(recipes).map((item) => item) : []
+            idDrink ? ingredientsDetails(recipes).map((item) => item) : []
           }
           instructions={ strInstructions }
-          video={ strYoutube }
+          video={ strVideo }
         />
       )}
     </div>
