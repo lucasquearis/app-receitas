@@ -81,7 +81,7 @@ function RecipesMainPage() {
 
   return (
     <div>
-      <Header />
+      <Header title="Comidas" />
       { renderCategoryButtons() }
       { renderAllButton() }
       <RecipesList

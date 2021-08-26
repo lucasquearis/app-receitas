@@ -1,0 +1,71 @@
+.done-card-container {
+  background: white;
+  border: 1px solid #f8eded;
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  display: flex;
+  height: 143;
+  margin: 30px auto;
+  width: 330px;
+}
+
+.side-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.side-container p {
+  font-family: Roboto , sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  margin-top: 5px;
+}
+
+.side-step1 {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 2px 0;
+  padding-right: 5px;
+  width: 160px;
+}
+
+.side-step1 p {
+  color: darkgray;
+  margin: 0;
+}
+
+
+.share-btn {
+  background: none;
+  border: none;
+  height: 22px;
+  padding: 0;
+  width: 22px;
+}
+
+.side-container h5 {
+  font-family: Roboto , sans-serif;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 25px;
+}
+
+.tags-container {
+  margin-top: 10px;
+}
+
+.tags-items {
+  background: #ecdede;
+  border-radius: 12px;
+  height: 20px;
+  margin: 5px;
+  padding: 6px;
+  width: 57px;
+}
