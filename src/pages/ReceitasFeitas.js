@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import shareIcon from '../images/shareIcon.svg';
+import copy from 'clipboard-copy';
 
 function ReceitasFeitas() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -22,10 +23,10 @@ function ReceitasFeitas() {
     <div>
       <div data-testid={ `${index}-horizontal-top-text` }>
         { recipe.category === 'Cocktail'
-          ? recipe.AlcoholicOrNot : `${recipe.area} - ${recipe.category}` }
+          ? recipe.alcoholicOrNot : `${recipe.area} - ${recipe.category}` }
         <button
           onClick={ () => {
-            // copy(`http://localhost:3000${location.pathname}`);
+            copy(`http://localhost:3000${path}`);
             setLinkShare(true);
           } }
           type="button"
