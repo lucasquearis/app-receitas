@@ -1,0 +1,19 @@
+.cardsContainer {
+  display: flex;
+  overflow: auto;
+}
+
+.card {
+  margin-left: 20px;
+  min-width: auto;
+  word-wrap: normal;
+}
+
+.card-img-top {
+  width: 140px;
+}
+
+.card-title {
+  display: block;
+  width: 100%;
+}
