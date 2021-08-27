@@ -15,6 +15,7 @@ const renderTitle = (path) => {
     '/comidas': 'Comidas',
     '/bebidas': 'Bebidas',
     '/perfil': 'Perfil',
+    '/explorar': 'Explorar',
     '/explorar/comidas': 'Explorar Comidas',
     '/explorar/bebidas': 'Explorar Bebidas',
     '/receitas-feitas': 'Receitas Feitas',
