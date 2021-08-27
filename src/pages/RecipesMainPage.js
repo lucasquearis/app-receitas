@@ -8,13 +8,8 @@ import Footer from '../components/Footer';
 import './RecipesMainPage.css';
 
 function RecipesMainPage() {
-<<<<<<< HEAD
-  const location = useLocation();
-  const { recipesData, setRecipesData, selIngredient } = useData();
-=======
   const { pathname } = useLocation();
-  const { recipesData, setRecipesData } = useData();
->>>>>>> 6b2ebe2134eb3c65c6a83e63549b022a98b219ce
+  const { recipesData, setRecipesData, selIngredient } = useData();
   const [categories, setCategories] = useState([]);
   const [selCategory, setSelCategory] = useState('All');
   const [database, setDatabase] = useState('');
@@ -36,12 +31,6 @@ function RecipesMainPage() {
     default:
       console.log('Failed to set database!');
     }
-<<<<<<< HEAD
-=======
-  }, [pathname]);
-
-  useEffect(() => {
->>>>>>> 6b2ebe2134eb3c65c6a83e63549b022a98b219ce
     let URL = `https://www.${database}.com/api/json/v1/1/search.php?s=`;
     if (selCategory !== 'All') URL = `https://www.${database}.com/api/json/v1/1/filter.php?c=${selCategory}`;
     if (selIngredient !== '') {
@@ -67,7 +56,7 @@ function RecipesMainPage() {
     setRecipesData,
     selCategory,
     selIngredient,
-    location.pathname]);
+    pathname]);
 
   const handleCategoryClick = (category) => {
     if (category === selCategory) setSelCategory('All');
@@ -94,18 +83,9 @@ function RecipesMainPage() {
     </div>);
 
   return (
-<<<<<<< HEAD
     <div>
       <Header />
       { selIngredient !== '' ? null : renderCategoryButtons() }
-=======
-    <div className="main-container">
-      <Header title={ pathname === '/comidas' ? 'Comidas' : 'Bebidas' } />
-      <nav className="nav-container">
-        { renderAllButton() }
-        { renderCategoryButtons() }
-      </nav>
->>>>>>> 6b2ebe2134eb3c65c6a83e63549b022a98b219ce
       <RecipesList
         recipesData={ recipesData }
         recipeKey={ recipeKey }

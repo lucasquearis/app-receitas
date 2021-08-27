@@ -19,13 +19,10 @@ export default function DataProvider({ children }) {
     setDetailsData,
     recommendationsData,
     setRecommendationsData,
-<<<<<<< HEAD
     selIngredient,
     setSelIngredient,
-=======
     fav,
     setFav,
->>>>>>> 6b2ebe2134eb3c65c6a83e63549b022a98b219ce
   };
 
   return (
