@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './css/Header.css';
 import profileIcon from '../images/profileIcon.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Header = ({ title }) => (
   <div
