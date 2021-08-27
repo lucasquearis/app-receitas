@@ -72,9 +72,9 @@ export default function Foods() {
         foods.map((food, index) => (
           <Card
             key={ food.idMeal }
+            id={ food.idMeal }
             title={ food.strMeal }
             thumb={ food.strMealThumb }
-            id={ food.idMeal }
             index={ index }
           />
         ))

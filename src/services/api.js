@@ -16,8 +16,27 @@ if (currentPage.includes(foodPage)) {
 const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
 const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
 const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
-const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
 const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
+const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+
+export const getRecomendations = async () => {
+  if (currentPage.includes(foodPage)) {
+    url = drinkURL;
+  } else if (currentPage.includes(cocktailPage)) {
+    url = mealURL;
+  }
+  const recomendationsURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
+  const response = await fetch(`${recomendationsURL}`);
+  if (currentPage.includes(foodPage)) {
+    const { drinks } = await response.json();
+
+    return drinks;
+  } if (currentPage.includes(cocktailPage)) {
+    const { meals } = await response.json();
+
+    return meals;
+  }
+};
 
 export const getDataByIngredient = async (ingredient) => {
   const response = await fetch(`${ingredientURL}${ingredient}`);
@@ -49,7 +68,6 @@ export const getDataDetails = async (id) => {
   const response = await fetch(`${detailsURL}${id}`);
   if (currentPage.includes(foodPage)) {
     const { meals } = await response.json();
-    console.log(meals);
     return meals[0];
   }
   const { drinks } = await response.json();
