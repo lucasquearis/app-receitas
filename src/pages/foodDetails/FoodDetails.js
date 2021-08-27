@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import HeaderDetails from '../../components/HeaderDetails/HeaderDetails';
 import IngredientsDetails from '../../components/IngredientsDetails/IngredientsDetails';
 import Instructions from '../../components/InstructionsDetails/InstructionsDetails';
 import VideoDetails from '../../components/VideoDetails/VideoDetails';
 import Recomendation from '../../components/Recomentation/Recomendation';
 import './FoodDetails.css';
+import ButtonDetails from '../../components/ButtonDetails/ButtonDetails';
 
 const FoodDetails = ({ match: { params: id } }) => {
   const [meal, setMeal] = useState(0);
   const [recomendation, setRecomendation] = useState(0);
-  const [stateButton, setStateButton] = useState('start-button');
   useEffect(() => {
     const fetchRemomendation = () => {
       fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
@@ -27,15 +27,9 @@ const FoodDetails = ({ match: { params: id } }) => {
         .then((response) => setMeal(response.meals[0]));
     };
     fecthDetails();
-    const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipe) {
-      const findRecipe = doneRecipe.find((done) => done.id === id.id);
-      if (findRecipe) setStateButton('start-button-none');
-    }
   }, [id.id]);
   if (!meal) return <Spinner animation="border" />;
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meal;
-  console.log(stateButton);
   return (
     <div>
       <HeaderDetails title={ strMeal } image={ strMealThumb } category={ strCategory } />
@@ -43,12 +37,7 @@ const FoodDetails = ({ match: { params: id } }) => {
       <Instructions instruction={ strInstructions } />
       <VideoDetails linkVideo={ strYoutube } />
       <Recomendation list={ recomendation } type="Drink" />
-      <Button
-        data-testid="start-recipe-btn"
-        className={ stateButton }
-      >
-        Começar Receita
-      </Button>
+      <ButtonDetails id={ id.id } type="meals" />
     </div>
   );
 };
