@@ -4,13 +4,11 @@ import Footer from '../components/Footer';
 
 function NotFound() {
   return (
-    <>
+    <div>
       <Header />
-      <p>
-        Not found
-      </p>
+      <h1>Not Found</h1>
       <Footer />
-    </>
+    </div>
   );
 }
 

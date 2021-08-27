@@ -5,6 +5,7 @@ const DataContext = createContext();
 
 export default function DataProvider({ children }) {
   const [recipesData, setRecipesData] = useState([]);
+  const [selIngredient, setSelIngredient] = useState('');
   const [exploreData, setExploreData] = useState([]);
   const [detailsData, setDetailsData] = useState([]);
   const [fav, setFav] = useState([]);
@@ -18,6 +19,8 @@ export default function DataProvider({ children }) {
     setDetailsData,
     recommendationsData,
     setRecommendationsData,
+    selIngredient,
+    setSelIngredient,
     fav,
     setFav,
   };
