@@ -79,24 +79,6 @@ function Provider({ children }) {
     setRecipes({ ...recipes, list: result, loading: false });
   };
 
-  const requestAreas = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
-    const { meals } = await response.json();
-    return meals;
-  };
-
-  const requestFoodByAreas = async (area) => {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
-    const { meals } = await response.json();
-    return meals;
-  };
-
-  const requestFoodByName = async (name) => {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-    const { meals } = await response.json();
-    return meals;
-  };
-
   const foodCategoryAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const drinkCategoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
@@ -125,9 +107,6 @@ function Provider({ children }) {
     setDrinkCategories,
     setRecipes,
     requestRandomAPI,
-    requestAreas,
-    requestFoodByAreas,
-    requestFoodByName,
   };
 
   return (
