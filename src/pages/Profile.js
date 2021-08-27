@@ -6,7 +6,7 @@ function Profile() {
   const email = localStorage.getItem('user');
   return (
     <div>
-      <p>Profile</p>
+      <p>Perfil</p>
       <span data-testid="profile-email">{email}</span>
       <Link to="/receitas-feitas">
         <button
