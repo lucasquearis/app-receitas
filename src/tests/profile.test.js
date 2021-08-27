@@ -32,7 +32,7 @@ describe('Tests profile route', () => {
   });
 });
 
-describe('Tests correct rendering of email element with', () => {
+describe('Tests correct rendering of email element', () => {
   it('Should render element with data-testid="profile-email"', () => {
     expect(screen.getByTestId(profileEmailId)).toBeInTheDocument();
   });

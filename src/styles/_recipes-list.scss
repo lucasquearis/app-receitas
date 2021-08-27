@@ -15,7 +15,7 @@
 }
 
 .recipe-card {
-  width: fit-content;
+  width: 175px;
   display: flex;
   flex-direction: column;
   margin: 5px 2px;
@@ -33,4 +33,5 @@
 
 .card-name {
   height: fit-content;
+  word-wrap: break-word;
 }

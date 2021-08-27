@@ -36,9 +36,7 @@
 }
 
 .recipe-card {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 175px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -66,6 +64,7 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  word-wrap: break-word;
 }
 
 @font-face {

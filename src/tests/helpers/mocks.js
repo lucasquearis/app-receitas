@@ -6,6 +6,7 @@ export const profileEmailId = 'profile-email';
 export const doneRecipesId = 'profile-done-btn';
 export const favoriteRecipesId = 'profile-favorite-btn';
 export const logoutButtonId = 'profile-logout-btn';
+export const exploreButtonId = 'explore-bottom-btn';
 
 export const VALID_EMAIL = 'valid123@trybe.com.br';
 export const VALID_PASSWORD = 'grupo24';
