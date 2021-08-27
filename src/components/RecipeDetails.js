@@ -16,6 +16,7 @@ const RecipeDetails = (props) => {
     isMeal,
     videoUrl,
     recipe,
+    id,
   } = props;
 
   return (
@@ -30,7 +31,7 @@ const RecipeDetails = (props) => {
         <h1 data-testid="recipe-title">{title}</h1>
         <div className="recipe-buttons-container">
           <ShareButton />
-          <FavoriteButton recipe={ recipe } />
+          <FavoriteButton recipe={ recipe } id={ id } />
         </div>
       </div>
       <h3 data-testid="recipe-category">{category || isAlcoholic}</h3>
@@ -71,6 +72,7 @@ RecipeDetails.propTypes = {
   isMeal: PropTypes.bool,
   videoUrl: PropTypes.string,
   recipe: PropTypes.shape({}),
+  id: PropTypes.number.isRequired,
 };
 
 RecipeDetails.defaultProps = {

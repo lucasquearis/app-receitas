@@ -1,4 +1,5 @@
 const formatFavoriteRecipe = (recipe) => {
+  if (recipe.id) return recipe;
   const emptyStr = '';
   if (recipe.strMeal) {
     const favoriteMeal = {

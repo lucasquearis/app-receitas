@@ -76,6 +76,7 @@ const MealsDetails = () => {
         isMeal
         videoUrl={ fixVideoUrl() }
         recipe={ meal }
+        id={ meal.idMeal }
       />
       <Recomendations
         recomendations={ recomendations }

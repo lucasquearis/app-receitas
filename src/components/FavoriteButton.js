@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { checkFavoriteRecipes, formatFavoriteRecipe } from '../helpers';
 
-const FavoriteButton = ({ recipe }) => {
+const FavoriteButton = ({ recipe, id, horizontal, index }) => {
   const [heartIcon, setHeartIcon] = useState(whiteHeart);
-  const { id } = useParams();
+  const { favoriteRcps, setFavoriteRcps } = useContext(AppContext);
+  // const { id } = useParams();
   const favoriteRecipe = formatFavoriteRecipe(recipe);
 
   const saveFavoriteRecipe = (favorite) => {
@@ -15,6 +17,10 @@ const FavoriteButton = ({ recipe }) => {
       const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const updateStorage = [...favoriteRecipes, favorite];
       localStorage.setItem('favoriteRecipes', JSON.stringify(updateStorage));
+      setFavoriteRcps([
+        ...favoriteRcps,
+        { ...formatFavoriteRecipe(recipe) },
+      ]);
     }
   };
 
@@ -23,6 +29,9 @@ const FavoriteButton = ({ recipe }) => {
       const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const newFavorites = favoriteRecipes.filter((e) => e.id !== favorite.id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+      setFavoriteRcps([
+        ...favoriteRcps.filter((rcp) => rcp.id !== favorite.id),
+      ]);
     }
   };
 
@@ -48,7 +57,7 @@ const FavoriteButton = ({ recipe }) => {
   return (
     <input
       type="image"
-      data-testid="favorite-btn"
+      data-testid={ horizontal ? `${index}-horizontal-favorite-btn` : 'favorite-btn' }
       src={ heartIcon }
       alt="heart"
       className="favorite-btn"
@@ -59,10 +68,15 @@ const FavoriteButton = ({ recipe }) => {
 
 FavoriteButton.propTypes = {
   recipe: PropTypes.shape({}),
+  id: PropTypes.number.isRequired,
+  horizontal: PropTypes.bool,
+  index: PropTypes.number,
 };
 
 FavoriteButton.defaultProps = {
   recipe: {},
+  horizontal: false,
+  index: 0,
 };
 
 export default FavoriteButton;
