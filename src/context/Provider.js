@@ -14,6 +14,8 @@ function Provider({ children }) {
   const [searchBar, setSearchBar] = useState(false);
   const [ingredientesData, setData] = useState([]);
   const [food, setFood] = useState(true);
+  const [mealRandom, setMealRandom] = useState('');
+  const [drinkRandom, setDrinkRandom] = useState('');
 
   const favoritingRecipe = (isFav, setIsFav, id, recipe) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -66,6 +68,24 @@ function Provider({ children }) {
     searchAlert();
   }, [search, filter]);
 
+  useEffect(() => {
+    const fetchAPIMeal = async () => {
+      const endpoint = 'https://www.themealdb.com/api/json/v1/1/random.php';
+      const a = await fetch(endpoint).then((dados) => dados.json());
+      setMealRandom(a.meals[0].idMeal);
+    };
+    fetchAPIMeal();
+  }, []);
+
+  useEffect(() => {
+    const fetchAPIDrink = async () => {
+      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+      const a = await fetch(endpoint).then((dados) => dados.json());
+      setDrinkRandom(a.drinks[0].idDrink);
+    };
+    fetchAPIDrink();
+  }, []);
+
   const contextValue = {
     email,
     setEmail,
@@ -82,6 +102,10 @@ function Provider({ children }) {
     search,
     setSearch,
     searchBar,
+    mealRandom,
+    setMealRandom,
+    drinkRandom,
+    setDrinkRandom,
     setSearchBar,
     favoritingRecipe,
     renderingIngredients,
