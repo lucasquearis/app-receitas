@@ -1,55 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Header(
-  { pageTitle, iconProfile, iconSearch, showProfileIcon, showExploreIcon },
+  {
+    pageTitle,
+    showProfileIcon,
+    showExploreIcon,
+    onClickShowInput,
+  },
 ) {
-  const [showInput, setShowInput] = useState(false);
   return (
-    <header>
-      <nav>
-        {!showProfileIcon
-          ? (
-            <Link to="/perfil">
-              <img data-testid="profile-top-btn" src={ iconProfile } alt="Profile" />
-            </Link>
-          )
-          : null}
-      </nav>
-      <nav>
-        <h2 data-testid="page-title">{pageTitle}</h2>
-      </nav>
-      <nav>
-        {!showExploreIcon
-          ? (
-            <button
-              type="button"
-              onClick={ () => setShowInput((prevCheck) => !prevCheck) }
-            >
-              <img data-testid="search-top-btn" src={ iconSearch } alt="Search" />
-            </button>
-          )
-          : null}
-      </nav>
-      {showInput ? <input data-testid="search-input" type="text" /> : null}
-    </header>
+    <div>
+      <header style={ { display: 'flex', justifyContent: 'space-around' } }>
+        <nav>
+          {!showProfileIcon
+            ? (
+              <Link to="/perfil">
+                <img data-testid="profile-top-btn" src={ profileIcon } alt="Profile" />
+              </Link>
+            )
+            : null}
+        </nav>
+        <nav>
+          <h2 data-testid="page-title">{pageTitle}</h2>
+        </nav>
+        <nav>
+          {!showExploreIcon
+            ? (
+              <button
+                type="button"
+                onClick={ () => onClickShowInput((prevCheck) => !prevCheck) }
+              >
+                <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
+              </button>
+            )
+            : null}
+        </nav>
+      </header>
+    </div>
   );
 }
 
 Header.propTypes = {
   pageTitle: PropTypes.string.isRequired,
-  iconProfile: PropTypes.string,
-  iconSearch: PropTypes.string,
   showProfileIcon: PropTypes.bool,
   showExploreIcon: PropTypes.bool,
+  onClickShowInput: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {
-  iconProfile: profileIcon,
-  iconSearch: searchIcon,
   showProfileIcon: false,
   showExploreIcon: false,
 };
