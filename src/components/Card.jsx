@@ -26,7 +26,6 @@ export default function CardItems({ title, thumb, index, id }) {
         </Card.Body>
       </Card>
     </Link>
-
   );
 }
 
