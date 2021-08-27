@@ -19,9 +19,10 @@ function FoodIngredientesExplore() {
     <>
       {data
         .filter((_, item) => (item < MNumber))
-        .map(({ strIngredient }, index) => (
+        .map(({ strIngredient, idIngredient }, index) => (
           <div
-            key={ index }
+            key={ idIngredient }
+            id={ idIngredient }
             data-testid={ `${index}-ingredient-card` }
           >
             <img
