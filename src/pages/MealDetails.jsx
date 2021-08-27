@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import '../styles/Details.css';
 
 export default function MealDetails(props) {
   const [mealDetails, setMealDetails] = useState({});
@@ -43,9 +46,15 @@ export default function MealDetails(props) {
           alt="imagem da receita"
           src={ details.strMealThumb }
         />
-        <h1 data-testid="recipe-title">{ details.strMeal }</h1>
-        <button type="button" data-testid="share-btn">SHARE</button>
-        <button type="button" data-testid="favorite-btn">FAVORITAR</button>
+        <div className="title-and-btns">
+          <h1 data-testid="recipe-title">{ details.strMeal }</h1>
+          <button type="button" data-testid="share-btn" className="share-btn">
+            <img src={ shareIcon } alt="share icon" className="share-icon" />
+          </button>
+          <button type="button" data-testid="favorite-btn" className="fave-btn">
+            <img src={ whiteHeartIcon } alt="favorite icon" />
+          </button>
+        </div>
         <p data-testid="recipe-category">{ details.strCategory }</p>
         {
           validIngredientKeys.map((key, index) => (

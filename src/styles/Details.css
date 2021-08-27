@@ -1,0 +1,15 @@
+.fave-btn {
+  background: none;
+  border: none;
+}
+
+.share-btn {
+  background: none;
+  border: none;
+}
+
+.title-and-btns {
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: space-between;
+}

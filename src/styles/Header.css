@@ -21,31 +21,13 @@ input {
   background-color: #eb6424;
   border: none;
   cursor: pointer;
-  display: inline-block;
-  font-size: 1rem;
   margin: 0;
-  padding: 1rem 2rem;
   text-align: center;
   text-decoration: none;
-  transition: background 250ms ease-in-out , transform 150ms ease;
-}
-
-.search-button:hover {
-  background-color: #eb6424;
 }
 
 .search-button img {
   filter: invert(100%);
-}
-
-.search-button:focus {
-  background-color: #eb6424;
-  outline: none;
-  outline-offset: none;
-}
-
-.search-button:active {
-  transform: scale(0.99);
 }
 
 .profile-link {

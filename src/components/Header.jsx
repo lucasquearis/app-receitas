@@ -23,7 +23,7 @@ function Header({ title, searchIcon = '' }) {
           <img
             data-testid="search-top-btn"
             src={ searchIcon }
-            alt="icone da busca"
+            alt="search icon"
           />
         </button>
       );
@@ -39,7 +39,7 @@ function Header({ title, searchIcon = '' }) {
             className="profile-icon"
             data-testid="profile-top-btn"
             src={ profileIcon }
-            alt="icone do perfil"
+            alt="profile icon"
           />
         </Link>
         <h3 data-testid="page-title">{ title }</h3>
