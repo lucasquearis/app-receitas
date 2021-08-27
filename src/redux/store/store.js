@@ -10,11 +10,3 @@ if (window.Cypress) {
 }
 
 export default store;
-
-/* How The Store Looks Like
-{
-  login: {
-    email: action.payload,
-  }
-};
-*/
