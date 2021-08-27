@@ -1,6 +1,7 @@
 // vitals
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import FooterMenu from '../components/FooterMenu';
 // styles
 import '../styles/Profile.css';
 
@@ -50,7 +51,7 @@ function Profile() {
           Sair
         </button>
       </div>
-      {/* Footer vai aqui */}
+      <FooterMenu />
     </div>
   );
 }

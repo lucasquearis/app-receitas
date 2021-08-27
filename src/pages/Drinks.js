@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import myContext from '../context/myContext';
 import FooterMenu from '../components/FooterMenu';
 import '../styles/Recepts.css';
 import { START_CARD, NUMBER_CARDS } from '../services/data';
-import { Link } from 'react-router-dom';
 
 export default function Foods() {
   const { filteredDrinks, baseDataDrinks } = useContext(myContext);

@@ -11,24 +11,29 @@ import Profile from './pages/Profile';
 import Drinks from './pages/Drinks';
 import RecipesDetails from './pages/RecipesDetails';
 import ExplorerFoods from './pages/ExplorerFoods';
+import Ingredients from './pages/Ingredients';
+import OriginExplorer from './pages/OriginExplorer';
+import MakedRecipes from './pages/MakedRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/bebidas" component={ Drinks } />
-      <Route exact path="/comidas" component={ Meals } />
-      <Route exact path="/profile" component={ Profile } />
-      <Route exact path="/comidas/:id" component={ RecipesDetails } />
-      <Route exact path="/bebidas/:id" component={ RecipesDetails } />
-      <Route exact path="/explorar" component={ Explorer } />
-      <Route exact path="/explorar/bebidas" component={ ExplorerDrinks } />
-      <Route exact path="/explorar/comidas" component={ ExplorerFoods } />
-      {/* <Route exact path="/comidas" component={ Foods } /> */}
-      {/* <Route exact path="/bebidas" component={ Drinks } /> */}
-      {/* <Route path="/comidas/:id" component={ OneRecept } /> */}
-      {/* <Route path="/explorar/comidas" component={ Colocar aqui o componente } /> */}
+      <Route path="/bebidas" component={ Drinks } />
+      <Route path="/comidas" component={ Meals } />
       <Route path="/profile" component={ Profile } />
+      <Route path="/explorar" component={ Explorer } />
+      <Route path="/profile" component={ Profile } />
+      <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
+      <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
+      <Route path="/explorar/comidas" component={ ExplorerFoods } />
+      <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
+      <Route path="/explorar/comidas/area" component={ OriginExplorer } />
+      <Route path="/receitas-feitas" component={ MakedRecipes } />
+      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+      <Route path="/comidas/:id" component={ RecipesDetails } />
+      <Route path="/bebidas/:id" component={ RecipesDetails } />
     </Switch>
   );
 }
