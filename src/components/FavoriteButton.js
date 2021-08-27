@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { checkFavoriteRecipes, formatFavoriteRecipe } from '../helpers';
 
 const FavoriteButton = ({ recipe }) => {
   const [heartIcon, setHeartIcon] = useState(whiteHeart);
+  const { favoriteRcps, setFavoriteRcps } = useContext(AppContext);
   const { id } = useParams();
   const favoriteRecipe = formatFavoriteRecipe(recipe);
 
@@ -15,6 +17,10 @@ const FavoriteButton = ({ recipe }) => {
       const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const updateStorage = [...favoriteRecipes, favorite];
       localStorage.setItem('favoriteRecipes', JSON.stringify(updateStorage));
+      setFavoriteRcps([
+        ...favoriteRcps,
+        { ...formatFavoriteRecipe(recipe) },
+      ]);
     }
   };
 
@@ -23,6 +29,9 @@ const FavoriteButton = ({ recipe }) => {
       const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const newFavorites = favoriteRecipes.filter((e) => e.id !== favorite.id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+      setFavoriteRcps([
+        ...favoriteRcps.filter((rcp) => rcp.id !== favorite.id),
+      ]);
     }
   };
 
