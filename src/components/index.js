@@ -7,4 +7,5 @@ export { default as RecomendationCard } from './RecomendationCard/RecomendationC
 export { default as RecipeInProgress } from './RecipeInProgress/RecipeInProgress';
 export { default as ExploreIngredients } from './ExploreIngredients/ExploreIngredients';
 export { default as CategoryFilter } from './CategoryFilter/CategoryFilter';
+export { default as DoneRecipeCard } from './DoneRecipeCard/DoneRecipeCard';
 export { default as ExploreArea } from './ExploreArea/ExploreArea';
