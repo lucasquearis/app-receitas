@@ -50,7 +50,12 @@ function RecipeDetail() {
       >
         {recipe.strCategory === 'Cocktail' ? recipe.strAlcoholic : recipe.strCategory}
       </p>
-      <p data-testid="instructions" style={ { display: 'flex', maxWidth: '70%' } }>{ `${recipe.strInstructions}` }</p>
+      <p
+        data-testid="instructions"
+        style={ { display: 'flex', maxWidth: '70%' } }
+      >
+        { `${recipe.strInstructions}` }
+      </p>
       { ingredientName.map((ingredient, index) => (
         <p
           key={ index }
