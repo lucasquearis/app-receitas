@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function RecipeDoneCard({
@@ -15,11 +17,79 @@ export default function RecipeDoneCard({
   tagsName,
   index,
 }) {
+  const [clickShare, seClickShare] = useState(false);
+  const handleClickShare = () => {
+    if (type === 'comida') {
+      Copy(`http://localhost:3000/comidas/${id}`);
+    } else {
+      Copy(`http://localhost:3000/bebidas/${id}`);
+    }
+    seClickShare(true);
+  };
+
+  const renderShareButton = (shareId) => (
+    <Button
+      variant="primary"
+      type="button"
+      data-testid={ shareId }
+      onClick={ handleClickShare }
+    >
+      <img
+        data-testid={ `${index}-horizontal-share-btn` }
+        src={ shareIcon }
+        alt="share-icon"
+      />
+    </Button>
+  );
+
   if (type === 'comida') {
     return (
+      <>
+        <Link
+          to={ `/comidas/${id}` }
+          className="mealDoneCard"
+          data-testid={ `${id}-recipe-card` }
+        >
+          <img
+            width="300px"
+            src={ image }
+            alt={ name }
+            data-testid={ `${index}-horizontal-image` }
+          />
+
+          <h2 data-testid={ `${index}-horizontal-name` }>
+            {name}
+          </h2>
+
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            { `${area} - ${category}` }
+          </p>
+
+          <p data-testid={ `${index}-horizontal-done-date` }>
+            {doneDate}
+          </p>
+
+          { tagsName.map((tag) => (
+            <p
+              key={ tag }
+              data-testid={ `${index}-${tag}-horizontal-tag` }
+            >
+              {tag}
+
+            </p>)) }
+
+        </Link>
+
+        { clickShare ? <p>Link copiado!</p> : renderShareButton('share-meal-btn') }
+      </>
+
+    );
+  }
+  return (
+    <>
       <Link
-        to={ `/comidas/${id}` }
-        className="mealDoneCard"
+        to={ `/bebidas/${id}` }
+        className="drinkDoneCard"
         data-testid={ `${id}-recipe-card` }
       >
         <img
@@ -34,7 +104,7 @@ export default function RecipeDoneCard({
         </h2>
 
         <p data-testid={ `${index}-horizontal-top-text` }>
-          { `${area} - ${category}` }
+          { alcoholicOrNot }
         </p>
 
         <p data-testid={ `${index}-horizontal-done-date` }>
@@ -50,56 +120,9 @@ export default function RecipeDoneCard({
 
           </p>)) }
 
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ shareIcon }
-          alt="share-icon"
-        />
-
       </Link>
-    );
-  }
-  return (
-    <Link
-      to={ `/bebidas/${id}` }
-      className="drinkDoneCard"
-      data-testid={ `${id}-recipe-card` }
-    >
-      <img
-        width="300px"
-        src={ image }
-        alt={ name }
-        data-testid={ `${index}-horizontal-image` }
-      />
-
-      <h2 data-testid={ `${index}-horizontal-name` }>
-        {name}
-      </h2>
-
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        { alcoholicOrNot }
-      </p>
-
-      <p data-testid={ `${index}-horizontal-done-date` }>
-        {doneDate}
-      </p>
-
-      { tagsName.map((tag) => (
-        <p
-          key={ tag }
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-        >
-          {tag}
-
-        </p>)) }
-
-      <img
-        data-testid={ `${index}-horizontal-share-btn` }
-        src={ shareIcon }
-        alt="share-icon"
-      />
-
-    </Link>
+      { clickShare ? <p>Link copiado!</p> : renderShareButton('share-drink-btn') }
+    </>
   );
 }
 
