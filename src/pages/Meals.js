@@ -3,10 +3,13 @@ import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
 import Header from '../components/Header';
+import Card from '../components/Card';
+import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 
 export default function Meals() {
   const { searchBarResult } = useContext(MyContext);
   const [resultList, setResultList] = useState();
+  const [foodMeals, setFoodMeals] = useState([]);
 
   useEffect(() => {
     const resolveApi = async () => {
@@ -17,7 +20,15 @@ export default function Meals() {
     resolveApi();
   }, [resultList, searchBarResult]);
 
-  console.log('RESULTLIST', resultList);
+  useEffect(() => {
+    const resolviFood = async () => {
+      const MAX_FOODS = 12;
+      const result = await fetchFoods();
+      const { meals } = result;
+      setFoodMeals(meals.slice(0, MAX_FOODS));
+    };
+    resolviFood();
+  }, []);
 
   const renderList = () => {
     if (resultList === null) {
@@ -62,6 +73,14 @@ export default function Meals() {
     <>
       <Header title="Comidas" />
       {renderList()}
+      { foodMeals.map(({ strMealThumb, strMeal }, index) => (
+        <Card
+          Key={ strMeal }
+          id={ index }
+          strThumb={ strMealThumb }
+          str={ strMeal }
+        />
+      ))}
       <BottomMenu />
     </>
   );
