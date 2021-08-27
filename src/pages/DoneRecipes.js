@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, DoneCard } from '../components';
 import './css/DoneRecipes.css';
 
-import recipes from '../tests/mocks/recipes';
-
-const copy = require('clipboard-copy');
+import recipes from '../tests/mocks/recipesMock';
 
 const DoneRecipes = () => {
   const [rawDoneRecipes, setRawDoneRecipes] = useState([]);
@@ -40,10 +38,11 @@ const DoneRecipes = () => {
   useEffect(() => {
     const INTERVAL = 5000;
     if (shareData.length > 1) {
-      copy(shareData[0]);
+      navigator.clipboard.writeText(shareData[0]);
       const parentNode = document.querySelector(`#${shareData[1]}`);
       const alertElement = document.createElement('span');
       alertElement.className = 'share-alert';
+      alertElement.setAttribute('data-testid', 'share-alert');
       alertElement.innerHTML = 'Link copiado!';
       parentNode.after(alertElement);
       setInterval(() => alertElement.remove(), INTERVAL);
@@ -60,8 +59,8 @@ const DoneRecipes = () => {
   const handleClickShare = ({ target: { id } }) => {
     const formatId = (id.replace('-', '/')).split(' ', 2);
     const recipeDetailURL = `http://localhost:3000/${formatId[0]}`;
-    const parentNodeId = `done-recipe-date-${formatId[1]}`;
-    setShareData([recipeDetailURL, parentNodeId]);
+    const previousNodeId = `done-recipe-date-${formatId[1]}`;
+    setShareData([recipeDetailURL, previousNodeId]);
     setShareAlert(true);
   };
 
