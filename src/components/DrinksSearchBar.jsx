@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
@@ -8,12 +8,6 @@ function DrinksSearchBar() {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
   const newDrinkRecipes = useContext(MyContext);
-
-  useEffect(() => {
-    if (data.length === 0) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    }
-  }, [data]);
 
   const handleChange = ({ target }) => {
     const { id, value: word, name } = target;
@@ -34,9 +28,9 @@ function DrinksSearchBar() {
     warning();
     const drinks = await fetchAPI.filteredDrinks(type, search);
     setData(drinks === null ? [] : drinks);
-    // if (drinks === null) {
-    //   alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    // }
+    if (drinks === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
     newDrinkRecipes(drinks === null ? [] : drinks);
   };
 
