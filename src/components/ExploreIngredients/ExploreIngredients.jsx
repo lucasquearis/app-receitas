@@ -11,6 +11,7 @@ function ExploreIngredients({ path }) {
     const ingList = ingredients.drinks.slice(0, maxCards);
     return (ingList.map(({ strIngredient1 }, i) => (
       <IngredientsCard
+        path={ path }
         key={ i }
         data-testid={ `${i}-ingredient-card` }
         name={ strIngredient1 }
@@ -22,6 +23,7 @@ function ExploreIngredients({ path }) {
     const ingList = ingredients.meals.slice(0, maxCards);
     return (ingList.map(({ strIngredient }, i) => (
       <IngredientsCard
+        path={ path }
         key={ i }
         name={ strIngredient }
         i={ i }
