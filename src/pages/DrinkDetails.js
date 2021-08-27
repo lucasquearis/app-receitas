@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-// import FoodContext from '../context/FoodContext';
 import { useHistory } from 'react-router';
 import DrinksContext from '../context/DrinksContext';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
@@ -8,18 +7,21 @@ import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
+import Copy from '../components/Clipboard-Copy';
 
 const DrinkDetails = () => {
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
+  const url = window.location.href;
 
   const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
   const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showMsg, setShowMsg] = useState(false);
 
   const getIngredients = () => {
     const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
@@ -35,6 +37,11 @@ const DrinkDetails = () => {
     const measuresOnly = measuresArr.map((item) => item
       .map((i) => i.pop())).map((item) => item);
     setMeasures(measuresOnly);
+  };
+
+  const copy = () => {
+    Copy(url);
+    setShowMsg(true);
   };
 
   useEffect(() => {
@@ -70,6 +77,7 @@ const DrinkDetails = () => {
               type="button"
               data-testid="share-btn"
               key={ shareIcon }
+              onClick={ () => copy() }
             >
               <img src={ shareIcon } alt="share-icon" />
             </button>
@@ -80,6 +88,7 @@ const DrinkDetails = () => {
             >
               <img src={ blackHeartIcon } alt="favorite-icon" />
             </button>
+            { showMsg ? <p>Link copiado!</p> : undefined }
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>

@@ -7,6 +7,7 @@ import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import Copy from '../components/Clipboard-Copy';
 import './foodDetails.css';
 
 const FoodDetails = () => {
@@ -14,12 +15,14 @@ const FoodDetails = () => {
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
+  const url = window.location.href;
 
   const { foodDetails, setFoodDetails } = useContext(FoodContext);
   const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showMsg, setShowMsg] = useState(false);
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
@@ -37,6 +40,11 @@ const FoodDetails = () => {
     const measuresOnly = measuresArr.map((item) => item
       .map((i) => i.pop())).map((item) => item);
     setMeasures(measuresOnly);
+  };
+
+  const copy = (path) => {
+    Copy(path);
+    setShowMsg(true);
   };
 
   useEffect(() => {
@@ -72,6 +80,7 @@ const FoodDetails = () => {
               type="button"
               data-testid="share-btn"
               key={ shareIcon }
+              onClick={ () => copy(url) }
             >
               <img src={ shareIcon } alt="share-icon" />
             </button>
@@ -82,6 +91,7 @@ const FoodDetails = () => {
             >
               <img src={ blackHeartIcon } alt="favorite-icon" />
             </button>
+            { showMsg ? <p>Link copiado!</p> : undefined }
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
             <ul>
