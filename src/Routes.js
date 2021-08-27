@@ -12,7 +12,6 @@ import DrinkExp from './pages/Explore/DrinkExp';
 import DrinkIngredients from './pages/Explore/DrinkIngredients';
 // import FoodIngredients from './pages/Explore/FoodIngredients';
 import FoodAreaExp from './pages/Explore/FoodAreaExp';
-import DrinkAreaExp from './pages/Explore/DrinkAreaExp';
 import Profile from './pages/Profile';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';

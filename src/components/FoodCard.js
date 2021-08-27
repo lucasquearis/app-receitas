@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function FoodCard({ meal, index }) {
@@ -8,6 +8,7 @@ function FoodCard({ meal, index }) {
   return (
     <div
       data-testid={ `${index}-recipe-card` }
+      aria-hidden="true"
       onClick={ () => push(`/comidas/${idMeal}`) }
     >
       <img
@@ -24,6 +25,7 @@ FoodCard.propTypes = {
   meal: PropTypes.shape({
     strMealThumb: PropTypes.string.isRequired,
     strMeal: PropTypes.string.isRequired,
+    idMeal: PropTypes.number.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
