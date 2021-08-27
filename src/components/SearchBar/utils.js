@@ -17,8 +17,8 @@ const setByType = async (type, search, setItems, { urlDetail, letter }) => {
 export const searchOnClick = (search, setItems) => {
   const path = window.location.pathname;
   let type;
-  if (path === '/comidas') type = 'themealdb';
-  if (path === '/bebidas') type = 'thecocktaildb';
+  if (path.includes('/comidas')) type = 'themealdb';
+  if (path.includes('/bebidas')) type = 'thecocktaildb';
   if (search.radioValue === 'Ingredientes') {
     setByType(type, search, setItems, { urlDetail: 'filter', letter: 'i' });
   } else if (search.radioValue === 'Nome') {

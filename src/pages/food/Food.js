@@ -6,6 +6,7 @@ import CategoriesFilterButtons from
   '../../components/FilterCategoriesButtons.js/CategoriesFilterButtons';
 import Header from '../../components/header/Header';
 import { fetchApi } from '../../components/SearchBar/utils';
+import FooterMenu from '../../components/FooterMenu/FooterMenu';
 
 const Food = () => {
   const [erro, setErro] = useState(false);
@@ -32,13 +33,14 @@ const Food = () => {
       <div>
         <Header>Comidas</Header>
         <CategoriesFilterButtons />
-        <CardsList array={ items } />
+        <CardsList array={ items } teste="recipe-card" />
       </div>
     );
   }
   return (
     <div>
       <Header>Comidas</Header>
+      <FooterMenu />
     </div>
   );
 };

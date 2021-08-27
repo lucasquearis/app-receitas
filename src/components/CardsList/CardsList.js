@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const CardsList = ({ array }) => {
-  const [redirect, setRedirect] = useState(false);
-  const [itemId, setItemId] = useState();
-  const [url, setUrl] = useState('');
-  let type;
+const CardsList = ({ array, teste }) => {
   if (array !== undefined) {
-    if (array[0].idDrink === undefined) type = 'Meal';
-    else type = 'Drink';
+    let type;
+    let path;
+    if (array[0].idDrink === undefined) {
+      type = 'Meal';
+      path = 'comidas';
+    } else {
+      type = 'Drink';
+      path = 'bebidas';
+    }
 
     let newArray;
     const maxCards = 12;
@@ -18,44 +21,25 @@ const CardsList = ({ array }) => {
     } else {
       newArray = array;
     }
-
-    const handleClick = (id, foodDrink) => {
-      setRedirect(true);
-      setItemId(id);
-      if (foodDrink === 'idDrink') {
-        setUrl('bebidas');
-      } else {
-        setUrl('comidas');
-      }
-    };
-
-    if (redirect) {
-      return <Redirect to={ `/${url}/${itemId}` } />;
-    }
+    console.log(newArray);
 
     return (
       <div>
-        { newArray.map((obj, index) => {
-          const objKeys = Object.keys(obj);
-          console.log(objKeys[0]);
-          return (
-            <div
-              role="button"
-              tabIndex={ 0 }
-              key={ index }
-              data-testid={ `${index}-recipe-card` }
-              onClick={ () => handleClick(obj[objKeys[0]], objKeys[0]) }
-              onKeyDown={ () => handleClick() }
-            >
+        { newArray.map((obj, index) => (
+          <div
+            key={ index }
+            data-testid={ `${index}-${teste}` }
+          >
+            <Link to={ `/${path}/${obj[`id${type}`]}` }>
               <img
                 data-testid={ `${index}-card-img` }
                 src={ obj[`str${type}Thumb`] }
                 alt={ obj[`str${type}`] }
               />
               <h3 data-testid={ `${index}-card-name` }>{ obj[`str${type}`] }</h3>
-            </div>
-          );
-        }) }
+            </Link>
+          </div>
+        )) }
       </div>
     );
   }
