@@ -7,7 +7,7 @@ import Video from '../Video/Video';
 import UseRecipeStatus from '../../hook/UseRecipeStatus';
 
 function RecipeDetails({ recipe, type }) {
-  const { recipeIsDone, recipeInProgress } = UseRecipeStatus(recipe, type);
+  const { recipeInProgress } = UseRecipeStatus(recipe, type);
   return (
     <>
       <HeroDetails recipe={ recipe } type={ type } />
@@ -18,16 +18,14 @@ function RecipeDetails({ recipe, type }) {
       </section>
       { recipe.strYoutube && <Video recipe={ recipe } />}
       <h3>Recomendados</h3>
-      {!recipeIsDone && (
-        <Link
-          to={ (type === 'Meal') ? `/comidas/${recipe[`id${type}`]}/in-progress`
-            : `/bebidas/${recipe[`id${type}`]}/in-progress` }
-        >
-          <button type="button" data-testid="start-recipe-btn" className="start-recipe">
-            { recipeInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
-          </button>
-        </Link>
-      )}
+      <Link
+        to={ (type === 'Meal') ? `/comidas/${recipe[`id${type}`]}/in-progress`
+          : `/bebidas/${recipe[`id${type}`]}/in-progress` }
+      >
+        <button type="button" data-testid="start-recipe-btn" className="start-recipe">
+          { recipeInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+        </button>
+      </Link>
     </>
   );
 }

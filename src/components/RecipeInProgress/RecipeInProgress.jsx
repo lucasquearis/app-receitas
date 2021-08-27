@@ -4,11 +4,11 @@ import { Redirect } from 'react-router-dom';
 import Checkbox from '../Ingredients/Checkbox';
 import HeroDetails from '../HeroDetails/HeroDetails';
 import Video from '../Video/Video';
-import useUser from '../../hook/UseUser';
+import UseFinishRecipe from '../../hook/UseFinishRecipe';
 
 function RecipeInProgress({ recipe, type }) {
   const [allChecked, setAllCheked] = useState(false);
-  const { redirect, shouldRedirect } = useUser();
+  const { redirect, finishRecipe } = UseFinishRecipe(recipe, type);
 
   const allIngredientsChecked = (array1, array2) => {
     if (array1.length === array2.length) {
@@ -36,7 +36,7 @@ function RecipeInProgress({ recipe, type }) {
         data-testid="finish-recipe-btn"
         disabled={ !allChecked }
         className="finish-recipe"
-        onClick={ shouldRedirect }
+        onClick={ finishRecipe }
       >
         Finalizar Receita
       </button>

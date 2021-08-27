@@ -25,7 +25,9 @@ function DoneRecipeCard({ recipe, cardIndex }) {
         <Link to={ `/${type}s/${id}` }>
           <p data-testid={ `${cardIndex}-horizontal-name` }>{name}</p>
         </Link>
-        <p data-testid={ `${cardIndex}-horizontal-done-date` }>{doneDate}</p>
+        <p data-testid={ `${cardIndex}-horizontal-done-date` }>
+          {`Feita em: ${doneDate}`}
+        </p>
         <button
           type="button"
           data-testid={ `${cardIndex}-horizontal-share-btn` }
