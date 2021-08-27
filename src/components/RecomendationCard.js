@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   getRecomendationsDrinks,
   getRecomendationsMeals } from '../services/apiRequisitions';
@@ -27,5 +28,9 @@ function RecomendationCard({ type }) {
     </section>
   ) : <p>Loading</p>;
 }
+
+RecomendationCard.propTypes = {
+  type: PropTypes.string.isRequired,
+};
 
 export default RecomendationCard;

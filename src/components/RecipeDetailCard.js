@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import RecomendationCard from './RecomendationCard';
+import YoutubeEmbed from './YoutubeEmbed';
 import { getMealById, getDrinkById } from '../services/apiRequisitions';
 
 function getIngredients(recipe, setIngredientName, setIngredientMeasure) {
@@ -60,14 +61,9 @@ function RecipeDetail() {
         </p>
       ))}
       { pathname.includes('comidas') ? (
-        <iframe
-          width="420"
-          height="315"
-          src={ `${(recipe.strYoutube).replace('watch?v=', 'embed/')}` }
-          title="video"
-          data-testid="video"
-        />) : null}
-      <RecomendationCard type="meals" />
+        <YoutubeEmbed videoId={ `${recipe.strYoutube.substring(32)}` } />) : null}
+      { pathname.includes('comidas') ? (<RecomendationCard type="drinks" />)
+        : (<RecomendationCard type="meals" />)}
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </section>
   ) : <p>Loading</p>;

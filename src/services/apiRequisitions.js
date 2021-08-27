@@ -19,5 +19,5 @@ export function getRecomendationsMeals() {
 export function getRecomendationsDrinks() {
   return fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
     .then((result) => result.json())
-    .then((resolve) => resolve.drinks);
+    .then((resolve) => resolve);
 }
