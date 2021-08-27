@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './style/categoryStyle.css';
 
 class CategoriesFilter extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class CategoriesFilter extends Component {
     return (
       <div>
         <button
+          className="btn btn-warning categoryStyle"
           type="button"
           data-testid="All-category-filter"
           onClick={ handleClick }
@@ -31,6 +33,7 @@ class CategoriesFilter extends Component {
         {
           filteredCategories.map(({ strCategory }) => (
             <button
+              className="btn btn-warning categoryStyle"
               key={ strCategory }
               type="button"
               data-testid={ `${strCategory}-category-filter` }

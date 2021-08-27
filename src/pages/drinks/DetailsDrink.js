@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Ingredients from '../recipedetails/Ingredients';
-import Instructions from '../recipedetails/Instructions';
-import Video from '../recipedetails/Video';
-import Recomendations from '../recipedetails/Recomendations';
+import Ingredients from '../../components/Ingredients';
+import Instructions from '../../components/Instructions';
+import Video from '../../components/Video';
+import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
