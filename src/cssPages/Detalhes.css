@@ -1,0 +1,23 @@
+.recommendedShow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recommendedCard {
+  border: 3px solid black;
+  height: 36vw;
+  width: 30vw;
+}
+
+.hideCard {
+  display: none;
+}
+
+.recommendedCard img {
+  width: 100%;
+}
+
+.mainBtn {
+  bottom: 0;
+  position: fixed;
+}
