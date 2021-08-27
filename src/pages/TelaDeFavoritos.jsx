@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
-import clipboardCopy from 'clipboard-copy';
 import foodsEdrinks from '../mocks/foodsEdrinks';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import '../cssPages/ReceitasF.css';
+import ShareButton from '../components/ShareButton';
 
 function ReceitasFeitas() {
   const [finishRecipes, SetFinishRecipes] = useState([]);
   const [redirect, setRedirect] = useState(null);
-  const [msg, setMsg] = useState(false);
-  const miliSecond = 1000;
 
   useEffect(() => {
     SetFinishRecipes(foodsEdrinks);
@@ -21,12 +18,6 @@ function ReceitasFeitas() {
   function desfavorite(parans) {
     const desfavoritar = foodsEdrinks.filter((bebida) => bebida.name !== parans);
     SetFinishRecipes(desfavoritar);
-  }
-
-  function onCopy(type, id) {
-    setMsg(true);
-    clipboardCopy(`http://localhost:3000/${type}/${id}`);
-    setTimeout(() => setMsg(false), miliSecond);
   }
 
   function onLink(type, id) {
@@ -96,20 +87,7 @@ function ReceitasFeitas() {
                 >
                   { recipe.name }
                 </Card.Title>
-                {msg && 'Link Copiado!' }
-                <button
-                  type="button"
-                  className="button-filtro"
-                  onClick={ () => onCopy(recipe.type, recipe.id) }
-                >
-
-                  <img
-                    className="shareIcon"
-                    alt={ recipe.name }
-                    src={ shareIcon }
-                    data-testid={ `${index}-horizontal-share-btn` }
-                  />
-                </button>
+                <ShareButton />
                 <button
                   type="button"
                   className="button-filtro"
@@ -129,8 +107,8 @@ function ReceitasFeitas() {
                 className="mb-2 text-muted"
                 data-testid={ `${index}-horizontal-top-text` }
               >
-                {`${recipe.area.length === 0 ? recipe.alcoholicOrNot : recipe.area} - 
-                ${recipe.category}`}
+                {recipe.area.length === 0 ? recipe.alcoholicOrNot
+                  : `${recipe.area} - ${recipe.category}`}
 
               </div>
             </Card.Body>
