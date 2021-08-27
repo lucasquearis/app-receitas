@@ -1,16 +1,39 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionRequestItems, actionRequestSuccess } from '../../actions';
 import CardsList from '../../components/CardsList/CardsList';
+import CategoriesFilterButtons from
+  '../../components/FilterCategoriesButtons.js/CategoriesFilterButtons';
 import Header from '../../components/header/Header';
+import { fetchApi } from '../../components/SearchBar/utils';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
 
-const Food = ({ storeItems }) => {
-  if (storeItems.length > 0) {
+const Food = () => {
+  const [erro, setErro] = useState(false);
+  const { items } = useSelector((state) => state.itemsReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      dispatch(actionRequestItems());
+      try {
+        const { meals } = await fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        dispatch(actionRequestSuccess(meals));
+      } catch (error) {
+        setErro(true);
+        console.log(`Erro ao carregar as primeiras receitas: ${error}`);
+      }
+    };
+    fetchItems();
+  }, [dispatch]);
+
+  if (erro) return <p>Algo deu errado. Tente novamente.</p>;
+  if (items.length > 0) {
     return (
       <div>
         <Header>Comidas</Header>
-        <CardsList array={ storeItems } teste="recipe-card" />
+        <CategoriesFilterButtons />
+        <CardsList array={ items } teste="recipe-card" />
       </div>
     );
   }
@@ -22,16 +45,4 @@ const Food = ({ storeItems }) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    storeItems: state.items.items,
-  };
-}
-
-Food.propTypes = {
-  storeItems: PropTypes.arrayOf(
-    PropTypes.object.isRequired,
-  ).isRequired,
-};
-
-export default connect(mapStateToProps)(Food);
+export default Food;

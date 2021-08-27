@@ -1,12 +1,12 @@
 import React from 'react';
-import CardsList from '../../components/CardsList/CardsList';
+// import CardsList from '../../components/CardsList/CardsList';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
 
 const ExploreFoodIng = () => (
   <div>
     <HeaderWithoutSearch>Explorar Ingredientes</HeaderWithoutSearch>
-    <CardsList />
+    {/* <CardsList /> */}
     <FooterMenu />
   </div>
 );
