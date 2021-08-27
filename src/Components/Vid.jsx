@@ -2,10 +2,7 @@ import React from 'react';
 
 function Vid(props) {
   return (
-    <video controls>
-      <source { ...props } />
-      <track kind="captions" />
-    </video>
+    <iframe title="video" { ...props } />
   );
 }
 export default Vid;

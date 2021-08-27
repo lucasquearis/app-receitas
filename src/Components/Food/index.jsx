@@ -2,30 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from '../RecipeCard';
 
-const Food = ({ recipes }) => {
-  const maxRecipes = 12;
+const doze = 12;
+const Food = ({ recipes, maxRecipes = doze }) => {
   if (recipes === undefined) {
     return <div>loding</div>;
   }
 
   return (
-    <div>
+    <>
       {recipes.slice(0, maxRecipes).map((recipe, index) => (
         <RecipeCard
+          feedType={ recipe.idMeal ? 'comidas' : 'bebidas' }
           key={ index }
           name={ recipe.strMeal || recipe.strDrink }
           image={ recipe.strMealThumb || recipe.strDrinkThumb }
-          testId={ `${index}-recipe-card` }
+          testId={ maxRecipes === doze
+            ? `${index}-recipe-card` : `${index}-recomendation-card` }
           index={ index }
-          props={ recipe }
           id={ recipe.idMeal || recipe.idDrink }
         />
       ))}
-    </div>
+    </>
   );
 };
 
 Food.propTypes = {
   recipes: PropTypes.objectOf(PropTypes.object).isRequired,
+  maxRecipes: PropTypes.number.isRequired,
 };
 export default Food;
