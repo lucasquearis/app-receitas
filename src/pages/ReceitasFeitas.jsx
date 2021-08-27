@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { Redirect } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
+import clipboardCopy from 'clipboard-copy';
 import foodsEdrinks from '../mocks/foodsEdrinks';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
@@ -11,15 +12,18 @@ import '../cssPages/ReceitasF.css';
 function ReceitasFeitas() {
   const [finishRecipes, SetFinishRecipes] = useState([]);
   const [redirect, setRedirect] = useState(null);
+  const [msg, setMsg] = useState(false);
   const minNumber = 2;
-  const copy = require('clipboard-copy');
+  const miliSecond = 1000;
 
   useEffect(() => {
     SetFinishRecipes(foodsEdrinks);
   }, []);
 
   function onCopy(type, id) {
-    copy(`http://localhost:3000/${type}/${id}`);
+    setMsg(true);
+    clipboardCopy(`http://localhost:3000/${type}/${id}`);
+    setTimeout(() => setMsg(false), miliSecond);
   }
 
   function onLink(type, id) {
@@ -79,6 +83,7 @@ function ReceitasFeitas() {
               variant="top"
               onClick={ () => onLink(recipe.type, recipe.id) }
               src={ `${recipe.image}` }
+              alt={ recipe.name }
             />
             <Card.Body>
               <div className="paizao">
@@ -88,7 +93,13 @@ function ReceitasFeitas() {
                 >
                   { recipe.name }
                 </Card.Title>
-                <button type="button" className="button-filtro">
+                {msg && 'Link Copiado!' }
+                <button
+                  type="button"
+                  className="button-filtro"
+                  onClick={ () => onCopy(recipe.type, recipe.id) }
+                >
+
                   <img
                     className="shareIcon"
                     alt={ recipe.name }
