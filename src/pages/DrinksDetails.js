@@ -1,43 +1,31 @@
-import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import Sugestions from '../components/Sugestions';
+import '../styles/Details.css';
+import HeaderDetails from '../components/HeaderDetails';
+import myContext from '../context/myContext';
+import Ingredients from '../components/Ingredients';
 
 function DrinksDetails() {
-  // const history = useHistory();
-  // const { location: { pathname } } = history;
-  const [recipe, setRecipe] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [lists, setLists] = useState({
-    ingredients: [],
-    measure: [],
-  });
-
-  useEffect(() => {
-    const filterIngredients = () => {
-      const keys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
-      const list = keys.map((key) => recipe[key]);
-      const measureQnt = Object.keys(recipe).filter((key) => key.includes('Measure'));
-      const measureList = measureQnt.map((key) => recipe[key]);
-      setLists({
-        ...lists,
-        ingredients: list.filter((item) => item),
-        measure: measureList.filter((item) => item),
-      });
-    };
-
-    filterIngredients();
-  }, [recipe]);
+  const { pathname } = useLocation();
+  const { id } = useParams();
+  const { loading, keyType, setLoading, setRecipe, setKeysType } = useContext(myContext);
 
   useEffect(() => {
     try {
       setLoading(true);
+      const urlMeals = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+      const correctURL = pathname.includes('comidas') ? urlMeals : urlDrinks;
+      const type = pathname.includes('comidas') ? 'meals' : 'drinks';
+      setKeysType(type);
       const fetchRecipe = async () => {
-        const request = await fetch(`${urlDrinks}17015`); // colocar o id dinânmico
+        const request = await fetch(`${correctURL}${id}`);
         const response = await request.json();
-        setRecipe(response.drinks[0]);
+        setRecipe(response[type][0]);
       };
+
       setLoading(false);
       fetchRecipe();
     } catch (error) {
@@ -45,46 +33,23 @@ function DrinksDetails() {
     }
   }, []);
 
+  const text = keyType === 'meals' ? 'drinks' : 'meals';
   if (loading) return <Loading />;
 
   return (
-    <section>
-      <div>
-        <img
-          src={ recipe.strDrinkThumb }
-          data-testid="recipe-photo"
-          alt={ recipe.strDrink }
-        />
-        <div>
-          <h2 data-testid="recipe-title">{ recipe.strDrink }</h2>
-          <button data-testid="share-btn" type="button">share</button>
-          <button data-testid="favorite-btn" type="button">favorite</button>
-        </div>
-        <h4 data-testid="recipe-category">{ recipe.strAlcoholic }</h4>
+    <section className="details-body">
+      <HeaderDetails />
+      <Ingredients />
+      <div className="sugestions">
+        <Sugestions type={ text } />
       </div>
-      <div>
-        <h3>Ingredients</h3>
-        <ul>
-          {
-            lists.ingredients.map((item, key) => (
-              <li
-                key={ key }
-                data-testid={ `${key}-ingredient-name-and-measure` }
-              >
-                { `${item} - ${lists.measure[key]}` }
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div>
-        <h3>Instruções</h3>
-        <p data-testid="instructions">{ recipe.strInstructions }</p>
-      </div>
-      <div>
-        <Sugestions type="meals" />
-      </div>
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      <button
+        className="iniciar-btn"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
     </section>
   );
 }

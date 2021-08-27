@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import '../styles/Sugestion.css';
 
 function Sugestions({ type }) {
   const [sugestions, setSugestions] = useState([]);
-  console.log(sugestions);
   const urlMealsSugestions = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const urlDrinksSugestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
@@ -22,16 +22,24 @@ function Sugestions({ type }) {
   }, [correctURL]);
 
   const renderMealsDetails = (item) => (
-    <div>
-      <img src={ item.strMealThumb } alt={ item.strMeal } />
+    <div className="sugestions-imagem-container">
+      <img
+        className="sugestions-imagem"
+        src={ item.strMealThumb }
+        alt={ item.strMeal }
+      />
       <p>{ item.strCategory }</p>
       <h5>{ item.strMeal }</h5>
     </div>
   );
 
   const renderDrinksDetails = (item) => (
-    <div>
-      <img src={ item.strDrinkThumb } alt={ item.strDrink } />
+    <div className="sugestions-imagem-container">
+      <img
+        className="sugestions-imagem"
+        src={ item.strDrinkThumb }
+        alt={ item.strDrink }
+      />
       <p>{ item.strAlcoholic }</p>
       <h5>{ item.strDrink }</h5>
     </div>
@@ -40,6 +48,7 @@ function Sugestions({ type }) {
   return (
     sugestions.map((item, key) => (
       <div
+        className="sugestions-container"
         key={ key }
         data-testid={ `${key}-recomendation-card` }
       >

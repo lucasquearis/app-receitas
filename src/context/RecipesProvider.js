@@ -11,13 +11,63 @@ function RecipesProvider({ children }) {
     textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
   const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
+  const [favorite, setFavorite] = useState({});
+  const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [keyType, setKeysType] = useState('');
+  const [lists, setLists] = useState({
+    ingredients: [],
+    measure: [],
+  });
 
   const globalState = {
+    lists,
+    keyType,
+    setKeysType,
+    recipe,
+    setRecipe,
+    loading,
+    setLoading,
+    favorite,
+    setFavorite,
     infoUser,
     setInfoUser,
     setSearchValues,
     filteredMealsOrDrinks,
   };
+  useEffect(() => {
+    const favoriteClick = () => {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([{
+        id: '',
+        type: '',
+        area: '',
+        category: '',
+        alcoholicOrNot: '',
+        name: '',
+        image: '',
+        doneDate: '',
+        tags: '',
+      }]));
+    };
+
+    favoriteClick();
+  }, []);
+
+  useEffect(() => {
+    const filterIngredients = () => {
+      const keys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
+      const list = keys.map((key) => recipe[key]);
+      const measureQnt = Object.keys(recipe).filter((key) => key.includes('Measure'));
+      const measureList = measureQnt.map((key) => recipe[key]);
+      setLists({
+        ...lists,
+        ingredients: list.filter((item) => item),
+        measure: measureList.filter((item) => item),
+      });
+    };
+
+    filterIngredients();
+  }, [recipe]);
 
   useEffect(() => {
     const resultFilter = async () => {

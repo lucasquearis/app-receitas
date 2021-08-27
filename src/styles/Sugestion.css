@@ -1,0 +1,25 @@
+.sugestions-container {
+  box-sizing: border-box;
+  bottom: 0%;
+  margin: 0;
+  padding: 0%;
+  width: 100%;
+}
+
+.sugestions-container{
+  display: flex;
+  padding: 3%;
+  margin-top: 5%;
+  margin-bottom: 13%;
+  margin-right: 5%;
+  border:solid gray 1px;
+  box-shadow: 2px 3px rgba(128, 128, 128, 0.466);
+}
+
+.sugestions-imagem-container {
+  margin-top: 5%;
+}
+
+.sugestions-imagem {
+  width: 150px;
+}
