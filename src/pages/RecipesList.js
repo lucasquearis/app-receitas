@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function RecipeList(title) {
   const history = useHistory();
@@ -15,6 +16,8 @@ function RecipeList(title) {
     <div>
       <Header title={ title } />
       <p>Recipe List</p>
+      <p>Recipe List</p>
+      <Footer />
     </div>
   );
 }
