@@ -20,8 +20,28 @@ function Provider({ children }) {
     loading: true,
   });
 
-  const [categories, setCategories] = useState([]);
+  const [foodRecipes, setFoodRecipes] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [drinkRecipes, setDrinkRecipes] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [foodCategories, setFoodCategories] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [drinkCategories, setDrinkCategories] = useState({
+    list: [],
+    loading: true,
+  });
+
   const [API, setAPI] = useState('');
+
   const switchAPI = (searchFilter) => {
     switch (searchFilter.type) {
     case 'ingredient':
@@ -44,10 +64,13 @@ function Provider({ children }) {
     setRecipes({ ...recipes, list: result, loading: false });
   };
 
-  const requestCategory = async () => {
-    const response = await fetch();
+  const requestCategory = async (categories, func) => {
+    const response = await fetch(categories);
     const result = await response.json();
-    setCategories(result);
+    func({
+      list: result,
+      loading: false,
+    });
   };
 
   const RequestAPI = async () => {
@@ -55,6 +78,9 @@ function Provider({ children }) {
     const result = await response.json();
     setRecipes({ ...recipes, list: result, loading: false });
   };
+
+  const foodCategoryAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const drinkCategoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
   useEffect(() => {
     switchAPI(filter);
@@ -68,8 +94,17 @@ function Provider({ children }) {
     API,
     RequestAPI,
     recipes,
-    categories,
+    foodCategories,
     requestCategory,
+    drinkCategories,
+    foodRecipes,
+    drinkRecipes,
+    setFoodRecipes,
+    foodCategoryAPI,
+    setFoodCategories,
+    drinkCategoryAPI,
+    setDrinkRecipes,
+    setDrinkCategories,
     setRecipes,
     requestRandomAPI,
   };
