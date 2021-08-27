@@ -24,7 +24,7 @@ function mockDoneRecipes() {
     },
   ];
 
-  localStorage.setItem('doneRecipes', JSON.stringfy(doneRecipes));
+  localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
 }
 
 export default mockDoneRecipes;

@@ -7,16 +7,16 @@ const THREE_SECONDS = 3000;
 
 mockDoneRecipes();
 
+const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
 function DoneRecipes() {
   const [activeFilter, setActiveFilter] = useState('');
   const [filteredDoneRecipes, setFilteredDoneRecipes] = useState([]);
   const [copied, SetCopied] = useState(false);
 
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-
   useEffect(() => {
     setFilteredDoneRecipes(doneRecipes);
-  }, [doneRecipes, setFilteredDoneRecipes]);
+  }, [setFilteredDoneRecipes]);
 
   const handleCopy = () => {
     SetCopied(true);
@@ -36,11 +36,11 @@ function DoneRecipes() {
     }
     if (filter !== activeFilter && filter === 'Food') {
       setActiveFilter(filter);
-      setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'meals'));
+      setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'comida'));
     }
     if (filter !== activeFilter && filter === 'Drinks') {
       setActiveFilter(filter);
-      setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'drinks'));
+      setFilteredDoneRecipes(doneRecipes.filter((recipe) => recipe.type === 'bebida'));
     }
   };
 
@@ -83,16 +83,19 @@ function DoneRecipes() {
           alcoholicOrNot,
         } = recipe;
 
-        const subpage = type === 'meals' ? 'comidas' : 'bebidas';
+        const subpage = type === 'comida' ? 'comida' : 'bebida';
 
         return (
           <div key={ `${type}-${index}` }>
             {
-              type === 'meals'
+              type === 'comida'
                 ? (
                   <div>
-                    <span data-testid={ `${index}-horizontal-top-text` }>{category}</span>
-                    <span data-testid={ `${index}-horizontal-top-text` }>{area}</span>
+                    <span
+                      data-testid={ `${index}-horizontal-top-text` }
+                    >
+                      {`${area} - ${category}`}
+                    </span>
                   </div>
                 ) : (
                   <span data-testid={ `${index}-horizontal-top-text` }>
@@ -100,14 +103,14 @@ function DoneRecipes() {
                   </span>
                 )
             }
-            <Link to={ `/${subpage}/${id}` } key={ `name-link/${id} ` }>
+            <Link to={ `/${subpage}s/${id}` } key={ `name-link/${id} ` }>
               <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
             </Link>
             <h4 data-testid={ `${index}-horizontal-done-date` }>
               Feita em:
               { doneDate }
             </h4>
-            <Link to={ `/${subpage}/${id}` } key={ `img-link/${id} ` }>
+            <Link to={ `/${subpage}s/${id}` } key={ `img-link/${id} ` }>
               <img
                 src={ image }
                 alt={ name }
@@ -115,13 +118,13 @@ function DoneRecipes() {
               />
             </Link>
             <ShareIcon
-              data-testid={ `${index}-horizontal-share-btn` }
-              url={ `/receitas-feitas/${index}` }
+              dataTestId={ `${index}-horizontal-share-btn` }
+              url={ `/${subpage}s/${id}` }
               onClick={ handleCopy }
             />
-            { copied && <div>Copiado!</div> }
+            { copied && <div>Link copiado!</div> }
             {
-              type === 'meals' ? (
+              type === 'comida' ? (
                 <div>
                   <div data-testid={ `${index}-${tags[0]}-horizontal-tag` }>
                     {tags[0]}
