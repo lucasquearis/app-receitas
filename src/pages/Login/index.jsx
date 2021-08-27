@@ -24,6 +24,13 @@ function Login() {
       email,
     };
 
+    const inProgress = localStorage.getItem('InProgressRecipes');
+    if (!inProgress) {
+      const defaultValue = { cocktails: {}, meals: {} };
+
+      localStorage.setItem('inProgressRecipes', JSON.stringify(defaultValue));
+    }
+
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify(user));

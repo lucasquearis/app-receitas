@@ -1,7 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Context from '.';
-import { fetchAPI } from '../services/API';
+import { fetchAPI,
+  fetchRandomRecipe } from '../services/API';
+
+import useFavorite from '../hooks/useFavorite';
 
 function Provider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
@@ -10,12 +13,19 @@ function Provider({ children }) {
   const [radioValue, setRadioValue] = useState('s');
   const [toggle, setToggle] = useState(false);
   const [email, setEmail] = useState('');
+  const [favoriteList, setFavoriteList] = useFavorite([]);
   const requestApiData = useCallback(async (URL) => {
     const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
     setApiData([await fetchAPI(URL, searchType, radioValue, inputText)]);
     setIsFetching(false);
   }, [inputText, radioValue]);
+
+  async function requestRandomRecipe(endpoint) {
+    setIsFetching(true);
+    setApiData([await fetchRandomRecipe(endpoint)]);
+    setIsFetching(false);
+  }
 
   const contextValue = {
     apiData,
@@ -28,6 +38,9 @@ function Provider({ children }) {
     toggle,
     email,
     setEmail,
+    favoriteList,
+    setFavoriteList,
+    requestRandomRecipe,
   };
 
   return (

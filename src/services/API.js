@@ -9,6 +9,7 @@ export async function fetchAPI(endpoint, searchType, radioValue, inputText) {
   }
 }
 
+export default fetchAPI;
 export async function fetchRecommendations(endpoint) {
   const url = `https://www.${endpoint}.com/api/json/v1/1/search.php?s=`;
   try {

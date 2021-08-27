@@ -31,7 +31,7 @@ function Profile() {
           <NavLink to="/receitas-feitas">
             <button
               type="button"
-              data-testeid="profile-done-btn"
+              data-testid="profile-done-btn"
             >
               Receitas Feitas
             </button>
@@ -41,7 +41,7 @@ function Profile() {
           <NavLink to="/receitas-favoritas">
             <button
               type="button"
-              data-testeid="profile-favorite-btn"
+              data-testid="profile-favorite-btn"
             >
               Receitas Favoritas
             </button>
@@ -51,7 +51,7 @@ function Profile() {
           <NavLink to="/">
             <button
               type="button"
-              data-testeid="profile-logout-btn"
+              data-testid="profile-logout-btn"
               onClick={ () => clearLocalStorage() }
             >
               Sair
