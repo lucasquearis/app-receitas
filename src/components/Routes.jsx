@@ -14,6 +14,7 @@ import InProgressDrink from '../pages/InProgressDrink';
 import InProgressFood from '../pages/InProgressFood';
 import CookedRecipies from '../pages/CookedRecipies';
 import FavoriteRecipies from '../pages/FavoriteRecipies';
+import RecipyDetails from '../pages/RecipyDetails';
 
 function Routes() {
   return (
@@ -21,11 +22,11 @@ function Routes() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ MainFood } />
       <Route exact path="/bebidas" component={ MainDrink } />
-      {/* <Route exact path="/comidas/{id-da-receita}" component={  } /> */}
-      {/* <Route exact path="/bebidas/{id-da-receita}" component={  } /> */}
+      <Route exact path="/:receita/:id"><RecipyDetails /></Route>
+      {/* <Route path="/bebidas/:id"><RecipyDetails /></Route> */}
       <Route
         exact
-        path="/comidas/{id-da-receita}/in-progress"
+        path="/comidas/{id-da-receita/in-progress"
         component={ InProgressFood }
       />
       <Route
