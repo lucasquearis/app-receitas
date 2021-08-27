@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { fetchDrinkDetails, fetchFoodRedux } from '../redux/actions/foodActions';
@@ -10,14 +10,35 @@ function DrinkInfo() {
   const dispatch = useDispatch();
   const { details, meals } = useSelector((state) => state.foodsAndDrinks);
   const [share, setShare] = useState(false);
-  const [button, setButton] = useState(false);
+  const [button, setButton] = useState('Iniciar Receita');
   const [favorite, setFavorite] = useState(false);
   const sixRecomendations = 6;
 
-  useEffect(() => {
+  const getFoodAndDrinks = useCallback(() => {
     dispatch(fetchFoodRedux);
     dispatch(fetchDrinkDetails(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    getFoodAndDrinks();
+  }, [getFoodAndDrinks]);
+
+  const checkRecipeName = useCallback(() => {
+    const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (storage && details) {
+      const storageRecipeName = storage.find(({ name }) => (
+        name === details.drinks[0].strDrink));
+      if (storageRecipeName) {
+        setButton('Continuar Receita');
+      }
+    } else {
+      setButton('Iniciar Receita');
+    }
+  }, [details]);
+
+  useEffect(() => {
+    checkRecipeName();
+  }, [checkRecipeName]);
 
   if (!meals) {
     return (
@@ -40,7 +61,7 @@ function DrinkInfo() {
     image: drinkDetails.strMealThumb,
   }];
 
-  const doneRecipes = [{
+  const doneRecipes = {
     id,
     type: 'bebida',
     area: '',
@@ -50,7 +71,7 @@ function DrinkInfo() {
     image: drinkDetails.strDrinkThumb,
     doneDate: getDate(new Date()),
     tags: [drinkDetails.strTags],
-  }];
+  };
 
   const favoriteHeart = <img src="/images/blackHeartIcon.svg" alt="black heart" />;
   const notFavoriteHeart = <img src="/images/whiteHeartIcon.svg" alt="white-heart" />;
@@ -104,10 +125,9 @@ function DrinkInfo() {
         <button
           type="button"
           data-testid="start-recipe-btn"
-          disabled={ button }
-          onClick={ () => setButton(startRecipe(doneRecipes)) }
+          onClick={ () => startRecipe(doneRecipes) }
         >
-          Iniciar Receita
+          { button }
         </button>
       </Link>
 

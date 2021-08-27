@@ -17,8 +17,8 @@ function App() {
       <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
       <Route path="/comidas/:id" component={ FoodsDetails } />
       <Route path="/comidas" component={ Foods } />
-      <Route path="/bebidas/:id" component={ DrinksDetails } />
       <Route path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
+      <Route path="/bebidas/:id" component={ DrinksDetails } />
       <Route path="/bebidas" component={ Drinks } />
       {/* <Route path="/explorar" component={ } />
       <Route path="/explorar/comidas" component={ } />

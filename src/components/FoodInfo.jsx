@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
@@ -10,23 +10,35 @@ function FoodInfo() {
   const dispatch = useDispatch();
   const { details, drinks } = useSelector((state) => state.foodsAndDrinks);
   const [favorite, setFavorite] = useState(false);
-  const [button, setButton] = useState(false);
+  const [button, setButton] = useState('Iniciar Receita');
   const [share, setShare] = useState(false);
   const sixRecomendations = 6;
 
-  useEffect(() => {
+  const getFoodAndDrinks = useCallback(() => {
     dispatch(fetchMealDetails(id));
     dispatch(fetchDrinksRedux);
   }, [dispatch, id]);
 
   useEffect(() => {
-    const storage = localStorage.getItem('doneRecipes');
-    if (storage) {
-      setButton(true);
+    getFoodAndDrinks();
+  }, [getFoodAndDrinks]);
+
+  const checkRecipeName = useCallback(() => {
+    const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (storage && details) {
+      const storageRecipeName = storage.find(({ name }) => (
+        name === details.meals[0].strMeal));
+      if (storageRecipeName) {
+        setButton('Continuar Receita');
+      }
     } else {
-      setButton(false);
+      setButton('Iniciar Receita');
     }
-  }, []);
+  }, [details]);
+
+  useEffect(() => {
+    checkRecipeName();
+  }, [checkRecipeName]);
 
   if (!drinks) {
     return (
@@ -43,7 +55,7 @@ function FoodInfo() {
   const notFavoriteHeart = <img src="/images/whiteHeartIcon.svg" alt="white-heart" />;
   const shareTag = <img src="/images/shareIcon.svg" alt="shareIt" />;
 
-  const doneRecipes = [{
+  const doneRecipes = {
     id,
     type: 'comida',
     area: foodDetails.strArea,
@@ -53,9 +65,9 @@ function FoodInfo() {
     image: foodDetails.strMealThumb,
     doneDate: getDate(new Date()),
     tags: [foodDetails.strTags],
-  }];
+  };
 
-  const favoriteRecipe = [{
+  const favoriteRecipe = {
     id,
     type: 'comida',
     area: foodDetails.strArea,
@@ -63,7 +75,7 @@ function FoodInfo() {
     alcoholicOrNot: '',
     name: foodDetails.strMeal,
     image: foodDetails.strMealThumb,
-  }];
+  };
 
   return (
     <section>
@@ -122,10 +134,9 @@ function FoodInfo() {
         <button
           type="button"
           data-testid="start-recipe-btn"
-          button={ button }
-          onClick={ () => setButton(startRecipe(doneRecipes)) }
+          onClick={ () => startRecipe(doneRecipes) }
         >
-          Iniciar Receita
+          { button }
         </button>
       </Link>
     </section>

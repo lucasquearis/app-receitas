@@ -72,7 +72,7 @@ export const copyToClipboard = () => {
   return true;
 };
 
-export const myFavoriteRecipe = ([recipe]) => {
+export const myFavoriteRecipe = (recipe) => {
   if (!recipe) {
     localStorage.removeItem('favoriteRecipes');
     return false;
@@ -81,9 +81,17 @@ export const myFavoriteRecipe = ([recipe]) => {
   return true;
 };
 
-export const startRecipe = ([recipe]) => {
-  localStorage.setItem('doneRecipes', JSON.stringify([recipe]));
-  return true;
+export const startRecipe = (recipe) => {
+  const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (recipes) {
+    localStorage.setItem('doneRecipes', JSON.stringify(
+      [...recipes, recipe],
+    ));
+  } else {
+    localStorage.setItem('doneRecipes', JSON.stringify(
+      [recipe],
+    ));
+  }
 };
 
 export const getDate = (date) => {
