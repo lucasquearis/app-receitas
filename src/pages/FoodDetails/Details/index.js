@@ -45,6 +45,9 @@ export default function Details({ item, pathname }) {
           </p>)}
         {type === 'food' && <VideoPlayer strYoutube={ object.strYoutube } />}
         <RecipesRecommendation />
+        <button type="button" data-testid="start-recipe-btn">
+          Iniciar Receita
+        </button>
       </div>
     );
   };
