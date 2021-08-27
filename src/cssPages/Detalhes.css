@@ -1,23 +1,23 @@
 .recommendedShow {
-display: flex;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .recommendedCard {
+  border: 3px solid black;
   height: 36vw;
   width: 30vw;
-  border: 3px solid black;
 }
 
-.hideCard{
+.hideCard {
   display: none;
 }
 
-.recommendedCard img{
+.recommendedCard img {
   width: 100%;
 }
 
 .mainBtn {
-  position: fixed;
   bottom: 0;
+  position: fixed;
 }
