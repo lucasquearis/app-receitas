@@ -16,8 +16,8 @@
 }
 
 .start-recipe-btn {
-  position: fixed;
   bottom: 0;
+  position: fixed;
   left: 10%;
   right: 10%;
 }
