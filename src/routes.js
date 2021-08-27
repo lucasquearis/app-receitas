@@ -38,7 +38,7 @@ export default function Routes() {
           component={ ExploreByIngredient }
         />
         <Route exact path="/explorar/comidas/area" component={ ExploreByArea } />
-        <Route exact path="/explorar/bebidas/area" component={ ExploreByArea } />
+        <Route exact path="/explorar/bebidas/area" component={ NotFound } />
         <Route exact path="/explorar/comidas" component={ FoodExplore } />
         <Route exact path="/explorar/bebidas" component={ DrinkExplore } />
         <Route exact path="/explorar" component={ Explore } />
