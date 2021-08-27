@@ -32,7 +32,7 @@ function App() {
           <Route path="/explorar/comidas/ingredientes" component={ Login } />
           <Route path="/explorar/bebidas/ingredientes" component={ Login } />
           <Route path="/explorar/comidas/area" component={ Login } />
-          */} 
+          */}
         </Switch>
       </BrowserRouter>
     </Provider>
