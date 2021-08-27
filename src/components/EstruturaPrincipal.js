@@ -24,11 +24,13 @@ function EstruturaPrincipal({
     const recipesListLimit = 12;
     if (index < recipesListLimit) {
       return (
-        <Link to={ `${pathname}/${recipe[`id${keyType}`]}` }>
+        <Link
+          key={ `${keyType}-card-${index}` }
+          to={ `${pathname}/${recipe[`id${keyType}`]}` }
+        >
           <Card
             img={ recipe[`str${keyType}Thumb`] }
             index={ index }
-            key={ `${keyType}-card-${index}` }
             name={ recipe[`str${keyType}`] }
           />
         </Link>
