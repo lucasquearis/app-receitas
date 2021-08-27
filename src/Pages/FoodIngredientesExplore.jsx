@@ -14,6 +14,7 @@ function FoodIngredientesExplore() {
   }, [data]);
 
   const srcImg = (name) => `https://www.themealdb.com/images/ingredients/${name}-Small.png`;
+
   const MNumber = '12';
   return (
     <>
