@@ -4,10 +4,10 @@ import Header from '../components/Header';
 
 function Profile() {
   return (
-    <div>
-      <Header />
+    <>
+      <Header title="Perfil" />
       <Footer />
-    </div>
+    </>
   );
 }
 

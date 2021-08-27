@@ -4,10 +4,10 @@ import Header from '../components/Header';
 
 function InProgressFood() {
   return (
-    <div>
+    <>
       <Header />
       <Footer />
-    </div>
+    </>
   );
 }
 
