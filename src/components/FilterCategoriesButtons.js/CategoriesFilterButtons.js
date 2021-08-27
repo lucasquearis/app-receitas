@@ -10,6 +10,7 @@ const CategoriesFilterButtons = () => {
   const [apiUrl, setApiUrl] = useState('');
   const dispatch = useDispatch();
   const categoriesQuantity = 5;
+  // comentario
 
   useEffect(() => {
     const path = window.location.pathname;
