@@ -7,14 +7,15 @@ const INITIAL_STATE = {
 
 const foodcategories = (state = INITIAL_STATE, action) => {
   const { payload, type } = action;
-  const CINCO = 5;
+  const SEIS = 6;
 
   switch (type) {
   case GET_CATEGORIES_FOOD:
+    payload.meals.unshift({ strCategory: 'All' });
     console.log(payload);
     return {
       ...state,
-      foodCategories: payload.categories.slice(0, CINCO),
+      foodCategories: payload.meals.slice(0, SEIS),
       isLoading: false };
 
   default:

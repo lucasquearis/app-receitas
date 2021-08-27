@@ -24,14 +24,6 @@ function CategoryFoodButtons() {
             { category.strCategory }
           </button>
         ))}
-        <button
-          type="button"
-          key="6"
-          onClick={ () => {} }
-          data-testid="All-category-filter"
-        >
-          All
-        </button>
       </session>
     );
   }

@@ -42,6 +42,7 @@ function Header({ title, loading }) {
           alt="profile"
         />
       </Link>
+      <h2 data-testid="page-title">{ title }</h2>
     </header>
   );
 }

@@ -3,7 +3,7 @@ import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import CategoryFoodButtons from '../Components/categoryFoddButtons';
 
-function MainPage() {
+function FoodMainPage() {
   return (
     <>
       <Header title="Comidas" loading />
@@ -12,4 +12,5 @@ function MainPage() {
     </>
   );
 }
-export default MainPage;
+
+export default FoodMainPage;
