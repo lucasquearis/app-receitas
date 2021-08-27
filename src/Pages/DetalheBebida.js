@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import copyToClipBoard from 'clipboard-copy';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidasAleatoria } from '../service/ComidasAPI';
@@ -14,6 +15,7 @@ export default function DetalheBebida(props) {
   const [drink, setDrink] = useState({});
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [randomFood, setRandomFood] = useState([]);
+  const [copyMessage, setCopyMessage] = useState(false);
 
   useEffect(() => {
     const getDrink = async () => {
@@ -63,8 +65,6 @@ export default function DetalheBebida(props) {
     getRandomFood();
   }, [id]);
 
-  console.log(drink);
-
   const randomFoodCard = () => (
     <section className="food-recomended">
       <h5>Recomendadas</h5>
@@ -83,6 +83,19 @@ export default function DetalheBebida(props) {
       </div>
     </section>
   );
+
+  const setMessageTime = () => {
+    const messageTime = 1000;
+    setTimeout(() => {
+      setCopyMessage(false);
+    }, messageTime);
+  };
+
+  const onShareClicked = () => {
+    copyToClipBoard(window.location.href);
+    setCopyMessage(true);
+    setMessageTime();
+  };
 
   return (
     <section className="food-info">
@@ -107,12 +120,18 @@ export default function DetalheBebida(props) {
       <div className="title-drink-info">
         <h4 data-testid="recipe-title">{ drink.strDrink }</h4>
         <div className="share-favorite-drink-section">
-          <img
-            data-testid="share-btn"
-            className="share-drink-icon"
-            src={ shareIcon }
-            alt="icone de compartilhar"
-          />
+          <button
+            type="button"
+            className="share-drink-btn-icon"
+            onClick={ onShareClicked }
+          >
+            <img
+              data-testid="share-btn"
+              className="share-drink-icon"
+              src={ shareIcon }
+              alt="icone de compartilhar"
+            />
+          </button>
           <img
             data-testid="favorite-btn"
             src={ whiteHeartIcon }
@@ -126,6 +145,9 @@ export default function DetalheBebida(props) {
       >
         { drink.strAlcoholic }
       </p>
+      { copyMessage
+        ? <p className="copy-drink-link-message">Link copiado!</p>
+        : <p className="copy-drink-link-message" /> }
       <div className="ingredients-drink-section">
         <h5>Ingredients</h5>
         <ul>

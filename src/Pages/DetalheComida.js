@@ -137,7 +137,11 @@ export default function DetalheComida(props) {
       <div className="title-info">
         <h4 data-testid="recipe-title">{ food.strMeal }</h4>
         <div className="share-favorite-section">
-          <button type="button" className="share-btn-icon" onClick={ onShareClicked }>
+          <button
+            type="button"
+            className="share-food-btn-icon"
+            onClick={ onShareClicked }
+          >
             <img
               data-testid="share-btn"
               className="share-icon"
@@ -154,8 +158,8 @@ export default function DetalheComida(props) {
       </div>
       <p className="food-category" data-testid="recipe-category">{ food.strCategory }</p>
       { copyMessage
-        ? <p className="copy-link-message">Link copiado!</p>
-        : <p className="copy-link-message" /> }
+        ? <p className="copy-food-link-message">Link copiado!</p>
+        : <p className="copy-food-link-message" /> }
       <div className="ingredients-section">
         <h5>Ingredients</h5>
         <ul>

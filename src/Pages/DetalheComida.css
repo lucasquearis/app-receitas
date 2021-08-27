@@ -121,16 +121,16 @@
   margin: 8px;
 }
 
-.share-btn-icon {
+.share-food-btn-icon {
   background: none;
   border: none;
 }
 
-.share-btn-icon:focus {
+.share-food-btn-icon:focus {
   outline: none;
 }
 
-.copy-link-message {
+.copy-food-link-message {
   height: 20px;
   margin: 0 auto;
   text-align: center;
