@@ -11,8 +11,11 @@ export default function Provider({ children }) {
   const [btnCategoryDrinks, setBtnCategoryDrinks] = useState('');
   const [listCategoryMeals, setListCategoryMeals] = useState();
   const [listCategoryDrinks, setListCategoryDrinks] = useState();
+  const [loading, setLoading] = useState(false);
 
   const context = {
+    loading,
+    setLoading,
     dataMeals,
     setDataMeals,
     dataDrinks,

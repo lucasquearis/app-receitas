@@ -8,21 +8,12 @@ export default function SearchBar({ title }) {
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
   const {
-    searchDataMeals,
-    searchDataDrinks,
     setSearchDataMeals,
-    setSearchDataDrinks } = useContext(context);
-
-  // const UM = 1;
-  // if (searchDataMeals.length === UM) {
-  //   return <Redirect to={ `/comidas/${searchDataMeals[0].idMeal}` } />;
-  // }
-
-  // if (searchDataDrinks.length === UM) {
-  //   return <Redirect to={ `/bebidas/${searchDataDrinks[0].idDrink}` } />;
-  // }
+    setSearchDataDrinks,
+    setLoading } = useContext(context);
 
   const fetchRecipesMeals = async (url) => {
+    setLoading(true);
     try {
       const request = await fetch(url);
       const { meals } = await request.json();
@@ -30,9 +21,11 @@ export default function SearchBar({ title }) {
     } catch (error) {
       return console.log(error);
     }
+    setLoading(false);
   };
 
   const fetchRecipesDrinks = async (url) => {
+    setLoading(true);
     try {
       const request = await fetch(url);
       const { drinks } = await request.json();
@@ -40,11 +33,11 @@ export default function SearchBar({ title }) {
     } catch (error) {
       return console.log(error);
     }
+    setLoading(false);
   };
 
   const msgCharacter = 'Sua busca deve conter somente 1 (um) caracter';
   const msgFilter = 'Preencha o campo de busca e selecione o filtro';
-  const msgNotRecipe = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
   const showAlert = (func, mensagem) => func(mensagem);
 
   const handleSearchMeals = () => {
@@ -61,7 +54,6 @@ export default function SearchBar({ title }) {
     } else {
       return showAlert(alert, msgFilter);
     }
-    if (searchDataMeals === null) return showAlert(alert, msgNotRecipe);
   };
 
   const handleSearchDrinks = () => {
@@ -78,17 +70,12 @@ export default function SearchBar({ title }) {
     } else {
       return showAlert(alert, msgFilter);
     }
-    if (searchDataDrinks === null) return showAlert(alert, msgNotRecipe);
   };
 
   const handleSearch = () => {
     const search = title === 'Comidas' ? handleSearchMeals() : handleSearchDrinks();
     return search;
   };
-
-  // if (searchDataMeals.length === 0 || searchDataDrinks.length === 0) {
-  //   return <p>loading...</p>;
-  // }
 
   return (
     <form className="search-form">
