@@ -7,19 +7,20 @@ import Vid from '../../Components/Vid';
 import Btn from '../../Components/Btn';
 import Food from '../../Components/Food';
 import './RecipeDetails.css';
-
 import { ContextApp } from '../../Context/ContextApp';
-
 import List from '../../Components/List';
 
 function RecipeDetails({ match: { params } }) {
-  const { handleRecipe, singleRecipe, drinks, meal } = useContext(ContextApp);
+  const { feedType, id } = params;
+  const { handleRecipe,
+    singleRecipe, drinks, meal, handleDone, doneRecipe } = useContext(ContextApp);
   if (!singleRecipe) {
     handleRecipe(params);
     return (
       <div>Loading</div>
     );
   }
+  console.log(params);
   const titleProps = {
     'data-testid': 'recipe-title',
   };
@@ -60,7 +61,6 @@ function RecipeDetails({ match: { params } }) {
     src: singleRecipe.strYoutube ? `https://www.youtube.com/embed/${singleRecipe.strYoutube.split('=')[1]}` : null,
   };
   const btnProps = {
-    name: 'Iniciar Receita',
     'data-testid': 'start-recipe-btn',
     type: 'button',
     variant: 'contained',
@@ -68,6 +68,7 @@ function RecipeDetails({ match: { params } }) {
       position: 'fixed',
       bottom: 0,
     },
+    onClick: () => handleDone(params),
   };
   const arr = Object.keys(singleRecipe)
     .filter((e) => e.includes('strIngredient')
@@ -95,7 +96,9 @@ function RecipeDetails({ match: { params } }) {
           ? <Food recipes={ drinks } maxRecipes={ 6 } />
           : <Food recipes={ meal } maxRecipes={ 6 } />}
       </div>
-      <Btn { ...btnProps } />
+      {!doneRecipe.some((e) => e[feedType] === id)
+        ? <Btn { ...btnProps } name="Iniciar Receita" />
+        : <Btn { ...btnProps } name="Continuar Receita" />}
     </>
   );
 }
