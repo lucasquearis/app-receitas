@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import copyToClipBoard from 'clipboard-copy';
 import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
 import * as BebidasAPI from '../service/BebidasAPI';
@@ -15,6 +16,7 @@ export default function DetalheComida(props) {
   const [randomDrinks, setRandomDrinks] = useState([]);
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [copyMessage, setCopyMessage] = useState(false);
 
   useEffect(() => {
     const getFood = async () => {
@@ -80,6 +82,19 @@ export default function DetalheComida(props) {
     return embededURL;
   };
 
+  const setMessageTime = () => {
+    const messageTime = 1000;
+    setTimeout(() => {
+      setCopyMessage(false);
+    }, messageTime);
+  };
+
+  const onShareClicked = () => {
+    copyToClipBoard(window.location.href);
+    setCopyMessage(true);
+    setMessageTime();
+  };
+
   const randomDrinkCard = () => (
     <section className="drink-recomended">
       <h5>Recomendadas</h5>
@@ -122,12 +137,14 @@ export default function DetalheComida(props) {
       <div className="title-info">
         <h4 data-testid="recipe-title">{ food.strMeal }</h4>
         <div className="share-favorite-section">
-          <img
-            data-testid="share-btn"
-            className="share-icon"
-            src={ shareIcon }
-            alt="icone de compartilhar"
-          />
+          <button type="button" className="share-btn-icon" onClick={ onShareClicked }>
+            <img
+              data-testid="share-btn"
+              className="share-icon"
+              src={ shareIcon }
+              alt="icone de compartilhar"
+            />
+          </button>
           <img
             data-testid="favorite-btn"
             src={ whiteHeartIcon }
@@ -136,6 +153,9 @@ export default function DetalheComida(props) {
         </div>
       </div>
       <p className="food-category" data-testid="recipe-category">{ food.strCategory }</p>
+      { copyMessage
+        ? <p className="copy-link-message">Link copiado!</p>
+        : <p className="copy-link-message" /> }
       <div className="ingredients-section">
         <h5>Ingredients</h5>
         <ul>
