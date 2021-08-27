@@ -1,0 +1,10 @@
+.recipes-checkbox {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+input[type=checkbox]:checked + .checked-item {
+  color:black;
+  text-decoration: line-through;
+}

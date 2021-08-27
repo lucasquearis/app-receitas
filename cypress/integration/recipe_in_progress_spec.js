@@ -42,7 +42,7 @@ describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, 
   });
 });
 
-describe.only('48 - Desenvolva um checkbox para cada item da lista de ingredientes', () => {
+describe('48 - Desenvolva um checkbox para cada item da lista de ingredientes', () => {
   it('todos os ingredientes de uma receita de comida possuem um checkbox', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
@@ -68,7 +68,7 @@ describe.only('48 - Desenvolva um checkbox para cada item da lista de ingredient
   });
 });
 
-describe('49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
+describe.only('49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
   const getIngredients = () => (
     cy.get('[data-testid*="ingredient-step"]')
       .find('input[type="checkbox"]')

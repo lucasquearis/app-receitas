@@ -1,75 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { Spinner, FormCheck } from 'react-bootstrap';
-import { getDataDetails } from '../services/api';
+import React from 'react';
+import { Spinner } from 'react-bootstrap';
 import ingredientsDetails from '../helpers/getIngredients';
 import RecipeDetailCard from '../components/RecipeDetailCard';
+import useProgressRecipes from '../hooks/useProgressRecipes';
+import '../styles/progressRecipes.css';
 
 export default function ProgressRecipes() {
-  const location = useLocation();
-  const currentPage = location.pathname;
-
-  const { id } = useParams();
-
-  const [recipes, setRecipes] = useState({ id });
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({
-    recipeId: '',
-    title: '',
-    image: '',
-    category: '',
-    instructions: '',
-    alcoholic: '',
-  });
-
-  useEffect(() => {
-    if (currentPage.includes('bebidas')) {
-      const getDrinks = async (drinkId) => {
-        await getDataDetails(drinkId).then((response) => setRecipes(response));
-      };
-      getDrinks(id);
-      setLoading(false);
-    }
-    const getFoods = async (foodId) => {
-      await getDataDetails(foodId).then((response) => setRecipes(response));
-    };
-    getFoods(id);
-    setLoading(false);
-  }, [id, currentPage]);
-
-  useEffect(() => {
-    if (currentPage.includes('comidas')) {
-      const {
-        idMeal,
-        strMealThumb,
-        strMeal,
-        strCategory,
-        strInstructions,
-      } = recipes;
-      setData({
-        recipeId: idMeal,
-        image: strMealThumb,
-        title: strMeal,
-        category: strCategory,
-        instructions: strInstructions,
-      });
-    } else if (currentPage.includes('bebidas')) {
-      const {
-        idDrink,
-        strDrinkThumb,
-        strDrink,
-        strCategory,
-        strInstructions,
-      } = recipes;
-      setData({
-        recipeId: idDrink,
-        image: strDrinkThumb,
-        title: strDrink,
-        category: strCategory,
-        instructions: strInstructions,
-      });
-    }
-  }, [currentPage, recipes]);
+  const { loading, recipes, data } = useProgressRecipes();
 
   return (
     <div>
@@ -85,14 +22,15 @@ export default function ProgressRecipes() {
           category={ data.alcoholic }
           ingredients={
             data.recipeId ? ingredientsDetails(recipes).map((item, index) => (
-              <li
-                data-testid={ `${index}-ingredient-step` }
-                key={ index }
-                style={ { listStyle: 'none' } }
-              >
-                <input type="checkbox" name="recipeCheck" id="recipeCheck" />
-                { item }
-              </li>
+              <div key={ index } className="recipes-checkbox">
+                <li data-testid="ingredient-step" className="checked-item">
+                  <input
+                    id={ item }
+                    type="checkbox"
+                  />
+                  { item }
+                </li>
+              </div>
             )) : []
           }
           instructions={ data.instructions }
