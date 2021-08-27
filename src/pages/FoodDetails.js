@@ -18,6 +18,7 @@ const FoodDetails = () => {
   const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
@@ -39,6 +40,7 @@ const FoodDetails = () => {
 
   useEffect(() => {
     fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
+    setLoading(false);
   }, [actualPath]);
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const FoodDetails = () => {
     getMeasure();
   }, [foodDetails]);
 
-  return (
+  return loading ? <p>Carregando...</p> : (
     <div>
       {
         foodDetails.map(({
