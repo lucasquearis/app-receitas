@@ -4,7 +4,7 @@ header {
 }
 
 h1 {
-  font-family: Roboto, arial;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -13,12 +13,12 @@ h1 {
 }
 
 p {
-  font-family: Roboto;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 21px;
   font-style: normal;
   font-weight: 400;
+  color: darkgray;
   line-height: 25px;
-  color: #a9a9a9;
   text-align: left;
 }
 
