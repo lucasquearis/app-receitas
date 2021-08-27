@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 const UserProfile = () => {
   const userEmail = JSON.parse(localStorage.getItem('user'));
   const clearEmail = () => localStorage.clear();
-  const email = userEmail.email ? userEmail.email : null;
+  const email = userEmail ? userEmail.email : '';
   const history = useHistory();
 
   return (
