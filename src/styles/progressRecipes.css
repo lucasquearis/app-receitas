@@ -4,7 +4,7 @@
   list-style: none;
 }
 
-input[type=checkbox]:checked + .checked-item {
+:checked + span {
   color:black;
   text-decoration: line-through;
 }

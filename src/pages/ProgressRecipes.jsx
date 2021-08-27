@@ -23,13 +23,14 @@ export default function ProgressRecipes() {
           ingredients={
             data.recipeId ? ingredientsDetails(recipes).map((item, index) => (
               <div key={ index } className="recipes-checkbox">
-                <li data-testid="ingredient-step" className="checked-item">
+                <label data-testid={ `${index}-ingredient-step` } htmlFor={ item }>
                   <input
-                    id={ item }
                     type="checkbox"
+                    id={ item }
+                    value={ item }
                   />
-                  { item }
-                </li>
+                  <span>{ item }</span>
+                </label>
               </div>
             )) : []
           }
