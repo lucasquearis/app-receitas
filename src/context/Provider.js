@@ -16,7 +16,7 @@ function Provider({ children }) {
   const [toggle, setToggle] = useState(false);
   const [email, setEmail] = useState('');
   const [favoriteList, setFavoriteList] = useFavorite([]);
-  const [doneList, setDoneList] = useDone([]);
+  const [doneRecipes, setDoneRecipes] = useDone([]);
   const [inProgressList, setInProgressList] = useInProgress();
   const requestApiData = useCallback(async (URL) => {
     const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
@@ -44,8 +44,8 @@ function Provider({ children }) {
     setEmail,
     favoriteList,
     setFavoriteList,
-    doneList,
-    setDoneList,
+    doneRecipes,
+    setDoneRecipes,
     inProgressList,
     setInProgressList,
     requestRandomRecipe,

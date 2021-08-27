@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Context from '../../../context';
 
 function FinishButton({ isReady, recipe, type }) {
-  const { setDoneList } = useContext(Context);
+  const { setDoneRecipes } = useContext(Context);
   const getFullDate = () => {
     const date = new Date();
     const day = date.getDate().toString().padStart(2, '0');
@@ -38,7 +38,7 @@ function FinishButton({ isReady, recipe, type }) {
         doneDate: getFullDate(),
         tags: '',
       };
-    setDoneList(value);
+    setDoneRecipes(value);
   };
   return (
     <Link to="/receitas-feitas">
