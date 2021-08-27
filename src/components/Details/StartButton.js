@@ -20,11 +20,9 @@ export default function StartButton(props) {
     return false;
   };
 
-  const isInProgress = (ID, cat) => {
+  const isInProgress = () => {
     if (!inProgressRecipes) return false;
-    const inProgress = cat.toLowerCase() === 'comidas'
-      ? inProgressRecipes.meals
-      : inProgressRecipes.cocktails;
+    const inProgress = inProgressRecipes.meals || inProgressRecipes.cocktails || false;
     const data = Object.keys(inProgress);
     return data.includes(id);
   };
@@ -37,7 +35,7 @@ export default function StartButton(props) {
         data-testid="start-recipe-btn"
         hidden={ isDone(id, category) }
       >
-        {isInProgress(id, category) ? 'Continuar Receita' : 'Iniciar Receita'}
+        {isInProgress() ? 'Continuar Receita' : 'Iniciar Receita'}
       </button>
     </Link>
   );
