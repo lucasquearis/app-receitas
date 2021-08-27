@@ -4,7 +4,7 @@ import RecipeCard from './RecipeCard';
 
 function RecipesList(props) {
   const { recipesData, recipeKey } = props;
-
+  // console.log(recipesData);
   const renderRecipesList = () => recipesData.map((recipe, index) => {
     const title = `str${recipeKey}`;
     const thumb = `str${recipeKey}Thumb`;

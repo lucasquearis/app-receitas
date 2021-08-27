@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import RecipesList from '../components/RecipesList';
+import RecipesList from '../components/RecipesMainPage/RecipesList';
 import Footer from '../components/Footer';
 
 function ExploreByArea() {
