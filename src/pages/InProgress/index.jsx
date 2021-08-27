@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-<<<<<<< HEAD
 import { useLocation } from 'react-router-dom';
-=======
-import { useLocation, Link } from 'react-router-dom';
->>>>>>> d16b53b90520e023948d5668ace7f032c395435b
 
 import { Form } from 'react-bootstrap';
 
@@ -11,12 +7,6 @@ import ShareIcon from '../../components/Icons/ShareIcon';
 import FavoriteIcon from '../../components/Icons/FavoriteIcon';
 import getFavoriteValue from '../../services/functions';
 import FinishButton from './Components/FinishButton';
-
-import Context from '../../context';
-
-import ShareIcon from '../../components/Icons/ShareIcon';
-import FavoriteIcon from '../../components/Icons/FavoriteIcon';
-import getFavoriteValue from '../../services/functions';
 
 import Context from '../../context';
 
