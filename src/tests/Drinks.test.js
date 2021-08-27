@@ -1,7 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { act, screen } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import { categoriesResponse, drinksResponse, categoryResponse } from './mocks/drinksMock';
 import Drinks from '../pages/Drinks';
