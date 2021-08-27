@@ -14,3 +14,4 @@ export { default as ExploreDrinks } from './ExploreDrinks';
 export { default as ExploreOrigin } from './ExploreOrigin';
 export { default as FavoriteRecipes } from './FavoriteRecipes';
 export { default as DoneRecipes } from './DoneRecipes';
+export { default as NotFound } from './NotFound';
