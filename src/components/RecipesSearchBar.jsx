@@ -32,6 +32,7 @@ function RecipesSearchBar() {
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     newFoodRecipes(recipes === null ? [] : recipes);
+    console.log('renderizou');
   };
 
   if (data.length === 1) return <Redirect to={ `/comidas/${data[0].idMeal}` } />;

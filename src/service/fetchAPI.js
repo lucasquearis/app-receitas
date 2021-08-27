@@ -10,6 +10,46 @@ export async function fetchDrinksAPI(URL) {
   return data.drinks;
 }
 
+export async function fetchRecipeById(id) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchDrinkById(id) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchRecipeByCategory(category) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchDrinkByCategory(category) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchDrinkSuggestions() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchRecipeSuggestions() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data;
+}
+
 export async function filteredRecipes(type, search) {
   const ingredientURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`;
   const nameURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
