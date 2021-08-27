@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../Button';
-import Header from '../Header';
 
 function ExploreFood() {
   async function getRandomMeal() {
@@ -23,7 +22,6 @@ function ExploreFood() {
 
   return (
     <section>
-      <Header title="Explorar Comidas" />
       <div className="container">
 
         <Button
