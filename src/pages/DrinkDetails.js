@@ -8,18 +8,21 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
+import Copy from '../components/Clipboard-Copy';
 
 const DrinkDetails = () => {
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
+  const url = window.location.href;
 
   const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
   const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
+  const [showMsg, setShowMsg] = useState(false);
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -78,6 +81,11 @@ const DrinkDetails = () => {
     setMeasures(measuresOnly);
   };
 
+  const copy = () => {
+    Copy(url);
+    setShowMsg(true);
+  };
+
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
   }, [actualPath]);
@@ -111,6 +119,7 @@ const DrinkDetails = () => {
               type="button"
               data-testid="share-btn"
               key={ shareIcon }
+              onClick={ () => copy() }
             >
               <img src={ shareIcon } alt="share-icon" />
             </button>
@@ -125,6 +134,7 @@ const DrinkDetails = () => {
                 alt="favorite-icon"
               />
             </button>
+            { showMsg ? <p>Link copiado!</p> : undefined }
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
