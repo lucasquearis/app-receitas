@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { fetchFoodById } from '../services/mealAPI';
 import '../styles/mainFoodInProgress.css';
 import shareImage from '../images/shareIcon.svg';
-import favImageWhite from '../images/whiteHeartIcon.svg';
+import { getFavorites, handleFavoriteAuxiliar }
+  from '../auxiliar/auxiliarFunctions';
 
 function MainFoodsInProgress({ history, match: { params: { id } } }) {
+  const isFavorite = getFavorites(id);
   const [foodInfo, setFoodInfo] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [link, setLink] = useState('');
+  const [icon, setIcon] = useState(isFavorite);
 
   useEffect(() => {
     fetchFoodById(id).then(({ meals }) => setFoodInfo(meals));
@@ -22,7 +25,6 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
         for (let i = 1; i <= MAX_INGREDIENT; i += 1) {
           const itemIngredient = `strIngredient${i}`;
           const itemMeasure = `strMeasure${i}`;
-          console.log(item[itemIngredient]);
           if (item[itemIngredient].length === 0) {
             setIngredients([...arr]);
             break;
@@ -41,11 +43,11 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
     history.push('/receitas-feitas');
   };
 
-  const testEvent = (event) => {
-    const a = document.querySelectorAll('.a');
-    a.forEach((as) => {
-      if (as.textContent === event.target.value) {
-        as.className = 'texto-riscado';
+  const riskCompleteds = (event) => {
+    const labelCheckbox = document.querySelectorAll('.label-checkbox');
+    labelCheckbox.forEach((inputs) => {
+      if (inputs.textContent === event.target.value) {
+        inputs.className = 'texto-riscado';
       }
     });
   };
@@ -60,15 +62,31 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
     return localStorage.setItem('inProgressRecipes', JSON.stringify([objStorage]));
   }
 
-  const handleShare = () => {
+  const handleFavorite = () => {
+    const objSave = foodInfo.map((item) => {
+      const obj = {
+        id: item.idMeal,
+        type: 'comida',
+        area: item.strArea,
+        category: item.strCategory,
+        alcoholicOrNot: '',
+        name: item.strMeal,
+        image: item.strMealThumb,
+      };
+      return obj;
+    })[0];
+    handleFavoriteAuxiliar(objSave, setIcon, icon);
+  };
+
+  const handleLinks = () => {
     setLink('Link copiado!');
     const actualLocation = window.location.href;
-    const dummy = document.createElement('input');
-    document.body.appendChild(dummy);
-    dummy.value = actualLocation;
-    dummy.select();
+    const inputs = document.createElement('input');
+    document.body.appendChild(inputs);
+    inputs.value = actualLocation;
+    inputs.select();
     document.execCommand('copy');
-    document.body.removeChild(dummy);
+    document.body.removeChild(inputs);
   };
 
   return (
@@ -85,11 +103,11 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
             <h1 data-testid="recipe-title">{ food.strMeal }</h1>
             <h2 data-testid="recipe-category">{ food.strCategory }</h2>
             <p>{ link }</p>
-            <button type="button" data-testid="share-btn" onClick={ handleShare }>
+            <button type="button" data-testid="share-btn" onClick={ handleLinks }>
               <img src={ shareImage } alt="botao-compartilhar" />
             </button>
-            <button type="button" data-testid="favorite-btn">
-              <img src={ favImageWhite } alt="icone-de-favoritar" />
+            <button type="button" onClick={ handleFavorite }>
+              <img src={ icon } alt="icone-de-favoritar" data-testid="favorite-btn" />
             </button>
             <p data-testid="instructions">{ food.strInstructions }</p>
           </div>
@@ -97,18 +115,23 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
         return allFood;
       }) }
       <div>
-        { ingredients.map(({ strMeasure, strIngredient }, i) => {
-          const ingrID = `${i}-ingredient-step`;
+        { ingredients.map(({ strMeasure, strIngredient }, index) => {
+          const ingrID = `${index}-ingredient-step`;
           return (
-            <label data-testid={ ingrID } key={ i } htmlFor={ i } className="a">
+            <label
+              data-testid={ ingrID }
+              key={ index }
+              htmlFor={ index }
+              className="label-checkbox"
+            >
               <br />
               { `${strMeasure} ${strIngredient}` }
               <input
-                id={ i }
+                id={ index }
                 type="checkbox"
-                key={ i }
+                key={ index }
                 value={ `${strMeasure} ${strIngredient}` }
-                onClick={ testEvent }
+                onClick={ riskCompleteds }
               />
             </label>);
         }) }

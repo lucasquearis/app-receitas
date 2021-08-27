@@ -3,13 +3,16 @@ import React, { useState, useEffect } from 'react';
 import { fetchDrinkById } from '../services/cocktailAPI';
 import '../styles/mainFoodInProgress.css';
 import shareImage from '../images/shareIcon.svg';
-import favImageWhite from '../images/whiteHeartIcon.svg';
+import { getFavorites, handleFavoriteAuxiliar }
+  from '../auxiliar/auxiliarFunctions';
 
 function MainDrinkInProgress({ history, match: { params: { id } } }) {
+  const isFavorite = getFavorites(id);
   const [drinkInfo, setdrinkInfo] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [disable] = useState(false);
   const [link, setLink] = useState('');
+  const [icon, setIcon] = useState(isFavorite);
 
   useEffect(() => {
     fetchDrinkById(id).then(({ drinks }) => setdrinkInfo(drinks));
@@ -64,12 +67,28 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
   const handleShare = () => {
     setLink('Link copiado!');
     const actualLocation = window.location.href;
-    const dummy = document.createElement('input');
-    document.body.appendChild(dummy);
-    dummy.value = actualLocation;
-    dummy.select();
+    const inputs = document.createElement('input');
+    document.body.appendChild(inputs);
+    inputs.value = actualLocation;
+    inputs.select();
     document.execCommand('copy');
-    document.body.removeChild(dummy);
+    document.body.removeChild(inputs);
+  };
+
+  const handleFavorite = () => {
+    const objSave = drinkInfo.map((item) => {
+      const obj = {
+        id: item.idDrink,
+        type: 'bebida',
+        area: '',
+        category: item.strCategory,
+        alcoholicOrNot: item.strAlcoholic,
+        name: item.strDrink,
+        image: item.strDrinkThumb,
+      };
+      return obj;
+    })[0];
+    handleFavoriteAuxiliar(objSave, setIcon, icon);
   };
 
   return (
@@ -89,8 +108,8 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
             <button type="button" data-testid="share-btn" onClick={ handleShare }>
               <img src={ shareImage } alt="botao-compartilhar" />
             </button>
-            <button type="button" data-testid="favorite-btn">
-              <img src={ favImageWhite } alt="icone-de-favoritar" />
+            <button type="button" onClick={ handleFavorite }>
+              <img src={ icon } alt="icone-de-favoritar" data-testid="favorite-btn" />
             </button>
             <p data-testid="instructions">{ drink.strInstructions }</p>
           </div>
