@@ -72,19 +72,6 @@
   text-decoration: none;
 }
 
-.tags-container {
-  margin-top: 10px;
-}
-
-.tags-items {
-  background: #ecdede;
-  border-radius: 12px;
-  height: 20px;
-  margin: 5px;
-  padding: 6px;
-  width: 57px;
-}
-
 .date-section {
   display: flex;
 }
