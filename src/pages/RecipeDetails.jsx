@@ -19,7 +19,7 @@ export default function RecipeDetails(props) {
 
   if (url === `/comidas/${id}` && food) {
     const { strMeal, strMealThumb, strCategory,
-      strInstructions, strYoutube, strArea, strTags, idMeal } = meals[0];
+      strInstructions, strYoutube, strArea, idMeal } = meals[0];
     const filterIngredients = Object.entries(meals[0])
       .filter((item) => item[0].includes('Ingredient'))
       .map((item) => item[1])
@@ -32,22 +32,23 @@ export default function RecipeDetails(props) {
     const ingredientEndMeasure = [[...filterIngredients], [...filterMeasure]];
     return (
       <FoodDetails
-        meal={ strMeal }
+        meals={ strMeal }
         thumb={ strMealThumb }
         category={ strCategory }
         instructions={ strInstructions }
         youTube={ strYoutube }
         ingredientEndMeasure={ ingredientEndMeasure }
+        alcoholic=""
         id={ idMeal }
         area={ strArea }
-        tag={ strTags }
+        type="comida"
       />
     );
   }
 
   if (url === `/bebidas/${id}` && drink) {
-    const { strDrink, strDrinkThumb, strCategory,
-      strInstructions, strAlcoholic, idDrink } = drinks[0];
+    const { strDrink, strDrinkThumb, strCategory, strInstructions,
+      strAlcoholic, idDrink } = drinks[0];
     const filterIngredients = Object.entries(drinks[0])
       .filter((item) => item[0].includes('Ingredient'))
       .map((item) => item[1]).filter((item) => item !== '' && item !== null);
@@ -66,6 +67,8 @@ export default function RecipeDetails(props) {
         ingredientEndMeasure={ ingredientEndMeasure }
         alcoholic={ strAlcoholic }
         id={ idDrink }
+        area=""
+        type="bebida"
       />
     );
   }

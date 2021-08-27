@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import initialStore from '../helpers/setLocalStorage';
+import { inProgessStorage } from '../helpers/setLocalStorage';
 
 export default function InProgress(
   { name, img, category, ingredients, instructions, id, type },
@@ -13,7 +13,7 @@ export default function InProgress(
   const [steps, setSteps] = useState([]);
 
   useEffect(() => {
-    initialStore(id, setSteps, ingredients, type);
+    inProgessStorage(id, setSteps, ingredients, type);
   }, []);
 
   useEffect(() => {
