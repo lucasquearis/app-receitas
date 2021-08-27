@@ -27,7 +27,8 @@ export default function Comidas() {
       <MenuInferior />
       <div>
         { (meals !== []) && meals.map((item, index) => (
-          <div className="col-md-4 my-3" key={ item.idMeal }>
+          <div key={ item.idMeal }>
+            { `categoria: ${ item.strCategory }` }
             <Link to={ `/comidas/${item.idMeal}` }>
               <Card recipe={ item } index={ index } />
             </Link>
