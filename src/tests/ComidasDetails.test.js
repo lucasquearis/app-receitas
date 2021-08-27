@@ -1,10 +1,9 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import ComidasDetails from '../pages/ComidasDetails';
 import fetchMock from '../../cypress/mocks/fetch';
-import { act } from 'react-dom/test-utils';
 
 describe('Testes para a pagina de detalhes de comidas', () => {
   beforeEach(() => {
@@ -13,7 +12,7 @@ describe('Testes para a pagina de detalhes de comidas', () => {
   });
 
   it('Verifica se todos os elementos sao mostrados na tela', async () => {
-    renderWithRouter(<ComidasDetails match={{params:{ id: '52771'}}}/>);
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
 
     await screen.findByTestId('recipe-photo');
     await screen.findByTestId('recipe-title');
@@ -27,5 +26,5 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     await screen.findByTestId('start-recipe-btn');
   });
   it('Verifica se foram feitas duas requisicoes a API', () => {
-  })
+  });
 });

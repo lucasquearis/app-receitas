@@ -10,7 +10,7 @@ function Login() {
     email: '',
     password: '',
   });
-  const { setEmail, drinkCategory } = useContext(RecipesContext);
+  const { setEmail } = useContext(RecipesContext);
   const { email, password } = user;
 
   DrinksAPI();
