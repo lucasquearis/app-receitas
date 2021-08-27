@@ -1,12 +1,14 @@
 .component-details {
   padding: 10px;
 }
+
 .start-button {
-  position: fixed;
   bottom: 0;
-}
-.start-button-none {
   position: fixed;
+}
+
+.start-button-none {
   bottom: 0;
   display: none;
+  position: fixed;
 }
