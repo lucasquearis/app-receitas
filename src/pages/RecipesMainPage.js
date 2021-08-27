@@ -64,7 +64,7 @@ function RecipesMainPage() {
   };
 
   const renderCategoryButtons = () => (
-    <div>
+    <>
       { selCategory !== 'All' && (<Button
         testId="All-category-filter"
         name="All"
@@ -80,7 +80,7 @@ function RecipesMainPage() {
           onClick={ () => handleCategoryClick(strCategory) }
         />
       ))}
-    </div>);
+    </>);
 
   return (
     <div className="main-container">
