@@ -13,9 +13,11 @@ export default function Bebidas() {
   if (cocktails.length === 1) {
     return history.push(`/bebidas/${cocktails[0].idDrink}`);
   }
+
   if (cocktails.length === 0) {
     return <Loading />;
   }
+
   return (
     <div>
       <Header recipeType="drinks">
