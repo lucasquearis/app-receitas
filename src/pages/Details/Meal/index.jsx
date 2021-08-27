@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import '../details.css';
+import Context from '../../../context';
 import DetailsHeader from '../DetailsHeader';
 import IngredientsList from '../IngredientsList';
 import Instructions from '../Instructions';
@@ -13,6 +14,7 @@ import { fetchRecipeDetails } from '../../../services/API';
 
 function Details({ match }) {
   const [recipe, setRecipe] = useState({});
+  const { doneRecipes, inProgressList } = useContext(Context);
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -49,6 +51,12 @@ function Details({ match }) {
     image: recipe.strMealThumb,
   };
 
+  const getIfInProgress = () => (
+    inProgressList.meals
+      && inProgressList.meals[recipe.idMeal]
+      ? 'Continuar Receita'
+      : 'Iniciar Receita');
+
   return (
     <>
       <div className="hero">
@@ -72,18 +80,20 @@ function Details({ match }) {
         <Recommendations endpoint="thecocktaildb" />
         <Video src={ recipe.strYoutube } />
       </Container>
-      <Link
-        className="start-recipe-btn-container"
-        data-testid="start-recipe-btn"
-        to={ `/comidas/${recipe.idMeal}/in-progress` }
-      >
-        <Button
-          className="start-recipe-btn"
-          variant="primary"
+      { !doneRecipes.find((item) => item.id === recipe.idMeal) && (
+        <Link
+          className="start-recipe-btn-container"
+          data-testid="start-recipe-btn"
+          to={ `/comidas/${recipe.idMeal}/in-progress` }
         >
-          Iniciar Receita
-        </Button>
-      </Link>
+          <Button
+            className="start-recipe-btn"
+            variant="primary"
+          >
+            {getIfInProgress()}
+          </Button>
+        </Link>
+      )}
     </>
   );
 }
