@@ -6,8 +6,6 @@ import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import RecipeDetailFavoriteButton from './RecipeDetailsFavoriteButton';
 
-// const copy = require('clipboard-copy');
-
 function RecipeDetailHeader({ recipe, type, recipeID }) {
   const [recipeName, setRecipeName] = useState('');
   const [displaycopymessage, setDisplayCopyMessage] = useState('none');
@@ -20,7 +18,7 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
     } else {
       setRecipeName(recipe.strDrink);
     }
-  }, [type, recipe.strMeal, recipe.strDrink, recipeID]);
+  }, [type, recipe.strMeal, recipe.strDrink]);
 
   function copyPath() {
     copy(`http://localhost:3000${pathname}`);
@@ -41,7 +39,11 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
         >
           <img src={ shareIcon } alt="Share Recipe" />
         </button>
-        <RecipeDetailFavoriteButton recipe={ recipe } type={ type } />
+        <RecipeDetailFavoriteButton
+          recipe={ recipe }
+          type={ type }
+          recipeID={ recipeID }
+        />
         <span style={ { display: displaycopymessage } }>Link copiado!</span>
       </div>
     </div>
