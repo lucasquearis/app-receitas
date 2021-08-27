@@ -6,7 +6,7 @@ import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { checkFavoriteRecipes, formatFavoriteRecipe } from '../helpers';
 
-const FavoriteButton = ({ recipe, id }) => {
+const FavoriteButton = ({ recipe, id, horizontal, index }) => {
   const [heartIcon, setHeartIcon] = useState(whiteHeart);
   const { favoriteRcps, setFavoriteRcps } = useContext(AppContext);
   // const { id } = useParams();
@@ -57,7 +57,7 @@ const FavoriteButton = ({ recipe, id }) => {
   return (
     <input
       type="image"
-      data-testid="favorite-btn"
+      data-testid={ horizontal ? `${index}-horizontal-favorite-btn` : 'favorite-btn' }
       src={ heartIcon }
       alt="heart"
       className="favorite-btn"
@@ -69,10 +69,14 @@ const FavoriteButton = ({ recipe, id }) => {
 FavoriteButton.propTypes = {
   recipe: PropTypes.shape({}),
   id: PropTypes.number.isRequired,
+  horizontal: PropTypes.bool,
+  index: PropTypes.number,
 };
 
 FavoriteButton.defaultProps = {
   recipe: {},
+  horizontal: false,
+  index: 0,
 };
 
 export default FavoriteButton;

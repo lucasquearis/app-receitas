@@ -72,6 +72,7 @@ RecipeDetails.propTypes = {
   isMeal: PropTypes.bool,
   videoUrl: PropTypes.string,
   recipe: PropTypes.shape({}),
+  id: PropTypes.number.isRequired,
 };
 
 RecipeDetails.defaultProps = {

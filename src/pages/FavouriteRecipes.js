@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import AppContext from '../context/AppContext';
 import { Button, FavCard } from '../components';
 import Header from '../components/Header';
 // import './css/DoneRecipes.css';
@@ -12,17 +13,20 @@ const DoneRecipes = () => {
   const [applyFilter, setApplyFilter] = useState(false);
   const [shareData, setShareData] = useState([]);
   const [shareAlert, setShareAlert] = useState(false);
+  const { favoriteRcps } = useContext(AppContext);
 
   useEffect(() => {
-    const getDoneRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (getDoneRecipes !== null) {
-      setRawFavRecipes(getDoneRecipes);
-      setFavRecipes(getDoneRecipes);
-    } else {
-      setRawFavRecipes([]);
-      setFavRecipes([]);
-    }
-  }, []);
+    // const getDoneRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    // if (getDoneRecipes !== null) {
+    //   setRawFavRecipes(getDoneRecipes);
+    //   setFavRecipes(getDoneRecipes);
+    // } else {
+    //   setRawFavRecipes([]);
+    //   setFavRecipes([]);
+    // }
+    setRawFavRecipes([...favoriteRcps]);
+    setFavRecipes([...favoriteRcps]);
+  }, [favoriteRcps]);
 
   useEffect(() => {
     if (applyFilter && (filterOption !== 'all')) {
