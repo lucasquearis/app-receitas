@@ -7,12 +7,27 @@ import { getFavorites, handleFavoriteAuxiliar }
   from '../auxiliar/auxiliarFunctions';
 
 function MainFoodsInProgress({ history, match: { params: { id } } }) {
+  const auxiliar = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!getLocalStorage) {
+      return [];
+    }
+    if (Object.keys(getLocalStorage).includes('meals')) {
+      const findItem = [getLocalStorage].find((storage) => Object
+        .keys(storage.meals).includes(id));
+      if (findItem) return getLocalStorage.meals[id];
+      return [];
+    }
+    return [];
+  };
+  const localStorageChecked = auxiliar();
   const isFavorite = getFavorites(id);
   const [foodInfo, setFoodInfo] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [link, setLink] = useState('');
   const [icon, setIcon] = useState(isFavorite);
   const [disable, setDisable] = useState(true);
+  const [checkArray, SetCheckArray] = useState(localStorageChecked);
 
   useEffect(() => {
     fetchFoodById(id).then(({ meals }) => setFoodInfo(meals));
@@ -44,24 +59,37 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
     history.push('/receitas-feitas');
   };
 
-  const riskCompleteds = (event) => {
+  useEffect(() => {
+    function saveInLocal() {
+      if (checkArray.length) {
+        let getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+        if (!getLocal) {
+          const objectStore = {};
+          localStorage.setItem('inProgressRecipes', JSON.stringify(objectStore));
+          getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+        }
+        const objeto = {
+          [id]: checkArray,
+        };
+        localStorage.setItem('inProgressRecipes',
+          JSON.stringify({ ...getLocal, meals: { ...getLocal.meals, ...objeto } }));
+      }
+    }
+    saveInLocal();
+  }, [checkArray, id]);
+
+  const riskCompleteds = ({ target: { value, checked } }, index) => {
+    if (checked) {
+      SetCheckArray([...checkArray, index]);
+    }
+
     const labelCheckbox = document.querySelectorAll('.label-checkbox');
     labelCheckbox.forEach((inputs) => {
-      if (inputs.textContent === event.target.value) {
+      if (inputs.textContent === value) {
         inputs.className = 'texto-riscado';
       }
     });
   };
-
-  const objStorage = {
-    meals: {
-      id: [...ingredients],
-    },
-  };
-
-  function lockStorage() {
-    return localStorage.setItem('inProgressRecipes', JSON.stringify([objStorage]));
-  }
 
   const handleFavorite = () => {
     const objSave = foodInfo.map((item) => {
@@ -139,12 +167,13 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
               <br />
               { `${strMeasure} ${strIngredient}` }
               <input
+                checked={ checkArray.includes(index) }
                 className="inputs-checkbox"
                 id={ index }
                 type="checkbox"
                 key={ index }
                 value={ `${strMeasure} ${strIngredient}` }
-                onClick={ riskCompleteds }
+                onClick={ (e) => riskCompleteds(e, index) }
               />
             </label>);
         }) }
@@ -157,7 +186,6 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
       >
         Finalizar Receita
       </button>
-      { lockStorage() }
     </div>
   );
 }

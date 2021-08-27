@@ -7,12 +7,27 @@ import { getFavorites, handleFavoriteAuxiliar }
   from '../auxiliar/auxiliarFunctions';
 
 function MainDrinkInProgress({ history, match: { params: { id } } }) {
+  const auxiliar = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!getLocalStorage) {
+      return [];
+    }
+    if (Object.keys(getLocalStorage).includes('drinks')) {
+      const findItem = [getLocalStorage].find((storage) => Object
+        .keys(storage.drinks).includes(id));
+      if (findItem) return getLocalStorage.drinks[id];
+      return [];
+    }
+    return [];
+  };
+  const localStorageChecked = auxiliar();
   const isFavorite = getFavorites(id);
   const [drinkInfo, setdrinkInfo] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [disable, setDisable] = useState(true);
   const [link, setLink] = useState('');
   const [icon, setIcon] = useState(isFavorite);
+  const [checkArray, SetCheckArray] = useState(localStorageChecked);
 
   useEffect(() => {
     fetchDrinkById(id).then(({ drinks }) => setdrinkInfo(drinks));
@@ -39,28 +54,41 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
     }
   });
 
+  useEffect(() => {
+    function saveInLocal() {
+      if (checkArray.length) {
+        let getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+        if (!getLocal) {
+          const objectStore = {};
+          localStorage.setItem('inProgressRecipes', JSON.stringify(objectStore));
+          getLocal = JSON.parse(localStorage.getItem('inProgressRecipes'));
+        }
+        const objeto = {
+          [id]: checkArray,
+        };
+        localStorage.setItem('inProgressRecipes',
+          JSON.stringify({ ...getLocal, drinks: { ...getLocal.drinks, ...objeto } }));
+      }
+    }
+    saveInLocal();
+  }, [checkArray, id]);
+
   const RedirectToRecipesMade = () => {
     history.push('/receitas-feitas');
   };
 
-  const testEvent = (event) => {
-    const a = document.querySelectorAll('.a');
-    a.forEach((as) => {
-      if (as.textContent === event.target.value) {
-        as.className = 'texto-riscado';
+  const riskCompleteds = ({ target: { value, checked } }, index) => {
+    if (checked) {
+      SetCheckArray([...checkArray, index]);
+    }
+
+    const labelCheckbox = document.querySelectorAll('.label-checkbox');
+    labelCheckbox.forEach((inputs) => {
+      if (inputs.textContent === value) {
+        inputs.className = 'texto-riscado';
       }
     });
   };
-
-  const objStorage = {
-    cocktails: {
-      id: [...ingredients],
-    },
-  };
-
-  function lockStorage() {
-    return localStorage.setItem('inProgressRecipes', JSON.stringify([objStorage]));
-  }
 
   const handleLinks = () => {
     setLink('Link copiado!');
@@ -132,18 +160,19 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
               data-testid={ ingrID }
               key={ i }
               htmlFor={ i }
-              className="a"
+              className="label-checkbox"
               onChange={ verifyChecked }
             >
               <br />
               { `${strMeasure} ${strIngredient}` }
               <input
+                checked={ checkArray.includes(i) }
                 className="inputs-checkbox"
                 id={ i }
                 type="checkbox"
                 key={ i }
                 value={ `${strMeasure} ${strIngredient}` }
-                onClick={ testEvent }
+                onClick={ (e) => riskCompleteds(e, i) }
               />
             </label>);
         }) }
@@ -156,7 +185,6 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
       >
         Finalizar Receita
       </button>
-      { lockStorage() }
     </div>
   );
 }
