@@ -7,6 +7,7 @@ import Card from '../components/Card';
 import Categories from '../components/Categories';
 import useRecipes from '../hooks/useRecipes';
 import useCategories from '../hooks/useCategories';
+import Footer from '../components/Footer';
 
 export default function Foods() {
   const foods = useSelector((state) => state.recipes.recipes);
@@ -79,6 +80,7 @@ export default function Foods() {
           />
         ))
       }
+      <Footer />
     </section>
   );
 }
