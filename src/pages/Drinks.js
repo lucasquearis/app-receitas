@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import MyContext from '../context';
 import Card from '../components/Card';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
+import Categories from '../components/Categories';
 
 export default function Drinks() {
   const { searchBarResult } = useContext(MyContext);
@@ -74,6 +75,7 @@ export default function Drinks() {
   return (
     <>
       <Header title="Bebidas" />
+      <Categories />
       {renderList()}
       { foodDrinks.map(({ strDrinkThumb, strDrink }, index) => (
         <Card

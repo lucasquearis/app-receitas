@@ -2,9 +2,10 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Card from '../components/Card';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
+import Categories from '../components/Categories';
 
 export default function Meals() {
   const { searchBarResult } = useContext(MyContext);
@@ -71,7 +72,8 @@ export default function Meals() {
   };
   return (
     <>
-      <Header title="Comidas" />
+      {/* <Header title="Comidas" /> */}
+      <Categories />
       {renderList()}
       { foodMeals.map(({ strMealThumb, strMeal }, index) => (
         <Card
