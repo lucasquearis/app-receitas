@@ -8,13 +8,12 @@ import mealIcon from '../images/mealIcon.svg';
 export default function MenuInferior() {
   return (
     <div className="main">
-      <footer className="barra-de-navegacao">
-        <div className="foother" data-testid="footer">
+      <footer className="foother" data-testid="footer">
+        <div className="barra-de-navegacao">
           <Link
             to="/bebidas"
             className="img-link"
-            type="button"
-            // data-testid="drinks-bottom-btn"
+            type="button"            
           >
             <img
               className="img"
@@ -27,7 +26,6 @@ export default function MenuInferior() {
           <Link
             to="explorar"
             className="img-link"
-            // data-testid="explore-bottom-btn"
           >
             <img src={ exploreIcon } alt="explorar" data-testid="explore-bottom-btn" />
           </Link>
@@ -35,8 +33,7 @@ export default function MenuInferior() {
           <Link
             to="/comidas"
             className="img-link"
-            type="button"
-            // data-testid="food-bottom-btn"
+            type="button"            
           >
             <img src={ mealIcon } alt="comidas" data-testid="food-bottom-btn" />
           </Link>

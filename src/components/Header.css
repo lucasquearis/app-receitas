@@ -1,0 +1,29 @@
+.container-nav {
+  margin-top: 3px;
+  margin-left: 3px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.name-search {
+  text-align: center;
+  font-family: "Hina Mincho", serif;
+}
+.img-busca {
+  background-color: transparent;
+  border-color: transparent;
+  margin-left: 45%;
+  margin-top: 3px;
+}
+
+.xadlkdksjfkl {
+  background-color: blue;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.input-busca {
+  padding: 8px;
+  width: 180px;
+}

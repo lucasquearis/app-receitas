@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputsSearch from './InputsSearch';
+import "./Header.css";
+
 
 function SearchBar({ display }) {
   const displaySearchBar = (bool) => {
@@ -12,7 +14,7 @@ function SearchBar({ display }) {
   };
 
   return (
-    <div>
+    <div className="xablau">
       {displaySearchBar(display)}
     </div>
   );

@@ -1,0 +1,48 @@
+body {
+  background-image: url(../images/foodInternet.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  margin: auto;
+  margin-top: 6%;
+  border-radius: 5%;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 2%;
+}
+
+.name-food {
+  font-size: 30px;
+  font-family: "Hina Mincho", serif;
+  margin-top: 80px;
+  color: rgb(36, 142, 41);
+}
+
+.input-container {
+  background-color: white;
+  width: 160px;
+  border: 2px solid rgb(36, 142, 41);
+  box-shadow: 0px 0px 20px rgb(75, 78, 75);
+  margin-top: 15px;
+  border-radius: 3px;
+  margin-bottom: 2px;
+}
+.input-password {
+  background-color: rgb(255, 255, 255);
+  width: 160px;
+  border: 2px solid rgb(36, 142, 41);
+  box-shadow: 0px 0px 20px rgb(75, 78, 75);
+  margin-top: 2px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.button-btn {
+  border: 2px solid rgb(36, 142, 41);
+  border-radius: 3px;
+}

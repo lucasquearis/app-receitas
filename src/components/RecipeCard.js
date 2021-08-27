@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
+import './Recipes.css';
 
 function RecipeCard({
   item,
@@ -10,8 +11,9 @@ function RecipeCard({
   const thumb = src === 'meal' ? item.strMealThumb : item.strDrinkThumb;
   const str = src === 'meal' ? item.strMeal : item.strDrink;
   return (
-    <div data-testid={ `${index}-recipe-card` }>
-      <img
+    <div className="aline-cards" data-testid={ `${index}-recipe-card` }>
+      <img        
+        className="img-cards"   
         data-testid={ `${index}-card-img` }
         src={ thumb }
         alt={ str }

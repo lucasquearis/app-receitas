@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 import SearchButton from './SearchButton';
 import InputRadio from './InputRadio';
+import './Recipes.css';
+
 
 function InputsSearch() {
   const { filter, setFilter } = useContext(Context);
@@ -20,8 +22,9 @@ function InputsSearch() {
   };
 
   return (
-    <div>
+    <div className="xadlkdksjfkl">
       <input
+        className="input-busca"
         type="text"
         name="search"
         value={ filter.search }
