@@ -4,40 +4,51 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { inProgessStorage } from '../helpers/setLocalStorage';
+import { updateProgressRecipe, initialProgressStore } from '../helpers/setLocalStorage';
 
 export default function InProgress(
   { name, img, category, ingredients, instructions, id, type },
 ) {
   const [favorite, setFavorite] = useState(false);
   const [steps, setSteps] = useState([]);
+  // const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    inProgessStorage(id, setSteps, ingredients, type);
+    if (!localStorage.inProgressRecipes) { initialProgressStore(); }
+    const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const recipes = getStorage[type];
+    console.log(steps);
+    if (Object.keys(recipes).some((key) => key === id)) {
+      setSteps(recipes[id]);
+    } else {
+      const mapSteps = ingredients.map((ing) => ({
+        step: ing[1],
+        checked: false,
+      }));
+      setSteps(mapSteps);
+    }
   }, []);
 
   useEffect(() => {
-    if (!localStorage.recipeProgess) { return; }
-    const { recipes } = JSON
-      .parse(localStorage.getItem('recipeProgess'));
-    localStorage.setItem('recipeProgess', JSON.stringify({
-      recipes: [
-        ...recipes.filter(((r) => r.id !== id)),
-        {
-          id,
-          steps,
-        }],
-    }));
+    updateProgressRecipe(id, steps, type);
+    console.log(steps);
   }, [steps]);
 
   const handleCheckBoxChange = ({ target }) => {
-    const { name: n, checked } = target;
+    console.log(steps);
+    const { name: n, checked: c } = target;
     const ingIndex = steps.findIndex(({ step }) => step === n);
     setSteps([
       ...steps.slice(0, ingIndex),
-      { step: n, checked },
+      { step: n, checked: c },
       ...steps.slice(ingIndex + 1),
     ]);
+
+    // if (c) {
+    //   setChecked(true);
+    // } else {
+    //   setChecked(false);
+    // }
   };
 
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
