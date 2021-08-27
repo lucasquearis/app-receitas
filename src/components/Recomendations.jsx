@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import fetchRecipe from '../Redux/actions/fetchRecipes';
 
 class Recomendations extends Component {
   render() {
+  const { recipe } = this.props;
     return (
       <section>
-        <div data-testid="0-recomendation-card">Recomendations</div>
+        <div data-testid="0-recomendation-card">
+        {
+          recipe.map(({ strMeal }, index) => (
+            <p key={index}>{ strMeal }</p>
+          ))
+        }
+        </div>
       </section>
     );
   }
 }
 
-export default Recomendations;
+const mapStateToProps = (state) => ({
+  recipe: state.foods.recipes,
+});
+
+const mapDispatchToProps = (dispach) => ({
+  fetchRecipe: (id) => dispach(fetchRecipe(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recomendations);

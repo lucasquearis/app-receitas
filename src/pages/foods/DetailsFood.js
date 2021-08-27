@@ -22,8 +22,8 @@ class DetailsFood extends Component {
       <div>
         <div>
           {
-            recipe.map(({ strMeal, strCategory, strMealThumb }) => (
-              <div>
+            recipe.map(({ strMeal, strCategory, strMealThumb }, index) => (
+              <div key={index}>
                 <div>
                   <img data-testid="recipe-photo" src={ strMealThumb } alt="foto" />
                 </div>
