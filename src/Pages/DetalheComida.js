@@ -5,6 +5,7 @@ import copyToClipBoard from 'clipboard-copy';
 import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
 import * as BebidasAPI from '../service/BebidasAPI';
+import getEmbedURL from '../service/getEmbedURL';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -62,25 +63,6 @@ export default function DetalheComida(props) {
       <h1>Loading...</h1>
     );
   }
-
-  const getEmbedURL = () => {
-    const url = food.strYoutube;
-    const minIndex = 24;
-    const maxIndex = 31;
-    let embededURL = '';
-    if (url.length !== 0) {
-      const splitedURL = url.split('');
-      splitedURL.forEach((word, index) => {
-        if (index === minIndex) {
-          embededURL += 'embed/';
-        }
-        if (index < minIndex || index > maxIndex) {
-          embededURL += word;
-        }
-      });
-    }
-    return embededURL;
-  };
 
   const setMessageTime = () => {
     const messageTime = 1000;
@@ -181,7 +163,7 @@ export default function DetalheComida(props) {
       </div>
       <div className="video-section">
         <h5>Video</h5>
-        <iframe data-testid="video" title="food-video" src={ getEmbedURL() } />
+        <iframe data-testid="video" title="food-video" src={ getEmbedURL(food) } />
       </div>
       { randomDrinkCard() }
     </section>
