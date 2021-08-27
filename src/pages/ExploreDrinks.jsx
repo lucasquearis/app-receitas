@@ -1,10 +1,13 @@
 import React from 'react';
-import { Header, Footer } from '../components';
+import { useLocation } from 'react-router-dom';
+import { Header, Footer, ExploreLinks } from '../components';
 
 function ExploreDrinks() {
+  const { pathname } = useLocation();
   return (
     <div>
       <Header title="Explorar Bebidas" />
+      <ExploreLinks path={ pathname } />
       <Footer />
     </div>
   );
