@@ -32,10 +32,8 @@ function App() {
         <Route path="/explorar/comidas/ingredientes" component={ ExploreIngredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ ExploreIngredients } />
         <Route path="/explorar/comidas/area" />
-        <Route path="/perfil" />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/perfil" component={ Profile } />
-        <Route path="/receitas-feitas" />
         <Route path="/receitas-favoritas" component={ Favorites } />
       </Switch>
     </Provider>
