@@ -6,7 +6,7 @@ import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 export default function MealDetails(props) {
   const [mealDetails, setMealDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isCopied, setIsCopied] = useState(false);
+
   useEffect(() => {
     const { match: { params: { id } } } = props;
     const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
