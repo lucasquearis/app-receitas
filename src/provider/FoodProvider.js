@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from '../context/FoodContext';
-import {
-  fetchFoods,
-  fetchFoodCategories,
-} from '../services/mealAPI';
+import { fetchFoods, fetchFoodCategories } from '../services/mealAPI';
 
 export default function FoodProvider({ children }) {
   const [foods, setFoods] = useState([]);
@@ -25,7 +22,8 @@ export default function FoodProvider({ children }) {
         foods,
         setFoods,
         categories,
-        setCategories } }
+        setCategories,
+      } }
     >
       {children}
     </FoodContext.Provider>
