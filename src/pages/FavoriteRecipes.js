@@ -13,9 +13,6 @@ function FavoriteRecipes() {
 
   const localStorageData = localStorage.getItem('favoriteRecipes');
 
-  // retirar esta linha, só serve pra simular algo que já está no localstorage
-  // localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
-
   useEffect(() => {
     if (localStorageData) {
       setFavoritesArray(JSON.parse(localStorageData));

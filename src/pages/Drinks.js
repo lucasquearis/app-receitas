@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import myContext from '../context/myContext';
-import FooterMenu from './FooterMenu';
+import FooterMenu from '../components/FooterMenu';
 import '../styles/Recepts.css';
 import { START_CARD, NUMBER_CARDS } from '../services/data';
 
@@ -19,16 +20,18 @@ export default function Foods() {
       <Header />
       <section className="container-cards">
         {cards.map((drink, i) => (
-          <div key={ i } className={ `${drink.idDrink}-recipe-card card` }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ drink.str }
-              className={ `${drink.idDrink}-card-img` }
-            />
-            <div>
-              <p data-testid={ `${drink.idDrink}-card-name` }>{drink.strDrink}</p>
+          <Link key={ i } to={ `/bebidas/${drink.idDrink}` }>
+            <div className={ `${drink.idDrink}-recipe-card card` }>
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ drink.str }
+                className={ `${drink.idDrink}-card-img` }
+              />
+              <div>
+                <p data-testid={ `${drink.idDrink}-card-name` }>{drink.strDrink}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </section>
       <FooterMenu />

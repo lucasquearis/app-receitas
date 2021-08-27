@@ -10,25 +10,47 @@ import { ALERT_TWO, MEAL_OBJ, DRINK_OBJ } from '../services/data';
 
 function RecipesProvider({ children }) {
   const [searchValues, setSearchValues] = useState({
-    textValue: '', radioValue: 'ingredient', pathname: '/comidas' });
-  const [filteredMeals, setFilteredMeals] = useState(false);
-  const [filteredDrinks, setFilteredDrinks] = useState(false);
+    textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
+  const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
   const [updateData, setUpdateData] = useState(false);
   const [baseDataMeals, setBaseDataMeals] = useState();
   const [baseDataDrinks, setBaseDataDrinks] = useState();
+  const [filteredMeals, setFilteredMeals] = useState(false);
+  const [filteredDrinks, setFilteredDrinks] = useState(false);
+  const [favorite, setFavorite] = useState({});
+  const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [keyType, setKeysType] = useState('');
+  const [url, setUrl] = useState();
+  const [lists, setLists] = useState({
+    ingredients: [],
+    measure: [],
+  });
 
   const globalState = {
+    url,
+    lists,
+    keyType,
+    setKeysType,
+    recipe,
+    setRecipe,
+    loading,
+    setLoading,
+    favorite,
+    setFavorite,
     infoUser,
     setInfoUser,
     setSearchValues,
     filteredMeals,
     filteredDrinks,
+    filteredMealsOrDrinks,
     updateData,
     setUpdateData,
     baseDataMeals,
     baseDataDrinks,
   };
+
   useEffect(() => {
     const resultBaseMeals = async () => {
       const baseMeals = await getMeals(MEAL_OBJ);
@@ -52,7 +74,7 @@ function RecipesProvider({ children }) {
     const resultFilterDrinks = async () => {
       const resultDrinks = await getDrinks(searchValues);
       setFilteredDrinks(resultDrinks);
-      if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
+      // if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
     };
     resultFilterDrinks();
   },
@@ -64,6 +86,54 @@ function RecipesProvider({ children }) {
       setBaseDataDrinks(baseDrinks);
     };
     resultBaseDrinks();
+  },
+  [searchValues]);
+
+  useEffect(() => {
+    const favoriteClick = () => {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([{
+        id: '',
+        type: '',
+        area: '',
+        category: '',
+        alcoholicOrNot: '',
+        name: '',
+        image: '',
+        doneDate: '',
+        tags: '',
+      }]));
+    };
+
+    favoriteClick();
+  }, []);
+
+  useEffect(() => {
+    const filterIngredients = () => {
+      const keys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
+      const list = keys.map((key) => recipe[key]);
+      const measureQnt = Object.keys(recipe).filter((key) => key.includes('Measure'));
+      const measureList = measureQnt.map((key) => recipe[key]);
+      setLists({
+        ...lists,
+        ingredients: list.filter((item) => item),
+        measure: measureList.filter((item) => item),
+      });
+    };
+    const correctUrl = () => {
+      const ytUrl = recipe.strYoutube;
+      if (ytUrl) setUrl(ytUrl.replace('watch?v=', 'embed/'));
+    };
+
+    correctUrl();
+    filterIngredients();
+  }, [recipe]);
+
+  useEffect(() => {
+    const resultFilter = async () => {
+      const result = await getMeals(searchValues);
+      setFilteredMealsOrDrinks(result);
+    };
+    resultFilter();
   },
   [searchValues]);
 

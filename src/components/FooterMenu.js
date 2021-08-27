@@ -9,36 +9,36 @@ function FooterMenu() {
   const history = useHistory();
   return (
     <footer data-testid="footer" className="footer">
-      <button
-        type="button"
-        onClick={ () => history.push('/bebidas') }
-        data-testid="drinks-bottom-btn"
-      >
-        <img
+      <label htmlFor="botão de drinks">
+        <input
+          name="botão de drinks"
+          type="image"
+          onClick={ () => history.push('/bebidas') }
+          data-testid="drinks-bottom-btn"
           src={ drinkIcon }
           alt="botão de drinks"
         />
-      </button>
-      <button
-        type="button"
-        onClick={ () => history.push('/explorar') }
-        data-testid="explore-bottom-btn"
-      >
-        <img
+      </label>
+      <label htmlFor="explorar">
+        <input
+          name="explorar"
+          type="image"
+          onClick={ () => history.push('/explorar') }
+          data-testid="explore-bottom-btn"
           src={ exploreIcon }
           alt="explorar"
         />
-      </button>
-      <button
-        type="button"
-        onClick={ () => history.push('/comidas') }
-        data-testid="food-bottom-btn"
-      >
-        <img
+      </label>
+      <label htmlFor="comidas">
+        <input
+          name="comidas"
+          type="image"
+          onClick={ () => history.push('/comidas') }
+          data-testid="food-bottom-btn"
           src={ mealIcon }
-          alt="explorar"
+          alt="comidas"
         />
-      </button>
+      </label>
     </footer>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import FooterMenu from './FooterMenu';
+import { Link, useHistory } from 'react-router-dom';
+import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import '../styles/Explorer.css';
 
@@ -9,22 +9,26 @@ function Explorer() {
   return (
     <div>
       <Header />
-      <button
-        type="button"
-        className="button"
-        onClick={ () => history.push('/explorar/comidas') }
-        data-testid="explore-food"
-      >
-        Explorar Comidas
-      </button>
-      <button
-        type="button"
-        className="button"
-        onClick={ () => history.push('/explorar/bebidas') }
-        data-testid="explore-drinks"
-      >
-        Explorar Bebidas
-      </button>
+      <Link to="/explorar/comidas">
+        <button
+          type="button"
+          className="button"
+          onClick={ () => history.push('/explorar/comidas') }
+          data-testid="explore-food"
+        >
+          Explorar Comidas
+        </button>
+      </Link>
+      <Link to="/explorar/bebidas">
+        <button
+          type="button"
+          className="button"
+          onClick={ () => history.push('/explorar/bebidas') }
+          data-testid="explore-drinks"
+        >
+          Explorar Bebidas
+        </button>
+      </Link>
       <FooterMenu />
     </div>
   );

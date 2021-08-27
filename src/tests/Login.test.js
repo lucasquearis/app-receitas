@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import App from '../App';
-import renderWithRouter from './helpers/renderwithRouter';
+import renderWithRouter from './helpers/renderWithRouter';
 
 const BTN_LOGIN = 'login-submit-btn';
 const INPUT_EMAIL = 'email-input';
