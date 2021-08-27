@@ -3,10 +3,27 @@ import { useHistory } from 'react-router-dom';
 
 function FoodDetails() {
   const id = 52771;
-  const index = 0;
+  const indexo = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
+  const [ingredient, setIngredient] = useState([]);
+  const [measure, setMeasure] = useState([]);
+
+  // função para puxar os ingredientes e sua medidas
+  const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
+    const lenghtIndredients = 20; // quantidade máxima de ingredientes da receita
+    const itens = [];
+    const itensMeasure = [];
+    if (getRecipe) {
+      for (let i = 1; i < lenghtIndredients; i += 1) {
+        itens.push(getRecipe[`strIngredient${i}`]);
+        itensMeasure.push(getRecipe[`strMeasure${i}`]);
+      }
+    }
+    setIngredient(itens);
+    setMeasure(itensMeasure);
+  };
 
   useEffect(() => {
     try {
@@ -26,6 +43,10 @@ function FoodDetails() {
     }
   }, [id, getHistory, pathname, setGetRecipe]);
 
+  useEffect(() => {
+    listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
+  }, [getRecipe]);
+
   return (
     <div>
       <div>
@@ -43,19 +64,33 @@ function FoodDetails() {
         <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>
       <section>
-        <h3>Ingredientes</h3>
-        <ul data-testid={ `${index}-ingredient-name-and-measure` }>
-          <li>item</li>
+        <h4>Ingredientes</h4>
+        <ul>
+          { ingredient.map((item, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { `${measure[index]} - ${item}` }
+            </li>
+          ))}
         </ul>
       </section>
       <section>
+        <h5>Modo de preparo:</h5>
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
       <div>
-        <p data-testid="video">video</p>
+        <iframe
+          width="420"
+          height="315"
+          src={ `${(getRecipe.strYoutube)}` }
+          title="video"
+          data-testid="video"
+        />
       </div>
       <div>
-        <p data-testid={ `${index}-recomendation-card` }>cards</p>
+        <p data-testid={ `${indexo}-recomendation-card` }>cards</p>
       </div>
       <div>
         <button type="button" data-testid="start-recipe-btn">iniciar receita</button>
@@ -63,6 +98,5 @@ function FoodDetails() {
     </div>
   );
 }
-// requisito 33
 
 export default FoodDetails;
