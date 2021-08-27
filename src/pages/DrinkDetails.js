@@ -51,7 +51,7 @@ const DrinkDetails = () => {
         drinkDetails.map(({
           strDrinkThumb,
           strDrink,
-          // strCategory,
+          strCategory,
           strInstructions,
           strAlcoholic,
         }, i) => (
