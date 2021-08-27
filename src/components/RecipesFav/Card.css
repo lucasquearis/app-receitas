@@ -40,13 +40,26 @@
   margin: 0;
 }
 
-
 .share-btn {
   background: none;
   border: none;
   height: 22px;
   padding: 0;
   width: 22px;
+}
+
+.share-btnFav, .favorite-btn {
+  background: none;
+  border: none;
+  height: 30px;
+  padding: 0;
+  width: 30px;
+}
+
+.share-fav-btns-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
 }
 
 .side-container h5 {

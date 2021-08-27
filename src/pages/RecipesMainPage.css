@@ -1,0 +1,35 @@
+.main-container {
+  border: solid #c4c4c4 1px;
+  min-height: 640px;
+  width: 360px;
+}
+
+.recipesList-containe {
+  display: flex;
+}
+
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 360px;
+}
+
+.nav-container button {
+  background: #c4c4c4;
+  border: none;
+  height: 28px;
+  margin: 5px;
+  min-width: 105px;
+  transition: all 0.4s ease-in-out;
+}
+
+.nav-container button:hover {
+  background-color: green;
+  border-radius: 20px;
+  color: white;
+}
+
+.nav-container button:active {
+  opacity: 0.1;
+}

@@ -8,6 +8,7 @@ export default function DataProvider({ children }) {
   const [selIngredient, setSelIngredient] = useState('');
   const [exploreData, setExploreData] = useState([]);
   const [detailsData, setDetailsData] = useState([]);
+  const [fav, setFav] = useState([]);
   const [recommendationsData, setRecommendationsData] = useState([]);
   const contextValue = {
     recipesData,
@@ -18,8 +19,13 @@ export default function DataProvider({ children }) {
     setDetailsData,
     recommendationsData,
     setRecommendationsData,
+<<<<<<< HEAD
     selIngredient,
     setSelIngredient,
+=======
+    fav,
+    setFav,
+>>>>>>> 6b2ebe2134eb3c65c6a83e63549b022a98b219ce
   };
 
   return (
