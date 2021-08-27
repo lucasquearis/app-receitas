@@ -15,6 +15,30 @@
   max-height: 80vh;
 }
 
+.cardsContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+  width: 100%;
+}
+
+.cardFlex {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+.cardTumb {
+  border: solid black 5px;
+  border-radius: 5px;
+  height: 300px;
+  margin-bottom: 10px;
+  width: 350px;
+}
+
 /*
 #iceLeft {
   animation: clink .8s infinite ease;
