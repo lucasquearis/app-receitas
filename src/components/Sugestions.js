@@ -21,27 +21,33 @@ function Sugestions({ type }) {
     fetchSugestions();
   }, [correctURL]);
 
-  const renderMealsDetails = (item) => (
-    <div className="sugestions-imagem-container">
+  const renderMealsDetails = (item, key) => (
+    <div
+      data-testid={ `${key}-recomendation-card` }
+      className="sugestions-imagem-container"
+    >
       <img
         className="sugestions-imagem"
         src={ item.strMealThumb }
         alt={ item.strMeal }
       />
       <p>{ item.strCategory }</p>
-      <h5>{ item.strMeal }</h5>
+      <h5 data-testid={ `${key}-recomendation-title` }>{ item.strMeal }</h5>
     </div>
   );
 
-  const renderDrinksDetails = (item) => (
-    <div className="sugestions-imagem-container">
+  const renderDrinksDetails = (item, key) => (
+    <div
+      data-testid={ `${key}-recomendation-card` }
+      className="sugestions-imagem-container"
+    >
       <img
         className="sugestions-imagem"
         src={ item.strDrinkThumb }
         alt={ item.strDrink }
       />
       <p>{ item.strAlcoholic }</p>
-      <h5>{ item.strDrink }</h5>
+      <h5 data-testid={ `${key}-recomendation-title` }>{ item.strDrink }</h5>
     </div>
   );
 
@@ -50,10 +56,9 @@ function Sugestions({ type }) {
       <div
         className="sugestions-container"
         key={ key }
-        data-testid={ `${key}-recomendation-card` }
       >
         {
-          item.idMeal ? renderMealsDetails(item) : renderDrinksDetails(item)
+          item.idMeal ? renderMealsDetails(item, key) : renderDrinksDetails(item, key)
         }
       </div>
     ))

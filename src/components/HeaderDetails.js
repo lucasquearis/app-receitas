@@ -6,8 +6,7 @@ import ShareButton from './ShareButton';
 function HeaderDetails() {
   const { recipe, keyType } = useContext(myContext);
   const type = keyType === 'meals' ? 'Meal' : 'Drink';
-  console.log(type);
-  console.log(keyType);
+  console.log(recipe.strCategory);
   return (
     <div className="imagem-container">
       <img
@@ -30,7 +29,7 @@ function HeaderDetails() {
         className="recipe-category"
         data-testid="recipe-category"
       >
-        { recipe[`str${keyType}`] }
+        { keyType === 'meals' ? recipe.strCategory : recipe.strAlcoholic }
       </h4>
     </div>
   );

@@ -15,12 +15,14 @@ function RecipesProvider({ children }) {
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
+  const [url, setUrl] = useState();
   const [lists, setLists] = useState({
     ingredients: [],
     measure: [],
   });
 
   const globalState = {
+    url,
     lists,
     keyType,
     setKeysType,
@@ -65,7 +67,12 @@ function RecipesProvider({ children }) {
         measure: measureList.filter((item) => item),
       });
     };
+    const correctUrl = () => {
+      const ytUrl = recipe.strYoutube;
+      if (ytUrl) setUrl(ytUrl.replace('watch?v=', 'embed/'));
+    };
 
+    correctUrl();
     filterIngredients();
   }, [recipe]);
 

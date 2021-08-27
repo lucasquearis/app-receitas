@@ -10,7 +10,17 @@ import Ingredients from '../components/Ingredients';
 function RecipesDetails() {
   const { pathname } = useLocation();
   const { id } = useParams();
-  const { loading, keyType, setLoading, setRecipe, setKeysType } = useContext(myContext);
+  const { loading, keyType, setLoading,
+    setRecipe, setKeysType, url, recipe } = useContext(myContext);
+
+  const video = (<iframe
+    className="recipe-video"
+    data-testid="video"
+    title={ recipe.srtMeal }
+    width="420"
+    height="315"
+    src={ url }
+  />);
 
   useEffect(() => {
     try {
@@ -35,11 +45,14 @@ function RecipesDetails() {
 
   const text = keyType === 'meals' ? 'drinks' : 'meals';
   if (loading) return <Loading />;
-
+  console.log();
   return (
     <section className="details-body">
       <HeaderDetails />
       <Ingredients />
+      {
+        (keyType === 'meals') && video
+      }
       <div className="sugestions">
         <Sugestions type={ text } />
       </div>
