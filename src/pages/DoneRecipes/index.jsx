@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import doneRecipes from './mockDoneRecipes';
+import mockDoneRecipes from './mockDoneRecipes';
 import ShareIcon from '../../components/Icons/ShareIcon';
 
 const THREE_SECONDS = 3000;
+
+mockDoneRecipes();
 
 function DoneRecipes() {
   const [activeFilter, setActiveFilter] = useState('');
   const [filteredDoneRecipes, setFilteredDoneRecipes] = useState([]);
   const [copied, SetCopied] = useState(false);
 
-  // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
   useEffect(() => {
     setFilteredDoneRecipes(doneRecipes);
-    // Por doneRecipes nas depêndencias quando trocar pro localStorage
-  }, [setFilteredDoneRecipes]);
+  }, [doneRecipes, setFilteredDoneRecipes]);
 
   const handleCopy = () => {
     SetCopied(true);

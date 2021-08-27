@@ -1,25 +1,30 @@
-const doneRecipes = [{
-  id: '53016',
-  type: 'meals',
-  area: 'area',
-  category: 'categoria',
-  alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-  name: 'Chick-Fil-A Sandwich',
-  image: 'https://www.themealdb.com/images/media/meals/sbx7n71587673021.jpg',
-  doneDate: '26/08/2021',
-  tags: ['Tag1', 'Tag2'],
-},
-{
-  id: '15300',
-  type: 'drinks',
-  area: 'area',
-  category: 'categoria',
-  alcoholicOrNot: 'alcoholic-ou-non-alcoholic',
-  name: '3-Mile Long Island Iced Tea',
-  image: 'https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg',
-  doneDate: '25/08/2021',
-  tags: ['Tag1', 'Tag2'],
-},
-];
+function mockDoneRecipes() {
+  const doneRecipes = [
+    {
+      id: '52771',
+      type: 'comida',
+      area: 'Italian',
+      category: 'Vegetarian',
+      alcoholicOrNot: '',
+      name: 'Spicy Arrabiata Penne',
+      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      doneDate: '23/06/2020',
+      tags: ['Pasta', 'Curry'],
+    },
+    {
+      id: '178319',
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: 'Aquamarine',
+      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+      doneDate: '23/06/2020',
+      tags: [],
+    },
+  ];
 
-export default doneRecipes;
+  localStorage.setItem('doneRecipes', JSON.stringfy(doneRecipes));
+}
+
+export default mockDoneRecipes;
