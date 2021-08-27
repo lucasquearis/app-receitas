@@ -1,0 +1,10 @@
+.start-button {
+  bottom: 0;
+  position: fixed;
+}
+
+.start-button-none {
+  bottom: 0;
+  display: none;
+  position: fixed;
+}
