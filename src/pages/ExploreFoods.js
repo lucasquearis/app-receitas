@@ -1,15 +1,15 @@
 import React from 'react';
-import {
-  Footer,
-  Header,
-} from '../components';
+import ExploreCard from '../components/ExploreCard';
+import { Footer, Header } from '../components';
 
 const ExploreFoods = () => {
   const pageName = 'Explorar Comidas';
   return (
     <div>
       <Header page={ pageName } />
-      Explorar Comidas
+      <ExploreCard type="ingredientFood" />
+      <ExploreCard type="local" />
+      <ExploreCard type="surpriseMeFood" />
       <Footer />
     </div>
   );

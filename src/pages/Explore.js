@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-  ExploreComponent,
-  Footer,
-  Header,
-} from '../components';
+import { Footer, Header, ExploreCard } from '../components';
 
 const Explore = () => (
   <div>
     <Header page="Explorar" />
-    <ExploreComponent />
+    <ExploreCard type="food" />
+    <ExploreCard type="drink" />
     <Footer />
   </div>
 );
