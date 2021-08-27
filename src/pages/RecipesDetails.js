@@ -7,7 +7,7 @@ import HeaderDetails from '../components/HeaderDetails';
 import myContext from '../context/myContext';
 import Ingredients from '../components/Ingredients';
 
-function DrinksDetails() {
+function RecipesDetails() {
   const { pathname } = useLocation();
   const { id } = useParams();
   const { loading, keyType, setLoading, setRecipe, setKeysType } = useContext(myContext);
@@ -54,4 +54,4 @@ function DrinksDetails() {
   );
 }
 
-export default DrinksDetails;
+export default RecipesDetails;
