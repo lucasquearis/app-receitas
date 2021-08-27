@@ -5,7 +5,9 @@ import Header from '../components/Header';
 import './Perfil.css';
 
 function Perfil() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  let emailObject = {};
+  if (localStorage.getItem('user'))emailObject = JSON.parse(localStorage.getItem('user'));
+  const { email } = emailObject;
 
   return (
     <div className="perfil-container">
