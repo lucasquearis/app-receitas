@@ -8,11 +8,10 @@ import * as BebidasAPI from '../service/BebidasAPI';
 import getEmbedURL from '../service/getEmbedURL';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DetalheComida(props) {
   const { match: { params: { id } } } = props;
-
   const [food, setFood] = useState({});
   const [randomDrinks, setRandomDrinks] = useState([]);
   const [foodIngredients, setFoodIngredients] = useState([]);
@@ -96,6 +95,40 @@ export default function DetalheComida(props) {
     </section>
   );
 
+  const isFavorite = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    if (favoriteRecipes !== null) {
+      const favorite = favoriteRecipes.some((recipe) => recipe.id === food.idMeal);
+
+      if (favorite) {
+        return (
+          <img
+            data-testid="favorite-btn"
+            src={ blackHeartIcon }
+            alt="icone de favoritar"
+          />
+        );
+      }
+
+      return (
+        <img
+          data-testid="favorite-btn"
+          src={ whiteHeartIcon }
+          alt="icone de favoritar"
+        />
+      );
+    }
+
+    return (
+      <img
+        data-testid="favorite-btn"
+        src={ whiteHeartIcon }
+        alt="icone de favoritar"
+      />
+    );
+  };
+
   return (
     <section className="food-info">
       <button
@@ -131,11 +164,7 @@ export default function DetalheComida(props) {
               alt="icone de compartilhar"
             />
           </button>
-          <img
-            data-testid="favorite-btn"
-            src={ whiteHeartIcon }
-            alt="icone de favoritar"
-          />
+          { isFavorite() }
         </div>
       </div>
       <p className="food-category" data-testid="recipe-category">{ food.strCategory }</p>
