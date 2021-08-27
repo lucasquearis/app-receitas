@@ -1,17 +1,28 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function Explore() {
-  const { location: { pathname } } = useHistory();
-  let title = pathname.includes('comida') ? 'Explorar Comidas' : 'Explorar Bebidas';
-  title = pathname.includes('ingredientes') ? 'Explorar Ingredientes' : title;
-  title = pathname.includes('area') ? 'Explorar Origem' : title;
-  title = pathname === '/explorar' ? 'Explorar' : title;
   return (
-    <>
-      <Header title={ title } search={ title === 'Explorar Origem' } />
+    <div>
+      <Header title="Explorar" search={ false } />
+      <div className="explore-container">
+        <Link
+          to="/explorar/comidas"
+          data-testid="explore-food"
+          className="explore-btn"
+        >
+          Explorar Comidas
+        </Link>
+        <Link
+          to="/explorar/bebidas"
+          data-testid="explore-drinks"
+          className="explore-btn"
+        >
+          Explorar Bebidas
+        </Link>
+      </div>
       <Footer />
     </>
   );
