@@ -55,11 +55,6 @@ export default function FoodDetails(props) {
         data-testid="recipe-photo"
       />
       <div className="btnShareHeart">
-        {/* {
-          clipBoardOrHeart.copy ? (
-            <p>Link copiado</p>
-          ) : null
-        } */}
         <button
           type="button"
           data-testid="share-btn"

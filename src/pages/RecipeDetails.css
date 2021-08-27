@@ -2,7 +2,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
   width: 100vw;
-  width: 100vw;
+
   white-space: nowrap;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .btn {
-  bottom: 0px;
+  bottom: 1px;
   display: flex;
   padding-left: 110px;
   position: fixed;
@@ -30,6 +30,5 @@
 .contentBtn {
   display: flex;
   justify-content: center;
-  position: relative;
   position: relative;
 }
