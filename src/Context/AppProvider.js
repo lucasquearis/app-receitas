@@ -6,9 +6,7 @@ function Provider({ children }) {
   const [userEmail, setUserEmail] = useState('');
 
   const globalState = {
-    user: {
-      email: userEmail,
-    },
+    email: userEmail,
   };
 
   const contextValue = {
