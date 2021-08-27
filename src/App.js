@@ -1,13 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import FoodProvider from './context/FoodProvider';
-import DrinksProvider from './context/DrinksProvider';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Drinks from './pages/Drinks';
 import FoodDetails from './pages/FoodDetails';
+import DrinkDetails from './pages/DrinkDetails';
 import Search from './pages/Search';
 import SearchDetailsFood from './pages/SeachDetailsFood';
 import SearchDetailsDrinks from './pages/SearchDetailsDrinks';
@@ -17,6 +16,8 @@ import SearchByOrigin from './pages/SearchByOrigin';
 import Profile from './pages/Profile';
 import FinishedRecipes from './pages/FinishedRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import FoodProvider from './context/FoodProvider';
+import DrinksProvider from './context/DrinksProvider';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
             <Route exact path="/" component={ Login } />
             <Route exact path="/comidas" component={ Recipes } />
             <Route exact path="/bebidas" component={ Drinks } />
-            <Route exact path="/comidas/{id-da-receita}" component={ FoodDetails } />
+            <Route exact path="/comidas/:id" component={ FoodDetails } />
+            <Route exact path="/bebidas/:id" component={ DrinkDetails } />
             <Route exact path="/explorar" component={ Search } />
             <Route exact path="/explorar/comidas" component={ SearchDetailsFood } />
             <Route exact path="/explorar/bebidas" component={ SearchDetailsDrinks } />

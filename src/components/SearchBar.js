@@ -49,7 +49,7 @@ const SearchBar = (location) => {
     <div className="search-bar">
       <Input
         textInput="text"
-        testId="search-input"
+        datatestId="search-input"
         name="searchText"
         placeH="Digite um texto"
         onChange={ handleChange }
@@ -57,7 +57,7 @@ const SearchBar = (location) => {
       <div className="radio-container">
         <Input
           textInput="radio"
-          testId="ingredient-search-radio"
+          datatestId="ingredient-search-radio"
           name="search"
           onChange={ handleChange }
           id="ingredient"
@@ -66,7 +66,7 @@ const SearchBar = (location) => {
         />
         <Input
           textInput="radio"
-          testId="name-search-radio"
+          datatestId="name-search-radio"
           name="search"
           onChange={ handleChange }
           id="name"
@@ -75,7 +75,7 @@ const SearchBar = (location) => {
         />
         <Input
           textInput="radio"
-          testId="first-letter-search-radio"
+          datatestId="first-letter-search-radio"
           name="search"
           onChange={ handleChange }
           placeH="sadsa"

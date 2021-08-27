@@ -5,6 +5,7 @@ import { fetchDrinksApi, fetchCategoriesDrinksApi } from '../services/fetchDrink
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
+  const [drinkDetails, setDrinkDetails] = useState([]);
   const [drinkFilter, setDrinkFilter] = useState({
     searchText: '',
     search: '',
@@ -26,6 +27,8 @@ const DrinksProvider = ({ children }) => {
 
   const contextValue = {
     drinks,
+    drinkDetails,
+    setDrinkDetails,
     drinkFilter,
     setDrinkFilter,
     categoriesDrinks,

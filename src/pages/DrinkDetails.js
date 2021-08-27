@@ -1,70 +1,71 @@
 import React, { useState, useContext, useEffect } from 'react';
+// import FoodContext from '../context/FoodContext';
 import { useHistory } from 'react-router';
-import FoodContext from '../context/FoodContext';
-import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 import DrinksContext from '../context/DrinksContext';
-import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
+import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import FoodContext from '../context/FoodContext';
 
-const FoodDetails = () => {
+const DrinkDetails = () => {
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
 
-  const { foodDetails, setFoodDetails } = useContext(FoodContext);
-  const { drinks } = useContext(DrinksContext);
+  const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
+  const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
-
-  foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
+  const [loading, setLoading] = useState(true);
 
   const getIngredients = () => {
-    const ingredientsArr = foodDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Ingredient') && i[1] !== ''));
+    const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
+      .filter((i) => i[0].includes('Ingredient') && i[1] !== null));
     const ingredientsOnly = ingredientsArr.map((item) => item
       .map((i) => i.pop())).map((item) => item);
     setIngredients(ingredientsOnly);
   };
 
   const getMeasure = () => {
-    const measuresArr = foodDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
+    const measuresArr = drinkDetails.map((item) => Object.entries(item)
+      .filter((i) => i[0].includes('Measure') && i[1] !== null && i[1] !== 'undefined'));
     const measuresOnly = measuresArr.map((item) => item
       .map((i) => i.pop())).map((item) => item);
     setMeasures(measuresOnly);
   };
 
   useEffect(() => {
-    fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
+    fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
+    setLoading(false);
   }, [actualPath]);
 
   useEffect(() => {
     getIngredients();
     getMeasure();
-  }, [foodDetails]);
+  }, [drinkDetails]);
 
-  return (
+  return loading ? <p>Carregando...</p> : (
     <div>
       {
-        foodDetails.map(({
-          strMealThumb,
-          strMeal,
+        drinkDetails.map(({
+          strDrinkThumb,
+          strDrink,
           strCategory,
           strInstructions,
-          strYoutube,
+          strAlcoholic,
         }, i) => (
           <div key={ i }>
             <img
-              key={ strMealThumb }
-              src={ strMealThumb }
+              key={ strDrinkThumb }
+              src={ strDrinkThumb }
               alt="thumbnail"
               data-testid="recipe-photo"
               className="details-image"
             />
-            <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
+            <h1 key={ strDrink } data-testid="recipe-title">{strDrink}</h1>
             <button
               type="button"
               data-testid="share-btn"
@@ -79,6 +80,7 @@ const FoodDetails = () => {
             >
               <img src={ blackHeartIcon } alt="favorite-icon" />
             </button>
+            <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
             <ul>
@@ -94,19 +96,10 @@ const FoodDetails = () => {
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            <iframe
-              data-testid="video"
-              key={ strYoutube }
-              frameBorder="0"
-              title="video"
-              width="200"
-              height="200"
-              src={ strYoutube }
-            />
             <div className="recomended-wrapper">
               <div className="recomended">
-                { drinks.map((drink, indice) => (
-                  DrinkRecomendationCard(drink, indice)
+                { foods.map((recipe, indice) => (
+                  FoodRecomendationCard(recipe, indice)
                 ))}
               </div>
             </div>
@@ -124,4 +117,4 @@ const FoodDetails = () => {
   );
 };
 
-export default FoodDetails;
+export default DrinkDetails;

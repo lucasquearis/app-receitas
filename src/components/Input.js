@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ textInput, textLabel, onChange, name, testId, placeH, id, value }) => (
+const Input = ({
+  textInput,
+  textLabel,
+  onChange,
+  name,
+  datatestId,
+  placeH,
+  id,
+  value,
+}) => (
   <label htmlFor={ id }>
     {textLabel}
     <input
       type={ textInput }
       name={ name }
-      data-testId={ testId }
+      data-testId={ datatestId }
       onChange={ onChange }
       placeholder={ placeH }
       id={ id }
@@ -21,7 +30,7 @@ Input.propTypes = {
   textLabel: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  testId: PropTypes.string.isRequired,
+  datatestId: PropTypes.string.isRequired,
   placeH: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

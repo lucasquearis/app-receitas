@@ -5,6 +5,7 @@ import { fetchMealApi, fetchCategoriesMealApi } from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
   const [foods, setFoods] = useState([]);
+  const [foodDetails, setFoodDetails] = useState([]);
   const [foodFilter, setFoodFilter] = useState({
     searchText: '',
     search: '',
@@ -29,6 +30,8 @@ const FoodProvider = ({ children }) => {
     foodFilter,
     setFoodFilter,
     setFoods,
+    setFoodDetails,
+    foodDetails,
     categoriesMeal,
     mealsByCategories,
     setMealsByCategories,
