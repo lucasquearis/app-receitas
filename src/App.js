@@ -4,12 +4,6 @@ import './styles/App.css';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
-<<<<<<< HEAD
-import RecipeDetails from './pages/RecipeDetails';
-import FoodInProgress from './pages/FoodInProgress';
-import DrinkInProgress from './pages/DrinkInProgress';
-=======
->>>>>>> 358348131d11a7d0e6c4d2dee59779377047a0da
 import Profile from './pages/Profile';
 import ExploreFoods from './pages/explore-pages/ExploreFoods';
 import Explore from './pages/explore-pages/Explore';
@@ -48,25 +42,14 @@ export default function App() {
       />
       <Route
         exact
-<<<<<<< HEAD
-        path="/comidas/:id"
-=======
         path="/:type/:id"
->>>>>>> 358348131d11a7d0e6c4d2dee59779377047a0da
         render={ (props) => <RecipeDetails { ...props } /> }
       />
       <Route
         exact
-<<<<<<< HEAD
-        path="/bebidas/:id"
-        render={ (props) => <RecipeDetails { ...props } /> }
-=======
         path="/:type/:id/in-progress"
         render={ (props) => <ProgressRecipes { ...props } /> }
->>>>>>> 358348131d11a7d0e6c4d2dee59779377047a0da
       />
-      <Route exact path="/comidas/:id/in-progress" component={ FoodInProgress } />
-      <Route exact path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
     </Switch>
   );
 }

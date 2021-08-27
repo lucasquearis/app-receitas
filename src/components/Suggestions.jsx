@@ -5,14 +5,15 @@ function Sugestions({ type }) {
   const urlMealsSugestions = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const urlDrinksSugestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
-  const correctURL = type === 'meals' ? urlMealsSugestions : urlDrinksSugestions;
+  const correctURL = type === 'bebidas' ? urlMealsSugestions : urlDrinksSugestions;
 
   useEffect(() => {
     const fetchSugestions = async () => {
       const request = await fetch(`${correctURL}`);
       const response = await request.json();
-      const resSugestion = type === 'meals' ? await response.meals.filter((item, key) => (
-        key < Number('6')))
+      const resSugestion = type === 'bebidas'
+        ? await response.meals.filter((item, key) => (
+          key < Number('6')))
         : await response.drinks.filter((item, key) => (
           key < Number('6')));
       setSugestions(resSugestion);
