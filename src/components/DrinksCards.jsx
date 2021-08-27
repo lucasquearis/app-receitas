@@ -5,14 +5,17 @@ import DrinkCard from './DrinkCard';
 import { useFetchApiDrinks } from '../customHooks/useFetchApi';
 
 export default function DrinksCards() {
-  const { dataDrinks, searchDataDrinks } = useContext(Context);
+  const { dataDrinks, searchDataDrinks, loading } = useContext(Context);
   const [getDrinksApi] = useFetchApiDrinks();
   const DOZE = 12;
   const UM = 1;
 
   useEffect(() => { getDrinksApi(); }, []);
 
-  if (searchDataDrinks.length === UM) {
+  const showAlert = (func, mensagem) => func(mensagem);
+  const msgNotRecipe = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+
+  if (searchDataDrinks && searchDataDrinks.length === UM) {
     return <Redirect to={ `/bebidas/${searchDataDrinks[0].idDrink}` } />;
   }
 
@@ -25,8 +28,16 @@ export default function DrinksCards() {
     return data;
   };
 
+  if (loading === true) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <ul>
+      {
+        (searchDataDrinks === null || !searchDataDrinks)
+        && showAlert(alert, msgNotRecipe)
+      }
       { dataDrinks ? (
         selectData(dataDrinks, searchDataDrinks)
           .filter((_item, index) => index < DOZE)
