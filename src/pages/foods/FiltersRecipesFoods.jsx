@@ -8,7 +8,7 @@ import getRecipes from '../../redux/actions/getRecipes';
 function FiltersRecipesFoods({ getCategory, getRecipesNotFilter }) {
   const [categories, setCategories] = useState([]);
   const [isMouted, setisMouted] = useState(false);
-  const [isToggle, setisToggle] = useState(false);
+  const [isToggle, setisToggle] = useState('');
   const [isFilteredCategory, setFilteredCategory] = useState(false);
 
   const getCategories = () => {
@@ -24,15 +24,21 @@ function FiltersRecipesFoods({ getCategory, getRecipesNotFilter }) {
 
   useEffect(getCategories);
 
-  async function handleClick({ target }) {
-    if (!isFilteredCategory) {
-      getCategory(target.value);
+  async function handleClick({ value }) {
+    if (!isFilteredCategory || isToggle !== value) {
+      getCategory(value);
       setFilteredCategory(true);
-    } else {
-      const recipes = await fetchSearchFoodsApi('name', '');
-      getRecipesNotFilter(recipes);
-      setFilteredCategory(false);
+      return setisToggle(value);
     }
+    const recipes = await fetchSearchFoodsApi('name', '');
+    getRecipesNotFilter(recipes);
+    setFilteredCategory(false);
+  }
+
+  async function setCategoryAll() {
+    const recipes = await fetchSearchFoodsApi('name', '');
+    getRecipesNotFilter(recipes);
+    setFilteredCategory(false);
   }
 
   return (
@@ -43,11 +49,18 @@ function FiltersRecipesFoods({ getCategory, getRecipesNotFilter }) {
           type="button"
           data-testid={ `${strCategory}-category-filter` }
           value={ strCategory }
-          onClick={ (e) => handleClick(e) }
+          onClick={ ({ target }) => handleClick(target) }
         >
           {strCategory}
         </button>
       ))}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ setCategoryAll }
+      >
+        All
+      </button>
     </>
   );
 }
@@ -59,6 +72,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 FiltersRecipesFoods.propTypes = {
   getCategory: func.isRequired,
+  getRecipesNotFilter: func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(FiltersRecipesFoods);

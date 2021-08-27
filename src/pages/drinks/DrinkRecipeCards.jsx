@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import RecipeCard from '../../components/RecipeCard';
@@ -11,12 +10,10 @@ function DrinkRecipeCards({ recipes }) {
 
   return (
     <>
-      {recipes.length === 1
-        ? <Redirect to={ `/bebidas/${recipes[0].idDrink}` } />
-        : ''}
 
       {firstTwelve.map((recipe, index) => (
         <RecipeCard
+          id={ recipe.idDrink }
           key={ index }
           name={ recipe.strDrink }
           src={ recipe.strDrinkThumb }

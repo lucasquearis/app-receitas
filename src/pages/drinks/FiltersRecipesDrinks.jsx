@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { func } from 'prop-types';
-import { fetchCategoriesDrinksApi } from '../../services/fetchApi';
+import { fetchCategoriesDrinksApi, fetchSearchDrinksApi } from '../../services/fetchApi';
 import { fetchRecipesForCategory } from '../../redux/actions';
+import getRecipes from '../../redux/actions/getRecipes';
 
-function FiltersRecipesDrinks({ getCategory }) {
+function FiltersRecipesDrinks({ getCategory, getRecipesNotFilter }) {
   const [categories, setCategories] = useState([]);
   const [isMouted, setisMouted] = useState(false);
+  const [isToggle, setisToggle] = useState('');
+  const [isFilteredCategory, setFilteredCategory] = useState(false);
 
   const getCategories = () => {
     const fetchCategories = async () => {
@@ -21,8 +24,21 @@ function FiltersRecipesDrinks({ getCategory }) {
 
   useEffect(getCategories);
 
-  function handleClick({ target: { value } }) {
-    getCategory(value);
+  async function handleClick({ target: { value } }) {
+    if (!isFilteredCategory || isToggle !== value) {
+      getCategory(value);
+      setFilteredCategory(true);
+      return setisToggle(value);
+    }
+    const recipes = await fetchSearchDrinksApi('name', '');
+    getRecipesNotFilter(recipes);
+    setFilteredCategory(false);
+  }
+
+  async function setCategoryAll() {
+    const recipes = await fetchSearchDrinksApi('name', '');
+    getRecipesNotFilter(recipes);
+    setFilteredCategory(false);
   }
 
   return (
@@ -38,16 +54,25 @@ function FiltersRecipesDrinks({ getCategory }) {
           {strCategory}
         </button>
       ))}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ setCategoryAll }
+      >
+        All
+      </button>
     </>
   );
 }
 
 const mapDispatchToProps = (dispatch) => ({
   getCategory: (category) => dispatch(fetchRecipesForCategory(category)),
+  getRecipesNotFilter: (recipes) => dispatch(getRecipes(recipes)),
 });
 
 FiltersRecipesDrinks.propTypes = {
   getCategory: func.isRequired,
+  getRecipesNotFilter: func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(FiltersRecipesDrinks);
