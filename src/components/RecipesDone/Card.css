@@ -6,7 +6,7 @@
   box-sizing: border-box;
   display: flex;
   height: 143;
-  margin: 30px auto;
+  margin: 15px auto;
   width: 330px;
 }
 
@@ -50,11 +50,13 @@
 }
 
 .side-container h5 {
+  color: black;
   font-family: Roboto , sans-serif;
   font-size: 21px;
   font-style: normal;
   font-weight: 500;
   line-height: 25px;
+  text-decoration: none;
 }
 
 .tags-container {
@@ -69,3 +71,12 @@
   padding: 6px;
   width: 57px;
 }
+
+.date-section {
+  display: flex;
+}
+
+.date-section p {
+  margin-right: 5px;
+}
+

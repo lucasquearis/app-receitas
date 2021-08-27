@@ -1,6 +1,6 @@
 .rd-container {
   border: solid #c4c4c4 1px;
-  height: 640px;
+  min-height: 640px;
   width: 360px;
 }
 

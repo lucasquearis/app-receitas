@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Card from '../components/RecipesDone/Card';
 import './RecipesDone.css';
 
 function RecipesDone() {
-  const index = '1';
-  const categoria = 'British - Dessert';
-  const recipeName = 'Chelsea Buns';
-  const dataWasDone = 'Feita em: 25/08/2021';
-  const tags = ['bun', 'baking'];
-  const imgSrc = 'https://images.tcdn.com.br/img/img_prod/697730/adesivo_lateral_vidro_caminhao_carro_decorativo_bart_simpson_5_1147485849_1_20201005081814.jpg';
+  const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const [filter, setFilter] = useState('All');
+  let filteredArray = getDoneRecipes;
+
+  switch (filter) {
+  case 'Food':
+    filteredArray = getDoneRecipes.filter((item) => item.type === 'comida');
+    break;
+  case 'Drink':
+    filteredArray = getDoneRecipes.filter((item) => item.type === 'bebida');
+    break;
+  default:
+    filteredArray = getDoneRecipes;
+  }
+
   return (
     <div className="rd-container">
       <Header title="Receitas Feitas" />
@@ -20,28 +29,53 @@ function RecipesDone() {
           name="All"
           testId="filter-by-all-btn"
           className="rd-btn"
+          onClick={ () => setFilter('All') }
         />
         <Button
           type="button"
           name="Food"
           testId="filter-by-food-btn"
           className="rd-btn"
+          onClick={ () => setFilter('Food') }
         />
         <Button
           type="button"
           name="Drink"
           testId="filter-by-drink-btn"
           className="rd-btn"
+          onClick={ () => setFilter('Drink') }
         />
       </div>
-      <Card
-        index={ index }
-        categoria={ categoria }
-        name={ recipeName }
-        data={ dataWasDone }
-        tags={ tags }
-        imgSrc={ imgSrc }
-      />
+      {filteredArray.map((item, i) => {
+        if (item.type === 'comida') {
+          return (<Card
+            key={ i }
+            id={ item.id }
+            categoria={ item.category }
+            name={ item.name }
+            date={ item.doneDate }
+            tags={ item.tags }
+            imgSrc={ item.image }
+            type={ item.type }
+            index={ i }
+            area={ item.area }
+          />
+          );
+        }
+        return (<Card
+          key={ i }
+          id={ item.id }
+          categoria={ item.alcoholicOrNot }
+          name={ item.name }
+          date={ item.doneDate }
+          tags={ item.tags }
+          imgSrc={ item.image }
+          type={ item.type }
+          index={ i }
+          area={ item.area }
+        />
+        );
+      })}
     </div>
   );
 }
