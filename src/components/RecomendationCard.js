@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   getRecomendationsDrinks,
-  getRecomendationsMeals } from '../services/apiRequisitions';
+  getRecomendationsMeals } from '../services/genericFetchAPI';
 
 function RecomendationCard({ type }) {
   const [recomendations, setRecomendations] = useState([]);

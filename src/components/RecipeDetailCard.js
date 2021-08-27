@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import RecomendationCard from './RecomendationCard';
-import YoutubeEmbed from './YoutubeEmbed';
-import { getMealById, getDrinkById } from '../services/apiRequisitions';
+import { getMealById, getDrinkById } from '../services/genericFetchAPI';
 
 function getIngredients(recipe, setIngredientName, setIngredientMeasure) {
   const MAX_INGREDIENTS = 20;
@@ -26,7 +25,6 @@ function RecipeDetail() {
   const [recipe, setRecipe] = useState();
   const [ingredientName, setIngredientName] = useState([1, 2]);
   const [ingredientMeasure, setIngredientMeasure] = useState([]);
-  const youtubeId = 32;
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -52,7 +50,7 @@ function RecipeDetail() {
       >
         {recipe.strCategory === 'Cocktail' ? recipe.strAlcoholic : recipe.strCategory}
       </p>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <h5 data-testid="instructions">{ `${recipe.strInstructions}` }</h5>
       { ingredientName.map((ingredient, index) => (
         <p
           key={ index }
@@ -62,9 +60,14 @@ function RecipeDetail() {
         </p>
       ))}
       { pathname.includes('comidas') ? (
-        <YoutubeEmbed videoId={ `${recipe.strYoutube.substring(youtubeId)}` } />) : null}
-      { pathname.includes('comidas') ? (<RecomendationCard type="drinks" />)
-        : (<RecomendationCard type="meals" />)}
+        <iframe
+          width="420"
+          height="315"
+          src={ `${(recipe.strYoutube).replace('watch?v=', 'embed/')}` }
+          title="video"
+          data-testid="video"
+        />) : null}
+      <RecomendationCard type="meals" />
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </section>
   ) : <p>Loading</p>;
