@@ -5,6 +5,8 @@ import Context from './Context';
 export default function Provider({ children }) {
   const [dataMeals, setDataMeals] = useState('');
   const [dataDrinks, setDataDrinks] = useState('');
+  const [searchDataMeals, setSearchDataMeals] = useState([]);
+  const [searchDataDrinks, setSearchDataDrinks] = useState([]);
   const [btnCategoryMeals, setBtnCategoryMeals] = useState('');
   const [btnCategoryDrinks, setBtnCategoryDrinks] = useState('');
   const [listCategoryMeals, setListCategoryMeals] = useState();
@@ -15,14 +17,18 @@ export default function Provider({ children }) {
     setDataMeals,
     dataDrinks,
     setDataDrinks,
+    searchDataMeals,
+    setSearchDataMeals,
+    searchDataDrinks,
+    setSearchDataDrinks,
     btnCategoryMeals,
     setBtnCategoryMeals,
     btnCategoryDrinks,
     setBtnCategoryDrinks,
-    setListCategoryMeals,
     listCategoryMeals,
-    setListCategoryDrinks,
+    setListCategoryMeals,
     listCategoryDrinks,
+    setListCategoryDrinks,
   };
 
   return (
