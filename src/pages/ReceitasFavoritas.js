@@ -53,14 +53,15 @@ function ReceitasFavoritas() {
       >
         Drinks
       </button>
-      { favoriteRecipes.map((recipe, index) => (
-        <FavoriteCard
-          key={ recipe.name }
-          recipe={ recipe }
-          updateFavorite={ updateFavorite }
-          index={ index }
-        />
-      )) }
+      {favoriteRecipes ? (
+        favoriteRecipes.map((recipe, index) => (
+          <FavoriteCard
+            key={ recipe.name }
+            recipe={ recipe }
+            updateFavorite={ updateFavorite }
+            index={ index }
+          />
+        ))) : null }
     </div>
   );
 }
