@@ -3,7 +3,7 @@ import RecipesContext from '../context/RecipesContext';
 
 function FoodDAPI() {
   const empthRequest = 'search.php?s=';
-  const { setFoodData, setFoodCategory, foodCategory } = useContext(RecipesContext);
+  const { setFoodData, setFoodCategory, foodCategory, food } = useContext(RecipesContext);
   const numberCategory = 5;
   useEffect(() => {
     const response = async (request) => {
@@ -15,13 +15,15 @@ function FoodDAPI() {
           } else setFoodCategory(meals.slice(0, numberCategory));
         });
     };
-    if (foodCategory.length > 1) {
-      response(empthRequest);
-    } else {
-      response(empthRequest);
-      response('list.php?c=list');
+    if (food) {
+      if (foodCategory.length > 1) {
+        response(empthRequest);
+      } else {
+        response(empthRequest);
+        response('list.php?c=list');
+      }
     }
-  }, [setFoodData, setFoodCategory, foodCategory]);
+  }, [setFoodData, setFoodCategory, foodCategory, food]);
 }
 
 export default FoodDAPI;
