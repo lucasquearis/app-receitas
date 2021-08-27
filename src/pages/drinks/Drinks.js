@@ -10,7 +10,7 @@ const Drinks = ({ storeItems }) => {
     return (
       <div>
         <Header>Bebidas</Header>
-        <CardsList array={ storeItems } />
+        <CardsList array={ storeItems } teste="recipe-card" />
       </div>
     );
   }
