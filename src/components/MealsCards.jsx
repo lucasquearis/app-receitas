@@ -28,10 +28,19 @@ export default function MealsCard() {
     return <Redirect to={ `/comidas/${searchDataMeals[0].idMeal}` } />;
   }
 
+  const selectData = (principalMeals, searchMeals) => {
+    if (searchDataMeals <= UM) {
+      const data = principalMeals;
+      return data;
+    }
+    const data = searchMeals;
+    return data;
+  };
+
   return (
     <ul>
       { dataMeals ? (
-        dataMeals
+        selectData(dataMeals, searchDataMeals)
           .filter((_item, index) => index < DOZE)
           .map((meal, index) => (
             <MealCard

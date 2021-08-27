@@ -16,10 +16,19 @@ export default function DrinksCards() {
     return <Redirect to={ `/bebidas/${searchDataDrinks[0].idDrink}` } />;
   }
 
+  const selectData = (principalDrinks, searchDrinks) => {
+    if (searchDataDrinks <= UM) {
+      const data = principalDrinks;
+      return data;
+    }
+    const data = searchDrinks;
+    return data;
+  };
+
   return (
     <ul>
       { dataDrinks ? (
-        dataDrinks
+        selectData(dataDrinks, searchDataDrinks)
           .filter((_item, index) => index < DOZE)
           .map((drink, index) => (
             <DrinkCard
