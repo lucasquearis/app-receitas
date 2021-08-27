@@ -3,10 +3,10 @@ import { useHistory, Link } from 'react-router-dom';
 import HeaderDrinks from '../components/HeaderDrinks';
 import DrinksCard from '../components/DrinksCard';
 import DrinksContext from '../context/DrinksContext';
-import './drinks.css';
-import '../components/drinksCard.css';
 import FooterMenu from '../components/FooterMenu';
 import ButtonCategoriesDrinks from '../components/ButtonCategoriesDrinks';
+import './drinks.css';
+import '../components/drinksCard.css';
 
 const Drinks = () => {
   const { drinks, categoriesDrinks, drinksByCategories } = useContext(DrinksContext);
