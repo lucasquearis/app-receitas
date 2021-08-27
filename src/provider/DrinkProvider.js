@@ -17,7 +17,14 @@ export default function DrinkProvider({ children }) {
   }, []);
 
   return (
-    <DrinkContext.Provider value={ { drinks, setDrinks, categories, setCategories } }>
+    <DrinkContext.Provider
+      value={ {
+        drinks,
+        setDrinks,
+        categories,
+        setCategories,
+      } }
+    >
       {children}
     </DrinkContext.Provider>
   );
