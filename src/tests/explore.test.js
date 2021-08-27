@@ -3,7 +3,14 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import loginSteps from './helpers/loginSteps';
-import { buttonId, exploreButtonId, exploreDrinksId, exploreFoodId, VALID_EMAIL, VALID_PASSWORD } from './helpers/mocks';
+import {
+  buttonId,
+  exploreButtonId,
+  exploreDrinksId,
+  exploreFoodId,
+  VALID_EMAIL,
+  VALID_PASSWORD,
+} from './helpers/mocks';
 import renderWithRouter from './helpers/renderWithRouter';
 
 let currentHistory;
