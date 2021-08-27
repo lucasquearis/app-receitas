@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState, useContext } from 'react';
 import './Header.css';
 import { Link, Redirect } from 'react-router-dom';
