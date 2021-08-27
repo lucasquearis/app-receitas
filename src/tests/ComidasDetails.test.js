@@ -1,10 +1,12 @@
 import React from 'react';
-import { act, screen, waitForElement, waitForElementToBeRemoved } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import { act, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import ComidasDetails from '../pages/ComidasDetails';
 import fetchMock from '../../cypress/mocks/fetch';
-import userEvent from '@testing-library/user-event';
+
+jest.mock('clipboard-copy', () => jest.fn());
+const copy = require('clipboard-copy');
 
 describe('Testes para a pagina de detalhes de comidas', () => {
   beforeEach(() => {
@@ -77,6 +79,50 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     const { location: { pathname } } = history;
 
     expect(pathname).toBe('/comidas/52771/in-progress');
+  });
 
-  })
+  it('Verifica se o botao de compartilhar copia o link da receita', async () => {
+    copy.mockImplementation(() => null);
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
+    const copyLink = await screen.findByTestId('share-btn');
+
+    userEvent.click(copyLink);
+
+    expect(copy).toHaveBeenCalled();
+  });
+
+  it('Verifica se o coracao do botao de favoritar vem preenchido', async () => {
+    const favoriteRecipes = [{
+      "id": "52771",
+      "type": "comida",
+      "area": "Italian",
+      "category": "Vegetarian",
+      "alcoholicOrNot": "",
+      "name": "Spicy Arrabiata Penne",
+      "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+    }];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
+    const favoriteImage = await screen.findByTestId('favorite-btn');
+
+    expect(favoriteImage).toHaveAttribute('src', 'blackHeartIcon.svg');
+  });
+
+  it('Verifica se o coracao do botao de favoritar vem vazio', async () => {
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
+    const favoriteImage = await screen.findByTestId('favorite-btn');
+
+    expect(favoriteImage).toHaveAttribute('src', 'whiteHeartIcon.svg');
+  });
+
+  it('Verifica que se clicar no botao favorita ou desfavorita a receita', async () => {
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
+    const favoriteImage = await screen.findByTestId('favorite-btn');
+
+    expect(favoriteImage).toHaveAttribute('src', 'whiteHeartIcon.svg');
+    userEvent.click(favoriteImage);
+    expect(favoriteImage).toHaveAttribute('src', 'blackHeartIcon.svg');
+    userEvent.click(favoriteImage);
+    expect(favoriteImage).toHaveAttribute('src', 'whiteHeartIcon.svg');
+  });
 });
