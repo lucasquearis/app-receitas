@@ -10,29 +10,43 @@ import shareIcon from '../images/shareIcon.svg';
 
 const maxSuggestions = 6;
 
-const heartIcon = () => {
-  const isFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  return isFavorite ? blackHeartIcon : whiteHeartIcon;
-};
-
 function DrinkDetails(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tip, setTip] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { strDrinkThumb, strDrink, strInstructions, strAlcoholic } = data;
+  const [icon, setIcon] = useState(whiteHeartIcon);
+  const { strDrinkThumb,
+    strDrink, strInstructions, strAlcoholic, idDrink, strCategory } = data;
 
   const { history: { location: { pathname } } } = props;
   useEffect(() => {
     const id = pathname.split('/')[2];
     fetchAPI.fetchDrinkById(id).then(({ drinks }) => setData(drinks[0]));
     fetchAPI.fetchRecipeSuggestions().then(({ meals }) => setTip(meals));
+
+    const heartIcon = () => {
+      const isFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      return isFavorite ? setIcon(blackHeartIcon) : setIcon(whiteHeartIcon);
+    };
+
+    heartIcon();
   }, []);
 
   useEffect(() => {
     setLoading(false);
-  }, [data]);
+  }, [data, icon]);
+
+  const favoriteRecipes = [{
+    id: idDrink,
+    type: 'bebida',
+    area: '',
+    category: strCategory,
+    alcoholicOrNot: strAlcoholic,
+    name: strDrink,
+    image: strDrinkThumb,
+  }];
 
   const getIngredients = () => {
     const keys = Object.keys(data).filter((key) => key.includes('strIngredient'));
@@ -55,8 +69,7 @@ function DrinkDetails(props) {
   const buttonName = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const condition = inProgress ? inProgress.cocktails[data.idDrink] : undefined;
-    if (condition === undefined) return 'Iniciar Receita';
-    return 'Continuar Receita';
+    return condition ? 'Continuar Receita' : 'Iniciar Receita';
   };
 
   const handleClick = () => setRedirect(true);
@@ -66,6 +79,17 @@ function DrinkDetails(props) {
     copy(`http://localhost:3000${pathname}`);
   };
 
+  const setFavorite = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  };
+
+  function toggleHeartIcon() {
+    const bool = icon === whiteHeartIcon
+      ? setIcon(blackHeartIcon) : setIcon(whiteHeartIcon);
+    setFavorite();
+    return bool;
+  }
+
   if (redirect) return <Redirect to={ `/bebidas/${data.idDrink}/in-progress` } />;
 
   if (loading) return <h1>Loading...</h1>;
@@ -74,15 +98,19 @@ function DrinkDetails(props) {
       <Image fluid data-testid="recipe-photo" src={ strDrinkThumb } alt="recipe" />
       <div className="favorite-container">
         <h2 data-testid="recipe-title">{strDrink}</h2>
-        <button
+        <Image
           data-testid="share-btn"
-          type="button"
+          src={ shareIcon }
+          alt="share icon"
           onClick={ () => shareHandleClick() }
-        >
-          <img src={ shareIcon } alt="share icon" />
-          {copied && <span>Link copiado!</span>}
-        </button>
-        <Image data-testid="favorite-btn" alt="heart" src={ heartIcon() } />
+        />
+        {copied && <span>Link copiado!</span>}
+        <Image
+          data-testid="favorite-btn"
+          alt="heart"
+          src={ icon }
+          onClick={ () => toggleHeartIcon() }
+        />
         <h4 data-testid="recipe-category">{ strAlcoholic }</h4>
       </div>
       <h4>Ingredientes</h4>

@@ -10,11 +10,6 @@ import shareIcon from '../images/shareIcon.svg';
 
 const maxSuggestions = 6;
 
-const heartIcon = () => {
-  const isFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  return isFavorite ? blackHeartIcon : whiteHeartIcon;
-};
-
 function RecipesDetails(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,13 +17,29 @@ function RecipesDetails(props) {
   const [URLId, setURLId] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [copied, setCopied] = useState(false);
-  const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = data;
+  const [icon, setIcon] = useState(whiteHeartIcon);
+  const {
+    idMeal,
+    strArea,
+    strMealThumb,
+    strMeal,
+    strCategory,
+    strInstructions,
+    strYoutube,
+  } = data;
 
   const { history: { location: { pathname } } } = props;
   useEffect(() => {
     const id = pathname.split('/')[2];
     fetchAPI.fetchRecipeById(id).then(({ meals }) => setData(meals[0]));
     fetchAPI.fetchDrinkSuggestions().then(({ drinks }) => setTip(drinks));
+
+    const heartIcon = () => {
+      const isFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      return isFavorite ? setIcon(blackHeartIcon) : setIcon(whiteHeartIcon);
+    };
+
+    heartIcon();
   }, []);
 
   useEffect(() => {
@@ -36,34 +47,38 @@ function RecipesDetails(props) {
     setLoading(false);
   }, [data]);
 
+  const favoriteRecipes = [{
+    id: idMeal,
+    type: 'comida',
+    area: strArea,
+    category: strCategory,
+    alcoholicOrNot: '',
+    name: strMeal,
+    image: strMealThumb,
+  }];
+
   const getIngredients = () => {
-    const negEight = -8;
-    const negNine = -9;
-    const keys = Object.keys(data);
+    const keys = Object.keys(data).filter((key) => key.includes('strIngredient'));
     return keys.map((key, index) => {
-      if (key.includes('strIngredient')) {
-        const measure = `strMeasure${index + negEight}`;
-        return (
-          (data[key] !== '' && data[key] !== null)
-            && (
-              <p
-                key={ index + negNine }
-                data-testid={ `${index + negNine}-ingredient-name-and-measure` }
-              >
-                { `- ${data[key]} - ${data[measure]}` }
-              </p>
-            )
-        );
-      }
-      return null;
+      const measure = `strMeasure${index + 1}`;
+      return (
+        (data[key] !== '' && data[key] !== null)
+          && (
+            <p
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { `- ${data[key]} - ${data[measure]}` }
+            </p>
+          )
+      );
     });
   };
 
   const buttonName = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const condition = inProgress ? inProgress.meals[data.idMeal] : undefined;
-    if (condition === undefined) return 'Iniciar Receita';
-    return 'Continuar Receita';
+    // const condition = inProgress ? inProgress.meals[data.idMeal] : undefined;
+    return inProgress ? 'Continuar Receita' : 'Iniciar Receita';
   };
 
   const handleClick = () => setRedirect(true);
@@ -73,6 +88,17 @@ function RecipesDetails(props) {
     copy(`http://localhost:3000${pathname}`);
   };
 
+  const setFavorite = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  };
+
+  function toggleHeartIcon() {
+    const bool = icon === whiteHeartIcon
+      ? setIcon(blackHeartIcon) : setIcon(whiteHeartIcon);
+    setFavorite();
+    return bool;
+  }
+
   if (redirect) return <Redirect to={ `/comidas/${data.idMeal}/in-progress` } />;
   if (loading) return <h1>Loading...</h1>;
   return (
@@ -80,15 +106,19 @@ function RecipesDetails(props) {
       <Image fluid data-testid="recipe-photo" src={ strMealThumb } alt="recipe" />
       <div className="favorite-container">
         <h2 data-testid="recipe-title">{strMeal}</h2>
-        <button
+        <Image
           data-testid="share-btn"
-          type="button"
+          src={ shareIcon }
+          alt="share icon"
           onClick={ () => shareHandleClick() }
-        >
-          <img src={ shareIcon } alt="share icon" />
-          {copied && <span>Link copiado!</span>}
-        </button>
-        <Image data-testid="favorite-btn" alt="heart" src={ heartIcon() } />
+        />
+        {copied && <span>Link copiado!</span>}
+        <Image
+          data-testid="favorite-btn"
+          alt="heart"
+          src={ icon }
+          onClick={ () => toggleHeartIcon() }
+        />
         <h4 data-testid="recipe-category">{ strCategory }</h4>
       </div>
       <h4>Ingredientes</h4>
