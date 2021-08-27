@@ -26,7 +26,7 @@ function Login() {
       ...dataLogin,
       disabledButton: validation,
     });
-  }, [email, password]);
+  }, [email, password, dataLogin]);
 
   const handleChangeEmail = ({ target: { value } }) => {
     setDataLogin({

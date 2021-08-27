@@ -1,0 +1,33 @@
+.cardRecipeMeals {
+  width: 100vw;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.card {
+  width: 45vw;
+  height: 250px;
+  margin: 5px 5px 50px 10px;
+  display: inline-block;
+}
+
+.instructions {
+  font-size: 15px;
+  display: flex;
+  justify-items: center;
+}
+
+.btn {
+  width: 100vw;
+  display: flex;
+  position: fixed;
+  bottom: 0px;
+  padding-left: 110px;
+}
+
+.contentBtn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}

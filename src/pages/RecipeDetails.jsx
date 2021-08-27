@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { fetchFoodDetails, fetchDrinksDetails } from '../services/fechRecipes';
 import FoodDetails from '../components/FoodDetails';
 import DrinksDetails from '../components/DrinkDetails';
+import './RecipeDetails.css';
 
 export default function RecipeDetails(props) {
   const { match: { params: { id }, url } } = props;
@@ -12,20 +13,22 @@ export default function RecipeDetails(props) {
     if (url === `/comidas/${id}`) {
       fetchFoodDetails(setFoodDetails, id);
     } else { fetchDrinksDetails(setDrinkDetails, id); }
-  }, []);
+  }, [id, url]);
   const { meals, food } = foodDetails;
   const { drinks, drink } = drinkDetails;
 
   if (url === `/comidas/${id}` && food) {
     const { strMeal, strMealThumb, strCategory,
-      strInstructions, strYoutube } = meals[0];
+      strInstructions, strYoutube, strArea, strTags } = meals[0];
     const filterIngredients = Object.entries(meals[0])
       .filter((item) => item[0].includes('Ingredient'))
-      .map((item) => item[1]).filter((item) => item !== '' && item.length > 0);
+      .map((item) => item[1])
+      .filter((item) => item !== '' && item !== null && item !== ' ');
 
     const filterMeasure = Object.entries(meals[0])
       .filter((item) => item[0].includes('Measure'))
-      .map((item) => item[1]).filter((item) => item !== ' ' && item.length > 0);
+      .map((item) => item[1])
+      .filter((item) => item !== ' ' && item !== null && item !== '');
     const ingredientEndMeasure = [[...filterIngredients], [...filterMeasure]];
     return (
       <FoodDetails
@@ -35,7 +38,9 @@ export default function RecipeDetails(props) {
         instructions={ strInstructions }
         youTube={ strYoutube }
         ingredientEndMeasure={ ingredientEndMeasure }
-
+        id={ id }
+        area={ strArea }
+        tag={ strTags }
       />
     );
   }
@@ -60,6 +65,7 @@ export default function RecipeDetails(props) {
         instructions={ strInstructions }
         ingredientEndMeasure={ ingredientEndMeasure }
         alcoholic={ strAlcoholic }
+        id={ id }
 
       />
     );
