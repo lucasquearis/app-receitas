@@ -7,6 +7,7 @@ function DrinkPerIngredient() {
     <>
       <Header title="Explorar Ingredientes" />
       <Footer />
+      <p>aa</p>
     </>
   );
 }
