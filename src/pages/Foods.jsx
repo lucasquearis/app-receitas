@@ -1,64 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchFoodRedux, fetchFoodsCategoriesRedux, fetchFoodByCategory,
-} from '../redux/actions/foodActions';
+import { fetchFoodRedux } from '../redux/actions/foodActions';
 import FoodsCards from '../components/FoodsCard';
-import CategoryButton from '../components/CategoryButton';
+import CategoryFoodBtn from '../components/CategoryFoodBtn';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Foods() {
   const dispatch = useDispatch();
   const foodsLimits = 12;
-  const buttonLimits = 5;
-  const [current, setCurrent] = useState('');
-
-  const foods = useSelector((state) => state.foodsAndDrinks.meals);
-  const { categories } = useSelector((state) => state.foodsAndDrinks);
+  // const [current, setCurrent] = useState('');
+  const { meals } = useSelector((state) => state.foodsAndDrinks);
+  // const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
     dispatch(fetchFoodRedux);
-    dispatch(fetchFoodsCategoriesRedux);
+    // dispatch(fetchFoodsCategoriesRedux);
   }, [dispatch]);
-
-  const onClick = (name) => {
-    if (current === name || name === 'All') {
-      setCurrent('');
-
-      dispatch(fetchFoodRedux);
-    } else {
-      dispatch(fetchFoodByCategory(name));
-      setCurrent(name);
-    }
-  };
-
-  if (!foods) {
-    return (
-      <h1>Loading</h1>
-    );
-  }
 
   const headerProps = {
     title: 'Comidas',
     renderSearchBar: true,
   };
 
+  if (meals.length === 0) {
+    return (
+      <h1>Loading</h1>
+    );
+  }
+
   return (
     <>
       <Header { ...headerProps } />
-      <div>
-        <button
-          type="button"
-          onClick={ () => onClick('All') }
-        >
-          All
-        </button>
-        { categories.meals.slice(0, buttonLimits).map(
-          (category, id) => CategoryButton(category.strCategory, id, onClick),
-        )}
+      <div className="recipes-list">
+        <CategoryFoodBtn />
 
-        {foods.slice(0, foodsLimits).map(
+        {meals.slice(0, foodsLimits).map(
+
           (food, id) => FoodsCards(
             food, 'comidas', id,
           ),

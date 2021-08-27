@@ -1,59 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDrinksRedux,
-  fetchDrinksCategoriesRedux, fetchDrinksByCategory } from '../redux/actions/foodActions';
+import { fetchDrinksRedux } from '../redux/actions/foodActions';
 import DrinksCards from '../components/DrinksCard';
-import CategoryButton from '../components/CategoryButton';
+import CategoryDrinkBtn from '../components/CategoryDrinkBtn';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Drinks() {
   const dispatch = useDispatch();
   const drinksLimits = 12;
-  const buttonLimits = 5;
-  const [current, setCurrent] = useState('');
-
-  const drinks = useSelector((state) => state.foodsAndDrinks.drinks);
-  const { categories } = useSelector((state) => state.foodsAndDrinks);
+  // const [current, setCurrent] = useState('');
+  const { drinks } = useSelector((state) => state.foodsAndDrinks);
+  // const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
     dispatch(fetchDrinksRedux);
-    dispatch(fetchDrinksCategoriesRedux);
+    // dispatch(fetchDrinksCategoriesRedux);
   }, [dispatch]);
 
-  const onClick = (name) => {
-    if (current === name || name === 'All') {
-      setCurrent('');
-      dispatch(fetchDrinksRedux);
-    } else {
-      dispatch(fetchDrinksByCategory(name));
-      setCurrent(name);
-    }
+  const headerProps = {
+    title: 'Bebidas',
+    renderSearchBar: true,
   };
 
-  if (!drinks) {
+  if (drinks.length === 0) {
     return (
       <h1>Loading</h1>
     );
   }
-
   return (
-    <div>
-      <button
-        type="button"
-        onClick={ () => onClick('All') }
-      >
-        All
-      </button>
-      { categories.drinks.slice(0, buttonLimits).map(
-        (category, id) => CategoryButton(category.strCategory, id, onClick),
-      )}
+    <>
+      <Header { ...headerProps } />
+      <div className="recipes-list">
+        <CategoryDrinkBtn />
 
-      { drinks.slice(0, drinksLimits).map(
-        (drink, id) => DrinksCards(
-          drink, 'bebidas', id,
-        ),
-      )}
+        {drinks.slice(0, drinksLimits).map(
+          (drink, id) => DrinksCards(
+            drink, 'bebidas', id,
+          ),
+        )}
 
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
 

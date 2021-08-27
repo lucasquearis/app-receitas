@@ -22,7 +22,7 @@ function Footer() {
   };
 
   return (
-    <div data-testId="footer">
+    <div data-testid="footer">
       <Link to="/bebidas">
         <IconBtn { ...bebidasBtnProps } />
       </Link>
