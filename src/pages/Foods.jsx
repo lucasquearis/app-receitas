@@ -28,6 +28,7 @@ function Foods() {
       <h1>Loading</h1>
     );
   }
+  
   return (
     <>
       <Header { ...headerProps } />
@@ -35,6 +36,7 @@ function Foods() {
         <CategoryFoodBtn />
 
         {meals.slice(0, foodsLimits).map(
+
           (food, id) => FoodsCards(
             food, 'comidas', id,
           ),
@@ -42,7 +44,6 @@ function Foods() {
       </div>
       <Footer />
     </>
-
   );
 }
 
