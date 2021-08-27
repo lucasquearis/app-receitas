@@ -4,6 +4,7 @@ import HeaderDetails from '../components/Details/HeaderDetails';
 import Ingredients from '../components/Details/Ingredients';
 import Instructions from '../components/Details/Instructions';
 import Recommendations from '../components/Details/Recommendations';
+import StartButton from '../components/Details/StartButton';
 import Video from '../components/Details/Video';
 import { useData } from '../Context/DataContext';
 import './Details.css';
@@ -59,18 +60,13 @@ export default function Details() {
         title={ detailsData.strMeal || detailsData.strDrink }
         category={ `${detailsData.strAlcoholic || detailsData.strCategory}` }
         photo={ detailsData.strMealThumb || detailsData.strDrinkThumb }
+        data={ detailsData }
       />
       <Ingredients data={ detailsData } />
       <Instructions instructions={ detailsData.strInstructions } />
       {(category === 'comidas') && <div><Video src={ detailsData.strYoutube } /></div>}
       <Recommendations data={ recommendationsData } />
-      <button
-        className="btn"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar receita
-      </button>
+      <StartButton category={ category } id={ id } />
     </div>
   );
 }

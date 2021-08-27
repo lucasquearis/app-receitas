@@ -108,7 +108,7 @@ function RecipeInProgress() {
       image: '',
       doneDate: '',
       tags: '' };
-    obj.type = recipeKey;
+    obj.type = recipeKey === 'Meal' ? 'comida' : 'bebida';
     obj.doneDate = currentData;
     const rd = recipeDetails;
     if (recipeKey === 'Meal') {

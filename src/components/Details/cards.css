@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-flow: row nowrap;
+  margin-bottom: 20px;
   overflow-x: scroll;
   overflow-y: hidden;
   padding: 0;

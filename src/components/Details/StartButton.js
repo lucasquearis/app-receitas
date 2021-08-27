@@ -1,26 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 
 export default function StartButton(props) {
   const { category, id } = props;
 
-  const doneRecipes = [{
-    id: 5297,
-    type: 'comidas',
-  }];
-
-  const inProgressRecipes = {
-    cocktails: {
-    },
-    meals: {
-      5297: [],
-    },
-  };
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const isDone = (ID, cat) => {
+    if (!doneRecipes) return false;
+    const type = cat === 'comidas' ? 'comida' : 'bebida';
     for (let index = 0; index < doneRecipes.length; index += 1) {
       if (parseFloat(doneRecipes[index].id) === parseFloat(ID)
-       && doneRecipes[index].type === cat) {
+       && doneRecipes[index].type === type) {
         return true;
       }
     }
@@ -28,6 +21,7 @@ export default function StartButton(props) {
   };
 
   const isInProgress = (ID, cat) => {
+    if (!inProgressRecipes) return false;
     const inProgress = cat.toLowerCase() === 'comidas'
       ? inProgressRecipes.meals
       : inProgressRecipes.cocktails;
@@ -36,14 +30,16 @@ export default function StartButton(props) {
   };
 
   return (
-    <button
-      className="btn"
-      type="button"
-      data-testid="start-recipe-btn"
-      disabled={ isDone(id, category) }
-    >
-      {isInProgress(id, category) ? 'Continuar Receita' : 'Iniciar Receita' }
-    </button>
+    <Link to={ `/${category}/${id}/in-progress` }>
+      <button
+        className="btn"
+        type="button"
+        data-testid="start-recipe-btn"
+        hidden={ isDone(id, category) }
+      >
+        {isInProgress(id, category) ? 'Continuar Receita' : 'Iniciar Receita'}
+      </button>
+    </Link>
   );
 }
 
