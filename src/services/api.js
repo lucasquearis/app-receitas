@@ -2,12 +2,10 @@ const filterAlertMsg = 'Sua busca deve conter somente 1 (um) caracter';
 let url;
 
 const currentPage = window.location.href;
-const foodPage = 'http://localhost:3000/comidas';
-const cocktailPage = 'http://localhost:3000/bebidas';
 
-if (currentPage === foodPage) {
+if (currentPage.includes('comidas')) {
   url = 'themealdb';
-} else if (currentPage === cocktailPage) {
+} else if (currentPage.includes('bebidas')) {
   url = 'thecocktaildb';
 }
 

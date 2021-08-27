@@ -5,7 +5,11 @@ const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 const FOODS_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const DRINKS_CATEGORIES_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+export const GET_INGREDIENTS = 'GET_INGREDIENTS';
+const FOODS_INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const DRINKS_INGREDIENTS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 const RECIPES_QUANTITY = 12;
+const INGREDIENTS_QUANTITY = 12;
 const CATEGORIES_QUANTITY = 5;
 
 export const loadingRecipes = () => ({
@@ -46,4 +50,22 @@ export const requestDrinksCategories = () => async (dispatch) => {
   const response = await fetch(DRINKS_CATEGORIES_URL);
   const { drinks } = await response.json();
   dispatch(getCategories(drinks));
+};
+
+export const getIngredients = (ingredients) => ({
+  type: GET_INGREDIENTS, ingredients: ingredients.slice(0, INGREDIENTS_QUANTITY),
+});
+
+export const requestFoodsIngredients = () => async (dispatch) => {
+  dispatch(loadingRecipes());
+  const response = await fetch(FOODS_INGREDIENTS_URL);
+  const { meals } = await response.json();
+  dispatch(getIngredients(meals));
+};
+
+export const requestDrinksIngredients = () => async (dispatch) => {
+  dispatch(loadingRecipes());
+  const response = await fetch(DRINKS_INGREDIENTS_URL);
+  const { drinks } = await response.json();
+  dispatch(getIngredients(drinks));
 };

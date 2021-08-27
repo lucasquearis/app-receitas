@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
-  requestFoods,
   requestFoodsCategories,
-  requestDrinks,
   requestDrinksCategories,
   getRecipes,
+  getCategories,
 } from '../redux/actions/recipesActions';
 import {
   getDataByIngredient,
@@ -30,11 +29,9 @@ export default function useRecipes(setRedirect) {
   useEffect(() => {
     if (currentPage === '/comidas') {
       setPageObjName('meals');
-      dispatch(requestFoods());
       dispatch(requestFoodsCategories());
     } else if (currentPage === '/bebidas') {
       setPageObjName('drinks');
-      dispatch(requestDrinks());
       dispatch(requestDrinksCategories());
     }
   }, [currentPage, dispatch]);
@@ -44,8 +41,6 @@ export default function useRecipes(setRedirect) {
       dispatch(getRecipes([]));
       // eslint-disable-next-line no-alert
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    } else {
-      dispatch(getRecipes(data));
     }
   }, [data, dispatch]);
 
@@ -82,6 +77,11 @@ export default function useRecipes(setRedirect) {
   useEffect(() => () => {
     setSearched(false);
   }, [searched]);
+
+  useEffect(() => () => {
+    dispatch(getRecipes([]));
+    dispatch(getCategories([]));
+  }, [dispatch]);
 
   return {
     setInputValue,
