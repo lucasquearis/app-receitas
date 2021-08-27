@@ -1,8 +1,13 @@
-import { GET_CATEGORIES_FOOD } from '../actions/categorieButtonsAct';
+import {
+  GET_CATEGORIES_FOOD,
+  GET_ALL_MEALS,
+  GET_MEALS_BY_CATEGORY } from '../actions/categorieButtonsAct';
 
 const INITIAL_STATE = {
   foodCategories: [],
   isLoading: true,
+  button: '',
+  meals: [],
 };
 
 const foodcategories = (state = INITIAL_STATE, action) => {
@@ -17,6 +22,19 @@ const foodcategories = (state = INITIAL_STATE, action) => {
       ...state,
       foodCategories: payload.meals.slice(0, SEIS),
       isLoading: false };
+
+  case GET_ALL_MEALS:
+    return {
+      ...state,
+      meals: payload.meals,
+    };
+
+  case GET_MEALS_BY_CATEGORY:
+    return {
+      ...state,
+      meals: payload.meals,
+      button: '',
+    };
 
   default:
     return state;
