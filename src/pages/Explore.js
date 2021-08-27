@@ -6,7 +6,7 @@ import ButtonsExplore from '../components/ButtonsExplore';
 function Explore() {
   return (
     <div>
-      <Header>Explorar</Header>
+      <Header title="Explorar" />
       <ButtonsExplore />
       <Footer />
     </div>

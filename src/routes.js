@@ -10,6 +10,9 @@ import ExploreByArea from './pages/ExploreByArea';
 import ExploreByIngredients from './pages/ExploreByIngredient';
 import RecipesDone from './pages/RecipesDone';
 import RecipesFav from './pages/RecipesFav';
+import DrinkExplore from './pages/DrinkExplore';
+import Explore from './pages/Explore';
+import FoodExplore from './pages/FoodExplore';
 
 export default function Routes() {
   return (
@@ -34,9 +37,9 @@ export default function Routes() {
         />
         <Route exact path="/explorar/comidas/area" component={ ExploreByArea } />
         <Route exact path="/explorar/bebidas/area" component={ NotFound } />
-        <Route exact path="/explorar/comidas" component={ NotFound } />
-        <Route exact path="/explorar/bebidas" component={ NotFound } />
-        <Route exact path="/explorar" component={ NotFound } />
+        <Route exact path="/explorar/comidas" component={ FoodExplore } />
+        <Route exact path="/explorar/bebidas" component={ DrinkExplore } />
+        <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/perfil" component={ Perfil } />
         <Route exact path="/receitas-feitas" component={ RecipesDone } />
         <Route exact path="/receitas-favoritas" component={ RecipesFav } />

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import Button from '../Button';
 import Header from '../Header';
 
 function ExploreFood() {
@@ -24,35 +23,33 @@ function ExploreFood() {
 
   return (
     <section>
-      <Header>Explorar Comidas</Header>
+      <Header title="Explorar Comidas" />
       <div className="container">
-        <Link to="/explorar/comidas/ingredientes">
-          <Button
-            className="myButton btn-lg btn-warning"
-            data-testid="explore-by-ingredient"
-            type="button"
-          >
-            Por Ingredientes
-          </Button>
-        </Link>
-        <Link to="/explorar/comidas/area">
-          <Button
-            className="myButton"
-            data-testid="explore-by-area"
-            type="button"
-          >
-            Por Local de Origem
-          </Button>
-        </Link>
-        <Link to={ `/comidas/${idMeal}` }>
-          <Button
-            className="myButton2"
-            data-testid="explore-surprise"
-            type="button"
-          >
-            Me Surpreenda!
-          </Button>
-        </Link>
+
+        <Button
+          link="/explorar/comidas/ingredientes"
+          className="myButton btn-lg btn-warning"
+          testId="explore-by-ingredient"
+          type="button"
+          name="Por Ingredientes"
+        />
+
+        <Button
+          link="/explorar/comidas/area"
+          className="myButton"
+          testId="explore-by-area"
+          type="button"
+          name="Por Local de Origem"
+        />
+
+        <Button
+          link={ `/comidas/${idMeal}` }
+          className="myButton2"
+          testId="explore-surprise"
+          type="button"
+          name="Me Surpreenda!"
+        />
+
       </div>
     </section>
   );
