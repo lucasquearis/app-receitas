@@ -19,10 +19,6 @@
   display: flex;
 }
 
-.share-icon {
-  margin-right: 10px;
-}
-
 .food-category {
   color: rgb(139, 139, 139);
   font-size: 18px;
@@ -124,6 +120,7 @@
 .share-food-btn-icon {
   background: none;
   border: none;
+  margin-right: 10px;
 }
 
 .share-food-btn-icon:focus {

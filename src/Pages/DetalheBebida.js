@@ -7,7 +7,7 @@ import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidasAleatoria } from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DetalheBebida(props) {
   const { match: { params: { id } } } = props;
@@ -97,6 +97,40 @@ export default function DetalheBebida(props) {
     setMessageTime();
   };
 
+  const isFavorite = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    if (favoriteRecipes !== null) {
+      const favorite = favoriteRecipes.some((recipe) => recipe.id === drink.idDrink);
+
+      if (favorite) {
+        return (
+          <img
+            data-testid="favorite-btn"
+            src={ blackHeartIcon }
+            alt="icone de favoritar"
+          />
+        );
+      }
+
+      return (
+        <img
+          data-testid="favorite-btn"
+          src={ whiteHeartIcon }
+          alt="icone de favoritar"
+        />
+      );
+    }
+
+    return (
+      <img
+        data-testid="favorite-btn"
+        src={ whiteHeartIcon }
+        alt="icone de favoritar"
+      />
+    );
+  };
+
   return (
     <section className="food-info">
       <button
@@ -132,11 +166,7 @@ export default function DetalheBebida(props) {
               alt="icone de compartilhar"
             />
           </button>
-          <img
-            data-testid="favorite-btn"
-            src={ whiteHeartIcon }
-            alt="icone de favoritar"
-          />
+          { isFavorite() }
         </div>
       </div>
       <p
