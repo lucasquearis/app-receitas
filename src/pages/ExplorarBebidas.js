@@ -35,7 +35,7 @@ export default function ExplorarBebidas() {
       <button
         data-testid="explore-by-ingredient"
         type="button"
-        onClick={ () => history.push('/explorar/comidas/ingredientes') }
+        onClick={ () => history.push('/explorar/bebidas/ingredientes') }
       >
         Por Ingredientes
       </button>
@@ -43,7 +43,7 @@ export default function ExplorarBebidas() {
       <button
         data-testid="explore-surprise"
         type="button"
-        onClick={ () => history.push('explore/surpresas') } // Este path aponta para qual componente? Requisito 70.
+        onClick={ () => history.push('/bebidas/178319') } // Este path aponta para qual componente? Requisito 70.
       >
         Me Surpreenda!
       </button>
