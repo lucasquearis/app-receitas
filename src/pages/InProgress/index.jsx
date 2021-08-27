@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 import { Button, Form } from 'react-bootstrap';
+
+import Context from '../../context';
 
 function InProgress() {
   const { pathname } = useLocation();
@@ -13,8 +15,17 @@ function InProgress() {
   const [loading, setLoading] = React.useState(true);
   const [checkedIngredients, setCheckedIngredients] = React.useState({});
   const [isReady, setIsReady] = React.useState(false);
-
+  const { inProgressList, setInProgressList } = useContext(Context);
   const query = pathname.includes('comidas') ? 'meal' : 'drink';
+
+  useEffect(() => {
+    const type = query === 'meal' ? 'meals' : 'cocktails';
+    const recipeId = query === 'meal' ? details.idMeal : details.idDrink;
+    if (inProgressList[type]) {
+      const newCheckedIngredients = inProgressList[type][recipeId] || [];
+      setCheckedIngredients(newCheckedIngredients);
+    }
+  }, [inProgressList, setCheckedIngredients, details, query]);
 
   React.useEffect(() => {
     const api = query === 'meal' ? 'themealdb' : 'thecocktaildb';
@@ -26,14 +37,14 @@ function InProgress() {
       setDetails(filteredData);
       setLoading(false);
 
-      Object.entries(filteredData)
-        .filter((entry) => entry[0].includes('strIngredient') && entry[1])
-        .forEach((ingredient) => {
-          setCheckedIngredients((prevState) => ({
-            ...prevState,
-            [ingredient[1]]: false,
-          }));
-        });
+      // Object.entries(filteredData)
+      //   .filter((entry) => entry[0].includes('strIngredient') && entry[1])
+      //   .forEach((ingredient) => {
+      //     setCheckedIngredients((prevState) => ({
+      //       ...prevState,
+      //       [ingredient[1]]: false,
+      //     }));
+      //   });
     };
     fetchData();
   }, [id, query]);
@@ -42,12 +53,14 @@ function InProgress() {
   const name = details[`str${query.charAt(0).toUpperCase() + query.slice(1)}`];
   const ingredients = Object.entries(details)
     .filter((entry) => entry[0].includes('strIngredient') && entry[1]);
-
   const handleClick = (ingredient) => {
-    setCheckedIngredients((prevState) => ({
-      ...prevState,
-      [ingredient]: !prevState[ingredient],
-    }));
+    const type = query === 'meal' ? 'meals' : 'cocktails';
+    const recipeId = query === 'meal' ? details.idMeal : details.idDrink;
+    setInProgressList(recipeId, ingredient, type);
+    // setCheckedIngredients((prevState) => ({
+    //   ...prevState,
+    //   [ingredient]: !prevState[ingredient],
+    // }));
   };
 
   React.useEffect(() => {
@@ -73,9 +86,9 @@ function InProgress() {
         <div key={ ingredient[0] } data-testid={ `${index}-ingredient-step` }>
           <Form.Check
             label={ ingredient[1] }
-            checked={ checkedIngredients[ingredient[1]] }
+            checked={ checkedIngredients.includes(ingredient[1]) }
             onChange={ () => handleClick(ingredient[1]) }
-            className={ checkedIngredients[ingredient[1]] ? 'checked' : '' }
+            className={ checkedIngredients.includes(ingredient[1]) ? 'checked' : '' }
           />
         </div>
       ))}
