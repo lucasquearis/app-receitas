@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CardsList from '../../components/CardsList/CardsList';
 import Header from '../../components/header/Header';
+import FooterMenu from '../../components/FooterMenu/FooterMenu';
 
 const ExploreFoodArea = () => {
   const [areas, setAreas] = useState();
@@ -69,6 +70,7 @@ const ExploreFoodArea = () => {
         { filteredFoods.bool && (
           <CardsList array={ filteredFoods.foods } teste="recipe-card" />
         ) }
+        <FooterMenu />
       </div>
     );
   }
