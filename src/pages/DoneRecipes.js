@@ -3,7 +3,10 @@ import Header from '../components/Header';
 
 function FoodAreaExp() {
   return (
-    <Header name="Receitas Feitas" search={ false } />
+    <div>
+      <Header name="Receitas Feitas" search={ false } />
+      <p>DoneRecipes pages</p>
+    </div>
   );
 }
 

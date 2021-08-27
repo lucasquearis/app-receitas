@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
+  // const { history } = useHistory();
 
   // localStorage.setItem('inProgressRecipes', ({ id-da-comida }));
+  // inProgressRecipes: {
+  //   cocktails: {},
+  //   meals: { },
+  // },
 
   useEffect(() => {
     const getRecipeFood = async () => {
@@ -14,8 +20,6 @@ function FoodsInProgress() {
     };
     getRecipeFood();
   }, []);
-
-  const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
   useEffect(() => {
     const ingredientsList = () => {
@@ -31,9 +35,20 @@ function FoodsInProgress() {
     ingredientsList();
   }, [recipeFood]);
 
+  // Requisito 50 - o número '52771' é só enquanto n tivermos o id
+  const objInProgressRecipes = {
+    meals: {
+      52771: [...ingredients],
+    },
+  };
+  console.log(objInProgressRecipes);
+  localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
+
   // const handleCheked = () => (
   //   'desenvolver lógica p dar check qd é apertado a caixinha de check'
   // );
+
+  const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
   return (
     <div className="food-in-progress">
@@ -55,7 +70,7 @@ function FoodsInProgress() {
                 <input
                   type="checkbox"
                   id={ `${ingredient}` }
-                // checked={ handleCheked() }
+                  // checked={ handleCheked() }
                 />
                 { `${ingredient}` }
               </label>
@@ -66,7 +81,12 @@ function FoodsInProgress() {
 
       <h3>Instruções</h3>
       <p data-testid="instructions">{ strInstructions }</p>
-      <button data-testid="finish-recipe-btn" type="button">finalizar</button>
+
+      <Link to="/receitas-feitas">
+        <button data-testid="finish-recipe-btn" type="button">
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }

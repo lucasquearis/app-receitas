@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // 178319
 function DrinksInProgress() {
@@ -65,7 +66,12 @@ function DrinksInProgress() {
 
       <h3>Instruções</h3>
       <p data-testid="instructions">{ strInstructions }</p>
-      <button data-testid="finish-recipe-btn" type="button">finalizar</button>
+
+      <Link to="/receitas-feitas">
+        <button data-testid="finish-recipe-btn" type="button">
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }
