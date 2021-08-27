@@ -1,15 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MenuInferior from '../../components/MenuInferior';
-import Header from '../../components/Header';
 
-function Explorar() {
+function MainContent() {
   return (
     <>
-      <Header
-        pageTitle="Explorar"
-        showSearchBtn={ false }
-      />
       <Link
         key="explore-food"
         to="/explorar/comidas"
@@ -32,9 +26,8 @@ function Explorar() {
           Explorar Bebidas
         </button>
       </Link>
-      <MenuInferior />
     </>
   );
 }
 
-export default Explorar;
+export default MainContent;

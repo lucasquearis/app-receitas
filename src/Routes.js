@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router';
 import Login from './pages/Login';
 import Principal from './pages/Principal';
 import Perfil from './pages/Perfil';
-import Explorar from './pages/Explorar';
+import Explore from './pages/Explore';
 import {
   MEALS_LIST,
   MEALS_BY_CATEGORY,
@@ -43,7 +43,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
         ) }
       />
       <Route exact path="/perfil" component={ Perfil } />
-      <Route exact path="/explorar" component={ Explorar } />
+      <Route exact path="/explorar" component={ Explore } />
       {/* <Route exact path="/comidas/:id" component={ Detalhe } />
       <Route exact path="/bebidas/:id" component={ Detalhe } /> */}
     </Switch>
