@@ -30,12 +30,10 @@ function LocalDeOrigem() {
       if (areaSelected.selected === 'All') {
         const list = await fetchFoods('food', 'procuraComida');
         const { meals } = list;
-        console.log(meals);
         setReceitas([...meals]);
       } else {
         const list = await fetchFoods('food', 'filterByArea', areaSelected.selected);
         const { meals } = list;
-        console.log(meals);
         setReceitas([...meals]);
       }
     };
@@ -47,7 +45,6 @@ function LocalDeOrigem() {
     setAreaSelected({
       selected: value,
     });
-    console.log(areaSelected);
   }
 
   if (!area) return <p>Loading...</p>;

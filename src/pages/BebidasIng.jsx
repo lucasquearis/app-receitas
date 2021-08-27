@@ -24,6 +24,13 @@ function BebidasIng() {
     setIngredients(drinkList);
   };
 
+  const getDrinkById = async (ingredient) => {
+    const list = await fetchFoods('drink', 'filterIngredient', ingredient);
+    setFilterByIng({
+      ...list,
+    });
+  };
+
   function onClick(event) {
     const { name } = event.target;
     event.preventDefault();
@@ -31,9 +38,7 @@ function BebidasIng() {
       redirect: true,
       path: name,
     });
-    setFilterByIng({
-      ingredient: name,
-    });
+    getDrinkById(name);
   }
 
   useEffect(() => {
@@ -41,7 +46,7 @@ function BebidasIng() {
   }, []);
 
   console.log(ingredients);
-  if (redirect.redirect) return <Redirect to="/Bebidas" />;
+  if (redirect.redirect) return <Redirect to="/bebidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (
     <div>

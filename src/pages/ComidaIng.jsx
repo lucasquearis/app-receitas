@@ -21,23 +21,27 @@ function ComidaIng() {
     setIngredients(foods);
   };
 
+  const getFoodById = async (ingredient) => {
+    const list = await fetchFoods('food', 'filterIngredient', ingredient);
+    setFilterByIng({
+      ...list,
+    });
+  };
+
   function onClick(event) {
     const { name } = event.target;
     event.preventDefault();
     setRedirect({
       redirect: true,
     });
-    setFilterByIng({
-      ingredient: name,
-    });
+    getFoodById(name);
   }
 
   useEffect(() => {
     getIngredients();
   }, []);
 
-  console.log(ingredients);
-  if (redirect.redirect) return <Redirect to="/Comidas" />;
+  if (redirect.redirect) return <Redirect to="/comidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (
     <div>
