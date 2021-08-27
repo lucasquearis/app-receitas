@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { shape, string } from 'prop-types';
 import { fetchFoodById } from '../../services/fetchApi';
 
@@ -12,7 +11,7 @@ function DetailsFood({ match: { params: { id } } }) {
     const getFood = async () => {
       const foodData = await fetchFoodById(id);
       setFood(foodData);
-      console.log(foodData);
+      // console.log(foodData);
       setIsMount(true);
       setIsLoading(false);
     };
@@ -24,11 +23,25 @@ function DetailsFood({ match: { params: { id } } }) {
   if (isLoading) return <div>Carregando...</div>;
 
   const keysFoods = Object.keys(food);
-  const keysIngredients = keysFoods.filter((key) => (key.includes('strIngredient')));
+  const keysIngredients = keysFoods.filter((key) => (
+    key.includes('strIngredient') && !!food[key]));
+
+  // const testId = 52951; ID = testado
+
+  const allow = `accelerometer; autoplay; clipboard-write; 
+  encrypted-media; gyroscope; picture-in-picture`;
+  const videoRegex = food.strYoutube.replace(/watch\?v=/, 'embed/');
+  // console.log(videoRegex);
 
   return (
     <div>
-      <img src={ food.strMealThumb } alt="recipe" data-testid="recipe-photo" />
+      <img
+        src={ food.strMealThumb }
+        alt="recipe"
+        data-testid="recipe-photo"
+        width="150"
+        height="150"
+      />
       <h1 data-testid="recipe-title">{food.strMeal}</h1>
       <p data-testid="recipe-category">{food.strCategory}</p>
       <button type="button" data-testid="share-btn">Compartilhar</button>
@@ -45,10 +58,16 @@ function DetailsFood({ match: { params: { id } } }) {
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
       <section>
-        <video controls src={ food.strYoutube }>
-          <track default kind="captions" srcLang="en" src="" />
-          Sorry, your browser doesnt support embedded videos.
-        </video>
+        <iframe
+          width="560"
+          height="315"
+          src={ videoRegex }
+          title="YouTube video player"
+          frameBorder="0"
+          allow={ allow }
+          allowFullScreen
+          data-testid="video"
+        />
       </section>
       {/* <div data-testid={ `${index}-recomendation-card` }>
         receitas recomendadas
@@ -62,8 +81,4 @@ DetailsFood.propTypes = {
   match: shape({ params: shape({ id: string }) }).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  meals: state.payload,
-});
-
-export default connect(mapStateToProps, null)(DetailsFood);
+export default DetailsFood;

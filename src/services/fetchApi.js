@@ -6,6 +6,7 @@ const FOOD_DETAILS_BY_ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i
 const DRINK_INGREDIENT_SEARCH_API = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const DRINK_NAME_SEARCH_API = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const DRINK_FIRST_LETTER_SEARCH_API = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=';
+const DRINK_DETAILS_BY_ID = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 
 export const fetchSearchFoodsApi = async (consultBy, query) => {
   const checkConsultBy = consultBy === 'ingredient'
@@ -51,6 +52,20 @@ export const fetchFoodById = async (id) => {
     const data = await response.json();
     // console.log(data.meals[0]);
     return data.meals[0];
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const fetchDrinkById = async (id) => {
+  // const testId = 11007;
+  const endPoint = DRINK_DETAILS_BY_ID;
+  try {
+    const response = await fetch(`${endPoint}${id}`);
+    const data = await response.json();
+    console.log(data.drinks[0]);
+    return data.drinks[0];
   } catch (error) {
     console.log(error);
     return error;
