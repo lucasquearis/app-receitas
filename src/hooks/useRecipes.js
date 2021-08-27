@@ -57,7 +57,6 @@ export default function useRecipes(setRedirect) {
 
   useEffect(() => {
     if (searched) {
-      console.log(pageObjName);
       if (filterIngredient && !filterName && !filterFirstLetter) {
         getDataByIngredient(inputValue)
           .then((response) => setData(response[pageObjName]));

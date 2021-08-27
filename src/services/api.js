@@ -1,20 +1,23 @@
 const filterAlertMsg = 'Sua busca deve conter somente 1 (um) caracter';
 let url;
+const mealURL = 'themealdb';
+const drinkURL = 'thecocktaildb';
 
 const currentPage = window.location.href;
-const foodPage = 'http://localhost:3000/comidas';
-const cocktailPage = 'http://localhost:3000/bebidas';
+const foodPage = 'comidas';
+const cocktailPage = 'bebidas';
 
-if (currentPage === foodPage) {
-  url = 'themealdb';
-} else if (currentPage === cocktailPage) {
-  url = 'thecocktaildb';
+if (currentPage.includes(foodPage)) {
+  url = mealURL;
+} else if (currentPage.includes(cocktailPage)) {
+  url = drinkURL;
 }
 
 const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
 const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
 const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
 const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
 
 export const getDataByIngredient = async (ingredient) => {
   const response = await fetch(`${ingredientURL}${ingredient}`);
@@ -40,6 +43,17 @@ export const getDataByFirstLetter = async (letter) => {
   }
 
   return data;
+};
+
+export const getDataDetails = async (id) => {
+  const response = await fetch(`${detailsURL}${id}`);
+  if (currentPage.includes(foodPage)) {
+    const { meals } = await response.json();
+    console.log(meals);
+    return meals[0];
+  }
+  const { drinks } = await response.json();
+  return drinks[0];
 };
 
 export const getDataByCategory = async (category) => {
