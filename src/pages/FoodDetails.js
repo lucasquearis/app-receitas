@@ -7,6 +7,7 @@ import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import './foodDetails.css';
 
 const FoodDetails = () => {
   const history = useHistory();
@@ -58,7 +59,7 @@ const FoodDetails = () => {
           strInstructions,
           strYoutube,
         }, i) => (
-          <div key={ i }>
+          <div className="details-container" key={ i }>
             <img
               key={ strMealThumb }
               src={ strMealThumb }
