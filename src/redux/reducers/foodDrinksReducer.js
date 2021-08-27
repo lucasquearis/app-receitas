@@ -7,7 +7,8 @@ import {
   ADD_DRINK_DETAIL } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-
+  meals: [],
+  drinks: [],
 };
 
 const foodsAndDrinks = (state = INITIAL_STATE, action) => {

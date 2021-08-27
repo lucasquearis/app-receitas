@@ -9,7 +9,7 @@ function DrinksCards(drink, foodOrDrink, id) {
         <CardMedia
           component="img"
           image={ drink.strDrinkThumb }
-          height="250"
+          height="200"
           alt={ drink.strDrink }
           title={ drink.strDrink }
           data-testid={ `${id}-card-img` }
