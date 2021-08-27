@@ -3,7 +3,7 @@ import { string, objectOf, arrayOf } from 'prop-types';
 import full from '../../images/blackHeartIcon.svg';
 import { useData } from '../../Context/DataContext';
 
-function FavBtn({ favList, id, testId }) {
+function FavBtn({ favList, id, testId, className }) {
   const { setFav } = useData();
 
   const handleFavorite = () => {
@@ -16,7 +16,7 @@ function FavBtn({ favList, id, testId }) {
     <button
       type="button"
       data-testid={ testId }
-      className="favorite-btn"
+      className={ className }
       onClick={ handleFavorite }
       src={ full }
     >
@@ -33,6 +33,11 @@ FavBtn.propTypes = {
   favList: arrayOf(objectOf(string)).isRequired,
   id: string.isRequired,
   testId: string.isRequired,
+  className: string,
+};
+
+FavBtn.defaultProps = {
+  className: '',
 };
 
 export default FavBtn;

@@ -7,7 +7,6 @@ import FavBtn from './FavBtn';
 
 function Card(props) {
   const getFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  console.log(getFavRecipes);
   const { id, categoria, name, imgSrc, type, index, area } = props;
   let path = '';
 
@@ -54,6 +53,7 @@ function Card(props) {
           <FavBtn
             id={ id }
             favList={ getFavRecipes }
+            className="favorite-btn"
             testId={ `${index}-horizontal-favorite-btn` }
           />
         </section>
