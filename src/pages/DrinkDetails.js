@@ -1,12 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
 // import FoodContext from '../context/FoodContext';
+import { useHistory } from 'react-router';
 import DrinksContext from '../context/DrinksContext';
+import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const DrinkDetails = () => {
-  const { drinkDetails } = useContext(DrinksContext);
+  const history = useHistory();
+  const { pathname } = history.location;
+  const pathnameSeparate = pathname.split('/');
+  const actualPath = pathnameSeparate[2];
+
+  const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
   //   const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState();
   const [measures, setMeasures] = useState();
@@ -26,6 +33,10 @@ const DrinkDetails = () => {
       .map((i) => i.pop())).map((item) => item);
     setMeasures(measuresOnly);
   };
+
+  useEffect(() => {
+    fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
+  }, [actualPath]);
 
   useEffect(() => {
     getIngredients();

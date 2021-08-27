@@ -26,7 +26,6 @@ const Drinks = () => {
       <ButtonCategoriesDrinks categories={ categoriesDrinks } />
 
       <div className="drinks-container">
-        {console.log(drinks)}
         {drinks && drinks.slice(0, DRINKS)
           .map((drink, index) => (
             <DrinksCard

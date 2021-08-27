@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import FoodContext from '../context/FoodContext';
+import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 import DrinksContext from '../context/DrinksContext';
 import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
 import './details.css';
@@ -7,10 +9,14 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const FoodDetails = () => {
-  const { foodDetails } = useContext(FoodContext);
+  const { foodDetails, setFoodDetails } = useContext(FoodContext);
   const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState();
   const [measures, setMeasures] = useState();
+  const history = useHistory();
+  const { pathname } = history.location;
+  const pathnameSeparate = pathname.split('/');
+  const actualPath = pathnameSeparate[2];
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
@@ -29,6 +35,10 @@ const FoodDetails = () => {
       .map((i) => i.pop())).map((item) => item);
     setMeasures(measuresOnly);
   };
+
+  useEffect(() => {
+    fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
+  }, [actualPath]);
 
   useEffect(() => {
     getIngredients();
