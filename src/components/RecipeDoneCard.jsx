@@ -18,6 +18,7 @@ export default function RecipeDoneCard({
   index,
 }) {
   const [clickShare, seClickShare] = useState(false);
+
   const handleClickShare = () => {
     if (type === 'comida') {
       Copy(`http://localhost:3000/comidas/${id}`);
@@ -42,6 +43,38 @@ export default function RecipeDoneCard({
     </Button>
   );
 
+  const renderImageAndName = () => (
+    <>
+      <img
+        width="300px"
+        src={ image }
+        alt={ name }
+        data-testid={ `${index}-horizontal-image` }
+      />
+
+      <h2 data-testid={ `${index}-horizontal-name` }>
+        {name}
+      </h2>
+    </>
+  );
+
+  const renderDoneDateAndTagsName = () => (
+    <>
+      <p data-testid={ `${index}-horizontal-done-date` }>
+        {doneDate}
+      </p>
+
+      { tagsName.map((tag) => (
+        <p
+          key={ tag }
+          data-testid={ `${index}-${tag}-horizontal-tag` }
+        >
+          {tag}
+
+        </p>)) }
+    </>
+  );
+
   if (type === 'comida') {
     return (
       <>
@@ -50,33 +83,13 @@ export default function RecipeDoneCard({
           className="mealDoneCard"
           data-testid={ `${id}-recipe-card` }
         >
-          <img
-            width="300px"
-            src={ image }
-            alt={ name }
-            data-testid={ `${index}-horizontal-image` }
-          />
-
-          <h2 data-testid={ `${index}-horizontal-name` }>
-            {name}
-          </h2>
+          { renderImageAndName() }
 
           <p data-testid={ `${index}-horizontal-top-text` }>
             { `${area} - ${category}` }
           </p>
 
-          <p data-testid={ `${index}-horizontal-done-date` }>
-            {doneDate}
-          </p>
-
-          { tagsName.map((tag) => (
-            <p
-              key={ tag }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            >
-              {tag}
-
-            </p>)) }
+          { renderDoneDateAndTagsName() }
 
         </Link>
 
@@ -92,33 +105,13 @@ export default function RecipeDoneCard({
         className="drinkDoneCard"
         data-testid={ `${id}-recipe-card` }
       >
-        <img
-          width="300px"
-          src={ image }
-          alt={ name }
-          data-testid={ `${index}-horizontal-image` }
-        />
-
-        <h2 data-testid={ `${index}-horizontal-name` }>
-          {name}
-        </h2>
+        { renderImageAndName() }
 
         <p data-testid={ `${index}-horizontal-top-text` }>
           { alcoholicOrNot }
         </p>
 
-        <p data-testid={ `${index}-horizontal-done-date` }>
-          {doneDate}
-        </p>
-
-        { tagsName.map((tag) => (
-          <p
-            key={ tag }
-            data-testid={ `${index}-${tag}-horizontal-tag` }
-          >
-            {tag}
-
-          </p>)) }
+        { renderDoneDateAndTagsName() }
 
       </Link>
       { clickShare ? <p>Link copiado!</p> : renderShareButton('share-drink-btn') }
