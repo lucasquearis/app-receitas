@@ -1,7 +1,7 @@
 .details-body {
-  padding: 0%;
-  margin: 0%;
   box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
 }
 
 .imagem {
@@ -18,14 +18,14 @@
 
 .infos-container {
   margin-top: 4%;
-  display: flex;
   justify-content: space-between;
+  display: flex;
 }
 
 .recipe-category {
+  color: rgba(99, 99, 99, 0.932);
   margin-left: 2%;
   margin-top: 2%;
-  color: rgba(99, 99, 99, 0.932);
 }
 
 .ingredients-container {
@@ -41,20 +41,20 @@
 }
 
 .instructions-container {
-  margin-top: 15%;
   margin-bottom: 15%;
+  margin-top: 15%;
 }
 
 .instructions {
+  background-color: rgba(175, 174, 174, 0.541);
   padding: 3%;
   padding-top: 5%;
-  background-color: rgba(175, 174, 174, 0.541);
 }
 
 .list {
   background-color: rgba(175, 174, 174, 0.541);
-  padding: 7%;
   margin: 7%;
+  padding: 7%;
 }
 
 .instructions {
@@ -63,20 +63,20 @@
 }
 
 .share-btn {
-  border: none;
   background-color: hotpink;
+  border: none;
 }
 
 .iniciar-btn {
+  background-image: linear-gradient(to bottom, #33c5df, #004798 130%);
   box-sizing: border-box;
   bottom: 0%;
+  border: none;
   height: 10%;
   margin: 0;
   padding: 0%;
   position: fixed;
   width: 100%;
-  border: none;
-  background-image: linear-gradient(to bottom, #33c5df, #004798 130%);
 }
 
 .recipe-video {

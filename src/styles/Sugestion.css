@@ -7,13 +7,13 @@
 }
 
 .sugestions-container{
+  border:solid gray 1px;
+  box-shadow: 2px 3px rgba(128, 128, 128, 0.466);
   display: flex;
-  padding: 3%;
   margin-top: 5%;
   margin-bottom: 13%;
   margin-right: 5%;
-  border:solid gray 1px;
-  box-shadow: 2px 3px rgba(128, 128, 128, 0.466);
+  padding: 3%;
 }
 
 .sugestions-imagem-container {
