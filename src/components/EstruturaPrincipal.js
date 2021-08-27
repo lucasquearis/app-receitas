@@ -28,11 +28,13 @@ function EstruturaPrincipal({
           key={ `${keyType}-card-${index}` }
           to={ `${pathname}/${recipe[`id${keyType}`]}` }
         >
-          <Card
-            img={ recipe[`str${keyType}Thumb`] }
-            index={ index }
-            name={ recipe[`str${keyType}`] }
-          />
+          <div data-testid={ `${index}-recipe-card` }>
+            <Card
+              img={ recipe[`str${keyType}Thumb`] }
+              index={ index }
+              name={ recipe[`str${keyType}`] }
+            />
+          </div>
         </Link>
       );
     }
