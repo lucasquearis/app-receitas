@@ -1,29 +1,28 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchFoods } from '../redux/actions/mainActions';
+import { fetchDrinks } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
 
-function FoodsCard() {
+function DrinksCard() {
   const doze = 12;
-  const { meals } = useSelector((state) => state.recipes.foods);
+  const drinks = useSelector((state) => state.recipes.foods.drinks);
   const loading = useSelector((state) => state.recipes.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchFoods());
+    dispatch(fetchDrinks());
   }, [dispatch]);
 
   if (loading) return <p>Carregando...</p>;
-
   return (
     <div>
       {
-        meals && meals.map((meal, index) => index < doze && (
+        drinks && drinks.map((drink, index) => index < doze && (
           <ItemCard
-            title={ meal.strMeal }
+            title={ drink.strDrink }
             data-testid={ `${index}-recipe-card` }
-            thumb={ meal.strMealThumb }
-            id={ meal.idMeal }
+            thumb={ drink.strDrinkThumb }
+            id={ drink.idDrink }
             index={ index }
             key={ index }
           />
@@ -33,4 +32,4 @@ function FoodsCard() {
   );
 }
 
-export default FoodsCard;
+export default DrinksCard;

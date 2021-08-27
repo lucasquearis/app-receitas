@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategory } from '../redux/actions/mainActions';
+import { fetchCategory, clearSearch } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
 
 function CategoryFoodButtons() {
@@ -25,6 +25,11 @@ function CategoryFoodButtons() {
     renderCategoryFilter();
   }, [dispatch]);
 
+  const handleClick = (categoryStr) => {
+    renderCategoryFilter(categoryStr);
+    dispatch(clearSearch());
+  };
+
   return (
     <div>
       {
@@ -33,7 +38,7 @@ function CategoryFoodButtons() {
             type="button"
             key={ `${category.strCategory}-category-filter` }
             data-testid={ `${category.strCategory}-category-filter` }
-            onClick={ () => renderCategoryFilter(category.strCategory) }
+            onClick={ () => handleClick(category.strCategory) }
           >
             {category.strCategory}
           </button>
