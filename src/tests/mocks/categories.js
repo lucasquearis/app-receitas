@@ -1,3 +1,5 @@
+const ordinaryDrink = 'Ordinary Drink';
+
 const categories = {
   mealsCategories: [
     { strCategory: 'Beef' },

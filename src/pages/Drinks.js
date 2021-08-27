@@ -17,7 +17,7 @@ const Drinks = () => {
   const [categories, setCategories] = useState([]);
   const [categoryEntry, setCategoryEntry] = useState('');
   const [categoryClicked, setCategoryClicked] = useState(false);
-  const [lastCategory, setLastCategoty] = useState('');
+  const [lastCategory, setLastCategory] = useState('');
 
   useEffect(() => {
     api.getDrinks(drinksAPI, DRINKS_LENGTH, setDrinks);
@@ -28,10 +28,11 @@ const Drinks = () => {
     if (categoryClicked && (categoryEntry !== lastCategory)) {
       if (categoryEntry === 'All') api.getDrinks(drinksAPI, DRINKS_LENGTH, setDrinks);
       else api.getDrinks(`${categoryAPI}${categoryEntry}`, DRINKS_LENGTH, setDrinks);
-      setLastCategoty(categoryEntry);
+      setLastCategory(categoryEntry);
     }
     if (categoryClicked && (categoryEntry === lastCategory)) {
       api.getDrinks(drinksAPI, DRINKS_LENGTH, setDrinks);
+      setLastCategory('');
     }
     setCategoryClicked(false);
   }, [categoryClicked]);
@@ -40,9 +41,6 @@ const Drinks = () => {
     setCategoryEntry(name);
     setCategoryClicked(true);
   };
-
-  console.log(drinks);
-  console.log(categories);
 
   return (
     <div className="drinks-container">

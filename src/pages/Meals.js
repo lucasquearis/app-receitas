@@ -17,7 +17,7 @@ const Meals = () => {
   const [categories, setCategories] = useState([]);
   const [categoryEntry, setCategoryEntry] = useState('');
   const [categoryClicked, setCategoryClicked] = useState(false);
-  const [lastCategory, setLastCategoty] = useState('');
+  const [lastCategory, setLastCategory] = useState('');
 
   useEffect(() => {
     api.getMeals(mealsAPI, MEALS_LENGTH, setMeals);
@@ -28,10 +28,11 @@ const Meals = () => {
     if (categoryClicked && (categoryEntry !== lastCategory)) {
       if (categoryEntry === 'All') api.getMeals(mealsAPI, MEALS_LENGTH, setMeals);
       else api.getMeals(`${categoryAPI}${categoryEntry}`, MEALS_LENGTH, setMeals);
-      setLastCategoty(categoryEntry);
+      setLastCategory(categoryEntry);
     }
     if (categoryClicked && (categoryEntry === lastCategory)) {
       api.getMeals(mealsAPI, MEALS_LENGTH, setMeals);
+      setLastCategory('');
     }
     setCategoryClicked(false);
   }, [categoryClicked]);
@@ -40,9 +41,6 @@ const Meals = () => {
     setCategoryEntry(name);
     setCategoryClicked(true);
   };
-
-  console.log(meals);
-  console.log(categories);
 
   return (
     <div className="meals-container">
