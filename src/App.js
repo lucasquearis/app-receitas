@@ -11,6 +11,8 @@ import Profile from './pages/Profile';
 import Favorites from './pages/Favorites';
 import InProgress from './pages/InProgress';
 import Explore from './pages/Explore';
+import ExploreFoods from './pages/Explore/ExploreFoods';
+import ExplorarDrinks from './pages/Explore/ExploreDrinks';
 import ExploreIngredients from './pages/ExploreIngredients';
 
 import './App.css';
@@ -27,8 +29,16 @@ function App() {
         <Route path="/comidas/:id/in-progress" component={ InProgress } />
         <Route path="/bebidas/:id/in-progress" component={ InProgress } />
         <Route exact path="/explorar" component={ Explore } />
-        <Route exact path="/explorar/comidas" />
-        <Route exact path="/explorar/bebidas" />
+        <Route
+          exact
+          path="/explorar/comidas"
+          render={ (props) => <ExploreFoods { ...props } endpoint="themealdb" /> }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas"
+          render={ (props) => <ExplorarDrinks { ...props } endpoint="thecocktaildb" /> }
+        />
         <Route path="/explorar/comidas/ingredientes" component={ ExploreIngredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ ExploreIngredients } />
         <Route path="/explorar/comidas/area" />
