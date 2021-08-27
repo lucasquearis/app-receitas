@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import Carousel from 'react-multi-carousel';
 
-// import Context from '../../context/Context';
+const responsive = {
+  mobile: {
+    breakpoint: { max: 360, min: 0 },
+    items: 2,
+  },
+};
 
 function FoodDetails() {
   const [recipesFood, setRecipesFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
+  const [recipesRecommendations, setRecipesRecommendations] = useState([]);
 
   useEffect(() => {
     const getRecipesFood = async () => {
@@ -34,6 +41,20 @@ function FoodDetails() {
       setMeasure(measureList);
     };
     getIngredients();
+  }, [recipesFood]);
+
+  useEffect(() => {
+    const getRecommendations = async () => {
+      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const { drinks } = await fetch(endpoint).then((data) => data.json());
+      const maxRecommendations = 5;
+      const recommendationList = [];
+      for (let index = 0; index <= maxRecommendations; index += 1) {
+        recommendationList.push(drinks[index]);
+      }
+      setRecipesRecommendations(recommendationList);
+    };
+    getRecommendations();
   }, [recipesFood]);
 
   return (
@@ -71,7 +92,14 @@ function FoodDetails() {
             height="10"
             src={ item.strYoutube }
           />
-          <div data-testid={ `${index}-recomendation-card` }>Receitas recomendadas</div>
+          <Carousel responsive={ responsive }>
+            { recipesRecommendations.map((food, ind) => (
+              <div key={ food.strDrink } data-testid={ `${ind}-recomendation-card` }>
+                <h2 data-testid={ `${ind}-recomendation-title` }>{food.strDrink }</h2>
+                <img src={ food.strDrinkThumb } alt={ food.strDrink } />
+              </div>
+            )) }
+          </Carousel>
           <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
         </div>
       )) }
