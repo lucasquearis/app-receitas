@@ -13,7 +13,6 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
       handleRedirect();
     }
   };
-
   if ((redirect && (pathname.length > 0) && !isDisable)) {
     return (<Redirect to={ pathname } />);
   }
@@ -37,7 +36,7 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
       className={ className }
       data-testid={ className }
       type={ (type === 'submit' ? 'submit' : 'button') }
-      onClick={ handleClick }
+      onClick={ !onClick ? handleRedirect : handleClick }
       disabled={ isDisable }
     >
       { buttonText }
