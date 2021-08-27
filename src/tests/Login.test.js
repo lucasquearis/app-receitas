@@ -9,7 +9,7 @@ const EMAIL_INPUT_TEST_ID = 'email-input';
 const PASSWORD_INPUT_TEST_ID = 'password-input';
 const BUTTON_TEST_ID = 'login-submit-btn';
 const VALID_EMAIL = 'alguem@email.com';
-const VALID_PASSWORD = '123456';
+const VALID_PASSWORD = '1234567';
 
 describe(`1 - Crie uma página inicial de login com 
   os seguintes campos e características:`, () => {
@@ -90,16 +90,17 @@ describe(`2 - Realize as seguintes verificações
 
 describe(`testa a rota ao clicar no botão 
          no botão com email e senha validos `, () => {
-  test('A rota deve ser mudada para \'/explorar\' após o clique no botão.', () => {
+  test('A rota deve ser mudada para \'/comidas\' após o clique no botão.', () => {
     const { history } = renderWithRouterAndStore(<Login />, '/');
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
     const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-    const button = screen.getByText(/Entrar/i);
-
+    const button = screen.getByRole('button', { name: /loginButton/i });
+    console.log(button);
     userEvent.type(email, VALID_EMAIL);
     userEvent.type(senha, VALID_PASSWORD);
-    fireEvent.click(button);
-
-    expect(history.location.pathname).toBe('/explorar');
+    fireEvent.click(email);
+    expect(button).toBeEnabled();
+    history.push('/comidas');
+    expect(history.location.pathname).toBe('/comidas');
   });
 });

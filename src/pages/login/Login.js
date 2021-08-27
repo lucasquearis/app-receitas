@@ -90,6 +90,8 @@ class Login extends React.Component {
         </form>
         <button
           className="btn btn-warning btnButon"
+          name="loginButton"
+          aria-label="loginButton"
           type="submit"
           data-testid="login-submit-btn"
           onClick={ (event) => this.submitLogin(event) }
