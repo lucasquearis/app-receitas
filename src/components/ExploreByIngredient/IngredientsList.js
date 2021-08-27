@@ -1,6 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import IngredientCard from './IngredientCard';
+import './IngredientsList.css';
 
 function IngredientsList(props) {
   const { ingredientsData, database, databaseKey, onClick } = props;
@@ -22,7 +23,7 @@ function IngredientsList(props) {
   });
 
   return (
-    <ul>
+    <ul className="ingredientsList-container">
       { renderIngredientsList() }
     </ul>
   );

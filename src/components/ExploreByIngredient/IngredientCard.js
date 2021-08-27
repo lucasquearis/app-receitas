@@ -15,9 +15,9 @@ function IngredientCard(props) {
           className="card-thumb"
           data-testid={ `${index}-card-img` }
         />
-        <h2 data-testid={ `${index}-card-name` }>
+        <h5 data-testid={ `${index}-card-name` }>
           { title }
-        </h2>
+        </h5>
       </li>
     </Link>
   );
