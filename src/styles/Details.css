@@ -17,9 +17,9 @@
 }
 
 .infos-container {
-  margin-top: 4%;
-  justify-content: space-between;
   display: flex;
+  justify-content: space-between;
+  margin-top: 4%;
 }
 
 .recipe-category {
@@ -47,19 +47,16 @@
 
 .instructions {
   background-color: rgba(175, 174, 174, 0.541);
+  margin: 2%;
   padding: 3%;
   padding-top: 5%;
+  text-align: justify;
 }
 
 .list {
   background-color: rgba(175, 174, 174, 0.541);
   margin: 7%;
   padding: 7%;
-}
-
-.instructions {
-  margin: 2%;
-  text-align: justify;
 }
 
 .share-btn {
@@ -69,9 +66,9 @@
 
 .iniciar-btn {
   background-image: linear-gradient(to bottom, #33c5df, #004798 130%);
-  box-sizing: border-box;
-  bottom: 0%;
   border: none;
+  bottom: 0%;
+  box-sizing: border-box;
   height: 10%;
   margin: 0;
   padding: 0%;
@@ -84,9 +81,9 @@
   width: 100%;
 }
 
-.sugestions{
+.sugestions {
   display: flex;
-  margin-top: 5%;
   margin-bottom: 13%;
+  margin-top: 5%;
   overflow-x: scroll;
 }
