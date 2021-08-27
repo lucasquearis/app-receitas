@@ -1,8 +1,8 @@
 import React from 'react';
 import '../cssPages/Detalhes.css';
 
-function VideoEmbed(videoData) {
-  const { url, recipeName } = videoData;
+function VideoEmbed(data) {
+  const { videoData: { url, recipeName } } = data;
   const allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;'
       + 'picture-in-picture';
 

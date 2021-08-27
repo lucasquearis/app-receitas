@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import '../cssPages/Detalhes.css';
 
-function Carousel(recipes) {
-  const { recommended } = recipes;
+const carouselStep = 1;
+
+function Carousel(data) {
+  const { recipes } = data;
   const [showIndex, setShowIndex] = useState(0);
 
   const recommendedCard = (recipe, index) => {
@@ -31,9 +33,8 @@ function Carousel(recipes) {
   const handleCarouselBtn = (value) => {
     const sum = (showIndex + value);
     let newIndex = sum > 2 ? 0 : sum;
-    newIndex = sum < 0 ? 2 : sum;
+    newIndex = sum < 0 ? 2 : newIndex;
     setShowIndex(newIndex);
-    console.log(newIndex);
   };
 
   const carouselBtn = (text, value) => (
@@ -44,10 +45,10 @@ function Carousel(recipes) {
 
   return (
     <>
-      { carouselBtn('<', -1) }
-      { carouselBtn('>', 1) }
+      { carouselBtn('<', -carouselStep) }
+      { carouselBtn('>', carouselStep) }
       <div className="recommendedShow">
-        {recommended.map((recipe, index) => recommendedCard(recipe, index))}
+        {recipes.map((recipe, index) => recommendedCard(recipe, index))}
       </div>
     </>
   );

@@ -3,7 +3,8 @@ import favoriteIconTransp from '../images/whiteHeartIcon.svg';
 import favoriteIconFull from '../images/blackHeartIcon.svg';
 import '../cssPages/ButtonFavorite.css';
 
-function ButtonFavorite(favoriteObject) {
+function ButtonFavorite(data) {
+  const { favoriteObject } = data;
   const { id: idRecipe } = favoriteObject;
   const favorites = localStorage.getItem('favoriteRecipes')
     ? localStorage.getItem('favoriteRecipes') : '';

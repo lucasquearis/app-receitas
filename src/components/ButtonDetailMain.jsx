@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import '../cssPages/ButtonDetailMain.css';
 
-function ButtonDetailMain(renderData) {
-  const { id: idRecipe, pathname } = renderData;
+function ButtonDetailMain(data) {
+  const { renderData: { id: idRecipe, pathname } } = data;
   const [redirect, setRedirect] = useState(null);
 
   const doneRecipes = localStorage.getItem('doneRecipes')
