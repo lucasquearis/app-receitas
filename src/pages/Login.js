@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-function Login({ history }) {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -26,7 +26,6 @@ function Login({ history }) {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
-    history.push('/comidas');
   };
 
   return (
@@ -44,22 +43,18 @@ function Login({ history }) {
         placeholder="Password"
         onChange={ (e) => handleChange(setPassword, e) }
       />
-      <button
-        data-testid="login-submit-btn"
-        type="button"
-        disabled={ buttonDisabled }
-        onClick={ handleClick }
-      >
-        Entrar
-      </button>
+      <Link to="/comidas">
+        <button
+          data-testid="login-submit-btn"
+          type="button"
+          disabled={ buttonDisabled }
+          onClick={ handleClick }
+        >
+          Entrar
+        </button>
+      </Link>
     </div>
   );
 }
-
-Login.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
 
 export default Login;

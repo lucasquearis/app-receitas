@@ -4,23 +4,12 @@ import { fetchFoods } from '../services/mealAPI';
 import { fetchDrinkById } from '../services/cocktailAPI';
 import '../styles/Details.css';
 import shareImage from '../images/shareIcon.svg';
-import favImageBlack from '../images/blackHeartIcon.svg';
-import favImageWhite from '../images/whiteHeartIcon.svg';
+import Carousel from '../components/Carousel';
+import { getFavorites, handleButton, handleShare, handleFavoriteAuxiliar }
+  from '../auxiliar/auxiliarFunctions';
 
 function DrinkDetails({ history, match: { params: { id } } }) {
-  const getFavorites = () => {
-    const allFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (allFavorites === null) {
-      return favImageWhite;
-    }
-    const itemFound = allFavorites.find((item) => item.id === id);
-    if (itemFound) {
-      return favImageBlack;
-    }
-    return favImageWhite;
-  };
-
-  const isFavorite = getFavorites();
+  const isFavorite = getFavorites(id);
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recMeal, setRecMeal] = useState([]);
@@ -54,72 +43,20 @@ function DrinkDetails({ history, match: { params: { id } } }) {
     }
   }, [drinkDetails, ingredients]);
 
-  const handleClick = () => {
-    const { location: { pathname } } = history;
-    history.push(`${pathname}/in-progress`);
-  };
-
   const handleFavorite = () => {
-    if (icon === favImageWhite) {
-      setIcon(favImageBlack);
-      const objSave = drinkDetails.map((item) => {
-        const obj = {
-          id: item.idDrink,
-          type: 'bebida',
-          area: '',
-          category: item.strCategory,
-          alcoholicOrNot: item.strAlcoholic,
-          name: item.strDrink,
-          image: item.strDrinkThumb,
-        };
-        return obj;
-      })[0];
-      const actual = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (actual !== null) {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([...actual, objSave]));
-      } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([objSave]));
-      }
-    } else {
-      setIcon(favImageWhite);
-    }
-  };
-
-  const handleButton = () => {
-    const obj = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (!obj) {
-      return (
-        <button
-          className="fixedbutton"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          Iniciar Receita
-        </button>
-      );
-    }
-    return (
-      <button
-        className="fixedbutton"
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ handleClick }
-      >
-        Continuar Receita
-      </button>
-    );
-  };
-
-  const handleShare = () => {
-    setLink('Link copiado!');
-    const actualLocation = window.location.href;
-    const dummy = document.createElement('input');
-    document.body.appendChild(dummy);
-    dummy.value = actualLocation;
-    dummy.select();
-    document.execCommand('copy');
-    document.body.removeChild(dummy);
+    const objSave = drinkDetails.map((item) => {
+      const obj = {
+        id: item.idDrink,
+        type: 'bebida',
+        area: '',
+        category: item.strCategory,
+        alcoholicOrNot: item.strAlcoholic,
+        name: item.strDrink,
+        image: item.strDrinkThumb,
+      };
+      return obj;
+    })[0];
+    handleFavoriteAuxiliar(objSave, setIcon, icon);
   };
 
   return (
@@ -139,7 +76,7 @@ function DrinkDetails({ history, match: { params: { id } } }) {
               alt="share"
               src={ shareImage }
               data-testid="share-btn"
-              onClick={ handleShare }
+              onClick={ () => handleShare(setLink) }
             />
             <p>{ link }</p>
             <input
@@ -162,9 +99,8 @@ function DrinkDetails({ history, match: { params: { id } } }) {
               }) }
             </div>
             <p data-testid="instructions">{ item.strInstructions }</p>
-            { console.log(recMeal) }
-            <div data-testid="0-recomendation-card">card</div>
-            { handleButton() }
+            <Carousel recommendation={ recMeal } />
+            { handleButton(history) }
           </div>
         );
         return all;

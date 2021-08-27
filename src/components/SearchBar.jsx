@@ -40,7 +40,7 @@ function SearchBar() {
   }
 
   return (
-    <div>
+    <section>
       <label htmlFor="searchText">
         Search:
         <input
@@ -93,7 +93,7 @@ function SearchBar() {
       >
         Find
       </button>
-    </div>
+    </section>
   );
 }
 

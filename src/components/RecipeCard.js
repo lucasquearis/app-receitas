@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function RecipeCard({ recipe, index, type }) {
+export default function RecipeCard({ recipe, index, type, dataId = '-card-name' }) {
   return (
     <Link
       to={
@@ -18,7 +18,7 @@ export default function RecipeCard({ recipe, index, type }) {
           alt="thumbnail recipe"
           width="100"
         />
-        <p data-testid={ `${index}-card-name` }>
+        <p data-testid={ `${index}${dataId}` }>
           { type === '/comidas' ? recipe.strMeal : recipe.strDrink }
         </p>
       </div>
