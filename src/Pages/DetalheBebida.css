@@ -64,6 +64,10 @@
   width: 85%;
 }
 
+.start-recipe-drink-btn-link {
+  color: black;
+}
+
 .start-drink-recipe-btn:active {
   background-color: rgb(0, 187, 0);
 }

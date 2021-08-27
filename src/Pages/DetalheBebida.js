@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
@@ -90,7 +91,12 @@ export default function DetalheBebida(props) {
         data-testid="start-recipe-btn"
         type="button"
       >
-        Iniciar Receita
+        <Link
+          className="start-recipe-drink-btn-link"
+          to={ `/bebidas/${drink.idDrink}/in-progress` }
+        >
+          Iniciar Receita
+        </Link>
       </button>
       <img
         className="food-drink-image"

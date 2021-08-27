@@ -107,7 +107,7 @@ export default function DetalheComida(props) {
         type="button"
       >
         <Link
-          className="start-recipe-btn-link"
+          className="start-recipe-food-btn-link"
           to={ `/comidas/${food.idMeal}/in-progress` }
         >
           Iniciar Receita
