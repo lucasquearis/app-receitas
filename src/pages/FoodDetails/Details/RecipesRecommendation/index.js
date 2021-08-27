@@ -23,7 +23,7 @@ export default function RecipesRecommendation() {
         <Carousel.Item key={ index } data-testid={ `${index}-recomendation-card` }>
           <img
             className="d-block w-100"
-            src={ cardRecommendation.strDrinkThumb }
+            src={ cardRecommendation.strDrinkThumb || cardRecommendation.strMealThumb }
             alt="First slide"
           />
         </Carousel.Item>
