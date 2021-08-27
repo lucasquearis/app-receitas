@@ -191,11 +191,11 @@ export default function DrinksDetails(props) {
 }
 
 DrinksDetails.propTypes = {
+  id: PropTypes.string.isRequired,
   drink: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
   ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
   alcoholic: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
 };

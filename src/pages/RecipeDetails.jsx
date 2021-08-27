@@ -19,7 +19,7 @@ export default function RecipeDetails(props) {
 
   if (url === `/comidas/${id}` && food) {
     const { strMeal, strMealThumb, strCategory,
-      strInstructions, strYoutube, strArea, strTags } = meals[0];
+      strInstructions, strYoutube, strArea, strTags, idMeal } = meals[0];
     const filterIngredients = Object.entries(meals[0])
       .filter((item) => item[0].includes('Ingredient'))
       .map((item) => item[1])
@@ -38,7 +38,7 @@ export default function RecipeDetails(props) {
         instructions={ strInstructions }
         youTube={ strYoutube }
         ingredientEndMeasure={ ingredientEndMeasure }
-        id={ id }
+        id={ idMeal }
         area={ strArea }
         tag={ strTags }
       />
@@ -47,7 +47,7 @@ export default function RecipeDetails(props) {
 
   if (url === `/bebidas/${id}` && drink) {
     const { strDrink, strDrinkThumb, strCategory,
-      strInstructions, strAlcoholic } = drinks[0];
+      strInstructions, strAlcoholic, idDrink } = drinks[0];
     const filterIngredients = Object.entries(drinks[0])
       .filter((item) => item[0].includes('Ingredient'))
       .map((item) => item[1]).filter((item) => item !== '' && item !== null);
@@ -65,8 +65,7 @@ export default function RecipeDetails(props) {
         instructions={ strInstructions }
         ingredientEndMeasure={ ingredientEndMeasure }
         alcoholic={ strAlcoholic }
-        id={ id }
-
+        id={ idDrink }
       />
     );
   }

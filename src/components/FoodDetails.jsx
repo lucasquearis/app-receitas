@@ -200,13 +200,13 @@ export default function FoodDetails(props) {
 }
 
 FoodDetails.propTypes = {
+  id: PropTypes.string.isRequired,
   meal: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
   youTube: PropTypes.string.isRequired,
   ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
-  id: PropTypes.string.isRequired,
   area: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
 };
