@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route exact path="/comidas" component={ Comidas } />
-          <Route path="/bebidas" component={ Bebidas } />
+          <Route exact path="/bebidas" component={ Bebidas } />
           <Route path="/explorar/comidas/ingredientes" component={ ComidaIng } />
           <Route path="/explorar/comidas/area" component={ LocalDeOrigem } />
           <Route path="/explorar/comidas" component={ ComidasExp } />
@@ -30,7 +30,7 @@ function App() {
           <Route path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
           <Route path="/explorar/bebidas" component={ BebidasExp } />
           <Route exect path="/explorar" component={ Explorar } />
-          <Route path="/perfil" component={ Perfil } />
+          <Route exact path="/perfil" component={ Perfil } />
           {/*
           <Route path="/comidas/:id" component={ Comidas } />
           <Route path="/bebidas/:id" component={ Bebidas } />

@@ -16,9 +16,7 @@ function BebidasIng() {
   });
   const getDrinks = async () => {
     const list = await fetchFoods('drink', 'ingredients');
-    console.log(list);
     const { drinks } = list;
-    console.log(drinks);
     const limitator = 12;
     const drinkList = drinks.filter((drink, index) => index < limitator);
     setIngredients(drinkList);
@@ -33,7 +31,6 @@ function BebidasIng() {
 
   function onClick(event) {
     const { name } = event.target;
-    event.preventDefault();
     setRedirect({
       redirect: true,
       path: name,
@@ -45,7 +42,6 @@ function BebidasIng() {
     getDrinks();
   }, []);
 
-  console.log(ingredients);
   if (redirect.redirect) return <Redirect to="/bebidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (

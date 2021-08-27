@@ -30,7 +30,6 @@ function ComidaIng() {
 
   function onClick(event) {
     const { name } = event.target;
-    event.preventDefault();
     setRedirect({
       redirect: true,
     });

@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../cssPages/Explore.css';
+import MyContext from '../context/MyContext';
+import fetchFoods from '../fetchs/FetchFood';
 
 function BebidasExp() {
+  const { surprise, setSurprise } = useContext(MyContext);
   const [redirect, setRedirect] = useState({
-    redirect: false,
     path: '',
   });
 
+  const getRandomDrink = async () => {
+    const list = await fetchFoods('drink', 'random');
+    setSurprise(list);
+  };
+
   function onClick(event) {
     const { name } = event.target;
-    event.preventDefault();
     setRedirect({
-      redirect: true,
       path: name,
     });
+    if (name === 'surprise') getRandomDrink();
   }
 
-  if (redirect.redirect) return <Redirect to={ `/explorar/bebidas/${redirect.path}` } />;
+  console.log(surprise);
+  if (redirect.path === 'surprise') {
+    return <Redirect to={ `/bebidas/${redirect.path}` } />;
+  }
+  if (redirect.path) return <Redirect to={ `/explorar/bebidas/${redirect.path}` } />;
   return (
     <div>
       <Header titulo="Explorar Bebidas" />
@@ -41,7 +51,7 @@ function BebidasExp() {
             data-testid="explore-surprise"
             className="btn"
             type="button"
-            name="bebidas"
+            name="surprise"
             variant="light"
             size="lg"
             onClick={ onClick }
