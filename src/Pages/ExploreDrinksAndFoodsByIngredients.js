@@ -35,7 +35,7 @@ function ExploreDrinksAndFoodsByIngredients() {
           { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
             .map((ingredient, index) => (
               <div data-testid={ `${index}-ingredient-card` } key={ index }>
-                <Link to="/explorar/comidas">
+                <Link to="/comidas">
                   <Card>
                     <img
                       variant="top"
@@ -59,7 +59,7 @@ function ExploreDrinksAndFoodsByIngredients() {
           { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
             .map((ingredient, index) => (
               <div data-testid={ `${index}-ingredient-card` } key={ index }>
-                <Link to="/explorar/bebidas">
+                <Link to="/bebidas">
                   <Card>
                     <img
                       src={ `${api}${ingredient.strIngredient1.toLowerCase()}.png` }
