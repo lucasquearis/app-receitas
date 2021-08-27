@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import loginSteps from './helpers/loginSteps';
-import { buttonId, exploreButtonId, VALID_EMAIL, VALID_PASSWORD } from './helpers/mocks';
+import { buttonId, exploreButtonId, exploreDrinksId, exploreFoodId, VALID_EMAIL, VALID_PASSWORD } from './helpers/mocks';
 import renderWithRouter from './helpers/renderWithRouter';
 
 let currentHistory;
@@ -25,13 +25,13 @@ describe('Tests explore screen route', () => {
 
 describe('Tests if renders both buttons', () => {
   it('Should render button with text "Explorar Comidas" & testid="explore-food"', () => {
-    const exploreFood = screen.getByTestId('explore-food');
+    const exploreFood = screen.getByTestId(exploreFoodId);
     expect(exploreFood).toBeInTheDocument();
     expect(exploreFood).toHaveTextContent('Explorar Comidas');
   });
 
   it('Should render button with text "Explorar Bebidas & testid="explore-drinks', () => {
-    const exploreDrinks = screen.getByTestId('explore-drinks');
+    const exploreDrinks = screen.getByTestId(exploreDrinksId);
     expect(exploreDrinks).toBeInTheDocument();
     expect(exploreDrinks).toHaveTextContent('Explorar Bebidas');
   });
@@ -39,14 +39,14 @@ describe('Tests if renders both buttons', () => {
 
 describe('Tests buttons routing', () => {
   it('Should redirect to "/explorar/comidas" after button Explorar Comidas click', () => {
-    const exploreFoodBtn = screen.getByTestId('explore-food');
+    const exploreFoodBtn = screen.getByTestId(exploreFoodId);
     userEvent.click(exploreFoodBtn);
 
     expect(currentHistory.location.pathname).toEqual('/explorar/comidas');
   });
 
   it('Should redirect to "/explorar/bebidas" after button Explorar Bebidas click', () => {
-    const exploreDrinksBtn = screen.getByTestId('explore-drinks');
+    const exploreDrinksBtn = screen.getByTestId(exploreDrinksId);
     userEvent.click(exploreDrinksBtn);
 
     expect(currentHistory.location.pathname).toEqual('/explorar/bebidas');
