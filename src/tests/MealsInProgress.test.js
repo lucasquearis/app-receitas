@@ -4,7 +4,7 @@ import { cleanup, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
-import recipe from './mocks/recipe';
+import recipe from './mocks/mealRecipe';
 
 const PATH = '/comidas/52771/in-progress';
 const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771';
