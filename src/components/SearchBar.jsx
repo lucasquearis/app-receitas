@@ -38,10 +38,13 @@ function SearchBar({ foodPage, searchRecipes, recipes }) {
 
   const { query, consultBy } = state;
 
+  const typeRecipe = foodPage ? 'comidas' : 'bebidas';
+  const typeId = foodPage ? 'idMeal' : 'idDrink';
+
   return (
     <nav>
       {recipes.length === 1
-        ? <Redirect to={ `/comidas/${recipes[0].idMeal}` } />
+        ? <Redirect to={ `/${typeRecipe}/${recipes[0][typeId]}` } />
         : ''}
 
       <Input
