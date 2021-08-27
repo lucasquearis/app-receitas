@@ -1,0 +1,15 @@
+.not-found-page {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  width: 100vw;
+}
+
+.not-found-page h1 {
+  border: 1px solid black;
+  color: red;
+  padding: 15px;
+}

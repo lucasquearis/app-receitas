@@ -21,3 +21,5 @@ export { default as PerfilPage } from './PerfilPage';
 
 export { default as ReceitasFeitasPage } from './ReceitasFeitasPage';
 export { default as ReceitasFavoritasPage } from './ReceitasFavoritasPage';
+
+export { default as NotFoundPage } from './NotFoundPage';

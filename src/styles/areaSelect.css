@@ -1,0 +1,14 @@
+.area-select-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.area-select-container select {
+  background-color: white;
+  border-radius: 10px;
+  font-size: 30px;
+  height: 47px;
+  width: 337px;
+}
