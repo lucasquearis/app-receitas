@@ -85,10 +85,11 @@ export default function SearchBar() {
       </div>
       <div className="search-container__button">
         <button
+          data-testid="exec-search-btn"
           type="button"
           onClick={ submit }
         >
-          Busca
+          Buscar
         </button>
       </div>
     </section>

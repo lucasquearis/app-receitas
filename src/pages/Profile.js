@@ -1,6 +1,8 @@
 // vitals
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import FooterMenu from '../components/FooterMenu';
+import Header from '../components/Header';
 // styles
 import '../styles/Profile.css';
 
@@ -13,7 +15,7 @@ function Profile() {
 
   return (
     <div className="main-profile">
-      {/* Header vai aqui */}
+      <Header />
       <div
         data-testid="profile-email"
         className="email-container"
@@ -27,7 +29,6 @@ function Profile() {
           type="button"
           data-testid="profile-done-btn"
           onClick={ () => history.push('/receitas-feitas') }
-
         >
           Receitas Feitas
         </button>
@@ -35,7 +36,6 @@ function Profile() {
           type="button"
           data-testid="profile-favorite-btn"
           onClick={ () => history.push('/receitas-favoritas') }
-
         >
           Receitas Favoritas
         </button>
@@ -49,8 +49,8 @@ function Profile() {
         >
           Sair
         </button>
+        <FooterMenu />
       </div>
-      {/* Footer vai aqui */}
     </div>
   );
 }

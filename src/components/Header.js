@@ -25,17 +25,14 @@ const renderTitle = (path) => {
 };
 
 const renderSearchButton = (showSearchBar, setShowSearchBar) => (
-  <button
-    type="button"
+  <input
+    type="image"
     className="header-button"
     onClick={ () => { setShowSearchBar(!showSearchBar); } }
-  >
-    <img
-      src={ searchIcon }
-      alt="Ícone que indica o botão pra ativar a barra de busca"
-      data-testid="search-top-btn"
-    />
-  </button>
+    src={ searchIcon }
+    alt="Ícone que indica o botão pra ativar a barra de busca"
+    data-testid="search-top-btn"
+  />
 );
 
 function Header() {
@@ -59,17 +56,14 @@ function Header() {
   return (
     <>
       <header className="header-div">
-        <button
-          type="button"
+        <input
+          type="image"
           className="header-button"
           onClick={ () => history.push('/profile') }
-        >
-          <img
-            src={ profilePicture }
-            alt="Ícone que indica o botão pra ir para o perfil de usuário"
-            data-testid="profile-top-btn"
-          />
-        </button>
+          src={ profilePicture }
+          alt="Ícone que indica o botão pra ir para o perfil de usuário"
+          data-testid="profile-top-btn"
+        />
         <div>
           <h1
             data-testid="page-title"

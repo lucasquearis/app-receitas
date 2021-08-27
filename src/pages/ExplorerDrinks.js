@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 import Header from '../components/Header';
-import FooterMenu from './FooterMenu';
+import FooterMenu from '../components/FooterMenu';
 
 function ExplorerDrinks() {
   const [randomDrink, setRandomDrink] = useState();
   const history = useHistory();
-
+  console.log(randomDrink);
   useEffect(() => {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
-    const getDrink = async () => {
-      const requestDrink = await fetch(URL);
-      const { meals } = await requestDrink.json();
-      setRandomDrink(meals[0]);
-    };
-    getDrink();
+    try {
+      const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+      const getDrink = async () => {
+        const requestDrink = await fetch(URL);
+        const response = await requestDrink.json();
+        setRandomDrink(response.drinks[0].idDrink);
+      };
+      getDrink();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
-  const handleClick = () => {
-    const drinkDinamic = `/explorar/bebidas/${randomDrink.idMeal}`;
-    return <Redirect to={ drinkDinamic } />;
-  };
   return (
     <div>
       <Header />
@@ -34,7 +34,7 @@ function ExplorerDrinks() {
       </button>
       <button
         type="button"
-        onClick={ () => handleClick() }
+        onClick={ () => history.push(`/bebidas/${randomDrink}`) }
         data-testid="explore-surprise"
       >
         Me Surpreenda!
