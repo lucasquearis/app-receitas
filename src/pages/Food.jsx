@@ -37,7 +37,6 @@ function Food() {
       </div>
     );
   }
-
   return (
     <div>
       <Header titulo="Comidas" />
