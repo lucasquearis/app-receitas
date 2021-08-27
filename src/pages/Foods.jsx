@@ -6,7 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
 import Footer from '../components/Footer';
 import ItemCard from '../components/ItemCard';
-import FoodsCard from '../components/FoodsCard';
+// import FoodsCard from '../components/FoodsCard';
 import CategoryFoodButtons from '../components/CategoryFoodButtons';
 import '../styles/Footer.css';
 
@@ -39,7 +39,6 @@ function Foods(props) {
         dataId="search-top-btn"
         className="img-search"
       />
-      <CategoryFoodButtons />
       <main>
         { search.meals && search.meals.map((meal, index) => index < doze && (<ItemCard
           title={ meal.strMeal }
@@ -50,7 +49,8 @@ function Foods(props) {
           key={ index }
         />)) }
       </main>
-      <FoodsCard />
+      {/* <FoodsCard /> */}
+      <CategoryFoodButtons />
 
       <Footer />
     </div>

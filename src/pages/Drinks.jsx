@@ -5,7 +5,6 @@ import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
 import ItemCard from '../components/ItemCard';
-import DrinksCard from '../components/DrinksCard';
 import Footer from '../components/Footer';
 import CategoryDrinkButtons from '../components/CategoryDrinkButtons';
 
@@ -49,7 +48,6 @@ function Drinks(props) {
           key={ index }
         />)) }
       </main>
-      <DrinksCard />
       <Footer />
     </div>
   );

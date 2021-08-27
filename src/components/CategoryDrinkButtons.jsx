@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDrinksCategories, clearSearch } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
+import DrinksCard from './DrinksCard';
 
 function CategoryDrinkButtons() {
   const doze = 12;
@@ -11,6 +12,11 @@ function CategoryDrinkButtons() {
   );
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
+  const [showInput, setShowInput] = useState(true);
+
+  const showInputClick = () => {
+    setShowInput((prevCheck) => !prevCheck);
+  };
 
   const filterDrinkCategory = async (category) => {
     try {
@@ -30,6 +36,7 @@ function CategoryDrinkButtons() {
 
   const handleClick = (categoryStr) => {
     filterDrinkCategory(categoryStr);
+    showInputClick();
     dispatch(clearSearch());
   };
 
@@ -47,19 +54,19 @@ function CategoryDrinkButtons() {
           </button>
         ))
       }
-      {
-        categoryClick.drinks
-          && categoryClick.drinks.map((dish, index) => index < doze && (
-            <ItemCard
-              title={ dish.strDrink }
-              data-testid={ `${index}-recipe-card` }
-              thumb={ dish.strDrinkThumb }
-              id={ dish.idDrink }
-              index={ index }
-              key={ index }
-            />
-          ))
-      }
+      { showInput
+        ? <DrinksCard />
+        : categoryClick.drinks
+        && categoryClick.drinks.map((dish, index) => index < doze && (
+          <ItemCard
+            title={ dish.strDrink }
+            data-testid={ `${index}-recipe-card` }
+            thumb={ dish.strDrinkThumb }
+            id={ dish.idDrink }
+            index={ index }
+            key={ index }
+          />
+        ))}
     </div>
   );
 }

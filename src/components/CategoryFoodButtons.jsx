@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategory, clearSearch } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
+import FoodsCard from './FoodsCard';
 
 function CategoryFoodButtons() {
   const cinco = 5;
@@ -9,6 +10,11 @@ function CategoryFoodButtons() {
   const categories = useSelector((state) => state.reducerCategories.categories.meals);
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
+  const [showInput, setShowInput] = useState(true);
+
+  const showInputClick = () => {
+    setShowInput((prevCheck) => !prevCheck);
+  };
 
   const renderCategoryFilter = async (category) => {
     try {
@@ -28,6 +34,7 @@ function CategoryFoodButtons() {
   const handleClick = (categoryStr) => {
     renderCategoryFilter(categoryStr);
     dispatch(clearSearch());
+    showInputClick();
   };
 
   return (
@@ -44,18 +51,17 @@ function CategoryFoodButtons() {
           </button>
         ))
       }
-      {
-        categoryClick.meals && categoryClick.meals.map((dish, index) => index < doze && (
+      { showInput ? <FoodsCard />
+        : categoryClick.meals
+        && categoryClick.meals.map((dish, index) => index < doze && (
           <ItemCard
             title={ dish.strMeal }
-            // data-testid={ `${index}-recipe-card` }
             thumb={ dish.strMealThumb }
             id={ dish.idMeal }
             index={ index }
             key={ index }
           />
-        ))
-      }
+        ))}
     </div>
   );
 }
