@@ -16,27 +16,27 @@
 }
 
 .cardsContent {
-  width: 100%;
-  padding: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 10px;
+  width: 100%;
 }
 
 .cardFlex {
+  display: flex;
+  flex-direction: column;
   margin: 5px;
   padding: 5px;
-  display: flex;
   text-align: center;
-  flex-direction: column;
 }
 
 .cardTumb {
-  width: 350px;
-  height: 300px;
-  border-radius: 5px;
-  margin-bottom: 10px;
   border: solid black 5px;
+  border-radius: 5px;
+  height: 300px;
+  margin-bottom: 10px;
+  width: 350px;
 }
 
 /*
