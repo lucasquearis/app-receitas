@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './Perfil.css';
 
@@ -8,7 +9,11 @@ function Perfil() {
 
   return (
     <div className="perfil-container">
-      <Header title="Perfil" />
+      <Header label="Perfil" Search={ () => '' } />
+      <br />
+      <br />
+      <br />
+      <Footer />
       <h5 data-testid="profile-email">{email}</h5>
       <section className="perfil-buttons">
         <Button
