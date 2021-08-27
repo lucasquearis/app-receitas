@@ -55,6 +55,7 @@ export default function MealDetails(props) {
             >
               { details[key] }
               :
+              &nbsp;
               { details[validMeasuresKeys[index]] }
             </p>
           ))
