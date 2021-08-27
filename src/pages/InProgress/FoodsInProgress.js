@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from 'react';
 
 function FoodsInProgress() {
-  const [recipesFood, setRecipesFood] = useState([]);
+  const [recipesFood, setRecipesFood] = useState([{}]);
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     const getRecipesFood = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id
+      const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id depois
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setRecipesFood(meals);
     };
     getRecipesFood();
   }, []);
 
-  // const [dataRecipesFood, setDataRecipesFood] = useState([]);
-  const dataRecipesFood = [...recipesFood];
-  const { strMealThumb, strMeal, srtCategory, strInstructions } = dataRecipesFood;
+  const { strMealThumb, strMeal, strCategory, strInstructions } = recipesFood[0];
+  console.log(strCategory);
 
   useEffect(() => {
     const ingredientsList = () => {
-      const ingredient = Object.entries(dataRecipesFood[0])
-        .filter((item) => item[0].includes('strIngredient'));
-      const ingredientFilter = ingredient.filter((item) => item[1]);
-      const ingredientList = Object.fromEntries(ingredientFilter);
-      return (console.log(Object.values(ingredientList)));
+      const keys = Object.keys(recipesFood[0])
+        .filter((item) => item.includes('strIngredient'));
+      const ingredientNotEmpty = keys
+        .filter((item) => recipesFood[0][item] !== ''
+          && recipesFood[0][item] !== null);
+      const ingredientList = ingredientNotEmpty.map((key) => recipesFood[0][key]);
+      setIngredients(ingredientList);
+      console.log(recipesFood);
     };
-    console.log(ingredientsList());
+    ingredientsList();
   }, [recipesFood]);
 
   // const handleCheked = () => (
@@ -33,36 +36,31 @@ function FoodsInProgress() {
 
   return (
     <div className="food-in-progress">
-      {/* { ingredientsList() } */}
       <p>Componente FoodsRecipeInProgress</p>
 
       <img data-testid="recipe-photo" alt="recipe" src={ strMealThumb } />
       <h1 data-testid="recipe-title">{ strMeal }</h1>
+      <h4 data-testid="recipe-category">{ strCategory }</h4>
       <button data-testid="share-btn" type="button">btn compartilhar</button>
       <button data-testid="favorite-btn" type="button">btn favoritar</button>
-
-      <h4 data-testid="recipe-category">{ srtCategory }</h4>
 
       <div className="indredients">
         <h3>Ingredientes</h3>
 
-        {/* <li>
-          <input data-testid={ `${index}-ingredient-step` } type="checkbox " />
-          5gr de sal
-        </li> */}
-
-        {/* <div className="indredients">
-          { ingredientsList.map((ingredient, index) => (
+        {
+          ingredients.map((ingredient, index) => (
             <div key={ index } data-testid={ `${index}-ingredient-step` }>
-              <input
-                type="checkbox"
-                checked={ handleCheked() }
-              />
-              { `${ingredient}` }
+              <label htmlFor={ `${ingredient}` }>
+                <input
+                  type="checkbox"
+                  id={ `${ingredient}` }
+                // checked={ handleCheked() }
+                />
+                { `${ingredient}` }
+              </label>
             </div>
-
-          ))}
-        </div> */}
+          ))
+        }
       </div>
 
       <h3>Instruções</h3>
