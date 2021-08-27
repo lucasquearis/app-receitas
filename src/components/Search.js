@@ -1,29 +1,23 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { createBrowserHistory } from 'history';
-import Radios from './Radios';
+import React, { useContext, useState } from 'react';
+import RecipesContext from '../context/RecipesContext';
 
-function Search({ functions }) {
-  const name = 'name';
-  const values = ['name', 'ingredient', 'first'];
-  const labels = ['Nome', 'Ingrediente', 'Primeira letra'];
-
-  const msg = alert;
+function Search() {
   const [radio, setRadio] = useState('s');
   const [searchValue, setSearchValue] = useState('');
-  const history = createBrowserHistory();
+  const {
+    API: { searchFoods, searchDrinks },
+    history: {
+      location: { pathname },
+    },
+  } = useContext(RecipesContext);
 
-  const tests = [
-    'name-search-radio',
-    'ingredient-search-radio',
-    'first-letter-search-radio',
-  ];
+  const search = pathname === '/comidas' ? searchFoods : searchDrinks;
 
   function handleChange({ target }) {
     setSearchValue(target.value);
   }
 
-  function change({ value }) {
+  function change(value) {
     switch (value) {
     case 'name':
       setRadio('s');
@@ -40,42 +34,26 @@ function Search({ functions }) {
   }
 
   function click() {
-    const { location: { pathname } } = history;
-    let searcher;
-
-    switch (pathname) {
-    case '/comidas':
-      searcher = functions.searchFoods;
-      break;
-
-    case '/bebidas':
-      searcher = functions.searchDrinks;
-      break;
-
-    default:
-      break;
-    }
-
     console.log(radio, searchValue);
     switch (radio) {
     case 'i':
       if (searchValue.length > 0) {
-        searcher(radio, searchValue);
+        search(radio, searchValue);
       } else {
-        msg('Escreva um ingrediente!');
+        alert('Escreva um ingrediente!');
       }
       break;
 
     case 'f':
       if (searchValue.length === 1) {
-        searcher(radio, searchValue);
+        search(radio, searchValue);
       } else {
-        msg('Sua busca deve conter somente 1 (um) caracter');
+        alert('Sua busca deve conter somente 1 (um) caracter');
       }
       break;
 
     default:
-      searcher(radio, searchValue);
+      search(radio, searchValue);
       break;
     }
   }
@@ -88,19 +66,42 @@ function Search({ functions }) {
         data-testid="search-input"
         onChange={ (e) => handleChange(e) }
       />
-      <Radios { ...{ name, change, tests, labels, values } } />
+      <div onChange={ ({ target: { value } }) => change(value) }>
+        <label htmlFor="labelName">
+          <input
+            type="radio"
+            name="radio"
+            value="name"
+            data-testid="name-search-radio"
+          />
+          <span>Nome</span>
+        </label>
+
+        <label htmlFor="labelIngredient">
+          <input
+            type="radio"
+            name="radio"
+            value="ingredient"
+            data-testid="ingredient-search-radio"
+          />
+          <span>Ingrediente</span>
+        </label>
+
+        <label htmlFor="labelFirst">
+          <input
+            type="radio"
+            name="radio"
+            value="first"
+            data-testid="first-letter-search-radio"
+          />
+          <span>Primeira letra</span>
+        </label>
+      </div>
       <button type="button" data-testid="exec-search-btn" onClick={ click }>
         Pesquisar
       </button>
     </div>
   );
 }
-
-Search.propTypes = {
-  functions: PropTypes.shape({
-    searchDrinks: PropTypes.func,
-    searchFoods: PropTypes.func,
-  }).isRequired,
-};
 
 export default Search;

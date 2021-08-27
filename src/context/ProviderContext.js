@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { createBrowserHistory } from 'history';
+
+import useAPI from '../hooks/useAPI';
 import RecipesContext from './RecipesContext';
 
 function ProviderContext({ children }) {
   const [register, setRegister] = useState('');
-
-  const context = { register, setRegister };
+  const API = useAPI();
+  const history = createBrowserHistory();
+  const context = { register, setRegister, API, history };
   return (
     <RecipesContext.Provider value={ context }>
       { children }

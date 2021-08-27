@@ -48,7 +48,7 @@ class HeaderSearch extends React.Component {
             alt="imagem do link de pesquisa"
           />
         </button>
-        {(show) ? <Search { ...this.props } /> : null }
+        {(show) ? <Search /> : null }
       </div>
     );
   }

@@ -1,15 +1,8 @@
 import { useState } from 'react';
 
 function useAPI() {
-  const apis = {
-    protocol: 'https',
-    drink: 'www.thecocktaildb.com',
-    food: 'www.themealdb.com',
-    path: 'api/json/v1/1',
-  };
-
-  const drinkAPI = `${apis.protocol}://${apis.drink}/${apis.path}`;
-  const foodAPI = `${apis.protocol}://${apis.food}/${apis.path}`;
+  const drinkAPI = 'https://www.thecocktaildb.com/api/json/v1/1';
+  const foodAPI = 'https://www.themealdb.com/api/json/v1/1';
 
   const [drinks, setDrinks] = useState({ drinks: [] });
   const [foods, setFoods] = useState({ meals: [] });
@@ -17,36 +10,44 @@ function useAPI() {
   function request(url, setter) {
     fetch(url)
       .then((response) => response.json())
-      .then((data) => setter(data))
+      .then((data) => {
+        const key = Object.keys(data)[0];
+        const value = data[key];
+        if (value === null) {
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+          setter({ [key]: [] });
+          return;
+        }
+        setter(data);
+      })
       .catch(console.error);
   }
 
-  function searchDrinks(category, query) {
+  function searchDrinks(category = 's', query = '') {
     // Category
     // 's' pesquisar por nome
-    // 'i' pesquisar por ingrediente
+    // 'i' filtra por ingrediente
     // 'f' pesquisar por pela primeira letra - precisa de uma letra
+    if (category === 'i') {
+      request(`${drinkAPI}/filter.php?${category}=${query}`, setFoods);
+      return;
+    }
     request(`${drinkAPI}/search.php?${category}=${query}`, setDrinks);
   }
 
-  function searchFoods(category, query) {
+  function searchFoods(category = 's', query = '') {
     // Category
     // 's' pesquisar por nome
+    // 'i' filtra por ingrediente
     // 'f' pesquisar por pela primeira letra - precisa de uma letra
+    if (category === 'i') {
+      request(`${foodAPI}/filter.php?${category}=${query}`, setFoods);
+      return;
+    }
     request(`${foodAPI}/search.php?${category}=${query}`, setFoods);
   }
 
-  const data = {
-    drinks: drinks.drinks,
-    foods: foods.meals,
-  };
-
-  const functions = {
-    searchDrinks,
-    searchFoods,
-  };
-
-  return [data, functions];
+  return { drinks, foods, searchDrinks, searchFoods };
 }
 
 export default useAPI;

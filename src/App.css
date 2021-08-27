@@ -15,17 +15,28 @@
   max-height: 80vh;
 }
 
-.cardFlex {
+.cardsContent {
   width: 100%;
-  height: 40vh;
+  padding: 10px;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
+.cardFlex {
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
 .cardTumb {
-  width: 200px;
-  height: 200px;
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: solid black 5px;
 }
 
 /*
