@@ -62,6 +62,13 @@ const CategoriesFilterButtons = () => {
   if (erro) return <p>Algo deu errado. Tente novamente.</p>;
   return (
     <div>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => { fetchItems(apiUrl); } }
+      >
+        All
+      </button>
       {
         categories.map((categorie, index) => {
           const name = Object.values(categorie);
