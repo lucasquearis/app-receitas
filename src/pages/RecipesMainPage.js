@@ -87,11 +87,11 @@ function RecipesMainPage() {
       <Header title={ pathname === '/comidas' ? 'Comidas' : 'Bebidas' } />
       <nav className="nav-container">
         { selIngredient !== '' ? null : renderCategoryButtons() }
-        <RecipesList
-          recipesData={ recipesData }
-          recipeKey={ recipeKey }
-        />
       </nav>
+      <RecipesList
+        recipesData={ recipesData }
+        recipeKey={ recipeKey }
+      />
       <Footer />
     </div>
   );
