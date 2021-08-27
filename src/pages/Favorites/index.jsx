@@ -7,7 +7,6 @@ import FavoriteCard from './components/Card';
 
 function Favorites() {
   const { favoriteList } = useContext(Context);
-  console.log(favoriteList);
   const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {

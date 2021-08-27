@@ -5,6 +5,8 @@ import { fetchAPI,
   fetchRandomRecipe } from '../services/API';
 
 import useFavorite from '../hooks/useFavorite';
+import useDone from '../hooks/useDone';
+import useInProgress from '../hooks/useInProgress';
 
 function Provider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
@@ -14,6 +16,8 @@ function Provider({ children }) {
   const [toggle, setToggle] = useState(false);
   const [email, setEmail] = useState('');
   const [favoriteList, setFavoriteList] = useFavorite([]);
+  const [doneList, setDoneList] = useDone([]);
+  const [inProgressList, setInProgressList] = useInProgress();
   const requestApiData = useCallback(async (URL) => {
     const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
@@ -40,6 +44,10 @@ function Provider({ children }) {
     setEmail,
     favoriteList,
     setFavoriteList,
+    doneList,
+    setDoneList,
+    inProgressList,
+    setInProgressList,
     requestRandomRecipe,
   };
 
