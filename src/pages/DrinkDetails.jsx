@@ -5,8 +5,10 @@ import { useLocation } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
+import bHIcon from '../images/blackHeartIcon.svg';
+import wHIcon from '../images/whiteHeartIcon.svg';
+import {Link} from 'react-router-dom'
 
 function DrinkDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -24,6 +26,10 @@ function DrinkDetails({ match: { params: { id } } }) {
   const imgStyle = {
     width: '300px',
   };
+  const [doneRecipe, setDoneRecipe] = useState(false);
+  const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita')
+  const [favorite, setFavorite] = useState(false);
+  const [favoriteIcon, setFavoriteIcon] = useState(wHIcon);
 
   const fetchRecomendedFood = async () => {
     const endPointRecomendedFood = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -81,6 +87,90 @@ function DrinkDetails({ match: { params: { id } } }) {
     setIngredientList(ingredientsArray);
   }, [drink]);
 
+  useEffect(() => {
+    if (favorite) {
+      setFavoriteIcon(bHIcon);
+    } else {
+      setFavoriteIcon(wHIcon);
+    }
+  }, [favorite]);
+
+  useEffect(() => {
+    localStorage.setItem('doneRecipes', JSON.stringify([{
+      id: "178319",
+      type: "bebida",
+      area: "",
+      category: "Cocktail",
+      alcoholicOrNot: "Alcoholic",
+      name: "Aquamarine",
+      image: "https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg",
+      doneDate: "23/6/2020",
+      tags: []
+  }]))
+  const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
+  if (doneRecipes.some((recipe) => recipe.id === id)) {
+    setDoneRecipe(true);
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+  if (inProgressRecipes){
+    if (inProgressRecipes.cocktails[id]) {
+      setContinueRecipe('Continuar Receita');
+    }
+  }
+    }
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const isFavorite = favoriteRecipes.some((fav) => fav.id === id);
+      if (isFavorite) {
+        setFavorite(true);
+      }
+    }
+  }
+  , [drink, id])
+
+
+  const saveFavoriteRecipes = () => {
+    const { strCategory, strDrink, strDrinkThumb, strAlcoholic } = drink;
+    const favoriteObject = [{
+      id,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    }];
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteObject));
+    } else {
+      const updateFavorite = [
+        ...favoriteRecipes,
+        ...favoriteObject,
+      ];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(updateFavorite));
+    }
+  };
+
+  const deleteFavoriteRecipes = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const updateFavorite = favoriteRecipes.filter((rec) => rec.id !== id);
+    if (updateFavorite.length === 0) {
+      localStorage.removeItem('favoriteRecipes');
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(updateFavorite));
+    }
+  };
+
+  const handleFavorite = () => {
+    if (favorite) {
+      deleteFavoriteRecipes();
+    } else {
+      saveFavoriteRecipes();
+    }
+    setFavorite(!favorite);
+  };
+
+
   return (
     <div>
       Detalhes de bebidas:
@@ -112,9 +202,9 @@ function DrinkDetails({ match: { params: { id } } }) {
           variant="contained"
           color="primary"
           type="button"
-          data-testid="favorite-btn"
+          onClick={handleFavorite}
         >
-          <img src={ whiteHeartIcon } alt="favorite" />
+          <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
         </Button>
         <p data-testid="recipe-category">{ strAlcoholic }</p>
         <p>Ingredientes:</p>
@@ -129,16 +219,19 @@ function DrinkDetails({ match: { params: { id } } }) {
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
         {renderRecomendedFood()}
-        <Button
+        <Link to={`/comidas/${id}/in-progress`}>
+          <button
           style={ mystyle }
           variant="contained"
           color="primary"
           type="button"
           data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
+          hidden={doneRecipe}
+          >
+          {continueRecipe}
 
-        </Button>
+           </button>
+         </Link>  
       </div>
     </div>
   );
