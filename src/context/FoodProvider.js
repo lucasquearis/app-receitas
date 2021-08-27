@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
 import { fetchMealApi, fetchCategoriesMealApi } from '../services/fetchMealApi';
-import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 
 const FoodProvider = ({ children }) => {
   const [foods, setFoods] = useState([]);
-  const [foodDetailsId, setFoodDetailsId] = useState('');
   const [foodDetails, setFoodDetails] = useState([]);
   const [foodFilter, setFoodFilter] = useState({
     searchText: '',
@@ -27,17 +25,12 @@ const FoodProvider = ({ children }) => {
     });
   }, []);
 
-  useEffect(() => {
-    fetchMealDetailsApi(foodDetailsId).then((data) => setFoodDetails(data.meals));
-  }, [foodDetailsId]);
-
   const contextValue = {
     foods,
     foodFilter,
     setFoodFilter,
     setFoods,
-    foodDetailsId,
-    setFoodDetailsId,
+    setFoodDetails,
     foodDetails,
     categoriesMeal,
     mealsByCategories,

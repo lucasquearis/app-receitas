@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import DrinksContext from '../context/DrinksContext';
+import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 
 const DrinksCard = ({ drink, index }) => {
   const history = useHistory();
-  const { setDrinkDetailsId } = useContext(DrinksContext);
+  const { setDrinkDetails } = useContext(DrinksContext);
 
-  const handleClick = ({ idDrink }) => {
-    setDrinkDetailsId(idDrink);
+  const handleClick = () => {
+    const { idDrink } = drink;
+    fetchDrinkDetailsApi(idDrink).then((data) => setDrinkDetails(data.drinks));
     history.push(`/bebidas/${idDrink}`);
   };
 
@@ -16,8 +18,8 @@ const DrinksCard = ({ drink, index }) => {
     <div
       role="tab"
       tabIndex={ 0 }
-      onClick={ () => handleClick(drink) }
-      onKeyDown={ () => handleClick(drink) }
+      onClick={ handleClick }
+      onKeyDown={ handleClick }
       className="drinks-card"
       data-testid={ `${index}-recipe-card` }
     >
@@ -33,6 +35,7 @@ const DrinksCard = ({ drink, index }) => {
 
 DrinksCard.propTypes = {
   drink: PropTypes.shape({
+    idDrink: PropTypes.string.isRequired,
     strDrink: PropTypes.string.isRequired,
     strDrinkThumb: PropTypes.string.isRequired,
   }).isRequired,

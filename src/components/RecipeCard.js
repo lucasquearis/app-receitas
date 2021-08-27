@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import FoodContext from '../context/FoodContext';
+import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 
 const RecipeCard = ({ recipe, index }) => {
   const history = useHistory();
-  const { setFoodDetailsId } = useContext(FoodContext);
+  const { setFoodDetails } = useContext(FoodContext);
 
-  const handleClick = ({ idMeal }) => {
-    setFoodDetailsId(idMeal);
+  const handleClick = () => {
+    const { idMeal } = recipe;
+    fetchMealDetailsApi(idMeal).then((data) => setFoodDetails(data.meals));
     history.push(`/comidas/${idMeal}`);
   };
 
@@ -16,8 +18,8 @@ const RecipeCard = ({ recipe, index }) => {
     <div
       role="tab"
       tabIndex={ 0 }
-      onClick={ () => handleClick(recipe) }
-      onKeyDown={ () => handleClick(recipe) }
+      onClick={ handleClick }
+      onKeyDown={ handleClick }
       className="recipe-card"
       data-testid={ `${index}-recipe-card` }
     >
@@ -33,6 +35,7 @@ const RecipeCard = ({ recipe, index }) => {
 
 RecipeCard.propTypes = {
   recipe: PropTypes.shape({
+    idMeal: PropTypes.string.isRequired,
     strMealThumb: PropTypes.string.isRequired,
     strMeal: PropTypes.string.isRequired,
   }).isRequired,
