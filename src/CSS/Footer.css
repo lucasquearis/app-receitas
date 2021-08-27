@@ -1,0 +1,33 @@
+.footer {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.drinks-botton {
+  background-image: url('../images/drinkIcon.svg');
+  background-size: cover;
+  height: 120px;
+  padding-top: 1px;
+  text-align: center;
+  width: 120px;
+}
+
+.explore-botton {
+  background-image: url('../images/exploreIcon.svg');
+  background-size: cover;
+  height: 120px;
+  padding-top: 1px;
+  text-align: center;
+  width: 120px;
+}
+
+.food-botton {
+  background-image: url('../images/mealIcon.svg');
+  background-size: cover;
+  height: 120px;
+  padding-top: 1px;
+  text-align: center;
+  width: 120px;
+}
