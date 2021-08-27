@@ -28,7 +28,7 @@ export default function Comidas() {
       <div>
         { (meals !== []) && meals.map((item, index) => (
           <div key={ item.idMeal }>
-            { `categoria: ${ item.strCategory }` }
+            { `categoria: ${item.strCategory}` }
             <Link to={ `/comidas/${item.idMeal}` }>
               <Card recipe={ item } index={ index } />
             </Link>

@@ -16,6 +16,7 @@ function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [recipeType, setRecipeType] = useState('meals');
+  const [exploreByArea, setExploreByArea] = ('off');
 
   useEffect(() => {
     async function fetchAPI() {
@@ -69,6 +70,8 @@ function Provider({ children }) {
     setMeals,
     recipeType,
     setRecipeType,
+    exploreByArea,
+    setExploreByArea,
   };
 
   return (

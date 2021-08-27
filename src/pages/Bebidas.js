@@ -25,7 +25,7 @@ export default function Bebidas() {
       <div>
         { (cocktails !== []) && cocktails.map((item, index) => (
           <div key={ item.idDrink }>
-            { `categoria: ${ item.strCategory }` }
+            { `categoria: ${item.strCategory}` }
             <Link to={ `/bebidas/${item.idDrink}` }>
               <Card recipe={ item } index={ index } />
             </Link>
