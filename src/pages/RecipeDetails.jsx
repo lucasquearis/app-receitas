@@ -76,7 +76,7 @@ function RecipeDetails(props) {
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
               {
                 type === 'comidas'
-                && <Iframe link={recipe[enType][0].strYoutube} />
+                && <Iframe link={ recipe[enType][0].strYoutube } />
               }
               {
                 recipe && <Suggestions type={ type } />

@@ -3,16 +3,15 @@ import { string } from 'prop-types';
 
 const Iframe = (props) => {
   const { link } = props;
-  
-  const convertVideoLink = () => { 
+
+  const convertVideoLink = () => {
     const stringLink = link;
-    const re = '/watch?v=/';
-    const convertedLink = stringLink.replace(re, 'embed/');
+    const convertedLink = stringLink.replace('watch?v=', 'embed/');
     console.log(convertedLink);
     return convertedLink;
   };
 
-  const convertedLink = convertVideoLink()
+  const convertedLink = convertVideoLink();
 
   return (
     <iframe
@@ -25,11 +24,11 @@ const Iframe = (props) => {
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
       src={ convertedLink }
     />
-  )
-}
+  );
+};
 
 Iframe.propTypes = {
   link: string,
 }.isRequired;
 
-export default Iframe
+export default Iframe;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function Sugestions({ type }) {
+function Suggestions({ type }) {
   const [sugestions, setSugestions] = useState([]);
   const urlMealsSugestions = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const urlDrinksSugestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -11,9 +11,9 @@ function Sugestions({ type }) {
     const fetchSugestions = async () => {
       const request = await fetch(`${correctURL}`);
       const response = await request.json();
-      const resSugestion = type === 'meals' ? await response.meals.filter((item, key) => (
+      const resSugestion = type === 'meals' ? await response.meals.filter((_item, key) => (
         key < Number('6')))
-        : await response.drinks.filter((item, key) => (
+        : await response.drinks.filter((_item, key) => (
           key < Number('6')));
       setSugestions(resSugestion);
     };
@@ -60,4 +60,4 @@ function Sugestions({ type }) {
   );
 }
 
-export default Sugestions;
+export default Suggestions;
