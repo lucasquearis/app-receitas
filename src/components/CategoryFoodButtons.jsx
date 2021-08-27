@@ -5,7 +5,6 @@ import { fetchCategory } from '../redux/actions/mainActions';
 function CategoryFoodButtons() {
   const cinco = 5;
   const categories = useSelector((state) => state.reducerCategories.categories.meals);
-  // const loading = useSelector((state) => state.reducerCategories.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
