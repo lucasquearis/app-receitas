@@ -1,17 +1,16 @@
 /* .recomended-wrapper{
-    
 } */
 
-.recomended-drinks{
-    display: flex;
-    flex-direction: row;
+.recomended-drinks {
+  display: flex;
+  flex-direction: row;
 }
 
-.recomended-drinks-card img{
-    width: 100%;
+.recomended-drinks-card img {
+  width: 100%;
 }
 
-.details-image{
-    width: 100vw;
-    height: 50vw;
+.details-image {
+  height: 50vw;
+  width: 100vw;
 }
