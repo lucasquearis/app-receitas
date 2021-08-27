@@ -6,7 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 import AppContext from '../context/AppContext';
 import './Header.css';
 
-function Header({ nomeDaPagina }) { //
+function Header({ pageTitle, showSearchBtn }) { //
   const [redirect, setRedirect] = useState(false); // esse estado local começa como false.
   const { showBar, setShowBar } = useContext(AppContext);
 
@@ -25,19 +25,20 @@ function Header({ nomeDaPagina }) { //
       <h1
         data-testid="page-title"
       >
-        { nomeDaPagina }
+        { pageTitle }
       </h1>
-      <input
+      { showSearchBtn && <input
         type="image"
         data-testid="search-top-btn"
         alt="icone-busca"
         src={ searchIcon }
         onClick={ () => setShowBar(!showBar) }
-      />
+      /> }
     </header> // ao clicar no ícone de busca, vai mudar o estado Global.
   );
 }
 Header.propTypes = {
-  nomeDaPagina: PropTypes.string.isRequired,
+  pageTitle: PropTypes.string.isRequired,
+  showSearchBtn: PropTypes.bool.isRequired,
 };
 export default Header;

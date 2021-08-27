@@ -39,7 +39,10 @@ function EstruturaPrincipal({
 
   return (
     <>
-      <Header nomeDaPagina={ (pathIsMeals) ? 'Comidas' : 'Bebidas ' } />
+      <Header
+        pageTitle={ (pathIsMeals) ? 'Comidas' : 'Bebidas ' }
+        showSearchBtn
+      />
       { showBar ? <BarraDeBusca /> : <BarraCategorias
         categoriesList={ categoriesList }
         whatIsTheType={ pathname }
