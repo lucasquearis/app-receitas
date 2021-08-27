@@ -8,7 +8,8 @@ export default function Provider({ children }) {
   const contextLogin = { userInfo, setUserInfo };
 
   const [recipes, setRecipes] = useState([]);
-  const contextRecipes = { recipes, setRecipes };
+  const [recipeType, setRecipeType] = useState(false);
+  const contextRecipes = { recipes, setRecipes, recipeType, setRecipeType };
 
   return (
     <LoginContext.Provider value={ contextLogin }>

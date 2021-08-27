@@ -17,7 +17,7 @@ export default function Header(props) {
 
   const { title, searchIcon } = props;
 
-  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { recipes, setRecipes, setRecipeType } = useContext(RecipesContext);
 
   const handleSearchClick = () => {
     setShowSearch(!showSearch);
@@ -94,8 +94,10 @@ export default function Header(props) {
   const searchRecipeByPath = () => {
     const { location: { pathname } } = window;
     if (pathname === '/comidas') {
+      setRecipeType('comida');
       return searchFoodRecipe();
     }
+    setRecipeType('bebida');
     return searchDrinkRecipe();
   };
 
@@ -117,7 +119,6 @@ export default function Header(props) {
   const searchBar = () => (
     <form className="search-form">
       { redirect() }
-      {console.log(recipes)}
       <Input
         value={ searchForm.searchValue }
         name="searchValue"

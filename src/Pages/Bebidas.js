@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import * as BebidasAPI from '../service/BebidasAPI';
 import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import RecipesContext from '../Context/RecipesContext';
 
 const fetchInitialDrinks = async (setBebidas) => {
   const maxDrinks = 12;
@@ -13,20 +14,17 @@ const fetchInitialDrinks = async (setBebidas) => {
 
 const mudaFiltro = (event, filtro, setFiltro, setBebidas) => {
   const { target: value } = event;
-  console.log(value.innerText);
+
   if (filtro === value.innerText) {
     fetchInitialDrinks(setBebidas);
     setFiltro('');
-    // document.getElementById(`${value}-category-filter`).disabled = false;
   }
   if (value.innerText === 'All' && filtro !== 'All') {
     fetchInitialDrinks(setBebidas);
     setFiltro(value.innerText);
-    // document.getElementById(`${value}-category-filter`).disabled = true;
   }
   if (filtro !== value.innerText) {
     setFiltro(value.innerText);
-    // document.getElementById(`${value}-category-filter`).disabled = true;
   }
 };
 
@@ -34,16 +32,15 @@ export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [filtro, setFiltro] = useState('');
-  // const fetchDrinks = async () => {
-  //   const maxDrinks = 12;
-  //   const results = await BebidasAPI.buscarBebidaPorNome('');
-  //   setBebidas(results.filter((result, index) => index < maxDrinks));
-  // };
+
+  const { recipes, recipeType } = useContext(RecipesContext);
+  const TWELVE = 12;
+
   const fetchCategorias = async () => {
     const maxCategorias = 6;
     const botaoALL = { strCategory: 'All' };
     const results = await BebidasAPI.buscarCategorias('');
-    console.log(results);
+
     if (results[0].strCategory !== 'All') {
       results.unshift(botaoALL);
     }
@@ -84,6 +81,17 @@ export default function Bebidas() {
     );
   }
 
+  const renderRecipes = (receitas) => (
+    receitas.map((receita, index) => (
+      index < TWELVE
+      && (
+        <Link key={ receita.idDrink } to={ `/bebidas/${receita.idDrink}` }>
+          <Card key={ receita.idDrink } bebida={ receita } index={ index } />
+        </Link>
+      )
+    ))
+  );
+
   return (
     <section>
       <Header title="Bebidas" searchIcon />
@@ -104,16 +112,9 @@ export default function Bebidas() {
           )
         }
       </section>
-      {
-        bebidas.map(
-          (bebida, index) => (
-            <Link key={ bebida.idDrink } to={ `/bebidas/${bebida.idDrink}` }>
-              <Card key={ bebida.idDrink } bebida={ bebida } index={ index } />
-            </Link>
-          ),
-        )
-      }
-      { console.log(bebidas) }
+      { (recipes && recipeType === 'bebida')
+        ? renderRecipes(recipes) : renderRecipes(bebidas)}
+
       <Footer />
     </section>
   );
