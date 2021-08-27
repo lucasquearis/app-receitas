@@ -105,14 +105,14 @@ describe('Testes para tela de receitas feitas', () => {
   });
 
   it('Verifica se o botao de compartilhar copia o link da receita', () => {
+    // const mockFunc = () => null;
+    // copy = jest.fn(() => mockFunc());
     renderWithRouter(<ReceitasFeitas />);
     const copyLink = screen.getByTestId(/0-horizontal-share-btn/i);
 
     userEvent.click(copyLink);
 
-    console.log(navigator);
-
-    // expect(navigator.clipboard.readText()).toBe('http://localhost:3000/comidas/52771');
+    expect(mockFunc).toHaveBeenCalled();
   });
 
 });

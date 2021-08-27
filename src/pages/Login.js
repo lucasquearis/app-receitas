@@ -14,7 +14,6 @@ function Login() {
   const { email, password } = user;
 
   DrinksAPI();
-  console.log(drinkCategory);
 
   const handleOnChange = ({ target }) => {
     const { id, value } = target;
