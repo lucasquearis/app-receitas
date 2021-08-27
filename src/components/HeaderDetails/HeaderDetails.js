@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
 import favoriteIcon from '../../images/whiteHeartIcon.svg';
@@ -14,16 +13,18 @@ const HeaderDetails = ({ image, title, category }) => (
         <p data-testid="recipe-category" className="subtitle-details">{category}</p>
       </section>
       <section className="buttons-container">
-        <Button
+        <input
+          type="image"
+          alt="Botão compartilhar"
+          src={ shareIcon }
           data-testid="share-btn"
-        >
-          <img src={ shareIcon } alt="Botão compartilhar" className="icons" />
-        </Button>
-        <Button
+        />
+        <input
+          type="image"
+          src={ favoriteIcon }
+          alt="Botão de favoritar"
           data-testid="favorite-btn"
-        >
-          <img src={ favoriteIcon } alt="Botão de favoritar" className="icons" />
-        </Button>
+        />
       </section>
     </div>
   </header>

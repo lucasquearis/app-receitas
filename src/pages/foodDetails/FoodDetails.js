@@ -37,7 +37,7 @@ const FoodDetails = ({ match: { params: id } }) => {
       <Instructions instruction={ strInstructions } />
       <VideoDetails linkVideo={ strYoutube } />
       <Recomendation list={ recomendation } type="Drink" />
-      <ButtonDetails id={ id.id } type="meals" rota="comidas" />
+      <ButtonDetails id={ id.id } type="meals" />
     </div>
   );
 };

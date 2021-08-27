@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
-const ButtonDetails = ({ id, type, rota }) => {
+const ButtonDetails = ({ id, type }) => {
   const [stateButton, setStateButton] = useState('start-button');
   const [nameButton, setNameButton] = useState('Começar Receita');
   const [redirect, setRedirect] = useState(false);
@@ -24,7 +24,7 @@ const ButtonDetails = ({ id, type, rota }) => {
   const handleClick = () => {
     setRedirect(true);
   };
-  if (redirect) return <Redirect to={ `${rota}/${id}/in-progress ` } />;
+  if (redirect) return <Redirect to={ `${id}/in-progress ` } />;
   return (
     <Button
       data-testid="start-recipe-btn"
@@ -39,7 +39,6 @@ const ButtonDetails = ({ id, type, rota }) => {
 ButtonDetails.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  rota: PropTypes.string.isRequired,
 };
 
 export default ButtonDetails;
