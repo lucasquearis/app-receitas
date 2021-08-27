@@ -22,3 +22,8 @@
   border-radius: 20px;
   color: white;
 }
+
+.container-vazio {
+  margin-top: 20px;
+  text-align: center;
+}

@@ -5,9 +5,10 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import RecipesList from '../components/RecipesList';
 import Footer from '../components/Footer';
+import './RecipesMainPage.css';
 
 function RecipesMainPage() {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const { recipesData, setRecipesData } = useData();
   const [categories, setCategories] = useState([]);
   const [selCategory, setSelCategory] = useState('All');
@@ -16,7 +17,7 @@ function RecipesMainPage() {
   const [recipeKey, setRecipeKey] = useState('');
 
   useEffect(() => {
-    switch (location.pathname) {
+    switch (pathname) {
     case '/comidas':
       setDatabase('themealdb');
       setDatabaseKey('meals');
@@ -30,7 +31,7 @@ function RecipesMainPage() {
     default:
       console.log('Failed to set database!');
     }
-  }, [location.pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     let URL = `https://www.${database}.com/api/json/v1/1/search.php?s=`;
@@ -80,10 +81,12 @@ function RecipesMainPage() {
     />));
 
   return (
-    <div>
-      <Header title="Comidas" />
-      { renderCategoryButtons() }
-      { renderAllButton() }
+    <div className="main-container">
+      <Header title={ pathname === '/comidas' ? 'Comidas' : 'Bebidas' } />
+      <nav className="nav-container">
+        { renderAllButton() }
+        { renderCategoryButtons() }
+      </nav>
       <RecipesList
         recipesData={ recipesData }
         recipeKey={ recipeKey }

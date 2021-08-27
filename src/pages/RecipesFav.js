@@ -13,9 +13,16 @@ function RecipesFav() {
     const getFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setFav(getFavRecipes);
   }, [setFav]);
-
+  if (!filteredArray) {
+    return (
+      <div className="rf-container">
+        <Header title="Receitas Favoritas" />
+        <p className="container-vazio">Você ainda não favoritou nenhuma receita</p>
+      </div>
+    );
+  }
   return (
-    <div className="rd-container">
+    <div className="rf-container">
       <Header title="Receitas Favoritas" />
       <Filters setFilter={ setFilter } />
       <CardList filteredArray={ filteredArray } />
