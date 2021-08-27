@@ -9,3 +9,4 @@ export { default as ExploreIngredients } from './ExploreIngredients/ExploreIngre
 export { default as CategoryFilter } from './CategoryFilter/CategoryFilter';
 export { default as DoneRecipeCard } from './DoneRecipeCard/DoneRecipeCard';
 export { default as ExploreArea } from './ExploreArea/ExploreArea';
+export { default as ExploreLinks } from './ExploreLinks/ExploreLinks';

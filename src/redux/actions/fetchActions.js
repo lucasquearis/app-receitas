@@ -19,6 +19,8 @@ const B_INGREDIENTS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?
 const MEAL_AREA_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const CATEGORY_MEAL_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const CATEGORY_DRINK_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+const C_RANDOM_URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const B_RANDOM_URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
 export const getRecipes = (payload) => ({
   type: GET_RECIPES,
@@ -91,6 +93,17 @@ export function requestByCategory(category, path) {
       .then((json) => dispatch(getRecipes(json)));
   }
   return (dispatch) => fetch(`${C_CATEGORY_URL}${category}`)
+    .then((r) => r.json())
+    .then((json) => dispatch(getRecipes(json)));
+}
+
+export function requestRandom(path) {
+  if (path === '/bebidas') {
+    return (dispatch) => fetch(`${B_RANDOM_URL}`)
+      .then((r) => r.json())
+      .then((json) => dispatch(getRecipes(json)));
+  }
+  return (dispatch) => fetch(`${C_RANDOM_URL}`)
     .then((r) => r.json())
     .then((json) => dispatch(getRecipes(json)));
 }

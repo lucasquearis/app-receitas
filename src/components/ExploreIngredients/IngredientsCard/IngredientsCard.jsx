@@ -35,6 +35,7 @@ IngredientsCard.propTypes = {
   name: PropTypes.string.isRequired,
   i: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default IngredientsCard;
