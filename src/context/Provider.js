@@ -6,7 +6,6 @@ import fetchFoods from '../fetchs/FetchFood';
 function Provider({ children }) {
   const [name, setName] = useState('');
   const [filterByIng, setFilterByIng] = useState();
-  const [surprise, setSurprise] = useState();
   const [data, setData] = useState({
     food: {},
     drink: {},
@@ -25,8 +24,6 @@ function Provider({ children }) {
     setData,
     filterByIng,
     setFilterByIng,
-    surprise,
-    setSurprise,
   };
 
   return (
