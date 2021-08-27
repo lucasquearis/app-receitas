@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Header from '../components/Header';
-import RecipeDoneMealCard from '../components/RecipeDoneMealCard';
-import RecipeDoneDrinkCard from '../components/RecipeDoneDrinkCard';
+import RecipeDoneCard from '../components/RecipeDoneCard';
 import recipesDoneMock from '../data/recipesDoneMock';
 
 function RecipesDone() {
@@ -50,36 +49,21 @@ function RecipesDone() {
               image,
               doneDate,
               tags },
-            index) => {
-              if (type === 'comida') { // foto, nome, categoria, area, data, tags, botao share
-                return (
-                  <RecipeDoneMealCard
-                    key={ +id }
-                    id={ +id }
-                    area={ area }
-                    category={ category }
-                    name={ name }
-                    image={ image }
-                    doneDate={ doneDate }
-                    tagsName={ tags }
-                    index={ +index }
-                  />
-                );
-              }
-
-              return (
-                <RecipeDoneDrinkCard
-                  key={ +id }
-                  id={ +id }
-                  alcoholicOrNot={ alcoholicOrNot }
-                  name={ name }
-                  image={ image }
-                  doneDate={ doneDate }
-                  tagsName={ tags }
-                  index={ +index }
-                />
-              );
-            })
+            index) => (
+              <RecipeDoneCard
+                key={ +id }
+                id={ +id }
+                type={ type }
+                area={ area }
+                category={ category }
+                alcoholicOrNot={ alcoholicOrNot }
+                name={ name }
+                image={ image }
+                doneDate={ doneDate }
+                tagsName={ tags }
+                index={ +index }
+              />
+            ))
           }
         </div>
       </main>
