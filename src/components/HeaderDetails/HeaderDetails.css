@@ -1,27 +1,24 @@
-.header-details {
+
+header {
   display: flex;
   flex-direction: column;
 }
 
-.title-details {
-  font-family: Roboto;
+h1 {
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: 35px;
-  letter-spacing: 0em;
   text-align: left;
 }
 
-.subtitle-details {
-  font-family: Roboto;
+p {
+  color: darkgray;
   font-size: 21px;
   font-style: normal;
   font-weight: 400;
   line-height: 25px;
-  letter-spacing: 0em;
   text-align: left;
-  color: #A9A9A9;
 }
 
 .info-container {
