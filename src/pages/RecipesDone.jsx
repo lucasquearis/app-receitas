@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Header from '../components/Header';
 import RecipeDoneCard from '../components/RecipeDoneCard';
 import recipesDoneMock from '../data/recipesDoneMock';
 
 function RecipesDone() {
+  const [filterRecipesDone, setfilterRecipesDone] = useState({
+    filterMeals: false,
+    filterDrinks: false,
+  });
+  const { filterMeals, filterDrinks } = filterRecipesDone;
+
+  const recipesDone = () => {
+    if (filterMeals) return recipesDoneMock.filter(({ type }) => type === 'comida');
+    if (filterDrinks) return recipesDoneMock.filter(({ type }) => type === 'bebida');
+    return recipesDoneMock;
+  };
   return (
     <>
       <Header title="Refeitas Feitas" />
@@ -13,17 +24,11 @@ function RecipesDone() {
           <Button
             variant="primary"
             type="button"
-            data-testid="filter-by-all-btn"
-            onClick={ () => {} }
-          >
-            All
-          </Button>
-
-          <Button
-            variant="primary"
-            type="button"
             data-testid="filter-by-food-btn"
-            onClick={ () => {} }
+            onClick={ () => setfilterRecipesDone({
+              filterMeals: true,
+              filterDrinks: false,
+            }) }
           >
             Food
           </Button>
@@ -32,14 +37,29 @@ function RecipesDone() {
             variant="primary"
             type="button"
             data-testid="filter-by-drink-btn"
-            onClick={ () => {} }
+            onClick={ () => setfilterRecipesDone({
+              filterMeals: false,
+              filterDrinks: true,
+            }) }
           >
             Drinks
+          </Button>
+
+          <Button
+            variant="primary"
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ () => setfilterRecipesDone({
+              filterMeals: false,
+              filterDrinks: false,
+            }) }
+          >
+            All
           </Button>
         </div>
         <div>
           {
-            recipesDoneMock.map(({
+            recipesDone().map(({
               id,
               type,
               area,
