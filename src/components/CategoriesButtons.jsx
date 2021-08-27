@@ -67,7 +67,7 @@ CategoriesButtons.propTypes = {
 };
 
 CategoriesButtons.defaultProps = {
-  type: PropTypes.any,
+  type: PropTypes.string,
 };
 
 export default CategoriesButtons;

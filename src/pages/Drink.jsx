@@ -54,7 +54,7 @@ function Drink() {
 
       <main>
         {
-          Drinks.splice(0, recipeLimit).map((element, index) => (
+          Drinks && Drinks.splice(0, recipeLimit).map((element, index) => (
             <Cards
               key={ index }
               index={ index }
