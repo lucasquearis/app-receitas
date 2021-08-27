@@ -6,7 +6,7 @@ import {
   exploreButtonId,
   exploreByArea,
   exploreByIngredient,
-  exploreBySurprise,
+  exploreSurprise,
   exploreDrinksId,
   VALID_EMAIL,
   VALID_PASSWORD,
@@ -47,8 +47,8 @@ describe('Tests rendering of explore drinks page', () => {
     });
   });
 
-  it('Should render an element with testid "explore-by-surprise"', () => {
-    const exploreBySurpriseBtn = screen.getByTestId(exploreBySurprise);
+  it('Should render an element with testid "explore-surprise"', () => {
+    const exploreBySurpriseBtn = screen.getByTestId(exploreSurprise);
     expect(exploreBySurpriseBtn).toBeInTheDocument();
 
     it('Element should have text "Me Surpreenda!"', () => {
