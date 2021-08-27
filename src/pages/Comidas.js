@@ -76,20 +76,22 @@ function Comidas(props) {
       >
         All
       </button>
-      { foodRecipes.map(({ strMealThumb, strMeal, idMeal }, index) => {
-        if (index < MAX_RECIPES) {
-          return (
-            <Link key={ strMeal } to={ `/comidas/${idMeal}` }>
-              <RecipeCard
-                thumb={ strMealThumb }
-                name={ strMeal }
-                index={ index }
-              />
-            </Link>
-          );
-        }
-        return null;
-      }) }
+      <div className="card-container">
+        { foodRecipes.map(({ strMealThumb, strMeal, idMeal }, index) => {
+          if (index < MAX_RECIPES) {
+            return (
+              <Link key={ strMeal } to={ `/comidas/${idMeal}` } className="card">
+                <RecipeCard
+                  thumb={ strMealThumb }
+                  name={ strMeal }
+                  index={ index }
+                />
+              </Link>
+            );
+          }
+          return null;
+        }) }
+      </div>
       <Footer />
     </div>
   );
