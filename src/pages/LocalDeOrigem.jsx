@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../cssPages/Explore.css';
@@ -17,7 +16,7 @@ function LocalDeOrigem() {
     const list = await fetchFoods('food', 'area');
     const { meals } = list;
     const all = { strArea: 'All' };
-    setArea([...meals, all]);
+    setArea([all, ...meals]);
     const receitasList = await fetchFoods('food', 'procuraComida');
     setReceitas([...receitasList.meals]);
   };
@@ -43,37 +42,34 @@ function LocalDeOrigem() {
     getReceitas();
   }, [areaSelected]);
 
-  function onClick(event) {
-    const { name } = event.target;
-    event.preventDefault();
+  function handleChange(event) {
+    const { value } = event.target;
     setAreaSelected({
-      selected: name,
+      selected: value,
     });
+    console.log(areaSelected);
   }
 
   if (!area) return <p>Loading...</p>;
   return (
     <div>
-      <Header titulo="Explorar Origem" />
+      <Header titulo="Explorar Origem" pesquisa="true" />
       <main className="origem">
-        <Dropdown className="d-inline mx-2">
-          <Dropdown.Toggle id="dropdown-autoclose-true">
-            { areaSelected.selected }
-          </Dropdown.Toggle>
-          <Dropdown.Menu data-testid="explore-by-area-dropdown">
-            { area.map(({ strArea }, index) => (
-              <Dropdown.Item
-                data-testid={ `${strArea}-option` }
-                name={ strArea }
-                href="#"
-                key={ index }
-                onClick={ onClick }
-              >
-                { strArea }
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
+        <select
+          className="select-area"
+          data-testid="explore-by-area-dropdown"
+          onChange={ handleChange }
+        >
+          { area.map(({ strArea }, index) => (
+            <option
+              data-testid={ `${strArea}-option` }
+              value={ strArea }
+              key={ index }
+            >
+              { strArea }
+            </option>
+          ))}
+        </select>
         <CardList
           list={ receitas }
           apiType="Meal"

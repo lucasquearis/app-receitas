@@ -30,7 +30,7 @@ function Header(props) {
           alt="imagem de pefil"
         />
       </Link>
-      <h1 data-testid="page-title">{ titulo }</h1>
+      <h3 data-testid="page-title">{ titulo }</h3>
       { pesquisa === 'true' ? iconePesquisa() : null }
       { showBar ? <SearchBar /> : null}
     </header>

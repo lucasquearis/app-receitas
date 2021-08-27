@@ -13,6 +13,7 @@ import Perfil from './pages/Perfil';
 import LocalDeOrigem from './pages/LocalDeOrigem';
 import ComidaIng from './pages/ComidaIng';
 import BebidasIng from './pages/BebidasIng';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -25,23 +26,15 @@ function App() {
           <Route path="/explorar/comidas/ingredientes" component={ ComidaIng } />
           <Route path="/explorar/comidas/area" component={ LocalDeOrigem } />
           <Route path="/explorar/comidas" component={ ComidasExp } />
+          <Route path="/explorar/bebidas/area" component={ NotFound } />
           <Route path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
           <Route path="/explorar/bebidas" component={ BebidasExp } />
           <Route exect path="/explorar" component={ Explorar } />
           <Route path="/perfil" component={ Perfil } />
           {/*
-          <Route path="/" component={ Login } />
-          <Route path="/comidas/:id" component={ ComidaExpIngId } />
-          {/* <Route path="/comidas" component={ Login } />
-          <Route path="/bebidas/{id-da-receita}" component={ Login } />
-          <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route path="/comidas" component={ Comidas } />
           <Route path="/comidas/:id" component={ Comidas } />
-          <Route path="/bebidas" component={ Bebidas } />
           <Route path="/bebidas/:id" component={ Bebidas } />
-          <Route path="/perfil" component={ Perfil } />
-
-          {/* <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
+          <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
