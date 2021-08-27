@@ -13,9 +13,11 @@ export default function Bebidas() {
   if (cocktails.length === 1) {
     return history.push(`/bebidas/${cocktails[0].idDrink}`);
   }
+
   if (cocktails.length === 0) {
     return <Loading />;
   }
+
   return (
     <div>
       <Header recipeType="drinks">
@@ -24,7 +26,8 @@ export default function Bebidas() {
       <MenuInferior />
       <div>
         { (cocktails !== []) && cocktails.map((item, index) => (
-          <div className="col-md-4 my-3" key={ item.idDrink }>
+          <div key={ item.idDrink }>
+            { `categoria: ${item.strCategory}` }
             <Link to={ `/bebidas/${item.idDrink}` }>
               <Card recipe={ item } index={ index } />
             </Link>

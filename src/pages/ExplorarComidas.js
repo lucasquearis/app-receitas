@@ -20,14 +20,14 @@ export default function ExplorarComidas() {
       <button
         data-testid="explore-by-area"
         type="button"
-        onClick={ () => history.push('explorar/comidas') }
+        onClick={ () => history.push('/explorar/comidas/area') }
       >
         Por Local de Origem
       </button>
       <button
         data-testid="explore-surprise"
         type="button"
-        onClick={ () => history.push('explore/surpresas') } // Este path aponta para qual componente? Requisito 70.
+        onClick={ () => history.push('/comidas/52771') }
       >
         Me Surpreenda!
       </button>
