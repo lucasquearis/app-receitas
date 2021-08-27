@@ -1,12 +1,14 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 function FoodCard({ meal, index }) {
-  console.log(meal);
-  const { strMealThumb, strMeal } = meal;
+  const { history: push } = useHistory();
+  const { strMealThumb, strMeal, idMeal } = meal;
   return (
     <div
       data-testid={ `${index}-recipe-card` }
+      onClick={ () => push(`/comidas/${idMeal}`) }
     >
       <img
         src={ strMealThumb }
