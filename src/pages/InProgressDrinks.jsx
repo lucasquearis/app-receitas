@@ -16,10 +16,10 @@ function InProgressDrinks({ match: { params: { id } } }) {
   }, [id]);
 
   return (
-    <article>
+    <main>
       { recipe.map((oneRecipe) => (
         <RecipeInProgress key="0" recipe={ oneRecipe } type="Drink" />)) }
-    </article>
+    </main>
   );
 }
 
