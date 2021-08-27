@@ -2,12 +2,13 @@ import React from 'react';
 import {
   Footer,
   Header,
+  UserProfile,
 } from '../components';
 
 const Profile = () => (
   <div>
     <Header page="Perfil" />
-    Perfil
+    <UserProfile />
     <Footer />
   </div>
 );

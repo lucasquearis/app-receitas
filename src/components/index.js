@@ -20,3 +20,4 @@ export { default as DrinkInProgress } from './DrinkInProgress';
 export { default as MealInProgress } from './MealInProgress';
 export { default as DoneRecipes } from './DoneRecipes';
 export { default as FavoriteRecipes } from './FavoriteRecipes';
+export { default as UserProfile } from './UserProfile';
