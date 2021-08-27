@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
-import { fetchDrinkById } from '../../services/fetchApi';
+import { fetchDrinkById, fetchSearchFoodsApi } from '../../services/fetchApi';
+import RecommendationCard from '../../components/RecommendationCard';
+import './detailsDrink.css';
 
 function DetailsDrink({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
   const [isMount, setIsMount] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [recommendations, setRecommendations] = useState([]);
 
   const fetchDrink = () => {
+    const getFood = async () => {
+      const foodData = await fetchSearchFoodsApi('name', '');
+      const MAX_INDEX = 6;
+      const MAX_NUM = 0.5;
+      const MINUS_NUM = -1;
+      // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+      foodData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
+      setRecommendations(foodData.filter((_food, index) => index < MAX_INDEX));
+    };
+
     const getdrink = async () => {
       const drinkData = await fetchDrinkById(id);
+      getFood();
       setDrink(drinkData);
       console.log(drinkData);
       setIsMount(true);
@@ -26,16 +40,10 @@ function DetailsDrink({ match: { params: { id } } }) {
   const ingredientskeys = keysDrinks.filter((key) => (
     key.includes('strIngredient') && !!drink[key]));
 
-  const allow = `accelerometer; autoplay; clipboard-write; 
-  encrypted-media; gyroscope; picture-in-picture`;
-  const videoRegex = drink.strVideo
-    ? drink.strVideo.replace(/watch\?v=/, 'embed/') : null;
-  console.log(videoRegex);
-
   // const testId = 11007; ID = testado
 
   return (
-    <div>
+    <div className="detailsDrink">
       <img
         src={ drink.strDrinkThumb }
         alt="recipe"
@@ -59,22 +67,25 @@ function DetailsDrink({ match: { params: { id } } }) {
         ))}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
-      <section>
-        <iframe
-          width="560"
-          height="315"
-          src={ videoRegex }
-          title="YouTube video player"
-          frameBorder="0"
-          allow={ allow }
-          allowFullScreen
-          data-testid="video"
-        />
+      <section className="recommendations-foods">
+        {recommendations.map((food, index) => (
+          <RecommendationCard
+            id={ food.idMeal }
+            key={ index }
+            name={ food.strMeal }
+            src={ food.strMealThumb }
+            index={ index }
+            alt={ `${food.strMeal} image` }
+          />
+        ))}
       </section>
-      {/* <div data-testid={ `${index}-recomendation-card` }>
-        receitas recomendadas
-      </div> */}
-      <button type="button" data-testid="start-recipe-btn">Iniciar receita</button>
+      <button
+        className="start-recipe-drink-btn"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar receita
+      </button>
     </div>
   );
 }
