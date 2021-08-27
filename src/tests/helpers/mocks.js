@@ -10,7 +10,7 @@ export const exploreButtonId = 'explore-bottom-btn';
 export const exploreFoodId = 'explore-food';
 export const exploreDrinksId = 'explore-drinks';
 export const exploreByArea = 'explore-by-area';
-export const exploreBySurprise = 'explore-by-surprise';
+export const exploreSurprise = 'explore-surprise';
 export const exploreByIngredient = 'explore-by-ingredient';
 
 export const VALID_EMAIL = 'valid123@trybe.com.br';
