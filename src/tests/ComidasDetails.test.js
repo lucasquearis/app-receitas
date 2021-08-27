@@ -4,11 +4,12 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import ComidasDetails from '../pages/ComidasDetails';
 import fetchMock from '../../cypress/mocks/fetch';
+import { act } from 'react-dom/test-utils';
 
 describe('Testes para a pagina de detalhes de comidas', () => {
   beforeEach(() => {
     jest.spyOn(global, 'fetch');
-    global.fetch = fetchMock;
+    global.fetch = jest.fn(fetchMock);
   });
 
   it('Verifica se todos os elementos sao mostrados na tela', async () => {
@@ -25,4 +26,6 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     await screen.findByTestId('0-recomendation-card');
     await screen.findByTestId('start-recipe-btn');
   });
+  it('Verifica se foram feitas duas requisicoes a API', () => {
+  })
 });

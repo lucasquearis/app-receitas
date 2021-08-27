@@ -3,7 +3,9 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import ReceitasFeitas from '../pages/ReceitasFeitas';
-import copy from 'clipboard-copy';
+
+jest.mock('clipboard-copy', () => jest.fn());
+const copy = require('clipboard-copy');
 
 describe('Testes para tela de receitas feitas', () => {
   const doneRecipes = [
@@ -105,14 +107,21 @@ describe('Testes para tela de receitas feitas', () => {
   });
 
   it('Verifica se o botao de compartilhar copia o link da receita', () => {
-    // const mockFunc = () => null;
-    // copy = jest.fn(() => mockFunc());
     renderWithRouter(<ReceitasFeitas />);
+    copy.mockImplementation(() => null);
     const copyLink = screen.getByTestId(/0-horizontal-share-btn/i);
 
     userEvent.click(copyLink);
 
-    expect(mockFunc).toHaveBeenCalled();
+    expect(copy).toHaveBeenCalled();
   });
+
+  it('Verifica se caso nao tenha receitas feitas, nao renderiza os cartoes', () => {
+    localStorage.clear();
+    renderWithRouter(<ReceitasFeitas />);
+    const imagem = screen.queryByTestId(/0-horizontal-image/i);
+
+    expect(imagem).toBeNull();
+  })
 
 });
