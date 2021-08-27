@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import HookBebidas from '../hooks/HookBebidas';
 import CardList from '../components/CardList';
 import Categories from '../components/Categories';
+import MyContext from '../context/MyContext';
 import '../cssPages/Refeicao.css';
 
 function Bebidas() {
+  const { filterByIng } = useContext(MyContext);
   const [drinkData, setDrinkData] = useState({});
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [drink, loading, categories, setLoading] = HookBebidas();
@@ -36,7 +38,7 @@ function Bebidas() {
           toggleCallback={ setToggleCategory }
         />
         <CardList
-          list={ drinkData.drinks }
+          list={ filterByIng ? filterByIng.drinks : drinkData.drinks }
           apiType="Drink"
           page="bebidas"
         />

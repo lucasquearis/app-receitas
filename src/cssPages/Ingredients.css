@@ -1,0 +1,8 @@
+.div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10%;
+  padding-left: 5%;
+  padding-top: 7%;
+}
