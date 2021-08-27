@@ -27,7 +27,7 @@ const BtnCategory = ({ category }) => {
               type: 'category',
               input: value,
             };
-            searchRecipes(searchInput, currentRout, url, history);
+            searchRecipes(searchInput, currentRout, url);
           } }
         >
           { strCategory }

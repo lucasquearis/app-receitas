@@ -4,8 +4,7 @@ import showAlert from '../Helpers/showAlert';
 
 function RecipesHooks() {
   const [recipes, setRecipes] = useState([]);
-
-  const searchRecipes = async (previousSearch, foodRout, url, history) => {
+  const searchRecipes = async (previousSearch, foodRout, url, history = null) => {
     const { type, input } = previousSearch;
     let response;
     switch (type) {
@@ -31,7 +30,6 @@ function RecipesHooks() {
       break;
     }
     const responseRecipes = foodRout === true ? response.meals : response.drinks;
-
     if (responseRecipes === null) {
       return showAlert(
         alert,
@@ -39,7 +37,7 @@ function RecipesHooks() {
       );
     }
     setRecipes(responseRecipes);
-    if (responseRecipes.length === 1) {
+    if (history !== null && responseRecipes.length === 1) {
       history.push(
         foodRout === true
           ? `/comidas/${responseRecipes[0].idMeal}`
@@ -51,6 +49,7 @@ function RecipesHooks() {
   return {
     searchRecipes,
     recipes,
+    setRecipes,
   };
 }
 

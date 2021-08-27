@@ -11,7 +11,7 @@ import FoodHook from '../Hooks/FoodHook';
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
-  const { searchRecipes, recipes } = recipesHooks();
+  const { searchRecipes, recipes, setRecipes } = recipesHooks();
   const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
   const { categoryMeal, categoryDrinks, filterIngredient, filter } = BtnFilterCategory();
   const { getRecipes } = FoodHook();
@@ -29,6 +29,7 @@ export const AppProvider = ({ children }) => {
     filterIngredient,
     filter,
     getRecipes,
+    setRecipes,
   };
 
   return (
