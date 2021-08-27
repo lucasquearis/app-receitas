@@ -5,6 +5,7 @@ import copyToClipBoard from 'clipboard-copy';
 import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
 import * as BebidasAPI from '../service/BebidasAPI';
+import RecomendedCard from '../Components/RecomendedCard';
 import getEmbedURL from '../service/getEmbedURL';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -17,6 +18,7 @@ export default function DetalheComida(props) {
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const getFood = async () => {
@@ -76,56 +78,71 @@ export default function DetalheComida(props) {
     setMessageTime();
   };
 
-  const randomDrinkCard = () => (
-    <section className="drink-recomended">
-      <h5>Recomendadas</h5>
-      <div className="recomended-drink-section-infos">
-        { randomDrinks.map((drink, index) => (
-          <div
-            data-testid={ `${index}-recomendation-card` }
-            className="recomended-drink-info"
-            key={ drink.idDrink }
-          >
-            <img src={ drink.strDrinkThumb } alt="foto da bebida" />
-            <p>{ drink.strCategory }</p>
-            <h5 data-testid={ `${index}-recomendation-title` }>{ drink.strDrink }</h5>
-          </div>
-        )) }
-      </div>
-    </section>
-  );
-
   const isFavorite = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
     if (favoriteRecipes !== null) {
-      const favorite = favoriteRecipes.some((recipe) => recipe.id === food.idMeal);
+      const hasFavorite = favoriteRecipes.some((recipe) => recipe.id === food.idMeal);
 
-      if (favorite) {
+      if (hasFavorite) {
         return (
-          <img
-            data-testid="favorite-btn"
-            src={ blackHeartIcon }
-            alt="icone de favoritar"
-          />
+          <button
+            type="button"
+            className="favorite-btn-icon"
+            // onClick={ onFavoriteClick }
+          >
+            <img
+              data-testid="favorite-icon"
+              src={ blackHeartIcon }
+              alt="icone de favoritar"
+            />
+          </button>
         );
       }
 
       return (
-        <img
-          data-testid="favorite-btn"
-          src={ whiteHeartIcon }
-          alt="icone de favoritar"
-        />
+        <button
+          type="button"
+          className="favorite-btn-icon"
+          // onClick={ onFavoriteClick }
+        >
+          <img
+            data-testid="favorite-icon"
+            src={ whiteHeartIcon }
+            alt="icone de favoritar"
+          />
+        </button>
+      );
+    }
+
+    if (favorite) {
+      return (
+        <button
+          type="button"
+          className="favorite-btn-icon"
+          // onClick={ onFavoriteClick }
+        >
+          <img
+            data-testid="favorite-icon"
+            src={ blackHeartIcon }
+            alt="icone de favoritar"
+          />
+        </button>
       );
     }
 
     return (
-      <img
-        data-testid="favorite-btn"
-        src={ whiteHeartIcon }
-        alt="icone de favoritar"
-      />
+      <button
+        type="button"
+        className="favorite-btn-icon"
+        // onClick={ onFavoriteClick }
+      >
+        <img
+          data-testid="favorite-icon"
+          src={ whiteHeartIcon }
+          alt="icone de favoritar"
+        />
+      </button>
     );
   };
 
@@ -194,7 +211,15 @@ export default function DetalheComida(props) {
         <h5>Video</h5>
         <iframe data-testid="video" title="food-video" src={ getEmbedURL(food) } />
       </div>
-      { randomDrinkCard() }
+      <div className="recomended-drink-section-infos">
+        { randomDrinks.map((drink, index) => (
+          <RecomendedCard
+            key={ `${drink.idDrink}-${index}` }
+            recomended={ drink }
+            index={ index }
+          />
+        )) }
+      </div>
     </section>
   );
 }

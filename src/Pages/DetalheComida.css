@@ -19,6 +19,15 @@
   display: flex;
 }
 
+.favorite-btn-icon {
+  background: none;
+  border: none;
+}
+
+.favorite-btn-icon:focus {
+  outline: none;
+}
+
 .food-category {
   color: rgb(139, 139, 139);
   font-size: 18px;
@@ -81,15 +90,12 @@
   outline: none;
 }
 
-.drink-recomended {
-  margin: 35px 0 100px 12px;
-}
-
 .recomended-drink-section-infos {
   display: flex;
   overflow-x: scroll;
   padding: 20px 5px;
-  width: 100%;
+  margin: 20px 0 120px 8px ;
+  width: 95%;
 }
 
 .recomended-drink-info {
