@@ -1,20 +1,30 @@
 const filterAlertMsg = 'Sua busca deve conter somente 1 (um) caracter';
-let url;
 
-const currentPage = window.location.href;
+const getUrl = () => {
+  const currentPage = window.location.href;
+  let url;
 
-if (currentPage.includes('comidas')) {
-  url = 'themealdb';
-} else if (currentPage.includes('bebidas')) {
-  url = 'thecocktaildb';
-}
+  if (currentPage.includes('comidas')) {
+    url = 'themealdb';
+  } else if (currentPage.includes('bebidas')) {
+    url = 'thecocktaildb';
+  }
 
-const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
-const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
-const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
-const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+  const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
+  const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
+  const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
+  const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+
+  return {
+    ingredientURL,
+    nameURL,
+    firstLetterURL,
+    categoryFilterURL,
+  };
+};
 
 export const getDataByIngredient = async (ingredient) => {
+  const { ingredientURL } = getUrl();
   const response = await fetch(`${ingredientURL}${ingredient}`);
   const data = response.json();
 
@@ -22,6 +32,7 @@ export const getDataByIngredient = async (ingredient) => {
 };
 
 export const getDataByName = async (name) => {
+  const { nameURL } = getUrl();
   const response = await fetch(`${nameURL}${name}`);
   const data = response.json();
 
@@ -29,6 +40,7 @@ export const getDataByName = async (name) => {
 };
 
 export const getDataByFirstLetter = async (letter) => {
+  const { firstLetterURL } = getUrl();
   const response = await fetch(`${firstLetterURL}${letter}`);
   const data = response.json();
   if (letter.length >= 2) {
@@ -41,6 +53,7 @@ export const getDataByFirstLetter = async (letter) => {
 };
 
 export const getDataByCategory = async (category) => {
+  const { categoryFilterURL } = getUrl();
   const response = await fetch(`${categoryFilterURL}${category}`);
   const data = await response.json();
 
