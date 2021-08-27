@@ -5,15 +5,14 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
-  const email = JSON.parse(localStorage.getItem('user'));
-  const receiveEmail = email.email;
+  const Sendemail = JSON.parse(localStorage.getItem('user'));
+  const receiveEmail = Sendemail.email;
+
   const history = useHistory();
 
   const doneRecipes = () => {
     history.push('/receitas-feitas');
   };
-
-  // npm run cy -- --spec cypress/integration/
 
   const favoriteRecipes = () => {
     history.push('/receitas-favoritas');
