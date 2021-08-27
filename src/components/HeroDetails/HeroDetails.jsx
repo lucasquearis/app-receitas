@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import shareIconImg from '../../images/shareIcon.svg';
-import blackHeartIconImg from '../../images/blackHeartIcon.svg';
+import UseFavorite from '../../hook/UseFavorite';
 
 function HeroDetails({ recipe, type }) {
+  const { changeFavorite, heart } = UseFavorite(recipe);
   return (
     <section>
       <img
@@ -17,8 +18,13 @@ function HeroDetails({ recipe, type }) {
       <button type="button" data-testid="share-btn">
         <img src={ shareIconImg } alt="share-button" width="20px" height="20px" />
       </button>
-      <button type="button" data-testid="favorite-btn">
-        <img src={ blackHeartIconImg } alt="favorite-button" width="20px" height="20px" />
+      <button
+        src={ heart }
+        type="button"
+        data-testid="favorite-btn"
+        onClick={ () => changeFavorite() }
+      >
+        <img src={ heart } alt="favorite-button" width="20px" height="20px" />
       </button>
       <h3 data-testid="recipe-category">
         {recipe.strCategory}
