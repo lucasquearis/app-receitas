@@ -1,6 +1,7 @@
 const fetchFoods = async (type, action, value = '') => {
   const actions = {
     procuraComida: 'search.php?s=',
+    procuraId: 'lookup.php?i=',
     procuraBebida: 'search.php?s=',
     random: 'random.php',
     categories: 'list.php?c=list',
