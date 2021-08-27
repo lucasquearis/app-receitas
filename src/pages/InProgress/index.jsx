@@ -1,7 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 import { Button, Form } from 'react-bootstrap';
+
+import ShareIcon from '../../components/Icons/ShareIcon';
+import FavoriteIcon from '../../components/Icons/FavoriteIcon';
+import getFavoriteValue from '../../services/functions';
 
 import Context from '../../context';
 
@@ -17,15 +21,22 @@ function InProgress() {
   const [isReady, setIsReady] = React.useState(false);
   const { inProgressList, setInProgressList } = useContext(Context);
   const query = pathname.includes('comidas') ? 'meal' : 'drink';
+  const queryForUrl = query === 'meal' ? 'comida' : 'bebida';
+  const type = query === 'meal' ? 'meals' : 'cocktails';
+  const recipeId = query === 'meal' ? details.idMeal : details.idDrink;
+  const [isCopied, setIsCopied] = useState(false);
+  const [favoriteValue, setFavoriteValue] = useState({});
+
+  const handleClickCopy = () => {
+    setIsCopied(true);
+  };
 
   useEffect(() => {
-    const type = query === 'meal' ? 'meals' : 'cocktails';
-    const recipeId = query === 'meal' ? details.idMeal : details.idDrink;
     if (inProgressList[type]) {
       const newCheckedIngredients = inProgressList[type][recipeId] || [];
       setCheckedIngredients(newCheckedIngredients);
     }
-  }, [inProgressList, setCheckedIngredients, details, query]);
+  }, [inProgressList, setCheckedIngredients, recipeId, type]);
 
   React.useEffect(() => {
     const api = query === 'meal' ? 'themealdb' : 'thecocktaildb';
@@ -34,17 +45,9 @@ function InProgress() {
       const res = await fetch(url);
       const data = await res.json();
       const filteredData = data[`${query}s`][0];
+      setFavoriteValue(getFavoriteValue(query, filteredData));
       setDetails(filteredData);
       setLoading(false);
-
-      // Object.entries(filteredData)
-      //   .filter((entry) => entry[0].includes('strIngredient') && entry[1])
-      //   .forEach((ingredient) => {
-      //     setCheckedIngredients((prevState) => ({
-      //       ...prevState,
-      //       [ingredient[1]]: false,
-      //     }));
-      //   });
     };
     fetchData();
   }, [id, query]);
@@ -54,18 +57,12 @@ function InProgress() {
   const ingredients = Object.entries(details)
     .filter((entry) => entry[0].includes('strIngredient') && entry[1]);
   const handleClick = (ingredient) => {
-    const type = query === 'meal' ? 'meals' : 'cocktails';
-    const recipeId = query === 'meal' ? details.idMeal : details.idDrink;
     setInProgressList(recipeId, ingredient, type);
-    // setCheckedIngredients((prevState) => ({
-    //   ...prevState,
-    //   [ingredient]: !prevState[ingredient],
-    // }));
   };
 
   React.useEffect(() => {
-    setIsReady(Object.values(checkedIngredients).every((value) => value));
-  }, [checkedIngredients]);
+    setIsReady(checkedIngredients.length === ingredients.length);
+  }, [checkedIngredients, ingredients]);
 
   if (loading) return 'Loading';
 
@@ -75,12 +72,13 @@ function InProgress() {
       <h2 data-testid="recipe-title">{name}</h2>
       <p data-testid="recipe-category">{details.strCategory}</p>
 
-      <Button data-testid="share-btn" variant="primary" className="mr-1">
-        Compartilhar
-      </Button>
-      <Button data-testid="favorite-btn" variant="primary">
-        Favoritar
-      </Button>
+      <ShareIcon
+        dataTestId="share-btn"
+        onClick={ handleClickCopy }
+        url={ `/${queryForUrl}s/${id}` }
+      />
+      <FavoriteIcon recipe={ favoriteValue } dataTestId="favorite-btn" />
+      {isCopied && <p className="copied-msg">Link copiado!</p>}
 
       {ingredients.map((ingredient, index) => (
         <div key={ ingredient[0] } data-testid={ `${index}-ingredient-step` }>
