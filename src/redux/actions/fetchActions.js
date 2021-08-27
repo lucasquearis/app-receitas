@@ -17,6 +17,8 @@ const B_INGREDIENT_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php
 const B_CATEGORY_URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 const B_INGREDIENTS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 const MEAL_AREA_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+const CATEGORY_MEAL_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const CATEGORY_DRINK_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
 export const getRecipes = (payload) => ({
   type: GET_RECIPES,
@@ -114,4 +116,15 @@ export function requestAreaList() {
   return (dispatch) => fetch(MEAL_AREA_URL)
     .then((r) => r.json())
     .then((json) => dispatch(getArea(json)));
+}
+
+export function requestCategoryList(path) {
+  if (path === '/bebidas') {
+    return (dispatch) => fetch(CATEGORY_DRINK_URL)
+      .then((r) => r.json())
+      .then((json) => dispatch(getCategories(json)));
+  }
+  return (dispatch) => fetch(CATEGORY_MEAL_URL)
+    .then((r) => r.json())
+    .then((json) => dispatch(getCategories(json)));
 }
