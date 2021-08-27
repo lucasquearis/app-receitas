@@ -13,3 +13,4 @@ export { default as DrinkExplorer } from './DrinkExplorer';
 export { default as ExploreByLocation } from './ExploreByLocation';
 export { default as ExploreFoodByIngredients } from './ExploreFoodByIngredients';
 export { default as ExploreDrinkByIngredients } from './ExploreDrinkByIngredients';
+export { default as NotFound } from './NotFound';

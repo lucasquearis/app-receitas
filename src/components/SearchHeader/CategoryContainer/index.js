@@ -1,10 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { useCategoriesContext } from '../../../context/CategoriesProvider';
+import { useDataContext } from '../../../context/DataProvider';
 
 export default function CategoryContainer() {
   const { location: { pathname } } = useHistory();
-  const { categories, handleSetSelected, handleReset } = useCategoriesContext();
+  const { categories } = useDataContext();
+  const { handleSetSelected, handleReset } = useCategoriesContext();
   const type = pathname.includes('/comidas') ? 'food' : 'drinks';
 
   const maxLength = 5;
