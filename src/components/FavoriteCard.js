@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import AppContext from '../context/AppContext';
 import shareIconPath from '../images/shareIcon.svg';
-import { FavoriteButton } from '.';
+import FavoriteButton from './FavoriteButton';
 // import './css/DoneCard.css';
 
 const FavCard = ({ favRecipe, index, handleClickShare }) => (
