@@ -7,5 +7,9 @@ export {
   DRINKS_BY_CATEGORY,
   RANDOM_MEAL,
   RANDOM_DRINK,
+  MEALS_INGREDIENTS_LIST,
+  DRINKS_INGREDIENTS_LIST,
+  MEALS_INGREDIENTS_IMAGE,
+  DRINKS_INGREDIENTS_IMAGE,
 } from './endPoints';
 export { default as fetchApi } from './fetchApi';
