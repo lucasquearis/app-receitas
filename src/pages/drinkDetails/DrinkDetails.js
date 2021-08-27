@@ -34,6 +34,8 @@ const DrinkDetails = ({ match: { params: id } }) => {
         title={ strDrink }
         image={ strDrinkThumb }
         category={ strAlcoholic }
+        recipe={ drink }
+        id={ id.id }
       />
       <IngredientsDetails recipe={ drink } />
       <Instructions instruction={ strInstructions } />

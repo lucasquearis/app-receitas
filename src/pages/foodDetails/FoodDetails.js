@@ -32,7 +32,13 @@ const FoodDetails = ({ match: { params: id } }) => {
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meal;
   return (
     <div>
-      <HeaderDetails title={ strMeal } image={ strMealThumb } category={ strCategory } />
+      <HeaderDetails
+        title={ strMeal }
+        image={ strMealThumb }
+        category={ strCategory }
+        recipe={ meal }
+        id={ id.id }
+      />
       <IngredientsDetails recipe={ meal } />
       <Instructions instruction={ strInstructions } />
       <VideoDetails linkVideo={ strYoutube } />
