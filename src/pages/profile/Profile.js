@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
 
 const Profile = () => {
@@ -55,6 +56,7 @@ const Profile = () => {
       >
         Sair
       </button>
+      <FooterMenu />
     </div>
   );
 };

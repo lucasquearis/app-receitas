@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardsList = ({ array }) => {
+const CardsList = ({ array, teste }) => {
   if (array !== undefined) {
     let type;
     if (array[0].idDrink === undefined) type = 'Meal';
@@ -20,7 +20,7 @@ const CardsList = ({ array }) => {
         { newArray.map((obj, index) => (
           <div
             key={ index }
-            data-testid={ `${index}-recipe-card` }
+            data-testid={ `${index}-${teste}` }
           >
             <img
               data-testid={ `${index}-card-img` }
