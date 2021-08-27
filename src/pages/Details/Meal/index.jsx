@@ -15,15 +15,20 @@ import { fetchRecipeDetails } from '../../../services/API';
 function Details({ match }) {
   const [recipe, setRecipe] = useState({});
   const { doneRecipes, inProgressList } = useContext(Context);
+  const [buttonAppear, setButtonAppear] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getRecipe = async () => {
       const { params: { id } } = match;
       const { meals } = await fetchRecipeDetails('themealdb', id);
       setRecipe(meals[0]);
+      const bool = !doneRecipes.find((item) => item.id === meals[0].idMeal);
+      setButtonAppear(bool);
+      setLoading(false);
     };
     getRecipe();
-  }, [match]);
+  }, [match, doneRecipes, setButtonAppear, setLoading]);
 
   const getIngredients = () => {
     const ingredientsList = Array.from({ length: 15 }).reduce((acc, _value, index) => {
@@ -57,7 +62,7 @@ function Details({ match }) {
       ? 'Continuar Receita'
       : 'Iniciar Receita');
 
-  return (
+  return loading ? <p>Loading...</p> : (
     <>
       <div className="hero">
         <Image
@@ -80,7 +85,7 @@ function Details({ match }) {
         <Recommendations endpoint="thecocktaildb" />
         <Video src={ recipe.strYoutube } />
       </Container>
-      { !doneRecipes.find((item) => item.id === recipe.idMeal) && (
+      { buttonAppear && (
         <Link
           className="start-recipe-btn-container"
           data-testid="start-recipe-btn"
