@@ -34,6 +34,7 @@ function Profile() {
           color="default"
           variant="contained"
           data-testid="profile-logout-btn"
+          onClick={ () => localStorage.clear() }
         >
           Sair
         </Button>
