@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 // import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
@@ -8,7 +8,6 @@ import shareIcon from '../images/shareIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
-import {Link} from 'react-router-dom'
 
 function DrinkDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -27,7 +26,7 @@ function DrinkDetails({ match: { params: { id } } }) {
     width: '300px',
   };
   const [doneRecipe, setDoneRecipe] = useState(false);
-  const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita')
+  const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
   const [favorite, setFavorite] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(wHIcon);
 
@@ -97,26 +96,25 @@ function DrinkDetails({ match: { params: { id } } }) {
 
   useEffect(() => {
     localStorage.setItem('doneRecipes', JSON.stringify([{
-      id: "178319",
-      type: "bebida",
-      area: "",
-      category: "Cocktail",
-      alcoholicOrNot: "Alcoholic",
-      name: "Aquamarine",
-      image: "https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg",
-      doneDate: "23/6/2020",
-      tags: []
-  }]))
-  const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
-  if (doneRecipes.some((recipe) => recipe.id === id)) {
-    setDoneRecipe(true);
-  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-  if (inProgressRecipes){
-    if (inProgressRecipes.cocktails[id]) {
-      setContinueRecipe('Continuar Receita');
+      id: '178319',
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: 'Aquamarine',
+      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+      doneDate: '23/6/2020',
+      tags: [],
+    }]));
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes.some((recipe) => recipe.id === id)) {
+      setDoneRecipe(true);
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (inProgressRecipes && inProgressRecipes.cocktails[id]) {
+        setContinueRecipe('Continuar Receita');
+      }
     }
-  }
-    }
+
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
       const isFavorite = favoriteRecipes.some((fav) => fav.id === id);
@@ -124,12 +122,10 @@ function DrinkDetails({ match: { params: { id } } }) {
         setFavorite(true);
       }
     }
-  }
-  , [drink, id])
-
+  },
+  [drink, id]);
 
   const saveFavoriteRecipes = () => {
-    const { strCategory, strDrink, strDrinkThumb, strAlcoholic } = drink;
     const favoriteObject = [{
       id,
       type: 'bebida',
@@ -170,7 +166,6 @@ function DrinkDetails({ match: { params: { id } } }) {
     setFavorite(!favorite);
   };
 
-
   return (
     <div>
       Detalhes de bebidas:
@@ -202,7 +197,7 @@ function DrinkDetails({ match: { params: { id } } }) {
           variant="contained"
           color="primary"
           type="button"
-          onClick={handleFavorite}
+          onClick={ handleFavorite }
         >
           <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
         </Button>
@@ -219,19 +214,19 @@ function DrinkDetails({ match: { params: { id } } }) {
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
         {renderRecomendedFood()}
-        <Link to={`/comidas/${id}/in-progress`}>
+        <Link to={ `/comidas/${id}/in-progress` }>
           <button
-          style={ mystyle }
-          variant="contained"
-          color="primary"
-          type="button"
-          data-testid="start-recipe-btn"
-          hidden={doneRecipe}
+            style={ mystyle }
+            variant="contained"
+            color="primary"
+            type="button"
+            data-testid="start-recipe-btn"
+            hidden={ doneRecipe }
           >
-          {continueRecipe}
+            {continueRecipe}
 
-           </button>
-         </Link>  
+          </button>
+        </Link>
       </div>
     </div>
   );

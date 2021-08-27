@@ -53,17 +53,6 @@ function FoodDetails({ match: { params: { id } } }) {
             />
           ))}
         </ul>
-      //   <Carousel data-testid="recomendation-card" itemsToShow={ 2 } itemsToScroll={ 2 }>
-      //   {sliceRecomended.map((drink, index) => (
-      //     <RecomendedCard
-      //       title={ drink.strDrink }
-      //       key={ drink.idDrink }
-      //       id={ drink.idDrink }
-      //       index={ index }
-      //       img={ drink.strDrinkThumb }
-      //     />
-      //   ))}
-      // </Carousel>
       );
     }
   };
@@ -113,10 +102,8 @@ function FoodDetails({ match: { params: { id } } }) {
       setDoneRecipe(true);
     }
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipes) {
-      if (inProgressRecipes.meals[id]) {
-        setContinueRecipe('Continuar Receita');
-      }
+    if (inProgressRecipes && inProgressRecipes.meals[id]) {
+      setContinueRecipe('Continuar Receita');
     }
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
@@ -129,7 +116,6 @@ function FoodDetails({ match: { params: { id } } }) {
   [food, id]);
 
   const saveFavoriteRecipes = () => {
-    const { strArea, strCategory, strMeal, strMealThumb } = food;
     const favoriteObject = [{
       id,
       type: 'comida',
@@ -143,10 +129,7 @@ function FoodDetails({ match: { params: { id } } }) {
     if (!favoriteRecipes) {
       localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteObject));
     } else {
-      const updateFavorite = [
-        ...favoriteRecipes,
-        ...favoriteObject,
-      ];
+      const updateFavorite = [...favoriteRecipes, ...favoriteObject];
       localStorage.setItem('favoriteRecipes', JSON.stringify(updateFavorite));
     }
   };
