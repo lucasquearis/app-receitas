@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Login, Profile, MainMeals, MainDrinks, MealDetails, DrinkDetails,
   InProgressMeals, InProgressDrinks, Explore, MealIngredients,
   DrinkIngredients, ExploreMeals, ExploreDrinks, ExploreOrigin,
-  FavoriteRecipes, DoneRecipes } from './pages';
+  FavoriteRecipes, DoneRecipes, NotFound } from './pages';
 import './App.css';
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
       <Route exact path="/bebidas" component={ MainDrinks } />
       <Route exact path="/comidas" component={ MainMeals } />
       <Route exact path="/" component={ Login } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }

@@ -11,6 +11,7 @@ function SelectArea({ setArea }) {
         data-testid="explore-by-area-dropdown"
         onChange={ ({ target }) => setArea(target.value) }
       >
+        <option data-testid="All-option" value="All">All</option>
         {areaList.meals.map(({ strArea }, i) => (
           <option
             key={ i }
