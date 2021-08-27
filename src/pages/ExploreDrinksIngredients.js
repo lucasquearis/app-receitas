@@ -3,6 +3,7 @@ import {
   Footer,
   Header,
 } from '../components';
+import DrinksIngredientsExplore from '../components/DrinksIngredientsExplore';
 
 const ExploreDrinksIngredients = () => {
   const pageName = 'Explorar Ingredientes';
@@ -10,7 +11,7 @@ const ExploreDrinksIngredients = () => {
   return (
     <div>
       <Header page={ pageName } />
-      Explorar Ingredientes de Drinks
+      <DrinksIngredientsExplore />
       <Footer />
     </div>
   );

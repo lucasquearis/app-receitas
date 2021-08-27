@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { FOOD_RESPONSE } from '../../redux/reducers/foodReducer';
-import { getFoodTypesList, getFoodByFilter } from '../../services/foodAPI';
+import { FOOD_RESPONSE, FOOD_PARAMETER_RESET } from '../../redux/reducers/foodReducer';
+import { getFoodTypesList, getFoodByFilter, getFood } from '../../services/foodAPI';
 import MealCard from '../MealCard';
 import Loading from '../Loading';
 
@@ -13,6 +13,7 @@ const FoodList = () => {
   const loading = useSelector(({ food }) => food.loading);
   const meals = useSelector(({ food }) => food.meals);
   const error = useSelector(({ food }) => food.error);
+  const getParameter = useSelector(({ food }) => food.redirectedWithParameter);
   const dispatch = useDispatch();
   const [foodTypesList, setFoodTypesList] = useState(false);
   const [loadingList, setLoadingList] = useState(true);
@@ -22,14 +23,24 @@ const FoodList = () => {
 
   useEffect(() => {
     const getFirstMeals = async () => {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      const { meals: startMeals } = await response.json();
-      dispatch({ type: FOOD_RESPONSE, payload: startMeals });
-      setFilteredMeals(startMeals);
-      setOriginalMeals(startMeals);
+      const { parameter, term } = getParameter;
+      if (parameter === 'ingredient') {
+        const filteredByIngredient = await getFood(term);
+        dispatch({ type: FOOD_RESPONSE, payload: filteredByIngredient });
+        setOriginalMeals(filteredByIngredient);
+        setFilteredMeals(filteredByIngredient);
+      } else {
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        const { meals: startMeals } = await response.json();
+        dispatch({ type: FOOD_RESPONSE, payload: startMeals });
+        setOriginalMeals(startMeals);
+        setFilteredMeals(startMeals);
+      }
     };
     getFirstMeals();
-  }, [dispatch]);
+  }, [dispatch, getParameter]);
+
+  useEffect(() => () => dispatch({ type: FOOD_PARAMETER_RESET }), [dispatch]);
 
   useEffect(() => {
     getFoodTypesList().then((list) => {

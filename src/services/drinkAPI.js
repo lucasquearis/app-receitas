@@ -76,3 +76,13 @@ export const getDrinksForRecommendation = async () => {
   //   return `Algo deu errado na busca: ${error}`;
   // }
 };
+
+export const getDrinkIngredients = async () => {
+  // try {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+  const { drinks } = await response.json();
+  return drinks;
+  // } catch (error) {
+  //   return `Algo deu errado na busca por ingredientes: ${error}`;
+  // }
+};

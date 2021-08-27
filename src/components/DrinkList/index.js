@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
+import { DRINK_RESPONSE, DRINK_PARAMETER_RESET } from '../../redux/reducers/drinkReducer';
 import DrinkCard from '../DrinkCard';
-import { getDrinkTypesList, getDrinkByFilter } from '../../services/drinkAPI';
+import { getDrinkTypesList, getDrinkByFilter, getDrink } from '../../services/drinkAPI';
 import Loading from '../Loading';
 
 const DrinkList = () => {
@@ -13,6 +13,7 @@ const DrinkList = () => {
   const loading = useSelector(({ drink }) => drink.loading);
   const drinks = useSelector(({ drink }) => drink.drinks);
   const error = useSelector(({ drink }) => drink.error);
+  const getParameter = useSelector(({ drink }) => drink.redirectedWithParameter);
   const dispatch = useDispatch();
   const [drinkTypesList, setDrinkTypesList] = useState(false);
   const [loadingList, setLoadingList] = useState(true);
@@ -21,15 +22,23 @@ const DrinkList = () => {
   const [originalDrinks, setOriginalDrinks] = useState(drinks);
 
   useEffect(() => {
-    const getFirstMeals = async () => {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-      const { drinks: startDrinks } = await response.json();
-      dispatch({ type: DRINK_RESPONSE, payload: startDrinks });
-      setFilteredDrinks(startDrinks);
-      setOriginalDrinks(startDrinks);
+    const getFirstDrinks = async () => {
+      const { parameter, term } = getParameter;
+      if (parameter === 'ingredient') {
+        const filteredByIngredient = await getDrink(term);
+        dispatch({ type: DRINK_RESPONSE, payload: filteredByIngredient });
+        setOriginalDrinks(filteredByIngredient);
+        setFilteredDrinks(filteredByIngredient);
+      } else {
+        const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        const { drinks: startDrinks } = await response.json();
+        dispatch({ type: DRINK_RESPONSE, payload: startDrinks });
+        setFilteredDrinks(startDrinks);
+        setOriginalDrinks(startDrinks);
+      }
     };
-    getFirstMeals();
-  }, [dispatch]);
+    getFirstDrinks();
+  }, [dispatch, getParameter]);
 
   useEffect(() => {
     getDrinkTypesList().then((list) => {
@@ -38,6 +47,8 @@ const DrinkList = () => {
       setLoadingList(false);
     });
   }, []);
+
+  useEffect(() => () => dispatch({ type: DRINK_PARAMETER_RESET }), [dispatch]);
 
   useEffect(() => {
     if (drinkFilter) {

@@ -2,12 +2,15 @@ export const NEW_FOOD_SEARCH = 'NEW_FOOD_SEARCH';
 export const FOOD_RESPONSE = 'FOOD_RESPONSE';
 export const FOOD_ERROR_RESPONSE = 'FOOD_ERROR_RESPONSE';
 export const FOOD_FILTER = 'FOOD_FILTER';
+export const FOOD_PARAMETER_REDIRECT = 'FOOD_PARAMETER_REDIRECT';
+export const FOOD_PARAMETER_RESET = 'FOOD_PARAMETER_RESET';
 
 const INITIAL_STATE = {
   meals: [],
   loading: true,
   error: false,
   filter: false,
+  redirectedWithParameter: { parameter: 'none', term: '' },
 };
 
 const food = (state = INITIAL_STATE, action) => {
@@ -33,6 +36,16 @@ const food = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       filter: action.payload,
+    };
+  case FOOD_PARAMETER_REDIRECT:
+    return {
+      ...state,
+      redirectedWithParameter: action.payload,
+    };
+  case FOOD_PARAMETER_RESET:
+    return {
+      ...state,
+      redirectedWithParameter: { parameter: 'none', term: '' },
     };
   default:
     return state;

@@ -1,0 +1,22 @@
+.ingredient-cards-container {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+}
+
+.ingredient-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+.explored-ingredient-name {
+  text-align: center;
+}
+
+.explored-ingredient-photo {
+  max-height: 80%;
+  max-width: 80%;
+}

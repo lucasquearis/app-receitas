@@ -3,13 +3,14 @@ import {
   Footer,
   Header,
 } from '../components';
+import MealsIngredientsExplore from '../components/MealsIngredientsExplore';
 
 const ExploreFoodsIngredients = () => {
   const pageName = 'Explorar Ingredientes';
   return (
     <div>
       <Header page={ pageName } />
-      Explorar Ingredientes de Comidas
+      <MealsIngredientsExplore />
       <Footer />
     </div>
   );
