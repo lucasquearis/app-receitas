@@ -5,8 +5,9 @@ import ShareButton from './ShareButton';
 
 function HeaderDetails() {
   const { recipe, keyType } = useContext(myContext);
-  const type = keyType === 'Meals' ? 'Meal' : 'Drink';
-
+  const type = keyType === 'meals' ? 'Meal' : 'Drink';
+  console.log(type);
+  console.log(keyType);
   return (
     <div className="imagem-container">
       <img
@@ -22,7 +23,7 @@ function HeaderDetails() {
         >
           { recipe[`str${type}`] }
         </h2>
-        {/* <FavoriteButton /> */}
+        <button data-testid="favorite-btn" type="button">favorite</button>
         <ShareButton />
       </div>
       <h4

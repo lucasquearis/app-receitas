@@ -3,7 +3,7 @@ import React from 'react';
 function ShareButton() {
   return (
     <button
-      classeName="share-btn"
+      // classeName="share-btn"
       data-testid="share-btn"
       type="button"
     >
