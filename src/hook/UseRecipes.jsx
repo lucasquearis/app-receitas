@@ -14,14 +14,14 @@ const UseRecipes = () => {
     if (recipes.meals) {
       return recipes.meals.map((e, index) => index <= maxItensIndexOnScreen
        && (
-         <Link to={ `/comidas/${e.idMeal}` }>
+         <Link key={ e.idMeal } to={ `/comidas/${e.idMeal}` }>
            <RecipeCard index={ index } key={ e.idMeal } recipe={ e } />
          </Link>));
     } if (recipes.drinks) {
       return recipes.drinks.map((e, index) => index <= maxItensIndexOnScreen
       && (
-        <Link to={ `/bebidas/${e.idDrink}` }>
-          <RecipeCard index={ index } key={ e.idDrink } recipe={ e } />
+        <Link key={ e.idMeal } to={ `/bebidas/${e.idDrink}` }>
+          <RecipeCard index={ index } recipe={ e } />
         </Link>));
     }
   };
