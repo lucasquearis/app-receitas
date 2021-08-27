@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardsList from '../../components/CardsList/CardsList';
 import Header from '../../components/header/Header';
+import FooterMenu from '../../components/FooterMenu/FooterMenu';
 
 const Drinks = ({ storeItems }) => {
   if (storeItems.length > 0) {
@@ -16,6 +17,7 @@ const Drinks = ({ storeItems }) => {
   return (
     <div>
       <Header>Bebidas</Header>
+      <FooterMenu />
     </div>
   );
 };
