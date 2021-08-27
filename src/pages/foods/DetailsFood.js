@@ -7,7 +7,7 @@ import Video from '../../components/Video';
 import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import fetchRecipe from '../../Redux/actions/fetchRecipes';
+import fetchRecipes from '../../Redux/actions/fetchRecipes';
 
 class DetailsFood extends Component {
   componentDidMount() {
@@ -22,8 +22,8 @@ class DetailsFood extends Component {
       <div>
         <div>
           {
-            recipe.map(({ strMeal, strCategory, strMealThumb }) => (
-              <div>
+            recipe.map(({ strMeal, strCategory, strMealThumb }, index) => (
+              <div key={ index }>
                 <div>
                   <img data-testid="recipe-photo" src={ strMealThumb } alt="foto" />
                 </div>
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispach) => ({
-  fetchRecipe: (id) => dispach(fetchRecipe(id)),
+  fetchRecipe: (id) => dispach(fetchRecipes(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsFood);
