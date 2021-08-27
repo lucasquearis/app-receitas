@@ -2,8 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
 import Header from './Components/Header/index';
-import Foods from './Pages/Foods';
-import Drinks from './Pages/Drinks/index';
+import AllRecipes from './Pages/AllRecipes';
 import Login from './Pages/Login/Login';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
@@ -21,8 +20,8 @@ function App() {
     <AppProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/comidas" component={ Foods } />
-        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas" component={ AllRecipes } />
+        <Route exact path="/bebidas" component={ AllRecipes } />
         <Route
           exact
           path="/explorar"

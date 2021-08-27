@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import fetchApi from '../Helpers/fetchApi';
+import showAlert from '../Helpers/showAlert';
 
 function RecipesHooks() {
   const [recipes, setRecipes] = useState([]);
-
-  const showAlert = (callback, msg) => {
-    callback(msg);
-  };
 
   const searchRecipes = async (previousSearch, foodRout, url, history) => {
     const { type, input } = previousSearch;
@@ -24,6 +21,12 @@ function RecipesHooks() {
       }
       response = await fetchApi(url, 'search.php?f=', input);
       break;
+    case 'category':
+      response = await fetchApi(url, 'filter.php?c=', input);
+      break;
+    case 'all':
+      response = await fetchApi(url, 'search.php?s=');
+      break;
     default:
       break;
     }
@@ -35,9 +38,7 @@ function RecipesHooks() {
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
-
     setRecipes(responseRecipes);
-
     if (responseRecipes.length === 1) {
       history.push(
         foodRout === true
