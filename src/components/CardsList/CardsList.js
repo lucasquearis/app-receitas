@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CardsList = ({ array }) => {
+  let type;
   if (array !== undefined) {
-    let type;
     if (array[0].idDrink === undefined) type = 'Meal';
     else type = 'Drink';
 

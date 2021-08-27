@@ -5,8 +5,8 @@ import { fetchApi } from '../SearchBar/utils';
 
 const CategoriesFilterButtons = () => {
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [erro, setErro] = useState(false);
-  const [toggled, setToggled] = useState(false);
   const [apiUrl, setApiUrl] = useState('');
   const dispatch = useDispatch();
   const categoriesQuantity = 5;
@@ -39,20 +39,21 @@ const CategoriesFilterButtons = () => {
       const response = await fetchApi(`https://www.${apiURL}.com/api/json/v1/1/search.php?s=`);
       const responseKey = Object.keys(response);
       dispatch(actionRequestSuccess(response[responseKey]));
-      setToggled(false);
+      setSelectedCategory('');
     } catch (error) {
       setErro(true);
       console.log(`Erro ao carregar as primeiras receitas: ${error}`);
     }
   };
 
-  const handleClick = async (category, apiURl, toggle) => {
-    if (!toggle) {
+  const handleClick = async (category, apiURl, { target: { innerHTML } }) => {
+    if (innerHTML !== selectedCategory) {
       dispatch(actionRequestItems());
       const response = await fetchApi(`https://www.${apiURl}.com/api/json/v1/1/filter.php?c=${category}`);
       const responseKey = Object.keys(response);
+      console.log(response[responseKey]);
       dispatch(actionRequestSuccess(response[responseKey]));
-      setToggled(true);
+      setSelectedCategory(category);
     } else {
       fetchItems(apiUrl);
     }
@@ -69,7 +70,9 @@ const CategoriesFilterButtons = () => {
               key={ index }
               data-testid={ `${categorie.strCategory}-category-filter` }
               type="button"
-              onClick={ () => handleClick(categorie.strCategory, apiUrl, toggled) }
+              onClick={
+                (event) => handleClick(categorie.strCategory, apiUrl, event)
+              }
             >
               {name[0]}
             </button>);
