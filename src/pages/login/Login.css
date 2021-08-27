@@ -1,22 +1,22 @@
 .styleLogin {
   border: none;
-  display: flex;
   border-radius: 4px;
+  display: flex;
   flex-direction: column;   
+  height: 585px;
   margin: auto;
   text-align: center;
-  height: 585px;
   width: 300px;
 }
 
 .imput {
   background-color: rgba(0, 0, 1, 0.603);
-  margin-top: 5%;
   border: none;
+  color: aliceblue;
+  margin-top: 5%;
   border-radius: 4px;
   height: 45px;
   width: 298px;
-  color: aliceblue;
   font-size: 1rem;
   padding: 1rem;
 }
