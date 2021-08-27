@@ -7,6 +7,7 @@ import '../styles/Details.css';
 export default function MealDetails(props) {
   const [mealDetails, setMealDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isCopied, setIsCopied] = useState(false);
   useEffect(() => {
     const { match: { params: { id } } } = props;
     const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -26,6 +27,16 @@ export default function MealDetails(props) {
     return (match && match[2].length === ELEVEN)
       ? match[2]
       : null;
+  }
+
+  function copyRecipeURL() {
+    const url = document.createElement('input');
+    url.value = window.location.href;
+    document.body.appendChild(url);
+    url.select();
+    document.execCommand('copy');
+    document.body.removeChild(url);
+    setIsCopied(true);
   }
 
   function renderDetails() {
@@ -48,12 +59,22 @@ export default function MealDetails(props) {
         />
         <div className="title-and-btns">
           <h1 data-testid="recipe-title">{ details.strMeal }</h1>
-          <button type="button" data-testid="share-btn" className="share-btn">
-            <img src={ shareIcon } alt="share icon" className="share-icon" />
-          </button>
-          <button type="button" data-testid="favorite-btn" className="fave-btn">
-            <img src={ whiteHeartIcon } alt="favorite icon" />
-          </button>
+          <div className="share-fave-btns">
+            { isCopied
+              ? <div className="copy-div">Link copiado! </div>
+              : <div className="copy-div" /> }
+            <button
+              type="button"
+              data-testid="share-btn"
+              className="share-btn"
+              onClick={ copyRecipeURL }
+            >
+              <img src={ shareIcon } alt="share icon" className="share-icon" />
+            </button>
+            <button type="button" data-testid="favorite-btn" className="fave-btn">
+              <img src={ whiteHeartIcon } alt="favorite icon" />
+            </button>
+          </div>
         </div>
         <p data-testid="recipe-category">{ details.strCategory }</p>
         {

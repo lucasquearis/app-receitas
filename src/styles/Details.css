@@ -13,3 +13,13 @@
   flex-direction: row wrap;
   justify-content: space-between; 
 }
+
+.share-fave-btns {
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: flex-end; 
+}
+
+.copy-div {
+  color: #eb6424
+}
