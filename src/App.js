@@ -4,8 +4,9 @@ import './styles/App.css';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
-import FoodDetails from './pages/FoodDetails';
-import DrinkDetails from './pages/DrinkDetails';
+import RecipeDetails from './pages/RecipeDetails';
+import FoodInProgress from './pages/FoodInProgress';
+import DrinkInProgress from './pages/DrinkInProgress';
 import Profile from './pages/Profile';
 import ExploreFoods from './pages/explore-pages/ExploreFoods';
 import Explore from './pages/explore-pages/Explore';
@@ -40,17 +41,18 @@ export default function App() {
         path="/explorar/bebidas/ingredientes"
         component={ ExploreDrinkIngredient }
       />
-
       <Route
         exact
         path="/comidas/:id"
-        render={ (props) => <FoodDetails { ...props } /> }
+        render={ (props) => <RecipeDetails { ...props } /> }
       />
       <Route
         exact
         path="/bebidas/:id"
-        render={ (props) => <DrinkDetails { ...props } /> }
+        render={ (props) => <RecipeDetails { ...props } /> }
       />
+      <Route exact path="/comidas/:id/in-progress" component={ FoodInProgress } />
+      <Route exact path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
     </Switch>
   );
 }
