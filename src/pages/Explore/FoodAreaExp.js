@@ -23,16 +23,20 @@ export default function FoodAreaExp() {
   }, []);
 
   useEffect(() => {
+    console.log(selectedArea);
     const filterSwitch = async () => {
+      console.log(selectedArea);
       setAreaLoading(true);
+      console.log(selectedArea);
       if (selectedArea === 'All') {
         const response = await requestFoodByName('');
         setFoods(response);
+        console.log(response)
         setLoading(false);
+        setAreaLoading(false);
       } else {
         const response = await requestFoodByAreas(selectedArea);
         setFoods(response);
-        console.log(response);
         setLoading(false);
         setAreaLoading(false);
       }
@@ -55,9 +59,10 @@ export default function FoodAreaExp() {
           <Header title="Comidas" name="meal" search />
           <select
             data-testid="explore-by-area-dropdown"
+            value={ selectedArea }
             onChange={ ({ target: { value } }) => setSelectedArea(value) }
           >
-            <option value="All" data-testid="All-option">All</option>
+            <option data-testid="All-option">All</option>
             {
               areas.map(({ strArea }) => (
                 <option
