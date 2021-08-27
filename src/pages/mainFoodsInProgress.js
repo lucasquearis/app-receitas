@@ -12,6 +12,7 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
   const [ingredients, setIngredients] = useState([]);
   const [link, setLink] = useState('');
   const [icon, setIcon] = useState(isFavorite);
+  const [disable, setDisable] = useState(true);
 
   useEffect(() => {
     fetchFoodById(id).then(({ meals }) => setFoodInfo(meals));
@@ -81,12 +82,20 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
   const handleLinks = () => {
     setLink('Link copiado!');
     const actualLocation = window.location.href;
-    const inputs = document.createElement('input');
-    document.body.appendChild(inputs);
-    inputs.value = actualLocation;
-    inputs.select();
+    const input = document.createElement('input');
+    document.body.appendChild(input);
+    input.value = actualLocation;
+    input.select();
     document.execCommand('copy');
-    document.body.removeChild(inputs);
+    document.body.removeChild(input);
+  };
+
+  const verifyChecked = () => {
+    const input = document.querySelectorAll('.inputs-checkbox');
+    input.forEach((inputs) => {
+      if (inputs.checked === true) setDisable(false);
+      else setDisable(true);
+    });
   };
 
   return (
@@ -119,6 +128,7 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
           const ingrID = `${index}-ingredient-step`;
           return (
             <label
+              onChange={ verifyChecked }
               data-testid={ ingrID }
               key={ index }
               htmlFor={ index }
@@ -127,6 +137,7 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
               <br />
               { `${strMeasure} ${strIngredient}` }
               <input
+                className="inputs-checkbox"
                 id={ index }
                 type="checkbox"
                 key={ index }
@@ -137,6 +148,7 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
         }) }
       </div>
       <button
+        disabled={ disable }
         type="button"
         data-testid="finish-recipe-btn"
         onClick={ RedirectToRecipesMade }
