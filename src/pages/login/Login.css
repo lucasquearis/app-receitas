@@ -1,11 +1,11 @@
-.styleLogin {  
+.styleLogin {
   border: none;
   display: flex;
-  border-radius: 4px; 
+  border-radius: 4px;
   flex-direction: column;   
-  margin: auto; 
-  text-align: center; 
-  height: 585px; 
+  margin: auto;
+  text-align: center;
+  height: 585px;
   width: 300px;
 }
 
