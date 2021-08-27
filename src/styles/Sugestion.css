@@ -1,19 +1,13 @@
 .sugestions-container {
-  box-sizing: border-box;
-  bottom: 0%;
-  margin: 0;
-  padding: 0%;
-  width: 100%;
-}
-
-.sugestions-container{
   border:solid gray 1px;
+  box-sizing: border-box;
   box-shadow: 2px 3px rgba(128, 128, 128, 0.466);
   display: flex;
   margin-top: 5%;
   margin-bottom: 13%;
   margin-right: 5%;
   padding: 3%;
+  width: 100%;
 }
 
 .sugestions-imagem-container {
