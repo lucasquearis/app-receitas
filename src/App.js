@@ -45,6 +45,11 @@ const App = () => (
           component={ ExploreDrinkIng }
         />
         <Route exact path="/explorar/comidas/area" component={ ExploreFoodArea } />
+        <Route
+          exact
+          path="/explorar/bebidas/area"
+          render={ () => <span>Not Found</span> }
+        />
         <Route exact path="/receitas-feitas" component={ RecipesMade } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       </Switch>

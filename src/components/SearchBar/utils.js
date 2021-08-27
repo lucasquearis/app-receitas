@@ -6,7 +6,6 @@ export const fetchApi = async (url) => {
 
 const setByType = async (type, search, setItems, { urlDetail, letter }) => {
   const response = await fetchApi(`https://www.${type}.com/api/json/v1/1/${urlDetail}.php?${letter}=${search.textValue}`);
-  console.log(response);
   if (Object.values(response)[0] === null) {
     // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -18,8 +17,8 @@ const setByType = async (type, search, setItems, { urlDetail, letter }) => {
 export const searchOnClick = (search, setItems) => {
   const path = window.location.pathname;
   let type;
-  if (path === '/comidas') type = 'themealdb';
-  if (path === '/bebidas') type = 'thecocktaildb';
+  if (path.includes('/comidas')) type = 'themealdb';
+  if (path.includes('/bebidas')) type = 'thecocktaildb';
   if (search.radioValue === 'Ingredientes') {
     setByType(type, search, setItems, { urlDetail: 'filter', letter: 'i' });
   } else if (search.radioValue === 'Nome') {

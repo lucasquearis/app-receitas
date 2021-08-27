@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const CardsList = ({ array }) => {
+const CardsList = ({ array, teste }) => {
   if (array !== undefined) {
     let type;
-    if (array[0].idDrink === undefined) type = 'Meal';
-    else type = 'Drink';
+    let path;
+    if (array[0].idDrink === undefined) {
+      type = 'Meal';
+      path = 'comidas';
+    } else {
+      type = 'Drink';
+      path = 'bebidas';
+    }
 
     let newArray;
     const maxCards = 12;
@@ -14,20 +21,23 @@ const CardsList = ({ array }) => {
     } else {
       newArray = array;
     }
+    console.log(newArray);
 
     return (
       <div>
         { newArray.map((obj, index) => (
           <div
             key={ index }
-            data-testid={ `${index}-recipe-card` }
+            data-testid={ `${index}-${teste}` }
           >
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ obj[`str${type}Thumb`] }
-              alt={ obj[`str${type}`] }
-            />
-            <h3 data-testid={ `${index}-card-name` }>{ obj[`str${type}`] }</h3>
+            <Link to={ `/${path}/${obj[`id${type}`]}` }>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ obj[`str${type}Thumb`] }
+                alt={ obj[`str${type}`] }
+              />
+              <h3 data-testid={ `${index}-card-name` }>{ obj[`str${type}`] }</h3>
+            </Link>
           </div>
         )) }
       </div>

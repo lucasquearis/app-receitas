@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionSaveItems } from '../../actions/index';
+import { actionStoreItems } from '../../actions/index';
 import { searchOnClick } from './utils';
 
-const SearchBar = ({ bool, saveItems }) => {
+const SearchBar = ({ bool }) => {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState({
     textValue: '',
     radioValue: '',
@@ -40,11 +41,11 @@ const SearchBar = ({ bool, saveItems }) => {
     checkItems();
     const saveItemsStore = () => {
       if (items !== undefined) {
-        saveItems(Object.values(items)[0]);
+        dispatch(actionStoreItems(Object.values(items)[0]));
       }
     };
     saveItemsStore();
-  }, [items, saveItems]);
+  }, [items, dispatch]);
 
   const handleChange = ({ target: { name, value } }) => {
     setSearch({
@@ -112,15 +113,8 @@ const SearchBar = ({ bool, saveItems }) => {
   return null;
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    saveItems: (items) => dispatch(actionSaveItems(items)),
-  };
-}
-
 SearchBar.propTypes = {
   bool: PropTypes.bool.isRequired,
-  saveItems: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default SearchBar;

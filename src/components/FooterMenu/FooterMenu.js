@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import drinkIcon from '../../images/drinkIcon.svg';
 import exploreIcon from '../../images/exploreIcon.svg';
@@ -10,28 +9,28 @@ const FooterMenu = () => (
   <footer data-testid="footer">
     <section className="buttons-footer">
       <Link to="/bebidas">
-        <Button
-          type="button"
+        <input
           data-testid="drinks-bottom-btn"
-        >
-          <img src={ drinkIcon } alt="Botão drink" />
-        </Button>
+          type="image"
+          alt="Botão Dink"
+          src={ drinkIcon }
+        />
       </Link>
       <Link to="/explorar">
-        <Button
-          type="button"
+        <input
           data-testid="explore-bottom-btn"
-        >
-          <img src={ exploreIcon } alt="Botão explorar" />
-        </Button>
+          type="image"
+          alt="Botão explorar"
+          src={ exploreIcon }
+        />
       </Link>
       <Link to="/comidas">
-        <Button
-          type="button"
+        <input
+          type="image"
+          alt="Botão refeição"
           data-testid="food-bottom-btn"
-        >
-          <img src={ mealIcon } alt="Botão refeição" />
-        </Button>
+          src={ mealIcon }
+        />
       </Link>
     </section>
   </footer>
