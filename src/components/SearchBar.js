@@ -2,8 +2,12 @@ import React, { useContext, useState } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
 function SearchBar() {
-  const { setFilter, setSearch } = useContext(RecipesContext);
+  const { setFilter, setSearch, setSearchBar } = useContext(RecipesContext);
   const [searchTerm, setSearchTerm] = useState('');
+  const onClick = () => {
+    setFilter(searchTerm);
+    setSearchBar(true);
+  };
   return (
     <div>
       <input
@@ -48,7 +52,7 @@ function SearchBar() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ () => setFilter(searchTerm) }
+          onClick={ () => onClick() }
         >
           Buscar
         </button>
