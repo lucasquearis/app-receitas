@@ -81,10 +81,12 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
 
   const handleLinks = () => {
     setLink('Link copiado!');
-    const actualLocation = window.location.href;
+    const actualLocation = String(window.location.href);
+    const a = actualLocation.split('/');
+    const actual = `${a[0]}//${a[1]}${a[2]}/${a[3]}/${a[4]}`;
     const input = document.createElement('input');
     document.body.appendChild(input);
-    input.value = actualLocation;
+    input.value = actual;
     input.select();
     document.execCommand('copy');
     document.body.removeChild(input);
