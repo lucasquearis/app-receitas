@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
 import ExploreByArea from './pages/ExploreByArea';
 import ExploreByIngredients from './pages/ExploreByIngredient';
+import RecipesDone from './pages/RecipesDone';
 
 export default function Routes() {
   return (
@@ -36,7 +37,7 @@ export default function Routes() {
         <Route exact path="/explorar/bebidas" component={ NotFound } />
         <Route exact path="/explorar" component={ NotFound } />
         <Route exact path="/perfil" component={ Perfil } />
-        <Route exact path="/receitas-feitas" component={ NotFound } />
+        <Route exact path="/receitas-feitas" component={ RecipesDone } />
         <Route exact path="/receitas-favoritas" component={ NotFound } />
       </Switch>
     </BrowserRouter>
