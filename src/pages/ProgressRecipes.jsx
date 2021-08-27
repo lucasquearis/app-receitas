@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import rockGlass from '../images/rockGlass.svg';
-import IngredientsList from '../components/IngredientsList';
-import Suggestions from '../components/Suggestions';
-import StartRecipeButton from '../components/StartRecipeButton';
+import IngredientsCheckList from '../components/IngredientsCheckList';
+import FinishRecipeButton from '../components/FinishRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
-import Iframe from '../components/Iframe';
 
-function RecipeDetails(props) {
+function ProgressRecipes(props) {
   const [recipe, setRecipe] = useState();
   const [enType, setEnType] = useState('drinks');
   const [enCasedType, setEnCasedType] = useState('Drink');
@@ -35,7 +33,7 @@ function RecipeDetails(props) {
         });
     };
     getRecipe();
-  }, []);
+  }, [id, type]);
 
   return (
     <div>
@@ -70,18 +68,12 @@ function RecipeDetails(props) {
                   ? recipe[enType][0].strCategory
                   : recipe[enType][0].strAlcoholic }
               </h2>
-              <ul>
-                <IngredientsList recipe={ recipe[enType][0] } />
-              </ul>
+              <section>
+                <IngredientsCheckList recipe={ recipe[enType][0] } />
+              </section>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
-              {
-                type === 'comidas'
-                && <Iframe link={ recipe[enType][0].strYoutube } />
-              }
-              {
-                recipe && <Suggestions type={ type } />
-              }
-              <StartRecipeButton
+
+              <FinishRecipeButton
                 id={ id }
                 type={ type }
                 enType={ enType }
@@ -90,7 +82,7 @@ function RecipeDetails(props) {
           )
           : (
             <object
-              className="rockGlass"
+              className="rocksGlass"
               type="image/svg+xml"
               data={ rockGlass }
             >
@@ -102,18 +94,22 @@ function RecipeDetails(props) {
   );
 }
 
-RecipeDetails.propTypes = {
-  match: PropTypes.arrayOf([
-    PropTypes.shape({
+ProgressRecipes.defaultProps = {
+  match: undefined,
+};
+
+ProgressRecipes.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
       type: PropTypes.string,
       id: PropTypes.string,
     }),
-  ]),
+  }),
   history: PropTypes.shape({
     location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }),
-}.isRequired;
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
-export default RecipeDetails;
+export default ProgressRecipes;
