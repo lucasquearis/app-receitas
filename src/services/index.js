@@ -68,13 +68,30 @@ export const fetchCategoriesDrinks = async (name) => {
 };
 
 export const copyToClipboard = () => {
-  const myUrl = copy(window.location.href);
-  return myUrl;
+  copy(window.location.href);
+  return true;
 };
 
-export const favoriteRecipe = (bool) => {
-  if (!bool) {
-    return true;
+export const myFavoriteRecipe = ([recipe]) => {
+  if (!recipe) {
+    localStorage.removeItem('favoriteRecipes');
+    return false;
   }
-  return false;
+  localStorage.setItem('favoriteRecipes', JSON.stringify([recipe]));
+  return true;
+};
+
+export const startRecipe = ([recipe]) => {
+  localStorage.setItem('doneRecipes', JSON.stringify([recipe]));
+  return true;
+};
+
+export const getDate = (date) => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  date = `${dd}/${mm}/${yyyy}`;
+
+  return date;
 };

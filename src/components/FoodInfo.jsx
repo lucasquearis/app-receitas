@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
-import { copyToClipboard, favoriteRecipe } from '../services';
+import { copyToClipboard, myFavoriteRecipe, getDate, startRecipe } from '../services';
 import DrinksCards from './DrinksCard';
 
 function FoodInfo() {
@@ -10,12 +10,23 @@ function FoodInfo() {
   const dispatch = useDispatch();
   const { details, drinks } = useSelector((state) => state.foodsAndDrinks);
   const [favorite, setFavorite] = useState(false);
+  const [button, setButton] = useState(false);
+  const [share, setShare] = useState(false);
   const sixRecomendations = 6;
 
   useEffect(() => {
     dispatch(fetchMealDetails(id));
     dispatch(fetchDrinksRedux);
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const storage = localStorage.getItem('doneRecipes');
+    if (storage) {
+      setButton(true);
+    } else {
+      setButton(false);
+    }
+  }, []);
 
   if (!drinks) {
     return (
@@ -31,6 +42,29 @@ function FoodInfo() {
   const favoriteHeart = <img src="/images/blackHeartIcon.svg" alt="black heart" />;
   const notFavoriteHeart = <img src="/images/whiteHeartIcon.svg" alt="white-heart" />;
   const shareTag = <img src="/images/shareIcon.svg" alt="shareIt" />;
+
+  const doneRecipes = [{
+    id,
+    type: 'comida',
+    area: foodDetails.strArea,
+    category: foodDetails.strCategory,
+    alcoholicOrNot: '',
+    name: foodDetails.strMeal,
+    image: foodDetails.strMealThumb,
+    doneDate: getDate(new Date()),
+    tags: [foodDetails.strTags],
+  }];
+
+  const favoriteRecipe = [{
+    id,
+    type: 'comida',
+    area: foodDetails.strArea,
+    category: foodDetails.strCategory,
+    alcoholicOrNot: '',
+    name: foodDetails.strMeal,
+    image: foodDetails.strMealThumb,
+  }];
+
   return (
     <section>
       <img
@@ -40,16 +74,17 @@ function FoodInfo() {
       />
       <h2 data-testid="recipe-title">{ foodDetails.strMeal }</h2>
       <button
-        onClick={ copyToClipboard }
+        onClick={ () => setShare(copyToClipboard) }
         type="button"
         data-testid="share-btn"
       >
         { shareTag }
+        <span>{ share ? 'Link copiado!' : '' }</span>
       </button>
       <button
         type="button"
         data-testid="favorite-btn"
-        onClick={ () => setFavorite(favoriteRecipe(favorite)) }
+        onClick={ () => setFavorite(myFavoriteRecipe(favoriteRecipe)) }
       >
         { favorite ? favoriteHeart : notFavoriteHeart }
       </button>
@@ -83,9 +118,16 @@ function FoodInfo() {
               { DrinksCards(drink, 'bebidas', index) }
             </li>))}
       </ul>
-      <button type="button" data-testid="start-recipe-btn">
-        Iniciar receita
-      </button>
+      <Link to={ `/comidas/${id}/in-progress` }>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          button={ button }
+          onClick={ () => setButton(startRecipe(doneRecipes)) }
+        >
+          Iniciar Receita
+        </button>
+      </Link>
     </section>
   );
 }
