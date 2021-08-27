@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import ShareButton from './ShareButton';
 import UnfavoriteButton from './UnfavoriteButton';
 
+import '../styles/FavoriteRecipeCard.css';
+
 export default function FavoriteRecipeCard({ recipe, index }) {
   const isFood = recipe.type === 'comida';
 
