@@ -19,6 +19,7 @@ const DrinkDetails = () => {
   const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getIngredients = () => {
     const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
@@ -38,6 +39,7 @@ const DrinkDetails = () => {
 
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
+    setLoading(false);
   }, [actualPath]);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const DrinkDetails = () => {
     getMeasure();
   }, [drinkDetails]);
 
-  return (
+  return loading ? <p>Carregando...</p> : (
     <div>
       {
         drinkDetails.map(({

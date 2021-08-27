@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
-import DrinksContext from '../context/DrinksContext';
-import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+// import DrinksContext from '../context/DrinksContext';
+// import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 
 const DrinksCard = ({ drink, index }) => {
   const history = useHistory();
-  const { setDrinkDetails } = useContext(DrinksContext);
+  // const { setDrinkDetails } = useContext(DrinksContext);
 
   const handleClick = () => {
     const { idDrink } = drink;
-    fetchDrinkDetailsApi(idDrink).then((data) => setDrinkDetails(data.drinks));
+    // fetchDrinkDetailsApi(idDrink).then((data) => setDrinkDetails(data.drinks));
     history.push(`/bebidas/${idDrink}`);
   };
 

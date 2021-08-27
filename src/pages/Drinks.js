@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import HeaderDrinks from '../components/HeaderDrinks';
 import DrinksCard from '../components/DrinksCard';
 import DrinksContext from '../context/DrinksContext';
@@ -28,11 +28,13 @@ const Drinks = () => {
       <div className="drinks-container">
         {drinks && drinks.slice(0, DRINKS)
           .map((drink, index) => (
-            <DrinksCard
-              key={ index }
-              index={ index }
-              drink={ drink }
-            />
+            <Link key={ index } to={ `/bebidas/${drink.idDrink}` }>
+              <DrinksCard
+                key={ index }
+                index={ index }
+                drink={ drink }
+              />
+            </Link>
           ))}
       </div>
       <FooterMenu />

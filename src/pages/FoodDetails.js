@@ -37,7 +37,6 @@ const FoodDetails = () => {
     setMeasures(measuresOnly);
   };
 
-  console.log(ingredients);
   useEffect(() => {
     fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
   }, [actualPath]);
