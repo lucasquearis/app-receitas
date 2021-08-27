@@ -23,15 +23,11 @@ export default function FoodAreaExp() {
   }, []);
 
   useEffect(() => {
-    console.log(selectedArea);
     const filterSwitch = async () => {
-      console.log(selectedArea);
       setAreaLoading(true);
-      console.log(selectedArea);
       if (selectedArea === 'All') {
         const response = await requestFoodByName('');
         setFoods(response);
-        console.log(response)
         setLoading(false);
         setAreaLoading(false);
       } else {
