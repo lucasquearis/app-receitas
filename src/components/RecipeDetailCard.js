@@ -26,6 +26,7 @@ function RecipeDetail() {
   const [recipe, setRecipe] = useState();
   const [ingredientName, setIngredientName] = useState([1, 2]);
   const [ingredientMeasure, setIngredientMeasure] = useState([]);
+  const youtubeId = 32;
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -61,7 +62,7 @@ function RecipeDetail() {
         </p>
       ))}
       { pathname.includes('comidas') ? (
-        <YoutubeEmbed videoId={ `${recipe.strYoutube.substring(32)}` } />) : null}
+        <YoutubeEmbed videoId={ `${recipe.strYoutube.substring(youtubeId)}` } />) : null}
       { pathname.includes('comidas') ? (<RecomendationCard type="drinks" />)
         : (<RecomendationCard type="meals" />)}
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
