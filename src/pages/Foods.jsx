@@ -28,7 +28,7 @@ function Foods() {
       <h1>Loading</h1>
     );
   }
-  
+
   return (
     <>
       <Header { ...headerProps } />
