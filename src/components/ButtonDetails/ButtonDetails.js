@@ -24,7 +24,7 @@ const ButtonDetails = ({ id, type, rota }) => {
   const handleClick = () => {
     setRedirect(true);
   };
-  if (redirect) return <Redirect to={ `${rota}/${id}/inProogress ` } />;
+  if (redirect) return <Redirect to={ `${rota}/${id}/in-progress ` } />;
   return (
     <Button
       data-testid="start-recipe-btn"
