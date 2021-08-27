@@ -6,7 +6,6 @@ import ShareButton from './ShareButton';
 function HeaderDetails() {
   const { recipe, keyType } = useContext(myContext);
   const type = keyType === 'meals' ? 'Meal' : 'Drink';
-  console.log(recipe.strCategory);
   return (
     <div className="imagem-container">
       <img

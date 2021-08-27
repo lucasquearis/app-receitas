@@ -12,5 +12,4 @@ const renderWithRouter = (component) => {
   ),
   history: mockHistory };
 };
-
 export default renderWithRouter;

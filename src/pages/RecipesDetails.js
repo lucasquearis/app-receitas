@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Loading from '../components/Loading';
 import Sugestions from '../components/Sugestions';
 import '../styles/Details.css';
 import HeaderDetails from '../components/HeaderDetails';
@@ -10,7 +9,8 @@ import Ingredients from '../components/Ingredients';
 function RecipesDetails() {
   const { pathname } = useLocation();
   const { id } = useParams();
-  const { loading, keyType, setLoading,
+  console.log(id);
+  const { keyType,
     setRecipe, setKeysType, url, recipe } = useContext(myContext);
 
   const video = (<iframe
@@ -24,19 +24,18 @@ function RecipesDetails() {
 
   useEffect(() => {
     try {
-      setLoading(true);
       const urlMeals = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const correctURL = pathname.includes('comidas') ? urlMeals : urlDrinks;
       const type = pathname.includes('comidas') ? 'meals' : 'drinks';
       setKeysType(type);
+      console.log(`${correctURL}${id}`);
       const fetchRecipe = async () => {
         const request = await fetch(`${correctURL}${id}`);
         const response = await request.json();
         setRecipe(response[type][0]);
       };
 
-      setLoading(false);
       fetchRecipe();
     } catch (error) {
       console.log(error);
@@ -44,8 +43,6 @@ function RecipesDetails() {
   }, []);
 
   const text = keyType === 'meals' ? 'drinks' : 'meals';
-  if (loading) return <Loading />;
-  console.log();
   return (
     <section className="details-body">
       <HeaderDetails />

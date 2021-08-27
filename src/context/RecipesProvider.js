@@ -4,13 +4,20 @@ import PropTypes from 'prop-types';
 // context
 import myContext from './myContext';
 // API
-import getFoodByIngredient from '../services/foodAPI';
+import getMeals from '../services/mealAPI';
+import getDrinks from '../services/drinkAPI';
+import { ALERT_TWO, MEAL_OBJ, DRINK_OBJ } from '../services/data';
 
 function RecipesProvider({ children }) {
   const [searchValues, setSearchValues] = useState({
     textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
   const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
+  const [updateData, setUpdateData] = useState(false);
+  const [baseDataMeals, setBaseDataMeals] = useState();
+  const [baseDataDrinks, setBaseDataDrinks] = useState();
+  const [filteredMeals, setFilteredMeals] = useState(false);
+  const [filteredDrinks, setFilteredDrinks] = useState(false);
   const [favorite, setFavorite] = useState({});
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
@@ -20,6 +27,7 @@ function RecipesProvider({ children }) {
     ingredients: [],
     measure: [],
   });
+  console.log(setFilteredDrinks);
 
   const globalState = {
     url,
@@ -35,8 +43,53 @@ function RecipesProvider({ children }) {
     infoUser,
     setInfoUser,
     setSearchValues,
+    filteredMeals,
+    filteredDrinks,
     filteredMealsOrDrinks,
+    updateData,
+    setUpdateData,
+    baseDataMeals,
+    baseDataDrinks,
   };
+
+  useEffect(() => {
+    const resultBaseMeals = async () => {
+      const baseMeals = await getMeals(MEAL_OBJ);
+      setBaseDataMeals(baseMeals);
+    };
+    resultBaseMeals();
+  },
+  [searchValues]);
+
+  useEffect(() => {
+    const resultFilterMeals = async () => {
+      const resultMeals = await getMeals(searchValues);
+      setFilteredMeals(resultMeals);
+      if (resultMeals.meals === null) global.alert(ALERT_TWO);
+    };
+    resultFilterMeals();
+  },
+  [searchValues]);
+
+  useEffect(() => {
+    const resultFilterDrinks = async () => {
+      const resultDrinks = await getDrinks(searchValues);
+      setFilteredDrinks(resultDrinks);
+      // if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
+    };
+    resultFilterDrinks();
+  },
+  [searchValues]);
+
+  useEffect(() => {
+    const resultBaseDrinks = async () => {
+      const baseDrinks = await getDrinks(DRINK_OBJ);
+      setBaseDataDrinks(baseDrinks);
+    };
+    resultBaseDrinks();
+  },
+  [searchValues]);
+
   useEffect(() => {
     const favoriteClick = () => {
       localStorage.setItem('favoriteRecipes', JSON.stringify([{
@@ -78,7 +131,7 @@ function RecipesProvider({ children }) {
 
   useEffect(() => {
     const resultFilter = async () => {
-      const result = await getFoodByIngredient(searchValues);
+      const result = await getMeals(searchValues);
       setFilteredMealsOrDrinks(result);
     };
     resultFilter();

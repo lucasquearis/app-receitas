@@ -1,13 +1,17 @@
 // vitals
 import React from 'react';
 import Routes from './Routes';
+// context
+import RecipesProvider from './context/RecipesProvider';
 // styles
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <Routes />
+    <RecipesProvider>
+      <Routes />
+    </RecipesProvider>
   );
 }
 
