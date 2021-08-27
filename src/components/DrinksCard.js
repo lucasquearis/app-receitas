@@ -13,7 +13,7 @@ const DrinksCard = ({ drink, index }) => {
   //   // fetchDrinkDetailsApi(idDrink).then((data) => setDrinkDetails(data.drinks));
   //   history.push(`/bebidas/${idDrink}`);
   // };
-
+  console.log(drink);
   return (
     <div
       // role="tab"
