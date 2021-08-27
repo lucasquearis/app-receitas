@@ -85,11 +85,14 @@ export default function ProgressRecipes() {
           category={ data.alcoholic }
           ingredients={
             data.recipeId ? ingredientsDetails(recipes).map((item, index) => (
-              <FormCheck
+              <li
                 data-testid={ `${index}-ingredient-step` }
                 key={ index }
-                label={ item }
-              />
+                style={ { listStyle: 'none' } }
+              >
+                <input type="checkbox" name="recipeCheck" id="recipeCheck" />
+                { item }
+              </li>
             )) : []
           }
           instructions={ data.instructions }
