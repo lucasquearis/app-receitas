@@ -5,3 +5,8 @@
   position: fixed;
   bottom: 0;
 }
+.start-button-none {
+  position: fixed;
+  bottom: 0;
+  display: none;
+}

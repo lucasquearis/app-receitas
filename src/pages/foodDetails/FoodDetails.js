@@ -11,6 +11,7 @@ import './FoodDetails.css';
 const FoodDetails = ({ match: { params: id } }) => {
   const [meal, setMeal] = useState(0);
   const [recomendation, setRecomendation] = useState(0);
+  const [stateButton, setStateButton] = useState('start-button');
   useEffect(() => {
     const fetchRemomendation = () => {
       fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
@@ -26,10 +27,15 @@ const FoodDetails = ({ match: { params: id } }) => {
         .then((response) => setMeal(response.meals[0]));
     };
     fecthDetails();
+    const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipe) {
+      const findRecipe = doneRecipe.find((done) => done.id === id.id);
+      if (findRecipe) setStateButton('start-button-none');
+    }
   }, [id.id]);
   if (!meal) return <Spinner animation="border" />;
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meal;
-  console.log(recomendation);
+  console.log(stateButton);
   return (
     <div>
       <HeaderDetails title={ strMeal } image={ strMealThumb } category={ strCategory } />
@@ -39,7 +45,7 @@ const FoodDetails = ({ match: { params: id } }) => {
       <Recomendation list={ recomendation } type="Drink" />
       <Button
         data-testid="start-recipe-btn"
-        className="start-button"
+        className={ stateButton }
       >
         Começar Receita
       </Button>

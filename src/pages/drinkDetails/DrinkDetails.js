@@ -9,6 +9,7 @@ import Recomendation from '../../components/Recomentation/Recomendation';
 const DrinkDetails = ({ match: { params: id } }) => {
   const [drink, setDrink] = useState(0);
   const [recomendation, setRecomendation] = useState(0);
+  const [stateButton, setStateButton] = useState('start-button');
   useEffect(() => {
     const fetchRemomendation = () => {
       fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
@@ -24,8 +25,12 @@ const DrinkDetails = ({ match: { params: id } }) => {
         .then((resolve) => setDrink(resolve.drinks[0]));
     };
     fetchDrink();
+    const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipe) {
+      const findRecipe = doneRecipe.find((done) => done.id === id.id);
+      if (findRecipe) setStateButton('start-button-none');
+    }
   }, [id.id]);
-  console.log(drink);
   if (!drink) return <Spinner animation="border" />;
   const { strDrink, strDrinkThumb, strAlcoholic, strInstructions } = drink;
   return (
@@ -38,7 +43,12 @@ const DrinkDetails = ({ match: { params: id } }) => {
       <IngredientsDetails recipe={ drink } />
       <Instructions instruction={ strInstructions } />
       <Recomendation list={ recomendation } type="Meal" />
-      <Button data-testid="start-recipe-btn">Começar Receita</Button>
+      <Button
+        data-testid="start-recipe-btn"
+        className={ stateButton }
+      >
+        Começar Receita
+      </Button>
     </div>
   );
 };
