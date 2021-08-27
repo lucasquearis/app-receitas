@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './RecipeCard.css';
+import '../styles/RecipeCard.css';
 
 export default function MealCard({ meal, index }) {
   const { strMeal, strMealThumb, idMeal } = meal;
