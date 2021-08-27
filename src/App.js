@@ -8,6 +8,7 @@ import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import Perfil from './pages/Perfil';
 import ReceitasFeitas from './pages/ReceitasFeitas';
+import TelaDeFavoritos from './pages/TelaDeFavoritos';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/bebidas/:id" component={ Bebidas } />
           <Route path="/perfil" component={ Perfil } />
           <Route path="/receitas-feitas" component={ ReceitasFeitas } />
+          <Route exact path="/receitas-favoritas" component={ TelaDeFavoritos } />
 
           {/* <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
@@ -30,7 +32,7 @@ function App() {
           <Route path="/explorar/comidas/ingredientes" component={ Login } />
           <Route path="/explorar/bebidas/ingredientes" component={ Login } />
           <Route path="/explorar/comidas/area" component={ Login } />
-          <Route path="/receitas-favoritas" component={ Login } /> */}
+          */}
         </Switch>
       </BrowserRouter>
     </Provider>

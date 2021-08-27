@@ -14,7 +14,7 @@ function ReceitasFeitas() {
   const [redirect, setRedirect] = useState(null);
   const [msg, setMsg] = useState(false);
   const minNumber = 2;
-  const miliSecond = 1000;
+  const miliSecond = 2000;
 
   useEffect(() => {
     SetFinishRecipes(foodsEdrinks);
