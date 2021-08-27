@@ -11,5 +11,5 @@
 .title-and-btns {
   display: flex;
   flex-direction: row wrap;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
