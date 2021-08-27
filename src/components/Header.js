@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import AppContext from '../context/AppContext';
 import './Header.css';
+import { useHeaderTitle } from '../hooks';
 
-function Header({ pageTitle, showSearchBtn }) { //
+function Header({ showSearchBtn }) { //
   const [redirect, setRedirect] = useState(false); // esse estado local começa como false.
   const { showBar, setShowBar } = useContext(AppContext);
+
+  const { pathname } = useLocation();
+  const [headerTitle] = useHeaderTitle(pathname);
 
   if (redirect) {
     return <Redirect to="/Perfil" />;
@@ -25,7 +29,7 @@ function Header({ pageTitle, showSearchBtn }) { //
       <h1
         data-testid="page-title"
       >
-        { pageTitle }
+        { headerTitle }
       </h1>
       { showSearchBtn && <input
         type="image"
@@ -38,7 +42,6 @@ function Header({ pageTitle, showSearchBtn }) { //
   );
 }
 Header.propTypes = {
-  pageTitle: PropTypes.string.isRequired,
   showSearchBtn: PropTypes.bool.isRequired,
 };
 export default Header;

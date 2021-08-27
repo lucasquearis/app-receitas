@@ -9,3 +9,7 @@ export const DRINKS_CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/li
 export const MEALS_BY_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
 export const DRINKS_BY_CATEGORY = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+
+export const RANDOM_MEAL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+
+export const RANDOM_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
