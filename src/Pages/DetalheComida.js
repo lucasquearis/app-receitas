@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
@@ -78,7 +79,7 @@ export default function DetalheComida(props) {
     }
     return embededURL;
   };
-  console.log(randomDrinks);
+
   const randomDrinkCard = () => (
     <section className="drink-recomended">
       <h5>Recomendadas</h5>
@@ -105,7 +106,12 @@ export default function DetalheComida(props) {
         data-testid="start-recipe-btn"
         type="button"
       >
-        Iniciar Receita
+        <Link
+          className="start-recipe-btn-link"
+          to={ `/comidas/${food.idMeal}/in-progress` }
+        >
+          Iniciar Receita
+        </Link>
       </button>
       <img
         className="food-image"

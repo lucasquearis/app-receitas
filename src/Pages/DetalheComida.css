@@ -73,6 +73,10 @@
   width: 85%;
 }
 
+.start-recipe-btn-link {
+  color: black;
+}
+
 .start-recipe-btn:active {
   background-color: rgb(0, 187, 0);
 }
