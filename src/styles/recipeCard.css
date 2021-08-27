@@ -2,3 +2,8 @@ img {
   height: 109px;
   width: 161px;
 }
+
+section {
+  width:170px;
+  margin: 10px;
+}

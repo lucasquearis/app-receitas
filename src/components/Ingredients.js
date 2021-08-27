@@ -1,28 +1,43 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-export default function Ingredients({ingredients, index}) {
-    // const ingredients = ['1', '2', '3'];
-   
+export default function Ingredients({ ingredients }) {
+  const onlyIngredients = Object.entries(ingredients).filter(
+    (key) => key[1] !== null && key[1] !== '' && key[0].includes('strIngredient'),
+  );
+
+  const makeList = () => {
+    const list = [];
+    for (let index = 1; index <= onlyIngredients.length; index += 1) {
+      if (ingredients[`strIngredient${index}`] !== null
+        && ingredients[`strIngredient${index}`] !== '') {
+        list.push(
+          `${ingredients[`strIngredient${index}`]} - 
+          ${ingredients[`strMeasure${index}`]}`,
+        );
+      }
+    }
+    return list;
+  };
+
   return (
-    <section data-testid={`${index}-ingredient-name-and-measure`}>
-        <h2>Ingredients</h2>
-        
-        <ul> 
-          <li>exemplo</li>         
-            {/* {ingredients.map((ingredient, i)=> (
-                <li key={i}>{ingredient[`strIngredient${i}`]}</li>            
-                )
-            )} */}
-        </ul>      
+    <section>
+      <h2>Ingredients</h2>
+
+      <ul>
+        {makeList().map((ingredient, index) => (
+          <li
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {ingredient}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
 
-// Ingredients.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   img: PropTypes.string.isRequired,
-//   aux: PropTypes.string.isRequired,
-//   index: PropTypes.number.isRequired,
-//   testId: PropTypes.string.isRequired,
-// };
+Ingredients.propTypes = {
+  ingredients: PropTypes.shape({ ingredient: PropTypes.string }).isRequired,
+};
