@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
 function FoodsInProgress() {
-  const [recipesFood, setRecipesFood] = useState([{}]);
+  const [recipeFood, setRecipeFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
 
+  // localStorage.setItem('inProgressRecipes', ({ id-da-comida }));
+
   useEffect(() => {
-    const getRecipesFood = async () => {
+    const getRecipeFood = async () => {
       const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id depois
       const { meals } = await fetch(endpoint).then((data) => data.json());
-      setRecipesFood(meals);
+      setRecipeFood(meals);
     };
-    getRecipesFood();
+    getRecipeFood();
   }, []);
 
-  const { strMealThumb, strMeal, strCategory, strInstructions } = recipesFood[0];
-  console.log(strCategory);
+  const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
   useEffect(() => {
     const ingredientsList = () => {
-      const keys = Object.keys(recipesFood[0])
+      const keys = Object.keys(recipeFood[0])
         .filter((item) => item.includes('strIngredient'));
       const ingredientNotEmpty = keys
-        .filter((item) => recipesFood[0][item] !== ''
-          && recipesFood[0][item] !== null);
-      const ingredientList = ingredientNotEmpty.map((key) => recipesFood[0][key]);
+        .filter((item) => recipeFood[0][item] !== ''
+          && recipeFood[0][item] !== null);
+      const ingredientList = ingredientNotEmpty.map((key) => recipeFood[0][key]);
       setIngredients(ingredientList);
-      console.log(recipesFood);
+      // console.log(recipeFood);
     };
     ingredientsList();
-  }, [recipesFood]);
+  }, [recipeFood]);
 
   // const handleCheked = () => (
   //   'desenvolver lógica p dar check qd é apertado a caixinha de check'

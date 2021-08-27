@@ -1,46 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+// 178319
 function DrinksInProgress() {
-  const ingredientsList = ['tomate', 'azeite', 'sal'];
+  const [recipeDrink, setRecipeDrink] = useState([{}]);
+  const [ingredients, setIngredients] = useState([]);
 
-  const handleCheked = () => (
-    'desenvolver lógica p dar check qd é apertado a caixinha de check'
-  );
+  useEffect(() => {
+    const getRecipeDrink = async () => {
+      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319'; // alterar Id depois
+      const { drinks } = await fetch(endpoint).then((data) => data.json());
+      setRecipeDrink(drinks);
+    };
+    getRecipeDrink();
+  }, []);
+
+  const { strDrink, strCategory, strInstructions, strDrinkThumb } = recipeDrink;
+
+  useEffect(() => {
+    const ingredientsList = () => {
+      const keys = Object.keys(recipeDrink[0])
+        .filter((item) => item.includes('strIngredient'));
+      const ingredientNotEmpty = keys
+        .filter((item) => recipeDrink[0][item] !== ''
+          && recipeDrink[0][item] !== null);
+      const ingredientList = ingredientNotEmpty.map((key) => recipeDrink[0][key]);
+      setIngredients(ingredientList);
+      // console.log(recipeDrink);
+    };
+    ingredientsList();
+  }, [recipeDrink]);
+
+  // const handleCheked = () => (
+  //   'desenvolver lógica p dar check qd é apertado a caixinha de check'
+  // );
 
   return (
     <div className="food-in-progress">
       <p>Componente DrinksRecipeInProgress</p>
 
-      <img data-testid="recipe-photo" alt="recipe" />
-      <h1 data-testid="recipe-title">Título receita</h1>
+      <img data-testid="recipe-photo" alt="recipe" src={ strDrinkThumb } />
+      <h1 data-testid="recipe-title">{ strDrink }</h1>
       <button data-testid="share-btn" type="button">btn compartilhar</button>
       <button data-testid="favorite-btn" type="button">btn favoritar</button>
 
-      <h4 data-testid="recipe-category">categoria</h4>
+      <h4 data-testid="recipe-category">{ strCategory }</h4>
 
       <div className="indredients">
         <h3>Ingredientes</h3>
-        {/* <li>
-          <input data-testid={ `${index}-ingredient-step` } type="checkbox " />
-          5gr de sal
-        </li> */}
-
-        <div className="indredients">
-          { ingredientsList.map((ingredient, index) => (
+        {
+          ingredients.map((ingredient, index) => (
             <div key={ index } data-testid={ `${index}-ingredient-step` }>
-              <input
-                type="checkbox"
-                checked={ handleCheked() }
-              />
-              { `${ingredient}` }
+              <label htmlFor={ `${ingredient}` }>
+                <input
+                  type="checkbox"
+                  id={ `${ingredient}` }
+                // checked={ handleCheked() }
+                />
+                { `${ingredient}` }
+              </label>
             </div>
-
-          ))}
-        </div>
+          ))
+        }
       </div>
 
       <h3>Instruções</h3>
-      <p data-testid="instructions">texto de instruçoes</p>
+      <p data-testid="instructions">{ strInstructions }</p>
       <button data-testid="finish-recipe-btn" type="button">finalizar</button>
     </div>
   );
