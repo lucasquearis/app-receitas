@@ -11,6 +11,7 @@ function Provider({ children }) {
   const [foodCategory, setFoodCategory] = useState([]);
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
+  const [searchBar, setSearchBar] = useState(false);
 
   const favoritingRecipe = (isFav, setIsFav, id, recipe) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -78,6 +79,8 @@ function Provider({ children }) {
     setFilter,
     search,
     setSearch,
+    searchBar,
+    setSearchBar,
     favoritingRecipe,
     renderingIngredients,
     verifyingRecipe,
