@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 // import Context from '../../context/Context';
 
 function DrinksDetails() {
-  const [recipesDrink, setRecipesDrink] = useState([]);
+  const [recipesDrink, setRecipesDrink] = useState([{}]);
+  const [ingredients, setIngredients] = useState([]);
+  const [measure, setMeasure] = useState([]);
 
   useEffect(() => {
     const getRecipesDrink = async () => {
@@ -13,11 +15,29 @@ function DrinksDetails() {
     getRecipesDrink();
   }, []);
 
-  const dataRecipesDrink = [...recipesDrink];
+  useEffect(() => {
+    const getIngredients = () => {
+      const key = Object.keys(recipesDrink[0])
+        .filter((item) => item.includes('strIngredient'));
+      const ingredientNotEmpty = key
+        .filter((item) => recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null);
+      const ingredientsList = ingredientNotEmpty
+        .map((keyDrink) => recipesDrink[0][keyDrink]);
+      setIngredients(ingredientsList);
+
+      const keyMeasure = Object.keys(recipesDrink[0])
+        .filter((item) => item.includes('strMeasure'));
+      const measureNoEmpty = keyMeasure
+        .filter((item) => recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null);
+      const measureList = measureNoEmpty.map((kMeasure) => recipesDrink[0][kMeasure]);
+      setMeasure(measureList);
+    };
+    getIngredients();
+  }, [recipesDrink]);
 
   return (
     <>
-      { dataRecipesDrink.map((item, index) => (
+      { recipesDrink.map((item, index) => (
         <div key={ index }>
           <img
             data-testid="recipe-photo"
@@ -27,17 +47,19 @@ function DrinksDetails() {
           <h2 data-testid="recipe-title">{ item.strDrink }</h2>
           <button data-testid="share-btn" type="button">Compartilhar</button>
           <button data-testid="favorite-btn" type="button">Add aos favoritos</button>
-          <p data-testid="recipe-category">{ item.strCategory }</p>
+          <p data-testid="recipe-category">{ item.strAlcoholic }</p>
           <div>
             <h3>Ingredientes</h3>
-            <ul data-testid={ `${index}-ingredient-name-and-measure` }>
-              <li>{ `${item.strMeasure1} ${item.strIngredient1}` }</li>
-              <li>{ `${item.strMeasure2} ${item.strIngredient2}` }</li>
-              <li>{ `${item.strMeasure3} ${item.strIngredient3}` }</li>
-              <li>{ `${item.strMeasure4} ${item.strIngredient4}` }</li>
-              <li>{ `${item.strMeasure5} ${item.strIngredient5}` }</li>
-              <li>{ `${item.strMeasure6} ${item.strIngredient6}` }</li>
-              <li>{ `${item.strMeasure7} ${item.strIngredient7}` }</li>
+            <ul>
+              { ingredients.map((ingredient, indx) => (
+                <li
+                  key={ indx }
+                  data-testid={ `${indx}-ingredient-name-and-measure` }
+                >
+                  { `${measure[indx]} ${ingredient}` }
+
+                </li>
+              )) }
             </ul>
           </div>
           <p data-testid="instructions">{ item.strInstructions }</p>
