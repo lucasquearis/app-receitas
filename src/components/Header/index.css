@@ -44,3 +44,33 @@
   margin-left: 5px;
 }
 
+.search-container {
+  background: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 105px;
+  margin-bottom: 10px;
+  width: 360px;
+
+}
+
+.search-input {
+  margin: 5px 5px 0;
+  width: 350px;
+}
+
+.radio-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.radio-container input {
+  margin-right: 5px;
+}
+
+.search-btn {
+  background-color: #c4c4c4;
+  border: none;
+  margin-left: 15px;
+  width: 325px;
+}
+

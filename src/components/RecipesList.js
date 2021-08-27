@@ -1,6 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import RecipeCard from './RecipeCard';
+import './RecipesList.css';
 
 function RecipesList(props) {
   const { recipesData, recipeKey } = props;
@@ -24,7 +25,7 @@ function RecipesList(props) {
   });
 
   return (
-    <ul>
+    <ul className="recipesList-container">
       { renderRecipesList() }
     </ul>
   );

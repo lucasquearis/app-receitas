@@ -70,16 +70,16 @@ function HeaderSearch() {
   };
 
   return (
-    <form className="header-search">
-      <div>
-        <Input
-          type="text"
-          value={ keyword }
-          onChange={ setKeyword }
-          testId="search-input"
-        />
-      </div>
-      <div>
+    <form className="search-container">
+      <Input
+        type="text"
+        value={ keyword }
+        onChange={ setKeyword }
+        testId="search-input"
+        holder="Buscar Receita"
+        className="search-input"
+      />
+      <div className="radio-container">
         <Input
           type="radio"
           value="ingredient"
@@ -115,6 +115,7 @@ function HeaderSearch() {
           onClick={ getRecipes }
           disabled={ false }
           name="Buscar"
+          className="search-btn"
         />
       </div>
     </form>

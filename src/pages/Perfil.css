@@ -37,3 +37,7 @@
   border-radius: 20px;
   color: white;
 }
+
+.perfil-btn:active, .logout-btn:active {
+  opacity: 0.1;
+}
