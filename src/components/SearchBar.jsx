@@ -13,15 +13,6 @@ export default function SearchBar({ title }) {
     setSearchDataMeals,
     setSearchDataDrinks } = useContext(context);
 
-  // const UM = 1;
-  // if (searchDataMeals.length === UM) {
-  //   return <Redirect to={ `/comidas/${searchDataMeals[0].idMeal}` } />;
-  // }
-
-  // if (searchDataDrinks.length === UM) {
-  //   return <Redirect to={ `/bebidas/${searchDataDrinks[0].idDrink}` } />;
-  // }
-
   const fetchRecipesMeals = async (url) => {
     try {
       const request = await fetch(url);
