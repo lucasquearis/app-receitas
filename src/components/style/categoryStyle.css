@@ -1,0 +1,8 @@
+.categoryStyle{
+margin: auto;
+align-items: center;
+margin-top: 10px;
+margin-bottom: 10px;
+height: 45px; 
+justify-content: space-between;
+}
