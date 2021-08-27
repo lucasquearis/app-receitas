@@ -125,4 +125,25 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     userEvent.click(favoriteImage);
     expect(favoriteImage).toHaveAttribute('src', 'whiteHeartIcon.svg');
   });
+
+  it('Verifica se a receita eh salva corretamente no localStorage ao clicar no botao de fav', async () => {
+    const expectedFavoriteRecipes = [
+      {
+        id: '52771',
+        type: 'comida',
+        area: 'Italian',
+        category: 'Vegetarian',
+        alcoholicOrNot: '',
+        name: 'Spicy Arrabiata Penne',
+        image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      },
+    ];
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
+    const favoriteImage = await screen.findByTestId('favorite-btn');
+
+    userEvent.click(favoriteImage);
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    expect(favoriteRecipes).toStrictEqual(expectedFavoriteRecipes);
+  });
 });
