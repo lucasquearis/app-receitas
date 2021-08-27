@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ToggleButtons from '../ToggleButtons';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import InfoCard from '../InfoCard';
 
 const DoneRecipes = () => {
-  const [doneRecipes] = useLocalStorage('doneRecipes');
-  const [recipes, setRecipes] = useState(doneRecipes);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const [recipes, setRecipes] = useState(doneRecipes || []);
   const filter = useSelector((state) => state.recipes.filter);
 
   const renderInfoCards = (array) => {
