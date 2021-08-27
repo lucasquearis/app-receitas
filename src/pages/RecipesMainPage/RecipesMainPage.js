@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useData } from '../Context/DataContext';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import RecipesList from '../components/RecipesMainPage/RecipesList';
-import Footer from '../components/Footer';
+import { useData } from '../../Context/DataContext';
+import Header from '../../components/Header';
+import Button from '../../components/Button';
+import RecipesList from '../../components/RecipesMainPage/RecipesList';
+import Footer from '../../components/Footer/Footer';
 import './RecipesMainPage.css';
 
 function RecipesMainPage() {
@@ -64,7 +64,7 @@ function RecipesMainPage() {
   };
 
   const renderCategoryButtons = () => (
-    <div>
+    <>
       { selCategory !== 'All' && (<Button
         testId="All-category-filter"
         name="All"
@@ -80,18 +80,18 @@ function RecipesMainPage() {
           onClick={ () => handleCategoryClick(strCategory) }
         />
       ))}
-    </div>);
+    </>);
 
   return (
     <div className="main-container">
       <Header title={ pathname === '/comidas' ? 'Comidas' : 'Bebidas' } />
       <nav className="nav-container">
         { selIngredient !== '' ? null : renderCategoryButtons() }
-        <RecipesList
-          recipesData={ recipesData }
-          recipeKey={ recipeKey }
-        />
       </nav>
+      <RecipesList
+        recipesData={ recipesData }
+        recipeKey={ recipeKey }
+      />
       <Footer />
     </div>
   );

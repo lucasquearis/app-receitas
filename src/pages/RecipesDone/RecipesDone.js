@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
-import CardList from '../components/RecipesDone/CardList';
-import Filters from '../components/RecipesDone/Filters';
-import useFilter from '../hooks/useFilter';
+import Header from '../../components/Header';
+import CardList from '../../components/RecipesDone/CardList';
+import Filters from '../../components/RecipesDone/Filters';
+import useFilter from '../../hooks/useFilter';
 import './RecipesDone.css';
 
 function RecipesDone() {

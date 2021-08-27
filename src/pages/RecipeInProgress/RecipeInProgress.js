@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import FavoriteButton from '../components/FavoriteButton';
-import ShareButton from '../components/ShareButton';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import FavoriteButton from '../../components/FavoriteButton';
+import ShareButton from '../../components/ShareButton';
 import './RecipeInProgress.css';
 
 function RecipeInProgress() {
