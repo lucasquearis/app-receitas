@@ -5,8 +5,10 @@ import { useLocation } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import bHIcon from '../images/blackHeartIcon.svg';
+import wHIcon from '../images/whiteHeartIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
+import {Link} from 'react-router-dom'
 
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
@@ -23,6 +25,11 @@ function FoodDetails({ match: { params: { id } } }) {
   const imgStyle = {
     width: '300px',
   };
+  const [doneRecipe, setDoneRecipe] = useState(false);
+  const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
+  const [favorite, setFavorite] = useState(false);
+  const [favoriteIcon, setFavoriteIcon] = useState(wHIcon);
+
 
   const fetchRecomendedDrink = async () => {
     const endPointRecomendedDrink = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -72,6 +79,7 @@ function FoodDetails({ match: { params: { id } } }) {
     };
     fetchFoodById();
     fetchRecomendedDrink();
+    setVisible([false, false, true, true, true, true]);
   }, [id]);
 
   useEffect(() => {
@@ -89,6 +97,89 @@ function FoodDetails({ match: { params: { id } } }) {
     }
     setIngredientList(ingredientsArray);
   }, [food]);
+
+  useEffect(() => {
+    localStorage.setItem('doneRecipes', JSON.stringify([{
+      id: "52771",
+      type: "comida",
+      area: "Italian",
+      category: "Vegetarian",
+      alcoholicOrNot: "",
+      name: "Spicy Arrabiata Penne",
+      image: "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+      doneDate: "22/6/2020",
+      tags: ["Pasta", "Curry"]
+  }]))
+  const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
+  if (doneRecipes.some((recipe) => recipe.id === id)) {
+    setDoneRecipe(true);
+    }
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    if (inProgressRecipes){
+      if (inProgressRecipes.meals[id]) {
+        setContinueRecipe('Continuar Receita');
+      }
+    }
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const isFavorite = favoriteRecipes.some((fav) => fav.id === id);
+      if (isFavorite) {
+        setFavorite(true);
+      }
+    }
+  }
+  , [food, id])
+
+  const saveFavoriteRecipes = () => {
+    const { strArea, strCategory, strMeal, strMealThumb } = food;
+    const favoriteObject = [{
+      id,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    }];
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!favoriteRecipes) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteObject));
+    } else {
+      const updateFavorite = [
+        ...favoriteRecipes,
+        ...favoriteObject,
+      ];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(updateFavorite));
+    }
+  };
+
+  const deleteFavoriteRecipes = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const updateFavorite = favoriteRecipes.filter((rec) => rec.id !== id);
+    if (updateFavorite.length === 0) {
+      localStorage.removeItem('favoriteRecipes');
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(updateFavorite));
+    }
+  };
+
+  const handleFavorite = () => {
+    if (favorite) {
+      deleteFavoriteRecipes();
+    } else {
+      saveFavoriteRecipes();
+    }
+    setFavorite(!favorite);
+  };
+
+
+  useEffect(() => {
+    if (favorite) {
+      setFavoriteIcon(bHIcon);
+    } else {
+      setFavoriteIcon(wHIcon);
+    }
+  }, [favorite]);
 
   return (
     <div>
@@ -119,9 +210,9 @@ function FoodDetails({ match: { params: { id } } }) {
         { share && <p>Link copiado!</p> }
         <Button
           type="button"
-          data-testid="favorite-btn"
+          onClick={handleFavorite}
         >
-          <img src={ whiteHeartIcon } alt="favorite" />
+          <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
         </Button>
         <p data-testid="recipe-category">{ strCategory }</p>
         <p>Ingredientes:</p>
@@ -140,17 +231,21 @@ function FoodDetails({ match: { params: { id } } }) {
           src={ strYoutube }
           data-testid="video"
         />
-        {renderRecomendedDrink()}
-        <Button
+        {renderRecomendedDrink()} 
+        
+        <Link to={`/comidas/${id}/in-progress`}>   
+        <button
           style={ mystyle }
           variant="contained"
           color="primary"
           type="button"
           data-testid="start-recipe-btn"
+          hidden={doneRecipe}
         >
-          Iniciar Receita
+          {continueRecipe}
 
-        </Button>
+        </button>
+        </Link>
       </div>
     </div>
   );
