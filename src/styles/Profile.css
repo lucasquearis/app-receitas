@@ -1,29 +1,19 @@
-.login-div {
+.profile-div {
   align-items: center;
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  height: 80vh;
   justify-content: center;
   width: 100%;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-input {
-  text-align: center;
-}
-
-.login-button {
+.button {
   background-color: #eb6424;
   border: none;
   border-radius: 5px;
   color: #fff7eb;
+  display: flex;
+  flex-wrap: wrap;
   margin: 3px;
   padding: 5px 15px;
-}
-
-.login-button:disabled {
-  opacity: 0.5;
 }
