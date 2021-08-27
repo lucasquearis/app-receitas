@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../styles/Details.css';
+import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 
 export default function MealDetails(props) {
   const [mealDetails, setMealDetails] = useState({});
@@ -29,16 +28,6 @@ export default function MealDetails(props) {
       : null;
   }
 
-  function copyRecipeURL() {
-    const url = document.createElement('input');
-    url.value = window.location.href;
-    document.body.appendChild(url);
-    url.select();
-    document.execCommand('copy');
-    document.body.removeChild(url);
-    setIsCopied(true);
-  }
-
   function renderDetails() {
     const details = mealDetails[0];
     const allKeys = (Object.keys(details));
@@ -59,22 +48,7 @@ export default function MealDetails(props) {
         />
         <div className="title-and-btns">
           <h1 data-testid="recipe-title">{ details.strMeal }</h1>
-          <div className="share-fave-btns">
-            { isCopied
-              ? <div className="copy-div">Link copiado! </div>
-              : <div className="copy-div" /> }
-            <button
-              type="button"
-              data-testid="share-btn"
-              className="share-btn"
-              onClick={ copyRecipeURL }
-            >
-              <img src={ shareIcon } alt="share icon" className="share-icon" />
-            </button>
-            <button type="button" data-testid="favorite-btn" className="fave-btn">
-              <img src={ whiteHeartIcon } alt="favorite icon" />
-            </button>
-          </div>
+          <DetailsShareFaveBtns />
         </div>
         <p data-testid="recipe-category">{ details.strCategory }</p>
         {
