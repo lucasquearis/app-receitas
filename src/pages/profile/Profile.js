@@ -1,4 +1,5 @@
 import React from 'react';
+import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
 
 const Profile = () => {
@@ -12,6 +13,7 @@ const Profile = () => {
       <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
       <button type="button" data-testid="profile-favorite-btn">Receitas Favoritas</button>
       <button type="button" data-testid="profile-logout-btn">Sair</button>
+      <FooterMenu />
     </div>
   );
 };
