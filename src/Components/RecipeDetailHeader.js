@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import RecipeDetailFavoriteButton from './RecipeDetailsFavoriteButton';
 
 // const copy = require('clipboard-copy');
 
 function RecipeDetailHeader({ recipe, type, recipeID }) {
   const [recipeName, setRecipeName] = useState('');
   const [displaycopymessage, setDisplayCopyMessage] = useState('none');
+
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -19,7 +20,7 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
     } else {
       setRecipeName(recipe.strDrink);
     }
-  }, [type, recipe.strMeal, recipe.strDrink]);
+  }, [type, recipe.strMeal, recipe.strDrink, recipeID]);
 
   function copyPath() {
     copy(`http://localhost:3000${pathname}`);
@@ -40,9 +41,7 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
         >
           <img src={ shareIcon } alt="Share Recipe" />
         </button>
-        <button type="button" data-testid="favorite-btn">
-          <img src={ whiteHeartIcon } alt="Favorite Recipe Action" />
-        </button>
+        <RecipeDetailFavoriteButton recipe={ recipe } type={ type } />
         <span style={ { display: displaycopymessage } }>Link copiado!</span>
       </div>
     </div>

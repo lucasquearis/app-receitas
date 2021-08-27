@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Drinks from '../Pages/Drinks';
 import DrinkInProgress from '../Pages/DrinkInProgress';
 // import DrinkRecipeDetails from '../Pages/DrinkRecipeDetails';
 import Explore from '../Pages/Explore';
@@ -10,7 +9,7 @@ import ExploreFoods from '../Pages/ExploreFoods';
 import ExploreFoodsByIngredient from '../Pages/ExploreFoodsByIngredient';
 import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
 import FavoriteRecipes from '../Pages/FavoriteRecipes';
-import Foods from '../Pages/Foods';
+import FoodsAndDrinks from '../Pages/FoodsAndDrinks';
 import FoodInProgress from '../Pages/FoodInProgress';
 import FoodRecipeDetails from '../Pages/FoodRecipeDetails';
 import Login from '../Pages/Login';
@@ -21,7 +20,7 @@ import RecipesDetails from '../Pages/RecipesDetails';
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/bebidas" component={ Drinks } />
+      <Route exact path="/bebidas" component={ FoodsAndDrinks } />
       <Route
         exact
         path="/bebidas/:id-da-receita/in-progress"
@@ -47,7 +46,7 @@ function Routes() {
       />
       <Route exact path="/explorar/comidas/area" component={ ExploreFoodsByOrigin } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
-      <Route exact path="/comidas" component={ Foods } />
+      <Route exact path="/comidas" component={ FoodsAndDrinks } />
       <Route
         exact
         path="/comidas/:id-da-receita/in-progress"

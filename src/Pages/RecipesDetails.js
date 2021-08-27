@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import getCocktailByID from '../Services/fetchCocktalis';
+import getCocktailByID from '../Services/fetchCocktails';
 import getMealByID from '../Services/fetchMeals';
 
 import RecipeDetailHeader from '../Components/RecipeDetailHeader';
