@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import { checkFavoriteRecipes, formatFavoriteRecipe } from '../helpers';
 
-const FavoriteButton = ({ recipe }) => {
+const FavoriteButton = ({ recipe, id }) => {
   const [heartIcon, setHeartIcon] = useState(whiteHeart);
   const { favoriteRcps, setFavoriteRcps } = useContext(AppContext);
-  const { id } = useParams();
+  // const { id } = useParams();
   const favoriteRecipe = formatFavoriteRecipe(recipe);
 
   const saveFavoriteRecipe = (favorite) => {
@@ -68,6 +68,7 @@ const FavoriteButton = ({ recipe }) => {
 
 FavoriteButton.propTypes = {
   recipe: PropTypes.shape({}),
+  id: PropTypes.number.isRequired,
 };
 
 FavoriteButton.defaultProps = {
