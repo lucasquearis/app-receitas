@@ -5,16 +5,42 @@ import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
+const fetchInitialDrinks = async (setBebidas) => {
+  const maxDrinks = 12;
+  const results = await BebidasAPI.buscarBebidaPorNome('');
+  setBebidas(results.filter((result, index) => index < maxDrinks));
+};
+
+const mudaFiltro = (event, filtro, setFiltro, setBebidas) => {
+  const { target: value } = event;
+  console.log(value.innerText);
+  if (filtro === value.innerText) {
+    fetchInitialDrinks(setBebidas);
+    setFiltro('');
+    // document.getElementById(`${value}-category-filter`).disabled = false;
+  }
+  if (value.innerText === 'All' && filtro !== 'All') {
+    fetchInitialDrinks(setBebidas);
+    setFiltro(value.innerText);
+    // document.getElementById(`${value}-category-filter`).disabled = true;
+  }
+  if (filtro !== value.innerText) {
+    setFiltro(value.innerText);
+    // document.getElementById(`${value}-category-filter`).disabled = true;
+  }
+};
+
 export default function Bebidas() {
   const [bebidas, setBebidas] = useState([]);
   const [categorias, setCategorias] = useState([]);
-  const fetchDrinks = async () => {
-    const maxDrinks = 12;
-    const results = await BebidasAPI.buscarBebidaPorNome('');
-    setBebidas(results.filter((result, index) => index < maxDrinks));
-  };
+  const [filtro, setFiltro] = useState('');
+  // const fetchDrinks = async () => {
+  //   const maxDrinks = 12;
+  //   const results = await BebidasAPI.buscarBebidaPorNome('');
+  //   setBebidas(results.filter((result, index) => index < maxDrinks));
+  // };
   const fetchCategorias = async () => {
-    const maxCategorias = 5;
+    const maxCategorias = 6;
     const botaoALL = { strCategory: 'All' };
     const results = await BebidasAPI.buscarCategorias('');
     console.log(results);
@@ -29,7 +55,7 @@ export default function Bebidas() {
 
   useEffect(() => {
     if (bebidas.length <= 0) {
-      fetchDrinks();
+      fetchInitialDrinks(setBebidas);
     }
   }, [bebidas]);
   useEffect(() => {
@@ -37,6 +63,16 @@ export default function Bebidas() {
       fetchCategorias();
     }
   }, [categorias]);
+  useEffect(() => {
+    const fetchFilteredDrinks = async () => {
+      const maxFood = 12;
+      const results = await BebidasAPI.buscarBebidasPorCategoria(filtro);
+      setBebidas(results.filter((result, index) => index < maxFood));
+    };
+    if (filtro.length > 0 && filtro !== 'All') {
+      fetchFilteredDrinks();
+    }
+  }, [filtro]);
 
   if (bebidas.length <= 0) {
     return (
@@ -59,6 +95,8 @@ export default function Bebidas() {
                 key={ key }
                 type="button"
                 data-testid={ `${categoria.strCategory}-category-filter` }
+                id={ `${categoria.strCategory}-category-filter` }
+                onClick={ (event) => mudaFiltro(event, filtro, setFiltro, setBebidas) }
               >
                 { categoria.strCategory }
               </button>

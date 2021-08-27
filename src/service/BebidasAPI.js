@@ -18,3 +18,10 @@ export async function buscarCategorias() {
   const response = await fetch(ENDPOINT).then((data) => data.json());
   return response.drinks;
 }
+
+export async function buscarBebidasPorCategoria(categoria) {
+  const ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categoria}`;
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response.drinks;
+}
