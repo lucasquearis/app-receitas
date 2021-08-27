@@ -3,13 +3,13 @@ import { useLocation } from 'react-router-dom';
 import { useData } from '../Context/DataContext';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import RecipesList from '../components/RecipesList';
+import RecipesList from '../components/RecipesMainPage/RecipesList';
 import Footer from '../components/Footer';
 import './RecipesMainPage.css';
 
 function RecipesMainPage() {
   const { pathname } = useLocation();
-  const { recipesData, setRecipesData } = useData();
+  const { recipesData, setRecipesData, selIngredient } = useData();
   const [categories, setCategories] = useState([]);
   const [selCategory, setSelCategory] = useState('All');
   const [database, setDatabase] = useState('');
@@ -31,11 +31,11 @@ function RecipesMainPage() {
     default:
       console.log('Failed to set database!');
     }
-  }, [pathname]);
-
-  useEffect(() => {
     let URL = `https://www.${database}.com/api/json/v1/1/search.php?s=`;
     if (selCategory !== 'All') URL = `https://www.${database}.com/api/json/v1/1/filter.php?c=${selCategory}`;
+    if (selIngredient !== '') {
+      URL = `https://www.${database}.com/api/json/v1/1/filter.php?i=${selIngredient}`;
+    }
     const getRecipes = async () => {
       const max = 12;
       const results = await fetch(URL).then((stuff) => stuff.json());
@@ -51,46 +51,47 @@ function RecipesMainPage() {
     };
     getRecipes();
     getCategories();
-  }, [database, databaseKey, setRecipesData, selCategory]);
+  }, [database,
+    databaseKey,
+    setRecipesData,
+    selCategory,
+    selIngredient,
+    pathname]);
 
   const handleCategoryClick = (category) => {
     if (category === selCategory) setSelCategory('All');
     else setSelCategory(category);
   };
 
-  const renderAllButton = () => {
-    if (selCategory !== 'All') {
-      return (
+  const renderCategoryButtons = () => (
+    <div>
+      { selCategory !== 'All' && (<Button
+        testId="All-category-filter"
+        name="All"
+        disabled={ false }
+        onClick={ () => handleCategoryClick('All') }
+      />) }
+      { categories.map(({ strCategory }, index) => (
         <Button
-          testId="All-category-filter"
-          name="All"
+          key={ index }
+          testId={ `${strCategory}-category-filter` }
+          name={ strCategory }
           disabled={ false }
-          onClick={ () => handleCategoryClick('All') }
+          onClick={ () => handleCategoryClick(strCategory) }
         />
-      );
-    }
-  };
-
-  const renderCategoryButtons = () => categories.map(({ strCategory }, index) => (
-    <Button
-      key={ index }
-      testId={ `${strCategory}-category-filter` }
-      name={ strCategory }
-      disabled={ false }
-      onClick={ () => handleCategoryClick(strCategory) }
-    />));
+      ))}
+    </div>);
 
   return (
     <div className="main-container">
       <Header title={ pathname === '/comidas' ? 'Comidas' : 'Bebidas' } />
       <nav className="nav-container">
-        { renderAllButton() }
-        { renderCategoryButtons() }
+        { selIngredient !== '' ? null : renderCategoryButtons() }
+        <RecipesList
+          recipesData={ recipesData }
+          recipeKey={ recipeKey }
+        />
       </nav>
-      <RecipesList
-        recipesData={ recipesData }
-        recipeKey={ recipeKey }
-      />
       <Footer />
     </div>
   );
