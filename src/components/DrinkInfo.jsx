@@ -110,6 +110,7 @@ function DrinkInfo() {
           Iniciar Receita
         </button>
       </Link>
+
     </section>
   );
 }
