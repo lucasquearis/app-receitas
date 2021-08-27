@@ -37,7 +37,12 @@ const FoodDetails = ({ match: { params: id } }) => {
       <Instructions instruction={ strInstructions } />
       <VideoDetails linkVideo={ strYoutube } />
       <Recomendation list={ recomendation } type="Drink" />
-      <Button data-testid="start-recipe-btn">Começar Receita</Button>
+      <Button
+        data-testid="start-recipe-btn"
+        className="start-button"
+      >
+        Começar Receita
+      </Button>
     </div>
   );
 };
