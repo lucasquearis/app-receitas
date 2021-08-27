@@ -45,7 +45,7 @@ const FoodDetails = () => {
   useEffect(() => {
     getIngredients();
     getMeasure();
-  }, []);
+  }, [foodDetails]);
 
   return (
     <div>

@@ -14,6 +14,7 @@ const DrinkDetails = () => {
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
+  console.log(actualPath);
 
   const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
   const { foods } = useContext(FoodContext);
@@ -30,7 +31,7 @@ const DrinkDetails = () => {
 
   const getMeasure = () => {
     const measuresArr = drinkDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Measure') && i[1] !== null));
+      .filter((i) => i[0].includes('Measure') && i[1] !== null && i[1] !== 'undefined'));
     const measuresOnly = measuresArr.map((item) => item
       .map((i) => i.pop())).map((item) => item);
     setMeasures(measuresOnly);
@@ -44,6 +45,10 @@ const DrinkDetails = () => {
     getIngredients();
     getMeasure();
   }, [drinkDetails]);
+
+  console.log(ingredients);
+  console.log(measures);
+  console.log(drinkDetails);
 
   return (
     <div>
@@ -79,7 +84,7 @@ const DrinkDetails = () => {
               <img src={ blackHeartIcon } alt="favorite-icon" />
             </button>
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
-            <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
+            {/* <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2> */}
             <h3>Ingredients</h3>
             <ul>
               {
