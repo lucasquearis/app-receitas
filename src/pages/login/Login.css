@@ -2,7 +2,7 @@
   border: none;
   border-radius: 4px;
   display: flex;
-  flex-direction: column;   
+  flex-direction: column;
   height: 585px;
   margin: auto;
   text-align: center;
@@ -12,13 +12,13 @@
 .imput {
   background-color: rgba(0, 0, 1, 0.603);
   border: none;
-  color: aliceblue;
-  margin-top: 5%;
   border-radius: 4px;
-  height: 45px;
-  width: 298px;
+  color: aliceblue;
   font-size: 1rem;
+  height: 45px;
+  margin-top: 5%;
   padding: 1rem;
+  width: 298px;
 }
 
 .imageLogoIcon {

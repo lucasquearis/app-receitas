@@ -1,7 +1,7 @@
 .containerBody {
   background: linear-gradient(90deg, rgb(149, 253, 208) 0%, rgb(110, 41, 167) 100%);
   border-radius: 4px;
+  margin: auto;
   text-align: center;
   text-decoration: none;
-  margin: auto;
 }

@@ -1,10 +1,7 @@
 .footerMenu {
   background: linear-gradient(90deg, rgb(253, 225, 149) 0%, rgb(255, 166, 0) 100%);
-  bottom: 0px;
   display: flex;
   justify-content: space-between;
-  left: 0px;
-  padding: 5px;
-  right: 0px;
   margin-top: 20px;
+  padding: 5px;
 }
