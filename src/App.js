@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DoneRecipes from './pages/DoneRecipes';
+import Profile from './pages/Profile';
 import Explore from './pages/Explore';
 import ExploreByArea from './pages/ExploreByArea';
 import ExploreByIngredient from './pages/ExploreByIngredient';
 import ExploreDrinksOrMeals from './pages/ExploreDrinksOrMeals';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Login from './pages/Login';
-import Profile from './pages/Profile';
 import RecipeDetail from './pages/RecipeDetail';
 import RecipeInProgress from './pages/RecipeInProgress';
 import RecipesList from './pages/RecipesList';
@@ -32,7 +32,7 @@ function App() {
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route path="/comidas" component={ RecipesList } />
         <Route path="/bebidas" component={ RecipesList } />
-        <Route path="/explorar" component={ Explore } />
+        <Route path="/explorar" render={ (props) => <Explore { ...props } /> } />
         <Route path="/perfil" component={ Profile } />
         <Route exact path="/" component={ Login } />
       </Switch>

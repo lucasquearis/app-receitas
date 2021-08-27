@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function ExploreByIngredient(title) {
   const history = useHistory();
@@ -13,6 +14,7 @@ function ExploreByIngredient(title) {
     <div>
       <Header title={ title } hideSearch />
       <p>Explore by Ingredient</p>
+      <Footer />
     </div>
   );
 }
