@@ -3,15 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import FoodProvider from './context/FoodProvider';
-import DrinksProvider from './context/DrinksProvider';
 
 ReactDOM.render(
-  <FoodProvider>
-    <DrinksProvider>
-      <App />
-    </DrinksProvider>
-  </FoodProvider>,
+  <App />,
   document.getElementById('root'),
 );
 
