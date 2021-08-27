@@ -8,6 +8,15 @@ import Recomendation from '../../components/Recomentation/Recomendation';
 
 const DrinkDetails = ({ match: { params: id } }) => {
   const [drink, setDrink] = useState(0);
+  const [recomendation, setRecomendation] = useState(0);
+  useEffect(() => {
+    const fetchRemomendation = () => {
+      fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        .then((resolve) => resolve.json())
+        .then((resolve) => setRecomendation(resolve.meals));
+    };
+    fetchRemomendation();
+  }, []);
   useEffect(() => {
     const fetchDrink = () => {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id.id}`)
@@ -28,7 +37,7 @@ const DrinkDetails = ({ match: { params: id } }) => {
       />
       <IngredientsDetails recipe={ drink } />
       <Instructions instruction={ strInstructions } />
-      <Recomendation />
+      <Recomendation list={ recomendation } type="Meal" />
       <Button data-testid="start-recipe-btn">Começar Receita</Button>
     </div>
   );

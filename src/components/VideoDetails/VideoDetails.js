@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const VideoDetails = ({ linkVideo }) => {
   const newLink = linkVideo.replace('watch?v=', 'embed/');
-  console.log(linkVideo);
   return (
     <div className="component-details">
       <h1>Video</h1>
