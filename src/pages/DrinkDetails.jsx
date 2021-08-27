@@ -62,6 +62,7 @@ function DrinkDetails({ match: { params: { id } } }) {
     };
     fetchDrinkById();
     fetchRecomendedFood();
+    setVisible([false, false, true, true, true, true]);
   }, [id]);
 
   useEffect(() => {
