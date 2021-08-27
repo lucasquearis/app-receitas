@@ -1,18 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login';
-import RecipesMainPage from './pages/RecipesMainPage';
-import RecipeInProgress from './pages/RecipeInProgress';
-import Details from './pages/Details';
-import NotFound from './pages/NotFound';
-import Perfil from './pages/Perfil';
-import ExploreByArea from './pages/ExploreByArea';
-import ExploreByIngredients from './pages/ExploreByIngredient';
-import RecipesDone from './pages/RecipesDone';
-import RecipesFav from './pages/RecipesFav';
-import DrinkExplore from './pages/DrinkExplore';
-import Explore from './pages/Explore';
-import FoodExplore from './pages/FoodExplore';
+import {
+  Details,
+  DrinkExplore,
+  Explore,
+  ExploreByArea,
+  ExploreByIngredient,
+  FoodExplore,
+  Login,
+  NotFound,
+  Perfil,
+  RecipeInProgress,
+  RecipesDone,
+  RecipesFav,
+  RecipesMainPage,
+} from './pages';
 
 export default function Routes() {
   return (
@@ -28,21 +30,22 @@ export default function Routes() {
         <Route
           exact
           path="/explorar/comidas/ingredientes"
-          component={ ExploreByIngredients }
+          component={ ExploreByIngredient }
         />
         <Route
           exact
           path="/explorar/bebidas/ingredientes"
-          component={ ExploreByIngredients }
+          component={ ExploreByIngredient }
         />
         <Route exact path="/explorar/comidas/area" component={ ExploreByArea } />
-        <Route exact path="/explorar/bebidas/area" component={ NotFound } />
+        <Route exact path="/explorar/bebidas/area" component={ ExploreByArea } />
         <Route exact path="/explorar/comidas" component={ FoodExplore } />
         <Route exact path="/explorar/bebidas" component={ DrinkExplore } />
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/perfil" component={ Perfil } />
         <Route exact path="/receitas-feitas" component={ RecipesDone } />
         <Route exact path="/receitas-favoritas" component={ RecipesFav } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );

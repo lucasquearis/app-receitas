@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../components/Button';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import Button from '../../components/Button';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header';
 import './Perfil.css';
 
 function Perfil() {

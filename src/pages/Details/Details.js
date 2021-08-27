@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import HeaderDetails from '../components/Details/HeaderDetails';
-import Ingredients from '../components/Details/Ingredients';
-import Instructions from '../components/Details/Instructions';
-import Recommendations from '../components/Details/Recommendations';
-import StartButton from '../components/Details/StartButton';
-import Video from '../components/Details/Video';
-import { useData } from '../Context/DataContext';
+import HeaderDetails from '../../components/Details/HeaderDetails';
+import Ingredients from '../../components/Details/Ingredients';
+import Instructions from '../../components/Details/Instructions';
+import Recommendations from '../../components/Details/Recommendations';
+import StartButton from '../../components/Details/StartButton';
+import Video from '../../components/Details/Video';
+import { useData } from '../../Context/DataContext';
 import './Details.css';
 
 export default function Details() {

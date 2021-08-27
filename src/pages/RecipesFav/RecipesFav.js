@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import Header from '../components/Header';
-import Filters from '../components/RecipesDone/Filters';
-import CardList from '../components/RecipesFav/CardList';
-import { useData } from '../Context/DataContext';
-import useFilter from '../hooks/useFilter';
+import Header from '../../components/Header';
+import Filters from '../../components/RecipesDone/Filters';
+import CardList from '../../components/RecipesFav/CardList';
+import { useData } from '../../Context/DataContext';
+import useFilter from '../../hooks/useFilter';
 import './RecipesFav.css';
 
 function RecipesFav() {

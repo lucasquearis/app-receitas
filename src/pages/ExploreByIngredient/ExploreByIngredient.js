@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useData } from '../Context/DataContext';
-import Header from '../components/Header';
-import IngredientsList from '../components/ExploreByIngredient/IngredientsList';
-import Footer from '../components/Footer';
+import { useData } from '../../Context/DataContext';
+import Header from '../../components/Header';
+import IngredientsList from '../../components/ExploreByIngredient/IngredientsList';
+import Footer from '../../components/Footer/Footer';
 
 function ExploreByIngredients() {
   const location = useLocation();

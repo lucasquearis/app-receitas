@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import RecipesList from '../components/RecipesMainPage/RecipesList';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import RecipesList from '../../components/RecipesMainPage/RecipesList';
+import Footer from '../../components/Footer/Footer';
 
 function ExploreByArea() {
   const [recipesData, setRecipesData] = useState([]);

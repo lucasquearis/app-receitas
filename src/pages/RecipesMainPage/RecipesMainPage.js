@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useData } from '../Context/DataContext';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import RecipesList from '../components/RecipesMainPage/RecipesList';
-import Footer from '../components/Footer';
+import { useData } from '../../Context/DataContext';
+import Header from '../../components/Header';
+import Button from '../../components/Button';
+import RecipesList from '../../components/RecipesMainPage/RecipesList';
+import Footer from '../../components/Footer/Footer';
 import './RecipesMainPage.css';
 
 function RecipesMainPage() {

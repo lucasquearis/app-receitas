@@ -2,7 +2,7 @@ import React from 'react';
 
 import FooterButton from './FooterButton';
 import './footer.css';
-import { exploreIcon, mealIcon, drinkIcon } from '../common/svgStore';
+import { exploreIcon, mealIcon, drinkIcon } from '../../common/svgStore';
 
 function Footer() {
   return (
