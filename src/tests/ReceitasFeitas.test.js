@@ -112,8 +112,8 @@ describe('Testes para tela de receitas feitas', () => {
   });
 
   it('Verifica se o botao de compartilhar copia o link da receita', () => {
-    renderWithRouter(<ReceitasFeitas />);
     copy.mockImplementation(() => null);
+    renderWithRouter(<ReceitasFeitas />);
     const copyLink = screen.getByTestId(/0-horizontal-share-btn/i);
 
     userEvent.click(copyLink);
