@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context/AppContext';
 import { Button } from '../components';
 import Header from '../components/Header';
 
 const FavouriteRecipes = () => {
-  console.log('favoritas');
+  const { favoriteRcps, setFavoriteRcps } = useContext(AppContext);
+
   return (
     <>
       <Header title="Receitas Favoritas" />
