@@ -84,12 +84,13 @@ export default function SearchBar() {
         </label>
       </div>
       <div className="search-container__button">
-        <input
+        <button
+          data-testid="exec-search-btn"
           type="button"
           onClick={ submit }
         >
-          Busca
-        </input>
+          Buscar
+        </button>
       </div>
     </section>
   );
