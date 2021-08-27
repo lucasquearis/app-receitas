@@ -9,14 +9,15 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const FoodDetails = () => {
-  const { foodDetails, setFoodDetails } = useContext(FoodContext);
-  const { drinks } = useContext(DrinksContext);
-  const [ingredients, setIngredients] = useState();
-  const [measures, setMeasures] = useState();
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
+
+  const { foodDetails, setFoodDetails } = useContext(FoodContext);
+  const { drinks } = useContext(DrinksContext);
+  const [ingredients, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
@@ -36,6 +37,7 @@ const FoodDetails = () => {
     setMeasures(measuresOnly);
   };
 
+  console.log(ingredients);
   useEffect(() => {
     fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
   }, [actualPath]);
@@ -43,7 +45,7 @@ const FoodDetails = () => {
   useEffect(() => {
     getIngredients();
     getMeasure();
-  }, [foodDetails]);
+  }, []);
 
   return (
     <div>

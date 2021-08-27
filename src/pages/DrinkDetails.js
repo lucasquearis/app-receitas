@@ -17,9 +17,8 @@ const DrinkDetails = () => {
 
   const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
   const { foods } = useContext(FoodContext);
-  //   const { drinks } = useContext(DrinksContext);
-  const [ingredients, setIngredients] = useState();
-  const [measures, setMeasures] = useState();
+  const [ingredients, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
 
   const getIngredients = () => {
     const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
