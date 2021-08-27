@@ -1,25 +1,25 @@
-import React from 'react';
-// import { useHistory } from 'react-router';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
-// import FoodContext from '../context/FoodContext';
-// import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
+import FoodContext from '../context/FoodContext';
+import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 
 const RecipeCard = ({ recipe, index }) => {
-  // const history = useHistory();
-  // const { setFoodDetails } = useContext(FoodContext);
+  const history = useHistory();
+  const { setFoodDetails } = useContext(FoodContext);
 
-  // const handleClick = () => {
-  //   const { idMeal } = recipe;
-  //   fetchMealDetailsApi(idMeal).then((data) => setFoodDetails(data.meals));
-  //   history.push(`/comidas/${idMeal}`);
-  // };
+  const handleClick = () => {
+    const { idMeal } = recipe;
+    fetchMealDetailsApi(idMeal).then((data) => setFoodDetails(data.meals));
+    history.push(`/comidas/${idMeal}`);
+  };
 
   return (
     <div
-      // role="tab"
-      // tabIndex={ 0 }
-      // onClick={ handleClick }
-      // onKeyDown={ handleClick }
+      role="tab"
+      tabIndex={ 0 }
+      onClick={ handleClick }
+      onKeyDown={ handleClick }
       className="recipe-card"
       data-testid={ `${index}-recipe-card` }
     >
