@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import mockDoneRecipes from './mockDoneRecipes';
 import ShareIcon from '../../components/Icons/ShareIcon';
+import Context from '../../context';
 
 const THREE_SECONDS = 3000;
-
-mockDoneRecipes();
-
-const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
 function DoneRecipes() {
   const [activeFilter, setActiveFilter] = useState('');
   const [filteredDoneRecipes, setFilteredDoneRecipes] = useState([]);
   const [copied, SetCopied] = useState(false);
+  const { doneRecipes } = useContext(Context);
 
   useEffect(() => {
     setFilteredDoneRecipes(doneRecipes);
-  }, [setFilteredDoneRecipes]);
+  }, [setFilteredDoneRecipes, doneRecipes]);
 
   const handleCopy = () => {
     SetCopied(true);

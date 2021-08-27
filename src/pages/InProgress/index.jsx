@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import ShareIcon from '../../components/Icons/ShareIcon';
 import FavoriteIcon from '../../components/Icons/FavoriteIcon';
 import getFavoriteValue from '../../services/functions';
+import FinishButton from './Components/FinishButton';
 
 import Context from '../../context';
 
@@ -92,17 +93,7 @@ function InProgress() {
       ))}
 
       <p data-testid="instructions">{details.strInstructions}</p>
-
-      <Link to="/receitas-feitas">
-        <Button
-          disabled={ !isReady }
-          data-testid="finish-recipe-btn"
-          variant="primary"
-          className="mb-4"
-        >
-          Finalizar Receita
-        </Button>
-      </Link>
+      <FinishButton type={ query } isReady={ isReady } recipe={ details } />
     </div>
   );
 }
