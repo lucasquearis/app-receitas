@@ -47,14 +47,14 @@ function Login({ history }) {
       <Input
         type="text"
         name="email"
-        testId="email-input"
+        datatestId="email-input"
         placeH="Insira o seu e-mail:"
         onChange={ (e) => handleChange(e) }
       />
       <Input
         type="password"
         name="password"
-        testId="password-input"
+        datatestId="password-input"
         placeH="Insira a sua senha:"
         onChange={ (e) => handleChange(e) }
       />
