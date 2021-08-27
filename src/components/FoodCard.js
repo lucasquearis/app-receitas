@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function FoodCard({ meal, index }) {
+  console.log(meal);
   const { strMealThumb, strMeal } = meal;
   return (
     <div

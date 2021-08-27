@@ -20,7 +20,7 @@ export default function FoodAreaExp() {
       setAreaLoading(false);
     };
     getAreas();
-  });
+  }, []);
 
   useEffect(() => {
     const filterSwitch = async () => {
@@ -32,7 +32,9 @@ export default function FoodAreaExp() {
       } else {
         const response = await requestFoodByAreas(selectedArea);
         setFoods(response);
+        console.log(response);
         setLoading(false);
+        setAreaLoading(false);
       }
     };
     filterSwitch();
@@ -41,12 +43,10 @@ export default function FoodAreaExp() {
   if (areaLoading) return <p>Loading...</p>;
 
   const cards = [];
-  const maxCards = 12;
-  for (let index = 0; index < maxCards; index += 1) {
-    if (loading === false) {
-      cards.push(<FoodCard meal={ foods[index] } index={ index } />);
-    }
+  for (let index = 0; index < foods.length; index += 1) {
+    cards.push(<FoodCard meal={ foods[index] } index={ index } />);
   }
+  const maxCards = 11;
 
   const foodPage = (bool) => {
     if (bool === false) {
@@ -69,7 +69,7 @@ export default function FoodAreaExp() {
               ))
             }
           </select>
-          { cards }
+          { cards.filter((e, index) => index <= maxCards) }
           <Recipes />
           <MenuInferior />
         </div>
