@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { saveLoginInfoLocalStorage, validateEmailPassword } from '../../functions';
 
 const LoginPage = () => {
