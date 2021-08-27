@@ -14,6 +14,7 @@ function FoodsCard() {
   }, [dispatch]);
 
   if (loading) return <p>Carregando...</p>;
+  
   return (
     <div>
       {
