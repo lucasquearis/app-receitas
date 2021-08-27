@@ -2,15 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import Card from '../components/Card';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import Categories from '../components/Categories';
 
 export default function Meals() {
-  const { searchBarResult } = useContext(MyContext);
+  const { feed, setFeed, searchBarResult } = useContext(MyContext);
   const [resultList, setResultList] = useState();
-  const [foodMeals, setFoodMeals] = useState([]);
 
   useEffect(() => {
     const resolveApi = async () => {
@@ -26,10 +25,10 @@ export default function Meals() {
       const MAX_FOODS = 12;
       const result = await fetchFoods();
       const { meals } = result;
-      setFoodMeals(meals.slice(0, MAX_FOODS));
+      setFeed(meals.slice(0, MAX_FOODS));
     };
     resolviFood();
-  }, []);
+  }, [setFeed]);
 
   const renderList = () => {
     if (resultList === null) {
@@ -40,7 +39,7 @@ export default function Meals() {
       return (<h1>Search something... </h1>);
     }
     if (resultList.length === 1) {
-      console.log(resultList[0]);
+      // console.log(resultList[0]);
       return <Redirect to={ `/comidas/${resultList[0].idMeal}` } />;
     }
     return (
@@ -72,12 +71,12 @@ export default function Meals() {
   };
   return (
     <>
-      {/* <Header title="Comidas" /> */}
+      <Header title="Comidas" />
       <Categories />
       {renderList()}
-      { foodMeals.map(({ strMealThumb, strMeal }, index) => (
+      { feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
         <Card
-          Key={ strMeal }
+          Key={ idMeal }
           id={ index }
           strThumb={ strMealThumb }
           str={ strMeal }

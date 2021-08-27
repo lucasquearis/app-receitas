@@ -4,13 +4,13 @@ import MyContext from '.';
 
 export default function Provider({ children }) {
   const [searchBarResult, setSearchBarResult] = useState({});
-  const [search, setSearch] = useState(false);
+  const [feed, setFeed] = useState([]);
 
   const context = {
     setSearchBarResult,
     searchBarResult,
-    search,
-    setSearch,
+    feed,
+    setFeed,
   };
 
   return (

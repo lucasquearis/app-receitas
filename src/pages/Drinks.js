@@ -8,9 +8,8 @@ import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import Categories from '../components/Categories';
 
 export default function Drinks() {
-  const { searchBarResult } = useContext(MyContext);
+  const { feed, setFeed, searchBarResult } = useContext(MyContext);
   const [resultList, setResultList] = useState();
-  const [foodDrinks, setFoodDrinks] = useState([]);
 
   useEffect(() => {
     const resolveApi = async () => {
@@ -22,14 +21,14 @@ export default function Drinks() {
   }, [resultList, searchBarResult]);
 
   useEffect(() => {
-    const resolviFood = async () => {
+    const resolviDrink = async () => {
       const MAX_FOODS = 12;
       const result = await fetchDrinks();
       const { drinks } = result;
-      setFoodDrinks(drinks.slice(0, MAX_FOODS));
+      setFeed(drinks.slice(0, MAX_FOODS));
     };
-    resolviFood();
-  }, []);
+    resolviDrink();
+  }, [setFeed]);
 
   const renderList = () => {
     if (resultList === null) {
@@ -77,7 +76,7 @@ export default function Drinks() {
       <Header title="Bebidas" />
       <Categories />
       {renderList()}
-      { foodDrinks.map(({ strDrinkThumb, strDrink }, index) => (
+      { feed.map(({ strDrinkThumb, strDrink }, index) => (
         <Card
           Key={ strDrink }
           id={ index }
