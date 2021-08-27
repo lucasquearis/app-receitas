@@ -9,6 +9,7 @@ import Explore from './pages/Explore/Explore';
 import FoodExp from './pages/Explore/FoodExp';
 import DrinkExp from './pages/Explore/DrinkExp';
 import DrinkIngredients from './pages/Explore/DrinkIngredients';
+import NotFound from './pages/NotFound';
 // import FoodIngredients from './pages/Explore/FoodIngredients';
 import FoodAreaExp from './pages/Explore/FoodAreaExp';
 import Profile from './pages/Profile';
