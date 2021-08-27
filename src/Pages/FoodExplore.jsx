@@ -5,16 +5,15 @@ import ButtonCard from '../Components/ButtonCard';
 
 function FoodExplore() {
   const [data, setData] = useState([]);
+
+  const surpriseMe = async () => {
+    const END_POINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
+    const { meals } = await fetch(END_POINT).then((response) => response.json());
+    setData(meals[0]);
+  };
   useEffect(() => {
-    const surpriseMe = async () => {
-      const END_POINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
-      const response = await fetch(END_POINT);
-      const { meals } = await response.json();
-      setData(meals[0]);
-      console.log(data);
-    };
     surpriseMe();
-  });
+  }, [data]);
 
   const path = (id) => `/comidas/${id}`;
 

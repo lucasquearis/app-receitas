@@ -5,14 +5,16 @@ import ButtonCard from '../Components/ButtonCard';
 
 function DrinksExplore() {
   const [data, setData] = useState([]);
+
+  const surpriseMe = async () => {
+    const END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+    const response = await fetch(END_POINT);
+    const { drinks } = await response.json();
+    setData(drinks[0]);
+    console.log(data);
+  };
+
   useEffect(() => {
-    const surpriseMe = async () => {
-      const END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
-      const response = await fetch(END_POINT);
-      const { drinks } = await response.json();
-      setData(drinks[0]);
-      console.log(data);
-    };
     surpriseMe();
   });
 

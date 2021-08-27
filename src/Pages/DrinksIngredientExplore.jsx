@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 function DrinkIngredientesExplore() {
   const [data, setData] = useState([]);
 
+  const getIngredient = async () => {
+    const END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+    const response = await fetch(END_POINT);
+    const { drinks } = await response.json();
+    setData(drinks);
+  };
   useEffect(() => {
-    const getIngredient = async () => {
-      const END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
-      const response = await fetch(END_POINT);
-      const { drinks } = await response.json();
-      setData(drinks);
-    };
     getIngredient();
   }, [data]);
 

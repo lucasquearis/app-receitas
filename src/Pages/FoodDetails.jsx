@@ -5,13 +5,12 @@ function FoodDetails(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    const { match: { params: { id } } } = props;
     const getDetails = async () => {
-      const { match: { params: { id } } } = props;
       const END_POINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const response = await fetch(END_POINT);
       const { meals } = await response.json();
       setData(meals[0]);
-      console.log(meals);
     };
     getDetails();
   }, [data, props]);

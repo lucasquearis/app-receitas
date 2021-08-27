@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 function FoodIngredientesExplore() {
   const [data, setData] = useState([]);
 
+  const getIngredient = async () => {
+    const END_POINT = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+    const response = await fetch(END_POINT);
+    const { meals } = await response.json();
+    setData(meals);
+  };
   useEffect(() => {
-    const getIngredient = async () => {
-      const END_POINT = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
-      const response = await fetch(END_POINT);
-      const { meals } = await response.json();
-      setData(meals);
-    };
     getIngredient();
   }, [data]);
 
