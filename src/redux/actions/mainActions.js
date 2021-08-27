@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import fetchFoodAPI from '../../API/fetchFoodAPI';
 import fetchDrinksAPI from '../../API/fetchDrinksAPI';
+// import { fetchFoodCategoryAPI, fetchDrinkCategoryAPI } from '../../API/fetchCategoryAPI';
 
 // Action Creators - Login Actions
 
@@ -11,12 +12,49 @@ export const loginAction = (payload) => ({
 
 // Action Creators - SearchBar Actions
 
+export const foodsRequest = () => ({
+  type: types.FOODS_API,
+});
+
+export const foodsRequestSuccess = (payload) => ({
+  type: types.FOODS_API_SUCCESS,
+  payload,
+});
+
+export const foodsRequestError = (payload) => ({
+  type: types.FOODS_API_ERROR,
+  payload,
+});
+
+export const drinksRequest = () => ({
+  type: types.DRINKS_API,
+});
+
+export const drinksRequestSuccess = (payload) => ({
+  type: types.DRINKS_API_SUCCESS,
+  payload,
+});
+
+export const drinksRequestError = (payload) => ({
+  type: types.DRINKS_API_ERROR,
+  payload,
+});
+
 export const ingredientRequest = () => ({
   type: types.INGREDIENT_REQUEST,
 });
 
 export const letterRequest = () => ({
   type: types.LETTER_REQUEST,
+});
+
+export const drinksCategory = () => ({
+  type: types.DRINKS_CATEGORY,
+});
+
+export const categoryRequest = (payload) => ({
+  type: types.CATEGORY_API,
+  payload,
 });
 
 export const nameRequest = () => ({
@@ -28,8 +66,18 @@ export const ingredientRequestSuccess = (payload) => ({
   payload,
 });
 
+export const categoryRequestSuccess = (payload) => ({
+  type: types.SUCCESS_CATEGORY_API,
+  payload,
+});
+
 export const letterRequestSuccess = (payload) => ({
   type: types.LETTER_REQUEST_SUCCESS,
+  payload,
+});
+
+export const drinksCategorySuccess = (payload) => ({
+  type: types.DRINKS_SUCCESS_CATEGORY,
   payload,
 });
 
@@ -53,6 +101,16 @@ export const nameRequestError = (payload) => ({
   payload,
 });
 
+export const drinksCategoryError = (payload) => ({
+  type: types.DRINKS_ERROR_CATEGORY,
+  payload,
+});
+
+export const categoryRequestError = (payload) => ({
+  type: types.ERROR_CATEGORY_API,
+  payload,
+});
+
 export const clearSearch = (payload) => ({
   type: types.CLEAR_SEARCH,
   payload,
@@ -61,6 +119,28 @@ export const clearSearch = (payload) => ({
 // Fetch APIs
 
 // Fetch Recipes APIs
+
+export const fetchFoods = () => async (dispatch) => {
+  dispatch(foodsRequest());
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return dispatch(foodsRequestSuccess(data));
+  } catch (error) {
+    return dispatch(foodsRequestError(error));
+  }
+};
+
+export const fetchDrinks = () => async (dispatch) => {
+  dispatch(drinksRequest());
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    return dispatch(foodsRequestSuccess(data));
+  } catch (error) {
+    return dispatch(drinksRequestError(error));
+  }
+};
 
 export const fetchIngredientAPI = (value) => async (dispatch) => {
   dispatch(ingredientRequest());
@@ -122,5 +202,27 @@ export const fetchLetterAPI = (value) => async (dispatch) => {
     } catch (error) {
       return dispatch(letterRequestError(error));
     }
+  }
+};
+
+export const fetchCategory = () => async (dispatch) => {
+  dispatch(categoryRequest());
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return dispatch(categoryRequestSuccess(data));
+  } catch (error) {
+    return dispatch(categoryRequestError(error));
+  }
+};
+
+export const fetchDrinksCategories = () => async (dispatch) => {
+  dispatch(drinksCategory());
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    return dispatch(drinksCategorySuccess(data));
+  } catch (error) {
+    return dispatch(drinksCategoryError(error));
   }
 };
