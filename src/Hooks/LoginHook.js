@@ -17,10 +17,6 @@ const LoginHook = () => {
     setLogin({ ...Login, [name]: value });
   });
 
-  const resetLogin = () => {
-    setLogin(INITIAL_LOGIN);
-  };
-
   const handleClick = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
@@ -42,7 +38,6 @@ const LoginHook = () => {
     handleClick,
     redirect,
     setRedirect,
-    resetLogin,
   };
 };
 

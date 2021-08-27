@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe.only('Profile screen', () => {
+describe('Profile screen', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/perfil', {
       onBeforeLoad(win) {
@@ -20,7 +20,7 @@ describe.only('Profile screen', () => {
     });
   });
 
-  describe.only('82 - Implemente os elementos da a tela de perfil respeitando os atributos descritos no protótipo', () => {
+  describe('82 - Implemente os elementos da a tela de perfil respeitando os atributos descritos no protótipo', () => {
     it('Todos o data-testid do email e de todos os botões', () => {
       cy.get('[data-testid="profile-email"]');
       cy.get('[data-testid="profile-done-btn"]');

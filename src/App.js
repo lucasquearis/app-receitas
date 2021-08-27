@@ -9,6 +9,7 @@ import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
 import Explore from './Pages/Explore';
 import Profile from './Pages/Profile/Profile';
+import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
 
 function App() {
   const exploreFoodDrink = (
@@ -88,6 +89,7 @@ function App() {
               searchButton={ false }
             />
           ) }
+          component={ ReceitasFavoritas }
         />
         <Route path="/:feedType/:id" component={ RecipeDetails } />
       </Switch>
