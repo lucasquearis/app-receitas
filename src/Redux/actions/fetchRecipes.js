@@ -1,32 +1,31 @@
 import {
-  GET_RECIPE,
-  GET_RECIPE_SUCCESS,
-  GET_RECIPE_ERROR,
+  RECIPE,
+  RECIPE_SUCCESS,
+  RECIPE_ERROR,
 } from './actionTypes';
 
 const getRecipe = () => ({
-  type: GET_RECIPE,
+  type: RECIPE,
 });
 
 const getRecipeSuccess = (responseRecipe) => ({
-  type: GET_RECIPE_SUCCESS,
+  type: RECIPE_SUCCESS,
   payload: responseRecipe,
 });
 
 const getRecipeError = (error) => ({
-  type: GET_RECIPE_ERROR,
+  type: RECIPE_ERROR,
   error,
 });
 
-export const fetchRecipe = () => async (dispatch) => {
+export const fetchRecipe = (id) => async (dispatch) => {
   dispatch(getRecipe());
-  const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${1}`;
+  const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(endPoint);
-  console.log(response);
   const responseJson = await response.json();
-  console.log(responseJson);
+  // console.log(responseJson);
   try {
-    dispatch(getRecipeSuccess(responseJson));
+    dispatch(getRecipeSuccess(responseJson.meals));
   } catch (error) {
     dispatch(getRecipeError(error));
   }
