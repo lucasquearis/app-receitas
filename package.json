@@ -8,11 +8,14 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/testing-library__jest-dom": "^5.14.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "clipboard-copy": "^3.1.0",
     "history": "^4.7.2",
     "lodash": "^4.17.15",
+    "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
@@ -33,7 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-coverage": "react-scripts test --coverage --watchAll=false",
+    "test-coverage": "react-scripts test --coverage --coverageDirectory='coverage' --collectCoverageFrom='./src/**/*.js' --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx"
   },
@@ -76,7 +79,8 @@
       "json",
       "lcovonly",
       "text",
-      "clover"
+      "clover",
+      "html"
     ]
   }
 }
