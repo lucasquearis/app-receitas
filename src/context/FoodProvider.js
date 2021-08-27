@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
-import { fetchMealApi, fetchCategoriesMealApi } from '../services/fetchMealApi';
+import {
+  fetchMealApi,
+  fetchCategoriesMealApi,
+  // fetchRandomMeal,
+} from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
   const [foods, setFoods] = useState([]);
@@ -12,6 +16,7 @@ const FoodProvider = ({ children }) => {
   });
   const [categoriesMeal, setCategoriesMeal] = useState([]);
   const [mealsByCategories, setMealsByCategories] = useState(false);
+  const [randomMeal, setRandomMeal] = useState('');
 
   useEffect(() => {
     fetchMealApi(foodFilter).then((data) => {
@@ -35,6 +40,8 @@ const FoodProvider = ({ children }) => {
     categoriesMeal,
     mealsByCategories,
     setMealsByCategories,
+    randomMeal,
+    setRandomMeal,
   };
   return (
     <FoodContext.Provider value={ contextValue }>

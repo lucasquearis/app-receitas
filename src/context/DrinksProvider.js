@@ -12,6 +12,7 @@ const DrinksProvider = ({ children }) => {
   });
   const [categoriesDrinks, setCategoriesDrinks] = useState([]);
   const [drinksByCategories, setDrinksByCategories] = useState(false);
+  const [randomDrinks, setRandomDrinks] = useState('');
 
   useEffect(() => {
     fetchDrinksApi(drinkFilter).then((data) => {
@@ -35,6 +36,8 @@ const DrinksProvider = ({ children }) => {
     setDrinks,
     drinksByCategories,
     setDrinksByCategories,
+    randomDrinks,
+    setRandomDrinks,
   };
 
   return (
