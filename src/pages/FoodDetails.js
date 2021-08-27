@@ -103,7 +103,7 @@ const FoodDetails = () => {
               src={ strYoutube }
             />
             <div className="recomended-wrapper">
-              <div className="recomended-drinks">
+              <div className="recomended">
                 { drinks.map((drink, indice) => (
                   DrinkRecomendationCard(drink, indice)
                 ))}
@@ -113,6 +113,7 @@ const FoodDetails = () => {
               data-testid="start-recipe-btn"
               key={ i }
               type="button"
+              className="start-recipe-btn"
             >
               Iniciar receita
             </button>

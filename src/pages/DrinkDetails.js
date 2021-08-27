@@ -3,9 +3,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import DrinksContext from '../context/DrinksContext';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import FoodContext from '../context/FoodContext';
 
 const DrinkDetails = () => {
   const history = useHistory();
@@ -14,6 +16,7 @@ const DrinkDetails = () => {
   const actualPath = pathnameSeparate[2];
 
   const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
+  const { foods } = useContext(FoodContext);
   //   const { drinks } = useContext(DrinksContext);
   const [ingredients, setIngredients] = useState();
   const [measures, setMeasures] = useState();
@@ -59,7 +62,7 @@ const DrinkDetails = () => {
               src={ strDrinkThumb }
               alt="thumbnail"
               data-testid="recipe-photo"
-              className="describe-image"
+              className="details-image"
             />
             <h1 key={ strDrink } data-testid="recipe-title">{strDrink}</h1>
             <button
@@ -92,17 +95,18 @@ const DrinkDetails = () => {
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            {/* <div className="recomended-wrapper">
-              <div className="recomended-drinks">
-                { drinks.map((drink, indice) => (
-                  DrinkRecomendationCard(drink, indice)
+            <div className="recomended-wrapper">
+              <div className="recomended">
+                { foods.map((recipe, indice) => (
+                  FoodRecomendationCard(recipe, indice)
                 ))}
               </div>
-            </div> */}
+            </div>
             <button
               data-testid="start-recipe-btn"
               key={ i }
               type="button"
+              className="start-recipe-btn"
             >
               Iniciar receita
             </button>

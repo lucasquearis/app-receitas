@@ -1,16 +1,23 @@
 /* .recomended-wrapper{
 } */
 
-.recomended-drinks {
+.recomended {
   display: flex;
   flex-direction: row;
 }
 
-.recomended-drinks-card img {
+.recomended-card img {
   width: 100%;
 }
 
 .details-image {
   height: 50vw;
   width: 100vw;
+}
+
+.start-recipe-btn {
+  position: fixed;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
 }
