@@ -57,13 +57,13 @@ const DoneRecipes = () => {
   const handleClickShare = ({ target: { id } }) => {
     const formatId = (id.replace('-', '/')).split(' ', 2);
     const recipeDetailURL = `http://localhost:3000/${formatId[0]}`;
-    const parentNodeId = `done-recipe-date-${formatId[1]}`;
+    const parentNodeId = `fav-recipe-info-${formatId[1]}`;
     setShareData([recipeDetailURL, parentNodeId]);
     setShareAlert(true);
   };
 
   return (
-    <div className="done-recipes-container">
+    <div className="fav-recipes-container">
       <Header title="Receitas Favoritas" />
       <div className="filter-recipes-container">
         <Button
