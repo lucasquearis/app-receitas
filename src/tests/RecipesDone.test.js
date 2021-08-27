@@ -4,6 +4,9 @@ import renderWithRouter from '../services/renderWithRouter';
 import RecipesDone from '../pages/RecipesDone';
 import recipesDoneMock from '../data/recipesDoneMock';
 
+const indexRecipeMeal = recipesDoneMock.indexOf(recipesDoneMock[0]);
+const indexRecipeDrink = recipesDoneMock.indexOf(recipesDoneMock[1]);
+
 describe('Testa presença de todos elementos da tela', () => {
   beforeEach(() => {
     renderWithRouter(<RecipesDone />);
@@ -22,23 +25,23 @@ describe('Testa presença de todos elementos da tela', () => {
 
   it('busca pelos elementos dos cards de comida', () => {
     const cardImage = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[0])}-horizontal-image`);
+      .getByTestId(`${indexRecipeMeal}-horizontal-image`);
     expect(cardImage).toBeInTheDocument();
 
     const cardCategory = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[0])}-horizontal-top-text`);
+      .getByTestId(`${indexRecipeMeal}-horizontal-top-text`);
     expect(cardCategory).toBeInTheDocument();
 
     const cardName = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[0])}-horizontal-name`);
+      .getByTestId(`${indexRecipeMeal}-horizontal-name`);
     expect(cardName).toBeInTheDocument();
 
     const cardDoneDate = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[0])}-horizontal-done-date`);
+      .getByTestId(`${indexRecipeMeal}-horizontal-done-date`);
     expect(cardDoneDate).toBeInTheDocument();
 
     const cardShare = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[0])}-horizontal-share-btn`);
+      .getByTestId(`${indexRecipeMeal}-horizontal-share-btn`);
     expect(cardShare).toBeInTheDocument();
 
     const cardTagName = screen
@@ -49,27 +52,73 @@ describe('Testa presença de todos elementos da tela', () => {
 
   it('busca pelos elementos dos cards de bebida', () => {
     const cardImage = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[1])}-horizontal-image`);
+      .getByTestId(`${indexRecipeDrink}-horizontal-image`);
     expect(cardImage).toBeInTheDocument();
 
     const cardCategory = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[1])}-horizontal-top-text`);
+      .getByTestId(`${indexRecipeDrink}-horizontal-top-text`);
     expect(cardCategory).toBeInTheDocument();
 
     const cardName = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[1])}-horizontal-name`);
+      .getByTestId(`${indexRecipeDrink}-horizontal-name`);
     expect(cardName).toBeInTheDocument();
 
     const cardDoneDate = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[1])}-horizontal-done-date`);
+      .getByTestId(`${indexRecipeDrink}-horizontal-done-date`);
     expect(cardDoneDate).toBeInTheDocument();
 
     const cardShare = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[1])}-horizontal-share-btn`);
+      .getByTestId(`${indexRecipeDrink}-horizontal-share-btn`);
     expect(cardShare).toBeInTheDocument();
 
     const cardAlcoholic = screen
-      .getByTestId(`${recipesDoneMock.indexOf(recipesDoneMock[1])}-horizontal-top-text`);
+      .getByTestId(`${indexRecipeDrink}-horizontal-top-text`);
     expect(cardAlcoholic).toBeInTheDocument();
+  });
+});
+
+// describe('Testa funcionamento do clipboard-copy', () => {
+
+// });
+
+describe('Testa funcionamento dos botões de filtro', () => {
+  beforeEach(() => {
+    renderWithRouter(<RecipesDone />);
+  });
+
+  it('Filtro para comidas', () => {
+    const cardFood = screen.getByTestId(`${recipesDoneMock[0].id}-recipe-card`);
+    expect(cardFood).toBeInTheDocument();
+
+    const cardDrink = screen.getByTestId(`${recipesDoneMock[1].id}-recipe-card`);
+    expect(cardDrink).toBeInTheDocument();
+
+    const foodButton = screen.getByTestId('filter-by-food-btn');
+    fireEvent.click(foodButton);
+
+    expect(cardFood).toBeInTheDocument();
+    expect(cardDrink).not.toBeInTheDocument();
+  });
+
+  it('botão para filtrar bebidas', () => {
+    const cardFood = screen.getByTestId(`${recipesDoneMock[0].id}-recipe-card`);
+    expect(cardFood).toBeInTheDocument();
+
+    const cardDrink = screen.getByTestId(`${recipesDoneMock[1].id}-recipe-card`);
+    expect(cardDrink).toBeInTheDocument();
+
+    const drinkButton = screen.getByTestId('filter-by-drink-btn');
+    fireEvent.click(drinkButton);
+
+    expect(cardFood).not.toBeInTheDocument();
+    expect(cardDrink).toBeInTheDocument();
+  });
+
+  // it('botão para desfazer filtros', () => {
+
+  // });
+
+  it('Testa redirecionameto ao clicar em cards', () => {
+    console.log(history);
   });
 });
