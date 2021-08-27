@@ -69,6 +69,7 @@ const DrinksDetails = () => {
         ingredients={ ingredients }
         measures={ measures }
         recipe={ drink }
+        id={ drink.idDrink }
       />
       <Recomendations
         recomendations={ recomendations }

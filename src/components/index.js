@@ -10,3 +10,4 @@ export { default as StartRecipeBtn } from './StartRecipeBtn';
 export { default as ContinueRecipeBtn } from './ContinueRecipeBtn';
 export { default as ShareButton } from './ShareButton';
 export { default as FavoriteButton } from './FavoriteButton';
+export { default as FavCard } from './FavoriteCard';
