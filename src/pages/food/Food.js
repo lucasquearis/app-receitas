@@ -9,7 +9,7 @@ const Food = ({ storeItems }) => {
     return (
       <div>
         <Header>Comidas</Header>
-        <CardsList array={ storeItems } />
+        <CardsList array={ storeItems } teste="recipe-card" />
       </div>
     );
   }
