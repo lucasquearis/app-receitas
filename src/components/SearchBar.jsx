@@ -61,7 +61,7 @@ export default function SearchBar({ title }) {
     } else {
       return showAlert(alert, msgFilter);
     }
-    if (searchDataMeals.length === 0) return showAlert(alert, msgNotRecipe);
+    if (searchDataMeals === null) return showAlert(alert, msgNotRecipe);
   };
 
   const handleSearchDrinks = () => {
@@ -78,13 +78,17 @@ export default function SearchBar({ title }) {
     } else {
       return showAlert(alert, msgFilter);
     }
-    if (searchDataDrinks.length === 0) return showAlert(alert, msgNotRecipe);
+    if (searchDataDrinks === null) return showAlert(alert, msgNotRecipe);
   };
 
   const handleSearch = () => {
     const search = title === 'Comidas' ? handleSearchMeals() : handleSearchDrinks();
     return search;
   };
+
+  // if (searchDataMeals.length === 0 || searchDataDrinks.length === 0) {
+  //   return <p>loading...</p>;
+  // }
 
   return (
     <form className="search-form">
