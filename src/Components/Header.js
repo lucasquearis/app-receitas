@@ -55,12 +55,12 @@ export default function Header(props) {
       if (searchValue.length > 1) {
         return alert('Sua busca deve conter somente 1 (um) caracter');
       }
-      return bebidasAPI.buscarBebidasLetra(searchValue)
+      return bebidasAPI.buscarTodasBebidasPorLetra(searchValue)
         .then((result) => setRecipes(result));
     }
 
     if (searchType === 'nome') {
-      return bebidasAPI.buscarBebidaNome(searchValue)
+      return bebidasAPI.buscarBebidaPorNome(searchValue)
         .then((result) => setRecipes(result));
     }
 
@@ -78,12 +78,12 @@ export default function Header(props) {
       if (searchValue.length > 1) {
         return alert('Sua busca deve conter somente 1 (um) caracter');
       }
-      return comidasAPI.buscarComidasLetra(searchValue)
+      return comidasAPI.buscarTodasComidasPorLetra(searchValue)
         .then((result) => setRecipes(result));
     }
 
     if (searchType === 'nome') {
-      return comidasAPI.buscarComidaNome(searchValue)
+      return comidasAPI.buscarComidaPorNome(searchValue)
         .then((result) => setRecipes(result));
     }
 
