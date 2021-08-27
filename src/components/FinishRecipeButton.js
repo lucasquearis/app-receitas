@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function StartRecipeButton(props) {
+function FinishRecipeButton(props) {
   const { id, type, enType } = props;
   const newEnType = enType === 'meals' ? enType : 'cocktails';
   const [done, setDone] = useState(true);
@@ -19,23 +19,24 @@ function StartRecipeButton(props) {
   }, [id, newEnType, type]);
 
   return (
-    <Link to={ `/${type}/${id}/in-progress` }>
+    <Link to="/receitas-feitas">
       <button
         hidden={ done }
-        className="start-recipe-button"
+        className="finish-recipe-button"
         type="button"
-        data-testid="start-recipe-btn"
+        data-testid="finish-recipe-btn"
+        disabled
       >
-        {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        {inProgress ? 'Continuar Receita' : 'Finalizar Receita'}
       </button>
     </Link>
   );
 }
 
-StartRecipeButton.propTypes = {
+FinishRecipeButton.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   enType: PropTypes.string.isRequired,
 };
 
-export default StartRecipeButton;
+export default FinishRecipeButton;
