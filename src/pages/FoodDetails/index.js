@@ -6,8 +6,6 @@ import { useDetailsContext } from '../../context/DetailsProvider';
 import { getDetails } from '../../services';
 
 import Details from './Details';
-import CopyButton from '../../components/CopyButton';
-import FavoriteButton from '../../components/FavoriteButton';
 
 export default function FoodDetails() {
   const {
@@ -37,9 +35,7 @@ export default function FoodDetails() {
 
   return (
     <div>
-      <CopyButton path={ location.pathname } />
-      <FavoriteButton />
-      {itemDetails && <Details item={ itemDetails } />}
+      {itemDetails && <Details item={ itemDetails } pathname={ location.pathname } />}
     </div>
   );
 }

@@ -4,8 +4,10 @@ import { useDetailsContext } from '../../../context/DetailsProvider';
 import ListDetails from './ListDetails';
 import VideoPlayer from './VideoPlayer';
 import RecipesRecommendation from './RecipesRecommendation';
+import CopyButton from '../../../components/CopyButton';
+import FavoriteButton from '../../../components/FavoriteButton';
 
-export default function Details({ item }) {
+export default function Details({ item, pathname }) {
   const { type, loading } = useDetailsContext();
   const objectFormatter = (object) => {
     const objectAsArray = Object.entries(object);
@@ -27,10 +29,8 @@ export default function Details({ item }) {
           alt={ object.strDrink }
         />
         <p data-testid="recipe-title">{object.strDrink || object.strMeal}</p>
-        <button data-testid="share-btn" type="button">
-          Compartilhar
-        </button>
-        <button data-testid="favorite-btn" type="button">Favoritar</button>
+        <CopyButton path={ pathname } />
+        <FavoriteButton />
         <p data-testid="recipe-category">{object.strAlcoholic || object.strCategory}</p>
         <h2>Ingredients</h2>
         <ul>
