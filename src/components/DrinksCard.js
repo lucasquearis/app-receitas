@@ -4,34 +4,19 @@ import PropTypes from 'prop-types';
 // import DrinksContext from '../context/DrinksContext';
 // import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 
-const DrinksCard = ({ drink, index }) => {
-  // const history = useHistory();
-  // const { setDrinkDetails } = useContext(DrinksContext);
-
-  // const handleClick = () => {
-  //   const { idDrink } = drink;
-  //   // fetchDrinkDetailsApi(idDrink).then((data) => setDrinkDetails(data.drinks));
-  //   history.push(`/bebidas/${idDrink}`);
-  // };
-  console.log(drink);
-  return (
-    <div
-      // role="tab"
-      // tabIndex={ 0 }
-      // onClick={ handleClick }
-      // onKeyDown={ handleClick }
-      className="drinks-card"
-      data-testid={ `${index}-recipe-card` }
-    >
-      <img
-        src={ drink.strDrinkThumb }
-        alt="drink"
-        data-testid={ `${index}-card-img` }
-      />
-      <p data-testid={ `${index}-card-name` }>{ drink.strDrink }</p>
-    </div>
-  );
-};
+const DrinksCard = ({ drink, index }) => (
+  <div
+    className="drinks-card"
+    data-testid={ `${index}-recipe-card` }
+  >
+    <img
+      src={ drink.strDrinkThumb }
+      alt="drink"
+      data-testid={ `${index}-card-img` }
+    />
+    <p data-testid={ `${index}-card-name` }>{ drink.strDrink }</p>
+  </div>
+);
 
 DrinksCard.propTypes = {
   drink: PropTypes.shape({
