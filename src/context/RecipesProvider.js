@@ -27,7 +27,6 @@ function RecipesProvider({ children }) {
     ingredients: [],
     measure: [],
   });
-  console.log(setFilteredDrinks);
 
   const globalState = {
     url,
