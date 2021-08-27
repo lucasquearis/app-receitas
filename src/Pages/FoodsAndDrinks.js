@@ -63,7 +63,7 @@ function FoodsAndDrinks() {
   };
 
   const fillCards = () => {
-    if (!category.length) return <span>Void</span>;
+    if (!category.length) return <span>Nenhum resultado encontrado</span>;
 
     const cardList = category.map((item, index) => (
       <Card
