@@ -6,6 +6,8 @@ import AppContext from './AppContext';
 function Provider({ children }) {
   const [user, setUser] = useState({ email: '' });
   const [data, setData] = useState({ data: [] });
+  const [exploreIngredient, setExpIng] = useState({ exploreIngredient: '' });
+
   const [favoriteRcps, setFavoriteRcps] = useState([]);
 
   function loadLocalStorageToState() {
@@ -26,6 +28,8 @@ function Provider({ children }) {
     setData,
     favoriteRcps,
     setFavoriteRcps,
+    exploreIngredient,
+    setExpIng,
   };
 
   return (
