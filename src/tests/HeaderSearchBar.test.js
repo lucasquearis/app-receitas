@@ -55,6 +55,5 @@ describe('Testa as requisições para API na página de Comidas', () => {
 
     expect(global.fetch).toBeCalledTimes(1);
     expect(global.fetch).toBeCalledWith('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=beef');
-
   });
 });
