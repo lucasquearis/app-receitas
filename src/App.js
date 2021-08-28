@@ -14,6 +14,7 @@ import Explore from './pages/Explore';
 import ExploreFoods from './pages/Explore/ExploreFoods';
 import ExplorarDrinks from './pages/Explore/ExploreDrinks';
 import ExploreIngredients from './pages/ExploreIngredients';
+import OriginFood from './pages/Explore/Origin/OriginFood';
 
 import './App.css';
 
@@ -41,7 +42,7 @@ function App() {
         />
         <Route path="/explorar/comidas/ingredientes" component={ ExploreIngredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ ExploreIngredients } />
-        <Route path="/explorar/comidas/area" />
+        <Route path="/explorar/comidas/area" component={ OriginFood } />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-favoritas" component={ Favorites } />
