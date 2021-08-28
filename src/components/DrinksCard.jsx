@@ -1,19 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Card, CardMedia, Typography } from '@material-ui/core';
 
 function DrinksCards(drink, foodOrDrink, id) {
   return (
-    <div key={ drink.idDrink } data-testid={ `${id}-recipe-card` }>
+    <Card key={ drink.idDrink } data-testid={ `${id}-recipe-card` }>
       <Link to={ `/${foodOrDrink}/${drink.idDrink}` }>
-        <img
-          src={ drink.strDrinkThumb }
+        <CardMedia
+          component="img"
+          image={ drink.strDrinkThumb }
+          height="200"
           alt={ drink.strDrink }
+          title={ drink.strDrink }
           data-testid={ `${id}-card-img` }
         />
       </Link>
-
-      <h3 data-testid={ `${id}-card-name` }>{ drink.strDrink }</h3>
-    </div>
+      <Typography
+        gutterBottom
+        variant="h4"
+        component="h2"
+        data-testid={ `${id}-card-name` }
+      >
+        { drink.strDrink }
+      </Typography>
+    </Card>
   );
 }
 

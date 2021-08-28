@@ -1,9 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
 import { fetchDrinkDetails, fetchFoodRedux } from '../redux/actions/foodActions';
 import { copyToClipboard, getDate, myFavoriteRecipe, startRecipe } from '../services';
 import FoodsCards from './FoodsCard';
+import IconBtn from './IconBtn';
+import Btn from './Btn';
 
 function DrinkInfo() {
   const { id } = useParams();
@@ -40,7 +44,7 @@ function DrinkInfo() {
     checkRecipeName();
   }, [checkRecipeName]);
 
-  if (!meals) {
+  if (!details) {
     return (
       <h1>Loading</h1>
     );
@@ -51,7 +55,7 @@ function DrinkInfo() {
   const filterObjDrink = objKeyDrink.filter((obj) => obj.includes('strIngredient'));
   const otherFilterObjDrink = filterObjDrink.filter((obj) => drinkDetails[obj] !== null);
 
-  const favoriteRecipe = [{
+  const favoriteRecipes = [{
     id,
     type: 'bebida',
     area: drinkDetails.strArea,
@@ -73,9 +77,25 @@ function DrinkInfo() {
     tags: [drinkDetails.strTags],
   };
 
-  const favoriteHeart = <img src="/images/blackHeartIcon.svg" alt="black heart" />;
-  const notFavoriteHeart = <img src="/images/whiteHeartIcon.svg" alt="white-heart" />;
-  const shareTag = <img src="/images/shareIcon.svg" alt="shareIt" />;
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 424, min: 0 },
+      items: 2,
+    },
+  };
+
   return (
     <section>
       <img
@@ -84,22 +104,27 @@ function DrinkInfo() {
         data-testid="recipe-photo"
       />
       <h2 data-testid="recipe-title">{ drinkDetails.strDrink }</h2>
-      <button
+      <p>{ drinkDetails.strAlcoholic }</p>
+
+      <IconBtn
+        dataId="share-btn"
         onClick={ () => setShare(copyToClipboard) }
         type="button"
-        data-testid="share-btn"
-      >
-        { shareTag }
-        <span>{ share ? 'Link copiado!' : '' }</span>
-      </button>
-      <button
+        src="/images/shareIcon.svg"
+        alt="shareIt"
+      />
+      { share && <span>Link copiado!</span> }
+
+      <IconBtn
         type="button"
-        data-testid="favorite-btn"
-        onClick={ () => setFavorite(myFavoriteRecipe(favoriteRecipe)) }
-      >
-        { favorite ? favoriteHeart : notFavoriteHeart }
-      </button>
+        dataId="favorite-btn"
+        onClick={ () => setFavorite(myFavoriteRecipe(favoriteRecipes)) }
+        src={ favorite ? '/images/blackHeartIcon.svg' : '/images/whiteHeartIcon.svg' }
+        alt="favorite heart"
+      />
+
       <p data-testid="recipe-category">{ drinkDetails.strCategory }</p>
+
       <ul>
         { otherFilterObjDrink.map((ingredient, index) => (
           <li
@@ -109,26 +134,33 @@ function DrinkInfo() {
             { drinkDetails[ingredient] }
           </li>)) }
       </ul>
+
       <p data-testid="instructions">{ drinkDetails.strInstructions }</p>
-      <ul />
+
       <ul>
-        { meals.slice(0, sixRecomendations)
-          .map((food, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              { FoodsCards(food, 'comidas', index) }
-            </li>))}
-      </ul>
-      <Link to={ `/bebidas/${id}/in-progress` }>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ () => startRecipe(doneRecipes) }
+        <Carousel
+          infinite
+          responsive={ responsive }
+          data-testid="0-recomendation-card"
         >
-          { button }
-        </button>
+          { meals.slice(0, sixRecomendations)
+            .map((drink, index) => (
+              <li
+                key={ index }
+                data-testid={ `${0}-recomendation-card` }
+              >
+                { FoodsCards(drink, 'bebidas', index) }
+              </li>)) }
+        </Carousel>
+      </ul>
+
+      <Link to={ `/bebidas/${id}/in-progress` }>
+        <Btn
+          dataId="start-recipe-btn"
+          onClick={ () => startRecipe(doneRecipes) }
+          info={ button }
+          className="btn-fixed"
+        />
       </Link>
 
     </section>

@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SearchBar from '../SearchBar';
 import './style.css';
+import IconBtn from '../IconBtn';
 
 function Header({ title, renderSearchBar }) {
-  const imgProps = {
+  const profileBtnProps = {
+    dataId: 'profile-top-btn',
     src: '/images/profileIcon.svg',
-    name: 'profile-icon',
-    'data-testid': 'profile-top-btn',
+    alt: 'Botão Perfil',
   };
 
   return (
     <header>
       <nav>
         <Link to="/perfil">
-          <img { ...imgProps } alt="profile-icon" />
+          <IconBtn { ...profileBtnProps } />
         </Link>
         <h1 data-testid="page-title">{title}</h1>
         {renderSearchBar
