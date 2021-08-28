@@ -7,63 +7,50 @@ class Ingredients extends Component {
   constructor(props) {
     super(props);
 
-    this.filterIngredients = this.filterIngredients.bind(this);
-    this.getIngredients = this.getIngredients.bind(this);
-    this.getMeasurements = this.getMeasurements.bind(this);
+    this.setIngredients = this.setIngredients.bind(this);
   }
 
-  getIngredients() {
+  setIngredients() {
     const { recipe } = this.props;
     const object = recipe[0];
     const keys = Object.keys(object);
     const values = Object.values(object);
 
-    const ingredients = keys.filter((item, index) => (
+    const ingredientsKeys = keys.filter((item, index) => (
       item.includes('strIngredient') && values[index] !== ''
     ));
 
-    return ingredients;
-  }
-
-  getMeasurements() {
-    const { recipe } = this.props;
-    const object = recipe[0];
-    const keys = Object.keys(object);
-    const values = Object.values(object);
-
-    const measurements = keys.filter((item, index) => (
-      item.includes('strMeasure') && values[index] !== ''
+    const measurementsKeys = keys.filter((item, index) => (
+      item.includes('strMeasure') && values[index] !== ' '
     ));
 
-    return measurements;
+    return ingredientsKeys.reduce((acc, curr, index) => (
+      [
+        ...acc,
+        {
+          [object[curr]]: object[measurementsKeys[index]],
+        },
+      ]
+    ), []);
   }
 
-  filterIngredients() {
-    const { recipe } = this.props;
-    const object = recipe[0];
-
-    const ingredients = this.getIngredients();
-
+  render() {
+    const ingredients = this.setIngredients();
     return (
-      <div>
+      <ul>
         {
           ingredients.map((ingredient, index) => (
             <li
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
             >
-              { `${object[ingredient]}` }
+              {
+                `${Object.keys(ingredient)[0]}:
+                ${Object.values(ingredient)[0]}`
+              }
             </li>
           ))
         }
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <ul>
-        { this.filterIngredients() }
       </ul>
     );
   }
