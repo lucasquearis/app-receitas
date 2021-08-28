@@ -13,18 +13,20 @@ export default function ProgressRecipes() {
   const currentPage = location.pathname;
   const { loading, recipes, data } = useProgressRecipes();
   const { inProgressRecipes } = useLocalStorageRecipes();
-  const [checkedIngredients, setCheckedIngredients] = useState();
+  const [checkedIngredients, setCheckedIngredients] = useState(0);
 
   function valueIngredients({ target }) {
     if (currentPage.includes('comidas')) {
       const savedata = ((saveInProgressRecipes(target.id, recipes)));
-      setCheckedIngredients(savedata);
       saveOnLocalStorage('inProgressRecipes', savedata);
     }
     const savedata = ((saveInProgressRecipes(target.id, recipes)));
-    setCheckedIngredients(savedata);
     saveOnLocalStorage('inProgressRecipes', savedata);
+    setCheckedIngredients((prevState) => prevState + 1);
   }
+
+  const lengthItems = ingredientsDetails(recipes).map((item) => item).length;
+  console.log(checkedIngredients);
   return (
     <div>
       {loading ? (
@@ -52,7 +54,6 @@ export default function ProgressRecipes() {
                         : inProgressRecipes.includes(item)
                     }
                   />
-
                   <span>{ item }</span>
                 </label>
               </div>
@@ -60,6 +61,7 @@ export default function ProgressRecipes() {
           }
           instructions={ data.instructions }
           showRecomendations={ false }
+          finalized={ checkedIngredients === lengthItems }
         />
       )}
     </div>

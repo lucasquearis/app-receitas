@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import FoodRecomendations from './FoodRecomendations';
 import DrinkRecomendations from './DrinkRecomendations';
 import ShareAndFavBtns from './ShareAndFavBtns';
@@ -79,15 +79,17 @@ export default function RecipeDetailCard({
         </Button>
       ) : null}
       {!showRecomendations ? (
-        <Button
-          style={ { position: 'fixed', bottom: '0', width: '100%' } }
-          data-testid="finish-recipe-btn"
-          type="button"
-          onClick={ handleClick }
-          disabled={ !finalized }
-        >
-          {progressRecipe ? 'Continuar Receita' : 'Finalizar Receita'}
-        </Button>
+        <Link to="/receitas-feitas">
+          <Button
+            style={ { position: 'fixed', bottom: '0', width: '100%' } }
+            data-testid="finish-recipe-btn"
+            type="button"
+            onClick={ handleClick }
+            disabled={ !finalized }
+          >
+            {progressRecipe ? 'Continuar Receita' : 'Finalizar Receita'}
+          </Button>
+        </Link>
       ) : null}
     </section>
   );
