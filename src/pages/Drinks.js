@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import Header from '../components/Header';
 import MyContext from '../context';
@@ -36,7 +36,17 @@ export default function Drinks() {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (!resultList) {
-      return (<h1>Search something... </h1>);
+      return (
+        feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
+          <Card
+            key={ idDrink }
+            idType={ idDrink }
+            id={ index }
+            strThumb={ strDrinkThumb }
+            str={ strDrink }
+          />
+        ))
+      );
     } if (resultList.length === 1) {
       console.log(resultList[0]);
       return <Redirect to={ `/bebidas/${resultList[0].idDrink}` } />;
@@ -50,21 +60,22 @@ export default function Drinks() {
           const MAX_ITENS = 12;
           if (index < MAX_ITENS) {
             return (
-              <li
-                key={ item.strDrink }
-                data-testid={ `${index}-recipe-card` }
-              >
-                <h2
-                  data-testid={ `${index}-card-name` }
+              <Link key={ item.idDrink } to={ `bebidas/${item.idDrink}` }>
+                <li
+                  data-testid={ `${index}-recipe-card` }
                 >
-                  {item.strDrink}
-                </h2>
-                <img
-                  data-testid={ `${index}-card-img` }
-                  src={ item.strDrinkThumb }
-                  alt={ item.strDrink }
-                />
-              </li>
+                  <h2
+                    data-testid={ `${index}-card-name` }
+                  >
+                    {item.strDrink}
+                  </h2>
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    src={ item.strDrinkThumb }
+                    alt={ item.strDrink }
+                  />
+                </li>
+              </Link>
             );
           } return false;
         })}
@@ -76,15 +87,6 @@ export default function Drinks() {
       <Header title="Bebidas" />
       <Categories />
       {renderList()}
-      { feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
-        <Card
-          key={ idDrink }
-          idType={ idDrink }
-          id={ index }
-          strThumb={ strDrinkThumb }
-          str={ strDrink }
-        />
-      ))}
       <BottomMenu />
     </>
   );
