@@ -41,8 +41,16 @@ function App() {
           path="/explorar/bebidas"
           render={ (props) => <ExplorarDrinks { ...props } endpoint="thecocktaildb" /> }
         />
-        <Route exact path="/explorar/comidas/ingredientes" component={ ExploreIngredients } />
-        <Route exact path="/explorar/bebidas/ingredientes" component={ ExploreIngredients } />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ ExploreIngredients }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes"
+          component={ ExploreIngredients }
+        />
         <Route exact path="/explorar/comidas/area" component={ OriginFood } />
         <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         <Route exact path="/perfil" component={ Profile } />
