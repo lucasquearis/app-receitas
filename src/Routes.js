@@ -11,6 +11,8 @@ import {
   DRINKS_CATEGORIES,
   DRINKS_BY_CATEGORY,
   DRINKS_LIST,
+  INGREDIENT_MEALS,
+  INGREDIENT_DRINKS,
 } from './services';
 
 function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisório.
@@ -24,6 +26,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
           <Principal
             categoriesEndPoint={ MEALS_CATEGORIES }
             getByCategoryEndPoint={ MEALS_BY_CATEGORY }
+            getByIngredientsEndPoint={ INGREDIENT_MEALS }
             listEndPoint={ MEALS_LIST }
             type="meals"
           />
@@ -37,6 +40,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
             { ...props }
             categoriesEndPoint={ DRINKS_CATEGORIES }
             getByCategoryEndPoint={ DRINKS_BY_CATEGORY }
+            getByIngredientsEndPoint={ INGREDIENT_DRINKS }
             listEndPoint={ DRINKS_LIST }
             type="drinks"
           />
