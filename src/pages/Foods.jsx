@@ -39,6 +39,9 @@ function Foods(props) {
         dataId="search-top-btn"
         className="img-search"
       />
+
+      {/* <FoodsCard /> */}
+      <CategoryFoodButtons />
       <main>
         { search.meals && search.meals.map((meal, index) => index < doze && (<ItemCard
           title={ meal.strMeal }
@@ -49,9 +52,6 @@ function Foods(props) {
           key={ index }
         />)) }
       </main>
-      {/* <FoodsCard /> */}
-      <CategoryFoodButtons />
-
       <Footer />
     </div>
   );

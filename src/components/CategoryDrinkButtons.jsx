@@ -39,7 +39,6 @@ function CategoryDrinkButtons() {
     showInputClick();
     dispatch(clearSearch());
   };
-
   return (
     <div>
       {
