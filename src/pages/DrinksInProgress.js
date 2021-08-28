@@ -68,7 +68,7 @@ function DrinksInProgress() {
       <img data-testid="recipe-photo" src={ rcp.strDrinkThumb } alt={ rcp.strDrink } />
       <h1 data-testid="recipe-title">{rcp.strDrink}</h1>
       <ShareButton />
-      <FavoriteButton recipe={ rcp } />
+      <FavoriteButton recipe={ rcp } id={ id } />
       <p data-testid="instructions">{rcp.strInstructions}</p>
       <h3 data-testid="recipe-category">{rcp.strAlcoholic}</h3>
       <IngredientsTaskList
