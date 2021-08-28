@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+// import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import EstruturaPrincipal from '../../components/EstruturaPrincipal';
 import AppContext from '../../context/AppContext';
@@ -10,11 +11,14 @@ function Principal({
   listEndPoint,
   categoriesEndPoint,
   getByCategoryEndPoint,
+  getByIngredientsEndPoint,
   type,
 }) {
   const { selectedCategory,
-    setSelectedCategory,
+    selectedIngredient,
     setShowBar,
+    setSelectedCategory,
+    setSelectedIngredient,
     recipes,
     setRecipes } = useContext(AppContext);
 
@@ -22,16 +26,6 @@ function Principal({
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const getApiData = async () => {
-      try {
-        const recipesList = await fetchApi(listEndPoint);
-        setRecipes(recipesList[type]);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     const getCategories = async () => {
       try {
         const categoriesList = await fetchApi(categoriesEndPoint);
@@ -43,11 +37,11 @@ function Principal({
 
     setIsLoading(true);
 
-    getApiData();
     getCategories();
 
     return () => {
       setSelectedCategory('');
+      setSelectedIngredient('');
       setShowBar(false);
     };
   }, [
@@ -55,6 +49,7 @@ function Principal({
     getByCategoryEndPoint,
     listEndPoint,
     setSelectedCategory,
+    setSelectedIngredient,
     setShowBar,
     type,
     setRecipes,
@@ -64,7 +59,11 @@ function Principal({
     const getApiData = async () => {
       try {
         let endPoint = listEndPoint;
-        if (selectedCategory) endPoint = `${getByCategoryEndPoint}${selectedCategory}`;
+        if (selectedCategory) {
+          endPoint = `${getByCategoryEndPoint}${selectedCategory}`;
+        } else if (selectedIngredient) {
+          endPoint = `${getByIngredientsEndPoint}${selectedIngredient}`;
+        }
         const recipesList = await fetchApi(endPoint);
         setRecipes((recipesList[type]) ? recipesList[type] : []);
         setIsLoading(false);
@@ -78,10 +77,12 @@ function Principal({
     getApiData();
   }, [
     getByCategoryEndPoint,
+    getByIngredientsEndPoint,
     listEndPoint,
     selectedCategory,
-    type,
+    selectedIngredient,
     setRecipes,
+    type,
   ]);
 
   return (
@@ -99,6 +100,7 @@ Principal.propTypes = {
   listEndPoint: PropTypes.string.isRequired,
   categoriesEndPoint: PropTypes.string.isRequired,
   getByCategoryEndPoint: PropTypes.string.isRequired,
+  getByIngredientsEndPoint: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 
