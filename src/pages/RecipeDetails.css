@@ -2,8 +2,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
   width: 100vw;
-
-  white-space: nowrap;
+  white-space:nowrap;
 }
 
 .card {
@@ -20,7 +19,7 @@
 }
 
 .btn {
-  bottom: 1px;
+  bottom: 0;
   display: flex;
   padding-left: 110px;
   position: fixed;

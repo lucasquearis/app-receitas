@@ -43,9 +43,6 @@ export const favoriteRecipes = (props, btnFavorite) => {
 export const startOrContinue = (callback, id, type) => {
   const data = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (localStorage.inProgressRecipes) {
-    console.log(type);
-    console.log(data);
-
     if (type === 'drinks') {
       const { cocktails } = data[0];
       callback(+Object.keys(cocktails) === id);

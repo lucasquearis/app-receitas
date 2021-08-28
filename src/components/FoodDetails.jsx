@@ -13,6 +13,7 @@ export default function FoodDetails(props) {
   const [drinks, setDrinks] = useState([]);
   const [btnFavorite, setBtnFavorite] = useState(false);
   const [btnStart, setBtnStart] = useState(false);
+  const [clipBoardCop, setClipBoardCop] = useState(false);
 
   const maxArray = 6;
   const filterDrinks = drinks.slice(0, maxArray);
@@ -41,6 +42,11 @@ export default function FoodDetails(props) {
       setBtnFavorite(false);
     }
   };
+  const clipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setClipBoardCop(true);
+  };
 
   if (linkPag) {
     return (<Redirect to={ `/comidas/${id}/in-progress` } />);
@@ -55,9 +61,14 @@ export default function FoodDetails(props) {
         data-testid="recipe-photo"
       />
       <div className="btnShareHeart">
+        {
+          clipBoardCop ? (
+            <p>Link copiado!</p>
+          ) : null
+        }
         <button
           type="button"
-          data-testid="share-btn"
+          onClick={ clipboard }
         >
           <img src={ ShareIcon } data-testid="share-btn" alt="share" />
         </button>

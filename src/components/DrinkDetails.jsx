@@ -13,6 +13,7 @@ export default function DrinksDetails(props) {
   const [meals, setMeals] = useState([]);
   const [btnFavorite, setBtnFavorite] = useState(false);
   const [btnStart, setBtnStart] = useState(false);
+  const [clipBoardCop, setClipBoardCop] = useState(false);
 
   const { drink, thumb, category, instructions,
     ingredientEndMeasure, alcoholic, id, type } = props;
@@ -43,6 +44,12 @@ export default function DrinksDetails(props) {
     }
   };
 
+  const clipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setClipBoardCop(true);
+  };
+
   if (linkPag) {
     return (<Redirect to={ `/bebidas/${id}/in-progress` } />);
   }
@@ -56,13 +63,14 @@ export default function DrinksDetails(props) {
         data-testid="recipe-photo"
       />
       <div className="btnShareHeart">
-        {/* {
-          clipBoardOrHeart.copy ? (
-            <p>Link copiado</p>
+        {
+          clipBoardCop ? (
+            <p>Link copiado!</p>
           ) : null
-        } */}
+        }
         <button
           type="button"
+          onClick={ clipboard }
         >
           <img src={ ShareIcon } data-testid="share-btn" alt="share" />
         </button>
