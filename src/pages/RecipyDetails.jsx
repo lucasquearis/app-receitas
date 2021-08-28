@@ -95,9 +95,9 @@ function RecipyDetails() {
     fetchEffect();
   }, [id, receita]);
 
-  return (
-    data
-      ? <>
+  if (data) {
+    return (
+      <>
         <img
           className="imgtittle"
           data-testid="recipe-photo"
@@ -137,7 +137,10 @@ function RecipyDetails() {
         </div>
         <Button data-testid="start-recipe-btn">Iniciar Receita</Button>
       </>
-      : <h1>Loading</h1>
+    );
+  }
+  return (
+    <h1>Loading</h1>
   );
 }
 
