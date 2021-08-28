@@ -23,24 +23,40 @@ function DetailsShareFaveBtns({ details }) {
     setIsCopied(true);
   }
 
-  // useEffect(() => {
-  //   if (isFavorite) {
-  //     const newFaveArray = JSON.stringify([
-  //       ...favorites,
-  //     ]);
-  //     localStorage.setItem('favoriteRecipes', newFaveArray);
-  //   } else {
-  //     const array = favorites.filter((item) => item.id !== details.id);
-  //     localStorage.setItem('favoriteRecipes', array);
-  //   }
-  // }, [isFavorite, favorites, details.id]);
+  useEffect(() => {
+    const checkFavorites = () => {
+      if (localStorage.favoriteRecipes) {
+        const storedFavorites = JSON
+          .parse(localStorage.getItem('favoriteRecipes'));
+        const faveArray = storedFavorites
+          .some((item) => item.id === details.id);
+        setIsFavorite(faveArray);
+      }
+    };
+    checkFavorites();
+  }, [details]);
+
+  function setLocalStorage() {
+    const newFaveArray = JSON.stringify([...favorites, details]);
+    localStorage.setItem('favoriteRecipes', newFaveArray);
+  }
+
+  function removeFromLocalStorage() {
+    const storedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const editedFavorites = storedFavorites.filter((item) => item.id !== details.id);
+    localStorage.setItem('favoriteRecipes', editedFavorites);
+  }
 
   function handleFavoriteClick() {
     if (isFavorite) {
       setIsFavorite(false);
+      const editedFavorites = favorites.filter((item) => item.id !== details.id);
+      setFavorites(editedFavorites);
+      removeFromLocalStorage();
     } else {
       setIsFavorite(true);
       setFavorites([...favorites, details]);
+      setLocalStorage();
     }
   }
 
@@ -59,13 +75,12 @@ function DetailsShareFaveBtns({ details }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
         className="fave-btn"
         onClick={ handleFavoriteClick }
       >
         { isFavorite
-          ? <img src={ blackHeartIcon } alt="favorite icon" />
-          : <img src={ whiteHeartIcon } alt="favorite icon" /> }
+          ? <img src={ blackHeartIcon } data-testid="favorite-btn" alt="favorite icon" />
+          : <img src={ whiteHeartIcon } data-testid="favorite-btn" alt="favorite icon" /> }
       </button>
     </div>
   );

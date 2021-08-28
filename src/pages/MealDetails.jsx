@@ -31,7 +31,7 @@ export default function MealDetails(props) {
   function modifyDetailProp() {
     const obj = {
       id: mealDetails[0].idMeal,
-      type: 'Comida',
+      type: 'comida',
       area: mealDetails[0].strArea,
       category: mealDetails[0].strCategory,
       alcoholicOrNot: '',
