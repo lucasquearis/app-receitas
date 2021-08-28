@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, Header, Footer } from '../components';
 import * as api from '../services/api';
 import AppContext from '../context/AppContext';
+import './css/ExploreByIngredients.css';
 
 const drinksIngredientsImagesAPI = 'https://www.thecocktaildb.com/images/ingredients/';
 const drinksIngredientsAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
@@ -23,29 +24,30 @@ const DrinksByIngredients = () => {
   };
 
   return (
-    <div>
+    <div className="ingredients-container">
       <Header title="Explorar Ingredientes" />
-
-      {
-        ingredients
-          ? (ingredients.map((ingredient, index) => (
-            <Link
-              to="/bebidas"
-              key={ ingredient }
-              className="drink-card-link"
-              onClick={ () => setExpIng(ingredient.strIngredient1) }
-            >
-              <Card
-                key={ ingredient.strIngredient1 }
-                type="ingredient"
-                index={ index }
-                thumb={ formatIngredient(ingredient) }
-                name={ ingredient.strIngredient1 }
-              />
-            </Link>
-          )))
-          : ''
-      }
+      <div className="ingredients-cards-container">
+        {
+          ingredients
+            ? (ingredients.map((ingredient, index) => (
+              <Link
+                to="/bebidas"
+                key={ ingredient }
+                className="ingredients-card-link"
+                onClick={ () => setExpIng(ingredient.strIngredient1) }
+              >
+                <Card
+                  key={ ingredient.strIngredient1 }
+                  type="ingredient"
+                  index={ index }
+                  thumb={ formatIngredient(ingredient) }
+                  name={ ingredient.strIngredient1 }
+                />
+              </Link>
+            )))
+            : ''
+        }
+      </div>
       <Footer />
     </div>
   );
