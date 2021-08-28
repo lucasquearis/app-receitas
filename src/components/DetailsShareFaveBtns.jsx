@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../context/Context';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -8,6 +9,8 @@ import '../styles/Details.css';
 function DetailsShareFaveBtns({ details }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const { favorites, setFavorites } = useContext(Context);
 
   // aprendido por aqui: https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
   function copyRecipeURL() {
@@ -20,22 +23,24 @@ function DetailsShareFaveBtns({ details }) {
     setIsCopied(true);
   }
 
-  useEffect(() => {
-    if (isFavorite) {
-      const newFaveArray = JSON.stringify([
-        details,
-      ]);
-      localStorage.setItem('favoriteRecipes', newFaveArray);
-    } else {
-      localStorage.setItem('favoriteRecipes', []);
-    }
-  }, [isFavorite, details]);
+  // useEffect(() => {
+  //   if (isFavorite) {
+  //     const newFaveArray = JSON.stringify([
+  //       ...favorites,
+  //     ]);
+  //     localStorage.setItem('favoriteRecipes', newFaveArray);
+  //   } else {
+  //     const array = favorites.filter((item) => item.id !== details.id);
+  //     localStorage.setItem('favoriteRecipes', array);
+  //   }
+  // }, [isFavorite, favorites, details.id]);
 
   function handleFavoriteClick() {
     if (isFavorite) {
       setIsFavorite(false);
     } else {
       setIsFavorite(true);
+      setFavorites([...favorites, details]);
     }
   }
 
