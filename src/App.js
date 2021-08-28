@@ -7,6 +7,7 @@ import AppProvider from './context/AppProvider';
 import Drinks from './pages/drinks/Drinks';
 import Food from './pages/food/Food';
 import FoodDetails from './pages/foodDetails/FoodDetails';
+import DrinkProcess from './pages/drinkProcess/DrinkProcess';
 import DrinkDetails from './pages/drinkDetails/DrinkDetails';
 import FoodProcess from './pages/foodProcess/FoodProcess';
 import Explore from './pages/explore/Explore';
@@ -30,7 +31,7 @@ const App = () => (
         <Route exact path="/comidas/:id" component={ FoodDetails } />
         <Route exact path="/bebidas/:id" component={ DrinkDetails } />
         <Route exact path="/comidas/:id/in-progress" component={ FoodProcess } />
-        <Route exact path="/comidas/:id/in-progress" component={ FoodProcess } />
+        <Route exact path="/bebidas/:id/in-progress" component={ DrinkProcess } />
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreFood } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
