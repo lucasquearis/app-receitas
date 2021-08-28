@@ -35,20 +35,15 @@ export default function InProgress(
   }, [steps]);
 
   const handleCheckBoxChange = ({ target }) => {
-    console.log(steps);
     const { name: n, checked: c } = target;
     const ingIndex = steps.findIndex(({ step }) => step === n);
+    console.log(ingIndex);
+    console.log(steps.slice(0, ingIndex));
     setSteps([
       ...steps.slice(0, ingIndex),
       { step: n, checked: c },
       ...steps.slice(ingIndex + 1),
     ]);
-
-    // if (c) {
-    //   setChecked(true);
-    // } else {
-    //   setChecked(false);
-    // }
   };
 
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
