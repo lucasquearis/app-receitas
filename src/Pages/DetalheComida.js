@@ -37,7 +37,7 @@ export default function DetalheComida(props) {
       const firstDrinks = drink.drinks.filter((_drink, index) => index < drinksCount);
       setRandomDrinks(firstDrinks);
     };
-    setFavorite(isRecipeFavorite(food));
+    setFavorite(isRecipeFavorite(food, 'comida'));
     getFood();
     getRandomDrink();
   }, [id, food]);

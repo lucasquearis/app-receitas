@@ -5,6 +5,7 @@ import copyToClipBoard from 'clipboard-copy';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidasAleatoria } from '../service/ComidasAPI';
+import isRecipeFavorite from '../service/isRecipeFavorite';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -16,6 +17,7 @@ export default function DetalheBebida(props) {
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [randomFood, setRandomFood] = useState([]);
   const [copyMessage, setCopyMessage] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const getDrink = async () => {
@@ -60,10 +62,10 @@ export default function DetalheBebida(props) {
       const firstFoods = foods.filter((_food, index) => index < foodsCount);
       setRandomFood(firstFoods);
     };
-
+    setFavorite(isRecipeFavorite(drink, 'bebida'));
     getDrink();
     getRandomFood();
-  }, [id]);
+  }, [id, drink]);
 
   const randomFoodCard = () => (
     <section className="food-recomended">
@@ -97,37 +99,64 @@ export default function DetalheBebida(props) {
     setMessageTime();
   };
 
-  const isFavorite = () => {
+  const onFavoriteClick = () => {
+    setFavorite(!favorite);
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    if (favoriteRecipes !== null) {
-      const favorite = favoriteRecipes.some((recipe) => recipe.id === drink.idDrink);
+    const newFood = {
+      id: drink.idDrink,
+      type: 'bebida',
+      area: '',
+      category: drink.strCategory,
+      alcoholicOrNot: drink.strAlcoholic,
+      name: drink.strDrink,
+      image: drink.strDrinkThumb,
+    };
 
+    if (favoriteRecipes !== null) {
       if (favorite) {
-        return (
+        const newFavoriteRecipes = favoriteRecipes.filter(
+          (recipe) => recipe.id !== drink.idDrink,
+        );
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+        return;
+      }
+      const newFavoriteRecipes = [...favoriteRecipes, newFood];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+      return;
+    }
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify([newFood]));
+  };
+
+  const isFavorite = () => {
+    if (favorite) {
+      return (
+        <button
+          type="button"
+          className="favorite-btn-icon"
+          onClick={ onFavoriteClick }
+        >
           <img
             data-testid="favorite-btn"
             src={ blackHeartIcon }
             alt="icone de favoritar"
           />
-        );
-      }
-
-      return (
+        </button>
+      );
+    }
+    return (
+      <button
+        type="button"
+        className="favorite-btn-icon"
+        onClick={ onFavoriteClick }
+      >
         <img
           data-testid="favorite-btn"
           src={ whiteHeartIcon }
           alt="icone de favoritar"
         />
-      );
-    }
-
-    return (
-      <img
-        data-testid="favorite-btn"
-        src={ whiteHeartIcon }
-        alt="icone de favoritar"
-      />
+      </button>
     );
   };
 
