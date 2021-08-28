@@ -79,8 +79,8 @@ function DetailsShareFaveBtns({ details }) {
         onClick={ handleFavoriteClick }
       >
         { isFavorite
-          ? <img src={ blackHeartIcon } data-testid="favorite-btn" alt="favorite icon" />
-          : <img src={ whiteHeartIcon } data-testid="favorite-btn" alt="favorite icon" /> }
+          ? <img src={ blackHeartIcon } data-testid="favorite-btn" alt="favoriteIcon" />
+          : <img src={ whiteHeartIcon } data-testid="favorite-btn" alt="favoriteIcon" /> }
       </button>
     </div>
   );
