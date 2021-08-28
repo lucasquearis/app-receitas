@@ -57,6 +57,7 @@ export default function Login() {
         />
         <button
           type="button"
+          className="login-button"
           data-testid="login-submit-btn"
           onClick={ submitLogin }
           disabled={ disabled }
