@@ -6,6 +6,7 @@ import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
 import Copy from '../components/Clipboard-Copy';
 
@@ -20,8 +21,49 @@ const DrinkDetails = () => {
   const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
+
+  function onFavorite() {
+    setFavorite(!favorite);
+
+    const {
+      idDrink: id,
+      strCategory: category,
+      strAlcoholic: alcoholicOrNot,
+      strDrink: name,
+      strDrinkThumb: image,
+    } = drinkDetails[0];
+    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
+    if (actualStorage === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
+      return;
+    }
+    if (actualStorage.some((favoriteItem) => favoriteItem.id === item.id)) {
+      return;
+    }
+
+    if (!favorite) {
+      actualStorage.push(item);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
+    } else {
+      const newStorage = actualStorage.filter(
+        (favoriteItem) => favoriteItem.id !== item.id,
+      );
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
+    }
+  }
+
+  const getFavorite = () => {
+    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (actualStorage && drinkDetails.length > 0) {
+      const isFavorited = actualStorage.some(
+        (item) => item.id === drinkDetails[0].idDrink,
+      );
+      setFavorite(isFavorited);
+    }
+  };
 
   const getIngredients = () => {
     const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
@@ -46,15 +88,15 @@ const DrinkDetails = () => {
 
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
-    setLoading(false);
   }, [actualPath]);
 
   useEffect(() => {
+    getFavorite();
     getIngredients();
     getMeasure();
   }, [drinkDetails]);
 
-  return loading ? <p>Carregando...</p> : (
+  return (
     <div>
       {
         drinkDetails.map(({
@@ -83,10 +125,14 @@ const DrinkDetails = () => {
             </button>
             <button
               type="button"
-              data-testid="favorite-btn"
+              onClick={ onFavorite }
               key={ blackHeartIcon }
             >
-              <img src={ blackHeartIcon } alt="favorite-icon" />
+              <img
+                data-testid="favorite-btn"
+                src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
+                alt="favorite-icon"
+              />
             </button>
             { showMsg ? <p>Link copiado!</p> : undefined }
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
