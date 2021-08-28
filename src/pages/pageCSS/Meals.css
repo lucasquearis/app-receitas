@@ -1,0 +1,6 @@
+.meals__whole-div {
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+  justify-content: space-between;
+}
