@@ -39,7 +39,7 @@ function Recipes() {
 
   React.useEffect(() => {
     requestApiData(api);
-  }, [api, requestApiData]);
+  }, [requestApiData, api, location]);
 
   React.useEffect(() => {
     const fetchCategores = async () => {
@@ -51,84 +51,72 @@ function Recipes() {
       setLoadingCategories(false);
     };
     fetchCategores();
-  }, [api]);
+  }, [api, location]);
 
   const recipesSize = 12;
   const catSize = 5;
 
+  if (isFetching || loadingCategories) return 'Loading';
+
   return (
     <>
       <Header title={ page.charAt(0).toUpperCase() + page.slice(1) } />
-      { isFetching || loadingCategories
-        ? 'Loading'
-        : (
-          <main className="p-2">
+      <main className="p-2">
+        <Button
+          type="button"
+          onClick={ handleRemoveFilter }
+          data-testid="All-category-filter"
+          className="mb-1 mr-1"
+          variant="primary"
+        >
+          All
+        </Button>
+        {categories[`${query}s`]
+          .slice(0, catSize).map((cat) => (
             <Button
+              key={ cat.strCategory }
+              onClick={ handleFilter }
               type="button"
-              onClick={ handleRemoveFilter }
-              data-testid="All-category-filter"
-              className="mb-1 mr-1"
+              data-testid={ `${cat.strCategory}-category-filter` }
               variant="primary"
+              className="mb-1 mr-1"
             >
-              All
+              {cat.strCategory}
             </Button>
-            {categories[`${query}s`]
-              .slice(0, catSize).map((cat) => (
-                <Button
-                  key={ cat.strCategory }
-                  onClick={ handleFilter }
-                  type="button"
-                  data-testid={ `${cat.strCategory}-category-filter` }
-                  variant="primary"
-                  className="mb-1 mr-1"
-                >
-                  {cat.strCategory}
-                </Button>
-              ))}
-            { 'meals' in apiData[0]
-              ? (
-                <div className="d-flex flex-column align-items-center mt-3">
-                  {apiData[0][`${query}s`]
-                    .slice(0, recipesSize).map((item, index) => {
-                      const name = item[`str${query.charAt(0).toUpperCase()
-                    + query.slice(1)}`];
-                      const src = item[`str${query.charAt(0).toUpperCase()
+          ))}
+
+        <div className="d-flex flex-column align-items-center mt-3">
+          {apiData[0][`${query}s`]
+            .slice(0, recipesSize).map((item, index) => {
+              const name = item[`str${query.charAt(0).toUpperCase() + query.slice(1)}`];
+              const src = item[`str${query.charAt(0).toUpperCase()
                 + query.slice(1)}Thumb`];
-                      const id = item[`id${query.charAt(0).toUpperCase()
-                        + query.slice(1)}`];
-                      // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
-                      return (
-                        <Link to={ `/${page}/${id}` } key={ id }>
-                          <Card
-                            data-testid={ `${index}-recipe-card` }
-                            style={ { width: '18rem' } }
-                          >
-                            <Card.Img
-                              data-testid={ `${index}-card-img` }
-                              src={ src }
-                              variant="top"
-                            />
-                            <Card.Body>
-                              <Card.Title
-                                data-testid={ `${index}-card-name` }
-                              >
-                                {name}
-                              </Card.Title>
-                            </Card.Body>
-                          </Card>
-                        </Link>
-                      );
-                    })}
-                </div>
-              )
-              : (
-                <p>
-                  Não achou
-                  { global.alert('teste') }
-                </p>
-              )}
-          </main>
-        )}
+              const id = item[`id${query.charAt(0).toUpperCase() + query.slice(1)}`];
+              // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+              return (
+                <Link to={ `/${page}/${id}` } key={ id }>
+                  <Card
+                    data-testid={ `${index}-recipe-card` }
+                    style={ { width: '18rem' } }
+                  >
+                    <Card.Img
+                      data-testid={ `${index}-card-img` }
+                      src={ src }
+                      variant="top"
+                    />
+                    <Card.Body>
+                      <Card.Title
+                        data-testid={ `${index}-card-name` }
+                      >
+                        {name}
+                      </Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              );
+            })}
+        </div>
+      </main>
       <Footer handleClick={ setLoadingCategories } />
     </>
   );
