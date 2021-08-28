@@ -43,7 +43,7 @@ describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, 
 });
 
 describe('48 - Desenvolva um checkbox para cada item da lista de ingredientes', () => {
-  it('todos os ingredientes de uma receita de comida possuem um checkbox', () => {
+  it.only('todos os ingredientes de uma receita de comida possuem um checkbox', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;
@@ -103,7 +103,7 @@ describe('49 - Implemente uma lógica que, ao clicar no checkbox de um ingredien
   });
 });
 
-describe('50 - Salve o estado do progresso, que deve ser mantido caso a pessoa atualize a página ou volte para a mesma receita', () => {
+describe.only('50 - Salve o estado do progresso, que deve ser mantido caso a pessoa atualize a página ou volte para a mesma receita', () => {
   it('salva o progresso de uma receita de comida em andamento', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {

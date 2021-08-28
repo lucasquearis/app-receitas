@@ -15,6 +15,7 @@ import Ingredients from './pages/Ingredients';
 import OriginExplorer from './pages/OriginExplorer';
 import MakedRecipes from './pages/MakedRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import RecipeProgress from './pages/RecipeProgress';
 
 function Routes() {
   return (
@@ -33,6 +34,8 @@ function Routes() {
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/comidas/:id" component={ RecipesDetails } />
       <Route exact path="/bebidas/:id" component={ RecipesDetails } />
+      <Route exact path="/comidas/:id/in-progress" component={ RecipeProgress } />
+      <Route exact path="/bebidas/:id/in-progress" component={ RecipeProgress } />
     </Switch>
   );
 }

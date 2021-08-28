@@ -1,7 +1,7 @@
 import { URL_RADIO_BUTTON } from './data';
 
 export default async function getDrinks({ textValue, radioValue, pathname }) {
-  if (pathname === '/comidas') textValue = 'water';
+  if (pathname === '/comidas') textValue = '';
   const mealOrDrink = textValue.split(' ').join('+');
   const typeOfSearch = URL_RADIO_BUTTON[radioValue];
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/${typeOfSearch}=${mealOrDrink}`;
@@ -12,3 +12,18 @@ export default async function getDrinks({ textValue, radioValue, pathname }) {
     return { drinks: null };
   }
 }
+
+async function getDrinksById(id) {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  try {
+    const result = await fetch(URL).then((resp) => resp.json());
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export { getDrinks, getDrinksById };
+// https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={ingrediente};
+// https://www.thecocktaildb.com/api/json/v1/1/search.php?s={nome};
+// https://www.thecocktaildb.com/api/json/v1/1/search.php?f={primeira-letra};
