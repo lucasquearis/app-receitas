@@ -7,5 +7,5 @@ export default function useIsFavorite(setFavorite, recipe, type) {
       setFavorite(isRecipeFavorite(recipe, type));
     };
     isFavorite();
-  }, [setFavorite, recipe]);
+  }, [setFavorite, recipe, type]);
 }

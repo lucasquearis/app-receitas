@@ -78,6 +78,10 @@
   width: 85%;
 }
 
+.start-recipe-btn-invisible {
+  display: none;
+}
+
 .start-recipe-food-btn-link {
   color: black;
 }
