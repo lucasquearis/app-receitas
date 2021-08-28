@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
 function BarraCategorias({ categoriesList }) {
-  const { selectedCategory, setSelectedCategory } = useContext(AppContext);
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    setSelectedIngredient,
+  } = useContext(AppContext);
 
   return (
     <>
       <button
         data-testid="All-category-filter"
         key="category-filter-all"
-        onClick={ () => setSelectedCategory('') }
+        onClick={ () => {
+          setSelectedCategory('');
+          setSelectedIngredient('');
+        } }
         type="button"
       >
         All
