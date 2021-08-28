@@ -11,3 +11,5 @@ export { default as ContinueRecipeBtn } from './ContinueRecipeBtn';
 export { default as ShareButton } from './ShareButton';
 export { default as FavoriteButton } from './FavoriteButton';
 export { default as FavCard } from './FavoriteCard';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';

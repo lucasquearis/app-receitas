@@ -23,6 +23,7 @@ export default function Login() {
   function handleClick() {
     const { email } = loginForm;
     setUser({ email });
+    localStorage.setItem('user', JSON.stringify({ email }));
   }
 
   useEffect(checkValid, [loginForm]);
