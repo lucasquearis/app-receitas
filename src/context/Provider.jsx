@@ -11,6 +11,7 @@ export default function Provider({ children }) {
   const [btnCategoryDrinks, setBtnCategoryDrinks] = useState('');
   const [listCategoryMeals, setListCategoryMeals] = useState();
   const [listCategoryDrinks, setListCategoryDrinks] = useState();
+  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const context = {
@@ -32,6 +33,8 @@ export default function Provider({ children }) {
     setListCategoryMeals,
     listCategoryDrinks,
     setListCategoryDrinks,
+    favorites,
+    setFavorites,
   };
 
   return (

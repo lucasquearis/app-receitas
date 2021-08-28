@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../context/Context';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -8,6 +9,8 @@ import '../styles/Details.css';
 function DetailsShareFaveBtns({ details }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const { favorites, setFavorites } = useContext(Context);
 
   // aprendido por aqui: https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
   function copyRecipeURL() {
@@ -21,21 +24,39 @@ function DetailsShareFaveBtns({ details }) {
   }
 
   useEffect(() => {
-    if (isFavorite) {
-      const newFaveArray = JSON.stringify([
-        details,
-      ]);
-      localStorage.setItem('favoriteRecipes', newFaveArray);
-    } else {
-      localStorage.setItem('favoriteRecipes', []);
-    }
-  }, [isFavorite, details]);
+    const checkFavorites = () => {
+      if (localStorage.favoriteRecipes) {
+        const storedFavorites = JSON
+          .parse(localStorage.getItem('favoriteRecipes'));
+        const faveArray = storedFavorites
+          .some((item) => item.id === details.id);
+        setIsFavorite(faveArray);
+      }
+    };
+    checkFavorites();
+  }, [details]);
+
+  function setLocalStorage() {
+    const newFaveArray = JSON.stringify([...favorites, details]);
+    localStorage.setItem('favoriteRecipes', newFaveArray);
+  }
+
+  function removeFromLocalStorage() {
+    const storedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const editedFavorites = storedFavorites.filter((item) => item.id !== details.id);
+    localStorage.setItem('favoriteRecipes', editedFavorites);
+  }
 
   function handleFavoriteClick() {
     if (isFavorite) {
       setIsFavorite(false);
+      const editedFavorites = favorites.filter((item) => item.id !== details.id);
+      setFavorites(editedFavorites);
+      removeFromLocalStorage();
     } else {
       setIsFavorite(true);
+      setFavorites([...favorites, details]);
+      setLocalStorage();
     }
   }
 
@@ -54,13 +75,12 @@ function DetailsShareFaveBtns({ details }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
         className="fave-btn"
         onClick={ handleFavoriteClick }
       >
         { isFavorite
-          ? <img src={ blackHeartIcon } alt="favorite icon" />
-          : <img src={ whiteHeartIcon } alt="favorite icon" /> }
+          ? <img src={ blackHeartIcon } data-testid="favorite-btn" alt="favoriteIcon" />
+          : <img src={ whiteHeartIcon } data-testid="favorite-btn" alt="favoriteIcon" /> }
       </button>
     </div>
   );
