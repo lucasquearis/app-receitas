@@ -5,7 +5,6 @@ import Input from './Input';
 import './css/Header.css';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import AppContext from '../context/AppContext';
 
 const MEALS_LENGTH = 12;
@@ -14,6 +13,7 @@ const HeaderMeals = ({ title }) => {
   const [searchBar, setShowBar] = useState(false);
   const [searchInput, setInput] = useState('');
   const [searchRadio, setRadio] = useState('');
+  const [redirect, setRedirect] = useState(false);
   const { data, setData } = useContext(AppContext);
 
   const showSearch = () => setShowBar(!searchBar);
@@ -54,11 +54,14 @@ const HeaderMeals = ({ title }) => {
       return renderAlert();
     }
     setData(response.meals.slice(0, MEALS_LENGTH));
+    setRedirect(true);
   };
   return (
     <>
       {
-        data.length === 1 ? <Redirect to={ `/comidas/${data[0].idMeal}` } /> : ''
+        data.length === 1 && redirect
+          ? <Redirect to={ `/comidas/${data[0].idMeal}` } />
+          : ''
       }
       <div
         className="header-container"
