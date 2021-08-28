@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Header } from '../components';
+import { Card, Header, Footer } from '../components';
 import * as api from '../services/api';
 import AppContext from '../context/AppContext';
 
@@ -46,6 +46,7 @@ const DrinksByIngredients = () => {
           )))
           : ''
       }
+      <Footer />
     </div>
   );
 };
