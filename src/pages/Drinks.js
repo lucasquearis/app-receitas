@@ -76,9 +76,10 @@ export default function Drinks() {
       <Header title="Bebidas" />
       <Categories />
       {renderList()}
-      { feed.map(({ strDrinkThumb, strDrink }, index) => (
+      { feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
         <Card
-          Key={ strDrink }
+          key={ idDrink }
+          idType={ idDrink }
           id={ index }
           strThumb={ strDrinkThumb }
           str={ strDrink }

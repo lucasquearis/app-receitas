@@ -76,7 +76,8 @@ export default function Meals() {
       {renderList()}
       { feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
         <Card
-          Key={ idMeal }
+          key={ idMeal }
+          idType={ idMeal }
           id={ index }
           strThumb={ strMealThumb }
           str={ strMeal }
