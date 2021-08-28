@@ -76,7 +76,13 @@ function Principal({
     setIsLoading(true);
 
     getApiData();
-  }, [getByCategoryEndPoint, listEndPoint, selectedCategory, type, setRecipes]);
+  }, [
+    getByCategoryEndPoint,
+    listEndPoint,
+    selectedCategory,
+    type,
+    setRecipes,
+  ]);
 
   return (
     <EstruturaPrincipal

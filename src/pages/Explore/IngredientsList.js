@@ -30,6 +30,10 @@ function IngrendientsList() {
     getIngredientsList();
   }, [pathIsMeals, ingredientsType]);
 
+  const handleClick = () => {
+    
+  };
+
   return (
     <>
       {
@@ -41,16 +45,17 @@ function IngrendientsList() {
             const ingredientName = (pathIsMeals) ? ingredient
               .strIngredient : ingredient.strIngredient1;
             return (
-              <div
+              <button
                 data-testid={ `${index}-ingredient-card` }
                 key={ `${index}-ingredient-card` }
+                type="button"
               >
                 <Card
                   img={ `${imgUrl}${ingredientName}-Small.png` }
                   index={ index }
                   name={ ingredientName }
                 />
-              </div>
+              </button>
             );
           }
           return null;
