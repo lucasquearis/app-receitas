@@ -22,7 +22,7 @@ function RecomendationCard({ type }) {
     <section>
       {recomendations.map((recipe, index) => (index < MAX_CARD_RECOMENDATIONS ? (
         <div data-testid={ `${index}-recomendation-card` } key={ index }>
-          {`${index}-teste`}
+          {`${recipe.strCategory}-teste`}
         </div>
       ) : null))}
     </section>

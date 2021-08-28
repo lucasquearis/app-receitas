@@ -11,7 +11,7 @@ const YoutubeEmbed = ({ videoId }) => (
     height="480"
     src={ `https://www.youtube.com/embed/${videoId}` }
     title="Youtube Video"
-    width="853"
+    width="640"
   />
 );
 
