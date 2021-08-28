@@ -29,6 +29,20 @@ export default function DrinkDetails(props) {
     const validMeasuresKeys = measuresKeys.filter(
       (key) => !(details[key] === '' || !details[key]),
     );
+
+    function modifyDetailProp() {
+      const obj = {
+        id: drinkDetails[0].idDrink,
+        type: 'Bebida',
+        area: '',
+        category: drinkDetails[0].strCategory,
+        alcoholicOrNot: drinkDetails[0].strAlcoholic,
+        name: drinkDetails[0].strDrink,
+        image: drinkDetails[0].strDrinkThumb,
+      };
+      return obj;
+    }
+
     return (
       <main>
         <img
@@ -38,7 +52,7 @@ export default function DrinkDetails(props) {
         />
         <div className="title-and-btns">
           <h1 data-testid="recipe-title">{ details.strDrink }</h1>
-          <DetailsShareFaveBtns />
+          <DetailsShareFaveBtns details={ modifyDetailProp() } />
         </div>
         <p data-testid="recipe-category">{ details.strAlcoholic }</p>
         {

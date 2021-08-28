@@ -28,6 +28,19 @@ export default function MealDetails(props) {
       : null;
   }
 
+  function modifyDetailProp() {
+    const obj = {
+      id: mealDetails[0].idMeal,
+      type: 'Comida',
+      area: mealDetails[0].strArea,
+      category: mealDetails[0].strCategory,
+      alcoholicOrNot: '',
+      name: mealDetails[0].strMeal,
+      image: mealDetails[0].strMealThumb,
+    };
+    return obj;
+  }
+
   function renderDetails() {
     const details = mealDetails[0];
     const allKeys = (Object.keys(details));
@@ -39,6 +52,7 @@ export default function MealDetails(props) {
     const validMeasuresKeys = measuresKeys.filter(
       (key) => !(details[key] === '' || !details[key]),
     );
+
     return (
       <main>
         <img
@@ -48,7 +62,7 @@ export default function MealDetails(props) {
         />
         <div className="title-and-btns">
           <h1 data-testid="recipe-title">{ details.strMeal }</h1>
-          <DetailsShareFaveBtns />
+          <DetailsShareFaveBtns details={ modifyDetailProp() } />
         </div>
         <p data-testid="recipe-category">{ details.strCategory }</p>
         {
