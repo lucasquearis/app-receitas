@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import MyContext from '.';
 
 export default function Provider({ children }) {
+  const [searchBarResult, setSearchBarResult] = useState({});
   const [search, setSearch] = useState(false);
-  const MyContextProvider = {
+
+  const context = {
+    setSearchBarResult,
+    searchBarResult,
     search,
     setSearch,
   };
 
-  return (
+  console.log(searchBarResult);
 
-    <MyContext.Provider value={ MyContextProvider }>
+  return (
+    <MyContext.Provider value={ context }>
       {children}
     </MyContext.Provider>
   );

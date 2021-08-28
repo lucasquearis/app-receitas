@@ -12,7 +12,7 @@ export default function Header({ title }) {
   return (
     <header className="header-food">
       {
-        search ? <SearchBar />
+        search ? <SearchBar title={ title } />
           : <SubHeader title={ title } />
       }
 
