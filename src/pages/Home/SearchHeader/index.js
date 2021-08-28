@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import '../../styles/header.css';
-import profileIcon from '../../images/profileIcon.svg';
-import searchIcon from '../../images/searchIcon.svg';
+import '../../../styles/header.css';
+import profileIcon from '../../../images/profileIcon.svg';
+import searchIcon from '../../../images/searchIcon.svg';
 import FormFilter from './FormFilter';
 import CategoryContainer from './CategoryContainer';
 
