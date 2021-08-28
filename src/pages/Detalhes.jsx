@@ -5,6 +5,7 @@ import ButtonFavorite from '../components/ButtonFavorite';
 import ButtonShare from '../components/ButtonShare';
 import VideoEmbed from '../components/VideoEmbed';
 import Carousel from '../components/Carousel';
+import IngredientsList from '../components/IngredientsList';
 import fetchFoods from '../fetchs/FetchFood';
 import '../cssPages/Detalhes.css';
 
@@ -15,7 +16,7 @@ const recommendedQuantity = 6;
 function Detalhes() {
   // Declarações de variáveis para saber se é pagina de comida ou bebida e definir o tipo recomendado
   const { pathname } = useLocation();
-  const [, type, id] = pathname.split('/');
+  const [, type, id, listRenderType] = pathname.split('/');
   const recommendedType = (type === 'comidas') ? 'bebidas' : 'comidas';
 
   // Variáveis com as informações da receita e dos recomendados e o fetch delas
@@ -50,25 +51,6 @@ function Detalhes() {
     image: recipe[`str${jsonTranslator[type]}Thumb`],
   };
 
-  const ingredientsList = () => {
-    const arrayList = Object.keys(recipe).filter((key) => key.includes('strIngredient')
-      && recipe[key] !== null && recipe[key] !== '');
-    return (
-      <ul>
-        {
-          arrayList.map((ing, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {`${recipe[ing]}: ${recipe[`strMeasure${ing.match(/\d/g).join('')}`]}`}
-            </li>
-          ))
-        }
-      </ul>
-    );
-  };
-
   if (!recipe || !recommended) return <h1>Carregando...</h1>;
 
   return (
@@ -86,7 +68,7 @@ function Detalhes() {
       </h2>
       <br />
       <h3>Ingredients</h3>
-      {ingredientsList()}
+      <IngredientsList data={ { id, type, listRenderType, recipe } } />
       <br />
       <h3>Instructions</h3>
       <p data-testid="instructions">
