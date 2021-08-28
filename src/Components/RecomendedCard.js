@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function RecomendedCard(props) {
   const { recomended, index } = props;
-  console.log(recomended);
+
   return (
     <div
       data-testid={ `${index}-recomendation-card` }

@@ -5,6 +5,8 @@ import copyToClipBoard from 'clipboard-copy';
 import './DetalheComida.css';
 import * as ComidasAPI from '../service/ComidasAPI';
 import * as BebidasAPI from '../service/BebidasAPI';
+import getFoodIngredients from '../service/getFoodIngredients';
+import isRecipeFavorite from '../service/isRecipeFavorite';
 import RecomendedCard from '../Components/RecomendedCard';
 import getEmbedURL from '../service/getEmbedURL';
 import shareIcon from '../images/shareIcon.svg';
@@ -24,26 +26,7 @@ export default function DetalheComida(props) {
     const getFood = async () => {
       const foodResult = await ComidasAPI.buscarComidaPeloID(id);
       setFood(foodResult[0]);
-
-      const ingredientsKeys = Object.entries(foodResult[0]).filter((ingredient) => (
-        ingredient[0].includes('strIngredient')
-      ));
-
-      const ingredientsMeasure = Object.entries(foodResult[0]).filter((measureAll) => (
-        measureAll[0].includes('strMeasure')
-      ));
-
-      const ingredients = ingredientsKeys.filter((key) => (
-        key[1] !== '' && key[1] !== null
-      ));
-
-      const measure = ingredientsMeasure.filter((currMeasure) => (
-        currMeasure[1] !== '' && currMeasure[1] !== null
-      ));
-
-      const readyIngredients = ingredients.map((ingredient, index) => (
-        `- ${ingredient[1]} - ${measure[index][1]}`
-      ));
+      const readyIngredients = getFoodIngredients(foodResult);
       setFoodIngredients(readyIngredients);
       setLoading(false);
     };
@@ -54,10 +37,10 @@ export default function DetalheComida(props) {
       const firstDrinks = drink.drinks.filter((_drink, index) => index < drinksCount);
       setRandomDrinks(firstDrinks);
     };
-
+    setFavorite(isRecipeFavorite(food));
     getFood();
     getRandomDrink();
-  }, [id]);
+  }, [id, food]);
 
   if (loading) {
     return (
@@ -77,75 +60,66 @@ export default function DetalheComida(props) {
     setCopyMessage(true);
     setMessageTime();
   };
-
-  const isFavorite = () => {
+  const onFavoriteClick = () => {
+    setFavorite(!favorite);
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
+    const newFood = {
+      id: food.idMeal,
+      type: 'comida',
+      area: food.strArea,
+      category: food.strCategory,
+      alcoholicOrNot: '',
+      name: food.strMeal,
+      image: food.strMealThumb,
+    };
+
     if (favoriteRecipes !== null) {
-      const hasFavorite = favoriteRecipes.some((recipe) => recipe.id === food.idMeal);
-
-      if (hasFavorite) {
-        return (
-          <button
-            type="button"
-            className="favorite-btn-icon"
-            // onClick={ onFavoriteClick }
-          >
-            <img
-              data-testid="favorite-icon"
-              src={ blackHeartIcon }
-              alt="icone de favoritar"
-            />
-          </button>
+      if (favorite) {
+        const newFavoriteRecipes = favoriteRecipes.filter(
+          (recipe) => recipe.id !== food.idMeal,
         );
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+        return;
       }
-
-      return (
-        <button
-          type="button"
-          className="favorite-btn-icon"
-          // onClick={ onFavoriteClick }
-        >
-          <img
-            data-testid="favorite-icon"
-            src={ whiteHeartIcon }
-            alt="icone de favoritar"
-          />
-        </button>
-      );
+      const newFavoriteRecipes = [...favoriteRecipes, newFood];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+      return;
     }
 
+    localStorage.setItem('favoriteRecipes', JSON.stringify([newFood]));
+  };
+
+  const isFavorite = () => {
     if (favorite) {
       return (
         <button
           type="button"
           className="favorite-btn-icon"
-          // onClick={ onFavoriteClick }
+          onClick={ onFavoriteClick }
         >
           <img
-            data-testid="favorite-icon"
+            data-testid="favorite-btn"
             src={ blackHeartIcon }
             alt="icone de favoritar"
           />
         </button>
       );
     }
-
     return (
       <button
         type="button"
         className="favorite-btn-icon"
-        // onClick={ onFavoriteClick }
+        onClick={ onFavoriteClick }
       >
         <img
-          data-testid="favorite-icon"
+          data-testid="favorite-btn"
           src={ whiteHeartIcon }
           alt="icone de favoritar"
         />
       </button>
     );
   };
-
   return (
     <section className="food-info">
       <button
