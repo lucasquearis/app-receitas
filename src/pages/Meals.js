@@ -5,7 +5,6 @@ import MyContext from '../context';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
-import Categories from '../components/Categories';
 
 export default function Meals() {
   const { feed, setFeed, searchBarResult } = useContext(MyContext);
@@ -83,7 +82,6 @@ export default function Meals() {
   return (
     <>
       <Header title="Comidas" />
-      <Categories />
       {renderList()}
       <BottomMenu />
     </>
