@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import './RecipyDetails.css';
@@ -11,9 +11,14 @@ https://pt.stackoverflow.com/questions/3021/como-posso-checar-se-uma-string-cont
  */
 
 const returnUrl = (id, receita) => {
-  const URL_COMIDA = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const URL_BEBIDA = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  return receita === 'comidas' ? URL_COMIDA : URL_BEBIDA;
+  const URLCOMIDA = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const URLBEBIDA = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const URLComidaRec = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const URLBebidaRec = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const urlRecipe = receita === 'comidas' ? URLCOMIDA : URLBEBIDA;
+  const urlRecomend = receita === 'comidas' ? URLBebidaRec : URLComidaRec;
+  const objreturn = [urlRecipe, urlRecomend];
+  return objreturn;
 };
 
 const IngredientList = (array) => {
@@ -22,6 +27,39 @@ const IngredientList = (array) => {
     n[1] !== '' && n[1] !== null
       ? <li data-testid={ `${index}${texthandle}` }>{n[1]}</li>
       : null
+  ));
+  return obj;
+};
+
+const RecomendList = (array, type) => {
+  if (array === null || array === undefined) return null;
+  if (type === 'comidas') {
+    const obj = array.drinks.map((n, index) => (
+      <Link key={ index } to={ `/bebidas/${n.idDrink}` }>
+        <button
+          type="button"
+          className="RecommendCard"
+          data-testid={ `${index}-recomendation-card` }
+        >
+          <img alt="recomendamos!" src={ n.strDrinkThumb } />
+          <p>{n.strDrink}</p>
+        </button>
+
+      </Link>
+    ));
+    return obj;
+  }
+  const obj = array.meals.map((n, index) => (
+    <Link key={ index } to={ `/comidas/${n.idMeal}` }>
+      <button
+        Type="button"
+        className="RecommendCard"
+        data-testid={ `${index}-recomendation-card` }
+      >
+        <img alt="recomendamos!" src={ n.strMealThumb } />
+        <p>{n.strMeal}</p>
+      </button>
+    </Link>
   ));
   return obj;
 };
@@ -77,17 +115,24 @@ const DataManeger = (data, receita) => {
 };
 
 function RecipyDetails() {
-  const [data, setData] = useState(undefined);
+  const [Data, setDataRecipe] = useState(undefined);
+  const [DataRecomend, setDataRecomend] = useState(undefined);
 
   const { id, receita } = useParams();
 
   useEffect(() => {
+    setDataRecipe(undefined);
+    setDataRecomend(undefined);
     const fetchEffect = async () => {
       try {
-        const fetchApi = await fetch(returnUrl(id, receita));
+        const fetchApi = await fetch(returnUrl(id, receita)[0]);
         const thedata = await fetchApi.json();
         const managedData = DataManeger(thedata, receita);
-        setData(managedData);
+        setDataRecipe(managedData);
+        const fetchApiRecomend = await fetch(returnUrl(id, receita)[1]);
+        const thedataRecomend = await fetchApiRecomend.json();
+        setDataRecomend(thedataRecomend);
+        console.log(thedataRecomend);
       } catch (error) {
         console.log(error);
       }
@@ -95,46 +140,41 @@ function RecipyDetails() {
     fetchEffect();
   }, [id, receita]);
 
-  if (data) {
+  if (Data) {
     return (
       <>
         <img
           className="imgtittle"
           data-testid="recipe-photo"
-          src={ data.img }
+          src={ Data.img }
           alt="detalhes"
         />
-        <h1 data-testid="recipe-title">{data.tittle}</h1>
+        <h1 data-testid="recipe-title">{Data.tittle}</h1>
         <div>
           <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
           <button type="button">
             <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="white-heart" />
           </button>
         </div>
-        <h3 data-testid="recipe-category">{data.category}</h3>
-        { data && receita === 'bebidas'
-          ? <h3 data-testid="recipe-category">{data.type}</h3>
+        <h3 data-testid="recipe-category">{Data.category}</h3>
+        { Data && receita === 'bebidas'
+          ? <h3 data-testid="recipe-category">{Data.type}</h3>
           : null}
         <h2>Ingredientes</h2>
 
         <div className="ingredients">
-          <lo>{ IngredientList(data.ingredients) }</lo>
-          <lo>
-            { measureList(data.measures) }
-          </lo>
+          <lo>{IngredientList(Data.ingredients)}</lo>
+          <lo>{measureList(Data.measures)}</lo>
         </div>
         <h2>Instruções</h2>
-        <p data-testid="instructions">{data.Instructions}</p>
+        <p data-testid="instructions">{Data.Instructions}</p>
         {
           receita === 'comidas'
-            ? <iframe title="vid" data-testid="video" width="50%" src={ data.youlink } />
+            ? <iframe title="vid" data-testid="video" width="50%" src={ Data.youlink } />
             : null
         }
         <h2>Recomendadas</h2>
-        <div>
-          <div data-testid="0-recomendation-card">cards recomendadas</div>
-          <div data-testid="0-recomendation-card">cards recomendadas</div>
-        </div>
+        <div>{RecomendList(DataRecomend !== null ? DataRecomend : null, receita)}</div>
         <Button data-testid="start-recipe-btn">Iniciar Receita</Button>
       </>
     );
