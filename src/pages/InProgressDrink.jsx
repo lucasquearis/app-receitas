@@ -23,7 +23,7 @@ export default function InProgressMeal(props) {
         ingredients={ strIngredients }
         instructions={ strInstructions }
         id={ id }
-        type="drinks"
+        type="cocktails"
       />
     </div>
   );

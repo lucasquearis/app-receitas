@@ -3,80 +3,51 @@ import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import ShareIcon from '../images/shareIcon.svg';
-import WhiteHeart from '../images/whiteHeartIcon.svg';
-import BleckHeart from '../images/blackHeartIcon.svg';
+import WhiteHeartIcon from '../images/whiteHeartIcon.svg';
+import BleckHeartIcon from '../images/blackHeartIcon.svg';
 import { fetchDrinks } from '../services/fechRecipes';
+import { favoriteRecipes, startOrContinue } from '../helpers/setLocalStorage';
 
 export default function FoodDetails(props) {
   const [linkPag, setLinkPag] = useState(false);
-  const [buttonOnOff, setButtonOnOff] = useState({ id: '', favorite: false });
   const [drinks, setDrinks] = useState([]);
-  const [clipBoardOrHeart, setClipBoardOrHeart] = useState({ copy: false,
-    food: { id: '', foodFavorite: false } });
+  const [btnFavorite, setBtnFavorite] = useState(false);
+  const [btnStart, setBtnStart] = useState(false);
+  const [clipBoardCop, setClipBoardCop] = useState(false);
 
   const maxArray = 6;
   const filterDrinks = drinks.slice(0, maxArray);
-  const { meal, thumb, category, instructions,
-    youTube, ingredientEndMeasure, id, area, tag } = props;
+  const { meals, thumb, category, instructions,
+    youTube, ingredientEndMeasure, id, type } = props;
 
   useEffect(() => {
     fetchDrinks(setDrinks);
-
-    const localContinueFood = JSON.parse(localStorage.getItem('continueFood'));
-    if (localContinueFood) {
-      localContinueFood.filter((item) => item.id === id)
-        .filter((item) => setButtonOnOff(item));
+    startOrContinue(setBtnStart, id, type);
+    if (localStorage.favoriteRecipes) {
+      setBtnFavorite(JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .some((item) => item.id === id));
     }
-    const localFavoriteFood = JSON.parse(localStorage.getItem('favoriteFood'));
-    if (localFavoriteFood) {
-      localFavoriteFood.filter((item) => item.food.id === id)
-        .filter((item) => setClipBoardOrHeart(item));
-    }
-  }, [id]);
-
+  }, []);
   const getButton = () => {
-    setButtonOnOff({ id, favorite: true });
-    const recipeContinue = [{ id, favorite: true }];
-    const continueFood = JSON.parse(localStorage.getItem('continueFood'));
-
-    if (continueFood !== null) {
-      localStorage.setItem('continueFood', JSON
-        .stringify([...continueFood, ...recipeContinue]));
-    } else {
-      localStorage.setItem('continueFood', JSON.stringify(recipeContinue));
-    }
     setLinkPag(true);
+    if (!btnStart) {
+      setBtnStart(true);
+    }
+  };
+  const favorite = () => {
+    favoriteRecipes(props, btnFavorite);
+    if (!btnFavorite) {
+      setBtnFavorite(true);
+    } else {
+      setBtnFavorite(false);
+    }
+  };
+  const clipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setClipBoardCop(true);
   };
 
-  const getContinueButton = () => (setLinkPag(true));
-
-  const copyClipboard = () => {
-    setClipBoardOrHeart({ ...clipBoardOrHeart, copy: true });
-  };
-
-  const favoriteHeart = () => {
-    setClipBoardOrHeart({ ...clipBoardOrHeart, food: { id, foodFavorite: true } });
-    const dataDone = clipBoardOrHeart.food.foodFavorite ? (
-      'Receita Iniciada') : ('Receita Não Iniciada');
-    const favorite = [{
-      id,
-      name: meal,
-      category,
-      area,
-      image: thumb,
-      alcoholicOrNot: 'No',
-      type: '',
-      dataDone,
-      tag,
-    }];
-
-    const foodHeart = [{ food: { id, foodFavorite: true } }];
-    localStorage.setItem('favoriteFood', JSON.stringify(foodHeart));
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    return (favoriteRecipes) ? (localStorage.setItem('favoriteRecipes', JSON
-      .stringify([...favoriteRecipes, ...favorite]))) : (localStorage
-      .setItem('favoriteRecipes', JSON.stringify(favorite)));
-  };
   if (linkPag) {
     return (<Redirect to={ `/comidas/${id}/in-progress` } />);
   }
@@ -91,32 +62,29 @@ export default function FoodDetails(props) {
       />
       <div className="btnShareHeart">
         {
-          clipBoardOrHeart.copy ? (
-            <p>Link copiado</p>
+          clipBoardCop ? (
+            <p>Link copiado!</p>
           ) : null
         }
         <button
           type="button"
-          data-testid="share-btn"
-          onClick={ copyClipboard }
+          onClick={ clipboard }
         >
-          <img src={ ShareIcon } alt="share" />
+          <img src={ ShareIcon } data-testid="share-btn" alt="share" />
         </button>
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          onClick={ favoriteHeart }
-        >
-          {
-            clipBoardOrHeart.food.foodFavorite ? (
-              <img src={ BleckHeart } alt="favorit" />
-            ) : (
-              <img src={ WhiteHeart } alt="No Favorit" />
-            )
-          }
-        </button>
+        {
+          btnFavorite ? (
+            <button type="button" onClick={ favorite }>
+              <img src={ BleckHeartIcon } data-testid="favorite-btn" alt="favorit" />
+            </button>
+          ) : (
+            <button type="button" onClick={ favorite }>
+              <img src={ WhiteHeartIcon } data-testid="favorite-btn" alt="No Favorit" />
+            </button>
+          )
+        }
       </div>
-      <h1 data-testid="recipe-title">{meal}</h1>
+      <h1 data-testid="recipe-title">{meals}</h1>
       <p data-testid="recipe-category">{category}</p>
       <div>
         <h2>Ingredients</h2>
@@ -173,13 +141,12 @@ export default function FoodDetails(props) {
       </div>
       <div className="contentBtn">
         {
-          buttonOnOff.favorite ? (
+          btnStart ? (
             <Button
               variant="success"
               type="button"
-              onClick={ getContinueButton }
+              onClick={ getButton }
               data-testid="start-recipe-btn"
-              link={ `comidas/${id}/in-progress` }
             >
               Continuar Receita
             </Button>
@@ -201,12 +168,11 @@ export default function FoodDetails(props) {
 
 FoodDetails.propTypes = {
   id: PropTypes.string.isRequired,
-  meal: PropTypes.string.isRequired,
+  meals: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
   youTube: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
-  area: PropTypes.string.isRequired,
-  tag: PropTypes.string.isRequired,
 };

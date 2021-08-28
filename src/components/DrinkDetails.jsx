@@ -6,78 +6,50 @@ import ShareIcon from '../images/shareIcon.svg';
 import WhiteHeart from '../images/whiteHeartIcon.svg';
 import BleckHeart from '../images/blackHeartIcon.svg';
 import { fetchMeals } from '../services/fechRecipes';
+import { favoriteRecipes, startOrContinue } from '../helpers/setLocalStorage';
 
 export default function DrinksDetails(props) {
   const [linkPag, setLinkPag] = useState(false);
-  const [buttonOnOff, setButtonOnOff] = useState({ id: '', favorite: false });
   const [meals, setMeals] = useState([]);
-  const [clipBoardOrHeart, setClipBoardOrHeart] = useState({
-    copy: false,
-    drink: { id: '', drinkFavorite: false } });
+  const [btnFavorite, setBtnFavorite] = useState(false);
+  const [btnStart, setBtnStart] = useState(false);
+  const [clipBoardCop, setClipBoardCop] = useState(false);
 
-  const { drink, thumb, category,
-    instructions, ingredientEndMeasure, alcoholic, id } = props;
+  const { drink, thumb, category, instructions,
+    ingredientEndMeasure, alcoholic, id, type } = props;
   const maxArray = 6;
   const filterMeals = meals.slice(0, maxArray);
 
   useEffect(() => {
     fetchMeals(setMeals);
-    const localFavoriteDrink = JSON.parse(localStorage.getItem('favoriteDrink'));
-    const localContinueDrink = JSON.parse(localStorage.getItem('continueDrink'));
-
-    if (localFavoriteDrink) {
-      localFavoriteDrink.filter((item) => item.drink.id === id)
-        .filter((item) => setClipBoardOrHeart(item));
+    startOrContinue(setBtnStart, id, type);
+    if (localStorage.favoriteRecipes) {
+      setBtnFavorite(JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .some((item) => item.id === id));
     }
-    if (localContinueDrink) {
-      localContinueDrink.filter((item) => item.id === id)
-        .filter((item) => setButtonOnOff(item));
-    }
-  }, [id]);
+  }, []);
 
   const getButton = () => {
-    setButtonOnOff({ id, favorite: true });
-    const recipeContinue = [{ id, favorite: true }];
-    const continueDrink = JSON.parse(localStorage.getItem('continueDrink'));
-
-    if (continueDrink !== null) {
-      localStorage.setItem('continueDrink', JSON
-        .stringify([...continueDrink, ...recipeContinue]));
-    } else {
-      localStorage.setItem('continueDrink', JSON.stringify(recipeContinue));
+    setLinkPag(true);
+    if (!btnStart) {
+      setBtnStart(true);
     }
-    setLinkPag(true);
+  };
+  const favorite = () => {
+    favoriteRecipes(props, btnFavorite);
+    if (!btnFavorite) {
+      setBtnFavorite(true);
+    } else {
+      setBtnFavorite(false);
+    }
   };
 
-  const getContinueButton = () => {
-    setLinkPag(true);
+  const clipboard = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setClipBoardCop(true);
   };
 
-  const copyClipboard = () => {
-    setClipBoardOrHeart({ ...clipBoardOrHeart, copy: true });
-  };
-
-  const favoriteHeart = () => {
-    setClipBoardOrHeart({ ...clipBoardOrHeart, drink: { id, favorite: true } });
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const dataDone = clipBoardOrHeart.drink.drinkFavorite ? (
-      'Receita Iniciada') : ('Receita Não Iniciada');
-    const favoriteDrinks = [{
-      id,
-      name: drink,
-      category,
-      image: thumb,
-      alcoholicOrNot: alcoholic,
-      type: '',
-      dataDone,
-    }];
-    const drinkHeart = [{ drink: { id, drinkFavorite: true } }];
-    localStorage.setItem('favoriteDrink', JSON.stringify(drinkHeart));
-    const favoriteRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    return (favoriteRecipes) ? (localStorage.setItem('favoriteRecipes', JSON
-      .stringify([...favoriteRecipe, ...favoriteDrinks]))) : (
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteDrinks)));
-  };
   if (linkPag) {
     return (<Redirect to={ `/bebidas/${id}/in-progress` } />);
   }
@@ -92,27 +64,25 @@ export default function DrinksDetails(props) {
       />
       <div className="btnShareHeart">
         {
-          clipBoardOrHeart.copy ? (
-            <p>Link copiado</p>
+          clipBoardCop ? (
+            <p>Link copiado!</p>
           ) : null
         }
         <button
           type="button"
-          data-testid="share-btn"
-          onClick={ copyClipboard }
+          onClick={ clipboard }
         >
-          <img src={ ShareIcon } alt="share" />
+          <img src={ ShareIcon } data-testid="share-btn" alt="share" />
         </button>
         <button
           type="button"
-          data-testid="favorite-btn"
-          onClick={ favoriteHeart }
+          onClick={ favorite }
         >
           {
-            clipBoardOrHeart.drink.drinkFavorite ? (
-              <img src={ BleckHeart } alt="favorit" />
+            btnFavorite ? (
+              <img src={ BleckHeart } data-testid="favorite-btn" alt="favorit" />
             ) : (
-              <img src={ WhiteHeart } alt="No Favorit" />
+              <img src={ WhiteHeart } data-testid="favorite-btn" alt="No Favorit" />
             )
           }
         </button>
@@ -164,14 +134,14 @@ export default function DrinksDetails(props) {
       </div>
       <div className="contentBtn">
         {
-          buttonOnOff.favorite ? (
+          btnStart ? (
             <Button
               variant="success"
               type="button"
-              onClick={ getContinueButton }
+              onClick={ getButton }
               data-testid="start-recipe-btn"
             >
-              Continuar Receita
+              <p>Continuar Receita</p>
             </Button>
           ) : (
             <Button
@@ -179,7 +149,6 @@ export default function DrinksDetails(props) {
               variant="success"
               type="button"
               onClick={ getButton }
-              link="comidas/53060"
             >
               Iniciar Receita
             </Button>
@@ -197,5 +166,6 @@ DrinksDetails.propTypes = {
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
   ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
+  type: PropTypes.string.isRequired,
   alcoholic: PropTypes.string.isRequired,
 };
