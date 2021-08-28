@@ -5,7 +5,7 @@ function FoodAreaExp() {
   return (
     <div>
       <Header name="Receitas Feitas" search={ false } />
-      <p>DoneRecipes pages</p>
+      <p>Page DoneRecipes</p>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function DrinksInProgress() {
   const [recipeDrink, setRecipeDrink] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
+  const [measure, setMeasure] = useState([]);
 
   useEffect(() => {
     const getRecipeDrink = async () => {
@@ -27,6 +28,13 @@ function DrinksInProgress() {
       const ingredientList = ingredientNotEmpty.map((key) => recipeDrink[0][key]);
       setIngredients(ingredientList);
       // console.log(recipeDrink);
+
+      const keyMeasure = Object.keys(recipeDrink[0])
+        .filter((item) => item.includes('strMeasure'));
+      const measureNoEmpty = keyMeasure
+        .filter((item) => recipeDrink[0][item] !== '' && recipeDrink[0][item] !== null);
+      const measureList = measureNoEmpty.map((kMeasure) => recipeDrink[0][kMeasure]);
+      setMeasure(measureList);
     };
     ingredientsList();
   }, [recipeDrink]);
@@ -37,7 +45,7 @@ function DrinksInProgress() {
 
   return (
     <div className="food-in-progress">
-      <p>Componente DrinksRecipeInProgress</p>
+      <p>Page DrinksRecipeInProgress</p>
 
       <img data-testid="recipe-photo" alt="recipe" src={ strDrinkThumb } />
       <h1 data-testid="recipe-title">{ strDrink }</h1>
@@ -57,7 +65,7 @@ function DrinksInProgress() {
                   id={ `${ingredient}` }
                 // checked={ handleCheked() }
                 />
-                { `${ingredient}` }
+                { `${measure[index]} ${ingredient}` }
               </label>
             </div>
           ))

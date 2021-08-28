@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
+  const [measure, setMeasure] = useState([]);
+  // const [objInProgressRecipes, setObjInProgress] = useState()
+  // const [ check, setCheck ] = useState([]);
   // const { history } = useHistory();
 
   // localStorage.setItem('inProgressRecipes', ({ id-da-comida }));
@@ -19,6 +22,9 @@ function FoodsInProgress() {
       setRecipeFood(meals);
     };
     getRecipeFood();
+    const id = 52771; // trocar depois p ser dinâmico
+    const objInProgressRecipes = { meals: { [id]: [] } }; // lembrar de dar spread p captar o de antes
+    localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
   }, []);
 
   useEffect(() => {
@@ -31,28 +37,45 @@ function FoodsInProgress() {
       const ingredientList = ingredientNotEmpty.map((key) => recipeFood[0][key]);
       setIngredients(ingredientList);
       // console.log(recipeFood);
+      // console.log(ingredientList);
+
+      const keyMeasure = Object.keys(recipeFood[0])
+        .filter((item) => item.includes('strMeasure'));
+      const measureNoEmpty = keyMeasure
+        .filter((item) => recipeFood[0][item] !== '' && recipeFood[0][item] !== null);
+      const measureList = measureNoEmpty.map((kMeasure) => recipeFood[0][kMeasure]);
+      setMeasure(measureList);
     };
     ingredientsList();
   }, [recipeFood]);
 
   // Requisito 50 - o número '52771' é só enquanto n tivermos o id
-  const objInProgressRecipes = {
-    meals: {
-      52771: [...ingredients],
-    },
-  };
-  console.log(objInProgressRecipes);
-  localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
 
-  // const handleCheked = () => (
-  //   'desenvolver lógica p dar check qd é apertado a caixinha de check'
-  // );
+  // const objInProgressRecipes = {
+  //   meals: {
+  //     52771: [],
+  //   },
+  // };
+  // esperar o requisito 41 q vai criai o objeto inProgressRecipes com a key do id da receita.
+  const handleCheked = (ingredient) => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(ingredient));
+
+    // const objInProgressRecipes = JSON
+    //   .parse(localStorage.getItem('inProgressRecipes')) || [];
+    // if (objInProgressRecipes.length > 0) {
+    //   const ingredientChecked = objInProgressRecipes.meals[52771]
+    //     .some((ingredientCheck) => ingredient === ingredientCheck);
+    // } else if {
+    // }
+    // console.log(ingredientChecked);
+    // localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
+  };
 
   const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
   return (
     <div className="food-in-progress">
-      <p>Componente FoodsRecipeInProgress</p>
+      <p>Page FoodsRecipeInProgress</p>
 
       <img data-testid="recipe-photo" alt="recipe" src={ strMealThumb } />
       <h1 data-testid="recipe-title">{ strMeal }</h1>
@@ -70,9 +93,9 @@ function FoodsInProgress() {
                 <input
                   type="checkbox"
                   id={ `${ingredient}` }
-                  // checked={ handleCheked() }
+                  onChange={ () => handleCheked(ingredient) }
                 />
-                { `${ingredient}` }
+                { `${measure[index]} ${ingredient}` }
               </label>
             </div>
           ))
