@@ -20,7 +20,6 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/profile" component={ Profile } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/bebidas" component={ Drinks } />
       <Route exact path="/comidas" component={ Meals } />

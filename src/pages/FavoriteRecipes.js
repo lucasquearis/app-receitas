@@ -1,3 +1,4 @@
+// vitals
 import React, { useEffect, useState } from 'react';
 // components
 import Header from '../components/Header';
