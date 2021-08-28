@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import AppContext from '../../context/AppContext';
+
 import {
   fetchApi,
   MEALS_INGREDIENTS_LIST,
@@ -11,7 +13,11 @@ import {
 import Card from '../../components/Card';
 
 function IngrendientsList() {
+  const { setSelectedIngredient } = useContext(AppContext);
+
+  const { push } = useHistory();
   const { pathname } = useLocation();
+
   const pathIsMeals = (pathname.includes('comidas'));
   const ingredientsType = (pathIsMeals) ? 'meals' : 'drinks';
 
@@ -30,8 +36,9 @@ function IngrendientsList() {
     getIngredientsList();
   }, [pathIsMeals, ingredientsType]);
 
-  const handleClick = () => {
-    
+  const handleClick = (ingredientName) => {
+    setSelectedIngredient(ingredientName);
+    push(`/${(pathname.split('/')[2])}`);
   };
 
   return (
@@ -49,6 +56,7 @@ function IngrendientsList() {
                 data-testid={ `${index}-ingredient-card` }
                 key={ `${index}-ingredient-card` }
                 type="button"
+                onClick={ () => handleClick(ingredientName) }
               >
                 <Card
                   img={ `${imgUrl}${ingredientName}-Small.png` }
