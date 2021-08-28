@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import whiteHeart from '../images/whiteHeartIcon.svg';
-import blackHeart from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import myContext from '../context/myContext';
 
 function FavoriteButton() {
@@ -12,7 +12,7 @@ function FavoriteButton() {
     id: recipe.idDrink,
     type: 'bebida',
     area: '',
-    category: '',
+    category: recipe.strCategory,
     alcoholicOrNot: recipe.strAlcoholic,
     name: recipe.strDrink,
     image: recipe.strDrinkThumb };
@@ -27,15 +27,25 @@ function FavoriteButton() {
     image: recipe.strMealThumb };
 
   const favorite = pathname.includes('comidas') ? favoriteMeals : favoriteDrink;
-  const [heart, setHeart] = useState(whiteHeart);
+  const [heart, setHeart] = useState(whiteHeartIcon);
+
+  useEffect(() => {
+    if (localStorage.favoriteRecipes) {
+      const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const filterLocal = request.filter((item) => item.id === id);
+      if (filterLocal.length !== 0) {
+        setHeart(blackHeartIcon);
+      }
+    }
+  }, []);
 
   const favoriteClick = () => {
-    if (localStorage.favoriteRecipes && heart === whiteHeart) {
+    if (localStorage.favoriteRecipes && heart === whiteHeartIcon) {
       const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const newLocalStorage = [...request, favorite];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newLocalStorage));
     }
-    if (localStorage.favoriteRecipes && heart === blackHeart) {
+    if (localStorage.favoriteRecipes && heart === blackHeartIcon) {
       const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const filterLocal = request.filter((item) => item.id !== id);
       const removeLocalStorage = [...filterLocal];
@@ -45,7 +55,8 @@ function FavoriteButton() {
 
   const correctHeart = () => {
     favoriteClick();
-    const img = heart === whiteHeart ? setHeart(blackHeart) : setHeart(whiteHeart);
+    const img = heart === whiteHeartIcon ? setHeart(blackHeartIcon)
+      : setHeart(whiteHeartIcon);
     return img;
   };
 
