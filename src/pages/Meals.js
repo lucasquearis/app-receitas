@@ -6,6 +6,7 @@ import * as api from '../services/api';
 import './css/Meals.css';
 
 const mealsAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const mealsIngredientAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 const categoriesAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const categoryAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const MEALS_LENGTH = 12;
@@ -16,7 +17,7 @@ const Meals = () => {
   const [categoryEntry, setCategoryEntry] = useState('');
   const [categoryClicked, setCategoryClicked] = useState(false);
   const [lastCategory, setLastCategory] = useState('');
-  const { data, setData } = useContext(AppContext);
+  const { data, setData, exploreIngredient, setExpIng } = useContext(AppContext);
 
   const resetBorder = () => {
     const categoryButtons = document.querySelectorAll('.meals-categories');
@@ -27,7 +28,15 @@ const Meals = () => {
   };
 
   useEffect(() => {
-    api.getMeals(mealsAPI, MEALS_LENGTH, setData);
+    const defineSearch = () => {
+      const search = exploreIngredient.length
+        ? `${mealsIngredientAPI}${exploreIngredient}`
+        : mealsAPI;
+      setExpIng('');
+      return search;
+    };
+
+    api.getMeals(defineSearch(), MEALS_LENGTH, setData);
     api.getMeals(categoriesAPI, CATEGORIES_LENGTH, setCategories);
   }, []);
 

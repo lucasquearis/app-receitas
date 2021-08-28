@@ -7,6 +7,7 @@ import * as api from '../services/api';
 import './css/Drinks.css';
 
 const drinksAPI = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const drinksIngredientAPI = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const categoriesAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const categoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 const DRINKS_LENGTH = 12;
@@ -17,7 +18,7 @@ const Drinks = () => {
   const [categoryEntry, setCategoryEntry] = useState('');
   const [categoryClicked, setCategoryClicked] = useState(false);
   const [lastCategory, setLastCategory] = useState('');
-  const { data, setData } = useContext(AppContext);
+  const { data, setData, exploreIngredient, setExpIng } = useContext(AppContext);
 
   const resetBorder = () => {
     const categoryButtons = document.querySelectorAll('.drinks-categories');
@@ -28,7 +29,14 @@ const Drinks = () => {
   };
 
   useEffect(() => {
-    api.getDrinks(drinksAPI, DRINKS_LENGTH, setData);
+    const defineSearch = () => {
+      const search = exploreIngredient.length
+        ? `${drinksIngredientAPI}${exploreIngredient}`
+        : drinksAPI;
+      setExpIng('');
+      return search;
+    };
+    api.getDrinks(defineSearch(), DRINKS_LENGTH, setData);
     api.getDrinks(categoriesAPI, CATEGORIES_LENGTH, setCategories);
   }, []);
 
