@@ -1,9 +1,9 @@
 import { fireEvent, screen } from '@testing-library/dom';
 import React from 'react';
-import Header from '../../../components/Header/Header';
-import renderWithRouterAndRedux from '../../helpers/renderWithRouterAndRedux';
-import ProfileIcon from '../../../images/profileIcon.svg';
-import SearchIcon from '../../../images/searchIcon.svg';
+import Header from '../../components/Header/Header';
+import renderWithRouterAndRedux from '../helpers/renderWithRouterAndRedux';
+import ProfileIcon from '../../images/profileIcon.svg';
+import SearchIcon from '../../images/searchIcon.svg';
 
 describe('verifica a renderização e o funcionamento do componente Header', () => {
   it('ao passar um titulo como props ele é renderizado  corretamente', () => {

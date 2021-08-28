@@ -59,7 +59,7 @@ const SearchBar = () => {
         text="Buscar"
         id="exec-search-btn"
         onClick={ getMeals }
-        disabled={ !filter }
+        // disabled={ !filter }
       />
     </div>
   );
