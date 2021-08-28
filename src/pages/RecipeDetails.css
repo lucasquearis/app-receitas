@@ -1,8 +1,8 @@
 .cardRecipeMeals {
   overflow-x: scroll;
   overflow-y: hidden;
+  white-space: nowrap;
   width: 100vw;
-  white-space:nowrap;
 }
 
 .card {
