@@ -48,7 +48,6 @@ export default function Meals() {
       );
     }
     if (resultList.length === 1) {
-      // console.log(resultList[0]);
       return <Redirect to={ `/comidas/${resultList[0].idMeal}` } />;
     }
     return (
