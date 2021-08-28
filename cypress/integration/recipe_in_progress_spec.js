@@ -68,7 +68,7 @@ describe('48 - Desenvolva um checkbox para cada item da lista de ingredientes', 
   });
 });
 
-describe.only('49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
+describe('49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
   const getIngredients = () => (
     cy.get('[data-testid*="ingredient-step"]')
       .find('input[type="checkbox"]')
