@@ -1,10 +1,10 @@
 .recipes-checkbox {
-  display: flex;
   align-items: center;
+  display: flex;
   list-style: none;
 }
 
 :checked + span {
-  color:black;
+  color: black;
   text-decoration: line-through;
 }
