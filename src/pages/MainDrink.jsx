@@ -2,25 +2,25 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CardRecipes from '../components/CardRecipes';
+import DrinkCard from '../components/DrinkCard';
 import { drinkFetch } from '../redux/actions/actionDrink';
 
 function MainDrink() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(drinkFetch());
-  }, []);
+  }, [dispatch]);
 
-  const drinksCardList = useSelector(({ drinkReducer }) => drinkReducer.drinksCardList);
-  console.log(drinksCardList);
+  const drinkCardList = useSelector(({ drinkReducer }) => drinkReducer.drinkCardList);
 
-  if (drinksCardList === []) {
+  if (drinkCardList === []) {
     return <p>loading...</p>;
   }
   return (
     <>
       <Header title="Bebidas" />
-      {drinksCardList.map((item) => <CardRecipes key={ item.idDrink } title={ item.strDrink } image={ item.strDrinkThumb } />)}
+      {drinkCardList.map((item, index) => (
+        <DrinkCard key={ item.idDrink } item={ item } index={ index } />))}
       <Footer />
     </>
   );
