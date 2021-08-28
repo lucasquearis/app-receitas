@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copyToClipBoard from 'clipboard-copy';
 import './DetalheComida.css';
+import useIsFavorite from '../hooks/useIsFavorite';
 import * as ComidasAPI from '../service/ComidasAPI';
 import * as BebidasAPI from '../service/BebidasAPI';
 import getFoodIngredients from '../service/getFoodIngredients';
-import isRecipeFavorite from '../service/isRecipeFavorite';
 import RecomendedCard from '../Components/RecomendedCard';
 import getEmbedURL from '../service/getEmbedURL';
 import shareIcon from '../images/shareIcon.svg';
@@ -21,6 +21,8 @@ export default function DetalheComida(props) {
   const [loading, setLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState(false);
   const [favorite, setFavorite] = useState(false);
+
+  useIsFavorite(setFavorite, food, 'comida');
 
   useEffect(() => {
     const getFood = async () => {
@@ -37,10 +39,9 @@ export default function DetalheComida(props) {
       const firstDrinks = drink.drinks.filter((_drink, index) => index < drinksCount);
       setRandomDrinks(firstDrinks);
     };
-    setFavorite(isRecipeFavorite(food, 'comida'));
     getFood();
     getRandomDrink();
-  }, [id, food]);
+  }, [id]);
 
   if (loading) {
     return (

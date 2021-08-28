@@ -92,9 +92,9 @@
 
 .recomended-drink-section-infos {
   display: flex;
+  margin: 20px 0 120px 8px;
   overflow-x: scroll;
   padding: 20px 5px;
-  margin: 20px 0 120px 8px ;
   width: 95%;
 }
 

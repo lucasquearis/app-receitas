@@ -5,7 +5,7 @@ import copyToClipBoard from 'clipboard-copy';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidasAleatoria } from '../service/ComidasAPI';
-import isRecipeFavorite from '../service/isRecipeFavorite';
+import useIsFavorite from '../hooks/useIsFavorite';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -18,6 +18,8 @@ export default function DetalheBebida(props) {
   const [randomFood, setRandomFood] = useState([]);
   const [copyMessage, setCopyMessage] = useState(false);
   const [favorite, setFavorite] = useState(false);
+
+  useIsFavorite(setFavorite, drink, 'bebida');
 
   useEffect(() => {
     const getDrink = async () => {
@@ -62,10 +64,9 @@ export default function DetalheBebida(props) {
       const firstFoods = foods.filter((_food, index) => index < foodsCount);
       setRandomFood(firstFoods);
     };
-    setFavorite(isRecipeFavorite(drink, 'bebida'));
     getDrink();
     getRandomFood();
-  }, [id, drink]);
+  }, [id]);
 
   const randomFoodCard = () => (
     <section className="food-recomended">
