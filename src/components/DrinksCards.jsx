@@ -35,7 +35,7 @@ export default function DrinksCards() {
   return (
     <ul>
       {
-        (searchDataDrinks === null || !searchDataDrinks)
+        (searchDataDrinks === null || searchDataDrinks === undefined)
         && showAlert(alert, msgNotRecipe)
       }
       { dataDrinks ? (
