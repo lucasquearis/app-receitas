@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Details.css';
+import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 
 export default function DrinkDetails(props) {
   const [drinkDetails, setDrinkDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const { match: { params: { id } } } = props;
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -26,6 +29,20 @@ export default function DrinkDetails(props) {
     const validMeasuresKeys = measuresKeys.filter(
       (key) => !(details[key] === '' || !details[key]),
     );
+
+    function modifyDetailProp() {
+      const obj = {
+        id: drinkDetails[0].idDrink,
+        type: 'Bebida',
+        area: '',
+        category: drinkDetails[0].strCategory,
+        alcoholicOrNot: drinkDetails[0].strAlcoholic,
+        name: drinkDetails[0].strDrink,
+        image: drinkDetails[0].strDrinkThumb,
+      };
+      return obj;
+    }
+
     return (
       <main>
         <img
@@ -33,9 +50,10 @@ export default function DrinkDetails(props) {
           alt="imagem da receita"
           src={ details.strDrinkThumb }
         />
-        <h1 data-testid="recipe-title">{ details.strDrink }</h1>
-        <button type="button" data-testid="share-btn">SHARE</button>
-        <button type="button" data-testid="favorite-btn">FAVORITAR</button>
+        <div className="title-and-btns">
+          <h1 data-testid="recipe-title">{ details.strDrink }</h1>
+          <DetailsShareFaveBtns details={ modifyDetailProp() } />
+        </div>
         <p data-testid="recipe-category">{ details.strAlcoholic }</p>
         {
           validIngredientKeys.map((key, index) => (
@@ -45,6 +63,7 @@ export default function DrinkDetails(props) {
             >
               { details[key] }
               :
+              &nbsp;
               {
                 !details[validMeasuresKeys[index]]
                   ? 'à gosto' : details[validMeasuresKeys[index]]

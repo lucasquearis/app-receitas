@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Details.css';
+import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 
 export default function MealDetails(props) {
   const [mealDetails, setMealDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const { match: { params: { id } } } = props;
     const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -25,6 +28,19 @@ export default function MealDetails(props) {
       : null;
   }
 
+  function modifyDetailProp() {
+    const obj = {
+      id: mealDetails[0].idMeal,
+      type: 'Comida',
+      area: mealDetails[0].strArea,
+      category: mealDetails[0].strCategory,
+      alcoholicOrNot: '',
+      name: mealDetails[0].strMeal,
+      image: mealDetails[0].strMealThumb,
+    };
+    return obj;
+  }
+
   function renderDetails() {
     const details = mealDetails[0];
     const allKeys = (Object.keys(details));
@@ -36,6 +52,7 @@ export default function MealDetails(props) {
     const validMeasuresKeys = measuresKeys.filter(
       (key) => !(details[key] === '' || !details[key]),
     );
+
     return (
       <main>
         <img
@@ -43,9 +60,10 @@ export default function MealDetails(props) {
           alt="imagem da receita"
           src={ details.strMealThumb }
         />
-        <h1 data-testid="recipe-title">{ details.strMeal }</h1>
-        <button type="button" data-testid="share-btn">SHARE</button>
-        <button type="button" data-testid="favorite-btn">FAVORITAR</button>
+        <div className="title-and-btns">
+          <h1 data-testid="recipe-title">{ details.strMeal }</h1>
+          <DetailsShareFaveBtns details={ modifyDetailProp() } />
+        </div>
         <p data-testid="recipe-category">{ details.strCategory }</p>
         {
           validIngredientKeys.map((key, index) => (
@@ -55,6 +73,7 @@ export default function MealDetails(props) {
             >
               { details[key] }
               :
+              &nbsp;
               { details[validMeasuresKeys[index]] }
             </p>
           ))
