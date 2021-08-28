@@ -1,0 +1,30 @@
+.filter-buttons {
+  display: flex;
+  flex-flow: row;
+  margin: auto;
+  max-width: 100vw;
+}
+
+.filter-buttons button {
+  margin: auto;
+  width: 30%;
+}
+
+.card-element {
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-flow: row;
+  margin: 20px auto;
+  width: 94vw;
+}
+
+.favorites-image-container input {
+  border-radius: 10px;
+  width: 120px;
+}
+
+.info-container {
+  display: flex;
+  flex-flow: column;
+}

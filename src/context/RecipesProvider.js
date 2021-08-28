@@ -90,24 +90,6 @@ function RecipesProvider({ children }) {
   [searchValues]);
 
   useEffect(() => {
-    const favoriteClick = () => {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([{
-        id: '',
-        type: '',
-        area: '',
-        category: '',
-        alcoholicOrNot: '',
-        name: '',
-        image: '',
-        doneDate: '',
-        tags: '',
-      }]));
-    };
-
-    favoriteClick();
-  }, []);
-
-  useEffect(() => {
     const filterIngredients = () => {
       const keys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
       const list = keys.map((key) => recipe[key]);
@@ -139,6 +121,7 @@ function RecipesProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: infoUser.email }));
   }, [infoUser]);

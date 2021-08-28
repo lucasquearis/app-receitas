@@ -8,18 +8,20 @@ import ExplorerDrinks from './pages/ExplorerDrinks';
 import Meals from './pages/Meals';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 import Drinks from './pages/Drinks';
 import RecipesDetails from './pages/RecipesDetails';
 import ExplorerFoods from './pages/ExplorerFoods';
 import Ingredients from './pages/Ingredients';
 import OriginExplorer from './pages/OriginExplorer';
 import MakedRecipes from './pages/MakedRecipes';
-import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
+      <Route exact path="/profile" component={ Profile } />
+      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/bebidas" component={ Drinks } />
       <Route exact path="/comidas" component={ Meals } />
       <Route exact path="/perfil" component={ Profile } />
@@ -30,7 +32,6 @@ function Routes() {
       <Route exact path="/explorar/comidas/ingredientes" component={ Ingredients } />
       <Route exact path="/explorar/comidas/area" component={ OriginExplorer } />
       <Route exact path="/receitas-feitas" component={ MakedRecipes } />
-      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/comidas/:id" component={ RecipesDetails } />
       <Route exact path="/bebidas/:id" component={ RecipesDetails } />
     </Switch>

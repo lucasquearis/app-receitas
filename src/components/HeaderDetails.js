@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import myContext from '../context/myContext';
+import FavoriteButton from './FavoriteButton';
 // import FavoriteButton from './FavoriteButton';
 import ShareButton from './ShareButton';
 
@@ -21,7 +22,7 @@ function HeaderDetails() {
         >
           { recipe[`str${type}`] }
         </h2>
-        <button data-testid="favorite-btn" type="button">favorite</button>
+        <FavoriteButton />
         <ShareButton />
       </div>
       <h4

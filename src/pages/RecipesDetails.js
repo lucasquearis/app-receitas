@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Redirect, useLocation, useParams } from 'react-router-dom';
 import Sugestions from '../components/Sugestions';
 import '../styles/Details.css';
 import HeaderDetails from '../components/HeaderDetails';
@@ -9,9 +9,9 @@ import Ingredients from '../components/Ingredients';
 function RecipesDetails() {
   const { pathname } = useLocation();
   const { id } = useParams();
-  console.log(id);
   const { keyType,
     setRecipe, setKeysType, url, recipe } = useContext(myContext);
+  const [buttonText, setButtonText] = useState(false);
 
   const video = (<iframe
     className="recipe-video"
@@ -22,6 +22,12 @@ function RecipesDetails() {
     src={ url }
   />);
 
+  const handleClick = () => {
+    const idRecipe = JSON.parse(localStorage.getItem('idRecipe'));
+    localStorage.setItem('idRecipe', JSON.stringify([...idRecipe, id]));
+    setButtonText(true);
+  };
+
   useEffect(() => {
     try {
       const urlMeals = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
@@ -29,7 +35,6 @@ function RecipesDetails() {
       const correctURL = pathname.includes('comidas') ? urlMeals : urlDrinks;
       const type = pathname.includes('comidas') ? 'meals' : 'drinks';
       setKeysType(type);
-      console.log(`${correctURL}${id}`);
       const fetchRecipe = async () => {
         const request = await fetch(`${correctURL}${id}`);
         const response = await request.json();
@@ -42,7 +47,10 @@ function RecipesDetails() {
     }
   }, []);
 
+  const messageButton = !buttonText ? 'Iniciar Receita' : 'Continuar Receita';
   const text = keyType === 'meals' ? 'drinks' : 'meals';
+  if (buttonText) return <Redirect to={ `${pathname}/in-progress` } />;
+
   return (
     <section className="details-body">
       <HeaderDetails />
@@ -57,8 +65,9 @@ function RecipesDetails() {
         className="iniciar-btn"
         type="button"
         data-testid="start-recipe-btn"
+        onClick={ handleClick }
       >
-        Iniciar Receita
+        { messageButton }
       </button>
     </section>
   );
