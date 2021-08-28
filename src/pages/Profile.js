@@ -5,9 +5,6 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
-  const Sendemail = JSON.parse(localStorage.getItem('user'));
-  const receiveEmail = Sendemail.email;
-
   const history = useHistory();
 
   const doneRecipes = () => {
@@ -26,7 +23,7 @@ function Profile() {
   return (
     <div>
       <Header title="Perfil" />
-      <h1 data-testid="profile-email">{ receiveEmail }</h1>
+      <h1 data-testid="profile-email">{ JSON.parse(localStorage.user).email }</h1>
       <Button
         className="profile-done-btn"
         type="submit"
