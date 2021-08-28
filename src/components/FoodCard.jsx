@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import './Card.css';
 
-function FoodCard({ item: { strMeal, strMealThumb }, index }) {
+function FoodCard({ food: { strMeal, strMealThumb }, index }) {
   return (
     <Card data-testid={ `${index}-recipe-card` }>
       <Card.Img

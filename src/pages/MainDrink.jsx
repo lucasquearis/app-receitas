@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import DrinkCard from '../components/DrinkCard';
-import { drinkFetch } from '../redux/actions/actionDrink';
+import { drinkCategoriesFetch, drinkListFetch } from '../redux/actions/actionDrink';
+import DrinkCategories from '../components/DrinkCategories';
 
 function MainDrink() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(drinkFetch());
+    dispatch(drinkListFetch());
+    dispatch(drinkCategoriesFetch());
   }, [dispatch]);
 
   const drinkCardList = useSelector(({ drinkReducer }) => drinkReducer.drinkCardList);
@@ -19,8 +21,9 @@ function MainDrink() {
   return (
     <>
       <Header title="Bebidas" />
+      <DrinkCategories />
       {drinkCardList.map((item, index) => (
-        <DrinkCard key={ item.idDrink } item={ item } index={ index } />))}
+        <DrinkCard key={ item.idDrink } drink={ item } index={ index } />))}
       <Footer />
     </>
   );
