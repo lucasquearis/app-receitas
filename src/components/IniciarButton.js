@@ -3,7 +3,7 @@ import { useHistory, useParams, Redirect } from 'react-router-dom';
 
 export default function IniciarButton() {
   const [redirectToInProgress, setRedirectToInProgress] = useState(false);
-  const [buttonChange, setButtonChange] = useState(false);
+  const [buttonChange, setButtonChange] = useState(true);
   const { location: { pathname } } = useHistory();
   const { id } = useParams();
   const EIGHT = 8;
@@ -13,26 +13,30 @@ export default function IniciarButton() {
     const mock = {
       cocktails: {
         11007: ['a,b,c'],
+        11017: ['a,b,c'],
       },
       meals: {
         4059302: ['b,c,d'],
+        4059322: ['b,c,d'],
       },
     };
     const mockStorage = JSON.stringify(mock);
     localStorage.setItem('inProgressRecipes', mockStorage);
 
-    const checkInProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const checkInProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));    
     const cocktailsId = Object.keys(checkInProgressRecipes.cocktails);
     const mealsId = Object.keys(checkInProgressRecipes.meals);
-
-    if (pathnameAPI === '/comidas') {
-      if (mealsId === id) {
-        setButtonChange(true);
-      }
-    } else if (pathnameAPI === '/bebidas') {
-      if (cocktailsId === id);
-      setButtonChange(true);
+    const checkMeals = mealsId.map((meal) => parseInt(meal));
+    const checkCocktails = cocktailsId.map((cocktails) => parseInt(cocktails));
+    
+    const mockId = 4059302;
+    const checkMealsId = checkMeals.some((mealsId) => mockId === mealsId);
+    const checkCocktailsId = checkCocktails.some((cocktailsId) => mockId === cocktailsId);
+    
+    if ( checkMealsId || checkCocktailsId ) {
+      setButtonChange(false);
     }
+    
   }, [setButtonChange, id, pathnameAPI]);
 
   const handleClick = () => {

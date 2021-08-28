@@ -6,7 +6,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function HeaderDetails(
-  { area, name, img, aux, categoryDrink, alcoholic = "" },
+  { area, name, img, aux, categoryDrink, alcoholic = '' },
 ) {
   const [copySuccess, setCopySuccess] = useState('');
   const [changeHeart, setChangeHeart] = useState(whiteHeartIcon);
@@ -14,7 +14,7 @@ export default function HeaderDetails(
   const { id } = useParams();
   const EIGHT = 8;
   const pathnameAPI = pathname.slice(0, EIGHT);
-  
+  const mockID = 123456;
 
   const sendFavorite = [{
     id: '',
@@ -24,26 +24,7 @@ export default function HeaderDetails(
     alcoholicOrNot: '',
     name: '',
     image: '',
-  }];
-
-  const clearFavoriteFood = [{
-    id: '',
-    type: '',
-    area: '',
-    category: '',
-    name: '',
-    image: '',
-  }];
-
-  const clearFavoriteDrink = [{
-    id: '',
-    type: '',
-    area: '',
-    category: '',
-    alcoholicOrNot: '',
-    name: '',
-    image: '',
-  }];
+  }];  
 
   const handleShare = () => {
     // Source: https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
@@ -67,49 +48,50 @@ export default function HeaderDetails(
       image: img,
     }];
     const mockStorage = JSON.stringify(mock);
-    localStorage.setItem('favoriteRecipes', mockStorage);
+    localStorage.setItem('favoriteRecipes', mockStorage);    
 
-    const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const checkId = checkIsFavorite.map((checkedId) => checkedId.id);
-    // const favoriteId = checkId.toString();
-    const favoriteId = checkId.some((storageId)=>id === storageId);
+    // const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    // const checkId = checkIsFavorite.map((checkedId) => checkedId.id);    
+    // const favoriteId = checkId.some((storageId) => storageId === id);    
 
-    if (favoriteId) {
-      setChangeHeart(blackHeartIcon);
-    } else {
-      setChangeHeart(whiteHeartIcon);
-    }
+    // favoriteId ? setChangeHeart(blackHeartIcon) : setChangeHeart(whiteHeartIcon);  
+    checkFavorite ? setChangeHeart(blackHeartIcon) : setChangeHeart(whiteHeartIcon);   
     
   }, [setChangeHeart, id, pathnameAPI, alcoholic, area, aux, img, name]);
+
+  const checkFavorite = () => {
+    const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const checkId = checkIsFavorite.map((checkedId) => checkedId.id);    
+    const favoriteId = checkId.some((storageId) => storageId === id);    
+    return(favoriteId);
+  }
 
   const handleFavorite = () => {
     const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const localStorageId = checkIsFavorite.map((recipe) => recipe.id);
-    const checkFavoriteId = localStorageId.some((storageId)=>id === storageId);
+    const checkFavoriteId = localStorageId.some((storageId) => id === storageId);
     const finalLocalStorage = checkIsFavorite.filter((recipeFav) => recipeFav.id !== id);
 
     if (checkFavoriteId) {
       localStorage.setItem('favoriteRecipes', finalLocalStorage);
-      setChangeHeart(whiteHeartIcon);      
+      setChangeHeart(whiteHeartIcon);
     } else {
-      const type = pathnameAPI.slice(0,7); 
-          const favorite = [{
-          id,
-          type,
-          area,
-          category: aux,
-          alcoholicOrNot: alcoholic,
-          name,
-          image: img,
-        }];
-        localStorage.setItem('favoriteRecipes', favorite);
-        setChangeHeart(blackHeartIcon);
-    
+      const type = pathnameAPI.slice(0, 7);
+      const favorite = [{
+        id,
+        type,
+        area,
+        category: aux,
+        alcoholicOrNot: alcoholic,
+        name,
+        image: img,
+      }];
+      localStorage.setItem('favoriteRecipes', favorite);
+      setChangeHeart(blackHeartIcon);
     }
-    
 
     // if (id !== recipeId) {
-      
+
     //     setChangeHeart(blackHeartIcon);
     //   }
     //   if (pathnameAPI === '/bebidas') {
@@ -126,7 +108,6 @@ export default function HeaderDetails(
     //     localStorage.setItem('favoriteRecipes', favorite);
     //     setChangeHeart(blackHeartIcon);
     //   }
-    
   };
 
   return (

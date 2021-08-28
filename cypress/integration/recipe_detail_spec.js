@@ -45,7 +45,7 @@ describe('33 - Implemente os elementos da tela de detalhes de uma receita respei
   });
 });
 
-describe.only('34 - Realize uma request para a API passando o `id` da receita que deve estar disponível nos parâmetros da URL', () => {
+describe('34 - Realize uma request para a API passando o `id` da receita que deve estar disponível nos parâmetros da URL', () => {
   it('Verifica se a requisição para a API de comidas foi realizada', () => {
     cy.visit('http://localhost:3000/comidas/52771', {
       onBeforeLoad(win) {
