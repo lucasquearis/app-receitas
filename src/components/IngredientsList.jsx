@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import '../cssPages/IngredientsList.css';
 
+const sectorTranslator = { comidas: 'meals', bebidas: 'cocktails' };
+
 function IngredientsList(params) {
-  console.log(params);
-  const { id: recipeId, type, listRenderType, recipe } = params.data;
-  const sector = (type === 'comidas') ? 'meals' : 'cocktails';
+  const { id: recipeId, type, renderType, recipe, setCompleted } = params.data;
+  const sector = sectorTranslator[type];
+
+  const arrayList = Object.keys(recipe).filter((key) => key.includes('strIngredient')
+    && recipe[key] !== null && recipe[key] !== '');
+
   const [recipeIngs, setRecipeIngs] = useState([]);
+
+  useEffect(() => {
+    if (recipeIngs.length === arrayList.length) {
+      setCompleted(true);
+    } else { setCompleted(false); }
+  }, [arrayList, recipeIngs, setCompleted]);
 
   useEffect(() => {
     if (!localStorage.getItem('inProgressRecipes')) {
@@ -31,9 +42,9 @@ function IngredientsList(params) {
     <>
       <input
         type="checkbox"
-        checked={ ingOnArray && 'checked' }
+        defaultChecked={ ingOnArray }
         id={ `ingredient-${ingNum}` }
-        onChange={ () => handleCheckBoxClick(ingNum, ingOnArray) }
+        onClick={ () => handleCheckBoxClick(ingNum, ingOnArray) }
       />
       <label
         htmlFor={ `ingredient-${ingNum}` }
@@ -45,23 +56,21 @@ function IngredientsList(params) {
   );
 
   const list = () => {
-    const arrayList = Object.keys(recipe).filter((key) => key.includes('strIngredient')
-      && recipe[key] !== null && recipe[key] !== '');
-    const testIdText = listRenderType ? '-ingredient-name-and-measure'
-      : '-ingredient-step';
+    const testIdText = renderType ? '-ingredient-step'
+      : '-ingredient-name-and-measure';
     return (
       <ul>
         {
           arrayList.map((ing, index) => {
             const ingNum = ing.match(/\d/g).join('');
-            const ingOnArray = (recipeIngs.indexOf(ingNum) >= 0);
+            const ingOnArray = (recipeIngs.indexOf(ingNum) >= 0) ? true : null;
             const text = `${recipe[ing]}: ${recipe[`strMeasure${ingNum}`]}`;
             return (
               <li
                 key={ index }
                 data-testid={ `${index}${testIdText}` }
               >
-                {(listRenderType) ? checkBoxComponent(text, ingNum, ingOnArray) : text }
+                {(renderType) ? checkBoxComponent(text, ingNum, ingOnArray) : text }
               </li>
             );
           })

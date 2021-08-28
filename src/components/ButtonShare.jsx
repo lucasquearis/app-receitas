@@ -11,7 +11,7 @@ function ShareButton() {
   const { pathname } = useLocation();
 
   const shareImgClick = () => {
-    copy(`http://localhost:3000${pathname}`);
+    copy((`http://localhost:3000${pathname}`).replace('/in-progress', ''));
     setShowShareMsg(true);
     setTimeout(() => setShowShareMsg(false), shareMsgDuration);
   };

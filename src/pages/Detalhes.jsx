@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import ButtonDetailMain from '../components/ButtonDetailMain';
+import ButtonActionRedirect from '../components/ButtonActionRedirect';
 import ButtonFavorite from '../components/ButtonFavorite';
 import ButtonShare from '../components/ButtonShare';
 import VideoEmbed from '../components/VideoEmbed';
@@ -16,12 +16,13 @@ const recommendedQuantity = 6;
 function Detalhes() {
   // Declarações de variáveis para saber se é pagina de comida ou bebida e definir o tipo recomendado
   const { pathname } = useLocation();
-  const [, type, id, listRenderType] = pathname.split('/');
+  const [, type, id, renderType] = pathname.split('/');
   const recommendedType = (type === 'comidas') ? 'bebidas' : 'comidas';
 
   // Variáveis com as informações da receita e dos recomendados e o fetch delas
   const [recipe, setRecipe] = useState(false);
   const [recommended, setRecommended] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     const detailsFetchs = async (params) => {
@@ -41,7 +42,7 @@ function Detalhes() {
   const { strYoutube: url, strMeal, strDrink } = recipe;
   const recipeName = strDrink || strMeal;
 
-  const favoriteObject = {
+  const localStrObject = {
     id,
     type: type.replace('s', ''),
     area: recipe.strArea ? recipe.strArea : '',
@@ -62,13 +63,13 @@ function Detalhes() {
       />
       <h1 data-testid="recipe-title">{recipeName}</h1>
       <ButtonShare />
-      <ButtonFavorite favoriteObject={ favoriteObject } />
+      <ButtonFavorite favoriteObject={ localStrObject } />
       <h2 data-testid="recipe-category">
         {type === 'comidas' ? recipe.strCategory : recipe.strAlcoholic}
       </h2>
       <br />
       <h3>Ingredients</h3>
-      <IngredientsList data={ { id, type, listRenderType, recipe } } />
+      <IngredientsList data={ { id, type, renderType, recipe, setCompleted } } />
       <br />
       <h3>Instructions</h3>
       <p data-testid="instructions">
@@ -79,7 +80,7 @@ function Detalhes() {
       <br />
       <Carousel recipes={ recommended } />
       <br />
-      <ButtonDetailMain renderData={ { pathname, id } } />
+      <ButtonActionRedirect renderData={ { pathname, id, renderType, completed } } />
     </>
   );
 }

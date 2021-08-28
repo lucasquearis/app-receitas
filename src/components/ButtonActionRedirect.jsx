@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import '../cssPages/ButtonDetailMain.css';
+import '../cssPages/ButtonActionRedirect.css';
 
-function ButtonDetailMain(data) {
-  const { renderData: { id: idRecipe, pathname } } = data;
+function ButtonActionRedirect(data) {
+  const { renderData: { id: idRecipe, pathname, renderType, completed } } = data;
   const [redirect, setRedirect] = useState(null);
 
   const doneRecipes = localStorage.getItem('doneRecipes')
@@ -13,22 +13,39 @@ function ButtonDetailMain(data) {
     ? localStorage.getItem('inProgressRecipes') : '';
   const recipeinProgress = inProgress.includes(idRecipe);
 
-  const mainBtnClick = () => setRedirect(`${pathname}/in-progress`);
+  const redirectClick = (path) => setRedirect(path);
 
   const detailsBtn = () => (
     <button
-      className="mainBtn"
+      className="detailBtn"
       data-testid="start-recipe-btn"
       type="button"
-      onClick={ mainBtnClick }
+      onClick={ () => redirectClick(`${pathname}/in-progress`) }
     >
       {recipeinProgress ? 'Continuar Receita' : 'Iniciar Receita'}
     </button>
   );
 
+  const progressBtn = () => (
+    <button
+      className="progressBtn"
+      data-testid="finish-recipe-btn"
+      disabled={ !completed }
+      type="button"
+      onClick={ () => redirectClick('/receitas-feitas') }
+    >
+      Finalizar receita
+    </button>
+  );
+
   if (redirect) return <Redirect to={ redirect } />;
 
-  return (notDone && detailsBtn());
+  return (
+    <>
+      { !renderType && notDone && detailsBtn() }
+      { renderType && progressBtn() }
+    </>
+  );
 }
 
-export default ButtonDetailMain;
+export default ButtonActionRedirect;
