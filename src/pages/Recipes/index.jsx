@@ -39,7 +39,7 @@ function Recipes() {
 
   React.useEffect(() => {
     requestApiData(api);
-  }, [requestApiData, api, location]);
+  }, [api, requestApiData]);
 
   React.useEffect(() => {
     const fetchCategores = async () => {
@@ -51,7 +51,7 @@ function Recipes() {
       setLoadingCategories(false);
     };
     fetchCategores();
-  }, [api, location]);
+  }, [api]);
 
   const recipesSize = 12;
   const catSize = 5;
@@ -85,8 +85,7 @@ function Recipes() {
                   {cat.strCategory}
                 </Button>
               ))}
-
-            { apiData[0][`${query}s`]
+            { 'meals' in apiData[0]
               ? (
                 <div className="d-flex flex-column align-items-center mt-3">
                   {apiData[0][`${query}s`]
