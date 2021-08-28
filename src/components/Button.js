@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import removeSomeSpaceAndSlash from '../helpers/fomartCategoriesID';
 
 const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick }) => {
   const [redirect, setRedirect] = useState(false);
@@ -20,7 +21,7 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
   if (id !== undefined) {
     return (
       <button
-        id={ id }
+        id={ removeSomeSpaceAndSlash(id) }
         className={ className }
         name={ buttonText }
         data-testid={ id }

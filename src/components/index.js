@@ -12,4 +12,6 @@ export { default as ShareButton } from './ShareButton';
 export { default as FavoriteButton } from './FavoriteButton';
 export { default as FavCard } from './FavoriteCard';
 export { default as Header } from './Header';
+export { default as HeaderDrinks } from './HeaderDrinks';
+export { default as HeaderMeals } from './HeaderMeals';
 export { default as Footer } from './Footer';

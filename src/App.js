@@ -19,6 +19,7 @@ import {
   Profile,
   DoneRecipes,
   FavouriteRecipes,
+  NotFound,
 } from './pages';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/explorar/comidas/ingredientes" component={ MealsByIngredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ DrinksByIngredients } />
         <Route path="/explorar/comidas/area" component={ MealsByArea } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/receitas-favoritas" component={ FavouriteRecipes } />

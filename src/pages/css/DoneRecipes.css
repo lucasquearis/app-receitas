@@ -17,11 +17,16 @@
 .recipes-categories {
   background-color: rgb(195, 195, 195);
   border: transparent;
+  cursor: pointer;
   font-size: 1.5em;
   height: 2em;
   margin: 0.2em 0.5em;
   text-align: center;
   width: 5.5em;
+}
+
+.recipes-categories:hover {
+  border: 0.1em solid black;
 }
 
 .done-cards-container {
@@ -43,6 +48,10 @@
     width: 7em;
   }
 
+  .recipes-categories:hover {
+    border: 0.15em solid black;
+  }
+
 }
 
 @media screen and ( min-width : 340px ) and ( max-width : 485px ) {
@@ -55,6 +64,10 @@
     font-size: 0.9em;
     margin: 0 0.7em;
     width: 6em;
+  }
+
+  .recipes-categories:hover {
+    border: 0.2em solid black;
   }
 
 }
