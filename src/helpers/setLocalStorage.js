@@ -43,12 +43,12 @@ export const favoriteRecipes = (props, btnFavorite) => {
 export const startOrContinue = (callback, id, type) => {
   const data = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (localStorage.inProgressRecipes) {
-    if (type === 'drinks') {
-      const { cocktails } = data[0];
-      callback(+Object.keys(cocktails) === id);
+    if (type === 'bebida') {
+      const { cocktails } = data;
+      callback(Object.keys(cocktails).some((item) => +item === +id));
     } else {
-      const { meals } = data[0];
-      callback(+Object.keys(meals) === id);
+      const { meals } = data;
+      callback(+Object.keys(meals).some((item) => +item === +id));
     }
   }
 };

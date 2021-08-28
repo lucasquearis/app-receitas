@@ -12,7 +12,6 @@ export default function InProgress(
   const [favorite, setFavorite] = useState(false);
   const [steps, setSteps] = useState([]);
   // const [checked, setChecked] = useState(false);
-
   useEffect(() => {
     if (!localStorage.inProgressRecipes) { initialProgressStore(); }
     const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
