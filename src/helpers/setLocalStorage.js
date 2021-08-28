@@ -15,14 +15,14 @@ export const updateProgressRecipe = (id, ing, type) => {
 };
 
 export const favoriteRecipes = (props, btnFavorite) => {
-  const { drink, meals, thumb, category, alcoholic, id, area, type } = props;
+  const { drink, meal, thumb, category, alcoholic, id, area, type } = props;
   const recipes = [{
     id,
-    type,
-    area,
-    category,
-    alcoholicOrNot: alcoholic,
-    name: (type === 'bebida') ? (drink) : (meals),
+    type: type === 'comidas' || type === 'meals' ? 'comida' : 'bebida',
+    area: area || '',
+    category: category || '',
+    alcoholicOrNot: alcoholic || '',
+    name: type === 'comidas' || type === 'meals' ? meal : drink,
     image: thumb,
   }];
   const recipesFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -44,11 +44,11 @@ export const startOrContinue = (callback, id, type) => {
   const data = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (localStorage.inProgressRecipes) {
     if (type === 'bebida') {
-      const { cocktails } = data;
-      callback(Object.keys(cocktails).some((item) => +item === +id));
+      const { drinks } = data;
+      callback(Object.keys(drinks).some((item) => +item === +id));
     } else {
       const { meals } = data;
-      callback(+Object.keys(meals).some((item) => +item === +id));
+      callback(Object.keys(meals).some((item) => +item === +id));
     }
   }
 };

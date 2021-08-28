@@ -13,15 +13,27 @@ export default function InProgressMeal(props) {
   if (!details.meals) { return <div>Loading...</div>; }
   const strIngredients = Object.entries(details.meals[0])
     .filter(([key, value]) => key.includes('strIngredient') && value);
-  const { strMeal, strMealThumb, strCategory, strInstructions } = details.meals[0];
+  const filterIngredients = Object.entries(details.meals[0])
+    .filter((item) => item[0].includes('Ingredient'))
+    .map((item) => item[1]).filter((item) => item !== '' && item !== null);
+  const filterMeasure = Object.entries(details.meals[0])
+    .filter((item) => item[0].includes('Measure'))
+    .map((item) => item[1]).filter((item) => item !== '' && item !== null);
+  const ingredientAndMeasure = [[...filterIngredients], [...filterMeasure]];
+
+  const { strMeal, strMealThumb, strCategory,
+    strInstructions, strYoutube, strArea } = details.meals[0];
   return (
     <div>
       <InProgress
-        name={ strMeal }
-        img={ strMealThumb }
+        meal={ strMeal }
+        thumb={ strMealThumb }
         category={ strCategory }
         ingredients={ strIngredients }
         instructions={ strInstructions }
+        youTube={ strYoutube }
+        area={ strArea }
+        ingredientAndMeasure={ ingredientAndMeasure }
         id={ id }
         type="meals"
       />

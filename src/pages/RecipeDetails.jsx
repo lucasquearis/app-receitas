@@ -29,7 +29,7 @@ export default function RecipeDetails(props) {
       .filter((item) => item[0].includes('Measure'))
       .map((item) => item[1])
       .filter((item) => item !== ' ' && item !== null && item !== '');
-    const ingredientEndMeasure = [[...filterIngredients], [...filterMeasure]];
+    const ingredientAndMeasure = [[...filterIngredients], [...filterMeasure]];
     return (
       <FoodDetails
         meals={ strMeal }
@@ -37,7 +37,7 @@ export default function RecipeDetails(props) {
         category={ strCategory }
         instructions={ strInstructions }
         youTube={ strYoutube }
-        ingredientEndMeasure={ ingredientEndMeasure }
+        ingredientAndMeasure={ ingredientAndMeasure }
         alcoholic=""
         id={ idMeal }
         area={ strArea }
@@ -57,14 +57,14 @@ export default function RecipeDetails(props) {
       .filter((item) => item[0].includes('Measure'))
       .map((item) => item[1]).filter((item) => item !== '' && item !== null);
 
-    const ingredientEndMeasure = [[...filterIngredients], [...filterMeasure]];
+    const ingredientAndMeasure = [[...filterIngredients], [...filterMeasure]];
     return (
       <DrinksDetails
         drink={ strDrink }
         thumb={ strDrinkThumb }
         category={ strCategory }
         instructions={ strInstructions }
-        ingredientEndMeasure={ ingredientEndMeasure }
+        ingredientAndMeasure={ ingredientAndMeasure }
         alcoholic={ strAlcoholic }
         id={ idDrink }
         area=""

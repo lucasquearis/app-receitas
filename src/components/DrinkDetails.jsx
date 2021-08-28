@@ -16,7 +16,7 @@ export default function DrinksDetails(props) {
   const [clipBoardCop, setClipBoardCop] = useState(false);
 
   const { drink, thumb, category, instructions,
-    ingredientEndMeasure, alcoholic, id, type } = props;
+    ingredientAndMeasure, alcoholic, id, type } = props;
   const maxArray = 6;
   const filterMeals = meals.slice(0, maxArray);
 
@@ -93,12 +93,12 @@ export default function DrinksDetails(props) {
         <h2>Ingredients</h2>
         <ul>
           {
-            ingredientEndMeasure[0].map((item, index) => (
+            ingredientAndMeasure[0].map((item, index) => (
               <li
-                key={ `${item} ${ingredientEndMeasure[1][index]}` }
+                key={ `${item} ${ingredientAndMeasure[1][index]}` }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                { `${item} - ${ingredientEndMeasure[1][index]}` }
+                { `${item} - ${ingredientAndMeasure[1][index]}` }
               </li>
             ))
           }
@@ -165,7 +165,7 @@ DrinksDetails.propTypes = {
   thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
-  ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
+  ingredientAndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
   type: PropTypes.string.isRequired,
   alcoholic: PropTypes.string.isRequired,
 };

@@ -18,7 +18,7 @@ export default function FoodDetails(props) {
   const maxArray = 6;
   const filterDrinks = drinks.slice(0, maxArray);
   const { meals, thumb, category, instructions,
-    youTube, ingredientEndMeasure, id, type } = props;
+    youTube, ingredientAndMeasure, id, type } = props;
 
   useEffect(() => {
     fetchDrinks(setDrinks);
@@ -90,12 +90,12 @@ export default function FoodDetails(props) {
         <h2>Ingredients</h2>
         <ul>
           {
-            ingredientEndMeasure[0].map((item, index) => (
+            ingredientAndMeasure[0].map((item, index) => (
               <li
-                key={ `${item} ${ingredientEndMeasure[1][index]}` }
+                key={ `${item} ${ingredientAndMeasure[1][index]}` }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                {`${item} - ${ingredientEndMeasure[1][index]}`}
+                {`${item} - ${ingredientAndMeasure[1][index]}`}
               </li>
             ))
           }
@@ -174,5 +174,5 @@ FoodDetails.propTypes = {
   instructions: PropTypes.string.isRequired,
   youTube: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ingredientEndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
+  ingredientAndMeasure: PropTypes.arrayOf(PropTypes.array).isRequired,
 };

@@ -11,19 +11,37 @@ export default function InProgressMeal(props) {
     fetchDrinksDetails(setDetails, id);
   }, []);
   if (!details.drinks) { return <div>Loading...</div>; }
+  const filterIngredients = Object.entries(details.drinks[0])
+    .filter((item) => item[0].includes('Ingredient'))
+    .map((item) => item[1])
+    .filter((item) => item !== '' && item !== null && item !== ' ');
+
+  const filterMeasure = Object.entries(details.drinks[0])
+    .filter((item) => item[0].includes('Measure'))
+    .map((item) => item[1])
+    .filter((item) => item !== ' ' && item !== null && item !== '');
+  const ingredientAndMeasure = [[...filterIngredients], [...filterMeasure]];
+
   const strIngredients = Object.entries(details.drinks[0])
     .filter(([key, value]) => key.includes('strIngredient') && value);
-  const { strDrink, strDrinkThumb, strAlcoholic, strInstructions } = details.drinks[0];
+  const {
+    strDrink,
+    strDrinkThumb,
+    strCategory,
+    strAlcoholic,
+    strInstructions } = details.drinks[0];
   return (
     <div>
       <InProgress
-        name={ strDrink }
-        img={ strDrinkThumb }
-        category={ strAlcoholic }
-        ingredients={ strIngredients }
+        drink={ strDrink }
+        thumb={ strDrinkThumb }
+        alcoholic={ strAlcoholic }
+        category={ strCategory }
         instructions={ strInstructions }
+        ingredientAndMeasure={ ingredientAndMeasure }
+        ingredients={ strIngredients }
         id={ id }
-        type="cocktails"
+        type="drinks"
       />
     </div>
   );

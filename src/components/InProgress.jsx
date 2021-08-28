@@ -4,19 +4,39 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { updateProgressRecipe, initialProgressStore } from '../helpers/setLocalStorage';
+import {
+  updateProgressRecipe,
+  initialProgressStore,
+  favoriteRecipes } from '../helpers/setLocalStorage';
 
-export default function InProgress(
-  { name, img, category, ingredients, instructions, id, type },
-) {
+export default function InProgress(props) {
+  const {
+    meal,
+    drink,
+    thumb,
+    category,
+    ingredients,
+    instructions,
+    id,
+    type,
+    alcoholic,
+  } = props;
+  const name = meal || drink;
   const [favorite, setFavorite] = useState(false);
   const [steps, setSteps] = useState([]);
+  const [clipBoardCop, setClipBoardCop] = useState(false);
   // const [checked, setChecked] = useState(false);
   useEffect(() => {
     if (!localStorage.inProgressRecipes) { initialProgressStore(); }
+    if (localStorage.favoriteRecipes) {
+      const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(favorites);
+      const test = favorites.some((fav) => fav.id === id);
+      console.log(test);
+      setFavorite(test);
+    }
     const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const recipes = getStorage[type];
-    console.log(steps);
     if (Object.keys(recipes).some((key) => key === id)) {
       setSteps(recipes[id]);
     } else {
@@ -29,15 +49,27 @@ export default function InProgress(
   }, []);
 
   useEffect(() => {
+    console.log(props);
+    favoriteRecipes(props, !favorite);
+  }, [favorite]);
+
+  useEffect(() => {
     updateProgressRecipe(id, steps, type);
-    console.log(steps);
   }, [steps]);
+
+  const clipboard = () => {
+    let url = window.location.href.split('/');
+    url = url.splice(0, url.length - 1).join('/');
+    console.log(url);
+    navigator.clipboard.writeText(url);
+    // const fiveSec = 5000;
+    setClipBoardCop(true);
+    // setTimeout(() => setClipBoardCop(false), fiveSec);
+  };
 
   const handleCheckBoxChange = ({ target }) => {
     const { name: n, checked: c } = target;
     const ingIndex = steps.findIndex(({ step }) => step === n);
-    console.log(ingIndex);
-    console.log(steps.slice(0, ingIndex));
     setSteps([
       ...steps.slice(0, ingIndex),
       { step: n, checked: c },
@@ -49,24 +81,27 @@ export default function InProgress(
 
   return (
     <div className="in-progress">
-      <img width="200px" src={ img } alt={ name } data-testid="recipe-photo" />
+      <img width="200px" src={ thumb } alt={ name } data-testid="recipe-photo" />
       <div className="main-infos">
         <h1 data-testid="recipe-title">{name}</h1>
+        {
+          clipBoardCop && <p>Link copiado!</p>
+        }
         <button
           type="button"
-          data-testid="share-btn"
+          onClick={ clipboard }
         >
-          <img src={ shareIcon } alt="share" />
+          <img data-testid="share-btn" src={ shareIcon } alt="share" />
         </button>
         <button
-          data-testid="favorite-btn"
           type="button"
           onClick={ () => setFavorite(!favorite) }
         >
-          <img src={ favoriteIcon } alt="favorite" />
+          <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
         </button>
       </div>
-      <h2 data-testid="recipe-category">{category}</h2>
+      {!alcoholic && <h2 data-testid="recipe-category">{category}</h2>}
+      {alcoholic && <h2 data-testid="recipe-category">{alcoholic}</h2>}
       <ul>
         {steps.map(({ step, checked }, i) => (
           <li key={ i }>
@@ -106,8 +141,10 @@ export default function InProgress(
 }
 
 InProgress.propTypes = {
-  name: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
+  meal: PropTypes.string.isRequired,
+  alcoholic: PropTypes.string.isRequired,
+  drink: PropTypes.string.isRequired,
+  thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   instructions: PropTypes.string.isRequired,
