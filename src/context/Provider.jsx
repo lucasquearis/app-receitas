@@ -14,7 +14,6 @@ export default function Provider({ children }) {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
   const context = {
     loading,
     setLoading,
