@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copyToClipBoard from 'clipboard-copy';
+import getDetailsInitialButton from '../service/getDetailsInitialButton';
 import './DetalheComida.css';
 import useIsFavorite from '../hooks/useIsFavorite';
 import * as ComidasAPI from '../service/ComidasAPI';
@@ -23,7 +23,7 @@ export default function DetalheComida(props) {
   const [favorite, setFavorite] = useState(false);
 
   useIsFavorite(setFavorite, food, 'comida');
-  // localStorage.setItem('doneRecipes', JSON.stringify([{ id: '52772' }]));
+
   useEffect(() => {
     const getFood = async () => {
       const foodResult = await ComidasAPI.buscarComidaPeloID(id);
@@ -122,61 +122,9 @@ export default function DetalheComida(props) {
     );
   };
 
-  const getInitialButton = () => {
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes !== null) {
-      const alredyDone = doneRecipes.some((recipe) => recipe.id === food.idMeal);
-      if (!alredyDone) {
-        console.log('receita ainda não feita');
-        return (
-          <button
-            className="start-recipe-btn"
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            <Link
-              className="start-recipe-food-btn-link"
-              to={ `/comidas/${food.idMeal}/in-progress` }
-            >
-              Iniciar Receita
-            </Link>
-          </button>
-        );
-      }
-      return (
-        <button
-          className="start-recipe-btn-invisible"
-          data-testid="start-recipe-btn"
-          type="button"
-        >
-          <Link
-            className="start-recipe-food-btn-link"
-            to={ `/comidas/${food.idMeal}/in-progress` }
-          >
-            Iniciar Receita
-          </Link>
-        </button>
-      );
-    }
-    return (
-      <button
-        className="start-recipe-btn"
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        <Link
-          className="start-recipe-food-btn-link"
-          to={ `/comidas/${food.idMeal}/in-progress` }
-        >
-          Iniciar Receita
-        </Link>
-      </button>
-    );
-  };
-
   return (
     <section className="food-info">
-      { getInitialButton() }
+      { getDetailsInitialButton(food, 'comida') }
       <img
         className="food-image"
         data-testid="recipe-photo"

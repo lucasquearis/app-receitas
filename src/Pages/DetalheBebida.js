@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copyToClipBoard from 'clipboard-copy';
+import getDetailsInitialButton from '../service/getDetailsInitialButton';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
 import { buscarComidasAleatoria } from '../service/ComidasAPI';
@@ -163,18 +163,7 @@ export default function DetalheBebida(props) {
 
   return (
     <section className="food-info">
-      <button
-        className="start-drink-recipe-btn"
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        <Link
-          className="start-recipe-drink-btn-link"
-          to={ `/bebidas/${drink.idDrink}/in-progress` }
-        >
-          Iniciar Receita
-        </Link>
-      </button>
+      { getDetailsInitialButton(drink, 'bebida') }
       <img
         className="food-drink-image"
         data-testid="recipe-photo"
