@@ -15,6 +15,7 @@ import InProgressFood from '../pages/InProgressFood';
 import CookedRecipies from '../pages/CookedRecipies';
 import FavoriteRecipies from '../pages/FavoriteRecipies';
 import RecipyDetails from '../pages/RecipyDetails';
+// import TestRecipyDetails from '../pages/TestRecipyDetails'; // novo componente que teria somente o url de bebidas
 
 function Routes() {
   return (
@@ -25,7 +26,7 @@ function Routes() {
       {/* <Route path="/bebidas/:id"><RecipyDetails /></Route> */}
       <Route
         exact
-        path="/comidas/{id-da-receita/in-progress"
+        path="/comidas/{id-da-receita}/in-progress"
         component={ InProgressFood }
       />
       <Route
