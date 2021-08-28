@@ -1,18 +1,18 @@
-.meals {
-height: fit-content;
-  min-height:100%;
-}
-
-.imgtittle{
-  height: 30vh; 
-  max-width: 80vh
+.imgtittle {
+  height: 30vh;
+  max-width: 80vh;
 }
 
 .ingredients {
-  display:flex;
-  flex-flow: row wrap
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.meals {
+  height: fit-content;
+  min-height: 100%;
 }
 
 .nodot {
-  list-style-type: none
+  list-style-type: none;
 }
