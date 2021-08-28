@@ -17,7 +17,5 @@ export {
   DRINKS_INGREDIENTS_LIST,
   MEALS_INGREDIENTS_IMAGE,
   DRINKS_INGREDIENTS_IMAGE,
-  MEALS_BY_INGREDIENT,
-  DRINKS_BY_INGREDIENT,
 } from './endPoints';
 export { default as fetchApi } from './fetchApi';
