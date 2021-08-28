@@ -17,6 +17,7 @@ import ExploreIngredients from './pages/ExploreIngredients';
 import OriginFood from './pages/Explore/Origin/OriginFood';
 
 import './App.css';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-favoritas" component={ Favorites } />
+        <Route component={ NotFound } />
       </Switch>
     </Provider>
   );
