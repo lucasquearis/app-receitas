@@ -28,6 +28,7 @@ const IngredientList = (array) => {
       ? <li data-testid={ `${index}${texthandle}` }>{n[1]}</li>
       : null
   ));
+  // console.log(obj);
   return obj;
 };
 
@@ -41,14 +42,17 @@ const RecomendList = (array, type) => {
           className="RecommendCard"
           data-testid={ `${index}-recomendation-card` }
         >
-          <img alt="recomendamos!" src={ n.strDrinkThumb } />
-          <p>{n.strDrink}</p>
+          <img className="img-details" alt="recomendamos!" src={ n.strDrinkThumb } />
+          <h2 data-testid={ `${index}-recomendation-title` }>{n.strDrink}</h2>
+          {console.log('array drinks', n)}
         </button>
-
       </Link>
     ));
-    return obj;
+    console.log('recomend list', obj);
+    const NUM = 6;
+    return obj.slice(0, NUM);
   }
+
   const obj = array.meals.map((n, index) => (
     <Link key={ index } to={ `/comidas/${n.idMeal}` }>
       <button
@@ -56,12 +60,13 @@ const RecomendList = (array, type) => {
         className="RecommendCard"
         data-testid={ `${index}-recomendation-card` }
       >
-        <img alt="recomendamos!" src={ n.strMealThumb } />
-        <p>{n.strMeal}</p>
+        <img className="img-details" alt="recomendamos!" src={ n.strMealThumb } />
+        <h2 data-testid={ `${index}-recomendation-title` }>{n.strMeal}</h2>
       </button>
     </Link>
   ));
-  return obj;
+  const NUM = 6;
+  return obj.slice(0, NUM);
 };
 
 const measureList = (array) => {
@@ -111,12 +116,14 @@ const DataManeger = (data, receita) => {
     ingredients: [ingredients],
     measures: [measures],
   };
+  console.log('objdrink', objdrink);
   return objdrink;
 };
 
 function RecipyDetails() {
   const [Data, setDataRecipe] = useState(undefined);
   const [DataRecomend, setDataRecomend] = useState(undefined);
+  console.log('DataRecomend', DataRecomend);
 
   const { id, receita } = useParams();
 
@@ -142,7 +149,7 @@ function RecipyDetails() {
 
   if (Data) {
     return (
-      <>
+      <div className="body-details">
         <img
           className="imgtittle"
           data-testid="recipe-photo"
@@ -173,10 +180,20 @@ function RecipyDetails() {
             ? <iframe title="vid" data-testid="video" width="50%" src={ Data.youlink } />
             : null
         }
-        <h2>Recomendadas</h2>
-        <div>{RecomendList(DataRecomend !== null ? DataRecomend : null, receita)}</div>
-        <Button data-testid="start-recipe-btn">Iniciar Receita</Button>
-      </>
+        <h2 data-testid="1-recomendation-title">Recomendadas</h2>
+        <div className="sugestions">
+          {RecomendList(DataRecomend !== null ? DataRecomend
+            : null, receita)}
+
+        </div>
+        <Button
+          className="button-details"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar Receita
+
+        </Button>
+      </div>
     );
   }
   return (

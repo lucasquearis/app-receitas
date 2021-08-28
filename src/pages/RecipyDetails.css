@@ -1,3 +1,16 @@
+.body-details {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.button-details {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+
 .imgtittle {
   height: 30vh;
   max-width: 80vh;
@@ -15,4 +28,13 @@
 
 .nodot {
   list-style-type: none;
+}
+
+.img-details {
+  width: 170px;
+}
+
+.sugestions {
+  display: flex;
+  overflow-x: scroll;
 }
