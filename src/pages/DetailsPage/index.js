@@ -12,9 +12,11 @@ import RecipesRecommendation from './RecipesRecommendation';
 
 export default function DetailsPage() {
   const { pathname } = useLocation();
+
   // id recebido pela url;
   const { id } = useParams();
   const { setLoading, loading } = useDataContext();
+
   // estado que salva detalhes da receita;
   const [recipeDetails, setRecipeDetails] = useState({});
 
@@ -92,7 +94,7 @@ export default function DetailsPage() {
 
   return (
     <div>
-      { !loading ? details() : <h1>Carregando...</h1>}
+      { !loading ? details() : <h1>Carregando...</h1> }
     </div>
   );
 }

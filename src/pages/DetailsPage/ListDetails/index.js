@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function ListDetails({ ingredients, measures }) {
-  const renderList = ingredients.map((ingredient, index) => {
+  return ingredients.map((ingredient, index) => {
     if (!measures[index]) {
       return (
         <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
@@ -16,5 +17,9 @@ export default function ListDetails({ ingredients, measures }) {
       </li>
     );
   });
-  return renderList;
 }
+
+ListDetails.propTypes = {
+  ingredient: PropTypes.arrayOf(PropTypes.string).isRequired,
+  measures: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
