@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import GenericBtn from '../GenericBtn';
 import IconBtn from '../IconBtn';
 import RadioInput from '../RadioInput';
 import TextInput from '../TextInput';
 import './style.css';
+import {
+  fetchFoodByFirstLetter,
+  fetchFoodByIngredient,
+  fetchFoodByName,
+} from '../../redux/actions/foodActions';
 
 function SearchBar() {
   const [searchInputs, setSearchInputs] = useState(false);
   const [formInputs, setFormInput] = useState({});
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (searchInputs) {
       setSearchInputs(false);
     } else {
       setSearchInputs(true);
+    }
+  };
+
+  const handleSubmit = ({ searchInput, selectedSearch }) => {
+    console.log(selectedSearch, searchInput);
+    switch (selectedSearch) {
+    case 'ingredients':
+      return dispatch(fetchFoodByIngredient(searchInput));
+    case 'name':
+      return dispatch(fetchFoodByName(searchInput));
+    case 'firstLetter':
+      return dispatch(fetchFoodByFirstLetter(searchInput));
+    default:
+      return true;
     }
   };
 
@@ -67,6 +88,12 @@ function SearchBar() {
     label: 'Primeira Letra',
   };
 
+  const searchBtn = {
+    dataId: 'exec-search-btn',
+    value: 'Buscar',
+    onClick: () => handleSubmit(formInputs),
+  };
+
   return (
     <>
       <IconBtn { ...searchBtnProps } />
@@ -77,10 +104,8 @@ function SearchBar() {
             <RadioInput { ...ingredientsRadioProps } />
             <RadioInput { ...nameRadioProps } />
             <RadioInput { ...firstLetterRadioProps } />
-
-            <button type="button" data-testid="exec-search-btn">Buscar</button>
-          </form>
-        )
+            <GenericBtn { ...searchBtn } />
+          </form>)
       }
     </>
   );
