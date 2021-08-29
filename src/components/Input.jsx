@@ -19,9 +19,7 @@ export default function Input({
       htmlFor={ id }
       className={ classNameLabel }
     >
-
-      { textLabel }
-
+      { type === 'checkbox' || type === 'radio' ? '' : textLabel }
       <input
         data-testid={ id }
         name={ name }
@@ -34,7 +32,7 @@ export default function Input({
         checked={ checked }
         placeholder={ placeholder }
       />
-
+      { type === 'checkbox' || type === 'radio' ? textLabel : '' }
     </label>
   );
 }
