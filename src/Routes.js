@@ -17,7 +17,6 @@ import OriginExplorer from './pages/OriginExplorer';
 import MakedRecipes from './pages/MakedRecipes';
 import RecipeProgress from './pages/RecipeProgress';
 
-
 function Routes() {
   return (
     <Switch>
