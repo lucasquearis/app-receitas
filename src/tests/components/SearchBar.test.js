@@ -116,4 +116,76 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     expect(store.getState().reducerBebidas.bebidas).toHaveLength(ginDrinks.drinks.length);
     expect(history.location.pathname).toBe('/bebidas');
   });
+
+  it('verifica a requisição com primeira letra na pagina de comidas', async () => {
+    renderWithRouterAndRedux(<SearchBar />, '/comidas');
+
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioLetter = screen.getByTestId(FIRST_LETTER);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    fireEvent.click(radioLetter);
+    expect(radioLetter).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'a' } });
+    expect(searchInput).toHaveValue('a');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+  });
+
+  it('verifica a requisição com primeira letra na pagina de bebidas', async () => {
+    renderWithRouterAndRedux(<SearchBar />, '/bebidas');
+
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioLetter = screen.getByTestId(FIRST_LETTER);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    fireEvent.click(radioLetter);
+    expect(radioLetter).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'a' } });
+    expect(searchInput).toHaveValue('a');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+  });
+
+  it('verifica a requisição por ingrediente com na pagina de comidas', async () => {
+    renderWithRouterAndRedux(<SearchBar />, '/comidas');
+
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioIngredient = screen.getByTestId(RADIO_INGREDIENT);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    fireEvent.click(radioIngredient);
+    expect(radioIngredient).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'chilli' } });
+    expect(searchInput).toHaveValue('chilli');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+  });
+
+  it('verifica a requisição com primeira letra na pagina de bebidas', async () => {
+    renderWithRouterAndRedux(<SearchBar />, '/bebidas');
+
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioIngredient = screen.getByTestId(RADIO_INGREDIENT);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    fireEvent.click(radioIngredient);
+    expect(radioIngredient).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'limon' } });
+    expect(searchInput).toHaveValue('limon');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+  });
 });

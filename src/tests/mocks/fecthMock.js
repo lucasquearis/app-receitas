@@ -1,5 +1,5 @@
 import oneDrink from '../../../cypress/mocks/oneDrink';
-import { soupMeals, oneMeal, ginDrinks } from './respMoks';
+import { soupMeals, oneMeal, ginDrinks, meals, drinks } from './respMoks';
 
 const fetchMock = async (url) => ({
   status: 200,
@@ -18,7 +18,7 @@ const fetchMock = async (url) => ({
     case 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=gin':
       return ginDrinks;
 
-    default: return { erro: 'url invalida' };
+    default: return { ...meals, ...drinks };
     }
   },
 });
