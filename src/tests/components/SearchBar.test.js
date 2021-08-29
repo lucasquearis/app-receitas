@@ -1,24 +1,32 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor, cleanup } from '@testing-library/react';
 import React from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import renderWithRouterAndRedux from '../helpers/renderWithRouterAndRedux';
 import fetchMock from '../mocks/fecthMock';
+import { soupMeals, ginDrinks } from '../mocks/respMoks';
 
-// const mockFetch = jest.spyOn(global, 'fetch').mockImplementation(fetchMock);
+const SEARCH_INPUT = 'search-input';
+const RADIO_NAME = 'name-search-radio';
+const RADIO_INGREDIENT = 'ingredient-search-radio';
+const FIRST_LETTER = 'first-letter-search-radio';
+const SEARCH_BUTTON = 'exec-search-btn';
 
 global.fetch = jest.fn(fetchMock);
 
-afterEach(() => jest.clearAllMocks());
-
 describe('verifica a renderização e o funcionamento componente SearchBar', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+    cleanup();
+  });
+
   it('verifica se todos componentes são renderizados', () => {
     renderWithRouterAndRedux(<SearchBar />, '/comidas');
 
-    const searchInput = screen.getByTestId('search-input');
-    const radioIngredient = screen.getByTestId('ingredient-search-radio');
-    const radioName = screen.getByTestId('name-search-radio');
-    const radioLetter = screen.getByTestId('first-letter-search-radio');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioIngredient = screen.getByTestId(RADIO_INGREDIENT);
+    const radioName = screen.getByTestId(RADIO_NAME);
+    const radioLetter = screen.getByTestId(FIRST_LETTER);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     expect(searchInput).toBeInTheDocument();
     expect(radioIngredient).toBeInTheDocument();
@@ -27,13 +35,52 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     expect(searchBtn).toBeInTheDocument();
   });
 
-  it('verifica busca por nome na pagina de comidas', async () => {
-    const { store } = renderWithRouterAndRedux(<SearchBar />, '/comidas');
+  it('verifica redirecionamento caso ocorra apenas um resultado com comida', async () => {
+    const { store, history } = renderWithRouterAndRedux(<SearchBar />, '/comidas');
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioName = screen.getByTestId(RADIO_NAME);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
 
-    const searchInput = screen.getByTestId('search-input');
-    const radioName = screen.getByTestId('name-search-radio');
-    const searchBtn = screen.getByTestId('exec-search-btn');
-    const { comidas } = store.getState().reducerComidas;
+    fireEvent.click(radioName);
+    expect(radioName).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'Arrabiata' } });
+    expect(searchInput).toHaveValue('Arrabiata');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+
+    expect(store.getState().reducerComidas.comidas).toHaveLength(1);
+    expect(history.location.pathname).toBe('/comidas/52771');
+  });
+
+  it('verifica redirecionamento caso ocorra apenas um resultado com bebida', async () => {
+    const { store, history } = renderWithRouterAndRedux(<SearchBar />, '/bebidas');
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioName = screen.getByTestId(RADIO_NAME);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    fireEvent.click(radioName);
+    expect(radioName).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'Aquamarine' } });
+    expect(searchInput).toHaveValue('Aquamarine');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+
+    expect(store.getState().reducerBebidas.bebidas).toHaveLength(1);
+    expect(history.location.pathname).toBe('/bebidas/178319');
+  });
+
+  it('verifica busca por nome na pagina de comidas', async () => {
+    const { store, history } = renderWithRouterAndRedux(<SearchBar />, '/comidas');
+
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioName = screen.getByTestId(RADIO_NAME);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     fireEvent.click(radioName);
     expect(radioName).toBeChecked();
@@ -42,9 +89,31 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     fireEvent.change(searchInput, { target: { value: 'Soup' } });
     expect(searchInput).toHaveValue('Soup');
     fireEvent.click(searchBtn);
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    // await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
-    // console.log(store.getState());
-    console.log(comidas);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+
+    expect(store.getState().reducerComidas.comidas).toHaveLength(soupMeals.meals.length);
+    expect(history.location.pathname).toBe('/comidas');
+  });
+
+  it('verifica busca por nome na pagina de bebidas', async () => {
+    const { store, history } = renderWithRouterAndRedux(<SearchBar />, '/bebidas');
+
+    const searchInput = screen.getByTestId(SEARCH_INPUT);
+    const radioName = screen.getByTestId(RADIO_NAME);
+    const searchBtn = screen.getByTestId(SEARCH_BUTTON);
+
+    fireEvent.click(radioName);
+    expect(radioName).toBeChecked();
+    expect(searchBtn).toBeEnabled();
+
+    fireEvent.change(searchInput, { target: { value: 'gin' } });
+    expect(searchInput).toHaveValue('gin');
+    fireEvent.click(searchBtn);
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
+
+    expect(store.getState().reducerBebidas.bebidas).toHaveLength(ginDrinks.drinks.length);
+    expect(history.location.pathname).toBe('/bebidas');
   });
 });
