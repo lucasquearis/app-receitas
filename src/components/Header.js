@@ -59,7 +59,7 @@ function Header() {
         <input
           type="image"
           className="header-button"
-          onClick={ () => history.push('/profile') }
+          onClick={ () => history.push('/perfil') }
           src={ profilePicture }
           alt="Ícone que indica o botão pra ir para o perfil de usuário"
           data-testid="profile-top-btn"

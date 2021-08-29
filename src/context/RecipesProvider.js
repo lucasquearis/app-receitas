@@ -124,6 +124,7 @@ function RecipesProvider({ children }) {
     localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: infoUser.email }));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({}));
   }, [infoUser]);
 
   return (

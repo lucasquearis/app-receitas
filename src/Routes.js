@@ -1,10 +1,7 @@
-// vitals
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Explorer from './pages/Explorer';
 import ExplorerDrinks from './pages/ExplorerDrinks';
-
-// components
 import Meals from './pages/Meals';
 import Login from './pages/Login';
 import Profile from './pages/Profile';

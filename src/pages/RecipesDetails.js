@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Redirect, useLocation, useParams } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Sugestions from '../components/Sugestions';
 import '../styles/Details.css';
 import HeaderDetails from '../components/HeaderDetails';
 import myContext from '../context/myContext';
 import Ingredients from '../components/Ingredients';
+import StartButton from '../components/StartButton';
 
 function RecipesDetails() {
   const { pathname } = useLocation();
   const { id } = useParams();
   const { keyType,
     setRecipe, setKeysType, url, recipe } = useContext(myContext);
-  const [buttonText, setButtonText] = useState(false);
 
   const video = (<iframe
     className="recipe-video"
@@ -21,12 +21,6 @@ function RecipesDetails() {
     height="315"
     src={ url }
   />);
-
-  const handleClick = () => {
-    const idRecipe = JSON.parse(localStorage.getItem('idRecipe'));
-    localStorage.setItem('idRecipe', JSON.stringify([...idRecipe, id]));
-    setButtonText(true);
-  };
 
   useEffect(() => {
     try {
@@ -47,9 +41,7 @@ function RecipesDetails() {
     }
   }, []);
 
-  const messageButton = !buttonText ? 'Iniciar Receita' : 'Continuar Receita';
   const text = keyType === 'meals' ? 'drinks' : 'meals';
-  if (buttonText) return <Redirect to={ `${pathname}/in-progress` } />;
 
   return (
     <section className="details-body">
@@ -61,14 +53,7 @@ function RecipesDetails() {
       <div className="sugestions">
         <Sugestions type={ text } />
       </div>
-      <button
-        className="iniciar-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ handleClick }
-      >
-        { messageButton }
-      </button>
+      <StartButton />
     </section>
   );
 }
