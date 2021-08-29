@@ -30,7 +30,7 @@ export default function Comidas() {
           <div key={ item.idMeal }>
             { `categoria: ${item.strCategory}` }
             <Link to={ `/comidas/${item.idMeal}` }>
-              <Card recipe={ item } index={ index } />
+              <Card item={ item } index={ index } />
             </Link>
           </div>
         )) }

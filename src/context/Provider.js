@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Context from './Context';
-import * as RequestMealsAPI from '../services/requestMealsAPI';
-import * as RequestCocktailsAPI from '../services/requestCocktailsAPI';
+import { fetchMeals } from '../services/requestMealsAPI';
+import { fetchDrinks } from '../services/requestDrinksAPI';
 
 function Provider({ children }) {
   const [user, setUser] = useState({
@@ -16,13 +16,12 @@ function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [recipeType, setRecipeType] = useState('meals');
-  // const [exploreByArea, setExploreByArea] = ('off');
 
   useEffect(() => {
     async function fetchAPI() {
-      const responseMeals = await RequestMealsAPI.fetchMeals();
+      const responseMeals = await fetchMeals();
       setMeals(responseMeals);
-      const responseCocktails = await RequestCocktailsAPI.fetchCocktails();
+      const responseCocktails = await fetchDrinks();
       setCocktails(responseCocktails);
     }
     fetchAPI();
@@ -70,8 +69,6 @@ function Provider({ children }) {
     setMeals,
     recipeType,
     setRecipeType,
-    // exploreByArea,
-    // setExploreByArea,
   };
 
   return (
