@@ -29,7 +29,7 @@ export default function Bebidas() {
           <div key={ item.idDrink }>
             { `categoria: ${item.strCategory}` }
             <Link to={ `/bebidas/${item.idDrink}` }>
-              <Card recipe={ item } index={ index } />
+              <Card item={ item } index={ index } />
             </Link>
           </div>
         )) }

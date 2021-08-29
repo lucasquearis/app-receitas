@@ -1,15 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Context from '../context/Context';
-import {
-  fetchMealsByIngredient,
-  fetchMealsByName,
-  fetchMealsByFirstLetter,
-} from '../services/requestMealsAPI';
-import {
-  fetchCocktailsByIngredient,
-  fetchCocktailsByName,
-  fetchCocktailsByFirstLetter,
-} from '../services/requestCocktailsAPI';
+import * as RequestMealsAPI from '../services/requestMealsAPI';
+import * as RequestCocktailsAPI from '../services/requestDrinksAPI';
 
 export default function SearchBar() {
   const { setCocktails, setMeals, recipeType } = useContext(Context);
@@ -21,43 +13,43 @@ export default function SearchBar() {
   const getMeals = async () => {
     let response = '';
     if (searchRadio === firstLetterSearch && searchInput.length > 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (searchRadio === 'ingredient-search') {
-      response = await fetchMealsByIngredient(searchInput);
+      response = await RequestMealsAPI.fetchMealsByIngredient(searchInput);
     }
     if (searchRadio === 'name-search') {
-      response = await fetchMealsByName(searchInput);
+      response = await RequestMealsAPI.fetchMealsByName(searchInput);
     }
     if (searchRadio === firstLetterSearch) {
-      response = await fetchMealsByFirstLetter(searchInput);
+      response = await RequestMealsAPI.fetchMealsByFirstLetter(searchInput);
     }
     if (response !== null && searchRadio !== '') {
       return setMeals(response.slice(0, maxRecipes));
     }
 
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const getDrinks = async () => {
     let response = '';
     if (searchRadio === firstLetterSearch && searchInput.length > 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (searchRadio === 'ingredient-search') {
-      response = await fetchCocktailsByIngredient(searchInput);
+      response = await RequestCocktailsAPI.fetchDrinksByIngredient(searchInput);
     }
     if (searchRadio === 'name-search') {
-      response = await fetchCocktailsByName(searchInput);
+      response = await RequestCocktailsAPI.fetchDrinksByName(searchInput);
     }
     if (searchRadio === firstLetterSearch) {
-      response = await fetchCocktailsByFirstLetter(searchInput);
+      response = await RequestCocktailsAPI.fetchDrinksByFirstLetter(searchInput);
     }
     if (response !== null && searchRadio !== '') {
       return setCocktails(response.slice(0, maxRecipes));
     }
 
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const handleInputText = ({ target: { value } }) => {

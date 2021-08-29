@@ -1,24 +1,22 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-function Card({ recipe, index }) {
+function Card({ item, index }) {
   return (
     <div
-      className="card border border-danger"
-      key={ recipe.idMeal || recipe.idDrink }
+      key={ item.idMeal || item.idDrink }
       data-testid={ `${index}-recipe-card` }
     >
       <div className="card-img-top">
         <img
-          className="img-fluid"
-          src={ recipe.strMealThumb || recipe.strDrinkThumb }
-          alt={ recipe.strMeal || recipe.strDrink }
+          src={ item.strMealThumb || item.strDrinkThumb }
+          alt={ item.strMeal || item.strDrink }
           data-testid={ `${index}-card-img` }
         />
       </div>
-      <div className="card-inner">
-        <h2 className="title-recipe" data-testid={ `${index}-card-name` }>
-          { recipe.strMeal || recipe.strDrink }
+      <div>
+        <h2 data-testid={ `${index}-card-name` }>
+          { item.strMeal || item.strDrink }
         </h2>
       </div>
     </div>
@@ -26,7 +24,7 @@ function Card({ recipe, index }) {
 }
 
 Card.propTypes = {
-  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+  item: PropTypes.objectOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
 };
 
