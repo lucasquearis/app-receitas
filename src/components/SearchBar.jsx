@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { bool, func } from 'prop-types';
+import { bool, func, arrayOf, shape } from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import Input from './Input';
 import { fetchSearchRecipes } from '../redux/actions';
 
 const MSG_ALERT = 'Sua busca deve conter somente 1 (um) caracter';
 
-function SearchBar({ foodPage, searchRecipes }) {
+function SearchBar({ foodPage, searchRecipes, recipes }) {
   const [state, setState] = useState({
     query: '',
     consultBy: 'ingredient',
@@ -37,8 +38,15 @@ function SearchBar({ foodPage, searchRecipes }) {
 
   const { query, consultBy } = state;
 
+  const typeRecipe = foodPage ? 'comidas' : 'bebidas';
+  const typeId = foodPage ? 'idMeal' : 'idDrink';
+
   return (
     <nav>
+      {recipes.length === 1
+        ? <Redirect to={ `/${typeRecipe}/${recipes[0][typeId]}` } />
+        : ''}
+
       <Input
         id="search-input"
         type="text"
@@ -89,14 +97,19 @@ function SearchBar({ foodPage, searchRecipes }) {
 SearchBar.propTypes = {
   foodPage: bool,
   searchRecipes: func.isRequired,
+  recipes: arrayOf(shape()).isRequired,
 };
 
 SearchBar.defaultProps = {
   foodPage: false,
 };
 
+const mapStateToProps = (state) => ({
+  recipes: state.recipesReducer.recipes,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   searchRecipes: (state) => dispatch(fetchSearchRecipes(state)),
 });
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
