@@ -9,31 +9,27 @@ import { getMealsById } from '../services/mealAPI';
 import { getDrinksById } from '../services/drinkAPI';
 
 export default function RecipeProgress() {
-  const { recipe, setRecipe, keyType, setKeysType, id, setId, keyProgress, setKeyProgress } = useContext(myContext);
+  const { setRecipe, setKeysType } = useContext(myContext);
   const { pathname } = useLocation();
-  const [, type, idPath] = pathname.split('/');
+  const [, type, id] = pathname.split('/');
 
   useEffect(() => {
     const getId = async () => {
-      const opt1 = (type === 'comidas') ? 'meals' : 'drinks';
-      const opt2 = opt1 === 'meals' ? 'meals' : 'cocktails';
+      const text = (type === 'comidas') ? 'meals' : 'drinks';
       const result = (type === 'comidas')
-        ? await getMealsById(idPath) : await getDrinksById(idPath);
-      setRecipe(result[opt1][0]);
-      setKeysType(opt1);
-      setId(idPath);
-      setKeyProgress(opt2);
+        ? await getMealsById(id) : await getDrinksById(id);
+      setRecipe(result[text][0]);
+      setKeysType(text);
     };
     getId();
   }, []);
 
   return (
     <section>
-      <HeaderDetails recipe={ recipe } keyType={ keyType } />
+      <HeaderDetails />
       <IngredientsStep />
-      <Intructions recipe={ recipe } />
+      <Intructions />
       <ButtonFinish />
-
     </section>
   );
 }

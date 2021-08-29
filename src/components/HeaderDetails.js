@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
+import myContext from '../context/myContext';
 
-export default function HeaderDetails(props) {
-  const { recipe, keyType } = props;
+export default function HeaderDetails() {
+  const { recipe, keyType } = useContext(myContext);
   const type = keyType === 'meals' ? 'Meal' : 'Drink';
   return (
     <div className="imagem-container">
@@ -20,7 +21,7 @@ export default function HeaderDetails(props) {
         >
           { recipe[`str${type}`] }
         </h2>
-        <button data-testid="favorite-btn" type="button">favorite</button>
+        <FavoriteButton />
         <ShareButton />
       </div>
       <h4
@@ -32,8 +33,3 @@ export default function HeaderDetails(props) {
     </div>
   );
 }
-
-HeaderDetails.propTypes = {
-  recipe: PropTypes.instanceOf(Object).isRequired,
-  keyType: PropTypes.string.isRequired,
-};

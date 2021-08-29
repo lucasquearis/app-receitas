@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import myContext from '../context/myContext';
 
-export default function Intructions(props) {
-  const { recipe } = props;
+export default function Intructions() {
+  const { recipe } = useContext(myContext);
   const key = 'strInstructions';
   if (!recipe) return '';
   return (
@@ -17,7 +17,3 @@ export default function Intructions(props) {
     </div>
   );
 }
-
-Intructions.propTypes = {
-  recipe: PropTypes.instanceOf(Object).isRequired,
-};

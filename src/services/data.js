@@ -3,6 +3,8 @@ const URL_RADIO_BUTTON = {
   name: 'search.php?s',
   letter: 'search.php?f',
 };
+const LOCAL_STORAGE_REC_PROGRESS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+const OBJ_LOCAL_STORAGE = { cocktails: { chave: [] }, meals: { chave: [] } };
 const MEAL_OBJ = { textValue: '', radioValue: 'ingredient', pathname: '/comidas' };
 const DRINK_OBJ = { textValue: '', radioValue: 'name', pathname: '/bebidas' };
 const ALERT_ONE = 'Sua busca deve conter somente 1 (um) caracter';
@@ -18,8 +20,6 @@ export {
   NUMBER_CARDS,
   MEAL_OBJ,
   DRINK_OBJ,
+  OBJ_LOCAL_STORAGE,
+  LOCAL_STORAGE_REC_PROGRESS,
 };
-// https://www.thecocktaildb.com/api/json/v1/1/$search.php?s=${mealOrDrink}
-// https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={ingrediente};
-// https://www.thecocktaildb.com/api/json/v1/1/search.php?s={nome};
-// https://www.thecocktaildb.com/api/json/v1/1/search.php?f={primeira-letra};

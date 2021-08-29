@@ -3,12 +3,19 @@ import PropTypes from 'prop-types';
 import myContext from './myContext';
 import { getMeals } from '../services/mealAPI';
 import { getDrinks } from '../services/drinkAPI';
-import { ALERT_TWO, MEAL_OBJ, DRINK_OBJ } from '../services/data';
+import {
+  ALERT_TWO,
+  MEAL_OBJ,
+  DRINK_OBJ,
+  OBJ_LOCAL_STORAGE,
+  LOCAL_STORAGE_REC_PROGRESS,
+} from '../services/data';
 
-function RecipesProvider({ children }) {
-  const [searchValues, setSearchValues] = useState({
-    textValue: '', radioValue: 'name', pathname: '/comidas' });
-  const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
+export default function RecipesProvider({ children }) {
+  const RECIPE_PROGRESS = LOCAL_STORAGE_REC_PROGRESS || OBJ_LOCAL_STORAGE;
+  const [objRecipeProgress, setObjRecipeProgress] = useState(RECIPE_PROGRESS);
+  const [searchMeals, setSearchMeals] = useState(MEAL_OBJ);
+  const [searchDrinks, setSearchDrinks] = useState(DRINK_OBJ);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
   const [updateData, setUpdateData] = useState(false);
   const [baseDataMeals, setBaseDataMeals] = useState();
@@ -20,10 +27,6 @@ function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
   const [lists, setLists] = useState({ ingredients: [], measure: [] });
-  const [id, setId] = useState('');
-  const [keyProgress, setKeyProgress] = useState('');
-  const value = JSON.parse(localStorage.getItem('inProgressRecipes')) || { cocktails: { chave: [] }, meals: { chave: [] } };
-  const [objRecipeProgress, setObjRecipeProgress] = useState(value);
 
   useEffect(() => {
     const resultBaseMeals = async () => {
@@ -32,27 +35,7 @@ function RecipesProvider({ children }) {
     };
     resultBaseMeals();
   },
-  [searchValues]);
-
-  useEffect(() => {
-    const resultFilterMeals = async () => {
-      const resultMeals = await getMeals(searchValues);
-      setFilteredMeals(resultMeals);
-      if (resultMeals.meals === null) global.alert(ALERT_TWO);
-    };
-    resultFilterMeals();
-  },
-  [searchValues]);
-
-  useEffect(() => {
-    const resultFilterDrinks = async () => {
-      const resultDrinks = await getDrinks(searchValues);
-      setFilteredDrinks(resultDrinks);
-      if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
-    };
-    resultFilterDrinks();
-  },
-  [searchValues]);
+  [searchMeals]);
 
   useEffect(() => {
     const resultBaseDrinks = async () => {
@@ -61,16 +44,27 @@ function RecipesProvider({ children }) {
     };
     resultBaseDrinks();
   },
-  [searchValues]);
+  [searchDrinks]);
 
   useEffect(() => {
-    const resultFilter = async () => {
-      const result = await getMeals(searchValues);
-      setFilteredMealsOrDrinks(result);
+    const resultFilterMeals = async () => {
+      const resultMeals = await getMeals(searchMeals);
+      setFilteredMeals(resultMeals);
+      if (resultMeals.meals === null) global.alert(ALERT_TWO);
     };
-    resultFilter();
+    resultFilterMeals();
   },
-  [searchValues]);
+  [searchMeals]);
+
+  useEffect(() => {
+    const resultFilterDrinks = async () => {
+      const resultDrinks = await getDrinks(searchDrinks);
+      setFilteredDrinks(resultDrinks);
+      if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
+    };
+    resultFilterDrinks();
+  },
+  [searchDrinks]);
 
   useEffect(() => {
     const filterIngredients = () => {
@@ -95,12 +89,12 @@ function RecipesProvider({ children }) {
   }, [infoUser]);
 
   const globalState = {
+    searchMeals,
+    setSearchMeals,
+    searchDrinks,
+    setSearchDrinks,
     objRecipeProgress,
     setObjRecipeProgress,
-    keyProgress,
-    setKeyProgress,
-    id,
-    setId,
     setLists,
     lists,
     keyType,
@@ -113,10 +107,8 @@ function RecipesProvider({ children }) {
     setFavorite,
     infoUser,
     setInfoUser,
-    setSearchValues,
     filteredMeals,
     filteredDrinks,
-    filteredMealsOrDrinks,
     updateData,
     setUpdateData,
     baseDataMeals,
@@ -136,5 +128,3 @@ RecipesProvider.propTypes = {
     PropTypes.node,
   ]).isRequired,
 };
-
-export default RecipesProvider;

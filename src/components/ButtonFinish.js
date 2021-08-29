@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import myContext from '../context/myContext';
 
 export default function ButtonFinish() {
-  const { lists, objRecipeProgress, setObjRecipeProgress } = useContext(myContext);
+  const { lists, objRecipeProgress } = useContext(myContext);
   const [renderCheckbox, setRenderCheckbox] = useState({});
+  const [activeButtoFinish, setActiveButtoFinish] = useState(true);
   const { id } = useParams();
   const { pathname } = useLocation();
   const text = pathname.includes('comidas') ? 'meals' : 'cocktails';
+  const sizeList = lists.ingredients.length;
 
   useEffect(() => {
     const { meals } = objRecipeProgress;
@@ -18,18 +20,26 @@ export default function ButtonFinish() {
     if (keysCocktails) setRenderCheckbox(objRecipeProgress[text][id]);
   }, [objRecipeProgress]);
 
+  const handleChange = () => setActiveButtoFinish(false);
+
   useEffect(() => {
-    if (renderCheckbox) console.log(Object.values(renderCheckbox).length);
-  }, [renderCheckbox]);
+    if (renderCheckbox && sizeList) {
+      const valueTrue = Object.values(renderCheckbox).filter((i) => i === true).length;
+      if (valueTrue === sizeList) handleChange();
+    }
+  }, [activeButtoFinish, renderCheckbox]);
 
-  if (renderCheckbox) console.log(Object.values(renderCheckbox).length);
-
-  // useEffect(() => console.log(renderCheckbox));
-  // useEffect(() => console.log(lists.ingredients.length));
-
+  useEffect(() => console.log(activeButtoFinish));
   return (
-    <button type="button" data-testid="finish-recipe-btn">
-      Finalizar Receita
-    </button>
+    <Link to="/receitas-feitas">
+      <button
+        type="button"
+        className="btn-finish"
+        data-testid="finish-recipe-btn"
+        disabled={ activeButtoFinish }
+      >
+        Finalizar Receita
+      </button>
+    </Link>
   );
 }

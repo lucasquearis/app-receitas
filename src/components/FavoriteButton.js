@@ -8,7 +8,6 @@ function FavoriteButton() {
   const { recipe } = useContext(myContext);
   const { pathname } = useLocation();
   const { id } = useParams();
-
   const favoriteDrink = {
     id: recipe.idDrink,
     type: 'bebida',
@@ -27,7 +26,6 @@ function FavoriteButton() {
     image: recipe.strMealThumb };
   const favorite = pathname.includes('comidas') ? favoriteMeals : favoriteDrink;
   const [heart, setHeart] = useState(whiteHeartIcon);
-
   useEffect(() => {
     if (localStorage.favoriteRecipes) {
       const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -37,7 +35,6 @@ function FavoriteButton() {
       }
     }
   }, []);
-
   const favoriteClick = () => {
     if (localStorage.favoriteRecipes && heart === whiteHeartIcon) {
       const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -57,7 +54,6 @@ function FavoriteButton() {
       : setHeart(whiteHeartIcon);
     return img;
   };
-
   return (
     <input
       classeName="favorite-btn"
