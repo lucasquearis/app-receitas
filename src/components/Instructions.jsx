@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import fetchRecipe from '../Redux/actions/fetchRecipes';
 
 class Instructions extends Component {
@@ -9,7 +10,7 @@ class Instructions extends Component {
       <section data-testid="instructions">
         {
           recipe.map(({ strInstructions }, index) => (
-            <p key={index}>{ strInstructions }</p>
+            <p key={ index }>{ strInstructions }</p>
           ))
         }
       </section>
@@ -26,3 +27,7 @@ const mapDispatchToProps = (dispach) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Instructions);
+
+Instructions.propTypes = {
+  recipe: PropTypes.objectOf(PropTypes.object),
+}.isRequired;
