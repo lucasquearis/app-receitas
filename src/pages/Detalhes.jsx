@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import ButtonActionRedirect from '../components/ButtonActionRedirect';
+import ButtonRedirect from '../components/ButtonRedirect';
 import ButtonFavorite from '../components/ButtonFavorite';
 import ButtonShare from '../components/ButtonShare';
 import VideoEmbed from '../components/VideoEmbed';
@@ -50,6 +50,7 @@ function Detalhes() {
     alcoholicOrNot: recipe.strAlcoholic ? recipe.strAlcoholic : '',
     name: recipe[`str${jsonTranslator[type]}`],
     image: recipe[`str${jsonTranslator[type]}Thumb`],
+    tag: (recipe.strTags) ? recipe.strTags.split(',') : '',
   };
 
   if (!recipe || !recommended) return <h1>Carregando...</h1>;
@@ -80,7 +81,10 @@ function Detalhes() {
       <br />
       <Carousel recipes={ recommended } />
       <br />
-      <ButtonActionRedirect renderData={ { pathname, id, renderType, completed } } />
+      <ButtonRedirect
+        key={ pathname }
+        renderData={ { pathname, id, renderType, completed, localStrObject } }
+      />
     </>
   );
 }
