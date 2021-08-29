@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
-// import require from 'clipboard-copy';
+import copy from 'clipboard-copy';
 import { fetchFoodById, fetchSearchDrinksApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
 import './detailsFood.css';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-function DetailsFood({ match: { params: { id } } }) {
+function DetailsFood({ match: { url, params: { id } } }) {
   const [food, setFood] = useState({});
   const [isMount, setIsMount] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,27 +39,31 @@ function DetailsFood({ match: { params: { id } } }) {
   };
   useEffect(fetchFood);
 
+  // Requisito 43 - como pegar a url
+  const handleShare = () => {
+    copy(url);
+    setCopyMsg(true);
+  };
+
   if (isLoading) return <div>Carregando...</div>;
 
   const keysFoods = Object.keys(food);
+
   const keysIngredients = keysFoods.filter((key) => (
     key.includes('strIngredient') && !!food[key]));
+
+  const keysMeasures = keysFoods.filter((key) => (
+    key.includes('strMeasure') && !!food[key]));
+
+  console.log(keysFoods);
 
   // const testId = 52951; ID = testado
 
   const allow = `accelerometer; autoplay; clipboard-write; 
   encrypted-media; gyroscope; picture-in-picture`;
-  const videoRegex = food.strYoutube.replace(/watch\?v=/, 'embed/');
+  const videoRegex = food.strYoutube
+    ? food.strYoutube.replace(/watch\?v=/, 'embed/') : '';
   // console.log(videoRegex);
-
-  // Requisito 43 - como pegar a url
-  const handleClick = () => {
-    const url = window.location.href;
-    const copy = require('clipboard-copy');
-    console.log(url);
-    copy(url);
-    setCopyMsg(true);
-  };
 
   return (
     <div className="detailsFood">
@@ -68,34 +72,35 @@ function DetailsFood({ match: { params: { id } } }) {
         alt="recipe"
         data-testid="recipe-photo"
       />
-      <h1 data-testid="recipe-title">{food.strMeal}</h1>
-      <section className="categ-fav-share-btn">
-        <p data-testid="recipe-category">{food.strCategory}</p>
-        <button
-          type="button"
-          data-testid="share-btn"
-          className="share-btn"
-          onClick={ handleClick }
-        >
-          <img src={ shareIcon } alt="share icon" />
-        </button>
-        {(copyMsg) ? <p>{ msg }</p> : null }
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          className="favorite-btn"
-          // onClick={  }
-        >
-          <img src={ whiteHeartIcon } alt="favorite icon" />
-        </button>
+      <section className="food-title-container">
+        <h1 data-testid="recipe-title">{food.strMeal}</h1>
+        <div>
+          <button
+            type="button"
+            data-testid="share-btn"
+            className="share-btn"
+            onClick={ handleShare }
+          >
+            <img src={ shareIcon } alt="share icon" />
+          </button>
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            className="favorite-btn"
+          >
+            <img src={ whiteHeartIcon } alt="favorite icon" />
+          </button>
+          {(copyMsg) ? <p>{ msg }</p> : null }
+        </div>
       </section>
-      <ul>
+      <p data-testid="recipe-category">{food.strCategory}</p>
+      <ul className="food-ingredients">
         {keysIngredients.map((key, index) => (
           <li
             key={ key }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {food[key]}
+            {`${food[key]} - ${food[keysMeasures[index]]}`}
           </li>
         ))}
       </ul>

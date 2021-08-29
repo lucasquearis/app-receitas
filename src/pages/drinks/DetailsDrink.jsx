@@ -24,15 +24,14 @@ function DetailsDrink({ match: { params: { id } } }) {
       setRecommendations(foodData.filter((_food, index) => index < MAX_INDEX));
     };
 
-    const getdrink = async () => {
+    const getDrink = async () => {
       const drinkData = await fetchDrinkById(id);
       getFood();
       setDrink(drinkData);
-      console.log(drinkData);
       setIsMount(true);
       setIsLoading(false);
     };
-    if (!isMount) getdrink();
+    if (!isMount) getDrink();
   };
 
   useEffect(fetchDrink);
@@ -40,10 +39,12 @@ function DetailsDrink({ match: { params: { id } } }) {
   if (isLoading) return <div>Carregando...</div>;
 
   const keysDrinks = Object.keys(drink);
-  const ingredientskeys = keysDrinks.filter((key) => (
+
+  const keysIngredients = keysDrinks.filter((key) => (
     key.includes('strIngredient') && !!drink[key]));
 
-  // const testId = 11007; ID = testado
+  const keysMeasures = keysDrinks.filter((key) => (
+    key.includes('strMeasure') && !!drink[key]));
 
   return (
     <div className="detailsDrink">
@@ -54,32 +55,33 @@ function DetailsDrink({ match: { params: { id } } }) {
         width="150"
         height="150"
       />
-      <h1 data-testid="recipe-title">{drink.strDrink}</h1>
-      <section className="categ-fav-share-btn">
-        <p data-testid="recipe-category">{drink.strCategory}</p>
-        <p data-testid="recipe-alcoholic">{drink.strAlcoholic}</p>
-        <button
-          type="button"
-          data-testid="share-btn"
-          className="share-btn"
-        >
-          <img src={ shareIcon } alt="share icon" />
-        </button>
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          className="favorite-btn"
-        >
-          <img src={ whiteHeartIcon } alt="favorite icon" />
-        </button>
+      <section className="drink-title-container">
+        <h1 data-testid="recipe-title">{drink.strDrink}</h1>
+        <div>
+          <button
+            type="button"
+            data-testid="share-btn"
+            className="share-btn"
+          >
+            <img src={ shareIcon } alt="share icon" />
+          </button>
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            className="favorite-btn"
+          >
+            <img src={ whiteHeartIcon } alt="favorite icon" />
+          </button>
+        </div>
       </section>
-      <ul>
-        {ingredientskeys.map((key, index) => (
+      <p data-testid="recipe-category">{`${drink.strCategory} ${drink.strAlcoholic}`}</p>
+      <ul className="drink-ingredients">
+        {keysIngredients.map((key, index) => (
           <li
             key={ key }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {drink[key]}
+            {`${drink[key]} - ${drink[keysMeasures[index]]}`}
           </li>
         ))}
       </ul>

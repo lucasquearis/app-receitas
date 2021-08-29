@@ -4,9 +4,14 @@
   width: 100vw;
 }
 
+.food-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .share-btn {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
 
 .favorite-btn {
@@ -22,8 +27,12 @@
 
 .detailsFood iframe {
   display: block;
-  margin: 10px auto;
   height: 95%;
+  margin: 10px auto;
+}
+
+.food-ingredients {
+  padding: 25px;
 }
 
 .recommendations-drinks {

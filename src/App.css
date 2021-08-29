@@ -1,9 +1,9 @@
 .footer {
+  bottom: 0;
   display: flex;
   flex-wrap: wrap;
-  bottom: 0;
-  position: fixed;
   justify-content: space-between;
+  position: fixed;
 }
 
 .meals {
