@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import RecipesContext from '../context/RecipesContext';
+import React, { useEffect } from 'react';
+import { Link, Redirect, useLocation } from 'react-router-dom';
+
+import useAPI from '../hooks/useAPI';
 
 function Cards() {
-  const { API: { recipes, searchByFilters }, pathname } = useContext(RecipesContext);
+  const { pathname } = useLocation();
+  const { recipes, searchByFilters } = useAPI(pathname);
 
   const min = 0;
   const max = 12;

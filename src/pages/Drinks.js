@@ -7,7 +7,7 @@ import Cards from '../components/Cards';
 function Drinks() {
   return (
     <div>
-      <HeaderSearch title="Comidas" />
+      <HeaderSearch title="Bebidas" />
       <Categories />
       <Cards />
       <Footer />
