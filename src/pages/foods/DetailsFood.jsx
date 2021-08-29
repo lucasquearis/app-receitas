@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
+import { Link } from 'react-router-dom';
+// import require from 'clipboard-copy';
 import { fetchFoodById, fetchSearchDrinksApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
 import './detailsFood.css';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function DetailsFood({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
   const [isMount, setIsMount] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
+  const [copyMsg, setCopyMsg] = useState(false);
+  const msg = 'Link copiado!';
 
   const fetchFood = () => {
     const getDrinks = async () => {
@@ -46,6 +52,15 @@ function DetailsFood({ match: { params: { id } } }) {
   const videoRegex = food.strYoutube.replace(/watch\?v=/, 'embed/');
   // console.log(videoRegex);
 
+  // Requisito 43 - como pegar a url
+  const handleClick = () => {
+    const url = window.location.href;
+    const copy = require('clipboard-copy');
+    console.log(url);
+    copy(url);
+    setCopyMsg(true);
+  };
+
   return (
     <div className="detailsFood">
       <img
@@ -54,9 +69,26 @@ function DetailsFood({ match: { params: { id } } }) {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{food.strMeal}</h1>
-      <p data-testid="recipe-category">{food.strCategory}</p>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      <section className="categ-fav-share-btn">
+        <p data-testid="recipe-category">{food.strCategory}</p>
+        <button
+          type="button"
+          data-testid="share-btn"
+          className="share-btn"
+          onClick={ handleClick }
+        >
+          <img src={ shareIcon } alt="share icon" />
+        </button>
+        {(copyMsg) ? <p>{ msg }</p> : null }
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          className="favorite-btn"
+          // onClick={  }
+        >
+          <img src={ whiteHeartIcon } alt="favorite icon" />
+        </button>
+      </section>
       <ul>
         {keysIngredients.map((key, index) => (
           <li
@@ -91,13 +123,15 @@ function DetailsFood({ match: { params: { id } } }) {
           />
         ))}
       </section>
-      <button
-        className="start-recipe-food-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar receita
-      </button>
+      <Link to="/bebidas/:id/in-progress">
+        <button
+          className="start-recipe-food-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar Receita
+        </button>
+      </Link>
     </div>
   );
 }

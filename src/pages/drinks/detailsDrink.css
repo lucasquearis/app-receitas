@@ -5,6 +5,16 @@
   width: 100vw;
 }
 
+.share-btn {
+  background: none;
+  border: none;
+}
+
+.favorite-btn {
+background: none;
+border: none;
+}
+
 .detailsDrink img {
   display: block;
   margin: 0 auto;

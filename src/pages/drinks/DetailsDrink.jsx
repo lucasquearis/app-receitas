@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
+import { Link } from 'react-router-dom';
 import { fetchDrinkById, fetchSearchFoodsApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
 import './detailsDrink.css';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function DetailsDrink({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -52,10 +55,24 @@ function DetailsDrink({ match: { params: { id } } }) {
         height="150"
       />
       <h1 data-testid="recipe-title">{drink.strDrink}</h1>
-      <p data-testid="recipe-category">{drink.strCategory}</p>
-      <p data-testid="recipe-alcoholic">{drink.strAlcoholic}</p>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      <section className="categ-fav-share-btn">
+        <p data-testid="recipe-category">{drink.strCategory}</p>
+        <p data-testid="recipe-alcoholic">{drink.strAlcoholic}</p>
+        <button
+          type="button"
+          data-testid="share-btn"
+          className="share-btn"
+        >
+          <img src={ shareIcon } alt="share icon" />
+        </button>
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          className="favorite-btn"
+        >
+          <img src={ whiteHeartIcon } alt="favorite icon" />
+        </button>
+      </section>
       <ul>
         {ingredientskeys.map((key, index) => (
           <li
@@ -79,13 +96,15 @@ function DetailsDrink({ match: { params: { id } } }) {
           />
         ))}
       </section>
-      <button
-        className="start-recipe-drink-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar receita
-      </button>
+      <Link to="/bebidas/:id/in-progress">
+        <button
+          className="start-recipe-drink-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar receita
+        </button>
+      </Link>
     </div>
   );
 }
