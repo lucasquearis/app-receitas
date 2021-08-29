@@ -33,7 +33,7 @@ function RecipeDetail() {
       if (pathname.includes('comidas')) {
         setRecipe((await genericFetchAPI('meal', 'lookup', 'i', recipeId)).meals[0]);
       } else {
-        setRecipe((await genericFetchAPI('meal', 'lookup', 'i', recipeId)).drinks[0]);
+        setRecipe((await genericFetchAPI('cocktail', 'lookup', 'i', recipeId)).drinks[0]);
       }
     };
     getRecipe();
