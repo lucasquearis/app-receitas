@@ -5,26 +5,21 @@ function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  // const [objInProgressRecipes, setObjInProgress] = useState()
-  // const [ check, setCheck ] = useState([]);
-  // const { history } = useHistory();
-
-  // localStorage.setItem('inProgressRecipes', ({ id-da-comida }));
-  // inProgressRecipes: {
-  //   cocktails: {},
-  //   meals: { },
-  // },
+  const [check, setCheck] = useState([]);
 
   useEffect(() => {
     const getRecipeFood = async () => {
       const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id depois
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setRecipeFood(meals);
+
+      const id = 52771; // trocar depois p ser dinâmico
+      const objInProgressRecipes = { cocktails: {}, meals: { [id]: [] } }; // lembrar de dar spread p captar o de antes
+      // coloquei a o objInProgressRecipes  dentro do LS
+      localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
     };
     getRecipeFood();
-    const id = 52771; // trocar depois p ser dinâmico
-    const objInProgressRecipes = { meals: { [id]: [] } }; // lembrar de dar spread p captar o de antes
-    localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
+    // console.log(recipeFood);
   }, []);
 
   useEffect(() => {
@@ -50,25 +45,28 @@ function FoodsInProgress() {
   }, [recipeFood]);
 
   // Requisito 50 - o número '52771' é só enquanto n tivermos o id
-
-  // const objInProgressRecipes = {
-  //   meals: {
-  //     52771: [],
-  //   },
-  // };
   // esperar o requisito 41 q vai criai o objeto inProgressRecipes com a key do id da receita.
-  const handleCheked = (ingredient) => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(ingredient));
 
-    // const objInProgressRecipes = JSON
-    //   .parse(localStorage.getItem('inProgressRecipes')) || [];
-    // if (objInProgressRecipes.length > 0) {
-    //   const ingredientChecked = objInProgressRecipes.meals[52771]
-    //     .some((ingredientCheck) => ingredient === ingredientCheck);
-    // } else if {
-    // }
-    // console.log(ingredientChecked);
-    // localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
+  // const inputs = document.querySelectorAll('input');
+  // const inputsArray = Array.from(inputs);
+  // console.log(inputsArray);
+  const checkItem = (ingredient) => {
+    // const storage = localStorage.getItem('inProgressRecipes');
+    // storage.filter((input) => (
+    //   input.value !== ingredient ? inputsArray.push(ingredient) : ''
+    // ));
+    // console.log(inputsArray);
+    // const newIngredient = check.filter((item) => item === ingredient);
+
+    // console.log(newIngredient);
+    check.push(ingredient);
+    setCheck([
+      ...check,
+      ingredient,
+    ]);
+
+    // console.log(check);
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ 52771: check }));
   };
 
   const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
@@ -93,7 +91,8 @@ function FoodsInProgress() {
                 <input
                   type="checkbox"
                   id={ `${ingredient}` }
-                  onChange={ () => handleCheked(ingredient) }
+                  value={ `${ingredient}` }
+                  onChange={ () => checkItem(ingredient) }
                 />
                 { `${measure[index]} ${ingredient}` }
               </label>
