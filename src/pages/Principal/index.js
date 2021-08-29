@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 // import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import EstruturaPrincipal from '../../components/EstruturaPrincipal';
+import { useHistory } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import {
   fetchApi,
 } from '../../services';
+
+import Header from '../../components/Header';
+import RecipesList from '../../components/RecipesList';
+import MenuInferior from '../../components/MenuInferior';
+import BarraDeBusca from '../../components/BarraDeBusca';
+import BarraCategorias from '../../components/BarraCategorias';
 
 function Principal({
   listEndPoint,
@@ -14,15 +20,18 @@ function Principal({
   getByIngredientsEndPoint,
   type,
 }) {
-  const { selectedCategory,
+  const { pathname } = useHistory();
+  const {
+    selectedCategory,
     selectedIngredient,
-    setShowBar,
+    setIsLoading,
+    setRecipes,
     setSelectedCategory,
     setSelectedIngredient,
-    recipes,
-    setRecipes } = useContext(AppContext);
+    setShowBar,
+    showBar,
+  } = useContext(AppContext);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -48,11 +57,12 @@ function Principal({
     categoriesEndPoint,
     getByCategoryEndPoint,
     listEndPoint,
+    setIsLoading,
+    setRecipes,
     setSelectedCategory,
     setSelectedIngredient,
     setShowBar,
     type,
-    setRecipes,
   ]);
 
   useEffect(() => {
@@ -79,20 +89,30 @@ function Principal({
     getByCategoryEndPoint,
     getByIngredientsEndPoint,
     listEndPoint,
+    setIsLoading,
     selectedCategory,
     selectedIngredient,
     setRecipes,
     type,
   ]);
 
-  return (
-    <EstruturaPrincipal
-      isLoading={ isLoading }
+  const renderBars = () => {
+    if (showBar) return <BarraDeBusca />;
+    return (<BarraCategorias
       categoriesList={ categories }
-      recipes={ recipes }
-      selectedCategory={ selectedCategory }
-      setSelectedCategory={ setSelectedCategory }
-    />
+      whatIsTheType={ pathname }
+    />);
+  };
+
+  return (
+    <>
+      <Header
+        showSearchBtn
+      />
+      { renderBars() }
+      <RecipesList />
+      <MenuInferior />
+    </>
   );
 }
 
