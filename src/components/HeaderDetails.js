@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import myContext from '../context/myContext';
-// import FavoriteButton from './FavoriteButton';
 import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
+import myContext from '../context/myContext';
 
-function HeaderDetails() {
+export default function HeaderDetails() {
   const { recipe, keyType } = useContext(myContext);
   const type = keyType === 'meals' ? 'Meal' : 'Drink';
   return (
@@ -21,7 +21,7 @@ function HeaderDetails() {
         >
           { recipe[`str${type}`] }
         </h2>
-        <button data-testid="favorite-btn" type="button">favorite</button>
+        <FavoriteButton />
         <ShareButton />
       </div>
       <h4
@@ -33,5 +33,3 @@ function HeaderDetails() {
     </div>
   );
 }
-
-export default HeaderDetails;

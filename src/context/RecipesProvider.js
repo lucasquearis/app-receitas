@@ -1,17 +1,21 @@
-// vitals
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// context
 import myContext from './myContext';
-// API
-import getMeals from '../services/mealAPI';
-import getDrinks from '../services/drinkAPI';
-import { ALERT_TWO, MEAL_OBJ, DRINK_OBJ } from '../services/data';
+import { getMeals } from '../services/mealAPI';
+import { getDrinks } from '../services/drinkAPI';
+import {
+  ALERT_TWO,
+  MEAL_OBJ,
+  DRINK_OBJ,
+  OBJ_LOCAL_STORAGE,
+  LOCAL_STORAGE_REC_PROGRESS,
+} from '../services/data';
 
-function RecipesProvider({ children }) {
-  const [searchValues, setSearchValues] = useState({
-    textValue: '', radioValue: 'ingredient', pathName: '/comidas' });
-  const [filteredMealsOrDrinks, setFilteredMealsOrDrinks] = useState(false);
+export default function RecipesProvider({ children }) {
+  const RECIPE_PROGRESS = LOCAL_STORAGE_REC_PROGRESS || OBJ_LOCAL_STORAGE;
+  const [objRecipeProgress, setObjRecipeProgress] = useState(RECIPE_PROGRESS);
+  const [searchMeals, setSearchMeals] = useState(MEAL_OBJ);
+  const [searchDrinks, setSearchDrinks] = useState(DRINK_OBJ);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
   const [updateData, setUpdateData] = useState(false);
   const [baseDataMeals, setBaseDataMeals] = useState();
@@ -22,14 +26,76 @@ function RecipesProvider({ children }) {
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
-  const [url, setUrl] = useState();
-  const [lists, setLists] = useState({
-    ingredients: [],
-    measure: [],
-  });
+  const [lists, setLists] = useState({ ingredients: [], measure: [] });
+
+  useEffect(() => {
+    const resultBaseMeals = async () => {
+      const baseMeals = await getMeals(MEAL_OBJ);
+      setBaseDataMeals(baseMeals);
+    };
+    resultBaseMeals();
+  },
+  [searchMeals]);
+
+  useEffect(() => {
+    const resultBaseDrinks = async () => {
+      const baseDrinks = await getDrinks(DRINK_OBJ);
+      setBaseDataDrinks(baseDrinks);
+    };
+    resultBaseDrinks();
+  },
+  [searchDrinks]);
+
+  useEffect(() => {
+    const resultFilterMeals = async () => {
+      const resultMeals = await getMeals(searchMeals);
+      setFilteredMeals(resultMeals);
+      if (resultMeals.meals === null) global.alert(ALERT_TWO);
+    };
+    resultFilterMeals();
+  },
+  [searchMeals]);
+
+  useEffect(() => {
+    const resultFilterDrinks = async () => {
+      const resultDrinks = await getDrinks(searchDrinks);
+      setFilteredDrinks(resultDrinks);
+      if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
+    };
+    resultFilterDrinks();
+  },
+  [searchDrinks]);
+
+  useEffect(() => {
+    const filterIngredients = () => {
+      const ingredients = Object.keys(recipe)
+        .filter((key) => key.includes('Ingredient'))
+        .map((key) => recipe[key])
+        .filter((item) => item);
+      const measure = Object.keys(recipe)
+        .filter((key) => key.includes('Measure'))
+        .map((key) => recipe[key])
+        .filter((item) => item !== ' ' && item !== null);
+      setLists({ ...lists, ingredients, measure });
+    };
+    filterIngredients();
+  }, [recipe]);
+
+  useEffect(() => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email: infoUser.email }));
+  }, [infoUser]);
 
   const globalState = {
-    url,
+    searchMeals,
+    setSearchMeals,
+    searchDrinks,
+    setSearchDrinks,
+    objRecipeProgress,
+    setObjRecipeProgress,
+    setLists,
     lists,
     keyType,
     setKeysType,
@@ -41,107 +107,13 @@ function RecipesProvider({ children }) {
     setFavorite,
     infoUser,
     setInfoUser,
-    setSearchValues,
     filteredMeals,
     filteredDrinks,
-    filteredMealsOrDrinks,
     updateData,
     setUpdateData,
     baseDataMeals,
     baseDataDrinks,
   };
-
-  useEffect(() => {
-    const resultBaseMeals = async () => {
-      const baseMeals = await getMeals(MEAL_OBJ);
-      setBaseDataMeals(baseMeals);
-    };
-    resultBaseMeals();
-  },
-  [searchValues]);
-
-  useEffect(() => {
-    const resultFilterMeals = async () => {
-      const resultMeals = await getMeals(searchValues);
-      setFilteredMeals(resultMeals);
-      if (resultMeals.meals === null) global.alert(ALERT_TWO);
-    };
-    resultFilterMeals();
-  },
-  [searchValues]);
-
-  useEffect(() => {
-    const resultFilterDrinks = async () => {
-      const resultDrinks = await getDrinks(searchValues);
-      setFilteredDrinks(resultDrinks);
-      // if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
-    };
-    resultFilterDrinks();
-  },
-  [searchValues]);
-
-  useEffect(() => {
-    const resultBaseDrinks = async () => {
-      const baseDrinks = await getDrinks(DRINK_OBJ);
-      setBaseDataDrinks(baseDrinks);
-    };
-    resultBaseDrinks();
-  },
-  [searchValues]);
-
-  useEffect(() => {
-    const favoriteClick = () => {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([{
-        id: '',
-        type: '',
-        area: '',
-        category: '',
-        alcoholicOrNot: '',
-        name: '',
-        image: '',
-        doneDate: '',
-        tags: '',
-      }]));
-    };
-
-    favoriteClick();
-  }, []);
-
-  useEffect(() => {
-    const filterIngredients = () => {
-      const keys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
-      const list = keys.map((key) => recipe[key]);
-      const measureQnt = Object.keys(recipe).filter((key) => key.includes('Measure'));
-      const measureList = measureQnt.map((key) => recipe[key]);
-      setLists({
-        ...lists,
-        ingredients: list.filter((item) => item),
-        measure: measureList.filter((item) => item),
-      });
-    };
-    const correctUrl = () => {
-      const ytUrl = recipe.strYoutube;
-      if (ytUrl) setUrl(ytUrl.replace('watch?v=', 'embed/'));
-    };
-
-    correctUrl();
-    filterIngredients();
-  }, [recipe]);
-
-  useEffect(() => {
-    const resultFilter = async () => {
-      const result = await getMeals(searchValues);
-      setFilteredMealsOrDrinks(result);
-    };
-    resultFilter();
-  },
-  [searchValues]);
-
-  useEffect(() => {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify({ email: infoUser.email }));
-  }, [infoUser]);
 
   return (
     <myContext.Provider value={ globalState }>
@@ -156,5 +128,3 @@ RecipesProvider.propTypes = {
     PropTypes.node,
   ]).isRequired,
 };
-
-export default RecipesProvider;

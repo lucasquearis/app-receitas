@@ -10,23 +10,23 @@ export default function Foods() {
   const { filteredMeals, baseDataMeals } = useContext(myContext);
   if (!filteredMeals || !baseDataMeals) return <p>Loading...</p>;
   const { meals } = filteredMeals;
-  let numberOfCards = null;
-  if (meals !== null) numberOfCards = meals.slice(START_CARD, NUMBER_CARDS);
-  if (meals === null) numberOfCards = baseDataMeals.meals.slice(START_CARD, NUMBER_CARDS);
+  let cards = null;
+  if (meals !== null) cards = meals.slice(START_CARD, NUMBER_CARDS);
+  if (meals === null) cards = baseDataMeals.meals.slice(START_CARD, NUMBER_CARDS);
   return (
     <div>
       <Header />
       <section className="container-cards">
-        {numberOfCards.map((meal, i) => (
-          <Link key={ i } to={ `/comidas/${meal.idMeal}` }>
-            <div className={ `${meal.idMeal}-recipe-card card` }>
+        {cards.map((meal, index) => (
+          <Link key={ index } to={ `/comidas/${meal.idMeal}` }>
+            <div data-testid={ `${index}-recipe-card` }>
               <img
                 src={ meal.strMealThumb }
                 alt={ meal.str }
-                className={ `${meal.idMeal}-card-img` }
+                data-testid={ `${index}-card-img` }
               />
               <div>
-                <p data-testid={ `${meal.idMeal}-card-name` }>{meal.strMeal}</p>
+                <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
               </div>
             </div>
           </Link>

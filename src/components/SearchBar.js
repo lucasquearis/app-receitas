@@ -1,13 +1,12 @@
-// vitals
 import React, { useContext, useState } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import myContext from '../context/myContext';
-// constants
 import { ALERT_ONE } from '../services/data';
 
 export default function SearchBar() {
   const {
-    setSearchValues,
+    setSearchMeals,
+    setSearchDrinks,
     filteredMeals,
     filteredDrinks,
     setUpdateData } = useContext(myContext);
@@ -15,13 +14,10 @@ export default function SearchBar() {
   const [textValue, setTextValue] = useState('');
   const [radioValue, setRadioValue] = useState('ingredient');
 
-  const settings = ({ target: { name, value } }) => {
-    if (name === 'filter-radio-button') return setRadioValue(value);
-    if (name === 'search-text') return setTextValue(value);
-  };
   const submit = () => {
     if (radioValue === 'letter' && textValue.length > 1) return global.alert(ALERT_ONE);
-    setSearchValues({ textValue, radioValue, pathname });
+    if (pathname === '/comidas') setSearchMeals({ textValue, radioValue, pathname });
+    if (pathname === '/bebidas') setSearchDrinks({ textValue, radioValue, pathname });
   };
 
   if (pathname === '/comidas') {
@@ -47,10 +43,13 @@ export default function SearchBar() {
           type="text"
           name="search-text"
           data-testid="search-input"
-          onChange={ (e) => settings(e) }
+          onChange={ (e) => setTextValue(e.target.value) }
         />
       </div>
-      <div className="search-container__radio-button" onChange={ (e) => settings(e) }>
+      <div
+        className="search-container__radio-button"
+        onChange={ (e) => setRadioValue(e.target.value) }
+      >
         <label htmlFor="ingredient-search-radio">
           <input
             defaultChecked
