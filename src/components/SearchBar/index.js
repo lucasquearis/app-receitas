@@ -14,20 +14,34 @@ function SearchBar() {
     setInputText,
     radioValue,
     setRadioValue,
+    setIsFetching,
     requestApiData,
     setToggle,
   } = useContext(Context);
 
-  const { pathname } = useLocation();
-  const endpoint = pathname.includes('comida') ? 'themeadldb' : 'thecocktaildb';
+  const [textValue, setTextValue] = React.useState('');
+  const [searchType, setSearchType] = React.useState('s');
 
   function handleClick(e) {
     e.preventDefault();
+    setIsFetching(true);
+    setInputText(textValue);
+    setRadioValue(searchType);
     setToggle(false);
-    return (radioValue === 'f' && inputText.length !== 1)
-      ? global.alert('Sua busca deve conter somente 1 (um) caracter')
-      : requestApiData(endpoint);
   }
+
+  const { pathname } = useLocation();
+  const endpoint = pathname.includes('comida') ? 'themeadldb' : 'thecocktaildb';
+
+  React.useEffect(() => {
+    if (inputText) {
+      if (radioValue === 'f' && inputText.length !== 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      } else {
+        requestApiData(endpoint);
+      }
+    }
+  }, [inputText, radioValue, endpoint, requestApiData]);
 
   return (
     <div>
@@ -36,8 +50,8 @@ function SearchBar() {
           type="text"
           data-testid="search-input"
           placeholder="Buscar Receita"
-          onChange={ (e) => setInputText(e.target.value) }
-          value={ inputText }
+          onChange={ (e) => setTextValue(e.target.value) }
+          value={ textValue }
         />
       </div>
       <div>
@@ -52,7 +66,7 @@ function SearchBar() {
               id={ option[0] }
               name="search-radio"
               type="radio"
-              onChange={ (e) => setRadioValue(e.target.value) }
+              onChange={ (e) => setSearchType(e.target.value) }
               value={ option[2] }
             />
             { option[1] }
