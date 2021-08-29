@@ -20,7 +20,7 @@
   justify-content: space-between;
 }
 
-.icon-share {
+.icon-share, .icon-favorite {
   width: 1.25rem;
 }
 
@@ -34,4 +34,10 @@ a {
   color: black;
   font-weight: 600;
   text-decoration: none;
+}
+
+.card-favorite-share {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }

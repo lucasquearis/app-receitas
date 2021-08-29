@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function useFilterMade() {
+function useFilterMadeAndFavorite() {
   const [madeRecipes, setMadeRecipes] = useState([]);
   const [filter, setFilter] = useState('all');
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const filters = async () => {
-      const recipes = await JSON.parse(localStorage.getItem('doneRecipes'));
+      let recipes = [];
+      if (pathname === '/receitas-feitas') {
+        recipes = await JSON.parse(localStorage.getItem('doneRecipes'));
+      } else {
+        recipes = await JSON.parse(localStorage.getItem('favoriteRecipes'));
+      }
+
       if (recipes !== null) {
         let cardsFiltered = [...recipes];
         if (filter !== 'all') {
@@ -19,7 +27,7 @@ function useFilterMade() {
     };
 
     filters();
-  }, [filter]);
+  }, [filter, pathname]);
 
   return {
     madeRecipes,
@@ -28,4 +36,4 @@ function useFilterMade() {
   };
 }
 
-export default useFilterMade;
+export default useFilterMadeAndFavorite;
