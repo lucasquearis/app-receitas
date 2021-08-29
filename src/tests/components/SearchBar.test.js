@@ -117,7 +117,7 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     expect(history.location.pathname).toBe('/bebidas');
   });
 
-  it('verifica a requisição com primeira letra na pagina de comidas', async () => {
+  it('Chamada da requisição com primeira letra na pagina de comidas', async () => {
     renderWithRouterAndRedux(<SearchBar />, '/comidas');
 
     const searchInput = screen.getByTestId(SEARCH_INPUT);
@@ -135,7 +135,7 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
   });
 
-  it('verifica a requisição com primeira letra na pagina de bebidas', async () => {
+  it('Chamada da requisição com primeira letra na pagina de bebidas', async () => {
     renderWithRouterAndRedux(<SearchBar />, '/bebidas');
 
     const searchInput = screen.getByTestId(SEARCH_INPUT);
@@ -153,7 +153,7 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
   });
 
-  it('verifica a requisição por ingrediente com na pagina de comidas', async () => {
+  it('Chamada da requisição por ingrediente com na pagina de comidas', async () => {
     renderWithRouterAndRedux(<SearchBar />, '/comidas');
 
     const searchInput = screen.getByTestId(SEARCH_INPUT);
@@ -171,7 +171,7 @@ describe('verifica a renderização e o funcionamento componente SearchBar', () 
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1));
   });
 
-  it('verifica a requisição com primeira letra na pagina de bebidas', async () => {
+  it('Chamada da requisição com primeira letra na pagina de bebidas', async () => {
     renderWithRouterAndRedux(<SearchBar />, '/bebidas');
 
     const searchInput = screen.getByTestId(SEARCH_INPUT);
