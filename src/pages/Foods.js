@@ -1,19 +1,15 @@
-import React, { useContext, useEffect } from 'react';
-
-import RecipesContext from '../context/RecipesContext';
+import React from 'react';
 import HeaderSearch from '../components/HeaderSearch';
+import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Cards from '../components/Cards';
 
 function Foods() {
-  const min = 0;
-  const max = 12;
-  const { API: { foods, searchFoods } } = useContext(RecipesContext);
-  useEffect(() => { if (foods.meals.length === 0) searchFoods(); });
   return (
     <div>
       <HeaderSearch title="Comidas" />
-      <Cards type="Meal" list={ foods.meals.slice(min, max) } />
+      <Categories />
+      <Cards />
       <Footer />
     </div>
   );

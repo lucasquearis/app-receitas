@@ -7,9 +7,11 @@ import RecipesContext from './RecipesContext';
 
 function ProviderContext({ children }) {
   const [register, setRegister] = useState('');
-  const API = useAPI();
-  const history = createBrowserHistory();
-  const context = { register, setRegister, API, history };
+
+  const { location: { pathname } } = createBrowserHistory();
+
+  const API = useAPI(pathname);
+  const context = { register, setRegister, API, pathname };
   return (
     <RecipesContext.Provider value={ context }>
       { children }

@@ -4,14 +4,7 @@ import RecipesContext from '../context/RecipesContext';
 function Search() {
   const [radio, setRadio] = useState('s');
   const [searchValue, setSearchValue] = useState('');
-  const {
-    API: { searchFoods, searchDrinks },
-    history: {
-      location: { pathname },
-    },
-  } = useContext(RecipesContext);
-
-  const search = pathname === '/comidas' ? searchFoods : searchDrinks;
+  const { API: { searchByFilters } } = useContext(RecipesContext);
 
   function handleChange({ target }) {
     setSearchValue(target.value);
@@ -38,7 +31,7 @@ function Search() {
     switch (radio) {
     case 'i':
       if (searchValue.length > 0) {
-        search(radio, searchValue);
+        searchByFilters(radio, searchValue);
       } else {
         alert('Escreva um ingrediente!');
       }
@@ -46,14 +39,14 @@ function Search() {
 
     case 'f':
       if (searchValue.length === 1) {
-        search(radio, searchValue);
+        searchByFilters(radio, searchValue);
       } else {
         alert('Sua busca deve conter somente 1 (um) caracter');
       }
       break;
 
     default:
-      search(radio, searchValue);
+      searchByFilters(radio, searchValue);
       break;
     }
   }
