@@ -4,6 +4,7 @@ import MenuInferior from '../../components/MenuInferior';
 import Header from '../../components/Header';
 import MainContent from './MainContent';
 import MealsOrDrinks from './MealsOrDrinks';
+import IngrendientsList from './IngredientsList';
 
 function Explorar() {
   const { pathname } = useLocation();
@@ -15,6 +16,7 @@ function Explorar() {
       />
       {(pathname === '/explorar') && <MainContent />}
       <MealsOrDrinks />
+      {(pathname.includes('ingredientes')) && <IngrendientsList />}
       <MenuInferior />
     </>
   );

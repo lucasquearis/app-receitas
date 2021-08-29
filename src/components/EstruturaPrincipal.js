@@ -12,9 +12,8 @@ import BarraCategorias from './BarraCategorias';
 function EstruturaPrincipal({
   categoriesList,
   isLoading,
-  recipes,
 }) { // Nome provisório
-  const { showBar } = useContext(AppContext);
+  const { recipes, showBar } = useContext(AppContext);
 
   const { pathname } = useLocation();
   const pathIsMeals = (pathname === '/comidas');
@@ -22,17 +21,19 @@ function EstruturaPrincipal({
   const renderCards = () => recipes.map((recipe, index) => {
     const keyType = (pathIsMeals) ? 'Meal' : 'Drink';
     const recipesListLimit = 12;
-    if (index < recipesListLimit) {
+    if (index < recipesListLimit && recipe[`id${keyType}`]) {
       return (
         <Link
           key={ `${keyType}-card-${index}` }
           to={ `${pathname}/${recipe[`id${keyType}`]}` }
         >
-          <Card
-            img={ recipe[`str${keyType}Thumb`] }
-            index={ index }
-            name={ recipe[`str${keyType}`] }
-          />
+          <div data-testid={ `${index}-recipe-card` }>
+            <Card
+              img={ recipe[`str${keyType}Thumb`] }
+              index={ index }
+              name={ recipe[`str${keyType}`] }
+            />
+          </div>
         </Link>
       );
     }
@@ -59,7 +60,6 @@ function EstruturaPrincipal({
 EstruturaPrincipal.propTypes = {
   categoriesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   isLoading: PropTypes.bool.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default EstruturaPrincipal;

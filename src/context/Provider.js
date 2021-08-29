@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
+  const [recipes, setRecipes] = useState([]);
   const [showBar, setShowBar] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [recipes, setRecipes] = useState([]);
+  const [selectedIngredient, setSelectedIngredient] = useState('');
 
   const contextValue = {
-    selectedCategory,
-    setSelectedCategory,
     showBar,
+    selectedCategory,
+    selectedIngredient,
+    setSelectedCategory,
+    setSelectedIngredient,
     setShowBar,
     recipes,
     setRecipes,
