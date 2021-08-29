@@ -54,11 +54,11 @@ function Foods() {
         >
           All
         </button>
-        { categories.meals.slice(0, buttonLimits).map(
+        {foods && categories.meals.slice(0, buttonLimits).map(
           (category, id) => CategoryButton(category.strCategory, id, onClick),
         )}
 
-        {foods.slice(0, foodsLimits).map(
+        {foods && foods.slice(0, foodsLimits).map(
           (food, id) => FoodsCards(
             food, 'comidas', id,
           ),

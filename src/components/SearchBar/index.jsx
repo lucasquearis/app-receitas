@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import IconBtn from '../IconBtn';
+import RadioInput from '../RadioInput';
 import TextInput from '../TextInput';
 import './style.css';
 
@@ -38,6 +40,33 @@ function SearchBar() {
     name: 'searchInput',
   };
 
+  const ingredientsRadioProps = {
+    id: 'ingredient-search-radio',
+    onChange: handleChange,
+    dataId: 'ingredient-search-radio',
+    name: 'selectedSearch',
+    value: 'ingredient',
+    label: 'Ingrediente',
+  };
+
+  const nameRadioProps = {
+    id: 'name-search-radio',
+    onChange: handleChange,
+    dataId: 'name-search-radio',
+    name: 'selectedSearch',
+    value: 'name',
+    label: 'Nome',
+  };
+
+  const firstLetterRadioProps = {
+    id: 'first-letter-search-radio',
+    onChange: handleChange,
+    dataId: 'first-letter-search-radio',
+    name: 'selectedSearch',
+    value: 'firstLetter',
+    label: 'Primeira Letra',
+  };
+
   return (
     <>
       <IconBtn { ...searchBtnProps } />
@@ -45,42 +74,9 @@ function SearchBar() {
         searchInputs && (
           <form>
             <TextInput { ...searchInputProps } />
-
-            <label htmlFor="ingredient-search-radio">
-              Ingrediente
-              <input
-                id="ingredient-search-radio"
-                type="radio"
-                onChange={ handleChange }
-                data-testid="ingredient-search-radio"
-                name="selectedSearch"
-                value="ingredient"
-              />
-            </label>
-
-            <label htmlFor="name-search-radio">
-              Nome
-              <input
-                id="name-search-radio"
-                type="radio"
-                onChange={ handleChange }
-                data-testid="name-search-radio"
-                name="selectedSearch"
-                value="name"
-              />
-            </label>
-
-            <label htmlFor="first-letter-search-radio">
-              Primeira Letra
-              <input
-                id="first-letter-search-radio"
-                type="radio"
-                onChange={ handleChange }
-                data-testid="first-letter-search-radio"
-                name="selectedSearch"
-                value="firstLetter"
-              />
-            </label>
+            <RadioInput { ...ingredientsRadioProps } />
+            <RadioInput { ...nameRadioProps } />
+            <RadioInput { ...firstLetterRadioProps } />
 
             <button type="button" data-testid="exec-search-btn">Buscar</button>
           </form>

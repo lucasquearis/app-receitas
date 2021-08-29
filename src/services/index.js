@@ -67,6 +67,66 @@ export const fetchCategoriesDrinks = async (name) => {
   }
 };
 
+export const fetchIngredientsFoods = async (ingredient) => {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchNameFoods = async (name) => {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchFirstLetterFoods = async (firstLetter) => {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchIngredientsDrinks = async (ingredient) => {
+  try {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchNameDrinks = async (name) => {
+  try {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchFirstLetterDrinks = async (firstLetter) => {
+  try {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const copyToClipboard = () => {
   const myUrl = copy(window.location.href);
   return myUrl;
