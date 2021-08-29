@@ -1,9 +1,13 @@
-import React from 'react';
+import React/* , { useState } */ from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function FoodCard({ meal, index }) {
   const { strMealThumb, strMeal, idMeal } = meal;
+  // const [id, setId] = useState('');
+  // setId(idMeal);
+  // console.log(id);
+
   return (
     <Link to={ `/comidas/${idMeal}` }>
       <div
