@@ -21,9 +21,9 @@ function RecipesProvider({ children }) {
   const [keyType, setKeysType] = useState('');
   const [lists, setLists] = useState({ ingredients: [], measure: [] });
   const [id, setId] = useState('');
-  const [onOff, setOnOff] = useState('');
   const [keyProgress, setKeyProgress] = useState('');
-  const [objRecipeProgress, setObjRecipeProgress] = useState({});
+  const value = JSON.parse(localStorage.getItem('inProgressRecipes')) || { cocktails: { chave: [] }, meals: { chave: [] } };
+  const [objRecipeProgress, setObjRecipeProgress] = useState(value);
 
   useEffect(() => {
     const resultBaseMeals = async () => {
@@ -74,48 +74,24 @@ function RecipesProvider({ children }) {
 
   useEffect(() => {
     const filterIngredients = () => {
-      const ingredientKeys = Object.keys(recipe).filter((key) => key.includes('Ingredient'));
-      const measureKeys = Object.keys(recipe).filter((key) => key.includes('Measure'));
-
-      const ingredientList = ingredientKeys.map((key) => recipe[key]);
-      const measureList = measureKeys.map((key) => recipe[key]);
-
-      const ingredients = ingredientList.filter((item) => item);
-      const measure = measureList.filter((item) => item);
-
-      const size = Object.keys(ingredients).length;
-      const classNameItem = new Array(size).fill('off');
-      const data = { ingredients, measure, classNameItem };
-      setLists({ ...lists, ...data });
-      setOnOff(classNameItem);
+      const ingredients = Object.keys(recipe)
+        .filter((key) => key.includes('Ingredient'))
+        .map((key) => recipe[key])
+        .filter((item) => item);
+      const measure = Object.keys(recipe)
+        .filter((key) => key.includes('Measure'))
+        .map((key) => recipe[key])
+        .filter((item) => item !== ' ' && item !== null);
+      setLists({ ...lists, ingredients, measure });
     };
     filterIngredients();
   }, [recipe]);
-
-  // useEffect(() => {
-  //   const loadingLocalStore = () => {
-  //     const obj = { cocktails: {}, meals: {} };
-  //     localStorage.setItem('inProgressRecipe', JSON.stringify(obj));
-  //   };
-  //   loadingLocalStore();
-  // }, []);
-
-  // useEffect(() => {
-  //   const getValuesLocalStore = async () => {
-  //     const local = await JSON.parse(localStorage.getItem('inProgressRecipe'));
-  //     const text = keyType === 'meals' ? 'meals' : 'cocktails';
-  //     console.log('now', text);
-  //     if (Object.keys(local[text]).includes(id)) return setOnOff(local[text][id]);
-  //   };
-  //   getValuesLocalStore();
-  // }, [keyType, id]);
 
   useEffect(() => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: infoUser.email }));
-    // localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { '': [] }, meals: { '': [] } }));
   }, [infoUser]);
 
   const globalState = {
@@ -123,8 +99,6 @@ function RecipesProvider({ children }) {
     setObjRecipeProgress,
     keyProgress,
     setKeyProgress,
-    onOff,
-    setOnOff,
     id,
     setId,
     setLists,

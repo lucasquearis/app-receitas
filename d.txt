@@ -1,9 +1,0 @@
-TÓPICO
-1 - Titulo de explorar ta undefined
-2 - faltando filtros
-3 - Quando clica no card não redireciona para nenhum lugar
-4 - copiar e colar
-5 - try catch
-6 - header undefined
-7 - uso de link
-8 - condição do alert quebrada
