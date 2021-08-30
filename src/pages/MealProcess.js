@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
-import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
 import './pageCSS/MealProcess.css';
 
@@ -23,7 +22,6 @@ export default function MealProcess(props) {
       strMeal,
       strCategory,
       strInstructions,
-      strYoutube,
     } = resultMealRecipe[0];
     const keysIngredients = Object.keys(resultMealRecipe[0]);
     const listIngredients = keysIngredients.filter((item) => item
@@ -35,7 +33,6 @@ export default function MealProcess(props) {
         <img data-testid="recipe-photo" src={ strMealThumb } alt={ strMeal } />
         <button data-testid="share-btn" type="button">Compartilhar</button>
         <button data-testid="favorite-btn" type="button">Favoritar</button>
-        <span>Categoria: </span>
         <span data-testid="recipe-category">{strCategory}</span>
         <ul className="progress__checkbox-list">
           {listIngredients.map((ingredient, index) => {
