@@ -36,8 +36,6 @@ function App() {
           path="/explorar/comidas/ingredientes"
           component={ ExplorarComidasPorIngrediente }
         />
-        <Route path="/comidas/:id" component={ ComidasDetalhes } />
-        <Route path="/bebidas/:id" component={ BebidasDetalhes } />
         <Route
           exact
           path="/comidas/:id/in-progress"
@@ -48,6 +46,8 @@ function App() {
           path="/bebidas/:id/in-progress"
           component={ BebidasEmProcesso }
         />
+        <Route path="/comidas/:id" component={ ComidasDetalhes } />
+        <Route path="/bebidas/:id" component={ BebidasDetalhes } />
         <Route
           exact
           path="/explorar/bebidas/ingredientes"
