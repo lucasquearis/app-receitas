@@ -6,25 +6,16 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function HeaderDetails(
-  { area, name, img, aux, categoryDrink, alcoholic = '' },
+  { area = '', name, img, aux, alcoholic = '' },
 ) {
   const [copySuccess, setCopySuccess] = useState('');
-  const [changeHeart, setChangeHeart] = useState(whiteHeartIcon);
+  const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const { location: { pathname } } = useHistory();
   const { id } = useParams();
-  const EIGHT = 8;
-  const pathnameAPI = pathname.slice(0, EIGHT);
-  const mockID = 123456;
-
-  const sendFavorite = [{
-    id: '',
-    type: '',
-    area: '',
-    category: '',
-    alcoholicOrNot: '',
-    name: '',
-    image: '',
-  }];  
+  const ONE = 1;
+  const SEVEN = 7;
+  const type = pathname.slice(ONE, SEVEN);
+  console.log(type);
 
   const handleShare = () => {
     // Source: https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
@@ -38,46 +29,34 @@ export default function HeaderDetails(
   };
 
   useEffect(() => {
-    const mock = [{
-      id: 123456,
-      // type,
-      area,
-      category: aux,
-      alcoholicOrNot: alcoholic,
-      name,
-      image: img,
-    }];
+    const mock = [];
     const mockStorage = JSON.stringify(mock);
-    localStorage.setItem('favoriteRecipes', mockStorage);    
 
-    // const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    // const checkId = checkIsFavorite.map((checkedId) => checkedId.id);    
-    // const favoriteId = checkId.some((storageId) => storageId === id);    
+    localStorage.setItem('favoriteRecipes', mockStorage);
 
-    // favoriteId ? setChangeHeart(blackHeartIcon) : setChangeHeart(whiteHeartIcon);  
-    checkFavorite ? setChangeHeart(blackHeartIcon) : setChangeHeart(whiteHeartIcon);   
-    
-  }, [setChangeHeart, id, pathnameAPI, alcoholic, area, aux, img, name]);
-
-  const checkFavorite = () => {
     const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const checkId = checkIsFavorite.map((checkedId) => checkedId.id);    
-    const favoriteId = checkId.some((storageId) => storageId === id);    
-    return(favoriteId);
-  }
+    const checkId = checkIsFavorite.map((checkedId) => checkedId.id);
+    const favoriteId = checkId.some((storageId) => storageId === id);
+
+    return favoriteId ? setHeartColor(blackHeartIcon) : setHeartColor(whiteHeartIcon);
+  }, [id]);
 
   const handleFavorite = () => {
     const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const localStorageId = checkIsFavorite.map((recipe) => recipe.id);
+    const filteredLocalStorage = checkIsFavorite.filter(
+      (recipeFav) => recipeFav.id !== id,
+    );
     const checkFavoriteId = localStorageId.some((storageId) => id === storageId);
-    const finalLocalStorage = checkIsFavorite.filter((recipeFav) => recipeFav.id !== id);
 
     if (checkFavoriteId) {
-      localStorage.setItem('favoriteRecipes', finalLocalStorage);
-      setChangeHeart(whiteHeartIcon);
-    } else {
-      const type = pathnameAPI.slice(0, 7);
-      const favorite = [{
+      const updatedLocalStorage = JSON.stringify(filteredLocalStorage);
+      localStorage.setItem('favoriteRecipes', updatedLocalStorage);
+      setHeartColor(whiteHeartIcon);
+    }
+
+    if (!checkFavoriteId) {
+      const favorite = {
         id,
         type,
         area,
@@ -85,29 +64,13 @@ export default function HeaderDetails(
         alcoholicOrNot: alcoholic,
         name,
         image: img,
-      }];
-      localStorage.setItem('favoriteRecipes', favorite);
-      setChangeHeart(blackHeartIcon);
+      };
+
+      filteredLocalStorage.push(favorite);
+      const finalLocalStorage = JSON.stringify(filteredLocalStorage);
+      localStorage.setItem('favoriteRecipes', finalLocalStorage);
+      setHeartColor(blackHeartIcon);
     }
-
-    // if (id !== recipeId) {
-
-    //     setChangeHeart(blackHeartIcon);
-    //   }
-    //   if (pathnameAPI === '/bebidas') {
-    //     type = 'bebida';
-    //     const favorite = [{
-    //       id,
-    //       type,
-    //       area: aux,
-    //       category: categoryDrink,
-    //       alcoholicOrNot: alcoholic,
-    //       name,
-    //       image: img,
-    //     }];
-    //     localStorage.setItem('favoriteRecipes', favorite);
-    //     setChangeHeart(blackHeartIcon);
-    //   }
   };
 
   return (
@@ -122,7 +85,7 @@ export default function HeaderDetails(
         onClick={ handleShare }
       />
       <input
-        src={ changeHeart }
+        src={ heartColor }
         alt="Favorite Icon"
         type="image"
         data-testid="favorite-btn"
@@ -130,6 +93,7 @@ export default function HeaderDetails(
       />
       <p>{ copySuccess }</p>
       { aux && <p data-testid="recipe-category">{ aux }</p> }
+      { alcoholic && <p data-testid="recipe-category">{ alcoholic }</p> }
     </header>
   );
 }
@@ -139,6 +103,5 @@ HeaderDetails.propTypes = {
   img: PropTypes.string.isRequired,
   aux: PropTypes.string.isRequired,
   area: PropTypes.string.isRequired,
-  categoryDrink: PropTypes.string.isRequired,
   alcoholic: PropTypes.string.isRequired,
 };

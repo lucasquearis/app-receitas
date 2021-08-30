@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import setLocalStorage from '../services/setLocalStorage';
 
 export default function LoginPage() {
   const [redirectToFoods, setRedirectToFoods] = useState(false);
@@ -18,6 +19,7 @@ export default function LoginPage() {
     localStorage.setItem('cocktailsToken', 1);
     const emailStorage = JSON.stringify({ email });
     localStorage.setItem('user', emailStorage);
+    setLocalStorage();
     setRedirectToFoods(true);
   };
 

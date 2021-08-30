@@ -1,0 +1,12 @@
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin: 10px;
+  }
+  
+  .filter-buttons button {
+    height: 28px;
+    width: 105px;
+  }
