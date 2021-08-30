@@ -24,7 +24,7 @@ export default function Profile() {
 
   return (
     <>
-      <Header title="Perfil" />
+      <Header title="Perfil" search={ false } />
       <main>
         <h2 data-testid="profile-email">{ email }</h2>
         <Button

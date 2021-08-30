@@ -37,6 +37,10 @@
   font-weight: 900;
 }
 
+.step-done {
+  text-decoration: line-through solid;
+}
+
 footer {
   background-color: lightblue;
   padding: 10px;

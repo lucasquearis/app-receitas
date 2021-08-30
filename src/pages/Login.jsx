@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import { initialProgressStore } from '../helpers/setLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login() {
@@ -14,6 +15,10 @@ function Login() {
   });
 
   const { email, password, disabledButton, redirect } = dataLogin;
+
+  useEffect(() => {
+    initialProgressStore();
+  }, []);
 
   // validação dos campos
   useEffect(() => {

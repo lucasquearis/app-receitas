@@ -18,3 +18,25 @@ export async function fetchDrinks(callback, endpoint = 'https://www.thecocktaild
     console.log(err);
   }
 }
+
+export async function fetchFoodDetails(callback, id) {
+  try {
+    const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const request = await fetch(endpoint);
+    const results = await request.json();
+    callback({ ...results, food: true });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function fetchDrinksDetails(callback, id) {
+  try {
+    const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const request = await fetch(endpoint);
+    const results = await request.json();
+    callback({ ...results, drink: true });
+  } catch (err) {
+    console.log(err);
+  }
+}

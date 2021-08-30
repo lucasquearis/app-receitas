@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 export default function Explore() {
   return (
     <div>
-      <Header title="Explorar" />
+      <Header title="Explorar" search={ false } />
       <div className="explore-container">
         <Link
           to="/explorar/comidas"
