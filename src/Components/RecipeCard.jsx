@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ function RecipeCard(props) {
   const { id, thumbnail, title, index } = props;
 
   return (
-    <Link to={ `${pathname}:${id}` }>
+    <Link className="recipe-cards" to={ `${pathname}/${id}` }>
       <div data-testid={ `${index}-recipe-card` }>
         <img
           src={ thumbnail }
