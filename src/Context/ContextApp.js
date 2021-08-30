@@ -29,7 +29,6 @@ export const AppProvider = ({ children }) => {
     Login,
     handleClick,
     redirect,
-    ingredients,
     setRedirect,
     drinks,
     meal,
