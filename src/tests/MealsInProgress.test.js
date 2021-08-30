@@ -52,7 +52,7 @@ describe('testa pagina de receita em progresso', () => {
     await screen.findByText(TITLE);
     await screen.findByText(CATEGORY);
     await screen.findByText(INSTRUCTIONS);
-    await screen.findByRole('img', { src: IMG_SRC, alt: TITLE });
+    await screen.findAllByRole('img', { src: IMG_SRC, alt: TITLE });
   });
 
   it('lista de ingredientes', async () => {
