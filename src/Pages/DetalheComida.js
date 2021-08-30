@@ -6,7 +6,7 @@ import './DetalheComida.css';
 import useIsFavorite from '../hooks/useIsFavorite';
 import * as ComidasAPI from '../service/ComidasAPI';
 import * as BebidasAPI from '../service/BebidasAPI';
-import getFoodIngredients from '../service/getFoodIngredients';
+import getRecipeIngredients from '../service/getRecipeIngredients';
 import RecomendedCard from '../Components/RecomendedCard';
 import getEmbedURL from '../service/getEmbedURL';
 import shareIcon from '../images/shareIcon.svg';
@@ -28,7 +28,7 @@ export default function DetalheComida(props) {
     const getFood = async () => {
       const foodResult = await ComidasAPI.buscarComidaPeloID(id);
       setFood(foodResult[0]);
-      const readyIngredients = getFoodIngredients(foodResult);
+      const readyIngredients = getRecipeIngredients(foodResult);
       setFoodIngredients(readyIngredients);
       setLoading(false);
     };
@@ -42,12 +42,6 @@ export default function DetalheComida(props) {
     getFood();
     getRandomDrink();
   }, [id]);
-
-  if (loading) {
-    return (
-      <h1>Loading...</h1>
-    );
-  }
 
   const setMessageTime = () => {
     const messageTime = 1000;
@@ -121,6 +115,12 @@ export default function DetalheComida(props) {
       </button>
     );
   };
+
+  if (loading) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
 
   return (
     <section className="food-info">

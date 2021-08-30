@@ -1,4 +1,4 @@
-export default function getFoodIngredients(foodResult) {
+export default function getRecipeIngredients(foodResult) {
   const ingredientsKeys = Object.entries(foodResult[0]).filter((ingredient) => (
     ingredient[0].includes('strIngredient')
   ));
@@ -15,9 +15,13 @@ export default function getFoodIngredients(foodResult) {
     currMeasure[1] !== '' && currMeasure[1] !== null
   ));
 
-  const readyIngredients = ingredients.map((ingredient, index) => (
-    `- ${ingredient[1]} - ${measure[index][1]}`
-  ));
+  const readyIngredients = ingredients.map((ingredient, index) => {
+    if (index <= measure.length - 1) {
+      const currMeasure = measure[index][1];
+      return `- ${ingredient[1]} - ${currMeasure}`;
+    }
+    return `- ${ingredient[1]}`;
+  });
 
   return readyIngredients;
 }

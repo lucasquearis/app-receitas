@@ -4,6 +4,7 @@ import copyToClipBoard from 'clipboard-copy';
 import getDetailsInitialButton from '../service/getDetailsInitialButton';
 import './DetalheBebida.css';
 import * as BebidasAPI from '../service/BebidasAPI';
+import getRecipeIngredients from '../service/getRecipeIngredients';
 import { buscarComidasAleatoria } from '../service/ComidasAPI';
 import useIsFavorite from '../hooks/useIsFavorite';
 import shareIcon from '../images/shareIcon.svg';
@@ -16,6 +17,7 @@ export default function DetalheBebida(props) {
   const [drink, setDrink] = useState({});
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [randomFood, setRandomFood] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState(false);
   const [favorite, setFavorite] = useState(false);
 
@@ -26,35 +28,9 @@ export default function DetalheBebida(props) {
       const drinkResult = await BebidasAPI.buscarBebidaPeloID(id);
       setDrink(drinkResult.drinks[0]);
 
-      const ingredientsKeys = Object.entries(
-        drinkResult.drinks[0],
-      ).filter((ingredient) => (
-        ingredient[0].includes('strIngredient')
-      ));
-
-      const ingredientsMeasure = Object.entries(
-        drinkResult.drinks[0],
-      ).filter((measureAll) => (
-        measureAll[0].includes('strMeasure')
-      ));
-
-      const ingredients = ingredientsKeys.filter((key) => (
-        key[1] !== '' && key[1] !== null
-      ));
-
-      const measure = ingredientsMeasure.filter((currMeasure) => (
-        currMeasure[1] !== '' && currMeasure[1] !== null
-      ));
-
-      const readyIngredients = ingredients.map((ingredient, index) => {
-        if (index <= measure.length - 1) {
-          const currMeasure = measure[index][1];
-          return `- ${ingredient[1]} - ${currMeasure}`;
-        }
-        return `- ${ingredient[1]}`;
-      });
-
+      const readyIngredients = getRecipeIngredients(drinkResult.drinks);
       setDrinkIngredients(readyIngredients);
+      setLoading(false);
     };
 
     const getRandomFood = async () => {
@@ -160,6 +136,12 @@ export default function DetalheBebida(props) {
       </button>
     );
   };
+
+  if (loading) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
 
   return (
     <section className="food-info">
