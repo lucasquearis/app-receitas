@@ -64,13 +64,11 @@ function SearchBar({ pageName }) {
   };
 
   const handleChangeInputText = (event) => {
-    // console.log(inputText);
     const { value } = event.target;
     setInputText(value);
   };
 
   const handleChangeInputRadio = (event) => {
-    // console.log(inputRadio);
     const { id } = event.target;
     setInputRadio(id);
   };
