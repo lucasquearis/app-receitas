@@ -14,6 +14,7 @@ export default function FavoriteRecipes() {
       <Header
         title="Receitas Favoritas"
         enableSearchIcon={ false }
+        showRender={ false }
       />
       <div>
         <button

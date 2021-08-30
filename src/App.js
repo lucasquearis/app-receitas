@@ -15,6 +15,7 @@ import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import Ingredients from './pages/Ingredients';
 import RecipesMade from './pages/RecipesMade';
+import Area from './pages/Area';
 
 import FoodProvider from './provider/FoodProvider';
 import DrinkProvider from './provider/DrinkProvider';
@@ -38,8 +39,8 @@ function App() {
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ ExploreFoods } />
             <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
-            <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
-            <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
+            <Route path="/explorar/:type/ingredientes" component={ Ingredients } />
+            <Route path="/explorar/:type/area" component={ Area } />
             <Route exact path="/receitas-feitas" component={ RecipesMade } />
           </Switch>
         </FavoritesProvider>
