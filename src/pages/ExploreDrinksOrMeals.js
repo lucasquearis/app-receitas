@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function ExploreDrinksOrMeals(title) {
+function ExploreDrinksOrMeals() {
   const [randomFood, setRandomFood] = useState('');
   const [randomDrink, setRandomDrink] = useState('');
   const [buttonFood, setButtonFood] = useState(false);
   const [buttonDrink, setButtonDrink] = useState(false);
   const { pathname } = useLocation();
-  const history = useHistory();
-
-  const pathURL = history.location.pathname;
-  if (pathURL === '/explorar/bebidas') {
-    title = 'Explorar Bebidas';
-  } if (pathURL === '/explorar/comidas') {
-    title = 'Explorar Comidas';
-  }
 
   useEffect(() => {
     function handleClickFood() {
@@ -49,7 +41,7 @@ function ExploreDrinksOrMeals(title) {
   if (pathname === '/explorar/comidas') {
     return (
       <div>
-        <Header title={ title } hideSearch />
+        <Header title="Explorar Comidas" hideSearch />
         <p>Explore Drinks or Meals</p>
         <Link to="/explorar/comidas/ingredientes">
           <button type="button" data-testid="explore-by-ingredient">
@@ -77,6 +69,7 @@ function ExploreDrinksOrMeals(title) {
   }
   return (
     <div>
+      <Header title="Explorar Bebidas" hideSearch />
       <Link to="/explorar/bebidas/ingredientes">
         <button type="button" data-testid="explore-by-ingredient">
           Por Ingredientes
