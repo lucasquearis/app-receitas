@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
 
 export default function BebidasDetalhes() {
   const [drink, setDrink] = useState();
+  const history = useHistory();
   const location = useLocation();
+  const idApi = location.pathname.split('/')[2];
+  console.log(idApi);
   const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
   const recommendedRecipes = [
     'receita 1',
@@ -14,10 +17,8 @@ export default function BebidasDetalhes() {
 
   useEffect(() => {
     const api = async () => {
-      const idApi = location.pathname.split('/')[2];
       const response = await fetch(`${URL_DRINK}${idApi}`);
       const data = await response.json();
-      console.log(data.drinks[0]);
       setDrink(data.drinks[0]);
     };
     api();
@@ -29,10 +30,9 @@ export default function BebidasDetalhes() {
 
   const setIngredients = () => {
     const ingredients1 = Object.keys(drink)
-      .filter((ingridient) => ingridient
+      .filter((ingredient) => ingredient
         .includes('strIngredient')
-        && drink[ingridient] !== null && drink[ingridient] !== '');
-    // console.log(ingredients1);
+        && drink[ingredient] !== null && drink[ingredient] !== '');
     return ingredients1.map((jonas, index) => (
       <li
         data-testid={ `${index}-ingredient-name-and-measure` }
@@ -47,7 +47,7 @@ export default function BebidasDetalhes() {
   setIngredients();
   return (
     <div>
-      <p>{drink.idDrink}</p>
+      {/* <p>{drink.idDrink}</p> */}
       <img src={ drink.strDrinkThumb } alt="recipe" data-testid="recipe-photo" />
       <h2 data-testid="recipe-title">{drink.strDrink}</h2>
       <button type="button" data-testid="share-btn">Compartilhar</button>
@@ -70,7 +70,13 @@ export default function BebidasDetalhes() {
           ))}
         </ul>
       </div>
-      <button type="button" data-testid="start-recipe-btn">Favorito</button>
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ () => history.push(`/bebidas/${idApi}/in-progress`) }
+      >
+        Começar receita
+      </button>
     </div>
   );
 }

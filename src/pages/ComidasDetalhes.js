@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Loading from '../components/Loading';
 
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
   // const [foodName, setFoodName] = useState('');
+  const history = useHistory();
   const location = useLocation();
+  const idApi = location.pathname.split('/')[2];
   const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 
   const recommendedRecipes = [
@@ -16,11 +18,8 @@ export default function ComidasDetalhes() {
 
   useEffect(() => {
     const api = async () => {
-      const idApi = location.pathname.split('/')[2];
-
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
-      // console.log(data.meals[0]);
       setFood(data.meals[0]);
     };
     api();
@@ -32,9 +31,9 @@ export default function ComidasDetalhes() {
 
   const setIngredients = () => {
     const ingredients1 = Object.keys(food)
-      .filter((ingridient) => ingridient
+      .filter((ingredient) => ingredient
         .includes('strIngredient')
-        && food[ingridient] !== null && food[ingridient] !== '');
+        && food[ingredient] !== null && food[ingredient] !== '');
     return ingredients1.map((jonas, index) => (
       <li
         data-testid={ `${index}-ingredient-name-and-measure` }
@@ -75,7 +74,13 @@ export default function ComidasDetalhes() {
           ))}
         </ul>
       </div>
-      <button type="button" data-testid="start-recipe-btn">Favorito</button>
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ () => history.push(`/comidas/${idApi}/in-progress`) }
+      >
+        Começar receita
+      </button>
     </div>
   );
 }
