@@ -9,6 +9,10 @@ import {
 const INITIAL_STATE = {
   meals: [],
   drinks: [],
+  categories: {
+    meals: [],
+    drinks: [],
+  },
 };
 
 const foodsAndDrinks = (state = INITIAL_STATE, action) => {
