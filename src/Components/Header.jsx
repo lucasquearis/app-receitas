@@ -22,6 +22,7 @@ function Header({ title, loading }) {
         <h2 data-testid="page-title">{ title }</h2>
         <Link to="/explorar">
           <button
+            className="header-button"
             type="button"
             data-test-id="search-top-btn"
             onClick={ renderSearchBar }
@@ -42,6 +43,7 @@ function Header({ title, loading }) {
           alt="profile"
         />
       </Link>
+      <h2 data-testid="page-title">{ title }</h2>
     </header>
   );
 }

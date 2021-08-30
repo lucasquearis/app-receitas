@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputCard from '../Components/InputCard';
 import { loginValidator } from '../helper';
 import ButtonCard from '../Components/ButtonCard';
+import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,8 +15,10 @@ function Login() {
     localStorage.setItem('mealsToken', 1);
   };
   return (
-    <main>
-      <form>
+    <main className="log-container">
+      <div className="none" />
+      <form className="form">
+        <h2>Cooky</h2>
         <InputCard
           id="email"
           name="email"
@@ -38,6 +41,7 @@ function Login() {
           disabled={ !loginValidator({ email, password }) }
         />
       </form>
+      <div className="none" />
     </main>
   );
 }

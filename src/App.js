@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Explore from './Pages/Explore';
 import Login from './Pages/Login';
-import MainPage from './Pages/MainPage';
+import FoodMainPage from './Pages/FoodMainPage';
 import DrinksExplore from './Pages/DrinksExplore';
 import FoodExplore from './Pages/FoodExplore';
 import FoodIngredientesExplore from './Pages/FoodIngredientesExplore';
@@ -43,7 +43,7 @@ function App() {
         path="/bebidas/:id"
         render={ (props) => <DrinksDetails { ...props } /> }
       />
-      <Route exact path="/comidas" component={ MainPage } />
+      <Route exact path="/comidas" component={ FoodMainPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
     </Switch>
