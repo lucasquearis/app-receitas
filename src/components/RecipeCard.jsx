@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './style/categoryStyle.css';
 
 class RecipeCard extends Component {
   renderFoodCard() {
     const { id, name, thumb, index } = this.props;
 
     return (
-      <Link to={ `/comidas/${id}` }>
+
+      <Link className="remove-line" to={ `/comidas/${id}` }>
         <div
           className="col"
         >
           <div
-            className="card"
+            className="card card-list-food"
             data-testid={ `${index}-recipe-card` }
           >
             <img
@@ -24,6 +26,7 @@ class RecipeCard extends Component {
           </div>
         </div>
       </Link>
+
     );
   }
 
