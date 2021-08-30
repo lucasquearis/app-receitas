@@ -78,6 +78,7 @@ function useAPI(pathname) {
 
   return {
     recipes,
+    pathname,
     categories,
     listCategories,
     searchByFilters,

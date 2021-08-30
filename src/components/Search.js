@@ -4,26 +4,16 @@ import RecipesContext from '../context/RecipesContext';
 function Search() {
   const [radio, setRadio] = useState('s');
   const [searchValue, setSearchValue] = useState('');
-  const { API: { searchByFilters } } = useContext(RecipesContext);
+
+  const { API } = useContext(RecipesContext);
+  const { searchByFilters } = API;
 
   function handleChange({ target }) {
     setSearchValue(target.value);
   }
 
   function change(value) {
-    switch (value) {
-    case 'name':
-      setRadio('s');
-      break;
-    case 'ingredient':
-      setRadio('i');
-      break;
-    case 'first':
-      setRadio('f');
-      break;
-    default:
-      break;
-    }
+    setRadio(value[0]);
   }
 
   function click() {
@@ -64,7 +54,7 @@ function Search() {
           <input
             type="radio"
             name="radio"
-            value="name"
+            value="search"
             data-testid="name-search-radio"
           />
           <span>Nome</span>

@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
-
-import useAPI from '../hooks/useAPI';
+import React, { useContext, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import RecipesContext from '../context/RecipesContext';
 
 function Cards() {
-  const { pathname } = useLocation();
-  const { recipes, searchByFilters } = useAPI(pathname);
+  const { API } = useContext(RecipesContext);
+  const { pathname, recipes, searchByFilters } = API;
 
   const min = 0;
   const max = 12;
@@ -33,9 +32,13 @@ function Cards() {
   const cardName = `str${type}`;
   const cards = list.slice(min, max);
 
-  useEffect(() => {
-    if (cards.length === 0) searchByFilters();
-  });
+  function didMount() {
+    if (cards.length === 0) {
+      searchByFilters();
+    }
+  }
+
+  useEffect(didMount);
 
   switch (cards.length) {
   case 0:
