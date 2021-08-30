@@ -7,14 +7,12 @@ import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
-import Ingredients from '../../components/Ingredients';
-import Video from '../../components/Video;
 
 class DetailsDrink extends Component {
   componentDidMount() {
-    const { fetchCocktail, match } = this.props;
+    const { setCocktail, match } = this.props;
     const { params: { id } } = match;
-    fetchCocktail(id);
+    setCocktail(id);
   }
 
   render() {
@@ -32,7 +30,7 @@ class DetailsDrink extends Component {
                   <div>
                     <h1 data-testid="recipe-title">{ strDrink }</h1>
                     <h2 data-testid="recipe-category">
-                      { strCategory } 
+                      { strCategory }
                       { strAlcoholic }
                     </h2>
                   </div>
@@ -77,7 +75,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispach) => ({
-  fetchCocktail: (id) => dispach(fetchCocktail(id)),
+  setCocktail: (id) => dispach(fetchCocktail(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsDrink);

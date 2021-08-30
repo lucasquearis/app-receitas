@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchCocktail from '../Redux/actions/fetchCocktail';
 
 class IngredientsDrink extends Component {
   constructor(props) {
@@ -60,11 +59,7 @@ const mapStateToProps = (state) => ({
   cocktail: state.drinks.cocktails,
 });
 
-const mapDispatchToProps = (dispach) => ({
-  fetchCocktail: (id) => dispach(fetchCocktail(id)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsDrink);
+export default connect(mapStateToProps)(IngredientsDrink);
 
 IngredientsDrink.propTypes = {
   cocktail: PropTypes.objectOf(PropTypes.object),
