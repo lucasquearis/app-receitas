@@ -1,37 +1,55 @@
 const filterAlertMsg = 'Sua busca deve conter somente 1 (um) caracter';
-let url;
-const mealURL = 'themealdb';
-const drinkURL = 'thecocktaildb';
 
-const currentPage = window.location.href;
-const foodPage = 'comidas';
-const cocktailPage = 'bebidas';
+const getUrl = () => {
+  let url;
+  const mealURL = 'themealdb';
+  const drinkURL = 'thecocktaildb';
 
-if (currentPage.includes(foodPage)) {
-  url = mealURL;
-} else if (currentPage.includes(cocktailPage)) {
-  url = drinkURL;
-}
+  const currentPage = window.location.href;
+  const foodPage = 'comidas';
+  const cocktailPage = 'bebidas';
 
-const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
-const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
-const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
-const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
-const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+  if (currentPage.includes(foodPage)) {
+    url = mealURL;
+  } else if (currentPage.includes(cocktailPage)) {
+    url = drinkURL;
+  }
+
+  const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
+  const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
+  const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
+  const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+  const areaURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
+  const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
+
+  return {
+    ingredientURL,
+    nameURL,
+    firstLetterURL,
+    categoryFilterURL,
+    areaURL,
+    detailsURL,
+    currentPage,
+    foodPage,
+    cocktailPage,
+    mealURL,
+    drinkURL,
+  };
+};
 
 export const getRecomendations = async () => {
+  const { currentPage, foodPage, cocktailPage, mealURL, drinkURL } = getUrl();
+
   if (currentPage.includes(foodPage)) {
-    url = drinkURL;
-  } else if (currentPage.includes(cocktailPage)) {
-    url = mealURL;
-  }
-  const recomendationsURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
-  const response = await fetch(`${recomendationsURL}`);
-  if (currentPage.includes(foodPage)) {
+    const recomendationsURL = `https://www.${drinkURL}.com/api/json/v1/1/search.php?s=`;
+    const response = await fetch(recomendationsURL);
     const { drinks } = await response.json();
 
     return drinks;
-  } if (currentPage.includes(cocktailPage)) {
+  }
+  if (currentPage.includes(cocktailPage)) {
+    const recomendationsURL = `https://www.${mealURL}.com/api/json/v1/1/search.php?s=`;
+    const response = await fetch(recomendationsURL);
     const { meals } = await response.json();
 
     return meals;
@@ -39,6 +57,7 @@ export const getRecomendations = async () => {
 };
 
 export const getDataByIngredient = async (ingredient) => {
+  const { ingredientURL } = getUrl();
   const response = await fetch(`${ingredientURL}${ingredient}`);
   const data = response.json();
 
@@ -46,6 +65,7 @@ export const getDataByIngredient = async (ingredient) => {
 };
 
 export const getDataByName = async (name) => {
+  const { nameURL } = getUrl();
   const response = await fetch(`${nameURL}${name}`);
   const data = response.json();
 
@@ -53,6 +73,7 @@ export const getDataByName = async (name) => {
 };
 
 export const getDataByFirstLetter = async (letter) => {
+  const { firstLetterURL } = getUrl();
   const response = await fetch(`${firstLetterURL}${letter}`);
   const data = response.json();
   if (letter.length >= 2) {
@@ -65,6 +86,7 @@ export const getDataByFirstLetter = async (letter) => {
 };
 
 export const getDataDetails = async (id) => {
+  const { detailsURL, currentPage, foodPage } = getUrl();
   const response = await fetch(`${detailsURL}${id}`);
   if (currentPage.includes(foodPage)) {
     const { meals } = await response.json();
@@ -75,7 +97,16 @@ export const getDataDetails = async (id) => {
 };
 
 export const getDataByCategory = async (category) => {
+  const { categoryFilterURL } = getUrl();
   const response = await fetch(`${categoryFilterURL}${category}`);
+  const data = await response.json();
+
+  return data;
+};
+
+export const getDataByArea = async (area) => {
+  const { areaURL } = getUrl();
+  const response = await fetch(`${areaURL}${area}`);
   const data = await response.json();
 
   return data;
