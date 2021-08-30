@@ -5,11 +5,12 @@ import LoginHook from '../Hooks/LoginHook';
 import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 
 import FoodHook from '../Hooks/FoodHook';
+import recipesHooks from '../Hooks/recipesHooks';
 
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
-  const { searchRecipes, recipes, setRecipes, loading } = recipesHooks();
+  const { searchRecipes, recipes, setRecipes } = recipesHooks();
   const { categoryMeal, categoryDrinks, filterIngredient, filter } = BtnFilterCategory();
   const {
     handleInput,
@@ -37,7 +38,6 @@ export const AppProvider = ({ children }) => {
     setRedirect,
     drinks,
     meal,
-    loading,
   };
 
   return (

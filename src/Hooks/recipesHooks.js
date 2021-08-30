@@ -6,7 +6,6 @@ const showAlert = (callback, msg) => {
 };
 
 function RecipesHooks() {
-  const [loading, setLoading] = useState(true);
   const [recipes, setRecipes] = useState([]);
   const searchRecipes = async (previousSearch, foodRout, url, history = null) => {
     const { type, input } = previousSearch;
@@ -40,7 +39,6 @@ function RecipesHooks() {
       );
     }
     setRecipes(responseRecipes);
-    setLoading(false);
     if (history !== null && responseRecipes.length === 1) {
       history.push(
         foodRout === true
@@ -52,8 +50,6 @@ function RecipesHooks() {
   return {
     searchRecipes,
     recipes,
-    loading,
-    setLoading,
     setRecipes,
   };
 }
