@@ -4,8 +4,8 @@ import BottomMenu from '../components/BottomMenu';
 import Header from '../components/Header';
 import MyContext from '../context';
 import Card from '../components/Card';
-import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import Categories from '../components/Categories';
+import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 
 export default function Drinks() {
   const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);

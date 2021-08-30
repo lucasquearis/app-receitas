@@ -4,8 +4,8 @@ import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
 import Header from '../components/Header';
 import Card from '../components/Card';
-import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import Categories from '../components/Categories';
+import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import './pageCSS/Meals.css';
 
 export default function Meals() {
