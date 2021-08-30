@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import RenderWithRouter from '../RenderWithRouter';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 const EMAIL_TESTID = 'email-input';
@@ -13,7 +13,7 @@ describe('Testando a Tela de Login (Tela inicial da Aplicação', () => {
   let history = {};
 
   beforeEach(() => {
-    history = RenderWithRouter(<App />).history;
+    history = renderWithRouter(<App />).history;
   });
 
   it('Testando se a rota está correta', () => {
@@ -91,9 +91,8 @@ describe('Testando a Tela de Login (Tela inicial da Aplicação', () => {
 
     userEvent.type(emailInput, EMAIL_TEST);
     expect(emailInput).toHaveValue(EMAIL_TEST);
-    userEvent.type(passwordInput, '123456');
-    expect(passwordInput).toHaveValue('123456');
-    expect(submitButton).not.toHaveAttribute('disabled');
+    userEvent.type(passwordInput, '1234567');
+    expect(passwordInput).toHaveValue('1234567');
 
     userEvent.click(submitButton);
     expect(history.location.pathname).toEqual('/comidas');
@@ -106,11 +105,12 @@ describe('Testando a Tela de Login (Tela inicial da Aplicação', () => {
 
     userEvent.type(emailInput, EMAIL_TEST);
     expect(emailInput).toHaveValue(EMAIL_TEST);
-    userEvent.type(passwordInput, '123456');
-    expect(passwordInput).toHaveValue('123456');
+    userEvent.type(passwordInput, '1234567');
+    expect(passwordInput).toHaveValue('1234567');
 
     userEvent.click(submitButton);
-    expect(localStorage.getItem('user')).toEqual('{"email":"teste@teste.com"}');
+    expect(history.location.pathname).toEqual('/comidas');
+    expect(localStorage.getItem('user')).toBe('{"email":"teste@teste.com"}');
     expect(localStorage.getItem('mealsToken')).toEqual('1');
     expect(localStorage.getItem('cocktailsToken')).toEqual('1');
   });
