@@ -36,7 +36,7 @@ const RecomendationCard = ({ page }) => {
           }
           return (
             <li data-testid={ `${index}-recomendation-card` } key={ idDrink }>
-              <p>{ strDrink }</p>
+              <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
               <p>{ strAlcoholic }</p>
               <img src={ strDrinkThumb } alt={ strDrink } />
             </li>

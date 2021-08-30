@@ -21,8 +21,8 @@ function DrinkRecipeDetails(props) {
     const {
       strDrink,
       strDrinkThumb,
-      strCategory,
       strInstructions,
+      strAlcoholic,
     } = resultDrinkRecipe[0];
     const keysIngredients = Object.keys(resultDrinkRecipe[0]);
     const listIngredients = keysIngredients.filter((item) => item
@@ -34,8 +34,7 @@ function DrinkRecipeDetails(props) {
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt={ strDrink } />
         <button data-testid="share-btn" type="button">Compartilhar</button>
         <button data-testid="favorite-btn" type="button">Favoritar</button>
-        <span>Categoria: </span>
-        <span data-testid="recipe-category">{strCategory}</span>
+        <p data-testid="recipe-category">{strAlcoholic}</p>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultDrinkRecipe[0][ingredient]) {

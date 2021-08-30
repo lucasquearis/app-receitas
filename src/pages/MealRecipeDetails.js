@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import './pageCSS/MealRecipeDetails.css';
 import searchMealAPI
   from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
@@ -32,7 +33,12 @@ export default function MealRecipeDetails(props) {
     return (
       <>
         <h1 data-testid="recipe-title">{strMeal}</h1>
-        <img data-testid="recipe-photo" src={ strMealThumb } alt={ strMeal } />
+        <img
+          className="cards"
+          data-testid="recipe-photo"
+          src={ strMealThumb }
+          alt={ strMeal }
+        />
         <button data-testid="share-btn" type="button">Compartilhar</button>
         <button data-testid="favorite-btn" type="button">Favoritar</button>
         <span>Categoria: </span>
