@@ -21,9 +21,9 @@ class CategoriesFilter extends Component {
     const filteredCategories = this.filterFiveCategories();
 
     return (
-      <div>
+      <div className="categoryStyle">
         <button
-          className="btn btn-warning categoryStyle"
+          className="btn btn-warning "
           type="button"
           data-testid="All-category-filter"
           onClick={ handleClick }
@@ -33,7 +33,7 @@ class CategoriesFilter extends Component {
         {
           filteredCategories.map(({ strCategory }) => (
             <button
-              className="btn btn-warning categoryStyle"
+              className="btn btn-warning "
               key={ strCategory }
               type="button"
               data-testid={ `${strCategory}-category-filter` }
