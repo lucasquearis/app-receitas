@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import SearchBar from '../SearchBar';
 import './style.css';
 import IconBtn from '../IconBtn';
+import profileIcon from '../../images/profileIcon.svg';
 
 function Header({ title, renderSearchBar }) {
   const profileBtnProps = {
     dataId: 'profile-top-btn',
-    src: '/images/profileIcon.svg',
+    src: profileIcon,
     alt: 'Botão Perfil',
   };
 
@@ -21,7 +22,7 @@ function Header({ title, renderSearchBar }) {
         <h1 data-testid="page-title">{title}</h1>
         {renderSearchBar
           && (
-            <SearchBar />
+            <SearchBar title={ title } />
           )}
       </nav>
     </header>

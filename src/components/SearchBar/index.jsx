@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import GenericBtn from '../GenericBtn';
 import IconBtn from '../IconBtn';
+import RadioInput from '../RadioInput';
 import TextInput from '../TextInput';
 import './style.css';
+import {
+  fetchFoodByFirstLetter,
+  fetchFoodByIngredient,
+  fetchFoodByName,
+  fetchDrinkByFirstLetter,
+  fetchDrinkByIngredient,
+  fetchDrinkByName,
+} from '../../redux/actions/foodActions';
+import searchIcon from '../../images/searchIcon.svg';
 
-function SearchBar() {
+function SearchBar({ title }) {
   const [searchInputs, setSearchInputs] = useState(false);
   const [formInputs, setFormInput] = useState({});
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (searchInputs) {
@@ -23,10 +37,60 @@ function SearchBar() {
     }
   };
 
+  const handleFoodSubmit = ({ searchInput, selectedSearch }) => {
+    switch (selectedSearch) {
+    case 'ingredient':
+    {
+      const ingredient = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchFoodByIngredient(ingredient));
+    }
+    case 'name':
+    {
+      const name = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchFoodByName(name));
+    }
+    case 'firstLetter':
+    {
+      if (searchInput.length > 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      const firstLetter = searchInput.charAt(0).toLowerCase();
+      return dispatch(fetchFoodByFirstLetter(firstLetter));
+    }
+    default:
+      return true;
+    }
+  };
+
+  const handleDrinkSubmit = ({ searchInput, selectedSearch }) => {
+    switch (selectedSearch) {
+    case 'ingredient':
+    {
+      const ingredient = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchDrinkByIngredient(ingredient));
+    }
+    case 'name':
+    {
+      const name = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchDrinkByName(name));
+    }
+    case 'firstLetter':
+    {
+      if (searchInput.length > 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      const firstLetter = searchInput.charAt(0).toLowerCase();
+      return dispatch(fetchDrinkByFirstLetter(firstLetter));
+    }
+    default:
+      return true;
+    }
+  };
+
   const searchBtnProps = {
     onClick: handleClick,
     dataId: 'search-top-btn',
-    src: '/images/searchIcon.svg',
+    src: searchIcon,
     alt: 'search-button',
   };
 
@@ -38,6 +102,45 @@ function SearchBar() {
     name: 'searchInput',
   };
 
+  const ingredientsRadioProps = {
+    id: 'ingredient-search-radio',
+    onChange: handleChange,
+    dataId: 'ingredient-search-radio',
+    name: 'selectedSearch',
+    value: 'ingredient',
+    label: 'Ingrediente',
+  };
+
+  const nameRadioProps = {
+    id: 'name-search-radio',
+    onChange: handleChange,
+    dataId: 'name-search-radio',
+    name: 'selectedSearch',
+    value: 'name',
+    label: 'Nome',
+  };
+
+  const firstLetterRadioProps = {
+    id: 'first-letter-search-radio',
+    onChange: handleChange,
+    dataId: 'first-letter-search-radio',
+    name: 'selectedSearch',
+    value: 'firstLetter',
+    label: 'Primeira Letra',
+  };
+
+  const searchBtn = {
+    dataId: 'exec-search-btn',
+    value: 'Buscar',
+    onClick: () => {
+      if (title.toLowerCase() === 'comidas') {
+        handleFoodSubmit(formInputs);
+      } if (title.toLowerCase() === 'bebidas') {
+        handleDrinkSubmit(formInputs);
+      }
+    },
+  };
+
   return (
     <>
       <IconBtn { ...searchBtnProps } />
@@ -45,49 +148,18 @@ function SearchBar() {
         searchInputs && (
           <form>
             <TextInput { ...searchInputProps } />
-
-            <label htmlFor="ingredient-search-radio">
-              Ingrediente
-              <input
-                id="ingredient-search-radio"
-                type="radio"
-                onChange={ handleChange }
-                data-testid="ingredient-search-radio"
-                name="selectedSearch"
-                value="ingredient"
-              />
-            </label>
-
-            <label htmlFor="name-search-radio">
-              Nome
-              <input
-                id="name-search-radio"
-                type="radio"
-                onChange={ handleChange }
-                data-testid="name-search-radio"
-                name="selectedSearch"
-                value="name"
-              />
-            </label>
-
-            <label htmlFor="first-letter-search-radio">
-              Primeira Letra
-              <input
-                id="first-letter-search-radio"
-                type="radio"
-                onChange={ handleChange }
-                data-testid="first-letter-search-radio"
-                name="selectedSearch"
-                value="firstLetter"
-              />
-            </label>
-
-            <button type="button" data-testid="exec-search-btn">Buscar</button>
-          </form>
-        )
+            <RadioInput { ...ingredientsRadioProps } />
+            <RadioInput { ...nameRadioProps } />
+            <RadioInput { ...firstLetterRadioProps } />
+            <GenericBtn { ...searchBtn } />
+          </form>)
       }
     </>
   );
 }
+
+SearchBar.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
 
 export default SearchBar;

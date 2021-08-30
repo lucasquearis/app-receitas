@@ -1,19 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function RadioInput() {
+function RadioInput({ id, onChange, dataId, name, value, label }) {
   return (
-    <label htmlFor="ingredient-search-radio">
-      Ingrediente
+    <label htmlFor={ id }>
+      {label}
       <input
-        id="ingredient-search-radio"
+        id={ id }
         type="radio"
-        onChange={ handleChange }
-        data-testid="ingredient-search-radio"
-        name="selectedSearch"
-        value="ingredient"
+        onChange={ onChange }
+        data-testid={ dataId }
+        name={ name }
+        value={ value }
       />
     </label>
   );
 }
+
+RadioInput.propTypes = {
+  id: PropTypes.string,
+  onChange: PropTypes.func,
+  dataId: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.string,
+}.isRequired;
 
 export default RadioInput;

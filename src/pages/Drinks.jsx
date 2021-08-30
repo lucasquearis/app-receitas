@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDrinksRedux } from '../redux/actions/foodActions';
 import DrinksCards from '../components/DrinksCard';
@@ -10,7 +11,7 @@ function Drinks() {
   const dispatch = useDispatch();
   const drinksLimits = 12;
   // const [current, setCurrent] = useState('');
-  const { drinks } = useSelector((state) => state.foodsAndDrinks);
+  const { drinks, redirect } = useSelector((state) => state.foodsAndDrinks);
   // const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
@@ -28,6 +29,11 @@ function Drinks() {
       <h1>Loading</h1>
     );
   }
+
+  if (redirect) {
+    return <Redirect to={ `/bebidas/${redirect}` } />;
+  }
+
   return (
     <>
       <Header { ...headerProps } />

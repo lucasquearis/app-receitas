@@ -4,7 +4,8 @@ import {
   ADD_DRINKS_CATEGORIES,
   ADD_FOODS_CATEGORIES,
   ADD_MEAL_DETAIL,
-  ADD_DRINK_DETAIL } from '../actions/actionTypes';
+  ADD_DRINK_DETAIL,
+  REDIRECT } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   meals: [],
@@ -29,6 +30,8 @@ const foodsAndDrinks = (state = INITIAL_STATE, action) => {
     return { ...state, details: action.payload };
   case ADD_DRINK_DETAIL:
     return { ...state, details: action.payload };
+  case REDIRECT:
+    return { ...state, redirect: action.payload };
   default:
     return state;
   }
