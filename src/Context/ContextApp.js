@@ -5,13 +5,11 @@ import LoginHook from '../Hooks/LoginHook';
 import foodHook from '../Hooks/FoodHook';
 
 import recipesHooks from '../Hooks/recipesHooks';
-import IngredientHooks from '../Hooks/IngredientsHooks';
 
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes } = recipesHooks();
-  const { ingredients, getIngredients } = IngredientHooks();
 
   const {
     handleInput,
@@ -32,7 +30,6 @@ export const AppProvider = ({ children }) => {
     handleClick,
     redirect,
     ingredients,
-    getIngredients,
     setRedirect,
     drinks,
     meal,
