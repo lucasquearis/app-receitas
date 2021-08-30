@@ -5,12 +5,18 @@ export default function ListDetails({ ingredients, measures }) {
   return ingredients.map((ingredient, index) => {
     if (!measures[index]) {
       return (
-        <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
+        <li
+          key={ `${ingredient}${Math.random() * 100}` }
+          data-testid={ `${index}-ingredient-name-and-measure` }
+        >
           {ingredient}
         </li>);
     }
     return (
-      <li key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
+      <li
+        key={ `${ingredient}${Math.random() * 100}` }
+        data-testid={ `${index}-ingredient-name-and-measure` }
+      >
         {ingredient}
         -
         {measures[index]}
@@ -19,7 +25,12 @@ export default function ListDetails({ ingredients, measures }) {
   });
 }
 
+ListDetails.defaultProps = {
+  ingredient: [],
+  measures: [],
+};
+
 ListDetails.propTypes = {
-  ingredient: PropTypes.arrayOf(PropTypes.string).isRequired,
-  measures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ingredient: PropTypes.arrayOf(PropTypes.string),
+  measures: PropTypes.arrayOf(PropTypes.string),
 };

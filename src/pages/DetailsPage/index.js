@@ -52,7 +52,7 @@ export default function DetailsPage() {
     return (
       <>
         <CopyButton path={ pathname } />
-        <FavoriteButton />
+        <FavoriteButton recipeDetails={ recipeDetails } path={ pathname } />
         <img
           src={ recipeDetails.strDrinkThumb || recipeDetails.strMealThumb }
           data-testid="recipe-photo"

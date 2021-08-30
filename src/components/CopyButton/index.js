@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import ShareIcon from '../../images/shareIcon.svg';
 
-export default function CopyButton({ path }) {
+export default function CopyButton({ path, index }) {
   const [isHidden, setIsHidden] = useState(true);
 
   const handleClipboardCopy = () => {
@@ -22,7 +22,11 @@ export default function CopyButton({ path }) {
         onClick={ handleClipboardCopy }
         data-testid="share-btn"
       >
-        <img src={ ShareIcon } alt="Botão de compartilhar" />
+        <img
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ ShareIcon }
+          alt="Botão de compartilhar"
+        />
       </button>
       <div hidden={ isHidden }>
         Link copiado!
@@ -31,6 +35,11 @@ export default function CopyButton({ path }) {
   );
 }
 
+CopyButton.defaultProps = {
+  index: 0,
+};
+
 CopyButton.propTypes = {
   path: PropTypes.string.isRequired,
+  index: PropTypes.number,
 };
