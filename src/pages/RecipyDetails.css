@@ -34,6 +34,11 @@
   width: 170px;
 }
 
+.RecomendImg {
+ width: 25vmin;
+ height: auto; 
+}
+
 .sugestions {
   display: flex;
   overflow-x: scroll;

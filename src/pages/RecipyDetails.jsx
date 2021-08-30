@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { useParams } from 'react-router-dom';
+import Details from '../components/Details';
 import './RecipyDetails.css';
 
 /*
@@ -19,64 +17,6 @@ const returnUrl = (id, receita) => {
   const urlRecomend = receita === 'comidas' ? URLBebidaRec : URLComidaRec;
   const objreturn = [urlRecipe, urlRecomend];
   return objreturn;
-};
-
-const IngredientList = (array) => {
-  const texthandle = '-ingredient-name-and-measure';
-  const obj = array[0].map((n, index) => (
-    n[1] !== '' && n[1] !== null
-      ? <li data-testid={ `${index}${texthandle}` }>{n[1]}</li>
-      : null
-  ));
-  // console.log(obj);
-  return obj;
-};
-
-const RecomendList = (array, type) => {
-  if (array === null || array === undefined) return null;
-  if (type === 'comidas') {
-    const obj = array.drinks.map((n, index) => (
-      <Link key={ index } to={ `/bebidas/${n.idDrink}` }>
-        <button
-          type="button"
-          className="RecommendCard"
-          data-testid={ `${index}-recomendation-card` }
-        >
-          <img className="img-details" alt="recomendamos!" src={ n.strDrinkThumb } />
-          <h2 data-testid={ `${index}-recomendation-title` }>{n.strDrink}</h2>
-          {console.log('array drinks', n)}
-        </button>
-      </Link>
-    ));
-    console.log('recomend list', obj);
-    const NUM = 6;
-    return obj.slice(0, NUM);
-  }
-
-  const obj = array.meals.map((n, index) => (
-    <Link key={ index } to={ `/comidas/${n.idMeal}` }>
-      <button
-        Type="button"
-        className="RecommendCard"
-        data-testid={ `${index}-recomendation-card` }
-      >
-        <img className="img-details" alt="recomendamos!" src={ n.strMealThumb } />
-        <h2 data-testid={ `${index}-recomendation-title` }>{n.strMeal}</h2>
-      </button>
-    </Link>
-  ));
-  const NUM = 6;
-  return obj.slice(0, NUM);
-};
-
-const measureList = (array) => {
-  const texthandle = '-ingredient-name-and-measure';
-  const obj = array[0].map((n, index) => (
-    n[1] !== '' && n[1] !== null
-      ? <li className="nodot" data-testid={ `${index}${texthandle}` }>{n[1]}</li>
-      : null
-  ));
-  return obj;
 };
 
 const DataManeger = (data, receita) => {
@@ -116,30 +56,25 @@ const DataManeger = (data, receita) => {
     ingredients: [ingredients],
     measures: [measures],
   };
-  console.log('objdrink', objdrink);
   return objdrink;
 };
 
 function RecipyDetails() {
   const [Data, setDataRecipe] = useState(undefined);
   const [DataRecomend, setDataRecomend] = useState(undefined);
-  console.log('DataRecomend', DataRecomend);
 
   const { id, receita } = useParams();
 
   useEffect(() => {
-    setDataRecipe(undefined);
-    setDataRecomend(undefined);
     const fetchEffect = async () => {
       try {
+        const fetchApiRecomend = await fetch(returnUrl(id, receita)[1]);
+        const thedataRecomend = await fetchApiRecomend.json();
+        setDataRecomend(thedataRecomend);
         const fetchApi = await fetch(returnUrl(id, receita)[0]);
         const thedata = await fetchApi.json();
         const managedData = DataManeger(thedata, receita);
         setDataRecipe(managedData);
-        const fetchApiRecomend = await fetch(returnUrl(id, receita)[1]);
-        const thedataRecomend = await fetchApiRecomend.json();
-        setDataRecomend(thedataRecomend);
-        console.log(thedataRecomend);
       } catch (error) {
         console.log(error);
       }
@@ -147,57 +82,17 @@ function RecipyDetails() {
     fetchEffect();
   }, [id, receita]);
 
-  if (Data) {
+  if (!Data) {
     return (
-      <div className="body-details">
-        <img
-          className="imgtittle"
-          data-testid="recipe-photo"
-          src={ Data.img }
-          alt="detalhes"
-        />
-        <h1 data-testid="recipe-title">{Data.tittle}</h1>
-        <div>
-          <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
-          <button type="button">
-            <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="white-heart" />
-          </button>
-        </div>
-        <h3 data-testid="recipe-category">{Data.category}</h3>
-        { Data && receita === 'bebidas'
-          ? <h3 data-testid="recipe-category">{Data.type}</h3>
-          : null}
-        <h2>Ingredientes</h2>
-
-        <div className="ingredients">
-          <lo>{IngredientList(Data.ingredients)}</lo>
-          <lo>{measureList(Data.measures)}</lo>
-        </div>
-        <h2>Instruções</h2>
-        <p data-testid="instructions">{Data.Instructions}</p>
-        {
-          receita === 'comidas'
-            ? <iframe title="vid" data-testid="video" width="50%" src={ Data.youlink } />
-            : null
-        }
-        <h2 data-testid="1-recomendation-title">Recomendadas</h2>
-        <div className="sugestions">
-          {RecomendList(DataRecomend !== null ? DataRecomend
-            : null, receita)}
-
-        </div>
-        <Button
-          className="button-details"
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-
-        </Button>
-      </div>
+      <h1>Loading</h1>
     );
   }
   return (
-    <h1>Loading</h1>
+    <Details
+      DetailedRecipe={ Data }
+      RecomendedRecipe={ DataRecomend }
+      Receita={ receita }
+    />
   );
 }
 
