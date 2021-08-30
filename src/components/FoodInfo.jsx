@@ -5,6 +5,9 @@ import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import { fetchDrinksRedux, fetchMealDetails } from '../redux/actions/foodActions';
 import { copyToClipboard, myFavoriteRecipe, getDate, startRecipe } from '../services';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 import Btn from './Btn';
 import DrinksCards from './DrinksCard';
 import IconBtn from './IconBtn';
@@ -29,6 +32,7 @@ function FoodInfo() {
 
   const checkRecipeName = useCallback(() => {
     const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (storage && details) {
       const storageRecipeName = storage.find(({ name }) => (
         name === details.meals[0].strMeal));
@@ -37,6 +41,15 @@ function FoodInfo() {
       }
     } else {
       setButton('Iniciar Receita');
+    }
+    if (favRecipe && details) {
+      const favName = favRecipe.some((item) => (
+        item.name === details.meals[0].strMeal));
+      if (favName) {
+        setFavorite(true);
+      } else {
+        setFavorite(false);
+      }
     }
   }, [details]);
 
@@ -67,7 +80,7 @@ function FoodInfo() {
     tags: [foodDetails.strTags],
   };
 
-  const favoriteRecipe = {
+  const favoriteRecipes = {
     id,
     type: 'comida',
     area: foodDetails.strArea,
@@ -76,6 +89,12 @@ function FoodInfo() {
     name: foodDetails.strMeal,
     image: foodDetails.strMealThumb,
   };
+
+  // const inProgressRecipes = {
+  //   meals: {
+  //     id: [otherFilterObjFood.map((meal) => foodDetails[meal])],
+  //   },
+  // };
 
   const responsive = {
     superLargeDesktop: {
@@ -109,18 +128,21 @@ function FoodInfo() {
         dataId="share-btn"
         onClick={ () => setShare(copyToClipboard) }
         type="button"
-        src="/images/shareIcon.svg"
+        src={ shareIcon }
         alt="shareIt"
       />
       { share && <span>Link copiado!</span> }
 
-      <IconBtn
+      <button
         type="button"
-        dataId="favorite-btn"
-        onClick={ () => setFavorite(myFavoriteRecipe(favoriteRecipe)) }
-        src={ favorite ? '/images/blackHeartIcon.svg' : '/images/whiteHeartIcon.svg' }
-        alt="favorite heart"
-      />
+        onClick={ () => setFavorite(myFavoriteRecipe(favoriteRecipes)) }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ favorite ? blackHeartIcon : whiteHeartIcon }
+          alt="favorite"
+        />
+      </button>
 
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
 
@@ -139,7 +161,7 @@ function FoodInfo() {
       <iframe
         data-testid="video"
         width="50%"
-        src={ foodDetails.strYoutube }
+        src={ foodDetails.strYoutube.replace('watch?v=', 'embed/') }
         title={ foodDetails.strMeal }
         allowFullScreen
       />

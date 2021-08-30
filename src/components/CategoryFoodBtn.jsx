@@ -26,6 +26,10 @@ function CategoryFoodBtn() {
     }
   };
 
+  if (categories) {
+    return (<h1>Loading...</h1>);
+  }
+
   return (
     <div>
       <Button
@@ -36,7 +40,7 @@ function CategoryFoodBtn() {
       >
         All
       </Button>
-      {categories.meals && categories.meals.slice(0, buttonLimits).map(
+      {categories && categories.meals.slice(0, buttonLimits).map(
         (category, id) => (
           <Button
             color="secondary"

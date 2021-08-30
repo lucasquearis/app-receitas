@@ -4,7 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import { fetchDrinkDetails, fetchFoodRedux } from '../redux/actions/foodActions';
-import { copyToClipboard, getDate, myFavoriteRecipe, startRecipe } from '../services';
+import { copyToClipboard, /* getDate */myFavoriteRecipe, startRecipe } from '../services';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 import FoodsCards from './FoodsCard';
 import IconBtn from './IconBtn';
 import Btn from './Btn';
@@ -28,15 +31,25 @@ function DrinkInfo() {
   }, [getFoodAndDrinks]);
 
   const checkRecipeName = useCallback(() => {
-    const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (storage && details) {
-      const storageRecipeName = storage.find(({ name }) => (
+      const storageRecipeName = storage.cocktails.idRecipe.find(({ name }) => (
         name === details.drinks[0].strDrink));
       if (storageRecipeName) {
         setButton('Continuar Receita');
       }
     } else {
       setButton('Iniciar Receita');
+    }
+    if (favRecipe && details) {
+      const favName = favRecipe.some((item) => (
+        item.name === details.drinks[0].strDrink));
+      if (favName) {
+        setFavorite(true);
+      } else {
+        setFavorite(false);
+      }
     }
   }, [details]);
 
@@ -55,17 +68,7 @@ function DrinkInfo() {
   const filterObjDrink = objKeyDrink.filter((obj) => obj.includes('strIngredient'));
   const otherFilterObjDrink = filterObjDrink.filter((obj) => drinkDetails[obj] !== null);
 
-  const favoriteRecipes = [{
-    id,
-    type: 'bebida',
-    area: drinkDetails.strArea,
-    category: drinkDetails.strCategory,
-    alcoholicOrNot: drinkDetails.strAlcoholic,
-    name: drinkDetails.strMeal,
-    image: drinkDetails.strMealThumb,
-  }];
-
-  const doneRecipes = {
+  const favoriteRecipes = {
     id,
     type: 'bebida',
     area: '',
@@ -73,8 +76,24 @@ function DrinkInfo() {
     alcoholicOrNot: drinkDetails.strAlcoholic,
     name: drinkDetails.strDrink,
     image: drinkDetails.strDrinkThumb,
-    doneDate: getDate(new Date()),
-    tags: [drinkDetails.strTags],
+  };
+
+  // const doneRecipes = {
+  //   id,
+  //   type: 'bebida',
+  //   area: '',
+  //   category: drinkDetails.strCategory,
+  //   alcoholicOrNot: drinkDetails.strAlcoholic,
+  //   name: drinkDetails.strDrink,
+  //   image: drinkDetails.strDrinkThumb,
+  //   doneDate: getDate(new Date()),
+  //   tags: [drinkDetails.strTags],
+  // };
+
+  const inProgressRecipes = {
+    cocktails: {
+      [id]: otherFilterObjDrink.map((drink) => drinkDetails[drink]),
+    },
   };
 
   const responsive = {
@@ -110,18 +129,21 @@ function DrinkInfo() {
         dataId="share-btn"
         onClick={ () => setShare(copyToClipboard) }
         type="button"
-        src="/images/shareIcon.svg"
+        src={ shareIcon }
         alt="shareIt"
       />
       { share && <span>Link copiado!</span> }
 
-      <IconBtn
+      <button
         type="button"
-        dataId="favorite-btn"
         onClick={ () => setFavorite(myFavoriteRecipe(favoriteRecipes)) }
-        src={ favorite ? '/images/blackHeartIcon.svg' : '/images/whiteHeartIcon.svg' }
-        alt="favorite heart"
-      />
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ favorite ? blackHeartIcon : whiteHeartIcon }
+          alt="favorite"
+        />
+      </button>
 
       <p data-testid="recipe-category">{ drinkDetails.strCategory }</p>
 
@@ -157,7 +179,7 @@ function DrinkInfo() {
       <Link to={ `/bebidas/${id}/in-progress` }>
         <Btn
           dataId="start-recipe-btn"
-          onClick={ () => startRecipe(doneRecipes) }
+          onClick={ () => startRecipe(inProgressRecipes) }
           info={ button }
           className="btn-fixed"
         />

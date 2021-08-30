@@ -73,22 +73,39 @@ export const copyToClipboard = () => {
 };
 
 export const myFavoriteRecipe = (recipe) => {
-  if (!recipe) {
-    localStorage.removeItem('favoriteRecipes');
-    return false;
+  const arrayOfFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (arrayOfFavorites) {
+    const checkName = arrayOfFavorites.filter(({ name }) => name === recipe.name);
+    if (!checkName.length) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...arrayOfFavorites, recipe],
+      ));
+      return (true);
+    }
+    const filteredName = arrayOfFavorites.filter((food) => food.name !== recipe.name);
+    if (!filteredName.length) {
+      localStorage.removeItem('favoriteRecipes');
+    } else {
+      localStorage.removeItem('favoriteRecipes');
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        filteredName,
+      ));
+      return (false);
+    }
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([recipe]));
+    return (true);
   }
-  localStorage.setItem('favoriteRecipes', JSON.stringify([recipe]));
-  return true;
 };
 
 export const startRecipe = (recipe) => {
-  const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (recipes) {
-    localStorage.setItem('doneRecipes', JSON.stringify(
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
       [...recipes, recipe],
     ));
   } else {
-    localStorage.setItem('doneRecipes', JSON.stringify(
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
       [recipe],
     ));
   }
