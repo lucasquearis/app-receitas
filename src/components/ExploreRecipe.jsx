@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import * as fetchAPI from '../service/fetchAPI';
 
 function ExploreRecipe() {
   const [location, setLocation] = useState({
@@ -8,12 +9,21 @@ function ExploreRecipe() {
     surprise: false,
   });
 
+  const [randomId, setRandomId] = useState('');
+
   const redirect = (path) => {
     setLocation({ ...location, [path]: true });
   };
 
+  const redirectToRandom = async () => {
+    const { meals } = await fetchAPI.fetchRadomRecipe();
+    await setRandomId(meals[0].idMeal);
+    setLocation({ ...location, surprise: true });
+  };
+
   if (location.ingredient) return <Redirect to="/explorar/comidas/ingredientes" />;
   if (location.area) return <Redirect to="/explorar/comidas/area" />;
+  if (location.surprise) return <Redirect to={ `/comidas/${randomId}` } />;
 
   return (
     <div>
@@ -34,6 +44,7 @@ function ExploreRecipe() {
       <button
         type="button"
         data-testid="explore-surprise"
+        onClick={ () => redirectToRandom() }
       >
         Me Surpreenda!
       </button>
