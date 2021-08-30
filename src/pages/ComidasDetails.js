@@ -30,36 +30,28 @@ function ComidasDetails(props) {
   useEffect(() => {
     const getMeal = async () => {
       const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setMeal(data.meals[0]);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await fetch(URL);
+      const data = await response.json();
+      setMeal(data.meals[0]);
     };
     getMeal();
     const getRecomendations = async () => {
       const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setDrinks(data.drinks);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await fetch(URL);
+      const data = await response.json();
+      setDrinks(data.drinks);
     };
     getRecomendations();
   }, [id]);
 
   const videoURL = meal.strYoutube ? meal.strYoutube.split('=') : '';
 
-  if (share) {
-    const threeSeconds = 3000;
-    setTimeout(() => {
-      setShare(false);
-    }, threeSeconds);
-  }
+  // if (share) {
+  //   const threeSeconds = 3000;
+  //   setTimeout(() => {
+  //     setShare(false);
+  //   }, threeSeconds);
+  // }
 
   const link = (
     <Link

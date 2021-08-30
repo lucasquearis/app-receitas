@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import ComidasDetails from '../pages/ComidasDetails';
@@ -96,6 +96,7 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     userEvent.click(copyLink);
 
     expect(copy).toHaveBeenCalled();
+    screen.getByText(/Link copiado!/i);
   });
 
   it('Verifica se o coracao do botao de favoritar vem preenchido', async () => {
