@@ -135,7 +135,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe('65 - Implemente 2 botões que filtram as receitas por comida ou bebida e um terceiro que remove todos os filtros', () => {
+  describe.only('65 - Implemente 2 botões que filtram as receitas por comida ou bebida e um terceiro que remove todos os filtros', () => {
     it('Ao clicar no botão "Food" as receitas devem ser filtradas por comidas', () => {
       cy.get('[data-testid="filter-by-food-btn"]').click();
 

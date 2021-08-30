@@ -13,10 +13,23 @@ export default function FavoriteRecipes() {
 
   const handleDelete = (favId) => {
     const filtered = favRecipes.filter((item) => item.id !== favId);
-    console.log(filtered);
     saveOnLocalStorage('favoriteRecipes', filtered);
     setFavRecipes(favRecipes.filter((item) => item.id !== favId));
   };
+
+  const clearFilter = () => {
+    setFavRecipes(favoriteRecipes);
+  };
+
+  const handleFoodFilter = () => {
+    setFavRecipes(favRecipes.filter((data) => data.type === 'comida'));
+  };
+
+  const handleDrinkFilter = () => {
+    setFavRecipes(favRecipes.filter((data) => data.type === 'bebida'));
+  };
+
+  console.log(favRecipes.filter((data) => data.type === 'comida'));
 
   return (
     <section>
@@ -25,9 +38,28 @@ export default function FavoriteRecipes() {
         pageTitle="Receitas Favoritas"
         onClickShowInput={ () => {} }
       />
-      <Button data-testid="filter-by-all-btn" type="button">All</Button>
-      <Button data-testid="filter-by-food-btn" type="button">Food</Button>
-      <Button data-testid="filter-by-drink-btn" type="button">Drinks</Button>
+      <Button
+        onClick={ clearFilter }
+        data-testid="filter-by-all-btn"
+        type="button"
+      >
+        All
+
+      </Button>
+      <Button
+        onClick={ handleFoodFilter }
+        data-testid="filter-by-food-btn"
+        type="button"
+      >
+        Food
+      </Button>
+      <Button
+        onClick={ handleDrinkFilter }
+        data-testid="filter-by-drink-btn"
+        type="button"
+      >
+        Drinks
+      </Button>
       {favRecipes.map((recipe, index) => (
         <FavoriteCard
           key={ recipe.id }

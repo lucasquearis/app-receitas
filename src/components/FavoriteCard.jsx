@@ -74,6 +74,7 @@ FavoriteCard.propTypes = {
   category: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   recipes: PropTypes.objectOf(
     PropTypes.string,
   ).isRequired,
