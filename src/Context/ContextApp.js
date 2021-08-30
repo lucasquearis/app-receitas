@@ -9,7 +9,7 @@ import recipesHooks from '../Hooks/recipesHooks';
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
-  const { searchRecipes, recipes } = recipesHooks();
+  const { searchRecipes, recipes, loading } = recipesHooks();
 
   const {
     handleInput,
@@ -32,6 +32,7 @@ export const AppProvider = ({ children }) => {
     setRedirect,
     drinks,
     meal,
+    loading,
   };
 
   return (
