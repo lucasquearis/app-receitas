@@ -3,18 +3,21 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { Redirect } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
-import foodsEdrinks from '../mocks/foodsEdrinks';
 import Header from '../components/Header';
 import '../cssPages/ReceitasF.css';
 import ShareButton from '../components/ShareButton';
 
 function ReceitasFeitas() {
+  const [showRecipes, setShowRecipes] = useState([]);
   const [finishRecipes, SetFinishRecipes] = useState([]);
   const [redirect, setRedirect] = useState(null);
   const minNumber = 2;
 
   useEffect(() => {
-    SetFinishRecipes(foodsEdrinks);
+    const doneRecipes = (localStorage.getItem('doneRecipes'))
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
+    SetFinishRecipes(doneRecipes);
+    setShowRecipes(doneRecipes);
   }, []);
 
   function onLink(type, id) {
@@ -22,11 +25,14 @@ function ReceitasFeitas() {
   }
 
   function onClick({ target: { name } }) {
-    const filtroBebidas = foodsEdrinks.filter((bebida) => bebida.type === 'bebida');
-    const filtroComidas = foodsEdrinks.filter((comida) => comida.type === 'comida');
-    if (name === 'bebida') SetFinishRecipes(filtroBebidas);
-    if (name === 'comida') SetFinishRecipes(filtroComidas);
-    if (name === 'all') SetFinishRecipes(foodsEdrinks);
+    // const filtroBebidas = finishRecipes.filter((bebida) => bebida.type === 'bebida');
+    // const filtroComidas = finishRecipes.filter((comida) => comida.type === 'comida');
+    const filtrosReceitas = finishRecipes
+      .filter((receita) => receita.type.includes(name));
+    setShowRecipes(filtrosReceitas);
+    // if (name === 'bebida') setShowRecipes(filtroBebidas);
+    // if (name === 'comida') setShowRecipes(filtroComidas);
+    // if (name === 'all') setShowRecipes(finishRecipes);
   }
 
   if (redirect) return <Redirect to={ redirect } />;
@@ -35,7 +41,7 @@ function ReceitasFeitas() {
       <Header titulo="Receitas Feitas" pesquisa="false" />
       <div className="buttons">
         <button
-          name="all"
+          name=""
           type="button"
           onClick={ onClick }
           data-testid="filter-by-all-btn"
@@ -63,57 +69,58 @@ function ReceitasFeitas() {
         </button>
       </div>
       <CardGroup className="paiDeTodos">
-        {finishRecipes.map((recipe, index) => (
-          <Card
-            name={ recipe.name }
-            style={ { width: '18rem' } }
-            key={ index }
-          >
-            <Card.Img
-              data-testid={ `${index}-horizontal-image` }
-              variant="top"
-              onClick={ () => onLink(recipe.type, recipe.id) }
-              src={ `${recipe.image}` }
-              alt={ recipe.name }
-            />
-            <Card.Body>
-              <div className="paizao">
-                <Card.Title
-                  data-testid={ `${index}-horizontal-name` }
-                  onClick={ () => onLink(recipe.type, recipe.id) }
+        {showRecipes.length === 0
+          ? 'Lista vazia!' : showRecipes.map((recipe, index) => (
+            <Card
+              name={ recipe.name }
+              style={ { width: '18rem' } }
+              key={ index }
+            >
+              <Card.Img
+                data-testid={ `${index}-horizontal-image` }
+                variant="top"
+                onClick={ () => onLink(recipe.type, recipe.id) }
+                src={ `${recipe.image}` }
+                alt={ recipe.name }
+              />
+              <Card.Body>
+                <div className="paizao">
+                  <Card.Title
+                    data-testid={ `${index}-horizontal-name` }
+                    onClick={ () => onLink(recipe.type, recipe.id) }
+                  >
+                    { recipe.name }
+                  </Card.Title>
+                  <ShareButton url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
+                </div>
+                <Card.Subtitle
+                  className="mb-2 text-muted"
+                  data-testid={ `${index}-horizontal-top-text` }
                 >
-                  { recipe.name }
-                </Card.Title>
-                <ShareButton url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
-              </div>
-              <Card.Subtitle
-                className="mb-2 text-muted"
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {recipe.area.length === 0 ? recipe.alcoholicOrNot
-                  : `${recipe.area} - ${recipe.category}`}
-              </Card.Subtitle>
-              <Card.Text data-testid={ `${index}-horizontal-done-date` }>
-                {recipe.doneDate}
-              </Card.Text>
+                  {recipe.area.length === 0 ? recipe.alcoholicOrNot
+                    : `${recipe.area} - ${recipe.category}`}
+                </Card.Subtitle>
+                <Card.Text data-testid={ `${index}-horizontal-done-date` }>
+                  {recipe.doneDate}
+                </Card.Text>
 
-              <ListGroup variant="flush">
-                {
-                  recipe.tags.length === 0 ? ''
-                    : recipe.tags.map((tag, count) => count > minNumber || (
-                      <ListGroup.Item
-                        key={ count }
-                        data-testid={ `${index}-${tag}-horizontal-tag` }
-                      >
-                        {' '}
-                        {tag}
-                        {' '}
-                      </ListGroup.Item>))
-                }
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        ))}
+                <ListGroup variant="flush">
+                  {
+                    recipe.tag.length === 0 ? ''
+                      : recipe.tag.map((tag, count) => count > minNumber || (
+                        <ListGroup.Item
+                          key={ count }
+                          data-testid={ `${index}-${tag}-horizontal-tag` }
+                        >
+                          {' '}
+                          {tag}
+                          {' '}
+                        </ListGroup.Item>))
+                  }
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          ))}
       </CardGroup>
 
     </div>

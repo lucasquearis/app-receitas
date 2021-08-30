@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
-import foodsEdrinks from '../mocks/foodsEdrinks';
 import Header from '../components/Header';
 import blackHeart from '../images/blackHeartIcon.svg';
 import '../cssPages/ReceitasF.css';
@@ -13,7 +12,6 @@ function ReceitasFeitas() {
   const [redirect, setRedirect] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem('doneRecipes', JSON.stringify(foodsEdrinks));
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     setFinishRecipes(doneRecipes);
     setShowRecipes(doneRecipes);
