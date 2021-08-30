@@ -24,7 +24,14 @@ function UseFavoriteRecipes() {
     }
   };
 
-  return { filteredFav, allFilter, mealFilter, drinkFilter };
+  const removeFavFromLocal = (id) => {
+    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const filter = local.filter((e) => e.id !== id);
+    setFilteredFav(filter);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(filter));
+  };
+
+  return { filteredFav, allFilter, mealFilter, drinkFilter, removeFavFromLocal };
 }
 
 export default UseFavoriteRecipes;

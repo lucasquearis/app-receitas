@@ -3,7 +3,7 @@ import UseFavoriteRecipes from '../hook/UseFavoriteRecipes';
 import { Header, FavoriteCard } from '../components';
 
 function FavoriteRecipes() {
-  const { filteredFav, allFilter, mealFilter, drinkFilter } = UseFavoriteRecipes();
+  const { filteredFav, allFilter, mealFilter, drinkFilter, removeFavFromLocal } = UseFavoriteRecipes();
 
   return (
     <main>
@@ -20,7 +20,12 @@ function FavoriteRecipes() {
         </button>
       </div>
       {filteredFav.map((recipe, index) => (
-        <FavoriteCard key={ index } recipe={ recipe } cardIndex={ index } />))}
+        <FavoriteCard
+          key={ index }
+          recipe={ recipe }
+          cardIndex={ index }
+          handleClick={ removeFavFromLocal }
+        />))}
     </main>
   );
 }
