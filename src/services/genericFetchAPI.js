@@ -3,3 +3,5 @@ export default function genericFetchAPI(mealOrCocktail, type, start, search) {
     .then((response) => response.json())
     .then((data) => data);
 }
+
+export default genericFetchAPI;
