@@ -1,4 +1,3 @@
-
 export async function buscarTodasBebidasPorLetra(letra) {
   const ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letra}`;
 
