@@ -13,12 +13,11 @@ function useAPI(pathname) {
   let api;
   let set;
   let cat;
-  let recipes;
+  const recipes = { drinks: drinks.drinks, meals: foods.meals };
   let categories;
 
-  switch (pathname) {
-  case '/comidas':
-    recipes = foods;
+  switch (true) {
+  case /comidas/.test(pathname):
     categories = foodsCategories;
 
     api = foodAPI;
@@ -26,8 +25,7 @@ function useAPI(pathname) {
     cat = setFoodsCategories;
     break;
 
-  case '/bebidas':
-    recipes = drinks;
+  case /bebidas/.test(pathname):
     categories = drinksCategories;
 
     api = drinkAPI;
@@ -76,6 +74,14 @@ function useAPI(pathname) {
     request(`${api}/list.php?c=list`, cat);
   }
 
+  function searchByArea(query) {
+    if (query !== 'All') {
+      request(`${api}/filter.php?a=${query}`, set);
+    } else {
+      request(`${api}/search.php?f=s`, set);
+    }
+  }
+
   return {
     recipes,
     pathname,
@@ -83,6 +89,7 @@ function useAPI(pathname) {
     listCategories,
     searchByFilters,
     searchByCategory,
+    searchByArea,
   };
 }
 

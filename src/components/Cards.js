@@ -4,23 +4,26 @@ import RecipesContext from '../context/RecipesContext';
 
 function Cards() {
   const { API } = useContext(RecipesContext);
-  const { pathname, action, recipes, searchByFilters } = API;
+  const { pathname, action, recipes, searchByFilters, searchByArea } = API;
 
   const min = 0;
   const max = 12;
 
   let type;
   let list;
+  let endpoint;
 
-  switch (pathname) {
-  case '/comidas':
+  switch (true) {
+  case /comidas/.test(pathname):
     type = 'Meal';
     list = recipes.meals;
+    endpoint = '/comidas';
     break;
 
-  case '/bebidas':
+  case /bebidas/.test(pathname):
     type = 'Drink';
     list = recipes.drinks;
+    endpoint = '/bebidas';
     break;
 
   default:
@@ -32,9 +35,15 @@ function Cards() {
   const cardName = `str${type}`;
   const cards = list.slice(min, max);
 
+  console.log('01');
+
   function didMount() {
     if (cards.length === 0) {
-      searchByFilters();
+      if (/area/.test(pathname)) {
+        searchByArea('american');
+      } else {
+        searchByFilters();
+      }
     }
   }
 
@@ -45,9 +54,8 @@ function Cards() {
     return <div>Carregando...</div>;
 
   case 1:
-    console.log(action);
     if (action === 'search-filters') {
-      return <Redirect to={ `${pathname}/${cards[0][id]}` } />;
+      return <Redirect to={ `${endpoint}/${cards[0][id]}` } />;
     }
     break;
 
@@ -59,7 +67,7 @@ function Cards() {
     <div className="cardsContent">
       {cards.map((item, i) => (
         <Link
-          to={ `${pathname}/${item[id]}` }
+          to={ `${endpoint}/${item[id]}` }
           key={ i }
           className="cardFlex"
           data-testid={ `${i}-recipe-card` }
