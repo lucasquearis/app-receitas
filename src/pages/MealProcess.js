@@ -37,7 +37,7 @@ export default function MealProcess(props) {
         <button data-testid="favorite-btn" type="button">Favoritar</button>
         <span>Categoria: </span>
         <span data-testid="recipe-category">{strCategory}</span>
-        <ul>
+        <ul className="progress__checkbox-list">
           {listIngredients.map((ingredient, index) => {
             if (resultMealRecipe[0][ingredient]) {
               return (
@@ -47,11 +47,13 @@ export default function MealProcess(props) {
                 >
                   <label htmlFor={ `${ingredient}-checkbox` }>
                     <input type="checkbox" id={ `${ingredient}-checkbox` } />
-                    { resultMealRecipe[0][ingredient] }
-                    {' '}
-                    -
-                    {' '}
-                    {resultMealRecipe[0][listMeasures[index]]}
+                    <span>
+                      { resultMealRecipe[0][ingredient] }
+                      {' '}
+                      -
+                      {' '}
+                      {resultMealRecipe[0][listMeasures[index]]}
+                    </span>
                   </label>
                 </li>
               );
@@ -61,17 +63,7 @@ export default function MealProcess(props) {
         </ul>
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
-        <iframe
-          data-testid="video"
-          title="Video da receita"
-          width="360"
-          height="640"
-          src={ strYoutube }
-          frameBorder="0"
-          allowFullScreen
-        />
-        <RecomendationCard page="meals" />
-        <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+        <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
       </>
     );
   }
