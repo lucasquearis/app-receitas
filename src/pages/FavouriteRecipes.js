@@ -16,16 +16,16 @@ const DoneRecipes = () => {
   const { favoriteRcps } = useContext(AppContext);
 
   useEffect(() => {
-    // const getDoneRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    // if (getDoneRecipes !== null) {
-    //   setRawFavRecipes(getDoneRecipes);
-    //   setFavRecipes(getDoneRecipes);
-    // } else {
-    //   setRawFavRecipes([]);
-    //   setFavRecipes([]);
-    // }
-    setRawFavRecipes([...favoriteRcps]);
-    setFavRecipes([...favoriteRcps]);
+    const getDoneRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (getDoneRecipes !== null) {
+      setRawFavRecipes(getDoneRecipes);
+      setFavRecipes(getDoneRecipes);
+    } else {
+      setRawFavRecipes([]);
+      setFavRecipes([]);
+    }
+    // setRawFavRecipes([...favoriteRcps]);
+    // setFavRecipes([...favoriteRcps]);
   }, [favoriteRcps]);
 
   useEffect(() => {
