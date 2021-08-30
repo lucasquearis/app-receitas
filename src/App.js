@@ -5,10 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/Provider';
 import Login from './pages/Login';
 import Comidas from './pages/Comidas';
+import Explorar from './pages/Explorar';
+import BebidasExp from './pages/BebidasExp';
+import ComidasExp from './pages/ComidasExp';
 import Bebidas from './pages/Bebidas';
 import Perfil from './pages/Perfil';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import TelaDeFavoritos from './pages/TelaDeFavoritos';
+import LocalDeOrigem from './pages/LocalDeOrigem';
+import ComidaIng from './pages/ComidaIng';
+import BebidasIng from './pages/BebidasIng';
+import NotFound from './pages/NotFound';
 import Detalhes from './pages/Detalhes';
 
 function App() {
@@ -17,22 +24,22 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/comidas" component={ Comidas } />
-          <Route path="/bebidas" component={ Bebidas } />
-          <Route path="/perfil" component={ Perfil } />
-          <Route path="/receitas-feitas" component={ ReceitasFeitas } />
+          <Route exact path="/comidas" component={ Comidas } />
+          <Route exact path="/bebidas" component={ Bebidas } />
+          <Route exact path="/comidas/:id" component={ Detalhes } />
+          <Route exact path="/bebidas/:id" component={ Detalhes } />
+          <Route exact path="/comidas/:id/in-progress" component={ Detalhes } />
+          <Route exact path="/bebidas/:id/in-progress" component={ Detalhes } />
+          <Route exact path="/explorar/comidas" component={ ComidasExp } />
+          <Route exact path="/explorar/bebidas" component={ BebidasExp } />
+          <Route exact path="/explorar/comidas/area" component={ LocalDeOrigem } />
+          <Route exact path="/explorar/comidas/ingredientes" component={ ComidaIng } />
+          <Route exact path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
+          <Route exact path="/explorar" component={ Explorar } />
+          <Route exact path="/perfil" component={ Perfil } />
+          <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
           <Route exact path="/receitas-favoritas" component={ TelaDeFavoritos } />
-          <Route path="/comidas/:id" component={ Detalhes } />
-          <Route path="/bebidas/:id" component={ Detalhes } />
-          {/* <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route path="/explorar" component={ Login } />
-          <Route path="/explorar/comidas" component={ Login } />
-          <Route path="/explorar/bebidas" component={ Login } />
-          <Route path="/explorar/comidas/ingredientes" component={ Login } />
-          <Route path="/explorar/bebidas/ingredientes" component={ Login } />
-          <Route path="/explorar/comidas/area" component={ Login } />
-          */}
+          <Route path="/" component={ NotFound } />
         </Switch>
       </BrowserRouter>
     </Provider>
