@@ -9,6 +9,7 @@ header {
   flex-direction: row;
   height: 7%;
   justify-content: space-between;
+  margin-bottom: 10px;
   padding: 0 10px;
 }
 

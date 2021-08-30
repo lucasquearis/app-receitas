@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchIngredientAPI,
   fetchNameAPI,
@@ -11,7 +11,8 @@ import '../styles/SearchBar.css';
 function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
   const dispatch = useDispatch();
-
+  const { meals } = useSelector((state) => state.recipes.foods);
+  const drinks = useSelector((state) => state.recipes.foods.drinks);
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };
@@ -31,7 +32,9 @@ function SearchBar() {
   const handleClick = (e) => {
     e.preventDefault();
     const { result } = search;
-    dispatch(clearSearch());
+    if (meals || drinks) {
+      dispatch(clearSearch());
+    }
     if (search.type === 'ingredient') {
       return requestIngredient(result);
     }

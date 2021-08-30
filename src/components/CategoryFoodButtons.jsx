@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategory, clearSearch } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
 import FoodsCard from './FoodsCard';
+import '../styles/CategoryButtons.css';
 
 function CategoryFoodButtons() {
   const cinco = 5;
@@ -41,14 +42,16 @@ function CategoryFoodButtons() {
     <div>
       {
         categories && categories.map((category, index) => index < cinco && (
-          <button
-            type="button"
-            key={ `${category.strCategory}-category-filter` }
-            data-testid={ `${category.strCategory}-category-filter` }
-            onClick={ () => handleClick(category.strCategory) }
-          >
-            {category.strCategory}
-          </button>
+          <section className="category-btn">
+            <button
+              type="button"
+              key={ `${category.strCategory}-category-filter` }
+              data-testid={ `${category.strCategory}-category-filter` }
+              onClick={ () => handleClick(category.strCategory) }
+            >
+              {category.strCategory}
+            </button>
+          </section>
         ))
       }
       { showInput ? <FoodsCard />
