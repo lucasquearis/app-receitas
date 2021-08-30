@@ -12,16 +12,16 @@ function ReceitasFeitas() {
   const [redirect, setRedirect] = useState(null);
 
   useEffect(() => {
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    setFinishRecipes(doneRecipes);
-    setShowRecipes(doneRecipes);
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setFinishRecipes(favoriteRecipes);
+    setShowRecipes(favoriteRecipes);
   }, []);
 
   function desfavorite(foodName) {
     const desfavoritar = finishRecipes.filter((value) => value.name !== foodName);
     setShowRecipes(showRecipes.filter((value) => value.name !== foodName));
     setFinishRecipes(desfavoritar);
-    localStorage.setItem('doneRecipes', JSON.stringify(desfavoritar));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(desfavoritar));
   }
 
   function onLink(type, id) {
