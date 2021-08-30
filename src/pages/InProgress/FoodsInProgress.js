@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const INITIAL_STATE = { cocktails: {}, meals: {} };
+const id = 52771;
+const INITIAL_STATE = { cocktails: {}, meals: { [id]: [] } };
 
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  // const [check, setCheck] = useState([]);
-  const [inProgress, setInProgress] = useState(INITIAL_STATE);
+  const [inProgress, setInProgress] = useState(INITIAL_STATE); // array de ingredientes que vão sendo checados
+  if (!localStorage.inProgressRecipes) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
+  }
+  // const [LS, setLS] = useState
 
   useEffect(() => {
     const getRecipeFood = async () => {
@@ -43,37 +47,49 @@ function FoodsInProgress() {
   }, [recipeFood]);
 
   // Requisito 50 - o número '52771' é só enquanto n tivermos o id
-  // esperar o requisito 41 q vai criai o objeto inProgressRecipes com a key do id da receita.
-
-  // const inputs = document.querySelectorAll('input');
-  // const inputsArray = Array.from(inputs);
-  // console.log(inputsArray);
+  useEffect(() => {
+    // const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    // if (inProgress.meals[id].length < 1) {
+    //   setInProgress({
+    //     ...LS,
+    //   });
+    // }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+  }, [inProgress]);
 
   const checkItem = (ingredient) => {
-    // const id = 52771; // trocar depois p ser dinâmico
-    // const ingredientsArray = inProgress.meals[id];
-    // ingredientsArray.find(())
-
-    // lógica abaixo para colocar ingr na array:
-    if (inProgress.meals[id]) {
+    const ingredientsArray = inProgress.meals[id];
+    if (!ingredientsArray) { // lógica p qd add o primeiro ingredient
       setInProgress({
-        ...inProgress,
         meals: {
-          [id]: [...inProgress.meals[id], ingredient],
+          [id]: ingredient,
         },
       });
     } else {
-      setInProgress({
-        ...inProgress,
-        meals: {
-          [id]: [ingredient],
-        },
-      });
-    }
+      const alreadyExist = ingredientsArray.some((item) => item === ingredient);
+      if (alreadyExist) { // lógica p qd tem q retirar
+        const newIngredients = ingredientsArray.filter((item) => item !== ingredient);
 
-    // console.log(check);
-    // localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+        setInProgress({
+          meals: {
+            [id]: newIngredients,
+          },
+        });
+      } else {
+        setInProgress({ // lógica para acrescentar do 2 p frente de ingredientes.
+          meals: {
+            [id]: [...inProgress.meals[id], ingredient],
+          },
+        });
+      }
+    }
   };
+
+  const handleCheked = (ingredient) => (inProgress.meals[id].includes(ingredient));
+  // console.log(inProgress.meals);
+  // console.log(inProgress.meals[id].includes(ingredient));
+  // (inProgress.meals[id].includes(ingredient))
+  // inProgress.meals.includes(ingredient);
 
   const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
@@ -99,6 +115,8 @@ function FoodsInProgress() {
                   id={ `${ingredient}` }
                   value={ `${ingredient}` }
                   onChange={ () => checkItem(ingredient) }
+                  // { inProgress.includes(ingredient) ?  }
+                  checked={ handleCheked(ingredient) }
                 />
                 { `${measure[index]} ${ingredient}` }
               </label>
