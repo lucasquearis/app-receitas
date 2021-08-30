@@ -30,7 +30,7 @@ describe('Testando se o componente Header', () => {
     userEvent.click(searchButton);
     expect(searchInput).not.toBeInTheDocument();
   });
-  it('tem um Título com o nome da página dependendo da página', async () => {
+  it('tem um Título com o nome da página dependendo da página', () => {
     const { history } = renderWithReduxAndRouter(<App />, {}, { route: '/comidas' });
 
     expect(screen.getByTestId(PAGE_TITLE_TEST_ID)).toHaveTextContent('Comidas');
