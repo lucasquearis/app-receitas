@@ -10,7 +10,7 @@ function RecomendationCard({ type }) {
     const getRecomendations = async () => {
       if (type === 'meals') {
         setRecomendations(await genericFetchAPI('meal', 'search', 's', ''));
-      } else setRecomendations(await genericFetchAPI('meal', 'cocktail', 's', ''));
+      } else setRecomendations(await genericFetchAPI('cocktail', 'search', 's', ''));
     };
     getRecomendations();
   }, [type]);
