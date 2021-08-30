@@ -3,7 +3,12 @@ import UseFavoriteRecipes from '../hook/UseFavoriteRecipes';
 import { Header, FavoriteCard } from '../components';
 
 function FavoriteRecipes() {
-  const { filteredFav, allFilter, mealFilter, drinkFilter, removeFavFromLocal } = UseFavoriteRecipes();
+  const {
+    filteredFav,
+    allFilter,
+    mealFilter,
+    drinkFilter,
+    removeFavFromLocal } = UseFavoriteRecipes();
 
   return (
     <main>
