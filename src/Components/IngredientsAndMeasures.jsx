@@ -12,7 +12,12 @@ function IngredientsAndMeasures({ recipe }) {
   }, [recipe]);
 
   const createRecipe = (item, key) => (
-    <li key={ key }>{`${item} - ${measures[key]}`}</li>
+    <li
+      key={ key }
+      data-testid={ `${key}-ingredient-name-and-measure` }
+    >
+      {`${item} - ${measures[key]}`}
+    </li>
   );
 
   return (
