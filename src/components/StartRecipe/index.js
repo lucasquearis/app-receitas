@@ -10,7 +10,8 @@ const StartRecipe = ({ recipeType, ingredients }) => {
   const { id } = useParams();
   const [display, setDisplay] = useState({});
   const recipeParam = recipeType === 'meals' ? 'comidas' : 'bebidas';
-  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const inProgressRecipes = doesInprogressExist(JSON
+    .parse(localStorage.getItem('inProgressRecipes')));
 
   useEffect(() => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -20,10 +21,9 @@ const StartRecipe = ({ recipeType, ingredients }) => {
   }, [id]);
 
   const handleStartRecipe = () => {
-    const oldInProgress = doesInprogressExist(inProgressRecipes);
     const newInprogress = {
-      ...oldInProgress,
-      [recipeType]: { ...oldInProgress[recipeType], [id]: ingredients },
+      ...inProgressRecipes,
+      [recipeType]: { ...inProgressRecipes[recipeType], [id]: ingredients },
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogress));
     history.push(`/${recipeParam}/${id}/in-progress`);
@@ -35,8 +35,7 @@ const StartRecipe = ({ recipeType, ingredients }) => {
 
   return (
     <div>
-      { inProgressRecipes && Object.keys(inProgressRecipes[recipeType])
-        .some((recipeId) => recipeId === id)
+      { Object.keys(inProgressRecipes[recipeType]).some((recipeId) => recipeId === id)
         ? (
           <Button
             className="start-recipe"

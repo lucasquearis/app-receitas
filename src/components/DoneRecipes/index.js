@@ -13,7 +13,7 @@ const DoneRecipes = () => {
       return (
         array.map((recipe, index) => (
           <InfoCard
-            key={ recipe.id }
+            key={ `Recipe ${index}` }
             recipe={ recipe }
             setRecipes={ setRecipes }
             index={ index }

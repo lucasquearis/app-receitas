@@ -7,7 +7,7 @@ import {
   Drinks,
   Explore,
   Profile,
-  Made,
+  Done,
   Favorites,
   ExploreFoods,
   ExploreDrinks,
@@ -47,7 +47,7 @@ const App = () => (
     <Route path="/explorar/comidas" component={ ExploreFoods } />
     <Route path="/explorar" component={ Explore } />
     <Route path="/perfil" component={ Profile } />
-    <Route path="/receitas-feitas" component={ Made } />
+    <Route path="/receitas-feitas" component={ Done } />
     <Route path="/receitas-favoritas" component={ Favorites } />
     <Route exact path="/" component={ Home } />
     <Route component={ NotFound } />

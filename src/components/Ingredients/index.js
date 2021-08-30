@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router';
 import { func, number, string } from 'prop-types';
 import { createIngredients, createDecorations,
-  doesInprogressExist, handleDisabled } from '../../utils';
+  doesItExist, handleDisabled } from '../../utils';
 import Loading from '../Loading';
 
 const Ingredients = ({ max, page, setDisabled }) => {
@@ -47,7 +47,7 @@ const Ingredients = ({ max, page, setDisabled }) => {
       return ingredient;
     });
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const oldInProgress = doesInprogressExist(inProgressRecipes);
+    const oldInProgress = doesItExist(inProgressRecipes);
     const newInprogress = {
       ...oldInProgress,
       [recipeType]: { ...oldInProgress[recipeType], [id]: newIngredients },
