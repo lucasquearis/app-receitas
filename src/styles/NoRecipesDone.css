@@ -1,0 +1,13 @@
+.no-recipes-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.not-found-icon {
+  padding: 30px;
+  width: 9em;
+}

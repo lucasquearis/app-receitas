@@ -14,6 +14,7 @@ export default function Provider({ children }) {
   const [recipesInProgress, setRecipesInProgress] = useState({
     cocktails: {},
     meals: {} });
+  const [recipesDone, setRecipesDone] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataRandomMeals, setDataRandomMeals] = useState('');
@@ -38,6 +39,8 @@ export default function Provider({ children }) {
     setListCategoryDrinks,
     recipesInProgress,
     setRecipesInProgress,
+    recipesDone,
+    setRecipesDone,
     loading,
     setLoading,
     dataRandomMeals,
