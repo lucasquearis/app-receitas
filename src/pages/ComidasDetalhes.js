@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ComidasDetalhes.css';
 import Loading from '../components/Loading';
+import styles from './ComidasDetalhes.module.css';
 
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
@@ -53,20 +54,33 @@ export default function ComidasDetalhes() {
 
   return (
     <div>
-      <img src={ food.strMealThumb } alt="recipe" data-testid="recipe-photo" />
+      <div className={ styles.comidasDetails }>
+        <img
+          src={ food.strMealThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+          className={ styles.imgComidasDetails }
+        />
+      </div>
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favorito</button>
-      <p data-testid="recipe-category">{food.strCategory}</p>
-      <ul>
-        {setIngredients()}
-      </ul>
-      <p data-testid="instructions">{food.strInstructions}</p>
-      <iframe
-        src={ food.strYoutube }
-        title="Vídeo de Instrução"
-        data-testid="video"
-      />
+      {/* <div className={ styles.buttonComidasDetails }> */}
+      <div>
+        <button type="button" data-testid="share-btn">Compartilhar</button>
+        <button type="button" data-testid="favorite-btn">Favorito</button>
+        {/* </div> */}
+        <p data-testid="recipe-category">{food.strCategory}</p>
+        <ul>
+          {setIngredients()}
+        </ul>
+        <p data-testid="instructions">{food.strInstructions}</p>
+      </div>
+      <div className={ styles.videoComida }>
+        <iframe
+          src={ food.strYoutube }
+          title="Vídeo de Instrução"
+          data-testid="video"
+        />
+      </div>
       {recomendedDrink.map((recomendation, index) => (
         <div
           data-testid={ `${index}-recomendation-card` }

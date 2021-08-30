@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior';
+import styles from './Profile.module.css';
 
 function Profile() {
   if (!localStorage.user) {
@@ -20,28 +21,35 @@ function Profile() {
       <Header>
         Perfil
       </Header>
-      <h4>{ email }</h4>
-      <button
-        data-testid="profile-done-btn"
-        type="button"
-        onClick={ () => history.push('/receitas-feitas') }
+      <h4
+        data-testid="profile-email"
+        className={ styles.email }
       >
-        Receitas Feitas
-      </button>
-      <button
-        data-testid="profile-favorite-btn"
-        type="button"
-        onClick={ () => history.push('/receitas-favoritas') }
-      >
-        Receitas Favoritas
-      </button>
-      <button
-        data-testid="profile-logout-btn"
-        type="button"
-        onClick={ () => handleClick() }
-      >
-        Sair
-      </button>
+        { email }
+      </h4>
+      <div className={ styles.profile }>
+        <button
+          data-testid="profile-done-btn"
+          type="button"
+          onClick={ () => history.push('/receitas-feitas') }
+        >
+          Receitas Feitas
+        </button>
+        <button
+          data-testid="profile-favorite-btn"
+          type="button"
+          onClick={ () => history.push('/receitas-favoritas') }
+        >
+          Receitas Favoritas
+        </button>
+        <button
+          data-testid="profile-logout-btn"
+          type="button"
+          onClick={ () => handleClick() }
+        >
+          Sair
+        </button>
+      </div>
       <MenuInferior />
     </div>
   );

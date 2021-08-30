@@ -1,0 +1,36 @@
+p {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.imgBebidasDetails {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.bebidasDetails {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonBebidasDetails {
+  display: flex;
+  justify-content: space-around;
+}
+
+.optionsDrinks {
+  display: block;
+  justify-content: center;
+}
+
+.receitasBebidas {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonFavoriteBebida {
+  display: flex;
+  justify-content: center;
+}
