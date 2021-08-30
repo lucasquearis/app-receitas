@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Redirect, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import AppContext from '../Context/AppContext';
 
 function ExploreDrinksAndFoodsByIngredients() {
   const [ingredients, setIngredients] = useState([]);
   const { pathname } = useLocation();
+  const { setIngredientFilter, setFoodOrDrink } = useContext(AppContext);
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     if (pathname === '/explorar/comidas/ingredientes') {
       const api = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
       const result = async () => {
         const data = await fetch(api).then((response) => response.json());
-        console.log(data.meals);
         setIngredients(data.meals);
       };
       result();
@@ -20,57 +22,93 @@ function ExploreDrinksAndFoodsByIngredients() {
       const api = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
       const result = async () => {
         const data = await fetch(api).then((response) => response.json());
-        console.log(data.drinks);
         setIngredients(data.drinks);
       };
       result();
     }
   }, [pathname]);
 
+  const handleClickComidas = (ingredient) => {
+    setIngredientFilter(ingredient);
+    setFoodOrDrink('food');
+    setRedirect(true);
+  };
+
+  const handleClickBebidas = async (ingredient) => {
+    setIngredientFilter(ingredient);
+    console.log(ingredient);
+    setFoodOrDrink('drink');
+    setRedirect(true);
+  };
+
   if (ingredients.length !== 0) {
     if (pathname === '/explorar/comidas/ingredientes') {
+      if (redirect === true) {
+        return <Redirect to="/comidas" />;
+      }
       const number = 12;
       return (
         <div>
           { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
             .map((ingredient, index) => (
-              <div data-testid={ `${index}-ingredient-card` } key={ index }>
-                <Link to="/comidas">
-                  <Card>
-                    <img
-                      variant="top"
-                      src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
-                      style={ { width: '50px' } }
-                      alt="ingredient ilustration"
-                    />
-                    <Card.Title>{ingredient.strIngredient}</Card.Title>
-                  </Card>
-                </Link>
-              </div>
+              <button
+                type="button"
+                onClick={ () => handleClickComidas(ingredient.strIngredient) }
+                data-testid={ `${index}-ingredient-card` }
+                key={ index }
+              >
+                <Card
+                  style={ { width: '8.75rem' } }
+                >
+                  <Card.Img
+                    variant="top"
+                    src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                    alt="ingredient ilustration"
+                    data-testid={ `${index}-card-img` }
+                  />
+                  <Card.Title
+                    data-testid={ `${index}-card-name` }
+                  >
+                    {ingredient.strIngredient}
+                  </Card.Title>
+                </Card>
+              </button>
             ))}
         </div>
       );
     }
     if (pathname === '/explorar/bebidas/ingredientes') {
+      if (redirect === true) {
+        return <Redirect to="/bebidas" />;
+      }
       const api = 'https://www.thecocktaildb.com/images/ingredients/';
       const number = 12;
       return (
         <div>
           { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
             .map((ingredient, index) => (
-              <div data-testid={ `${index}-ingredient-card` } key={ index }>
-                <Link to="/bebidas">
-                  <Card>
-                    <img
-                      src={ `${api}${ingredient.strIngredient1.toLowerCase()}.png` }
-                      className="card-image"
-                      style={ { width: '50px' } }
-                      alt="ingredient ilustration"
-                    />
-                    <Card.Title>{ingredient.strIngredient1}</Card.Title>
-                  </Card>
-                </Link>
-              </div>
+              <button
+                type="button"
+                data-testid={ `${index}-ingredient-card` }
+                key={ index }
+                onClick={ () => handleClickBebidas(ingredient.strIngredient1) }
+              >
+                <Card
+                  style={ { width: '8.75rem' } }
+                >
+                  <Card.Img
+                    variant="top"
+                    src={ `${api}${ingredient.strIngredient1}-Small.png` }
+                    alt="ingredient ilustration"
+                    data-testid={ `${index}-card-img` }
+                  />
+                  <Card.Title
+                    data-testid={ `${index}-card-name` }
+                  >
+                    {ingredient.strIngredient1}
+                  </Card.Title>
+                </Card>
+              </button>
             ))}
         </div>
       );

@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { Redirect, useLocation } from 'react-router-dom';
-import useRandom from '../Hooks/useRandom';
+import { Redirect, useLocation, Link } from 'react-router-dom';
+import useRandom from '../hooks/useRandom';
 
 function ExploreDrinksAndFoods() {
   const { pathname } = useLocation();
   const [redirectTo, setRedirectTo] = useState({
     ingredients: false,
-    area: false,
     surprise: false });
   const [id] = useRandom();
 
   const handleClick = ({ target }) => {
-    setRedirectTo({ [target.name]: true });
+    setRedirectTo({ ...redirectTo, [target.name]: true });
   };
 
   const handleSurpriseClick = () => {
     if (id !== '') {
-      console.log(id);
       setRedirectTo({ ...redirectTo, surprise: true });
     }
   };
@@ -25,9 +23,6 @@ function ExploreDrinksAndFoods() {
   if (pathname === '/explorar/comidas') {
     if (redirectTo.ingredients === true) {
       return <Redirect to="/explorar/comidas/ingredientes" />;
-    }
-    if (redirectTo.area === true) {
-      return <Redirect to="/explorar/comidas/area" />;
     }
     if (redirectTo.surprise === true) {
       return <Redirect to={ `/comidas/${id}` } />;
@@ -42,14 +37,15 @@ function ExploreDrinksAndFoods() {
         >
           Por Ingredientes
         </Button>
-        <Button
-          name="area"
-          data-testid="explore-by-area"
-          variant="link"
-          onClick={ () => handleClick }
-        >
-          Por Local de Origem
-        </Button>
+        <Link to="/explorar/comidas/area">
+          <Button
+            name="area"
+            data-testid="explore-by-area"
+            variant="link"
+          >
+            Por Local de Origem
+          </Button>
+        </Link>
         <Button
           name="surprise"
           data-testid="explore-surprise"
