@@ -12,7 +12,6 @@ function FoodsInProgress() {
   if (!localStorage.inProgressRecipes) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
   }
-  // const [LS, setLS] = useState
 
   useEffect(() => {
     const getRecipeFood = async () => {
@@ -47,49 +46,45 @@ function FoodsInProgress() {
   }, [recipeFood]);
 
   // Requisito 50 - o número '52771' é só enquanto n tivermos o id
-  useEffect(() => {
-    // const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    // if (inProgress.meals[id].length < 1) {
-    //   setInProgress({
-    //     ...LS,
-    //   });
-    // }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
-  }, [inProgress]);
-
   const checkItem = (ingredient) => {
     const ingredientsArray = inProgress.meals[id];
     if (!ingredientsArray) { // lógica p qd add o primeiro ingredient
-      setInProgress({
+      const estado = {
         meals: {
           [id]: ingredient,
         },
-      });
+      };
+      setInProgress(estado);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(estado));
     } else {
       const alreadyExist = ingredientsArray.some((item) => item === ingredient);
       if (alreadyExist) { // lógica p qd tem q retirar
         const newIngredients = ingredientsArray.filter((item) => item !== ingredient);
-
-        setInProgress({
+        const estado2 = {
           meals: {
             [id]: newIngredients,
           },
-        });
-      } else {
-        setInProgress({ // lógica para acrescentar do 2 p frente de ingredientes.
+        };
+        setInProgress(estado2);
+        localStorage.setItem('inProgressRecipes', JSON.stringify(estado2));
+      } else { // lógica para acrescentar do 2 p frente de ingredientes.
+        const estado3 = {
           meals: {
             [id]: [...inProgress.meals[id], ingredient],
           },
-        });
+        };
+        setInProgress(estado3);
+        localStorage.setItem('inProgressRecipes', JSON.stringify(estado3));
       }
     }
   };
 
+  useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setInProgress({ ...LS });
+  }, []);
+
   const handleCheked = (ingredient) => (inProgress.meals[id].includes(ingredient));
-  // console.log(inProgress.meals);
-  // console.log(inProgress.meals[id].includes(ingredient));
-  // (inProgress.meals[id].includes(ingredient))
-  // inProgress.meals.includes(ingredient);
 
   const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
@@ -115,8 +110,7 @@ function FoodsInProgress() {
                   id={ `${ingredient}` }
                   value={ `${ingredient}` }
                   onChange={ () => checkItem(ingredient) }
-                  // { inProgress.includes(ingredient) ?  }
-                  checked={ handleCheked(ingredient) }
+                  defaultChecked={ handleCheked(ingredient) }
                 />
                 { `${measure[index]} ${ingredient}` }
               </label>
