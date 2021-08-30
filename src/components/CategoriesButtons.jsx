@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import DrinkContext from '../context/DrinkContext';
 import FoodContext from '../context/FoodContext';
 import { fetchDrinkByCategorie, fetchInicialDrinks } from '../services/cocktailAPI';
@@ -8,17 +8,8 @@ import { fetchFoodByCategorie, fetchInicialFoods } from '../services/mealAPI';
 function CategoriesButtons({ categories, type }) {
   const { setDrinks } = useContext(DrinkContext);
   const { setFoods } = useContext(FoodContext);
+  const [category, setCategory] = useState('');
   const categoriesLimit = 5;
-
-  async function onClick(categorie) {
-    if (type === 'Drink') {
-      const { drinks } = await fetchDrinkByCategorie(categorie);
-      setDrinks(drinks);
-    } else {
-      const { meals } = await fetchFoodByCategorie(categorie);
-      setFoods(meals);
-    }
-  }
 
   async function onClickAll() {
     if (type === 'Drink') {
@@ -29,6 +20,20 @@ function CategoriesButtons({ categories, type }) {
       setFoods(meals);
     }
   }
+
+  async function onClick(categorie) {
+    if (category === categorie) {
+      onClickAll();
+    } else if (type === 'Drink') {
+      const { drinks } = await fetchDrinkByCategorie(categorie);
+      setDrinks(drinks);
+    } else {
+      const { meals } = await fetchFoodByCategorie(categorie);
+      setFoods(meals);
+    }
+    setCategory(categorie);
+  }
+
   return (
     <div>
       <label htmlFor="All">
@@ -36,6 +41,7 @@ function CategoriesButtons({ categories, type }) {
           type="radio"
           id="All"
           name="radio-category"
+          className="category-buttons"
           data-testid="All-category-filter"
           value="All"
           onClick={ () => onClickAll() }

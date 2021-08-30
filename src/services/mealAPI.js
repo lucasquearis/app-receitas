@@ -6,7 +6,6 @@ const FoodByCategorie = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
 export async function fetchInicialFoods() {
   const fetchURL = await fetch(InitialFood);
-  console.log(fetchURL);
   return fetchURL.json();
 }
 
