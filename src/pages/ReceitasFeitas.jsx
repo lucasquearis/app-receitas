@@ -8,12 +8,14 @@ import '../cssPages/ReceitasF.css';
 import ShareButton from '../components/ShareButton';
 
 function ReceitasFeitas() {
+  console.log(1);
   const [showRecipes, setShowRecipes] = useState([]);
   const [finishRecipes, SetFinishRecipes] = useState([]);
   const [redirect, setRedirect] = useState(null);
   const minNumber = 2;
 
   useEffect(() => {
+    console.log(2);
     const doneRecipes = (localStorage.getItem('doneRecipes'))
       ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
     SetFinishRecipes(doneRecipes);
@@ -25,14 +27,9 @@ function ReceitasFeitas() {
   }
 
   function onClick({ target: { name } }) {
-    // const filtroBebidas = finishRecipes.filter((bebida) => bebida.type === 'bebida');
-    // const filtroComidas = finishRecipes.filter((comida) => comida.type === 'comida');
     const filtrosReceitas = finishRecipes
       .filter((receita) => receita.type.includes(name));
     setShowRecipes(filtrosReceitas);
-    // if (name === 'bebida') setShowRecipes(filtroBebidas);
-    // if (name === 'comida') setShowRecipes(filtroComidas);
-    // if (name === 'all') setShowRecipes(finishRecipes);
   }
 
   if (redirect) return <Redirect to={ redirect } />;
@@ -68,6 +65,7 @@ function ReceitasFeitas() {
 
         </button>
       </div>
+      {console.log(3, showRecipes.length)}
       <CardGroup className="paiDeTodos">
         {showRecipes.length === 0
           ? 'Lista vazia!' : showRecipes.map((recipe, index) => (
@@ -83,6 +81,7 @@ function ReceitasFeitas() {
                 src={ `${recipe.image}` }
                 alt={ recipe.name }
               />
+              {console.log(4, recipe)}
               <Card.Body>
                 <div className="paizao">
                   <Card.Title
@@ -106,8 +105,8 @@ function ReceitasFeitas() {
 
                 <ListGroup variant="flush">
                   {
-                    recipe.tag.length === 0 ? ''
-                      : recipe.tag.map((tag, count) => count > minNumber || (
+                    recipe.tags.length === 0 ? ''
+                      : recipe.tags.map((tag, count) => count > minNumber || (
                         <ListGroup.Item
                           key={ count }
                           data-testid={ `${index}-${tag}-horizontal-tag` }
