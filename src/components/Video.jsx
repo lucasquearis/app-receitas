@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import fetchRecipe from '../Redux/actions/fetchRecipes';
 
 class Video extends Component {
@@ -10,11 +11,11 @@ class Video extends Component {
         {
           recipe.map(({ strYoutube }, index) => (
             <iframe
-            key={index}
-            src={ strYoutube }
-            title="recipe video"
-            data-testid="video"
-          />
+              key={ index }
+              src={ strYoutube }
+              title="recipe video"
+              data-testid="video"
+            />
           ))
         }
       </section>
@@ -30,5 +31,8 @@ const mapDispatchToProps = (dispach) => ({
   fetchRecipe: (id) => dispach(fetchRecipe(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Video);
+Video.propTypes = {
+  recipe: PropTypes.objectOf(PropTypes.object),
+}.isRequired;
 
+export default connect(mapStateToProps, mapDispatchToProps)(Video);

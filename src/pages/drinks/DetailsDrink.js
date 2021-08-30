@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Ingredients from '../../components/Ingredients';
+import IngredientsDrink from '../../components/IngredientsDrink';
 import Instructions from '../../components/Instructions';
-import Video from '../../components/Video';
 import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -17,24 +16,23 @@ class DetailsDrink extends Component {
   }
 
   render() {
-    const { recipe } = this.props;
+    const { cocktail } = this.props;
     return (
       <div>
         <div>
           {
-            recipe.map(({ strDrink, strCategory, strDrinkThumb }, index) => (
+            cocktail.map(({ strDrink, strCategory, strDrinkThumb, strAlcoholic }, index) => (
               <div key={ index }>
                 <div>
                   <img data-testid="recipe-photo" src={ strDrinkThumb } alt="foto" />
                 </div>
                 <div>
                   <h1 data-testid="recipe-title">{ strDrink }</h1>
-                  <h2 data-testid="recipe-category">{ strCategory }</h2>
+                  <h2 data-testid="recipe-category">{ strCategory } - { strAlcoholic }</h2>
                 </div>
-                {/* <Ingredients />
+                <IngredientsDrink />
                 <Instructions />
-                <Video />
-                <Recomendations /> */}
+                <Recomendations />
                 <button
                   type="button"
                   data-testid="start-recipe-btn"
@@ -67,7 +65,7 @@ DetailsDrink.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  recipe: state.drinks.cocktails,
+  cocktail: state.drinks.cocktails,
 });
 
 const mapDispatchToProps = (dispach) => ({
