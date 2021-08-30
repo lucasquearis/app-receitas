@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import '../styles/Footer.css';
 
 // O menu inferior deve ter possuir o atributo data-testid="footer";
 // drinks deve possuir o atributo data-testid="drinks-bottom-btn";
@@ -10,7 +11,7 @@ import mealIcon from '../images/mealIcon.svg';
 // comidas deve possuir o atributo data-testid="food-bottom-btn".
 
 const Footer = () => (
-  <footer data-testid="footer" className="footer">
+  <footer data-testid="footer" className="fixedbottom">
     <Link
       to="/bebidas"
     >
@@ -40,4 +41,5 @@ const Footer = () => (
     </Link>
   </footer>
 );
+
 export default Footer;

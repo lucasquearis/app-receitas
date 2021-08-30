@@ -17,8 +17,7 @@ function Header(props) {
     }
   }
 
-  const teste = () => {
-    console.log('entro');
+  const shouldRender = () => {
     const renderBar = (
       <button type="button" onClick={ showSearchBar }>
         <img src={ searchIcon } alt="icone-de-pesquisar" data-testid="search-top-btn" />
@@ -33,7 +32,7 @@ function Header(props) {
         <img src={ profileIcon } alt="icone-perfil" data-testid="profile-top-btn" />
       </Link>
       <h3 data-testid="page-title">{ title }</h3>
-      { showRender && teste() }
+      { showRender && shouldRender() }
       {
         searchBar ? <SearchBar /> : null
       }
