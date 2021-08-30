@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import copyToClipBoard from 'clipboard-copy';
+import { Redirect } from 'react-router-dom';
 import { buscarBebidasID } from '../service/BebidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -19,6 +20,7 @@ export default function DetalheReceitaBebida(props) {
   const [copyMessage, setCopyMessage] = useState(false);
   const [drinkIngredients, setdrinkIngredients] = useState([]);
   const [isLoading, changeLoading] = useState(true);
+  const [shouldRedirect, changeRedirect] = useState(false);
 
   useEffect(() => {
     buscarBebidasID(id)
@@ -41,6 +43,10 @@ export default function DetalheReceitaBebida(props) {
     copyToClipBoard(window.location.href);
     setCopyMessage(true);
     setMessageTime();
+  };
+
+  const redirectTo = () => {
+    changeRedirect(true);
   };
 
   const renderRecipe = () => {
@@ -102,6 +108,7 @@ export default function DetalheReceitaBebida(props) {
         <button
           type="button"
           data-testid="finish-recipe-btn"
+          onClick={ redirectTo }
         >
           Finalizar Receita
         </button>
@@ -115,6 +122,7 @@ export default function DetalheReceitaBebida(props) {
       { copyMessage
         ? <p className="copy-food-link-message">Link copiado!</p>
         : <p className="copy-food-link-message" /> }
+      { shouldRedirect && <Redirect to="/receitas-feitas" /> }
     </>
   );
 }
