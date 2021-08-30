@@ -61,7 +61,7 @@ function RecipesDetails({ type }) {
         <RecipeDetailInstructions recipe={ recipe } />
         {(type === 'food') && <RecipeDetailVideo videoSource={ recipe.strYoutube } />}
         <RecipeDetailsRecomendations type={ type } />
-        <RecipeDetailButton recipeID={ recipeID } />
+        <RecipeDetailButton type={ type } recipe={ recipe } recipeID={ recipeID } />
       </div>
     );
   }

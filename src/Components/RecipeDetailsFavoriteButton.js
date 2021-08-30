@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import FavoriteButtonIcon from './FavoriteButtonIcon';
 
 function RecipeDetailFavoriteButton({ recipe, type, recipeID }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -26,25 +25,15 @@ function RecipeDetailFavoriteButton({ recipe, type, recipeID }) {
 
   const newFavorite = () => {
     const favoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    let favoriteData = {
+    const favoriteData = {
       id: recipeID,
       type,
       category: recipe.strCategory,
       alcoholicOrNot: recipe.strAlcoholic || '',
+      area: recipe.strArea || '',
       name: recipe.strDrink || recipe.strMeal,
       image: recipe.strMealThumb || recipe.strDrinkThumb,
     };
-
-    if (type === 'comida') {
-      favoriteData = {
-        id: recipeID,
-        type,
-        area: recipe.strArea || '',
-        category: recipe.strCategory,
-        name: recipe.strDrink || recipe.strMeal,
-        image: recipe.strMealThumb || recipe.strDrinkThumb,
-      };
-    }
 
     const newFavorites = [...favoritesRecipes, favoriteData];
 
@@ -60,16 +49,11 @@ function RecipeDetailFavoriteButton({ recipe, type, recipeID }) {
   };
 
   return (
-    <button
-      onClick={ isFavorite ? () => removeFavorite() : () => newFavorite() }
-      type="button"
-      data-testid="favorite-btn"
-    >
-      <img
-        src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-        alt="Favorite Recipe Action"
-      />
-    </button>
+    <FavoriteButtonIcon
+      isFavorite={ isFavorite }
+      removeFavorite={ removeFavorite }
+      newFavorite={ newFavorite }
+    />
   );
 }
 

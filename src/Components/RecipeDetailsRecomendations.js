@@ -38,7 +38,7 @@ function RecipeDetailsRecomendations({ type }) {
       <div className="cardsContainer">
         {
           recomendationList.map((recipe, index) => (
-            <Card key={ index }>
+            <Card key={ index } data-testid={ `${index}-recomendation-card` }>
               <Card.Img
                 variant="top"
                 src={ (type === 'food' ? recipe.strDrinkThumb : recipe.strMealThumb) }
