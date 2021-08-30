@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+const INITIAL_STATE = { cocktails: {}, meals: {} };
+
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const [check, setCheck] = useState([]);
+  // const [check, setCheck] = useState([]);
+  const [inProgress, setInProgress] = useState(INITIAL_STATE);
 
   useEffect(() => {
     const getRecipeFood = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id depois
+      const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id depois p ser dinâmico
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setRecipeFood(meals);
-
-      const id = 52771; // trocar depois p ser dinâmico
-      const objInProgressRecipes = { cocktails: {}, meals: { [id]: [] } }; // lembrar de dar spread p captar o de antes
-      // coloquei a o objInProgressRecipes  dentro do LS
-      localStorage.setItem('inProgressRecipes', JSON.stringify(objInProgressRecipes));
     };
     getRecipeFood();
     // console.log(recipeFood);
@@ -50,23 +48,31 @@ function FoodsInProgress() {
   // const inputs = document.querySelectorAll('input');
   // const inputsArray = Array.from(inputs);
   // console.log(inputsArray);
-  const checkItem = (ingredient) => {
-    // const storage = localStorage.getItem('inProgressRecipes');
-    // storage.filter((input) => (
-    //   input.value !== ingredient ? inputsArray.push(ingredient) : ''
-    // ));
-    // console.log(inputsArray);
-    // const newIngredient = check.filter((item) => item === ingredient);
 
-    // console.log(newIngredient);
-    check.push(ingredient);
-    setCheck([
-      ...check,
-      ingredient,
-    ]);
+  const checkItem = (ingredient) => {
+    // const id = 52771; // trocar depois p ser dinâmico
+    // const ingredientsArray = inProgress.meals[id];
+    // ingredientsArray.find(())
+
+    // lógica abaixo para colocar ingr na array:
+    if (inProgress.meals[id]) {
+      setInProgress({
+        ...inProgress,
+        meals: {
+          [id]: [...inProgress.meals[id], ingredient],
+        },
+      });
+    } else {
+      setInProgress({
+        ...inProgress,
+        meals: {
+          [id]: [ingredient],
+        },
+      });
+    }
 
     // console.log(check);
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ 52771: check }));
+    // localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
   };
 
   const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
