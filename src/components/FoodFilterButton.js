@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
+import './FilterButton.css';
 
-function FoodFilterButton({ onClick }) {
+function FoodFilterButton({ onClick, toggle }) {
   const {
     foodCategories: { loading, list },
   } = useContext(Context);
@@ -20,6 +21,7 @@ function FoodFilterButton({ onClick }) {
       { filterButtons.map((button, index) => (
         <button
           type="button"
+          className={ toggle === button.strCategory ? 'toggle-button' : null }
           data-testid={ `${button.strCategory}-category-filter` }
           key={ index }
           onClick={ (e) => onClick(e) }
@@ -32,6 +34,7 @@ function FoodFilterButton({ onClick }) {
 
 FoodFilterButton.propTypes = {
   onClick: PropTypes.func.isRequired,
+  toggle: PropTypes.string.isRequired,
 };
 
 export default FoodFilterButton;

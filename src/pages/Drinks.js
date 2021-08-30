@@ -15,13 +15,13 @@ function Drinks() {
     drinkCategoryAPI } = useContext(Context);
   const { list: recipes } = drinkRecipes;
   const { loading: loadcard } = drinkRecipes;
+  const INITIAL_API = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const [API, setAPI] = useState('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-    if (loadcard) {
-      requestCategory(API, setDrinkRecipes);
-      requestCategory(drinkCategoryAPI, setDrinkCategories);
-    }
+    requestCategory(API, setDrinkRecipes);
+    requestCategory(drinkCategoryAPI, setDrinkCategories);
   }, [API]);
 
   if (loadcard) return <p>carregando...</p>;
@@ -34,9 +34,14 @@ function Drinks() {
     }
   }
 
-  const handleClick = async ({ target: { innerText } }) => {
-    setDrinkRecipes({ ...drinkRecipes, loading: true });
+  const handleClick = ({ target: { innerText } }) => {
+    if (filter === innerText) {
+      setFilter('All');
+      return setAPI(INITIAL_API);
+    }
     setAPI(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${innerText}`);
+    setFilter(innerText);
+    setDrinkRecipes({ ...drinkRecipes, loading: true });
   };
 
   const drinkPage = (bool) => {
@@ -44,7 +49,7 @@ function Drinks() {
       return (
         <div>
           <Header title="Bebidas" name="cocktail" search />
-          <DrinkFilterButton onClick={ handleClick } />
+          <DrinkFilterButton onClick={ handleClick } toggle={ filter } />
           { cards.filter((e, index) => index <= maxCards) }
           <MenuInferior />
           <Recipes />

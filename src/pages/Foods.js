@@ -14,13 +14,13 @@ function Foods() {
     foodCategoryAPI } = useContext(Context);
   const { loading } = foodRecipes;
   const { list } = foodRecipes;
-  const [API, setAPI] = useState('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const INITIAL_API = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const [API, setAPI] = useState(INITIAL_API);
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-    if (loading) {
-      requestCategory(API, setFoodRecipes);
-      requestCategory(foodCategoryAPI, setFoodCategories);
-    }
+    requestCategory(API, setFoodRecipes);
+    requestCategory(foodCategoryAPI, setFoodCategories);
   }, [API]);
 
   if (loading) return <p> carregando ...</p>;
@@ -31,9 +31,14 @@ function Foods() {
     cards.push(<FoodCard meal={ list.meals[index] } index={ index } />);
   }
 
-  const handleClick = async ({ target: { innerText } }) => {
-    setFoodRecipes({ ...foodRecipes, loading: true });
+  const handleClick = ({ target: { innerText } }) => {
+    if (filter === innerText) {
+      setFilter('All');
+      return setAPI(INITIAL_API);
+    }
     setAPI(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${innerText}`);
+    setFilter(innerText);
+    setFoodRecipes({ ...foodRecipes, loading: true });
   };
 
   const foodPage = (bool) => {
@@ -41,8 +46,7 @@ function Foods() {
       return (
         <div>
           <Header title="Comidas" name="meal" search />
-          <FoodFilterButton onClick={ handleClick } />
-          { console.log(list) }
+          <FoodFilterButton onClick={ handleClick } toggle={ filter } />
           { cards.filter((e, index) => index <= maxCards) }
           <Recipes />
           <MenuInferior />
