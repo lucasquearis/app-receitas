@@ -5,8 +5,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProviderContext from './context/ProviderContext';
 import Login from './pages/Login';
-// import Foods from './pages/Foods';
-// import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
 import ExploreFood from './pages/ExploreFood';
 import ExploreDrink from './pages/ExploreDrink';

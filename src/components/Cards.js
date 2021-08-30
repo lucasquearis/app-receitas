@@ -4,7 +4,7 @@ import RecipesContext from '../context/RecipesContext';
 
 function Cards() {
   const { API } = useContext(RecipesContext);
-  const { pathname, recipes, searchByFilters } = API;
+  const { pathname, action, recipes, searchByFilters } = API;
 
   const min = 0;
   const max = 12;
@@ -45,7 +45,11 @@ function Cards() {
     return <div>Carregando...</div>;
 
   case 1:
-    return <Redirect to={ `${pathname}/${cards[0][id]}` } />;
+    console.log(action);
+    if (action === 'search-filters') {
+      return <Redirect to={ `${pathname}/${cards[0][id]}` } />;
+    }
+    break;
 
   default:
     break;
