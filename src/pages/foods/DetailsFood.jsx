@@ -14,16 +14,15 @@ function DetailsFood({ match: { url, params: { id } } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
   const [copyMsg, setCopyMsg] = useState(false);
-  const msg = 'Link copiado!';
 
   const fetchFood = () => {
     const getDrinks = async () => {
       const drinksData = await fetchSearchDrinksApi('name', '');
       const MAX_INDEX = 6;
-      const MAX_NUM = 0.5;
-      const MINUS_NUM = -1;
-      // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-      drinksData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
+      // const MAX_NUM = 0.5;
+      // const MINUS_NUM = -1;
+      // // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+      // drinksData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
       setRecommendations(drinksData.filter((_drink, index) => index < MAX_INDEX));
     };
 
@@ -31,15 +30,14 @@ function DetailsFood({ match: { url, params: { id } } }) {
       const foodData = await fetchFoodById(id);
       getDrinks();
       setFood(foodData);
-      // console.log(foodData);
       setIsMount(true);
       setIsLoading(false);
     };
     if (!isMount) getFood();
   };
+
   useEffect(fetchFood);
 
-  // Requisito 43 - como pegar a url
   const handleShare = () => {
     copy(url);
     setCopyMsg(true);
@@ -55,15 +53,15 @@ function DetailsFood({ match: { url, params: { id } } }) {
   const keysMeasures = keysFoods.filter((key) => (
     key.includes('strMeasure') && !!food[key]));
 
-  console.log(keysFoods);
-
   // const testId = 52951; ID = testado
 
   const allow = `accelerometer; autoplay; clipboard-write; 
   encrypted-media; gyroscope; picture-in-picture`;
-  const videoRegex = food.strYoutube
+  const videoReplace = food.strYoutube
     ? food.strYoutube.replace(/watch\?v=/, 'embed/') : '';
   // console.log(videoRegex);
+
+  const COPY_MSG = 'Link copiado!';
 
   return (
     <div className="detailsFood">
@@ -90,7 +88,7 @@ function DetailsFood({ match: { url, params: { id } } }) {
           >
             <img src={ whiteHeartIcon } alt="favorite icon" />
           </button>
-          {(copyMsg) ? <p>{ msg }</p> : null }
+          {(copyMsg) ? <p>{ COPY_MSG }</p> : ''}
         </div>
       </section>
       <p data-testid="recipe-category">{food.strCategory}</p>
@@ -107,7 +105,7 @@ function DetailsFood({ match: { url, params: { id } } }) {
       <p data-testid="instructions">{food.strInstructions}</p>
       <section>
         <iframe
-          src={ videoRegex }
+          src={ videoReplace }
           title="YouTube video player"
           frameBorder="0"
           allow={ allow }
@@ -128,7 +126,7 @@ function DetailsFood({ match: { url, params: { id } } }) {
           />
         ))}
       </section>
-      <Link to="/bebidas/:id/in-progress">
+      <Link to={ `/comidas/${id}/in-progress` }>
         <button
           className="start-recipe-food-btn"
           type="button"
@@ -142,7 +140,9 @@ function DetailsFood({ match: { url, params: { id } } }) {
 }
 
 DetailsFood.propTypes = {
-  match: shape({ params: shape({ id: string }) }).isRequired,
+  match: shape({
+    url: string,
+    params: shape({ id: string }) }).isRequired,
 };
 
 export default DetailsFood;

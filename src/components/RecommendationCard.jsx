@@ -7,12 +7,12 @@ export default function RecommendationCard({ src, name, index, alt, id, foodPage
     <Link
       to={ `/${!foodPage ? 'comidas' : 'bebidas'}/${id}` }
     >
-      <div>
+      <div data-testid={ `${index}-recomendation-card` }>
         <img
           src={ src }
           alt={ alt }
         />
-        <span data-testid={ `${index}-recomendation-card` }>{name}</span>
+        <span data-testid={ `${index}-recomendation-title` }>{name}</span>
       </div>
     </Link>
   );

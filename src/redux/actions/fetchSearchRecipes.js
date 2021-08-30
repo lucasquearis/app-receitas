@@ -1,6 +1,5 @@
 import { fetchSearchFoodsApi, fetchSearchDrinksApi } from '../../services/fetchApi';
 import isFetching from './isFetching';
-import fetchSuccess from './fetchSuccess';
 import getRecipes from './getRecipes';
 import fetchError from './fetchError';
 
@@ -12,17 +11,18 @@ export default function fetchSearchRecipes({ query, consultBy, foodPage }) {
     try {
       if (foodPage) {
         const recipes = await fetchSearchFoodsApi(consultBy, query);
-        dispatch(fetchSuccess());
         const { alert } = window;
         if (!recipes.length) alert(MSG_ALERT);
-        return dispatch(getRecipes(recipes));
+        dispatch(getRecipes(recipes));
+        return;
       }
       const recipes = await fetchSearchDrinksApi(consultBy, query);
-      dispatch(fetchSuccess());
       const { alert } = window;
       if (!recipes.length) alert(MSG_ALERT);
-      return dispatch(getRecipes(recipes));
+      dispatch(getRecipes(recipes));
+      return;
     } catch (error) {
+      console.log(error);
       fetchError();
     }
   };

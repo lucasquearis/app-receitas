@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
 import { Link } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import { fetchDrinkById, fetchSearchFoodsApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
 import './detailsDrink.css';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-function DetailsDrink({ match: { params: { id } } }) {
+function DetailsDrink({ match: { url, params: { id } } }) {
   const [drink, setDrink] = useState({});
   const [isMount, setIsMount] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
+  const [copyMsg, setCopyMsg] = useState(false);
 
   const fetchDrink = () => {
-    const getFood = async () => {
+    const getFoods = async () => {
       const foodData = await fetchSearchFoodsApi('name', '');
       const MAX_INDEX = 6;
-      const MAX_NUM = 0.5;
-      const MINUS_NUM = -1;
-      // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-      foodData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
+      // const MAX_NUM = 0.5;
+      // const MINUS_NUM = -1;
+      // // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+      // foodData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
       setRecommendations(foodData.filter((_food, index) => index < MAX_INDEX));
     };
 
     const getDrink = async () => {
       const drinkData = await fetchDrinkById(id);
-      getFood();
+      getFoods();
       setDrink(drinkData);
       setIsMount(true);
       setIsLoading(false);
@@ -35,6 +37,11 @@ function DetailsDrink({ match: { params: { id } } }) {
   };
 
   useEffect(fetchDrink);
+
+  const handleShare = () => {
+    copy(url);
+    setCopyMsg(true);
+  };
 
   if (isLoading) return <div>Carregando...</div>;
 
@@ -45,6 +52,8 @@ function DetailsDrink({ match: { params: { id } } }) {
 
   const keysMeasures = keysDrinks.filter((key) => (
     key.includes('strMeasure') && !!drink[key]));
+
+  const COPY_MSG = 'Link copiado!';
 
   return (
     <div className="detailsDrink">
@@ -62,6 +71,7 @@ function DetailsDrink({ match: { params: { id } } }) {
             type="button"
             data-testid="share-btn"
             className="share-btn"
+            onClick={ handleShare }
           >
             <img src={ shareIcon } alt="share icon" />
           </button>
@@ -72,6 +82,7 @@ function DetailsDrink({ match: { params: { id } } }) {
           >
             <img src={ whiteHeartIcon } alt="favorite icon" />
           </button>
+          {(copyMsg) ? <p>{ COPY_MSG }</p> : '' }
         </div>
       </section>
       <p data-testid="recipe-category">{`${drink.strCategory} ${drink.strAlcoholic}`}</p>
@@ -81,7 +92,7 @@ function DetailsDrink({ match: { params: { id } } }) {
             key={ key }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {`${drink[key]} - ${drink[keysMeasures[index]]}`}
+            {`${drink[key]} - ${drink[keysMeasures[index]] || ''}`}
           </li>
         ))}
       </ul>
@@ -98,7 +109,7 @@ function DetailsDrink({ match: { params: { id } } }) {
           />
         ))}
       </section>
-      <Link to="/bebidas/:id/in-progress">
+      <Link to={ `/bebidas/${id}/in-progress` }>
         <button
           className="start-recipe-drink-btn"
           type="button"
@@ -112,7 +123,9 @@ function DetailsDrink({ match: { params: { id } } }) {
 }
 
 DetailsDrink.propTypes = {
-  match: shape({ params: shape({ id: string }) }).isRequired,
+  match: shape({
+    url: string,
+    params: shape({ id: string }) }).isRequired,
 };
 
 export default DetailsDrink;

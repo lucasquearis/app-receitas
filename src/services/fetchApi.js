@@ -109,6 +109,7 @@ export const fetchDrinkById = async (id) => {
   try {
     const response = await fetch(`${endPoint}${id}`);
     const data = await response.json();
+    console.log(data.drinks[0]);
     return data.drinks[0];
   } catch (error) {
     console.log(error);
