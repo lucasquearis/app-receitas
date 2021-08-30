@@ -63,7 +63,7 @@ function RecipesProvider({ children }) {
   useEffect(() => {
     const resultFilterMeals = async () => {
       const resultMeals = await getMeals(searchValues);
-      setFilteredMeals(resultMeals);
+      await setFilteredMeals(resultMeals);
       if (resultMeals.meals === null) global.alert(ALERT_TWO);
     };
     resultFilterMeals();
@@ -73,7 +73,7 @@ function RecipesProvider({ children }) {
   useEffect(() => {
     const resultFilterDrinks = async () => {
       const resultDrinks = await getDrinks(searchValues);
-      setFilteredDrinks(resultDrinks);
+      await setFilteredDrinks(resultDrinks);
       if (resultDrinks.drinks === null) global.alert(ALERT_TWO);
     };
     resultFilterDrinks();
