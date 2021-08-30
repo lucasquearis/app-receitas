@@ -5,23 +5,29 @@ import styles from './BebidasDetalhes.module.css';
 
 export default function BebidasDetalhes() {
   const [drink, setDrink] = useState();
+  const [recomendedFood, setRecoomendedFood] = useState([]);
   const location = useLocation();
   const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-  const recommendedRecipes = [
-    'receita 1',
-    'receita 2',
-    'receita 3',
-  ];
 
   useEffect(() => {
     const api = async () => {
       const idApi = location.pathname.split('/')[2];
       const response = await fetch(`${URL_DRINK}${idApi}`);
       const data = await response.json();
-      console.log(data.drinks[0]);
       setDrink(data.drinks[0]);
     };
     api();
+  }, []);
+
+  useEffect(() => {
+    const apiFood = async () => {
+      const magicalNumber = 6;
+      const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const data = await fetch(URL).then((response) => response.json());
+      const firstSix = await data.meals.slice(0, magicalNumber);
+      setRecoomendedFood(firstSix);
+    };
+    apiFood();
   }, []);
 
   if (drink === undefined) {
@@ -67,27 +73,28 @@ export default function BebidasDetalhes() {
         {setIngredients()}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
-      <div>
-        <h3 className={ styles.receitasBebidas }>Receitas recomendadas</h3>
-        <ul>
-          {recommendedRecipes.map((name, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              {name}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={ styles.buttonFavoriteBebida }>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
+      {recomendedFood.map((recomendation, index) => (
+        <div
+          data-testid={ `${index}-recomendation-card` }
+          key={ index }
         >
-          Favorito
-        </button>
-      </div>
+          <ul>
+            <li
+              className={ index <= 1 ? '' : 'displayNone' }
+              data-testid={ `${index}-recomendation-title` }
+            >
+              { recomendation.strMeal }
+            </li>
+          </ul>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="start-recipe-btn"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }

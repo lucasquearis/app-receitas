@@ -1,30 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import './ComidasDetalhes.css';
 import Loading from '../components/Loading';
 import styles from './ComidasDetalhes.module.css';
 
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
-  // const [foodName, setFoodName] = useState('');
+  const [recomendedDrink, setRecoomendedDrink] = useState([]);
   const location = useLocation();
   const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-
-  const recommendedRecipes = [
-    'receita 1',
-    'receita 2',
-    'receita 3',
-  ];
 
   useEffect(() => {
     const api = async () => {
       const idApi = location.pathname.split('/')[2];
-
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
-      // console.log(data.meals[0]);
+      // console.log(data);
       setFood(data.meals[0]);
     };
     api();
+  }, []);
+
+  useEffect(() => {
+    const apiDrink = async () => {
+      const magicalNumber = 6;
+      const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const data = await fetch(URL).then((response) => response.json());
+      const firstSix = await data.drinks.slice(0, magicalNumber);
+      setRecoomendedDrink(firstSix);
+    };
+    apiDrink();
   }, []);
 
   if (food === undefined) {
@@ -67,29 +72,34 @@ export default function ComidasDetalhes() {
         {setIngredients()}
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
-      <div className={ styles.videoComida }>
-        <iframe
-          src="https://www.youtube.com/embed/DsFpGUXpZVU"
-          title="Vídeo de Instrução"
-          data-testid="video"
-        />
       </div>
-      <div>
-        <h3 className={ styles.receitasComidas }>Receitas recomendadas</h3>
-        <ul>
-          {recommendedRecipes.map((name, index) => (
+      <iframe
+        src={ food.strYoutube }
+        title="Vídeo de Instrução"
+        data-testid="video"
+      />
+      {recomendedDrink.map((recomendation, index) => (
+        <div
+          data-testid={ `${index}-recomendation-card` }
+          key={ index }
+        >
+          <ul>
             <li
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
+              className={ index <= 1 ? '' : 'displayNone' }
+              data-testid={ `${index}-recomendation-title` }
             >
-              {name}
+              { recomendation.strDrink }
             </li>
-          ))}
-        </ul>
-      </div>
-      <div className={ styles.favoriteComidaButton }>
-        <button type="button" data-testid="start-recipe-btn">Favorito</button>
-      </div>
+          </ul>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="start-recipe-btn"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }
