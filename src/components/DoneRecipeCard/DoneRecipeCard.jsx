@@ -1,11 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import Modal from 'react-modal';
 import shareButtonIcon from '../../images/shareIcon.svg';
+import UseModal from '../../hook/UseModal';
+import ModalCopy from '../ModalCopy/ModalCopy';
 
 function DoneRecipeCard({ recipe, cardIndex }) {
   const { image, name, type, area, category,
     alcoholicOrNot, doneDate, tags, id } = recipe;
+  const { modalIsOpen,
+    copyLinkFromDone,
+    closeModal,
+    customStyles } = UseModal();
+
+  Modal.setAppElement('#root');
 
   return (
     <section>
@@ -32,9 +41,18 @@ function DoneRecipeCard({ recipe, cardIndex }) {
           type="button"
           data-testid={ `${cardIndex}-horizontal-share-btn` }
           src={ shareButtonIcon }
+          onClick={ () => copyLinkFromDone(type, id) }
         >
           <img src={ shareButtonIcon } alt="share-button" />
         </button>
+        <Modal
+          isOpen={ modalIsOpen }
+          onRequestClose={ closeModal }
+          style={ customStyles }
+          contentLabel="Example Modal"
+        >
+          <ModalCopy />
+        </Modal>
         <div>
           {tags.map((tag) => (
             <span key={ tag } data-testid={ `${cardIndex}-${tag}-horizontal-tag` }>
