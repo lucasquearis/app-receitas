@@ -9,10 +9,11 @@ const FoodRecomendationCard = ({ recipe, index }) => (
 );
 
 FoodRecomendationCard.propTypes = {
-  drink: PropTypes.shape({
-    strDrink: PropTypes.string.isRequired,
-    strDrinkThumb: PropTypes.string.isRequired,
+  recipe: PropTypes.shape({
+    strMeal: PropTypes.string.isRequired,
+    strMealThumb: PropTypes.string.isRequired,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default FoodRecomendationCard;
