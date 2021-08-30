@@ -4,11 +4,11 @@ import {
   DoneRecipes,
 } from '../components';
 
-const Made = () => (
+const Done = () => (
   <div>
     <Header page="Receitas Feitas" />
     <DoneRecipes />
   </div>
 );
 
-export default Made;
+export default Done;

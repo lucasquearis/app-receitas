@@ -3,7 +3,7 @@ export { default as Foods } from './Foods';
 export { default as Drinks } from './Drinks';
 export { default as Explore } from './Explore';
 export { default as Profile } from './Profile';
-export { default as Made } from './Made';
+export { default as Done } from './Done';
 export { default as Favorites } from './Favorites';
 export { default as ExploreFoods } from './ExploreFoods';
 export { default as ExploreDrinks } from './ExploreDrinks';

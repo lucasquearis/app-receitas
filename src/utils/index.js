@@ -14,17 +14,17 @@ export const saveLoginLocalStorage = (email) => {
   localStorage.setItem('user', JSON.stringify(user));
 };
 
-export const doesItExist = (key) => {
-  if (key) return key;
-  return [];
-};
-
 export const doesInprogressExist = (key) => {
   if (key) return key;
   return {
     cocktails: {},
     meals: {},
   };
+};
+
+export const doesItExist = (key) => {
+  if (key) return key;
+  return [];
 };
 
 export const createIngredients = (response, max) => {

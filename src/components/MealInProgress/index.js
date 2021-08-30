@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router';
 import { Button } from 'react-bootstrap';
 import { getFood } from '../../services/foodAPI';
-import { doesItExist } from '../../utils';
+import { doesItExist, doesInprogressExist } from '../../utils';
 import {
   // FOOD_ERROR_RESPONSE,
   NEW_FOOD_SEARCH,
@@ -65,6 +65,10 @@ const MealInProgress = () => {
 
   const handleFinish = () => {
     const { idMeal, strMeal, strMealThumb, strCategory, strArea, strTags } = meals[0];
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const getInprogress = doesInprogressExist(inProgressRecipes);
+    if (getInprogress.meals[idMeal]) delete getInprogress.meals[idMeal];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(getInprogress));
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const oldDoneRecipes = doesItExist(doneRecipes);
     const newDoneRecipes = [

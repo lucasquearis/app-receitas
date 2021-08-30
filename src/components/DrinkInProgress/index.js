@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router';
 import { Button } from 'react-bootstrap';
 import { getDrink } from '../../services/drinkAPI';
-import { doesItExist } from '../../utils';
+import { doesItExist, doesInprogressExist } from '../../utils';
 import {
   // DRINK_ERROR_RESPONSE,
   NEW_DRINK_SEARCH,
@@ -65,6 +65,10 @@ const DrinkInProgress = () => {
 
   const handleFinish = () => {
     const { idDrink, strDrink, strDrinkThumb, strCategory, strAlcoholic } = drinks[0];
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const getInprogress = doesInprogressExist(inProgressRecipes);
+    if (getInprogress.cocktails[idDrink]) delete getInprogress.cocktails[idDrink];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(getInprogress));
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const oldDoneRecipes = doesItExist(doneRecipes);
     const newDoneRecipes = [
