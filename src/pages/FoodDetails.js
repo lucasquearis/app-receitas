@@ -9,24 +9,18 @@ import { getFavorites, handleButton, handleShare, handleFavoriteAuxiliar }
   from '../auxiliar/auxiliarFunctions';
 
 const youtubeEmbed = 'https://www.youtube.com/embed/';
-
 function FoodDetails({ history, match: { params: { id } } }) {
   const isFavorite = getFavorites(id);
   const [foodInfo, setFoodInfo] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
   const [recDrink, setRecDrinks] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [link, setLink] = useState('');
   const [icon, setIcon] = useState(isFavorite);
 
   useEffect(() => {
-    fetchFoodById(id).then(({ meals }) => setFoodInfo(meals));
-    fetchCocktails().then(({ drinks }) => setRecDrinks(drinks));
-  }, [id]);
-
-  useEffect(() => {
-    if (ingredients.length === 0) {
+    fetchFoodById(id).then(({ meals }) => {
       const MAX_INGREDIENT = 20;
-      foodInfo.map((item) => {
+      meals.forEach((item) => {
         let arr = [];
         for (let i = 1; i <= MAX_INGREDIENT; i += 1) {
           const itemIngredient = `strIngredient${i}`;
@@ -40,10 +34,15 @@ function FoodDetails({ history, match: { params: { id } } }) {
             { strMeasure: item[itemMeasure], strIngredient: item[itemIngredient] },
           ];
         }
-        return ingredients;
       });
-    }
-  }, [foodInfo, ingredients]);
+      setFoodInfo(meals);
+    });
+    fetchCocktails().then(({ drinks }) => setRecDrinks(drinks));
+  }, [id]);
+
+  if (foodInfo.length === 0) {
+    return <h1>Loading...</h1>;
+  }
 
   const handleFavorite = () => {
     const objSave = foodInfo.map((item) => {
@@ -60,7 +59,6 @@ function FoodDetails({ history, match: { params: { id } } }) {
     })[0];
     handleFavoriteAuxiliar(objSave, setIcon, icon);
   };
-
   return (
     <div>
       { foodInfo.map((item) => {
@@ -117,7 +115,6 @@ function FoodDetails({ history, match: { params: { id } } }) {
     </div>
   );
 }
-
 FoodDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -131,5 +128,4 @@ FoodDetails.propTypes = {
     }),
   }).isRequired,
 };
-
 export default FoodDetails;
