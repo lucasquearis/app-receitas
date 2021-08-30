@@ -25,7 +25,11 @@ function RecomendationCard({ type }) {
       {recomendations.map((recipe, index) => (index < MAX_CARD_RECOMENDATIONS ? (
         <div data-testid={ `${index}-recomendation-card` } key={ index }>
           <img src={ recipe.strMealThumb || recipe.strDrinkThumb } alt="Recipe Thumb" />
-          <h6 data-testid={`${index}-recomendation-title`}>{ recipe.strMeal || recipe.strDrink }</h6>
+          <h6
+            data-testid={ `${index}-recomendation-title` }
+          >
+            { recipe.strMeal || recipe.strDrink }
+          </h6>
         </div>
       ) : null))}
     </section>
