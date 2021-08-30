@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, CardContent, Typography, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { copyToClipboardDone } from '../../services';
+import shareIcon from '../../images/shareIcon.svg';
 
 export default function RecipesDoneCard({ recipe, index }) {
   const [copyLink, setCopyLink] = useState('');
@@ -63,7 +64,7 @@ export default function RecipesDoneCard({ recipe, index }) {
           >
             <img
               data-testid={ `${index}-horizontal-share-btn` }
-              src="/images/shareIcon.svg"
+              src={ shareIcon }
               alt="shareIt"
             />
           </button>

@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import './style.css';
-import localStoreTest from '../../components/testLocal';
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
-  localStoreTest();
   return (
     <div className="profile">
       <Typography variant="h5" component="h2" data-testid="profile-email">
