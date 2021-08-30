@@ -1,6 +1,7 @@
 const urlFoodList = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const urlFoodCategories = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const urlFoodListByCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+const urlFoodRandom = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
 export async function fetchAPIList() {
   try {
@@ -25,6 +26,16 @@ export async function fetchAPICategories() {
 export async function fetchAPIListByCategory(category) {
   try {
     const response = await fetch(`${urlFoodListByCategory}${category}`);
+    const resolve = await response.json();
+    return resolve.meals;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function fetchFoodRandom() {
+  try {
+    const response = await fetch(urlFoodRandom);
     const resolve = await response.json();
     return resolve.meals;
   } catch (error) {

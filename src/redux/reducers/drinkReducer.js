@@ -1,8 +1,13 @@
-import { DRINK_CATEGORIES_SUCCESS, DRINK_LIST_SUCCESS } from '../actions/actionDrink';
+import {
+  DRINK_CATEGORIES_SUCCESS,
+  DRINK_LIST_SUCCESS,
+  DRINK_RANDOM_SUCCESS,
+} from '../actions/actionDrink';
 
 const INITIAL_STATE = {
   drinkCardList: [],
   drinkCategoriesList: [],
+  drinkRandom: [],
 };
 
 const cardListLenght = 12;
@@ -19,6 +24,11 @@ function drinkReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       drinkCategoriesList: action.payload.slice(0, categoriesListLenght),
+    };
+  case DRINK_RANDOM_SUCCESS:
+    return {
+      ...state,
+      drinkRandom: action.payload[0].idDrink,
     };
   default:
     return state;
