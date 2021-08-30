@@ -14,7 +14,6 @@ export default function ComidasDetalhes() {
       const idApi = location.pathname.split('/')[2];
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
-      // console.log(data.meals[0]);
       setFood(data.meals[0]);
     };
     api();
@@ -26,9 +25,7 @@ export default function ComidasDetalhes() {
       const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const data = await fetch(URL).then((response) => response.json());
       const firstSix = await data.drinks.slice(0, magicalNumber);
-      console.log(firstSix);
       setRecoomendedDrink(firstSix);
-      // console.log(recomendedFood);
     };
     apiDrink();
   }, []);
