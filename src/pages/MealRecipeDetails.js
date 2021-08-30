@@ -38,14 +38,14 @@ export default function MealRecipeDetails(props) {
         <span>Categoria: </span>
         <span data-testid="recipe-category">{strCategory}</span>
         <ul>
-          {listIngredients.map((igredient, index) => {
-            if (resultMealRecipe[0][igredient]) {
+          {listIngredients.map((ingredient, index) => {
+            if (resultMealRecipe[0][ingredient]) {
               return (
                 <li
-                  key={ igredient }
+                  key={ ingredient }
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
-                  { resultMealRecipe[0][igredient] }
+                  { resultMealRecipe[0][ingredient] }
                   {' '}
                   -
                   {' '}
