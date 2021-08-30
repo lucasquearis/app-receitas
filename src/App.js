@@ -26,8 +26,14 @@ function App() {
         <Route path="/explorar/bebidas/ingredientes" component={ ExploreByIngredient } />
         <Route path="/comidas/:id" component={ RecipeDetail } />
         <Route path="/bebidas/:id" component={ RecipeDetail } />
-        <Route path="/explorar/comidas" component={ ExploreDrinksOrMeals } />
-        <Route path="/explorar/bebidas" component={ ExploreDrinksOrMeals } />
+        <Route
+          path="/explorar/comidas"
+          render={ (props) => <ExploreDrinksOrMeals { ...props } /> }
+        />
+        <Route
+          path="/explorar/bebidas"
+          render={ (props) => <ExploreDrinksOrMeals { ...props } /> }
+        />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route path="/comidas" component={ RecipesList } />
