@@ -9,17 +9,23 @@ function Button({ favorite, handleFavorite, handleShare }) {
     <>
       <button
         type="button"
-        data-testid="share-btn"
         onClick={ handleShare }
       >
-        { shareIcon }
+        <img
+          data-testid="share-btn"
+          src={ shareIcon }
+          alt="To share"
+        />
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
         onClick={ handleFavorite }
       >
-        { !favorite ? whiteHeart : blackHeart }
+        <img
+          data-testid="favorite-btn"
+          src={ favorite ? blackHeart : whiteHeart }
+          alt="Favorite"
+        />
       </button>
     </>
   );
