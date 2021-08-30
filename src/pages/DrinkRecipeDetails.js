@@ -37,6 +37,7 @@ function DrinkRecipeDetails(props) {
         <p data-testid="recipe-category">{strAlcoholic}</p>
         <ul>
           {listIngredients.map((ingredient, index) => {
+            console.log(resultDrinkRecipe);
             if (resultDrinkRecipe[0][ingredient]) {
               return (
                 <li
