@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import fetch from '../services/fetch';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import fetchSearchIngredientMeals from '../Redux/actions/fetchSearchIngredientMeals';
+import fetchSearchNomeMeals from '../Redux/actions/fetchSearchNomeMeals';
+import fetchSearchLetterMeals from '../Redux/actions/fetchLetterMeals';
+import fetchSearchNomeDrinks from '../Redux/actions/fetchSearchNomeDrinks';
+import fetchSearchLetterDrinks from '../Redux/actions/fetchLetterDrinks';
+import fetchSearchIngredientDrinks from '../Redux/actions/fetchSearchIngredientDrinks';
 
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,35 +25,46 @@ export default class Search extends Component {
 
   handleChange({ target }) {
     const { name, value } = target;
+
     this.setState({ [name]: value });
   }
 
-  async handleDrinks() {
+  handleDrinks() {
     const { radio, text } = this.state;
+    const {
+      setSearchIngredientDrinks,
+      setSearchLetterDrinks,
+      setSearchNomeDrinks,
+    } = this.props;
     if (radio === 'Ingrediente') {
-      const ingredientes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`);
-      return ingredientes;
-    } if (radio === 'Nome') {
-      const nomes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`);
-      return nomes;
-    } if (radio === 'Primeira letra' && text.length === 1) {
-      const primeiras = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`);
-      return primeiras;
-    } alert('Sua busca deve conter somente 1 (um) caracter');
+      setSearchIngredientDrinks(text);
+    } else if (radio === 'Nome') {
+      setSearchNomeDrinks(text);
+    } else if (radio === 'Primeira letra' && text.length === 1) {
+      setSearchLetterDrinks(text);
+    } else { alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
-  async handleFoods() {
+  handleFoods() {
     const { radio, text } = this.state;
+    const { setSearchIngredient, setSearchLetter, setSearchNome, setNome } = this.props;
+    console.log(setNome);
     if (radio === 'Ingrediente') {
-      const ingredientes = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`);
-      return ingredientes;
-    } if (radio === 'Nome') {
-      const nomes = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`);
-      return nomes;
-    } if (radio === 'Primeira letra' && text.length === 1) {
-      const primeiras = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`);
-      return primeiras;
-    } alert('Sua busca deve conter somente 1 (um) caracter');
+      setSearchIngredient(text);
+      if (setSearchIngredient().length === 1) {
+        return <Redirect to={ `/comidas/${setSearchIngredient.idMeal}` } />;
+      }
+    } else if (radio === 'Nome') {
+      setSearchNome(text);
+      if (setSearchNome.length === 1) {
+        return <Redirect to={ `/comidas/${setNome.idMeal}` } />;
+      }
+    } else if (radio === 'Primeira letra' && text.length === 1) {
+      setSearchLetter(text);
+      if (setSearchLetter().length === 1) {
+        return <Redirect to={ `/comidas/${setSearchLetter.idMeal}` } />;
+      }
+    } else { alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
   handleClick() {
@@ -112,3 +132,28 @@ export default class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  setSearchIngredient: PropTypes.func.isRequired,
+  setSearchNome: PropTypes.func.isRequired,
+  setSearchLetter: PropTypes.func.isRequired,
+  setSearchIngredientDrinks: PropTypes.func.isRequired,
+  setSearchNomeDrinks: PropTypes.func.isRequired,
+  setSearchLetterDrinks: PropTypes.func.isRequired,
+  setNome: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setSearchIngredient: (url) => dispatch(fetchSearchIngredientMeals(url)),
+  setSearchNome: (url) => dispatch(fetchSearchNomeMeals(url)),
+  setSearchLetter: (url) => dispatch(fetchSearchLetterMeals(url)),
+  setSearchIngredientDrinks: (url) => dispatch(fetchSearchIngredientDrinks(url)),
+  setSearchNomeDrinks: (url) => dispatch(fetchSearchNomeDrinks(url)),
+  setSearchLetterDrinks: (url) => dispatch(fetchSearchLetterDrinks(url)),
+});
+
+const mapStateToProps = (state) => ({
+  setNome: state.searchNomeReducer.search,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
