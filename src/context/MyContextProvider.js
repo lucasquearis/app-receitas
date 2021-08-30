@@ -5,6 +5,7 @@ import MyContext from '.';
 export default function Provider({ children }) {
   const [searchBarResult, setSearchBarResult] = useState({});
   const [feed, setFeed] = useState([]);
+  const [feedDataFilter, setFeedDataFilter] = useState([]);
   const [search, setSearch] = useState(false);
 
   const context = {
@@ -12,6 +13,8 @@ export default function Provider({ children }) {
     searchBarResult,
     feed,
     setFeed,
+    feedDataFilter,
+    setFeedDataFilter,
     search,
     setSearch,
   };

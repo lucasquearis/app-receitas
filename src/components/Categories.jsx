@@ -8,6 +8,7 @@ export default function Categories() {
   const [categoriesMeals, setCategoriesMeal] = useState([]);
   const history = useHistory();
   const { location: { pathname } } = history;
+  const [resetFilter, setResetFilter] = useState('');
 
   useEffect(() => {
     const getCategoriesMeals = async () => {
@@ -48,15 +49,43 @@ export default function Categories() {
     }
   };
 
+  const toggleFunc = ({ target }) => {
+    if (resetFilter === target.name && pathname === '/comidas') {
+      setResetFilter('');
+      setFeedDataFilter([]);
+      // categoryChoose(target);
+      console.log('resetado');
+    }
+    if (resetFilter === target.name && pathname === '/bebidas') {
+      setResetFilter('');
+      setFeedDataFilter([]);
+      console.log('resetadodrink');
+    }
+    if (resetFilter !== target.name) {
+      console.log(target.name);
+      setResetFilter(target.name);
+      categoryChoose(target);
+    }
+  };
+
   return (
     <div className="category-container">
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => setFeedDataFilter([]) }
+
+      >
+        ALL
+
+      </button>
       {categoriesMeals.map((item, index) => (
         <button
           type="button"
           name={ item.strCategory }
           key={ index }
           data-testid={ `${item.strCategory}-category-filter` }
-          onClick={ (e) => categoryChoose(e) }
+          onClick={ (e) => toggleFunc(e) }
         >
           {item.strCategory}
         </button>

@@ -8,7 +8,7 @@ import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import Categories from '../components/Categories';
 
 export default function Drinks() {
-  const { feed, setFeed, searchBarResult } = useContext(MyContext);
+  const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Drinks() {
       setFeed(drinks.slice(0, MAX_FOODS));
     };
     resolviDrink();
-  }, [setFeed]);
+  }, [setFeed, feedDataFilter]);
 
   const renderList = () => {
     if (resultList === null) {
@@ -86,6 +86,16 @@ export default function Drinks() {
     <>
       <Header title="Bebidas" />
       <Categories />
+      {renderList()}
+      { feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
+        <Card
+          key={ idDrink }
+          idType={ idDrink }
+          id={ index }
+          strThumb={ strDrinkThumb }
+          str={ strDrink }
+        />
+      ))}
       {renderList()}
       <BottomMenu />
     </>
