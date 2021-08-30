@@ -14,7 +14,7 @@ function RecipeList(title) {
     title = 'Bebidas';
   }
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchAPI = async () => {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
