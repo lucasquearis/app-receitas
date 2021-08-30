@@ -5,7 +5,6 @@ import './style.css';
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
-
   return (
     <div className="profile">
       <Typography variant="h5" component="h2" data-testid="profile-email">

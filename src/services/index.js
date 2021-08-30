@@ -72,6 +72,11 @@ export const copyToClipboard = () => {
   return myUrl;
 };
 
+export const copyToClipboardDone = (id, foodOrDrink) => {
+  const myUrl = copy(`http://${window.location.host}/${foodOrDrink}s/${id}`);
+  return myUrl;
+};
+
 export const favoriteRecipe = (bool) => {
   if (!bool) {
     return true;

@@ -36,7 +36,7 @@ function CategoryDrinkBtn() {
       >
         All
       </Button>
-      {categories && categories.drinks.slice(0, buttonLimits).map(
+      {categories.drinks && categories.drinks.slice(0, buttonLimits).map(
         (category, id) => (
           <Button
             color="secondary"
