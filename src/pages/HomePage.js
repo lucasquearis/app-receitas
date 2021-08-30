@@ -16,19 +16,27 @@ export default function HomePage() {
     const string = pathname.slice(1);
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  const { recipeList, setRecipeList, setCategoriesList } = useContext(AppContext);
+  const {
+    recipeList,
+    setRecipeList, setCategoriesList, from, setFrom,
+  } = useContext(AppContext);
 
   useEffect(() => {
-    (async () => {
-      setRecipeList(await fetchAPI(pathname));
-      setCategoriesList(await fetchAPICategories(pathname));
-      setLoading(false);
-    })();
-  }, [setRecipeList, setCategoriesList, pathname]);
+    if (!from && (pathname === '/comidas' || pathname === '/bebidas')) {
+      (async () => {
+        setRecipeList(await fetchAPI(pathname));
+        setCategoriesList(await fetchAPICategories(pathname));
+        setLoading(false);
+        console.log(from);
+      })();
+    }
+    setLoading(false);
+    return () => setFrom(false);
+  }, [setRecipeList, setCategoriesList, pathname, setFrom, from]);
 
   useEffect(() => {
-    setLoading(true);
-  }, [pathname]);
+    (async () => setCategoriesList(await fetchAPICategories(pathname)))();
+  }, [pathname, setCategoriesList]);
 
   useEffect(() => {
     if (idDetails) {

@@ -17,17 +17,17 @@ export default function Routes() {
 
       <Route
         path="/explorar/comidas/ingredientes"
-        component={ Pages.ExplorarComidasIngredients }
+        component={ Pages.ExplorarIngredients }
       />
       <Route path="/explorar/comidas/area" component={ Pages.ExplorarComidasArea } />
-      <Route path="/explorar/comidas" component={ Pages.ExplorarComidasPage } />
+      <Route path="/explorar/comidas" component={ Pages.ExplorarRecipesPage } />
 
       <Route
         path="/explorar/bebidas/ingredientes"
-        component={ Pages.ExplorarBebidasIngredients }
+        component={ Pages.ExplorarIngredients }
       />
       <Route path="/explorar/bebidas/area" component={ Pages.NotFoundPage } />
-      <Route path="/explorar/bebidas" component={ Pages.ExplorarBebidasPage } />
+      <Route path="/explorar/bebidas" component={ Pages.ExplorarRecipesPage } />
 
       <Route path="/explorar" component={ Pages.ExplorarPage } />
 

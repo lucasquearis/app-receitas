@@ -6,6 +6,7 @@ export default function AppProvider({ children }) {
   const [recipeList, setRecipeList] = useState();
   const [categoriesList, setCategoriesList] = useState([]);
   const [filterDoneRecipes, setFilterDoneRecipes] = useState('all');
+  const [from, setFrom] = useState(false);
   const [recipeDetails, setRecipeDetails] = useState();
 
   const context = {
@@ -15,6 +16,8 @@ export default function AppProvider({ children }) {
     setCategoriesList,
     filterDoneRecipes,
     setFilterDoneRecipes,
+    from,
+    setFrom,
     recipeDetails,
     setRecipeDetails,
   };
