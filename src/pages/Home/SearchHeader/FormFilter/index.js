@@ -1,21 +1,47 @@
 import React, { useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
-import { useFiltersContext } from '../../../context/FiltersProvider';
+import { useDataContext } from '../../../../context/DataProvider';
+import { getFilters } from '../../../../services';
 
 export default function FormFilter() {
-  const { location: { pathname } } = useHistory();
-  const { handleFilterAPI } = useFiltersContext();
+  const history = useHistory();
+  const { location: { pathname } } = history;
+  const { setData, setLoading } = useDataContext();
 
   // Estado dos inputs;
   const [text, setText] = useState('');
   const [filter, setFilter] = useState('ingredient');
 
+  // Objeto com todos os filtros, que sempre será atualizado conforme o estado;
+  const filters = useMemo(() => ({ filter, text }), [text, filter]);
+
   const handleSetText = ({ target: { value } }) => setText(value);
 
   const handleSetFilter = ({ target: { value } }) => setFilter(value);
 
-  // Objeto com todos os filtros, que sempre será atualizado conforme o estado;
-  const filters = useMemo(() => ({ filter, text }), [text, filter]);
+  // Função que salva no estado os filtros do usuário;
+  const handleFilterAPI = async () => {
+    // É executada quando o usuário clica em "buscar";
+    const foodURL = '/comidas';
+    const types = pathname.includes(foodURL)
+      ? { type: 'food', response: 'meals', url: '/comidas/' }
+      : { type: 'drinks', response: 'drinks', url: '/bebidas/' };
+
+    setLoading(true);
+    const recipes = await getFilters(types.type, filters);
+    setLoading(false);
+
+    if (recipes[types.response]) {
+      const [firstRecipe] = recipes[types.response];
+      // Se houver somente uma comida, mudará o estado para redirecionar o usuário (Requisito 16);
+      if (recipes[types.response].length === 1) {
+        history.push(`${types.url}${firstRecipe.idMeal || firstRecipe.idDrink}`);
+      }
+      setData((prevData) => ({ ...prevData, [types.type]: recipes[types.response] }));
+    } else {
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+  };
 
   return (
     <form onSubmit={ (e) => e.preventDefault() }>
@@ -63,7 +89,7 @@ export default function FormFilter() {
       <button
         type="submit"
         data-testid="exec-search-btn"
-        onClick={ () => handleFilterAPI(filters, pathname) }
+        onClick={ handleFilterAPI }
       >
         Buscar
       </button>

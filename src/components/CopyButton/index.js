@@ -8,28 +8,26 @@ export default function CopyButton({ path }) {
   const [isHidden, setIsHidden] = useState(true);
 
   const handleClipboardCopy = () => {
-    const timer = 2000;
+    const twoSeconds = 2000;
     setIsHidden(false);
     Copy(`http://localhost:3000${path}`);
-    setTimeout(() => {
-      setIsHidden(true);
-    }, timer);
+    setTimeout(() => setIsHidden(true), twoSeconds);
   };
 
   return (
-    <div>
+    <>
       <button
         type="button"
         src={ ShareIcon }
-        onClick={ () => handleClipboardCopy() }
+        onClick={ handleClipboardCopy }
         data-testid="share-btn"
       >
         <img src={ ShareIcon } alt="Botão de compartilhar" />
       </button>
       <div hidden={ isHidden }>
-        <span>Link copiado!</span>
+        Link copiado!
       </div>
-    </div>
+    </>
   );
 }
 
