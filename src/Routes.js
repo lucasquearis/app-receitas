@@ -14,7 +14,7 @@ import RecipesDetails from './pages/RecipesDetails';
 import ExplorerFoods from './pages/ExplorerFoods';
 import Ingredients from './pages/Ingredients';
 import OriginExplorer from './pages/OriginExplorer';
-import MakedRecipes from './pages/MakedRecipes';
+import DoneRecipes from './pages/DoneRecipes';
 import RecipeProgress from './pages/RecipeProgress';
 
 function Routes() {
@@ -32,7 +32,7 @@ function Routes() {
       <Route exact path="/explorar/comidas" component={ ExplorerFoods } />
       <Route exact path="/explorar/comidas/ingredientes" component={ Ingredients } />
       <Route exact path="/explorar/comidas/area" component={ OriginExplorer } />
-      <Route exact path="/receitas-feitas" component={ MakedRecipes } />
+      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route exact path="/comidas/:id" component={ RecipesDetails } />
       <Route exact path="/bebidas/:id" component={ RecipesDetails } />
       <Route exact path="/comidas/:id/in-progress" component={ RecipeProgress } />
