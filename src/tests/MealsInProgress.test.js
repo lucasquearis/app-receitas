@@ -96,8 +96,10 @@ describe('testa pagina de receita em progresso', () => {
   });
 
   it('botao de finalizar', async () => {
+    let his;
     await act(async () => {
-      renderWithRouter(<App />, PATH);
+      const { history } = renderWithRouter(<App />, PATH);
+      his = history;
     });
     expect(global.fetch).toHaveBeenCalledWith(ENDPOINT);
     const finishBtn = await screen.findByRole('button', { name: /finalizar/i });
@@ -126,9 +128,7 @@ describe('testa pagina de receita em progresso', () => {
     });
 
     expect(finishBtn).toBeEnabled();
-  });
-
-  it('a rota deve ser mudada ao clicar em finalizar', async () => {
-
+    userEvent.click(finishBtn);
+    expect(his.location.pathname).toBe('/receitas-feitas');
   });
 });

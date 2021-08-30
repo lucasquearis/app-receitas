@@ -47,7 +47,7 @@ describe('testa pagina de receita em progresso', () => {
     await screen.findByText(TITLE);
     await screen.findByText(CATEGORY);
     await screen.findByText(INSTRUCTIONS);
-    await screen.findByRole('img', { src: IMG_SRC, alt: TITLE });
+    await screen.findAllByRole('img', { src: IMG_SRC, alt: TITLE });
   });
 
   it('lista de ingredientes', async () => {
@@ -91,8 +91,10 @@ describe('testa pagina de receita em progresso', () => {
   });
 
   it('botao de finalizar', async () => {
+    let his;
     await act(async () => {
-      renderWithRouter(<App />, PATH);
+      const { history } = renderWithRouter(<App />, PATH);
+      his = history;
     });
     expect(global.fetch).toHaveBeenCalledWith(ENDPOINT);
     const finishBtn = await screen.findByRole('button', { name: /finalizar/i });
@@ -121,9 +123,7 @@ describe('testa pagina de receita em progresso', () => {
     });
 
     expect(finishBtn).toBeEnabled();
-  });
-
-  it('a rota deve ser mudada ao clicar em finalizar', async () => {
-
+    userEvent.click(finishBtn);
+    expect(his.location.pathname).toBe('/receitas-feitas');
   });
 });
