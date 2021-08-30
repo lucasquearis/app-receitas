@@ -65,21 +65,21 @@ export default function ComidasDetalhes() {
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
       {/* <div className={ styles.buttonComidasDetails }> */}
       <div>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favorito</button>
-      {/* </div> */}
-      <p data-testid="recipe-category">{food.strCategory}</p>
-      <ul>
-        {setIngredients()}
-      </ul>
-      <p data-testid="instructions">{food.strInstructions}</p>
-      </div>
-      <div className={ styles.videoComida }>
-      <iframe
-        src={ food.strYoutube }
-        title="Vídeo de Instrução"
-        data-testid="video"
-      />
+        <button type="button" data-testid="share-btn">Compartilhar</button>
+        <button type="button" data-testid="favorite-btn">Favorito</button>
+        {/* </div> */}
+        <p data-testid="recipe-category">{food.strCategory}</p>
+        <ul>
+          {setIngredients()}
+        </ul>
+        <p data-testid="instructions">{food.strInstructions}</p>
+        </div>
+        <div className={ styles.videoComida }>
+        <iframe
+          src={ food.strYoutube }
+          title="Vídeo de Instrução"
+          data-testid="video"
+        />
       </div>
       {recomendedDrink.map((recomendation, index) => (
         <div
