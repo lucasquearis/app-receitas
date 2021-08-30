@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import ButtonCard from '../Components/ButtonCard';
-import { getRandomId } from '../helper';
 
 function FoodExplore() {
-  const randomId = getRandomId();
-  const path = `/comidas/${randomId}`;
+  const [data, setData] = useState([]);
+
+  const surpriseMe = async () => {
+    const END_POINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
+    const { meals } = await fetch(END_POINT).then((response) => response.json());
+    setData(meals[0]);
+  };
+  useEffect(() => {
+    surpriseMe();
+  }, [data]);
+
+  const path = (id) => `/comidas/${id}`;
 
   return (
     <div>
-      <Header />
+      <Header title="Comidas" loading />
       <ButtonCard
         page="/explorar/comidas/ingredientes"
         testId="explore-by-ingredient"
@@ -22,7 +31,7 @@ function FoodExplore() {
         buttonText="Por Local de Origem"
       />
       <ButtonCard
-        page={ path }
+        page={ path(data.idMeal) }
         testId="explore-surprise"
         buttonText="Me Surpreenda!"
       />

@@ -8,6 +8,9 @@ import FoodExplore from './Pages/FoodExplore';
 import FoodIngredientesExplore from './Pages/FoodIngredientesExplore';
 import FoodPlaceExplore from './Pages/FoodPlaceExplore';
 import Profile from './Pages/Profile';
+import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
+import FoodDetails from './Pages/FoodDetails';
+import DrinksDetails from './Pages/DrinksDetails';
 
 function App() {
   return (
@@ -22,9 +25,24 @@ function App() {
         path="/explorar/comidas/ingredientes"
         component={ FoodIngredientesExplore }
       />
+      <Route
+        exact
+        path="/explorar/bebidas/ingredientes"
+        component={ DrinkIngredientesExplore }
+      />
       <Route exact path="/explorar/comidas" component={ FoodExplore } />
       <Route exact path="/explorar/bebidas" component={ DrinksExplore } />
       <Route exact path="/perfil" component={ Profile } />
+      <Route
+        exact
+        path="/comidas/:id"
+        render={ (props) => <FoodDetails { ...props } /> }
+      />
+      <Route
+        exact
+        path="/bebidas/:id"
+        render={ (props) => <DrinksDetails { ...props } /> }
+      />
       <Route exact path="/comidas" component={ FoodMainPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />

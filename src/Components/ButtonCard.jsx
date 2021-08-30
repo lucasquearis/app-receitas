@@ -30,7 +30,7 @@ ButtonCard.propTypes = {
   testId: PropTypes.string,
   page: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  disabled: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default ButtonCard;
