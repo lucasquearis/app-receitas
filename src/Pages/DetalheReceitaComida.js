@@ -88,7 +88,7 @@ export default function DetalheReceitaComida(props) {
             {
               foodIngredients.map((ingredient, index) => (
                 <li
-                  data-testid={ `${index}-ingredient-name-and-measure` }
+                  data-testid={ `${index}-ingredient-step` }
                   key={ `${index}` }
                 >
                   { ingredient }
