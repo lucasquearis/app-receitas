@@ -37,6 +37,7 @@ const LoginHook = () => {
     disabled,
     handleClick,
     redirect,
+    setRedirect,
   };
 };
 

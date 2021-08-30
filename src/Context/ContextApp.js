@@ -12,9 +12,15 @@ export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes, setRecipes } = recipesHooks();
-  const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
   const { categoryMeal, categoryDrinks, filterIngredient, filter } = BtnFilterCategory();
-  const { getRecipes } = FoodHook();
+  const {
+    handleInput,
+    Login,
+    disabled,
+    handleClick,
+    redirect,
+    setRedirect } = LoginHook();
+  const { drinks, meal, getRecipes } = FoodHook();
 
   const ContProps = {
     recipes,
@@ -30,6 +36,9 @@ export const AppProvider = ({ children }) => {
     filter,
     getRecipes,
     setRecipes,
+    setRedirect,
+    drinks,
+    meal,
   };
 
   return (
