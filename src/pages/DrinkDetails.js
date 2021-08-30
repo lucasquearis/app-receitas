@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import FoodRecomendationCard from '../components/FoodRecomendationCard';
@@ -23,6 +25,7 @@ const DrinkDetails = () => {
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
+  const RECOMENDATION_CARDS = 6;
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -38,9 +41,6 @@ const DrinkDetails = () => {
     const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
     if (actualStorage === null) {
       localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-    if (actualStorage.some((favoriteItem) => favoriteItem.id === item.id)) {
       return;
     }
 
@@ -96,8 +96,26 @@ const DrinkDetails = () => {
     getMeasure();
   }, [drinkDetails]);
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2,
+      slidesToSlide: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
   return (
-    <div>
+    <div className="drink-details-container">
       {
         drinkDetails.map(({
           strDrinkThumb,
@@ -114,26 +132,30 @@ const DrinkDetails = () => {
               data-testid="recipe-photo"
               className="details-image"
             />
-            <h1 key={ strDrink } data-testid="recipe-title">{strDrink}</h1>
-            <button
-              type="button"
-              data-testid="share-btn"
-              key={ shareIcon }
-              onClick={ () => copy() }
-            >
-              <img src={ shareIcon } alt="share-icon" />
-            </button>
-            <button
-              type="button"
-              onClick={ onFavorite }
-              key={ blackHeartIcon }
-            >
-              <img
-                data-testid="favorite-btn"
-                src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-icon"
-              />
-            </button>
+            <div className="details-buttons">
+              <h1 key={ strDrink } data-testid="recipe-title">{strDrink}</h1>
+              <div>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  key={ shareIcon }
+                  onClick={ () => copy() }
+                >
+                  <img src={ shareIcon } alt="share-icon" />
+                </button>
+                <button
+                  type="button"
+                  onClick={ onFavorite }
+                  key={ blackHeartIcon }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
+                    alt="favorite-icon"
+                  />
+                </button>
+              </div>
+            </div>
             { showMsg ? <p>Link copiado!</p> : undefined }
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
@@ -151,13 +173,17 @@ const DrinkDetails = () => {
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            <div className="recomended-wrapper">
-              <div className="recomended">
-                { foods.map((recipe, indice) => (
-                  FoodRecomendationCard(recipe, indice)
-                ))}
-              </div>
-            </div>
+            <Carousel
+              responsive={ responsive }
+              swipeable={ false }
+              draggable={ false }
+              showDots
+              ssr
+            >
+              { foods.slice(0, RECOMENDATION_CARDS).map((recipe, index) => (
+                <FoodRecomendationCard key={ index } recipe={ recipe } index={ index } />
+              ))}
+            </Carousel>
             <button
               data-testid="start-recipe-btn"
               key={ i }
