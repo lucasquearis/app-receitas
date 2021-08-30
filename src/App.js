@@ -14,6 +14,7 @@ import FoodInProgress from './pages/FoodInProgress';
 import ExploreFood from './pages/ExploreFood';
 import ExploreFoodByIngredients from './pages/ExploreFoodByIngredients';
 import FoodByOrigin from './pages/FoodByOrigin';
+import DinksByOrigin from './pages/DrinksByOrigin';
 import RecipesDone from './pages/RecipesDone';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import store from './redux/store';
@@ -27,16 +28,16 @@ function App() {
         <Route exact path="/comidas" component={ MealsList } />
         <Route exact path="/bebidas" component={ DrinksList } />
         <Route exact path="/" component={ Login } />
-        <Route exact path="/comidas/{id-da-receita}" component={ FoodDetails } />
+        <Route exact path="/comidas/:idMeal" component={ FoodDetails } />
         <Route
           exact
-          path="/comidas/{id-da-receita}/in-progress"
+          path="/comidas/:idMeal/in-progress"
           component={ FoodInProgress }
         />
-        <Route exact path="/bebidas/{id-da-receita}" component={ DrinksDetails } />
+        <Route exact path="/bebidas/:idDrink" component={ DrinksDetails } />
         <Route
           exact
-          path="/bebidas/{id-da-receita}/in-progress"
+          path="/bebidas/:idDrink/in-progress"
           component={ DrinksInProgress }
         />
         <Route exact path="/perfil" component={ Profile } />
@@ -54,6 +55,7 @@ function App() {
           component={ ExploreDrinksByIngredients }
         />
         <Route exact path="/explorar/comidas/area" component={ FoodByOrigin } />
+        <Route exact path="/explorar/bebidas/area" component={ DinksByOrigin } />
         <Route exact path="/receitas-feitas" component={ RecipesDone } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       </Switch>
