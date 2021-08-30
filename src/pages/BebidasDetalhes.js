@@ -4,13 +4,9 @@ import Loading from '../components/Loading';
 
 export default function BebidasDetalhes() {
   const [drink, setDrink] = useState();
+  const [recomendedFood, setRecoomendedFood] = useState([]);
   const location = useLocation();
   const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-  const recommendedRecipes = [
-    'receita 1',
-    'receita 2',
-    'receita 4',
-  ];
 
   useEffect(() => {
     const api = async () => {
@@ -21,6 +17,19 @@ export default function BebidasDetalhes() {
       setDrink(data.drinks[0]);
     };
     api();
+  }, []);
+
+  useEffect(() => {
+    const apiFood = async () => {
+      const magicalNumber = 6;
+      const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const data = await fetch(URL).then((response) => response.json());
+      const firstSix = await data.meals.slice(0, magicalNumber);
+      console.log(firstSix);
+      setRecoomendedFood(firstSix);
+      // console.log(recomendedFood);
+    };
+    apiFood();
   }, []);
 
   if (drink === undefined) {
@@ -57,20 +66,28 @@ export default function BebidasDetalhes() {
         {setIngredients()}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
-      <div>
-        <h3>Receitas recomendadas</h3>
-        <ul>
-          {recommendedRecipes.map((name, index) => (
+      {recomendedFood.map((recomendation, index) => (
+        <div
+          data-testid={ `${index}-recomendation-card` }
+          key={ index }
+        >
+          <ul>
             <li
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
+              className={ index <= 1 ? '' : 'displayNone' }
+              data-testid={ `${index}-recomendation-title` }
             >
-              {name}
+              { recomendation.strMeal }
             </li>
-          ))}
-        </ul>
-      </div>
-      <button type="button" data-testid="start-recipe-btn">Favorito</button>
+          </ul>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="start-recipe-btn"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }
