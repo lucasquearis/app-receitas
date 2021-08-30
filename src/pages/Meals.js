@@ -5,9 +5,12 @@ import MyContext from '../context';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
+import Categories from '../components/Categories';
+import './pageCSS/Meals.css';
 
 export default function Meals() {
-  const { feed, setFeed, searchBarResult } = useContext(MyContext);
+  const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
+  console.log(feed);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function Meals() {
       setFeed(meals.slice(0, MAX_FOODS));
     };
     resolviFood();
-  }, [setFeed]);
+  }, [setFeed, feedDataFilter]);
 
   const renderList = () => {
     if (resultList === null) {
@@ -81,6 +84,7 @@ export default function Meals() {
   return (
     <>
       <Header title="Comidas" />
+      <Categories />
       {renderList()}
       <BottomMenu />
     </>

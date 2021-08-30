@@ -8,6 +8,8 @@ import renderWithRouter from './renderWithRouter';
 describe('Testa elementos na barra de busca', () => {
   test('testa todos os testIds', () => {
     renderWithRouter(<Header />);
+    const magnifyBtn = screen.getByTestId('search-top-btn');
+    userEvent.click(magnifyBtn);
     const searchInput = screen.getByTestId('search-input');
     const ingredientRadio = screen.getByTestId('ingredient-search-radio');
     const firstLetterRadio = screen.getByTestId('first-letter-search-radio');
@@ -19,6 +21,8 @@ describe('Testa elementos na barra de busca', () => {
   });
   test('Testa endpoints da API', async () => {
     renderWithRouter(<Header />);
+    const magnifyBtn = screen.getByTestId('search-top-btn');
+    userEvent.click(magnifyBtn);
     const searchInput = screen.getByTestId('search-input');
     userEvent.type(searchInput, 'banana');
     const ingredientRadio = screen.getByTestId('ingredient-search-radio');
