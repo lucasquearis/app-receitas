@@ -4,7 +4,7 @@ import copyToClipBoard from 'clipboard-copy';
 import { buscarComidasID } from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import getFoodIngredients from '../service/getFoodIngredients';
+import getRecipeIngredients from '../service/getRecipeIngredients';
 
 const defaultParams = {
   strMeal: '',
@@ -23,7 +23,7 @@ export default function DetalheReceitaComida(props) {
   useEffect(() => {
     buscarComidasID(id)
       .then((result) => setRecipe(result))
-      .then(() => getFoodIngredients(recipe[0]))
+      .then(() => getRecipeIngredients(recipe))
       .then((ingredients) => setFoodIngredients(ingredients))
       .then(() => changeLoading(false));
 
@@ -84,20 +84,21 @@ export default function DetalheReceitaComida(props) {
         </section>
         <section className="ingredients-section">
           <h5>Ingredients</h5>
-          <ul>
-            {
-              foodIngredients.map((ingredient, index) => (
-                <li
-                  data-testid={ `${index}-ingredient-step` }
-                  key={ `${index}` }
-                >
+          {
+            foodIngredients.map((ingredient, index) => (
+              <div key={ `${index}` } data-testid={ `${index}-ingredient-step` }>
+                <input
+                  type="checkbox"
+                  id={ index }
+                />
+                <label htmlFor={ index }>
                   { ingredient }
-                </li>
-              ))
-            }
-          </ul>
-          <p data-testid="instructions">{strInstructions}</p>
+                </label>
+              </div>
+            ))
+          }
         </section>
+        <p data-testid="instructions">{strInstructions}</p>
         <button
           type="button"
           data-testid="finish-recipe-btn"
