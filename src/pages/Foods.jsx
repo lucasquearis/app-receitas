@@ -39,7 +39,6 @@ function Foods(props) {
         className="img-search"
       />
 
-      {/* <FoodsCard /> */}
       <CategoryFoodButtons />
       <main>
         { search.meals && search.meals.map((meal, index) => index < doze && (<ItemCard

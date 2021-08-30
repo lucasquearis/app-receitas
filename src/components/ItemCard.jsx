@@ -6,8 +6,8 @@ import '../styles/ItemCard.css';
 function ItemCard(props) {
   const { title, thumb, id, index, to } = props;
   return (
-    <Link to={ to }>
-      <div className="div-card" data-testid={ `${index}-recipe-card` }>
+    <div className="div-card" data-testid={ `${index}-recipe-card` }>
+      <Link to={ to }>
         <section className="section-card">
           <span
             className="card-title"
@@ -23,8 +23,8 @@ function ItemCard(props) {
           />
           <span>{id}</span>
         </section>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

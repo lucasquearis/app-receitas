@@ -11,9 +11,9 @@ function HeaderDetails() {
   const [share, setShare] = useState(false);
   const { pathname } = useLocation();
   return (
-    <div className="imagem-container">
+    <div className="section-card">
       <img
-        className="imagem"
+        className="card-img"
         src={ recipe[`str${type}Thumb`] }
         data-testid="recipe-photo"
         alt={ recipe[`str${type}`] }

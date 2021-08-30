@@ -41,8 +41,8 @@ function Drinks(props) {
       <main>
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard
           title={ drink.strDrink }
-          data-testid={ `${index}-recipe-card` }
           thumb={ drink.strDrinkThumb }
+          data-testid={ `${index}-recipe-card` }
           id={ drink.idDrink }
           index={ index }
           key={ index }
