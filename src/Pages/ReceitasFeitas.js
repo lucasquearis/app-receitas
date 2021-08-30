@@ -3,6 +3,7 @@ import copyToClipBoard from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import ShareIcon from '../images/shareIcon.svg';
 import Header from '../Components/Header';
+import './ReceitasFeitas.css';
 
 // const TESTE_STATE = [
 //   {
@@ -33,6 +34,7 @@ export default function ReceitasFeitas() {
   const [receitas, setReceitas] = useState([]);
   const [receitasFiltradas, setReceitasFiltradas] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
+  const [successCopy, setSuccessCopy] = useState(false);
 
   useEffect(() => {
     // localStorage.setItem('doneRecipes', JSON.stringify(TESTE_STATE));
@@ -84,18 +86,23 @@ export default function ReceitasFeitas() {
   };
 
   const shareLink = (type, id) => {
+    const sec = 1000;
     let url = `http://localhost:3000/bebidas/${id}`;
     if (type === 'comida') {
       url = `http://localhost:3000/comidas/${id}`;
-      console.log('oiii');
     }
     copyToClipBoard(url);
+    setSuccessCopy(true);
+    setTimeout(() => {
+      setSuccessCopy(false);
+    }, sec);
   };
 
   const cardReceitas = (receita) => (
     <section key={ receita.index }>
       <Link to={ urlType(receita.id, receita.type) }>
         <img
+          className="linkImage"
           src={ receita.image }
           data-testid={ `${receita.index}-horizontal-image` }
           alt="img"
@@ -104,16 +111,21 @@ export default function ReceitasFeitas() {
       {
         verificaTipo(receita, receita.index)
       }
-      <h2
-        data-testid={ `${receita.index}-horizontal-name` }
-      >
-        {receita.name}
-      </h2>
+      <Link to={ urlType(receita.id, receita.type) }>
+        <h2
+          data-testid={ `${receita.index}-horizontal-name` }
+        >
+          {receita.name}
+        </h2>
+      </Link>
       <p
         data-testid={ `${receita.index}-horizontal-done-date` }
       >
         { receita.doneDate }
       </p>
+      {
+        successCopy && <p>Link copiado!</p>
+      }
       <button type="button" onClick={ () => shareLink(receita.type, receita.id) }>
         <img
           data-testid={ `${receita.index}-horizontal-share-btn` }
@@ -122,7 +134,10 @@ export default function ReceitasFeitas() {
         />
       </button>
       { receita.tags.map((tag, index) => (
-        <p key={ `${index} ${tag}` } data-testid={ `${receita.index}-${tag}-horizontal-tag` }>
+        <p
+          key={ `${index} ${tag}` }
+          data-testid={ `${receita.index}-${tag}-horizontal-tag` }
+        >
           { tag }
         </p>
       ))}
