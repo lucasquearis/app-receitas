@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
-  requestFoods,
   requestFoodsCategories,
-  requestDrinks,
   requestDrinksCategories,
   getRecipes,
+  getCategories,
 } from '../redux/actions/recipesActions';
 import {
   getDataByIngredient,
@@ -28,24 +27,20 @@ export default function useRecipes(setRedirect) {
   const currentPage = location.pathname;
 
   useEffect(() => {
-    if (currentPage === '/comidas') {
+    if (currentPage.includes('/comidas')) {
       setPageObjName('meals');
-      dispatch(requestFoods());
       dispatch(requestFoodsCategories());
-    } else if (currentPage === '/bebidas') {
+    } else if (currentPage.includes('/bebidas')) {
       setPageObjName('drinks');
-      dispatch(requestDrinks());
       dispatch(requestDrinksCategories());
     }
   }, [currentPage, dispatch]);
 
   useEffect(() => {
     if (data === null) {
-      dispatch(getRecipes([]));
       // eslint-disable-next-line no-alert
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    } else {
-      dispatch(getRecipes(data));
+      dispatch(getRecipes([]));
     }
   }, [data, dispatch]);
 
@@ -54,6 +49,12 @@ export default function useRecipes(setRedirect) {
       setRedirect(true);
     }
   }, [data, dispatch, setRedirect]);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      dispatch(getRecipes(data));
+    }
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (searched) {
@@ -81,6 +82,11 @@ export default function useRecipes(setRedirect) {
   useEffect(() => () => {
     setSearched(false);
   }, [searched]);
+
+  useEffect(() => () => {
+    dispatch(getRecipes([]));
+    dispatch(getCategories([]));
+  }, [dispatch]);
 
   return {
     setInputValue,

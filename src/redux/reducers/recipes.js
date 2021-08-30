@@ -4,11 +4,15 @@ import {
   SEND_RECIPE_DATA,
   GET_CATEGORIES,
   DONE_RECIPES,
+  GET_INGREDIENTS,
+  GET_AREAS,
 } from '../actions/recipesActions';
 
 const INITIAL_STATE = {
   recipes: [],
   categories: [],
+  ingredients: [],
+  areas: [],
   isLoading: true,
   doneRecipes: [],
 };
@@ -41,6 +45,17 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       doneRecipes: [...state.doneRecipes, action.recipe],
+    };
+  case GET_INGREDIENTS:
+    return {
+      ...state,
+      ingredients: action.ingredients,
+      isLoading: false,
+    };
+  case GET_AREAS:
+    return {
+      ...state,
+      areas: action.areas,
       isLoading: false,
     };
   default:
