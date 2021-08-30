@@ -61,7 +61,8 @@
     "mochawesome": "^6.1.1",
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
-    "stylelint": "^13.8.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0"
   },
   "jest": {

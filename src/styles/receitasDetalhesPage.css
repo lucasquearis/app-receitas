@@ -1,7 +1,7 @@
-.button-iniciar {    
+.button-iniciar {
   bottom: 0;
-  display: flex;    
+  display: flex;
+  
   position: fixed;
   width: 100%;
 }
-  
