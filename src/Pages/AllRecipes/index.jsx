@@ -12,8 +12,7 @@ function AllRecipes() {
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
-  // const url = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
-  // searchRecipes(searchInput, currentRout, url, history);
+
   useEffect(() => {
     const urlRender = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
     const fetchApi = async (url, type, searchInput = '') => {
