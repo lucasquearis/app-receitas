@@ -16,6 +16,15 @@ describe('testa se a Tela de Profile', () => {
     expect(screen.getByTestId(EMAIL_TEST_ID)).toBeInTheDocument();
   });
 
+  it('recebe o e-mail do localStorage', () => {
+    localStorage.setItem('user', JSON.stringify({ email: 'alguem@alguem.com' }));
+    const { getByTestId } = renderWithReduxAndRouter(<Profile />);
+    const emailTest = getByTestId('profile-email');
+
+    expect(emailTest).toBeInTheDocument();
+    expect(emailTest.textContent).toBe('alguem@alguem.com');
+  });
+
   it('contem botão de receita feita e seu redirecionamento', async () => {
     const { history } = renderWithReduxAndRouter(<App />, {}, { route: '/perfil' });
 
@@ -26,6 +35,7 @@ describe('testa se a Tela de Profile', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/receitas-feitas');
   });
+
   it('contem botão de receita favorita e seu redirecionamento', async () => {
     const { history } = renderWithReduxAndRouter(<App />, {}, { route: '/perfil' });
 
@@ -36,6 +46,7 @@ describe('testa se a Tela de Profile', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/receitas-favoritas');
   });
+
   it('contem botão de sair e seu redirecionamento', async () => {
     const { history } = renderWithReduxAndRouter(<App />, {}, { route: '/perfil' });
 
@@ -46,6 +57,7 @@ describe('testa se a Tela de Profile', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/');
   });
+
   it('contem um footer', () => {
     renderWithReduxAndRouter(<Profile />);
 
