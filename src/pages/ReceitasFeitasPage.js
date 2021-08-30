@@ -8,7 +8,7 @@ export default function ReceitasFeitasPage() {
   const [idDetails, setIdDetails] = useState(null);
   const [typeDetails, setTypeDetails] = useState(null);
   const [redirectToDetails, setRedirectToDetails] = useState(false);
-  const { filterDoneRecipes } = useContext(AppContext);
+  const { filterRecipes } = useContext(AppContext);
 
   useEffect(() => {
     if (idDetails) {
@@ -36,7 +36,7 @@ export default function ReceitasFeitasPage() {
       <Header title="Receitas Feitas" showSearchIcon={ false } />
       <FilteringButtons />
       <section className="cards-area">
-        { doneRecipes && doneRecipesResult(filterDoneRecipes, doneRecipes)
+        { doneRecipes && doneRecipesResult(filterRecipes, doneRecipes)
           .map((recipe, index) => (
             <DoneRecipeCard
               key={ recipe.id }

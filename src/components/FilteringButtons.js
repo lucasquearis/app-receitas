@@ -4,12 +4,12 @@ import AppContext from '../context/AppContext';
 const typeList = ['all', 'food', 'drink'];
 
 export default function FilteringButtons() {
-  const { setFilterDoneRecipes } = useContext(AppContext);
+  const { setFilterRecipes } = useContext(AppContext);
 
   const handleClick = ({ target: { textContent } }) => {
-    if (textContent === 'All') setFilterDoneRecipes('all');
-    if (textContent === 'Food') setFilterDoneRecipes('comida');
-    if (textContent === 'Drink') setFilterDoneRecipes('bebida');
+    if (textContent === 'All') setFilterRecipes('all');
+    if (textContent === 'Food') setFilterRecipes('comida');
+    if (textContent === 'Drink') setFilterRecipes('bebida');
   };
 
   return (
