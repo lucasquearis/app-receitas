@@ -23,3 +23,19 @@
 .copy-div {
   color: #eb6424;
 }
+
+.start-recipe-btn {
+  bottom: 0;
+  position: fixed;
+}
+
+h3 {
+  color: black;
+}
+
+.carousel {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}

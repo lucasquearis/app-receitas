@@ -11,6 +11,9 @@ export default function Provider({ children }) {
   const [btnCategoryDrinks, setBtnCategoryDrinks] = useState('');
   const [listCategoryMeals, setListCategoryMeals] = useState();
   const [listCategoryDrinks, setListCategoryDrinks] = useState();
+  const [recipesInProgress, setRecipesInProgress] = useState({
+    cocktails: {},
+    meals: {} });
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataRandomMeals, setDataRandomMeals] = useState('');
@@ -33,6 +36,8 @@ export default function Provider({ children }) {
     setListCategoryMeals,
     listCategoryDrinks,
     setListCategoryDrinks,
+    recipesInProgress,
+    setRecipesInProgress,
     loading,
     setLoading,
     dataRandomMeals,

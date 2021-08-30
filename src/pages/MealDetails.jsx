@@ -1,22 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Details.css';
+import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Context from '../context/Context';
 import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 
 export default function MealDetails(props) {
   const [mealDetails, setMealDetails] = useState({});
+  const [drinksRecommended, setDrinksRecommended] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { recipesInProgress, setRecipesInProgress } = useContext(Context);
 
   useEffect(() => {
     const { match: { params: { id } } } = props;
-    const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const endpointDetails = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const endpointRecomendations = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
     const fetchDetails = async () => {
-      const { meals } = await fetch(endpoint).then((data) => data.json());
+      const { meals } = await fetch(endpointDetails).then((data) => data.json());
       setMealDetails(meals);
       setIsLoading(false);
     };
+    const fetchRecomendations = async () => {
+      const SIX = 6;
+      const { drinks } = await fetch(endpointRecomendations)
+        .then((data) => data.json());
+      const filteredDrinks = drinks.filter((_drink, index) => index < SIX);
+      setDrinksRecommended(filteredDrinks);
+    };
     fetchDetails();
-  }, []);
+    fetchRecomendations();
+  }, [props]);
+
+  useEffect(() => {
+    const actualLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!actualLocalStorage) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
+    }
+  }, [recipesInProgress]);
+
+  function handleStartRecipe() {
+    const { match: { params: { id } } } = props;
+    const recipesObject = {
+      ...recipesInProgress,
+      meals: {
+        ...recipesInProgress.meals,
+        [id]: [],
+      },
+    };
+    setRecipesInProgress({ ...recipesObject });
+    const actualLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      ...actualLocalStorage,
+      meals: {
+        ...actualLocalStorage.meals,
+        [id]: [],
+      },
+    }));
+  }
+
+  function verifyIfRecipeInProgress() {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const mealsIds = Object.keys(inProgressRecipes.meals);
+    const isThisRecipeInProgress = mealsIds
+      .some((id) => id === props.match.params.id);
+    return isThisRecipeInProgress;
+  }
 
   // source: https://stackoverflow.com/a/21607897, tks!
   function getYouTubeId(url) {
@@ -87,8 +136,31 @@ export default function MealDetails(props) {
             src={ `https://youtube.com/embed/${getYouTubeId(details.strYoutube)}` }
           />
         </div>
-        <div data-testid={ `${0}-recomendation-card` }>CARD</div>
-        <button type="button" data-testid="start-recipe-btn">INICIAR RECEITA</button>
+        <h3>Recomendações para acompanhar essa receita</h3>
+        <Carousel>
+          {
+            drinksRecommended.map((drink, index) => (
+              <Carousel.Item key={ drink.strDrink }>
+                <div
+                  className="d-block w-100"
+                  data-testid={ `${index}-recomendation-card` }
+                >
+                  <p data-testid={ `${index}-recomendation-title` }>{ drink.strDrink }</p>
+                </div>
+              </Carousel.Item>
+            ))
+          }
+        </Carousel>
+        <Link to={ `/comidas/${props.match.params.id}/in-progress` }>
+          <button
+            type="button"
+            className="start-recipe-btn"
+            data-testid="start-recipe-btn"
+            onClick={ handleStartRecipe }
+          >
+            { verifyIfRecipeInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
+          </button>
+        </Link>
       </main>
     );
   }
