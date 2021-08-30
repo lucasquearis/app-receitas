@@ -4,6 +4,7 @@ import { cleanup, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
+import { FavouriteRecipes } from '../pages';
 
 const PATH = '/receitas-favoritas';
 const MOCK_FAV_RECIPES = [
@@ -45,15 +46,20 @@ const MOCK_FAV_RECIPES = [
   },
 ];
 
+Object.assign(navigator, { clipboard: { writeText: () => {} } });
+
+// const clipboardMock = () => jest.spyOn(navigator.clipboard, 'writeText');
+
+jest.spyOn(navigator.clipboard, 'writeText');
+
 describe('testa pagina de receitas favoritas', () => {
-  // beforeAll(fetchMock);
   beforeEach(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(MOCK_FAV_RECIPES));
     jest.clearAllMocks();
+    cleanup();
   });
 
   afterEach(() => localStorage.clear());
-  beforeEach(cleanup);
 
   it('path da pagina', async () => {
     await act(async () => {
@@ -102,7 +108,6 @@ describe('testa pagina de receitas favoritas', () => {
       const recpCards = document.getElementsByClassName('fav-recipe-container');
       expect(recpCards.length).toBe(MOCK_FAV_RECIPES.length);
       expect(JSON.parse(localStorage.favoriteRecipes).length).toEqual(four);
-      console.log(recpCards);
 
       expect(JSON.parse(localStorage.favoriteRecipes).length).toBe(four);
 
@@ -112,5 +117,26 @@ describe('testa pagina de receitas favoritas', () => {
       userEvent.click(favBtn1);
       expect(JSON.parse(localStorage.favoriteRecipes).length).toBe(two);
     });
+  });
+
+  // clipboardMock();
+  it('compartilhar', async () => {
+    const firstPromise = Promise.resolve();
+
+    await act(async () => {
+      renderWithRouter(<FavouriteRecipes />);
+    });
+
+    const shareBtn = await screen.findByTestId('0-horizontal-share-btn');
+    expect(shareBtn).toBeInTheDocument();
+    userEvent.click(shareBtn);
+
+    await act(() => firstPromise);
+
+    await screen.findByText(/link copiado/i);
+
+    // const urlCopied = 'http://localhost:3000/comidas/52977';
+    expect(navigator.clipboard.writeText).toHaveBeenCalled();
+    // expect(navigator.clipboard.writeText).toHaveBeenCalledWith(urlCopied);
   });
 });

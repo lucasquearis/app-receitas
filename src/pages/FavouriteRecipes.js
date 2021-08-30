@@ -4,7 +4,7 @@ import { Button, FavCard } from '../components';
 import Header from '../components/Header';
 // import './css/DoneRecipes.css';
 
-const copy = require('clipboard-copy');
+// const copy = require('clipboard-copy');
 
 const DoneRecipes = () => {
   const [rawFavRecipes, setRawFavRecipes] = useState([]);
@@ -41,7 +41,7 @@ const DoneRecipes = () => {
   useEffect(() => {
     const INTERVAL = 5000;
     if (shareData.length > 1) {
-      copy(shareData[0]);
+      navigator.clipboard.writeText(shareData[0]);
       const parentNode = document.querySelector(`#${shareData[1]}`);
       const alertElement = document.createElement('span');
       alertElement.className = 'share-alert';
