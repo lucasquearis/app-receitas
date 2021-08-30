@@ -1,47 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
-import { Link } from 'react-router-dom';
-import copy from 'clipboard-copy';
 import { fetchFoodById, fetchSearchDrinksApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
 import './detailsFood.css';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import FavoriteAndShare from '../../components/FavoriteAndShare';
+import Video from './Video';
+import StartRecipeButton from '../../components/StartRecipeButton';
 
-function DetailsFood({ match: { url, params: { id } } }) {
-  const [food, setFood] = useState({});
-  const [isMount, setIsMount] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [recommendations, setRecommendations] = useState([]);
-  const [copyMsg, setCopyMsg] = useState(false);
+function DetailsFood({ match: { params: { id } } }) {
+  const [state, setState] = useState({
+    food: [],
+    isMount: false,
+    isLoading: true,
+    recommendations: [],
+    doneRecipe: false,
+    inProgressRecipe: false,
+  });
 
-  const fetchFood = () => {
+  const { food,
+    isMount,
+    isLoading,
+    recommendations,
+    doneRecipe,
+    inProgressRecipe } = state;
+
+  const initialUpdate = () => {
+    const isDone = () => {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      return doneRecipes
+        ? doneRecipes.some((recipe) => (recipe.id === id && recipe.type === 'comida'))
+        : false;
+    };
+
+    const inProgress = () => {
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      return inProgressRecipes ? !!inProgressRecipes.meals[id] : false;
+    };
+
     const getDrinks = async () => {
       const drinksData = await fetchSearchDrinksApi('name', '');
       const MAX_INDEX = 6;
-      // const MAX_NUM = 0.5;
-      // const MINUS_NUM = -1;
-      // // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-      // drinksData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
-      setRecommendations(drinksData.filter((_drink, index) => index < MAX_INDEX));
+      return drinksData.filter((_drink, index) => index < MAX_INDEX);
     };
 
     const getFood = async () => {
       const foodData = await fetchFoodById(id);
-      getDrinks();
-      setFood(foodData);
-      setIsMount(true);
-      setIsLoading(false);
+      const drinks = await getDrinks();
+      setState({
+        ...state,
+        food: foodData,
+        isMount: true,
+        isLoading: false,
+        recommendations: drinks,
+        doneRecipe: isDone(),
+        inProgressRecipe: inProgress(),
+      });
     };
+
     if (!isMount) getFood();
   };
 
-  useEffect(fetchFood);
-
-  const handleShare = () => {
-    copy(url);
-    setCopyMsg(true);
-  };
+  useEffect(initialUpdate);
 
   if (isLoading) return <div>Carregando...</div>;
 
@@ -53,16 +72,6 @@ function DetailsFood({ match: { url, params: { id } } }) {
   const keysMeasures = keysFoods.filter((key) => (
     key.includes('strMeasure') && !!food[key]));
 
-  // const testId = 52951; ID = testado
-
-  const allow = `accelerometer; autoplay; clipboard-write; 
-  encrypted-media; gyroscope; picture-in-picture`;
-  const videoReplace = food.strYoutube
-    ? food.strYoutube.replace(/watch\?v=/, 'embed/') : '';
-  // console.log(videoRegex);
-
-  const COPY_MSG = 'Link copiado!';
-
   return (
     <div className="detailsFood">
       <img
@@ -72,24 +81,11 @@ function DetailsFood({ match: { url, params: { id } } }) {
       />
       <section className="food-title-container">
         <h1 data-testid="recipe-title">{food.strMeal}</h1>
-        <div>
-          <button
-            type="button"
-            data-testid="share-btn"
-            className="share-btn"
-            onClick={ handleShare }
-          >
-            <img src={ shareIcon } alt="share icon" />
-          </button>
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            className="favorite-btn"
-          >
-            <img src={ whiteHeartIcon } alt="favorite icon" />
-          </button>
-          {(copyMsg) ? <p>{ COPY_MSG }</p> : ''}
-        </div>
+        <FavoriteAndShare
+          id={ id }
+          recipe={ food }
+          isFood
+        />
       </section>
       <p data-testid="recipe-category">{food.strCategory}</p>
       <ul className="food-ingredients">
@@ -103,16 +99,9 @@ function DetailsFood({ match: { url, params: { id } } }) {
         ))}
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
-      <section>
-        <iframe
-          src={ videoReplace }
-          title="YouTube video player"
-          frameBorder="0"
-          allow={ allow }
-          allowFullScreen
-          data-testid="video"
-        />
-      </section>
+      <Video
+        src={ food.strYoutube }
+      />
       <section className="recommendations-drinks">
         {recommendations.map((drink, index) => (
           <RecommendationCard
@@ -126,22 +115,18 @@ function DetailsFood({ match: { url, params: { id } } }) {
           />
         ))}
       </section>
-      <Link to={ `/comidas/${id}/in-progress` }>
-        <button
-          className="start-recipe-food-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-        </button>
-      </Link>
+      <StartRecipeButton
+        isFood
+        doneRecipe={ doneRecipe }
+        inProgress={ inProgressRecipe }
+        id={ id }
+      />
     </div>
   );
 }
 
 DetailsFood.propTypes = {
   match: shape({
-    url: string,
     params: shape({ id: string }) }).isRequired,
 };
 

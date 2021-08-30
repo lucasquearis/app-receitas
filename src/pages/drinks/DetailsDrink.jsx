@@ -1,47 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string } from 'prop-types';
-import { Link } from 'react-router-dom';
-import copy from 'clipboard-copy';
 import { fetchDrinkById, fetchSearchFoodsApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
 import './detailsDrink.css';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import FavoriteAndShare from '../../components/FavoriteAndShare';
+import StartRecipeButton from '../../components/StartRecipeButton';
 
-function DetailsDrink({ match: { url, params: { id } } }) {
-  const [drink, setDrink] = useState({});
-  const [isMount, setIsMount] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [recommendations, setRecommendations] = useState([]);
-  const [copyMsg, setCopyMsg] = useState(false);
+function DetailsDrink({ match: { params: { id } } }) {
+  const [state, setState] = useState({
+    drink: [],
+    isMount: false,
+    isLoading: true,
+    recommendations: [],
+    doneRecipe: false,
+    inProgressRecipe: false,
+  });
 
-  const fetchDrink = () => {
+  const { drink,
+    isMount,
+    isLoading,
+    recommendations,
+    doneRecipe,
+    inProgressRecipe } = state;
+
+  const initialUpdate = () => {
+    const isDone = () => {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      return doneRecipes
+        ? doneRecipes.some((recipe) => (recipe.id === id && recipe.type === 'bebida'))
+        : false;
+    };
+
+    const inProgress = () => {
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      return inProgressRecipes ? !!inProgressRecipes.cocktails[id] : false;
+    };
+
     const getFoods = async () => {
       const foodData = await fetchSearchFoodsApi('name', '');
       const MAX_INDEX = 6;
-      // const MAX_NUM = 0.5;
-      // const MINUS_NUM = -1;
-      // // consultado StackOverflow Source(https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
-      // foodData.sort(() => (Math.random() > MAX_NUM ? 1 : MINUS_NUM));
-      setRecommendations(foodData.filter((_food, index) => index < MAX_INDEX));
+      return foodData.filter((_food, index) => index < MAX_INDEX);
     };
 
     const getDrink = async () => {
       const drinkData = await fetchDrinkById(id);
-      getFoods();
-      setDrink(drinkData);
-      setIsMount(true);
-      setIsLoading(false);
+      const foods = await getFoods();
+      setState({
+        ...state,
+        drink: drinkData,
+        isMount: true,
+        isLoading: false,
+        recommendations: foods,
+        doneRecipe: isDone(),
+        inProgressRecipe: inProgress(),
+      });
     };
+
     if (!isMount) getDrink();
   };
 
-  useEffect(fetchDrink);
-
-  const handleShare = () => {
-    copy(url);
-    setCopyMsg(true);
-  };
+  useEffect(initialUpdate);
 
   if (isLoading) return <div>Carregando...</div>;
 
@@ -53,37 +71,19 @@ function DetailsDrink({ match: { url, params: { id } } }) {
   const keysMeasures = keysDrinks.filter((key) => (
     key.includes('strMeasure') && !!drink[key]));
 
-  const COPY_MSG = 'Link copiado!';
-
   return (
     <div className="detailsDrink">
       <img
         src={ drink.strDrinkThumb }
         alt="recipe"
         data-testid="recipe-photo"
-        width="150"
-        height="150"
       />
       <section className="drink-title-container">
         <h1 data-testid="recipe-title">{drink.strDrink}</h1>
-        <div>
-          <button
-            type="button"
-            data-testid="share-btn"
-            className="share-btn"
-            onClick={ handleShare }
-          >
-            <img src={ shareIcon } alt="share icon" />
-          </button>
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            className="favorite-btn"
-          >
-            <img src={ whiteHeartIcon } alt="favorite icon" />
-          </button>
-          {(copyMsg) ? <p>{ COPY_MSG }</p> : '' }
-        </div>
+        <FavoriteAndShare
+          id={ id }
+          recipe={ drink }
+        />
       </section>
       <p data-testid="recipe-category">{`${drink.strCategory} ${drink.strAlcoholic}`}</p>
       <ul className="drink-ingredients">
@@ -109,22 +109,17 @@ function DetailsDrink({ match: { url, params: { id } } }) {
           />
         ))}
       </section>
-      <Link to={ `/bebidas/${id}/in-progress` }>
-        <button
-          className="start-recipe-drink-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          Iniciar receita
-        </button>
-      </Link>
+      <StartRecipeButton
+        doneRecipe={ doneRecipe }
+        inProgress={ inProgressRecipe }
+        id={ id }
+      />
     </div>
   );
 }
 
 DetailsDrink.propTypes = {
   match: shape({
-    url: string,
     params: shape({ id: string }) }).isRequired,
 };
 
