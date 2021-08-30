@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
+import MenuInferior from '../../components/MenuInferior';
 
 function Perfil() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -13,6 +15,9 @@ function Perfil() {
   }
   return (
     <div>
+      <Header
+        showSearchBtn={ false }
+      />
       {user && getEmail()}
       <Link to="/receitas-feitas">
         <button
@@ -41,6 +46,7 @@ function Perfil() {
         >
           Sair
         </button>
+        <MenuInferior />
       </Link>
     </div>
   );

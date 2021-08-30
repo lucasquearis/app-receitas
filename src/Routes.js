@@ -24,7 +24,6 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
       <Route exact path="/explorar/comidas/ingredientes" component={ Explore } />
       <Route exact path="/explorar/bebidas" component={ Explore } />
       <Route exact path="/explorar/comidas" component={ Explore } />
-
       <Route
         exact
         path="/bebidas"
