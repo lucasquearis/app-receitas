@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import Context from '../../context';
 
 const radioSearchOptions = [
@@ -17,6 +17,7 @@ function SearchBar() {
     setIsFetching,
     requestApiData,
     setToggle,
+    apiData,
   } = useContext(Context);
 
   const [textValue, setTextValue] = React.useState('');
@@ -32,6 +33,8 @@ function SearchBar() {
 
   const { pathname } = useLocation();
   const endpoint = pathname.includes('comida') ? 'themeadldb' : 'thecocktaildb';
+  const query = pathname === '/comidas' ? 'meal' : 'drink';
+  const page = query === 'meal' ? 'comidas' : 'bebidas';
 
   React.useEffect(() => {
     if (inputText) {
@@ -45,6 +48,11 @@ function SearchBar() {
 
   return (
     <div>
+      {apiData[0][`${query}s`] && apiData[0][`${query}s`].length === 1
+    && <Redirect
+      to={ `/${page}/${apiData[0][`${query}s`][0][`id${query
+        .charAt(0).toUpperCase() + query.slice(1)}`]}` }
+    />}
       <div>
         <input
           type="text"

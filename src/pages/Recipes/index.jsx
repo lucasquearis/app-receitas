@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation, Redirect } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Button, Card } from 'react-bootstrap';
 import Context from '../../context';
@@ -89,11 +89,6 @@ function Recipes() {
             { apiData[0][`${query}s`]
               ? (
                 <div className="d-flex flex-column align-items-center mt-3">
-                  {apiData[0][`${query}s`].length === 1
-                  && <Redirect
-                    to={ `/${page}/${apiData[0][`${query}s`][0][`id${query
-                      .charAt(0).toUpperCase() + query.slice(1)}`]}` }
-                  />}
                   {apiData[0][`${query}s`]
                     .slice(0, recipesSize).map((item, index) => {
                       const name = item[`str${query.charAt(0).toUpperCase()
