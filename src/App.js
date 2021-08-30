@@ -6,6 +6,7 @@ import Foods from './pages/foods/Foods';
 import Drinks from './pages/drinks/Drinks';
 import DetailsFood from './pages/foods/DetailsFood';
 import DetailsDrink from './pages/drinks/DetailsDrink';
+import Perfil from './pages/perfil/profile';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           ) }
         />
         <Route exact path="/" component={ Login } />
+        <Route path="/perfil" component={ Perfil } />
       </Switch>
     </div>
   );
