@@ -24,13 +24,13 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      {filteredFav.map((recipe, index) => (
+      {(filteredFav) ? filteredFav.map((recipe, index) => (
         <FavoriteCard
           key={ index }
           recipe={ recipe }
           cardIndex={ index }
           handleClick={ removeFavFromLocal }
-        />))}
+        />)) : <h1>Carregando...</h1>}
     </main>
   );
 }
