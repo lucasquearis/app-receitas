@@ -1,44 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { func } from 'prop-types';
-import getRecipes from '../../redux/actions/getRecipes';
+import { func, bool } from 'prop-types';
+import { fetchSearchRecipes } from '../../redux/actions';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import FoodRecipeCards from './FoodRecipeCards';
-import { fetchSearchFoodsApi } from '../../services/fetchApi';
 import FiltersRecipesFoods from './FiltersRecipesFoods';
 
-function Foods({ setRecipes }) {
+const PARAMS_NOT_FILTER = { query: '', consultBy: 'name', foodPage: true };
+
+function Foods({ setRecipes, isFetching }) {
   const [isMount, setIsMount] = useState(false);
 
-  function mountRecipes() {
-    const fetchApi = async () => {
-      if (!isMount) {
-        const recipes = await fetchSearchFoodsApi('name', '');
-        setRecipes(recipes);
-        setIsMount(true);
-      }
-    };
-    fetchApi();
-  }
+  const fetchRecipes = () => {
+    if (!isMount) {
+      setRecipes();
+      setIsMount(true);
+    }
+  };
 
-  useEffect(mountRecipes);
+  useEffect(fetchRecipes);
 
   return (
     <>
       <Header title="Comidas" showButton foodPage />
       <FiltersRecipesFoods />
-      <FoodRecipeCards />
+      {isFetching
+        ? <div>Carregando ...</div>
+        : <FoodRecipeCards />}
       <Footer />
     </>
   );
 }
+
 Foods.propTypes = {
   setRecipes: func.isRequired,
+  isFetching: bool.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setRecipes: (recipes) => dispatch(getRecipes(recipes)),
+const mapStateToProps = (state) => ({
+  isFetching: state.recipesReducer.isFetching,
 });
 
-export default connect(null, mapDispatchToProps)(Foods);
+const mapDispatchToProps = (dispatch) => ({
+  setRecipes: () => dispatch(fetchSearchRecipes(PARAMS_NOT_FILTER)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Foods);

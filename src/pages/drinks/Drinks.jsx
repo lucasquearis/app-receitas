@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { func } from 'prop-types';
+import { func, bool } from 'prop-types';
+import { fetchSearchRecipes } from '../../redux/actions';
 import Footer from '../../components/Footer';
-import getRecipes from '../../redux/actions/getRecipes';
 import Header from '../../components/Header';
 import DrinkRecipeCards from './DrinkRecipeCards';
-import { fetchSearchDrinksApi } from '../../services/fetchApi';
 import FiltersRecipesDrinks from './FiltersRecipesDrinks';
 
-function Drinks({ setRecipes }) {
+const PARAMS_NOT_FILTER = { query: '', consultBy: 'name', foodPage: false };
+
+function Drinks({ setRecipes, isFetching }) {
   const [isMount, setIsMount] = useState(false);
 
-  function mountRecipes() {
-    const fetchApi = async () => {
-      if (!isMount) {
-        const recipes = await fetchSearchDrinksApi('name', '');
-        setRecipes(recipes);
-        setIsMount(true);
-      }
-    };
-    fetchApi();
-  }
+  const fetchRecipes = () => {
+    if (!isMount) {
+      setRecipes();
+      setIsMount(true);
+    }
+  };
 
-  useEffect(mountRecipes);
+  useEffect(fetchRecipes);
+
   return (
     <>
       <Header title="Bebidas" showButton />
       <FiltersRecipesDrinks />
-      <DrinkRecipeCards />
+      {isFetching
+        ? <div>Carregando ...</div>
+        : <DrinkRecipeCards />}
       <Footer />
     </>
   );
@@ -35,10 +35,15 @@ function Drinks({ setRecipes }) {
 
 Drinks.propTypes = {
   setRecipes: func.isRequired,
+  isFetching: bool.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setRecipes: (recipes) => dispatch(getRecipes(recipes)),
+const mapStateToProps = (state) => ({
+  isFetching: state.recipesReducer.isFetching,
 });
 
-export default connect(null, mapDispatchToProps)(Drinks);
+const mapDispatchToProps = (dispatch) => ({
+  setRecipes: () => dispatch(fetchSearchRecipes(PARAMS_NOT_FILTER)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Drinks);

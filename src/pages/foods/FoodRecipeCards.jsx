@@ -3,25 +3,26 @@ import { arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import RecipeCard from '../../components/RecipeCard';
 
-const num = 12;
+const TWELVE = 12;
 
 function FoodRecipeCards({ recipes }) {
-  const firstTwelve = recipes.filter((_recipe, index) => index < num);
-
   return (
     <>
 
-      {firstTwelve.map((recipe, index) => (
-        <RecipeCard
-          foodPage
-          id={ recipe.idMeal }
-          key={ index }
-          name={ recipe.strMeal }
-          src={ recipe.strMealThumb }
-          index={ index }
-          alt={ `${recipe.strMeal} image` }
-        />
-      ))}
+      {recipes.reduce((acc, recipe, index) => {
+        if (index < TWELVE) {
+          acc = [...acc, <RecipeCard
+            foodPage
+            id={ recipe.idMeal }
+            key={ index }
+            name={ recipe.strMeal }
+            src={ recipe.strMealThumb }
+            index={ index }
+            alt={ `${recipe.strMeal} image` }
+          />];
+        }
+        return acc;
+      }, [])}
     </>
   );
 }

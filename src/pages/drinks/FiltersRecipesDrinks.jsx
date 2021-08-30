@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { func } from 'prop-types';
-import { fetchCategoriesDrinksApi, fetchSearchDrinksApi } from '../../services/fetchApi';
-import { fetchRecipesForCategory } from '../../redux/actions';
-import getRecipes from '../../redux/actions/getRecipes';
+import { fetchCategoriesDrinksApi } from '../../services/fetchApi';
+import { fetchRecipesForCategory, fetchSearchRecipes } from '../../redux/actions';
 
-function FiltersRecipesDrinks({ getCategory, getRecipesNotFilter }) {
+const PARAMS_NOT_FILTER = { query: '', consultBy: 'name', foodPage: false };
+
+function FiltersRecipesDrinks({ getCategory, recipesNotFilter }) {
   const [categories, setCategories] = useState([]);
-  const [isMouted, setisMouted] = useState(false);
-  const [isToggle, setisToggle] = useState('');
+  const [isMounted, setIsMounted] = useState(false);
+  const [isToggle, setIsToggle] = useState('');
   const [isFilteredCategory, setFilteredCategory] = useState(false);
 
   const getCategories = () => {
@@ -17,27 +18,25 @@ function FiltersRecipesDrinks({ getCategory, getRecipesNotFilter }) {
       const FiveNumber = 5;
       const firstFivesCategories = data.filter((_item, index) => index < FiveNumber);
       setCategories(firstFivesCategories);
-      setisMouted(true);
+      setIsMounted(true);
     };
-    if (!isMouted) fetchCategories();
+    if (!isMounted) fetchCategories();
   };
 
   useEffect(getCategories);
 
-  async function handleClick({ target: { value } }) {
+  function handleClick({ target: { value } }) {
     if (!isFilteredCategory || isToggle !== value) {
       getCategory(value);
       setFilteredCategory(true);
-      return setisToggle(value);
+      return setIsToggle(value);
     }
-    const recipes = await fetchSearchDrinksApi('name', '');
-    getRecipesNotFilter(recipes);
+    recipesNotFilter();
     setFilteredCategory(false);
   }
 
-  async function setCategoryAll() {
-    const recipes = await fetchSearchDrinksApi('name', '');
-    getRecipesNotFilter(recipes);
+  function setCategoryAll() {
+    recipesNotFilter();
     setFilteredCategory(false);
   }
 
@@ -67,12 +66,12 @@ function FiltersRecipesDrinks({ getCategory, getRecipesNotFilter }) {
 
 const mapDispatchToProps = (dispatch) => ({
   getCategory: (category) => dispatch(fetchRecipesForCategory(category)),
-  getRecipesNotFilter: (recipes) => dispatch(getRecipes(recipes)),
+  recipesNotFilter: () => dispatch(fetchSearchRecipes(PARAMS_NOT_FILTER)),
 });
 
 FiltersRecipesDrinks.propTypes = {
   getCategory: func.isRequired,
-  getRecipesNotFilter: func.isRequired,
+  recipesNotFilter: func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(FiltersRecipesDrinks);

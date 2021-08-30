@@ -1,0 +1,59 @@
+.detailsFood {
+  padding-bottom: 80px;
+  padding-top: 10px;
+  width: 100vw;
+}
+
+.food-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.share-btn {
+  background: none;
+  border: none;
+}
+
+.favorite-btn {
+  background: none;
+  border: none;
+}
+
+.detailsFood img {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.detailsFood iframe {
+  display: block;
+  height: 95%;
+  margin: 10px auto;
+}
+
+.food-ingredients {
+  padding: 25px;
+}
+
+.recommendations-drinks {
+  display: flex;
+  overflow-x: scroll;
+  width: 100vw;
+}
+
+.recommendations-drinks img {
+  width: 51vw;
+}
+
+.start-recipe-food-btn {
+  background-color: limegreen;
+  border: none;
+  bottom: 0;
+  color: white;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  position: fixed;
+  width: 100vw;
+}
