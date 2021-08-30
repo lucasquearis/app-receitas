@@ -34,15 +34,18 @@ const FoodDetails = () => {
       strMeal: name,
       strMealThumb: image,
     } = foodDetails[0];
+
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const item = { id, type: 'comida', area, category, alcoholicOrNot: '', name, image };
+
     if (actualStorage === null) {
       localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
       return;
     }
-    if (actualStorage.some((favoriteItem) => favoriteItem.id === item.id)) {
-      return;
-    }
+
+    // if (actualStorage.some((favoriteItem) => favoriteItem.id === item.id)) {
+    //   return;
+    // }
 
     if (!favorite) {
       actualStorage.push(item);
