@@ -28,6 +28,7 @@ export default function MealRecipeDetails(props) {
     const keysIngredients = Object.keys(resultMealRecipe[0]);
     const listIngredients = keysIngredients.filter((item) => item
       .includes('strIngredient'));
+    const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
     return (
       <>
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -45,6 +46,10 @@ export default function MealRecipeDetails(props) {
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
                   { resultMealRecipe[0][igredient] }
+                  {' '}
+                  -
+                  {' '}
+                  {resultMealRecipe[0][listMeasures[index]]}
                 </li>
               );
             }

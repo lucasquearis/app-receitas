@@ -27,7 +27,7 @@ function DrinkRecipeDetails(props) {
     const keysIngredients = Object.keys(resultDrinkRecipe[0]);
     const listIngredients = keysIngredients.filter((item) => item
       .includes('strIngredient'));
-    console.log(listIngredients);
+    const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
     return (
       <>
         <h1 data-testid="recipe-title">{strDrink}</h1>
@@ -45,6 +45,9 @@ function DrinkRecipeDetails(props) {
                   data-testid={ `${index}-ingredient-name-and-measure` }
                 >
                   { resultDrinkRecipe[0][ingredient] }
+                  {' '}
+                  -
+                  { resultDrinkRecipe[0][listMeasures[index]] }
                 </li>
               );
             }
@@ -54,6 +57,7 @@ function DrinkRecipeDetails(props) {
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
         <RecomendationCard page="drinks" />
+        <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
       </>
     );
   }

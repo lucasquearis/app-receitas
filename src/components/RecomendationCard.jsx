@@ -35,7 +35,7 @@ const RecomendationCard = ({ page }) => {
             return false;
           }
           return (
-            <li key={ idDrink }>
+            <li data-testid={ `${index}-recomendation-card` } key={ idDrink }>
               <p>{ strDrink }</p>
               <p>{ strAlcoholic }</p>
               <img src={ strDrinkThumb } alt={ strDrink } />
@@ -56,7 +56,7 @@ const RecomendationCard = ({ page }) => {
             return false;
           }
           return (
-            <li key={ idMeal }>
+            <li data-testid={ `${index}-recomendation-card` } key={ idMeal }>
               <p>{ strMeal }</p>
               <img src={ strMealThumb } alt={ strMeal } />
             </li>
