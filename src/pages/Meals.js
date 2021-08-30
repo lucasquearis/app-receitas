@@ -3,10 +3,13 @@ import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
 import Header from '../components/Header';
+import Card from '../components/Card';
+import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
+import Categories from '../components/Categories';
 import './pageCSS/Meals.css';
 
 export default function Meals() {
-  const { searchBarResult } = useContext(MyContext);
+  const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -18,7 +21,15 @@ export default function Meals() {
     resolveApi();
   }, [resultList, searchBarResult]);
 
-  console.log('RESULTLIST', resultList);
+  useEffect(() => {
+    const resolviFood = async () => {
+      const MAX_FOODS = 12;
+      const result = await fetchFoods();
+      const { meals } = result;
+      setFeed(meals.slice(0, MAX_FOODS));
+    };
+    resolviFood();
+  }, [setFeed, feedDataFilter]);
 
   const renderList = () => {
     if (resultList === null) {
@@ -29,7 +40,7 @@ export default function Meals() {
       return (<h1>Search something... </h1>);
     }
     if (resultList.length === 1) {
-      console.log(resultList[0]);
+      // console.log(resultList[0]);
       return <Redirect to={ `/comidas/${resultList[0].idMeal}` } />;
     }
     return (
@@ -62,6 +73,17 @@ export default function Meals() {
   return (
     <>
       <Header title="Comidas" />
+      <Categories />
+      {renderList()}
+      { feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
+        <Card
+          key={ idMeal }
+          idType={ idMeal }
+          id={ index }
+          strThumb={ strMealThumb }
+          str={ strMeal }
+        />
+      ))}
       {renderList()}
       <BottomMenu />
     </>

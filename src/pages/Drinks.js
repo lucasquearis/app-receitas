@@ -3,9 +3,12 @@ import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import Header from '../components/Header';
 import MyContext from '../context';
+import Card from '../components/Card';
+import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
+import Categories from '../components/Categories';
 
 export default function Drinks() {
-  const { searchBarResult } = useContext(MyContext);
+  const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -16,6 +19,16 @@ export default function Drinks() {
     };
     resolveApi();
   }, [resultList, searchBarResult]);
+
+  useEffect(() => {
+    const resolviDrink = async () => {
+      const MAX_FOODS = 12;
+      const result = await fetchDrinks();
+      const { drinks } = result;
+      setFeed(drinks.slice(0, MAX_FOODS));
+    };
+    resolviDrink();
+  }, [setFeed, feedDataFilter]);
 
   const renderList = () => {
     if (resultList === null) {
@@ -61,6 +74,17 @@ export default function Drinks() {
   return (
     <>
       <Header title="Bebidas" />
+      <Categories />
+      {renderList()}
+      { feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
+        <Card
+          key={ idDrink }
+          idType={ idDrink }
+          id={ index }
+          strThumb={ strDrinkThumb }
+          str={ strDrink }
+        />
+      ))}
       {renderList()}
       <BottomMenu />
     </>
