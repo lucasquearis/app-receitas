@@ -7,7 +7,6 @@ const UseFavorite = (recipe) => {
   useEffect(() => {
     if (localStorage.getItem('favoriteRecipes')) {
       const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(recipe);
       const some = local.some((e) => (e.id
         .includes(recipe.idDrink ? recipe.idDrink : recipe.idMeal)));
       if (some) {

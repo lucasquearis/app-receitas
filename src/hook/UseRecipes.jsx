@@ -15,12 +15,12 @@ const UseRecipes = () => {
       return recipes.meals.map((e, index) => index <= maxItensIndexOnScreen
        && (
          <Link key={ e.idMeal } to={ `/comidas/${e.idMeal}` }>
-           <RecipeCard index={ index } key={ e.idMeal } recipe={ e } />
+           <RecipeCard index={ index } recipe={ e } />
          </Link>));
     } if (recipes.drinks) {
       return recipes.drinks.map((e, index) => index <= maxItensIndexOnScreen
       && (
-        <Link key={ e.idMeal } to={ `/bebidas/${e.idDrink}` }>
+        <Link key={ e.idDrink } to={ `/bebidas/${e.idDrink}` }>
           <RecipeCard index={ index } recipe={ e } />
         </Link>));
     }
