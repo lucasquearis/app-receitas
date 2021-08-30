@@ -3,6 +3,7 @@ import { screen, waitForDomChange } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithReduxAndRouter from './renderWithReduxRouter';
 import App from '../App';
+import mockFetch from './mocks/mockFetch';
 
 const SEARCH_TOP_BTN_TEST_ID = 'search-top-btn';
 const SEARCH_INPUT_TEST_ID = 'search-input';
@@ -41,6 +42,7 @@ describe('Testando se a barra de busca', () => {
   it(
     'quando na página de comida busca na Api de comida, respeitando os filtros',
     async () => {
+      global.fetch = jest.fn(mockFetch);
       renderWithReduxAndRouter(<App />, {}, { route: '/comidas' });
 
       userEvent.click(screen.getByTestId(SEARCH_TOP_BTN_TEST_ID));
@@ -67,6 +69,7 @@ describe('Testando se a barra de busca', () => {
 
   it('quando na página de bebida busca na Api de bebida, respeitando os filtros',
     async () => {
+      global.fetch = jest.fn(mockFetch);
       renderWithReduxAndRouter(<App />, {}, { route: '/bebidas' });
 
       userEvent.click(screen.getByTestId(SEARCH_TOP_BTN_TEST_ID));
@@ -91,7 +94,7 @@ describe('Testando se a barra de busca', () => {
 
   it('dispara um alerta quando a busca não retornar nada', async () => {
     global.alert = jest.fn(() => {});
-
+    global.fetch = jest.fn(mockFetch);
     renderWithReduxAndRouter(<App />, {}, { route: '/comidas' });
 
     userEvent.click(screen.getByTestId(SEARCH_TOP_BTN_TEST_ID));
