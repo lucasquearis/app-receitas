@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { Image, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const responsive = {
   mobile: {
@@ -61,14 +64,29 @@ function FoodDetails() {
     <>
       { recipesFood.map((item, index) => (
         <div key={ index }>
-          <img
+          <Image
             data-testid="recipe-photo"
             src={ item.strMealThumb }
             alt="receita pronta"
+            fluid
           />
           <h2 data-testid="recipe-title">{ item.strMeal }</h2>
-          <button data-testid="share-btn" type="button">Compartilhar</button>
-          <button data-testid="favorite-btn" type="button">Add aos favoritos</button>
+          <Button
+            variant="success"
+            data-testid="share-btn"
+            type="button"
+          >
+            Compartilhar
+
+          </Button>
+          <Button
+            variant="success"
+            data-testid="favorite-btn"
+            type="button"
+          >
+            Add aos favoritos
+
+          </Button>
           <p data-testid="recipe-category">{ item.strCategory }</p>
           <div>
             <h3>Ingredientes</h3>
@@ -92,15 +110,23 @@ function FoodDetails() {
             height="10"
             src={ item.strYoutube }
           />
-          <Carousel responsive={ responsive }>
+          <Carousel responsive={ responsive } slidesToSlide={ 2 }>
             { recipesRecommendations.map((food, ind) => (
               <div key={ food.strDrink } data-testid={ `${ind}-recomendation-card` }>
                 <h2 data-testid={ `${ind}-recomendation-title` }>{food.strDrink }</h2>
-                <img src={ food.strDrinkThumb } alt={ food.strDrink } />
+                <Image src={ food.strDrinkThumb } alt={ food.strDrink } fluid />
               </div>
             )) }
           </Carousel>
-          <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+          <Button
+            className="fixed-bottom"
+            variant="success"
+            data-testid="start-recipe-btn"
+            type="button"
+          >
+            Iniciar Receita
+
+          </Button>
         </div>
       )) }
     </>
