@@ -80,14 +80,8 @@ function HeaderSearchBar() {
   const { filter } = state;
 
   return (
-    <div>
+    <div id="search-bar">
       <section>
-        <button
-          type="button"
-          data-testid="search-top-btn"
-        >
-          teste
-        </button>
         <input
           type="text"
           onChange={ ({ target: { value } }) => setState({ ...state, search: value }) }

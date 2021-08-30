@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import HeaderSearchBar from '../components/HeaderSearchBar';
 
 function RecipeList(title) {
   const history = useHistory();
@@ -27,7 +26,6 @@ function RecipeList(title) {
   return (
     <div>
       <Header title={ title } />
-      <HeaderSearchBar />
       <Footer />
     </div>
   );
