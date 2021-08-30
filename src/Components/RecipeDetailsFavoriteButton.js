@@ -16,51 +16,62 @@ function RecipeDetailFavoriteButton({ recipe, type, recipeID }) {
   useEffect(() => {
     const verifyIsFavorite = () => {
       const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (favoritesStorage !== null) {
-        const favorite = favoritesStorage.find((food) => food.id === recipeID);
-        verifyFavorite(favorite);
-      } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-        setIsFavorite(false);
-      }
+      const favorite = favoritesStorage.find((food) => food.id === recipeID) || false;
+      verifyFavorite(favorite);
     };
     verifyIsFavorite();
   });
 
-  function favoriteAction() {
+  const newFavorite = () => {
     const favoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const favorite = favoritesRecipes.find((currRecipe) => currRecipe.id === recipeID);
-    if (favorite === undefined) {
-      const favoriteData = {
+    let favoriteData = {};
+
+    if (type === 'comida') {
+      favoriteData = {
         id: recipeID,
         type,
         area: recipe.strArea || '',
+        category: recipe.strCategory,
+        name: recipe.strDrink || recipe.strMeal,
+        image: recipe.strMealThumb || recipe.strDrinkThumb,
+      };
+    } else {
+      favoriteData = {
+        id: recipeID,
+        type,
         category: recipe.strCategory,
         alcoholicOrNot: recipe.strAlcoholic || '',
         name: recipe.strDrink || recipe.strMeal,
         image: recipe.strMealThumb || recipe.strDrinkThumb,
       };
-      const newFavorites = [...favoritesRecipes, favoriteData];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      setIsFavorite(true);
-    } else {
-      const newFavorites = favoritesRecipes.filter(({ id }) => id !== recipeID);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      setIsFavorite(false);
     }
-  }
+    const newFavorites = [...favoritesRecipes, favoriteData];
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    setIsFavorite(true);
+  };
+
+  const removeFavorite = () => {
+    const favoritesRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const newFavorites = favoritesRecipes.filter(({ id }) => id !== recipeID);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    setIsFavorite(false);
+  };
 
   return (
-    <button
-      onClick={ () => favoriteAction() }
-      type="button"
-      data-testid="favorite-btn"
-    >
-      <img
+    <div className="favoriteButton">
+      <button
+        onClick={ isFavorite ? () => removeFavorite() : () => newFavorite() }
+        type="button"
+        data-testid="favorite-btn"
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-        alt="Favorite Recipe Action"
-      />
-    </button>
+      >
+        <img
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="Favorite Recipe Action"
+        />
+      </button>
+    </div>
   );
 }
 
