@@ -39,6 +39,7 @@ export default function () {
         if (i < maxLength) {
           return (
             <button
+              key={ i }
               type="button"
               data-testid={ `${strCategory}-category-filter` }
               onClick={ () => {

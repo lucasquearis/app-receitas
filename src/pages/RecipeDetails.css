@@ -18,13 +18,13 @@
   justify-items: center;
 }
 
-.btn {
+/* .btn {
   bottom: 0;
   display: flex;
   padding-left: 110px;
   position: fixed;
   width: 100vw;
-}
+} */
 
 .contentBtn {
   display: flex;

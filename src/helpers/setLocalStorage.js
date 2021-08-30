@@ -16,27 +16,27 @@ export const updateProgressRecipe = (id, ing, type) => {
 
 export const favoriteRecipes = (props, btnFavorite) => {
   const { drink, meal, thumb, category, alcoholic, id, area, type } = props;
-  const recipes = [{
+  const recipe = [{
     id,
-    type: type === 'comidas' || type === 'meals' ? 'comida' : 'bebida',
+    type: type === 'comida' || type === 'meals' ? 'comida' : 'bebida',
     area: area || '',
     category: category || '',
     alcoholicOrNot: alcoholic || '',
-    name: type === 'comidas' || type === 'meals' ? meal : drink,
+    name: type === 'comida' || type === 'meals' ? meal : drink,
     image: thumb,
   }];
   const recipesFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (localStorage.favoriteRecipes && recipesFavorite.length > 0) {
-    if (recipesFavorite.some((item) => item.id !== id)) {
+    if (!recipesFavorite.some((item) => item.id === id)) {
       localStorage.setItem('favoriteRecipes',
-        JSON.stringify([...recipesFavorite, ...recipes]));
+        JSON.stringify([...recipesFavorite, ...recipe]));
     }
     if (btnFavorite && recipesFavorite.some((item) => item.id === id)) {
       localStorage.setItem('favoriteRecipes',
         JSON.stringify([...recipesFavorite.filter((item) => item.id !== id)]));
     }
   } else {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(recipe));
   }
 };
 

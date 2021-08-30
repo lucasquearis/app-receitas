@@ -32,7 +32,7 @@ export default function RecipeDetails(props) {
     const ingredientAndMeasure = [[...filterIngredients], [...filterMeasure]];
     return (
       <FoodDetails
-        meals={ strMeal }
+        meal={ strMeal }
         thumb={ strMealThumb }
         category={ strCategory }
         instructions={ strInstructions }
