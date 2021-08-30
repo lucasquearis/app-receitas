@@ -35,7 +35,11 @@ export default function CopyButton({ path, index }) {
   );
 }
 
+CopyButton.defaultProps = {
+  index: 0,
+};
+
 CopyButton.propTypes = {
   path: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number,
 };

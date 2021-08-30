@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
-import '../../styles/doneRecipes.css';
-// import shareIcon from '../../images/shareIcon.svg';
-import { getStorage } from '../../components/StoreBox';
+import './styles.css';
+import { getSavedAssistent } from '../../utils';
 import CopyButton from '../../components/CopyButton';
 
 function DoneRecipes() {
-  // const [getLinkCopied, setLinkCopied] = useState('');
-
-  function recipesDone() {
-    const storage = getStorage('doneRecipes');
-    return storage || [];
-  }
-  const [doneRecipes, setDoneRecipes] = useState(recipesDone());
-
-  useEffect(() => {
-    setDoneRecipes(recipesDone());
-  }, []);
-
-  // function copyUrlToClipboard() {
-  //   const { type, id } = doneRecipes[0];
-  //   setLinkCopied('Link copiado!');
-  //   navigator.clipboard.writeText(window.location.href
-  //     .replace('receitas-feitas', `${type}s/${id}`));
-  // }
+  const recipesDone = getSavedAssistent('doneRecipes');
+  const [doneRecipes, setDoneRecipes] = useState(recipesDone);
 
   function mealInfo(index, category, area) {
     return (
@@ -48,11 +31,9 @@ function DoneRecipes() {
     );
   }
 
-  // const { type, id } = doneRecipes[0];
-
   return (
     <>
-      <Header />
+      <Header>Receitas Feitas</Header>
       <div className="buttonfilter-container">
         <button
           className="btn-filter"
@@ -67,7 +48,7 @@ function DoneRecipes() {
           data-testid="filter-by-food-btn"
           type="button"
           onClick={ () => setDoneRecipes(
-            recipesDone().filter((data) => data.type === 'comida'),
+            recipesDone.filter((data) => data.type === 'comida'),
           ) }
         >
           Food
@@ -77,15 +58,12 @@ function DoneRecipes() {
           data-testid="filter-by-drink-btn"
           type="button"
           onClick={ () => setDoneRecipes(
-            recipesDone().filter((data) => data.type === 'bebida'),
+            recipesDone.filter((data) => data.type === 'bebida'),
           ) }
         >
           Drink
         </button>
       </div>
-      {/* <p className="link">
-        {getLinkCopied}
-      </p> */}
       <section className="done-recipes-container">
         { doneRecipes.map((
           { category,
@@ -102,7 +80,6 @@ function DoneRecipes() {
                 data-testid={ `${index}-horizontal-image` }
                 src={ image }
                 alt={ name }
-                style={ { width: '100px' } }
               />
             </Link>
             <div className="infos">
@@ -129,18 +106,6 @@ function DoneRecipes() {
                 ))}
               </div>
             </div>
-            {/* <button
-              type="button"
-              className="share"
-              data-testid="share-btn"
-              onClick={ () => copyUrlToClipboard() }
-            >4
-              <img
-                src={ shareIcon }
-                alt="share-icon"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button> */}
             <CopyButton
               path={ `/${type}s/${id}` }
               index={ index }

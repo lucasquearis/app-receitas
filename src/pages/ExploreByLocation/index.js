@@ -1,11 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import { useDataContext } from '../../context/DataProvider';
 import HeaderLocation from './HeaderLocation';
 
 export default function ExploreByLocation() {
-  const history = useHistory();
   const { locationData, loading } = useDataContext();
 
   const maxLength = 12;
@@ -15,10 +14,7 @@ export default function ExploreByLocation() {
         key={ idMeal }
         data-testid={ `${index}-recipe-card` }
       >
-        <button
-          type="button"
-          onClick={ () => history.push(`/comidas/${idMeal}`) }
-        >
+        <Link to={ `/comidas/${idMeal}` }>
           <img
             data-testid={ `${index}-card-img` }
             src={ strMealThumb }
@@ -27,7 +23,7 @@ export default function ExploreByLocation() {
           <h4 data-testid={ `${index}-card-name` }>
             { strMeal }
           </h4>
-        </button>
+        </Link>
       </section>
     ));
 

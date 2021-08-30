@@ -6,9 +6,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 export default function FavoriteButton({ recipeDetails, path }) {
-  const gettingFavorites = useMemo(() => ((
-    !getSavedAssistent('favoriteRecipes')
-      ? [] : getSavedAssistent('favoriteRecipes'))), []);
+  const gettingFavorites = getSavedAssistent('favoriteRecipes');
 
   const [savedFavorites, setSavedFavorites] = useState(gettingFavorites);
 
