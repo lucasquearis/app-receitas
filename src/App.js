@@ -38,7 +38,7 @@ function App() {
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route path="/comidas" component={ RecipesList } />
         <Route path="/bebidas" component={ RecipesList } />
-        <Route path="/explorar" component={ Explore } />
+        <Route path="/explorar" render={ (props) => <Explore { ...props } /> } />
         <Route path="/perfil" component={ Profile } />
         <Route exact path="/" component={ Login } />
       </Switch>

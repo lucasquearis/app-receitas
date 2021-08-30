@@ -1,8 +1,12 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
 function Profile() {
   return (
-    <p>Profile</p>
+    <div>
+      <p>Profile</p>
+      <Footer />
+    </div>
   );
 }
 

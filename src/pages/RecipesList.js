@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import HeaderSearchBar from '../components/HeaderSearchBar';
+import Footer from '../components/Footer';
 
 function RecipeList() {
   useEffect(() => {
@@ -13,7 +14,10 @@ function RecipeList() {
   }, []);
 
   return (
-    <HeaderSearchBar />
+    <div>
+      <HeaderSearchBar />
+      <Footer />
+    </div>
   );
 }
 
