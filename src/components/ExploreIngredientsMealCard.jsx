@@ -12,7 +12,6 @@ export default function ExploreIngredientsMealCard({ ingredient, index }) {
   const imgUrl = `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png`;
 
   const handleClick = async () => {
-    console.log(strIngredient);
     const { meals } = await fetchAPI(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${strIngredient}`);
     setFilterByIngredientsMeals(meals);
   };
@@ -42,7 +41,7 @@ export default function ExploreIngredientsMealCard({ ingredient, index }) {
 }
 
 ExploreIngredientsMealCard.propTypes = {
-  meal: PropTypes.shape({
+  ingredient: PropTypes.shape({
     strIngredient: PropTypes.string,
   }),
   index: PropTypes.number,
