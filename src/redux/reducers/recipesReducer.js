@@ -71,6 +71,8 @@ export function recipes(state = INITIAL_STATE, action) {
       ...state,
       isLoading: false,
       search: [],
+      foods: [],
+      drinks: [],
     };
   default:
     return state;

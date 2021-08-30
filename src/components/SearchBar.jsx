@@ -4,6 +4,7 @@ import {
   fetchIngredientAPI,
   fetchNameAPI,
   fetchLetterAPI,
+  clearSearch,
 } from '../redux/actions/mainActions';
 import '../styles/SearchBar.css';
 
@@ -11,8 +12,7 @@ function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
   const dispatch = useDispatch();
   const { meals } = useSelector((state) => state.recipes.foods);
-  console.log(meals);
-
+  const drinks = useSelector((state) => state.recipes.foods.drinks);
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };
@@ -32,8 +32,8 @@ function SearchBar() {
   const handleClick = (e) => {
     e.preventDefault();
     const { result } = search;
-    if (meals) {
-      meals.length = 0;
+    if (meals || drinks) {
+      dispatch(clearSearch());
     }
     if (search.type === 'ingredient') {
       return requestIngredient(result);

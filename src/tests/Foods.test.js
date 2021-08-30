@@ -53,3 +53,13 @@ describe('Testes no componente Food', () => {
     expect(pathname).toBe('/comidas');
   });
 });
+describe('testa os cards dentro da tela foods', () => {
+  it('verifica se ao renderizar a tela, apenas 12 cards aparecem', async () => {
+    renderWithReduxAndRouter(<Foods />);
+    // for (let index = 0; index < doze; index += 1) {
+    //   const foodCard = screen.getAllByTestId(`${index}-recipe-card`);
+    //   expect(foodCard).toBeInTheDocument();
+    // }
+    // await waitFor(() => screen.getByTestId('0-recipe-card'));
+  });
+});

@@ -1,0 +1,24 @@
+.category-btn {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.category-btn button {
+  background: #fd8061;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
+  color: white;
+  font-size: 16px;
+  height: 25px;
+  margin-top: 7px;
+}
+
+.category-btn button:active {
+  transform: scale(0.96);
+}
+
+.category-btn button:focus {
+  outline: none;
+}

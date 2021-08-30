@@ -8,6 +8,7 @@ function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
   const [url, setUrl] = useState();
+  const [categoryClick, setCategoryClick] = useState([]);
   const [lists, setLists] = useState({
     ingredients: [],
     measure: [],
@@ -24,7 +25,21 @@ function RecipesProvider({ children }) {
     setLoading,
     favorite,
     setFavorite,
+    categoryClick,
   };
+
+  useEffect(() => {
+    const renderCategoryFilter = async (category) => {
+      try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+        const data = await response.json();
+        setCategoryClick(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    renderCategoryFilter();
+  });
 
   useEffect(() => {
     const favoriteClick = () => {
