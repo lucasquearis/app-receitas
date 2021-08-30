@@ -4,7 +4,7 @@ import FoodContext from './FoodContext';
 import {
   fetchMealApi,
   fetchCategoriesMealApi,
-  // fetchRandomMeal,
+  fetchIngredients,
 } from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
@@ -17,6 +17,7 @@ const FoodProvider = ({ children }) => {
   const [categoriesMeal, setCategoriesMeal] = useState([]);
   const [mealsByCategories, setMealsByCategories] = useState(false);
   const [randomMeal, setRandomMeal] = useState('');
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     fetchMealApi(foodFilter).then((data) => {
@@ -27,6 +28,12 @@ const FoodProvider = ({ children }) => {
   useEffect(() => {
     fetchCategoriesMealApi().then((category) => {
       setCategoriesMeal(category.meals);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchIngredients().then((data) => {
+      setIngredients(data.meals);
     });
   }, []);
 
@@ -42,6 +49,7 @@ const FoodProvider = ({ children }) => {
     setMealsByCategories,
     randomMeal,
     setRandomMeal,
+    ingredients,
   };
   return (
     <FoodContext.Provider value={ contextValue }>

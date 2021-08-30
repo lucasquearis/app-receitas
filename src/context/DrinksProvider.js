@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DrinksContext from './DrinksContext';
-import { fetchDrinksApi, fetchCategoriesDrinksApi } from '../services/fetchDrinksApi';
+import { fetchDrinksApi,
+  fetchCategoriesDrinksApi, fetchIngredients } from '../services/fetchDrinksApi';
 
 const DrinksProvider = ({ children }) => {
   const [drinks, setDrinks] = useState([]);
@@ -13,6 +14,7 @@ const DrinksProvider = ({ children }) => {
   const [categoriesDrinks, setCategoriesDrinks] = useState([]);
   const [drinksByCategories, setDrinksByCategories] = useState(false);
   const [randomDrinks, setRandomDrinks] = useState('');
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     fetchDrinksApi(drinkFilter).then((data) => {
@@ -23,6 +25,12 @@ const DrinksProvider = ({ children }) => {
   useEffect(() => {
     fetchCategoriesDrinksApi().then((categories) => {
       setCategoriesDrinks(categories.drinks);
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchIngredients().then((data) => {
+      setIngredients(data.drinks);
     });
   }, []);
 
@@ -38,6 +46,7 @@ const DrinksProvider = ({ children }) => {
     setDrinksByCategories,
     randomDrinks,
     setRandomDrinks,
+    ingredients,
   };
 
   return (
