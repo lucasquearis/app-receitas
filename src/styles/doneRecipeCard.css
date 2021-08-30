@@ -1,17 +1,13 @@
-img {
-  height: 109px;
-  width: 170px;
-}
-
 .recipe-card {
   background-color: white;
   border: 1px solid gray;
   border-radius: 6px;
-  height: 172px;
+  height: 350px;
+  margin: 5px;
   width: 161px;
 }
 
-.recipe-card img {
+.image-card {
   height: 109px;
   width: 100%;
 }
@@ -20,6 +16,6 @@ img {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
+  margin-left: 10px;
   margin-top: 5px;
 }

@@ -28,6 +28,7 @@ export default function Routes() {
         path="/explorar/bebidas/ingredientes"
         component={ Pages.ExplorarBebidasIngredients }
       />
+      <Route path="/explorar/bebidas/area" component={ Pages.NotFoundPage } />
       <Route path="/explorar/bebidas" component={ Pages.ExplorarBebidasPage } />
 
       <Route path="/explorar" component={ Pages.ExplorarPage } />
@@ -36,6 +37,8 @@ export default function Routes() {
 
       <Route path="/receitas-feitas" component={ Pages.ReceitasFeitasPage } />
       <Route path="/receitas-favoritas" component={ Pages.ReceitasFavoritasPage } />
+
+      <Route path="*" component={ Pages.NotFoundPage } />
     </Switch>
   );
 }

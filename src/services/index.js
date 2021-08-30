@@ -4,3 +4,8 @@ export { default as fetchAPIDetails } from './fetchAPIDetails';
 export { default as fetchAPIByCategory } from './fetchAPIByCategory';
 export { default as fetchAPICategories } from './fetchAPICategories';
 export { default as clipboardCopy } from './clipbordCopy';
+export { default as fetchAPICategories } from './fetchAPICategories';
+export { default as fetchAPIByCategory } from './fetchAPIByCategory';
+export { default as fetchAPIAreas } from './fetchAPIAreas';
+export { default as fetchAPIByAreas } from './fetchAPIByAreas';
+export { default as clipboardCopy } from './clipboardCopy';
