@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import IngredientCard from '../components/IngredientCard';
 
@@ -27,6 +28,7 @@ function Ingredients() {
 
   return (
     <div>
+      <Header title="Explorar Ingredientes" showRender={ false } />
       { ingredients.length && ingredients.map((ingredient, index) => (
         <IngredientCard
           ingredient={ ingredient }
