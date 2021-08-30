@@ -91,7 +91,7 @@ function RecipeDetail() {
         <button
           type="button"
           data-testid="start-recipe-btn"
-          style={ { position: 'fixed', bottom: '0' } }
+          style={ { position: 'fixed', bottom: '0', marginLeft: '45vw', marginRight: '45vw' } }
         >
           Iniciar Receita
         </button>
