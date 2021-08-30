@@ -96,7 +96,7 @@ const Drinks = () => {
           ? (data.map((drink, index) => (
             <Link
               to={ `bebidas/${drink.idDrink}` }
-              key={ drink.idDrink }
+              key={ index }
               className="drink-card-link"
             >
               <Card

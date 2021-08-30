@@ -78,7 +78,7 @@ export const drinksResponse = {
   ],
 };
 
-export const categoriesResponse = {
+export const drinksCategoriesResponse = {
   drinks: [
     { strCategory: 'Ordinary Drink' },
     { strCategory: 'Cocktail' },
@@ -94,7 +94,7 @@ export const categoriesResponse = {
   ],
 };
 
-export const categoryResponse = {
+export const drinksCategoryResponse = {
   drinks: [
     {
       idDrink: '12730',

@@ -2,46 +2,18 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { act, screen } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
-import { categoriesResponse, mealsResponse, categoryResponse } from './mocks/mealsMock';
+import {
+  mealsMockFetch,
+  changeMealsCategoryMockFetch,
+  changeMealsTwiceMockFetch,
+  justMealTwiceMockFetch,
+} from './helpers/mockedFetchs';
 import Meals from '../pages/Meals';
 
 const MEALS_CARDS = 12;
 const CATEGORY_OPTIONS = ['All', 'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat'];
 const FIRST_CARD = '0-card-name';
 const SECOND_CARD = '1-recipe-card';
-
-const justMealMockFetch = () => {
-  jest.spyOn(global, 'fetch')
-    .mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve(mealsResponse),
-    }));
-};
-
-const mealsMockFetch = () => {
-  justMealMockFetch();
-  jest.spyOn(global, 'fetch')
-    .mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve(categoriesResponse),
-    }));
-};
-
-const changeCategoryMockFetch = () => {
-  mealsMockFetch();
-  jest.spyOn(global, 'fetch')
-    .mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve(categoryResponse),
-    }));
-};
-
-const changeTwiceMockFetch = () => {
-  changeCategoryMockFetch();
-  justMealMockFetch();
-};
-
-const justMealTwiceMockFetch = () => {
-  mealsMockFetch();
-  justMealMockFetch();
-};
 
 describe('Testa a página principal de Comidas', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -97,7 +69,7 @@ describe('Testa a página principal de Comidas', () => {
     }
   });
 
-  changeCategoryMockFetch();
+  changeMealsCategoryMockFetch();
   it('Quando clica em uma opção de filtro por categoria, os cards mudam', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -124,7 +96,7 @@ describe('Testa a página principal de Comidas', () => {
     expect(secondCard).not.toBeInTheDocument();
   });
 
-  changeTwiceMockFetch();
+  changeMealsTwiceMockFetch();
   it('Quando clica na mesma opção de filtro por categoria duas vezes, volta para o'
       + 'cenário inicial com cards de todas as categorias', async () => {
     const firstPromise = Promise.resolve();

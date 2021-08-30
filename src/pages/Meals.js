@@ -35,7 +35,6 @@ const Meals = () => {
       setExpIng('');
       return search;
     };
-
     api.getMeals(defineSearch(), MEALS_LENGTH, setData);
     api.getMeals(categoriesAPI, CATEGORIES_LENGTH, setCategories);
   }, []);
@@ -94,7 +93,7 @@ const Meals = () => {
           ? (data.map((meal, index) => (
             <Link
               to={ `comidas/${meal.idMeal}` }
-              key={ meal.idMeal }
+              key={ index }
               className="meal-card-link"
             >
               <Card
@@ -105,8 +104,8 @@ const Meals = () => {
               />
             </Link>
           ))) : ''}
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

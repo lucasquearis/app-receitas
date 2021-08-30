@@ -5,7 +5,7 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [user, setUser] = useState({ email: '' });
-  const [data, setData] = useState({ data: [] });
+  const [data, setData] = useState([]);
   const [exploreIngredient, setExpIng] = useState({ exploreIngredient: '' });
 
   const [favoriteRcps, setFavoriteRcps] = useState([]);

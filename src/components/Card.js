@@ -53,8 +53,13 @@ const Card = ({ type, index, thumb, name }) => {
 Card.propTypes = {
   type: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  thumb: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  thumb: PropTypes.string,
+  name: PropTypes.string,
+};
+
+Card.defaultProps = {
+  thumb: undefined,
+  name: undefined,
 };
 
 export default Card;

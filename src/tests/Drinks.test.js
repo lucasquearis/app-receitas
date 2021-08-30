@@ -3,7 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import renderWithRouter from './helpers/renderWithRouter';
-import { categoriesResponse, drinksResponse, categoryResponse } from './mocks/drinksMock';
+import {
+  drinksMockFetch,
+  changeDrinksCategoryMockFetch,
+  changeDrinksTwiceMockFetch,
+  justDrinkTwiceMockFetch,
+} from './helpers/mockedFetchs';
 import Drinks from '../pages/Drinks';
 
 const DRINKS_CARDS = 12;
@@ -17,39 +22,6 @@ const CATEGORY_OPTIONS = [
 ];
 const FIRST_CARD = '0-card-name';
 const SECOND_CARD = '1-recipe-card';
-
-const justDrinkMockFetch = () => {
-  jest.spyOn(global, 'fetch')
-    .mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve(drinksResponse),
-    }));
-};
-
-const drinksMockFetch = () => {
-  justDrinkMockFetch();
-  jest.spyOn(global, 'fetch')
-    .mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve(categoriesResponse),
-    }));
-};
-
-const changeCategoryMockFetch = () => {
-  drinksMockFetch();
-  jest.spyOn(global, 'fetch')
-    .mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve(categoryResponse),
-    }));
-};
-
-const changeTwiceMockFetch = () => {
-  changeCategoryMockFetch();
-  justDrinkMockFetch();
-};
-
-const justDrinkTwiceMockFetch = () => {
-  drinksMockFetch();
-  justDrinkMockFetch();
-};
 
 describe('Testa a página principal de Bebidas', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -105,7 +77,7 @@ describe('Testa a página principal de Bebidas', () => {
     }
   });
 
-  changeCategoryMockFetch();
+  changeDrinksCategoryMockFetch();
   it('Quando clica em uma opção de filtro por categoria, os cards mudam', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -132,7 +104,7 @@ describe('Testa a página principal de Bebidas', () => {
     expect(tenthCard).not.toBeInTheDocument();
   });
 
-  changeTwiceMockFetch();
+  changeDrinksTwiceMockFetch();
   it('Quando clica em uma opção de filtro por categoria duas vezes, volta para o cenário'
       + 'inicial com cards de todas as categorias', async () => {
     const firstPromise = Promise.resolve();

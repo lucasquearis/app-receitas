@@ -78,7 +78,7 @@ export const mealsResponse = {
   ],
 };
 
-export const categoriesResponse = {
+export const mealsCategoriesResponse = {
   meals: [
     { strCategory: 'Beef' },
     { strCategory: 'Breakfast' },
@@ -97,7 +97,7 @@ export const categoriesResponse = {
   ],
 };
 
-export const categoryResponse = {
+export const mealsCategoryResponse = {
   meals: [
     {
       idMeal: '52968',
