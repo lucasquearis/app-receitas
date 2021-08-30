@@ -20,7 +20,7 @@ describe('2 - Verifica se os elementos foram criados', () => {
 });
 
 describe('3 - Verifica funcionalidade input de email', () => {
-  it('Verifica se é possível digitar no campo', () => {
+  it('Verifica se é possível digitar no campo de email', () => {
     renderWithRouterAndRedux(<App />);
 
     const email = screen.getByTestId(emailInput);
@@ -30,7 +30,7 @@ describe('3 - Verifica funcionalidade input de email', () => {
 });
 
 describe('4 - Verifica funcionalidade input de email', () => {
-  it('Verifica se é possível digitar no campo', () => {
+  it('Verifica se é possível digitar no campo de senha', () => {
     renderWithRouterAndRedux(<App />);
 
     const password = screen.getByTestId(passwordInput);
@@ -39,7 +39,7 @@ describe('4 - Verifica funcionalidade input de email', () => {
   });
 });
 
-describe('5 - Verifica validação dos campos', () => {
+describe('5 - Verifica validação dos campos de email e senha', () => {
   beforeEach(() => {
     renderWithRouterAndRedux(<App />);
   });
@@ -64,7 +64,7 @@ describe('5 - Verifica validação dos campos', () => {
     expect(screen.getByTestId(loginButton)).toHaveProperty('disabled', true);
   });
 
-  it('Botão de entrar é habilitado com email e senha corretos', () => {
+  it('Botão de entrar é habilitado com email e senha válidos', () => {
     const email = screen.getByTestId(emailInput);
     const password = screen.getByTestId(passwordInput);
     userEvent.type(email, testEmail);
@@ -93,7 +93,7 @@ describe('6 - Salva tokens no local storage após clicar no botão', () => {
 });
 
 describe('7 - Salva email no local storage após clicar no botão', () => {
-  it('Verifica existencia da chave user com valor do email no local storage',
+  it('Verifica existencia da chave user com valor do email em um objeto no local storage',
     async () => {
       renderWithRouterAndRedux(<App />);
       localStorage.clear();
