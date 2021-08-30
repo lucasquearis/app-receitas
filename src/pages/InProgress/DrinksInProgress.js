@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// 178319
+const id = 178319;
+const INITIAL_STATE = { cocktails: { [id]: [] }, meals: {} };
+
 function DrinksInProgress() {
   const [recipeDrink, setRecipeDrink] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
+  const [inProgress, setInProgress] = useState(INITIAL_STATE); // array de ingredientes que vão sendo checados
+  if (!localStorage.inProgressRecipes) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
+  }
 
   useEffect(() => {
     const getRecipeDrink = async () => {
@@ -14,9 +20,8 @@ function DrinksInProgress() {
       setRecipeDrink(drinks);
     };
     getRecipeDrink();
+    // console.log(recipeDrink);
   }, []);
-
-  const { strDrink, strCategory, strInstructions, strDrinkThumb } = recipeDrink;
 
   useEffect(() => {
     const ingredientsList = () => {
@@ -28,6 +33,7 @@ function DrinksInProgress() {
       const ingredientList = ingredientNotEmpty.map((key) => recipeDrink[0][key]);
       setIngredients(ingredientList);
       // console.log(recipeDrink);
+      // console.log(ingredientList);
 
       const keyMeasure = Object.keys(recipeDrink[0])
         .filter((item) => item.includes('strMeasure'));
@@ -39,9 +45,48 @@ function DrinksInProgress() {
     ingredientsList();
   }, [recipeDrink]);
 
-  // const handleCheked = () => (
-  //   'desenvolver lógica p dar check qd é apertado a caixinha de check'
-  // );
+  // Requisito 50 - o número '52771' é só enquanto n tivermos o id
+  const checkItem = (ingredient) => {
+    const ingredientsArray = inProgress.cocktails[id];
+    if (!ingredientsArray) { // lógica p qd add o primeiro ingredient
+      const estado = {
+        cocktails: {
+          [id]: ingredient,
+        },
+      };
+      setInProgress(estado);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(estado));
+    } else {
+      const alreadyExist = ingredientsArray.some((item) => item === ingredient);
+      if (alreadyExist) { // lógica p qd tem q retirar
+        const newIngredients = ingredientsArray.filter((item) => item !== ingredient);
+        const estado2 = {
+          cocktails: {
+            [id]: newIngredients,
+          },
+        };
+        setInProgress(estado2);
+        localStorage.setItem('inProgressRecipes', JSON.stringify(estado2));
+      } else { // lógica para acrescentar do 2 p frente de ingredientes.
+        const estado3 = {
+          cocktails: {
+            [id]: [...inProgress.cocktails[id], ingredient],
+          },
+        };
+        setInProgress(estado3);
+        localStorage.setItem('inProgressRecipes', JSON.stringify(estado3));
+      }
+    }
+  };
+
+  useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setInProgress({ ...LS });
+  }, []);
+
+  const handleCheked = (ingredient) => (inProgress.cocktails[id].includes(ingredient));
+
+  const { strDrink, strCategory, strInstructions, strDrinkThumb } = recipeDrink[0];
 
   return (
     <div className="food-in-progress">
@@ -63,7 +108,9 @@ function DrinksInProgress() {
                 <input
                   type="checkbox"
                   id={ `${ingredient}` }
-                // checked={ handleCheked() }
+                  value={ `${ingredient}` }
+                  onChange={ () => checkItem(ingredient) }
+                  defaultChecked={ handleCheked(ingredient) }
                 />
                 { `${measure[index]} ${ingredient}` }
               </label>
