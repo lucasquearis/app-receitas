@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
-function DrinkFilterButton() {
+function DrinkFilterButton({ onClick }) {
   const { drinkCategories: { loading, list } } = useContext(Context);
 
   const filterButtons = [];
@@ -18,6 +19,7 @@ function DrinkFilterButton() {
           type="button"
           data-testid={ `${button.strCategory}-category-filter` }
           key={ index }
+          onClick={ (e) => onClick(e) }
         >
           { button.strCategory }
         </button>
@@ -25,5 +27,9 @@ function DrinkFilterButton() {
     </div>
   );
 }
+
+DrinkFilterButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default DrinkFilterButton;

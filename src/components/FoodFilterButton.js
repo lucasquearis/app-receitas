@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
-function FoodFilterButton() {
-  const { foodCategories: { loading, list } } = useContext(Context);
+function FoodFilterButton({ onClick }) {
+  const {
+    foodCategories: { loading, list },
+  } = useContext(Context);
 
   const filterButtons = [];
   const maxButtons = 5;
@@ -11,6 +14,7 @@ function FoodFilterButton() {
       filterButtons.push(list.meals[index]);
     }
   }
+
   return (
     <div>
       { filterButtons.map((button, index) => (
@@ -18,12 +22,16 @@ function FoodFilterButton() {
           type="button"
           data-testid={ `${button.strCategory}-category-filter` }
           key={ index }
+          onClick={ (e) => onClick(e) }
         >
           { button.strCategory }
         </button>)) }
     </div>
-
   );
 }
+
+FoodFilterButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default FoodFilterButton;
