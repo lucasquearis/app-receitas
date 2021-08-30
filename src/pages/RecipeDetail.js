@@ -95,7 +95,7 @@ function RecipeDetail() {
             position: 'fixed',
             bottom: '0',
             marginLeft: '45vw',
-            marginRight: '45vw'
+            marginRight: '45vw',
           } }
         >
           Iniciar Receita
