@@ -13,7 +13,7 @@ import {
 export default function ShareAndFavBtns({ recipes }) {
   const location = useLocation();
   const currentPage = location.pathname;
-  const curretPageURL = window.location.href;
+  const currentPageURL = window.location.href;
   const { id } = useParams();
 
   const [msgLink, setMsgLink] = useState('');
@@ -34,7 +34,12 @@ export default function ShareAndFavBtns({ recipes }) {
 
   const onClickShare = () => {
     setMsgLink('Link copiado!');
-    navigator.clipboard.writeText(`${curretPageURL}`);
+    if (currentPage.includes('progress')) {
+      const newURL = currentPageURL.replace('/in-progress', '');
+      navigator.clipboard.writeText(`${newURL}`);
+    } else {
+      navigator.clipboard.writeText(`${currentPageURL}`);
+    }
   };
 
   useEffect(() => {
@@ -70,7 +75,7 @@ export default function ShareAndFavBtns({ recipes }) {
 }
 
 ShareAndFavBtns.propTypes = {
-  recipes: PropTypes.arrayOf(
-    PropTypes.object,
+  recipes: PropTypes.objectOf(
+    PropTypes.string,
   ).isRequired,
 };
