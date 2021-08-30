@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ButtonCard from '../Components/ButtonCard';
-import { getRandomId } from '../helper';
 
 function DrinksExplore() {
-  const randomId = getRandomId();
-  const path = `/comidas/${randomId}`;
+  const [data, setData] = useState([]);
+
+  const surpriseMe = async () => {
+    const END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+    const response = await fetch(END_POINT);
+    const { drinks } = await response.json();
+    setData(drinks[0]);
+    console.log(data);
+  };
+
+  useEffect(() => {
+    surpriseMe();
+  });
+
+  const path = (id) => `/bebidas/${id}`;
 
   return (
     <div>
@@ -18,7 +30,7 @@ function DrinksExplore() {
         buttonText="Por Ingredientes"
       />
       <ButtonCard
-        page={ path }
+        page={ path(data.idDrink) }
         testId="explore-surprise"
         buttonText="Me Surpreenda!"
       />

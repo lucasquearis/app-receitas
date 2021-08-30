@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap') ;
+
+
+main body {
+  display: grid;
+  grid-template-areas: 'header''btns''cards''footer';
+  grid-template-rows: 0.2fr 0.6fr 3fr 0.2fr;
+  max-height: 640px;
+  max-width: 360px;
+}
+
+.btn-session button {
+  background-color: #940022;
+  border: transparent;
+  border-radius: 8px;
+  color: white;
+  height: 40px;
+  margin: 3px;
+  padding: 5px;
+  width: 80px;
+}
+
+.header-container {
+  align-items: center;
+  background-color: #940022;
+  display: flex;
+  grid-area: header;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+}
+
+.header-container img h2 {
+  background-color: transparent;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.header-button {
+  background: transparent;
+  border: transparent;
+}
+
+.btn-session {
+  background-color: white;
+  display: flex;
+  grid-area: btns;
+  margin-top: 50px;
+  position: fixed;
+  width: 100%;
+}
+
+.cards {
+  align-items: center;
+  background-image: url('../images/background3.jpg');
+  display: flex;
+  flex-flow: column;
+  grid-area: cards;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+footer {
+  background-color: #940022;
+  bottom: 0;
+  display: flex;
+  grid-area: footer;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+}
+
+.recipe-cards {
+  background-color: white;
+  border-radius: 18px;
+  color: #940022;
+  font-family: Leckerli One , Courier New , Courier , monospace;
+  font-size: 24px;
+  height: 350px;
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  width: 80%;
+}
+
+.recipe-cards img {
+  border-radius: 18px;
+  max-height: 60%;
+  max-width: 98%;
+}
+
