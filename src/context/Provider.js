@@ -15,11 +15,33 @@ function Provider({ children }) {
     src: '',
   });
 
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState({
+    list: [],
+    loading: true,
+  });
 
-  const [categories, setCategories] = useState([]);
+  const [foodRecipes, setFoodRecipes] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [drinkRecipes, setDrinkRecipes] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [foodCategories, setFoodCategories] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [drinkCategories, setDrinkCategories] = useState({
+    list: [],
+    loading: true,
+  });
 
   const [API, setAPI] = useState('');
+
   const switchAPI = (searchFilter) => {
     switch (searchFilter.type) {
     case 'ingredient':
@@ -36,17 +58,47 @@ function Provider({ children }) {
     }
   };
 
-  const requestCategory = async () => {
-    const response = await fetch();
+  const requestRandomAPI = async (type) => {
+    const response = await fetch(`https://www.the${type}db.com/api/json/v1/1/random.php`);
     const result = await response.json();
-    setCategories(result);
+    setRecipes({ ...recipes, list: result, loading: false });
+  };
+
+  const requestCategory = async (categories, func) => {
+    const response = await fetch(categories);
+    const result = await response.json();
+    func({
+      list: result,
+      loading: false,
+    });
   };
 
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
-    setRecipes(result);
+    setRecipes({ ...recipes, list: result, loading: false });
   };
+
+  const requestAreas = async () => {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    const { meals } = await response.json();
+    return meals;
+  };
+
+  const requestFoodByAreas = async (area) => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+    const { meals } = await response.json();
+    return meals;
+  };
+
+  const requestFoodByName = async (name) => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+    const { meals } = await response.json();
+    return meals;
+  };
+
+  const foodCategoryAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const drinkCategoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
   useEffect(() => {
     switchAPI(filter);
@@ -60,8 +112,22 @@ function Provider({ children }) {
     API,
     RequestAPI,
     recipes,
-    categories,
+    foodCategories,
     requestCategory,
+    drinkCategories,
+    foodRecipes,
+    drinkRecipes,
+    setFoodRecipes,
+    foodCategoryAPI,
+    setFoodCategories,
+    drinkCategoryAPI,
+    setDrinkRecipes,
+    setDrinkCategories,
+    setRecipes,
+    requestRandomAPI,
+    requestAreas,
+    requestFoodByAreas,
+    requestFoodByName,
   };
 
   return (
