@@ -12,7 +12,14 @@ import RecomendedCard from '../components/RecomendedCard';
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
   const [recomendedDrink, setRecomendedDrink] = useState([]);
-  const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = food;
+  const {
+    strMealThumb,
+    strMeal,
+    strCategory,
+    strInstructions,
+    strYoutube,
+    strArea,
+  } = food;
   const [ingredientList, setIngredientList] = useState([]);
   const location = useLocation();
   const [share, setShare] = useState(false);
@@ -86,19 +93,8 @@ function FoodDetails({ match: { params: { id } } }) {
   }, [food]);
 
   useEffect(() => {
-    localStorage.setItem('doneRecipes', JSON.stringify([{
-      id: '52771',
-      type: 'comida',
-      area: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '22/6/2020',
-      tags: ['Pasta', 'Curry'],
-    }]));
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes.some((recipe) => recipe.id === id)) {
+    if (doneRecipes && doneRecipes.some((recipe) => recipe.id === id)) {
       setDoneRecipe(true);
     }
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
