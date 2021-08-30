@@ -1,5 +1,6 @@
 export { default as Header } from './Header';
-export { default as RecipeCard } from './RecomendationCard';
+export { default as RecipeCard } from './RecipeCard';
+export { default as RecomendationCard } from './RecomendationCard';
 export { default as FooterMenu } from './FooterMenu';
 export { default as FiltersMenu } from './FiltersMenu';
 export { default as IniciarButton } from './DetailsButton';
