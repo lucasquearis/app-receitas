@@ -23,7 +23,13 @@ async function getDrinksById(id) {
   }
 }
 
-export { getDrinks, getDrinksById };
+async function getDrinksCategories() {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const result = await fetch(URL).then((resp) => resp.json());
+  return result;
+}
+
+export { getDrinks, getDrinksById, getDrinksCategories };
 // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={ingrediente};
 // https://www.thecocktaildb.com/api/json/v1/1/search.php?s={nome};
 // https://www.thecocktaildb.com/api/json/v1/1/search.php?f={primeira-letra};

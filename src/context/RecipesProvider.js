@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import myContext from './myContext';
-import { getMeals } from '../services/mealAPI';
-import { getDrinks } from '../services/drinkAPI';
+import { getMeals, getMealsCategories } from '../services/mealAPI';
+import { getDrinks, getDrinksCategories } from '../services/drinkAPI';
 import {
   ALERT_TWO,
   MEAL_OBJ,
   DRINK_OBJ,
   OBJ_LOCAL_STORAGE,
   LOCAL_STORAGE_REC_PROGRESS,
+  START_CARD,
+  NUMBER_CATEGORIES,
 } from '../services/data';
 
 export default function RecipesProvider({ children }) {
@@ -22,11 +24,61 @@ export default function RecipesProvider({ children }) {
   const [baseDataDrinks, setBaseDataDrinks] = useState();
   const [filteredMeals, setFilteredMeals] = useState(false);
   const [filteredDrinks, setFilteredDrinks] = useState(false);
+  const [mealCategories, setMealCategories] = useState();
+  const [drinkCategories, setDrinkCategories] = useState();
   const [favorite, setFavorite] = useState({});
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
   const [lists, setLists] = useState({ ingredients: [], measure: [] });
+
+  useEffect(() => {
+    const mealCategory = async () => {
+      const mealCat = await getMealsCategories();
+      setMealCategories(mealCat);
+    };
+    mealCategory();
+  },
+  []);
+
+  useEffect(() => {
+    const drinkCategory = async () => {
+      const drinkCat = await getDrinksCategories();
+      setDrinkCategories(drinkCat);
+    };
+    drinkCategory();
+  },
+  []);
+
+  /* useEffect(() => {
+    const mealCategory = async () => {
+      const mealCat = await getDrinksCategories();
+      const { categories } = mealCat;
+      const baseCategories = categories.map((category) => (category.strCategory)); // quebra aqui no cypress
+      const categoriesCheck = baseCategories
+        .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
+      const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
+      returnBaseCategories.push('All');
+      setMealCategories(returnBaseCategories);
+    };
+    mealCategory();
+  },
+  []);
+
+  useEffect(() => {
+    const drinkCategory = async () => {
+      const drinkCat = await getMealsCategories();
+      const { drinks } = drinkCat;
+      const baseCategories = drinks.map((category) => (category.strCategory)); // quebra aqui no cypress
+      const categoriesCheck = baseCategories
+        .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
+      const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
+      returnBaseCategories.push('All');
+      setDrinkCategories(returnBaseCategories);
+    };
+    drinkCategory();
+  },
+  []); */
 
   useEffect(() => {
     const resultBaseMeals = async () => {
@@ -109,6 +161,8 @@ export default function RecipesProvider({ children }) {
     setInfoUser,
     filteredMeals,
     filteredDrinks,
+    mealCategories,
+    drinkCategories,
     updateData,
     setUpdateData,
     baseDataMeals,

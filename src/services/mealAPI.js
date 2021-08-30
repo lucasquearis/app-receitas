@@ -23,4 +23,10 @@ async function getMealsById(id) {
   }
 }
 
-export { getMeals, getMealsById };
+async function getMealsCategories() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+  const result = await fetch(URL).then((resp) => resp.json());
+  return result;
+}
+
+export { getMeals, getMealsById, getMealsCategories };
