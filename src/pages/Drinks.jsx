@@ -3,10 +3,11 @@ import { Redirect, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
-import Card from '../components/Card';
 import Categories from '../components/Categories';
+import Card from '../components/CardItems';
 import useRecipes from '../hooks/useRecipes';
 import useCategories from '../hooks/useCategories';
+import Footer from '../components/Footer';
 
 export default function Drinks() {
   const drinks = useSelector((state) => state.recipes.recipes);
@@ -77,6 +78,7 @@ export default function Drinks() {
         drinks.map((drink, index) => (
           <Card
             key={ drink.idDrink }
+            id={ drink.idDrink }
             title={ drink.strDrink }
             thumb={ drink.strDrinkThumb }
             onClick={ () => handleClickCard(drink.idDrink) }
@@ -85,6 +87,7 @@ export default function Drinks() {
           />
         ))
       }
+      <Footer />
     </section>
   );
 }

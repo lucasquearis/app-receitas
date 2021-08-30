@@ -1,13 +1,18 @@
 const filterAlertMsg = 'Sua busca deve conter somente 1 (um) caracter';
 
 const getUrl = () => {
-  const currentPage = window.location.href;
   let url;
+  const mealURL = 'themealdb';
+  const drinkURL = 'thecocktaildb';
 
-  if (currentPage.includes('comidas')) {
-    url = 'themealdb';
-  } else if (currentPage.includes('bebidas')) {
-    url = 'thecocktaildb';
+  const currentPage = window.location.href;
+  const foodPage = 'comidas';
+  const cocktailPage = 'bebidas';
+
+  if (currentPage.includes(foodPage)) {
+    url = mealURL;
+  } else if (currentPage.includes(cocktailPage)) {
+    url = drinkURL;
   }
 
   const ingredientURL = `https://www.${url}.com/api/json/v1/1/filter.php?i=`;
@@ -15,6 +20,8 @@ const getUrl = () => {
   const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
   const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
   const areaURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
+  const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
+  const recomendationsURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
 
   return {
     ingredientURL,
@@ -22,7 +29,24 @@ const getUrl = () => {
     firstLetterURL,
     categoryFilterURL,
     areaURL,
+    detailsURL,
+    recomendationsURL,
   };
+};
+
+export const getRecomendations = async () => {
+  const { recomendationsURL, currentPage, foodPage, cocktailPage } = getUrl();
+
+  const response = await fetch(recomendationsURL);
+  if (currentPage.includes(foodPage)) {
+    const { drinks } = await response.json();
+
+    return drinks;
+  } if (currentPage.includes(cocktailPage)) {
+    const { meals } = await response.json();
+
+    return meals;
+  }
 };
 
 export const getDataByIngredient = async (ingredient) => {
@@ -52,6 +76,17 @@ export const getDataByFirstLetter = async (letter) => {
   }
 
   return data;
+};
+
+export const getDataDetails = async (id) => {
+  const { detailsURL, currentPage, foodPage } = getUrl();
+  const response = await fetch(`${detailsURL}${id}`);
+  if (currentPage.includes(foodPage)) {
+    const { meals } = await response.json();
+    return meals[0];
+  }
+  const { drinks } = await response.json();
+  return drinks[0];
 };
 
 export const getDataByCategory = async (category) => {

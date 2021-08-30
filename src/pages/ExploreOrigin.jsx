@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Redirect, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
-import Card from '../components/Card';
 import useRecipes from '../hooks/useRecipes';
+import Card from '../components/CardItems';
 import useArea from '../hooks/useArea';
 import Origins from '../components/Origins';
 
@@ -82,6 +83,7 @@ export default function ExploreOrigin() {
           />
         ))
       }
+      <Footer />
     </section>
   );
 }

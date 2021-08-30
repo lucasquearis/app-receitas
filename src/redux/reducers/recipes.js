@@ -1,6 +1,7 @@
 import {
   LOADING_RECIPES,
   GET_RECIPES,
+  SEND_RECIPE_DATA,
   GET_CATEGORIES,
   GET_INGREDIENTS,
   GET_AREAS,
@@ -26,6 +27,11 @@ export default (state = INITIAL_STATE, action) => {
       ...state,
       recipes: action.recipes,
       isLoading: false,
+    };
+  case SEND_RECIPE_DATA:
+    return {
+      ...state,
+      recipes: action.recipes.data,
     };
   case GET_CATEGORIES:
     return {
