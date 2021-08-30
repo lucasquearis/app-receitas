@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 // import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
@@ -8,7 +8,6 @@ import shareIcon from '../images/shareIcon.svg';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
-import {Link} from 'react-router-dom'
 
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
@@ -29,7 +28,6 @@ function FoodDetails({ match: { params: { id } } }) {
   const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
   const [favorite, setFavorite] = useState(false);
   const [favoriteIcon, setFavoriteIcon] = useState(wHIcon);
-
 
   const fetchRecomendedDrink = async () => {
     const endPointRecomendedDrink = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -55,17 +53,6 @@ function FoodDetails({ match: { params: { id } } }) {
             />
           ))}
         </ul>
-      //   <Carousel data-testid="recomendation-card" itemsToShow={ 2 } itemsToScroll={ 2 }>
-      //   {sliceRecomended.map((drink, index) => (
-      //     <RecomendedCard
-      //       title={ drink.strDrink }
-      //       key={ drink.idDrink }
-      //       id={ drink.idDrink }
-      //       index={ index }
-      //       img={ drink.strDrinkThumb }
-      //     />
-      //   ))}
-      // </Carousel>
       );
     }
   };
@@ -100,25 +87,23 @@ function FoodDetails({ match: { params: { id } } }) {
 
   useEffect(() => {
     localStorage.setItem('doneRecipes', JSON.stringify([{
-      id: "52771",
-      type: "comida",
-      area: "Italian",
-      category: "Vegetarian",
-      alcoholicOrNot: "",
-      name: "Spicy Arrabiata Penne",
-      image: "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-      doneDate: "22/6/2020",
-      tags: ["Pasta", "Curry"]
-  }]))
-  const doneRecipes = JSON.parse(localStorage.getItem("doneRecipes"));
-  if (doneRecipes.some((recipe) => recipe.id === id)) {
-    setDoneRecipe(true);
+      id: '52771',
+      type: 'comida',
+      area: 'Italian',
+      category: 'Vegetarian',
+      alcoholicOrNot: '',
+      name: 'Spicy Arrabiata Penne',
+      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      doneDate: '22/6/2020',
+      tags: ['Pasta', 'Curry'],
+    }]));
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes.some((recipe) => recipe.id === id)) {
+      setDoneRecipe(true);
     }
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-    if (inProgressRecipes){
-      if (inProgressRecipes.meals[id]) {
-        setContinueRecipe('Continuar Receita');
-      }
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.meals[id]) {
+      setContinueRecipe('Continuar Receita');
     }
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
@@ -127,11 +112,10 @@ function FoodDetails({ match: { params: { id } } }) {
         setFavorite(true);
       }
     }
-  }
-  , [food, id])
+  },
+  [food, id]);
 
   const saveFavoriteRecipes = () => {
-    const { strArea, strCategory, strMeal, strMealThumb } = food;
     const favoriteObject = [{
       id,
       type: 'comida',
@@ -145,10 +129,7 @@ function FoodDetails({ match: { params: { id } } }) {
     if (!favoriteRecipes) {
       localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteObject));
     } else {
-      const updateFavorite = [
-        ...favoriteRecipes,
-        ...favoriteObject,
-      ];
+      const updateFavorite = [...favoriteRecipes, ...favoriteObject];
       localStorage.setItem('favoriteRecipes', JSON.stringify(updateFavorite));
     }
   };
@@ -171,7 +152,6 @@ function FoodDetails({ match: { params: { id } } }) {
     }
     setFavorite(!favorite);
   };
-
 
   useEffect(() => {
     if (favorite) {
@@ -210,7 +190,7 @@ function FoodDetails({ match: { params: { id } } }) {
         { share && <p>Link copiado!</p> }
         <Button
           type="button"
-          onClick={handleFavorite}
+          onClick={ handleFavorite }
         >
           <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
         </Button>
@@ -231,20 +211,20 @@ function FoodDetails({ match: { params: { id } } }) {
           src={ strYoutube }
           data-testid="video"
         />
-        {renderRecomendedDrink()} 
-        
-        <Link to={`/comidas/${id}/in-progress`}>   
-        <button
-          style={ mystyle }
-          variant="contained"
-          color="primary"
-          type="button"
-          data-testid="start-recipe-btn"
-          hidden={doneRecipe}
-        >
-          {continueRecipe}
+        {renderRecomendedDrink()}
 
-        </button>
+        <Link to={ `/comidas/${id}/in-progress` }>
+          <button
+            style={ mystyle }
+            variant="contained"
+            color="primary"
+            type="button"
+            data-testid="start-recipe-btn"
+            hidden={ doneRecipe }
+          >
+            {continueRecipe}
+
+          </button>
         </Link>
       </div>
     </div>
