@@ -13,7 +13,6 @@ export default function BebidasDetalhes() {
       const idApi = location.pathname.split('/')[2];
       const response = await fetch(`${URL_DRINK}${idApi}`);
       const data = await response.json();
-      console.log(data.drinks[0]);
       setDrink(data.drinks[0]);
     };
     api();
@@ -25,9 +24,7 @@ export default function BebidasDetalhes() {
       const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
       const data = await fetch(URL).then((response) => response.json());
       const firstSix = await data.meals.slice(0, magicalNumber);
-      console.log(firstSix);
       setRecoomendedFood(firstSix);
-      // console.log(recomendedFood);
     };
     apiFood();
   }, []);
