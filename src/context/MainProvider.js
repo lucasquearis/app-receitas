@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MainContext from './MainContext';
 
 function MainProvider({ children }) {
-  const value = { number: 4 };
-
+  const [title, setTitle] = useState('');
+  const value = {
+    title,
+    setTitle,
+  };
   return (
     <MainContext.Provider value={ value }>
       { children }

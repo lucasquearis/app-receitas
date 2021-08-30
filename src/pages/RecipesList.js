@@ -1,8 +1,19 @@
 import React, { useEffect } from 'react';
-import HeaderSearchBar from '../components/HeaderSearchBar';
+import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
+import HeaderSearchBar from '../components/HeaderSearchBar';
 
-function RecipeList() {
+function RecipeList(title) {
+  const history = useHistory();
+  const URL = history.location.pathname;
+  if (URL === '/comidas') {
+    title = 'Comidas';
+  }
+  if (URL === '/bebidas') {
+    title = 'Bebidas';
+  }
+
   useEffect(() => {
     const fetchAPI = async () => {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -15,6 +26,7 @@ function RecipeList() {
 
   return (
     <div>
+      <Header title={ title } />
       <HeaderSearchBar />
       <Footer />
     </div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DoneRecipes from './pages/DoneRecipes';
+import Profile from './pages/Profile';
 import Explore from './pages/Explore';
 import ExploreByArea from './pages/ExploreByArea';
 import ExploreByIngredient from './pages/ExploreByIngredient';
 import ExploreDrinksOrMeals from './pages/ExploreDrinksOrMeals';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Login from './pages/Login';
-import Profile from './pages/Profile';
 import RecipeDetail from './pages/RecipeDetail';
 import RecipeInProgress from './pages/RecipeInProgress';
 import RecipesList from './pages/RecipesList';
