@@ -19,3 +19,48 @@
 .filter-section button:focus {
   outline: none;
 }
+
+.favorite-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.favorite-card {
+  border-radius: 10px;
+  box-shadow: 2px 6px 5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  margin: 15px auto;
+  width: 85%;
+}
+
+.image-section {
+  width: 45%;
+}
+
+.image-section img {
+  width: 100%;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 6px;
+  width: 50%;
+}
+
+.infos p {
+  color: rgb(139, 139, 139);
+  margin: 0;
+}
+
+.infos h4 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.buttons-section {
+  display: flex;
+  justify-content: space-around;
+}
