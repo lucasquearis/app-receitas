@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../styles/Explore.css';
 
 export default function Explore() {
   return (
@@ -11,7 +12,7 @@ export default function Explore() {
         <button
           type="button"
           data-testid="explore-food"
-          className="filter-button"
+          className="explore-button"
         >
           Explorar Comidas
         </button>
@@ -20,7 +21,7 @@ export default function Explore() {
         <button
           type="button"
           data-testid="explore-drinks"
-          className="filter-button"
+          className="explore-button"
         >
           Explorar Bebidas
         </button>

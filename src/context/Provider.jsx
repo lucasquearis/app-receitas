@@ -13,10 +13,10 @@ export default function Provider({ children }) {
   const [listCategoryDrinks, setListCategoryDrinks] = useState();
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [dataRandomMeals, setDataRandomMeals] = useState('');
+  const [dataRandomDrinks, setDataRandomDrinks] = useState('');
 
   const context = {
-    loading,
-    setLoading,
     dataMeals,
     setDataMeals,
     dataDrinks,
@@ -33,6 +33,12 @@ export default function Provider({ children }) {
     setListCategoryMeals,
     listCategoryDrinks,
     setListCategoryDrinks,
+    loading,
+    setLoading,
+    dataRandomMeals,
+    setDataRandomMeals,
+    dataRandomDrinks,
+    setDataRandomDrinks,
     favorites,
     setFavorites,
   };
