@@ -5,14 +5,14 @@ function saveDoneMeal(rcp) {
       ...doneRecipes,
       {
         id: rcp.idMeal,
-        type: 'meal',
+        type: 'comida',
         area: rcp.strArea ? rcp.strArea : '',
         category: rcp.strCategory ? rcp.strCategory : '',
         alcoholicOrNot: rcp.strAlcoholic ? rcp.strAlcoholic : '',
         name: rcp.strMeal,
         image: rcp.strMealThumb,
         doneDate: new Date().toLocaleDateString('pt-BR'),
-        tags: rcp.strTags ? rcp.strTags : '',
+        tags: rcp.strTags ? rcp.strTags.split(',') : [],
       },
     ]));
   }
@@ -25,7 +25,7 @@ function saveDoneDrink(rcp) {
       ...doneRecipes,
       {
         id: rcp.idDrink,
-        type: 'drink',
+        type: 'bebida',
         area: rcp.strArea ? rcp.strArea : '',
         category: rcp.strCategory ? rcp.strCategory : '',
         alcoholicOrNot: rcp.strAlcoholic ? rcp.strAlcoholic : '',

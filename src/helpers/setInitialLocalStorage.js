@@ -1,7 +1,10 @@
 const setInitialLocalStorage = (user) => {
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
-  localStorage.setItem('user', JSON.stringify(user));
+
+  if (user.length || !localStorage.user) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
   if (!localStorage.inProgressRecipes) {
     localStorage.setItem(
       'inProgressRecipes',
@@ -11,6 +14,12 @@ const setInitialLocalStorage = (user) => {
   if (!localStorage.doneRecipes) {
     localStorage.setItem(
       'doneRecipes',
+      JSON.stringify([]),
+    );
+  }
+  if (!localStorage.favoriteRecipes) {
+    localStorage.setItem(
+      'favoriteRecipes',
       JSON.stringify([]),
     );
   }

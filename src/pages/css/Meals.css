@@ -23,12 +23,17 @@
 .meals-categories {
   background-color: rgb(195, 195, 195);
   border: transparent;
+  cursor: pointer;
   font-size: 1em;
   height: 3em;
   margin: 0.5em 1em;
   text-align: start;
   text-indent: 0.5em;
   width: 8.5em;
+}
+
+.meals-categories:hover {
+  border: 0.15em solid black;
 }
 
 .meal-card-link {
@@ -62,6 +67,10 @@
     margin: 0 0.7em;
     text-indent: 0.2em;
     width: 8.3em;
+  }
+
+  .meals-categories:hover {
+    border: 0.2em solid black;
   }
 
 }

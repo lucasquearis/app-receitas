@@ -4,7 +4,7 @@ import AppContext from '../context/AppContext';
 import verifyLogin from '../helpers/verifyLogin';
 
 export default function Login() {
-  const { user, setUser } = useContext(AppContext);
+  const { setUser } = useContext(AppContext);
   const [loginForm, setLoginForm] = useState({
     email: '',
     password: '',
@@ -22,7 +22,8 @@ export default function Login() {
 
   function handleClick() {
     const { email } = loginForm;
-    setUser({ ...user, email });
+    setUser({ email });
+    localStorage.setItem('user', JSON.stringify({ email }));
   }
 
   useEffect(checkValid, [loginForm]);

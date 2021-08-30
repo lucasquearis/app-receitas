@@ -1,6 +1,9 @@
 export const getMeals = async (url, length, setInfo) => {
   const mealsResult = await fetch(url).then((response) => response.json());
-  setInfo(mealsResult.meals.slice(0, length));
+  if (typeof length === 'number') {
+    mealsResult.meals.slice(0, length);
+    setInfo(mealsResult.meals.slice(0, length));
+  } else setInfo(mealsResult.meals);
 };
 
 export const getDrinks = async (url, length, setInfo) => {

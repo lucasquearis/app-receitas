@@ -1,0 +1,11 @@
+.title-error-containers {
+  display: flex;
+  flex-direction: row;
+  height: 97vh;
+  justify-content: center;
+  width: 97vw;
+}
+
+.title-error {
+  margin: 2em auto;
+}

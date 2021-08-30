@@ -7,6 +7,13 @@
   width: 13.2em;
 }
 
+.card:hover {
+  border: 0.15em solid black;
+  font-weight: 600;
+  height: 11.7em;
+  width: 12.9em;
+}
+
 .thumb {
   border-radius: 12px;
   border-bottom-left-radius: 0;
@@ -25,6 +32,11 @@
   .card {
     height: 8.6em;
     width: 9.5em;
+  }
+
+  .card:hover {
+    height: 8.3em;
+    width: 9.2em;
   }
 
   .thumb {

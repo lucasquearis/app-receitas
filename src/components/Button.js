@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import removeSomeSpaceAndSlash from '../helpers/fomartCategoriesID';
 
 const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick }) => {
   const [redirect, setRedirect] = useState(false);
@@ -13,7 +14,6 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
       handleRedirect();
     }
   };
-
   if ((redirect && (pathname.length > 0) && !isDisable)) {
     return (<Redirect to={ pathname } />);
   }
@@ -21,7 +21,7 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
   if (id !== undefined) {
     return (
       <button
-        id={ id }
+        id={ removeSomeSpaceAndSlash(id) }
         className={ className }
         name={ buttonText }
         data-testid={ id }
@@ -37,7 +37,7 @@ const Button = ({ id, className, type, buttonText, pathname, isDisable, onClick 
       className={ className }
       data-testid={ className }
       type={ (type === 'submit' ? 'submit' : 'button') }
-      onClick={ handleClick }
+      onClick={ !onClick ? handleRedirect : handleClick }
       disabled={ isDisable }
     >
       { buttonText }

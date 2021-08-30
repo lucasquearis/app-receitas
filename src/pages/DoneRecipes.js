@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DoneCard } from '../components';
+import { Button, DoneCard, Header } from '../components';
 import './css/DoneRecipes.css';
-
-const copy = require('clipboard-copy');
 
 const DoneRecipes = () => {
   const [rawDoneRecipes, setRawDoneRecipes] = useState([]);
@@ -11,6 +9,8 @@ const DoneRecipes = () => {
   const [applyFilter, setApplyFilter] = useState(false);
   const [shareData, setShareData] = useState([]);
   const [shareAlert, setShareAlert] = useState(false);
+
+  const style = '0.1em solid black';
 
   useEffect(() => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -21,6 +21,7 @@ const DoneRecipes = () => {
       setRawDoneRecipes([]);
       setDoneRecipes([]);
     }
+    document.querySelector('.all').style.border = style;
   }, []);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const DoneRecipes = () => {
   useEffect(() => {
     const INTERVAL = 5000;
     if (shareData.length > 1) {
-      copy(shareData[0]);
+      navigator.clipboard.writeText(shareData[0]);
       const parentNode = document.querySelector(`#${shareData[1]}`);
       const alertElement = document.createElement('span');
       alertElement.className = 'share-alert';
@@ -48,7 +49,26 @@ const DoneRecipes = () => {
     setShareData([]);
   }, [shareAlert]);
 
+  const resetBorder = () => {
+    const categoryButtons = document.querySelectorAll('.recipes-categories');
+    categoryButtons.forEach((button) => {
+      button.style.border = 'none';
+      button.style.cssText = 'button:hover{ border 0.1em solid black }';
+    });
+  };
+
+  const applyBorder = (className) => {
+    resetBorder();
+    switch (className) {
+    case 'all': document.querySelector(`.${className}`).style.border = style; break;
+    case 'comida': document.querySelector(`.${className}`).style.border = style; break;
+    case 'bebida': document.querySelector(`.${className}`).style.border = style; break;
+    default: break;
+    }
+  };
+
   const handleFilterClick = ({ target: { className } }) => {
+    applyBorder(className.split(' ', 2)[1]);
     setFilterOption(className.split(' ', 2)[1]);
     setApplyFilter(true);
   };
@@ -63,6 +83,7 @@ const DoneRecipes = () => {
 
   return (
     <div className="done-recipes-container">
+      <Header title="Receitas Feitas" />
       <div className="filter-recipes-container">
         <Button
           type="button"

@@ -1,37 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card } from '../components';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import AppContext from '../context/AppContext';
+import { Button, Card, Footer, HeaderMeals } from '../components';
 import * as api from '../services/api';
 import './css/Meals.css';
 
 const mealsAPI = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const mealsIngredientAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 const categoriesAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const categoryAPI = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const MEALS_LENGTH = 12;
 const CATEGORIES_LENGTH = 5;
 
 const Meals = () => {
-  const [meals, setMeals] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoryEntry, setCategoryEntry] = useState('');
   const [categoryClicked, setCategoryClicked] = useState(false);
-  const [lastCategory, setLastCategoty] = useState('');
+  const [lastCategory, setLastCategory] = useState('');
+  const { data, setData, exploreIngredient, setExpIng } = useContext(AppContext);
+
+  const resetBorder = () => {
+    const categoryButtons = document.querySelectorAll('.meals-categories');
+    categoryButtons.forEach((button) => {
+      button.style.border = 'none';
+      button.style.cssText = 'button:hover{ border 0.15em solid black }';
+    });
+  };
 
   useEffect(() => {
-    api.getMeals(mealsAPI, MEALS_LENGTH, setMeals);
+    const defineSearch = () => {
+      const search = exploreIngredient.length
+        ? `${mealsIngredientAPI}${exploreIngredient}`
+        : mealsAPI;
+      setExpIng('');
+      return search;
+    };
+
+    api.getMeals(defineSearch(), MEALS_LENGTH, setData);
     api.getMeals(categoriesAPI, CATEGORIES_LENGTH, setCategories);
   }, []);
 
   useEffect(() => {
     if (categoryClicked && (categoryEntry !== lastCategory)) {
-      if (categoryEntry === 'All') api.getMeals(mealsAPI, MEALS_LENGTH, setMeals);
-      else api.getMeals(`${categoryAPI}${categoryEntry}`, MEALS_LENGTH, setMeals);
-      setLastCategoty(categoryEntry);
+      if (categoryEntry === 'All') api.getMeals(mealsAPI, MEALS_LENGTH, setData);
+      else api.getMeals(`${categoryAPI}${categoryEntry}`, MEALS_LENGTH, setData);
+      setLastCategory(categoryEntry);
+      resetBorder();
+      const selectedButton = document.querySelector(`#${categoryEntry}-category-filter`);
+      selectedButton.style.border = '0.15em solid black';
     }
     if (categoryClicked && (categoryEntry === lastCategory)) {
-      api.getMeals(mealsAPI, MEALS_LENGTH, setMeals);
+      api.getMeals(mealsAPI, MEALS_LENGTH, setData);
+      setLastCategory('');
+      resetBorder();
+      const selectedButton = document.querySelector(`#${categoryEntry}-category-filter`);
+      selectedButton.style.border = 'none';
+      selectedButton.style.cssText = 'button:hover{ border 0.15em solid black }';
     }
     setCategoryClicked(false);
   }, [categoryClicked]);
@@ -41,12 +65,9 @@ const Meals = () => {
     setCategoryClicked(true);
   };
 
-  console.log(meals);
-  console.log(categories);
-
   return (
     <div className="meals-container">
-      <Header />
+      <HeaderMeals title="Comidas" />
       <div className="meals-categories-container">
         <Button
           type="button"
@@ -69,22 +90,23 @@ const Meals = () => {
         )) }
       </div>
       <div className="meals-cards-container">
-        { meals.map((meal, index) => (
-          <Link
-            to={ `comidas/${meal.idMeal}` }
-            key={ meal.idMeal }
-            className="meal-card-link"
-          >
-            <Card
-              type="Meal"
-              index={ index }
-              thumb={ meal.strMealThumb }
-              name={ meal.strMeal }
-            />
-          </Link>
-        ))}
+        { data.length
+          ? (data.map((meal, index) => (
+            <Link
+              to={ `comidas/${meal.idMeal}` }
+              key={ meal.idMeal }
+              className="meal-card-link"
+            >
+              <Card
+                type="Meal"
+                index={ index }
+                thumb={ meal.strMealThumb }
+                name={ meal.strMeal }
+              />
+            </Link>
+          ))) : ''}
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

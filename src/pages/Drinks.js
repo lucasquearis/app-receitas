@@ -1,37 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card } from '../components';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import AppContext from '../context/AppContext';
+import { Button, Card, Footer, HeaderDrinks } from '../components';
+import removeSomeSpaceAndSlash from '../helpers/fomartCategoriesID';
 import * as api from '../services/api';
 import './css/Drinks.css';
 
 const drinksAPI = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const drinksIngredientAPI = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const categoriesAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const categoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 const DRINKS_LENGTH = 12;
 const CATEGORIES_LENGTH = 5;
 
 const Drinks = () => {
-  const [drinks, setDrinks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoryEntry, setCategoryEntry] = useState('');
   const [categoryClicked, setCategoryClicked] = useState(false);
-  const [lastCategory, setLastCategoty] = useState('');
+  const [lastCategory, setLastCategory] = useState('');
+  const { data, setData, exploreIngredient, setExpIng } = useContext(AppContext);
+
+  const resetBorder = () => {
+    const categoryButtons = document.querySelectorAll('.drinks-categories');
+    categoryButtons.forEach((button) => {
+      button.style.border = 'none';
+      button.style.cssText = 'button:hover{ border 0.15em solid black }';
+    });
+  };
 
   useEffect(() => {
-    api.getDrinks(drinksAPI, DRINKS_LENGTH, setDrinks);
+    const defineSearch = () => {
+      const search = exploreIngredient.length
+        ? `${drinksIngredientAPI}${exploreIngredient}`
+        : drinksAPI;
+      setExpIng('');
+      return search;
+    };
+    api.getDrinks(defineSearch(), DRINKS_LENGTH, setData);
     api.getDrinks(categoriesAPI, CATEGORIES_LENGTH, setCategories);
   }, []);
 
   useEffect(() => {
     if (categoryClicked && (categoryEntry !== lastCategory)) {
-      if (categoryEntry === 'All') api.getDrinks(drinksAPI, DRINKS_LENGTH, setDrinks);
-      else api.getDrinks(`${categoryAPI}${categoryEntry}`, DRINKS_LENGTH, setDrinks);
-      setLastCategoty(categoryEntry);
+      if (categoryEntry === 'All') api.getDrinks(drinksAPI, DRINKS_LENGTH, setData);
+      else api.getDrinks(`${categoryAPI}${categoryEntry}`, DRINKS_LENGTH, setData);
+      setLastCategory(categoryEntry);
+      resetBorder();
+      const selectedButton = document
+        .querySelector(`#${removeSomeSpaceAndSlash(categoryEntry)}-category-filter`);
+      selectedButton.style.border = '0.15em solid black';
     }
     if (categoryClicked && (categoryEntry === lastCategory)) {
-      api.getDrinks(drinksAPI, DRINKS_LENGTH, setDrinks);
+      api.getDrinks(drinksAPI, DRINKS_LENGTH, setData);
+      setLastCategory('');
+      resetBorder();
+      const selectedButton = document
+        .querySelector(`#${removeSomeSpaceAndSlash(categoryEntry)}-category-filter`);
+      selectedButton.style.border = 'none';
+      selectedButton.style.cssText = 'button:hover{ border 0.15em solid black }';
     }
     setCategoryClicked(false);
   }, [categoryClicked]);
@@ -41,12 +67,9 @@ const Drinks = () => {
     setCategoryClicked(true);
   };
 
-  console.log(drinks);
-  console.log(categories);
-
   return (
     <div className="drinks-container">
-      <Header />
+      <HeaderDrinks title="Bebidas" />
       <div className="drinks-categories-container">
         <Button
           type="button"
@@ -69,22 +92,23 @@ const Drinks = () => {
         )) }
       </div>
       <div className="drinks-cards-container">
-        { drinks.map((drink, index) => (
-          <Link
-            to={ `bebidas/${drink.idDrink}` }
-            key={ drink.idDrink }
-            className="drink-card-link"
-          >
-            <Card
-              type="Drink"
-              index={ index }
-              thumb={ drink.strDrinkThumb }
-              name={ drink.strDrink }
-              onClick={ handleCategoryClick }
-              isDisable={ false }
-            />
-          </Link>
-        ))}
+        { data.length
+          ? (data.map((drink, index) => (
+            <Link
+              to={ `bebidas/${drink.idDrink}` }
+              key={ drink.idDrink }
+              className="drink-card-link"
+            >
+              <Card
+                type="Drink"
+                index={ index }
+                thumb={ drink.strDrinkThumb }
+                name={ drink.strDrink }
+                onClick={ handleCategoryClick }
+                isDisable={ false }
+              />
+            </Link>
+          ))) : ''}
       </div>
       <Footer />
     </div>

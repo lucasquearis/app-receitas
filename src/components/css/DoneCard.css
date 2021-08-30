@@ -8,6 +8,12 @@
   width: 20em;
 }
 
+.done-recipe-container:hover {
+  border: 0.15em solid black;
+  height: 9.7em;
+  width: 19.7em;
+}
+
 .horizontal-image-link {
   display: flex;
   width: 50%;

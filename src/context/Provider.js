@@ -5,12 +5,31 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [user, setUser] = useState({ email: '' });
+  const [data, setData] = useState({ data: [] });
+  const [exploreIngredient, setExpIng] = useState({ exploreIngredient: '' });
+
+  const [favoriteRcps, setFavoriteRcps] = useState([]);
+
+  function loadLocalStorageToState() {
+    if (JSON.parse(localStorage.favoriteRecipes).length) {
+      setFavoriteRcps([
+        ...JSON.parse(localStorage.favoriteRecipes),
+      ]);
+    }
+  }
 
   useEffect(() => setInitialLocalStorage(user), [user]);
+  useEffect(() => loadLocalStorageToState(), []);
 
   const context = {
     user,
     setUser,
+    data,
+    setData,
+    favoriteRcps,
+    setFavoriteRcps,
+    exploreIngredient,
+    setExpIng,
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { fetchMealRecipe } from '../services/fetchRecipe';
-import { IngredientsTaskList } from '../components';
+import { IngredientsTaskList, ShareButton, FavoriteButton } from '../components';
 import {
   addIngInProgressStorage,
   rmvIngFromProgressStorage,
@@ -67,12 +67,8 @@ function MealsInProgress() {
     <>
       <img data-testid="recipe-photo" src={ rcp.strMealThumb } alt={ rcp.strMeal } />
       <h1 data-testid="recipe-title">{rcp.strMeal}</h1>
-      <button data-testid="share-btn" type="button">
-        Compartilhar
-      </button>
-      <button data-testid="favorite-btn" type="button">
-        Favoritar
-      </button>
+      <ShareButton />
+      <FavoriteButton recipe={ rcp } id={ id } />
       <p data-testid="instructions">{rcp.strInstructions}</p>
       <h3 data-testid="recipe-category">{rcp.strCategory}</h3>
       <IngredientsTaskList
