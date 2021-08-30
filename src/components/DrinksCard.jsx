@@ -25,6 +25,7 @@ function DrinksCard() {
             id={ drink.idDrink }
             index={ index }
             key={ index }
+            to={ `/bebidas/${drink.idDrink}` }
           />
         ))
       }

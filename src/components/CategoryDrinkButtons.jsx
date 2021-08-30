@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDrinksCategories, clearSearch } from '../redux/actions/mainActions';
-import ItemCard from './ItemCard';
 import DrinksCard from './DrinksCard';
+import ItemCard from './ItemCard';
 
 function CategoryDrinkButtons() {
   const doze = 12;
@@ -13,6 +13,7 @@ function CategoryDrinkButtons() {
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
   const [showInput, setShowInput] = useState(true);
+  const [lastClick, setLastClick] = useState('');
 
   const showInputClick = () => {
     setShowInput((prevCheck) => !prevCheck);
@@ -36,6 +37,7 @@ function CategoryDrinkButtons() {
 
   const handleClick = (categoryStr) => {
     filterDrinkCategory(categoryStr);
+    setLastClick(categoryStr);
     showInputClick();
     dispatch(clearSearch());
   };
@@ -47,7 +49,14 @@ function CategoryDrinkButtons() {
             type="button"
             key={ `${category.strCategory}-category-filter` }
             data-testid={ `${category.strCategory}-category-filter` }
-            onClick={ () => handleClick(category.strCategory) }
+            onClick={ () => {
+              handleClick(category.strCategory);
+              if (category.strCategory === lastClick) {
+                setShowInput(true);
+              } else {
+                setShowInput(false);
+              }
+            } }
           >
             {category.strCategory}
           </button>
@@ -64,6 +73,7 @@ function CategoryDrinkButtons() {
             id={ dish.idDrink }
             index={ index }
             key={ index }
+            to={ `/bebidas/${dish.idDrink}` }
           />
         ))}
     </div>

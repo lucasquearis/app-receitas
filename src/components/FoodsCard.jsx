@@ -14,7 +14,6 @@ function FoodsCard() {
   }, [dispatch]);
 
   if (loading) return <p>Carregando...</p>;
-
   return (
     <div>
       {
@@ -26,6 +25,7 @@ function FoodsCard() {
             id={ meal.idMeal }
             index={ index }
             key={ index }
+            to={ `/comidas/${meal.idMeal}` }
           />
         ))
       }

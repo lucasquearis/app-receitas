@@ -12,6 +12,7 @@ function CategoryFoodButtons() {
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
   const [showInput, setShowInput] = useState(true);
+  const [lastClick, setLastClick] = useState('');
 
   const showInputClick = () => {
     setShowInput((prevCheck) => !prevCheck);
@@ -34,6 +35,7 @@ function CategoryFoodButtons() {
 
   const handleClick = (categoryStr) => {
     renderCategoryFilter(categoryStr);
+    setLastClick(categoryStr);
     dispatch(clearSearch());
     showInputClick();
   };
@@ -42,20 +44,27 @@ function CategoryFoodButtons() {
     <div>
       {
         categories && categories.map((category, index) => index < cinco && (
-          <section className="category-btn">
+          <section key={ index } className="category-btn">
             <button
               type="button"
               key={ `${category.strCategory}-category-filter` }
               data-testid={ `${category.strCategory}-category-filter` }
-              onClick={ () => handleClick(category.strCategory) }
+              onClick={ () => {
+                handleClick(category.strCategory);
+                if (category.strCategory === lastClick) {
+                  setShowInput(true);
+                } else {
+                  setShowInput(false);
+                }
+              } }
             >
               {category.strCategory}
             </button>
           </section>
         ))
       }
-      { showInput ? <FoodsCard />
-        : categoryClick.meals
+      {
+        showInput ? <FoodsCard /> : categoryClick.meals
         && categoryClick.meals.map((dish, index) => index < doze && (
           <ItemCard
             title={ dish.strMeal }
@@ -63,8 +72,23 @@ function CategoryFoodButtons() {
             id={ dish.idMeal }
             index={ index }
             key={ index }
+            to={ `comidas/${dish.idMeal}` }
           />
-        ))}
+        ))
+      }
+      {/* {
+        categoryClick.meals
+        && categoryClick.meals.map((dish, index) => index < doze && (
+          <ItemCard
+            title={ dish.strMeal }
+            thumb={ dish.strMealThumb }
+            id={ dish.idMeal }
+            index={ index }
+            key={ index }
+            to={ `comidas/${dish.idMeal}` }
+          />
+        ))
+      } */}
     </div>
   );
 }

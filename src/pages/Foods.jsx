@@ -16,7 +16,6 @@ function Foods(props) {
   const { search } = useSelector((state) => state.recipes);
   const oneElementDetails = () => {
     if (search.meals.length === 1) {
-      console.log('aqui');
       history.push(`/comidas/${search.meals[0].idMeal}`);
     }
   };
@@ -50,6 +49,7 @@ function Foods(props) {
           id={ meal.idMeal }
           index={ index }
           key={ index }
+          to={ `comidas/${meal.idMeal}` }
         />)) }
       </main>
       <Footer />
