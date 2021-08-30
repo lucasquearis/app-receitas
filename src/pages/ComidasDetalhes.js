@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import './ComidasDetalhes.css';
 import Loading from '../components/Loading';
 
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
-  // const [foodName, setFoodName] = useState('');
+  const [recomendedDrink, setRecoomendedDrink] = useState([]);
   const location = useLocation();
   const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-
-  const recommendedRecipes = [
-    'receita 1',
-    'receita 2',
-    'receita 3',
-  ];
 
   useEffect(() => {
     const api = async () => {
       const idApi = location.pathname.split('/')[2];
-
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
       // console.log(data.meals[0]);
       setFood(data.meals[0]);
     };
     api();
+  }, []);
+
+  useEffect(() => {
+    const apiDrink = async () => {
+      const magicalNumber = 6;
+      const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const data = await fetch(URL).then((response) => response.json());
+      const firstSix = await data.drinks.slice(0, magicalNumber);
+      console.log(firstSix);
+      setRecoomendedDrink(firstSix);
+      // console.log(recomendedFood);
+    };
+    apiDrink();
   }, []);
 
   if (food === undefined) {
@@ -58,24 +65,32 @@ export default function ComidasDetalhes() {
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
       <iframe
-        src="https://www.youtube.com/embed/DsFpGUXpZVU"
+        src={ food.strYoutube }
         title="Vídeo de Instrução"
         data-testid="video"
       />
-      <div>
-        <h3>Receitas recomendadas</h3>
-        <ul>
-          {recommendedRecipes.map((name, index) => (
+      {recomendedDrink.map((recomendation, index) => (
+        <div
+          data-testid={ `${index}-recomendation-card` }
+          key={ index }
+        >
+          <ul>
             <li
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
+              className={ index <= 1 ? '' : 'displayNone' }
+              data-testid={ `${index}-recomendation-title` }
             >
-              {name}
+              { recomendation.strDrink }
             </li>
-          ))}
-        </ul>
-      </div>
-      <button type="button" data-testid="start-recipe-btn">Favorito</button>
+          </ul>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="start-recipe-btn"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }
