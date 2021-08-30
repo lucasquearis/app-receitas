@@ -101,7 +101,7 @@ function DetailsDrink({ match: { url, params: { id } } }) {
         {recommendations.map((food, index) => (
           <RecommendationCard
             id={ food.idMeal }
-            key={ index }
+            key={ food.strMeal + index }
             name={ food.strMeal }
             src={ food.strMealThumb }
             index={ index }

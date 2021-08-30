@@ -118,7 +118,7 @@ function DetailsFood({ match: { url, params: { id } } }) {
           <RecommendationCard
             foodPage
             id={ drink.idDrink }
-            key={ index }
+            key={ drink.strDrink + index }
             name={ drink.strDrink }
             src={ drink.strDrinkThumb }
             index={ index }
