@@ -38,9 +38,9 @@ function App() {
             <Route path="/explorar/comidas/area" component={ SearchByOrigin } />
             <Route path="/explorar/comidas" component={ SearchDetailsFood } />
             <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
-            <Route path="/explorar" component={ Search } />
-            <Route path="/comidas" component={ Recipes } />
             <Route path="/bebidas" component={ Drinks } />
+            <Route path="/comidas" component={ Recipes } />
+            <Route path="/explorar" component={ Search } />
             <Route path="/perfil" component={ Profile } />
             <Route path="/receitas-feitas" component={ FinishedRecipes } />
             <Route path="/receitas-favoritas" component={ FavoriteRecipes } />

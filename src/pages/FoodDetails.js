@@ -9,7 +9,6 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Copy from '../components/Clipboard-Copy';
-import './foodDetails.css';
 
 const FoodDetails = () => {
   const history = useHistory();
@@ -124,7 +123,11 @@ const FoodDetails = () => {
               key={ shareIcon }
               onClick={ () => copy(url) }
             >
-              <img src={ shareIcon } alt="share-icon" />
+              <img
+                src={ shareIcon }
+                alt="share-icon"
+                className="detail-img-btn"
+              />
             </button>
             <button
               type="button"
@@ -133,6 +136,7 @@ const FoodDetails = () => {
             >
               <img
                 data-testid="favorite-btn"
+                className="detail-img-btn"
                 src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite-icon"
               />

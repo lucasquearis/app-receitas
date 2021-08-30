@@ -34,12 +34,14 @@ const DrinkDetails = () => {
       strDrink: name,
       strDrinkThumb: image,
     } = drinkDetails[0];
+
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
     if (actualStorage === null) {
       localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
       return;
     }
+
     if (actualStorage.some((favoriteItem) => favoriteItem.id === item.id)) {
       return;
     }
@@ -121,7 +123,11 @@ const DrinkDetails = () => {
               key={ shareIcon }
               onClick={ () => copy() }
             >
-              <img src={ shareIcon } alt="share-icon" />
+              <img
+                src={ shareIcon }
+                alt="share-icon"
+                className="detail-img-btn"
+              />
             </button>
             <button
               type="button"
@@ -130,6 +136,7 @@ const DrinkDetails = () => {
             >
               <img
                 data-testid="favorite-btn"
+                className="detail-img-btn"
                 src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite-icon"
               />

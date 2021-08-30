@@ -21,3 +21,7 @@
   position: fixed;
   right: 10%;
 }
+
+.detail-img-btn img {
+  width: 15%;
+}
