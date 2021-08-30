@@ -11,7 +11,7 @@ function Profile() {
     setRedirect(true);
   };
 
-  if (redirect || !email) {
+  if (redirect) {
     return <Redirect to="/" />;
   }
 
