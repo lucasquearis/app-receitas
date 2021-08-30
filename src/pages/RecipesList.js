@@ -16,6 +16,10 @@ function RecipeList(title) {
     <div>
       <Header title={ title } />
       <p>Recipe List</p>
+<<<<<<< HEAD
+=======
+      <p>Recipe List</p>
+>>>>>>> 2729d5f85e620986b905c793f7bf49cc7d96412a
       <Footer />
     </div>
   );
