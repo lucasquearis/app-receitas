@@ -7,6 +7,11 @@ import Drinks from './pages/Drinks';
 import FoodsDetails from './pages/FoodsDetails';
 import DrinksDetails from './pages/DrinksDetails';
 import Login from './pages/Login';
+import Explore from './pages/Explore';
+import ExploreFoods from './pages/ExploreFoods';
+import ExploreDrinks from './pages/ExploreDrinks';
+import ExploreByIngredients from './pages/ExploreByIngredients';
+import ExploreByArea from './pages/ExploreByArea';
 
 function App() {
   return (
@@ -16,12 +21,13 @@ function App() {
       <Route path="/comidas" component={ Foods } />
       <Route path="/bebidas/:id" component={ DrinksDetails } />
       <Route path="/bebidas" component={ Drinks } />
-      {/* <Route path="/explorar" component={ } />
-      <Route path="/explorar/comidas" component={ } />
-      <Route path="/explorar/bebidas" component={ } />
-      <Route path="/explorar/comidas/ingredientes" component={ } />
+      <Route path="/explorar" component={ Explore } />
+      <Route path="/explorar/comidas" component={ ExploreFoods } />
+      <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route path="/explorar/comidas/ingredientes" component={ ExploreByIngredients } />
+      <Route path="/explorar/comidas/area" component={ ExploreByArea } />
+      {/*
       <Route path="/explorar/bebidas/ingrediente" component={ } />
-      <Route path="/explorar/comidas/area" component={ } />
       <Route path="/perfil" component={ } />
       <Route path="/receitas-feitas" component={ } />
       <Route path="/receitas-favoritas" component={ } /> */}
