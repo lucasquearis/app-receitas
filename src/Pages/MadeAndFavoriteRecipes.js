@@ -7,7 +7,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/made-recipes.css';
 
 function MadeRecipes() {
-  const { madeRecipes, filter, setFilter } = useFilterMadeAndFavorite();
+  const { madeRecipes, filter, setFilter, setRecipes } = useFilterMadeAndFavorite();
   const { pathname } = useLocation();
   const types = ['all', 'food', 'drink', 'All', 'Food', 'Drinks'];
   const numButtons = 3;
@@ -28,8 +28,11 @@ function MadeRecipes() {
 
   const deleteFavorite = async (id) => {
     let recipes = await JSON.parse(localStorage.getItem('favoriteRecipes'));
-    recipes = recipes.filter((recipe) => recipe !== id);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
+    console.log('antes de deletar', recipes);
+    recipes = recipes.filter((recipe) => recipe.id !== id);
+    await localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
+    console.log('deleta receita', recipes);
+    setRecipes(recipes);
   };
 
   const cardFoodMade = (recipe, index) => {
@@ -203,6 +206,7 @@ function MadeRecipes() {
 
   const fillCards = () => {
     if (!madeRecipes) return <span>Nenhuma receita feita</span>;
+    console.log('carrega cards');
 
     return madeRecipes.map((recipe, index) => {
       if (recipe.type === 'comida') {

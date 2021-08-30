@@ -4,17 +4,26 @@ import { useLocation } from 'react-router-dom';
 function useFilterMadeAndFavorite() {
   const [madeRecipes, setMadeRecipes] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [recipes, setRecipes] = useState([]);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const filters = async () => {
-      let recipes = [];
+    const savedRecipes = async () => {
+      let saved = [];
       if (pathname === '/receitas-feitas') {
-        recipes = await JSON.parse(localStorage.getItem('doneRecipes'));
+        saved = await JSON.parse(localStorage.getItem('doneRecipes'));
+        await setRecipes(saved);
       } else {
-        recipes = await JSON.parse(localStorage.getItem('favoriteRecipes'));
+        saved = await JSON.parse(localStorage.getItem('favoriteRecipes'));
+        await setRecipes(saved);
       }
+    };
+    console.log('lê storage');
+    savedRecipes();
+  }, [pathname]);
 
+  useEffect(() => {
+    const filters = async () => {
       if (recipes !== null) {
         let cardsFiltered = [...recipes];
         if (filter !== 'all') {
@@ -25,14 +34,15 @@ function useFilterMadeAndFavorite() {
         setMadeRecipes([]);
       }
     };
-
+    console.log('filtra storage');
     filters();
-  }, [filter, pathname]);
+  }, [filter, recipes]);
 
   return {
     madeRecipes,
     filter,
     setFilter,
+    setRecipes,
   };
 }
 
