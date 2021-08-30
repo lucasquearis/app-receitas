@@ -10,6 +10,8 @@ import BebidasExp from './pages/BebidasExp';
 import ComidasExp from './pages/ComidasExp';
 import Bebidas from './pages/Bebidas';
 import Perfil from './pages/Perfil';
+import ReceitasFeitas from './pages/ReceitasFeitas';
+import TelaDeFavoritos from './pages/TelaDeFavoritos';
 import LocalDeOrigem from './pages/LocalDeOrigem';
 import ComidaIng from './pages/ComidaIng';
 import BebidasIng from './pages/BebidasIng';
@@ -35,10 +37,9 @@ function App() {
           <Route exact path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
           <Route exact path="/explorar" component={ Explorar } />
           <Route exact path="/perfil" component={ Perfil } />
+          <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
+          <Route exact path="/receitas-favoritas" component={ TelaDeFavoritos } />
           <Route path="/" component={ NotFound } />
-          {/*
-          <Route path="/receitas-feitas" component={ Login } />
-          <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
       </BrowserRouter>
     </Provider>

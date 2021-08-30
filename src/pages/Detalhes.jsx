@@ -50,7 +50,7 @@ function Detalhes() {
     alcoholicOrNot: recipe.strAlcoholic ? recipe.strAlcoholic : '',
     name: recipe[`str${jsonTranslator[type]}`],
     image: recipe[`str${jsonTranslator[type]}Thumb`],
-    tag: (recipe.strTags) ? recipe.strTags.split(',') : '',
+    tags: (recipe.strTags) ? recipe.strTags.split(',') : '',
   };
 
   if (!recipe || !recommended) return <h1>Carregando...</h1>;

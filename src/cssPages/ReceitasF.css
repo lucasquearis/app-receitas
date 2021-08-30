@@ -1,0 +1,29 @@
+.buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.paizao {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paizao img {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.paiDeTodos {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button-filtro {
+  background-color: white;
+  border: none;
+}

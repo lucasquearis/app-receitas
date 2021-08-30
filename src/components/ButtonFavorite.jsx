@@ -14,7 +14,7 @@ function ButtonFavorite(data) {
 
   const favoriteClick = () => {
     const thisFavoriteObject = { ...favoriteObject };
-    delete thisFavoriteObject.tag;
+    delete thisFavoriteObject.tags;
     const oldFavorites = (favorites === '') ? [] : JSON.parse(favorites);
     const newFavorites = (isFavorite)
       ? [...oldFavorites].filter(({ id }) => id !== idRecipe)
