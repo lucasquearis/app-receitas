@@ -13,15 +13,31 @@ export default function Filter() {
     setSearchDrinks } = useContext(myContext);
   const { pathname } = useLocation();
   const [textToSend, setTextValue] = useState('');
+  const [radioValueToSend, setRadioValue] = useState('name');
   const [usedMealsToRender, setUsedMeals] = useState('');
 
   useEffect(() => {
-    const { categories } = mealCategories;
+    if (pathname === '/comidas') {
+      setSearchMeals({
+        textValue: textToSend,
+        radioValue: radioValueToSend,
+        pathname: '/comidas' });
+    } if (pathname === '/bebidas') {
+      setSearchDrinks({
+        textValue: textToSend,
+        radioValue: radioValueToSend,
+        pathname: '/bebidas' });
+    }
+  },
+  [textToSend]);
+
+  useEffect(() => {
+    const { meals } = mealCategories;
     const { drinks } = drinkCategories;
     const usedMeals = (pathname === '/comidas'
-      ? categories
+      ? meals
       : drinks);
-    const getUsedMeals = async () => {
+    const getUsedMeals = () => {
       const baseCategories = usedMeals.map((category) => (category.strCategory)); // quebra aqui no cypress
       const categoriesCheck = baseCategories
         .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
@@ -31,64 +47,14 @@ export default function Filter() {
     };
     getUsedMeals();
   },
-  [pathname, mealCategories, drinkCategories]);
+  []);
 
-  /*   const baseCategories = usedMeals.map((category) => (category.strCategory)); // quebra aqui no cypress
-  const categoriesCheck = baseCategories
-    .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
-  const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
-  returnBaseCategories.push('All'); */
-
-  /* const [radioValue, setRadioValue] = useState(''); */
-  const MEAL_CAT = {
-    textValue: textToSend,
-    radioValue: 'category',
-    pathname: '/comidas' };
-  const DRINK_CAT = {
-    textValue: textToSend,
-    radioValue: 'category',
-    pathname: '/bebidas' };
-
-  const submit = () => {
-    console.log('teste');
-    if (pathname === '/comidas') {
-      setSearchMeals(MEAL_CAT);
-    } else { setSearchDrinks(DRINK_CAT); }
+  const settings = ({ target: { id } }) => {
+    const filterId = id === textToSend || id === 'All' ? '' : id;
+    const filterSearchBtn = filterId === '' ? 'name' : 'category';
+    setTextValue(filterId);
+    setRadioValue(filterSearchBtn);
   };
-
-  /* const settings = async ({ target: { id } }) => {
-    const filter = id === textToSend || id === 'All' ? '' : id;
-    await setRadioValue(value);
-    await setTextValue(filter);
-    await submit()
-  }; */
-
-  const settings = async ({ target: { id } }) => {
-    const filter = id === textToSend || id === 'All' ? '' : id;
-    await setTextValue(filter);
-    if (pathname === '/comidas') {
-      await setSearchMeals({
-        textValue: textToSend,
-        radioValue: 'category',
-        pathname: '/comidas' });
-      console.log(MEAL_CAT);
-    } else {
-      setSearchDrinks({
-        textValue: textToSend,
-        radioValue: 'category',
-        pathname: '/bebidas' });
-    }
-  };
-
-  /*  const usedMeals = (pathname === '/comidas'
-    ? categories
-    : drinks);
-
-  const baseCategories = usedMeals.map((category) => (category.strCategory)); // quebra aqui no cypress
-  const categoriesCheck = baseCategories
-    .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
-  const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
-  returnBaseCategories.push('All'); */
 
   return (
     <div>

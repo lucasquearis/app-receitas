@@ -9,8 +9,6 @@ import {
   DRINK_OBJ,
   OBJ_LOCAL_STORAGE,
   LOCAL_STORAGE_REC_PROGRESS,
-  START_CARD,
-  NUMBER_CATEGORIES,
 } from '../services/data';
 
 export default function RecipesProvider({ children }) {
@@ -50,36 +48,6 @@ export default function RecipesProvider({ children }) {
   },
   []);
 
-  /* useEffect(() => {
-    const mealCategory = async () => {
-      const mealCat = await getDrinksCategories();
-      const { categories } = mealCat;
-      const baseCategories = categories.map((category) => (category.strCategory)); // quebra aqui no cypress
-      const categoriesCheck = baseCategories
-        .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
-      const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
-      returnBaseCategories.push('All');
-      setMealCategories(returnBaseCategories);
-    };
-    mealCategory();
-  },
-  []);
-
-  useEffect(() => {
-    const drinkCategory = async () => {
-      const drinkCat = await getMealsCategories();
-      const { drinks } = drinkCat;
-      const baseCategories = drinks.map((category) => (category.strCategory)); // quebra aqui no cypress
-      const categoriesCheck = baseCategories
-        .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
-      const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
-      returnBaseCategories.push('All');
-      setDrinkCategories(returnBaseCategories);
-    };
-    drinkCategory();
-  },
-  []); */
-
   useEffect(() => {
     const resultBaseMeals = async () => {
       const baseMeals = await getMeals(MEAL_OBJ);
@@ -106,7 +74,7 @@ export default function RecipesProvider({ children }) {
     };
     resultFilterMeals();
   },
-  [searchMeals]);
+  [searchMeals, mealCategories]);
 
   useEffect(() => {
     const resultFilterDrinks = async () => {
@@ -116,7 +84,7 @@ export default function RecipesProvider({ children }) {
     };
     resultFilterDrinks();
   },
-  [searchDrinks]);
+  [searchDrinks, drinkCategories]);
 
   useEffect(() => {
     const filterIngredients = () => {

@@ -25,8 +25,12 @@ async function getDrinksById(id) {
 
 async function getDrinksCategories() {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-  const result = await fetch(URL).then((resp) => resp.json());
-  return result;
+  try {
+    const result = await fetch(URL).then((resp) => resp.json());
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export { getDrinks, getDrinksById, getDrinksCategories };
