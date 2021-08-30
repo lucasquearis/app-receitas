@@ -3,9 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import { CarouselContainer, HeaderIngredientsInstructions, DetailsButton, Video }
   from '../components';
-import { fetchAPI } from '../services';
-import fetchAPIDetailsFood from '../services/fetchAPIDetailsFood';
-import fetchAPIDetailsDrink from '../services/fetchAPIDetailsDrink';
+import { fetchAPI, fetchAPIDetailsFood, fetchAPIDetailsDrink } from '../services';
 import '../styles/receitasDetalhesPage.css';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
