@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
-import shareIcon from '../../images/shareIcon.svg';
-import favoriteIcon from '../../images/blackHeartIcon.svg';
+import RenderRecipes from './RenderRecipes';
 
 const FavoriteRecipe = () => {
   const [copied, setCopied] = useState('');
   const [recipes, setRecipes] = useState('');
+  const [filter, setFilter] = useState();
 
   useEffect(() => {
     const getFavoriteRecipes = () => {
@@ -39,83 +39,112 @@ const FavoriteRecipe = () => {
     setRecipes(newSavedRecipes);
   };
 
-  if (recipes) {
+  const filterByFood = () => {
+    const foodFilter = recipes.filter(({ type }) => type === 'comida');
+    setFilter(foodFilter);
+  };
+
+  const filterByDrink = () => {
+    const drinkFilter = recipes.filter(({ type }) => type === 'bebida');
+    setFilter(drinkFilter);
+  };
+
+  const noFilter = () => {
+    setFilter(undefined);
+  };
+
+  if (filter) {
     return (
       <div>
-        { recipes.map(({ type, name, image, category, area, alcoholicOrNot }, index) => {
-          if (type === 'comida') {
-            return (
-              <div key={ index }>
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ image }
-                  alt={ name }
-                />
-                <p data-testid={ `${index}-horizontal-top-text` }>
-                  { `${area} - ${category}` }
-                </p>
-                <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-                <section className="buttons-container">
-                  <label htmlFor="share">
-                    <input
-                      id="share"
-                      type="image"
-                      alt="Botão compartilhar"
-                      src={ shareIcon }
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      onClick={ copyLink }
-                    />
-                    {copied}
-                  </label>
-                  <input
-                    type="image"
-                    src={ favoriteIcon }
-                    alt="Botão de favoritar"
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                    onClick={ unfavoriteRecipe }
-                  />
-                </section>
-              </div>
-            );
-          }
-          return (
-            <div key={ index }>
-              <img
-                data-testid={ `${index}-horizontal-image` }
-                src={ image }
-                alt={ name }
-              />
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                { `${alcoholicOrNot}` }
-              </p>
-              <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-              <section className="buttons-container">
-                <label htmlFor="share">
-                  <input
-                    id="share"
-                    type="image"
-                    alt="Botão compartilhar"
-                    src={ shareIcon }
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    onClick={ copyLink }
-                  />
-                  {copied}
-                </label>
-                <input
-                  type="image"
-                  src={ favoriteIcon }
-                  alt="Botão de favoritar"
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  onClick={ unfavoriteRecipe }
-                />
-              </section>
-            </div>
-          );
-        }) }
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ noFilter }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ filterByFood }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ filterByDrink }
+        >
+          Drinks
+        </button>
+        <RenderRecipes
+          array={ filter }
+          copied={ copied }
+          copyLink={ copyLink }
+          unfavoriteRecipe={ unfavoriteRecipe }
+        />
       </div>
     );
   }
-  return null;
+
+  if (recipes) {
+    return (
+      <div>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ noFilter }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ filterByFood }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ filterByDrink }
+        >
+          Drinks
+        </button>
+        <RenderRecipes
+          array={ recipes }
+          copied={ copied }
+          copyLink={ copyLink }
+          unfavoriteRecipe={ unfavoriteRecipe }
+        />
+      </div>
+    );
+  }
+  return (
+    <div>
+      <button
+        type="button"
+        data-testid="filter-by-all-btn"
+        onClick={ noFilter }
+      >
+        All
+      </button>
+      <button
+        type="button"
+        data-testid="filter-by-food-btn"
+        onClick={ filterByFood }
+      >
+        Food
+      </button>
+      <button
+        type="button"
+        data-testid="filter-by-drink-btn"
+        onClick={ filterByDrink }
+      >
+        Drinks
+      </button>
+    </div>
+  );
 };
 
 export default FavoriteRecipe;
