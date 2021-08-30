@@ -29,7 +29,8 @@ export default function InProgressMeal(props) {
     strDrinkThumb,
     strCategory,
     strAlcoholic,
-    strInstructions } = details.drinks[0];
+    strInstructions,
+  } = details.drinks[0];
   return (
     <div>
       <InProgress

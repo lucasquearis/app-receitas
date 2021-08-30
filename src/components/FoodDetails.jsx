@@ -17,7 +17,7 @@ export default function FoodDetails(props) {
 
   const maxArray = 6;
   const filterDrinks = drinks.slice(0, maxArray);
-  const { meals, thumb, category, instructions,
+  const { meal, thumb, category, instructions,
     youTube, ingredientAndMeasure, id, type } = props;
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function FoodDetails(props) {
           )
         }
       </div>
-      <h1 data-testid="recipe-title">{meals}</h1>
+      <h1 data-testid="recipe-title">{meal}</h1>
       <p data-testid="recipe-category">{category}</p>
       <div>
         <h2>Ingredients</h2>
@@ -168,7 +168,7 @@ export default function FoodDetails(props) {
 
 FoodDetails.propTypes = {
   id: PropTypes.string.isRequired,
-  meals: PropTypes.string.isRequired,
+  meal: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
