@@ -4,6 +4,7 @@ import favoriteIconFull from '../images/blackHeartIcon.svg';
 import '../cssPages/ButtonFavorite.css';
 
 function ButtonFavorite(data) {
+  console.log(data);
   const { favoriteObject } = data;
   const { id: idRecipe } = favoriteObject;
   const favorites = localStorage.getItem('favoriteRecipes')
@@ -12,14 +13,13 @@ function ButtonFavorite(data) {
   const [isFavorite, setIsFavorite] = useState(favorites.includes(idRecipe));
 
   const favoriteClick = () => {
+    const thisFavoriteObject = { ...favoriteObject };
+    delete thisFavoriteObject.tag;
     const oldFavorites = (favorites === '') ? [] : JSON.parse(favorites);
-    if (isFavorite) {
-      const newFavorites = [...oldFavorites].filter(({ id }) => id !== idRecipe);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    } else {
-      const newFavorites = [...oldFavorites, favoriteObject];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    }
+    const newFavorites = (isFavorite)
+      ? [...oldFavorites].filter(({ id }) => id !== idRecipe)
+      : [...oldFavorites, thisFavoriteObject];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     setIsFavorite(!isFavorite);
   };
 

@@ -22,21 +22,21 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/comidas/:id" component={ Detalhes } />
-          <Route path="/bebidas/:id" component={ Detalhes } />
           <Route exact path="/comidas" component={ Comidas } />
           <Route exact path="/bebidas" component={ Bebidas } />
-          <Route path="/explorar/comidas/ingredientes" component={ ComidaIng } />
-          <Route path="/explorar/comidas/area" component={ LocalDeOrigem } />
-          <Route path="/explorar/comidas" component={ ComidasExp } />
-          <Route path="/explorar/bebidas/area" component={ NotFound } />
-          <Route path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
-          <Route path="/explorar/bebidas" component={ BebidasExp } />
-          <Route exect path="/explorar" component={ Explorar } />
+          <Route exact path="/comidas/:id" component={ Detalhes } />
+          <Route exact path="/bebidas/:id" component={ Detalhes } />
+          <Route exact path="/comidas/:id/in-progress" component={ Detalhes } />
+          <Route exact path="/bebidas/:id/in-progress" component={ Detalhes } />
+          <Route exact path="/explorar/comidas" component={ ComidasExp } />
+          <Route exact path="/explorar/bebidas" component={ BebidasExp } />
+          <Route exact path="/explorar/comidas/area" component={ LocalDeOrigem } />
+          <Route exact path="/explorar/comidas/ingredientes" component={ ComidaIng } />
+          <Route exact path="/explorar/bebidas/ingredientes" component={ BebidasIng } />
+          <Route exact path="/explorar" component={ Explorar } />
           <Route exact path="/perfil" component={ Perfil } />
+          <Route path="/" component={ NotFound } />
           {/*
-          <Route path="/comidas/{id-da-receita}/in-progress" component={ Login } />
-          <Route path="/bebidas/{id-da-receita}/in-progress" component={ Login } />
           <Route path="/receitas-feitas" component={ Login } />
           <Route path="/receitas-favoritas" component={ Login } /> */}
         </Switch>
