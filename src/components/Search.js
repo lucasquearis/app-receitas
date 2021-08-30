@@ -4,33 +4,16 @@ import RecipesContext from '../context/RecipesContext';
 function Search() {
   const [radio, setRadio] = useState('s');
   const [searchValue, setSearchValue] = useState('');
-  const {
-    API: { searchFoods, searchDrinks },
-    history: {
-      location: { pathname },
-    },
-  } = useContext(RecipesContext);
 
-  const search = pathname === '/comidas' ? searchFoods : searchDrinks;
+  const { API } = useContext(RecipesContext);
+  const { searchByFilters } = API;
 
   function handleChange({ target }) {
     setSearchValue(target.value);
   }
 
   function change(value) {
-    switch (value) {
-    case 'name':
-      setRadio('s');
-      break;
-    case 'ingredient':
-      setRadio('i');
-      break;
-    case 'first':
-      setRadio('f');
-      break;
-    default:
-      break;
-    }
+    setRadio(value[0]);
   }
 
   function click() {
@@ -38,7 +21,7 @@ function Search() {
     switch (radio) {
     case 'i':
       if (searchValue.length > 0) {
-        search(radio, searchValue);
+        searchByFilters(radio, searchValue);
       } else {
         alert('Escreva um ingrediente!');
       }
@@ -46,14 +29,14 @@ function Search() {
 
     case 'f':
       if (searchValue.length === 1) {
-        search(radio, searchValue);
+        searchByFilters(radio, searchValue);
       } else {
         alert('Sua busca deve conter somente 1 (um) caracter');
       }
       break;
 
     default:
-      search(radio, searchValue);
+      searchByFilters(radio, searchValue);
       break;
     }
   }
@@ -71,7 +54,7 @@ function Search() {
           <input
             type="radio"
             name="radio"
-            value="name"
+            value="search"
             data-testid="name-search-radio"
           />
           <span>Nome</span>

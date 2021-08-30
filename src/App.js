@@ -5,8 +5,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProviderContext from './context/ProviderContext';
 import Login from './pages/Login';
-import Foods from './pages/Foods';
-import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
 import ExploreFood from './pages/ExploreFood';
 import ExploreDrink from './pages/ExploreDrink';
@@ -18,14 +16,15 @@ import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipesInProgress from './pages/RecipesInProgress';
+import FoodsOrDrinks from './pages/FoodsOrDrinks';
 
 function App() {
   return (
     <ProviderContext>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/comidas" component={ Foods } />
-        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas" render={ () => <FoodsOrDrinks title="Comidas" /> } />
+        <Route exact path="/bebidas" render={ () => <FoodsOrDrinks title="Bebidas" /> } />
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreFood } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
