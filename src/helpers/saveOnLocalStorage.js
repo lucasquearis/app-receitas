@@ -62,3 +62,26 @@ export const saveNewFavorite = (recipe, typeRecipe) => {
   };
   return newFavRecipe;
 };
+
+export const saveInProgressRecipes = (recipe, item) => {
+  const currentPage = window.location.href;
+  if (currentPage.includes('comidas')) {
+    const { idMeal } = item;
+
+    const newProgressRecipe = {
+      meals: {
+        [idMeal]: [recipe],
+      },
+    };
+    return newProgressRecipe;
+  } if (currentPage.includes('bebidas')) {
+    const { idDrink } = item;
+
+    const newProgressRecipe = {
+      cocktails: {
+        [idDrink]: [recipe],
+      },
+    };
+    return newProgressRecipe;
+  }
+};
