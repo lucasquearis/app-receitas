@@ -11,20 +11,25 @@ export default function Foods() {
   const { meals } = filteredMeals;
   let numberOfCards = null;
   if (meals !== null) numberOfCards = meals.slice(START_CARD, NUMBER_CARDS);
-  if (meals === null) numberOfCards = baseDataMeals.meals.slice(START_CARD, NUMBER_CARDS);
+  /* if (meals === null) numberOfCards = baseDataMeals.meals.slice(START_CARD, NUMBER_CARDS); */
   return (
     <div>
       <Header />
       <section className="container-cards">
         {numberOfCards.map((meal, i) => (
-          <div key={ i } className={ `${meal.idMeal}-recipe-card card` }>
+          <div
+            key={ i }
+            className={ `${i}-recipe-card` }
+            data-testid={ `${i}-recipe-card` }
+          >
             <img
               src={ meal.strMealThumb }
               alt={ meal.str }
-              className={ `${meal.idMeal}-card-img` }
+              className={ `${i}-card-img` }
+              data-testid={ `${i}-card-img` }
             />
             <div>
-              <p data-testid={ `${meal.idMeal}-card-name` }>{meal.strMeal}</p>
+              <p data-testid={ `${i}-card-name` }>{meal.strMeal}</p>
             </div>
           </div>
         ))}

@@ -3,16 +3,14 @@ import React, { useContext, useState } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import myContext from '../context/myContext';
 // constants
-import { ALERT_ONE, START_CARD, NUMBER_CATEGORIES } from '../services/data';
+import { ALERT_ONE } from '../services/data';
 
 export default function SearchBar() {
   const {
     setSearchValues,
     filteredMeals,
     filteredDrinks,
-    setUpdateData,
-    /* baseCategoryDrinks */
-    baseCategoryMeal } = useContext(myContext);
+    setUpdateData } = useContext(myContext);
   const { pathname } = useLocation();
   const [textValue, setTextValue] = useState('');
   const [radioValue, setRadioValue] = useState('ingredient');
@@ -41,9 +39,6 @@ export default function SearchBar() {
       return <Redirect to={ `${pathname}/${drinks[0].idDrink}` } />;
     }
   }
-  const { categories } = baseCategoryMeal;
-  let cards = categories.slice(START_CARD, NUMBER_CATEGORIES);
-  console.log(cards);
   return (
     <section className="search-container">
       <div className="search-container__input">
@@ -87,21 +82,6 @@ export default function SearchBar() {
           Primeira letra
         </label>
       </div>
-      <label htmlFor="method">
-        Categoria:
-        <select
-          type="select"
-          name="method"
-          id="method"
-        >
-          {Object.values(cards)
-            .map((category, index) => (
-              <option key={ index }>
-                {category.strCategory}
-              </option>
-            ))}
-        </select>
-      </label>
       <div className="search-container__button">
         <button
           type="button"

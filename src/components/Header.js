@@ -6,6 +6,7 @@ import '../styles/Header.css';
 import profilePicture from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import Filter from './Filter';
 
 const renderTitle = (path) => {
   if (path.endsWith('/ingredientes')) return 'Explorar Ingredientes';
@@ -86,6 +87,7 @@ function Header() {
           ? <SearchBar />
           : ''}
       </div>
+      <Filter />
     </>
   );
 }

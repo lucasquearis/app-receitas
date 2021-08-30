@@ -1,7 +1,7 @@
 import { URL_RADIO_BUTTON } from './data';
 
 export async function getDrinks({ textValue, radioValue, pathname }) {
-  if (pathname === '/comidas') textValue = 'water';
+  if (pathname === '/comidas') textValue = '';
   const mealOrDrink = textValue.split(' ').join('+');
   const typeOfSearch = URL_RADIO_BUTTON[radioValue];
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/${typeOfSearch}=${mealOrDrink}`;
@@ -15,10 +15,6 @@ export async function getDrinks({ textValue, radioValue, pathname }) {
 
 export async function getDrinksCategories() {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-  try {
-    const result = await fetch(URL).then((resp) => resp.json());
-    return result;
-  } catch (e) {
-    return { drinkCategory: '' };
-  }
+  const result = await fetch(URL).then((resp) => resp.json());
+  return result;
 }

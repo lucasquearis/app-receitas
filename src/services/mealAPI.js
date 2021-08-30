@@ -10,11 +10,8 @@ export async function getMeals({ textValue, radioValue, pathname }) {
 }
 
 export async function getMealsCategories() {
-  try {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
-    const result = await fetch(URL).then((resp) => resp.json());
-    return result;
-  } catch (e) {
-    return { mealCategory: '' };
-  }
+  const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+  const response = await fetch(URL);
+  const result = response.json();
+  return result;
 }

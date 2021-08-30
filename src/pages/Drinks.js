@@ -19,14 +19,19 @@ export default function Foods() {
       <Header />
       <section className="container-cards">
         {cards.map((drink, i) => (
-          <div key={ i } className={ `${drink.idDrink}-recipe-card card` }>
+          <div
+            key={ i }
+            className={ `${i}-recipe-card` }
+            data-testid={ `${i}-recipe-card` }
+          >
             <img
               src={ drink.strDrinkThumb }
               alt={ drink.str }
-              className={ `${drink.idDrink}-card-img` }
+              className={ `${i}-card-img` }
+              data-testid={ `${i}-card-img` }
             />
             <div>
-              <p data-testid={ `${drink.idDrink}-card-name` }>{drink.strDrink}</p>
+              <p data-testid={ `${i}-card-name` }>{drink.strDrink}</p>
             </div>
           </div>
         ))}

@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+// <reference types="cypress" />
 
 describe('67 - Implemente os elementos da tela de explorar respeitando os atributos descritos no protótipo', () => {
   it('Tem os data-testids explore-food e explore-drinks', () => {

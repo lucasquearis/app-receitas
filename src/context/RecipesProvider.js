@@ -10,15 +10,15 @@ import { ALERT_TWO, MEAL_OBJ, DRINK_OBJ } from '../services/data';
 
 function RecipesProvider({ children }) {
   const [searchValues, setSearchValues] = useState({
-    textValue: '', radioValue: 'ingredient', pathname: '/comidas' });
+    textValue: '', radioValue: 'name', pathname: '/comidas' });
   const [filteredMeals, setFilteredMeals] = useState(false);
   const [filteredDrinks, setFilteredDrinks] = useState(false);
   const [infoUser, setInfoUser] = useState({ email: '', password: '' });
   const [updateData, setUpdateData] = useState(false);
   const [baseDataMeals, setBaseDataMeals] = useState();
   const [baseDataDrinks, setBaseDataDrinks] = useState();
-  const [baseCategoryDrinks, setBaseCategoryDrinks] = useState();
-  const [baseCategoryMeal, setBaseCategoryMeal] = useState();
+  const [mealCategoriesBase, setMealCategories] = useState();
+  const [drinkCategoriesBase, setDrinkCategories] = useState();
 
   const globalState = {
     infoUser,
@@ -30,8 +30,8 @@ function RecipesProvider({ children }) {
     setUpdateData,
     baseDataMeals,
     baseDataDrinks,
-    baseCategoryDrinks,
-    baseCategoryMeal,
+    drinkCategoriesBase,
+    mealCategoriesBase,
   };
   useEffect(() => {
     const resultBaseMeals = async () => {
@@ -43,22 +43,22 @@ function RecipesProvider({ children }) {
   [searchValues]);
 
   useEffect(() => {
-    const resultBaseMealsCategories = async () => {
-      const baseMeals = await getMealsCategories(MEAL_OBJ);
-      setBaseCategoryMeal(baseMeals);
+    const mealCategories = async () => {
+      const mealCat = await getMealsCategories();
+      setMealCategories(mealCat);
     };
-    resultBaseMealsCategories();
+    mealCategories();
   },
-  [searchValues]);
+  []);
 
   useEffect(() => {
-    const resultBaseDrinksCategories = async () => {
-      const baseMeals = await getDrinksCategories();
-      setBaseCategoryDrinks(baseMeals);
+    const drinkCategories = async () => {
+      const drinkCat = await getDrinksCategories();
+      setDrinkCategories(drinkCat);
     };
-    resultBaseDrinksCategories();
+    drinkCategories();
   },
-  [searchValues]);
+  []);
 
   useEffect(() => {
     const resultFilterMeals = async () => {

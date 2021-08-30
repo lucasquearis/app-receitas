@@ -1,8 +1,8 @@
 const URL_RADIO_BUTTON = {
   ingredient: 'filter.php?i',
-  category: 'filter.php?c',
   name: 'search.php?s',
   letter: 'search.php?f',
+  category: 'filter.php?c',
 };
 const MEAL_OBJ = { textValue: '', radioValue: 'ingredient', pathname: '/comidas' };
 const DRINK_OBJ = { textValue: 'water', radioValue: 'ingredient', pathname: '/bebidas' };
