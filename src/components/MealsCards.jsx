@@ -5,24 +5,17 @@ import MealCard from './MealCard';
 import { useFetchApiMeals } from '../customHooks/useFetchApi';
 
 export default function MealsCard() {
-  const { dataMeals, searchDataMeals, loading } = useContext(Context);
+  const {
+    dataMeals,
+    searchDataMeals,
+    loading,
+    filterByIngredientsMeals,
+  } = useContext(Context);
   const [getMealsApi] = useFetchApiMeals();
   const DOZE = 12;
   const UM = 1;
 
   useEffect(() => { getMealsApi(); }, []);
-
-  // useEffect(() => {
-  //   const data = dataMeals;
-  //   if (searchDataMeals.length > UM) {
-  //     return data = searchDataMeals;
-  //   }
-  // }, [searchDataMeals]);
-
-  // if (!dataMeals || !searchDataMeals) {
-  //   return <p>loading...</p>;
-  //   if
-  // }
 
   const showAlert = (func, mensagem) => func(mensagem);
   const msgNotRecipe = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
@@ -31,13 +24,19 @@ export default function MealsCard() {
     return <Redirect to={ `/comidas/${searchDataMeals[0].idMeal}` } />;
   }
 
-  const selectData = (principalMeals, searchMeals) => {
-    if (searchDataMeals <= UM) {
+  const selectData = (principalMeals, searchMeals, filterIngredients) => {
+    if (searchDataMeals <= UM && !filterByIngredientsMeals) {
       const data = principalMeals;
       return data;
     }
-    const data = searchMeals;
-    return data;
+    if (searchDataMeals > UM && !filterByIngredientsMeals) {
+      const data = searchMeals;
+      return data;
+    }
+    if (filterByIngredientsMeals) {
+      const data = filterIngredients;
+      return data;
+    }
   };
 
   if (loading === true) {
@@ -50,11 +49,8 @@ export default function MealsCard() {
         (searchDataMeals === null || searchDataMeals === undefined)
         && showAlert(alert, msgNotRecipe)
       }
-      {/* { if (searchDataMeals === null || searchDataMeals === undefined) {
-        return showAlert(alert, msgNotRecipe);
-      } } */}
       { dataMeals ? (
-        selectData(dataMeals, searchDataMeals)
+        selectData(dataMeals, searchDataMeals, filterByIngredientsMeals)
           .filter((_item, index) => index < DOZE)
           .map((meal, index) => (
             <MealCard

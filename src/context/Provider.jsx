@@ -17,6 +17,7 @@ export default function Provider({ children }) {
   const [dataRandomDrinks, setDataRandomDrinks] = useState('');
   const [dataExploreIngredientsMeals, setDataExploreIngredientsMeals] = useState('');
   const [dataExploreIngredientsDrinks, setDataExploreIngredientsDrinks] = useState('');
+  const [filterByIngredientsMeals, setFilterByIngredientsMeals] = useState('');
 
   const context = {
     dataMeals,
@@ -47,6 +48,8 @@ export default function Provider({ children }) {
     setDataExploreIngredientsMeals,
     dataExploreIngredientsDrinks,
     setDataExploreIngredientsDrinks,
+    filterByIngredientsMeals,
+    setFilterByIngredientsMeals,
   };
 
   return (
