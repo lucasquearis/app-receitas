@@ -102,6 +102,7 @@ function DoneRecipes() {
                 data-testid={ `${index}-horizontal-image` }
                 src={ image }
                 alt={ name }
+                style={ { width: '100px' } }
               />
             </Link>
             <div className="infos">
@@ -111,22 +112,22 @@ function DoneRecipes() {
                 <p className="name" data-testid={ `${index}-horizontal-name` }>
                   {name}
                 </p>
-                <p className="date" data-testid={ `${index}-horizontal-done-date` }>
-                  Feita em:
-                  {doneDate}
-                </p>
-                <div className="done-tags">
-                  {tags.map((tag) => (
-                    <p
-                      className="tag"
-                      key={ tag }
-                      data-testid={ `${index}-${tag}-horizontal-tag` }
-                    >
-                      {tag}
-                    </p>
-                  ))}
-                </div>
               </Link>
+              <p className="date" data-testid={ `${index}-horizontal-done-date` }>
+                Feita em:
+                {doneDate}
+              </p>
+              <div className="done-tags">
+                {tags.map((tag) => (
+                  <p
+                    className="tag"
+                    key={ tag }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                  >
+                    {tag}
+                  </p>
+                ))}
+              </div>
             </div>
             {/* <button
               type="button"

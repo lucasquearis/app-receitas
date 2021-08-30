@@ -37,4 +37,5 @@ export default function CopyButton({ path, index }) {
 
 CopyButton.propTypes = {
   path: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
