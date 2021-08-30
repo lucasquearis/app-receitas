@@ -61,7 +61,7 @@ function ReceitasFeitas() {
                     to={ `/bebidas/${recipe.id}` }
                   >
                     <img
-                      width="200px"
+                      width="250px"
                       data-testid={ `${index}-horizontal-image` }
                       alt={ recipe.name }
                       src={ recipe.image }
@@ -99,7 +99,7 @@ function ReceitasFeitas() {
                     to={ `/comidas/${recipe.id}` }
                   >
                     <img
-                      width="200px"
+                      width="250px"
                       data-testid={ `${index}-horizontal-image` }
                       alt={ recipe.name }
                       src={ recipe.image }
