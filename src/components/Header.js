@@ -15,7 +15,7 @@ function Header({ showSearchBtn }) { //
   const [headerTitle] = useHeaderTitle(pathname);
 
   if (redirect) {
-    return <Redirect to="/Perfil" />;
+    return <Redirect to="/perfil" />;
   }
   return (
     <header>

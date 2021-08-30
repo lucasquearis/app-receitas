@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
 
 function Perfil() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -13,6 +14,7 @@ function Perfil() {
   }
   return (
     <div>
+      <Header />
       {user && getEmail()}
       <Link to="/receitas-feitas">
         <button
