@@ -42,10 +42,6 @@ const DrinkDetails = () => {
       return;
     }
 
-    // if (actualStorage.some((favoriteItem) => favoriteItem.id === item.id)) {
-    //   return;
-    // }
-
     if (!favorite) {
       actualStorage.push(item);
       localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
