@@ -1,7 +1,14 @@
 import React from 'react';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 export default function Explorar() {
   return (
-    <h1>Tela de Explorar</h1>
+    <>
+      <section>
+        <Header title="Explorar" searchIcon />
+      </section>
+      <Footer />
+    </>
   );
 }
