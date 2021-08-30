@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { fetchFoodRedux } from '../redux/actions/foodActions';
 import FoodsCards from '../components/FoodsCard';
 import CategoryFoodBtn from '../components/CategoryFoodBtn';
@@ -10,7 +11,7 @@ function Foods() {
   const dispatch = useDispatch();
   const foodsLimits = 12;
   // const [current, setCurrent] = useState('');
-  const { meals } = useSelector((state) => state.foodsAndDrinks);
+  const { meals, redirect } = useSelector((state) => state.foodsAndDrinks);
   // const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
@@ -27,6 +28,10 @@ function Foods() {
     return (
       <h1>Loading</h1>
     );
+  }
+
+  if (redirect) {
+    return <Redirect to={ `/comidas/${redirect}` } />;
   }
 
   return (

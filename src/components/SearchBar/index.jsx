@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import GenericBtn from '../GenericBtn';
 import IconBtn from '../IconBtn';
@@ -9,9 +10,13 @@ import {
   fetchFoodByFirstLetter,
   fetchFoodByIngredient,
   fetchFoodByName,
+  fetchDrinkByFirstLetter,
+  fetchDrinkByIngredient,
+  fetchDrinkByName,
 } from '../../redux/actions/foodActions';
+import searchIcon from '../../images/searchIcon.svg';
 
-function SearchBar() {
+function SearchBar({ title }) {
   const [searchInputs, setSearchInputs] = useState(false);
   const [formInputs, setFormInput] = useState({});
   const dispatch = useDispatch();
@@ -24,29 +29,6 @@ function SearchBar() {
     }
   };
 
-  const handleSubmit = ({ searchInput, selectedSearch }) => {
-    console.log(selectedSearch, searchInput);
-    switch (selectedSearch) {
-    case 'ingredient':
-    {
-      const ingredient = searchInput.replace(' ', '_');
-      return dispatch(fetchFoodByIngredient(ingredient));
-    }
-    case 'name':
-    {
-      const name = searchInput.replace(' ', '_');
-      return dispatch(fetchFoodByName(name));
-    }
-    case 'firstLetter':
-    {
-      const firstLetter = searchInput.charAt(0);
-      return dispatch(fetchFoodByFirstLetter(firstLetter));
-    }
-    default:
-      return true;
-    }
-  };
-
   const handleChange = ({ target: { value, type, name, checked } }) => {
     if (type === 'checkbox') {
       setFormInput({ ...formInputs, [name]: checked });
@@ -55,10 +37,60 @@ function SearchBar() {
     }
   };
 
+  const handleFoodSubmit = ({ searchInput, selectedSearch }) => {
+    switch (selectedSearch) {
+    case 'ingredient':
+    {
+      const ingredient = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchFoodByIngredient(ingredient));
+    }
+    case 'name':
+    {
+      const name = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchFoodByName(name));
+    }
+    case 'firstLetter':
+    {
+      if (searchInput.length > 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      const firstLetter = searchInput.charAt(0).toLowerCase();
+      return dispatch(fetchFoodByFirstLetter(firstLetter));
+    }
+    default:
+      return true;
+    }
+  };
+
+  const handleDrinkSubmit = ({ searchInput, selectedSearch }) => {
+    switch (selectedSearch) {
+    case 'ingredient':
+    {
+      const ingredient = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchDrinkByIngredient(ingredient));
+    }
+    case 'name':
+    {
+      const name = searchInput.replace(' ', '_').toLowerCase();
+      return dispatch(fetchDrinkByName(name));
+    }
+    case 'firstLetter':
+    {
+      if (searchInput.length > 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      const firstLetter = searchInput.charAt(0).toLowerCase();
+      return dispatch(fetchDrinkByFirstLetter(firstLetter));
+    }
+    default:
+      return true;
+    }
+  };
+
   const searchBtnProps = {
     onClick: handleClick,
     dataId: 'search-top-btn',
-    src: '/images/searchIcon.svg',
+    src: searchIcon,
     alt: 'search-button',
   };
 
@@ -100,7 +132,13 @@ function SearchBar() {
   const searchBtn = {
     dataId: 'exec-search-btn',
     value: 'Buscar',
-    onClick: () => handleSubmit(formInputs),
+    onClick: () => {
+      if (title.toLowerCase() === 'comidas') {
+        handleFoodSubmit(formInputs);
+      } if (title.toLowerCase() === 'bebidas') {
+        handleDrinkSubmit(formInputs);
+      }
+    },
   };
 
   return (
@@ -119,5 +157,9 @@ function SearchBar() {
     </>
   );
 }
+
+SearchBar.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
 
 export default SearchBar;

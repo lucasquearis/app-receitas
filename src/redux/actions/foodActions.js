@@ -20,6 +20,7 @@ import {
   ADD_FOODS_CATEGORIES,
   ADD_MEAL_DETAIL,
   ADD_DRINK_DETAIL,
+  REDIRECT,
 } from './actionTypes';
 
 export const addFoods = (payload) => ({
@@ -49,6 +50,11 @@ const addMealDetail = (payload) => ({
 
 const addDrinkDetail = (payload) => ({
   type: ADD_DRINK_DETAIL,
+  payload,
+});
+
+const redirect = (payload) => ({
+  type: REDIRECT,
   payload,
 });
 
@@ -94,32 +100,76 @@ export const fetchDrinksByCategory = (name) => async (dispatch) => {
   dispatch(addDrinks(results));
 };
 
+const msg = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+
 export const fetchFoodByIngredient = (ingredient) => async (dispatch) => {
   const results = await fetchIngredientsFoods(ingredient);
-  dispatch(addFoods(results));
+  if (results.meals === null) {
+    global.alert(msg);
+  } else if (results.meals.length === 1) {
+    dispatch(addFoods(results));
+    dispatch(redirect(results.meals[0].idMeal));
+  } else {
+    dispatch(addFoods(results));
+  }
 };
 
 export const fetchFoodByName = (name) => async (dispatch) => {
   const results = await fetchNameFoods(name);
-  dispatch(addFoods(results));
+  if (results.meals === null) {
+    global.alert(msg);
+  } else if (results.meals.length === 1) {
+    dispatch(addFoods(results));
+    dispatch(redirect(results.meals[0].idMeal));
+  } else {
+    dispatch(addFoods(results));
+  }
 };
 
 export const fetchFoodByFirstLetter = (firstLetter) => async (dispatch) => {
   const results = await fetchFirstLetterFoods(firstLetter);
-  dispatch(addFoods(results));
+  if (results.meals === null) {
+    global.alert(msg);
+  } else if (results.meals.length === 1) {
+    dispatch(addFoods(results));
+    dispatch(redirect(results.meals[0].idMeal));
+  } else {
+    dispatch(addFoods(results));
+  }
 };
 
 export const fetchDrinkByIngredient = (ingredient) => async (dispatch) => {
   const results = await fetchIngredientsDrinks(ingredient);
-  dispatch(addDrinks(results));
+  if (results.drinks === null) {
+    global.alert(msg);
+  } else if (results.drinks.length === 1) {
+    dispatch(addDrinks(results));
+    dispatch(redirect(results.drinks[0].idDrink));
+  } else {
+    dispatch(addDrinks(results));
+  }
 };
 
 export const fetchDrinkByName = (name) => async (dispatch) => {
   const results = await fetchNameDrinks(name);
-  dispatch(addDrinks(results));
+  if (results.drinks === null) {
+    global.alert(msg);
+  } else if (results.drinks.length === 1) {
+    dispatch(addDrinks(results));
+    dispatch(redirect(results.drinks[0].idDrink));
+  } else {
+    dispatch(addDrinks(results));
+  }
 };
 
 export const fetchDrinkByFirstLetter = (firstLetter) => async (dispatch) => {
   const results = await fetchFirstLetterDrinks(firstLetter);
-  dispatch(addDrinks(results));
+  if (results.drinks === null) {
+    global.alert(msg);
+  } else if (results.drinks.length === 1) {
+    dispatch(addDrinks(results));
+    dispatch(redirect(results.drinks[0].idDrink));
+  } else {
+    dispatch(addDrinks(results));
+  }
 };
