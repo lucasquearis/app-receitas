@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function FavoritesCard(props) {
+export default function FavoriteCards(props) {
   const { recipe, index } = props;
 
   const getCategory = () => {
@@ -55,3 +56,15 @@ export default function FavoritesCard(props) {
     </section>
   );
 }
+
+FavoriteCards.propTypes = {
+  recipe: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    area: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    alcoholicOrNot: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};

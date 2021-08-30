@@ -8,8 +8,8 @@
   background-color: rgb(204, 204, 204);
   border: none;
   border-radius: 10px;
-  width: 25%;
   padding: 10px;
+  width: 25%;
 }
 
 .filter-section button:active {
