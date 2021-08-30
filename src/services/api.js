@@ -21,7 +21,6 @@ const getUrl = () => {
   const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
   const areaURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
   const detailsURL = `https://www.${url}.com/api/json/v1/1/lookup.php?i=`;
-  const recomendationsURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
 
   return {
     ingredientURL,
@@ -30,22 +29,27 @@ const getUrl = () => {
     categoryFilterURL,
     areaURL,
     detailsURL,
-    recomendationsURL,
     currentPage,
     foodPage,
     cocktailPage,
+    mealURL,
+    drinkURL,
   };
 };
 
 export const getRecomendations = async () => {
-  const { recomendationsURL, currentPage, foodPage, cocktailPage } = getUrl();
+  const { currentPage, foodPage, cocktailPage, mealURL, drinkURL } = getUrl();
 
-  const response = await fetch(recomendationsURL);
-  if (currentPage.includes(cocktailPage)) {
+  if (currentPage.includes(foodPage)) {
+    const recomendationsURL = `https://www.${drinkURL}.com/api/json/v1/1/search.php?s=`;
+    const response = await fetch(recomendationsURL);
     const { drinks } = await response.json();
 
     return drinks;
-  } if (currentPage.includes(foodPage)) {
+  }
+  if (currentPage.includes(cocktailPage)) {
+    const recomendationsURL = `https://www.${mealURL}.com/api/json/v1/1/search.php?s=`;
+    const response = await fetch(recomendationsURL);
     const { meals } = await response.json();
 
     return meals;
