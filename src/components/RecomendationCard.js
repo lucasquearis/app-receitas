@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  getRecomendationsDrinks,
-  getRecomendationsMeals } from '../services/genericFetchAPI';
+import genericFetchAPI from '../services/genericFetchAPI';
 
 function RecomendationCard({ type }) {
   const [recomendations, setRecomendations] = useState([]);
@@ -10,8 +8,9 @@ function RecomendationCard({ type }) {
 
   useEffect(() => {
     const getRecomendations = async () => {
-      if (type === 'meals') setRecomendations(await getRecomendationsMeals());
-      else setRecomendations(await getRecomendationsDrinks());
+      if (type === 'meals') {
+        setRecomendations(await genericFetchAPI('meal', 'search', 's', ''));
+      } else setRecomendations(await genericFetchAPI('meal', 'cocktail', 's', ''));
     };
     getRecomendations();
   }, [type]);
@@ -22,7 +21,7 @@ function RecomendationCard({ type }) {
     <section>
       {recomendations.map((recipe, index) => (index < MAX_CARD_RECOMENDATIONS ? (
         <div data-testid={ `${index}-recomendation-card` } key={ index }>
-          {`${recipe.strCategory}-teste`}
+          {`${recipe.strCategory || recipe.strAlchoolic}-teste`}
         </div>
       ) : null))}
     </section>

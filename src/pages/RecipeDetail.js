@@ -44,8 +44,12 @@ function RecipeDetail() {
   }, [recipe]);
 
   return recipe ? (
-    <section>
-      <img data-testid="recipe-photo" alt="recipe" />
+    <section style={ { textAlign: 'center' } }>
+      <img
+        data-testid="recipe-photo"
+        alt="recipe"
+        src={ recipe.strMealThumb || recipe.strDrinkThumb }
+      />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <button data-testid="share-btn" type="button">Share</button>
       <button data-testid="favorite-btn" type="button">Favorite</button>
@@ -56,7 +60,7 @@ function RecipeDetail() {
       </p>
       <p
         data-testid="instructions"
-        style={ { display: 'flex', maxWidth: '70%' } }
+        style={ { display: 'flex', padding: '10%' } }
       >
         { `${recipe.strInstructions}` }
       </p>
@@ -70,7 +74,7 @@ function RecipeDetail() {
       ))}
       { pathname.includes('comidas') ? (
         <YoutubeEmbed videoId={ recipe.strYoutube.substring(youtubeId) } />) : null}
-      <RecomendationCard type="meals" />
+      <RecomendationCard type={ pathname.includes('comidas') ? 'meals' : 'drinks' } />
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </section>
   ) : <p>Loading</p>;
