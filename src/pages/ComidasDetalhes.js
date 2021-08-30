@@ -64,6 +64,7 @@ export default function ComidasDetalhes() {
       </div>
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
       {/* <div className={ styles.buttonComidasDetails }> */}
+      <div>
       <button type="button" data-testid="share-btn">Compartilhar</button>
       <button type="button" data-testid="favorite-btn">Favorito</button>
       {/* </div> */}
