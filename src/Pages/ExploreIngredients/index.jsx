@@ -34,7 +34,7 @@ function ExploreIngredients() {
                 input: current.name,
               };
               searchRecipes(previousSearch, currentRout, url, history);
-              history.push('/comidas');
+              history.push(currentRout === true ? '/comidas' : '/bebidas');
             } }
           />
         ))}
