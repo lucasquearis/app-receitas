@@ -10,3 +10,4 @@ export { default as CategoryFilter } from './CategoryFilter/CategoryFilter';
 export { default as DoneRecipeCard } from './DoneRecipeCard/DoneRecipeCard';
 export { default as ExploreArea } from './ExploreArea/ExploreArea';
 export { default as ExploreLinks } from './ExploreLinks/ExploreLinks';
+export { default as FavoriteCard } from './FavoriteCard/FavoriteCard';
