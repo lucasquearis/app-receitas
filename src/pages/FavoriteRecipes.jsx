@@ -44,7 +44,6 @@ export default function FavoriteRecipes() {
         type="button"
       >
         All
-
       </Button>
       <Button
         onClick={ handleFoodFilter }

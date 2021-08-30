@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import shareIcon from '../images/shareIcon.svg';
 import favIconChecked from '../images/blackHeartIcon.svg';
@@ -16,7 +17,7 @@ export default function FavoriteCard({
   const drinkURL = 'http://localhost:3000/bebidas/';
 
   const [msgLink, setMsgLink] = useState('');
-  const { id } = recipes;
+  const { id, type } = recipes;
 
   const onClickShare = () => {
     setMsgLink('Link copiado!');
@@ -29,17 +30,19 @@ export default function FavoriteCard({
 
   return (
     <Card style={ { width: '90%' } }>
-      <Card.Img
-        style={ { width: '100px' } }
-        data-testid={ `${index}-horizontal-image` }
-        src={ img }
-      />
-      <Card.Title
-        data-testid={ `${index}-horizontal-top-text` }
-      >
-        {category}
-      </Card.Title>
-      <Card.Title data-testid={ `${index}-horizontal-name` }>{title}</Card.Title>
+      <Link to={ type === 'comida' ? `comidas/${id}` : `bebidas/${id}` }>
+        <Card.Img
+          style={ { width: '100px' } }
+          data-testid={ `${index}-horizontal-image` }
+          src={ img }
+        />
+        <Card.Title
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          {category}
+        </Card.Title>
+        <Card.Title data-testid={ `${index}-horizontal-name` }>{title}</Card.Title>
+      </Link>
       <div>
         <p>{msgLink}</p>
         <button
