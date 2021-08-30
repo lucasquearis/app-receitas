@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import { Share, Favorite } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
 import IconButton from '../../Components/IconBtn';
 import Vid from '../../Components/Vid';
 import Btn from '../../Components/Btn';
@@ -9,18 +10,23 @@ import Food from '../../Components/Food';
 import './RecipeDetails.css';
 import { ContextApp } from '../../Context/ContextApp';
 import List from '../../Components/List';
+import ModalHook from '../../Hooks/ModalHook';
+
+Modal.setAppElement('#root');
 
 function RecipeDetails({ match: { params } }) {
   const { feedType, id } = params;
-  const { handleRecipe,
-    singleRecipe, drinks, meal, handleDone, doneRecipe } = useContext(ContextApp);
+  const { handleCopy, closeModal, modal, modalStyles } = ModalHook();
+  const {
+    handleRecipe, singleRecipe, drinks, meal, handleStart, doneRecipe,
+    handleBtnType,
+  } = useContext(ContextApp);
   if (!singleRecipe) {
     handleRecipe(params);
     return (
       <div>Loading</div>
     );
   }
-  console.log(params);
   const titleProps = {
     'data-testid': 'recipe-title',
   };
@@ -29,18 +35,20 @@ function RecipeDetails({ match: { params } }) {
     src: singleRecipe.strMealThumb || singleRecipe.strDrinkThumb,
     'data-testid': 'recipe-photo',
   };
+
   const shareBtn = {
     name: 'share',
     'data-testid': 'share-btn',
-    icon: ShareIcon,
+    icon: Share,
     alt: 'shareIcon',
     type: 'button',
     variant: 'contained',
+    onClick: handleCopy,
   };
   const favBtn = {
     name: 'favorite',
     'data-testid': 'favorite-btn',
-    icon: FavoriteIcon,
+    icon: Favorite,
     alt: 'favoriteIcon',
     type: 'button',
     variant: 'contained',
@@ -61,6 +69,7 @@ function RecipeDetails({ match: { params } }) {
     src: singleRecipe.strYoutube ? `https://www.youtube.com/embed/${singleRecipe.strYoutube.split('=')[1]}` : null,
   };
   const btnProps = {
+    name: handleBtnType(params),
     'data-testid': 'start-recipe-btn',
     type: 'button',
     variant: 'contained',
@@ -68,7 +77,12 @@ function RecipeDetails({ match: { params } }) {
       position: 'fixed',
       bottom: 0,
     },
-    onClick: () => handleDone(params),
+    onClick: () => handleStart(params),
+  };
+  const modalProps = {
+    isOpen: modal,
+    onRequestClose: closeModal,
+    style: modalStyles,
   };
   const arr = Object.keys(singleRecipe)
     .filter((e) => e.includes('strIngredient')
@@ -96,9 +110,10 @@ function RecipeDetails({ match: { params } }) {
           ? <Food recipes={ drinks } maxRecipes={ 6 } />
           : <Food recipes={ meal } maxRecipes={ 6 } />}
       </div>
-      {!doneRecipe.some((e) => e[feedType] === id)
-        ? <Btn { ...btnProps } name="Iniciar Receita" />
-        : <Btn { ...btnProps } name="Continuar Receita" />}
+      {!doneRecipe.some((e) => e.id === id)
+        ? <Link to={ `/${feedType}/${id}/in-progress` }><Btn { ...btnProps } /></Link>
+        : null}
+      <Modal { ...modalProps }>Link copiado!</Modal>
     </>
   );
 }

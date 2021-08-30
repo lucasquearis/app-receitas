@@ -5,6 +5,7 @@ import foodHook from '../Hooks/FoodHook';
 import recipesHooks from '../Hooks/recipesHooks';
 import SingleRecipeHook from '../Hooks/SingleRecipeHook';
 import DoneRecipeHook from '../Hooks/DoneRecipeHook';
+import ModalHook from '../Hooks/ModalHook';
 
 export const ContextApp = createContext();
 
@@ -13,7 +14,8 @@ export const AppProvider = ({ children }) => {
   const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
   const { drinks, meal } = foodHook();
   const { singleRecipe, handleRecipe } = SingleRecipeHook();
-  const { handleDone, doneRecipe } = DoneRecipeHook();
+  const { handleStart, doneRecipe, inProgress, handleBtnType } = DoneRecipeHook();
+  const { handleModal } = ModalHook();
 
   const ContProps = {
     recipes,
@@ -27,8 +29,11 @@ export const AppProvider = ({ children }) => {
     meal,
     singleRecipe,
     handleRecipe,
-    handleDone,
+    handleStart,
     doneRecipe,
+    inProgress,
+    handleBtnType,
+    handleModal,
   };
 
   return (
