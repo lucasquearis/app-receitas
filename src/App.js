@@ -13,6 +13,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import Explore from './pages/Explore';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
+import Ingredients from './pages/Ingredients';
 import RecipesMade from './pages/RecipesMade';
 
 import FoodProvider from './provider/FoodProvider';
@@ -37,6 +38,8 @@ function App() {
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ ExploreFoods } />
             <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+            <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
+            <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
             <Route exact path="/receitas-feitas" component={ RecipesMade } />
           </Switch>
         </FavoritesProvider>

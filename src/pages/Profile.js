@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile(props) {
-  let email = '';
-  const getLocal = localStorage.getItem('user');
-  if (getLocal === null) {
-    localStorage.setItem('user', 'user@test.com');
-    const getFakeLocal = localStorage.getItem('user');
-    // const emailFake = JSON.parse(getFakeLocal);
-    email = getFakeLocal;
-  } else {
-    const emaila = JSON.parse(getLocal);
-    email = emaila.email;
-  }
+  const [email, SetEmail] = useState();
+
+  useEffect(() => {
+    const getLocal = JSON.parse(localStorage.getItem('user'));
+    if (getLocal) SetEmail(getLocal.email);
+    else SetEmail('');
+  }, [email]);
 
   const FavoriteRecipes = () => {
     const { history } = props;

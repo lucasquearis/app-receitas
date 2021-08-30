@@ -14,6 +14,7 @@ export default function MainFoods() {
   if (foods === null) {
     global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   }
+
   if (foods !== null && foods.length === 1) {
     return <Redirect to={ `comidas/${foods[0].idMeal}` } />;
   }

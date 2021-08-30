@@ -14,6 +14,7 @@ export default function MainDrinks() {
   if (drinks === null) {
     global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   }
+
   if (drinks !== null && drinks.length === 1) {
     return <Redirect to={ `bebidas/${drinks[0].idDrink}` } />;
   }
