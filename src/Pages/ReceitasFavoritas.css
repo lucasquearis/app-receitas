@@ -1,0 +1,21 @@
+.filter-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+}
+
+.filter-section button {
+  background-color: rgb(204, 204, 204);
+  border: none;
+  border-radius: 10px;
+  width: 25%;
+  padding: 10px;
+}
+
+.filter-section button:active {
+  background-color: rgb(158, 158, 158);
+}
+
+.filter-section button:focus {
+  outline: none;
+}
