@@ -73,11 +73,13 @@ export default function ComidasDetalhes() {
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
       </div>
+      <div className={ styles.videoComida }>
       <iframe
         src={ food.strYoutube }
         title="Vídeo de Instrução"
         data-testid="video"
       />
+      </div>
       {recomendedDrink.map((recomendation, index) => (
         <div
           data-testid={ `${index}-recomendation-card` }
