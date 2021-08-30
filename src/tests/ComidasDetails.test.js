@@ -36,14 +36,12 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     await screen.findByTestId(startRecipeButton);
   });
   it('Verifica se foram feitas duas requisicoes a API', async () => {
-    act(() => {
-      renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
-    });
+    renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
 
-    act(() => {
-      expect(fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771');
-      expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-    });
+    expect(fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771');
+    expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+
+    await act(() => fetchMock());
   });
 
   it('Verifica se o botao de iniciar desaparece caso ja tenha sido feita', async () => {
@@ -60,8 +58,8 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     }];
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
-    waitForElementToBeRemoved(null)
-      .catch(() => expect(screen.queryByTestId(startRecipeButton)).toBeNull());
+    expect(screen.queryByTestId(startRecipeButton)).toBeNull();
+    await act(() => fetchMock());
   });
 
   it('Verifica se o texto muda caso a receita ja tenha sido iniciada', async () => {
@@ -90,7 +88,7 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     expect(pathname).toBe('/comidas/52771/in-progress');
   });
 
-  it('Verifica se o botao de compartilhar copia o link da receita', async () => {
+  it('Verifica se a funcao copy e chamada ao clicar no botao', async () => {
     copy.mockImplementation(() => null);
     renderWithRouter(<ComidasDetails match={ { params: { id: '52771' } } } />);
     const copyLink = await screen.findByTestId('share-btn');
@@ -115,6 +113,7 @@ describe('Testes para a pagina de detalhes de comidas', () => {
     const favoriteImage = await screen.findByTestId(favoriteButton);
 
     expect(favoriteImage).toHaveAttribute('src', 'blackHeartIcon.svg');
+    await act(() => fetchMock());
   });
 
   it('Verifica se o coracao do botao de favoritar vem vazio', async () => {
