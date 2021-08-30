@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
-import FavRecipeShareAndFavBtn from './FavRecipeShareAndFavBtn';
+import shareIcon from '../images/shareIcon.svg';
+import favIconChecked from '../images/blackHeartIcon.svg';
 
-export default function FavoriteCard({ img, category, title, index, recipe }) {
+export default function FavoriteCard({
+  img,
+  category,
+  title,
+  index,
+  recipes,
+  handleDelete,
+}) {
+  const foodURL = 'http://localhost:3000/comidas/';
+  const drinkURL = 'http://localhost:3000/bebidas/';
+
+  const [msgLink, setMsgLink] = useState('');
+  const { id } = recipes;
+
+  const onClickShare = () => {
+    setMsgLink('Link copiado!');
+    if (recipes.type.includes('comida')) {
+      navigator.clipboard.writeText(`${foodURL}${id}`);
+    } else {
+      navigator.clipboard.writeText(`${drinkURL}${id}`);
+    }
+  };
+
   return (
     <Card style={ { width: '90%' } }>
       <Card.Img
@@ -17,7 +40,31 @@ export default function FavoriteCard({ img, category, title, index, recipe }) {
         {category}
       </Card.Title>
       <Card.Title data-testid={ `${index}-horizontal-name` }>{title}</Card.Title>
-      <FavRecipeShareAndFavBtn recipes={ recipe } index={ index } />
+      <div>
+        <p>{msgLink}</p>
+        <button
+          type="button"
+          style={ { border: 'none', background: 'none' } }
+          onClick={ onClickShare }
+        >
+          <img
+            data-testid={ `${index}-horizontal-share-btn` }
+            src={ shareIcon }
+            alt="Compartilhar"
+          />
+        </button>
+        <button
+          type="button"
+          style={ { border: 'none', background: 'none' } }
+          onClick={ handleDelete }
+        >
+          <img
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            src={ favIconChecked }
+            alt="Favoritar"
+          />
+        </button>
+      </div>
     </Card>
   );
 }
@@ -27,7 +74,7 @@ FavoriteCard.propTypes = {
   category: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  recipe: PropTypes.objectOf(
+  recipes: PropTypes.objectOf(
     PropTypes.string,
   ).isRequired,
 };
