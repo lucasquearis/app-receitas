@@ -1,0 +1,11 @@
+img {
+  height: 109px;
+  width: 170px;
+}
+
+.button-iniciar {
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  width: 100%;
+}

@@ -5,3 +5,5 @@ export { default as fetchAPIByCategory } from './fetchAPIByCategory';
 export { default as fetchAPIAreas } from './fetchAPIAreas';
 export { default as fetchAPIByAreas } from './fetchAPIByAreas';
 export { default as clipboardCopy } from './clipboardCopy';
+export { default as fetchAPIDetailsDrink } from './fetchAPIDetailsDrink';
+export { default as fetchAPIDetailsFood } from './fetchAPIDetailsFood';

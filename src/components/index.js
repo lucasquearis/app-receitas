@@ -5,3 +5,8 @@ export { default as FiltersMenu } from './FiltersMenu';
 export { default as AreaSelect } from './AreaSelect';
 export { default as FilteringButtons } from './FilteringButtons';
 export { default as DoneRecipeCard } from './DoneRecipeCard';
+export { default as DetailsButton } from './DetailsButton';
+export { default as HeaderIngredientsInstructions }
+  from './HeaderIngredientsInstructions';
+export { default as Video } from './Video';
+export { default as CarouselContainer } from './CarouselContainer';

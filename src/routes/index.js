@@ -8,11 +8,11 @@ export default function Routes() {
       <Route exact path="/" component={ Pages.LoginPage } />
 
       <Route path="/comidas/:id/in-progress" component={ Pages.ComidasInProgress } />
-      <Route path="/comidas/:id" component={ Pages.ComidasDetails } />
+      <Route path="/comidas/:id" component={ Pages.ReceitasDetalhesPage } />
       <Route path="/comidas" component={ Pages.HomePage } />
 
       <Route path="/bebidas/:id/in-progress" component={ Pages.BebidasInProgress } />
-      <Route path="/bebidas/:id" component={ Pages.BebidasDetails } />
+      <Route path="/bebidas/:id" component={ Pages.ReceitasDetalhesPage } />
       <Route path="/bebidas" component={ Pages.HomePage } />
 
       <Route
