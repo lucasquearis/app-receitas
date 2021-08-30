@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../context/RecipesContext';
 import HeaderSearch from '../components/HeaderSearch';
 import Footer from '../components/Footer';
+
 import Cards from '../components/Cards';
 
 function Drinks() {
