@@ -6,6 +6,7 @@ import {
 export const GET_CATEGORIES_FOOD = 'GET_CATEGORIES_FOOD';
 export const GET_ALL_MEALS = 'GET_ALL_MEALS';
 export const GET_MEALS_BY_CATEGORY = 'GET_MEALS_BY_CATEGORY';
+export const SELECT_BUTTON = 'SELECT_BUTTON';
 
 export const getFetchCategories = (resposta) => ({
   type: GET_CATEGORIES_FOOD,
@@ -22,6 +23,11 @@ export const getMeals = (btn) => ({
   payload: btn,
 });
 
+export const selectButton = (button) => ({
+  type: SELECT_BUTTON,
+  payload: button,
+});
+
 export const getCategoriesFood = () => async (dispatch) => {
   const resposta = await getFoodCategories();
   dispatch(getFetchCategories(resposta));
@@ -32,7 +38,7 @@ export const getAllFoodsThunk = () => async (dispatch) => {
   dispatch(getAllFoods(resposta));
 };
 
-export const getMealsThunk = (button) => async (dispatch) => {
-  const response = await getMealsByCategory(button);
+export const getMealsThunk = (selectedButton) => async (dispatch) => {
+  const response = await getMealsByCategory(selectedButton);
   dispatch(getMeals(response));
 };

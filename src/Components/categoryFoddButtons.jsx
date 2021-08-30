@@ -4,37 +4,53 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllFoodsThunk,
   getCategoriesFood,
-  getMealsThunk } from '../Redux/actions/categorieButtonsAct';
+  getMealsThunk,
+  selectButton } from '../Redux/actions/categorieButtonsAct';
 
 function CategoryFoodButtons() {
-  const { foodcategories: { foodCategories, isLoading } } = useSelector((state) => state);
+  const { foodcategories: {
+    foodCategories,
+    isLoading,
+    selectedButton } } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCategoriesFood());
   }, [dispatch]);
 
-  const handleClick = ({ target }) => {
-    if (target.name === 'All') {
+  console.log(selectedButton);
+
+  useEffect(() => {
+    if (selectedButton !== 'All' && selectedButton !== 'none') {
+      dispatch(getMealsThunk(selectedButton));
+    } else {
       dispatch(getAllFoodsThunk());
     }
-    dispatch(getMealsThunk(target.name));
-  };
+  }, [dispatch, selectedButton]);
 
   if (!isLoading) {
     return (
-      <session>
+      <session className="btn-session">
         { foodCategories.map((category) => (
           <button
             type="button"
-            key={ category.strCategory }
-            onClick={ handleClick }
+            key={ category.key }
+            onClick={ () => { dispatch(selectButton(category.strCategory)); } }
             name={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
           >
             { category.strCategory }
           </button>
         ))}
+        <button
+          type="button"
+          key="6"
+          onClick={ () => { dispatch(selectButton('All')); } }
+          name="All"
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
       </session>
     );
   }

@@ -1,41 +1,38 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import RecipeCard from '../Components/RecipeCard';
 import CategoryFoodButtons from '../Components/categoryFoddButtons';
-import { getAllFoodsThunk } from '../Redux/actions/categorieButtonsAct';
+import '../styles/MainPages.css';
 
 function FoodMainPage() {
   const { meals } = useSelector((state) => state.foodcategories);
-  const dispatch = useDispatch();
 
   const DOZE = 12;
-
-  useEffect(() => {
-    dispatch(getAllFoodsThunk());
-  }, [dispatch]);
 
   if (!meals) {
     return <Spinner animation="border" variant="danger" />;
   }
-  console.log(meals);
+
   return (
-    <>
+    <div className="container">
       <Header title="Comidas" loading />
       <CategoryFoodButtons />
-      { meals.slice(0, DOZE).map(({ idMeal, strMeal, strMealThumb }, key) => (
-        <RecipeCard
-          key={ key }
-          id={ idMeal }
-          thumbnail={ strMealThumb }
-          title={ strMeal }
-          index={ strMeal }
-        />
-      ))}
+      <session className="cards">
+        { meals.slice(0, DOZE).map(({ idMeal, strMealThumb, strMeal }, key) => (
+          <RecipeCard
+            key={ idMeal }
+            id={ idMeal }
+            thumbnail={ strMealThumb }
+            title={ strMeal }
+            index={ key }
+          />
+        ))}
+      </session>
       <Footer />
-    </>
+    </div>
   );
 }
 
