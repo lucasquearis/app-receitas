@@ -1,8 +1,12 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
 function ExploreByArea() {
   return (
-    <p>Explore by Area</p>
+    <div>
+      <p>Explore by Area</p>
+      <Footer />
+    </div>
   );
 }
 
