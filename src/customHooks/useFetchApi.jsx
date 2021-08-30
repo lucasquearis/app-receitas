@@ -9,6 +9,7 @@ export function useFetchApiMeals() {
   const getMealsApi = async () => {
     const { meals } = await fetchAPI('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     setDataMeals(meals);
+    console.log(meals);
   };
   return [getMealsApi];
 }

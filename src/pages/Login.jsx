@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import '../styles/Login.css';
+import { initialInProgressStorage } from '../services/inProgressStorage';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -32,6 +33,7 @@ export default function Login() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
+    initialInProgressStorage();
     setShould(true);
   }
 
