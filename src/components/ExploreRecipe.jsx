@@ -4,7 +4,8 @@ import { Redirect } from 'react-router-dom';
 function ExploreRecipe() {
   const [location, setLocation] = useState({
     ingredient: false,
-    explore: false,
+    area: false,
+    surprise: false,
   });
 
   const redirect = (path) => {
@@ -12,6 +13,7 @@ function ExploreRecipe() {
   };
 
   if (location.ingredient) return <Redirect to="/explorar/comidas/ingredientes" />;
+  if (location.area) return <Redirect to="/explorar/comidas/area" />;
 
   return (
     <div>
@@ -25,6 +27,7 @@ function ExploreRecipe() {
       <button
         type="button"
         data-testid="explore-by-area"
+        onClick={ () => redirect('area') }
       >
         Por Local de Origem
       </button>
