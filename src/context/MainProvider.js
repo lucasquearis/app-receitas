@@ -8,11 +8,6 @@ function MainProvider({ children }) {
     title,
     setTitle,
   };
-<<<<<<< HEAD
-=======
-
-  const value = { number: 4 };
->>>>>>> 2729d5f85e620986b905c793f7bf49cc7d96412a
   return (
     <MainContext.Provider value={ value }>
       { children }

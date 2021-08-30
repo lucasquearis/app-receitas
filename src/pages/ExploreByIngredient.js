@@ -14,10 +14,6 @@ function ExploreByIngredient(title) {
     <div>
       <Header title={ title } hideSearch />
       <p>Explore by Ingredient</p>
-<<<<<<< HEAD
-=======
-      <p>Explore by Ingredient</p>
->>>>>>> 2729d5f85e620986b905c793f7bf49cc7d96412a
       <Footer />
     </div>
   );

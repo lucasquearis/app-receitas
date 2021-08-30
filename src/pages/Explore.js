@@ -1,12 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-=======
-import Header from '../components/Header';
-
-import { Link } from 'react-router-dom';
->>>>>>> 2729d5f85e620986b905c793f7bf49cc7d96412a
 import Footer from '../components/Footer';
 
 function Explore() {
