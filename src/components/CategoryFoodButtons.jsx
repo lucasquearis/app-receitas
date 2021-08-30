@@ -39,9 +39,19 @@ function CategoryFoodButtons() {
     dispatch(clearSearch());
     showInputClick();
   };
+  const handleClickAll = () => {
+    setShowInput(true);
+  };
 
   return (
     <div>
+      <button
+        type="button"
+        onClick={ handleClickAll }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {
         categories && categories.map((category, index) => index < cinco && (
           <section key={ index } className="category-btn">
