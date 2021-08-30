@@ -1,9 +1,3 @@
-// acessar os elementos da tela
-
-// interagir com esses elementos (se necessário)
-
-// fazer os testes
-
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Login from '../pages/Login';

@@ -30,7 +30,7 @@ export default function SearchBar() {
     }
     if (searchType === 'firstLetter') {
       if (value.length > 1) {
-        console.log('Sua busca deve conter somente 1 (um) caracter');
+        alert('Sua busca deve conter somente 1 (um) caracter');
         return;
       }
       fetchType(setRecipeType, `https://www.the${recipeType}db.com/api/json/v1/1/search.php?f=${value}`);
