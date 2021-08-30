@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import FoodContext from '../context/FoodContext';
 import './favoriteFoodCard.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -7,7 +8,8 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const FavoriteFoodCard = ({ recipe }, index) => {
   const { id, image, name, area, category } = recipe;
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(true);
+  const { changed, setChanged } = useContext(FoodContext);
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -28,6 +30,7 @@ const FavoriteFoodCard = ({ recipe }, index) => {
       );
       localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
     }
+    setChanged(!changed);
   }
 
   const getFavorite = () => {
@@ -76,7 +79,7 @@ const FavoriteFoodCard = ({ recipe }, index) => {
 
 FavoriteFoodCard.propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
     area: PropTypes.string,

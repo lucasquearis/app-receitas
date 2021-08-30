@@ -9,7 +9,7 @@ const FavoriteDrinkCard = ({ recipe }, index) => {
   const { id, image, name, alcoholicOrNot } = recipe;
   console.log(recipe);
 
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(true);
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -74,7 +74,7 @@ const FavoriteDrinkCard = ({ recipe }, index) => {
 
 FavoriteDrinkCard.propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
     area: PropTypes.string,

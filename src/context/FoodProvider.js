@@ -17,6 +17,7 @@ const FoodProvider = ({ children }) => {
   const [categoriesMeal, setCategoriesMeal] = useState([]);
   const [mealsByCategories, setMealsByCategories] = useState(false);
   const [randomMeal, setRandomMeal] = useState('');
+  const [changed, setChanged] = useState(false);
 
   useEffect(() => {
     fetchMealApi(foodFilter).then((data) => {
@@ -42,6 +43,8 @@ const FoodProvider = ({ children }) => {
     setMealsByCategories,
     randomMeal,
     setRandomMeal,
+    changed,
+    setChanged,
   };
   return (
     <FoodContext.Provider value={ contextValue }>

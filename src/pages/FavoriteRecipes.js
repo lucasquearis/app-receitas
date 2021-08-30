@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import FoodContext from '../context/FoodContext';
 import FavoriteFoodCard from '../components/FavoriteFoodCard';
 import FavoriteDrinkCard from '../components/FavoriteDrinkCard';
 import profileIcon from '../images/profileIcon.svg';
 
 const FavoriteRecipes = () => {
-  const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  console.log(actualStorage);
+  const { changed } = useContext(FoodContext);
+  const [storage, setStorage] = useState([]);
+  console.log(changed);
+
+  useEffect(() => {
+    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setStorage(actualStorage);
+  }, [changed]);
+
   return (
     <div>
       <div>
@@ -14,7 +22,7 @@ const FavoriteRecipes = () => {
         </button>
         <h2 data-testid="page-title">Receitas Favoritas</h2>
       </div>
-      { actualStorage.map((recipe, index) => (recipe.type === 'comida'
+      { storage.map((recipe, index) => (recipe.type === 'comida'
         ? <FavoriteFoodCard recipe={ recipe } index={ index } />
         : <FavoriteDrinkCard recipe={ recipe } index={ index } />))}
     </div>
