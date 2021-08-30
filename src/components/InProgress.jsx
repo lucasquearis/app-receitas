@@ -54,7 +54,7 @@ export default function InProgress(props) {
   }, [favorite]);
 
   useEffect(() => {
-    updateProgressRecipe(id, steps, type);
+    updateProgressRecipe(id, steps, type, category);
   }, [steps]);
 
   const clipboard = () => {

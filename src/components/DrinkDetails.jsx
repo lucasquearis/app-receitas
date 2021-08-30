@@ -22,7 +22,7 @@ export default function DrinksDetails(props) {
 
   useEffect(() => {
     fetchMeals(setMeals);
-    startOrContinue(setBtnStart, id, type);
+    startOrContinue(setBtnStart, id, type, category);
     if (localStorage.favoriteRecipes) {
       setBtnFavorite(JSON.parse(localStorage.getItem('favoriteRecipes'))
         .some((item) => item.id === id));

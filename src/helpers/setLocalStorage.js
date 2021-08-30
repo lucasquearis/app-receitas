@@ -2,15 +2,16 @@ export const initialProgressStore = () => {
   localStorage.setItem('inProgressRecipes', JSON.stringify({
     meals: {},
     drinks: {},
+    cocktails: {},
   }));
 };
 
-export const updateProgressRecipe = (id, ing, type) => {
+export const updateProgressRecipe = (id, ing, type, category) => {
   const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const recipes = getStorage[type];
   localStorage.setItem('inProgressRecipes', JSON.stringify({
     ...getStorage,
-    [type]: { ...recipes, [id]: ing },
+    [category === 'Cocktail' ? 'cocktails' : 'drinks']: { ...recipes, [id]: ing },
   }));
 };
 
@@ -40,12 +41,15 @@ export const favoriteRecipes = (props, btnFavorite) => {
   }
 };
 
-export const startOrContinue = (callback, id, type) => {
+export const startOrContinue = (callback, id, type, category) => {
   const data = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (localStorage.inProgressRecipes) {
-    if (type === 'bebida') {
+    if (type === 'bebida' && category !== 'Cocktail') {
       const { drinks } = data;
       callback(Object.keys(drinks).some((item) => +item === +id));
+    } else if (category === 'Cocktail') {
+      const { cocktails } = data;
+      callback(Object.keys(cocktails).some((item) => +item === +id));
     } else {
       const { meals } = data;
       callback(Object.keys(meals).some((item) => +item === +id));
