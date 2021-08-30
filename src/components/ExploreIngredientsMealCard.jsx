@@ -4,19 +4,20 @@ import PropTypes from 'prop-types';
 import '../styles/RecipeCard.css';
 
 export default function ExploreIngredientsMealCard({ ingredient, index }) {
-  console.log(ingredient, index);
   const { strIngredient } = ingredient;
+  const imgUrl = `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png`;
+
   return (
     // <Link to={ `/comidas/${idMeal}` }> -> requisito 77
     <li
       className="recipe-card"
       data-testid={ `${index}-ingredient-card` }
     >
-      {/* <img -> requisito 76
+      <img
         alt={ strIngredient }
-        src={ strMealThumb }
+        src={ imgUrl }
         data-testid={ `${index}-card-img` }
-      /> */}
+      />
       <p
         data-testid={ `${index}-card-name` }
       >
@@ -30,7 +31,6 @@ export default function ExploreIngredientsMealCard({ ingredient, index }) {
 ExploreIngredientsMealCard.propTypes = {
   meal: PropTypes.shape({
     strIngredient: PropTypes.string,
-    // strMealThumb: PropTypes.string,
   }),
   index: PropTypes.number,
 }.isRequired;
