@@ -8,16 +8,22 @@ import '../cssPages/ReceitasF.css';
 import ShareButton from '../components/ShareButton';
 
 function ReceitasFeitas() {
-  const [finishRecipes, SetFinishRecipes] = useState([]);
+  const [showRecipes, setShowRecipes] = useState([]);
+  const [finishRecipes, setFinishRecipes] = useState([]);
   const [redirect, setRedirect] = useState(null);
 
   useEffect(() => {
-    SetFinishRecipes(foodsEdrinks);
+    localStorage.setItem('doneRecipes', JSON.stringify(foodsEdrinks));
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    setFinishRecipes(doneRecipes);
+    setShowRecipes(doneRecipes);
   }, []);
 
-  function desfavorite(parans) {
-    const desfavoritar = foodsEdrinks.filter((bebida) => bebida.name !== parans);
-    SetFinishRecipes(desfavoritar);
+  function desfavorite(foodName) {
+    const desfavoritar = finishRecipes.filter((value) => value.name !== foodName);
+    setShowRecipes(showRecipes.filter((value) => value.name !== foodName));
+    setFinishRecipes(desfavoritar);
+    localStorage.setItem('doneRecipes', JSON.stringify(desfavoritar));
   }
 
   function onLink(type, id) {
@@ -25,11 +31,11 @@ function ReceitasFeitas() {
   }
 
   function onClick({ target: { name } }) {
-    const filtroBebidas = foodsEdrinks.filter((bebida) => bebida.type === 'bebida');
-    const filtroComidas = foodsEdrinks.filter((comida) => comida.type === 'comida');
-    if (name === 'bebida') SetFinishRecipes(filtroBebidas);
-    if (name === 'comida') SetFinishRecipes(filtroComidas);
-    if (name === 'all') SetFinishRecipes(foodsEdrinks);
+    const filtroBebidas = finishRecipes.filter((bebida) => bebida.type === 'bebida');
+    const filtroComidas = finishRecipes.filter((comida) => comida.type === 'comida');
+    if (name === 'bebida') setShowRecipes(filtroBebidas);
+    if (name === 'comida') setShowRecipes(filtroComidas);
+    if (name === 'all') setShowRecipes(finishRecipes);
   }
 
   if (redirect) return <Redirect to={ redirect } />;
@@ -66,7 +72,7 @@ function ReceitasFeitas() {
         </button>
       </div>
       <div className="paiDeTodos">
-        {finishRecipes.map((recipe, index) => (
+        {showRecipes.map((recipe, index) => (
           <Card
             name={ recipe.name }
             style={ { width: '18rem' } }
@@ -87,7 +93,7 @@ function ReceitasFeitas() {
                 >
                   { recipe.name }
                 </Card.Title>
-                <ShareButton />
+                <ShareButton url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
                 <button
                   type="button"
                   className="button-filtro"
