@@ -1,0 +1,25 @@
+.buttonSuperior {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.categoria {
+  display: flex;
+  justify-content: center;
+}
+
+.comida {
+  display: flex;
+  justify-content: center;
+}
+
+.imagem {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}

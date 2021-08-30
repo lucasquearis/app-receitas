@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
+import styles from './BebidasDetalhes.module.css';
 
 export default function BebidasDetalhes() {
   const [drink, setDrink] = useState();
@@ -48,17 +49,26 @@ export default function BebidasDetalhes() {
   return (
     <div>
       <p>{drink.idDrink}</p>
-      <img src={ drink.strDrinkThumb } alt="recipe" data-testid="recipe-photo" />
+      <div className={ styles.bebidasDetails }>
+        <img
+          src={ drink.strDrinkThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+          className={ styles.imgBebidasDetails }
+        />
+      </div>
       <h2 data-testid="recipe-title">{drink.strDrink}</h2>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favorito</button>
+      <div className={ styles.buttonBebidasDetails }>
+        <button type="button" data-testid="share-btn">Compartilhar</button>
+        <button type="button" data-testid="favorite-btn">Favorito</button>
+      </div>
       <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-      <ul>
+      <ul className={ styles.optionsDrinks }>
         {setIngredients()}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
       <div>
-        <h3>Receitas recomendadas</h3>
+        <h3 className={ styles.receitasBebidas }>Receitas recomendadas</h3>
         <ul>
           {recommendedRecipes.map((name, index) => (
             <li
@@ -70,7 +80,14 @@ export default function BebidasDetalhes() {
           ))}
         </ul>
       </div>
-      <button type="button" data-testid="start-recipe-btn">Favorito</button>
+      <div className={ styles.buttonFavoriteBebida }>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Favorito
+        </button>
+      </div>
     </div>
   );
 }

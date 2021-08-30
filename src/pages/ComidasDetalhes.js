@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
+import styles from './ComidasDetalhes.module.css';
 
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
@@ -48,22 +49,33 @@ export default function ComidasDetalhes() {
 
   return (
     <div>
-      <img src={ food.strMealThumb } alt="recipe" data-testid="recipe-photo" />
+      <div className={ styles.comidasDetails }>
+        <img
+          src={ food.strMealThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+          className={ styles.imgComidasDetails }
+        />
+      </div>
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
+      {/* <div className={ styles.buttonComidasDetails }> */}
       <button type="button" data-testid="share-btn">Compartilhar</button>
       <button type="button" data-testid="favorite-btn">Favorito</button>
+      {/* </div> */}
       <p data-testid="recipe-category">{food.strCategory}</p>
       <ul>
         {setIngredients()}
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
-      <iframe
-        src="https://www.youtube.com/embed/DsFpGUXpZVU"
-        title="Vídeo de Instrução"
-        data-testid="video"
-      />
+      <div className={ styles.videoComida }>
+        <iframe
+          src="https://www.youtube.com/embed/DsFpGUXpZVU"
+          title="Vídeo de Instrução"
+          data-testid="video"
+        />
+      </div>
       <div>
-        <h3>Receitas recomendadas</h3>
+        <h3 className={ styles.receitasComidas }>Receitas recomendadas</h3>
         <ul>
           {recommendedRecipes.map((name, index) => (
             <li
@@ -75,7 +87,9 @@ export default function ComidasDetalhes() {
           ))}
         </ul>
       </div>
-      <button type="button" data-testid="start-recipe-btn">Favorito</button>
+      <div className={ styles.favoriteComidaButton }>
+        <button type="button" data-testid="start-recipe-btn">Favorito</button>
+      </div>
     </div>
   );
 }
