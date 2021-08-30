@@ -4,8 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Foods from './pages/foods/Foods';
 import Drinks from './pages/drinks/Drinks';
-import DetailsFood from './pages/foods/DetailsFood';
 import DetailsDrink from './pages/drinks/DetailsDrink';
+import DetailsFood from './pages/foods/DetailsFood';
 
 function App() {
   return (

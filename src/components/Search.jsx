@@ -42,7 +42,7 @@ class Search extends Component {
       setSearchNomeDrinks(text);
     } else if (radio === 'Primeira letra' && text.length === 1) {
       setSearchLetterDrinks(text);
-    } else { alert('Sua busca deve conter somente 1 (um) caracter'); }
+    } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
   handleFoods() {
@@ -64,7 +64,7 @@ class Search extends Component {
       if (setSearchLetter().length === 1) {
         return <Redirect to={ `/comidas/${setSearchLetter.idMeal}` } />;
       }
-    } else { alert('Sua busca deve conter somente 1 (um) caracter'); }
+    } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
   handleClick() {
