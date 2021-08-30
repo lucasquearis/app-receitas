@@ -31,6 +31,9 @@ const getUrl = () => {
     areaURL,
     detailsURL,
     recomendationsURL,
+    currentPage,
+    foodPage,
+    cocktailPage,
   };
 };
 
@@ -38,11 +41,11 @@ export const getRecomendations = async () => {
   const { recomendationsURL, currentPage, foodPage, cocktailPage } = getUrl();
 
   const response = await fetch(recomendationsURL);
-  if (currentPage.includes(foodPage)) {
+  if (currentPage.includes(cocktailPage)) {
     const { drinks } = await response.json();
 
     return drinks;
-  } if (currentPage.includes(cocktailPage)) {
+  } if (currentPage.includes(foodPage)) {
     const { meals } = await response.json();
 
     return meals;
