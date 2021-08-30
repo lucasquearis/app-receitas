@@ -10,6 +10,7 @@ import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
 import Explore from './Pages/Explore';
 import Profile from './Pages/Profile/Profile';
 import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
+import ReceitasFeitas from './Pages/ReceitasFeitas/ReceitasFeitas';
 
 function App() {
   const exploreFoodDrink = (
@@ -74,20 +75,15 @@ function App() {
           exact
           path="/receitas-feitas"
           render={ () => (
-            <Header
-              title="Receitas Feitas"
-              searchButton={ false }
-            />
+            <Header />
           ) }
+          component={ ReceitasFeitas }
         />
         <Route
           exact
           path="/receitas-favoritas"
           render={ () => (
-            <Header
-              title="Receitas Favoritas"
-              searchButton={ false }
-            />
+            <Header />
           ) }
           component={ ReceitasFavoritas }
         />

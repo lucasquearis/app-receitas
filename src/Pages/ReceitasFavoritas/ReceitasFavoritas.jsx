@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import clipboardCopy from 'clipboard-copy';
 import Header from '../../Components/Header';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Btn from '../../Components/Btn';
 
 function ReceitasFavoritas() {
-  const history = useHistory();
-
   const getFavoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const [favorite, setFavorite] = useState(getFavoriteStorage);
   const [copied, setCopied] = useState(false);
@@ -51,7 +50,10 @@ function ReceitasFavoritas() {
 
   return (
     <div>
-      <Header title="Receitas Favoritas" />
+      <Header
+        title="Receitas Favoritas"
+        searchButton={ false }
+      />
       <div>
         <Btn { ...allButtonProps } />
       </div>
@@ -87,7 +89,7 @@ function ReceitasFavoritas() {
                   <button
                     type="button"
                     onClick={ () => {
-                      history.push(`http://localhost:3000/bebidas/${recipe.id}`);
+                      clipboardCopy(`http://localhost:3000/bebidas/${recipe.id}`);
                       setCopied(true);
                     } }
                   >
@@ -131,7 +133,7 @@ function ReceitasFavoritas() {
                   <button
                     type="button"
                     onClick={ () => {
-                      history.push(`http://localhost:3000/comidas/${recipe.id}`);
+                      clipboardCopy(`http://localhost:3000/comidas/${recipe.id}`);
                       setCopied(true);
                     } }
                   >
