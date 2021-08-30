@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './pageCSS/Login.css';
 import { Link } from 'react-router-dom';
+import loginBackground from '../images/loginBg.png';
 
 // prettier-ignore
 export default function Login() {
@@ -41,39 +42,47 @@ export default function Login() {
   }, [loginInfo]);
 
   return (
-    <form className="pure-form">
-      <fieldset>
-        <label htmlFor="email-input">
-          E-mail:
-          <input
-            name="email"
-            type="email"
-            data-testid="email-input"
-            onChange={ handleChange }
-            value={ loginInfo.email }
-          />
-        </label>
-        <label htmlFor="password-input">
-          Password:
-          <input
-            name="password"
-            type="password"
-            data-testid="password-input"
-            onChange={ handleChange }
-            value={ loginInfo.password }
-          />
-        </label>
-        <Link to="/comidas">
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            onClick={ handleClick }
-            disabled={ btnDisabled }
-          >
-            Login
-          </button>
-        </Link>
-      </fieldset>
-    </form>
+    <div className="login__body">
+      <img
+        src={ loginBackground }
+        alt="Dog Logo Pink Background"
+        className="login__bg"
+      />
+      <form className="pure-form">
+        <fieldset>
+          <label htmlFor="email-input">
+            <input
+              placeholder="E-mail"
+              name="email"
+              type="email"
+              data-testid="email-input"
+              onChange={ handleChange }
+              value={ loginInfo.email }
+            />
+          </label>
+          <label htmlFor="password-input">
+            <input
+              placeholder="Senha"
+              name="password"
+              type="password"
+              data-testid="password-input"
+              onChange={ handleChange }
+              value={ loginInfo.password }
+            />
+          </label>
+          <Link to="/comidas">
+            <button
+              type="button"
+              className="pure-button pure-button-primary"
+              data-testid="login-submit-btn"
+              onClick={ handleClick }
+              disabled={ btnDisabled }
+            >
+              Login
+            </button>
+          </Link>
+        </fieldset>
+      </form>
+    </div>
   );
 }

@@ -20,11 +20,11 @@ export default function Header({ title }) {
         type="button"
         className="search-btn"
         onClick={ showSearch }
+        data-testid="search-top-btn"
       >
         <img
           alt="button-icon"
           src={ searchIcon }
-          data-testid="search-top-btn"
         />
       </button>
     </header>

@@ -3,17 +3,18 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import Header from '../pages/Meals';
+import SubHeader from '../components/SubHeader';
 
 const SEARCH_BTN = 'search-top-btn';
 
 describe('Teste elementos do header na tela principal de receitas', () => {
   test('O botão de perfil deve possuir o atributo data-testid', () => {
-    renderWithRouter(<Header />);
+    renderWithRouter(<SubHeader />);
     const profileBtn = screen.getByTestId('profile-top-btn');
     expect(profileBtn).toBeInTheDocument();
   });
   test('O titulo deve possuir o atributo data-testid', () => {
-    renderWithRouter(<Header />);
+    renderWithRouter(<SubHeader />);
     const titleH1 = screen.getByTestId('page-title');
     expect(titleH1).toBeInTheDocument();
   });
@@ -26,7 +27,7 @@ describe('Teste elementos do header na tela principal de receitas', () => {
 
 describe('Teste ícone para a tela de perfil,  título e  ícone para a busca', () => {
   test('O botão de perfil e pesquisar devem possuir icone correpondente', () => {
-    renderWithRouter(<Header />);
+    renderWithRouter(<SubHeader />);
     const icon = 'profileIcon.svg';
     const icon2 = 'searchIcon.svg';
     const locations = screen.getAllByRole('img', { name: /button-icon/i });
