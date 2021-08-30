@@ -19,7 +19,12 @@ export default function ListDetails({ ingredients, measures }) {
   });
 }
 
+ListDetails.defaultProps = {
+  ingredient: [],
+  measures: [],
+};
+
 ListDetails.propTypes = {
-  ingredient: PropTypes.arrayOf(PropTypes.string).isRequired,
-  measures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ingredient: PropTypes.arrayOf(PropTypes.string),
+  measures: PropTypes.arrayOf(PropTypes.string),
 };
