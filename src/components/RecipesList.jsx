@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from './RecipeCard';
+import './style/categoryStyle.css';
 
 class RecipesList extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class RecipesList extends Component {
     const recipes = this.filterTwelveRecipes();
 
     return (
-      <div className="row row-cols-3 row-cols-md-3 g-4">
+      <div className="row row-cols-3 row-cols-md-3 g-4 ">
         {
           recipes.map(({ idMeal, strMeal, strMealThumb }, index) => (
             <RecipeCard

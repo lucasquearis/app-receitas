@@ -1,7 +1,10 @@
 .containerBody {
-  background: linear-gradient(90deg, rgb(241, 213, 237) 0%, rgb(245, 178, 225)100%);
-  width: 375px;
-  height: 667px;
-  margin: auto;
+  background: linear-gradient(90deg, rgb(149, 253, 208) 0%, rgb(110, 41, 167) 100%);
   border-radius: 4px;
+  color: white;
+  margin: auto;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  width: 80%;
 }
