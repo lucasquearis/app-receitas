@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CardFood from './CardFood';
 
 function CategoryFood() {
   const [foodRecipes, setFoodRecipes] = useState([]);
@@ -42,8 +43,8 @@ function CategoryFood() {
         { categoriesBtn() }
       </div>
       <div>
-        { foodRecipes.slice(0, maxList).map((meal) => (
-          <p key={ meal.idMeal }>{ meal.strMeal}</p>)) }
+        { foodRecipes.slice(0, maxList).map((meal, index) => (
+          <CardFood key={ meal.idMeal } meal={ meal } i={ index } />)) }
       </div>
     </div>
   );
