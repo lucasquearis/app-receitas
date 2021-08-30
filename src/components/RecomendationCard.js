@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import genericFetchAPI from '../services/genericFetchAPI';
+import './RecomendationCard.css';
 
 function RecomendationCard({ type }) {
   const [recomendations, setRecomendations] = useState([]);
@@ -9,8 +10,12 @@ function RecomendationCard({ type }) {
   useEffect(() => {
     const getRecomendations = async () => {
       if (type === 'meals') {
-        setRecomendations(await genericFetchAPI('meal', 'search', 's', ''));
-      } else setRecomendations(await genericFetchAPI('cocktail', 'search', 's', ''));
+        setRecomendations((await genericFetchAPI('meal', 'search', 's', '')).meals);
+      } else {
+        setRecomendations(
+          (await genericFetchAPI('cocktail', 'search', 's', '')).drinks,
+        );
+      }
     };
     getRecomendations();
   }, [type]);
@@ -18,10 +23,11 @@ function RecomendationCard({ type }) {
   useEffect(() => console.log(recomendations), [recomendations]);
 
   return recomendations.length ? (
-    <section>
+    <section className="recomendation-cards">
       {recomendations.map((recipe, index) => (index < MAX_CARD_RECOMENDATIONS ? (
         <div data-testid={ `${index}-recomendation-card` } key={ index }>
-          {`${recipe.strCategory || recipe.strAlchoolic}-teste`}
+          <img src={ recipe.strMealThumb || recipe.strDrinkThumb } alt="Recipe Thumb" />
+          <h6>{ recipe.strMeal || recipe.strDrink }</h6>
         </div>
       ) : null))}
     </section>

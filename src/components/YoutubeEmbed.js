@@ -8,10 +8,10 @@ const YoutubeEmbed = ({ videoId }) => (
     allowFullScreen
     data-testid="video"
     frameBorder="0"
-    height="480"
+    height="360"
     src={ `https://www.youtube.com/embed/${videoId}` }
     title="Youtube Video"
-    width="640"
+    width="300"
   />
 );
 

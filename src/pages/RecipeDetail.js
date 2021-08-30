@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import RecomendationCard from '../components/RecomendationCard';
 import genericFetchAPI from '../services/genericFetchAPI';
@@ -24,6 +24,7 @@ function RecipeDetail() {
   const { pathname } = useLocation();
   const { id: recipeId } = useParams();
   const [recipe, setRecipe] = useState();
+  const [copyOk, setCopyOk] = useState(false);
   const [ingredientName, setIngredientName] = useState([1, 2]);
   const [ingredientMeasure, setIngredientMeasure] = useState([]);
   const youtubeId = 32;
@@ -43,8 +44,13 @@ function RecipeDetail() {
     getIngredients(recipe, setIngredientName, setIngredientMeasure);
   }, [recipe]);
 
+  useEffect(() => {
+    const TWO_SECONDS = 2000;
+    setTimeout(() => setCopyOk(false), TWO_SECONDS);
+  }, [copyOk]);
+
   return recipe ? (
-    <section style={ { textAlign: 'center' } }>
+    <section>
       <img
         data-testid="recipe-photo"
         alt="recipe"
@@ -52,7 +58,14 @@ function RecipeDetail() {
         style={ { width: '200px', height: '150px' } }
       />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-      <button data-testid="share-btn" type="button">Share</button>
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={ () => { navigator.clipboard.writeText(pathname); setCopyOk(true); } }
+      >
+        <img src="../images/shareIcon.svg" alt="share icon" />
+      </button>
+      { copyOk ? <p>Link copiado!</p> : null}
       <button data-testid="favorite-btn" type="button">Favorite</button>
       <h4>Category:</h4>
       <p
@@ -64,8 +77,9 @@ function RecipeDetail() {
       <p
         data-testid="instructions"
       >
-        { `${recipe.strInstructions}` }
+        { recipe.strInstructions }
       </p>
+      <h4>Ingredients:</h4>
       { ingredientName.map((ingredient, index) => (
         <p
           key={ index }
@@ -76,8 +90,17 @@ function RecipeDetail() {
       ))}
       { pathname.includes('comidas') ? (
         <YoutubeEmbed videoId={ recipe.strYoutube.substring(youtubeId) } />) : null}
+      <h4>Recomendadas</h4>
       <RecomendationCard type={ pathname.includes('comidas') ? 'drinks' : 'meals' } />
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      <Link to={ `${pathname}/in-progress` }>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          style={ { position: 'fixed', bottom: '0' } }
+        >
+          Iniciar Receita
+        </button>
+      </Link>
     </section>
   ) : <p>Loading</p>;
 }
