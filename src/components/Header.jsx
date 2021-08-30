@@ -3,6 +3,8 @@ import { string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import './Header.css';
+import SearchBar from './SearchBar';
 
 function Header({ title }) {
   const [showInput, setShowInput] = useState(false);
@@ -12,42 +14,44 @@ function Header({ title }) {
 
   const renderButton = () => (
     <>
-      <button type="button" onClick={ handleClick }>
-        <img
-          data-testid="search-top-btn"
-          src={ searchIcon }
-          alt="iconProfile"
-        />
-      </button>
-      { showInput ? <input type="text" data-testid="search-input" /> : '' }
+      <div>
+        <button type="button" className="buttons" onClick={ handleClick }>
+          <img
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            alt="iconProfile"
+          />
+        </button>
+      </div>
+      <div>
+        {showInput ? <SearchBar /> : ''}
+      </div>
     </>
   );
 
   return (
-    <div>
-      <header>
-        <Link to="/perfil">
-          <button type="button">
-            <img
-              data-testid="profile-top-btn"
-              src={ profileIcon }
-              alt="iconProfile"
-            />
-          </button>
-        </Link>
-        <h1 data-testid="page-title">{ title }</h1>
-        {
-          title !== 'Explorar'
+    <header className="header">
+      <Link to="/perfil">
+        <button type="button" className="buttons">
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="iconProfile"
+          />
+        </button>
+      </Link>
+      <h1 data-testid="page-title">{title}</h1>
+      {
+        title !== 'Explorar'
           && title !== 'Explorar Comidas'
           && title !== 'Explorar Bebidas'
           && title !== 'Explorar Ingredientes'
           && title !== 'Perfil'
           && title !== 'Receitas Feitas'
           && title !== 'Receitas Favoritas'
-            ? renderButton() : ''
-        }
-      </header>
-    </div>
+          ? renderButton() : ''
+      }
+    </header>
   );
 }
 
