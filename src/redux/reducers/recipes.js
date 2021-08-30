@@ -3,12 +3,14 @@ import {
   GET_RECIPES,
   SEND_RECIPE_DATA,
   GET_CATEGORIES,
+  DONE_RECIPES,
 } from '../actions/recipesActions';
 
 const INITIAL_STATE = {
   recipes: [],
   categories: [],
   isLoading: true,
+  doneRecipes: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -33,6 +35,12 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       categories: action.categories,
+      isLoading: false,
+    };
+  case DONE_RECIPES:
+    return {
+      ...state,
+      doneRecipes: [...state.doneRecipes, action.recipe],
       isLoading: false,
     };
   default:

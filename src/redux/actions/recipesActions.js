@@ -8,6 +8,7 @@ const FOODS_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c
 const DRINKS_CATEGORIES_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const RECIPES_QUANTITY = 12;
 const CATEGORIES_QUANTITY = 5;
+export const DONE_RECIPES = 'DONE_RECIPES';
 
 export const loadingRecipes = () => ({
   type: LOADING_RECIPES,
@@ -52,3 +53,7 @@ export const requestDrinksCategories = () => async (dispatch) => {
   const { drinks } = await response.json();
   dispatch(getCategories(drinks));
 };
+
+export const doneRecipes = (recipe) => ({
+  type: DONE_RECIPES, recipe,
+});
