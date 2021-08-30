@@ -8,26 +8,26 @@ import Btn from '../../Components/Btn';
 
 function ReceitasFavoritas() {
   const getFavoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-  const [favorite, setFavorite] = useState(getFavoriteStorage);
+  const [favorited, setFavorited] = useState(getFavoriteStorage);
   const [copied, setCopied] = useState(false);
 
   function removeFavorite(event, id) {
     event.preventDefault();
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const newArrayFavorite = favoriteStorage.filter((item) => item.id !== id);
-    setFavorite(newArrayFavorite);
+    setFavorited(newArrayFavorite);
   }
 
   useEffect(() => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
-  }, [favorite]);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favorited));
+  }, [favorited]);
 
   const allButtonProps = {
     name: 'All',
     'data-testid': 'filter-by-all-btn',
     type: 'button',
     variant: 'contained',
-    onClick: () => setFavorite(getFavoriteStorage),
+    onClick: () => setFavorited(getFavoriteStorage),
   };
 
   const foodButtonProps = {
@@ -35,7 +35,7 @@ function ReceitasFavoritas() {
     'data-testid': 'filter-by-food-btn',
     type: 'button',
     variant: 'contained',
-    onClick: () => setFavorite(favorite
+    onClick: () => setFavorited(favorited
       .filter((recipes) => recipes.type === 'comida')),
   };
 
@@ -44,7 +44,7 @@ function ReceitasFavoritas() {
     'data-testid': 'filter-by-drink-btn',
     type: 'button',
     variant: 'contained',
-    onClick: () => setFavorite(favorite
+    onClick: () => setFavorited(favorited
       .filter((recipes) => recipes.type === 'bebida')),
   };
 
@@ -65,7 +65,7 @@ function ReceitasFavoritas() {
       </div>
       <div>
         {
-          favorite.map((recipe, index) => (
+          favorited.map((recipe, index) => (
             <div key={ index }>
               {recipe.type === 'bebida' ? (
                 <div>
@@ -73,6 +73,7 @@ function ReceitasFavoritas() {
                     to={ `/bebidas/${recipe.id}` }
                   >
                     <img
+                      width="250px"
                       data-testid={ `${index}-horizontal-image` }
                       alt={ recipe.name }
                       src={ recipe.image }
@@ -117,6 +118,7 @@ function ReceitasFavoritas() {
                     to={ `/comidas/${recipe.id}` }
                   >
                     <img
+                      width="250px"
                       data-testid={ `${index}-horizontal-image` }
                       alt={ recipe.name }
                       src={ recipe.image }
