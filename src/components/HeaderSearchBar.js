@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import genericFetchAPI from '../services/genericFetchAPI';
-// import CardFood from './CardFood';
-// import CardDrink from './CardDrink';
+import CardDrink from './CardDrink';
+import CardFood from './CardFood';
 
 function HeaderSearchBar() {
   const { pathname } = useLocation();
-  // const history = useHistory();
+  const history = useHistory();
 
   // const [fetch, setFetch] = useState(false);
+  const [meals, setMeals] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const [data, setData] = useState({});
   const [state, setState] = useState({
     mealOrCocktail: '',
@@ -33,41 +35,47 @@ function HeaderSearchBar() {
   }, [pathname]);
 
   useEffect(() => {
-    if (data.length) return console.log(data.response);
-  }, [data]);
+    const maxList = 12;
+    const resolveMeals = () => {
+      if (!data.response.meals) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      } else if (data.response.meals.length === 1) {
+        history.push(`/comidas/${data.response.meals[0].idMeal}`);
+      } else {
+        setMeals(data.response.meals.slice(0, maxList));
+      }
+    };
+    const resolveDrinks = () => {
+      if (!data.response.drinks) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      } else if (data.response.drinks.length === 1) {
+        history.push(`/bebidas/${data.response.drinks[0].idDrink}`);
+      } else {
+        setDrinks(data.response.drinks.slice(0, maxList));
+      }
+    };
+    const verifyMealsOrDrinks = () => {
+      if (pathname === '/comidas') {
+        resolveMeals();
+      } else if (pathname === '/bebidas') {
+        resolveDrinks();
+      }
+    };
+    if (data.response) return verifyMealsOrDrinks();
+  }, [data, pathname, history]);
 
   async function handleClick() {
-    // const maxList = 12;
     const { mealOrCocktail, type, inicio, search } = state;
     if (inicio === 'f' && search.length === 1) {
       const response = await genericFetchAPI(mealOrCocktail, type, inicio, search);
       setData({ response });
     } else if (inicio === 'f' && search.length > 1) {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
+    } if (inicio !== 'f') {
+      const response = await genericFetchAPI(mealOrCocktail, type, inicio, search);
+      setData({ response });
     }
-    const response = await genericFetchAPI(mealOrCocktail, type, inicio, search);
-    setData({ response });
   }
-
-  // useEffect(() => {
-  //   async function fetchAPI() {
-  //     const { mealOrCocktail, type, inicio, search } = state;
-  //     const response = await genericFetchAPI(mealOrCocktail, type, inicio, search);
-  //     setData({ response });
-  //   }
-  //   fetchAPI();
-  // }, [fetch]);
-
-  // function handleClick() {
-  //   const { inicio, search } = state;
-  //   if (inicio === 'f' && search.length === 1) {
-  //     setFetch(true);
-  //   } else if (inicio === 'f' && search.length > 1) {
-  //     global.alert('Sua busca deve conter somente 1 (um) caracter');
-  //   } else {
-  //     setFetch(true);
-  //   }
-  // }
 
   const { filter } = state;
 
@@ -147,15 +155,12 @@ function HeaderSearchBar() {
           Buscar
         </button>
       </section>
-      {/* {pathname === '/comidas' ? (
-        mealList.slice(0, maxList).map((meal, index) => (
-          <CardFood key={ index } meal={ meal } />
-        ))
-      ) : (
-        drinkList.slice(0, maxList).map((drink, index) => (
-          <CardDrink key={ index } drink={ drink } />
-        ))
-      )} */}
+      {meals.map((meal, index) => (
+        <CardFood key={ meal.idMeal } meal={ meal } i={ index } />
+      ))}
+      {drinks.map((drink, index) => (
+        <CardDrink key={ drink.idDrink } drink={ drink } i={ index } />
+      ))}
     </div>
   );
 }
