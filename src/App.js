@@ -7,6 +7,7 @@ import Drinks from './Pages/Drinks/index';
 import Login from './Pages/Login/Login';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
+import ExploreArea from './Pages/ExploreArea';
 import Explore from './Pages/Explore';
 import Profile from './Pages/Profile/Profile';
 import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
@@ -43,11 +44,7 @@ function App() {
         <Route
           exact
           path="/explorar/comidas/area"
-          render={ () => (
-            <Header
-              title="Explorar Origem"
-            />
-          ) }
+          component={ ExploreArea }
         />
         <Route
           exact
