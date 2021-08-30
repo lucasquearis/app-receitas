@@ -73,8 +73,8 @@ export default function ComidasDetalhes() {
           {setIngredients()}
         </ul>
         <p data-testid="instructions">{food.strInstructions}</p>
-        </div>
-        <div className={ styles.videoComida }>
+      </div>
+      <div className={ styles.videoComida }>
         <iframe
           src={ food.strYoutube }
           title="Vídeo de Instrução"
