@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -47,7 +48,16 @@ function ComidasProcess(props) {
     }, threeSeconds);
   }
 
-  console.log(inProgress);
+  // const inProgressRecipe = ({ target: { value } }) => {
+  //   const values = [];
+  //   values.push(value);
+
+  //   const progress = {
+  //     meals: [...values],
+  //   };
+
+  //   return localStorage.setItem('inProgressRecipes', JSON.stringify(progress));
+  // };
 
   return (
     <div>
@@ -93,7 +103,12 @@ function ComidasProcess(props) {
                 >
                   <label htmlFor="check-ingredients">
                     { `${ingredient} - ${measures[index]}`}
-                    <input type="checkbox" id="check-ingredients" />
+                    <input
+                      type="checkbox"
+                      value={ index }
+                      id="check-ingredients"
+                      // onChange={ inProgressRecipe }
+                    />
                   </label>
                 </li>))
           }
@@ -101,7 +116,9 @@ function ComidasProcess(props) {
       </div>
       <h3>Instructions</h3>
       <p data-testid="instructions">{ strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Finish</button>
+      <Link to="/receitas-feitas">
+        <button type="button" data-testid="finish-recipe-btn">Finish</button>
+      </Link>
     </div>
   );
 }
