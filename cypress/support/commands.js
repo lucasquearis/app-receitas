@@ -38,7 +38,7 @@ Cypress.Commands.add('setToken', () => {
         url: 'https://opentdb.com/api_token.php?command=request',
     })
         .then((resp) => {
-            console.log({resp})
+            //console.log({resp})
             window.localStorage.setItem('token', resp.body.token)
         })
 

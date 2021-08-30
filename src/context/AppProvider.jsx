@@ -4,10 +4,16 @@ import AppContext from './AppContext';
 
 function AppProvider({ children }) {
   const [user, setUser] = useState();
+  const [drinks, setDrinks] = useState([]);
+  const [foods, setFoods] = useState([]);
 
   const contextValue = {
     user,
     setUser,
+    drinks,
+    setDrinks,
+    setFoods,
+    foods,
   };
 
   return (

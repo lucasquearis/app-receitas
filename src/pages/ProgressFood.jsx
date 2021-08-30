@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import FinishRecipeButton from '../components/FinishRecipeButton';
 import shareIcon from '../images/shareIcon.svg';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
@@ -170,16 +170,11 @@ function ProgressFood({
     const disable = steps.some((step) => step.checked === false);
     return (
       <div>
-        <Link to="/receitas-feitas">
-          <Button
-            data-testid="finish-recipe-btn"
-            variant="contained"
-            color="primary"
-            disabled={ disable }
-          >
-            Finalizar Receita
-          </Button>
-        </Link>
+        <FinishRecipeButton
+          disable={ disable }
+          recipe={ recipe }
+          type="comida"
+        />
       </div>
     );
   };

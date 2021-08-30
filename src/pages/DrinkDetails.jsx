@@ -12,7 +12,7 @@ import wHIcon from '../images/whiteHeartIcon.svg';
 function DrinkDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
   const [recomendedFood, setRecomendedFood] = useState([]);
-  const { strDrinkThumb, strDrink, strAlcoholic, strInstructions } = drink;
+  const { strDrinkThumb, strDrink, strAlcoholic, strInstructions, strCategory } = drink;
   const [ingredientList, setIngredientList] = useState([]);
   const location = useLocation();
   const [share, setShare] = useState(false);
@@ -95,26 +95,14 @@ function DrinkDetails({ match: { params: { id } } }) {
   }, [favorite]);
 
   useEffect(() => {
-    localStorage.setItem('doneRecipes', JSON.stringify([{
-      id: '178319',
-      type: 'bebida',
-      area: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '23/6/2020',
-      tags: [],
-    }]));
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes.some((recipe) => recipe.id === id)) {
+    if (doneRecipes && doneRecipes.some((recipe) => recipe.id === id)) {
       setDoneRecipe(true);
-      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      if (inProgressRecipes && inProgressRecipes.cocktails[id]) {
-        setContinueRecipe('Continuar Receita');
-      }
     }
-
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.cocktails[id]) {
+      setContinueRecipe('Continuar Receita');
+    }
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
       const isFavorite = favoriteRecipes.some((fav) => fav.id === id);
@@ -214,7 +202,7 @@ function DrinkDetails({ match: { params: { id } } }) {
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
         {renderRecomendedFood()}
-        <Link to={ `/comidas/${id}/in-progress` }>
+        <Link to={ `/bebidas/${id}/in-progress` }>
           <button
             style={ mystyle }
             variant="contained"
