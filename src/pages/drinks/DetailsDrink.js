@@ -21,36 +21,41 @@ class DetailsDrink extends Component {
       <div>
         <div>
           {
-            cocktail.map(({ strDrink, strCategory, strDrinkThumb, strAlcoholic }, index) => (
-              <div key={ index }>
-                <div>
-                  <img data-testid="recipe-photo" src={ strDrinkThumb } alt="foto" />
+            cocktail.map(
+              ({ strDrink, strCategory, strDrinkThumb, strAlcoholic }, index) => (
+                <div key={ index }>
+                  <div>
+                    <img data-testid="recipe-photo" src={ strDrinkThumb } alt="foto" />
+                  </div>
+                  <div>
+                    <h1 data-testid="recipe-title">{ strDrink }</h1>
+                    <h2 data-testid="recipe-category">
+                      { strCategory } 
+                      { strAlcoholic }
+                    </h2>
+                  </div>
+                  <IngredientsDrink />
+                  <Instructions />
+                  <Recomendations />
+                  <button
+                    type="button"
+                    data-testid="start-recipe-btn"
+                  >
+                    Start recipe
+                  </button>
+                  <button type="button">
+                    <img src={ ShareIcon } alt="share button" data-testid="share-btn" />
+                  </button>
+                  <button type="button">
+                    <img
+                      src={ WhiteHeartIcon }
+                      alt="favorite button"
+                      data-testid="favorite-btn"
+                    />
+                  </button>
                 </div>
-                <div>
-                  <h1 data-testid="recipe-title">{ strDrink }</h1>
-                  <h2 data-testid="recipe-category">{ strCategory } - { strAlcoholic }</h2>
-                </div>
-                <IngredientsDrink />
-                <Instructions />
-                <Recomendations />
-                <button
-                  type="button"
-                  data-testid="start-recipe-btn"
-                >
-                  Start recipe
-                </button>
-                <button type="button">
-                  <img src={ ShareIcon } alt="share button" data-testid="share-btn" />
-                </button>
-                <button type="button">
-                  <img
-                    src={ WhiteHeartIcon }
-                    alt="favorite button"
-                    data-testid="favorite-btn"
-                  />
-                </button>
-              </div>
-            ))
+              ),
+            )
           }
         </div>
       </div>
