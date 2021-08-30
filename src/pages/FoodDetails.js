@@ -7,7 +7,6 @@ import shareImage from '../images/shareIcon.svg';
 import Carousel from '../components/Carousel';
 import { getFavorites, handleButton, handleShare, handleFavoriteAuxiliar }
   from '../auxiliar/auxiliarFunctions';
-// import IngredientList from '../components/IngredientList';
 
 const youtubeEmbed = 'https://www.youtube.com/embed/';
 
