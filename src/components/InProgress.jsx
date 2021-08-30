@@ -24,16 +24,14 @@ export default function InProgress(props) {
   const name = meal || drink;
   const [favorite, setFavorite] = useState(false);
   const [steps, setSteps] = useState([]);
-  const [clipBoardCop, setClipBoardCop] = useState(false);
+  const [clipBoardCopy, setClipBoardCopy] = useState(false);
   // const [checked, setChecked] = useState(false);
   useEffect(() => {
     if (!localStorage.inProgressRecipes) { initialProgressStore(); }
     if (localStorage.favoriteRecipes) {
       const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(favorites);
-      const test = favorites.some((fav) => fav.id === id);
-      console.log(test);
-      setFavorite(test);
+      const isFavorite = favorites.some((fav) => fav.id === id);
+      setFavorite(isFavorite);
     }
     const getStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const recipes = getStorage[type];
@@ -49,7 +47,6 @@ export default function InProgress(props) {
   }, []);
 
   useEffect(() => {
-    console.log(props);
     favoriteRecipes(props, !favorite);
   }, [favorite]);
 
@@ -60,10 +57,9 @@ export default function InProgress(props) {
   const clipboard = () => {
     let url = window.location.href.split('/');
     url = url.splice(0, url.length - 1).join('/');
-    console.log(url);
     navigator.clipboard.writeText(url);
     // const fiveSec = 5000;
-    setClipBoardCop(true);
+    setClipBoardCopy(true);
     // setTimeout(() => setClipBoardCop(false), fiveSec);
   };
 
@@ -85,7 +81,7 @@ export default function InProgress(props) {
       <div className="main-infos">
         <h1 data-testid="recipe-title">{name}</h1>
         {
-          clipBoardCop && <p>Link copiado!</p>
+          clipBoardCopy && <p>Link copiado!</p>
         }
         <button
           type="button"
