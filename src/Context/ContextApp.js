@@ -2,15 +2,15 @@ import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import LoginHook from '../Hooks/LoginHook';
 
-import foodHook from '../Hooks/FoodHook';
+import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 
-import recipesHooks from '../Hooks/recipesHooks';
+import FoodHook from '../Hooks/FoodHook';
 
 export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
-  const { searchRecipes, recipes, loading } = recipesHooks();
-
+  const { searchRecipes, recipes, setRecipes, loading } = recipesHooks();
+  const { categoryMeal, categoryDrinks, filterIngredient, filter } = BtnFilterCategory();
   const {
     handleInput,
     Login,
@@ -18,8 +18,7 @@ export const AppProvider = ({ children }) => {
     handleClick,
     redirect,
     setRedirect } = LoginHook();
-
-  const { drinks, meal } = foodHook();
+  const { drinks, meal, getRecipes } = FoodHook();
 
   const ContProps = {
     recipes,
@@ -29,6 +28,12 @@ export const AppProvider = ({ children }) => {
     Login,
     handleClick,
     redirect,
+    categoryMeal,
+    categoryDrinks,
+    filterIngredient,
+    filter,
+    getRecipes,
+    setRecipes,
     setRedirect,
     drinks,
     meal,

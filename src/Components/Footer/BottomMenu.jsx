@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import drinkIcon from '../../images/drinkIcon.svg';
 import exploreIcon from '../../images/exploreIcon.svg';
 import mealIcon from '../../images/mealIcon.svg';
+import './BottomMenu.css';
 
 function BottomMenu() {
   return (
-    <footer data-testid="footer">
+    <footer className="footer" data-testid="footer">
       <Link to="/bebidas">
         <img data-testid="drinks-bottom-btn" alt="Drink" src={ drinkIcon } />
       </Link>

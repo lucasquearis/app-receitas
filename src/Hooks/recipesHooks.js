@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import fetchApi from '../Helpers/fetchApi';
 
-function RecipesHooks() {
-  const [loading, setLoading] = useState(false);
-  const [recipes, setRecipes] = useState([]);
-  const showAlert = (callback, msg) => {
-    callback(msg);
-  };
+const showAlert = (callback, msg) => {
+  callback(msg);
+};
 
-  const searchRecipes = async (previousSearch, foodRout, url, history) => {
-    setLoading(true);
+function RecipesHooks() {
+  const [loading, setLoading] = useState(true);
+  const [recipes, setRecipes] = useState([]);
+  const searchRecipes = async (previousSearch, foodRout, url, history = null) => {
     const { type, input } = previousSearch;
     let response;
     switch (type) {
@@ -25,19 +24,24 @@ function RecipesHooks() {
       }
       response = await fetchApi(url, 'search.php?f=', input);
       break;
+    case 'category':
+      response = await fetchApi(url, 'filter.php?c=', input);
+      break;
+    case 'all':
+      response = await fetchApi(url, 'search.php?s=');
+      break;
     default:
       break;
     }
     const responseRecipes = foodRout === true ? response.meals : response.drinks;
     if (responseRecipes === null) {
       return showAlert(
-        alert,
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+        alert, 'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
     setRecipes(responseRecipes);
     setLoading(false);
-    if (responseRecipes.length === 1) {
+    if (history !== null && responseRecipes.length === 1) {
       history.push(
         foodRout === true
           ? `/comidas/${responseRecipes[0].idMeal}`
@@ -45,12 +49,12 @@ function RecipesHooks() {
       );
     }
   };
-
   return {
     searchRecipes,
     recipes,
     loading,
     setLoading,
+    setRecipes,
   };
 }
 

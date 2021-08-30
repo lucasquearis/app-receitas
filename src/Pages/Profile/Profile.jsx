@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../Components/Btn';
-import ProfileIcon from '../../images/profileIcon.svg';
 import BottomMenu from '../../Components/Footer/BottomMenu';
 import { ContextApp } from '../../Context/ContextApp';
+import Header from '../../Components/Header/index';
 
 function Profile() {
   const getUser = JSON.parse(localStorage.getItem('user'));
@@ -40,10 +40,10 @@ function Profile() {
 
   return (
     <div>
-      <header>
-        <img src={ ProfileIcon } alt="profile icon" />
-        <h1>Perfil</h1>
-      </header>
+      <Header
+        title="Perfil"
+        searchButton={ false }
+      />
       <h2 data-testid="profile-email">
         {email}
       </h2>
