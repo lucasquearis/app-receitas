@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Components/Header';
 import './ReceitasFavoritas.css';
-import FavoritesCard from '../Components/FavoritesCard';
+import FavoriteCards from '../Components/FavoriteCards';
 
 const favoriteRecipes = [
   {
@@ -50,7 +50,7 @@ export default function Perfil() {
       </div>
       <div className="favorite-section">
         { favorites.map((favorite, index) => (
-          <FavoritesCard key={ favorite.id } recipe={ favorite } index={ index } />
+          <FavoriteCards key={ favorite.id } recipe={ favorite } index={ index } />
         )) }
       </div>
     </section>
