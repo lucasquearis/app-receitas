@@ -27,12 +27,21 @@ function SearchBar() {
   const handleSubmit = ({ searchInput, selectedSearch }) => {
     console.log(selectedSearch, searchInput);
     switch (selectedSearch) {
-    case 'ingredients':
-      return dispatch(fetchFoodByIngredient(searchInput));
+    case 'ingredient':
+    {
+      const ingredient = searchInput.replace(' ', '_');
+      return dispatch(fetchFoodByIngredient(ingredient));
+    }
     case 'name':
-      return dispatch(fetchFoodByName(searchInput));
+    {
+      const name = searchInput.replace(' ', '_');
+      return dispatch(fetchFoodByName(name));
+    }
     case 'firstLetter':
-      return dispatch(fetchFoodByFirstLetter(searchInput));
+    {
+      const firstLetter = searchInput.charAt(0);
+      return dispatch(fetchFoodByFirstLetter(firstLetter));
+    }
     default:
       return true;
     }
