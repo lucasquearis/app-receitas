@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import Carousel from 'react-multi-carousel';
-import useRecomendations from '../hooks/useRecomendations';
 import 'react-multi-carousel/lib/styles.css';
+import useRecomendations from '../hooks/useRecomendations';
 
 export default function FoodRecomendations() {
   const { recomendations } = useRecomendations();
