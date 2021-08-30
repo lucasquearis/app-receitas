@@ -44,11 +44,6 @@ function RecipeDetail() {
     getIngredients(recipe, setIngredientName, setIngredientMeasure);
   }, [recipe]);
 
-  useEffect(() => {
-    const TWO_SECONDS = 2000;
-    setTimeout(() => setCopyOk(false), TWO_SECONDS);
-  }, [copyOk]);
-
   return recipe ? (
     <section>
       <img
@@ -63,10 +58,10 @@ function RecipeDetail() {
         type="button"
         onClick={ () => { navigator.clipboard.writeText(pathname); setCopyOk(true); } }
       >
-        <img src="../images/shareIcon.svg" alt="share icon" />
+        Share
       </button>
-      { copyOk ? <p>Link copiado!</p> : null}
       <button data-testid="favorite-btn" type="button">Favorite</button>
+      { copyOk ? <p>Link copiado!</p> : null}
       <h4>Category:</h4>
       <p
         data-testid="recipe-category"

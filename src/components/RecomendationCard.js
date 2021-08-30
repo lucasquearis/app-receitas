@@ -20,8 +20,6 @@ function RecomendationCard({ type }) {
     getRecomendations();
   }, [type]);
 
-  useEffect(() => console.log(recomendations), [recomendations]);
-
   return recomendations.length ? (
     <section className="recomendation-cards">
       {recomendations.map((recipe, index) => (index < MAX_CARD_RECOMENDATIONS ? (
