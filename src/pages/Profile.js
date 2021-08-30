@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 function Profile() {
   const email = localStorage.getItem('user');
   return (
+
     <div>
       <p>Perfil</p>
       <span data-testid="profile-email">{email}</span>
