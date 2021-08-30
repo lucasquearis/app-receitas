@@ -14,6 +14,7 @@ function RecipeDetailVideo({ videoSource }) {
     <div className="videoContainer">
       <h3>Video</h3>
       <iframe
+        data-testid="video"
         width="100%"
         src={ `https://www.youtube.com/embed/${videoID}` }
         frameBorder="0"

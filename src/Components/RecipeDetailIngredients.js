@@ -10,13 +10,19 @@ function RecipeDetailIngredients({ recipe }) {
       .filter((key) => key[0].includes('strIngredient'));
 
     setIngredientsList(arrayOfIngredientes
-      .filter((ingredient) => ingredient[1] !== null && ingredient[1] !== ''));
+      .filter((ingredient) => ingredient[1] !== null
+        && ingredient[1] !== '' && ingredient[1] !== ' '));
 
     const arrayOfMeasures = (Object.entries(recipe))
       .filter((key) => key[0].includes('strMeasure'));
 
     setMeasuresList(arrayOfMeasures
-      .filter((measure) => measure[1] !== null && measure[1] !== ''));
+      .map((measure) => {
+        if (measure[1] === null || measure[1] === '') {
+          return ' ';
+        }
+        return measure[1];
+      }));
   }, [recipe]);
 
   return (
@@ -24,8 +30,11 @@ function RecipeDetailIngredients({ recipe }) {
       <h3>Ingredients</h3>
       <ul>
         {ingredientsList.map((ingredient, index) => (
-          <li key={ ingredient[0] } data-testid="1-ingredient-name-and-measure">
-            {`- ${ingredient[1]} - ${measuresList[index][1]}`}
+          <li
+            key={ ingredient[0] }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {`- ${ingredient[1]} - ${measuresList[index]}`}
           </li>
         ))}
       </ul>

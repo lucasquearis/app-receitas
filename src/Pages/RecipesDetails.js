@@ -26,6 +26,24 @@ function RecipesDetails({ type }) {
     if (type === 'drink') {
       getCocktailByID(recipeID).then((data) => setRecipe(data));
     }
+
+    const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoritesStorage === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+
+    const doneStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneStorage === null) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
+
+    const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressStorage === null) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        cocktails: {},
+        meals: {},
+      }));
+    }
   }, [type, recipeID]);
 
   if (recipe !== {}) {
@@ -34,7 +52,7 @@ function RecipesDetails({ type }) {
         <img
           width="100%"
           height="200px"
-          src={ recipe.strMealThumb }
+          src={ recipe.strMealThumb || recipe.strDrinkThumb }
           alt="Recipe"
           data-testid="recipe-photo"
         />

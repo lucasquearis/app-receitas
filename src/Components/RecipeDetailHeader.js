@@ -8,17 +8,23 @@ import RecipeDetailFavoriteButton from './RecipeDetailsFavoriteButton';
 
 function RecipeDetailHeader({ recipe, type, recipeID }) {
   const [recipeName, setRecipeName] = useState('');
+  const [recipeCategory, setRecipeCategory] = useState('');
   const [displaycopymessage, setDisplayCopyMessage] = useState('none');
+  const [recipeType, setRecipeType] = useState('');
 
   const { pathname } = useLocation();
 
   useEffect(() => {
     if (type === 'food') {
       setRecipeName(recipe.strMeal);
+      setRecipeType('comida');
+      setRecipeCategory(recipe.strCategory);
     } else {
       setRecipeName(recipe.strDrink);
+      setRecipeType('bebida');
+      setRecipeCategory(recipe.strAlcoholic);
     }
-  }, [type, recipe.strMeal, recipe.strDrink]);
+  }, [type, recipe.strMeal, recipe.strDrink, recipe.strCategory, recipe.strAlcoholic]);
 
   function copyPath() {
     copy(`http://localhost:3000${pathname}`);
@@ -29,7 +35,7 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
     <div className="headerContainer">
       <div className="nameContainer">
         <h3 data-testid="recipe-title">{recipeName}</h3>
-        <h4 data-testid="recipe-category">{recipe.strCategory}</h4>
+        <h4 data-testid="recipe-category">{recipeCategory}</h4>
       </div>
       <div className="iconsContainer">
         <button
@@ -41,7 +47,7 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
         </button>
         <RecipeDetailFavoriteButton
           recipe={ recipe }
-          type={ type }
+          type={ recipeType }
           recipeID={ recipeID }
         />
         <span style={ { display: displaycopymessage } }>Link copiado!</span>
@@ -57,6 +63,7 @@ RecipeDetailHeader.propTypes = {
     strMeal: PropTypes.string,
     strDrink: PropTypes.string,
     strCategory: PropTypes.string,
+    strAlcoholic: PropTypes.string,
   }).isRequired,
 };
 
