@@ -30,7 +30,7 @@ function Profile(props) {
 
   return (
     <>
-      <Header title="Perfil" />
+      <Header title="Perfil" showRender={ false } />
       <h4 data-testid="profile-email">{ email }</h4>
       <button
         type="button"
