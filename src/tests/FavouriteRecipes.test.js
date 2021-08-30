@@ -7,6 +7,7 @@ import App from '../App';
 import { FavouriteRecipes } from '../pages';
 
 const PATH = '/receitas-favoritas';
+const ordinaryDrink = 'Ordinary Drink';
 const MOCK_FAV_RECIPES = [
   {
     id: '52785',
@@ -39,7 +40,7 @@ const MOCK_FAV_RECIPES = [
     id: '17203',
     type: 'bebida',
     area: '',
-    category: 'Ordinary Drink',
+    category: ordinaryDrink,
     alcoholicOrNot: 'Alcoholic',
     name: 'Kir',
     image: 'https://www.thecocktaildb.com/images/media/drink/apneom1504370294.jpg',
@@ -48,7 +49,7 @@ const MOCK_FAV_RECIPES = [
     id: '13938',
     type: 'bebida',
     area: '',
-    category: 'Ordinary Drink',
+    category: ordinaryDrink,
     alcoholicOrNot: 'Alcoholic',
     name: 'AT&T',
     image: 'https://www.thecocktaildb.com/images/media/drink/rhhwmp1493067619.jpg',
@@ -89,7 +90,7 @@ const MOCK_FAV_DRINKS = [
     id: '17203',
     type: 'bebida',
     area: '',
-    category: 'Ordinary Drink',
+    category: ordinaryDrink,
     alcoholicOrNot: 'Alcoholic',
     name: 'Kir',
     image: 'https://www.thecocktaildb.com/images/media/drink/apneom1504370294.jpg',
@@ -98,7 +99,7 @@ const MOCK_FAV_DRINKS = [
     id: '13938',
     type: 'bebida',
     area: '',
-    category: 'Ordinary Drink',
+    category: ordinaryDrink,
     alcoholicOrNot: 'Alcoholic',
     name: 'AT&T',
     image: 'https://www.thecocktaildb.com/images/media/drink/rhhwmp1493067619.jpg',
@@ -106,9 +107,6 @@ const MOCK_FAV_DRINKS = [
 ];
 
 Object.assign(navigator, { clipboard: { writeText: () => {} } });
-
-// const clipboardMock = () => jest.spyOn(navigator.clipboard, 'writeText');
-
 jest.spyOn(navigator.clipboard, 'writeText');
 
 describe('testa pagina de receitas favoritas', () => {
@@ -117,26 +115,21 @@ describe('testa pagina de receitas favoritas', () => {
     jest.clearAllMocks();
     cleanup();
   });
-
   afterEach(() => localStorage.clear());
-
   it('path da pagina', async () => {
     await act(async () => {
       const { history } = renderWithRouter(<App />, PATH);
       expect(history.location.pathname).toBe(PATH);
     });
   });
-
   it('elementos da pagina', async () => {
     await act(async () => {
       renderWithRouter(<App />, PATH);
       localStorage.setItem('favoriteRecipes', JSON.stringify(MOCK_FAV_RECIPES));
     });
-
     await screen.findByRole('heading', { name: /Receitas Favoritas/i });
     await screen.findByRole('button', { name: /Food/i });
     await screen.findByRole('button', { name: /Drinks/i });
-
     const recpCards = document.getElementsByClassName('fav-recipe-container');
     expect(recpCards.length).toBe(MOCK_FAV_RECIPES.length);
 
@@ -163,16 +156,12 @@ describe('testa pagina de receitas favoritas', () => {
       const five = 5;
       const four = 4;
       const three = 3;
-
       const recpCards = document.getElementsByClassName('fav-recipe-container');
       expect(recpCards.length).toBe(MOCK_FAV_RECIPES.length);
       expect(JSON.parse(localStorage.favoriteRecipes).length).toEqual(five);
-
       expect(JSON.parse(localStorage.favoriteRecipes).length).toBe(five);
-
       userEvent.click(favBtn0);
       expect(JSON.parse(localStorage.favoriteRecipes).length).toBe(four);
-
       userEvent.click(favBtn1);
       expect(JSON.parse(localStorage.favoriteRecipes).length).toBe(three);
     });
@@ -180,19 +169,14 @@ describe('testa pagina de receitas favoritas', () => {
 
   it('compartilhar', async () => {
     const firstPromise = Promise.resolve();
-
     await act(async () => {
       renderWithRouter(<FavouriteRecipes />);
     });
-
     const shareBtn = await screen.findByTestId('0-horizontal-share-btn');
     expect(shareBtn).toBeInTheDocument();
     userEvent.click(shareBtn);
-
     await act(() => firstPromise);
-
     await screen.findByText(/link copiado/i);
-
     const urlCopied = 'http://localhost:3000/comidas/52785';
     expect(navigator.clipboard.writeText).toHaveBeenCalled();
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(urlCopied);
@@ -205,9 +189,7 @@ describe('testa pagina de receitas favoritas', () => {
       renderWithRouter(<FavouriteRecipes />, PATH);
     });
 
-    const allBtn = await screen.findByRole('button', { name: /All/i });
     const foodBtn = await screen.findByRole('button', { name: /Food/i });
-    // const drinksBtn = await screen.findByRole('button', { name: /Drinks/i });
 
     userEvent.click(foodBtn);
     await act(() => firstPromise);
