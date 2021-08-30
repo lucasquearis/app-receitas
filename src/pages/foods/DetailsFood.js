@@ -7,7 +7,7 @@ import Video from '../../components/Video';
 import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import fetchRecipe from '../../Redux/actions/fetchRecipes';
+import fetchRecipes from '../../Redux/actions/fetchRecipes';
 
 class DetailsFood extends Component {
   componentDidMount() {
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispach) => ({
-  fetchRecipe: (id) => dispach(fetchRecipe(id)),
+  fetchRecipe: (id) => dispach(fetchRecipes(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsFood);
