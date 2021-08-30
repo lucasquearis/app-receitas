@@ -119,7 +119,6 @@ describe('testa pagina de receitas favoritas', () => {
     });
   });
 
-  // clipboardMock();
   it('compartilhar', async () => {
     const firstPromise = Promise.resolve();
 
@@ -135,8 +134,8 @@ describe('testa pagina de receitas favoritas', () => {
 
     await screen.findByText(/link copiado/i);
 
-    // const urlCopied = 'http://localhost:3000/comidas/52977';
+    const urlCopied = 'http://localhost:3000/comidas/52785';
     expect(navigator.clipboard.writeText).toHaveBeenCalled();
-    // expect(navigator.clipboard.writeText).toHaveBeenCalledWith(urlCopied);
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(urlCopied);
   });
 });
