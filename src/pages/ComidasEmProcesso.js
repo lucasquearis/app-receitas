@@ -16,25 +16,43 @@ const ComidasEmProcesso = () => {
     api();
   }, []);
 
-  if (food === undefined) {
-    return <Loading />;
-  }
+  const getInitialCheckboxState = () => ({});
+  const [checkbox, setCheckbox] = useState(getInitialCheckboxState());
+
+  const handleCheckboxChange = ({ target }) => {
+    setCheckbox({
+      ...checkbox,
+      [target.name]: target.checked,
+    });
+  };
 
   const setIngredients = () => {
-    const ingredients1 = Object.keys(food)
+    const ingredientsKeys = Object.keys(food)
       .filter((ingredient) => ingredient
         .includes('strIngredient')
         && food[ingredient] !== null && food[ingredient] !== '');
-    return ingredients1.map((jonas, index) => (
+    return ingredientsKeys.map((ingredientKey, index) => (
       <li
         data-testid={ `${index}-ingredient-step` }
         key={ index }
+        style={ { 'list-style-type': 'none' } }
       >
-        {food[jonas]}
+        <input
+          name={ food[ingredientKey] }
+          type="checkbox"
+          // checked={ checkbox[food[ingredient1]] }
+          onChange={ handleCheckboxChange }
+        />
+        {' '}
+        {food[ingredientKey]}
         -
         {food[`strMeasure${index + 1}`]}
       </li>));
   };
+
+  if (food === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -43,7 +61,7 @@ const ComidasEmProcesso = () => {
       <button type="button" data-testid="share-btn">Compartilhar</button>
       <button type="button" data-testid="favorite-btn">Favorito</button>
       <p data-testid="recipe-category">{food.strCategory}</p>
-      <ul>
+      <ul style={ { 'padding-inline-start': '0px' } }>
         {setIngredients()}
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>

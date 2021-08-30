@@ -17,17 +17,34 @@ export default function BebidasEmProcesso() {
     api();
   }, []);
 
+  const getInitialCheckboxState = () => ({});
+  const [checkbox, setCheckbox] = useState(getInitialCheckboxState());
+
+  const handleCheckboxChange = ({ target }) => {
+    setCheckbox({
+      ...checkbox,
+      [target.name]: target.checked,
+    });
+  };
+
   const setIngredients = () => {
     const ingredients1 = Object.keys(drink)
       .filter((ingredient) => ingredient
         .includes('strIngredient')
         && drink[ingredient] !== null && drink[ingredient] !== '');
-    return ingredients1.map((jonas, index) => (
+    return ingredients1.map((ingredientKey, index) => (
       <li
         data-testid={ `${index}-ingredient-step` }
         key={ index }
       >
-        {drink[jonas]}
+        <input
+          name={ drink[ingredientKey] }
+          type="checkbox"
+          // checked={ checkbox[food[ingredient1]] }
+          onChange={ handleCheckboxChange }
+        />
+        {' '}
+        {drink[ingredientKey]}
         -
         {drink[`strMeasure${index + 1}`]}
       </li>));
