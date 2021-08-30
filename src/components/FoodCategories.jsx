@@ -1,25 +1,45 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { foodListByCategoryFetch, foodListFetch } from '../redux/actions/actionFood';
 
 export default function FoodCategories() {
+  const [clickedCategory, setClickedCategory] = useState('');
+
   const foodCategoriesList = useSelector(({ foodReducer }) => (
     foodReducer.foodCategoriesList));
+  const dispatch = useDispatch();
+
+  const withoutFilter = () => {
+    setClickedCategory('All');
+    dispatch(foodListFetch());
+  };
+
+  const filterByCategory = (category) => {
+    if (clickedCategory === category) {
+      withoutFilter();
+    } else {
+      setClickedCategory(category);
+      dispatch(foodListByCategoryFetch(category));
+    }
+  };
   return (
     <div>
       <Button
         data-testid="All-category-filter"
         className="category-button"
+        onClick={ withoutFilter }
       >
         All
       </Button>
-      {foodCategoriesList.map((categorie) => (
+      {foodCategoriesList.map((category) => (
         <Button
-          data-testid={ `${categorie.strCategory}-category-filter` }
+          data-testid={ `${category.strCategory}-category-filter` }
           className="category-button"
-          key={ categorie.strCategory }
+          key={ category.strCategory }
+          onClick={ () => filterByCategory(category.strCategory) }
         >
-          {categorie.strCategory}
+          {category.strCategory}
         </Button>
       ))}
     </div>

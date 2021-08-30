@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   foodCategoriesList: [],
 };
 
-const cardLenght = 12;
+const cardListLenght = 12;
 const categoriesListLenght = 5;
 
 function foodReducer(state = INITIAL_STATE, action) {
@@ -13,7 +13,7 @@ function foodReducer(state = INITIAL_STATE, action) {
   case FOOD_LIST_SUCCESS:
     return {
       ...state,
-      foodCardList: action.payload.slice(0, cardLenght),
+      foodCardList: action.payload.slice(0, cardListLenght),
     };
   case FOOD_CATEGORIES_SUCCESS:
     return {

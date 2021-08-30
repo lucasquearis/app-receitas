@@ -1,4 +1,8 @@
-import { fetchAPICategories, fetchAPIList } from '../../services/FoodAPIFetch';
+import {
+  fetchAPICategories,
+  fetchAPIList,
+  fetchAPIListByCategory,
+} from '../../services/FoodAPIFetch';
 
 export const FOOD_LIST_SUCCESS = 'FOOD_LIST_SUCCESS';
 export const FOOD_CATEGORIES_SUCCESS = 'FOOD_CATEGORIES_SUCCESS';
@@ -21,4 +25,9 @@ export const foodCategoriesSuccess = (payload) => ({
 export const foodCategoriesFetch = () => async (dispatch) => {
   const returnFetch = await fetchAPICategories();
   dispatch(foodCategoriesSuccess(returnFetch));
+};
+
+export const foodListByCategoryFetch = (category) => async (dispatch) => {
+  const returnAPI = await fetchAPIListByCategory(category);
+  dispatch(foodListSuccess(returnAPI));
 };

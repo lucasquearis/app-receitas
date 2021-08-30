@@ -1,4 +1,8 @@
-import { fetchAPICategories, fetchAPIList } from '../../services/DrinkAPIFetch';
+import {
+  fetchAPICategories,
+  fetchAPIList,
+  fetchAPIListByCategory,
+} from '../../services/DrinkAPIFetch';
 
 export const DRINK_LIST_SUCCESS = 'DRINK_LIST_SUCCESS';
 export const DRINK_CATEGORIES_SUCCESS = 'DRINK_CATEGORIES_SUCCESS';
@@ -21,4 +25,9 @@ export const drinkCategoriesSucccess = (payload) => ({
 export const drinkCategoriesFetch = () => async (dispatch) => {
   const returnFetch = await fetchAPICategories();
   dispatch(drinkCategoriesSucccess(returnFetch));
+};
+
+export const drinkListByCategoryFetch = (category) => async (dispatch) => {
+  const returnAPI = await fetchAPIListByCategory(category);
+  dispatch(drinkListSuccess(returnAPI));
 };

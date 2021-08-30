@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodCard from '../components/FoodCard';
@@ -23,7 +24,9 @@ function MainFood() {
       <Header title="Comidas" />
       <FoodCategories />
       {foodCardList.map((item, index) => (
-        <FoodCard key={ item.idDrink } food={ item } index={ index } />))}
+        <Link to={ `/comidas/${item.idMeal}` } key={ item.idMeal }>
+          <FoodCard food={ item } index={ index } />
+        </Link>))}
       <Footer />
     </>
   );
