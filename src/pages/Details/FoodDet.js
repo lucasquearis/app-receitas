@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Image, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useHistory } from 'react-router-dom';
 
 const responsive = {
   mobile: {
@@ -11,20 +12,44 @@ const responsive = {
   },
 };
 
+// mock de teste
+const doneRecipes = [{
+  id: 52771,
+  type: 'comida',
+  area: 'Italian',
+  category: 'Vegetarian',
+  alcoholicOrNot: '',
+  name: 'Spicy Arrabiata Penne',
+  image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  doneDate: '22/6/2020',
+  tags: ['Pasta', 'Curry'],
+}];
+localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+
+// mock de teste
+const inProgressRecipes = {
+  meals: {
+    52771: [],
+  },
+};
+localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+
 function FoodDetails() {
   const [recipesFood, setRecipesFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [recipesRecommendations, setRecipesRecommendations] = useState([]);
+  const { location: { id } } = useHistory();
+  console.log(id);
 
   useEffect(() => {
     const getRecipesFood = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52771'; // alterar Id
+      const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`; // alterar Id
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setRecipesFood(meals);
     };
     getRecipesFood();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const getIngredients = () => {
@@ -59,6 +84,14 @@ function FoodDetails() {
     };
     getRecommendations();
   }, [recipesFood]);
+
+  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
+    .filter((item) => item.id === id);
+
+  const localStorageInProgressRecipes = JSON
+    .parse(localStorage.getItem('inProgressRecipes'));
+  const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.meals)
+    .filter((item) => parseInt(item, 10) === id);
 
   return (
     <>
@@ -118,15 +151,18 @@ function FoodDetails() {
               </div>
             )) }
           </Carousel>
-          <Button
-            className="fixed-bottom"
-            variant="success"
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            Iniciar Receita
+          { localStorageDoneRecipes.length !== 0 ? (
+            <Button
+              className="fixed-bottom"
+              variant="success"
+              data-testid="start-recipe-btn"
+              type="button"
+            >
+              { filterProgressRecipes.length !== 0
+                ? 'Continuar Receita' : 'Iniciar Receita' }
 
-          </Button>
+            </Button>
+          ) : '' }
         </div>
       )) }
     </>

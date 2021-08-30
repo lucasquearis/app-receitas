@@ -11,6 +11,28 @@ const responsive = {
   },
 };
 
+// mock de teste
+// const doneRecipes = [{
+//   id: 178319,
+//   type: 'bebida',
+//   area: '',
+//   category: 'Cocktail',
+//   alcoholicOrNot: 'Alcoholic',
+//   name: 'Aquamarine',
+//   image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+//   doneDate: '23/6/2020',
+//   tags: [],
+// }];
+// localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+
+// // mock de teste
+// const inProgressRecipes = {
+//   cocktails: {
+//     178319: [],
+//   },
+// };
+// localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+
 function DrinksDetails() {
   const [recipesDrink, setRecipesDrink] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
@@ -111,15 +133,17 @@ function DrinksDetails() {
               </div>
             )) }
           </Carousel>
-          <Button
-            className="fixed-bottom"
-            variant="success"
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            Iniciar Receita
+          {/* { doneRecipes ? (
+            <Button
+              className="fixed-bottom"
+              variant="success"
+              data-testid="start-recipe-btn"
+              type="button"
+            >
+              { inProgressRecipes ? 'Continuar Receita' : 'Iniciar Receita' }
 
-          </Button>
+            </Button>
+          ) : '' } */}
         </div>
       )) }
     </>
