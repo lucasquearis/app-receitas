@@ -14,12 +14,14 @@ const getUrl = () => {
   const nameURL = `https://www.${url}.com/api/json/v1/1/search.php?s=`;
   const firstLetterURL = `https://www.${url}.com/api/json/v1/1/search.php?f=`;
   const categoryFilterURL = `https://www.${url}.com/api/json/v1/1/filter.php?c=`;
+  const areaURL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
 
   return {
     ingredientURL,
     nameURL,
     firstLetterURL,
     categoryFilterURL,
+    areaURL,
   };
 };
 
@@ -55,6 +57,14 @@ export const getDataByFirstLetter = async (letter) => {
 export const getDataByCategory = async (category) => {
   const { categoryFilterURL } = getUrl();
   const response = await fetch(`${categoryFilterURL}${category}`);
+  const data = await response.json();
+
+  return data;
+};
+
+export const getDataByArea = async (area) => {
+  const { areaURL } = getUrl();
+  const response = await fetch(`${areaURL}${area}`);
   const data = await response.json();
 
   return data;

@@ -3,12 +3,14 @@ import {
   GET_RECIPES,
   GET_CATEGORIES,
   GET_INGREDIENTS,
+  GET_AREAS,
 } from '../actions/recipesActions';
 
 const INITIAL_STATE = {
   recipes: [],
   categories: [],
   ingredients: [],
+  areas: [],
   isLoading: true,
 };
 
@@ -35,6 +37,12 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       ingredients: action.ingredients,
+      isLoading: false,
+    };
+  case GET_AREAS:
+    return {
+      ...state,
+      areas: action.areas,
       isLoading: false,
     };
   default:

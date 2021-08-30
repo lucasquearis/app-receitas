@@ -27,10 +27,10 @@ export default function useRecipes(setRedirect) {
   const currentPage = location.pathname;
 
   useEffect(() => {
-    if (currentPage === '/comidas') {
+    if (currentPage.includes('/comidas')) {
       setPageObjName('meals');
       dispatch(requestFoodsCategories());
-    } else if (currentPage === '/bebidas') {
+    } else if (currentPage.includes('/bebidas')) {
       setPageObjName('drinks');
       dispatch(requestDrinksCategories());
     }
@@ -38,9 +38,9 @@ export default function useRecipes(setRedirect) {
 
   useEffect(() => {
     if (data === null) {
-      dispatch(getRecipes([]));
       // eslint-disable-next-line no-alert
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      dispatch(getRecipes([]));
     }
   }, [data, dispatch]);
 
@@ -51,8 +51,13 @@ export default function useRecipes(setRedirect) {
   }, [data, dispatch, setRedirect]);
 
   useEffect(() => {
+    if (data && data.length > 0) {
+      dispatch(getRecipes(data));
+    }
+  }, [data, dispatch]);
+
+  useEffect(() => {
     if (searched) {
-      console.log(pageObjName);
       if (filterIngredient && !filterName && !filterFirstLetter) {
         getDataByIngredient(inputValue)
           .then((response) => setData(response[pageObjName]));
