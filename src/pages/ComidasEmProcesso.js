@@ -35,18 +35,15 @@ const ComidasEmProcesso = () => {
       <li
         data-testid={ `${index}-ingredient-step` }
         key={ index }
-        style={ { 'list-style-type': 'none' } }
+        className="list-no-style"
+        style={ checkbox[food[ingredientKey]] && { 'text-decoration': 'line-through' } }
       >
         <input
           name={ food[ingredientKey] }
           type="checkbox"
-          // checked={ checkbox[food[ingredient1]] }
           onChange={ handleCheckboxChange }
         />
-        {' '}
-        {food[ingredientKey]}
-        -
-        {food[`strMeasure${index + 1}`]}
+        {` ${food[ingredientKey]} - ${food[`strMeasure${index + 1}`]}`}
       </li>));
   };
 

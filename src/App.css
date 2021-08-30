@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.list-no-style {
+  list-style-type: none;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;

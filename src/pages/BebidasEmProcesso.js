@@ -36,17 +36,16 @@ export default function BebidasEmProcesso() {
       <li
         data-testid={ `${index}-ingredient-step` }
         key={ index }
+        className="list-no-style"
+        style={ checkbox[drink[ingredientKey]] && { 'text-decoration': 'line-through' } }
       >
         <input
           name={ drink[ingredientKey] }
           type="checkbox"
-          // checked={ checkbox[food[ingredient1]] }
           onChange={ handleCheckboxChange }
         />
-        {' '}
-        {drink[ingredientKey]}
-        -
-        {drink[`strMeasure${index + 1}`]}
+        {` ${drink[ingredientKey]} - ${drink[`strMeasure${index + 1}`]}`}
+
       </li>));
   };
 
