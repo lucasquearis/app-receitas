@@ -6,12 +6,10 @@ import Header from '../../components/Header';
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
-
   const headerProps = {
     title: 'Perfil',
     renderSearchBar: false,
   };
-
   return (
     <div className="profile">
       <Header { ...headerProps } />

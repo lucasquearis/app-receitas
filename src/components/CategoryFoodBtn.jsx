@@ -36,7 +36,7 @@ function CategoryFoodBtn() {
       >
         All
       </Button>
-      {categories && categories.meals.slice(0, buttonLimits).map(
+      {categories.meals && categories.meals.slice(0, buttonLimits).map(
         (category, id) => (
           <Button
             color="secondary"
