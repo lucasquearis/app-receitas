@@ -1,0 +1,145 @@
+.food-image {
+  height: 35vh;
+  width: 100%;
+}
+
+.title-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding: 10px;
+}
+
+.title-info h4 {
+  margin: 0;
+}
+
+.share-favorite-section {
+  display: flex;
+}
+
+.favorite-btn-icon {
+  background: none;
+  border: none;
+}
+
+.favorite-btn-icon:focus {
+  outline: none;
+}
+
+.food-category {
+  color: rgb(139, 139, 139);
+  font-size: 18px;
+  font-weight: 00;
+  margin-left: 12px;
+}
+
+.ingredients-section {
+  margin-left: 12px;
+}
+
+.ingredients-section ul {
+  background-color: rgb(216, 216, 216);
+  list-style: none;
+  padding: 10px;
+  width: 95%;
+}
+
+.instructions-section {
+  margin-left: 12px;
+}
+
+.instructions-section p {
+  background-color: rgb(216, 216, 216);
+  padding: 20px;
+  text-align: left;
+  width: 95%;
+}
+
+.video-section {
+  margin-left: 12px;
+}
+
+.video-section iframe {
+  height: 35vh;
+  width: 95%;
+}
+
+.start-recipe-btn {
+  background-color: lime;
+  border: none;
+  bottom: 0;
+  font-size: 18px;
+  font-weight: 600;
+  height: 55px;
+  margin-left: 30px;
+  position: fixed;
+  width: 85%;
+}
+
+.start-recipe-btn-invisible {
+  display: none;
+}
+
+.start-recipe-food-btn-link {
+  color: black;
+}
+
+.start-recipe-btn:active {
+  background-color: rgb(0, 187, 0);
+}
+
+.start-recipe-btn:focus {
+  outline: none;
+}
+
+.recomended-drink-section-infos {
+  display: flex;
+  margin: 20px 0 120px 8px;
+  overflow-x: scroll;
+  padding: 20px 5px;
+  width: 95%;
+}
+
+.recomended-drink-info {
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+  flex-shrink: 0;
+  margin: 0 10px;
+  width: 140px;
+}
+
+.recomended-drink-info img {
+  border-radius: 8px;
+  height: 100px;
+  width: 100%;
+}
+
+.recomended-drink-info p {
+  color: rgb(139, 139, 139);
+  font-size: 16px;
+  font-weight: 00;
+  margin: 8px;
+}
+
+.recomended-drink-info h5 {
+  margin: 8px;
+}
+
+.share-food-btn-icon {
+  background: none;
+  border: none;
+  margin-right: 10px;
+}
+
+.share-food-btn-icon:focus {
+  outline: none;
+}
+
+.copy-food-link-message {
+  height: 20px;
+  margin: 0 auto;
+  text-align: center;
+  width: 50%;
+}
