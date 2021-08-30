@@ -7,12 +7,12 @@ function Cards({ element, index, type }) {
   return (
     <Link
       to={
-        type === 'comidas' ? `/comidas/${element.idMeal}` : `/comidas/${element.idDrink}`
+        type === 'Meal' ? `/comidas/${element.idMeal}` : `/bebidas/${element.idDrink}`
       }
     >
       <section data-testid={ `${index}-recipe-card` }>
         <img
-          src={ type === 'comidas' ? element.strMealThumb : element.strDrinkThumb }
+          src={ type === 'Meal' ? element.strMealThumb : element.strDrinkThumb }
           data-testid={ `${index}-card-img` }
           alt="Thumbnail"
           width="130"
@@ -20,7 +20,7 @@ function Cards({ element, index, type }) {
         <p
           data-testid={ `${index}-card-name` }
         >
-          { type === 'comidas' ? element.strMeal : element.strDrink }
+          { type === 'Meal' ? element.strMeal : element.strDrink }
         </p>
       </section>
     </Link>

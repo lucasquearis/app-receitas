@@ -11,7 +11,7 @@ function CategoriesButtons({ categories, type }) {
   const categoriesLimit = 5;
 
   async function onClick(categorie) {
-    if (type === 'bebidas') {
+    if (type === 'Drink') {
       const { drinks } = await fetchDrinkByCategorie(categorie);
       setDrinks(drinks);
     } else {
@@ -21,7 +21,7 @@ function CategoriesButtons({ categories, type }) {
   }
 
   async function onClickAll() {
-    if (type === 'bebidas') {
+    if (type === 'Drink') {
       const { drinks } = await fetchInicialDrinks();
       setDrinks(drinks);
     } else {

@@ -49,16 +49,16 @@ function Drink() {
         ? searchedDrinkRecipes() : redirectDrink()}
 
       <div>
-        <CategoriesButtons type="bebidas" categories={ drinksCategories } />
+        <CategoriesButtons type="Drink" categories={ drinksCategories } />
       </div>
 
       <main>
         {
-          Drinks && Drinks.splice(0, recipeLimit).map((element, index) => (
+          Drinks.slice(0, recipeLimit).map((element, index) => (
             <Cards
               key={ index }
               index={ index }
-              type="bebidas"
+              type="Drink"
               element={ element }
             />
           ))
