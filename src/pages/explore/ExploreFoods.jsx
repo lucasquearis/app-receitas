@@ -22,7 +22,7 @@ export default function ExploreFoods() {
   if (state.redirect) return <Redirect to={ `/comidas/${state.id}` } />;
   return (
     <section>
-      <Header />
+      <Header title="Explorar Comidas" />
       <h1>Explorar Comidas</h1>
       <Link to="/explorar/comidas/ingredientes">
         <button

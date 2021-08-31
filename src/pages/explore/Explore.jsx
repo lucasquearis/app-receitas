@@ -6,8 +6,7 @@ import Header from '../../components/Header';
 export default function Explore() {
   return (
     <section>
-      <Header />
-      <h1>Explorar</h1>
+      <Header title="Explorar" />
       <Link to="/explorar/comidas">
         <button
           data-testid="explore-food"
