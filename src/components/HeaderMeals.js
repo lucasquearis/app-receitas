@@ -93,6 +93,7 @@ const HeaderMeals = ({ title }) => {
         <button
           type="button"
           data-testid="search-top-btn"
+          className="search-icon-container"
           onClick={ showSearch }
           src={ searchIcon }
         >
