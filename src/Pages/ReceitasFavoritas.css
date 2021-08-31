@@ -71,11 +71,11 @@
   text-align: center;
 }
 
-.share-btn {
+.info-btn {
   background: none;
   border: none;
 }
 
-.share-btn:focus {
+.info-btn:focus {
   outline: none;
 }

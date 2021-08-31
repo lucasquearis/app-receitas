@@ -40,6 +40,12 @@ export default function Perfil() {
     getFavorites();
   }, []);
 
+  const onFavoriteClick = (id) => {
+    const newFavorites = favorites.filter((favorite) => favorite.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    setFavorites(newFavorites);
+  };
+
   return (
     <section>
       <Header title="Receitas Favoritas" />
@@ -50,7 +56,12 @@ export default function Perfil() {
       </div>
       <div className="favorite-section">
         { favorites.map((favorite, index) => (
-          <FavoriteCards key={ favorite.id } recipe={ favorite } index={ index } />
+          <FavoriteCards
+            key={ favorite.id }
+            recipe={ favorite }
+            index={ index }
+            onFavoriteClick={ onFavoriteClick }
+          />
         )) }
       </div>
     </section>

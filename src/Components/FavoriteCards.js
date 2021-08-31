@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function FavoriteCards(props) {
-  const { recipe, index } = props;
+  const { recipe, index, onFavoriteClick } = props;
 
   const [copyMessage, setCopyMessage] = useState(false);
 
@@ -60,18 +60,24 @@ export default function FavoriteCards(props) {
         </div>
         { copyMessage && <p className="copy-message">Link copiado!</p> }
         <div className="buttons-section">
-          <button type="button" className="share-btn" onClick={ onShareClick }>
+          <button type="button" className="info-btn" onClick={ onShareClick }>
             <img
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
               alt="botão de compartilhar"
             />
           </button>
-          <img
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            src={ blackHeartIcon }
-            alt="botão de favoritar"
-          />
+          <button
+            type="button"
+            className="info-btn"
+            onClick={ () => onFavoriteClick(recipe.id) }
+          >
+            <img
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              src={ blackHeartIcon }
+              alt="botão de favoritar"
+            />
+          </button>
         </div>
       </div>
     </section>
@@ -89,4 +95,5 @@ FavoriteCards.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
