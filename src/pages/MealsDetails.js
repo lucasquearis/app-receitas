@@ -19,24 +19,16 @@ const MealsDetails = () => {
 
   useEffect(() => {
     const getMealByIdAPI = async () => {
-      try {
-        const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-        const { meals } = await fetch(URL).then((response) => response.json());
-        setMeal({ ...meals[0] });
-      } catch (error) {
-        console.log(error);
-      }
+      const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const { meals } = await fetch(URL).then((response) => response.json());
+      setMeal({ ...meals[0] });
     };
 
     const getDrinksRecomendations = async () => {
-      try {
-        const limit = 6;
-        const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-        const { drinks } = await fetch(URL).then((response) => response.json());
-        setRecomendations(drinks.filter((drink, index) => index < limit));
-      } catch (error) {
-        console.log(error);
-      }
+      const limit = 6;
+      const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const { drinks } = await fetch(URL).then((response) => response.json());
+      setRecomendations(drinks.filter((drink, index) => index < limit));
     };
     getMealByIdAPI();
     getDrinksRecomendations();
