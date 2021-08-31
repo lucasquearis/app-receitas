@@ -82,7 +82,7 @@ function RecipesProvider({ children }) {
 
     correctUrl();
     filterIngredients();
-  }, [recipe]);
+  }, [recipe, lists]);
 
   return (
     <myContext.Provider value={ providerState }>

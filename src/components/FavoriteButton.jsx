@@ -19,7 +19,7 @@ function FavoriteButton(props) {
         (favRecipe) => favRecipe.id === recipe.id && favRecipe.type === recipe.type,
       ));
     }
-  }, [recipe]);
+  }, [recipe, favoriteRecipes, setFavoriteRecipes]);
 
   useEffect(() => {
     if (favorite) {
@@ -27,7 +27,7 @@ function FavoriteButton(props) {
     } else {
       setFavoriteRecipes([...favoriteList]);
     }
-  }, [favorite, favoriteList, recipe]);
+  }, [favorite, favoriteList, recipe, setFavoriteRecipes]);
 
   const handleClick = () => {
     if (favorite === false) {

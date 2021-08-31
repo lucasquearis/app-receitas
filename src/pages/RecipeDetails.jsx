@@ -35,7 +35,7 @@ function RecipeDetails(props) {
         });
     };
     getRecipe();
-  }, []);
+  }, [id, type]);
 
   return (
     <div>

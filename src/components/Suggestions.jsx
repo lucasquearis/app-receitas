@@ -32,7 +32,7 @@ function Suggestions({ type }) {
       setSuggestions(resSuggestion);
     };
     fetchSuggestions();
-  }, [correctURL]);
+  }, [correctURL, type]);
 
   const renderMealsDetails = (item, key) => (
     <div
