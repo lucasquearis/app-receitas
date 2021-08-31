@@ -19,8 +19,6 @@ export default function Provider({ children }) {
     setSearch,
   };
 
-  console.log(searchBarResult);
-
   return (
     <MyContext.Provider value={ context }>
       {children}
