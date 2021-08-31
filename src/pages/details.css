@@ -39,3 +39,7 @@
   margin-bottom: 32px;
   margin-left: 24px;
 }
+
+.detail-img-btn img {
+  width: 15%;
+}

@@ -37,6 +37,7 @@ const DrinkDetails = () => {
       strDrink: name,
       strDrinkThumb: image,
     } = drinkDetails[0];
+
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
     if (actualStorage === null) {

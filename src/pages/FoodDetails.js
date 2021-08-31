@@ -12,7 +12,6 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Copy from '../components/Clipboard-Copy';
-import './foodDetails.css';
 
 const FoodDetails = () => {
   const history = useHistory();
@@ -39,8 +38,10 @@ const FoodDetails = () => {
       strMeal: name,
       strMealThumb: image,
     } = foodDetails[0];
+
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const item = { id, type: 'comida', area, category, alcoholicOrNot: '', name, image };
+
     if (actualStorage === null) {
       localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
       return;
@@ -121,7 +122,7 @@ const FoodDetails = () => {
   return (
     <div>
       {
-        foodDetails.map(({
+        foodDetails && foodDetails.map(({
           strMealThumb,
           strMeal,
           strCategory,
@@ -143,7 +144,11 @@ const FoodDetails = () => {
               key={ shareIcon }
               onClick={ () => copy(url) }
             >
-              <img src={ shareIcon } alt="share-icon" />
+              <img
+                src={ shareIcon }
+                alt="share-icon"
+                className="detail-img-btn"
+              />
             </button>
             <button
               type="button"
@@ -152,6 +157,7 @@ const FoodDetails = () => {
             >
               <img
                 data-testid="favorite-btn"
+                className="detail-img-btn"
                 src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite-icon"
               />
