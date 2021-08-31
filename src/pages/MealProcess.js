@@ -7,10 +7,6 @@ import './pageCSS/MealProcess.css';
 export default function MealProcess(props) {
   const { match: { params: { id } } } = props;
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
-  const initialState = () => JSON.parse(localStorage
-    .getItem('inProgressRecipes')) || [];
-  const [listCheckedIngredients] = useState(initialState);
-  console.log(listCheckedIngredients);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -21,16 +17,19 @@ export default function MealProcess(props) {
   }, [id]);
 
   const handleClick = ({ target: { name } }) => {
-    const removeIngredient = listCheckedIngredients
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes'));
+
+    const removeIngredient = getLocalStorage.meals[id]
       .filter((ingredient) => ingredient !== name);
-    const isOnList = listCheckedIngredients.includes(name);
+    const isOnList = getLocalStorage.meals[id].includes(name);
     if (!isOnList) {
-      // setListCheckedIngredients([...listCheckedIngredients, name]);
       localStorage.setItem('inProgressRecipes', JSON
-        .stringify({ meals: { [id]: [...initialState(), name] } }));
+        .stringify({ meals: { [id]: [...getLocalStorage.meals[id], name] } }));
       return false;
     }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(removeIngredient));
+    localStorage.setItem('inProgressRecipes', JSON
+      .stringify({ meals: { [id]: removeIngredient } }));
   };
 
   if (resultMealRecipe.length > 0) {
@@ -44,6 +43,11 @@ export default function MealProcess(props) {
     const listIngredients = keysIngredients.filter((item) => item
       .includes('strIngredient'));
     const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
+
+    const handleChange = ({ target: { name } }) => {
+      console.log(name);
+    };
+
     return (
       <>
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -64,6 +68,7 @@ export default function MealProcess(props) {
                   >
                     <input
                       onClick={ handleClick }
+                      onChange={ handleChange }
                       type="checkbox"
                       id={ `${ingredient}-checkbox` }
                       name={ resultMealRecipe[0][ingredient] }

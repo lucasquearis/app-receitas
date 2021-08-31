@@ -19,6 +19,17 @@ export default function MealRecipeDetails(props) {
     resolveAPI();
   }, [id]);
 
+  const handleClick = () => {
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes'));
+    const defaultObject = { cockstails: {}, meals: { [id]: [] } };
+    if (!getLocalStorage) {
+      localStorage
+        .setItem('inProgressRecipes', JSON.stringify(defaultObject));
+      return false;
+    }
+  };
+
   if (resultMealRecipe.length > 0) {
     const {
       strMealThumb,
@@ -79,6 +90,7 @@ export default function MealRecipeDetails(props) {
           <button
             data-testid="start-recipe-btn"
             type="button"
+            onClick={ handleClick }
           >
             Iniciar Receita
           </button>
