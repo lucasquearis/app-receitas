@@ -12,7 +12,8 @@ function ReceitasFeitas() {
   const [redirect, setRedirect] = useState(null);
 
   useEffect(() => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
     setFinishRecipes(favoriteRecipes);
     setShowRecipes(favoriteRecipes);
   }, []);

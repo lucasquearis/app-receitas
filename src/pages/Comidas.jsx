@@ -8,7 +8,7 @@ import MyContext from '../context/MyContext';
 import '../cssPages/Refeicao.css';
 
 function Comidas() {
-  const { filterByIng } = useContext(MyContext);
+  const { filterByIng, renderFoods, dataMeals } = useContext(MyContext);
   const [foodData, setFoodData] = useState({});
   const [foodCategories, setFoodCategories] = useState([]);
   const [food, loading, categories, setLoading] = HookComidas();
@@ -22,6 +22,23 @@ function Comidas() {
       categories.meals,
     );
   }, [food, categories]);
+
+  const changeRender = (condition) => {
+    if (condition) {
+      return (<CardList
+        list={ dataMeals }
+        apiType="Meal"
+        page="comidas"
+      />);
+    }
+    return (
+      <CardList
+        list={ filterByIng ? filterByIng.meals : foodData.meals }
+        apiType="Meal"
+        page="comidas"
+      />
+    );
+  };
 
   return loading
     ? <div>Loading... </div>
@@ -37,11 +54,7 @@ function Comidas() {
           toggle={ toggleCategory }
           toggleCallback={ setToggleCategory }
         />
-        <CardList
-          list={ filterByIng ? filterByIng.meals : foodData.meals }
-          apiType="Meal"
-          page="comidas"
-        />
+        {changeRender(renderFoods)}
         <Footer />
       </>
     );
