@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import copyToClipBoard from 'clipboard-copy';
 import { Redirect } from 'react-router-dom';
 import { buscarBebidasID } from '../service/BebidasAPI';
 import shareIcon from '../images/shareIcon.svg';
@@ -17,7 +16,6 @@ const defaultParams = {
 export default function DetalheReceitaBebida(props) {
   const { match: { params: { id } } } = props;
   const [recipe, setRecipe] = useState([defaultParams]);
-  const [copyMessage, setCopyMessage] = useState(false);
   const [drinkIngredients, setdrinkIngredients] = useState([]);
   const [isLoading, changeLoading] = useState(true);
   const [shouldRedirect, changeRedirect] = useState(false);
@@ -40,19 +38,6 @@ export default function DetalheReceitaBebida(props) {
       return setIngredients(progressRecipes.cocktails[id]);
     }
   }, [id, recipe]);
-
-  const setMessageTime = () => {
-    const messageTime = 1000;
-    setTimeout(() => {
-      setCopyMessage(false);
-    }, messageTime);
-  };
-
-  const onShareClicked = () => {
-    copyToClipBoard(window.location.href);
-    setCopyMessage(true);
-    setMessageTime();
-  };
 
   const saveIngredients = ({ target }) => {
     if (ingredientsDone.includes(target.id)) {

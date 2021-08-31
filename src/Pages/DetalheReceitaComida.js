@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import copyToClipBoard from 'clipboard-copy';
 import { Redirect } from 'react-router';
 import { buscarComidasID } from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
@@ -17,7 +16,6 @@ const defaultParams = {
 export default function DetalheReceitaComida(props) {
   const { match: { params: { id } } } = props;
   const [recipe, setRecipe] = useState([defaultParams]);
-  const [copyMessage, setCopyMessage] = useState(false);
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [isLoading, changeLoading] = useState(true);
   const [shouldRedirect, changeRedirect] = useState(false);
@@ -41,13 +39,6 @@ export default function DetalheReceitaComida(props) {
     }
   }, [id, recipe]);
 
-  const setMessageTime = () => {
-    const messageTime = 1000;
-    setTimeout(() => {
-      setCopyMessage(false);
-    }, messageTime);
-  };
-
   const saveIngredients = ({ target }) => {
     if (ingredientsDone.includes(target.id)) {
       const newIngredients = ingredientsDone.filter((ingr) => ingr !== target.id);
@@ -55,12 +46,6 @@ export default function DetalheReceitaComida(props) {
     } else {
       setIngredients([...ingredientsDone, target.id]);
     }
-  };
-
-  const onShareClicked = () => {
-    copyToClipBoard(window.location.href);
-    setCopyMessage(true);
-    setMessageTime();
   };
 
   const redirectTo = () => {
@@ -105,7 +90,6 @@ export default function DetalheReceitaComida(props) {
             <button
               type="button"
               className="share-food-btn-icon"
-              onClick={ onShareClicked }
             >
               <img
                 data-testid="share-btn"
@@ -161,9 +145,6 @@ export default function DetalheReceitaComida(props) {
   return (
     <>
       { isLoading ? <p>Loading...</p> : renderRecipe() }
-      { copyMessage
-        ? <p className="copy-food-link-message">Link copiado!</p>
-        : <p className="copy-food-link-message" /> }
       { shouldRedirect && <Redirect to="/receitas-feitas" /> }
     </>
   );
