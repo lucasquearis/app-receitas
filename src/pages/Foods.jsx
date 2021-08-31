@@ -10,13 +10,10 @@ import Footer from '../components/Footer';
 function Foods() {
   const dispatch = useDispatch();
   const foodsLimits = 12;
-  // const [current, setCurrent] = useState('');
   const { meals, redirect } = useSelector((state) => state.foodsAndDrinks);
-  // const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
     dispatch(fetchFoodRedux);
-    // dispatch(fetchFoodsCategoriesRedux);
   }, [dispatch]);
 
   const headerProps = {
