@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function ExploreByArea() {
-  const [ingredients, setIngredients] = useState([]);
-  const exploreLimits = 12;
+  // const [ingredients, setIngredients] = useState([]);
+  // const exploreLimits = 12;
   return (
     <div>
       hi

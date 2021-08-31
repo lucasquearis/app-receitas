@@ -4,7 +4,7 @@ import IngredientsCard from './IngredientsCard';
 function ExploreDrinksByIngredients() {
   const [ingredients, setIngredients] = useState([]);
   const exploreLimits = 12;
-  const one = 1;
+  // const one = 1;
 
   const fetchIngredients = async () => {
     const endPoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
