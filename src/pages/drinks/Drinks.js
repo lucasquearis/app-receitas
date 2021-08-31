@@ -8,7 +8,7 @@ import CategoriesFilterButtons from
   '../../components/FilterCategoriesButtons.js/CategoriesFilterButtons';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import AppContext from '../../context/AppContext';
-
+// Atualiza
 const Drinks = () => {
   const context = useContext(AppContext);
   const { ingredient } = context;
