@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/ButtonCategories.css'
 
 function ButtonCategories({ handleClick, dataID, value }) {
   return (
     <button
       type="button"
+      className="category-btn"
       onClick={ ({ target }) => handleClick(target) }
       data-testid={ dataID }
       value={ value }

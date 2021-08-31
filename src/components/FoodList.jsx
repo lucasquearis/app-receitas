@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import FoodCard from './FoodCard';
 import ButtonCategories from './ButtonCategories';
+import '../styles/FoodList.css'
 
 function FoodList() {
   const [foods, setFoods] = useState('');
@@ -52,17 +53,19 @@ function FoodList() {
   if (foods !== '' && categories !== '') {
     return (
       <div>
-        <ButtonCategories
-          handleClick={ fetchFoods }
-          dataID="All-category-filter"
-          value="All"
-        />
-        {categories.meals.slice(0, CINCO).map((cat) => (<ButtonCategories
-          key={ cat.idMeal }
-          handleClick={ handleClick }
-          dataID={ `${cat.strCategory}-category-filter` }
-          value={ cat.strCategory }
-        />))}
+        <div className="category-btn-container">
+          <ButtonCategories
+            handleClick={ fetchFoods }
+            dataID="All-category-filter"
+            value="All"
+          />
+          {categories.meals.slice(0, CINCO).map((cat) => (<ButtonCategories
+            key={ cat.idMeal }
+            handleClick={ handleClick }
+            dataID={ `${cat.strCategory}-category-filter` }
+            value={ cat.strCategory }
+          />))}
+        </div>
         <ol>
           {foods.meals.slice(0, DOZE).map((food, index) => (
             <FoodCard key={ food.idMeal } food={ food } index={ index } />
