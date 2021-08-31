@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import Buttons from '../components/categoriesButton';
 import RecipesContext from '../context/RecipesContext';
@@ -12,12 +12,8 @@ function Comidas() {
     foodCategory,
     foodData,
     searchBar,
-    filter,
-    food,
-    setFood } = useContext(RecipesContext);
-  setFood(true);
-  const [ingrediente] = useState(false);
-  if (!filter) {
+    filter } = useContext(RecipesContext);
+  if (filter === '') {
     FoodDAPI();
   }
   if (foodData === null) {
@@ -33,8 +29,8 @@ function Comidas() {
     return (
       <div>
         <Header title="Comidas" />
-        <Buttons food={ food } />
-        <Recipes food={ food } ingredientes={ ingrediente } />
+        <Buttons food />
+        <Recipes food ingredientes={ false } />
         <Footer />
       </div>
     );

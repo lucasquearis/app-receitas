@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
 import DrinksAPI from '../service/drinksAPI';
 import Buttons from '../components/categoriesButton';
@@ -12,13 +12,9 @@ function Bebidas() {
     drinkCategory,
     drinkData,
     searchBar,
-    filter,
-    setFood,
-    food } = useContext(RecipesContext);
-  setFood(false);
-  const [ingrediente] = useState(false);
+    filter } = useContext(RecipesContext);
   if (filter === '') {
-    DrinksAPI();
+    DrinksAPI(false);
   }
   if (drinkData === null) {
     return (
@@ -33,8 +29,8 @@ function Bebidas() {
     return (
       <div>
         <Header title="Bebidas" />
-        <Buttons food={ food } />
-        <Recipes food={ food } ingredientes={ ingrediente } />
+        <Buttons food={ false } />
+        <Recipes food={ false } ingredientes={ false } />
         <Footer />
       </div>
     );

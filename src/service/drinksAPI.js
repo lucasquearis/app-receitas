@@ -1,12 +1,11 @@
 import { useContext, useEffect } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
-function DrinksAPI() {
+function DrinksAPI(food) {
   const empthRequest = 'search.php?s=';
   const { setDrinkData,
     setDrinkCategory,
-    drinkCategory,
-    food } = useContext(RecipesContext);
+    drinkCategory } = useContext(RecipesContext);
   const numberCategory = 5;
   useEffect(() => {
     const response = async (request) => {
