@@ -38,8 +38,8 @@ function App() {
       <Route path="/explorar/bebidas/ingredientes" component={ ExpBebidasIngredientes } />
       <Route path="/receitas-feitas" component={ ReceitasFeitas } />
       <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
-      <Route component={ NotFound } />
       <Route exact path="/" component={ () => <Login /> } />
+      <Route component={ NotFound } />
     </Switch>
   );
 }
