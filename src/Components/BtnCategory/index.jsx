@@ -5,7 +5,7 @@ import { ContextApp } from '../../Context/ContextApp';
 
 const BtnCategory = ({ category }) => {
   const maxCategory = 5;
-  const { searchRecipes } = useContext(ContextApp);
+  const { searchRecipes, setRecipes } = useContext(ContextApp);
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
@@ -13,8 +13,20 @@ const BtnCategory = ({ category }) => {
   if (category === undefined) {
     return <div>loding</div>;
   }
+  const returnAll = () => {
+    setRecipes([]);
+  };
   return (
     <div>
+      <button
+        type="button"
+        name="All"
+        key="All"
+        value="All"
+        onClick={ returnAll }
+      >
+        All
+      </button>
       {category.slice(0, maxCategory).map(({ strCategory }) => (
         <button
           type="button"

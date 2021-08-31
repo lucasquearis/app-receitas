@@ -12,7 +12,8 @@ export const ContextApp = createContext();
 
 export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes, setRecipes } = recipesHooks();
-  const { categoryMeal, categoryDrinks, filterIngredient, filter } = BtnFilterCategory();
+  const { categoryMeal, categoryDrinks, filterIngredient,
+    filter } = BtnFilterCategory();
   const {
     handleInput,
     Login,
