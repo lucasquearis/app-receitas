@@ -7,6 +7,10 @@ import './pageCSS/MealProcess.css';
 export default function MealProcess(props) {
   const { match: { params: { id } } } = props;
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
+  const initialState = () => JSON.parse(localStorage
+    .getItem('inProgressRecipes')) || [];
+  const [listCheckedIngredients] = useState(initialState);
+  console.log(listCheckedIngredients);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -15,6 +19,19 @@ export default function MealProcess(props) {
     };
     resolveAPI();
   }, [id]);
+
+  const handleClick = ({ target: { name } }) => {
+    const removeIngredient = listCheckedIngredients
+      .filter((ingredient) => ingredient !== name);
+    const isOnList = listCheckedIngredients.includes(name);
+    if (!isOnList) {
+      // setListCheckedIngredients([...listCheckedIngredients, name]);
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify({ meals: { [id]: [...initialState(), name] } }));
+      return false;
+    }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(removeIngredient));
+  };
 
   if (resultMealRecipe.length > 0) {
     const {
@@ -42,8 +59,15 @@ export default function MealProcess(props) {
                   key={ ingredient }
                   data-testid={ `${index}-ingredient-step` }
                 >
-                  <label htmlFor={ `${ingredient}-checkbox` }>
-                    <input type="checkbox" id={ `${ingredient}-checkbox` } />
+                  <label
+                    htmlFor={ `${ingredient}-checkbox` }
+                  >
+                    <input
+                      onClick={ handleClick }
+                      type="checkbox"
+                      id={ `${ingredient}-checkbox` }
+                      name={ resultMealRecipe[0][ingredient] }
+                    />
                     <span>
                       { resultMealRecipe[0][ingredient] }
                       {' '}
@@ -60,7 +84,12 @@ export default function MealProcess(props) {
         </ul>
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
-        <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
+        <button
+          data-testid="finish-recipe-btn"
+          type="button"
+        >
+          Finalizar Receita
+        </button>
       </>
     );
   }

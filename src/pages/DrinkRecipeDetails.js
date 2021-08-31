@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './pageCSS/DrinkRecipeDetails.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
@@ -57,7 +58,14 @@ function DrinkRecipeDetails(props) {
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
         <RecomendationCard page="drinks" />
-        <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+        <Link to={ `/bebidas/${id}/in-progress` }>
+          <button
+            data-testid="start-recipe-btn"
+            type="button"
+          >
+            Iniciar Receita
+          </button>
+        </Link>
       </>
     );
   }

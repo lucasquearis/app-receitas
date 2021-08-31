@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './pageCSS/MealRecipeDetails.css';
+import { Link } from 'react-router-dom';
 import searchMealAPI
   from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
@@ -74,7 +75,14 @@ export default function MealRecipeDetails(props) {
           allowFullScreen
         />
         <RecomendationCard page="meals" />
-        <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+        <Link to={ `/comidas/${id}/in-progress` }>
+          <button
+            data-testid="start-recipe-btn"
+            type="button"
+          >
+            Iniciar Receita
+          </button>
+        </Link>
       </>
     );
   }

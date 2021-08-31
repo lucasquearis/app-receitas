@@ -36,7 +36,6 @@ function DrinkRecipeDetails(props) {
         <span data-testid="recipe-category">{strAlcoholic}</span>
         <ul className="progress__checkbox-list">
           {listIngredients.map((ingredient, index) => {
-            console.log(resultDrinkRecipe);
             if (resultDrinkRecipe[0][ingredient]) {
               return (
                 <li
