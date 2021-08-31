@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import fetchApi from '../Helpers/fetchApi';
-import showAlert from '../Helpers/showAlert';
+
+const showAlert = (callback, msg) => {
+  callback(msg);
+};
 
 function RecipesHooks() {
   const [recipes, setRecipes] = useState([]);
@@ -32,8 +35,7 @@ function RecipesHooks() {
     const responseRecipes = foodRout === true ? response.meals : response.drinks;
     if (responseRecipes === null) {
       return showAlert(
-        alert,
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+        alert, 'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
     setRecipes(responseRecipes);
@@ -45,7 +47,6 @@ function RecipesHooks() {
       );
     }
   };
-
   return {
     searchRecipes,
     recipes,
