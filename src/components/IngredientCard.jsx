@@ -20,6 +20,7 @@ IngredientCard.propTypes = {
   thumb: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default IngredientCard;
