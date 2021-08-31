@@ -13,13 +13,54 @@ function RecipesMade() {
     }
   }, []);
 
+  const handleFood = () => {
+    const getInfo = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (getInfo) {
+      const filterFood = getInfo.filter(({ type }) => type === 'comida');
+      setRecipes(filterFood);
+    }
+  };
+
+  const handleDrink = () => {
+    const getInfo = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (getInfo) {
+      const filterDrink = getInfo.filter(({ type }) => type === 'bebida');
+      setRecipes(filterDrink);
+    }
+  };
+
+  const handleAll = () => {
+    const getAll = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (getAll) {
+      setRecipes(getAll);
+    }
+  };
+
   return (
     <div>
       <Header title="Receitas Feitas" showRender={ false } />
       <div>
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ handleAll }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ handleFood }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ handleDrink }
+        >
+          Drinks
+        </button>
       </div>
       { recipes.map((item, index) => {
         let card;
