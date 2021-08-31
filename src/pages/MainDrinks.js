@@ -14,7 +14,7 @@ export default function MainDrinks() {
 
   const ing = localStorage.getItem('filterIngredient');
   if (ing) {
-    fetchDrinkByIngredient(ing).then(({ drinks }) => setDrinks(drinks));
+    fetchDrinkByIngredient(ing).then((data) => setDrinks(data.drinks));
     localStorage.removeItem('filterIngredient');
   }
 
