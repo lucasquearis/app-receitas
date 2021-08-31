@@ -22,6 +22,8 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
+        {/* <Route path="/comidas/:id/in-progress" component={ FoodsInProgress } /> */}
+        {/* <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } /> */}
         <Route path="/comidas/:id" render={ (props) => <FoodDet { ...props } /> } />
         <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/comidas" component={ Foods } />

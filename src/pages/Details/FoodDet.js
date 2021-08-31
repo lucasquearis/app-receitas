@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { useParams } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Image } from 'react-bootstrap';
+import ShareButton from '../../components/Details/ShareButton';
+import FavoriteButton from '../../components/Details/FavoriteButton';
 
 const responsive = {
   mobile: {
@@ -11,28 +13,6 @@ const responsive = {
     items: 2,
   },
 };
-
-// mock de teste
-// const doneRecipes = [{
-//   id: 52771,
-//   type: 'comida',
-//   area: 'Italian',
-//   category: 'Vegetarian',
-//   alcoholicOrNot: '',
-//   name: 'Spicy Arrabiata Penne',
-//   image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-//   doneDate: '22/6/2020',
-//   tags: ['Pasta', 'Curry'],
-// }];
-// localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
-
-// // mock de teste
-// const inProgressRecipes = {
-//   meals: {
-//     52771: [],
-//   },
-// };
-// localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
 
 function FoodDetails() {
   const [recipesFood, setRecipesFood] = useState([{}]);
@@ -84,43 +64,28 @@ function FoodDetails() {
     getRecommendations();
   }, [recipesFood]);
 
-  // const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
-  //   .filter((item) => item.id === id);
-  // console.log(localStorageDoneRecipes);
+  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
+    .filter((item) => item.id === id);
 
-  // const localStorageInProgressRecipes = JSON
-  //   .parse(localStorage.getItem('inProgressRecipes'));
-  // const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.meals)
-  //   .filter((item) => parseInt(item, 10) === id);
+  const localStorageInProgressRecipes = JSON
+    .parse(localStorage.getItem('inProgressRecipes'));
+  const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.meals)
+    .filter((item) => parseInt(item, 10) === id);
 
   return (
     <>
       { recipesFood.map((item, index) => (
         <div key={ index }>
-          <img
+          <Image
             data-testid="recipe-photo"
             src={ item.strMealThumb }
             alt="receita pronta"
             fluid
           />
           <h2 data-testid="recipe-title">{ item.strMeal }</h2>
-          <button
-            variant="success"
-            data-testid="share-btn"
-            type="button"
-          >
-            Compartilhar
-
-          </button>
-          <button
-            variant="success"
-            data-testid="favorite-btn"
-            type="button"
-          >
-            Add aos favoritos
-
-          </button>
           <p data-testid="recipe-category">{ item.strCategory }</p>
+          <ShareButton />
+          <FavoriteButton />
           <div>
             <h3>Ingredientes</h3>
             <ul>
@@ -147,31 +112,24 @@ function FoodDetails() {
             { recipesRecommendations.map((food, ind) => (
               <div key={ food.strDrink } data-testid={ `${ind}-recomendation-card` }>
                 <h2 data-testid={ `${ind}-recomendation-title` }>{food.strDrink }</h2>
-                <img src={ food.strDrinkThumb } alt={ food.strDrink } fluid />
+                <Image src={ food.strDrinkThumb } alt={ food.strDrink } fluid />
               </div>
             )) }
           </Carousel>
-          {/* { localStorageDoneRecipes.length !== 0 ? (
-            <Button
-              className="fixed-bottom"
-              variant="success"
-              data-testid="start-recipe-btn"
-              type="button"
-            >
-              { filterProgressRecipes.length !== 0
-                ? 'Continuar Receita' : 'Iniciar Receita' }
+          { !localStorageDoneRecipes.length !== 0 ? (
+            <Link to={ `/comidas/${id}/in-progress` }>
+              <Button
+                className="fixed-bottom"
+                variant="success"
+                data-testid="start-recipe-btn"
+                type="button"
+              >
+                { filterProgressRecipes.length !== 0
+                  ? 'Continuar Receita' : 'Iniciar Receita' }
 
-            </Button>
-          ) : '' } */}
-          <Button
-            className="fixed-bottom"
-            variant="success"
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            Iniciar Receita
-
-          </Button>
+              </Button>
+            </Link>
+          ) : '' }
         </div>
       )) }
     </>
