@@ -14,7 +14,7 @@ const Drinks = () => {
   const DRINKS = 12;
 
   if (drinks === null) {
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   } else if (drinks.length === 1 && drinksByCategories === false) {
     history.push(`/bebidas/${drinks[0].idDrink}`);
   }

@@ -60,32 +60,6 @@ const FoodDetails = () => {
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
-  const getFavorite = () => {
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (actualStorage && foodDetails.length > 0) {
-      const isFavorited = actualStorage.some(
-        (item) => item.id === foodDetails[0].idMeal,
-      );
-      setFavorite(isFavorited);
-    }
-  };
-
-  const getIngredients = () => {
-    const ingredientsArr = foodDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Ingredient') && i[1] !== ''));
-    const ingredientsOnly = ingredientsArr.map((item) => item
-      .map((i) => i.pop())).map((item) => item);
-    setIngredients(ingredientsOnly);
-  };
-
-  const getMeasure = () => {
-    const measuresArr = foodDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
-    const measuresOnly = measuresArr.map((item) => item
-      .map((i) => i.pop())).map((item) => item);
-    setMeasures(measuresOnly);
-  };
-
   const copy = (path) => {
     Copy(path);
     setShowMsg(true);
@@ -93,9 +67,35 @@ const FoodDetails = () => {
 
   useEffect(() => {
     fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
-  }, [actualPath]);
+  }, [actualPath, setFoodDetails]);
 
   useEffect(() => {
+    const getFavorite = () => {
+      const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      if (actualStorage && foodDetails.length > 0) {
+        const isFavorited = actualStorage.some(
+          (item) => item.id === foodDetails[0].idMeal,
+        );
+        setFavorite(isFavorited);
+      }
+    };
+
+    const getIngredients = () => {
+      const ingredientsArr = foodDetails.map((item) => Object.entries(item)
+        .filter((i) => i[0].includes('Ingredient') && i[1] !== ''));
+      const ingredientsOnly = ingredientsArr.map((item) => item
+        .map((i) => i.pop())).map((item) => item);
+      setIngredients(ingredientsOnly);
+    };
+
+    const getMeasure = () => {
+      const measuresArr = foodDetails.map((item) => Object.entries(item)
+        .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
+      const measuresOnly = measuresArr.map((item) => item
+        .map((i) => i.pop())).map((item) => item);
+      setMeasures(measuresOnly);
+    };
+
     getFavorite();
     getIngredients();
     getMeasure();

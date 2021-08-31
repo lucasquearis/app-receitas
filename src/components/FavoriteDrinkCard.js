@@ -49,19 +49,18 @@ const FavoriteDrinkCard = ({ recipe, index }) => {
     setChanged(!changed);
   }
 
-  const getFavorite = () => {
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (actualStorage && recipe.length > 0) {
-      const isFavorited = actualStorage.some(
-        (item) => item.id === recipe.id,
-      );
-      setFavorite(isFavorited);
-    }
-  };
-
   useEffect(() => {
+    const getFavorite = () => {
+      const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      if (actualStorage && recipe.length > 0) {
+        const isFavorited = actualStorage.some(
+          (item) => item.id === recipe.id,
+        );
+        setFavorite(isFavorited);
+      }
+    };
     getFavorite();
-  }, [changed]);
+  }, [changed, recipe]);
 
   return (
     <div className="fav-food-card">

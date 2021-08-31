@@ -7,21 +7,20 @@ function Login({ history }) {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
   const [disabled, setDisabled] = useState(true);
 
-  const Validations = () => {
-    const SIX = 6;
-    const eRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const { email, password } = loginState;
-
-    const emailVerification = () => eRegex.test(email);
-
-    const passwordVerification = () => password.length > SIX;
-
-    if (emailVerification() && passwordVerification() === true) setDisabled(false);
-
-    if (eRegex.test(email) === false || password.length <= SIX) setDisabled(true);
-  };
-
   useEffect(() => {
+    const Validations = () => {
+      const SIX = 6;
+      const eRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const { email, password } = loginState;
+
+      const emailVerification = () => eRegex.test(email);
+
+      const passwordVerification = () => password.length > SIX;
+
+      if (emailVerification() && passwordVerification() === true) setDisabled(false);
+
+      if (eRegex.test(email) === false || password.length <= SIX) setDisabled(true);
+    };
     Validations();
   }, [loginState]);
 
