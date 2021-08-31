@@ -5,7 +5,7 @@ import IngredientsCheckList from '../components/IngredientsCheckList';
 import FinishRecipeButton from '../components/FinishRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
-import useLocalStorage from '../helpers/useLocalStorage';
+/* import useLocalStorage from '../helpers/useLocalStorage'; */
 
 function ProgressRecipes(props) {
   const [recipe, setRecipe] = useState();
@@ -15,7 +15,7 @@ function ProgressRecipes(props) {
   const { match, history } = props;
   const { type, id } = match.params;
   const { pathname } = history.location;
- /*  const [ingredients, setIngredients] = useState([]);
+  /*  const [ingredients, setIngredients] = useState([]);
   const [cocktailsStorage, setCocktailsStorage] = useLocalStorage('cocktails', {});
   const [mealsStorage, setMealsStorage] = useLocalStorage('meals', {}); */
 

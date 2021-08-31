@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { string } from 'prop-types';
 import Carousel from 'react-multi-carousel';
-import "react-multi-carousel/lib/styles.css";
+import 'react-multi-carousel/lib/styles.css';
 
 function Suggestions({ type }) {
   const [suggestions, setSuggestions] = useState([]);
@@ -9,13 +10,13 @@ function Suggestions({ type }) {
   const responsiveCarousel = {
     desktop: {
       breakpoint: { max: 4000, min: 1024 },
-      items: 2
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 1024, min: 0 },
-      items: 2
-    }
-  }
+      items: 2,
+    },
+  };
 
   const correctURL = type === 'bebidas' ? urlMealsSuggestions : urlDrinksSuggestions;
 
@@ -37,7 +38,8 @@ function Suggestions({ type }) {
     <div
       key={ key }
       data-testid={ `${key}-recomendation-card` }
-      className='suggestion__card'>
+      className="suggestion__card"
+    >
       <img
         width="150"
         height="150"
@@ -53,7 +55,7 @@ function Suggestions({ type }) {
     <div
       key={ key }
       data-testid={ `${key}-recomendation-card` }
-      className='suggestion__card'
+      className="suggestion__card"
     >
       <img
         width="150"
@@ -67,12 +69,16 @@ function Suggestions({ type }) {
   );
 
   return (
-    <Carousel responsive={responsiveCarousel}>
+    <Carousel responsive={ responsiveCarousel }>
       { suggestions.map((item, key) => (
         item.idMeal ? renderMealsDetails(item, key) : renderDrinksDetails(item, key)
       )) }
     </Carousel>
   );
 }
+
+Suggestions.propTypes = {
+  type: string,
+}.isRequired;
 
 export default Suggestions;
