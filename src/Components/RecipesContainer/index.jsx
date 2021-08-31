@@ -14,6 +14,7 @@ function RecipesContainer() {
           image={ recipe.strMealThumb || recipe.strDrinkThumb }
           testId={ `${index}-recipe-card` }
           index={ index }
+          id={ recipe.idMeal || recipe.idDrink }
         />
       ))}
     </div>
