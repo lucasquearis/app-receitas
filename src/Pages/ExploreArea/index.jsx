@@ -1,22 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import Header from '../../Components/Header';
 import BottomMenu from '../../Components/Footer/BottomMenu';
 import fetchApi from '../../Helpers/fetchApi';
+import { ContextApp } from '../../Context/ContextApp';
+import RecipesContainer from '../../Components/RecipesContainer';
 
 function ExploreArea() {
   const [areas, setAreas] = useState([]);
+  const { setRecipes } = useContext(ContextApp);
+  const url = 'https://www.themealdb.com/api/json/v1/1/';
 
   useEffect(() => {
     const getArea = async () => {
-      const response = await fetchApi('https://www.themealdb.com/api/json/v1/1/', 'list.php?a=list');
-      setAreas(response.meals);
+      const response = await fetchApi(url, 'list.php?a=list');
+      setAreas([
+        {
+          strArea: 'All',
+        },
+        ...response.meals,
+      ]);
     };
     getArea();
   }, []);
 
-  const handleChange = ({ target: { value } }) => {
-    console.log(value);
+  const handleChange = async ({ target: { value } }) => {
+    const maxRecipes = 12;
+    const response = await fetchApi(url, 'filter.php?a=', value);
+    setRecipes(response.meals.slice(0, maxRecipes));
   };
 
   return (
@@ -30,10 +41,17 @@ function ExploreArea() {
           data-testid="explore-by-area-dropdown"
           onChange={ (event) => handleChange(event) }
         >
-          {areas.map((current, ind) => <option key={ ind }>{current.strArea}</option>)}
+          {areas.map((current, ind) => (
+            <option
+              key={ ind }
+              data-testid={ `${current.strArea}-option` }
+            >
+              {current.strArea}
+            </option>
+          ))}
         </select>
         <div>
-          oi
+          <RecipesContainer />
         </div>
       </div>
       <BottomMenu />
