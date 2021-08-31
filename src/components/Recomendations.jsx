@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchRecipe from '../Redux/actions/fetchRecipes';
-import fetchCocktail from '../Redux/actions/fetchCocktail';
 
 class Recomendations extends Component {
   render() {
@@ -31,12 +29,7 @@ const mapStateToProps = (state) => ({
   cocktail: state.drinks.cocktails,
 });
 
-const mapDispatchToProps = (dispach) => ({
-  fetchRecipe: (id) => dispach(fetchRecipe(id)),
-  fetchCocktail: (id) => dispach(fetchCocktail(id)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Recomendations);
+export default connect(mapStateToProps)(Recomendations);
 
 Recomendations.propTypes = {
   recipe: PropTypes.objectOf(PropTypes.object),

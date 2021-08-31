@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Ingredients from '../../components/Ingredients';
 import Instructions from '../../components/Instructions';
 import Video from '../../components/Video';
@@ -11,14 +12,32 @@ import fetchRecipes from '../../Redux/actions/fetchRecipes';
 import './style.css';
 
 class DetailsFood extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      red: false,
+    };
+    this.setRedirect = this.setRedirect.bind(this);
+  }
+
   componentDidMount() {
     const { fetchRecipe, match } = this.props;
     const { params: { id } } = match;
     fetchRecipe(id);
   }
 
+  setRedirect() {
+    const { red } = this.state;
+    this.setState({
+      red: !red,
+    });
+  }
+
   render() {
-    const { recipe } = this.props;
+    const { recipe, match } = this.props;
+    const { params: { id } } = match;
+    const { red } = this.state;
     return (
       <div>
         <div>
@@ -42,11 +61,12 @@ class DetailsFood extends Component {
                 <Video />
                 <Recomendations />
                 <button
-                  className="btn btn-warning"
+                  className="start-recipe-button"
                   type="button"
                   data-testid="start-recipe-btn"
+                  onClick={ () => this.setRedirect() }
                 >
-                  Start recipe
+                  Iniciar Receita
                 </button>
                 <button type="button" className="share-fill">
                   <img
@@ -64,6 +84,9 @@ class DetailsFood extends Component {
                 </button>
               </div>
             ))
+          }
+          {
+            red ? <Redirect to={ `/comidas/${id}/in-progress` } /> : console.log('chamou')
           }
         </div>
       </div>

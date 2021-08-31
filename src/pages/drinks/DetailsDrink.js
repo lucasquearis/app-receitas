@@ -1,24 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import IngredientsDrink from '../../components/IngredientsDrink';
 import Instructions from '../../components/Instructions';
 import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
-// import Ingredients from '../../components/Ingredients';
-// import Video from '../../components/Video';
+import './style.css';
 
 class DetailsDrink extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      red: false,
+    };
+    this.setRedirect = this.setRedirect.bind(this);
+  }
+
   componentDidMount() {
     const { setCocktail, match } = this.props;
     const { params: { id } } = match;
     setCocktail(id);
   }
 
+  setRedirect() {
+    const { red } = this.state;
+    this.setState({
+      red: !red,
+    });
+  }
+
   render() {
-    const { cocktail } = this.props;
+    const { cocktail, match } = this.props;
+    const { params: { id } } = match;
+    const { red } = this.state;
     return (
       <div>
         <div>
@@ -40,10 +58,12 @@ class DetailsDrink extends Component {
                   <Instructions />
                   <Recomendations />
                   <button
+                    className="start-recipe-button"
                     type="button"
                     data-testid="start-recipe-btn"
+                    onClick={ () => this.setRedirect() }
                   >
-                    Start recipe
+                    Iniciar Receita
                   </button>
                   <button type="button">
                     <img src={ ShareIcon } alt="share button" data-testid="share-btn" />
@@ -59,8 +79,10 @@ class DetailsDrink extends Component {
               ),
             )
           }
+          {
+            red ? <Redirect to={ `/bebidas/${id}/in-progress` } /> : console.log('chamou')
+          }
         </div>
-
       </div>
     );
   }
