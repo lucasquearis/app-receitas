@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import clipboardCopy from 'clipboard-copy';
 import Header from '../../Components/Header';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Btn from '../../Components/Btn';
 
 function ReceitasFavoritas() {
-  const history = useHistory();
-
   const getFavoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-  const [favorite, setFavorite] = useState(getFavoriteStorage);
+  const [favorited, setFavorited] = useState(getFavoriteStorage);
   const [copied, setCopied] = useState(false);
 
   function removeFavorite(event, id) {
     event.preventDefault();
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const newArrayFavorite = favoriteStorage.filter((item) => item.id !== id);
-    setFavorite(newArrayFavorite);
+    setFavorited(newArrayFavorite);
   }
 
   useEffect(() => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
-  }, [favorite]);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favorited));
+  }, [favorited]);
 
   const allButtonProps = {
     name: 'All',
     'data-testid': 'filter-by-all-btn',
     type: 'button',
     variant: 'contained',
-    onClick: () => setFavorite(getFavoriteStorage),
+    onClick: () => setFavorited(getFavoriteStorage),
   };
 
   const foodButtonProps = {
@@ -36,7 +35,7 @@ function ReceitasFavoritas() {
     'data-testid': 'filter-by-food-btn',
     type: 'button',
     variant: 'contained',
-    onClick: () => setFavorite(favorite
+    onClick: () => setFavorited(favorited
       .filter((recipes) => recipes.type === 'comida')),
   };
 
@@ -45,13 +44,16 @@ function ReceitasFavoritas() {
     'data-testid': 'filter-by-drink-btn',
     type: 'button',
     variant: 'contained',
-    onClick: () => setFavorite(favorite
+    onClick: () => setFavorited(favorited
       .filter((recipes) => recipes.type === 'bebida')),
   };
 
   return (
     <div>
-      <Header title="Receitas Favoritas" />
+      <Header
+        title="Receitas Favoritas"
+        searchButton={ false }
+      />
       <div>
         <Btn { ...allButtonProps } />
       </div>
@@ -63,7 +65,7 @@ function ReceitasFavoritas() {
       </div>
       <div>
         {
-          favorite.map((recipe, index) => (
+          favorited.map((recipe, index) => (
             <div key={ index }>
               {recipe.type === 'bebida' ? (
                 <div>
@@ -71,6 +73,7 @@ function ReceitasFavoritas() {
                     to={ `/bebidas/${recipe.id}` }
                   >
                     <img
+                      width="250px"
                       data-testid={ `${index}-horizontal-image` }
                       alt={ recipe.name }
                       src={ recipe.image }
@@ -87,7 +90,7 @@ function ReceitasFavoritas() {
                   <button
                     type="button"
                     onClick={ () => {
-                      history.push(`http://localhost:3000/bebidas/${recipe.id}`);
+                      clipboardCopy(`http://localhost:3000/bebidas/${recipe.id}`);
                       setCopied(true);
                     } }
                   >
@@ -115,6 +118,7 @@ function ReceitasFavoritas() {
                     to={ `/comidas/${recipe.id}` }
                   >
                     <img
+                      width="250px"
                       data-testid={ `${index}-horizontal-image` }
                       alt={ recipe.name }
                       src={ recipe.image }
@@ -131,7 +135,7 @@ function ReceitasFavoritas() {
                   <button
                     type="button"
                     onClick={ () => {
-                      history.push(`http://localhost:3000/comidas/${recipe.id}`);
+                      clipboardCopy(`http://localhost:3000/comidas/${recipe.id}`);
                       setCopied(true);
                     } }
                   >
