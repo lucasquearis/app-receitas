@@ -7,7 +7,7 @@ export default function Explorar() {
   return (
     <div>
       <Header
-        title="Explorar"
+        titulo="Explorar"
         enableSearchIcon={ false }
       />
       <Link to="/explorar/comidas">
