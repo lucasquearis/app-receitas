@@ -7,8 +7,6 @@ import Recomendations from '../../components/Recomendations';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
-// import Ingredients from '../../components/Ingredients';
-// import Video from '../../components/Video';
 
 class DetailsDrink extends Component {
   componentDidMount() {
