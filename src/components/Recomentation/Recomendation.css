@@ -1,8 +1,7 @@
-#recomendation {
+.recomendation {
   display: flex;
   overflow-x: scroll;
   width: 300px;
-
 }
 
 .card-recomendation {

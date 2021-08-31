@@ -15,7 +15,7 @@ const Recomendation = ({ list, type }) => {
   return (
     <div className="component-details">
       <h1>Recomendation</h1>
-      <div id="recomendation">
+      <div className="recomendation">
         { newArray.map((obj, index) => (
           <div
             key={ index }

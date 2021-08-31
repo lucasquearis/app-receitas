@@ -32,9 +32,9 @@ p {
 }
 
 .buttons-container {
+  align-items: center;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   width: 105px;
 }
 
