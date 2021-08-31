@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Loading from '../components/Loading';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -36,6 +36,7 @@ const ComidasEmProcesso = () => {
   const [food, setFood] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState({ wereFetched: false });
+  const history = useHistory();
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
 
@@ -161,6 +162,7 @@ const ComidasEmProcesso = () => {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ !allDone() }
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar Receita
       </button>
