@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;700&display=swap') ;
 
 * {
-  font-family: 'Commissioner', sans-serif;
+  border: 0;
+  font-family: Commissioner , sans-serif;
   margin: 0;
   padding: 0;
-  border: 0;
   text-decoration: none;
 }
 
@@ -46,21 +46,20 @@ header > button {
   border: none;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active
-{
- -webkit-box-shadow: 0 0 0 30px whitesmoke inset !important;
-}
-
 @keyframes pop-in {
-  0% { opacity: 0; -webkit-transform: scale(0.5); }
-  100% { opacity: 1; -webkit-transform: scale(1); }
+
+  0% { opacity: 0;
+    transform: scale(0.5); }
+
+  100% { opacity: 1;
+    transform: scale(1); }
 }
 
 @keyframes popout {
-  from{transform:scale(0)}
-  80%{transform:scale(1.2)}
-  to{transform:scale(1)}
+
+  from { transform: scale(0); }
+
+  80% { transform: scale(1.2); }
+
+  to { transform: scale(1); }
 }
