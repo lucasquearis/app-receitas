@@ -4,6 +4,8 @@ const MEAL_API_URL_INGREDIENT = 'https://www.themealdb.com/api/json/v1/1/filter.
 const INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const MEAL_BY_AREA_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 
+const INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+
 export const fetchMealApi = async (foodFilter = { searchText: '', search: '' }) => {
   const { searchText, search } = foodFilter;
 
