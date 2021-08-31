@@ -7,12 +7,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-
-const recommendedRecipes = [
-  'receita 1',
-  'receita 2',
-  'receita 3',
-];
+const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const maxRecommendedRecipes = 6;
 
 const getFavorite = (drink) => ({
   id: drink.idDrink,
@@ -35,7 +31,7 @@ export default function BebidasDetalhes() {
   const history = useHistory();
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
-  const [recomendedFood, setRecoomendedFood] = useState([]);
+  const [recommendedFood, setRecommendedFood] = useState([]);
 
   useEffect(() => {
     const api = async () => {
@@ -54,14 +50,11 @@ export default function BebidasDetalhes() {
     api();
   }, [idApi]);
 
-
   useEffect(() => {
     const apiFood = async () => {
-      const magicalNumber = 6;
-      const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      const data = await fetch(URL).then((response) => response.json());
-      const firstSix = await data.meals.slice(0, magicalNumber);
-      setRecoomendedFood(firstSix);
+      const data = await fetch(URL_FOOD).then((response) => response.json());
+      const recommendedRecipes = await data.meals.slice(0, maxRecommendedRecipes);
+      setRecommendedFood(recommendedRecipes);
     };
     apiFood();
   }, []);
@@ -72,7 +65,7 @@ export default function BebidasDetalhes() {
         data-testid={ `${index}-ingredient-name-and-measure` }
         key={ index }
       >
-        {`${drink[ingredientKey]}`}
+        {` ${drink[ingredientKey]} - ${drink[`strMeasure${index + 1}`]}`}
       </li>));
 
   const handleFavorite = () => {
@@ -105,10 +98,11 @@ export default function BebidasDetalhes() {
         />
       </div>
       <h2 data-testid="recipe-title">{drink.strDrink}</h2>
-      <div data-testid="recipe-category">{drink.strCategory}</div>
+      <div data-testid="recipe-category">{drink.strAlcoholic}</div>
+      {console.log(drink)}
       <div data-testid="recipe-glass">{drink.strGlass}</div>
-      <div data-testid="recipe-alcoholic">{drink.strAlcoholic}</div>
-      
+      <div data-testid="recipe-alcoholic">{drink.strCategory}</div>
+
       <div className={ styles.buttonBebidasDetails }>
         <button type="button" data-testid="share-btn">Compartilhar</button>
         <button
@@ -126,7 +120,7 @@ export default function BebidasDetalhes() {
         {renderIngredients(getIngredientsKeys(drink))}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
-      {recomendedFood.map((recomendation, index) => (
+      {recommendedFood.map((recomendation, index) => (
         <div
           data-testid={ `${index}-recomendation-card` }
           key={ index }
@@ -138,9 +132,9 @@ export default function BebidasDetalhes() {
             >
               { recomendation.strMeal }
             </li>
-          ))}
-        </ul>
-      </div>
+          </ul>
+        </div>
+      ))}
       <button
         type="button"
         className="start-recipe-btn"

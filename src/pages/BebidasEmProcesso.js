@@ -125,7 +125,7 @@ const BebidasEmProcesso = () => {
             checked={ ingredients.wereFetched
               && ingredients[idApi][index][drink[ingredientKey]] }
           />
-          {` ${drink[ingredientKey]}`}
+          {` ${drink[ingredientKey]} - ${drink[`strMeasure${index + 1}`]}`}
         </label>
       </div>
     ));
