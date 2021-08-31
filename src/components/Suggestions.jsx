@@ -1,28 +1,45 @@
 import React, { useEffect, useState } from 'react';
+import { string } from 'prop-types';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-function Sugestions({ type }) {
-  const [sugestions, setSugestions] = useState([]);
-  const urlMealsSugestions = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const urlDrinksSugestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+function Suggestions({ type }) {
+  const [suggestions, setSuggestions] = useState([]);
+  const urlMealsSuggestions = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const urlDrinksSuggestions = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const responsiveCarousel = {
+    desktop: {
+      breakpoint: { max: 4000, min: 1024 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 1024, min: 0 },
+      items: 2,
+    },
+  };
 
-  const correctURL = type === 'bebidas' ? urlMealsSugestions : urlDrinksSugestions;
+  const correctURL = type === 'bebidas' ? urlMealsSuggestions : urlDrinksSuggestions;
 
   useEffect(() => {
-    const fetchSugestions = async () => {
+    const fetchSuggestions = async () => {
       const request = await fetch(`${correctURL}`);
       const response = await request.json();
-      const resSugestion = type === 'bebidas'
+      const resSuggestion = type === 'bebidas'
         ? await response.meals.filter((item, key) => (
           key < Number('6')))
         : await response.drinks.filter((item, key) => (
           key < Number('6')));
-      setSugestions(resSugestion);
+      setSuggestions(resSuggestion);
     };
-    fetchSugestions();
-  }, [correctURL]);
+    fetchSuggestions();
+  }, [correctURL, type]);
 
-  const renderMealsDetails = (item) => (
-    <div>
+  const renderMealsDetails = (item, key) => (
+    <div
+      key={ key }
+      data-testid={ `${key}-recomendation-card` }
+      className="suggestion__card"
+    >
       <img
         width="150"
         height="150"
@@ -30,12 +47,16 @@ function Sugestions({ type }) {
         alt={ item.strMeal }
       />
       <p>{ item.strCategory }</p>
-      <h5>{ item.strMeal }</h5>
+      <h5 data-testid={ `${key}-recomendation-title` }>{ item.strMeal }</h5>
     </div>
   );
 
-  const renderDrinksDetails = (item) => (
-    <div>
+  const renderDrinksDetails = (item, key) => (
+    <div
+      key={ key }
+      data-testid={ `${key}-recomendation-card` }
+      className="suggestion__card"
+    >
       <img
         width="150"
         height="150"
@@ -43,22 +64,21 @@ function Sugestions({ type }) {
         alt={ item.strDrink }
       />
       <p>{ item.strAlcoholic }</p>
-      <h5>{ item.strDrink }</h5>
+      <h5 data-testid={ `${key}-recomendation-title` }>{ item.strDrink }</h5>
     </div>
   );
 
   return (
-    sugestions.map((item, key) => (
-      <div
-        key={ key }
-        data-testid={ `${key}-recomendation-card` }
-      >
-        {
-          item.idMeal ? renderMealsDetails(item) : renderDrinksDetails(item)
-        }
-      </div>
-    ))
+    <Carousel responsive={ responsiveCarousel }>
+      { suggestions.map((item, key) => (
+        item.idMeal ? renderMealsDetails(item, key) : renderDrinksDetails(item, key)
+      )) }
+    </Carousel>
   );
 }
 
-export default Sugestions;
+Suggestions.propTypes = {
+  type: string,
+}.isRequired;
+
+export default Suggestions;
