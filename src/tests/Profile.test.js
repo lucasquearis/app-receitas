@@ -2,7 +2,7 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { fireEvent } from '@testing-library/react';
 import { renderWithRouterAndStore } from './testConfig';
-import Profile from '../pages/perfil/profile';
+import Profile from '../pages/perfil/Profile';
 
 const testHistory = createMemoryHistory({ initialEntries: ['/perfil'] });
 const PROFILE_EMAIL = 'profile-email';
