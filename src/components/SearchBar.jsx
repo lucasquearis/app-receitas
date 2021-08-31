@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { fetchFoodByFilters } from '../services/mealAPI';
 import { fetchCocktailByFilters } from '../services/cocktailAPI';
 import FoodContext from '../context/FoodContext';
@@ -15,6 +16,25 @@ function SearchBar() {
   const [filters, setFilters] = useState(defaultFilters);
   const { setFoods } = useContext(FoodContext);
   const { setDrinks } = useContext(DrinkContext);
+
+  const { drinks } = useContext(DrinkContext);
+  const { foods } = useContext(FoodContext);
+
+  if (drinks === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+
+  if (drinks !== null && drinks.length === 1) {
+    return <Redirect to={ `bebidas/${drinks[0].idDrink}` } />;
+  }
+
+  if (foods === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+
+  if (foods !== null && foods.length === 1) {
+    return <Redirect to={ `comidas/${foods[0].idMeal}` } />;
+  }
 
   function handleChange({ target }) {
     const obj = { ...filters };
