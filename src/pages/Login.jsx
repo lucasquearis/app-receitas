@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
+import palmirinha from '../images/turma-12-palmirinha.png'
+import '../styles/Login.css'
 
 function Login() {
   const SEIS = 6;
@@ -36,9 +38,13 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="login-container">
+      <h1>Palmirinha App</h1>
+      <img className="palmirinha-img" src={ palmirinha } />
       <input
+        className="input-login"
         data-testid="email-input"
+        placeholder="E-mail"
         id="standard-name"
         label="Email"
         value={ user.email }
@@ -46,7 +52,9 @@ function Login() {
         onChange={ handleChange }
       />
       <input
+        className="input-login"
         data-testid="password-input"
+        placeholder="Senha"
         id="standard-password-input"
         label="Password"
         value={ user.password }
@@ -55,6 +63,7 @@ function Login() {
         type="password"
       />
       <Button
+        className="btn-login"
         type="submit"
         variant="contained"
         disabled={ !(emailIsValid(user.email) && user.password.length > SEIS) }
