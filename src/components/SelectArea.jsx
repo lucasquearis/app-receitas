@@ -35,6 +35,13 @@ export default function SelectArea() {
             onChange={ handleChange }
             id="input-area"
           >
+            <option
+              value="All"
+              key="All"
+              data-testid="All-option"
+            >
+              All
+            </option>
             { dataArea.map((area) => (
               <option
                 value={ area.strArea }
