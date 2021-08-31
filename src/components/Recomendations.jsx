@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 
 class Recomendations extends Component {
   render() {
-    const { recipe, cocktail } = this.props;
+    const { meals, drinks } = this.props;
     return (
       <section>
         <div data-testid="0-recomendation-card">
           {
-            recipe.map(({ strMeal }, index) => (
+            meals.map(({ strMeal }, index) => (
               <p key={ index }>{ strMeal }</p>
             ))
           }
           {
-            cocktail.map(({ strDrink }, index) => (
+            drinks.map(({ strDrink }, index) => (
               <p key={ index }>{ strDrink }</p>
             ))
           }
@@ -25,8 +25,8 @@ class Recomendations extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  recipe: state.foods.recipes,
-  cocktail: state.drinks.cocktails,
+  meals: state.foods.meals,
+  drinks: state.drinks.drinks,
 });
 
 export default connect(mapStateToProps)(Recomendations);

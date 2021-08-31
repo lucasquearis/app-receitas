@@ -86,7 +86,7 @@ class DetailsFood extends Component {
             ))
           }
           {
-            red ? <Redirect to={ `/comidas/${id}/in-progress` } /> : console.log("chamou")
+            red ? <Redirect to={ `/comidas/${id}/in-progress` } /> : console.log('chamou')
           }
         </div>
       </div>
