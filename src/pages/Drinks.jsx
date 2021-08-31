@@ -14,7 +14,6 @@ function Drinks(props) {
   const { search } = useSelector((state) => state.recipes);
   const oneElementDetails = () => {
     if (search.drinks.length === 1) {
-      console.log('aqui');
       history.push(`/bebidas/${search.drinks[0].idDrink}`);
     }
   };
@@ -43,9 +42,11 @@ function Drinks(props) {
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard
           title={ drink.strDrink }
           thumb={ drink.strDrinkThumb }
+          data-testid={ `${index}-recipe-card` }
           id={ drink.idDrink }
           index={ index }
           key={ index }
+          to={ `/bebidas/${drink.idDrink}` }
         />)) }
       </main>
       <Footer />
