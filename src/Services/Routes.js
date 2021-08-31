@@ -7,11 +7,10 @@ import ExploreDrinksByIngredients from '../Pages/ExploreDrinksByIngredients';
 import ExploreFoods from '../Pages/ExploreFoods';
 import ExploreFoodsByIngredient from '../Pages/ExploreFoodsByIngredient';
 import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
-import FavoriteRecipes from '../Pages/FavoriteRecipes';
 import FoodsAndDrinks from '../Pages/FoodsAndDrinks';
 import FoodInProgress from '../Pages/FoodInProgress';
 import Login from '../Pages/Login';
-import MadeRecipes from '../Pages/MadeRecipes';
+import MadeAndFavoriteRecipes from '../Pages/MadeAndFavoriteRecipes';
 import Profile from '../Pages/Profile';
 import RecipesDetails from '../Pages/RecipesDetails';
 
@@ -43,7 +42,7 @@ function Routes() {
         component={ ExploreFoodsByIngredient }
       />
       <Route exact path="/explorar/comidas/area" component={ ExploreFoodsByOrigin } />
-      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+      <Route exact path="/receitas-favoritas" component={ MadeAndFavoriteRecipes } />
       <Route exact path="/comidas" component={ FoodsAndDrinks } />
       <Route
         exact
@@ -56,7 +55,7 @@ function Routes() {
         render={ (props) => <RecipesDetails { ...props } type="food" /> }
       />
       <Route exact path="/" component={ Login } />
-      <Route exact path="/receitas-feitas" component={ MadeRecipes } />
+      <Route exact path="/receitas-feitas" component={ MadeAndFavoriteRecipes } />
       <Route exact path="/perfil" component={ Profile } />
     </Switch>
   );
