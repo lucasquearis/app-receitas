@@ -52,7 +52,7 @@ function RecipesDone() {
 
   return (
     <>
-      <Header title="Refeitas Feitas" />
+      <Header title="Receitas Feitas" search={ false } />
       <main>
         <FilterButtons setFilterRecipes={ setfilterRecipesDone } />
         ;
