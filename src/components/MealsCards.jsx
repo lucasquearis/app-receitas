@@ -37,6 +37,8 @@ export default function MealsCard() {
       const data = filterIngredients;
       return data;
     }
+    const data = searchMeals;
+    return data;
   };
 
   if (loading === true) {
