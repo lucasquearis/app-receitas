@@ -78,9 +78,7 @@ function RecipeDetails(props) {
                 type === 'comidas'
                 && <Iframe link={ recipe[enType][0].strYoutube } />
               }
-              {
-                recipe && <Suggestions type={ type } />
-              }
+              { recipe && <Suggestions type={ type } /> }
               <StartRecipeButton
                 id={ id }
                 type={ type }
