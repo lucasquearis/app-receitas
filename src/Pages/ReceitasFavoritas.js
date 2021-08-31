@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../Components/Header';
 import './ReceitasFavoritas.css';
 import FavoriteCards from '../Components/FavoriteCards';
@@ -26,9 +27,10 @@ const favoriteRecipes = [
 
 localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 
-export default function Perfil() {
+export default function ReceitasFeitas() {
   const [favorites, setFavorites] = useState([]);
   const [favoritesFiltered, setFavoritesFiltered] = useState([]);
+  const [canRedirect, setCanRedirect] = useState({ redirect: false, to: '' });
 
   useEffect(() => {
     const getFavorites = () => {
@@ -68,6 +70,22 @@ export default function Perfil() {
     setFavoritesFiltered(newFilter);
   };
 
+  const handleRedirect = (id, type) => {
+    let url = `/bebidas/${id}`;
+
+    if (type === 'comida') {
+      url = `/comidas/${id}`;
+      setCanRedirect({ redirect: true, to: url });
+      return;
+    }
+
+    setCanRedirect({ redirect: true, to: url });
+  };
+
+  if (canRedirect.redirect) {
+    return <Redirect to={ canRedirect.to } />;
+  }
+
   return (
     <section>
       <Header title="Receitas Favoritas" />
@@ -104,6 +122,7 @@ export default function Perfil() {
             recipe={ favorite }
             index={ index }
             onFavoriteClick={ onFavoriteClick }
+            handleRedirect={ handleRedirect }
           />
         )) }
       </div>

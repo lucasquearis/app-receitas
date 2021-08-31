@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function FavoriteCards(props) {
-  const { recipe, index, onFavoriteClick } = props;
+  const { recipe, index, onFavoriteClick, handleRedirect } = props;
 
   const [copyMessage, setCopyMessage] = useState(false);
 
@@ -47,20 +47,32 @@ export default function FavoriteCards(props) {
   return (
     <section className="favorite-card">
       <div className="image-section">
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          src={ recipe.image }
-          alt={ recipe.name }
-        />
+        <button
+          type="button"
+          className="card-btn"
+          onClick={ () => handleRedirect(recipe.id, recipe.type) }
+        >
+          <img
+            data-testid={ `${index}-horizontal-image` }
+            src={ recipe.image }
+            alt={ recipe.name }
+          />
+        </button>
       </div>
       <div className="info-section">
         <div className="infos">
           { getCategory() }
-          <h4 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h4>
+          <button
+            type="button"
+            className="card-btn"
+            onClick={ () => handleRedirect(recipe.id, recipe.type) }
+          >
+            <h4 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h4>
+          </button>
         </div>
         { copyMessage && <p className="copy-message">Link copiado!</p> }
         <div className="buttons-section">
-          <button type="button" className="info-btn" onClick={ onShareClick }>
+          <button type="button" className="card-btn" onClick={ onShareClick }>
             <img
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
@@ -69,7 +81,7 @@ export default function FavoriteCards(props) {
           </button>
           <button
             type="button"
-            className="info-btn"
+            className="card-btn"
             onClick={ () => onFavoriteClick(recipe.id) }
           >
             <img
@@ -96,4 +108,5 @@ FavoriteCards.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   onFavoriteClick: PropTypes.func.isRequired,
+  handleRedirect: PropTypes.func.isRequired,
 };
