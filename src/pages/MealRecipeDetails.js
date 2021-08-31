@@ -21,11 +21,17 @@ export default function MealRecipeDetails(props) {
 
   const handleClick = () => {
     const getLocalStorage = JSON.parse(localStorage
-      .getItem('inProgressRecipes'));
-    const defaultObject = { cockstails: {}, meals: { [id]: [] } };
-    if (!getLocalStorage) {
+      .getItem('inProgressRecipes')) || { meals: {}, cocktails: {} };
+    const defaultObject = {
+      ...getLocalStorage,
+      meals: { ...getLocalStorage.meals,
+        [id]: [] },
+    };
+
+    if (!getLocalStorage.meals[id]) {
       localStorage
-        .setItem('inProgressRecipes', JSON.stringify(defaultObject));
+        .setItem('inProgressRecipes', JSON
+          .stringify(defaultObject));
       return false;
     }
   };

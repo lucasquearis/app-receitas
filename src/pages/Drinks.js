@@ -9,7 +9,6 @@ import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 
 export default function Drinks() {
   const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
-  console.log(feed);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -33,7 +32,6 @@ export default function Drinks() {
 
   const renderList = () => {
     if (resultList === null) {
-      console.log('ENTROU NA CONDICAO');
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (!resultList) {
@@ -49,7 +47,6 @@ export default function Drinks() {
         ))
       );
     } if (resultList.length === 1) {
-      console.log(resultList[0]);
       return <Redirect to={ `/bebidas/${resultList[0].idDrink}` } />;
     }
     if (resultList.length === null) {

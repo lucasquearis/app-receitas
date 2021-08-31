@@ -17,19 +17,39 @@ export default function MealProcess(props) {
   }, [id]);
 
   const handleClick = ({ target: { name } }) => {
-    const getLocalStorage = JSON.parse(localStorage
-      .getItem('inProgressRecipes'));
+    const getLocalStorage = () => JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [name] } };
 
-    const removeIngredient = getLocalStorage.meals[id]
-      .filter((ingredient) => ingredient !== name);
-    const isOnList = getLocalStorage.meals[id].includes(name);
-    if (!isOnList) {
-      localStorage.setItem('inProgressRecipes', JSON
-        .stringify({ meals: { [id]: [...getLocalStorage.meals[id], name] } }));
+    if (!getLocalStorage().meals[id]) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify({
+            ...getLocalStorage(),
+            meals: { ...getLocalStorage().meals,
+              [id]: [name] } }));
       return false;
     }
+
+    const removeIngredient = getLocalStorage().meals[id]
+      .filter((ingredient) => ingredient !== name);
+
+    const isOnList = getLocalStorage().meals[id].includes(name);
+
+    if (!isOnList) {
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify({
+          ...getLocalStorage(),
+          meals: { ...getLocalStorage().meals,
+            [id]: [...getLocalStorage().meals[id],
+              name] } }));
+      return false;
+    }
+
     localStorage.setItem('inProgressRecipes', JSON
-      .stringify({ meals: { [id]: removeIngredient } }));
+      .stringify({
+        ...getLocalStorage(),
+        meals: { ...getLocalStorage().meals,
+          [id]: removeIngredient } }));
   };
 
   if (resultMealRecipe.length > 0) {
@@ -43,10 +63,6 @@ export default function MealProcess(props) {
     const listIngredients = keysIngredients.filter((item) => item
       .includes('strIngredient'));
     const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
-
-    const handleChange = ({ target: { name } }) => {
-      console.log(name);
-    };
 
     return (
       <>
@@ -68,7 +84,6 @@ export default function MealProcess(props) {
                   >
                     <input
                       onClick={ handleClick }
-                      onChange={ handleChange }
                       type="checkbox"
                       id={ `${ingredient}-checkbox` }
                       name={ resultMealRecipe[0][ingredient] }

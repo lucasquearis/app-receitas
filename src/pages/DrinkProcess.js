@@ -16,6 +16,42 @@ function DrinkRecipeDetails(props) {
     resolveAPI();
   }, [id]);
 
+  const handleClick = ({ target: { name } }) => {
+    const getLocalStorage = () => JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: { [id]: [name] }, meals: {} };
+
+    if (!getLocalStorage().cocktails[id]) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify({
+            ...getLocalStorage(),
+            cocktails: { ...getLocalStorage().cocktails,
+              [id]: [name] } }));
+      return false;
+    }
+
+    const removeIngredient = getLocalStorage().cocktails[id]
+      .filter((ingredient) => ingredient !== name);
+
+    const isOnList = getLocalStorage().cocktails[id].includes(name);
+
+    if (!isOnList) {
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify({
+          ...getLocalStorage(),
+          cocktails: { ...getLocalStorage().cocktails,
+            [id]: [...getLocalStorage().cocktails[id],
+              name] } }));
+      return false;
+    }
+
+    localStorage.setItem('inProgressRecipes', JSON
+      .stringify({
+        ...getLocalStorage(),
+        cocktails: { ...getLocalStorage().cocktails,
+          [id]: removeIngredient } }));
+  };
+
   if (resultDrinkRecipe.length > 0) {
     const {
       strDrink,
@@ -43,7 +79,12 @@ function DrinkRecipeDetails(props) {
                   data-testid={ `${index}-ingredient-step` }
                 >
                   <label htmlFor={ `${ingredient}-checkbox` }>
-                    <input type="checkbox" id={ `${ingredient}-checkbox` } />
+                    <input
+                      onClick={ handleClick }
+                      type="checkbox"
+                      id={ `${ingredient}-checkbox` }
+                      name={ resultDrinkRecipe[0][ingredient] }
+                    />
                     <span>
                       { resultDrinkRecipe[0][ingredient] }
                       {' '}

@@ -18,6 +18,23 @@ function DrinkRecipeDetails(props) {
     resolveAPI();
   }, [id]);
 
+  const handleClick = () => {
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: {} };
+    const defaultObject = {
+      ...getLocalStorage,
+      cocktails: { ...getLocalStorage.cocktails,
+        [id]: [] },
+    };
+
+    if (!getLocalStorage.cocktails[id]) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify(defaultObject));
+      return false;
+    }
+  };
+
   if (resultDrinkRecipe.length > 0) {
     const {
       strDrink,
@@ -38,7 +55,6 @@ function DrinkRecipeDetails(props) {
         <p data-testid="recipe-category">{strAlcoholic}</p>
         <ul>
           {listIngredients.map((ingredient, index) => {
-            console.log(resultDrinkRecipe);
             if (resultDrinkRecipe[0][ingredient]) {
               return (
                 <li
@@ -62,6 +78,7 @@ function DrinkRecipeDetails(props) {
           <button
             data-testid="start-recipe-btn"
             type="button"
+            onClick={ handleClick }
           >
             Iniciar Receita
           </button>
