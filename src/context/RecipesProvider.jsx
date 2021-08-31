@@ -9,6 +9,7 @@ function RecipesProvider({ children }) {
   const [randomFood, setRandomFood] = useState([]);
   const [randomDrink, setRandomDrink] = useState([]);
   const [foodIngredients, setFoodIngredients] = useState([]);
+  const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [keyType, setKeysType] = useState('');
   const [url, setUrl] = useState();
   const [lists, setLists] = useState({
@@ -30,6 +31,7 @@ function RecipesProvider({ children }) {
     randomFood,
     randomDrink,
     foodIngredients,
+    drinkIngredients,
   };
 
   useEffect(() => {
@@ -57,6 +59,15 @@ function RecipesProvider({ children }) {
       setFoodIngredients(data.meals);
     };
     getIngredients();
+  }, []);
+
+  useEffect(() => {
+    const getDrinkIngredients = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+      const data = await response.json();
+      setDrinkIngredients(data.drinks);
+    };
+    getDrinkIngredients();
   }, []);
 
   useEffect(() => {

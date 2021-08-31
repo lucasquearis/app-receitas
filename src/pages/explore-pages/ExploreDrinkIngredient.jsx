@@ -7,12 +7,12 @@ import '../../styles/Footer.css';
 
 function ExploreDrinkIngredient() {
   const doze = 12;
-  const { foodIngredients } = useContext(myContext);
+  const { drinkIngredients } = useContext(myContext);
   return (
     <div>
       <Header brand="Explorar Ingredientes" className="img-search" />
       {
-        foodIngredients && foodIngredients.map((ingredient, index) => index < doze && (
+        drinkIngredients && drinkIngredients.map((ingredient, index) => index < doze && (
           <div
             key={ index }
             className="div-card"
@@ -23,11 +23,11 @@ function ExploreDrinkIngredient() {
                 className="card-title"
                 data-testid={ `${index}-card-name` }
               >
-                { ingredient.strIngredient }
+                { ingredient.strIngredient1 }
               </p>
               <img
                 className="card-img"
-                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
                 alt=""
                 data-testid={ `${index}-card-img` }
               />
