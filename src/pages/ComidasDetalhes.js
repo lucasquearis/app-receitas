@@ -23,7 +23,7 @@ export default function ComidasDetalhes() {
       setFood(data.meals[0]);
     };
     api();
-  }, []);
+  }, [location.pathname]);
 
   if (food === undefined) {
     return <Loading />;
