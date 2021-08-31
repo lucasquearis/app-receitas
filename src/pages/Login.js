@@ -11,7 +11,6 @@ function Login() {
   });
   const { setEmail } = useContext(RecipesContext);
   const { email, password } = user;
-
   const handleOnChange = ({ target }) => {
     const { id, value } = target;
     setUser({
