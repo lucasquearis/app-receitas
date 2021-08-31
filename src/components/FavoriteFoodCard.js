@@ -5,11 +5,24 @@ import './favoriteFoodCard.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import Copy from './Clipboard-Copy';
 
 const FavoriteFoodCard = ({ recipe, index }) => {
   const { id, image, name, area, category } = recipe;
   const [favorite, setFavorite] = useState(true);
+  const [copy, setCopy] = useState('');
   const { changed, setChanged } = useContext(FoodContext);
+
+  function DetailUrl() {
+    const url = window.location.href;
+    const splitUrl = url.split('/');
+    const newUrl = splitUrl[0] + splitUrl[1] + splitUrl[2];
+    if (recipe.type === 'comida') {
+      const detailUrl = `http://${newUrl}/comidas/${id}`;
+      Copy(detailUrl);
+      setCopy(true);
+    }
+  }
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -63,6 +76,7 @@ const FavoriteFoodCard = ({ recipe, index }) => {
             type="image"
             src={ shareIcon }
             alt="share-icon"
+            onClick={ DetailUrl }
             data-testId={ `${index}-horizontal-share-btn` }
           />
           <input
@@ -72,6 +86,7 @@ const FavoriteFoodCard = ({ recipe, index }) => {
             onClick={ onFavorite }
             data-testId={ `${index}-horizontal-favorite-btn` }
           />
+          { copy ? <p>Link copiado!</p> : undefined }
         </div>
       </div>
     </div>
@@ -88,6 +103,7 @@ FavoriteFoodCard.propTypes = {
     category: PropTypes.string,
     alcoholicOrNot: PropTypes.string,
     length: PropTypes.number,
+    type: PropTypes.string,
   }).isRequired,
 };
 

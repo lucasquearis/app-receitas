@@ -21,6 +21,7 @@ import DrinksProvider from './context/DrinksProvider';
 
 function App() {
   return (
+    // muito obrigado ao meu amigo Gedeão por ajudar à montar e organizar as minhas rotas.
     <FoodProvider>
       <DrinksProvider>
         <BrowserRouter>
