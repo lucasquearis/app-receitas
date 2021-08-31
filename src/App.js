@@ -16,6 +16,7 @@ import SearchByOrigin from './pages/SearchByOrigin';
 import Profile from './pages/Profile';
 import FinishedRecipes from './pages/FinishedRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import RecipeInProgress from './pages/RecipeInProgress';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
     // muito obrigado ao meu amigo Gedeão por ajudar à montar e organizar as minhas rotas.
     <BrowserRouter>
       <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/comidas/:id/in-progress" component={ RecipeInProgress } />
+        <Route exact path="/bebidas/:id/in-progress" component={ RecipeInProgress } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route exact path="/receitas-feitas" component={ FinishedRecipes } />
         <Route exact path="/perfil" component={ Profile } />
@@ -44,7 +48,6 @@ function App() {
         <Route exact path="/comidas/:id" component={ FoodDetails } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path="/comidas" component={ Recipes } />
-        <Route exact path="/" component={ Login } />
         <Route exact path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
