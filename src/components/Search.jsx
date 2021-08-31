@@ -47,23 +47,30 @@ class Search extends Component {
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
-  handleFoods() {
+  async handleFoods() {
     const { radio, text } = this.state;
-    const { setSearchIngredient,
-      setSearchLetter, setSearchNome, setNome } = this.props;
+    const {
+      setSearchIngredient,
+      setSearchLetter,
+      setSearchNome,
+    } = this.props;
+
     if (radio === 'Ingrediente') {
-      setSearchIngredient(text);
+      await setSearchIngredient(text);
+      const { setNome } = this.props;
       if (setNome.length === 1) {
         this.setState({ redirect: true, id: setNome[0].idMeal });
       }
     } else if (radio === 'Nome') {
-      setSearchNome(text);
+      await setSearchNome(text);
+      const { setNome } = this.props;
+      console.log(setNome);
       if (setNome.length === 1) {
         this.setState({ redirect: true, id: setNome[0].idMeal });
       }
-      console.log(setNome);
     } else if (radio === 'Primeira letra' && text.length === 1) {
-      setSearchLetter(text);
+      await setSearchLetter(text);
+      const { setNome } = this.props;
       if (setNome.length === 1) {
         this.setState({ redirect: true, id: setNome[0].idMeal });
       }
@@ -128,7 +135,7 @@ class Search extends Component {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ () => this.handleClick() }
+          onClick={ this.handleClick }
         >
           Search
         </button>
@@ -150,7 +157,7 @@ Search.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   setSearchIngredient: (url) => dispatch(fetchSearchIngredientMeals(url)),
-  setSearchNome: (url) => dispatch(fetchSearchNomeMeals(url)),
+  setSearchNome: (text) => dispatch(fetchSearchNomeMeals(text)),
   setSearchLetter: (url) => dispatch(fetchSearchLetterMeals(url)),
   setSearchIngredientDrinks: (url) => dispatch(fetchSearchIngredientDrinks(url)),
   setSearchNomeDrinks: (url) => dispatch(fetchSearchNomeDrinks(url)),
