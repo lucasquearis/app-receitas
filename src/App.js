@@ -18,6 +18,7 @@ import ExpBebidasIngredientes from './pages/ExpBebidasIngredientes';
 import ExplorarOrigem from './pages/ExplorarOrigem';
 import BebidasEmProgresso from './pages/BebidasEmProgresso';
 import ComidasEmProgresso from './pages/ComidasEmProgresso';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
       <Route path="/explorar/bebidas/ingredientes" component={ ExpBebidasIngredientes } />
       <Route path="/receitas-feitas" component={ ReceitasFeitas } />
       <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+      <Route component={ NotFound } />
       <Route exact path="/" component={ () => <Login /> } />
     </Switch>
   );
