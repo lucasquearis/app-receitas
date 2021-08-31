@@ -16,18 +16,21 @@
   height: auto;
   justify-content: space-around;
   margin: 0.2em auto;
-  padding: 0.5em 0;
-  width: 95%;
+  min-width: 100vw;
 }
 
 .meals-categories {
-  background-color: rgb(195, 195, 195);
+  background-color: whitesmoke;
   border: transparent;
+  border-radius: 6px;
+  box-shadow: 0 0 4px -1px grey;
+  color: rgb(0, 48, 73);
   cursor: pointer;
   font-size: 1em;
+  font-weight: 600;
   height: 3em;
-  margin: 0.5em 1em;
-  text-align: start;
+  margin: 1px;
+  text-align: center;
   text-indent: 0.5em;
   width: 8.5em;
 }

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '../components';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import './css/Profile.css';
 
 function Profile() {
   const getEmail = () => {
