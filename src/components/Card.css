@@ -1,0 +1,13 @@
+.card {
+  width: 14rem;
+}
+
+.card-img {
+  height: 200px;
+  width: 100%;
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+}
