@@ -35,6 +35,16 @@ function Provider({ children }) {
     loading: true,
   });
 
+  const [foodIngredients, setFoodIngredients] = useState({
+    list: [],
+    loading: true,
+  });
+
+  const [drinkIngredients, setDrinkIngredients] = useState({
+    list: [],
+    loading: true,
+  });
+
   const [drinkCategories, setDrinkCategories] = useState({
     list: [],
     loading: true,
@@ -94,6 +104,18 @@ function Provider({ children }) {
     }
   };
 
+  const requestFoodIngredients = async () => {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+    const result = await response.json();
+    setFoodIngredients({ ...foodIngredients, list: result, loading: false });
+  };
+
+  const requestDrinkIngredients = async () => {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+    const result = await response.json();
+    setDrinkIngredients({ ...drinkIngredients, list: result, loading: false });
+  };
+
   const requestAreas = async () => {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
     const { meals } = await response.json();
@@ -140,6 +162,10 @@ function Provider({ children }) {
     requestAreas,
     requestFoodByAreas,
     requestFoodByName,
+    drinkIngredients,
+    foodIngredients,
+    requestFoodIngredients,
+    requestDrinkIngredients,
   };
 
   return (

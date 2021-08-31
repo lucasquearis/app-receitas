@@ -21,8 +21,8 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
-        <Route path="/explorar/bebidas/ingredientes" component={ FoodIngredients } />
+        <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
+        <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
         <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/comidas" component={ Foods } />
