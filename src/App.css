@@ -1,6 +1,6 @@
 .meals {
   align-items: center;
-  background-image: url(./images/background.jpg);
+  background-image: url("./images/background.jpg");
   color: #464646;
   display: flex;
   flex-direction: column;
@@ -11,14 +11,14 @@
 }
 
 .profile {
-  color:white;
+  color: white;
   display: flex;
   font-size: 20px;
   top: 30px;
 }
 
 .email {
-  color:white;
+  color: white;
   display: flex;
   font-size: 20px;
   left: 80px;
@@ -26,85 +26,83 @@
 }
 
 .btn-done {
-  position: absolute;
   background-color: #606c38;
+  position: absolute;
   height: 36px;
-  width: 180px;
   left: 90px;
+  width: 180px;
   top: 360px;
 }
 
 .btn-favorite {
-  position: absolute;
   background-color: #606c38;
+  position: absolute;
   height: 36px;
-  width: 180px;
   left: 90px;
+  width: 180px;
   top: 430px;
 }
 
-.btn-logout{
-  position: absolute;
+.btn-logout {
   background-color: #606c38;
+  position: absolute;
   height: 36px;
-  width: 180px;
   left: 90px;
+  width: 180px;
   top: 500px;
 }
 
 .logo {
   align-items: center;
   border-radius: 80px;
-  position: absolute;
   height: 166px;
-  width: 234px;
+  position: absolute;
   left: 63px;
+  width: 234px;
   top: 80px;
 }
 
 .login {
   align-items: center;
   background: rgba(255, 254, 251, 0.85);
-  position: absolute;
+  border-radius: 40px;
   display: flex;
+  position: absolute;
   flex-direction: column;
   height: 432px;
-  width: 275px;
   left: 42px;
+  width: 275px;
   top: 106px;
-  border-radius: 40px;
 }
 
 .mb-1 {
   align-items: center;
-  border-radius:80%;
-  position:absolute;
+  border-radius: 80%;
   height: 46px;
-  width: 234px;
+  position:absolute;
   left: 21px;
+  width: 234px;
   top: 250px;
 }
 
 .mb-2 {
   align-items: center;
   border-radius: 80px;
-  position:absolute;
   height: 46px;
-  width: 234px;
+  position:absolute;
   left: 21px;
+  width: 234px;
   top: 300px;
 }
 
 .mb-3 {
-  position: absolute;
   background-color: #606c38;
+  position: absolute;
   height: 36px;
-  width: 149px;
   left: 60px;
+  width: 149px;
   top: 360px;
 }
-
-
 
 .rocksGlass {
   animation: shake 1s infinite ease;
