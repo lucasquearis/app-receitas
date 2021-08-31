@@ -10,17 +10,19 @@ export default function Explorar() {
         <Header title="Explorar" searchIcon />
       </section>
       <Link to="/explorar/comidas">
-        <button type="button">
-          <h1 data-testid="explore-food">
-            Explorar Comidas
-          </h1>
+        <button
+          type="button"
+          data-testid="explore-food"
+        >
+          Explorar Comidas
         </button>
       </Link>
       <Link to="/explorar/bebidas">
-        <button type="button">
-          <h1 data-testid="explore-drinks">
-            Explorar Bebidas
-          </h1>
+        <button
+          type="button"
+          data-testid="explore-drinks"
+        >
+          Explorar Bebidas
         </button>
       </Link>
       <Footer />

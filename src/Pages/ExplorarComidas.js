@@ -4,55 +4,66 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import * as ComidasAPI from '../service/ComidasAPI';
 
-// async function insereReceitaAleatoria() {
-//   const receita = await ComidasAPI.buscarAleatoria();
-//   // const receita = [{ idMeal: '52916' }];
-//   console.log(receita);
-//   if (receita[0].length <= 0) {
-//     return (
-//       <p>Loading...</p>
-//     );
-//   }
-//   return (
-//   );
-// }
 export default function ExplorarComidas() {
   const [receita, setreceita] = useState([]);
+  const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
     const pegarComida = async () => {
-      const result = await ComidasAPI.buscarAleatoria();      
+      const result = await ComidasAPI.buscarAleatoria();
       setreceita(result);
+      setShowBtn(true);
     };
     pegarComida();
   }, []);
-  console.log(receita);
+
+  const getLink = () => {
+    if (showBtn) {
+      return (
+        <Link to={ `/comidas/${receita[0].idMeal}` }>
+          <button
+            type="button"
+            data-testid="explore-surprise"
+          >
+            Me Surpreenda!
+          </button>
+        </Link>
+      );
+    }
+    return (
+      <Link to="/comidas">
+        <button
+          type="button"
+          data-testid="explore-surprise"
+        >
+          Me Surpreenda!
+        </button>
+      </Link>
+    );
+  };
+
   return (
     <main>
       <section>
         <Header title="ExplorarComidas" searchIcon />
       </section>
       <Link to="/explorar/comidas/ingredientes">
-        <button type="button">
-          <h1 data-testid="explore-by-ingredient">
-            Por Ingredientes
-          </h1>
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+        >
+          Por Ingredientes
         </button>
       </Link>
       <Link to="/explorar/comidas/area">
-        <button type="button">
-          <h1 data-testid="explore-by-area">
-            Por Local de Origem
-          </h1>
+        <button
+          type="button"
+          data-testid="explore-by-area"
+        >
+          Por Local de Origem
         </button>
       </Link>
-      {/* <Link to={ `/comidas/${receita[0].idMeal}` }>
-        <button type="button">
-          <h1 data-testid="explore-surprise">
-            Me Surpreenda!
-          </h1>
-        </button>
-      </Link> */}
+      { getLink() }
       <Footer />
     </main>
   );
