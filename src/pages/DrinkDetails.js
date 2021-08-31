@@ -155,7 +155,7 @@ const DrinkDetails = () => {
                 </button>
               </div>
             </div>
-            { showMsg ? <p>Link copiado!</p> : undefined }
+            { showMsg && <p>Link copiado!</p> }
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>

@@ -162,7 +162,7 @@ const FoodDetails = () => {
                 alt="favorite-icon"
               />
             </button>
-            { showMsg ? <p>Link copiado!</p> : undefined }
+            { showMsg && <p>Link copiado!</p> }
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
             <ul>
