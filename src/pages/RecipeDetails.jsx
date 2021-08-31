@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Details from '../components/Details';
-import './RecipyDetails.css';
+import ProgressValidation from '../services/recipeProgress';
+import './RecipeDetails.css';
 
 /*
 solução da lógica para achar palavras iguais
@@ -61,20 +62,19 @@ const DataManeger = (data, receita) => {
 
 function RecipyDetails() {
   const [Data, setDataRecipe] = useState(undefined);
-  const [DataRecomend, setDataRecomend] = useState(undefined);
 
   const { id, receita } = useParams();
 
   useEffect(() => {
     const fetchEffect = async () => {
       try {
-        const fetchApiRecomend = await fetch(returnUrl(id, receita)[1]);
-        const thedataRecomend = await fetchApiRecomend.json();
-        setDataRecomend(thedataRecomend);
         const fetchApi = await fetch(returnUrl(id, receita)[0]);
         const thedata = await fetchApi.json();
         const managedData = DataManeger(thedata, receita);
-        setDataRecipe(managedData);
+        const fetchApiRecomend = await fetch(returnUrl(id, receita)[1]);
+        const thedataRecomend = await fetchApiRecomend.json();
+        const finalobj = [managedData, thedataRecomend];
+        setDataRecipe(finalobj);
       } catch (error) {
         console.log(error);
       }
@@ -89,9 +89,11 @@ function RecipyDetails() {
   }
   return (
     <Details
-      DetailedRecipe={ Data }
-      RecomendedRecipe={ DataRecomend }
+      DetailedRecipe={ Data[0] }
+      RecomendedRecipe={ Data[1] }
+      Id={ id }
       Receita={ receita }
+      ProgressValidation={ ProgressValidation(id, receita) }
     />
   );
 }

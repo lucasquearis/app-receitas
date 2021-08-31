@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareButton from '../services/Sharebutton';
+import FavoriteButton from './FavoriteButton';
 
 const IngredientList = (array) => {
   const texthandle = '-ingredient-name-and-measure';
   const obj = array[0].map((n, index) => (
     n[1] !== '' && n[1] !== null
-      ? <li data-testid={ `${index}${texthandle}` }>{n[1]}</li>
+      ? <li key={ index } data-testid={ `${index}${texthandle}` }>{n[1]}</li>
       : null
   ));
   return obj;
@@ -21,14 +21,18 @@ const RecomendList = (array, type) => {
   if (type === 'comidas' && array.drinks) {
     const obj = array.drinks.map((n, index) => (
       <Link key={ index } to={ `/bebidas/${n.idDrink}` }>
-        <button
-          type="button"
+        <div
           className="RecommendCard"
           data-testid={ `${index}-recomendation-card` }
         >
+          <p
+            data-testid={ `${index}-recomendation-title` }
+            className="recipeName"
+          >
+            {n.strDrink}
+          </p>
           <img className="RecomendImg" alt="recomendamos!" src={ n.strDrinkThumb } />
-          <p>{n.strDrink}</p>
-        </button>
+        </div>
 
       </Link>
     ));
@@ -37,14 +41,18 @@ const RecomendList = (array, type) => {
   if (type === 'bebidas' && array.meals) {
     const obj = array.meals.map((n, index) => (
       <Link key={ index } to={ `/comidas/${n.idMeal}` }>
-        <button
-          Type="button"
+        <div
           className="RecommendCard"
           data-testid={ `${index}-recomendation-card` }
         >
+          <p
+            data-testid={ `${index}-recomendation-title` }
+            className="recipeName"
+          >
+            {n.strMeal}
+          </p>
           <img className="RecomendImg" alt="recomendamos!" src={ n.strMealThumb } />
-          <p>{n.strMeal}</p>
-        </button>
+        </div>
       </Link>
     ));
     return obj.slice(0, recomendlegth);
@@ -52,10 +60,10 @@ const RecomendList = (array, type) => {
 };
 
 const measureList = (array) => {
-  const texthandle = '-ingredient-name-and-measure';
+  const txthd = '-ingredient-name-and-measure';
   const obj = array[0].map((n, index) => (
     n[1] !== '' && n[1] !== null
-      ? <li className="nodot" data-testid={ `${index}${texthandle}` }>{n[1]}</li>
+      ? <li className="nodot" key={ index } data-testid={ `${index}${txthd}` }>{n[1]}</li>
       : null
   ));
   return obj;
@@ -67,7 +75,9 @@ const RecomendExist = (objeto) => {
 };
 
 function Details(props) {
-  const { Receita, DetailedRecipe, RecomendedRecipe } = props;
+  const { Receita, DetailedRecipe, RecomendedRecipe, Id, ProgressValidation } = props;
+  const [copiedbutton, setcopy] = useState(false);
+
   return (
     <div className="body-details">
       <img
@@ -78,10 +88,16 @@ function Details(props) {
       />
       <h1 data-testid="recipe-title">{DetailedRecipe.tittle}</h1>
       <div>
-        <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
-        <button type="button">
-          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="white-heart" />
+        <button
+          type="button"
+          onClick={ () => { shareButton(Receita, Id); setcopy(true); } }
+        >
+          <img alt="share" data-testid="share-btn" src={ shareIcon } />
+          <p>
+            {copiedbutton ? <p>Link copiado!</p> : ''}
+          </p>
         </button>
+        <FavoriteButton type={ Receita } id={ Id } />
       </div>
       <h3 data-testid="recipe-category">{DetailedRecipe.category}</h3>
       { DetailedRecipe && Receita === 'bebidas'
@@ -90,8 +106,8 @@ function Details(props) {
       <h2>Ingredientes</h2>
 
       <div className="ingredients">
-        <lo>{IngredientList(DetailedRecipe.ingredients)}</lo>
-        <lo>{measureList(DetailedRecipe.measures)}</lo>
+        <l>{IngredientList(DetailedRecipe.ingredients)}</l>
+        <l>{measureList(DetailedRecipe.measures)}</l>
       </div>
       <h2>Instruções</h2>
       <p data-testid="instructions">{DetailedRecipe.Instructions}</p>
@@ -104,13 +120,15 @@ function Details(props) {
       <div className="sugestions">
         {RecomendList(RecomendExist(RecomendedRecipe), Receita)}
       </div>
-      <Button
-        className="button-details"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-
-      </Button>
+      <Link to={ `/${Receita}/${Id}/in-progress` }>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="button-details"
+        >
+          {ProgressValidation ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>
+      </Link>
     </div>
   );
 }
@@ -118,17 +136,19 @@ function Details(props) {
 const { string, shape, objectOf } = PropTypes;
 Details.propTypes = {
   Receita: string.isRequired,
+  Id: string.isRequired,
   DetailedRecipe: shape({
     tittle: string.isRequired,
     img: string.isRequired,
-    type: string.isRequired,
+    type: string,
     category: string.isRequired,
     Instructions: string.isRequired,
     tag: string.isRequired,
     ingredients: string.isRequired,
     measures: string.isRequired,
   }).isRequired,
-  RecomendedRecipe: objectOf(string).isRequired,
+  ProgressValidation: PropTypes.bool.isRequired,
+  RecomendedRecipe: objectOf(string.isRequired).isRequired,
 };
 
 export default Details;

@@ -34,9 +34,22 @@
   width: 170px;
 }
 
+.recipeName {
+  height: auto;
+  align-self: center;
+}
+
+.RecommendCard {
+  background-color: green;
+  border: 2px solid black;
+  display: flex;
+  flex-flow: column nowrap;  
+  height: 40vh;
+}
+
 .RecomendImg {
- width: 25vmin;
- height: auto; 
+  height: 30vh; 
+  width: 50vw;
 }
 
 .sugestions {
