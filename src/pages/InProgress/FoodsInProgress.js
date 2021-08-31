@@ -8,15 +8,21 @@ function FoodsInProgress() {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
-  const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
-  const [inProgress, setInProgress] = useState(INITIAL_STATE); // array de ingredientes que vão sendo checados
+
+  // const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
+  // const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
+
+  const [inProgress, setInProgress] = useState(JSON
+    .parse(localStorage.getItem('inProgressRecipes'))); // array de ingredientes que vão sendo checados
+
   const [disabled, setDisabled] = useState(true);
   // localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
 
-  if (!localStorage.inProgressRecipes) {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
-  }
+  // if (!recipeFood) return <div>Carregando...</div>;
+
+  // if (!localStorage.inProgressRecipes) {
+  //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
+  // }
 
   useEffect(() => {
     const getRecipeFood = async () => {
@@ -60,38 +66,45 @@ function FoodsInProgress() {
     ingredientsList();
   }, [recipeFood]);
 
+  // tentiva p ajudar no req 50
+  if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
+    const inProgressRecipes = { cocktails: {}, meals: { [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  }
   // Requisito 50
-  const checkItem = (ingredient) => {
-    const ingredientsArray = inProgress.meals[id];
-    if (!ingredientsArray) { // lógica p qd add o primeiro ingredient
-      const estado = {
+  const handleCheckItem = (ingredient) => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const { meals } = inProgressRecipes;
+    // const ingredientsArray = inProgress.meals[id];
+
+    if (!meals[id]) { // lógica p qd add o primeiro ingredient
+      const newInProgressRecipes = {
         meals: {
           [id]: ingredient,
         },
       };
-      setInProgress(estado);
-      localStorage.setItem('inProgressRecipes', JSON.stringify(estado));
-    } else {
-      const alreadyExist = ingredientsArray.some((item) => item === ingredient);
-      if (alreadyExist) { // lógica p qd tem q retirar
-        const newIngredients = ingredientsArray.filter((item) => item !== ingredient);
-        const estado2 = {
-          meals: {
-            [id]: newIngredients,
-          },
-        };
-        setInProgress(estado2);
-        localStorage.setItem('inProgressRecipes', JSON.stringify(estado2));
-      } else { // lógica para acrescentar do 2 p frente de ingredientes.
-        const estado3 = {
-          meals: {
-            [id]: [...inProgress.meals[id], ingredient],
-          },
-        };
-        setInProgress(estado3);
-        localStorage.setItem('inProgressRecipes', JSON.stringify(estado3));
-      }
+      setInProgress(newInProgressRecipes);
+      return localStorage
+        .setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
     }
+
+    const newIngredients = meals[id]
+      .includes(ingredient) ? meals[id]
+        .filter((item) => item !== ingredient) : [...meals[id], ingredient];
+
+    const newInProgressRecipes = {
+      ...inProgressRecipes,
+      meals: {
+        ...meals,
+        [id]: newIngredients,
+      },
+    };
+
+    setInProgress(newInProgressRecipes);
+    return localStorage.setItem(
+      'inProgressRecipes',
+      JSON.stringify(newInProgressRecipes),
+    );
   };
 
   const handleCheked = (ingredient) => (inProgress.meals[id].includes(ingredient));
@@ -124,7 +137,7 @@ function FoodsInProgress() {
                   type="checkbox"
                   id={ `${ingredient}` }
                   value={ `${ingredient}` }
-                  onChange={ () => checkItem(ingredient) }
+                  onChange={ () => handleCheckItem(ingredient) }
                   defaultChecked={ handleCheked(ingredient) }
                 />
                 { `${measure[index]} ${ingredient}` }
