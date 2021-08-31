@@ -18,7 +18,7 @@ export default function ComidasDetalhes() {
       setFood(data.meals[0]);
     };
     api();
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     const apiDrink = async () => {
