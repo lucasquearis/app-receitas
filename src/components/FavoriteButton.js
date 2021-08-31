@@ -1,56 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { removeFavorite, addFavorite, startFavorites } from '../redux/actions';
 
-function FavoriteButton(props) {
-  const [favorite, setFavorite] = useState(false);
-  const [favoriteList, setFavoriteList] = useState([]);
-  const { recipe, testId } = props;
+class FavoriteButton extends React.Component {
+  constructor(props) {
+    super(props);
+    const { recipe } = this.props;
+    this.state = { favorite: (localStorage.getItem('favoriteRecipes'))
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')).some(
+        (favRecipe) => favRecipe.id === recipe.id,
+      )
+      : false };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
-      setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')).filter(
-        (favRecipe) => favRecipe.id !== recipe.id || favRecipe.type !== recipe.type,
-      ));
-      setFavorite(JSON.parse(localStorage.getItem('favoriteRecipes')).some(
-        (favRecipe) => favRecipe.id === recipe.id && favRecipe.type === recipe.type,
-      ));
-    }
-  }, [recipe]);
+  componentDidMount() {
+    const { startFav } = this.props;
+    startFav();
+  }
 
-  useEffect(() => {
+  handleClick() {
+    const { addFav, removeFav, recipe } = this.props;
+    const { favorite } = this.state;
     if (favorite) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteList, recipe]));
+      removeFav(recipe);
+      this.setState({ favorite: false });
     } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteList]));
+      addFav(recipe);
+      this.setState({ favorite: true });
     }
-  }, [favorite, favoriteList, recipe]);
+  }
 
-  const handleClick = () => {
-    if (favorite === false) {
-      setFavorite(true);
-    } else {
-      setFavorite(false);
-    }
-  };
-
-  return (
-    <div>
-      <button
-        type="button"
-        onClick={ handleClick }
-      >
-        <img
-          type="image/svg+xml"
-          src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          data-testid={ testId }
-          alt="Adicionar a favoritos"
-        />
-      </button>
-    </div>
-  );
+  render() {
+    const { testId } = this.props;
+    const { favorite } = this.state;
+    return (
+      <div>
+        <button
+          type="button"
+          onClick={ this.handleClick }
+        >
+          <img
+            type="image/svg+xml"
+            src={ favorite ? blackHeartIcon : whiteHeartIcon }
+            data-testid={ testId }
+            alt="Adicionar a favoritos"
+          />
+        </button>
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = (state) => ({
+  favoriteRecipes: state.favoriteReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addFav: (recipe) => dispatch(addFavorite(recipe)),
+  removeFav: (recipe) => dispatch(removeFavorite(recipe)),
+  startFav: () => dispatch(startFavorites()),
+});
 
 FavoriteButton.propTypes = {
   recipe: PropTypes.shape({
@@ -63,6 +76,9 @@ FavoriteButton.propTypes = {
     image: PropTypes.string.isRequired,
   }).isRequired,
   testId: PropTypes.string.isRequired,
+  addFav: PropTypes.func.isRequired,
+  removeFav: PropTypes.func.isRequired,
+  startFav: PropTypes.func.isRequired,
 };
 
-export default FavoriteButton;
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteButton);

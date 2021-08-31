@@ -1,33 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import '../styles/RecipeDetails.css';
 
 function FavoriteRecipes() {
-  const [favoriteList, setFavoriteList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [removedFavorites, setRemovedFavorites] = useState(0);
+  const favoriteRecipes = useSelector((state) => state.favoriteReducer);
+  const [filteredList, setFilteredList] = useState(favoriteRecipes);
 
   useEffect(() => {
-    setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')));
-  }, []);
-
-  useEffect(() => {
-    if (favoriteList && favoriteList.length > 0) {
-      setFilteredList(JSON.parse(localStorage.getItem('favoriteRecipes')));
-    }
-  }, [favoriteList]);
+    setFilteredList([...favoriteRecipes]);
+  }, [favoriteRecipes]);
 
   const handleClickFilter = (filter) => {
-    if (favoriteList
+    if (favoriteRecipes
       && (filter === 'comida' || filter === 'bebida')
-      && favoriteList.length > 0) {
-      setFilteredList([...favoriteList].filter((recipe) => recipe.type === filter));
+      && favoriteRecipes.length > 0) {
+      setFilteredList([...favoriteRecipes].filter((recipe) => recipe.type === filter));
     }
-    if (favoriteList && filter === 'all' && favoriteList.length > 0) {
-      setFilteredList([...favoriteList]);
+    if (favoriteRecipes && filter === 'all') {
+      setFilteredList([...favoriteRecipes]);
     }
   };
 
@@ -88,8 +82,6 @@ function FavoriteRecipes() {
             <FavoriteButton
               recipe={ recipe }
               testId={ `${index}-horizontal-favorite-btn` }
-              removedFavorites={ removedFavorites }
-              setRemovedFavorites={ setRemovedFavorites }
             />
           </div>
         ))

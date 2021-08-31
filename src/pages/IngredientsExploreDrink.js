@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import IngredientsCard from '../components/IngredientsCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function IngredientsExploreDrink() {
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const MAX_INGREDIENTS = 12;
-  // const { pathname } = useLocation();
-  // console.log('CAMINHO',pathname);
+  const min = 0;
+  const max = 12;
 
   useEffect(() => {
     const listIngredients = async () => {
@@ -29,15 +29,15 @@ function IngredientsExploreDrink() {
   return (
     <div>
       <Header title="Explorar Ingredientes das Bebidas" />
-      {drinkIngredients
-        .filter((_e, maxIngredient) => maxIngredient < MAX_INGREDIENTS)
-        .map((ingredient, index) => (
-          <IngredientsCard
-            index={ index }
-            key={ index }
-            src={ drinkImage(ingredient.strIngredient1) }
-            name={ ingredient.strIngredient1 }
-          />
+      {drinkIngredients.slice(min, max)
+        .map(({ strIngredient1: ingredient }, index) => (
+          <Link key={ index } to={ { pathname: '/bebidas', state: { ingredient } } }>
+            <IngredientsCard
+              index={ index }
+              src={ drinkImage(ingredient) }
+              name={ ingredient }
+            />
+          </Link>
         ))}
       <Footer />
     </div>
