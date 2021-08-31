@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap';
 import ShareBtn from '../components/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { drinkById } from '../utils/fetchAPIbyID';
+import useRedirect from '../hooks/useRedirect';
 
 function DrinksInProgress() {
-  const { idDrink } = useParams();
+  const { id } = useParams();
   const [drinkDetails, setDrinkDetails] = useState({});
-  const [redirect, setRedirect] = useState(false);
   const [progress, setProgress] = useState([]);
+  const { shouldRedirect, redirect } = useRedirect();
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     const fetchDrink = async () => {
-      const drink = await drinkById(idDrink);
+      const drink = await drinkById(id);
       setDrinkDetails(drink);
       const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (inProgressRecipes && progress
         .length === 0 && Object.keys(inProgressRecipes.cocktails)
-        .some((key) => key === idDrink)) {
+        .some((key) => key === id)) {
         const { cocktails } = inProgressRecipes;
-        const loadedProgress = cocktails[idDrink];
+        const loadedProgress = cocktails[id];
         setProgress(loadedProgress);
         const inputs = document.querySelectorAll('input');
         if (inputs) {
@@ -38,12 +40,12 @@ function DrinksInProgress() {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
       const isFavorite = () => favoriteRecipes
-        .some((recipe) => recipe.id === idDrink) && document.getElementById('fav-btn')
+        .some((recipe) => recipe.id === id) && document.getElementById('fav-btn')
         .setAttribute('src', blackHeartIcon);
       isFavorite();
     }
     fetchDrink();
-  }, [idDrink, progress]);
+  }, [id, progress]);
 
   const retObj = Object.entries(drinkDetails);
   const listIngredients = retObj.filter((drink) => (
@@ -56,7 +58,6 @@ function DrinksInProgress() {
 
   const progressRecipe = (labelValue) => {
     let updatedProgress = [];
-    console.log(labelValue);
     if (!progress.some((value) => value === labelValue)) {
       updatedProgress = progress.concat(labelValue);
       setProgress(updatedProgress);
@@ -67,14 +68,14 @@ function DrinksInProgress() {
     let inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!inProgressRecipes) {
       inProgressRecipes = {
-        cocktails: { [idDrink]: updatedProgress },
+        cocktails: { [id]: updatedProgress },
       };
     } else {
       let { cocktails } = inProgressRecipes;
       if (inProgressRecipes.cocktails) {
-        cocktails[idDrink] = updatedProgress;
+        cocktails[id] = updatedProgress;
       } else {
-        const recipeProgress = { [idDrink]: [...updatedProgress] };
+        const recipeProgress = { [id]: [...updatedProgress] };
         cocktails = { ...cocktails, ...recipeProgress };
       }
       inProgressRecipes.cocktails = cocktails;
@@ -94,7 +95,7 @@ function DrinksInProgress() {
       arrTag = null;
     }
     const finishedRecipeToken = {
-      id: idDrink,
+      id,
       type: 'bebida',
       area: null,
       category: strCategory,
@@ -109,7 +110,7 @@ function DrinksInProgress() {
       .length && Object.keys(inProgressRecipes.cocktails).length) === 1) {
       localStorage.removeItem('inProgressRecipes');
     } else {
-      delete inProgressRecipes.cocktails[idDrink];
+      delete inProgressRecipes.cocktails[id];
     }
     let doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipes) {
@@ -118,7 +119,7 @@ function DrinksInProgress() {
       doneRecipes = [finishedRecipeToken];
     }
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
-    setRedirect(true);
+    shouldRedirect('/receitas-feitas');
   };
 
   const isDisabled = () => {
@@ -134,7 +135,7 @@ function DrinksInProgress() {
     const { strDrinkThumb, strDrink, strAlcoholic, strCategory } = drinkDetails;
 
     const favoriteRecipeToken = {
-      id: idDrink,
+      id,
       type: 'bebida',
       area: '',
       category: strCategory,
@@ -155,7 +156,6 @@ function DrinksInProgress() {
       }
     } else {
       favoriteRecipes = [favoriteRecipeToken];
-      console.log(process.env);
       document.getElementById('fav-btn').setAttribute('src', blackHeartIcon);
     }
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
@@ -164,23 +164,25 @@ function DrinksInProgress() {
     }
   };
   return (
-    <div onChange={ isDisabled }>
+    <div onChange={ isDisabled } className="in-progress">
+      { redirect.should && <Redirect to={ redirect.path } />}
       <img
         src={ drinkDetails.strDrinkThumb }
         alt="imagem da bebida"
         data-testid="recipe-photo"
+        className="in-progress-pic"
       />
       <h1 data-testid="recipe-title">{ drinkDetails.strDrink }</h1>
 
-      <ShareBtn id={ idDrink } type="bebida" />
-      <button type="button" onClick={ setFavorite }>
+      <ShareBtn id={ id } type="bebida" />
+      <Button variant="danger" type="button" onClick={ setFavorite }>
         <img
           id="fav-btn"
           src={ whiteHeartIcon }
           alt="favoritar"
           data-testid="favorite-btn"
         />
-      </button>
+      </Button>
       <h2 data-testid="recipe-category">{ drinkDetails.strAlcoholic }</h2>
       <h3>Ingredientes:</h3>
       <ul>
@@ -189,40 +191,31 @@ function DrinksInProgress() {
             key={ index }
             data-testid={ `${index}-ingredient-step` }
           >
-            <input
-              onClick={ (ev) => {
-                if (ev.target.defaultChecked) {
-                  ev.target.defaultChecked = false;
-                  ev.target.checked = false;
-                } else {
-                  ev.target.defaultChecked = true;
-                  ev.target.checked = true;
-                }
-              } }
-              onChange={ (ev) => {
-                const label = ev.target.parentElement.querySelector('label');
-                progressRecipe(label.innerText);
-                if (ev.target.defaultChecked) {
-                  label.style.textDecoration = 'line-through';
-                } else if (!ev.target.defaultChecked) {
-                  ev.target.defaultChecked = false;
-                  label.style.textDecoration = 'none';
-                }
-              } }
-              type="checkbox"
-              id={ `${index}-ingredient-step` }
-            />
-            <label htmlFor={ `${index}-ingredient-step` }>
-              {filterAlcoohol[index] ? (
-                `${ingredient[1]} - ${filterAlcoohol[index][1]}`
-              ) : (ingredient[1])}
-            </label>
+            <Form.Group className="mb-3" controlId={ `${index}-ingredient-step` }>
+              <Form.Check
+                type="checkbox"
+                id={ `${index}-ingredient-step` }
+                label={ filterAlcoohol[index] ? (
+                  `${ingredient[1]} - ${filterAlcoohol[index][1]}`
+                ) : (ingredient[1]) }
+                onChange={ ({ target }) => {
+                  const label = target.parentElement;
+                  progressRecipe(label.innerText);
+                  if (target.checked) {
+                    label.style.textDecoration = 'line-through';
+                  } else if (!target.checked) {
+                    target.defaultChecked = false;
+                    label.style.textDecoration = 'none';
+                  }
+                } }
+              />
+            </Form.Group>
           </li>
         ))}
       </ul>
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
-      <button
+      <Button
         disabled={ disabled }
         type="button"
         data-testid="finish-recipe-btn"
@@ -230,8 +223,7 @@ function DrinksInProgress() {
         onClick={ finishRecipe }
       >
         Finalizar Receita
-      </button>
-      { redirect && <Redirect to="/receitas-feitas" />}
+      </Button>
     </div>
   );
 }

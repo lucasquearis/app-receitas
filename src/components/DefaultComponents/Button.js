@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
-function Button(props) {
+function MyButton(props) {
   const {
     className,
     disabled,
@@ -11,7 +12,7 @@ function Button(props) {
   } = props;
 
   return (
-    <button
+    <Button
       className={ className }
       disabled={ disabled }
       data-testid={ testId }
@@ -19,12 +20,12 @@ function Button(props) {
       type="button"
     >
       { name }
-    </button>
+    </Button>
   );
 }
 
 const { bool, func, string, oneOfType } = PropTypes;
-Button.propTypes = {
+MyButton.propTypes = {
   className: oneOfType([bool, string]),
   disabled: bool,
   handleClick: func.isRequired,
@@ -32,10 +33,10 @@ Button.propTypes = {
   testId: string,
 };
 
-Button.defaultProps = {
+MyButton.defaultProps = {
   className: '',
   disabled: false,
   testId: '',
 };
 
-export default Button;
+export default MyButton;
