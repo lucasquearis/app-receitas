@@ -18,7 +18,7 @@ const getCocktailError = (error) => ({
   error,
 });
 
-export const fetchCocktail = (id) => async (dispatch) => {
+const fetchCocktail = (id) => async (dispatch) => {
   dispatch(getCocktail());
   const endPoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(endPoint);
