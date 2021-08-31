@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
 import Header from '../../components/Header';
 import '../../styles/Header.css';
 import Footer from '../../components/Footer';
 import '../../styles/Footer.css';
+import myContext from '../../context/myContext';
 
-function ExploreFoods() {
+function ExploreFoods(props) {
+  const { history } = props;
+  const { randomFood } = useContext(myContext);
+
+  const handleClick = () => {
+    history.push(`/comidas/${randomFood[0].idMeal}`);
+    console.log(randomFood);
+  };
+
   return (
     <div>
       <Header brand="Explorar Comidas" className="img-search" />
@@ -26,18 +36,21 @@ function ExploreFoods() {
             Por Local de Origem
           </button>
         </Link>
-        <Link to="/explorar/comidas">
-          <button
-            data-testid="explore-surprise"
-            type="button"
-          >
-            Me Surpreenda!
-          </button>
-        </Link>
+        <button
+          data-testid="explore-surprise"
+          type="button"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
+        </button>
       </div>
       <Footer />
     </div>
   );
 }
+
+ExploreFoods.propTypes = {
+  history: objectOf(oneOfType([func, string, number, object])),
+}.isRequired;
 
 export default ExploreFoods;
