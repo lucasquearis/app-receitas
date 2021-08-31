@@ -18,7 +18,8 @@ const RecipeInProgress = () => {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
-  const [showMsg, setShowMsg] = useState(false);
+  const [showMsg] = useState(false);
+  const EIGHT = 8;
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -63,7 +64,7 @@ const RecipeInProgress = () => {
           (item) => item.id === foodDetails[0].idMeal,
         );
         setFavorite(isFavorited);
-    }
+      }
     };
 
     const getIngredients = () => {
@@ -135,15 +136,16 @@ const RecipeInProgress = () => {
             <h3>Ingredients</h3>
             <ul>
               {
-                ingredients.map((ingredient) => ingredient.slice(0, 8).map((item, index) => (
-                  <li
-                    key={ item }
-                    data-testid={ `${index}-ingredient-step` }
-                  >
-                    <input type="checkbox" id={ item } name={ item } />
-                    {`${item} - ${measures[0][index]}`}
-                  </li>
-                )))
+                ingredients.map((ingredient) => ingredient
+                  .slice(0, EIGHT).map((item, index) => (
+                    <li
+                      key={ item }
+                      data-testid={ `${index}-ingredient-step` }
+                    >
+                      <input type="checkbox" id={ item } name={ item } />
+                      {`${item} - ${measures[0][index]}`}
+                    </li>
+                  )))
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
