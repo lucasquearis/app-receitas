@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState([]);
@@ -39,16 +39,16 @@ function Login() {
         name="password"
         type="password"
       />
-      <Link to="/menu">
-        <button
-          data-testid="login-submit-btn"
-          onClick={ handleClick }
-          type="button"
-          disabled={ !isValid() }
-        >
-          Entrar
-        </button>
-      </Link>
+
+      <button
+        data-testid="login-submit-btn"
+        onClick={ handleClick }
+        type="button"
+        disabled={ !isValid() }
+      >
+        Entrar
+      </button>
+
     </form>
   );
 }
