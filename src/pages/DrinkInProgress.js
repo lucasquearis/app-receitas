@@ -144,6 +144,7 @@ const DrinkInProgress = () => {
                       key={ item }
                       data-testid={ `${index}-ingredient-step` }
                     >
+                      <input type="checkbox" id={ item } name={ item } />
                       {`${item} - ${measures[0][index]}`}
                     </li>
                   )))
