@@ -37,7 +37,6 @@ export default function DrinksCards() {
       const data = filterIngredients;
       return data;
     }
-
     const data = searchDrinks;
     return data;
   };
