@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
 import Loading from '../components/Loading';
 
-function DrinkRecipeDetails(props) {
+export default function DrinkRecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const [resultDrinkRecipe, setResultDrinkRecipe] = useState([]);
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -14,7 +15,36 @@ function DrinkRecipeDetails(props) {
       setResultDrinkRecipe(drinks);
     };
     resolveAPI();
+    const { cocktails } = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: { [id]: [] }, meals: {} };
+    setCheckedIngredients([...cocktails[id]]);
   }, [id]);
+
+  useEffect(() => {
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: {} };
+    const defaultObject = {
+      ...getLocalStorage,
+      cocktails: { ...getLocalStorage.cocktails,
+        [id]: [] },
+    };
+
+    if (!getLocalStorage.cocktails[id]) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify(defaultObject));
+      return false;
+    }
+  }, [id]);
+
+  const isIngredientChecked = (comparison) => checkedIngredients
+    .some((ingredient) => ingredient === comparison);
+
+  const updateStateFromLocalStorage = () => {
+    const { cocktails } = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: { [id]: [] }, meals: {} };
+    setCheckedIngredients([...cocktails[id]]);
+  };
 
   const handleClick = ({ target: { name } }) => {
     const getLocalStorage = () => JSON.parse(localStorage
@@ -84,6 +114,8 @@ function DrinkRecipeDetails(props) {
                       type="checkbox"
                       id={ `${ingredient}-checkbox` }
                       name={ resultDrinkRecipe[0][ingredient] }
+                      checked={ isIngredientChecked(resultDrinkRecipe[0][ingredient]) }
+                      onChange={ updateStateFromLocalStorage }
                     />
                     <span>
                       { resultDrinkRecipe[0][ingredient] }
@@ -101,18 +133,19 @@ function DrinkRecipeDetails(props) {
         </ul>
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
-        <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
+        <button
+          data-testid="finish-recipe-btn"
+          type="button"
+        >
+          Finalizar Receita
+        </button>
       </>
     );
   }
 
-  return (
-    <Loading />
-  );
+  return <Loading />;
 }
 
 DrinkRecipeDetails.propTypes = {
   id: PropTypes.number,
 }.isRequired;
-
-export default DrinkRecipeDetails;

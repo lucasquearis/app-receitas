@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import './pageCSS/MealProcess.css';
 import PropTypes from 'prop-types';
 import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
 import Loading from '../components/Loading';
-import './pageCSS/MealProcess.css';
 
 export default function MealProcess(props) {
   const { match: { params: { id } } } = props;
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -14,7 +15,36 @@ export default function MealProcess(props) {
       setResultMealRecipe(meals);
     };
     resolveAPI();
+    const { meals } = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [] } };
+    setCheckedIngredients([...meals[id]]);
   }, [id]);
+
+  useEffect(() => {
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { meals: {}, cocktails: {} };
+    const defaultObject = {
+      ...getLocalStorage,
+      meals: { ...getLocalStorage.meals,
+        [id]: [] },
+    };
+
+    if (!getLocalStorage.meals[id]) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify(defaultObject));
+      return false;
+    }
+  }, [id]);
+
+  const isIngredientChecked = (comparison) => checkedIngredients
+    .some((ingredient) => ingredient === comparison);
+
+  const updateStateFromLocalStorage = () => {
+    const { meals } = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [] } };
+    setCheckedIngredients([...meals[id]]);
+  };
 
   const handleClick = ({ target: { name } }) => {
     const getLocalStorage = () => JSON.parse(localStorage
@@ -63,7 +93,6 @@ export default function MealProcess(props) {
     const listIngredients = keysIngredients.filter((item) => item
       .includes('strIngredient'));
     const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
-
     return (
       <>
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -79,14 +108,14 @@ export default function MealProcess(props) {
                   key={ ingredient }
                   data-testid={ `${index}-ingredient-step` }
                 >
-                  <label
-                    htmlFor={ `${ingredient}-checkbox` }
-                  >
+                  <label htmlFor={ `${ingredient}-checkbox` }>
                     <input
                       onClick={ handleClick }
                       type="checkbox"
                       id={ `${ingredient}-checkbox` }
                       name={ resultMealRecipe[0][ingredient] }
+                      checked={ isIngredientChecked(resultMealRecipe[0][ingredient]) }
+                      onChange={ updateStateFromLocalStorage }
                     />
                     <span>
                       { resultMealRecipe[0][ingredient] }
