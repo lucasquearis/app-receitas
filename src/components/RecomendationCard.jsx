@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import Loading from './Loading';
+import './componentCSS/RecomendationCard.css';
 
 const RecomendationCard = ({ page }) => {
   const [recomendationCards, setRecomendationCards] = useState([]);
@@ -27,42 +28,54 @@ const RecomendationCard = ({ page }) => {
 
   if (recomendationCards.length > 0 && page === 'meals') {
     return (
-      <ul>
-        {recomendationCards.map((item, index) => {
-          const MAX_CARDS = 6;
-          const { idDrink, strDrink, strAlcoholic, strDrinkThumb } = item;
-          if (index > MAX_CARDS - 1) {
-            return false;
-          }
-          return (
-            <li data-testid={ `${index}-recomendation-card` } key={ idDrink }>
-              <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
-              <p>{ strAlcoholic }</p>
-              <img src={ strDrinkThumb } alt={ strDrink } />
-            </li>
-          );
-        })}
-      </ul>
+      <div className="details__carousel-cards-wrapper">
+        <div className="details__carousel-cards">
+          {recomendationCards.map((item, index) => {
+            const MAX_CARDS = 6;
+            const { idDrink, strDrink, strAlcoholic, strDrinkThumb } = item;
+            if (index > MAX_CARDS - 1) {
+              return false;
+            }
+            return (
+              <div
+                data-testid={ `${index}-recomendation-card` }
+                className="details__carousel-card"
+                key={ idDrink }
+              >
+                <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
+                <p>{ strAlcoholic }</p>
+                <img src={ strDrinkThumb } alt={ strDrink } />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 
   if (recomendationCards.length > 0 && page === 'drinks') {
     return (
-      <ul>
-        {recomendationCards.map((item, index) => {
-          const MAX_CARDS = 6;
-          const { idMeal, strMeal, strMealThumb } = item;
-          if (index > MAX_CARDS - 1) {
-            return false;
-          }
-          return (
-            <li data-testid={ `${index}-recomendation-card` } key={ idMeal }>
-              <p>{ strMeal }</p>
-              <img src={ strMealThumb } alt={ strMeal } />
-            </li>
-          );
-        })}
-      </ul>
+      <div className="details__carousel-cards-wrapper">
+        <div className="details__carousel-cards">
+          {recomendationCards.map((item, index) => {
+            const MAX_CARDS = 6;
+            const { idMeal, strMeal, strMealThumb } = item;
+            if (index > MAX_CARDS - 1) {
+              return false;
+            }
+            return (
+              <div
+                data-testid={ `${index}-recomendation-card` }
+                className="details__carousel-card"
+                key={ idMeal }
+              >
+                <p data-testid={ `${index}-recomendation-title` }>{ strMeal }</p>
+                <img src={ strMealThumb } alt={ strMeal } />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 

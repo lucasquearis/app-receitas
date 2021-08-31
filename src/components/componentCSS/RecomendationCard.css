@@ -1,0 +1,19 @@
+.details__carousel-cards-wrapper {
+  width: 100vw;
+}
+
+.details__carousel-cards {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.details__carousel-card {
+  flex: none;
+  scroll-snap-align: start;
+  width: 51vw;
+}
+
+.details__carousel-card img {
+  width: 100%;
+}

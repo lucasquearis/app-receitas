@@ -9,6 +9,7 @@ import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 
 export default function Drinks() {
   const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
+  console.log(feed);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
