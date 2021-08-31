@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import LoginHook from '../Hooks/LoginHook';
-import foodHook from '../Hooks/FoodHook';
+import FoodHook from '../Hooks/FoodHook';
 import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 import recipesHooks from '../Hooks/recipesHooks';
 import SingleRecipeHook from '../Hooks/SingleRecipeHook';
