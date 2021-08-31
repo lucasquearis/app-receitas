@@ -127,11 +127,15 @@ describe('testa pagina de receitas favoritas', () => {
       renderWithRouter(<App />, PATH);
       localStorage.setItem('favoriteRecipes', JSON.stringify(MOCK_FAV_RECIPES));
     });
+    const firstPromise = Promise.resolve();
+
     await screen.findByRole('heading', { name: /Receitas Favoritas/i });
     await screen.findByRole('button', { name: /Food/i });
     await screen.findByRole('button', { name: /Drinks/i });
     const recpCards = document.getElementsByClassName('fav-recipe-container');
     expect(recpCards.length).toBe(MOCK_FAV_RECIPES.length);
+
+    await act(() => firstPromise);
 
     MOCK_FAV_RECIPES.forEach(
       ({ name, type, area, category, alcoholicOrNot, image }, i) => {
