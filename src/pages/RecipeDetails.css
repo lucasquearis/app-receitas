@@ -1,0 +1,58 @@
+.body-details {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.button-details {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.imgtittle {
+  height: 30vh;
+  max-width: 80vh;
+}
+
+.ingredients {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.meals {
+  height: fit-content;
+  min-height: 100%;
+}
+
+.nodot {
+  list-style-type: none;
+}
+
+.img-details {
+  width: 170px;
+}
+
+.recipeName {
+  align-self: center;
+  height: auto;
+}
+
+.RecommendCard {
+  background-color: green;
+  border: 2px solid black;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 40vh;
+}
+
+.RecomendImg {
+  height: 30vh;
+  width: 50vw;
+}
+
+.sugestions {
+  display: flex;
+  overflow-x: scroll;
+}
