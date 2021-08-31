@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import copy from 'clipboard-copy';
 import useFilterMadeAndFavorite from '../hooks/useFilterMadeAndFavorite';
 import share from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/made-recipes.css';
 
-function MadeRecipes() {
+function MadeAndFavoriteRecipes() {
   const { madeRecipes, filter, setFilter, setRecipes } = useFilterMadeAndFavorite();
   const { pathname } = useLocation();
+  const [copyMessage, setCopyMessage] = useState('none');
+  const [shareId, setShareId] = useState('');
   const types = ['all', 'food', 'drink', 'All', 'Food', 'Drinks'];
   const numButtons = 3;
 
@@ -28,18 +31,23 @@ function MadeRecipes() {
 
   const deleteFavorite = async (id) => {
     let recipes = await JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log('antes de deletar', recipes);
     recipes = recipes.filter((recipe) => recipe.id !== id);
     await localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
-    console.log('deleta receita', recipes);
     setRecipes(recipes);
+  };
+
+  const copyPath = (urlDetails, id) => {
+    copy(`http://localhost:3000${urlDetails}`);
+    setShareId(id);
+    setCopyMessage('block');
   };
 
   const cardFoodMade = (recipe, index) => {
     const { id, type, name, image, area, category, doneDate, tags } = recipe;
+    const urlDetails = `/${type}s/${id}`;
     return (
       <div key={ index } className="card-done">
-        <Link to={ `/${type}s/${id}` }>
+        <Link to={ urlDetails }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="img-card-done"
@@ -58,7 +66,10 @@ function MadeRecipes() {
               type="image"
               src={ share }
               alt="Compartilhar"
+              onClick={ () => copyPath(urlDetails, id) }
             />
+            { shareId === id
+              && <span style={ { display: copyMessage } }>Link copiado!</span> }
           </div>
           <Link
             data-testid={ `${index}-horizontal-name` }
@@ -84,10 +95,10 @@ function MadeRecipes() {
 
   const cardDrinkMade = (recipe, index) => {
     const { id, type, name, image, alcoholicOrNot, doneDate } = recipe;
-
+    const urlDetails = `/${type}s/${id}`;
     return (
       <div key={ index } className="card-done">
-        <Link to={ `/${type}s/${id}` }>
+        <Link to={ urlDetails }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="img-card-done"
@@ -104,7 +115,10 @@ function MadeRecipes() {
               type="image"
               src={ share }
               alt="Compartilhar"
+              onClick={ () => copyPath(urlDetails, id) }
             />
+            { shareId === id
+              && <span style={ { display: copyMessage } }>Link copiado!</span> }
           </div>
           <Link
             data-testid={ `${index}-horizontal-name` }
@@ -120,9 +134,10 @@ function MadeRecipes() {
 
   const cardFoodFavorite = (recipe, index) => {
     const { id, type, name, image, area, category } = recipe;
+    const urlDetails = `/${type}s/${id}`;
     return (
       <div key={ index } className="card-done">
-        <Link to={ `/${type}s/${id}` }>
+        <Link to={ urlDetails }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="img-card-done"
@@ -141,12 +156,16 @@ function MadeRecipes() {
             { name }
           </Link>
           <div className="card-favorite-share">
-            <img
+            <input
               data-testid={ `${index}-horizontal-share-btn` }
               className="icon-share"
+              type="image"
               src={ share }
               alt="Compartilhar"
+              onClick={ () => copyPath(urlDetails, id) }
             />
+            { shareId === id
+              && <span style={ { display: copyMessage } }>Link copiado!</span> }
             <input
               data-testid={ `${index}-horizontal-favorite-btn` }
               className="icon-favorite"
@@ -163,10 +182,10 @@ function MadeRecipes() {
 
   const cardDrinkFavorite = (recipe, index) => {
     const { id, type, name, image, alcoholicOrNot } = recipe;
-
+    const urlDetails = `/${type}s/${id}`;
     return (
       <div key={ index } className="card-done">
-        <Link to={ `/${type}s/${id}` }>
+        <Link to={ urlDetails }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="img-card-done"
@@ -189,7 +208,10 @@ function MadeRecipes() {
               type="image"
               src={ share }
               alt="Compartilhar"
+              onClick={ () => copyPath(urlDetails, id) }
             />
+            { shareId === id
+              && <span style={ { display: copyMessage } }>Link copiado!</span> }
             <input
               data-testid={ `${index}-horizontal-favorite-btn` }
               className="icon-favorite"
@@ -206,7 +228,6 @@ function MadeRecipes() {
 
   const fillCards = () => {
     if (!madeRecipes) return <span>Nenhuma receita feita</span>;
-    console.log('carrega cards');
 
     return madeRecipes.map((recipe, index) => {
       if (recipe.type === 'comida') {
@@ -242,4 +263,4 @@ function MadeRecipes() {
   );
 }
 
-export default MadeRecipes;
+export default MadeAndFavoriteRecipes;

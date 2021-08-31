@@ -18,7 +18,6 @@ function useFilterMadeAndFavorite() {
         await setRecipes(saved);
       }
     };
-    console.log('lê storage');
     savedRecipes();
   }, [pathname]);
 
@@ -34,7 +33,6 @@ function useFilterMadeAndFavorite() {
         setMadeRecipes([]);
       }
     };
-    console.log('filtra storage');
     filters();
   }, [filter, recipes]);
 
