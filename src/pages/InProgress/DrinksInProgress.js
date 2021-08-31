@@ -6,16 +6,8 @@ function DrinksInProgress() {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  // const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
-  // const INITIAL_STATE = { ...previousLocalStorage, cocktails: { [id]: [] } };
-  // const INITIAL_STATE = { melas: {}, cocktails: { [id]: [] } };
   const [inProgress, setInProgress] = useState('');
   const [disabled, setDisabled] = useState(true);
-  // localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
-
-  // if (!localStorage.inProgressRecipes) {
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
-  // }
 
   // useEffect p fetch
   useEffect(() => {
@@ -25,7 +17,6 @@ function DrinksInProgress() {
       setRecipeDrink(drinks);
     };
     getRecipeDrink();
-    // console.log(recipeDrink);
   }, [id]);
 
   // useEffect p checar o q existe no localStorage
@@ -83,7 +74,6 @@ function DrinksInProgress() {
   const handleCheckItem = (ingredient) => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const { cocktails } = inProgressRecipes;
-    // const ingredientsArray = inProgress.meals[id];
 
     if (!cocktails[id]) { // lógica p qd add o primeiro ingredient
       const newInProgressRecipes = {
@@ -111,7 +101,6 @@ function DrinksInProgress() {
     };
 
     setInProgress(newInProgressRecipes);
-    // handleDisabled();
     return localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(newInProgressRecipes),

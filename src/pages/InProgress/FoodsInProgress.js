@@ -1,34 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-// const id = 52771;
-
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
   const { id } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-
-  // const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
-  // const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
-
-  // const [inProgress, setInProgress] = useState(JSON
-  //   .parse(localStorage.getItem('inProgressRecipes'))); // array de ingredientes que vão sendo checados
-
   const [inProgress, setInProgress] = useState('');
   const [disabled, setDisabled] = useState(true);
-  // localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
-
-  // if (!recipeFood) return <div>Carregando...</div>;
-
-  // if (!localStorage.inProgressRecipes) {
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
-  // }
 
   // useEffect p fetch
   useEffect(() => {
     const getRecipeFood = async () => {
-      // const { id } = useParams();
       const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setRecipeFood(meals);
@@ -43,7 +26,6 @@ function FoodsInProgress() {
       const newLocalStorage = { cocktails: {}, meals: { [id]: [] } };
       localStorage.setItem('inProgressRecipes', JSON.stringify(newLocalStorage));
       setInProgress(newLocalStorage);
-      // console.log(localStorage.meals[id]);
     } else if (!previousLocalStorage.meals[id]) {
       const { meals } = previousLocalStorage;
       const newLocalStorage = { ...previousLocalStorage, meals: { ...meals, [id]: [] } };
@@ -74,7 +56,6 @@ function FoodsInProgress() {
   }, [recipeFood]);
 
   // Requisito 50
-
   const handleDisabled = () => {
     if (inProgress.meals[id].length !== ingredients.length || ingredients.length === 0) {
       setDisabled(true);
@@ -90,7 +71,6 @@ function FoodsInProgress() {
   const handleCheckItem = (ingredient) => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const { meals } = inProgressRecipes;
-    // const ingredientsArray = inProgress.meals[id];
 
     if (!meals[id]) { // lógica p qd add o primeiro ingredient
       const newInProgressRecipes = {
@@ -118,7 +98,6 @@ function FoodsInProgress() {
     };
 
     setInProgress(newInProgressRecipes);
-    // handleDisabled();
     return localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(newInProgressRecipes),
