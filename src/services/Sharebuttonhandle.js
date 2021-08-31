@@ -1,7 +1,7 @@
 /* solution to copy to clipboard found in:
 https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript */
 
-const shareButton = (type, id) => {
+const shareButtonHandle = (type, id) => {
   const text = `http://localhost:3000/${type}/${id}`;
   navigator.clipboard.writeText(text).then(() => {
     console.log('Async: Copying to clipboard was successful!');
@@ -10,4 +10,4 @@ const shareButton = (type, id) => {
   });
 };
 
-export default shareButton;
+export default shareButtonHandle;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Details from '../components/Details';
-import ProgressValidation from '../services/recipeProgress';
 import './RecipeDetails.css';
 
 /*
@@ -60,7 +59,7 @@ const DataManeger = (data, receita) => {
   return objdrink;
 };
 
-function RecipyDetails() {
+function RecipeDetails() {
   const [Data, setDataRecipe] = useState(undefined);
 
   const { id, receita } = useParams();
@@ -93,9 +92,8 @@ function RecipyDetails() {
       RecomendedRecipe={ Data[1] }
       Id={ id }
       Receita={ receita }
-      ProgressValidation={ ProgressValidation(id, receita) }
     />
   );
 }
 
-export default RecipyDetails;
+export default RecipeDetails;

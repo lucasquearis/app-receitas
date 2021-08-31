@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
-import shareButton from '../services/Sharebutton';
+import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
-
-const IngredientList = (array) => {
-  const texthandle = '-ingredient-name-and-measure';
-  const obj = array[0].map((n, index) => (
-    n[1] !== '' && n[1] !== null
-      ? <li key={ index } data-testid={ `${index}${texthandle}` }>{n[1]}</li>
-      : null
-  ));
-  return obj;
-};
+import StartContinueDoneButton from './StartContinueDoneButton';
+import IngredientList from './IngredientList';
 
 const RecomendList = (array, type) => {
   const recomendlegth = 6;
@@ -59,24 +50,13 @@ const RecomendList = (array, type) => {
   }
 };
 
-const measureList = (array) => {
-  const txthd = '-ingredient-name-and-measure';
-  const obj = array[0].map((n, index) => (
-    n[1] !== '' && n[1] !== null
-      ? <li className="nodot" key={ index } data-testid={ `${index}${txthd}` }>{n[1]}</li>
-      : null
-  ));
-  return obj;
-};
-
 const RecomendExist = (objeto) => {
   if (objeto === null || objeto === undefined) return null;
   return objeto;
 };
 
 function Details(props) {
-  const { Receita, DetailedRecipe, RecomendedRecipe, Id, ProgressValidation } = props;
-  const [copiedbutton, setcopy] = useState(false);
+  const { Receita, DetailedRecipe, RecomendedRecipe, Id } = props;
 
   return (
     <div className="body-details">
@@ -88,16 +68,8 @@ function Details(props) {
       />
       <h1 data-testid="recipe-title">{DetailedRecipe.tittle}</h1>
       <div>
-        <button
-          type="button"
-          onClick={ () => { shareButton(Receita, Id); setcopy(true); } }
-        >
-          <img alt="share" data-testid="share-btn" src={ shareIcon } />
-          <p>
-            {copiedbutton ? <p>Link copiado!</p> : ''}
-          </p>
-        </button>
-        <FavoriteButton type={ Receita } id={ Id } />
+        <ShareButton type={ Receita } id={ Id } />
+        <FavoriteButton recipe={ DetailedRecipe } id={ Id } type={ Receita } />
       </div>
       <h3 data-testid="recipe-category">{DetailedRecipe.category}</h3>
       { DetailedRecipe && Receita === 'bebidas'
@@ -106,8 +78,9 @@ function Details(props) {
       <h2>Ingredientes</h2>
 
       <div className="ingredients">
-        <l>{IngredientList(DetailedRecipe.ingredients)}</l>
-        <l>{measureList(DetailedRecipe.measures)}</l>
+        <lo>
+          <IngredientList array={ DetailedRecipe } />
+        </lo>
       </div>
       <h2>Instruções</h2>
       <p data-testid="instructions">{DetailedRecipe.Instructions}</p>
@@ -121,13 +94,7 @@ function Details(props) {
         {RecomendList(RecomendExist(RecomendedRecipe), Receita)}
       </div>
       <Link to={ `/${Receita}/${Id}/in-progress` }>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="button-details"
-        >
-          {ProgressValidation ? 'Continuar Receita' : 'Iniciar Receita'}
-        </button>
+        <StartContinueDoneButton id={ Id } type={ Receita } />
       </Link>
     </div>
   );
@@ -147,7 +114,6 @@ Details.propTypes = {
     ingredients: string.isRequired,
     measures: string.isRequired,
   }).isRequired,
-  ProgressValidation: PropTypes.bool.isRequired,
   RecomendedRecipe: objectOf(string.isRequired).isRequired,
 };
 

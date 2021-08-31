@@ -35,20 +35,20 @@
 }
 
 .recipeName {
-  height: auto;
   align-self: center;
+  height: auto;
 }
 
 .RecommendCard {
   background-color: green;
   border: 2px solid black;
   display: flex;
-  flex-flow: column nowrap;  
+  flex-flow: column nowrap;
   height: 40vh;
 }
 
 .RecomendImg {
-  height: 30vh; 
+  height: 30vh;
   width: 50vw;
 }
 
