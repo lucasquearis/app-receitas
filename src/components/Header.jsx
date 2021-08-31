@@ -22,18 +22,22 @@ function Header(props) {
   );
 
   return (
-    <header className="header">
-      <Link to="/perfil">
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="imagem de pefil"
-        />
-      </Link>
-      <h3 data-testid="page-title">{ titulo }</h3>
-      { pesquisa === 'true' ? iconePesquisa() : null }
-      { showBar ? <SearchBar /> : null}
-    </header>
+    <div>
+      <header className="header">
+        <Link to="/perfil">
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="imagem de pefil"
+          />
+        </Link>
+        <h3 data-testid="page-title">{ titulo }</h3>
+        { pesquisa === 'true' ? iconePesquisa() : null }
+      </header>
+      <div className="filtros">
+        { showBar ? <SearchBar /> : null }
+      </div>
+    </div>
   );
 }
 

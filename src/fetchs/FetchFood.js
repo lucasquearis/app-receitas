@@ -5,11 +5,13 @@ const fetchFoods = async (type, action, value = '') => {
     procuraBebida: 'search.php?s=',
     random: 'random.php',
     ingredients: 'list.php?i=list',
+    ingredientes: 'filter.php?i=',
     area: 'list.php?a=list',
     filterByArea: 'filter.php?a=',
     categories: 'list.php?c=list',
     filterIngredient: 'filter.php?i=',
     filterCategory: 'filter.php?c=',
+    primeiraLetra: 'search.php?f=',
   };
   const endPoints = {
     drink: 'https://www.thecocktaildb.com/api/json/v1/1/',

@@ -10,6 +10,10 @@ function Provider({ children }) {
     food: {},
     drink: {},
   });
+  const [dataMeals, setDataMeals] = useState();
+  const [dataDrinks, setDataDrinks] = useState();
+  const [renderFoods, setRenderFoods] = useState(false);
+  const [renderDrinks, setRenderDrinks] = useState(false);
 
   const handleClick = async (type, action, value, callback) => {
     const result = await fetchFoods(type, action, value);
@@ -24,6 +28,14 @@ function Provider({ children }) {
     setData,
     filterByIng,
     setFilterByIng,
+    dataMeals,
+    setDataMeals,
+    dataDrinks,
+    setDataDrinks,
+    renderFoods,
+    setRenderFoods,
+    renderDrinks,
+    setRenderDrinks,
   };
 
   return (

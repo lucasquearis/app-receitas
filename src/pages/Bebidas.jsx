@@ -8,7 +8,7 @@ import MyContext from '../context/MyContext';
 import '../cssPages/Refeicao.css';
 
 function Bebidas() {
-  const { filterByIng } = useContext(MyContext);
+  const { filterByIng, renderDrinks, dataDrinks } = useContext(MyContext);
   const [drinkData, setDrinkData] = useState({});
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [drink, loading, categories, setLoading] = HookBebidas();
@@ -22,6 +22,23 @@ function Bebidas() {
       categories.drinks,
     );
   }, [drink, categories]);
+
+  const changeRender = (condition) => {
+    if (condition) {
+      return (<CardList
+        list={ dataDrinks }
+        apiType="Drink"
+        page="bebidas"
+      />);
+    }
+    return (
+      <CardList
+        list={ filterByIng ? filterByIng.drinks : drinkData.drinks }
+        apiType="Drink"
+        page="bebidas"
+      />
+    );
+  };
 
   return loading
     ? <div>Loading... </div>
@@ -37,11 +54,7 @@ function Bebidas() {
           toggle={ toggleCategory }
           toggleCallback={ setToggleCategory }
         />
-        <CardList
-          list={ filterByIng ? filterByIng.drinks : drinkData.drinks }
-          apiType="Drink"
-          page="bebidas"
-        />
+        {changeRender(renderDrinks)}
         <Footer />
       </>
     );

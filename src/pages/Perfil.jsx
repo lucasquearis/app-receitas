@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import '../cssPages/Perfil.css';
 
 function Perfil(props) {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const { history } = props;
 
   const local = () => {
-    const info = localStorage.getItem('user');
-    const objectInfo = JSON.parse(info);
-    setEmail(objectInfo.email);
+    const info = localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user')) : '';
+    setEmail(info.email);
   };
 
   useEffect(() => {
@@ -49,6 +50,7 @@ function Perfil(props) {
           Sair
         </button>
       </div>
+      <Footer />
     </div>
   );
 }
