@@ -1,0 +1,17 @@
+.div-explore {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.div-explore button {
+  background: #fd8061;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  margin: 5px;
+  width: 300px;
+}
