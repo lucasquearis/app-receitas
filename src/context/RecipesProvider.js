@@ -74,7 +74,7 @@ export default function RecipesProvider({ children }) {
     };
     resultFilterMeals();
   },
-  [searchMeals, mealCategories]);
+  [searchMeals]);
 
   useEffect(() => {
     const resultFilterDrinks = async () => {
@@ -84,7 +84,7 @@ export default function RecipesProvider({ children }) {
     };
     resultFilterDrinks();
   },
-  [searchDrinks, drinkCategories]);
+  [searchDrinks]);
 
   useEffect(() => {
     const filterIngredients = () => {

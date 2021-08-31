@@ -23,12 +23,6 @@ async function getMealsById(id) {
   }
 }
 
-/* async function getMealsCategories() {
-  const URL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
-  const result = await fetch(URL).then((resp) => resp.json());
-  return result;
-} */
-
 async function getMealsCategories() {
   const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   try {

@@ -14,7 +14,7 @@ export default function Filter() {
   const { pathname } = useLocation();
   const [textToSend, setTextValue] = useState('');
   const [radioValueToSend, setRadioValue] = useState('name');
-  const [usedMealsToRender, setUsedMeals] = useState('');
+  const [usedTypeToRender, setUsedType] = useState('');
 
   useEffect(() => {
     if (pathname === '/comidas') {
@@ -38,16 +38,16 @@ export default function Filter() {
       ? meals
       : drinks);
     const getUsedMeals = () => {
-      const baseCategories = usedMeals.map((category) => (category.strCategory)); // quebra aqui no cypress
+      const baseCategories = usedMeals.map((category) => (category.strCategory));
       const categoriesCheck = baseCategories
         .length > NUMBER_CATEGORIES ? NUMBER_CATEGORIES : baseCategories.length;
       const returnBaseCategories = baseCategories.slice(START_CARD, categoriesCheck);
       returnBaseCategories.push('All');
-      setUsedMeals(returnBaseCategories);
+      setUsedType(returnBaseCategories);
     };
     getUsedMeals();
   },
-  []);
+  [textToSend, pathname]);
 
   const settings = ({ target: { id } }) => {
     const filterId = id === textToSend || id === 'All' ? '' : id;
@@ -58,7 +58,7 @@ export default function Filter() {
 
   return (
     <div>
-      {Object.values(usedMealsToRender)
+      {Object.values(usedTypeToRender)
         .map((category, index) => (
           <label htmlFor={ category } key={ index }>
             <button
