@@ -10,10 +10,11 @@ function FoodDetails(props) {
       const END_POINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const response = await fetch(END_POINT);
       const { meals } = await response.json();
+      console.log(meals);
       setData(meals[0]);
     };
     getDetails();
-  }, [data, props]);
+  }, [setData, props]);
 
   const { strMeal, strCategory, strArea, strMealThumb } = data;
 

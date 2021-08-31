@@ -14,7 +14,7 @@ function FoodExplore() {
   };
   useEffect(() => {
     surpriseMe();
-  }, [data]);
+  }, [setData]);
 
   const path = (id) => `/comidas/${id}`;
 
