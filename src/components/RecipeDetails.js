@@ -28,37 +28,41 @@ const RecipeDetails = (props) => {
         data-testid="recipe-photo"
       />
       <div className="recipe-title-container">
-        <h1 data-testid="recipe-title">{title}</h1>
+        <div className="recipe-title">
+          <h1 data-testid="recipe-title">{title}</h1>
+          <h5 data-testid="recipe-category" className="category-title">
+            {category || isAlcoholic}
+          </h5>
+        </div>
         <div className="recipe-buttons-container">
           <ShareButton />
           <FavoriteButton recipe={ recipe } id={ id } />
         </div>
       </div>
-      <h3 data-testid="recipe-category">{category || isAlcoholic}</h3>
-      <h3>Ingredients</h3>
-      <ul>
-        { ingredients.map((ingredient, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
+      <h3 className="sub-title">Ingredients</h3>
+      <ul className="details-ing-list">
+        {ingredients.map((ingredient, index) => (
+          <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
             {ingredient}
             -
             {measures[index]}
-          </li>)) }
+          </li>
+        ))}
       </ul>
-      <h3>Instructions</h3>
-      <p data-testid="instructions">{instructions}</p>
-      { isMeal
-        && <iframe
+      <h3 className="sub-title">Instructions</h3>
+      <p className="instructions-paragraph" data-testid="instructions">{instructions}</p>
+      {isMeal && (
+        <iframe
           className="recipe-video"
           data-testid="video"
           title={ title }
           width="420"
           height="315"
           src={ videoUrl }
-        />}
-    </section>);
+        />
+      )}
+    </section>
+  );
 };
 
 RecipeDetails.propTypes = {

@@ -22,6 +22,8 @@
   border: solid 1px darkgrey;
   border-radius: 6px;
   box-shadow: 0 0 6px -1px darkgrey;
+  margin-right: 0.5em;
+
 }
 
 .profile-icon {
