@@ -24,7 +24,7 @@ export default class Header extends Component {
 
   render() {
     const { searchBar } = this.state;
-    const { titulo } = this.props;
+    const { title } = this.props;
     return (
       <div className="header">
         <header>
@@ -35,7 +35,7 @@ export default class Header extends Component {
               <img src={ profile } alt="profile" data-testid="profile-top-btn" />
             </button>
           </Link>
-          <h2 data-testid="page-title">{ titulo }</h2>
+          <h2 data-testid="page-title">{ title }</h2>
           <button
             type="button"
             onClick={ this.handleSearch }
@@ -54,5 +54,5 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  titulo: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
