@@ -7,7 +7,7 @@ function DrinkPerIngredient() {
     <>
       <Header title="Explorar Ingredientes" />
       <Footer />
-      <p>aa</p>
+      <p>hello darkeness my old friend</p>
     </>
   );
 }
