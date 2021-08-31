@@ -37,7 +37,7 @@ export const doneRecipesToStorage = (props) => {
     name: type === 'comida' || type === 'meals' ? meal : drink,
     image: thumb,
     doneDate: '31/08/2021',
-    tags: tags || [],
+    tags: [tags] || [],
   }];
 
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));

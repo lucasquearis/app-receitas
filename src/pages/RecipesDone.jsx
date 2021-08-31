@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Header from '../components/Header';
 import RecipeDoneCard from '../components/RecipeDoneCard';
-import recipesDoneMock from '../data/recipesDoneMock';
 
 function RecipesDone() {
   const [filterRecipesDone, setfilterRecipesDone] = useState({
@@ -11,10 +10,12 @@ function RecipesDone() {
   });
   const { filterMeals, filterDrinks } = filterRecipesDone;
 
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
   const recipesDone = () => {
-    if (filterMeals) return recipesDoneMock.filter(({ type }) => type === 'comida');
-    if (filterDrinks) return recipesDoneMock.filter(({ type }) => type === 'bebida');
-    return recipesDoneMock;
+    if (filterMeals) return doneRecipes.filter(({ type }) => type === 'comida');
+    if (filterDrinks) return doneRecipes.filter(({ type }) => type === 'bebida');
+    return doneRecipes;
   };
 
   const renderFilterButtons = () => (
