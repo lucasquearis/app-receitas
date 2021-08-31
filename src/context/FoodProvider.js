@@ -5,6 +5,7 @@ import {
   fetchMealApi,
   fetchCategoriesMealApi,
   fetchIngredients,
+  fetchMealByArea,
 } from '../services/fetchMealApi';
 
 const FoodProvider = ({ children }) => {
@@ -18,6 +19,7 @@ const FoodProvider = ({ children }) => {
   const [mealsByCategories, setMealsByCategories] = useState(false);
   const [randomMeal, setRandomMeal] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const [areas, setAreas] = useState([]);
 
   useEffect(() => {
     fetchMealApi(foodFilter).then((data) => {
@@ -37,6 +39,12 @@ const FoodProvider = ({ children }) => {
     });
   }, []);
 
+  useEffect(() => {
+    fetchMealByArea().then((data) => {
+      setAreas(data.meals);
+    });
+  }, []);
+
   const contextValue = {
     foods,
     foodFilter,
@@ -50,7 +58,9 @@ const FoodProvider = ({ children }) => {
     randomMeal,
     setRandomMeal,
     ingredients,
+    areas,
   };
+
   return (
     <FoodContext.Provider value={ contextValue }>
       {children}

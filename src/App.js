@@ -18,6 +18,7 @@ import FinishedRecipes from './pages/FinishedRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import FoodProvider from './context/FoodProvider';
 import DrinksProvider from './context/DrinksProvider';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               component={ SearchDrinksByIngredients }
             />
             <Route path="/explorar/comidas/area" component={ SearchByOrigin } />
+            <Route path="/explorar/bebidas/area" component={ NotFound } />
             <Route path="/explorar/comidas" component={ SearchDetailsFood } />
             <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
             <Route path="/explorar" component={ Search } />
