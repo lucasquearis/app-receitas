@@ -1,0 +1,31 @@
+.comidasDetails {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.imgComidasDetails {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.buttonComidasDetails {
+  display: flex;
+  justify-content: space-around;
+}
+
+.videoComida {
+  display: flex;
+  justify-content: center;
+}
+
+.receitasComidas {
+  display: flex;
+  justify-content: center;
+}
+
+.favoriteComidaButton {
+  display: flex;
+  justify-content: center;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import styles from './Header/Header.module.css';
 
 function Card({ item, index }) {
   return (
@@ -12,6 +13,7 @@ function Card({ item, index }) {
           src={ item.strMealThumb || item.strDrinkThumb }
           alt={ item.strMeal || item.strDrink }
           data-testid={ `${index}-card-img` }
+          className={ styles.imagem }
         />
       </div>
       <div>

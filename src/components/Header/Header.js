@@ -5,13 +5,14 @@ import profileicon from '../../images/profileIcon.svg';
 import searchicon from '../../images/searchIcon.svg';
 import HEADERSEARCHBAR from '../../services/data';
 import SearchBar from '../SearchBar';
+import styles from './Header.module.css';
 
 function Header({ children }) {
   const history = useHistory();
   const [hideSearchBar, setHideSearchBar] = React.useState(false);
   const ShowHideSearchBar = () => setHideSearchBar(!hideSearchBar);
   return (
-    <header>
+    <header className={ styles.buttonSuperior }>
       <Link to="/perfil">
         <button type="button">
           <input

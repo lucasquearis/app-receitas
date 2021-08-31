@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
+import styles from './BebidasDetalhes.module.css';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -34,6 +35,7 @@ export default function BebidasDetalhes() {
   const history = useHistory();
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
+  const [recomendedFood, setRecoomendedFood] = useState([]);
 
   useEffect(() => {
     const api = async () => {
@@ -51,6 +53,18 @@ export default function BebidasDetalhes() {
     };
     api();
   }, [idApi]);
+
+
+  useEffect(() => {
+    const apiFood = async () => {
+      const magicalNumber = 6;
+      const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const data = await fetch(URL).then((response) => response.json());
+      const firstSix = await data.meals.slice(0, magicalNumber);
+      setRecoomendedFood(firstSix);
+    };
+    apiFood();
+  }, []);
 
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
     .map((ingredientKey, index) => (
@@ -82,43 +96,54 @@ export default function BebidasDetalhes() {
 
   return (
     <div>
-      <img src={ drink.strDrinkThumb } alt="recipe" data-testid="recipe-photo" />
+      <div className={ styles.bebidasDetails }>
+        <img
+          src={ drink.strDrinkThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+          className={ styles.imgBebidasDetails }
+        />
+      </div>
       <h2 data-testid="recipe-title">{drink.strDrink}</h2>
       <div data-testid="recipe-category">{drink.strCategory}</div>
       <div data-testid="recipe-glass">{drink.strGlass}</div>
       <div data-testid="recipe-alcoholic">{drink.strAlcoholic}</div>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-
-      <button
-        type="button"
-        onClick={ handleFavorite }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt={ `Botão para adicionar ou retirar ${drink.strDrink} dos favoritos` }
-        />
-      </button>
-
-      <ul>
+      
+      <div className={ styles.buttonBebidasDetails }>
+        <button type="button" data-testid="share-btn">Compartilhar</button>
+        <button
+          type="button"
+          onClick={ handleFavorite }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt={ `Botão para adicionar ou retirar ${drink.strDrink} dos favoritos` }
+          />
+        </button>
+      </div>
+      <ul className={ styles.optionsDrinks }>
         {renderIngredients(getIngredientsKeys(drink))}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
-      <div>
-        <h3>Receitas recomendadas</h3>
-        <ul>
-          {recommendedRecipes.map((name, index) => (
+      {recomendedFood.map((recomendation, index) => (
+        <div
+          data-testid={ `${index}-recomendation-card` }
+          key={ index }
+        >
+          <ul>
             <li
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
+              className={ index <= 1 ? '' : 'displayNone' }
+              data-testid={ `${index}-recomendation-title` }
             >
-              {name}
+              { recomendation.strMeal }
             </li>
           ))}
         </ul>
       </div>
       <button
         type="button"
+        className="start-recipe-btn"
         data-testid="start-recipe-btn"
         onClick={ () => history.push(`/bebidas/${idApi}/in-progress`) }
       >

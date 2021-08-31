@@ -63,8 +63,7 @@ export const fetchMealsCategory = () => {
     .then((data) => {
       const dataMeals = data.meals;
       return dataMeals.slice(0, amountCategory);
-    })
-    .catch((error) => error);
+    });
 };
 
 export const fetchMealsByCategories = (category) => {

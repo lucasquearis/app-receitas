@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import Context from '../context/Context';
 import * as RequestMealsAPI from '../services/requestMealsAPI';
 import * as RequestCocktailsAPI from '../services/requestDrinksAPI';
+import styles from './SearchBar.module.css';
 
 export default function SearchBar() {
   const { setCocktails, setMeals, recipeType } = useContext(Context);
@@ -69,54 +70,49 @@ export default function SearchBar() {
   };
 
   return (
-    <>
-      {/* <div>
+    <div>
+      <div className={ styles.searchBar }>
         <input
-          type="image"
+          id="search-input"
+          type="text"
           data-testid="search-input"
-          alt="Search"
+          className="input-field-search"
+          name="search-input"
+          placeholder="receita"
+          value={ searchInput }
+          onChange={ handleInputText }
         />
-      </div> */}
-      <input
-        id="search-input"
-        type="text"
-        data-testid="search-input"
-        className="input-field-search"
-        name="search-input"
-        placeholder="receita"
-        value={ searchInput }
-        onChange={ handleInputText }
-      />
-      <label htmlFor="ingredient-search-radio">
-        ingredientes
-        <input
-          id="ingredient-search"
-          type="radio"
-          data-testid="ingredient-search-radio"
-          name="radio-filter"
-          onChange={ handleChange }
-        />
-      </label>
-      <label htmlFor="name-search-radio">
-        Nome
-        <input
-          id="name-search"
-          type="radio"
-          data-testid="name-search-radio"
-          name="radio-filter"
-          onChange={ handleChange }
-        />
-      </label>
-      <label htmlFor="first-letter-search-radio">
-        Primeira Letra
-        <input
-          id="first-letter-search"
-          type="radio"
-          data-testid="first-letter-search-radio"
-          name="radio-filter"
-          onChange={ handleChange }
-        />
-      </label>
+        <label htmlFor="ingredient-search-radio">
+          ingredientes
+          <input
+            id="ingredient-search"
+            type="radio"
+            data-testid="ingredient-search-radio"
+            name="radio-filter"
+            onChange={ handleChange }
+          />
+        </label>
+        <label htmlFor="name-search-radio">
+          Nome
+          <input
+            id="name-search"
+            type="radio"
+            data-testid="name-search-radio"
+            name="radio-filter"
+            onChange={ handleChange }
+          />
+        </label>
+        <label htmlFor="first-letter-search-radio">
+          Primeira Letra
+          <input
+            id="first-letter-search"
+            type="radio"
+            data-testid="first-letter-search-radio"
+            name="radio-filter"
+            onChange={ handleChange }
+          />
+        </label>
+      </div>
       <button
         type="button"
         className="button-search"
@@ -125,6 +121,6 @@ export default function SearchBar() {
       >
         Buscar
       </button>
-    </>
+    </div>
   );
 }
