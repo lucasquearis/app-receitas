@@ -9,8 +9,8 @@ import { copyToClipboard } from '../../services';
 import shareIcon from '../../images/shareIcon.svg';
 import FavoriteFoodBtn from '../../components/FavoriteFoodBtn';
 import BtnFoods from '../../components/BtnFoods';
-import DrinksCards from '../../components/DrinksCard';
 import '../../components/foodDrinks.css';
+import 'react-multi-carousel/lib/styles.css';
 
 function FoodsDetails() {
   const { id } = useParams();
@@ -27,7 +27,7 @@ function FoodsDetails() {
     getFoodAndDrinks();
   }, [getFoodAndDrinks]);
 
-  if (!details) {
+  if (!details.meals) {
     return (
       <h1>Loading</h1>
     );
@@ -35,28 +35,33 @@ function FoodsDetails() {
 
   const foodDetails = details.meals[0];
   const objKeyFood = Object.keys(foodDetails);
-  const filterObjFood = objKeyFood.filter((obj) => obj.includes('strIngredient'));
-  const otherFilterObjFood = filterObjFood.filter((obj) => (
-    foodDetails[obj] !== ''));
+  const filterObjFood = objKeyFood
+    .filter((obj) => obj
+      .includes('strIngredient') && foodDetails[obj] !== '' && foodDetails[obj] !== null);
+  const filterObjMeasure = objKeyFood
+    .filter((obj) => obj
+      .includes('strMeasure') && foodDetails[obj] !== ' ' && foodDetails[obj] !== null);
+  const ingredientesWithMeasures = filterObjFood
+    .map((e, index) => `${foodDetails[e]} - ${foodDetails[filterObjMeasure[index]]}`);
 
   const sixRecomendations = 6;
+  const carouselDrinks = [...drinks.slice(0, sixRecomendations)];
 
   const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 2,
+      slidesToSlide: 2, // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 424, min: 0 },
+      breakpoint: { max: 464, min: 0 },
       items: 2,
+      slidesToSlide: 2, // optional, default to 1.
     },
   };
 
@@ -82,12 +87,12 @@ function FoodsDetails() {
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
 
       <ul>
-        { otherFilterObjFood.map((ingredient, index) => (
+        { ingredientesWithMeasures.map((ingredient, index) => (
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
             key={ index }
           >
-            { foodDetails[ingredient] }
+            { ingredient }
           </li>)) }
       </ul>
 
@@ -102,17 +107,30 @@ function FoodsDetails() {
 
       <ul>
         <Carousel
-          infinite
+          swipeable={ false }
+          draggable={ false }
+          showDots
           responsive={ responsive }
+          ssr // means to render carousel on server-side.
+          autoPlaySpeed={ 1000 }
+          keyBoardControl
+          customTransition="all .5"
+          transitionDuration={ 500 }
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={ ['tablet', 'mobile'] }
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
         >
-          { drinks.slice(0, sixRecomendations)
-            .map((drink, index) => (
-              <li
-                key={ index }
-                data-testid={ `${index}-recomendation-card` }
-              >
-                { DrinksCards(drink, 'comidas', index) }
-              </li>)) }
+          { carouselDrinks.map((drink, index) => (
+            <div
+              key={ index }
+              data-testid={ `${index}-recomendation-card` }
+            >
+              <Link to={ `/bebidas/${drink.idDrink}/` }>
+                <img src={ drink.strDrinkThumb } alt="drink-recomendation" />
+                <p data-testid={ `${index}-recomendation-title` }>{ drink.strDrink}</p>
+              </Link>
+            </div>))}
         </Carousel>
       </ul>
 

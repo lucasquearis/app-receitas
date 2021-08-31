@@ -5,33 +5,29 @@ import { startDrinkRecipe } from '../../services';
 
 function BtnDrinks({ dataId, className, details, id }) {
   const [button, setButton] = useState(false);
-
   const drinkDetails = details.drinks[0];
   const objKeyDrink = Object.keys(drinkDetails);
   const filterObjDrink = objKeyDrink.filter((obj) => obj.includes('strIngredient'));
   const otherFilterObjDrink = filterObjDrink.filter((obj) => drinkDetails[obj] !== null);
 
-  const checkRecipeName = useCallback(() => {
+  const checkRecipeId = useCallback(() => {
     const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (storage) {
-      const storageRecipeName = storage.find(({ cocktails }) => (
-        String(Object.keys(cocktails)) === drinkDetails.idDrink));
-      if (storageRecipeName) {
+    if (storage && storage.cocktails) {
+      const findId = Object.keys(storage.cocktails).find((key) => key === id);
+      if (findId) {
         setButton(true);
+      } else {
+        setButton(false);
       }
-    } else {
-      setButton(false);
     }
-  }, [drinkDetails.idDrink]);
+  }, [id]);
 
   useEffect(() => {
-    checkRecipeName();
-  }, [checkRecipeName]);
+    checkRecipeId();
+  }, [checkRecipeId]);
 
   const inProgressRecipes = {
-    cocktails: {
-      [id]: otherFilterObjDrink.map((drink) => drinkDetails[drink]),
-    },
+    [id]: otherFilterObjDrink.map((drink) => drinkDetails[drink]),
   };
 
   return (

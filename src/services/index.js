@@ -105,46 +105,46 @@ export const myFavoriteRecipe = (recipe) => {
 
 export const startDrinkRecipe = (recipe) => {
   const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
-  if (recipes) {
-    const checkName = recipes
-      .filter(({ cocktails }) => (
-        String(Object.keys(cocktails)) === String(Object.keys(recipe.cocktails))));
-    console.log('se tem igual', checkName);
-    if (checkName.length) {
-      return (true);
-    }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      [...recipes, recipe],
-    ));
-
-    return (true);
+  if (!recipes) {
+    const newObject = {
+      ...recipes,
+      cocktails: {
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
+  } else {
+    const newObject = {
+      ...recipes,
+      cocktails: {
+        ...recipes.cocktails,
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
   }
-  localStorage.setItem('inProgressRecipes', JSON.stringify(
-    [recipe],
-  ));
-  return (true);
 };
 
 export const startFoodRecipe = (recipe) => {
   const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (recipes) {
-    const checkName = recipes
-      .filter(({ meals }) => (
-        String(Object.keys(meals)) === String(Object.keys(recipe.meals))));
-    console.log('se tem igual', checkName);
-    if (!checkName.length) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        [...recipes, recipe],
-      ));
-      return (true);
-    }
-    return (true);
+  if (!recipes) {
+    const newObject = {
+      ...recipes,
+      meals: {
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
+  } else {
+    const newObject = {
+      ...recipes,
+      meals: {
+        ...recipes.meals,
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
   }
-  localStorage.setItem('inProgressRecipes', JSON.stringify(
-    [recipe],
-  ));
-  return (true);
 };
 
 export const getDate = (date) => {

@@ -287,7 +287,7 @@ describe('39 - Implemente a solução de forma que caso a receita já tenha sido
   });
 });
 
-describe.only('40 - Implemente a solução de modo que caso a receita tenha sido iniciada mas não finalizada, o texto do botão deve ser "Continuar Receita"', () => {
+describe('40 - Implemente a solução de modo que caso a receita tenha sido iniciada mas não finalizada, o texto do botão deve ser "Continuar Receita"', () => {
   it('Verifica botão de "Continuar Receita" na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/comidas/52771', {
       onBeforeLoad(win) {
@@ -604,7 +604,7 @@ describe('46 - Salve as receitas favoritas no `localStorage` na chave `favoriteR
           type: 'bebida',
           area: '',
           category: 'Cocktail',
-          alcoholicOrNot:  'Alcoholic',
+          alcoholicOrNot: 'Alcoholic',
           name: 'Aquamarine',
           image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
         },

@@ -16,7 +16,7 @@ function DrinkInfo({ drinkDetails }) {
 }
 
 DrinkInfo.propTypes = {
-  drinkDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
+  drinkDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default DrinkInfo;

@@ -15,7 +15,7 @@ function FoodInfo({ foodDetails }) {
 }
 
 FoodInfo.propTypes = {
-  foodDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
+  foodDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default FoodInfo;
