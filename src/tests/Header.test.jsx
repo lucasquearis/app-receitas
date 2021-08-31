@@ -20,7 +20,10 @@ describe('Header', () => {
   });
 
   test('Existe um botão de busca', () => {
-    const { getByTestId } = renderWithRouter(<Header title="Header" renderSearchIcon={ true } />);
+    const { getByTestId } = renderWithRouter(<Header
+      title="Header"
+      renderSearchIcon
+    />);
     expect(getByTestId(testIds.searchTopBtn)).toBeInTheDocument();
   });
 });
