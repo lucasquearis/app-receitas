@@ -29,7 +29,7 @@ export default function FiltersMenu({ type }) {
       >
         All
       </button>
-      { categoriesList.map((filter) => (
+      { categoriesList && categoriesList.map((filter) => (
         <button
           key={ filter }
           type="button"

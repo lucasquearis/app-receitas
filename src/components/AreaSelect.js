@@ -5,7 +5,7 @@ import '../styles/areaSelect.css';
 
 export default function AreaSelect() {
   const [loading, setLoading] = useState(true);
-  const [areasList, setAreasList] = useState([]);
+  const [areasList, setAreasList] = useState(null);
   const [areaSelected, setAreaSelected] = useState('All');
   const { setRecipeList } = useContext(AppContext);
 
@@ -39,7 +39,7 @@ export default function AreaSelect() {
         onChange={ handleChange }
       >
         <option data-testid="All-option">All</option>
-        { areasList.map((area) => (
+        { areasList && areasList.map((area) => (
           <option key={ area } data-testid={ `${area}-option` }>{ area }</option>
         )) }
       </select>

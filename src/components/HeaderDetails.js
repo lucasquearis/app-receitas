@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useParams } from 'react-router-dom';
+import { clipboardCopy } from '../utils';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function HeaderDetails(
-  { area = '', name, img, aux, alcoholic = '' },
+  { area, name, img, aux, alcoholic },
 ) {
-  const [copySuccess, setCopySuccess] = useState('');
   const [heartColor, setHeartColor] = useState(whiteHeartIcon);
   const { location: { pathname } } = useHistory();
   const { id } = useParams();
   const ONE = 1;
   const SEVEN = 7;
   const type = pathname.slice(ONE, SEVEN);
-  console.log(type);
 
   useEffect(() => {
     const checkIsFavorite = localStorage.getItem('favoriteRecipes')
@@ -25,17 +24,6 @@ export default function HeaderDetails(
 
     return (favoriteId ? setHeartColor(blackHeartIcon) : setHeartColor(whiteHeartIcon));
   }, [id]);
-
-  const handleShare = () => {
-    // Source: https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
-    const el = document.createElement('input');
-    el.value = window.location.href;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    setCopySuccess('Link copiado!');
-  };
 
   const handleFavorite = () => {
     const checkIsFavorite = localStorage.getItem('favoriteRecipes')
@@ -79,8 +67,9 @@ export default function HeaderDetails(
         alt="Share Icon"
         type="image"
         data-testid="share-btn"
-        onClick={ handleShare }
+        onClick={ () => clipboardCopy(type, id) }
       />
+      <span id={ `share-text${id}` } />
       <input
         src={ heartColor }
         alt="Favorite Icon"
@@ -88,17 +77,21 @@ export default function HeaderDetails(
         data-testid="favorite-btn"
         onClick={ handleFavorite }
       />
-      <p>{ copySuccess }</p>
       { aux && <p data-testid="recipe-category">{ aux }</p> }
       { alcoholic && <p data-testid="recipe-category">{ alcoholic }</p> }
     </header>
   );
 }
 
+HeaderDetails.defaultProps = {
+  area: '',
+  alcoholic: '',
+};
+
 HeaderDetails.propTypes = {
   name: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   aux: PropTypes.string.isRequired,
-  area: PropTypes.string.isRequired,
-  alcoholic: PropTypes.string.isRequired,
+  area: PropTypes.string,
+  alcoholic: PropTypes.string,
 };

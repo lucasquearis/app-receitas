@@ -39,7 +39,6 @@ export default function ExplorarIngredients() {
   const getFiltererdReceipes = async ({ target }) => {
     const name = target.name || target.parentNode.name;
     const type = title();
-    console.log(type);
     const results = await API.fetchAPIFilter(type, 'ingredient', name);
     setRecipeList(results);
     setFrom(true);

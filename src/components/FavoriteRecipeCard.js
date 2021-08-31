@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import AppContext from '../context/AppContext';
-import { clipboardCopy } from '../services';
+import { clipboardCopy } from '../utils';
 import '../styles/favoriteRecipeCard.css';
 
 export default function FavoriteRecipeCard({

@@ -21,7 +21,6 @@ export default function ReceitasFeitasPage() {
   }
 
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-
   const doneRecipesResult = (filterType, array) => {
     if (filterType === 'all') {
       return array;

@@ -4,7 +4,7 @@ import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
   const [recipeList, setRecipeList] = useState();
-  const [categoriesList, setCategoriesList] = useState([]);
+  const [categoriesList, setCategoriesList] = useState(null);
   const [filterRecipes, setFilterRecipes] = useState('all');
   const [from, setFrom] = useState(false);
   const [recipeDetails, setRecipeDetails] = useState();

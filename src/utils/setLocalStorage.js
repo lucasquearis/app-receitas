@@ -1,4 +1,4 @@
-function setLocalStorage() {
+export default function setLocalStorage() {
   const done = [];
   const doneRecipesStorage = JSON.stringify(done);
   localStorage.setItem('doneRecipes', doneRecipesStorage);
@@ -8,10 +8,11 @@ function setLocalStorage() {
   const favoriteRecipesStorage = JSON.stringify(favorite);
   localStorage.setItem('favoriteRecipes', favoriteRecipesStorage);
 
-  const inProgress = [];
+  const inProgress = {
+    cocktails: {},
+    meals: {},
+  };
 
   const inProgressStorage = JSON.stringify(inProgress);
   localStorage.setItem('inProgressRecipes', inProgressStorage);
 }
-
-export default setLocalStorage;

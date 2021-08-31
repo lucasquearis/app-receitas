@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import setLocalStorage from '../services/setLocalStorage';
+import { setLocalStorage } from '../utils';
 
 export default function LoginPage() {
   const [redirectToFoods, setRedirectToFoods] = useState(false);

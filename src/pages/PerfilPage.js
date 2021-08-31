@@ -26,7 +26,9 @@ export default function PerfilPage() {
   if (redirectToFavRecipes) return <Redirect to="/receitas-favoritas" />;
   if (redirectToLogin) return <Redirect to="/" />;
 
-  const userEmail = JSON.parse(localStorage.getItem('user')).email || '';
+  const userEmail = localStorage.getItem('user')
+    && JSON.parse(localStorage.getItem('user')).email;
+
   return (
     <div>
       <Header title="Perfil" showSearchIcon={ false } />

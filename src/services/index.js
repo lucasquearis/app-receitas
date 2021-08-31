@@ -7,6 +7,4 @@ export { default as fetchRandomMeal } from './fetchRandomMeal';
 export { default as fetchIngredients } from './fetchIngredients';
 export { default as fetchAPIAreas } from './fetchAPIAreas';
 export { default as fetchAPIByAreas } from './fetchAPIByAreas';
-export { default as clipboardCopy } from './clipboardCopy';
-export { default as fetchAPIDetailsDrink } from './fetchAPIDetailsDrink';
-export { default as fetchAPIDetailsFood } from './fetchAPIDetailsFood';
+export { default as fetchAPIDetails } from './fetchAPIDetails';

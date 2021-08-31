@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-import { clipboardCopy } from '../services';
+import { clipboardCopy } from '../utils';
 import '../styles/doneRecipeCard.css';
 
 export default function DoneRecipeCard({
@@ -39,7 +39,7 @@ export default function DoneRecipeCard({
             { `${area} - ${category}`}
           </span>
         )}
-        <Link to={ `${type}s/${id}` }>
+        <Link to={ `/${type}s/${id}` }>
           <span data-testid={ `${index}-horizontal-name` }>
             {name}
           </span>

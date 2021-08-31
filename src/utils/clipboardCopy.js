@@ -1,4 +1,4 @@
-const copy = require('clipboard-copy');
+import copy from 'clipboard-copy';
 
 const clipboardCopy = (type, id) => {
   copy(`${window.location.origin}/${type}s/${id}`)

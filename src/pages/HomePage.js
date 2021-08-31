@@ -27,7 +27,6 @@ export default function HomePage() {
         setRecipeList(await fetchAPI(pathname));
         setCategoriesList(await fetchAPICategories(pathname));
         setLoading(false);
-        console.log(from);
       })();
     }
     setLoading(false);
