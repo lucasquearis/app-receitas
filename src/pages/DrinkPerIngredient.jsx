@@ -4,10 +4,11 @@ import Header from '../components/Header';
 
 function DrinkPerIngredient() {
   return (
-    <div>
+    <>
       <Header title="Explorar Ingredientes" />
       <Footer />
-    </div>
+      <p>aa</p>
+    </>
   );
 }
 
