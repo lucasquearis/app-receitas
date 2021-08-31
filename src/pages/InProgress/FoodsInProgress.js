@@ -8,9 +8,11 @@ function FoodsInProgress() {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const INITIAL_STATE = { cocktails: {}, meals: { [id]: [] } };
+  const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
+  const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
   const [inProgress, setInProgress] = useState(INITIAL_STATE); // array de ingredientes que vão sendo checados
   const [disabled, setDisabled] = useState(true);
+  // localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
 
   if (!localStorage.inProgressRecipes) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
@@ -18,12 +20,26 @@ function FoodsInProgress() {
 
   useEffect(() => {
     const getRecipeFood = async () => {
+      // const { id } = useParams();
       const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setRecipeFood(meals);
     };
     getRecipeFood();
   }, [id]);
+
+  useEffect(() => {
+    const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    setInProgress({ ...LS });
+
+    // const setLocalStorage = () => {
+    //   const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
+    //   const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
+    //   setInProgress(INITIAL_STATE);
+    //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
+    // };
+    // setLocalStorage();
+  }, []);
 
   useEffect(() => {
     const ingredientsList = () => {
@@ -77,11 +93,6 @@ function FoodsInProgress() {
       }
     }
   };
-
-  useEffect(() => {
-    const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setInProgress({ ...LS });
-  }, []);
 
   const handleCheked = (ingredient) => (inProgress.meals[id].includes(ingredient));
 
