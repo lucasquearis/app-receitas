@@ -13,7 +13,7 @@ export const AppProvider = ({ children }) => {
   const { searchRecipes, recipes } = recipesHooks();
   const { handleInput, Login, disabled, handleClick, redirect } = LoginHook();
   const { drinks, meal } = foodHook();
-  const { singleRecipe, handleRecipe } = SingleRecipeHook();
+  const { singleRecipe, handleRecipe, handleFav, fav } = SingleRecipeHook();
   const { handleStart, doneRecipe, inProgress, handleBtnType } = DoneRecipeHook();
   const { handleModal } = ModalHook();
 
@@ -34,6 +34,8 @@ export const AppProvider = ({ children }) => {
     inProgress,
     handleBtnType,
     handleModal,
+    handleFav,
+    fav,
   };
 
   return (

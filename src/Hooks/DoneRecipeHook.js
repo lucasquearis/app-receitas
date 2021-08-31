@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react';
 
 const INITIAL_STATE = {
   meals: {
-    52771: [],
   },
   cocktails: {
-    178319: [],
   },
 };
 

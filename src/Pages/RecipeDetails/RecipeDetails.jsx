@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Share, Favorite } from '@material-ui/icons';
+import { Share, Favorite as blackHeartIcon,
+  FavoriteBorder as whiteHeartIcon } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import IconButton from '../../Components/IconBtn';
@@ -19,14 +20,18 @@ function RecipeDetails({ match: { params } }) {
   const { handleCopy, closeModal, modal, modalStyles } = ModalHook();
   const {
     handleRecipe, singleRecipe, drinks, meal, handleStart, doneRecipe,
-    handleBtnType,
+    handleBtnType, handleFav, fav,
   } = useContext(ContextApp);
+
   if (!singleRecipe) {
     handleRecipe(params);
     return (
       <div>Loading</div>
     );
   }
+
+  console.log(singleRecipe);
+
   const titleProps = {
     'data-testid': 'recipe-title',
   };
@@ -48,10 +53,12 @@ function RecipeDetails({ match: { params } }) {
   const favBtn = {
     name: 'favorite',
     'data-testid': 'favorite-btn',
-    icon: Favorite,
+    icon: fav ? blackHeartIcon : whiteHeartIcon,
     alt: 'favoriteIcon',
     type: 'button',
     variant: 'contained',
+    onClick: handleFav,
+    src: fav ? 'blackHeartIcon' : 'whiteHeartIcon',
   };
   const categoryProps = {
     'data-testid': 'recipe-category',
