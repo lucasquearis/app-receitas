@@ -9,8 +9,8 @@ class Ingredients extends Component {
     this.taskItem = this.taskItem.bind(this);
     this.setIngredients = this.setIngredients.bind(this);
     this.state = {
-      className:''
-    }
+      className: '',
+    };
   }
 
   setIngredients() {
@@ -37,17 +37,17 @@ class Ingredients extends Component {
       ]
     ), []);
   }
- 
-  taskItem({target: {checked, value, index}}) {
-    if (checked){
-      this.setState({className: 'complet'});
-      console.log('marquei', index)
+
+  taskItem({ target: { checked, index } }) {
+    if (checked) {
+      this.setState({ className: 'complet' });
+      console.log('marquei', index);
     }
   }
 
   render() {
     const ingredients = this.setIngredients();
-    const {className}= this.state
+    const { className } = this.state;
     return (
       <ul>
         {
@@ -55,12 +55,12 @@ class Ingredients extends Component {
             <h2
               key={ index }
               data-testid={ `${index}-ingredient-step` }
-              className=""
+              className={ className }
             >
               <input
                 key={ index }
                 type="checkbox"
-                onClick={ (e) => this.taskItem(e)}
+                onClick={ (e) => this.taskItem(e) }
               />
               {
                 `${Object.keys(ingredient)[0]}:

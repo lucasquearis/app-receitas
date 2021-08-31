@@ -8,7 +8,6 @@ import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
 import DrinkscheckIngredients from '../../components/DrinksCheckIngredients';
 
-
 class DetailsDrink extends Component {
   componentDidMount() {
     const { getCocktail, match } = this.props;
