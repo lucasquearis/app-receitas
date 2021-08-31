@@ -14,7 +14,6 @@ const AREAS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const RECIPES_QUANTITY = 12;
 const INGREDIENTS_QUANTITY = 12;
 const CATEGORIES_QUANTITY = 5;
-export const DONE_RECIPES = 'DONE_RECIPES';
 
 export const loadingRecipes = () => ({
   type: LOADING_RECIPES,
@@ -60,9 +59,6 @@ export const requestDrinksCategories = () => async (dispatch) => {
   dispatch(getCategories(drinks));
 };
 
-export const doneRecipes = (recipe) => ({
-  type: DONE_RECIPES, recipe,
-});
 export const getIngredients = (ingredients) => ({
   type: GET_INGREDIENTS, ingredients: ingredients.slice(0, INGREDIENTS_QUANTITY),
 });

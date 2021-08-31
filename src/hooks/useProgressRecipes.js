@@ -17,6 +17,7 @@ export default function useProgressRecipes() {
     category: '',
     instructions: '',
     alcoholic: '',
+
   });
 
   useEffect(() => {
@@ -42,6 +43,8 @@ export default function useProgressRecipes() {
         strMeal,
         strCategory,
         strInstructions,
+        strArea,
+        strTags,
       } = recipes;
       setData({
         recipeId: idMeal,
@@ -49,6 +52,8 @@ export default function useProgressRecipes() {
         title: strMeal,
         category: strCategory,
         instructions: strInstructions,
+        area: strArea,
+        tags: strTags,
       });
     } else if (currentPage.includes('bebidas')) {
       const {
@@ -57,6 +62,9 @@ export default function useProgressRecipes() {
         strDrink,
         strCategory,
         strInstructions,
+        strAlcoholic,
+        strArea,
+        strTags,
       } = recipes;
       setData({
         recipeId: idDrink,
@@ -64,6 +72,9 @@ export default function useProgressRecipes() {
         title: strDrink,
         category: strCategory,
         instructions: strInstructions,
+        alcoholic: strAlcoholic,
+        area: strArea,
+        tags: strTags,
       });
     }
   }, [currentPage, recipes]);

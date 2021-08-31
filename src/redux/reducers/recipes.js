@@ -3,7 +3,6 @@ import {
   GET_RECIPES,
   SEND_RECIPE_DATA,
   GET_CATEGORIES,
-  DONE_RECIPES,
   GET_INGREDIENTS,
   GET_AREAS,
 } from '../actions/recipesActions';
@@ -40,11 +39,6 @@ export default (state = INITIAL_STATE, action) => {
       ...state,
       categories: action.categories,
       isLoading: false,
-    };
-  case DONE_RECIPES:
-    return {
-      ...state,
-      doneRecipes: [...state.doneRecipes, action.recipe],
     };
   case GET_INGREDIENTS:
     return {
