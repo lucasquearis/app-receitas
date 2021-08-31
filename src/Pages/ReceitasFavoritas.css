@@ -39,6 +39,7 @@
 }
 
 .image-section img {
+  height: 100%;
   width: 100%;
 }
 
@@ -63,4 +64,18 @@
 .buttons-section {
   display: flex;
   justify-content: space-around;
+}
+
+.copy-message {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.share-btn {
+  background: none;
+  border: none;
+}
+
+.share-btn:focus {
+  outline: none;
 }
