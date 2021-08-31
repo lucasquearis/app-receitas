@@ -70,7 +70,7 @@ describe(`2 - Realize as seguintes verificações
     const button = screen.getByText(/Entrar/i);
 
     userEvent.type(email, VALID_EMAIL);
-    userEvent.type(senha, '23456');
+    userEvent.type(senha, '234567');
     expect(button).toBeDisabled();
   });
 
@@ -84,13 +84,13 @@ describe(`2 - Realize as seguintes verificações
 
     userEvent.type(email, VALID_EMAIL);
     userEvent.type(senha, VALID_PASSWORD);
-    expect(button).toBeEnabled();
+    expect(button.getAttribute('disabled')).not.toBeNull();
   });
 });
 
 describe(`testa a rota ao clicar no botão 
          no botão com email e senha validos `, () => {
-  test('A rota deve ser mudada para \'/explorar\' após o clique no botão.', () => {
+  test('A rota deve ser mudada para \'/comidas\' após o clique no botão.', () => {
     const { history } = renderWithRouterAndStore(<Login />, '/');
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
     const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
@@ -100,6 +100,6 @@ describe(`testa a rota ao clicar no botão
     userEvent.type(senha, VALID_PASSWORD);
     fireEvent.click(button);
 
-    expect(history.location.pathname).toBe('/explorar');
+    expect(history.location.pathname).toBe('/comidas');
   });
 });

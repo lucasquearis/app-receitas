@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { actionEmail } from '../../Redux/actions/user';
 import './Login.css';
 import logo from './salad.png';
@@ -89,15 +90,17 @@ class Login extends React.Component {
             />
           </label>
         </form>
-        <button
-          className="btn btn-warning btnButon"
-          type="submit"
-          data-testid="login-submit-btn"
-          onClick={ (event) => this.submitLogin(event) }
-          disabled={ button }
-        >
-          Entrar
-        </button>
+        <Link to="/comidas">
+          <button
+            className="btn btn-warning btnButon"
+            type="submit"
+            data-testid="login-submit-btn"
+            onClick={ (event) => this.submitLogin(event) }
+            disabled={ button }
+          >
+            Entrar
+          </button>
+        </Link>
         <p className="group7">By Group 07</p>
       </div>
     );
