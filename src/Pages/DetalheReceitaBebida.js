@@ -80,6 +80,13 @@ export default function DetalheReceitaBebida(props) {
     }
   };
 
+  const disabledButton = () => {
+    if (drinkIngredients.length === ingredientsDone.length) {
+      return false;
+    }
+    return true;
+  };
+
   const renderRecipe = () => {
     const { strDrink, strDrinkThumb, strCategory, strInstructions } = recipe[0];
     return (
@@ -143,6 +150,7 @@ export default function DetalheReceitaBebida(props) {
           type="button"
           data-testid="finish-recipe-btn"
           onClick={ redirectTo }
+          disabled={ disabledButton() }
         >
           Finalizar Receita
         </button>
