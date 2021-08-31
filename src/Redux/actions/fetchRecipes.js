@@ -23,7 +23,6 @@ export const fetchRecipe = (id) => async (dispatch) => {
   const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(endPoint);
   const responseJson = await response.json();
-  // console.log(responseJson);
   try {
     dispatch(getRecipeSuccess(responseJson.meals));
   } catch (error) {
