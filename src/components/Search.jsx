@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { Redirect } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import fetchSearchIngredientMeals from '../Redux/actions/fetchSearchIngredientMeals';
 import fetchSearchNomeMeals from '../Redux/actions/fetchSearchNomeMeals';
@@ -31,7 +30,7 @@ class Search extends Component {
     this.setState({ [name]: value });
   }
 
-  handleDrinks() {
+  async handleDrinks() {
     const { radio, text } = this.state;
     const {
       setSearchIngredientDrinks,
@@ -39,34 +38,40 @@ class Search extends Component {
       setSearchNomeDrinks,
     } = this.props;
     if (radio === 'Ingrediente') {
-      setSearchIngredientDrinks(text);
+      await setSearchIngredientDrinks(text);
     } else if (radio === 'Nome') {
-      setSearchNomeDrinks(text);
+      await setSearchNomeDrinks(text);
+      const { nomeDrink } = this.props;
+      if (nomeDrink.length === 1) {
+        this.setState({ redirect: true, id: nomeDrink[0].idDrink });
+      }
     } else if (radio === 'Primeira letra' && text.length === 1) {
-      setSearchLetterDrinks(text);
+      await setSearchLetterDrinks(text);
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
-  handleFoods() {
+  async handleFoods() {
     const { radio, text } = this.state;
     const { setSearchIngredient,
-      setSearchLetter, setSearchNome, setNome } = this.props;
+      setSearchLetter, setSearchNome } = this.props;
     if (radio === 'Ingrediente') {
-      setSearchIngredient(text);
-      if (setNome.length === 1) {
-        this.setState({ redirect: true, id: setNome[0].idMeal });
-      }
+      await setSearchIngredient(text);
+      // if (setNome.length === 1) {
+      //   this.setState({ redirect: true, id: ingrediente[0].idMeal });
+      // }
     } else if (radio === 'Nome') {
-      setSearchNome(text);
-      if (setNome.length === 1) {
-        this.setState({ redirect: true, id: setNome[0].idMeal });
+      await setSearchNome(text);
+      const { nome } = this.props;
+      console.log('to no radio nome');
+      if (nome.length === 1) {
+        this.setState({ redirect: true, id: nome[0].idMeal });
       }
-      console.log(setNome);
     } else if (radio === 'Primeira letra' && text.length === 1) {
-      setSearchLetter(text);
-      if (setNome.length === 1) {
-        this.setState({ redirect: true, id: setNome[0].idMeal });
-      }
+      // const { letter } = this.props;
+      await setSearchLetter(text);
+      // if (setNome.length === 1) {
+      //   this.setState({ redirect: true, id: letter[0].idMeal });
+      // }
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
@@ -132,7 +137,9 @@ class Search extends Component {
         >
           Search
         </button>
-        { redirect ? <Redirect to={ `/comidas/${id}` } /> : console.log('chamou') }
+        { redirect && window.location.pathname === '/comidas'
+          ? <Redirect to={ `/comidas/${id}` } />
+          : redirect && <Redirect to={ `/bebidas/${id}` } /> }
       </div>
     );
   }
@@ -145,7 +152,8 @@ Search.propTypes = {
   setSearchIngredientDrinks: PropTypes.func.isRequired,
   setSearchNomeDrinks: PropTypes.func.isRequired,
   setSearchLetterDrinks: PropTypes.func.isRequired,
-  setNome: PropTypes.arrayOf(PropTypes.object).isRequired,
+  nome: PropTypes.arrayOf(PropTypes.object).isRequired,
+  nomeDrink: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -158,7 +166,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  setNome: state.searchNomeReducer.search,
+  nome: state.searchNomeReducer.search,
+  nomeDrink: state.searchNomeDrinksReducer.search,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
