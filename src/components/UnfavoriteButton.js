@@ -17,7 +17,6 @@ export default function UnfavoriteButton({ recipe, index }) {
     );
     setFavorites(updatedFavorites);
   }
-  console.log(index);
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
