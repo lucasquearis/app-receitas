@@ -52,18 +52,6 @@ function FoodsInProgress() {
     } else {
       setInProgress(previousLocalStorage);
     }
-    // if (!previousLocalStorage.meals[id]) {
-    //   const newLocalStorage = { }
-    // }
-    // setInProgress({ ...previousLocalStorage });
-
-    // const setLocalStorage = () => {
-    //   const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
-    //   const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
-    //   setInProgress(INITIAL_STATE);
-    //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
-    // };
-    // setLocalStorage();
   }, [id]);
 
   useEffect(() => {
@@ -85,11 +73,6 @@ function FoodsInProgress() {
     ingredientsList();
   }, [recipeFood]);
 
-  // tentiva p ajudar no req 50
-  // if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
-  //   const inProgressRecipes = { cocktails: {}, meals: { [id]: [] } };
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-  // }
   // Requisito 50
 
   const handleDisabled = () => {

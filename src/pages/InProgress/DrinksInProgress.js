@@ -9,9 +9,7 @@ function DrinksInProgress() {
   // const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
   // const INITIAL_STATE = { ...previousLocalStorage, cocktails: { [id]: [] } };
   // const INITIAL_STATE = { melas: {}, cocktails: { [id]: [] } };
-  const [inProgress, setInProgress] = useState(JSON
-    .parse(localStorage.getItem('inProgressRecipes')));
-
+  const [inProgress, setInProgress] = useState('');
   const [disabled, setDisabled] = useState(true);
   // localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
 
@@ -19,6 +17,7 @@ function DrinksInProgress() {
   //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
   // }
 
+  // useEffect p fetch
   useEffect(() => {
     const getRecipeDrink = async () => {
       const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`; // alterar Id depois
@@ -29,10 +28,24 @@ function DrinksInProgress() {
     // console.log(recipeDrink);
   }, [id]);
 
+  // useEffect p checar o q existe no localStorage
   useEffect(() => {
-    const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setInProgress({ ...LS });
-  }, []);
+    const previousLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!previousLocalStorage) {
+      const newLocalStorage = { cocktails: { [id]: [] }, meals: {} };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newLocalStorage));
+      setInProgress(newLocalStorage);
+      // console.log(localStorage.meals[id]);
+    } else if (!previousLocalStorage.cocktails[id]) {
+      const { cocktails } = previousLocalStorage;
+      const newLocalStorage = {
+        ...previousLocalStorage, cocktails: { ...cocktails, [id]: [] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newLocalStorage));
+      setInProgress(newLocalStorage);
+    } else {
+      setInProgress(previousLocalStorage);
+    }
+  }, [id]);
 
   useEffect(() => {
     const ingredientsList = () => {
@@ -54,13 +67,19 @@ function DrinksInProgress() {
   }, [recipeDrink]);
 
   // Requisito 50
-  // tentiva p ajudar no req 50
-  if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
-    const inProgressRecipes = { cocktails: { [id]: [] }, meals: {} };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-  }
+  const handleDisabled = () => {
+    if (inProgress.cocktails[id].length !== ingredients.length
+      || ingredients.length === 0) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  };
 
-  // Requisito 50
+  useEffect(() => {
+    if (inProgress) handleDisabled();
+  }, [inProgress]);
+
   const handleCheckItem = (ingredient) => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const { cocktails } = inProgressRecipes;
@@ -77,19 +96,22 @@ function DrinksInProgress() {
         .setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
     }
 
+    // p checar se existe o igrendiente
     const newIngredients = cocktails[id]
       .includes(ingredient) ? cocktails[id]
         .filter((item) => item !== ingredient) : [...cocktails[id], ingredient];
 
+    // add ingrediente novo
     const newInProgressRecipes = {
       ...inProgressRecipes,
-      meals: {
+      cocktails: {
         ...cocktails,
         [id]: newIngredients,
       },
     };
 
     setInProgress(newInProgressRecipes);
+    // handleDisabled();
     return localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(newInProgressRecipes),
@@ -97,18 +119,6 @@ function DrinksInProgress() {
   };
 
   const handleCheked = (ingredient) => (inProgress.cocktails[id].includes(ingredient));
-  // console.log(inProgress.cocktails[id]);
-  // const arrayIngredients = inProgress.cocktails[id];
-
-  // useEffect para habilitar  e desabilitar o btn 'Finalizar'
-  useEffect(() => {
-    if (inProgress.cocktails[id].length !== ingredients.length
-      || ingredients.length === 0) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  }, [inProgress, ingredients, id]);
 
   const { strDrink, strCategory, strInstructions, strDrinkThumb } = recipeDrink[0];
 
@@ -123,7 +133,8 @@ function DrinksInProgress() {
       <div className="indredients">
         <h3>Ingredientes</h3>
         {
-          ingredients.map((ingredient, index) => (
+          inProgress
+          && ingredients.map((ingredient, index) => (
             <div key={ index } data-testid={ `${index}-ingredient-step` }>
               <label htmlFor={ `${ingredient}` }>
                 <input
