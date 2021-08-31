@@ -63,8 +63,7 @@ export const fetchDrinksCategory = () => {
     .then((data) => {
       const dataDrinks = data.drinks;
       return dataDrinks.slice(0, amountCategory);
-    })
-    .catch((error) => error);
+    });
 };
 
 export const fetchDrinksByCategories = (category) => {
