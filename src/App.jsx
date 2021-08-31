@@ -7,11 +7,11 @@ import Drinks from './pages/Drinks';
 import FoodsDetails from './pages/FoodsDetails';
 import DrinksDetails from './pages/DrinksDetails';
 import Login from './pages/Login';
-import Explore from './pages/Explore';
-import ExploreFoods from './pages/ExploreFoods';
-import ExploreDrinks from './pages/ExploreDrinks';
-import ExploreByIngredients from './pages/ExploreByIngredients';
-import ExploreByArea from './pages/ExploreByArea';
+import Explore from './pages/Explore/Explore';
+import ExploreFoods from './pages/Explore/ExploreFoods';
+import ExploreDrinks from './pages/Explore/ExploreDrinks';
+import ExploreByIngredients from './pages/Explore/ExploreByIngredients';
+import ExploreByArea from './pages/Explore/ExploreByArea';
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
       <Route path="/bebidas/:id" component={ DrinksDetails } />
       <Route path="/bebidas" component={ Drinks } />
       <Route path="/explorar" component={ Explore } />
-      <Route path="/explorar/comidas" component={ ExploreFoods } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route path="/explorar/comidas/" component={ ExploreFoods } />
       <Route path="/explorar/comidas/ingredientes" component={ ExploreByIngredients } />
       <Route path="/explorar/comidas/area" component={ ExploreByArea } />
       {/*
