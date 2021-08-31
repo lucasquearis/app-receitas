@@ -5,10 +5,17 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Perfil(props) {
-  const emailLocalStorage = localStorage.getItem('user');
-  const email = JSON.parse(emailLocalStorage);
-  const emailH2 = email.email;
+  let email = '';
+  const getUser = localStorage.getItem('user');
 
+  if (getUser === null) {
+    localStorage.setItem('user', 'user@requisito11.com');
+    const getFakeUser = localStorage.getItem('user');
+    email = getFakeUser;
+  } else {
+    const emailObj = JSON.parse(getUser);
+    email = emailObj.email;
+  }
   const redirect = () => {
     const path = '/';
     props.history.push(path);
@@ -22,7 +29,7 @@ function Perfil(props) {
   return (
     <div>
       <Header titulo="Perfil" />
-      <h2 data-testid="profile-email">{ emailH2 }</h2>
+      <h2 data-testid="profile-email">{ email }</h2>
       <Link to="/receitas-feitas">
         <button
           type="button"

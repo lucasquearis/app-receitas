@@ -6,6 +6,7 @@ import { fetchInicialFoods, fetchFoodCategories } from '../services/mealAPI';
 function FoodProvider({ children }) {
   const [foods, setFoods] = useState([]);
   const [foodCategories, setfoodCategories] = useState([]);
+  const [foodRandom, setFoodRandom] = useState(0);
 
   useEffect(() => {
     fetchInicialFoods().then(({ meals }) => setFoods(meals));
@@ -17,6 +18,8 @@ function FoodProvider({ children }) {
     setFoods,
     foodCategories,
     setfoodCategories,
+    foodRandom,
+    setFoodRandom,
   };
 
   return (
