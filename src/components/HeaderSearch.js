@@ -1,57 +1,54 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import Search from './Search';
 
-class HeaderSearch extends React.Component {
-  constructor() {
-    super();
+function HeaderSearch({ title }) {
+  const { state } = useLocation();
+  const [show, setShow] = useState(false);
+  const [ingredient, setIngredient] = useState(null);
 
-    this.state = {
-      show: false,
-    };
-
-    this.handleSearch = this.handleSearch.bind(this);
+  function handleSearch() {
+    if (!show) {
+      return setShow(true);
+    }
+    setShow(false);
   }
 
-  handleSearch() {
-    const { show } = this.state;
-    if (show === false) {
-      this.setState({ show: true });
-    } else { this.setState({ show: false }); }
-  }
+  useEffect(() => {
+    if (state) {
+      setShow(true);
+      setIngredient(state.ingredient);
+    }
+  }, [state]);
 
-  render() {
-    const { title } = this.props;
-    const { show } = this.state;
-    return (
-      <div>
-        <Link to="/perfil">
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="imagem do link do perfil"
-          />
-        </Link>
-        <h1 data-testid="page-title">{title}</h1>
-        <button
-          type="button"
-          onClick={ this.handleSearch }
-          data-testid="search-top-btn"
+  return (
+    <div>
+      <Link to="/perfil">
+        <img
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt="imagem do link do perfil"
+        />
+      </Link>
+      <h1 data-testid="page-title">{title}</h1>
+      <button
+        type="button"
+        onClick={ handleSearch }
+        data-testid="search-top-btn"
+        src={ searchIcon }
+        id="button"
+      >
+        <img
           src={ searchIcon }
-          id="button"
-        >
-          <img
-            src={ searchIcon }
-            alt="imagem do link de pesquisa"
-          />
-        </button>
-        {(show) ? <Search /> : null }
-      </div>
-    );
-  }
+          alt="imagem do link de pesquisa"
+        />
+      </button>
+      {(show) ? <Search ingredient={ ingredient } /> : null }
+    </div>
+  );
 }
 
 HeaderSearch.propTypes = {

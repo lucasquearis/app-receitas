@@ -13,29 +13,20 @@ function Cards() {
   let list;
   let endpoint;
 
-  switch (true) {
-  case /comidas/.test(pathname):
+  if (/comidas/.test(pathname)) {
     type = 'Meal';
     list = recipes.meals;
     endpoint = '/comidas';
-    break;
-
-  case /bebidas/.test(pathname):
+  } else if (/bebidas/.test(pathname)) {
     type = 'Drink';
     list = recipes.drinks;
     endpoint = '/bebidas';
-    break;
-
-  default:
-    break;
   }
 
   const id = `id${type}`;
   const img = `str${type}Thumb`;
   const cardName = `str${type}`;
   const cards = list.slice(min, max);
-
-  console.log('01');
 
   function didMount() {
     if (cards.length === 0) {

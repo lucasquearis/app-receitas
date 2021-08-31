@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
-function Search() {
+function Search({ ingredient }) {
   const [radio, setRadio] = useState('s');
   const [searchValue, setSearchValue] = useState('');
 
@@ -41,6 +42,19 @@ function Search() {
     }
   }
 
+  function searchIngredient() {
+    setSearchValue(ingredient);
+    document.getElementById('labelIngredient').click();
+    document.getElementById('exec').click();
+  }
+
+  useEffect(() => {
+    if (ingredient && radio === 's') {
+      const delay = 500;
+      setTimeout(searchIngredient, delay);
+    }
+  });
+
   return (
     <div>
       <input
@@ -48,6 +62,7 @@ function Search() {
         placeholder="Pesquisa"
         data-testid="search-input"
         onChange={ (e) => handleChange(e) }
+        value={ searchValue }
       />
       <div onChange={ ({ target: { value } }) => change(value) }>
         <label htmlFor="labelName">
@@ -55,6 +70,7 @@ function Search() {
             type="radio"
             name="radio"
             value="search"
+            id="labelName"
             data-testid="name-search-radio"
           />
           <span>Nome</span>
@@ -65,6 +81,7 @@ function Search() {
             type="radio"
             name="radio"
             value="ingredient"
+            id="labelIngredient"
             data-testid="ingredient-search-radio"
           />
           <span>Ingrediente</span>
@@ -75,16 +92,21 @@ function Search() {
             type="radio"
             name="radio"
             value="first"
+            id="labelFirst"
             data-testid="first-letter-search-radio"
           />
           <span>Primeira letra</span>
         </label>
       </div>
-      <button type="button" data-testid="exec-search-btn" onClick={ click }>
+      <button type="button" id="exec" data-testid="exec-search-btn" onClick={ click }>
         Pesquisar
       </button>
     </div>
   );
 }
+
+Search.propTypes = {
+  ingredient: PropTypes.string.isRequired,
+};
 
 export default Search;
