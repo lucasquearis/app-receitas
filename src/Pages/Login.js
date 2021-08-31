@@ -43,8 +43,8 @@ function Login() {
   return (
     <section>
       { redirectValidation && <Redirect to="/comidas" /> }
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form className="login">
+        <Form.Group className="mb-1" controlId="formBasicEmail">
 
           <Form.Control
             type="email"
@@ -56,7 +56,7 @@ function Login() {
           <Form.Text className="text-muted" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-2" controlId="formBasicPassword">
           <Form.Control
             type="password"
             placeholder="Password"
@@ -65,19 +65,20 @@ function Login() {
             data-testid="password-input"
           />
         </Form.Group>
-        <Form.Group
+        {/* <Form.Group
           className="mb-3"
           controlId="formBasicCheckbox"
 
-        />
+        /> */}
         <Button
+          className="mb-3"
           variant="primary"
           type="button"
           data-testid="login-submit-btn"
           disabled={ formValidation }
           onClick={ handleSubmit }
         >
-          Submit
+          Entrar
         </Button>
       </Form>
     </section>

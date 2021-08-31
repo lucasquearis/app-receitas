@@ -1,6 +1,8 @@
 .meals {
+ 
   align-items: center;
-  background: #0fa36b;
+  /* background: #0fa36b; */
+  background-image: url(./images/background.jpg);
   color: #464646;
   display: flex;
   flex-direction: column;
@@ -9,6 +11,102 @@
   justify-content: center;
   width: 100%;
 }
+
+.profile {
+  color:white;
+  display: flex;
+  font-size: 20px;
+  top: 30px;
+}
+
+.email {
+  color:white;
+  display: flex;
+  font-size: 20px;
+  top: 60px;
+  left: 80px;
+}
+
+.btn-done {
+  position: absolute;
+  width: 180px;
+  height: 36px;
+  left: 90px;
+  top: 360px;
+  background-color: #606C38;
+}
+
+.btn-favorite {
+  position: absolute;
+  width: 180px;
+  height: 36px;
+  left: 90px;
+  top: 430px;
+  background-color: #606C38;
+}
+
+.btn-logout{
+  position: absolute;
+  width: 180px;
+  height: 36px;
+  left: 90px;
+  top: 500px;
+  background-color: #606C38;
+}
+
+.logo {
+  position: absolute;
+  align-items: center;
+  width: 234px;
+  height: 166px;
+  left: 63px;
+  top: 80px;
+  border-radius: 80px;
+}
+
+.login {
+  position: absolute;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 275px;
+  height: 432px;
+  left: 42px;
+  top: 106px;
+  background: rgba(255, 254, 251, 0.85);
+  border-radius: 40px;
+}
+
+.mb-1 {
+  position:absolute;
+  align-items: center;
+  width: 234px;
+  height: 46px;
+  left: 21px;
+  top: 250px;
+  border-radius:80%;
+}
+
+.mb-2 {
+  position:absolute;
+  align-items: center;
+  width: 234px;
+  height: 46px;
+  left: 21px;
+  top: 300px;
+  border-radius: 80px;
+}
+
+.mb-3 {
+  position: absolute;
+  width: 149px;
+  height: 36px;
+  left: 60px;
+  top: 360px;
+  background-color: #606C38; 
+}
+
+
 
 .rocksGlass {
   animation: shake 1s infinite ease;
