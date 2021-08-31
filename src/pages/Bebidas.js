@@ -6,9 +6,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import MyContext from '../context/MyContext';
+import * as fetchAPI from '../service/fetchAPI';
 
 function Bebidas(props) {
-  const { history: { location: { pathname } } } = props;
+  const { history: { location: { pathname, state } } } = props;
   const [drinkRecipes, setDrinkRecipes] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
   const MAX_RECIPES = 12;
@@ -21,9 +22,14 @@ function Bebidas(props) {
   };
 
   const getAllDrinks = () => {
-    fetch(drinkEndpoint)
-      .then((res) => res.json())
-      .then(({ drinks }) => setDrinkRecipes(drinks));
+    if (!state) {
+      fetch(drinkEndpoint)
+        .then((res) => res.json())
+        .then(({ drinks }) => setDrinkRecipes(drinks));
+    } else {
+      fetchAPI.filteredDrinks('ingredient', state.ingredient)
+        .then((drinks) => setDrinkRecipes(drinks));
+    }
   };
 
   useEffect(() => {
