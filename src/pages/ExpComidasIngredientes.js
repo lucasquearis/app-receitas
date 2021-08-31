@@ -20,7 +20,11 @@ function ExpComidasIngredientes() {
         { data.map(({ strIngredient, idIngredient }, index) => {
           if (index < MAX_RECIPES) {
             return (
-              <Link key={ idIngredient } to={ `/comidas/${''}` } className="card">
+              <Link
+                key={ idIngredient }
+                to={ { pathname: '/comidas', state: { ingredient: strIngredient } } }
+                className="card"
+              >
                 <IngredientCard
                   thumb={ strIngredient }
                   name={ strIngredient }
