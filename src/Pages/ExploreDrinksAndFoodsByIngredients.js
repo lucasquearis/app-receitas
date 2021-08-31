@@ -36,7 +36,6 @@ function ExploreDrinksAndFoodsByIngredients() {
 
   const handleClickBebidas = async (ingredient) => {
     setIngredientFilter(ingredient);
-    console.log(ingredient);
     setFoodOrDrink('drink');
     setRedirect(true);
   };
