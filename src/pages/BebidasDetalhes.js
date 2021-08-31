@@ -17,7 +17,7 @@ export default function BebidasDetalhes() {
       setDrink(data.drinks[0]);
     };
     api();
-  }, [location.pathname]);
+  }, []);
 
   useEffect(() => {
     const apiFood = async () => {
