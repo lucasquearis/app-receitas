@@ -18,7 +18,6 @@ export default function MainFoods() {
     localStorage.removeItem('filterIngredient');
   }
 
-
   return (
     <div>
       <Header title="Comidas" />
