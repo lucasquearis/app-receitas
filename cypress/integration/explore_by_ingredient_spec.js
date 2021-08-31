@@ -84,7 +84,7 @@ describe('77 -  Redireciona a pessoa usuária ao clicar no card do ingrediente, 
       onBeforeLoad(win) { 
         win.fetch = fetchMock;
       },
-    }); /comidas
+    }); 
 
     cy.get('[data-testid="0-ingredient-card"]').click();
 
