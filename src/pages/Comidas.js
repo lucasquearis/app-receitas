@@ -17,7 +17,7 @@ export default function Comidas() {
   setRecipeType('meals');
 
   if (meals.length === 1 && category === 'All') {
-    return history.push(`/bebidas/${meals[0].idMeal}`);
+    return history.push(`/comidas/${meals[0].idMeal}`);
   }
 
   if (meals.length === 0) {
