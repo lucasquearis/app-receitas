@@ -4,15 +4,14 @@ import Footer from '../components/Footer';
 import Recipes from '../components/Recipes';
 import RecipesContext from '../context/RecipesContext';
 
-function ComidasIngredientes() {
-  const [food] = useState(false);
+function BebidasIngredientes() {
   const [ingrediente] = useState(true);
-  const { setSearch, setFilter } = useContext(RecipesContext);
+  const { setSearch, setFilter, food, setFood } = useContext(RecipesContext);
   const onClick = ({ target }) => {
-    console.log();
     setSearch('ingrediente');
     setFilter(target.parentNode.innerText);
   };
+  setFood(false);
   return (
     <div>
       <Header title="Explorar Ingredientes" renderSearch={ false } />
@@ -22,4 +21,4 @@ function ComidasIngredientes() {
   );
 }
 
-export default ComidasIngredientes;
+export default BebidasIngredientes;

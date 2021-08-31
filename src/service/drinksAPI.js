@@ -3,8 +3,7 @@ import RecipesContext from '../context/RecipesContext';
 
 function DrinksAPI() {
   const empthRequest = 'search.php?s=';
-  const {
-    setDrinkData,
+  const { setDrinkData,
     setDrinkCategory,
     drinkCategory,
     food } = useContext(RecipesContext);

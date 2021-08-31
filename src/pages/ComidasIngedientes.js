@@ -9,7 +9,6 @@ function ComidasIngredientes() {
   const [ingrediente] = useState(true);
   const { setSearch, setFilter } = useContext(RecipesContext);
   const onClick = ({ target }) => {
-    console.log();
     setSearch('ingrediente');
     setFilter(target.parentNode.innerText);
   };

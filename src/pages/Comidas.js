@@ -17,7 +17,7 @@ function Comidas() {
     setFood } = useContext(RecipesContext);
   setFood(true);
   const [ingrediente] = useState(false);
-  if (filter === '') {
+  if (!filter) {
     FoodDAPI();
   }
   if (foodData === null) {
