@@ -16,6 +16,7 @@ import ProgressFood from './pages/ProgressFood';
 import ProgressDrink from './pages/ProgressDrink';
 import FoodDetails from './pages/FoodDetails';
 import DrinkDetails from './pages/DrinkDetails';
+import NotFound from './pages/NotFound';
 
 function Routes() {
   return (
@@ -30,6 +31,7 @@ function Routes() {
       />
       <Route path="/bebidas/:id" component={ DrinkDetails } />
       <Route path="/comidas/:id" component={ FoodDetails } />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route path="/explorar/comidas/area" component={ FoodByOrigin } />
       <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
       <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
