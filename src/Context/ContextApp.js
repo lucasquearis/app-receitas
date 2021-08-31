@@ -22,7 +22,6 @@ export const AppProvider = ({ children }) => {
     setRedirect } = LoginHook();
   const { drinks, meal, getRecipes } = FoodHook();
 
-  // esta logica que foi movida de AllRecipes
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
@@ -35,7 +34,6 @@ export const AppProvider = ({ children }) => {
   if (recipes.length === 0) {
     fetchApi(urlRender, 'search.php?s=');
   }
-  // este é o fim da logica que foi movida de AllRecipes
 
   const ContProps = {
     recipes,

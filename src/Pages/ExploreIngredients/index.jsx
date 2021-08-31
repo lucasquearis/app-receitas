@@ -23,7 +23,7 @@ function ExploreIngredients() {
       if (route.includes('comidas')) {
         const response = await fetchApi('https://www.themealdb.com/api/json/v1/1/', 'list.php?i=list');
         const allIngredients = [];
-        response.meals.splice(0, maxIngredients).map(async (current) => {
+        response.meals.slice(0, maxIngredients).map(async (current) => {
           const ingredient = {
             name: current.strIngredient,
             image: `https://www.themealdb.com/images/ingredients/${current.strIngredient}-Small.png`,
@@ -34,7 +34,7 @@ function ExploreIngredients() {
       }
       const response = await fetchApi('https://www.thecocktaildb.com/api/json/v1/1/', 'list.php?i=list');
       const allIngredients = [];
-      response.drinks.splice(0, maxIngredients).map(async (current) => {
+      response.drinks.slice(0, maxIngredients).map(async (current) => {
         const ingredient = {
           name: current.strIngredient1,
           image: `https://www.thecocktaildb.com/images/ingredients/${current.strIngredient1}-Small.png`,
