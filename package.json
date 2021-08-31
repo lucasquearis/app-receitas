@@ -29,6 +29,7 @@
     "test": "react-scripts test",
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
+    "lint:styles": "npx stylelint '**/*.css'",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx"
   },
   "eslintConfig": {
@@ -60,5 +61,17 @@
     "mochawesome-report-generator": "^5.1.0",
     "stylelint": "^13.8.0",
     "stylelint-order": "^4.1.0"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "index.js",
+      "serviceWorker.js"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcovonly",
+      "text",
+      "clover"
+    ]
   }
 }
