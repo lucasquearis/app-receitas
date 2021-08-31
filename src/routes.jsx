@@ -10,6 +10,7 @@ import DrinkDetails from './pages/DrinkDetails';
 import FoodDetails from './pages/FoodDetails';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
+import ExploreArea from './pages/ExploreArea';
 
 function Routes() {
   return (
@@ -26,7 +27,7 @@ function Routes() {
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route path="/explorar/comidas/ingredientes" component={ null } />
       <Route path="/explorar/bebidas/ingredientes" component={ null } />
-      <Route path="/explorar/comidas/area" component={ null } />
+      <Route path="/explorar/comidas/area" component={ ExploreArea } />
       <Route exact path="/perfil" component={ Perfil } />
       <Route path="/receitas-feitas" component={ FoodRecipe } />
       <Route path="/receitas-favoritas" component={ Perfil } />
