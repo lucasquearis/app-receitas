@@ -57,8 +57,10 @@ function FoodDetails() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
-        <ShareButton />
-        <FavoriteButton />
+        <div className="icons">
+          <ShareButton />
+          <FavoriteButton />
+        </div>
         <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>
       <section>

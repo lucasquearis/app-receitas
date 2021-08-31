@@ -3,11 +3,9 @@ import { useHistory } from 'react-router';
 
 function ButtonDrinks() {
   const ido = 178319;
-  // const { id, type} = props;
-  // const type = 'cocktail';
-  const [none, setNone] = useState(true);
-  // const [inProgress, setInProgress] = useState(false);
+  const [none, setNone] = useState(false);
   const setHistory = useHistory();
+
   const handleClick = () => {
     setHistory.push(`/bebidas/${ido}/in-progress`);
   };
@@ -16,15 +14,8 @@ function ButtonDrinks() {
     const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
     if (recipe) {
       const findRecipe = recipe.find((item) => item.id === ido);
-      if (findRecipe) setNone(false);
+      if (findRecipe) setNone(true);
     }
-    // setNone(localStorage.getItem('doneRecipes')
-    //   && (JSON.parse(localStorage.getItem('doneRecipes')).some(
-    //     (item) => item.id === ido,
-    //   )));
-    // setInProgress(localStorage.getItem('inProgressRecipes')
-    //   && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
-    //     type]).some((recipeId) => recipeId === ido));
   }, []);
 
   return (

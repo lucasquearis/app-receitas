@@ -3,11 +3,9 @@ import { useHistory } from 'react-router';
 
 function ButtonFoods() {
   const ide = 52771;
-  // const { id, type } = props;
-  // const type = 'meal';
-  const [none, setNone] = useState(true);
-  // const [inProgres, setInProgres] = useState(false);
+  const [none, setNone] = useState(false);
   const setHistory = useHistory();
+
   const handleClick = () => {
     setHistory.push(`/comidas/${ide}/in-progress`);
   };
@@ -16,15 +14,8 @@ function ButtonFoods() {
     const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
     if (recipe) {
       const findRecipe = recipe.find((item) => item.id === ide);
-      if (findRecipe) setNone(false);
+      if (findRecipe) setNone(true);
     }
-    // setNone(localStorage.getItem('doneRecipes')
-    //   && (JSON.parse(localStorage.getItem('doneRecipes')).find(
-    //     (item) => item.id === ide,
-    //   )));
-    // setInProgres(localStorage.getItem('inProgressRecipes')
-    //   && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
-    //     type]).some((recipeId) => recipeId === ide));
   }, []);
 
   return (
@@ -37,7 +28,7 @@ function ButtonFoods() {
         onClick={ handleClick }
       >
         Iniciar Receita
-        {/* {inProgres ? 'Continuar Receita' : 'Iniciar Receita'} */}
+        {/* {inProgress ? 'Continuar Receita' : 'Iniciar Receita'} */}
       </button>
     </div>
   );

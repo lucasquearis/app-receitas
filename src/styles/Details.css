@@ -15,3 +15,6 @@
   overflow-x: scroll;
 }
 
+.icons {
+  display:flex
+}

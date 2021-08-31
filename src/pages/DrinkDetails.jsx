@@ -57,8 +57,10 @@ function DrinkDetails() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
-        <ShareButton />
-        <FavoriteButton />
+        <div className="icons">
+          <ShareButton />
+          <FavoriteButton />
+        </div>
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
