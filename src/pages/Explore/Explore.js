@@ -8,7 +8,7 @@ function Foods() {
 
   return (
     <div>
-      <Header name="Explorar" search={ false } />
+      <Header name="Explorar" title="Explorar" search={ false } />
       <button
         data-testid="explore-food"
         type="button"
