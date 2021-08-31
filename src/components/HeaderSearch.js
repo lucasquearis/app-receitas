@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import Search from './Search';
 
 class HeaderSearch extends React.Component {
   constructor() {
@@ -47,12 +48,7 @@ class HeaderSearch extends React.Component {
             alt="imagem do link de pesquisa"
           />
         </button>
-        {(show) ? <input
-          data-testid="search-input"
-          placeholder="Search"
-          type="text"
-          id="searchbar"
-        /> : null }
+        {(show) ? <Search /> : null }
       </div>
     );
   }

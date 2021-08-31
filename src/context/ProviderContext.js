@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import RecipesContext from './RecipesContext';
 
-function ProviderContext({ children }) {
-  const [register, setRegister] = useState('');
+import useAPI from '../hooks/useAPI';
 
-  const context = { register, setRegister };
+function ProviderContext({ children }) {
+  const { pathname } = useLocation();
+  const API = useAPI(pathname);
+
+  const [register, setRegister] = useState('');
+  const context = { register, setRegister, API };
+
   return (
     <RecipesContext.Provider value={ context }>
       { children }

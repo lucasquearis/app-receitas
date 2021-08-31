@@ -1,13 +1,17 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+
 import HeaderSearch from '../components/HeaderSearch';
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Cards from '../components/Cards';
 
-function Foods() {
+function FoodsOrDrinks(props) {
+  const { title} = props;
+  console.log('INGREDIENTE',props)
   return (
     <div>
-      <HeaderSearch title="Comidas" />
+      <HeaderSearch title={ title } />
       <Categories />
       <Cards />
       <Footer />
@@ -15,4 +19,8 @@ function Foods() {
   );
 }
 
-export default Foods;
+FoodsOrDrinks.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default FoodsOrDrinks;

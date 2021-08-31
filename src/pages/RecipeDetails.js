@@ -47,6 +47,7 @@ function RecipeDetails(props) {
                 src={ recipe[enType][0][`str${enCasedType}Thumb`] }
                 alt="Foto do Prato"
                 data-testid="recipe-photo"
+                className="recipe-image"
               />
               <h1
                 data-testid="recipe-title"
