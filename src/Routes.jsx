@@ -16,6 +16,7 @@ import ExploreFoodsByArea from './pages/explore/ExploreFoodsByArea';
 import Profile from './pages/profile/Profile';
 import MadeRecipes from './pages/recipes/MadeRecipes';
 import FavoritesRecipes from './pages/recipes/FavoritesRecipes';
+import NotFound from './pages/notFound/NotFound';
 
 export default function Routes() {
   return (
@@ -109,6 +110,10 @@ export default function Routes() {
           path="/receitas-favoritas"
           // component={ FavoritesRecipes }
           render={ (props) => <FavoritesRecipes { ...props } /> }
+        />
+
+        <Route
+          component={ NotFound }
         />
 
       </Switch>

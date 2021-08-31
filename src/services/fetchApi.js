@@ -6,6 +6,8 @@ const FOOD_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list
 const FOOD_FOR_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const FOOD_INGREDIENTS = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const FOOD_RANDOM = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const FOOD_AREAS = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+const FOOD_BY_AREA = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
 
 const DRINK_INGREDIENT_SEARCH_API = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const DRINK_NAME_SEARCH_API = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -158,6 +160,29 @@ export const fetchIngredientsDrinksApi = async () => {
     const response = await fetch(DRINK_INGREDIENTS);
     const data = await response.json();
     return data.drinks;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const fetchAreas = async () => {
+  try {
+    const response = await fetch(FOOD_AREAS);
+    const data = await response.json();
+    return data.meals || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const fetchByArea = async (area) => {
+  try {
+    const response = await fetch(FOOD_BY_AREA + area);
+    const data = await response.json();
+    console.log(data.meals);
+    return data.meals || [];
   } catch (error) {
     console.log(error);
     return [];
