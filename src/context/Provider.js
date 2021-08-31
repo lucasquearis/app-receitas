@@ -73,10 +73,21 @@ function Provider({ children }) {
     });
   };
 
+  const foodCategoryAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const drinkCategoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+
   const RequestAPI = async () => {
     const response = await fetch(API);
     const result = await response.json();
-    setRecipes({ ...recipes, list: result, loading: false });
+    const resultNull = result.drinks === null || result.meals === null;
+    if (resultNull) {
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    } else {
+      if (filter.src === 'meal') {
+        setFoodRecipes({ ...recipes, list: result, loading: false });
+      }
+      setDrinkRecipes({ ...recipes, list: result, loading: false });
+    }
   };
 
   const requestAreas = async () => {
@@ -96,9 +107,6 @@ function Provider({ children }) {
     const { meals } = await response.json();
     return meals;
   };
-
-  const foodCategoryAPI = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-  const drinkCategoryAPI = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
   useEffect(() => {
     switchAPI(filter);

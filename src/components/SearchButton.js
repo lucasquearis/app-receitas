@@ -7,19 +7,14 @@ function SearchButton({ name, datatestid }) {
   const {
     filter: { search, type, src },
     RequestAPI,
-    setRecipes,
-    recipes,
-    recipes: { list, loading },
+    foodRecipes,
+    drinkRecipes,
+    foodRecipes: { loading: foodLoading },
+    drinkRecipes: { loading: drinkLoading },
   } = useContext(Context);
 
-  const handleClick = () => {
-    RequestAPI();
-  };
-
-  const throwAlert = () => {
-    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    setRecipes({ ...recipes, list: [], loading: true });
-  };
+  const handleClick = () => RequestAPI();
+  const loading = () => drinkLoading || foodLoading;
 
   return (
     <button
@@ -28,19 +23,16 @@ function SearchButton({ name, datatestid }) {
       type="button"
       disabled={ search === '' || type === '' }
     >
-      {!loading
+      {!loading()
       && src === 'meal'
-      && list.meals !== null
-      && list.meals.length === 1
-      && <Redirect to={ `/comidas/${list.meals[0].idMeal}` } />}
-      {!loading
+      && foodRecipes.list.meals !== null
+      && foodRecipes.list.meals.length === 1
+      && <Redirect to={ `/comidas/${foodRecipes.list.meals[0].idMeal}` } />}
+      {loading()
       && src === 'cocktail'
-      && list.drinks !== null
-      && list.drinks.length === 1
-      && <Redirect to={ `/bebidas/${list.drinks[0].idDrink}` } />}
-      {!loading
-      && (list.drinks === null || list.meals === null)
-      && throwAlert()}
+      && drinkRecipes.list.drinks !== null
+      && drinkRecipes.list.drinks.length === 1
+      && <Redirect to={ `/bebidas/${drinkRecipes.list.drinks[0].idDrink}` } />}
       { name }
     </button>
   );
