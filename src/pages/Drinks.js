@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import Header from '../components/Header';
 import MyContext from '../context';
 import Card from '../components/Card';
-import Categories from '../components/Categories';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
+import Categories from '../components/Categories';
 
 export default function Drinks() {
   const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
@@ -32,21 +32,13 @@ export default function Drinks() {
 
   const renderList = () => {
     if (resultList === null) {
+      console.log('ENTROU NA CONDICAO');
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (!resultList) {
-      return (
-        feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
-          <Card
-            key={ idDrink }
-            idType={ idDrink }
-            id={ index }
-            strThumb={ strDrinkThumb }
-            str={ strDrink }
-          />
-        ))
-      );
+      return (<h1>Search something... </h1>);
     } if (resultList.length === 1) {
+      console.log(resultList[0]);
       return <Redirect to={ `/bebidas/${resultList[0].idDrink}` } />;
     }
     if (resultList.length === null) {
@@ -58,33 +50,41 @@ export default function Drinks() {
           const MAX_ITENS = 12;
           if (index < MAX_ITENS) {
             return (
-              <Link key={ item.idDrink } to={ `bebidas/${item.idDrink}` }>
-                <li
-                  data-testid={ `${index}-recipe-card` }
+              <li
+                key={ item.strDrink }
+                data-testid={ `${index}-recipe-card` }
+              >
+                <h2
+                  data-testid={ `${index}-card-name` }
                 >
-                  <h2
-                    data-testid={ `${index}-card-name` }
-                  >
-                    {item.strDrink}
-                  </h2>
-                  <img
-                    data-testid={ `${index}-card-img` }
-                    src={ item.strDrinkThumb }
-                    alt={ item.strDrink }
-                  />
-                </li>
-              </Link>
+                  {item.strDrink}
+                </h2>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ item.strDrinkThumb }
+                  alt={ item.strDrink }
+                />
+              </li>
             );
           } return false;
         })}
       </ul>
     );
   };
-
   return (
     <>
       <Header title="Bebidas" />
       <Categories />
+      {renderList()}
+      { feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
+        <Card
+          key={ idDrink }
+          idType={ idDrink }
+          id={ index }
+          strThumb={ strDrinkThumb }
+          str={ strDrink }
+        />
+      ))}
       {renderList()}
       <BottomMenu />
     </>

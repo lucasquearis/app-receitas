@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
 import Header from '../components/Header';
 import Card from '../components/Card';
-import Categories from '../components/Categories';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
+import Categories from '../components/Categories';
 import './pageCSS/Meals.css';
 
 export default function Meals() {
@@ -33,22 +33,14 @@ export default function Meals() {
 
   const renderList = () => {
     if (resultList === null) {
+      console.log('ENTROU NA CONDICAO');
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (!resultList) {
-      return (
-        feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
-          <Card
-            key={ idMeal }
-            idType={ idMeal }
-            id={ index }
-            strThumb={ strMealThumb }
-            str={ strMeal }
-          />
-        ))
-      );
+      return (<h1>Search something... </h1>);
     }
     if (resultList.length === 1) {
+      // console.log(resultList[0]);
       return <Redirect to={ `/comidas/${resultList[0].idMeal}` } />;
     }
     return (
@@ -57,22 +49,21 @@ export default function Meals() {
           const MAX_ITENS = 12;
           if (index < MAX_ITENS) {
             return (
-              <Link key={ item.idMeal } to={ `comidas/${item.idMeal}` }>
-                <li
-                  data-testid={ `${index}-recipe-card` }
+              <li
+                key={ item.strMeal }
+                data-testid={ `${index}-recipe-card` }
+              >
+                <h2
+                  data-testid={ `${index}-card-name` }
                 >
-                  <h2
-                    data-testid={ `${index}-card-name` }
-                  >
-                    {item.strMeal}
-                  </h2>
-                  <img
-                    data-testid={ `${index}-card-img` }
-                    src={ item.strMealThumb }
-                    alt={ item.strMeal }
-                  />
-                </li>
-              </Link>
+                  {item.strMeal}
+                </h2>
+                <img
+                  data-testid={ `${index}-card-img` }
+                  src={ item.strMealThumb }
+                  alt={ item.strMeal }
+                />
+              </li>
             );
           } return false;
         })}
@@ -83,6 +74,16 @@ export default function Meals() {
     <>
       <Header title="Comidas" />
       <Categories />
+      {renderList()}
+      { feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
+        <Card
+          key={ idMeal }
+          idType={ idMeal }
+          id={ index }
+          strThumb={ strMealThumb }
+          str={ strMeal }
+        />
+      ))}
       {renderList()}
       <BottomMenu />
     </>
