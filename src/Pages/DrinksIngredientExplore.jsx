@@ -11,7 +11,7 @@ function DrinkIngredientesExplore() {
   };
   useEffect(() => {
     getIngredient();
-  }, [data]);
+  }, [setData]);
 
   const srcImg = (name) => `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png`;
 

@@ -1,35 +1,46 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFoodAreaThunk } from '../Redux/actions/FoodExplore';
+import React, { useEffect, useState } from 'react';
 
 function FoodPlaceExplore() {
-  const dispatch = useDispatch();
-  const { Areas, isLoading } = useSelector((state) => state.areas);
+  const [data, setData] = useState([]);
 
+  const getArea = async () => {
+    const END_POINT = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+    const response = await fetch(END_POINT);
+    const { meals } = await response.json();
+    setData(meals);
+  };
   useEffect(() => {
-    dispatch(getFoodAreaThunk());
-  }, [dispatch]);
+    getArea();
+  }, [setData]);
 
-  if (!isLoading) {
-    return (
-      <select
-        data-testid="explore-by-area-dropdown"
-      >
-        {
-          Areas
-            .map(({ strArea }, index) => (
+  return (
+    <select
+      data-testid="explore-by-area-dropdown"
+    >
+      {
+        data
+          .map(({ strArea }, index) => (
+            <div
+              data-testid={ `${0}-recipe-card` }
+              key={ index }
+            >
+              <img
+                src="https://static3.depositphotos.com/1005412/218/i/950/depositphotos_2186038-stock-photo-kitten-lays-isolated.jpg"
+                data-testid={ `${index}-card-img` }
+                alt={ strArea }
+              />
               <option
-                key={ index }
-                data-testid={ `${strArea}-category-filter` }
+                data-testid={ `${strArea}-option` }
               >
                 { strArea }
               </option>
-            ))
-        }
-      </select>
-    );
-  }
-  return ('Carregando');
+              <p data-testid={ `${index}-card-name` }>{ strArea }</p>
+            </div>
+          ))
+      }
+      <option data-testid="0-recipe-card">0</option>
+    </select>
+  );
 }
 
 export default FoodPlaceExplore;

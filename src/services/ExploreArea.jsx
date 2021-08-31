@@ -1,5 +1,5 @@
 const exploreArea = async () => {
-  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   const response = await fetch(endpoint);
   if (!response.ok) return console.log('Falha na requisição');
   const result = await response.json();
