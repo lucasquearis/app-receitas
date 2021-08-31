@@ -7,6 +7,7 @@ function RecipeCard({ image, name, index, testId, id }) {
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
+
   return (
     <Link to={ currentRout ? `/comidas/${id}` : `/bebidas/${id}` }>
       <div data-testid={ testId } className="container">
