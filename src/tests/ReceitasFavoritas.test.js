@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
@@ -91,5 +92,54 @@ describe('Testes da pagina de receitas favoritas', () => {
 
     expect(favoriteBtn1).toBeDefined();
     expect(favoriteBtn2).toBeDefined();
+  });
+
+  it('Verifica se ao clicar nos filtros, realmente filtram a listagem', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(url);
+
+    const categoryID = '0-horizontal-top-text';
+
+    const foodBtn = screen.getByTestId(foodBtnID);
+    userEvent.click(foodBtn);
+    const category = await screen.findByTestId(categoryID);
+    expect(category.innerHTML).toBe('Italian - Vegetarian');
+
+    const drinkBtn = screen.getByTestId(drinkBtnID);
+    userEvent.click(drinkBtn);
+    const category1 = await screen.findByTestId(categoryID);
+    expect(category1.innerHTML).toBe('Alcoholic');
+
+    const allBtn = screen.getByTestId(allBtnID);
+    userEvent.click(allBtn);
+    const cards = await screen.findAllByTestId('favorite-card');
+    expect(cards.length).toBe(2);
+  });
+
+  it('Verifica se ao clicar na imagem ou nome, a pagina é redirecionada', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(url);
+
+    const image1 = await screen.findByTestId('0-horizontal-image');
+    userEvent.click(image1);
+    expect(history.location.pathname).toBe('/comidas/52771');
+
+    history.push(url);
+
+    const image2 = await screen.findByTestId('1-horizontal-image');
+    userEvent.click(image2);
+    expect(history.location.pathname).toBe('/bebidas/178319');
+
+    history.push(url);
+
+    const title1 = await screen.findByTestId('0-horizontal-name');
+    userEvent.click(title1);
+    expect(history.location.pathname).toBe('/comidas/52771');
+
+    history.push(url);
+
+    const title2 = await screen.findByTestId('1-horizontal-name');
+    userEvent.click(title2);
+    expect(history.location.pathname).toBe('/bebidas/178319');
   });
 });
