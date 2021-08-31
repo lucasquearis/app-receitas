@@ -4,23 +4,19 @@ import RecipeCard from '../RecipeCard';
 
 function RecipesContainer() {
   const { recipes } = useContext(ContextApp);
-  const maxRecipes = 12;
+  const number = 12;
   return (
     <div>
-      {recipes.map((recipe, index) => {
-        if (index < maxRecipes) {
-          return (
-            <RecipeCard
-              key={ index }
-              name={ recipe.strMeal || recipe.strDrink }
-              image={ recipe.strMealThumb || recipe.strDrinkThumb }
-              testId={ `${index}-recipe-card` }
-              index={ index }
-            />
-          );
-        }
-        return null;
-      })}
+      {recipes.slice(0, number).map((recipe, index) => (
+        <RecipeCard
+          key={ index }
+          name={ recipe.strMeal || recipe.strDrink }
+          image={ recipe.strMealThumb || recipe.strDrinkThumb }
+          testId={ `${index}-recipe-card` }
+          index={ index }
+          id={ recipe.idMeal || recipe.idDrink }
+        />
+      ))}
     </div>
   );
 }

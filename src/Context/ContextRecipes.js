@@ -5,7 +5,6 @@ export const ContextRecipes = createContext();
 
 function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
-
   const showAlert = (callback, msg) => {
     callback(msg);
   };
