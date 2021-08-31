@@ -20,7 +20,6 @@ export default function ComidasDetalhes() {
 
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
-      // console.log(data.meals[0]);
       setFood(data.meals[0]);
     };
     api();

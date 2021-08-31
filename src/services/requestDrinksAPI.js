@@ -50,8 +50,8 @@ export const fetchDrinks = () => {
   return fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      const dataMeals = data.drinks;
-      return dataMeals.slice(0, amount);
+      const dataDrinks = data.drinks;
+      return dataDrinks.slice(0, amount);
     })
     .catch((error) => error);
 };
@@ -61,8 +61,8 @@ export const fetchDrinksCategory = () => {
   return fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      const dataMeals = data.meals;
-      return dataMeals.slice(0, amountCategory);
+      const dataDrinks = data.drinks;
+      return dataDrinks.slice(0, amountCategory);
     })
     .catch((error) => error);
 };
@@ -72,8 +72,8 @@ export const fetchDrinksByCategories = (category) => {
   return fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      const dataMeals = data.meals;
-      return dataMeals.slice(0, amount);
+      const dataDrinks = data.drinks;
+      return dataDrinks.slice(0, amount);
     })
     .catch((error) => error);
 };
