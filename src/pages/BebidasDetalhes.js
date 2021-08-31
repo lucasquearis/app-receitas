@@ -2,18 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
 
+const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+
+const recommendedRecipes = [
+  'receita 1',
+  'receita 2',
+  'receita 3',
+];
+
+const getIngredientsKeys = (cocktail) => Object.keys(cocktail)
+  .filter((ingredient) => ingredient
+    .includes('strIngredient')
+&& cocktail[ingredient] !== null && cocktail[ingredient] !== '');
+
 export default function BebidasDetalhes() {
   const [drink, setDrink] = useState();
   const history = useHistory();
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
-  console.log(idApi);
-  const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-  const recommendedRecipes = [
-    'receita 1',
-    'receita 2',
-    'receita 3',
-  ];
 
   useEffect(() => {
     const api = async () => {
@@ -24,37 +30,31 @@ export default function BebidasDetalhes() {
     api();
   }, []);
 
-  if (drink === undefined) {
-    return <Loading />;
-  }
-
-  const setIngredients = () => {
-    const ingredients1 = Object.keys(drink)
-      .filter((ingredient) => ingredient
-        .includes('strIngredient')
-        && drink[ingredient] !== null && drink[ingredient] !== '');
-    return ingredients1.map((jonas, index) => (
+  const renderIngredients = (ingredientsKeys) => ingredientsKeys
+    .map((ingredientKey, index) => (
       <li
         data-testid={ `${index}-ingredient-name-and-measure` }
         key={ index }
       >
-        {drink[jonas]}
-        -
-        {drink[`strMeasure${index + 1}`]}
+        {`${drink[ingredientKey]}`}
       </li>));
-  };
 
-  setIngredients();
+  if (drink === undefined) {
+    return <Loading />;
+  }
+
   return (
     <div>
       {/* <p>{drink.idDrink}</p> */}
       <img src={ drink.strDrinkThumb } alt="recipe" data-testid="recipe-photo" />
       <h2 data-testid="recipe-title">{drink.strDrink}</h2>
+      <div data-testid="recipe-category">{drink.strCategory}</div>
+      <div data-testid="recipe-glass">{drink.strGlass}</div>
+      <div data-testid="recipe-alcoholic">{drink.strAlcoholic}</div>
       <button type="button" data-testid="share-btn">Compartilhar</button>
       <button type="button" data-testid="favorite-btn">Favorito</button>
-      <p data-testid="recipe-category">{drink.strAlcoholic}</p>
       <ul>
-        {setIngredients()}
+        {renderIngredients(getIngredientsKeys(drink))}
       </ul>
       <p data-testid="instructions">{drink.strInstructions}</p>
       <div>

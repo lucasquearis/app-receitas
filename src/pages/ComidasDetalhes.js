@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import Loading from '../components/Loading';
 
+const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+
+const recommendedRecipes = [
+  'receita 1',
+  'receita 2',
+  'receita 3',
+];
+
+const getIngredientsKeys = (meal) => Object.keys(meal)
+  .filter((ingredient) => ingredient
+    .includes('strIngredient')
+      && meal[ingredient] !== null && meal[ingredient] !== '');
+
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
-  // const [foodName, setFoodName] = useState('');
   const history = useHistory();
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
-  const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-
-  const recommendedRecipes = [
-    'receita 1',
-    'receita 2',
-    'receita 3',
-  ];
 
   useEffect(() => {
     const api = async () => {
@@ -29,21 +34,14 @@ export default function ComidasDetalhes() {
     return <Loading />;
   }
 
-  const setIngredients = () => {
-    const ingredients1 = Object.keys(food)
-      .filter((ingredient) => ingredient
-        .includes('strIngredient')
-        && food[ingredient] !== null && food[ingredient] !== '');
-    return ingredients1.map((jonas, index) => (
+  const renderIngredients = (ingredientsKeys) => ingredientsKeys
+    .map((ingredientKey, index) => (
       <li
         data-testid={ `${index}-ingredient-name-and-measure` }
         key={ index }
       >
-        {food[jonas]}
-        -
-        {food[`strMeasure${index + 1}`]}
+        {`${food[ingredientKey]} - ${food[`strMeasure${index + 1}`]}`}
       </li>));
-  };
 
   return (
     <div>
@@ -53,7 +51,7 @@ export default function ComidasDetalhes() {
       <button type="button" data-testid="favorite-btn">Favorito</button>
       <p data-testid="recipe-category">{food.strCategory}</p>
       <ul>
-        {setIngredients()}
+        {renderIngredients(getIngredientsKeys(food))}
       </ul>
       <p data-testid="instructions">{food.strInstructions}</p>
       <iframe
