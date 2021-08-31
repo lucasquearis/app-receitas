@@ -69,10 +69,6 @@ export default function RecipesDoneCard({ recipe, index, setFavoriteRecipes }) {
               alt="shareIt"
             />
           </button>
-<<<<<<< HEAD
-=======
-
->>>>>>> main-group-28-requisito-33-46
           <button
             onClick={ () => handleFavoriteClick(recipe.id) }
             type="button"
@@ -83,10 +79,6 @@ export default function RecipesDoneCard({ recipe, index, setFavoriteRecipes }) {
               alt="favorite"
             />
           </button>
-<<<<<<< HEAD
-=======
-
->>>>>>> main-group-28-requisito-33-46
           <Typography
             variant="subtitle1"
             color="textSecondary"
