@@ -6,7 +6,7 @@ import MealCard from './MealCard';
 import MealsCard from './MealsCards';
 
 export default function SelectArea() {
-  const { dataArea, selectedArea, setSelectedArea, loading } = useContext(Context);
+  const { dataArea, selectedArea, setSelectedArea } = useContext(Context);
   const [getAreaApi] = useFetchAreaApi();
 
   const DOZE = 12;
@@ -21,10 +21,6 @@ export default function SelectArea() {
     };
     fetchArea();
   };
-
-  if (loading === true) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div>
