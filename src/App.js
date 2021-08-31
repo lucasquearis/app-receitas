@@ -23,10 +23,12 @@ function App() {
     // muito obrigado ao meu amigo Gedeão por ajudar à montar e organizar as minhas rotas.
     <BrowserRouter>
       <Switch>
+        <Route exact path="/" component={ Login } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route exact path="/receitas-feitas" component={ FinishedRecipes } />
         <Route exact path="/perfil" component={ Profile } />
         <Route exact path="/explorar/comidas/area" component={ SearchByOrigin } />
+        <Route exact path="/explorar/bebidas/area" component={ NotFound } />
         <Route
           exact
           path="/explorar/bebidas/ingredientes"
@@ -44,8 +46,6 @@ function App() {
         <Route exact path="/comidas/:id" component={ FoodDetails } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path="/comidas" component={ Recipes } />
-        <Route exact path="/" component={ Login } />
-        <Route exact path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );
