@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import '../styles/Header.css';
 
 function Header({ name }) {
   const [hide, setHide] = useState(false);
@@ -15,22 +16,26 @@ function Header({ name }) {
     if (name === 'Comidas' || name === 'Bebidas' || name === 'Explorar Origem') {
       return (
         <Button
+          className="header-btn"
           type="button"
-          variant="contained"
-          color="primary"
           onClick={ handleClick }
         >
           <img src={ searchIcon } data-testid="search-top-btn" alt="search" />
         </Button>
       );
+    } else {
+      return (
+        <Button
+          className="header-btn"
+          type="button" />
+      );
     }
   };
   return (
-    <header>
+    <header className="header-container">
       <Link to="/perfil">
         <Button
-          variant="contained"
-          color="primary"
+          className="header-btn"
           type="button"
         >
           <img src={ profileIcon } data-testid="profile-top-btn" alt="profile" />

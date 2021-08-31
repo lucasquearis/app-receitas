@@ -1,9 +1,12 @@
 import React from 'react';
 import Routes from '../Routes';
+import '../styles/Home.css'
 
 function Home() {
   return (
-    <Routes />
+    <div className="app-container">
+      <Routes />
+    </div>
   );
 }
 

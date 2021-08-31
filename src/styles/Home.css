@@ -1,0 +1,19 @@
+img {
+  max-width: 100px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 365px;
+  margin: auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ol {
+  list-style-type: none;
+}
