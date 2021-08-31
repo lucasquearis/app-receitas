@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import Spinner from 'react-bootstrap/Spinner';
 import AppContext from '../Context/AppContext';
 
 import RecipeInProgressCheckBox from './RecipeInProgressCheckBox';
@@ -12,23 +13,19 @@ function RecipeInProgressIngredients({ type, recipeID }) {
 
   useEffect(() => {
     const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
-    if (type === 'food') {
-      setIngredientsList(inProgressStorage.meals[recipeID]);
+    if (type === 'food' && inProgressStorage !== undefined) {
+      console.log(typeof(recipeID));
+      console.log((inProgressStorage.meals));
+      console.log(inProgressStorage.meals[recipeID]);
+      setIngredientsList((inProgressStorage.meals)[recipeID]);
+      console.log(ingredientsList);
     }
 
-    if (type === 'drink') {
+    if (type === 'drink' && inProgressStorage !== undefined) {
       setIngredientsList(inProgressStorage.cocktails[recipeID]);
+      console.log(ingredientsList);
     }
-  }, [recipeID, type]);
-
-  useEffect(() => {
-    if (ingredientsList.every(verifyItsDone)) {
-      setMadeRecipe(true);
-    } else {
-      setMadeRecipe(false);
-    }
-  });
+  }, [recipeID, type, ingredientsList]);
 
   const changeChecked = (index) => {
     const newIngredientsList = ingredientsList;
@@ -49,6 +46,20 @@ function RecipeInProgressIngredients({ type, recipeID }) {
     }
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressStorage));
   };
+
+  useEffect(() => {
+    if (ingredientsList !== undefined) {
+      setMadeRecipe(ingredientsList.every(verifyItsDone));
+    }
+  });
+
+  if (ingredientsList === undefined) {
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden"> </span>
+      </Spinner>
+    );
+  }
 
   return (
     <div className="ingredientsContainer">
