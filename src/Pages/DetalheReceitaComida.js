@@ -21,6 +21,7 @@ export default function DetalheReceitaComida(props) {
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [isLoading, changeLoading] = useState(true);
   const [shouldRedirect, changeRedirect] = useState(false);
+  const [ingredientsDone, setIngredients] = useState([]);
 
   useEffect(() => {
     buscarComidasID(id)
@@ -29,7 +30,15 @@ export default function DetalheReceitaComida(props) {
       .then((ingredients) => setFoodIngredients(ingredients))
       .then(() => changeLoading(false));
 
-    changeLoading(false);
+    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!progressRecipes) {
+      const inProgress = JSON.stringify({ cocktails: { }, meals: { } });
+      return localStorage.setItem('inProgressRecipes', inProgress);
+    }
+
+    if (progressRecipes.meals[id] && progressRecipes.meals[id].length > 0) {
+      return setIngredients(progressRecipes.meals[id]);
+    }
   }, [id, recipe]);
 
   const setMessageTime = () => {
@@ -37,6 +46,15 @@ export default function DetalheReceitaComida(props) {
     setTimeout(() => {
       setCopyMessage(false);
     }, messageTime);
+  };
+
+  const saveIngredients = ({ target }) => {
+    if (ingredientsDone.includes(target.id)) {
+      const newIngredients = ingredientsDone.filter((ingr) => ingr !== target.id);
+      setIngredients(newIngredients);
+    } else {
+      setIngredients([...ingredientsDone, target.id]);
+    }
   };
 
   const onShareClicked = () => {
@@ -49,10 +67,24 @@ export default function DetalheReceitaComida(props) {
     changeRedirect(true);
   };
 
+  const saveToLocalStorage = () => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    inProgress.meals[id] = ingredientsDone;
+    return localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+  };
+
+  const isChecked = (idIngr) => {
+    if (ingredientsDone) {
+      const checkID = ingredientsDone.some((ingr) => ingr === idIngr.toString());
+      return checkID;
+    }
+  };
+
   const renderRecipe = () => {
     const { strMeal, strMealThumb, strCategory, strInstructions } = recipe[0];
     return (
       <>
+        {saveToLocalStorage()}
         <img
           data-testid="recipe-photo"
           src={ strMealThumb }
@@ -96,6 +128,8 @@ export default function DetalheReceitaComida(props) {
                 <input
                   type="checkbox"
                   id={ index }
+                  onClick={ saveIngredients }
+                  defaultChecked={ isChecked(index) }
                 />
                 <label htmlFor={ index }>
                   { ingredient }

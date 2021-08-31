@@ -21,6 +21,7 @@ export default function DetalheReceitaBebida(props) {
   const [drinkIngredients, setdrinkIngredients] = useState([]);
   const [isLoading, changeLoading] = useState(true);
   const [shouldRedirect, changeRedirect] = useState(false);
+  const [ingredientsDone, setIngredients] = useState([]);
 
   useEffect(() => {
     buscarBebidasID(id)
@@ -29,7 +30,15 @@ export default function DetalheReceitaBebida(props) {
       .then((ingredients) => setdrinkIngredients(ingredients))
       .then(() => changeLoading(false));
 
-    changeLoading(false);
+    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!progressRecipes) {
+      const inProgress = JSON.stringify({ cocktails: { }, meals: { } });
+      return localStorage.setItem('inProgressRecipes', inProgress);
+    }
+
+    if (progressRecipes.cocktails[id] && progressRecipes.cocktails[id].length > 0) {
+      return setIngredients(progressRecipes.cocktails[id]);
+    }
   }, [id, recipe]);
 
   const setMessageTime = () => {
@@ -45,14 +54,37 @@ export default function DetalheReceitaBebida(props) {
     setMessageTime();
   };
 
+  const saveIngredients = ({ target }) => {
+    if (ingredientsDone.includes(target.id)) {
+      const newIngredients = ingredientsDone.filter((ingr) => ingr !== target.id);
+      setIngredients(newIngredients);
+    } else {
+      setIngredients([...ingredientsDone, target.id]);
+    }
+  };
+
   const redirectTo = () => {
     changeRedirect(true);
+  };
+
+  const saveToLocalStorage = () => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    inProgress.cocktails[id] = ingredientsDone;
+    return localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+  };
+
+  const isChecked = (idIngr) => {
+    if (ingredientsDone) {
+      const checkID = ingredientsDone.some((ingr) => ingr === idIngr.toString());
+      return checkID;
+    }
   };
 
   const renderRecipe = () => {
     const { strDrink, strDrinkThumb, strCategory, strInstructions } = recipe[0];
     return (
       <>
+        {saveToLocalStorage()}
         <img
           data-testid="recipe-photo"
           src={ strDrinkThumb }
@@ -96,6 +128,8 @@ export default function DetalheReceitaBebida(props) {
                 <input
                   type="checkbox"
                   id={ index }
+                  onClick={ saveIngredients }
+                  defaultChecked={ isChecked(index) }
                 />
                 <label htmlFor={ index }>
                   { ingredient }
