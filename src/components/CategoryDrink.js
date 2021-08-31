@@ -8,9 +8,19 @@ function CategoryDrink() {
   const maxCategories = 5;
   const maxList = 12;
 
+  const searchDrink = async () => {
+    const drinkApi = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+    const { drinks } = await fetch(drinkApi).then((data) => data.json());
+    setDrinkRecipes(drinks);
+  };
+
+  useEffect(() => {
+    searchDrink();
+  }, []);
+
   useEffect(() => {
     const getDrinks = async () => {
-      const drinkApi = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${category}`;
+      const drinkApi = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
       const { drinks } = await fetch(drinkApi).then((data) => data.json());
       setDrinkRecipes(drinks);
     };
@@ -25,6 +35,11 @@ function CategoryDrink() {
     getCategories();
   }, [category]);
 
+  const handleClick = () => {
+    setCategory('');
+    searchDrink();
+  };
+
   const categoriesBtn = () => {
     const categoryBtn = drinkCategories.slice(0, maxCategories).map(({ strCategory }) => (
       <button
@@ -32,7 +47,7 @@ function CategoryDrink() {
         type="button"
         key={ strCategory }
         onClick={ (() => (
-          (category !== strCategory) ? setCategory(strCategory) : setCategory(''))) }
+          (category !== strCategory) ? setCategory(strCategory) : handleClick())) }
       >
         { strCategory }
       </button>
@@ -43,7 +58,7 @@ function CategoryDrink() {
   return (
     <div>
       <div>
-        <button type="button" onClick={ (() => setCategory('')) }>
+        <button type="button" data-testid="All-category-filter" onClick={ searchDrink }>
           All
         </button>
         { categoriesBtn() }
