@@ -32,11 +32,9 @@ function SearchBar({ title }) {
   const renderFoods = () => {
     switch (searchBy) {
     case 'ingredient':
-      console.log('CHAMAR API INGREDIENTE', `com: ${searchInput}`);
       setSearchBarResult(ingredientSearcFoodsAPI(searchInput));
       break;
     case 'name':
-      console.log('CHAMAR API NAME', `com: ${searchInput}`);
       setSearchBarResult(nameSearchFoodsAPI(searchInput));
       break;
     case 'firstLetter':
@@ -44,7 +42,6 @@ function SearchBar({ title }) {
         alertFirstLetterBiggerThanOne();
         break;
       }
-      console.log('CHAMAR API FIRST LETTER', `com: ${searchInput}`);
       setSearchBarResult(firstLetterSearchFoodsAPI(searchInput));
       break;
     default:
@@ -55,11 +52,9 @@ function SearchBar({ title }) {
   const renderDrinks = () => {
     switch (searchBy) {
     case 'ingredient':
-      console.log('CHAMAR API INGREDIENTE', `com: ${searchInput}`);
       setSearchBarResult(ingredientSearchDrinksAPI(searchInput));
       break;
     case 'name':
-      console.log('CHAMAR API NAME', `com: ${searchInput}`);
       setSearchBarResult(nameSearchDrinksAPI(searchInput));
       break;
     case 'firstLetter':
@@ -67,7 +62,6 @@ function SearchBar({ title }) {
         alertFirstLetterBiggerThanOne();
         break;
       }
-      console.log('CHAMAR API FIRST LETTER', `com: ${searchInput}`);
       setSearchBarResult(firstLetterSearchDrinkdsAPI(searchInput));
       break;
     default:

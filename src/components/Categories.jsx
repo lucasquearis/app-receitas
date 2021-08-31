@@ -31,17 +31,17 @@ export default function Categories() {
     getCategoriesMeals();
   }, [pathname]);
 
-  const categoryChoose = async (target) => {
+  const categoryChoose = async ({ target: { name } }) => {
     const MAX_CATEGORY = 12;
     if (pathname === '/comidas') {
-      const URL_API_MEALS = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${target.name}`;
+      const URL_API_MEALS = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${name}`;
       const result = await fetch(URL_API_MEALS);
       const chooseCategory = await result.json();
       const { meals } = chooseCategory;
       return setFeed(meals.slice(0, MAX_CATEGORY));
     }
     if (pathname === '/bebidas') {
-      const URL_API_MEALS = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${target.name}`;
+      const URL_API_MEALS = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`;
       const result = await fetch(URL_API_MEALS);
       const chooseCategory = await result.json();
       const { drinks } = chooseCategory;
@@ -53,7 +53,6 @@ export default function Categories() {
     if (resetFilter === target.name && pathname === '/comidas') {
       setResetFilter('');
       setFeedDataFilter([]);
-      // categoryChoose(target);
       console.log('resetado');
     }
     if (resetFilter === target.name && pathname === '/bebidas') {
