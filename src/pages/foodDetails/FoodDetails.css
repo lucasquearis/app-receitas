@@ -12,3 +12,7 @@
   display: none;
   position: fixed;
 }
+
+.page-container {
+  overflow: hidden;
+}

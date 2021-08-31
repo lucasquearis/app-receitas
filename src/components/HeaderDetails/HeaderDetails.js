@@ -83,6 +83,7 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
         <section className="buttons-container">
           <label htmlFor="share">
             <input
+              className="input-image"
               id="share"
               type="image"
               alt="Botão compartilhar"
@@ -92,13 +93,17 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
             />
             {copied}
           </label>
-          <input
-            type="image"
-            src={ favorite ? blackHeartIcon : favoriteIcon }
-            alt="Botão de favoritar"
-            data-testid="favorite-btn"
-            onClick={ favoriteClick }
-          />
+          <label htmlFor="favorite">
+            <input
+              className="input-image"
+              id="favorite"
+              type="image"
+              src={ favorite ? blackHeartIcon : favoriteIcon }
+              alt="Botão de favoritar"
+              data-testid="favorite-btn"
+              onClick={ favoriteClick }
+            />
+          </label>
         </section>
       </div>
     </header>

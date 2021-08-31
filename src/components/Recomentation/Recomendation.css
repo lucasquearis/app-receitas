@@ -1,7 +1,10 @@
-.recomendation {
-  overflow: x;
-  width: 150px;
+#recomendation {
+  display: flex;
+  overflow-x: scroll;
+  width: 300px;
+
 }
 
-.card-recomendation{
+.card-recomendation {
+  padding: 18px;
 }

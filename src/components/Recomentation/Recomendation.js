@@ -15,15 +15,15 @@ const Recomendation = ({ list, type }) => {
   return (
     <div className="component-details">
       <h1>Recomendation</h1>
-      <div className="recomendation">
+      <div id="recomendation">
         { newArray.map((obj, index) => (
           <div
             key={ index }
             data-testid={ `${index}-recomendation-card` }
-            // className="card-recomendation"
+            className="card-recomendation"
           >
             <img
-              width="30%"
+              width="120px"
               data-testid={ `${index}-card-img` }
               src={ obj[`str${type}Thumb`] }
               alt={ obj[`str${type}`] }
