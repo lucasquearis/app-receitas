@@ -18,6 +18,8 @@ class Ingredients extends Component {
 
     const ingredientsKeys = keys.filter((item, index) => (
       item.includes('strIngredient') && values[index] !== ''
+      && item.includes('strIngredient') && values[index] !== null
+
     ));
 
     const measurementsKeys = keys.filter((item, index) => (
