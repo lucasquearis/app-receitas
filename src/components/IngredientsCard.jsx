@@ -1,18 +1,30 @@
+import { bool, func, number, string } from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-export default function ingredientsCard() {
-  const isFood = true;
-  const type = isFood ? 'comidas' : 'bebidas';
-  const ingredient = 'oi';
-  const image = '';
-  const index = '';
+export default function IngredientsCard({ index, name, isFood, onClick }) {
+  const END_POINT = isFood ? 'https://www.themealdb.com/images/ingredients/'
+    : 'https://www.thecocktaildb.com/images/ingredients/';
   return (
     <div data-testid={ `${index}-ingredient-card` }>
-      <Link to={ `/${type}` }>
-        <h3 data-testid={ `${index}-card-name` }>{ingredient}</h3>
-        <img data-testid={ `${index}-card-img` } src={ image } alt={ ingredient } />
-      </Link>
+      <button
+        style={ { width: '100%' } }
+        onClick={ onClick }
+        type="button"
+      >
+        <h3 data-testid={ `${index}-card-name` }>{name}</h3>
+        <img
+          data-testid={ `${index}-card-img` }
+          src={ `${END_POINT}${name}-Small.png` }
+          alt={ name }
+        />
+      </button>
     </div>
   );
 }
+
+IngredientsCard.propTypes = {
+  index: number.isRequired,
+  name: string.isRequired,
+  isFood: bool.isRequired,
+  onClick: func.isRequired,
+};
