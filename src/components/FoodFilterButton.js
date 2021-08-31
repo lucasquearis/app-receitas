@@ -21,7 +21,7 @@ function FoodFilterButton({ onClick, toggle }) {
       <button
         type="button"
         className={ toggle === 'All' ? 'toggle-button' : null }
-        data-testid={ `All-category-filter` }
+        data-testid='All-category-filter'
         onClick={ (e) => onClick(e) }
       >
         All
@@ -31,6 +31,7 @@ function FoodFilterButton({ onClick, toggle }) {
           type="button"
           className={ toggle === button.strCategory ? 'toggle-button' : null }
           data-testid={ `${button.strCategory}-category-filter` }
+          key={ index }
           onClick={ (e) => onClick(e) }
         >
           { button.strCategory }
