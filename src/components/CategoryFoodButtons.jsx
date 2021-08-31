@@ -86,17 +86,6 @@ function CategoryFoodButtons() {
           />
         ))
       }
-      { showInput ? <FoodsCard />
-        : categoryClick.meals
-        && categoryClick.meals.map((dish, index) => index < doze && (
-          <ItemCard
-            title={ dish.strMeal }
-            thumb={ dish.strMealThumb }
-            id={ dish.idMeal }
-            index={ index }
-            key={ index }
-          />
-        ))}
     </div>
   );
 }

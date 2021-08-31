@@ -6,14 +6,13 @@ import ItemCard from './ItemCard';
 function DrinksCard() {
   const doze = 12;
   const drinks = useSelector((state) => state.recipes.foods.drinks);
-  const loading = useSelector((state) => state.recipes.isLoading);
+  // const loading = useSelector((state) => state.recipes.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchDrinks());
   }, [dispatch]);
 
-  if (loading) return <p>Carregando...</p>;
   return (
     <div>
       {
