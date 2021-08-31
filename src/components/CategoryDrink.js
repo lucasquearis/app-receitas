@@ -4,13 +4,12 @@ import CardDrink from './CardDrink';
 function CategoryDrink() {
   const [drinkRecipes, setDrinkRecipes] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
-  const [category, setCategory] = useState('');
   const maxCategories = 5;
   const maxList = 12;
 
   useEffect(() => {
     const getDrinks = async () => {
-      const drinkApi = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${category}`;
+      const drinkApi = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const { drinks } = await fetch(drinkApi).then((data) => data.json());
       setDrinkRecipes(drinks);
     };
@@ -23,7 +22,16 @@ function CategoryDrink() {
 
     getDrinks();
     getCategories();
-  }, [category]);
+  }, []);
+
+  const handleClick = ({ target }) => {
+    const getDrinks = async () => {
+      const drinkApi = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${target.value}`;
+      const { drinks } = await fetch(drinkApi).then((data) => data.json());
+      setDrinkRecipes(drinks);
+    };
+    getDrinks();
+  };
 
   const categoriesBtn = () => {
     const categoryBtn = drinkCategories.slice(0, maxCategories).map(({ strCategory }) => (
@@ -31,8 +39,8 @@ function CategoryDrink() {
         data-testid={ `${strCategory}-category-filter` }
         type="button"
         key={ strCategory }
-        onClick={ (() => (
-          (category !== strCategory) ? setCategory(strCategory) : setCategory(''))) }
+        value={ strCategory }
+        onClick={ handleClick }
       >
         { strCategory }
       </button>
@@ -43,14 +51,15 @@ function CategoryDrink() {
   return (
     <div>
       <div>
-        <button type="button" onClick={ (() => setCategory('')) }>
+        <button type="button" value="" onClick={ handleClick }>
           All
         </button>
         { categoriesBtn() }
       </div>
       <div>
-        { drinkRecipes.slice(0, maxList).map((drink, index) => (
-          <CardDrink key={ drink.idDrink } drink={ drink } i={ index } />)) }
+        { drinkRecipes
+          && drinkRecipes.slice(0, maxList).map((drink, index) => (
+            <CardDrink key={ drink.idDrink } drink={ drink } i={ index } />)) }
       </div>
     </div>
   );
