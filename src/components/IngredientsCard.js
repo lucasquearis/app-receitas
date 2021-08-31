@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function IngredientsCard({ src, name, index, onclick }) {
+function IngredientsCard({ src, name, index }) {
   return (
     <div data-testid={ `${index}-ingredient-card` }>
       <img

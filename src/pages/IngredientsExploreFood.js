@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import IngredientsCard from '../components/IngredientsCard';
 
@@ -6,7 +7,8 @@ import Footer from '../components/Footer';
 
 function IngredientsExploreFood() {
   const [foodIngredients, setFoodIngredients] = useState([]);
-  const MAX_INGREDIENTS = 12;
+  const min = 0;
+  const max = 12;
 
   useEffect(() => {
     const listIngredients = async () => {
@@ -28,15 +30,15 @@ function IngredientsExploreFood() {
   return (
     <div>
       <Header title="Explorar Ingredientes das Comidas" />
-      {foodIngredients
-        .filter((_e, maxIngredient) => maxIngredient < MAX_INGREDIENTS)
-        .map((ingredient, index) => (
-          <IngredientsCard
-            index={ index }
-            key={ index }
-            src={ foodImage(ingredient.strIngredient) }
-            name={ ingredient.strIngredient }
-          />
+      {foodIngredients.slice(min, max)
+        .map(({ strIngredient: ingredient }, index) => (
+          <Link key={ index } to={ { pathname: '/comidas', state: { ingredient } } }>
+            <IngredientsCard
+              index={ index }
+              src={ foodImage(ingredient) }
+              name={ ingredient }
+            />
+          </Link>
         ))}
       <Footer />
     </div>

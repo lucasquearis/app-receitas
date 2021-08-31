@@ -6,9 +6,7 @@ import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Cards from '../components/Cards';
 
-function FoodsOrDrinks(props) {
-  const { title} = props;
-  console.log('INGREDIENTE',props)
+function FoodsOrDrinks({ title }) {
   return (
     <div>
       <HeaderSearch title={ title } />
