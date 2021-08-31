@@ -27,7 +27,7 @@ function ExploreDrinksByIngredients() {
           ingredientImg={ ingredient.strIngredient1 }
           ingredientName={ ingredient.strIngredient1 }
           index={ index }
-          path="themealdb"
+          path="thecocktaildb"
         />
       ))}
     </div>
