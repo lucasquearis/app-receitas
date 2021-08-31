@@ -129,11 +129,11 @@ describe('8 - Redirecione a pessoa usuária para a tela receitas de comidas.', (
     const { history } = renderWithRouter(<App />);
     const emailInput = screen.getByTestId(idEmail);
     const passwordInput = screen.getByTestId(idPassword);
-    const loginButtton = screen.getByTestId(idLoginButton);
+    const loginButton = screen.getByTestId(idLoginButton);
 
     userEvent.type(emailInput, emailTest);
     userEvent.type(passwordInput, '1234567');
-    userEvent.click(loginButtton);
+    userEvent.click(loginButton);
 
     const { pathname } = history.location;
     expect(pathname).toBe('/comidas');
