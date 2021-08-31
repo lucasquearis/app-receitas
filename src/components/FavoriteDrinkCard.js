@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-const FavoriteDrinkCard = ({ recipe }, index) => {
+const FavoriteDrinkCard = ({ recipe, index }) => {
   const { id, image, name, alcoholicOrNot } = recipe;
 
   const [favorite, setFavorite] = useState(true);
@@ -59,12 +59,19 @@ const FavoriteDrinkCard = ({ recipe }, index) => {
         <p data-testid={ `${index}-horizontal-top-text` }>{ `${alcoholicOrNot}` }</p>
         <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
         <div>
-          <button type="button">
-            <img src={ shareIcon } alt="share-icon" />
-          </button>
-          <button onClick={ onFavorite } type="button">
-            <img src={ favorite ? blackHeartIcon : whiteHeartIcon } alt="favorite-icon" />
-          </button>
+          <input
+            type="image"
+            src={ shareIcon }
+            alt="share-icon"
+            data-testId={ `${index}-horizontal-share-btn` }
+          />
+          <input
+            type="image"
+            src={ favorite ? blackHeartIcon : whiteHeartIcon }
+            alt="share-icon"
+            onClick={ onFavorite }
+            data-testId={ `${index}-horizontal-favorite-btn` }
+          />
         </div>
       </div>
     </div>
@@ -72,6 +79,7 @@ const FavoriteDrinkCard = ({ recipe }, index) => {
 };
 
 FavoriteDrinkCard.propTypes = {
+  index: PropTypes.number.isRequired,
   recipe: PropTypes.shape({
     id: PropTypes.string,
     image: PropTypes.string,

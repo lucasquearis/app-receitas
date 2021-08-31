@@ -9,18 +9,22 @@ const FavoriteRecipes = () => {
   const { changed } = useContext(FoodContext);
   const [storage, setStorage] = useState([]);
   const [filter, setFilter] = useState('');
-  console.log(storage);
 
   useEffect(() => {
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setStorage(actualStorage);
   }, [changed]);
 
-  if (filter) {
-    if (filter === 'All') return storage;
-    if (filter === 'Food') storage.filter((item) => item.type === 'comida');
-    if (filter === 'Drinks') storage.filter((item) => item.type === 'bebida');
-  }
+  const filterStorage = () => {
+    let copyStorage = [...storage];
+    if (filter === 'Food') {
+      copyStorage = copyStorage.filter((item) => item.type === 'comida');
+    }
+    if (filter === 'Drinks') {
+      copyStorage = copyStorage.filter((item) => item.type === 'bebida');
+    }
+    return copyStorage;
+  };
 
   const handleClick = (value) => {
     setFilter(value);
@@ -33,23 +37,25 @@ const FavoriteRecipes = () => {
           <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
         </button>
         <h2 data-testid="page-title">Receitas Favoritas</h2>
+      </div>
+      <div>
         <Button
           btnText="All"
-          data-testid="filter-by-all-btn"
+          datatestId="filter-by-all-btn"
           onClick={ () => handleClick('All') }
         />
         <Button
           btnText="Food"
-          data-testid="filter-by-food-btn"
+          datatestId="filter-by-food-btn"
           onClick={ () => handleClick('Food') }
         />
         <Button
           btnText="Drinks"
-          data-testid="filter-by-drink-btn"
+          datatestId="filter-by-drink-btn"
           onClick={ () => handleClick('Drinks') }
         />
       </div>
-      { storage.map((recipe, index) => (recipe.type === 'comida'
+      { filterStorage().map((recipe, index) => (recipe.type === 'comida'
         ? <FavoriteFoodCard recipe={ recipe } index={ index } />
         : <FavoriteDrinkCard recipe={ recipe } index={ index } />))}
     </div>
