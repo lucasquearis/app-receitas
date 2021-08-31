@@ -52,6 +52,11 @@ function App() {
         />
         <Route
           exact
+          path="/explorar/bebidas/area"
+          render={ () => <div>Not Found</div> }
+        />
+        <Route
+          exact
           path="/perfil"
           render={ () => (
             <Header
