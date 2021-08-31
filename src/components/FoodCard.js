@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function FoodCard({ meal, index }) {
   const { strMealThumb, strMeal, idMeal } = meal;
   return (
-    <Link to={ `/comidas/${idMeal}` }>
+    <Link to={ { pathname: `/comidas/${idMeal}`, id: idMeal } }>
       <div
         data-testid={ `${index}-recipe-card` }
       >
