@@ -7,32 +7,6 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 import './pageCSS/FavoriteRecipes.css';
 
-/*
-const allRecipes = [
-  {
-    id: '52771',
-    type: 'comida',
-    area: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: ['Pasta', 'Curry'],
-  },
-  {
-    id: '178319',
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot:  'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    doneDate: '23/06/2020',
-    tags: [],
-  },
-]; */
-
 export default function FavoriteRecipes() {
   const allRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   // const recipes = allRecipes ? allRecipes : [];
@@ -53,22 +27,23 @@ export default function FavoriteRecipes() {
     let favoritesRecipes = await JSON.parse(localStorage.getItem('favoriteRecipes'));
     favoritesRecipes = favoritesRecipes.filter((recipe) => recipe.id !== id);
     await localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesRecipes));
-    setFilteredFavoriteRecipes(favoritesRecipes);
+    setFavoriteRecipes(favoritesRecipes);
   };
 
   const cardMeals = (recipe, index) => {
     const { id, type, name, image, area, category } = recipe;
     return (
-      <div key={ index } className="card-done">
+      <div key={ index } className="done__card">
         <Link to={ `/${type}s/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
-            className="img-card-done"
+            className="done__card-img"
             src={ image }
             alt={ name }
           />
         </Link>
-        <div className="card-done-infos">
+
+        <div className="done__card-infos">
           <span data-testid={ `${index}-horizontal-top-text` }>
             { `${area} - ${category}` }
           </span>
@@ -78,7 +53,8 @@ export default function FavoriteRecipes() {
           >
             { name }
           </Link>
-          <div className="card-favorite-share">
+          <div className="favorite__card-share">
+
             <button
               onClick={ () => {
                 copy(`http://localhost:3000/${type}s/${id}`);
@@ -111,16 +87,16 @@ export default function FavoriteRecipes() {
     const { id, type, name, image, alcoholicOrNot } = recipe;
 
     return (
-      <div key={ index } className="card-done">
+      <div key={ index } className="done__card">
         <Link to={ `/${type}s/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
-            className="img-card-done"
+            className="done__card-img"
             src={ image }
             alt={ name }
           />
         </Link>
-        <div className="card-done-infos">
+        <div className="done__card-infos">
           <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span>
           <Link
             data-testid={ `${index}-horizontal-name` }
@@ -128,7 +104,7 @@ export default function FavoriteRecipes() {
           >
             { name }
           </Link>
-          <div className="card-favorite-share">
+          <div className="favorite__card-share">
             <button
               onClick={ () => {
                 copy(`http://localhost:3000/${type}s/${id}`);
@@ -149,7 +125,7 @@ export default function FavoriteRecipes() {
               type="image"
               src={ blackHeartIcon }
               alt="Favorite"
-              onClick={ () => deleteFavorite(id) }
+              onClick={ () => removeFavorites(id) }
             />
           </div>
         </div>
@@ -170,33 +146,32 @@ export default function FavoriteRecipes() {
   return (
     <div>
       <HeaderNoSearch title="Receitas Favoritas" />
-      <section>
-        <section>
-          <button
-            type="button"
-            data-testid="filter-by-all-btn"
-            onClick={ setFilterData }
-            value="all"
-          >
-            All
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-food-btn"
-            onClick={ setFilterData }
-            value="comida"
-          >
-            Food
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-drink-btn"
-            onClick={ setFilterData }
-            value="bebida"
-          >
-            Drink
-          </button>
-        </section>
+      <section className="favorite__filter-btn-section">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ setFilterData }
+          value="all"
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ setFilterData }
+          value="comida"
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ setFilterData }
+          value="bebida"
+        >
+          Drink
+        </button>
+
       </section>
       <section>
         { fillCardsMealsAndDrinks() }
