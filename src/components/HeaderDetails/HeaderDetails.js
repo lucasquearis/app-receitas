@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../../images/shareIcon.svg';
 import favoriteIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import './HeaderDetails.css';
 
 const HeaderDetails = ({ image, title, category, recipe, id }) => {
@@ -48,17 +49,20 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
     if (listFavorite) {
       listFavorite.push(localStorageObj);
       localStorage.setItem('favoriteRecipes', JSON.stringify(listFavorite));
+      setFavorite(true);
     } else {
       listFavorite = [];
       listFavorite.push(localStorageObj);
       localStorage.setItem('favoriteRecipes', JSON.stringify(listFavorite));
+      setFavorite(true);
     }
   };
   const favoriteClick = () => {
     if (favorite) {
       const favoriteList = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const filterFavorite = favoriteList.filter((favo) => favo.id !== id);
-      localStorage.setItem('favoriteRecipes', filterFavorite);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filterFavorite));
+      setFavorite(false);
     } else {
       favoriteSet();
     }
@@ -79,6 +83,7 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
         <section className="buttons-container">
           <label htmlFor="share">
             <input
+              className="input-image"
               id="share"
               type="image"
               alt="Botão compartilhar"
@@ -88,13 +93,17 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
             />
             {copied}
           </label>
-          <input
-            type="image"
-            src={ favoriteIcon }
-            alt="Botão de favoritar"
-            data-testid="favorite-btn"
-            onClick={ favoriteClick }
-          />
+          <label htmlFor="favorite">
+            <input
+              className="input-image"
+              id="favorite"
+              type="image"
+              src={ favorite ? blackHeartIcon : favoriteIcon }
+              alt="Botão de favoritar"
+              data-testid="favorite-btn"
+              onClick={ favoriteClick }
+            />
+          </label>
         </section>
       </div>
     </header>

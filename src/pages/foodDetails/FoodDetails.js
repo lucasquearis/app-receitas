@@ -31,7 +31,7 @@ const FoodDetails = ({ match: { params: id } }) => {
   if (!meal) return <Spinner animation="border" />;
   const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meal;
   return (
-    <div>
+    <div className="page-container">
       <HeaderDetails
         title={ strMeal }
         image={ strMealThumb }
