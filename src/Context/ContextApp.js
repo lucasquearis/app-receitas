@@ -2,15 +2,18 @@ import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import LoginHook from '../Hooks/LoginHook';
-
-import BtnFilterCategory from '../Hooks/BtnFilterCategory';
-
 import FoodHook from '../Hooks/FoodHook';
+import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 import recipesHooks from '../Hooks/recipesHooks';
+import SingleRecipeHook from '../Hooks/SingleRecipeHook';
+import DoneRecipeHook from '../Hooks/DoneRecipeHook';
+import ModalHook from '../Hooks/ModalHook';
 
 export const ContextApp = createContext();
-
 export const AppProvider = ({ children }) => {
+  const { singleRecipe, handleRecipe, handleFav, fav } = SingleRecipeHook();
+  const { handleStart, doneRecipe, inProgress, handleBtnType } = DoneRecipeHook();
+  const { handleModal } = ModalHook();
   const { searchRecipes, recipes, setRecipes } = recipesHooks();
   const { categoryMeal, categoryDrinks, filterIngredient,
     filter } = BtnFilterCategory();
@@ -22,7 +25,6 @@ export const AppProvider = ({ children }) => {
     redirect,
     setRedirect } = LoginHook();
   const { drinks, meal, getRecipes } = FoodHook();
-
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
@@ -53,6 +55,15 @@ export const AppProvider = ({ children }) => {
     setRedirect,
     drinks,
     meal,
+    singleRecipe,
+    handleRecipe,
+    handleStart,
+    doneRecipe,
+    inProgress,
+    handleBtnType,
+    handleModal,
+    handleFav,
+    fav,
   };
 
   return (

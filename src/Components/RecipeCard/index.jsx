@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './style.css';
 
-function RecipeCard({ image, name, index, testId, id }) {
-  const history = useHistory();
-  const { location: { pathname } } = history;
-  const currentRout = pathname.includes('/comidas');
-
+function RecipeCard({ image, name, index, testId, id, feedType }) {
   return (
-    <Link to={ currentRout ? `/comidas/${id}` : `/bebidas/${id}` }>
-      <div data-testid={ testId } className="container">
+    <div data-testid={ testId } className="container">
+      <Link to={ `/${feedType}/${id}` }>
         <img src={ image } alt="Recipe" data-testid={ `${index}-card-img` } />
-        <p data-testid={ `${index}-card-name` }>{ name }</p>
-      </div>
-    </Link>
+        <p
+          data-testid={ testId === `${index}-recomendation-card`
+            ? `${index}-recomendation-title` : `${index}-card-name` }
+        >
+          { name }
+        </p>
+      </Link>
+    </div>
   );
 }
 
@@ -24,6 +25,8 @@ RecipeCard.propTypes = {
   testId: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  feedType: PropTypes.string.isRequired,
+
 };
 
 export default RecipeCard;
