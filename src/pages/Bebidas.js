@@ -12,10 +12,11 @@ export default function Bebidas() {
   const {
     cocktails,
     setRecipeType,
+    category,
   } = useContext(Context);
   setRecipeType('cocktail');
 
-  if (cocktails.length === 1) {
+  if (cocktails.length === 1 && category === 'All') {
     return history.push(`/bebidas/${cocktails[0].idDrink}`);
   }
 

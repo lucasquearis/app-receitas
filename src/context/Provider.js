@@ -16,6 +16,9 @@ function Provider({ children }) {
   const [meals, setMeals] = useState([]);
   const [cocktails, setCocktails] = useState([]);
   const [recipeType, setRecipeType] = useState('meals');
+  const [category, setCategory] = useState('All');
+  const [toggle, setToggle] = useState(false);
+  const [btnstrCategory, setBtnstrCategory] = useState('');
 
   useEffect(() => {
     async function fetchAPI() {
@@ -26,6 +29,37 @@ function Provider({ children }) {
     }
     fetchAPI();
   }, []);
+
+  async function resetFilter() {
+    const initalMeals = await fetchMeals();
+    setMeals(initalMeals);
+    setCategory('All');
+    const initialDrinks = await fetchDrinks();
+    setCocktails(initialDrinks);
+  }
+
+  function handleToggle(strCategory) {
+    const arr = [
+      !toggle,
+      toggle && strCategory === btnstrCategory,
+      toggle && strCategory !== btnstrCategory,
+    ];
+    switch (arr.indexOf(true)) {
+    case 0:
+      setBtnstrCategory(strCategory);
+      setToggle(true);
+      break;
+    case 1:
+      setToggle(false);
+      resetFilter();
+      break;
+    case 2:
+      setBtnstrCategory(strCategory);
+      break;
+    default:
+      global.alert('');
+    }
+  }
 
   const validButton = () => {
     const { email, password } = user;
@@ -42,10 +76,10 @@ function Provider({ children }) {
   const history = useHistory();
 
   const handleInputs = ({ target }) => {
-    const { name, value } = target;
+    const { strCategory, value } = target;
     setUser({
       ...user,
-      [name]: value,
+      [strCategory]: value,
     });
     validButton();
     const inputEmail = document.getElementById('email-input');
@@ -69,6 +103,10 @@ function Provider({ children }) {
     setMeals,
     recipeType,
     setRecipeType,
+    category,
+    setCategory,
+    resetFilter,
+    handleToggle,
   };
 
   return (

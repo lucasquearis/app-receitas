@@ -12,10 +12,11 @@ export default function Comidas() {
   const {
     setRecipeType,
     meals,
+    category,
   } = useContext(Context);
   setRecipeType('meals');
 
-  if (meals.length === 1) {
+  if (meals.length === 1 && category === 'All') {
     return history.push(`/bebidas/${meals[0].idMeal}`);
   }
 
