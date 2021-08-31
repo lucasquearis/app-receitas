@@ -41,15 +41,15 @@ export default function Comidas() {
   //   setComidas(results.filter((result, index) => index < maxFood));
   // };
   const fetchCategorias = async () => {
-    const maxCategorias = 6;
+    const maxCategorias = 5;
     const botaoALL = { strCategory: 'All' };
     const results = await ComidasAPI.buscarCategorias('');
-    if (results[0].strCategory !== 'All') {
-      results.unshift(botaoALL);
-    }
     const myCategories = results.filter(
       (result, index) => index < maxCategorias,
     );
+    if (myCategories[0].strCategory !== 'All') {
+      myCategories.unshift(botaoALL);
+    }
     setCategorias(myCategories);
   };
   useEffect(() => {

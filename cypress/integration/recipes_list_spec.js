@@ -103,6 +103,7 @@ describe('27 - Implemente os botões de categoria para serem utilizados como fil
       },
     });
 
+    console.log('mealCategoriesMock', mealCategoriesMock);
     mealCategoriesMock.meals.slice(0, 5).forEach(({ strCategory: category }) => {
       cy.get(`[data-testid="${category}-category-filter"]`);
     });

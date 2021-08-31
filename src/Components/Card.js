@@ -31,11 +31,24 @@ Card.propTypes = {
   comida: PropTypes.shape({
     strMealThumb: PropTypes.string.isRequired,
     strMeal: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   bebida: PropTypes.shape({
     strDrinkThumb: PropTypes.string.isRequired,
     strDrink: PropTypes.string.isRequired,
-  }).isRequired,
-  index: PropTypes.number.isRequired,
-  isFood: PropTypes.bool.isRequired,
+  }),
+  index: PropTypes.number,
+  isFood: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  comida: {
+    strMealThumb: '',
+    strMeal: '',
+  },
+  bebida: {
+    strDrinkThumb: '',
+    strDrink: '',
+  },
+  index: 0,
+  isFood: true,
 };

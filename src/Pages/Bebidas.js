@@ -40,16 +40,16 @@ export default function Bebidas() {
   //   setBebidas(results.filter((result, index) => index < maxDrinks));
   // };
   const fetchCategorias = async () => {
-    const maxCategorias = 6;
+    const maxCategorias = 5;
     const botaoALL = { strCategory: 'All' };
     const results = await BebidasAPI.buscarCategorias('');
     console.log(results);
-    if (results[0].strCategory !== 'All') {
-      results.unshift(botaoALL);
-    }
     const myCategories = results.filter(
       (result, index) => index < maxCategorias,
     );
+    if (myCategories[0].strCategory !== 'All') {
+      myCategories.unshift(botaoALL);
+    }
     setCategorias(myCategories);
   };
 
