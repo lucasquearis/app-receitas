@@ -10,7 +10,6 @@ import './pageCSS/Meals.css';
 
 export default function Meals() {
   const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
-  console.log(feed);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -34,7 +33,6 @@ export default function Meals() {
 
   const renderList = () => {
     if (resultList === null) {
-      console.log('ENTROU NA CONDICAO');
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (!resultList) {

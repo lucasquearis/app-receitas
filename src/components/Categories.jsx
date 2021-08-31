@@ -53,15 +53,12 @@ export default function Categories() {
     if (resetFilter === target.name && pathname === '/comidas') {
       setResetFilter('');
       setFeedDataFilter([]);
-      console.log('resetado');
     }
     if (resetFilter === target.name && pathname === '/bebidas') {
       setResetFilter('');
       setFeedDataFilter([]);
-      console.log('resetadodrink');
     }
     if (resetFilter !== target.name) {
-      console.log(target.name);
       setResetFilter(target.name);
       categoryChoose(target);
     }
