@@ -4,7 +4,7 @@ import RecipeCard from './RecipeCard';
 
 function Recipes() {
   const { recipes: { list, loading }, filter: { src } } = useContext(Context);
-  console.log(list);
+
   const mainRecipes = (listToShow) => {
     const maxRecipes = 11;
     const listRecipes = [];

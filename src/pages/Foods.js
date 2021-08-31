@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import MenuInferior from '../components/MenuInferior';
 import Recipes from '../components/Recipes';
@@ -12,31 +12,42 @@ function Foods() {
     setFoodRecipes,
     setFoodCategories,
     foodCategoryAPI } = useContext(Context);
-  const { loading: loadcard } = foodRecipes;
-  const { list: recipes } = foodRecipes;
+  const { loading } = foodRecipes;
+  const { list } = foodRecipes;
+  const INITIAL_API = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const [API, setAPI] = useState(INITIAL_API);
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-    if (loadcard) {
-      requestCategory('https://www.themealdb.com/api/json/v1/1/search.php?s=', setFoodRecipes);
-      requestCategory(foodCategoryAPI, setFoodCategories);
-    }
-  });
+    requestCategory(API, setFoodRecipes);
+    requestCategory(foodCategoryAPI, setFoodCategories);
+  }, [API]);
+
+  if (loading) return <p> carregando ...</p>;
 
   const cards = [];
-  const maxCards = 12;
-  for (let index = 0; index < maxCards; index += 1) {
-    if (loadcard === false) {
-      cards.push(<FoodCard meal={ recipes.meals[index] } index={ index } />);
-    }
+  const maxCards = 11;
+  for (let index = 0; index < list.meals.length; index += 1) {
+    cards.push(<FoodCard meal={ list.meals[index] } index={ index } />);
   }
+
+  const handleClick = ({ target: { innerText } }) => {
+    if (filter === innerText) {
+      setFilter('All');
+      return setAPI(INITIAL_API);
+    }
+    setAPI(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${innerText}`);
+    setFilter(innerText);
+    setFoodRecipes({ ...foodRecipes, loading: true });
+  };
 
   const foodPage = (bool) => {
     if (bool === false) {
       return (
         <div>
           <Header title="Comidas" name="meal" search />
-          <FoodFilterButton />
-          { cards }
+          <FoodFilterButton onClick={ handleClick } toggle={ filter } />
+          { cards.filter((e, index) => index <= maxCards) }
           <Recipes />
           <MenuInferior />
         </div>
@@ -46,7 +57,7 @@ function Foods() {
 
   return (
     <main>
-      { foodPage(loadcard) }
+      { foodPage(loading) }
     </main>
   );
 }

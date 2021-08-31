@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Image, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useHistory } from 'react-router-dom';
 
 const responsive = {
   mobile: {
@@ -38,15 +39,16 @@ function DrinksDetails() {
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [recipesRecommendations, setRecipesRecommendations] = useState([]);
+  const { location: { id } } = useHistory();
 
   useEffect(() => {
     const getRecipesDrink = async () => {
-      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319'; // alterar id
+      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`; // alterar id
       const { drinks } = await fetch(endpoint).then((data) => data.json());
       setRecipesDrink(drinks);
     };
     getRecipesDrink();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const getIngredientsAndMeasures = () => {
@@ -81,6 +83,14 @@ function DrinksDetails() {
     };
     getRecommendations();
   }, [recipesDrink]);
+
+  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
+    .filter((item) => item.id === id);
+
+  const localStorageInProgressRecipes = JSON
+    .parse(localStorage.getItem('inProgressRecipes'));
+  const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.drinks)
+    .filter((item) => parseInt(item, 10) === id);
 
   return (
     <>
@@ -133,17 +143,17 @@ function DrinksDetails() {
               </div>
             )) }
           </Carousel>
-          {/* { doneRecipes ? (
+          { localStorageDoneRecipes.length !== 0 ? (
             <Button
               className="fixed-bottom"
               variant="success"
               data-testid="start-recipe-btn"
-              type="button"
             >
-              { inProgressRecipes ? 'Continuar Receita' : 'Iniciar Receita' }
+              { filterProgressRecipes.length !== 0
+                ? 'Continuar Receita' : 'Iniciar Receita' }
 
             </Button>
-          ) : '' } */}
+          ) : '' }
         </div>
       )) }
     </>
