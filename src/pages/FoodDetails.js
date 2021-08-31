@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 
 import Carousel from 'react-multi-carousel';
@@ -128,6 +129,7 @@ const FoodDetails = () => {
           strCategory,
           strInstructions,
           strYoutube,
+          idMeal,
         }, i) => (
           <div className="details-container" key={ i }>
             <img
@@ -198,14 +200,16 @@ const FoodDetails = () => {
                 <DrinkRecomendationCard key={ index } drink={ drink } index={ index } />
               ))}
             </Carousel>
-            <button
-              data-testid="start-recipe-btn"
-              key={ i }
-              type="button"
-              className="start-recipe-btn"
-            >
-              Iniciar receita
-            </button>
+            <Link to={ `/comidas/${idMeal}/in-progress` }>
+              <button
+                data-testid="start-recipe-btn"
+                key={ i }
+                type="button"
+                className="start-recipe-btn"
+              >
+                Iniciar receita
+              </button>
+            </Link>
           </div>))
       }
     </div>

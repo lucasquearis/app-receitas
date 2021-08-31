@@ -16,6 +16,8 @@ import SearchByOrigin from './pages/SearchByOrigin';
 import Profile from './pages/Profile';
 import FinishedRecipes from './pages/FinishedRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import RecipeInProgress from './pages/RecipeInProgress';
+import DrinkInProgress from './pages/DrinkInProgress';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route exact path="/receitas-feitas" component={ FinishedRecipes } />
         <Route exact path="/perfil" component={ Profile } />
         <Route exact path="/explorar/comidas/area" component={ SearchByOrigin } />
+        <Route exact path="/comidas/:id/in-progress" component={ RecipeInProgress } />
+        <Route exact path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
         <Route
           exact
           path="/explorar/bebidas/ingredientes"
