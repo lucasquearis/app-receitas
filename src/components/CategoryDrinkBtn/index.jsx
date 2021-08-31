@@ -2,26 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  fetchFoodRedux, fetchFoodByCategory, fetchFoodsCategoriesRedux,
-} from '../redux/actions/foodActions';
+  fetchDrinksRedux, fetchDrinksByCategory, fetchDrinksCategoriesRedux,
+} from '../../redux/actions/foodActions';
 
-function CategoryFoodBtn() {
+function CategoryDrinkBtn() {
   const dispatch = useDispatch();
   const [current, setCurrent] = useState('');
   const buttonLimits = 5;
   const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
-    dispatch(fetchFoodsCategoriesRedux);
+    dispatch(fetchDrinksCategoriesRedux);
   }, [dispatch]);
 
   const handleClick = (name) => {
     if (current === name || name === 'All') {
       setCurrent('');
 
-      dispatch(fetchFoodRedux);
+      dispatch(fetchDrinksRedux);
     } else {
-      dispatch(fetchFoodByCategory(name));
+      dispatch(fetchDrinksByCategory(name));
       setCurrent(name);
     }
   };
@@ -36,7 +36,7 @@ function CategoryFoodBtn() {
       >
         All
       </Button>
-      {categories.meals && categories.meals.slice(0, buttonLimits).map(
+      {categories.drinks && categories.drinks.slice(0, buttonLimits).map(
         (category, id) => (
           <Button
             color="secondary"
@@ -52,4 +52,4 @@ function CategoryFoodBtn() {
   );
 }
 
-export default CategoryFoodBtn;
+export default CategoryDrinkBtn;

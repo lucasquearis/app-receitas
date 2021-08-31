@@ -12,12 +12,18 @@ function FavoriteRecipes() {
     ? {} : favoriteRecipes.filter((recipe) => recipe.type.includes('bebida'));
   const foodsFilted = (!favoriteRecipes)
     ? {} : favoriteRecipes.filter((recipe) => recipe.type.includes('comida'));
+<<<<<<< HEAD
 
+=======
+>>>>>>> main-group-28-requisito-33-46
   const headerProps = {
     title: 'Receitas Favoritas',
     renderSearchBar: false,
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> main-group-28-requisito-33-46
   const filterByBtn = () => {
     if (!favoriteRecipes) {
       return (<h3>Nenhuma Receita Favorita</h3>);
@@ -50,7 +56,10 @@ function FavoriteRecipes() {
           setFavoriteRecipes={ setFavoriteRecipes }
         />));
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> main-group-28-requisito-33-46
   return (
     <div>
       <Header { ...headerProps } />
@@ -82,5 +91,4 @@ function FavoriteRecipes() {
     </div>
   );
 }
-
 export default FavoriteRecipes;

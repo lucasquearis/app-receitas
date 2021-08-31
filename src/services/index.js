@@ -128,8 +128,8 @@ export const fetchFirstLetterDrinks = async (firstLetter) => {
 };
 
 export const copyToClipboard = () => {
-  const myUrl = copy(window.location.href);
-  return myUrl;
+  copy(window.location.href);
+  return true;
 };
 
 export const copyToClipboardDone = (id, foodOrDrink) => {
@@ -137,9 +137,82 @@ export const copyToClipboardDone = (id, foodOrDrink) => {
   return myUrl;
 };
 
-export const favoriteRecipe = (bool) => {
-  if (!bool) {
-    return true;
+export const myFavoriteRecipe = (recipe) => {
+  const arrayOfFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (arrayOfFavorites) {
+    const checkName = arrayOfFavorites.filter(({ name }) => name === recipe.name);
+    if (!checkName.length) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...arrayOfFavorites, recipe],
+      ));
+      return (true);
+    }
+    const filteredName = arrayOfFavorites.filter((food) => food.name !== recipe.name);
+    if (!filteredName.length) {
+      localStorage.removeItem('favoriteRecipes');
+    } else {
+      localStorage.removeItem('favoriteRecipes');
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        filteredName,
+      ));
+      return (false);
+    }
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([recipe]));
+    return (true);
   }
-  return false;
+};
+
+export const startDrinkRecipe = (recipe) => {
+  const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!recipes) {
+    const newObject = {
+      ...recipes,
+      cocktails: {
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
+  } else {
+    const newObject = {
+      ...recipes,
+      cocktails: {
+        ...recipes.cocktails,
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
+  }
+};
+
+export const startFoodRecipe = (recipe) => {
+  const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!recipes) {
+    const newObject = {
+      ...recipes,
+      meals: {
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
+  } else {
+    const newObject = {
+      ...recipes,
+      meals: {
+        ...recipes.meals,
+        ...recipe,
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newObject));
+  }
+};
+
+export const getDate = (date) => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  date = `${dd}/${mm}/${yyyy}`;
+
+  return date;
 };

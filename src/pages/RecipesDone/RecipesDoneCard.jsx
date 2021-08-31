@@ -25,6 +25,13 @@ export default function RecipesDoneCard({ recipe, index }) {
             title={ recipe.name }
             data-testid={ `${index}-horizontal-image` }
           />
+          <Typography
+            data-testid={ `${index}-horizontal-name` }
+            component="h5"
+            variant="h5"
+          >
+            { recipe.name }
+          </Typography>
         </Link>
         <CardContent>
           <Typography
@@ -35,6 +42,7 @@ export default function RecipesDoneCard({ recipe, index }) {
             { recipe.type === 'comida'
               ? (`${recipe.area} - ${recipe.category}`) : recipe.alcoholicOrNot }
           </Typography>
+<<<<<<< HEAD
           <Link to={ `/${recipe.type}s/${recipe.id}` }>
             <Typography
               data-testid={ `${index}-horizontal-name` }
@@ -44,6 +52,8 @@ export default function RecipesDoneCard({ recipe, index }) {
               { recipe.name }
             </Typography>
           </Link>
+=======
+>>>>>>> main-group-28-requisito-33-46
           <Typography
             data-testid={ `${index}-horizontal-done-date` }
             variant="subtitle1"
