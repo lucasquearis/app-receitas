@@ -10,7 +10,6 @@ function Select(props) {
     label,
     name,
     options,
-    testIdOptions,
     testIdSelect,
     value,
   } = props;
@@ -29,7 +28,7 @@ function Select(props) {
         { options.map((option) => (
           <option
             className={ classNameOptions }
-            data-testid={ testIdOptions }
+            data-testid={ `${option}-option` }
             key={ v4() }
             value={ option }
           >
@@ -49,7 +48,6 @@ Select.propTypes = {
   label: string.isRequired,
   options: oneOfType([arrayOf(string), arrayOf(object)]).isRequired,
   name: string.isRequired,
-  testIdOptions: string,
   testIdSelect: string,
   value: string.isRequired,
 };
@@ -57,7 +55,6 @@ Select.propTypes = {
 Select.defaultProps = {
   classNameOptions: '',
   classNameSelect: '',
-  testIdOptions: '',
   testIdSelect: '',
 };
 
