@@ -5,12 +5,18 @@ import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior';
 import Card from '../components/Card';
 import Loading from '../components/Loading';
+import CategoriesBar from '../components/CategoriesBar';
 
 export default function Bebidas() {
   const history = useHistory();
-  const { cocktails, setRecipeType } = useContext(Context);
+  const {
+    cocktails,
+    setRecipeType,
+    category,
+  } = useContext(Context);
   setRecipeType('cocktail');
-  if (cocktails.length === 1) {
+
+  if (cocktails.length === 1 && category === 'All') {
     return history.push(`/bebidas/${cocktails[0].idDrink}`);
   }
 
@@ -23,9 +29,10 @@ export default function Bebidas() {
       <Header recipeType="drinks">
         Bebidas
       </Header>
+      <CategoriesBar />
       <MenuInferior />
       <div>
-        { (cocktails !== []) && cocktails.map((item, index) => (
+        { (cocktails.length !== 0) && cocktails.map((item, index) => (
           <div key={ item.idDrink }>
             { `categoria: ${item.strCategory}` }
             <Link to={ `/bebidas/${item.idDrink}` }>

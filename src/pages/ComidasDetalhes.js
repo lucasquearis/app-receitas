@@ -15,7 +15,6 @@ export default function ComidasDetalhes() {
       const idApi = location.pathname.split('/')[2];
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
-      // console.log(data);
       setFood(data.meals[0]);
     };
     api();

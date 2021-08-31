@@ -5,13 +5,18 @@ import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior';
 import Card from '../components/Card';
 import Loading from '../components/Loading';
+import CategoriesBar from '../components/CategoriesBar';
 
 export default function Comidas() {
   const history = useHistory();
-  const { setRecipeType, meals } = useContext(Context);
+  const {
+    setRecipeType,
+    meals,
+    category,
+  } = useContext(Context);
   setRecipeType('meals');
 
-  if (meals.length === 1) {
+  if (meals.length === 1 && category === 'All') {
     return history.push(`/comidas/${meals[0].idMeal}`);
   }
 
@@ -24,9 +29,10 @@ export default function Comidas() {
       <Header>
         Comidas
       </Header>
+      <CategoriesBar />
       <MenuInferior />
       <div>
-        { (meals !== []) && meals.map((item, index) => (
+        { (meals.length !== 0) && meals.map((item, index) => (
           <div key={ item.idMeal }>
             { `categoria: ${item.strCategory}` }
             <Link to={ `/comidas/${item.idMeal}` }>
