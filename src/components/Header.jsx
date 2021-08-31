@@ -11,22 +11,19 @@ export default function Header({ title }) {
 
   return (
     <header className="header-food">
-      {
-        search ? <SearchBar title={ title } />
-          : <SubHeader title={ title } />
-      }
-
+      <SubHeader title={ title } />
       <button
         type="button"
         className="search-btn"
         onClick={ showSearch }
-        data-testid="search-top-btn"
       >
         <img
+          data-testid="search-top-btn"
           alt="button-icon"
           src={ searchIcon }
         />
       </button>
+      { search && <SearchBar title={ title } />}
     </header>
   );
 }

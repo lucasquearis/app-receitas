@@ -5,7 +5,7 @@ import profileIcon from '../images/profileIcon.svg';
 
 export default function SubHeader({ title }) {
   return (
-    <div>
+    <div className="header__first-div">
       <Link
         to="/perfil"
         className="profile-btn"
