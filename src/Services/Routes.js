@@ -2,10 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import DrinkInProgress from '../Pages/DrinkInProgress';
 import Explore from '../Pages/Explore';
-import ExploreDrinks from '../Pages/ExploreDrinks';
-import ExploreDrinksByIngredients from '../Pages/ExploreDrinksByIngredients';
-import ExploreFoods from '../Pages/ExploreFoods';
-import ExploreFoodsByIngredient from '../Pages/ExploreFoodsByIngredient';
+import ExploreDrinksAndFoods from '../Pages/ExploreDrinksAndFoods';
+import ExploreDrinksAndFoodsByIng from '../Pages/ExploreDrinksAndFoodsByIngredients';
 import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
 import FoodsAndDrinks from '../Pages/FoodsAndDrinks';
 import FoodInProgress from '../Pages/FoodInProgress';
@@ -29,17 +27,17 @@ function Routes() {
         render={ (props) => <RecipesDetails { ...props } type="drink" /> }
       />
       <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route exact path="/explorar/bebidas" component={ ExploreDrinksAndFoods } />
       <Route
         exact
         path="/explorar/bebidas/ingredientes"
-        component={ ExploreDrinksByIngredients }
+        component={ ExploreDrinksAndFoodsByIng }
       />
-      <Route exact path="/explorar/comidas" component={ ExploreFoods } />
+      <Route exact path="/explorar/comidas" component={ ExploreDrinksAndFoods } />
       <Route
         exact
         path="/explorar/comidas/ingredientes"
-        component={ ExploreFoodsByIngredient }
+        component={ ExploreDrinksAndFoodsByIng }
       />
       <Route exact path="/explorar/comidas/area" component={ ExploreFoodsByOrigin } />
       <Route exact path="/receitas-favoritas" component={ MadeAndFavoriteRecipes } />
@@ -57,6 +55,7 @@ function Routes() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/receitas-feitas" component={ MadeAndFavoriteRecipes } />
       <Route exact path="/perfil" component={ Profile } />
+      <Route exact path="/explorar/bebidas/area" component={ NotFound } status={ 404 } />
     </Switch>
   );
 }
