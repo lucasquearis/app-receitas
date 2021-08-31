@@ -6,7 +6,6 @@ function DrinkCard({ drink, index }) {
   const { strDrink, strDrinkThumb, idDrink } = drink;
   return (
     <Link to={ { pathname: `/comidas/${idDrink}`, id: idDrink } }>
-
       <div
         data-testid={ `${index}-recipe-card` }
       >

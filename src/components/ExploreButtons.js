@@ -1,13 +1,21 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 import Button from './Button';
 
 function ExploreButtons({ type }) {
-  const { requestRandomAPI, recipes: { list } } = useContext(Context);
+  const {
+    requestRandomAPI,
+    recipes: { list },
+    foodRecipes,
+    drinkRecipes,
+    foodRecipes: { loading: foodLoading },
+    drinkRecipes: { loading: drinkLoading },
+  } = useContext(Context);
   const history = useHistory();
   const typeFood = () => type === 'foods';
+  const isLoading = foodLoading && drinkLoading;
   const redirectButtonArea = () => {
     if (typeFood()) {
       history.push('comidas/area');
@@ -57,6 +65,12 @@ function ExploreButtons({ type }) {
         name="Me Surpreenda!"
         onClick={ () => handleSurpriseClick() }
       />
+      {!isLoading
+      && type === 'foods'
+      && <Redirect to={ `/comidas/${foodRecipes.list.meals[0].idMeal}` } />}
+      {!isLoading
+      && type !== 'foods'
+      && <Redirect to={ `/bebidas/${drinkRecipes.list.drinks[0].idDrink}` } />}
       {showAreaButton()}
     </div>
   );
