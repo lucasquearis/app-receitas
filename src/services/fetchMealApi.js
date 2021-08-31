@@ -2,6 +2,8 @@ const MEAL_API_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const MEAL_API_URL_LETTER = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
 const MEAL_API_URL_INGREDIENT = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 
+const INGREDIENTS_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+
 export const fetchMealApi = async (foodFilter = { searchText: '', search: '' }) => {
   const { searchText, search } = foodFilter;
 
@@ -33,5 +35,10 @@ export const fetchCategoriesMealApi = async () => {
 
 export const fetchMealsByCategoryName = async (categoryName) => {
   const response = await fetch(`${MEALS_BY_CATEGORY}${categoryName}`);
+  return response.json();
+};
+
+export const fetchIngredients = async () => {
+  const response = await fetch(INGREDIENTS_URL);
   return response.json();
 };
