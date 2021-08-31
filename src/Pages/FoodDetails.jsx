@@ -14,7 +14,7 @@ function FoodDetails(props) {
       setData(meals[0]);
     };
     getDetails();
-  }, [data, props]);
+  }, [setData, props]);
 
   const { strMeal, strCategory, strArea, strMealThumb } = data;
 
