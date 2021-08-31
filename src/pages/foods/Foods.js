@@ -6,6 +6,7 @@ import fetchMealsCategories from '../../Redux/actions/fetchMealsCategories';
 import fetchMeals from '../../Redux/actions/fetchMeals';
 import CategoriesFilter from '../../components/CategoriesFilter';
 import RecipesList from '../../components/RecipesList';
+import Header from '../../components/Header';
 import MenuFooter from '../../components/MenuFooter';
 
 class Foods extends Component {
@@ -55,6 +56,7 @@ class Foods extends Component {
 
     return (
       <div>
+        <Header title="Comidas" />
         <CategoriesFilter
           categories={ mealCategories }
           handleClick={ this.filterMealsByCategory }
