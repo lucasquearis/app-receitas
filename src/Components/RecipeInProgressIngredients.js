@@ -20,13 +20,15 @@ function RecipeInProgressIngredients({ type, recipeID }) {
     if (type === 'drink') {
       setIngredientsList(inProgressStorage.cocktails[recipeID]);
     }
+  }, [recipeID, type]);
 
+  useEffect(() => {
     if (ingredientsList.every(verifyItsDone)) {
       setMadeRecipe(true);
     } else {
       setMadeRecipe(false);
     }
-  }, [recipeID, type]);
+  });
 
   const changeChecked = (index) => {
     const newIngredientsList = ingredientsList;
@@ -55,7 +57,7 @@ function RecipeInProgressIngredients({ type, recipeID }) {
         {ingredientsList.map((item, index) => (
           <li
             key={ item.ingredient }
-            data-testid={ `${index}-ingredient-name-and-measure` }
+            data-testid={ `${index}-ingredient-step` }
           >
             <RecipeInProgressCheckBox
               isChecked={ item.done }

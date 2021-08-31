@@ -8,6 +8,7 @@ import { getMealByID } from '../Services/fetchMeals';
 import RecipeDetailHeader from '../Components/RecipeDetailHeader';
 import RecipeDetailInstructions from '../Components/RecipeDetailInstructions';
 import RecipeInProgressIngredients from '../Components/RecipeInProgressIngredients';
+import RecipeInProgressButton from '../Components/RecipeInProgressButton';
 
 function RecipeInProgress({ type }) {
   const [recipe, setRecipe] = useState({});
@@ -42,8 +43,7 @@ function RecipeInProgress({ type }) {
         <RecipeInProgressIngredients type={ type } recipeID={ recipeID } />
         <RecipeDetailInstructions recipe={ recipe } />
 
-        {/* Botão de Finalizar Receita ->
-        <RecipeDetailButton type={ type } recipe={ recipe } recipeID={ recipeID } /> */}
+        <RecipeInProgressButton type={ type } recipe={ recipe } recipeID={ recipeID } />
       </div>
     );
   }
