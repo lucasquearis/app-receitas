@@ -8,6 +8,7 @@ function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [randomFood, setRandomFood] = useState([]);
   const [randomDrink, setRandomDrink] = useState([]);
+  const [foodIngredients, setFoodIngredients] = useState([]);
   const [keyType, setKeysType] = useState('');
   const [url, setUrl] = useState();
   const [lists, setLists] = useState({
@@ -28,6 +29,7 @@ function RecipesProvider({ children }) {
     setFavorite,
     randomFood,
     randomDrink,
+    foodIngredients,
   };
 
   useEffect(() => {
@@ -46,6 +48,15 @@ function RecipesProvider({ children }) {
       setRandomDrink(data.drinks);
     };
     getRandomFood();
+  }, []);
+
+  useEffect(() => {
+    const getIngredients = async () => {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+      const data = await response.json();
+      setFoodIngredients(data.meals);
+    };
+    getIngredients();
   }, []);
 
   useEffect(() => {
