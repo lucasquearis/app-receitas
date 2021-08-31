@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player/youtube';
 
 import { useDataContext } from '../../context/DataProvider';
@@ -10,8 +10,12 @@ import FavoriteButton from '../../components/FavoriteButton';
 import ListDetails from './ListDetails';
 import RecipesRecommendation from './RecipesRecommendation';
 
+import './detailsPage.css';
+
 export default function DetailsPage() {
   const { pathname } = useLocation();
+
+  const history = useHistory();
 
   // id recebido pela url;
   const { id } = useParams();
@@ -21,6 +25,9 @@ export default function DetailsPage() {
   const [recipeDetails, setRecipeDetails] = useState({});
 
   const type = pathname.includes('/comidas/') ? 'food' : 'drinks';
+
+  // define o caminho para a pagina de receitas em andamento de acorodo com o path atual;
+  const path = pathname.includes('/comidas/') ? '/comidas' : '/bebidas';
 
   // Quando o componente for montado irá executar a função "getItem";
   useEffect(() => {
@@ -83,8 +90,10 @@ export default function DetailsPage() {
         ) }
         <RecipesRecommendation type={ type } />
         <button
+          className="start-recipe-btn"
           type="button"
           data-testid="start-recipe-btn"
+          onClick={ () => history.push(`${path}/${id}/in-progress`) }
         >
           Iniciar Receita
         </button>
