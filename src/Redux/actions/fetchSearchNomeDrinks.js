@@ -22,10 +22,14 @@ const fetchSearchNomeDrinks = (text) => async (dispatch) => {
   dispatch(getSearch());
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`);
   const json = await response.json();
-  try {
-    dispatch(getSearchSuccess(json.drinks));
-  } catch (error) {
-    dispatch(getSearchError(error));
+  if (json.drinks === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  } else {
+    try {
+      dispatch(getSearchSuccess(json.drinks));
+    } catch (error) {
+      dispatch(getSearchError(error));
+    }
   }
 };
 
