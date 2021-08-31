@@ -8,10 +8,18 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Bebidas() {
-  const { drinkCategory, drinkData, searchBar } = useContext(RecipesContext);
-  DrinksAPI();
-  const [food] = useState(false);
-  console.log(drinkData);
+  const {
+    drinkCategory,
+    drinkData,
+    searchBar,
+    filter,
+    setFood,
+    food } = useContext(RecipesContext);
+  setFood(false);
+  const [ingrediente] = useState(false);
+  if (filter === '') {
+    DrinksAPI();
+  }
   if (drinkData === null) {
     return (
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
@@ -26,7 +34,7 @@ function Bebidas() {
       <div>
         <Header title="Bebidas" />
         <Buttons food={ food } />
-        <Recipes food={ food } />
+        <Recipes food={ food } ingredientes={ ingrediente } />
         <Footer />
       </div>
     );
