@@ -7,6 +7,7 @@ import StartRecipeButton from '../components/StartRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import Iframe from '../components/Iframe';
+import '../styles/ItemCard.css';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
@@ -44,11 +45,13 @@ function RecipeDetails(props) {
           ? (
             <div>
               <img
+                className="card-img"
                 src={ recipe[enType][0][`str${enCasedType}Thumb`] }
                 alt="Foto do Prato"
                 data-testid="recipe-photo"
               />
               <h1
+                className="card-title"
                 data-testid="recipe-title"
               >
                 { recipe[enType][0][`str${enCasedType}`] }

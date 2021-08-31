@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import DoneCard from '../components/DoneCard';
 import Header from '../components/Header';
-import ShareButton from '../components/ShareButton';
+import shareIcon from '../images/shareIcon.svg';
 
-function RecipesMade(props) {
-  const [madeRecipes, setDoneRecipes] = useState([]);
-  const [doneList, setDoneList] = useState([]);
-  const { history } = props;
-  const { pathname } = history.location;
+function RecipesMade() {
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [recipesList, setRecipesList] = useState([]);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setDoneRecipes(JSON.parse(localStorage.getItem('doneRecipes')));
-    setDoneList(JSON.parse(localStorage.getItem('doneRecipes')));
+    setRecipesList(JSON.parse(localStorage.getItem('doneRecipes')));
   }, []);
 
   const handleAllClick = () => {
-    setDoneList(madeRecipes);
+    setRecipesList(doneRecipes);
   };
 
   const handleFoodClick = () => {
-    setDoneList(madeRecipes.filter((recipe) => recipe.type === 'comidas'));
+    setRecipesList(doneRecipes.filter((recipe) => recipe.type === 'comida'));
   };
 
   const handleDrinkClick = () => {
-    setDoneList(madeRecipes.filter((recipe) => recipe.type === 'bebidas'));
+    setRecipesList(doneRecipes.filter((recipe) => recipe.type === 'bebida'));
   };
 
   const renderFilterButtons = () => (
@@ -53,36 +53,56 @@ function RecipesMade(props) {
     </div>
   );
 
+  const handleClick = (type, id) => {
+    copy(`http://localhost:3000/${type}s/${id}`);
+    setCopied(true);
+  };
+
   const renderDoneCards = () => (
     <div>
       <ul>
-        {doneList.map((recipe, index) => (
+        {recipesList.map((recipe, index) => (
           <li key={ recipe.id }>
-            <DoneCard
-              title={ recipe.strMeal }
-              thumb={ recipe.strMealThumb }
-              index={ index }
-              area={ recipe.strArea }
-              alcoholicOrNot={ recipe.strAlcoholic }
-              category={ recipe.strCategory }
-            />
-            <span
-              data-testid={ `${index}-horizontal-done-date` }
-            >
-              { `Feito em: ${recipe.doneDate}` }
-            </span>
-            {recipe.tags.map((tag) => (
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
+              <DoneCard
+                title={ recipe.name }
+                thumb={ recipe.image }
+                index={ index }
+                area={ recipe.area }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+                category={ recipe.category }
+              />
               <span
-                key={ tag }
-                data-testid={ `${index}-${tag}-horizontal-tag` }
+                data-testid={ `${index}-horizontal-done-date` }
               >
-                {tag[0] - tag[1]}
+                { `Feito em: ${recipe.doneDate}` }
               </span>
-            ))}
-            <ShareButton
-              index={ index }
-              pathname={ pathname }
-            />
+              {recipe.tags.map((tag) => (
+                <span
+                  key={ tag }
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  {`${tag} - ${tag}`}
+                </span>
+              ))}
+            </Link>
+            <div>
+              <button
+                type="button"
+                onClick={ () => handleClick(recipe.type, recipe.id) }
+                src={ shareIcon }
+                data-testid={ `${index}-horizontal-share-btn` }
+              >
+                <img
+                  className="share-image"
+                  type="image/svg+xml"
+                  src={ shareIcon }
+                  data-testid="share-btn"
+                  alt="Compartilhar"
+                />
+              </button>
+              {copied && <p>Link copiado!</p>}
+            </div>
           </li>
         ))}
       </ul>
@@ -93,17 +113,9 @@ function RecipesMade(props) {
     <div>
       <Header brand="Receitas Feitas" />
       {renderFilterButtons()}
-      {doneList && renderDoneCards()}
+      {recipesList && renderDoneCards()}
     </div>
   );
 }
-
-RecipesMade.propTypes = {
-  history: PropTypes.shape({
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }),
-}.isRequired;
 
 export default RecipesMade;
