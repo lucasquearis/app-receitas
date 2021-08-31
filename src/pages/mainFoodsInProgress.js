@@ -56,6 +56,29 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
   }, [foodInfo, ingredients]);
 
   const RedirectToRecipesMade = () => {
+    console.log(foodInfo);
+    const dateNow = new Date();
+    const formatDate = `${dateNow}`.split(' GMT')[0];
+    const objToSave = foodInfo.map((item) => {
+      const obj = {
+        id: item.idMeal,
+        type: 'comida',
+        area: item.strArea,
+        category: item.strCategory,
+        alcoholicOrNot: '',
+        name: item.strMeal,
+        image: item.strMealThumb,
+        doneDate: formatDate,
+        tags: item.strTags,
+      };
+      return obj;
+    });
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (!doneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify(objToSave));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, ...objToSave]));
+    }
     history.push('/receitas-feitas');
   };
 

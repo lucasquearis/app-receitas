@@ -74,6 +74,28 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
   }, [checkArray, id]);
 
   const RedirectToRecipesMade = () => {
+    const dateNow = new Date();
+    const formatDate = `${dateNow}`.split(' GMT')[0];
+    const objToSave = drinkInfo.map((item) => {
+      const obj = {
+        id: item.idDrink,
+        type: 'bebida',
+        area: '',
+        category: item.strCategory,
+        alcoholicOrNot: item.strAlcoholic,
+        name: item.strDrink,
+        image: item.strDrinkThumb,
+        doneDate: formatDate,
+        tags: item.strTags,
+      };
+      return obj;
+    });
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (!doneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify(objToSave));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, ...objToSave]));
+    }
     history.push('/receitas-feitas');
   };
 
