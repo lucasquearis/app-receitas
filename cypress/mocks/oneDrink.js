@@ -15,7 +15,7 @@ const oneDrink = {
       'strIBA': null,
       'strAlcoholic': 'Alcoholic',
       'strGlass': 'Martini Glass',
-      'strInstructions': 'Shake well in a shaker with ice.\r\nStrain in a martini glass.',
+      'strInstructions': 'Shake well in a shaker with ice. Strain in a martini glass.',
       'strInstructionsES': null,
       'strInstructionsDE': null,
       'strInstructionsFR': null,
