@@ -6,7 +6,7 @@ import Foods from './pages/foods/Foods';
 import Drinks from './pages/drinks/Drinks';
 import DetailsFood from './pages/foods/DetailsFood';
 import DetailsDrink from './pages/drinks/DetailsDrink';
-// teste
+
 function App() {
   return (
     <div className="containerBody">
