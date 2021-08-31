@@ -55,7 +55,7 @@ export default function FavoritesRecipes() {
       >
         Drink
       </button>
-      {filteredRecipes.map((recipe, index) => (
+      {filteredRecipes && filteredRecipes.map((recipe, index) => (
         <FavoriteRecipesCard
           key={ index }
           index={ index }
