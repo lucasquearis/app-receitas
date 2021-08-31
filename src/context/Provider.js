@@ -18,7 +18,7 @@ function Provider({ children }) {
   const [recipeType, setRecipeType] = useState('meals');
   const [category, setCategory] = useState('All');
   const [toggle, setToggle] = useState(false);
-  const [btnName, setBtnName] = useState('');
+  const [categoryName, setcategoryName] = useState('');
 
   useEffect(() => {
     async function fetchAPI() {
@@ -38,23 +38,18 @@ function Provider({ children }) {
     setCocktails(initialDrinks);
   }
 
-  function handleToggle(name) {
-    const arr = [
-      !toggle,
-      toggle && name === btnName,
-      toggle && name !== btnName,
-    ];
-    switch (arr.indexOf(true)) {
-    case 0:
-      setBtnName(name);
+  function handleToggle(strCategory) {
+    switch (true) {
+    case (!toggle):
+      setcategoryName(strCategory);
       setToggle(true);
       break;
-    case 1:
+    case (toggle && strCategory === categoryName):
       setToggle(false);
       resetFilter();
       break;
-    case 2:
-      setBtnName(name);
+    case (toggle && strCategory !== categoryName):
+      setcategoryName(strCategory);
       break;
     default:
       global.alert('');
