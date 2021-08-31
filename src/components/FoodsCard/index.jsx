@@ -1,6 +1,6 @@
+import { Card, CardMedia, Typography } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardMedia, Typography } from '@material-ui/core';
 
 function FoodsCards(food, foodOrDrink, id) {
   return (

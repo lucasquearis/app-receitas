@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     meals: [],
     drinks: [],
   },
+  details: {},
 };
 
 const foodsAndDrinks = (state = INITIAL_STATE, action) => {

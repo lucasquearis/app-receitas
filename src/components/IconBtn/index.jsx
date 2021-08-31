@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 function IconBtn({ onClick, dataId, src, alt }) {
   return (
-    <button src={ src } type="button" onClick={ onClick } data-testid={ dataId }>
+    <button type="button" onClick={ onClick }>
       <img
+        data-testid={ dataId }
         src={ src }
         alt={ alt }
       />

@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { fetchFoodRedux } from '../redux/actions/foodActions';
-import FoodsCards from '../components/FoodsCard';
-import CategoryFoodBtn from '../components/CategoryFoodBtn';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { fetchFoodRedux } from '../../redux/actions/foodActions';
+import FoodsCards from '../../components/FoodsCard';
+import CategoryFoodBtn from '../../components/CategoryFoodBtn';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function Foods() {
   const dispatch = useDispatch();
   const foodsLimits = 12;
-  // const [current, setCurrent] = useState('');
   const { meals, redirect } = useSelector((state) => state.foodsAndDrinks);
-  // const { categories } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
     dispatch(fetchFoodRedux);
-    // dispatch(fetchFoodsCategoriesRedux);
   }, [dispatch]);
 
   const headerProps = {
