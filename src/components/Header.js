@@ -81,7 +81,12 @@ function Header() {
           ? <SearchBar />
           : ''}
       </div>
-      <Filter />
+      <div>
+        {pathname === '/comidas'
+      || pathname === '/bebidas'
+          ? <Filter />
+          : ''}
+      </div>
     </>
   );
 }
