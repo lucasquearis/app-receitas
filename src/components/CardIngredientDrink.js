@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function CardIngredientDrink(props) {
-  const { drink, index } = props;
+  const { drink, i } = props;
   console.log(drink);
   return (
-    <div data-testid={ `${index}-ingredient-card` }>
+    <div data-testid={ `${i}-ingredient-card` }>
       <Link to="/explorar/bebidas">
-        <h4 data-testid={ `${index}-card-name` }>{drink.strIngredient1}</h4>
+        <h4 data-testid={ `${i}-card-name` }>{drink.strIngredient1}</h4>
         <img
-          data-testid={ `${index}-card-img` }
+          data-testid={ `${i}-card-img` }
           src={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
           alt={ drink.strIngredient1 }
         />
@@ -21,7 +21,7 @@ function CardIngredientDrink(props) {
 
 CardIngredientDrink.propTypes = {
   drink: PropTypes.arrayOf(PropTypes.string).isRequired,
-  index: PropTypes.number.isRequired,
+  i: PropTypes.number.isRequired,
 };
 
 export default CardIngredientDrink;
