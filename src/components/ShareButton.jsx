@@ -15,7 +15,7 @@ function ShareButton({ index, address, pathname }) {
     <div>
       <button
         type="button"
-        onClick={ handleClick }
+        onClick={ () => handleClick() }
         src={ shareIcon }
         data-testid={ `${index}-horizontal-share-btn` }
       >
