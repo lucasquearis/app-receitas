@@ -11,6 +11,7 @@
 .profile-icon-container {
   border: solid 1px darkgrey;
   border-radius: 6px;
+  box-shadow: 0 0 6px -1px darkgrey;
   margin: 0;
   margin-left: 0.5em;
 
@@ -19,6 +20,7 @@
 .search-icon-container {
   border: solid 1px darkgrey;
   border-radius: 6px;
+  box-shadow: 0 0 6px -1px darkgrey;
 }
 
 .profile-icon {
