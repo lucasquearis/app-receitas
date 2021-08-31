@@ -6,6 +6,8 @@ import Foods from './pages/foods/Foods';
 import Drinks from './pages/drinks/Drinks';
 import DetailsDrink from './pages/drinks/DetailsDrink';
 import DetailsFood from './pages/foods/DetailsFood';
+import RecipesInProgress from './pages/foods/RecipesInProgress';
+import DrinksInProgress from './pages/drinks/drinksInProgress';
 
 function App() {
   return (
@@ -25,6 +27,20 @@ function App() {
           path="/bebidas/:id"
           render={ (props) => (
             <DetailsDrink { ...props } />
+          ) }
+        />
+        <Route
+          exact
+          path="/comidas/:id/in-progress"
+          render={ (props) => (
+            <RecipesInProgress { ...props } />
+          ) }
+        />
+        <Route
+          exact
+          path="/bebidas/:id/in-progress"
+          render={ (props) => (
+            <DrinksInProgress { ...props } />
           ) }
         />
         <Route exact path="/" component={ Login } />
