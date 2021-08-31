@@ -18,6 +18,14 @@ function FoodFilterButton({ onClick, toggle }) {
 
   return (
     <div>
+      <button
+        type="button"
+        className={ toggle === 'All' ? 'toggle-button' : null }
+        data-testid="All-category-filter"
+        onClick={ (e) => onClick(e) }
+      >
+        All
+      </button>
       { filterButtons.map((button, index) => (
         <button
           type="button"
