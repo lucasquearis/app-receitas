@@ -41,20 +41,21 @@ function Food() {
   return (
     <div>
       <Header titulo="Comidas" />
+
       { searchedRecipe.length > 1
         ? searchedFoodRecipes() : redirectFood()}
 
       <div>
-        <CategoriesButtons categories={ foodCategories } />
+        <CategoriesButtons categories={ foodCategories } type="Meal" />
       </div>
 
       <main>
         {
-          foods.splice(0, recipeLimit).map((element, index) => (
+          foods.slice(0, recipeLimit).map((element, index) => (
             <Cards
               key={ index }
               index={ index }
-              type="comidas"
+              type="Meal"
               element={ element }
             />
           ))
