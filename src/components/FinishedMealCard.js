@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareImage from '../images/shareIcon.svg';
 import { handleShare } from '../auxiliar/auxiliarFunctions';
@@ -8,14 +9,18 @@ function FinishedMealCard({ card, index }) {
   const { image, area, category, name, doneDate, tags, id } = card;
   return (
     <div key={ index }>
-      <img
-        src={ image }
-        alt="card-recipe"
-        data-testid="0-horizontal-image"
-        width="250px"
-      />
+      <Link to={ `/comidas/${id}` }>
+        <img
+          src={ image }
+          alt="card-recipe"
+          data-testid="0-horizontal-image"
+          width="250px"
+        />
+      </Link>
       <h3 data-testid={ `${index}-horizontal-top-text` }>{ `${area} - ${category}` }</h3>
-      <h2 data-testid={ `${index}-horizontal-name` }>{ name }</h2>
+      <Link to={ `/comidas/${id}` }>
+        <h2 data-testid={ `${index}-horizontal-name` }>{ name }</h2>
+      </Link>
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
       <input
         type="image"
