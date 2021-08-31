@@ -15,8 +15,46 @@ export const updateProgressRecipe = (id, ing, type, category) => {
   }));
 };
 
+export const doneRecipesToStorage = (props) => {
+  const {
+    id,
+    type,
+    area,
+    category,
+    alcoholic,
+    meal,
+    drink,
+    thumb,
+    tags,
+  } = props;
+
+  const doneRecipe = [{
+    id,
+    type: type === 'comida' || type === 'meals' ? 'comida' : 'bebida',
+    area: area || '',
+    category: category || '',
+    alcoholicOrNot: alcoholic || '',
+    name: type === 'comida' || type === 'meals' ? meal : drink,
+    image: thumb,
+    doneDate: '31/08/2021',
+    tags: [tags] || [],
+  }];
+
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
+  if (localStorage.doneRecipes && doneRecipes.length > 0) {
+    if (!doneRecipes.some((item) => item.id === id)) {
+      localStorage.setItem('doneRecipes',
+        JSON.stringify([...doneRecipes, ...doneRecipe]));
+    }
+  } else {
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
+  }
+};
+
 export const favoriteRecipes = (props, btnFavorite) => {
   const { drink, meal, thumb, category, alcoholic, id, area, type } = props;
+
   const recipe = [{
     id,
     type: type === 'comida' || type === 'meals' ? 'comida' : 'bebida',
@@ -26,7 +64,9 @@ export const favoriteRecipes = (props, btnFavorite) => {
     name: type === 'comida' || type === 'meals' ? meal : drink,
     image: thumb,
   }];
+
   const recipesFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
   if (localStorage.favoriteRecipes && recipesFavorite.length > 0) {
     if (!recipesFavorite.some((item) => item.id === id)) {
       localStorage.setItem('favoriteRecipes',

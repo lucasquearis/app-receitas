@@ -1,8 +1,7 @@
 import React from 'react';
-import { screen, fireEvent, history } from '@testing-library/dom';
+import { screen, fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../services/renderWithRouter';
 import RecipesDone from '../pages/RecipesDone';
-import recipesDoneMock from '../data/recipesDoneMock';
 
 const indexRecipeMeal = recipesDoneMock.indexOf(recipesDoneMock[0]);
 const indexRecipeDrink = recipesDoneMock.indexOf(recipesDoneMock[1]);
@@ -118,7 +117,7 @@ describe('Testa funcionamento dos botões de filtro', () => {
 
   // });
 
-  it('Testa redirecionameto ao clicar em cards', () => {
-    console.log(history);
-  });
+  // it('Testa redirecionameto ao clicar em cards', () => {
+
+  // });
 });
