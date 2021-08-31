@@ -4,13 +4,21 @@ import { Card, CardContent, Typography, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { copyToClipboardDone } from '../../services';
 import shareIcon from '../../images/shareIcon.svg';
+import BlackHeart from '../../images/blackHeartIcon.svg';
 
-export default function RecipesDoneCard({ recipe, index }) {
+export default function RecipesDoneCard({ recipe, index, setFavoriteRecipes }) {
   const [copyLink, setCopyLink] = useState('');
 
   const handleClick = (id, foodOrDrink) => {
     copyToClipboardDone(id, foodOrDrink);
     setCopyLink('Link copiado!');
+  };
+
+  const handleFavoriteClick = (id) => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const removeFav = favoriteRecipes.filter((each) => each.id !== id);
+    setFavoriteRecipes(removeFav);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removeFav));
   };
 
   return (
@@ -25,13 +33,6 @@ export default function RecipesDoneCard({ recipe, index }) {
             title={ recipe.name }
             data-testid={ `${index}-horizontal-image` }
           />
-          <Typography
-            data-testid={ `${index}-horizontal-name` }
-            component="h5"
-            variant="h5"
-          >
-            { recipe.name }
-          </Typography>
         </Link>
         <CardContent>
           <Typography
@@ -42,6 +43,15 @@ export default function RecipesDoneCard({ recipe, index }) {
             { recipe.type === 'comida'
               ? (`${recipe.area} - ${recipe.category}`) : recipe.alcoholicOrNot }
           </Typography>
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <Typography
+              data-testid={ `${index}-horizontal-name` }
+              component="h5"
+              variant="h5"
+            >
+              { recipe.name }
+            </Typography>
+          </Link>
           <Typography
             data-testid={ `${index}-horizontal-done-date` }
             variant="subtitle1"
@@ -49,15 +59,6 @@ export default function RecipesDoneCard({ recipe, index }) {
           >
             { recipe.doneDate }
           </Typography>
-          <ul>
-            { recipe.tags.map((tag, i) => (
-              <li
-                key={ i }
-                data-testid={ `${index}-${tag}-horizontal-tag` }
-              >
-                {tag}
-              </li>))}
-          </ul>
           <button
             onClick={ () => handleClick(recipe.id, recipe.type) }
             type="button"
@@ -68,6 +69,18 @@ export default function RecipesDoneCard({ recipe, index }) {
               alt="shareIt"
             />
           </button>
+
+          <button
+            onClick={ () => handleFavoriteClick(recipe.id) }
+            type="button"
+          >
+            <img
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              src={ BlackHeart }
+              alt="favorite"
+            />
+          </button>
+
           <Typography
             variant="subtitle1"
             color="textSecondary"

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { fetchFoodRedux } from '../../redux/actions/foodActions';
 import FoodsCards from '../../components/FoodsCard';
 import CategoryFoodBtn from '../../components/CategoryFoodBtn';
@@ -9,13 +10,10 @@ import Footer from '../../components/Footer';
 function Foods() {
   const dispatch = useDispatch();
   const foodsLimits = 12;
-  // const [current, setCurrent] = useState('');
-  const { meals } = useSelector((state) => state.foodsAndDrinks);
-  // const { categories } = useSelector((state) => state.foodsAndDrinks);
+  const { meals, redirect } = useSelector((state) => state.foodsAndDrinks);
 
   useEffect(() => {
     dispatch(fetchFoodRedux);
-    // dispatch(fetchFoodsCategoriesRedux);
   }, [dispatch]);
 
   const headerProps = {
@@ -29,14 +27,16 @@ function Foods() {
     );
   }
 
+  if (redirect) {
+    return <Redirect to={ `/comidas/${redirect}` } />;
+  }
+
   return (
     <>
       <Header { ...headerProps } />
       <div className="recipes-list">
         <CategoryFoodBtn />
-
         {meals.slice(0, foodsLimits).map(
-
           (food, id) => FoodsCards(
             food, 'comidas', id,
           ),

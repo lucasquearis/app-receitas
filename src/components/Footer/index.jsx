@@ -1,23 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import IconBtn from '../IconBtn';
+import drinkIcon from '../../images/drinkIcon.svg';
+import exploreIcon from '../../images/exploreIcon.svg';
+import mealIcon from '../../images/mealIcon.svg';
 
 function Footer() {
   const bebidasBtnProps = {
     dataId: 'drinks-bottom-btn',
-    src: '/images/drinkIcon.svg',
+    src: drinkIcon,
     alt: 'Botão Bebidas',
   };
 
   const explorarBtnProps = {
     dataId: 'explore-bottom-btn',
-    src: '/images/exploreIcon.svg',
+    src: exploreIcon,
     alt: 'Botão Explorar',
   };
 
   const comidasBtnProps = {
     dataId: 'food-bottom-btn',
-    src: '/images/mealIcon.svg',
+    src: mealIcon,
     alt: 'Botão Comidas',
   };
 

@@ -51,17 +51,17 @@ function DrinksDetails() {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 2,
-      slidesToSlide: 2, // optional, default to 1.
+      slidesToSlide: 2,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
       items: 2,
-      slidesToSlide: 2, // optional, default to 1.
+      slidesToSlide: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 2,
-      slidesToSlide: 2, // optional, default to 1.
+      slidesToSlide: 2,
     },
   };
 
@@ -104,7 +104,6 @@ function DrinksDetails() {
           draggable={ false }
           showDots
           responsive={ responsive }
-          ssr // means to render carousel on server-side.
           autoPlaySpeed={ 1000 }
           keyBoardControl
           customTransition="all .5"

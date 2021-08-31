@@ -26,10 +26,6 @@ function CategoryFoodBtn() {
     }
   };
 
-  if (categories) {
-    return (<h1>Loading...</h1>);
-  }
-
   return (
     <div>
       <Button
