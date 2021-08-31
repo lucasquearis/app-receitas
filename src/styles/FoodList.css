@@ -3,3 +3,11 @@
   justify-content: space-around;
   margin-top: 5px;
 }
+
+ol {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 5px;
+  justify-content: space-around;
+}
