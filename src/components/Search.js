@@ -6,7 +6,20 @@ function Search() {
   const [searchValue, setSearchValue] = useState('');
 
   const { API } = useContext(RecipesContext);
-  const { searchByFilters } = API;
+  const { searchByFilters, pathname } = API;
+
+  let ingredient;
+  let search;
+
+  if(/ingredient/.test(pathname)) {
+    ingredient = pathname.replace(/.*ingredient=([^&]+).*/, '$1');
+  }
+  console.log('inGREDIENT',ingredient)
+
+  if(/search/.test(pathname)) {
+    search = pathname.replace(/.*search=([^&]+).*/, '$1');
+  }
+  console.log('SEARCH',search)
 
   function handleChange({ target }) {
     setSearchValue(target.value);

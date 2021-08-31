@@ -14,10 +14,10 @@ function IngredientsExploreDrink() {
   console.log(pathname)
   const [path, setPath] = useState('');
 
-  const handleClick = () => {
-    setPath('')
-    // push(`/bebidas`);
+  const handleClick = (item) => {
+    push(`/bebidas?search${item}&ingredient=i`);
   }
+
   useEffect(() => {
     const listIngredients = async () => {
       try {
@@ -41,7 +41,7 @@ function IngredientsExploreDrink() {
       {drinkIngredients
         .filter((_e, maxIngredient) => maxIngredient < MAX_INGREDIENTS)
         .map((ingredient, index) => (
-          <Link ingredient={ ingredient.strIngredient1 } onClick={ handleClick }>
+          <Link ingredient={ ingredient.strIngredient1 } onClick={ () => handleClick(ingredient.strIngredient1) }>
             <IngredientsCard
               index={ index }
               key={ index }
