@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import myContext from './myContext';
-import { getMeals } from '../services/mealAPI';
-import { getDrinks } from '../services/drinkAPI';
+import { getMeals, getMealsCategories } from '../services/mealAPI';
+import { getDrinks, getDrinksCategories } from '../services/drinkAPI';
 import {
   ALERT_TWO,
   MEAL_OBJ,
@@ -22,11 +22,31 @@ export default function RecipesProvider({ children }) {
   const [baseDataDrinks, setBaseDataDrinks] = useState();
   const [filteredMeals, setFilteredMeals] = useState(false);
   const [filteredDrinks, setFilteredDrinks] = useState(false);
+  const [mealCategories, setMealCategories] = useState();
+  const [drinkCategories, setDrinkCategories] = useState();
   const [favorite, setFavorite] = useState({});
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
   const [lists, setLists] = useState({ ingredients: [], measure: [] });
+
+  useEffect(() => {
+    const mealCategory = async () => {
+      const mealCat = await getMealsCategories();
+      setMealCategories(mealCat);
+    };
+    mealCategory();
+  },
+  []);
+
+  useEffect(() => {
+    const drinkCategory = async () => {
+      const drinkCat = await getDrinksCategories();
+      setDrinkCategories(drinkCat);
+    };
+    drinkCategory();
+  },
+  []);
 
   useEffect(() => {
     const resultBaseMeals = async () => {
@@ -109,6 +129,8 @@ export default function RecipesProvider({ children }) {
     setInfoUser,
     filteredMeals,
     filteredDrinks,
+    mealCategories,
+    drinkCategories,
     updateData,
     setUpdateData,
     baseDataMeals,
