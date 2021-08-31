@@ -8,7 +8,7 @@ import Select from '../components/DefaultComponents/Select';
 import useRedirect from '../hooks/useRedirect';
 
 function FoodByOrigin() {
-  const [origins, setOrigins] = useState([]);
+  const [origins, setOrigins] = useState(['All']);
   const [firstTwelve, setFistTwelve] = useState([]);
   const [originSelect, setOriginSelect] = useState({ selected: 'All' });
   const { shouldRedirect, redirect } = useRedirect();
@@ -31,7 +31,8 @@ function FoodByOrigin() {
       const response = await fetch(END_POINT);
       const { meals: originsList } = await response.json();
       const results = originsList.map(({ strArea }) => strArea);
-      return setOrigins(results);
+      const teste = [...origins, ...results];
+      return setOrigins(teste);
     };
     fetchOrigins();
   }, [origins]);
