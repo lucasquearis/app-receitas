@@ -60,17 +60,5 @@
     "mochawesome-report-generator": "^5.1.0",
     "stylelint": "^13.8.0",
     "stylelint-order": "^4.1.0"
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      "index.js",
-      "serviceWorker.js"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcovonly",
-      "text",
-      "clover"
-    ]
   }
 }
