@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { Image, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-// import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const responsive = {
   mobile: {
@@ -12,36 +12,34 @@ const responsive = {
   },
 };
 
-const id = 52771;
-
 // mock de teste
-const doneRecipes = [{
-  id: 52771,
-  type: 'comida',
-  area: 'Italian',
-  category: 'Vegetarian',
-  alcoholicOrNot: '',
-  name: 'Spicy Arrabiata Penne',
-  image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  doneDate: '22/6/2020',
-  tags: ['Pasta', 'Curry'],
-}];
-localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+// const doneRecipes = [{
+//   id: 52771,
+//   type: 'comida',
+//   area: 'Italian',
+//   category: 'Vegetarian',
+//   alcoholicOrNot: '',
+//   name: 'Spicy Arrabiata Penne',
+//   image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+//   doneDate: '22/6/2020',
+//   tags: ['Pasta', 'Curry'],
+// }];
+// localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
 
-// mock de teste
-const inProgressRecipes = {
-  meals: {
-    52771: [],
-  },
-};
-localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+// // mock de teste
+// const inProgressRecipes = {
+//   meals: {
+//     52771: [],
+//   },
+// };
+// localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
 
 function FoodDetails() {
   const [recipesFood, setRecipesFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [recipesRecommendations, setRecipesRecommendations] = useState([]);
-  // const { location: { id } } = useHistory();
+  const { id } = useParams();
 
   useEffect(() => {
     const getRecipesFood = async () => {
@@ -50,7 +48,7 @@ function FoodDetails() {
       setRecipesFood(meals);
     };
     getRecipesFood();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const getIngredients = () => {
@@ -86,42 +84,42 @@ function FoodDetails() {
     getRecommendations();
   }, [recipesFood]);
 
-  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
-    .filter((item) => item.id === id);
-  console.log(localStorageDoneRecipes);
+  // const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
+  //   .filter((item) => item.id === id);
+  // console.log(localStorageDoneRecipes);
 
-  const localStorageInProgressRecipes = JSON
-    .parse(localStorage.getItem('inProgressRecipes'));
-  const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.meals)
-    .filter((item) => parseInt(item, 10) === id);
+  // const localStorageInProgressRecipes = JSON
+  //   .parse(localStorage.getItem('inProgressRecipes'));
+  // const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.meals)
+  //   .filter((item) => parseInt(item, 10) === id);
 
   return (
     <>
       { recipesFood.map((item, index) => (
         <div key={ index }>
-          <Image
+          <img
             data-testid="recipe-photo"
             src={ item.strMealThumb }
             alt="receita pronta"
             fluid
           />
           <h2 data-testid="recipe-title">{ item.strMeal }</h2>
-          <Button
+          <button
             variant="success"
             data-testid="share-btn"
             type="button"
           >
             Compartilhar
 
-          </Button>
-          <Button
+          </button>
+          <button
             variant="success"
             data-testid="favorite-btn"
             type="button"
           >
             Add aos favoritos
 
-          </Button>
+          </button>
           <p data-testid="recipe-category">{ item.strCategory }</p>
           <div>
             <h3>Ingredientes</h3>
@@ -149,21 +147,31 @@ function FoodDetails() {
             { recipesRecommendations.map((food, ind) => (
               <div key={ food.strDrink } data-testid={ `${ind}-recomendation-card` }>
                 <h2 data-testid={ `${ind}-recomendation-title` }>{food.strDrink }</h2>
-                <Image src={ food.strDrinkThumb } alt={ food.strDrink } fluid />
+                <img src={ food.strDrinkThumb } alt={ food.strDrink } fluid />
               </div>
             )) }
           </Carousel>
-          { localStorageDoneRecipes.length !== 0 ? (
+          {/* { localStorageDoneRecipes.length !== 0 ? (
             <Button
               className="fixed-bottom"
               variant="success"
               data-testid="start-recipe-btn"
+              type="button"
             >
               { filterProgressRecipes.length !== 0
                 ? 'Continuar Receita' : 'Iniciar Receita' }
 
             </Button>
-          ) : '' }
+          ) : '' } */}
+          <Button
+            className="fixed-bottom"
+            variant="success"
+            data-testid="start-recipe-btn"
+            type="button"
+          >
+            Iniciar Receita
+
+          </Button>
         </div>
       )) }
     </>

@@ -22,16 +22,16 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Profile } />
+        <Route path="/comidas/:id" render={ (props) => <FoodDet { ...props } /> } />
+        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
+        <Route path="/comidas" component={ Foods } />
+        <Route path="/bebidas" component={ Drinks } />
         <Route path="/explorar" component={ Explore } />
         <Route path="/explorar/comidas" component={ FoodExp } />
         <Route path="/explorar/bebidas" component={ DrinkExp } />
         <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ FoodIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
-        <Route path="/comidas/:id" render={ (props) => <FoodDet { ...props } /> } />
-        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
-        <Route path="/comidas" component={ Foods } />
-        <Route path="/bebidas" component={ Drinks } />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />

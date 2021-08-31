@@ -11,7 +11,7 @@ function FoodCard({ meal, index }) {
       >
         <img
           src={ strMealThumb }
-          alt="Imagem da Comida"
+          alt="Prato de Comida"
           data-testid={ `${index}-card-img` }
         />
         <p data-testid={ `${index}-card-name` }>{ strMeal }</p>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { Image, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const responsive = {
   mobile: {
@@ -39,11 +39,11 @@ function DrinksDetails() {
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [recipesRecommendations, setRecipesRecommendations] = useState([]);
-  const { location: { id } } = useHistory();
+  const { id } = useParams();
 
   useEffect(() => {
     const getRecipesDrink = async () => {
-      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`; // alterar id
+      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
       const { drinks } = await fetch(endpoint).then((data) => data.json());
       setRecipesDrink(drinks);
     };
@@ -84,41 +84,41 @@ function DrinksDetails() {
     getRecommendations();
   }, [recipesDrink]);
 
-  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
-    .filter((item) => item.id === id);
+  // const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
+  //   .filter((item) => item.id === id);
 
-  const localStorageInProgressRecipes = JSON
-    .parse(localStorage.getItem('inProgressRecipes'));
-  const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.drinks)
-    .filter((item) => parseInt(item, 10) === id);
+  // const localStorageInProgressRecipes = JSON
+  //   .parse(localStorage.getItem('inProgressRecipes'));
+  // const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.drinks)
+  //   .filter((item) => parseInt(item, 10) === id);
 
   return (
     <>
       { recipesDrink.map((item, index) => (
         <div key={ index }>
-          <Image
+          <img
             data-testid="recipe-photo"
             src={ item.strDrinkThumb }
             alt="receita pronta"
             fluid
           />
           <h2 data-testid="recipe-title">{ item.strDrink }</h2>
-          <Button
+          <button
             variant="success"
             data-testid="share-btn"
             type="button"
           >
             Compartilhar
 
-          </Button>
-          <Button
+          </button>
+          <button
             variant="success"
             data-testid="favorite-btn"
             type="button"
           >
             Add aos favoritos
 
-          </Button>
+          </button>
           <p data-testid="recipe-category">{ item.strAlcoholic }</p>
           <div>
             <h3>Ingredientes</h3>
@@ -139,21 +139,31 @@ function DrinksDetails() {
             { recipesRecommendations.map((food, ind) => (
               <div key={ food.strMeal } data-testid={ `${ind}-recomendation-card` }>
                 <h2 data-testid={ `${ind}-recomendation-title` }>{food.strMeal }</h2>
-                <Image src={ food.strMealThumb } alt={ food.strMeal } fluid />
+                <img src={ food.strMealThumb } alt={ food.strMeal } fluid />
               </div>
             )) }
           </Carousel>
-          { localStorageDoneRecipes.length !== 0 ? (
-            <Button
+          {/* { localStorageDoneRecipes.length !== 0 ? (
+            <button
               className="fixed-bottom"
               variant="success"
               data-testid="start-recipe-btn"
+              type="button"
             >
               { filterProgressRecipes.length !== 0
                 ? 'Continuar Receita' : 'Iniciar Receita' }
 
-            </Button>
-          ) : '' }
+            </button>
+          ) : '' } */}
+          <Button
+            className="fixed-bottom"
+            variant="success"
+            data-testid="start-recipe-btn"
+            type="button"
+          >
+            Iniciar Receita
+
+          </Button>
         </div>
       )) }
     </>
