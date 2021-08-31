@@ -18,7 +18,7 @@ function DrinkFilterButton({ onClick, toggle }) {
       <button
         type="button"
         className={ toggle === 'All' ? 'toggle-button' : null }
-        data-testid='All-category-filter'
+        data-testid="All-category-filter"
         onClick={ (e) => onClick(e) }
       >
         All
