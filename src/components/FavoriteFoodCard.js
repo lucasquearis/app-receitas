@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FoodContext from '../context/FoodContext';
 import './favoriteFoodCard.css';
@@ -15,10 +16,10 @@ const FavoriteFoodCard = ({ recipe, index }) => {
 
   function DetailUrl() {
     const url = window.location.href;
-    const splitUrl = url.split('/');
-    const newUrl = splitUrl[0] + splitUrl[1] + splitUrl[2];
+    const splitUrl = url.split('receitas-favoritas');
+    const newUrl = splitUrl[0];
     if (recipe.type === 'comida') {
-      const detailUrl = `http://${newUrl}/comidas/${id}`;
+      const detailUrl = `${newUrl}comidas/${id}`;
       Copy(detailUrl);
       setCopy(true);
     }
@@ -62,15 +63,19 @@ const FavoriteFoodCard = ({ recipe, index }) => {
 
   return (
     <div className="fav-food-card">
-      <img
-        src={ image }
-        alt="recipe-img"
-        data-testid={ `${index}-horizontal-image` }
-        className="fav-food-image"
-      />
+      <Link to={ `/comidas/${id}` }>
+        <img
+          src={ image }
+          alt="recipe-img"
+          data-testid={ `${index}-horizontal-image` }
+          className="fav-food-image"
+        />
+      </Link>
       <div>
         <p data-testid={ `${index}-horizontal-top-text` }>{ `${area} - ${category}` }</p>
-        <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
+        <Link to={ `comidas/${id}` }>
+          <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
+        </Link>
         <div>
           <input
             type="image"
