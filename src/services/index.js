@@ -72,6 +72,11 @@ export const copyToClipboard = () => {
   return true;
 };
 
+export const copyToClipboardDone = (id, foodOrDrink) => {
+  const myUrl = copy(`http://${window.location.host}/${foodOrDrink}s/${id}`);
+  return myUrl;
+};
+
 export const myFavoriteRecipe = (recipe) => {
   const arrayOfFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (arrayOfFavorites) {
@@ -98,17 +103,48 @@ export const myFavoriteRecipe = (recipe) => {
   }
 };
 
-export const startRecipe = (recipe) => {
+export const startDrinkRecipe = (recipe) => {
   const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
   if (recipes) {
+    const checkName = recipes
+      .filter(({ cocktails }) => (
+        String(Object.keys(cocktails)) === String(Object.keys(recipe.cocktails))));
+    console.log('se tem igual', checkName);
+    if (checkName.length) {
+      return (true);
+    }
     localStorage.setItem('inProgressRecipes', JSON.stringify(
       [...recipes, recipe],
     ));
-  } else {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(
-      [recipe],
-    ));
+
+    return (true);
   }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    [recipe],
+  ));
+  return (true);
+};
+
+export const startFoodRecipe = (recipe) => {
+  const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (recipes) {
+    const checkName = recipes
+      .filter(({ meals }) => (
+        String(Object.keys(meals)) === String(Object.keys(recipe.meals))));
+    console.log('se tem igual', checkName);
+    if (!checkName.length) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        [...recipes, recipe],
+      ));
+      return (true);
+    }
+    return (true);
+  }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    [recipe],
+  ));
+  return (true);
 };
 
 export const getDate = (date) => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardContent, Typography, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { copyToClipboardDone } from '../services';
+import { copyToClipboardDone } from '../../services';
 import shareIcon from '../../images/shareIcon.svg';
 
 export default function RecipesDoneCard({ recipe, index }) {

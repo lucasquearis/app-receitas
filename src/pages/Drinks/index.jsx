@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDrinksRedux } from '../redux/actions/foodActions';
-import DrinksCards from '../components/DrinksCard';
-import CategoryDrinkBtn from '../components/CategoryDrinkBtn';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { fetchDrinksRedux } from '../../redux/actions/foodActions';
+import DrinksCards from '../../components/DrinksCard';
+import CategoryDrinkBtn from '../../components/CategoryDrinkBtn';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function Drinks() {
   const dispatch = useDispatch();
