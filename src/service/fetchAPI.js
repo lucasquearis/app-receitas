@@ -62,6 +62,18 @@ export async function fetchRadomRecipe() {
   return data;
 }
 
+export async function fetchRecipeByIngredient() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchDrinkByIngredient() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+  const data = await response.json();
+  return data;
+}
+
 export async function filteredRecipes(type, search) {
   const ingredientURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`;
   const nameURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;

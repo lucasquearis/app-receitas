@@ -6,9 +6,10 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import MyContext from '../context/MyContext';
+import * as fetchAPI from '../service/fetchAPI';
 
 function Comidas(props) {
-  const { history: { location: { pathname } } } = props;
+  const { history: { location: { pathname, state } } } = props;
   const [foodRecipes, setFoodRecipes] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const MAX_RECIPES = 12;
@@ -21,9 +22,14 @@ function Comidas(props) {
   };
 
   const getAllFoods = () => {
-    fetch(foodEndpoint)
-      .then((res) => res.json())
-      .then(({ meals }) => setFoodRecipes(meals));
+    if (!state) {
+      fetch(foodEndpoint)
+        .then((res) => res.json())
+        .then(({ meals }) => setFoodRecipes(meals));
+    } else {
+      fetchAPI.filteredRecipes('ingredient', state.ingredient)
+        .then((meals) => setFoodRecipes(meals));
+    }
   };
 
   useEffect(() => {
