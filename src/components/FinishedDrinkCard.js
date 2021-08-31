@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import shareImage from '../images/shareIcon.svg';
+import { handleShare } from '../auxiliar/auxiliarFunctions';
 
 function FinishedDrinkCard({ card, index }) {
-  const { image, name, doneDate, tags, alcoholicOrNot } = card;
+  const [link, setLink] = useState();
+  const { image, name, doneDate, tags, alcoholicOrNot, id } = card;
   return (
     <div key={ index }>
       <img
@@ -14,7 +17,14 @@ function FinishedDrinkCard({ card, index }) {
       <h3 data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</h3>
       <h2 data-testid={ `${index}-horizontal-name` }>{ name }</h2>
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-      <button type="button" data-testid={ `${index}-horizontal-share-btn` }>Share</button>
+      <input
+        type="image"
+        alt="share"
+        src={ shareImage }
+        data-testid={ `${index}-horizontal-share-btn` }
+        onClick={ () => handleShare(setLink, `bebidas/${id}`) }
+      />
+      <p>{ link }</p>
       { tags.map((item) => {
         const tagItem = (
           <p key={ item } data-testid={ `${index}-${item}-horizontal-tag` }>{ item }</p>
