@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
-import { useHistory } from 'react-router-dom';
 import RecomendationsFoods from '../components/RecomendationsFoods';
+import ButtonDrinks from '../components/ButtonDrinks';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -20,31 +20,24 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function DrinkDetails() {
   const id = 178319;
-  const getHistory = useHistory();
-  const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
 
   useEffect(() => {
     try {
-      const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        console.log(getHistory);
-        const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
-        console.log(pathname);
-        const request = await fetch(`${goURL}${id}`);
+        const request = await fetch(`${urlDrinks}${id}`);
         const response = await request.json();
         const resolve = await response.drinks[0];
-        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
@@ -89,15 +82,7 @@ function DrinkDetails() {
       <div className="recomendations">
         <RecomendationsFoods />
       </div>
-      <div className="div-button-details">
-        <button
-          className="button-details"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          iniciar receita
-        </button>
-      </div>
+      <ButtonDrinks />
     </div>
   );
 }

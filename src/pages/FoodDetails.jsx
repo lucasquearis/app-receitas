@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
-import { useHistory } from 'react-router-dom';
 import RecomendationsDrinks from '../components/RecomendationsDrinks';
+import ButtonFoods from '../components/ButtonFoods';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -20,8 +20,6 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function FoodDetails() {
   const id = 52771;
-  const getHistory = useHistory();
-  const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
@@ -29,22 +27,17 @@ function FoodDetails() {
   useEffect(() => {
     try {
       const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-      const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        console.log(getHistory);
-        const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
-        console.log(pathname);
-        const request = await fetch(`${goURL}${id}`);
+        const request = await fetch(`${urlFoods}${id}`);
         const response = await request.json();
         const resolve = await response.meals[0];
-        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
@@ -95,15 +88,7 @@ function FoodDetails() {
       <div className="recomendations">
         <RecomendationsDrinks />
       </div>
-      <div className="div-button-details">
-        <button
-          className="button-details"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          iniciar receita
-        </button>
-      </div>
+      <ButtonFoods />
     </div>
   );
 }
