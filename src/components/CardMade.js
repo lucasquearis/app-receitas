@@ -9,7 +9,7 @@ function CardMade(props) {
     doneDate, tags, alcoholicOrNot } = recipe;
   const urlDetails = `/${type}s/${id}`;
 
-  if (recipe.type === 'comida') {
+  if (type === 'comida') {
     return (
       <div key={ index } className="card-done">
         <Link to={ urlDetails }>
@@ -95,7 +95,17 @@ function CardMade(props) {
 }
 
 CardMade.propTypes = {
-  recipe: PropTypes.objectOf(string).isRequired,
+  recipe: PropTypes.shape({
+    id: PropTypes.number,
+    type: PropTypes.string,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    area: PropTypes.string,
+    category: PropTypes.string,
+    alcoholicOrNot: PropTypes.string,
+    doneDate: PropTypes.string,
+    tags: PropTypes.arrayOf(String),
+  }).isRequired,
   index: PropTypes.number.isRequired,
   copyPath: PropTypes.func.isRequired,
   copyMessage: PropTypes.string.isRequired,

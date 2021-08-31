@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import copy from 'clipboard-copy';
 import useFilterMadeAndFavorite from '../hooks/useFilterMadeAndFavorite';
-import '../styles/made-recipes.css';
 import CardMade from '../components/CardMade';
 import CardFavorite from '../components/CardFavorite';
+import '../styles/made-recipes.css';
 
 function MadeAndFavoriteRecipes() {
   const { madeRecipes, filter, setFilter, setRecipes } = useFilterMadeAndFavorite();
