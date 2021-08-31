@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
+import ShareButton from '../components/ShareButton';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -55,7 +56,7 @@ function DrinkDetails() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
-        <button type="button" data-testid="share-btn">compartilhar</button>
+        <ShareButton />
         <button type="button" data-testid="favorite-btn">favorito</button>
         <p data-testid="recipe-category">
           { getRecipe

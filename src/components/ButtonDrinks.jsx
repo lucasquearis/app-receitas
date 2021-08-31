@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 
 function ButtonDrinks() {
   const ido = 178319;
+  // const { id, type} = props;
+  const type = 'cocktail';
   const [none, setNone] = useState(true);
   const [inProgress, setInProgress] = useState(false);
   const setHistory = useHistory();
@@ -16,7 +18,8 @@ function ButtonDrinks() {
         (item) => item.id === ido,
       )));
     setInProgress(localStorage.getItem('inProgressRecipes')
-      && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes')).some((itemId) => itemId === ido)));
+      && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
+        type]).some((recipeId) => recipeId === ido));
   }, []);
 
   return (

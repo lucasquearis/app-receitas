@@ -2,21 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
 function ButtonFoods() {
-  const ido = 52771;
+  const ide = 52771;
+  // const { id, type } = props;
+  const type = 'meal';
   const [none, setNone] = useState(true);
-  const [inProgress, setInProgress] = useState(false);
+  const [inProgres, setInProgres] = useState(false);
   const setHistory = useHistory();
   const handleClick = () => {
-    setHistory.push(`/comidas/${ido}/in-progress`);
+    setHistory.push(`/comidas/${ide}/in-progress`);
   };
 
   useEffect(() => {
     setNone(localStorage.getItem('doneRecipes')
       && (JSON.parse(localStorage.getItem('doneRecipes')).some(
-        (item) => item.id === ido,
+        (item) => item.id === ide,
       )));
-    setInProgress(localStorage.getItem('inProgressRecipes')
-      && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes')).some((itemId) => itemId === ido)));
+    setInProgres(localStorage.getItem('inProgressRecipes')
+      && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
+        type]).some((recipeId) => recipeId === ide));
   }, []);
 
   return (
@@ -28,7 +31,7 @@ function ButtonFoods() {
         data-testid="start-recipe-btn"
         onClick={ handleClick }
       >
-        {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        {inProgres ? 'Continuar Receita' : 'Iniciar Receita'}
       </button>
     </div>
   );
