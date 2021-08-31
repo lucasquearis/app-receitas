@@ -7,6 +7,7 @@
   display: flex;
   flex-flow: wrap;
   justify-content: space-evenly;
+  padding-bottom: 6em;
 }
 
 .drinks-categories-container {
