@@ -29,14 +29,6 @@ function ExploreDrinks(props) {
             Por Ingredientes
           </button>
         </Link>
-        <Link to="/explorar/comidas/area">
-          <button
-            data-testid="explore-by-area"
-            type="button"
-          >
-            Por Local de Origem
-          </button>
-        </Link>
         <button
           data-testid="explore-surprise"
           type="button"
