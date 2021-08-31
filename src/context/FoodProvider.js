@@ -60,6 +60,7 @@ const FoodProvider = ({ children }) => {
     ingredients,
     areas,
   };
+
   return (
     <FoodContext.Provider value={ contextValue }>
       {children}
