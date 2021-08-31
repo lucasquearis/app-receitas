@@ -18,7 +18,6 @@ function Header(props) {
   }
 
   const teste = () => {
-    console.log('entro');
     const renderBar = (
       <button type="button" onClick={ showSearchBar }>
         <img src={ searchIcon } alt="icone-de-pesquisar" data-testid="search-top-btn" />

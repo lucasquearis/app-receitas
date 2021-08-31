@@ -56,10 +56,15 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
   }, [foodInfo, ingredients]);
 
   const RedirectToRecipesMade = () => {
-    console.log(foodInfo);
     const dateNow = new Date();
     const formatDate = `${dateNow}`.split(' GMT')[0];
     const objToSave = foodInfo.map((item) => {
+      let tagFormat;
+      if (item.strTags) {
+        tagFormat = item.strTags.split(', ');
+      } else {
+        tagFormat = [];
+      }
       const obj = {
         id: item.idMeal,
         type: 'comida',
@@ -69,7 +74,7 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
         name: item.strMeal,
         image: item.strMealThumb,
         doneDate: formatDate,
-        tags: item.strTags,
+        tags: tagFormat,
       };
       return obj;
     });

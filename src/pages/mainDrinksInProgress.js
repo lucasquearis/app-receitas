@@ -77,6 +77,12 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
     const dateNow = new Date();
     const formatDate = `${dateNow}`.split(' GMT')[0];
     const objToSave = drinkInfo.map((item) => {
+      let tagFormat;
+      if (item.strTags) {
+        tagFormat = item.strTags.split(', ');
+      } else {
+        tagFormat = [];
+      }
       const obj = {
         id: item.idDrink,
         type: 'bebida',
@@ -86,7 +92,7 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
         name: item.strDrink,
         image: item.strDrinkThumb,
         doneDate: formatDate,
-        tags: item.strTags,
+        tags: tagFormat,
       };
       return obj;
     });
