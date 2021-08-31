@@ -1,3 +1,7 @@
+.recipe-card {
+  box-shadow: 4px 4px 4px #969595;
+}
+
 .recipe-card img {
   height: 140px;
   width: 140px;
