@@ -1,13 +1,15 @@
 import React from 'react';
 import UseRecipes from '../../hook/UseRecipes';
+import { ListSection, ListDiv } from './styles';
 
 const RecipeList = () => {
   const { chooser } = UseRecipes();
   return (
-    <section>
-      <h2>Receitas</h2>
-      {chooser()}
-    </section>
+    <ListSection>
+      <ListDiv>
+        {chooser()}
+      </ListDiv>
+    </ListSection>
   );
 };
 

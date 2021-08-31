@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import CategoryButton from './CategoryButton/CategoryButton';
 import AllButton from './AllButton/AllButton';
+import { CategorySection } from './styles';
 
 function CategoryFilter() {
   const { pathname } = useLocation();
@@ -11,8 +12,8 @@ function CategoryFilter() {
 
   function btnMap(firstFive) {
     return (
-      <div>
-        <AllButton path={ pathname } select={ setSelected } />
+      <CategorySection>
+        <AllButton path={ pathname } selected={ selected } select={ setSelected } />
         { firstFive.map(({ strCategory }) => (
           <CategoryButton
             key={ strCategory }
@@ -21,7 +22,7 @@ function CategoryFilter() {
             selected={ selected }
             select={ setSelected }
           />)) }
-      </div>
+      </CategorySection>
     );
   }
 

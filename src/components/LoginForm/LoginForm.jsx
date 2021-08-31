@@ -1,47 +1,60 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
 import useUser from '../../hook/UseUser';
+import { LoginSection, LoginDiv, LoginLogo, Button } from './styles';
 
 const LoginForm = () => {
   const { handleChange, setTokenToLocal,
     disableBtn, redirect, minLength, user: { email, password } } = useUser();
 
+  const emailProps = {
+    name: 'email',
+    id: 'email-input',
+    label: 'E-mail:',
+    type: 'email',
+    value: email,
+    defaultValue: 'Default Value',
+    helperText: 'Digite seu melhor e-mail!',
+    variant: 'outlined',
+    onChange: ({ target }) => handleChange(target),
+    inputProps: { 'data-testid': 'email-input' },
+  };
+
+  const passwordProps = {
+    name: 'password',
+    id: 'password-input',
+    label: 'Senha:',
+    type: 'password',
+    value: password,
+    defaultValue: 'Default Value',
+    helperText: 'Pelo menos 7 digitos',
+    variant: 'outlined',
+    onChange: ({ target }) => handleChange(target),
+    inputProps: { 'data-testid': 'password-input' },
+  };
+
+  const buttonProps = {
+    disabled: disableBtn || password.length <= minLength,
+    type: 'button',
+    'data-testid': 'login-submit-btn',
+    onClick: () => setTokenToLocal(),
+  };
+
   if (redirect) {
     return <Redirect to="/comidas" />;
   }
   return (
-    <section>
-      <label htmlFor="email-input">
-        E-mail:
-        <input
-          name="email"
-          value={ email }
-          id="email-input"
-          type="email"
-          data-testid="email-input"
-          onChange={ ({ target }) => handleChange(target) }
-        />
-      </label>
-      <label htmlFor="password-input">
-        Password:
-        <input
-          name="password"
-          value={ password }
-          id="password-input"
-          type="password"
-          data-testid="password-input"
-          onChange={ ({ target }) => handleChange(target) }
-        />
-      </label>
-      <button
-        disabled={ disableBtn || password.length <= minLength }
-        type="button"
-        data-testid="login-submit-btn"
-        onClick={ () => setTokenToLocal() }
-      >
-        Entrar
-      </button>
-    </section>
+    <LoginSection>
+      <LoginDiv>
+        <LoginLogo src="https://cdn.discordapp.com/attachments/879411496998817795/882329158007525386/H3.png" />
+        <TextField { ...emailProps } />
+        <TextField { ...passwordProps } />
+        <Button { ...buttonProps }>
+          Entrar
+        </Button>
+      </LoginDiv>
+    </LoginSection>
   );
 };
 

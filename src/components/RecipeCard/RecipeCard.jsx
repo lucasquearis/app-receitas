@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CardSection, CardImg, CardH2 } from './styles';
 
 const RecipeCard = ({ recipe, index }) => (
-  <section data-testid={ `${index}-recipe-card` }>
-    <img
-      style={ { width: '90px' } }
+  <CardSection data-testid={ `${index}-recipe-card` }>
+    <CardImg
       data-testid={ `${index}-card-img` }
       src={ recipe.strMealThumb || recipe.strDrinkThumb }
       alt="food thumb"
     />
-    <h2 data-testid={ `${index}-card-name` }>{recipe.strMeal || recipe.strDrink}</h2>
-  </section>
+    <CardH2 data-testid={ `${index}-card-name` }>
+      {recipe.strMeal || recipe.strDrink}
+    </CardH2>
+  </CardSection>
 );
 
 RecipeCard.propTypes = {

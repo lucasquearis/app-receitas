@@ -4,17 +4,18 @@ import propTypes from 'prop-types';
 import SearchBar from '../SearchBar/SearchBar';
 import profileIconImg from '../../images/profileIcon.svg';
 import searchIconImg from '../../images/searchIcon.svg';
+import { HeaderSection, ImgProfile, HeaderTitle } from './styles';
 
 function Header({ title, searchIcon }) {
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
 
   return (
-    <header>
+    <HeaderSection>
       <Link to="/perfil" data-testid="profile-top-btn" src={ profileIconImg }>
-        <img src={ profileIconImg } alt="profile-button" width="50px" height="50px" />
+        <ImgProfile src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png" alt="profile-button" />
       </Link>
-      <h1 data-testid="page-title">{title}</h1>
-      {searchIcon && (
+      <HeaderTitle data-testid="page-title">{title}</HeaderTitle>
+      {searchIcon ? (
         <button
           type="button"
           data-testid="search-top-btn"
@@ -22,9 +23,16 @@ function Header({ title, searchIcon }) {
           src={ searchIconImg }
         >
           <img src={ searchIconImg } alt="search-button" width="50px" height="50px" />
-        </button>)}
+        </button>)
+        : (
+          <button
+            type="button"
+            style={ { visibility: 'hidden' } }
+          >
+            <img src={ searchIconImg } alt="search-button" width="50px" height="50px" />
+          </button>)}
       {displaySearchBar && <SearchBar />}
-    </header>
+    </HeaderSection>
   );
 }
 
