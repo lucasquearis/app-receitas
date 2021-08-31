@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Input, Button } from '../components';
 import AppContext from '../context/AppContext';
 import verifyLogin from '../helpers/verifyLogin';
+import './css/Login.css';
 
 export default function Login() {
   const { setUser } = useContext(AppContext);
@@ -29,29 +30,40 @@ export default function Login() {
   useEffect(checkValid, [loginForm]);
 
   return (
-    <form action="">
-      <Input
-        labelText="Email:"
-        type="email"
-        id="email-input"
-        name="email"
-        onChange={ handleChange }
-      />
-      <Input
-        labelText="Senha:"
-        type="password"
-        id="password-input"
-        name="password"
-        onChange={ handleChange }
-      />
-      <Button
-        className="login-submit-btn"
-        type="button"
-        buttonText="Entrar"
-        pathname="/comidas"
-        isDisable={ btnDisable }
-        onClick={ handleClick }
-      />
-    </form>
+    <>
+      <h1 className="login-title">APP de Receitas</h1>
+      <form className="login-form">
+        <div className="mb-3">
+          <Input
+            labelText="Email:"
+            type="email"
+            id="email-input"
+            name="email"
+            className="form-control"
+            onChange={ handleChange }
+          />
+        </div>
+        <div className="mb-3">
+          <Input
+            labelText="Senha:"
+            type="password"
+            id="password-input"
+            name="password"
+            className="form-control"
+            onChange={ handleChange }
+          />
+        </div>
+        <div className="mb-3">
+          <Button
+            className="login-submit-btn btn btn-primary"
+            type="button"
+            buttonText="Entrar"
+            pathname="/comidas"
+            isDisable={ btnDisable }
+            onClick={ handleClick }
+          />
+        </div>
+      </form>
+    </>
   );
 }

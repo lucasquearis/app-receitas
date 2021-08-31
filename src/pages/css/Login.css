@@ -1,0 +1,10 @@
+.login-title {
+  margin-top: 30vh;
+  text-align: center;
+}
+
+.login-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
