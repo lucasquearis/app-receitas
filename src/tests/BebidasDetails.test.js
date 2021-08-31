@@ -13,6 +13,7 @@ const startRecipeButton = 'start-recipe-btn';
 const drinkName = 'Aquamarine';
 const drinkImage = 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg';
 const whiteHeart = 'whiteHeartIcon.svg';
+const blackHeart = 'blackHeartIcon.svg';
 
 describe('Testes para a pagina de detalhes de bebidas', () => {
   beforeEach(() => {
@@ -62,97 +63,96 @@ describe('Testes para a pagina de detalhes de bebidas', () => {
     await act(() => fetchMock());
   });
 
-  // it('Verifica se o texto muda caso a receita ja tenha sido iniciada', async () => {
-  //   localStorage.clear();
-  //   const inProgressRecipes = {
-  //     meals: {
-  //       52771: [],
-  //     },
-  //   };
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-  //   renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
-  //   const continueRecipeButton = await screen.findByTestId(startRecipeButton);
-  //   expect(continueRecipeButton).toHaveTextContent('Continuar Receita');
-  // });
+  it('Verifica se o texto muda caso a receita ja tenha sido iniciada', async () => {
+    localStorage.clear();
+    const inProgressRecipes = {
+      cocktails: {
+        178319: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
+    const continueRecipeButton = await screen.findByTestId(startRecipeButton);
+    expect(continueRecipeButton).toHaveTextContent('Continuar Receita');
+  });
 
-  // it('Verifica se o link para comecar redireciona para a pagina correta', async () => {
-  //   const { history } = renderWithRouter(
-  //     <BebidasDetails match={ { params: { id: '178319' } } } />,
-  //   );
-  //   const continueRecipeButton = await screen.findByTestId(startRecipeButton);
+  it('Verifica se o link para comecar redireciona para a pagina correta', async () => {
+    const { history } = renderWithRouter(
+      <BebidasDetails match={ { params: { id: '178319' } } } />,
+    );
+    const continueRecipeButton = await screen.findByTestId(startRecipeButton);
 
-  //   userEvent.click(continueRecipeButton);
+    userEvent.click(continueRecipeButton);
 
-  //   const { location: { pathname } } = history;
+    const { location: { pathname } } = history;
 
-  //   expect(pathname).toBe('/comidas/52771/in-progress');
-  // });
+    expect(pathname).toBe('/bebidas/178319/in-progress');
+  });
 
-  // it('Verifica se a funcao copy e chamada ao clicar no botao', async () => {
-  //   copy.mockImplementation(() => null);
-  //   renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
-  //   const copyLink = await screen.findByTestId('share-btn');
+  it('Verifica se a funcao copy e chamada ao clicar no botao', async () => {
+    copy.mockImplementation(() => null);
+    renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
+    const copyLink = await screen.findByTestId('share-btn');
 
-  //   userEvent.click(copyLink);
+    userEvent.click(copyLink);
 
-  //   expect(copy).toHaveBeenCalled();
-  //   screen.getByText(/Link copiado!/i);
-  // });
+    expect(copy).toHaveBeenCalled();
+    screen.getByText(/Link copiado!/i);
+  });
 
-  // it('Verifica se o coracao do botao de favoritar vem preenchido', async () => {
-  //   const favoriteRecipes = [{
-  //     id: '178319',
-  //     type: 'comida',
-  //     area: 'Italian',
-  //     category: 'Vegetarian',
-  //     alcoholicOrNot: '',
-  //     name: foodName,
-  //     image: foodImage,
-  //   }];
-  //   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  //   renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
-  //   const favoriteImage = await screen.findByTestId(favoriteButton);
+  it('Verifica se o coracao do botao de favoritar vem preenchido', async () => {
+    const favoriteRecipes = [{
+      id: '178319',
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: drinkName,
+      image: drinkImage,
+    }];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
+    const favoriteImage = await screen.findByTestId(favoriteButton);
 
-  //   expect(favoriteImage).toHaveAttribute('src', 'blackHeartIcon.svg');
-  //   await act(() => fetchMock());
-  // });
+    expect(favoriteImage).toHaveAttribute('src', blackHeart);
+  });
 
-  // it('Verifica se o coracao do botao de favoritar vem vazio', async () => {
-  //   renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
-  //   const favoriteImage = await screen.findByTestId(favoriteButton);
+  it('Verifica se o coracao do botao de favoritar vem vazio', async () => {
+    renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
+    const favoriteImage = await screen.findByTestId(favoriteButton);
 
-  //   expect(favoriteImage).toHaveAttribute('src', whiteHeart);
-  // });
+    expect(favoriteImage).toHaveAttribute('src', whiteHeart);
+  });
 
-  // it('Verifica que se clicar no botao favorita ou desfavorita a receita', async () => {
-  //   renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
-  //   const favoriteImage = await screen.findByTestId(favoriteButton);
+  it('Verifica que se clicar no botao favorita ou desfavorita a receita', async () => {
+    renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
+    const favoriteImage = await screen.findByTestId(favoriteButton);
 
-  //   expect(favoriteImage).toHaveAttribute('src', whiteHeart);
-  //   userEvent.click(favoriteImage);
-  //   expect(favoriteImage).toHaveAttribute('src', 'blackHeartIcon.svg');
-  //   userEvent.click(favoriteImage);
-  //   expect(favoriteImage).toHaveAttribute('src', whiteHeart);
-  // });
+    expect(favoriteImage).toHaveAttribute('src', whiteHeart);
+    userEvent.click(favoriteImage);
+    expect(favoriteImage).toHaveAttribute('src', blackHeart);
+    userEvent.click(favoriteImage);
+    expect(favoriteImage).toHaveAttribute('src', whiteHeart);
+  });
 
-  // it('Verifica se a receita esta no localStorage ao clicar no botao de fav', async () => {
-  //   const expectedFavoriteRecipes = [
-  //     {
-  //       id: '178319',
-  //       type: 'comida',
-  //       area: 'Italian',
-  //       category: 'Vegetarian',
-  //       alcoholicOrNot: '',
-  //       name: foodName,
-  //       image: foodImage,
-  //     },
-  //   ];
-  //   renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
-  //   const favoriteImage = await screen.findByTestId(favoriteButton);
+  it('Verifica se a receita esta no localStorage ao clicar no botao de fav', async () => {
+    const expectedFavoriteRecipes = [
+      {
+        id: '178319',
+        type: 'bebida',
+        area: '',
+        category: 'Cocktail',
+        alcoholicOrNot: 'Alcoholic',
+        name: drinkName,
+        image: drinkImage,
+      },
+    ];
+    renderWithRouter(<BebidasDetails match={ { params: { id: '178319' } } } />);
+    const favoriteImage = await screen.findByTestId(favoriteButton);
 
-  //   userEvent.click(favoriteImage);
-  //   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    userEvent.click(favoriteImage);
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-  //   expect(favoriteRecipes).toStrictEqual(expectedFavoriteRecipes);
-  // });
+    expect(favoriteRecipes).toStrictEqual(expectedFavoriteRecipes);
+  });
 });
