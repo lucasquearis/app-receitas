@@ -32,6 +32,43 @@ const getIngredientsList = (target, idApi, ingredients, drink) => {
     }));
 };
 
+const saveProgress = (target, idApi, ingredients, drink) => {
+  const lastSave = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
+  localStorage.setItem('inProgressRecipes', JSON.stringify({
+    ...lastSave,
+    cocktails: {
+      ...lastSave.cocktails,
+      [idApi]: getIngredientsList(target, idApi, ingredients, drink),
+    },
+    meals: {
+      ...lastSave.meals,
+    },
+  }));
+};
+
+const setFavorite = (favoriteFound, setIsFavorite) => {
+  if (favoriteFound) {
+    setIsFavorite(Object.values(favoriteFound)[0]);
+  } else {
+    setIsFavorite(false);
+  }
+};
+
+const buildIngredients = (cocktail, idApi) => {
+  const ingredientsKeys = getIngredientsKeys(cocktail);
+  const lastSaveProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+    meals: {}, cocktails: {},
+  };
+  return {
+    [idApi]: ingredientsKeys.map((ingredientKey, index) => ({
+      [cocktail[ingredientKey]]: lastSaveProgress.cocktails[idApi]
+        ? lastSaveProgress.cocktails[idApi][index][cocktail[ingredientKey]]
+        : false,
+    })),
+    wereFetched: true,
+  };
+};
+
 const BebidasEmProcesso = () => {
   const [drink, setDrink] = useState();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -51,24 +88,8 @@ const BebidasEmProcesso = () => {
       const lastSaveFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
       const favoriteFound = lastSaveFavorite
         .find((recipe) => recipe.id === data.drinks[0].idDrink);
-      if (favoriteFound) {
-        setIsFavorite(Object.values(favoriteFound)[0]);
-      } else {
-        setIsFavorite(false);
-      }
-
-      const ingredientsKeys = getIngredientsKeys(cocktail);
-      const lastSaveProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
-        meals: {}, cocktails: {},
-      };
-      setIngredients({
-        [idApi]: ingredientsKeys.map((ingredientKey, index) => ({
-          [cocktail[ingredientKey]]: lastSaveProgress.cocktails[idApi]
-            ? lastSaveProgress.cocktails[idApi][index][cocktail[ingredientKey]]
-            : false,
-        })),
-        wereFetched: true,
-      });
+      setFavorite(favoriteFound, setIsFavorite);
+      setIngredients(buildIngredients(cocktail, idApi));
     };
     api();
   }, [idApi]);
@@ -93,17 +114,7 @@ const BebidasEmProcesso = () => {
       [idApi]: getIngredientsList(target, idApi, ingredients, drink),
       wereFetched: true,
     });
-    const lastSave = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      ...lastSave,
-      cocktails: {
-        ...lastSave.cocktails,
-        [idApi]: getIngredientsList(target, idApi, ingredients, drink),
-      },
-      meals: {
-        ...lastSave.meals,
-      },
-    }));
+    saveProgress(target, idApi, ingredients, drink);
   };
 
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
