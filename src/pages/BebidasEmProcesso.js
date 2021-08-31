@@ -129,6 +129,9 @@ const BebidasEmProcesso = () => {
       </div>
     ));
 
+  const allDone = () => ingredients.wereFetched && ingredients[idApi]
+    .every((ingredient) => Object.values(ingredient)[0] === true);
+
   if (drink === undefined) {
     return <Loading />;
   }
@@ -144,7 +147,6 @@ const BebidasEmProcesso = () => {
 
       <button
         type="button"
-        // data-testid="favorite-btn"
         onClick={ handleFavorite }
       >
         <img
@@ -156,7 +158,13 @@ const BebidasEmProcesso = () => {
 
       {renderIngredients(getIngredientsKeys(drink))}
       <p data-testid="instructions">{drink.strInstructions}</p>
-      <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ !allDone() }
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 };

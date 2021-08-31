@@ -130,6 +130,9 @@ const ComidasEmProcesso = () => {
       </div>
     ));
 
+  const allDone = () => ingredients.wereFetched && ingredients[idApi]
+    .every((ingredient) => Object.values(ingredient)[0] === true);
+
   if (food === undefined) {
     return <Loading />;
   }
@@ -142,7 +145,6 @@ const ComidasEmProcesso = () => {
 
       <button
         type="button"
-        // data-testid="favorite-btn"
         onClick={ handleFavorite }
       >
         <img
@@ -155,7 +157,13 @@ const ComidasEmProcesso = () => {
       <p data-testid="recipe-category">{food.strCategory}</p>
       {renderIngredients(getIngredientsKeys(food))}
       <p data-testid="instructions">{food.strInstructions}</p>
-      <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ !allDone() }
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 };
