@@ -32,7 +32,7 @@ export default function Comidas() {
       <CategoriesBar />
       <MenuInferior />
       <div>
-        { (meals.length !== 0) && meals.map((item, index) => (
+        { (meals !== []) && meals.map((item, index) => (
           <div key={ item.idMeal }>
             { `categoria: ${item.strCategory}` }
             <Link to={ `/comidas/${item.idMeal}` }>

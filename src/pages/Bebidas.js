@@ -32,7 +32,7 @@ export default function Bebidas() {
       <CategoriesBar />
       <MenuInferior />
       <div>
-        { (cocktails.length !== 0) && cocktails.map((item, index) => (
+        { (cocktails !== []) && cocktails.map((item, index) => (
           <div key={ item.idDrink }>
             { `categoria: ${item.strCategory}` }
             <Link to={ `/bebidas/${item.idDrink}` }>
