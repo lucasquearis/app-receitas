@@ -6,6 +6,7 @@ import AllRecipes from './Pages/AllRecipes';
 import Login from './Pages/Login/Login';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
+import ExploreArea from './Pages/ExploreArea';
 import Explore from './Pages/Explore';
 import ExploreIngredients from './Pages/ExploreIngredients';
 import Profile from './Pages/Profile/Profile';
@@ -37,11 +38,7 @@ function App() {
         <Route
           exact
           path="/explorar/comidas/area"
-          render={ () => (
-            <Header
-              title="Explorar Origem"
-            />
-          ) }
+          component={ ExploreArea }
         />
         <Route
           exact
@@ -52,6 +49,11 @@ function App() {
           exact
           path="/explorar/bebidas/ingredientes"
           component={ ExploreIngredients }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/area"
+          render={ () => <div>Not Found</div> }
         />
         <Route
           exact
