@@ -1,31 +1,22 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Redirect, useLocation } from 'react-router-dom';
 import AppContext from '../Context/AppContext';
 import useFilter from '../hooks/useFilter';
-import useFilterIngredient from '../hooks/useFilterIngredient';
 
 function FoodsAndDrinks() {
   const { globalState } = useContext(AppContext);
   const { meals, drinks, mealsCategories, drinksCategories } = globalState;
   const { pathname } = useLocation();
-  const { filter, setFilter, category, setCategory } = useFilter();
-  const { itemsByIngredient, setItemsByIngredient } = useFilterIngredient();
+  const { filter, setFilter, category } = useFilter();
   const [redirect, setRedirect] = useState(false);
   const [id, setId] = useState('');
   const numButtons = 5;
   let type = 'Meal';
   let cards = meals;
   let buttons = mealsCategories;
-
-  useEffect(() => {
-    if (itemsByIngredient.length !== 0) {
-      setCategory(itemsByIngredient);
-      setItemsByIngredient([]);
-    }
-  }, [itemsByIngredient, setCategory, setItemsByIngredient]);
 
   if (pathname === '/bebidas') {
     type = 'Drink';
