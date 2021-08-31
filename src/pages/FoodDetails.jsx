@@ -100,4 +100,3 @@ function FoodDetails() {
 }
 
 export default FoodDetails;
-
