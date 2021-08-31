@@ -16,6 +16,7 @@ class Search extends Component {
     this.state = {
       radio: '',
       text: '',
+      redirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -48,22 +49,24 @@ class Search extends Component {
   handleFoods() {
     const { radio, text } = this.state;
     const { setSearchIngredient,
-      setSearchLetter, setSearchNome, setNome } = this.props;
+      setSearchLetter, setSearchNome } = this.props;
+    // console.log(id);
     if (radio === 'Ingrediente') {
       setSearchIngredient(text);
       if (setSearchIngredient.length === 1) {
-        return <Redirect to={ `/comidas/${setNome}` } />;
+        // return <Redirect to={ `/comidas/${setNome}` } />;
       }
     } else if (radio === 'Nome') {
       setSearchNome(text);
-      // console.log(nome.search.idMeal);
+      const { setNome } = this.props;
       if (setSearchNome.length === 1) {
-        return <Redirect to={ `/comidas/${setNome}` } />;
+        this.setState({ redirect: true });
       }
+      console.log(setNome);
     } else if (radio === 'Primeira letra' && text.length === 1) {
       setSearchLetter(text);
       if (setSearchLetter.length === 1) {
-        return <Redirect to={ `/comidas/${setNome}` } />;
+        this.setState({ redirect: true });
       }
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
@@ -79,6 +82,7 @@ class Search extends Component {
   }
 
   render() {
+    const { redirect, id } = this.state;
     return (
       <div>
         <label htmlFor="search-input">
@@ -129,6 +133,7 @@ class Search extends Component {
         >
           Search
         </button>
+        { redirect ? <Redirect to={ `/comidas/${id}` } /> : console.log('teste') }
       </div>
     );
   }

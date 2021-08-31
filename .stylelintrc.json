@@ -131,7 +131,6 @@
     "value-list-comma-space-after": "always",
     "value-list-comma-space-before": "always",
     "value-list-max-empty-lines": 0,
-    "value-no-vendor-prefix": true,
-    "extends": "stylelint-config-standard"
+    "value-no-vendor-prefix": true
   }
 }
