@@ -7,7 +7,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import {
   updateProgressRecipe,
   initialProgressStore,
-  favoriteRecipes } from '../helpers/setLocalStorage';
+  favoriteRecipes,
+  doneRecipesToStorage } from '../helpers/setLocalStorage';
 
 export default function InProgress(props) {
   const {
@@ -73,6 +74,10 @@ export default function InProgress(props) {
     ]);
   };
 
+  const handleFinish = () => {
+    doneRecipesToStorage(props);
+  };
+
   const favoriteIcon = favorite ? blackHeartIcon : whiteHeartIcon;
 
   return (
@@ -127,6 +132,7 @@ export default function InProgress(props) {
           type="button"
           data-testid="finish-recipe-btn"
           disabled={ !steps.every(({ checked }) => checked) }
+          onClick={ handleFinish }
         >
           Finish
 

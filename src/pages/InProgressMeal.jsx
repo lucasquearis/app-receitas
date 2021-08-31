@@ -22,7 +22,7 @@ export default function InProgressMeal(props) {
   const ingredientAndMeasure = [[...filterIngredients], [...filterMeasure]];
 
   const { strMeal, strMealThumb, strCategory,
-    strInstructions, strYoutube, strArea } = details.meals[0];
+    strInstructions, strYoutube, strArea, strTags } = details.meals[0];
   return (
     <div>
       <InProgress
@@ -36,6 +36,7 @@ export default function InProgressMeal(props) {
         ingredientAndMeasure={ ingredientAndMeasure }
         id={ id }
         type="meals"
+        tags={ strTags }
       />
     </div>
   );
