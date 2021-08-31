@@ -9,7 +9,7 @@ function Profile() {
 
   return (
     <main>
-      <Header name="Perfil" search={ false } />
+      <Header title="Perfil" search={ false } />
       <h1
         data-testid="profile-email"
       >
