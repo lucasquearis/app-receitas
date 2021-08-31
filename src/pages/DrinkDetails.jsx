@@ -3,6 +3,7 @@ import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
 import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -57,7 +58,7 @@ function DrinkDetails() {
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <ShareButton />
-        <button type="button" data-testid="favorite-btn">favorito</button>
+        <FavoriteButton />
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
@@ -83,7 +84,9 @@ function DrinkDetails() {
       <div className="recomendations">
         <RecomendationsFoods />
       </div>
-      <ButtonDrinks />
+      <div>
+        <ButtonDrinks />
+      </div>
     </div>
   );
 }

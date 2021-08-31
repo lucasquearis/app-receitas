@@ -7,8 +7,10 @@ function ShareButton() {
   const { pathname } = useLocation();
   const local = `http://localhost:3000${pathname}`;
 
-  // const { location: { href } } = location;
-  // console.log(link);
+  const handleShare = () => {
+    navigator.clipboard.writeText(local);
+    setShowMsg(true);
+  };
 
   return (
     <div>
@@ -16,7 +18,7 @@ function ShareButton() {
         type="button"
         data-testid="share-btn"
         key={ shareIcon }
-        onClick={ () => { navigator.clipboard.writeText(local); setShowMsg(true); } }
+        onClick={ () => handleShare() }
       >
         <img src={ shareIcon } alt="share-icon" />
         { showMsg ? <p>Link copiado!</p> : undefined }

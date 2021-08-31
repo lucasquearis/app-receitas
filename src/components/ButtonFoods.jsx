@@ -4,22 +4,27 @@ import { useHistory } from 'react-router';
 function ButtonFoods() {
   const ide = 52771;
   // const { id, type } = props;
-  const type = 'meal';
+  // const type = 'meal';
   const [none, setNone] = useState(true);
-  const [inProgres, setInProgres] = useState(false);
+  // const [inProgres, setInProgres] = useState(false);
   const setHistory = useHistory();
   const handleClick = () => {
     setHistory.push(`/comidas/${ide}/in-progress`);
   };
 
   useEffect(() => {
-    setNone(localStorage.getItem('doneRecipes')
-      && (JSON.parse(localStorage.getItem('doneRecipes')).some(
-        (item) => item.id === ide,
-      )));
-    setInProgres(localStorage.getItem('inProgressRecipes')
-      && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
-        type]).some((recipeId) => recipeId === ide));
+    const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (recipe) {
+      const findRecipe = recipe.find((item) => item.id === ide);
+      if (findRecipe) setNone(false);
+    }
+    // setNone(localStorage.getItem('doneRecipes')
+    //   && (JSON.parse(localStorage.getItem('doneRecipes')).find(
+    //     (item) => item.id === ide,
+    //   )));
+    // setInProgres(localStorage.getItem('inProgressRecipes')
+    //   && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
+    //     type]).some((recipeId) => recipeId === ide));
   }, []);
 
   return (
@@ -31,7 +36,8 @@ function ButtonFoods() {
         data-testid="start-recipe-btn"
         onClick={ handleClick }
       >
-        {inProgres ? 'Continuar Receita' : 'Iniciar Receita'}
+        Iniciar Receita
+        {/* {inProgres ? 'Continuar Receita' : 'Iniciar Receita'} */}
       </button>
     </div>
   );
