@@ -32,39 +32,44 @@ export default function DoneRecipes() {
     setFavoriteRecipes(favoriteRecipes.filter((favorite) => favorite.name !== name));
   };
 
+  const renderFavorites = () => (
+    <section>
+      {
+        filterFavorites().map(({
+          id,
+          area,
+          category,
+          alcoholicOrNot,
+          name,
+          image,
+          type,
+        },
+        index) => (
+          <FavoriteRecipeCard
+            key={ id }
+            area={ area }
+            category={ category }
+            alcoholic={ alcoholicOrNot }
+            drink={ name }
+            meal={ name }
+            name={ name }
+            thumb={ image }
+            type={ type === 'comida' ? 'meals' : 'drinks' }
+            index={ index }
+            id={ id }
+            handleFavoriteRemove={ handleFavoriteRemove }
+          />
+        ))
+      }
+    </section>
+  );
+
   return (
     <>
       <Header title="Receitas Favoritas" search={ false } />
       <FilterButtons setFilterRecipes={ setFilterRecipes } />
-      <section>
-        {
-          filterFavorites().map(({
-            id,
-            area,
-            category,
-            alcoholicOrNot,
-            name,
-            image,
-            type,
-          },
-          index) => (
-            <FavoriteRecipeCard
-              key={ id }
-              area={ area }
-              category={ category }
-              alcoholic={ alcoholicOrNot }
-              drink={ name }
-              meal={ name }
-              name={ name }
-              thumb={ image }
-              type={ type === 'comida' ? 'meals' : 'drinks' }
-              index={ index }
-              id={ id }
-              handleFavoriteRemove={ handleFavoriteRemove }
-            />
-          ))
-        }
-      </section>
+      { !filterFavorites() && <p>Nenhuma receita favoritada</p> }
+      { filterFavorites() && renderFavorites() }
     </>
   );
 }
