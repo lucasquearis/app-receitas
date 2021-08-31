@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { cleanup, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import renderWithRouter from './helpers/renderWithRouter';
+import renderWithRouter from './helpers/renderWithRouterPath';
 import App from '../App';
 import recipe from './mocks/drinkRecipe';
 
