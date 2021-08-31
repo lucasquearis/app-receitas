@@ -17,7 +17,7 @@ main body {
   height: 40px;
   margin: 3px;
   padding: 5px;
-  width: 80px;
+  width: 60px;
 }
 
 .header-container {
@@ -44,6 +44,7 @@ main body {
 .btn-session {
   background-color: white;
   display: flex;
+  font-size: 8px;
   grid-area: btns;
   margin-top: 50px;
   position: fixed;

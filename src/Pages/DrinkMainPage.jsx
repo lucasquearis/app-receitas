@@ -4,27 +4,27 @@ import { Spinner } from 'react-bootstrap';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import RecipeCard from '../Components/RecipeCard';
-import CategoryFoodButtons from '../Components/categoryFoddButtons';
+import CategoryDrinkButtons from '../Components/CategoryDrinkButtons';
 import '../styles/MainPages.css';
 
-function FoodMainPage() {
-  const { meals } = useSelector((state) => state.foodcategories);
+function DrinkMainPage() {
+  const { drinks } = useSelector((state) => state.drinksReducer);
 
-  if (!meals) {
+  if (!drinks) {
     return <Spinner animation="border" variant="danger" />;
   }
 
   return (
     <div className="container">
-      <Header title="Comidas" loading />
-      <CategoryFoodButtons />
+      <Header title="Bebidas" loading />
+      <CategoryDrinkButtons />
       <session className="cards">
-        { meals.map(({ idMeal, strMealThumb, strMeal }, key) => (
+        { drinks.map(({ idDrink, strDrinkThumb, strDrink }, key) => (
           <RecipeCard
-            key={ idMeal }
-            id={ idMeal }
-            thumbnail={ strMealThumb }
-            title={ strMeal }
+            key={ idDrink }
+            id={ idDrink }
+            thumbnail={ strDrinkThumb }
+            title={ strDrink }
             index={ key }
           />
         ))}
@@ -34,4 +34,4 @@ function FoodMainPage() {
   );
 }
 
-export default FoodMainPage;
+export default DrinkMainPage;

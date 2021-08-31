@@ -4,7 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 function RecipeCard(props) {
   const { pathname } = useLocation();
-  const { id, thumbnail, title, index, dataId } = props;
+  const { id, thumbnail, title, index } = props;
 
   return (
     <Link className="recipe-cards" to={ `${pathname}/${id}` }>
@@ -32,7 +32,6 @@ RecipeCard.defaultProps = {
 RecipeCard.propTypes = {
   id: string,
   thumbnail: string,
-  dataId: string.isRequired,
   title: string.isRequired,
   index: number.isRequired,
 };
