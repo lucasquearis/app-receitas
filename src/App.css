@@ -15,8 +15,9 @@
   max-height: 80vh;
 }
 
-img {
-  width: 300px;
+.recipes-list {
+  padding: 3px 7px;
+  width: 100%;
 }
 
 /*

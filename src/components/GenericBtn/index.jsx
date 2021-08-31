@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class GenericBtn extends React.Component {
-  render() {
-    const { value, disabled, onClick } = this.props;
-
-    return (
-      <button
-        type="button"
-        disabled={ disabled }
-        onClick={ onClick }
-      >
-        {value}
-      </button>
-    );
-  }
+function GenericBtn({ dataId, disabled, value, onClick }) {
+  return (
+    <button
+      type="button"
+      data-testid={ dataId }
+      disabled={ disabled }
+      onClick={ onClick }
+    >
+      {value}
+    </button>
+  );
 }
 
 GenericBtn.propTypes = {
+  dataId: PropTypes.string,
+  disabled: PropTypes.bool,
   value: PropTypes.string,
-  onClick: PropTypes.func,
 }.isRequired;
 
 export default GenericBtn;
