@@ -11,9 +11,12 @@
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
+  margin-bottom: 14%;
+  margin-top: 20%;
   width: 100%;
+
 }
 
 .rocksGlass {
@@ -72,3 +75,4 @@
     transform: rotate(-10deg);
   }
 }
+
