@@ -10,6 +10,7 @@ function Provider({ children }) {
   const [drinks, setDrinks] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [madeRecipe, setMadeRecipe] = useState(false);
 
   const globalState = {
     email: userEmail,
@@ -17,11 +18,13 @@ function Provider({ children }) {
     drinks,
     mealsCategories,
     drinksCategories,
+    madeRecipe,
   };
 
   const contextValue = {
     globalState,
     setUserEmail,
+    setMadeRecipe,
   };
 
   useEffect(() => {
