@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { v4 } from 'uuid';
 import Footer from '../components/Footer';
 import HeaderWithSearch from '../components/HeaderWithSearch';
 import { getMeal } from '../redux/actions';
@@ -9,7 +8,7 @@ import Select from '../components/DefaultComponents/Select';
 import useRedirect from '../hooks/useRedirect';
 
 function FoodByOrigin() {
-  const [origins, setOrigins] = useState(['All']);
+  const [origins, setOrigins] = useState([]);
   const [firstTwelve, setFistTwelve] = useState([]);
   const [originSelect, setOriginSelect] = useState({ selected: 'All' });
   const { shouldRedirect, redirect } = useRedirect();
@@ -32,7 +31,7 @@ function FoodByOrigin() {
       const response = await fetch(END_POINT);
       const { meals: originsList } = await response.json();
       const results = originsList.map(({ strArea }) => strArea);
-      return setOrigins([...origins, ...results]);
+      return setOrigins(results);
     };
     fetchOrigins();
   }, [origins]);
@@ -78,20 +77,20 @@ function FoodByOrigin() {
       />
       <>
         {
-          firstTwelve.map((item, index) => (
+          firstTwelve.map(({ idMeal, strMeal, strMealThumb }, index) => (
             <button
               type="button"
-              onClick={ () => shouldRedirect(`/comidas/${item.idMeal}`) }
-              key={ v4() }
+              onClick={ () => shouldRedirect(`/comidas/${idMeal}`) }
+              key={ idMeal }
               data-testid={ `${index}-recipe-card` }
               className="recipe-card"
             >
               <img
                 alt="meal"
-                src={ item.strMealThumb }
+                src={ strMealThumb }
                 data-testid={ `${index}-card-img` }
               />
-              <h4 data-testid={ `${index}-card-name` }>{item.strMeal}</h4>
+              <h4 data-testid={ `${index}-card-name` }>{strMeal}</h4>
             </button>
           ))
         }
