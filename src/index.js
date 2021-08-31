@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import FoodProvider from './context/FoodProvider';
@@ -9,7 +10,9 @@ import DrinksProvider from './context/DrinksProvider';
 ReactDOM.render(
   <FoodProvider>
     <DrinksProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </DrinksProvider>
   </FoodProvider>,
   document.getElementById('root'),
