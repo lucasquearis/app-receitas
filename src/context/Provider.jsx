@@ -18,6 +18,10 @@ export default function Provider({ children }) {
   const [loading, setLoading] = useState(false);
   const [dataRandomMeals, setDataRandomMeals] = useState('');
   const [dataRandomDrinks, setDataRandomDrinks] = useState('');
+  const [dataExploreIngredientsMeals, setDataExploreIngredientsMeals] = useState('');
+  const [dataExploreIngredientsDrinks, setDataExploreIngredientsDrinks] = useState('');
+  const [filterByIngredientsMeals, setFilterByIngredientsMeals] = useState('');
+  const [filterByIngredientsDrinks, setFilterByIngredientsDrinks] = useState('');
 
   const context = {
     dataMeals,
@@ -46,6 +50,14 @@ export default function Provider({ children }) {
     setDataRandomDrinks,
     favorites,
     setFavorites,
+    dataExploreIngredientsMeals,
+    setDataExploreIngredientsMeals,
+    dataExploreIngredientsDrinks,
+    setDataExploreIngredientsDrinks,
+    filterByIngredientsMeals,
+    setFilterByIngredientsMeals,
+    filterByIngredientsDrinks,
+    setFilterByIngredientsDrinks,
   };
 
   return (

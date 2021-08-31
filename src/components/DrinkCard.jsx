@@ -5,7 +5,6 @@ import '../styles/RecipeCard.css';
 
 export default function DrinkCard({ drink, index }) {
   const { strDrink, strDrinkThumb, idDrink } = drink;
-  console.log(idDrink);
   return (
     <Link to={ `/bebidas/${idDrink}` }>
       <li
