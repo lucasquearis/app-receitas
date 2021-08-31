@@ -1,9 +1,39 @@
-.login-container {
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap') ;
+
+body {
+  background-color: whitesmoke;
+}
+
+.loginContainer {
   align-items: center;
-  border: solid black 1px;
   display: flex;
   flex-direction: column;
-  height: 400px;
+  gap: 5vh;
+  justify-content: center;
+  left: 50%;
+  mix-blend-mode: multiply;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loginContainer img {
+  height: 20vh;
+}
+
+.loginContainer h1 {
+  font-family: Roboto Slab , serif;
+  font-size: 3.5vh;
+}
+
+.loginForm {
+  align-items: center;
+  background-color: rgb(240, 240, 240);
+  border: none;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  height: 35vh;
   justify-content: space-evenly;
   width: 300px;
 }
@@ -11,12 +41,11 @@
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 10%;
 }
 
 .login {
   border: solid black 1px;
-  height: 5%;
+  /* height: 5%; */
   width: 70%;
 }
 

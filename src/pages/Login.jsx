@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import logo from '../images/image.png';
 import '../cssPages/Login.css';
 
 function Login() {
@@ -30,33 +31,39 @@ function Login() {
   }
   if (redirect) return <Redirect to="/comidas" />;
   return (
-    <form onSubmit={ onSubmit } className="container">
-      <div className="login-container">
-        <input
-          type="email"
-          className="login"
-          value={ email }
-          onChange={ (event) => setEmail(event.target.value) }
-          data-testid="email-input"
-        />
-        <input
-          type="password"
-          className="login"
-          data-testid="password-input"
-          value={ password }
-          onChange={ (event) => setPassword(event.target.value) }
-        />
+    <div className="loginContainer">
+      <header className="loginHeader">
+        <img src={ logo } alt="logo" />
+      </header>
+      <h1>Find your favorite recipe on iTry!</h1>
+      <form onSubmit={ onSubmit } className="container">
+        <div className="loginForm">
+          <input
+            type="email"
+            className="login"
+            value={ email }
+            onChange={ (event) => setEmail(event.target.value) }
+            data-testid="email-input"
+          />
+          <input
+            type="password"
+            className="login"
+            data-testid="password-input"
+            value={ password }
+            onChange={ (event) => setPassword(event.target.value) }
+          />
 
-        <button
-          className="btn"
-          type="submit"
-          disabled={ validation }
-          data-testid="login-submit-btn"
-        >
-          Entrar
-        </button>
-      </div>
-    </form>
+          <button
+            className="btn"
+            type="submit"
+            disabled={ validation }
+            data-testid="login-submit-btn"
+          >
+            Entrar
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
