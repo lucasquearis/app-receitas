@@ -14,7 +14,7 @@ function MainDrinks() {
         && <Redirect to={ `/bebidas/${drinks[0].idDrink}` } /> }
       <Header name="Bebidas" />
       <div>
-        { drinks !== [] ? drinks.map((recipe, index) => (
+        { drinks.length !== 0 ? drinks.map((recipe, index) => (
           <div key={ recipe.idDrink }>
             <Link to={ `/bebidas/${recipe.idDrink}` }>
               <RecipeCard recipe={ recipe } index={ index } />
