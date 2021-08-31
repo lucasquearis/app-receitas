@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './favoriteFoodCard.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FoodContext from '../context/FoodContext';
 import Copy from './Clipboard-Copy';
 
 const FavoriteDrinkCard = ({ recipe, index }) => {
   const { id, image, name, alcoholicOrNot } = recipe;
   const [copy, setCopy] = useState('');
   const [favorite, setFavorite] = useState(true);
+  const { changed, setChanged } = useContext(FoodContext);
 
   function DetailUrl() {
     const url = window.location.href;
@@ -44,6 +46,7 @@ const FavoriteDrinkCard = ({ recipe, index }) => {
       );
       localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
     }
+    setChanged(!changed);
   }
 
   const getFavorite = () => {
@@ -58,7 +61,7 @@ const FavoriteDrinkCard = ({ recipe, index }) => {
 
   useEffect(() => {
     getFavorite();
-  }, [recipe]);
+  }, [changed]);
 
   return (
     <div className="fav-food-card">
