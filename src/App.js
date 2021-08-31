@@ -22,6 +22,7 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
+    // muito obrigado ao meu amigo Gedeão por ajudar à montar e organizar as minhas rotas.
     <FoodProvider>
       <DrinksProvider>
         <BrowserRouter>
@@ -40,9 +41,9 @@ function App() {
             <Route path="/explorar/bebidas/area" component={ NotFound } />
             <Route path="/explorar/comidas" component={ SearchDetailsFood } />
             <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
-            <Route path="/explorar" component={ Search } />
-            <Route path="/comidas" component={ Recipes } />
             <Route path="/bebidas" component={ Drinks } />
+            <Route path="/comidas" component={ Recipes } />
+            <Route path="/explorar" component={ Search } />
             <Route path="/perfil" component={ Profile } />
             <Route path="/receitas-feitas" component={ FinishedRecipes } />
             <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
