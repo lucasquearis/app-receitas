@@ -23,18 +23,18 @@ export default function RecipesFavorites() {
     favoriteCard.remove();
   }
 
-  function renderArea(item) {
+  function renderAreaAndCategory(item, index) {
     return (
-      <p key={ item.area }>
-        { item.area }
+      <p key={ item.category } data-testid={ `${index}-horizontal-top-text` }>
+        { `${item.area} - ${item.category}` }
       </p>
     );
   }
 
-  function renderAlcoholic(item) {
+  function renderAlcoholic(item, index) {
     return (
-      <p key={ item.alcoholicOrNot }>
-        { item.alcoholicOrNot }
+      <p key={ item.category } data-testid={ `${index}-horizontal-top-text` }>
+        { `${item.alcoholicOrNot}` }
       </p>
     );
   }
@@ -58,14 +58,11 @@ export default function RecipesFavorites() {
           alt="favorite recipe"
           data-testid={ `${index}-horizontal-image` }
         />
+        { item.type === 'comida' && renderAreaAndCategory(item, index) }
+        { item.type === 'bebida' && renderAlcoholic(item, index) }
         <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
           { item.name }
         </h3>
-        <p key={ item.category } data-testid={ `${index}-horizontal-top-text` }>
-          { item.category }
-        </p>
-        { item.type === 'comida' && renderArea(item) }
-        { item.type === 'bebida' && renderAlcoholic(item) }
         <button
           className="share-btn"
           type="button"
