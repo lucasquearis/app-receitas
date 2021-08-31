@@ -30,7 +30,7 @@ function ExploreArea() {
           data-testid="explore-by-area-dropdown"
           onChange={ (event) => handleChange(event) }
         >
-          {areas.map((current) => <option key={ current }>{current.strArea}</option>)}
+          {areas.map((current, ind) => <option key={ ind }>{current.strArea}</option>)}
         </select>
         <div>
           oi
