@@ -1,7 +1,5 @@
 .meals {
- 
   align-items: center;
-  /* background: #0fa36b; */
   background-image: url(./images/background.jpg);
   color: #464646;
   display: flex;
@@ -23,87 +21,87 @@
   color:white;
   display: flex;
   font-size: 20px;
-  top: 60px;
   left: 80px;
+  top: 60px;
 }
 
 .btn-done {
   position: absolute;
-  width: 180px;
+  background-color: #606c38;
   height: 36px;
+  width: 180px;
   left: 90px;
   top: 360px;
-  background-color: #606C38;
 }
 
 .btn-favorite {
   position: absolute;
-  width: 180px;
+  background-color: #606c38;
   height: 36px;
+  width: 180px;
   left: 90px;
   top: 430px;
-  background-color: #606C38;
 }
 
 .btn-logout{
   position: absolute;
-  width: 180px;
+  background-color: #606c38;
   height: 36px;
+  width: 180px;
   left: 90px;
   top: 500px;
-  background-color: #606C38;
 }
 
 .logo {
-  position: absolute;
   align-items: center;
-  width: 234px;
+  border-radius: 80px;
+  position: absolute;
   height: 166px;
+  width: 234px;
   left: 63px;
   top: 80px;
-  border-radius: 80px;
 }
 
 .login {
-  position: absolute;
   align-items: center;
+  background: rgba(255, 254, 251, 0.85);
+  position: absolute;
   display: flex;
   flex-direction: column;
-  width: 275px;
   height: 432px;
+  width: 275px;
   left: 42px;
   top: 106px;
-  background: rgba(255, 254, 251, 0.85);
   border-radius: 40px;
 }
 
 .mb-1 {
-  position:absolute;
   align-items: center;
-  width: 234px;
+  border-radius:80%;
+  position:absolute;
   height: 46px;
+  width: 234px;
   left: 21px;
   top: 250px;
-  border-radius:80%;
 }
 
 .mb-2 {
-  position:absolute;
   align-items: center;
-  width: 234px;
+  border-radius: 80px;
+  position:absolute;
   height: 46px;
+  width: 234px;
   left: 21px;
   top: 300px;
-  border-radius: 80px;
 }
 
 .mb-3 {
   position: absolute;
-  width: 149px;
+  background-color: #606c38;
   height: 36px;
+  width: 149px;
   left: 60px;
   top: 360px;
-  background-color: #606C38; 
 }
 
 

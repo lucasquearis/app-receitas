@@ -65,11 +65,6 @@ function Login() {
             data-testid="password-input"
           />
         </Form.Group>
-        {/* <Form.Group
-          className="mb-3"
-          controlId="formBasicCheckbox"
-
-        /> */}
         <Button
           className="mb-3"
           variant="primary"
