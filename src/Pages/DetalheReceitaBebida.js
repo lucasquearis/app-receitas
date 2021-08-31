@@ -90,7 +90,6 @@ export default function DetalheReceitaBebida(props) {
             <button
               type="button"
               className="share-food-btn-icon"
-              onClick={ onShareClicked }
             >
               <img
                 data-testid="share-btn"
@@ -146,9 +145,6 @@ export default function DetalheReceitaBebida(props) {
   return (
     <>
       { isLoading ? <p>Loading...</p> : renderRecipe() }
-      { copyMessage
-        ? <p className="copy-food-link-message">Link copiado!</p>
-        : <p className="copy-food-link-message" /> }
       { shouldRedirect && <Redirect to="/receitas-feitas" /> }
     </>
   );
