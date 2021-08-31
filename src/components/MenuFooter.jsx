@@ -7,7 +7,7 @@ import './style/footerMenu.css';
 
 export default function MenuFooter() {
   return (
-    <footer data-testid="footer" className="footerMenu">
+    <footer data-testid="footer" className="footer-menu">
       <Link to="/bebidas">
         <img data-testid="drinks-bottom-btn" src={ drink } alt="icon drink" />
       </Link>
