@@ -56,7 +56,6 @@ function FavoriteButton() {
   };
   return (
     <input
-      classeName="favorite-btn"
       data-testid="favorite-btn"
       type="image"
       src={ heart }

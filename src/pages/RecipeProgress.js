@@ -1,12 +1,13 @@
 import React, { useEffect, useContext } from 'react';
+// import React from 'react';
 import { useLocation } from 'react-router-dom';
 import myContext from '../context/myContext';
 import HeaderDetails from '../components/HeaderDetails';
 import IngredientsStep from '../components/IngredientsProgress';
 import Intructions from '../components/Intructions';
-import ButtonFinish from '../components/ButtonFinish';
 import { getMealsById } from '../services/mealAPI';
 import { getDrinksById } from '../services/drinkAPI';
+import ButtonFinish from '../components/ButtonFinish';
 
 export default function RecipeProgress() {
   const { setRecipe, setKeysType } = useContext(myContext);

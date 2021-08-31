@@ -4,34 +4,56 @@ import myContext from '../context/myContext';
 import '../styles/IngredientsProgress.css';
 
 export default function IngredientsProgress() {
-  const { lists, objRecipeProgress, setObjRecipeProgress } = useContext(myContext);
-  const [renderCheckbox, setRenderCheckbox] = useState({});
+  const {
+    lists,
+    objRecipeProgress,
+    setObjRecipeProgress,
+    updateLocalStore,
+  } = useContext(myContext);
+  const [trueOrFalse, setTrueOrFalse] = useState(false);
   const { id } = useParams();
   const { pathname } = useLocation();
   const text = pathname.includes('comidas') ? 'meals' : 'cocktails';
 
   useEffect(() => {
-    const { meals } = objRecipeProgress;
-    const { cocktails } = objRecipeProgress;
-    const keysMeals = Object.keys(meals).includes(id);
-    const keysCocktails = Object.keys(cocktails).includes(id);
-    if (keysMeals) setRenderCheckbox(objRecipeProgress[text][id]);
-    if (keysCocktails) setRenderCheckbox(objRecipeProgress[text][id]);
+    if (Object.keys(objRecipeProgress[text]).length === 0) {
+      console.log('aqui');
+      setObjRecipeProgress({ ...objRecipeProgress,
+        [text]:
+          { ...objRecipeProgress[text],
+            [id]: [...new Array(lists.ingredients.length).fill(false)] } });
+    }
+  }, [id, lists]);
+
+  useEffect(() => {
+    if (localStorage.inProgressRecipes) {
+      const request = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (Object.keys(request[text]).includes(id)) setTrueOrFalse(request[text][id]);
+    }
+  }, []);
+
+  useEffect(() => {
+    const keysM = Object.keys(objRecipeProgress.meals).includes(id);
+    const keysC = Object.keys(objRecipeProgress.cocktails).includes(id);
+    if (keysM) setTrueOrFalse(objRecipeProgress[text][id]);
+    if (keysC) setTrueOrFalse(objRecipeProgress[text][id]);
   }, [objRecipeProgress]);
 
   useEffect(() => {
-    const func = () => {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(objRecipeProgress));
-    };
-    func();
-  }, [objRecipeProgress]);
+    updateLocalStore();
+  }, [setObjRecipeProgress, objRecipeProgress]);
 
-  const handleClassChange = ({ target: { name, checked } }) => {
-    setObjRecipeProgress({ ...objRecipeProgress,
-      [text]: { [id]: { ...objRecipeProgress[text][id], [name]: checked } } });
+  const handleUpdateValues = ({ target: { checked } }, key) => {
+    const values = objRecipeProgress[text][id];
+    values[key] = checked;
+    setObjRecipeProgress(
+      { ...objRecipeProgress,
+        [text]: { ...objRecipeProgress[text],
+          [id]: [...values] } },
+    );
   };
 
-  if (!lists) return '';
+  if (!lists && trueOrFalse.length === 0) return <p>Loading...</p>;
   return (
     <div className="ingredients-container">
       <h3 className="title-ingrendients">Ingredients</h3>
@@ -41,14 +63,14 @@ export default function IngredientsProgress() {
             <li
               key={ key }
               data-testid={ `${key}-ingredient-step` }
+              className={ String(trueOrFalse[key]) }
             >
               <input
                 type="checkbox"
                 name={ key }
-                onChange={ (e) => handleClassChange(e) }
-                checked={ renderCheckbox[key] }
+                onChange={ (e) => handleUpdateValues(e, key) }
+                checked={ trueOrFalse[key] }
               />
-
               { `${item} - ${lists.measure[key]}` }
             </li>
           ))

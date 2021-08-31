@@ -1,8 +1,7 @@
-.on {
+.true {
   text-decoration: line-through;
 }
 
-.off {
+.false {
   text-decoration: none;
 }
-

@@ -1,42 +1,68 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import myContext from '../context/myContext';
 
 export default function ButtonFinish() {
-  const { lists, objRecipeProgress } = useContext(myContext);
-  const [renderCheckbox, setRenderCheckbox] = useState({});
-  const [activeButtoFinish, setActiveButtoFinish] = useState(true);
+  const {
+    keyType,
+    lists,
+    recipe,
+    objRecipeProgress,
+    updateLocalStoreRecipeDone,
+    doneRecipe,
+    setDoneRecipe,
+  } = useContext(myContext);
+
+  const [trueOrFalse, setTrueOrFalse] = useState(false);
+  const [activeButton, setActioveButton] = useState(true);
   const { id } = useParams();
   const { pathname } = useLocation();
   const text = pathname.includes('comidas') ? 'meals' : 'cocktails';
+  const type = keyType === 'meals' ? 'Meal' : 'Drink';
+  const alcolic = keyType === 'meals' ? '' : recipe.Alcoholic;
   const sizeList = lists.ingredients.length;
 
+  const objDoneRecipe = {
+    id,
+    type: text,
+    area: recipe.strArea,
+    category: recipe.strCategory,
+    alcoholicOrNot: alcolic,
+    name: recipe[`str${type}`],
+    image: recipe[`str${type}Thumb`],
+    doneDate: '22/6/2020',
+    tags: recipe.strTags,
+  };
+
   useEffect(() => {
-    const { meals } = objRecipeProgress;
-    const { cocktails } = objRecipeProgress;
-    const keysMeals = Object.keys(meals).includes(id);
-    const keysCocktails = Object.keys(cocktails).includes(id);
-    if (keysMeals) setRenderCheckbox(objRecipeProgress[text][id]);
-    if (keysCocktails) setRenderCheckbox(objRecipeProgress[text][id]);
+    const keysM = Object.keys(objRecipeProgress.meals).includes(id);
+    const keysC = Object.keys(objRecipeProgress.cocktails).includes(id);
+    if (keysM) setTrueOrFalse(objRecipeProgress[text][id]);
+    if (keysC) setTrueOrFalse(objRecipeProgress[text][id]);
   }, [objRecipeProgress]);
 
-  const handleChange = () => setActiveButtoFinish(false);
+  useEffect(() => {
+    if (trueOrFalse && (trueOrFalse.filter((i) => i === true).length === sizeList)) {
+      setActioveButton(false);
+    }
+  }, [objRecipeProgress]);
 
   useEffect(() => {
-    if (renderCheckbox && sizeList) {
-      const valueTrue = Object.values(renderCheckbox).filter((i) => i === true).length;
-      if (valueTrue === sizeList) handleChange();
-    }
-  }, [activeButtoFinish, renderCheckbox]);
+    setDoneRecipe([...doneRecipe, objDoneRecipe]);
+  }, []);
 
-  useEffect(() => console.log(activeButtoFinish));
+  const handleClick = () => {
+    updateLocalStoreRecipeDone();
+  };
+
   return (
     <Link to="/receitas-feitas">
       <button
         type="button"
         className="btn-finish"
         data-testid="finish-recipe-btn"
-        disabled={ activeButtoFinish }
+        disabled={ activeButton }
+        onClick={ handleClick }
       >
         Finalizar Receita
       </button>

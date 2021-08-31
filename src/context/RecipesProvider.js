@@ -8,11 +8,14 @@ import {
   MEAL_OBJ,
   DRINK_OBJ,
   OBJ_LOCAL_STORAGE,
+  OBJ_RECIPE_DONE,
   LOCAL_STORAGE_REC_PROGRESS,
+  LOCAL_STORAGE_RECIPEDONE,
 } from '../services/data';
 
 export default function RecipesProvider({ children }) {
   const RECIPE_PROGRESS = LOCAL_STORAGE_REC_PROGRESS || OBJ_LOCAL_STORAGE;
+  const RECIPE_DONE = LOCAL_STORAGE_RECIPEDONE || OBJ_RECIPE_DONE;
   const [objRecipeProgress, setObjRecipeProgress] = useState(RECIPE_PROGRESS);
   const [searchMeals, setSearchMeals] = useState(MEAL_OBJ);
   const [searchDrinks, setSearchDrinks] = useState(DRINK_OBJ);
@@ -29,6 +32,16 @@ export default function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [keyType, setKeysType] = useState('');
   const [lists, setLists] = useState({ ingredients: [], measure: [] });
+  const [renderCheckbox, setRenderCheckbox] = useState(null);
+  const [doneRecipe, setDoneRecipe] = useState(RECIPE_DONE);
+
+  const updateLocalStore = () => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(objRecipeProgress));
+  };
+
+  const updateLocalStoreRecipeDone = () => {
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
+  };
 
   useEffect(() => {
     const mealCategory = async () => {
@@ -109,6 +122,12 @@ export default function RecipesProvider({ children }) {
   }, [infoUser]);
 
   const globalState = {
+    doneRecipe,
+    setDoneRecipe,
+    updateLocalStoreRecipeDone,
+    setRenderCheckbox,
+    renderCheckbox,
+    updateLocalStore,
     searchMeals,
     setSearchMeals,
     searchDrinks,

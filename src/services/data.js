@@ -5,7 +5,9 @@ const URL_RADIO_BUTTON = {
   letter: 'search.php?f',
 };
 const LOCAL_STORAGE_REC_PROGRESS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-const OBJ_LOCAL_STORAGE = { cocktails: { chave: [] }, meals: { chave: [] } };
+const OBJ_LOCAL_STORAGE = { cocktails: { }, meals: { } };
+const LOCAL_STORAGE_RECIPEDONE = JSON.parse(localStorage.getItem('doneRecipes'));
+const OBJ_RECIPE_DONE = [];
 const MEAL_OBJ = { textValue: '', radioValue: 'ingredient', pathname: '/comidas' };
 const DRINK_OBJ = { textValue: '', radioValue: 'name', pathname: '/bebidas' };
 const ALERT_ONE = 'Sua busca deve conter somente 1 (um) caracter';
@@ -25,4 +27,6 @@ export {
   DRINK_OBJ,
   OBJ_LOCAL_STORAGE,
   LOCAL_STORAGE_REC_PROGRESS,
+  LOCAL_STORAGE_RECIPEDONE,
+  OBJ_RECIPE_DONE,
 };
