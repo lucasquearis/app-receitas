@@ -1,54 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
-import shareIcon from '../../images/shareIcon.svg';
+import MadeRecipesCard from './MadeRecipesCard';
 
-function MadeRecipes() {
+export default function MadeRecipes() {
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  function getMadeRecipes() {
+    const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    setDoneRecipes(recipes || []);
+    setFilteredRecipes(recipes || []);
+    setIsMounted(true);
+  }
+
+  function getMadeRecipesFoods() {
+    const madeRecipesFoods = doneRecipes.filter(({ type }) => type === 'comida');
+    setFilteredRecipes(madeRecipesFoods);
+  }
+
+  function getFavoriteRecipesDrinks() {
+    const madeRecipesDrinks = doneRecipes.filter(({ type }) => type === 'bebida');
+    setFilteredRecipes(madeRecipesDrinks);
+  }
+
+  useEffect(() => {
+    if (!isMounted) getMadeRecipes();
+  });
   return (
-    <>
+    <div>
       <Header title="Receitas Feitas" />
-
-      MadeRecipes
-
       <button
         type="button"
         data-testid="filter-by-all-btn"
+        onClick={ getMadeRecipes }
       >
         All
       </button>
       <button
         type="button"
         data-testid="filter-by-food-btn"
+        onClick={ getMadeRecipesFoods }
       >
         Food
       </button>
       <button
         type="button"
         data-testid="filter-by-drink-btn"
+        onClick={ getFavoriteRecipesDrinks }
       >
-        Drinks
+        Drink
       </button>
-      <img
-        src={ image }
-        alt=""
-        data-testid={ `${index}-horizontal-image` }
-      />
-
-      <p data-testid={ `${index}-horizontal-top-text` } />
-      <h3 data-testid={ `${index}-horizontal-name` }>{}</h3>
-      <p data-testid={ `${index}-horizontal-done-date` }>{}</p>
-      <button type="button">
-        <img
-          src={ shareIcon }
-          alt=""
-          data-testid={ `${index}-horizontal-share-btn` }
+      {filteredRecipes.map((recipe, index) => (
+        <MadeRecipesCard
+          key={ index }
+          index={ index }
+          recipe={ recipe }
+          isFood={ recipe.type === 'comida' }
+          tags={ recipe.tags }
+          doneDate={ recipe.doneDate }
         />
-      </button>
-      <p
-        key={ tag }
-        data-testid={ `${index}-${tag}-horizontal-tag` }
-      />
-    </>
+      ))}
+    </div>
   );
 }
-
-export default MadeRecipes();
