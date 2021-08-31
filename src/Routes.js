@@ -15,8 +15,8 @@ export default function Routes() {
           component={ Pages.ExploreFoodByIngredients }
         />
         <Route path="/explorar/comidas/area" component={ Pages.ExploreByLocation } />
-        <Route path="/bebidas/:id/in-progress" component={ Pages.DoingDrinks } />
-        <Route path="/comidas/:id/in-progress" component={ Pages.DoingFood } />
+        <Route path="/bebidas/:id/in-progress" component={ Pages.RecipesInProgress } />
+        <Route path="/comidas/:id/in-progress" component={ Pages.RecipesInProgress } />
         <Route path="/receitas-favoritas" component={ Pages.FavorieRecipes } />
         <Route path="/receitas-feitas" component={ Pages.DoneRecipes } />
         <Route path="/bebidas/:id" component={ Pages.DetailsPage } />
