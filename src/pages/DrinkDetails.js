@@ -1,27 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import 'react-multi-carousel/lib/styles.css';
-
 import Carousel from 'react-multi-carousel';
-import FoodContext from '../context/FoodContext';
-import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 import DrinksContext from '../context/DrinksContext';
-import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
+import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FoodContext from '../context/FoodContext';
 import Copy from '../components/Clipboard-Copy';
 
-const FoodDetails = () => {
+const DrinkDetails = () => {
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
   const url = window.location.href;
 
-  const { foodDetails, setFoodDetails } = useContext(FoodContext);
-  const { drinks } = useContext(DrinksContext);
+  const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
+  const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -32,16 +31,15 @@ const FoodDetails = () => {
     setFavorite(!favorite);
 
     const {
-      idMeal: id,
+      idDrink: id,
       strCategory: category,
-      strArea: area,
-      strMeal: name,
-      strMealThumb: image,
-    } = foodDetails[0];
+      strAlcoholic: alcoholicOrNot,
+      strDrink: name,
+      strDrinkThumb: image,
+    } = drinkDetails[0];
 
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'comida', area, category, alcoholicOrNot: '', name, image };
-
+    const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
     if (actualStorage === null) {
       localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
       return;
@@ -58,48 +56,44 @@ const FoodDetails = () => {
     }
   }
 
-  foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
-
-  const copy = (path) => {
-    Copy(path);
+  const copy = () => {
+    Copy(url);
     setShowMsg(true);
   };
 
   useEffect(() => {
-    fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
-  }, [actualPath, setFoodDetails]);
+    fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
+  }, [actualPath, setDrinkDetails]);
 
   useEffect(() => {
     const getFavorite = () => {
       const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (actualStorage && foodDetails.length > 0) {
+      if (actualStorage && drinkDetails.length > 0) {
         const isFavorited = actualStorage.some(
-          (item) => item.id === foodDetails[0].idMeal,
+          (item) => item.id === drinkDetails[0].idDrink,
         );
         setFavorite(isFavorited);
       }
     };
-
-    const getIngredients = () => {
-      const ingredientsArr = foodDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Ingredient') && i[1] !== ''));
-      const ingredientsOnly = ingredientsArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      setIngredients(ingredientsOnly);
-    };
-
     const getMeasure = () => {
-      const measuresArr = foodDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
+      const measuresArr = drinkDetails.map((item) => Object.entries(item)
+        .filter((i) => i[0]
+          .includes('Measure') && i[1] !== null && i[1] !== 'undefined'));
       const measuresOnly = measuresArr.map((item) => item
         .map((i) => i.pop())).map((item) => item);
       setMeasures(measuresOnly);
     };
-
+    const getIngredients = () => {
+      const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
+        .filter((i) => i[0].includes('Ingredient') && i[1] !== null));
+      const ingredientsOnly = ingredientsArr.map((item) => item
+        .map((i) => i.pop())).map((item) => item);
+      setIngredients(ingredientsOnly);
+    };
     getFavorite();
     getIngredients();
     getMeasure();
-  }, [foodDetails]);
+  }, [drinkDetails]);
 
   const responsive = {
     desktop: {
@@ -120,49 +114,49 @@ const FoodDetails = () => {
   };
 
   return (
-    <div>
+    <div className="drink-details-container">
       {
-        foodDetails && foodDetails.map(({
-          strMealThumb,
-          strMeal,
+        drinkDetails.map(({
+          strDrinkThumb,
+          strDrink,
           strCategory,
           strInstructions,
-          strYoutube,
+          strAlcoholic,
         }, i) => (
-          <div className="details-container" key={ i }>
+          <div key={ i }>
             <img
-              key={ strMealThumb }
-              src={ strMealThumb }
+              key={ strDrinkThumb }
+              src={ strDrinkThumb }
               alt="thumbnail"
               data-testid="recipe-photo"
               className="details-image"
             />
-            <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
-            <button
-              type="button"
-              data-testid="share-btn"
-              key={ shareIcon }
-              onClick={ () => copy(url) }
-            >
-              <img
-                src={ shareIcon }
-                alt="share-icon"
-                className="detail-img-btn"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={ onFavorite }
-              key={ blackHeartIcon }
-            >
-              <img
-                data-testid="favorite-btn"
-                className="detail-img-btn"
-                src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-icon"
-              />
-            </button>
+            <div className="details-buttons">
+              <h1 key={ strDrink } data-testid="recipe-title">{strDrink}</h1>
+              <div>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  key={ shareIcon }
+                  onClick={ () => copy() }
+                >
+                  <img src={ shareIcon } alt="share-icon" />
+                </button>
+                <button
+                  type="button"
+                  onClick={ onFavorite }
+                  key={ blackHeartIcon }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
+                    alt="favorite-icon"
+                  />
+                </button>
+              </div>
+            </div>
             { showMsg ? <p>Link copiado!</p> : undefined }
+            <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
             <ul>
@@ -178,15 +172,6 @@ const FoodDetails = () => {
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            <iframe
-              data-testid="video"
-              key={ strYoutube }
-              frameBorder="0"
-              title="video"
-              width="200"
-              height="200"
-              src={ strYoutube }
-            />
             <Carousel
               responsive={ responsive }
               swipeable={ false }
@@ -194,8 +179,8 @@ const FoodDetails = () => {
               showDots
               ssr
             >
-              { drinks.slice(0, RECOMENDATION_CARDS).map((drink, index) => (
-                <DrinkRecomendationCard key={ index } drink={ drink } index={ index } />
+              { foods.slice(0, RECOMENDATION_CARDS).map((recipe, index) => (
+                <FoodRecomendationCard key={ index } recipe={ recipe } index={ index } />
               ))}
             </Carousel>
             <button
@@ -212,4 +197,4 @@ const FoodDetails = () => {
   );
 };
 
-export default FoodDetails;
+export default DrinkDetails;

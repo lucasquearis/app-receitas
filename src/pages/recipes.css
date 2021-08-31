@@ -1,0 +1,11 @@
+.container {
+  width: 360px;
+}
+
+.recipe-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 16px;
+  width: 360px;
+}

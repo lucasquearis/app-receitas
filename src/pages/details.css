@@ -1,0 +1,45 @@
+.recomended {
+  display: flex;
+  flex-direction: row;
+}
+
+.recomended-card img {
+  width: 100%;
+}
+
+.drink-details-container .details-image {
+  height: 240px;
+  width: 100%;
+}
+
+.start-recipe-btn {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.details-buttons {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-buttons h1 {
+  margin-left: 8px;
+}
+
+.details-buttons button {
+  background: none;
+  border: none;
+  margin-right: 8px;
+  outline: none;
+}
+
+.recomended-card {
+  margin-bottom: 32px;
+  margin-left: 24px;
+}
+
+.detail-img-btn img {
+  width: 15%;
+}
