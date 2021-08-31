@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import ButtonCard from '../Components/ButtonCard';
+import '../styles/explorePages.css';
 
 function FoodExplore() {
   const [data, setData] = useState([]);
@@ -20,21 +21,23 @@ function FoodExplore() {
   return (
     <div>
       <Header title="Comidas" loading />
-      <ButtonCard
-        page="/explorar/comidas/ingredientes"
-        testId="explore-by-ingredient"
-        buttonText="Por Ingredientes"
-      />
-      <ButtonCard
-        page="/explorar/comidas/area"
-        testId="explore-by-area"
-        buttonText="Por Local de Origem"
-      />
-      <ButtonCard
-        page={ path(data.idMeal) }
-        testId="explore-surprise"
-        buttonText="Me Surpreenda!"
-      />
+      <div className="explore-buttons">
+        <ButtonCard
+          page="/explorar/comidas/ingredientes"
+          testId="explore-by-ingredient"
+          buttonText="Por Ingredientes"
+        />
+        <ButtonCard
+          page="/explorar/comidas/area"
+          testId="explore-by-area"
+          buttonText="Por Local de Origem"
+        />
+        <ButtonCard
+          page={ path(data.idMeal) }
+          testId="explore-surprise"
+          buttonText="Me Surpreenda!"
+        />
+      </div>
       <Footer />
     </div>
   );
