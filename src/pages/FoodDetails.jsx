@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import '../styles/Details.css';
 import { useHistory } from 'react-router-dom';
+import RecomendationsDrinks from '../components/RecomendationsDrinks';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -18,7 +20,6 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function FoodDetails() {
   const id = 52771;
-  const indexo = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
@@ -91,10 +92,10 @@ function FoodDetails() {
           data-testid="video"
         />
       </div>
-      <div>
-        <p data-testid={ `${indexo}-recomendation-card` }>carousel</p>
+      <div className="recomendations">
+        <RecomendationsDrinks />
       </div>
-      <div>
+      <div className="div-button-details">
         <button
           className="button-details"
           type="button"
