@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import RecipesContext from '../context/RecipesContext';
+import DrinksAPI from '../service/drinksAPI';
 
 function Login() {
   const [user, setUser] = useState({
@@ -11,6 +12,9 @@ function Login() {
   });
   const { setEmail } = useContext(RecipesContext);
   const { email, password } = user;
+
+  DrinksAPI();
+
   const handleOnChange = ({ target }) => {
     const { id, value } = target;
     setUser({

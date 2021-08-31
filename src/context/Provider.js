@@ -12,8 +12,6 @@ function Provider({ children }) {
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
   const [searchBar, setSearchBar] = useState(false);
-  const [ingredientesData, setData] = useState([]);
-  const [food, setFood] = useState(true);
   const [mealRandom, setMealRandom] = useState('');
   const [drinkRandom, setDrinkRandom] = useState('');
 
@@ -33,14 +31,14 @@ function Provider({ children }) {
     }
   };
 
-  const renderingIngredients = (foodToRender) => {
+  const renderingIngredients = (food) => {
     const ingredients = [];
     const measures = [];
     const TWENTY = 20;
     for (let index = 1; index <= TWENTY; index += 1) {
-      if (foodToRender[`strIngredient${index}`]) {
-        ingredients.push(foodToRender[`strIngredient${index}`]);
-        measures.push(foodToRender[`strMeasure${index}`]);
+      if (food[`strIngredient${index}`]) {
+        ingredients.push(food[`strIngredient${index}`]);
+        measures.push(food[`strMeasure${index}`]);
       }
     }
     return { ingredients, measures };
@@ -110,10 +108,6 @@ function Provider({ children }) {
     favoritingRecipe,
     renderingIngredients,
     verifyingRecipe,
-    ingredientesData,
-    setData,
-    food,
-    setFood,
   };
 
   return (
