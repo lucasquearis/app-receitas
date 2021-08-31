@@ -18,7 +18,7 @@ const LoginForm = () => {
     helperText: 'Digite seu melhor e-mail!',
     variant: 'outlined',
     onChange: ({ target }) => handleChange(target),
-    inputProps: { 'data-testid': 'email-input' },
+    inputProps: { 'data-testid': 'email-input', autocomplete: 'off' },
   };
 
   const passwordProps = {
