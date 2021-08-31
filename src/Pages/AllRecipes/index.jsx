@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
+// import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextApp } from '../../Context/ContextApp';
 import Header from '../../Components/Header';
@@ -7,7 +8,8 @@ import Footer from '../../Components/Footer/BottomMenu';
 import BtnCategory from '../../Components/BtnCategory';
 
 function AllRecipes() {
-  const { categoryMeal, setRecipes, categoryDrinks, recipes } = useContext(ContextApp);
+  // const { categoryMeal, setRecipes, categoryDrinks, recipes } = useContext(ContextApp);
+  const { categoryMeal, categoryDrinks } = useContext(ContextApp);
 
   const history = useHistory();
   const { location: { pathname } } = history;
