@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
 
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+
 const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+
+const getFavorite = (drink) => ({
+  id: drink.idDrink,
+  type: 'bebida',
+  area: '',
+  category: drink.strCategory,
+  alcoholicOrNot: drink.strAlcoholic,
+  name: drink.strDrink,
+  image: drink.strDrinkThumb,
+});
 
 const getIngredientsKeys = (cocktail) => Object.keys(cocktail)
   .filter((ingredient) => ingredient
@@ -21,6 +34,7 @@ const getIngredientsList = (target, idApi, ingredients, drink) => {
 
 const BebidasEmProcesso = () => {
   const [drink, setDrink] = useState();
+  const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState({ wereFetched: false });
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
@@ -30,22 +44,48 @@ const BebidasEmProcesso = () => {
       const response = await fetch(`${URL_DRINK}${idApi}`);
       const data = await response.json();
       const cocktail = data.drinks[0];
+
       setDrink(cocktail);
+
+      const lastSaveFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      const favoriteFound = lastSaveFavorite
+        .find((recipe) => recipe.id === data.drinks[0].idDrink);
+      if (favoriteFound) {
+        setIsFavorite(Object.values(favoriteFound)[0]);
+      } else {
+        setIsFavorite(false);
+      }
+
       const ingredientsKeys = getIngredientsKeys(cocktail);
-      const lastSave = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+      const lastSaveProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
         meals: {}, cocktails: {},
       };
       setIngredients({
         [idApi]: ingredientsKeys.map((ingredientKey, index) => ({
-          [cocktail[ingredientKey]]: lastSave.cocktails[idApi]
-            ? lastSave.cocktails[idApi][index][cocktail[ingredientKey]]
+          [cocktail[ingredientKey]]: lastSaveProgress.cocktails[idApi]
+            ? lastSaveProgress.cocktails[idApi][index][cocktail[ingredientKey]]
             : false,
         })),
         wereFetched: true,
       });
     };
     api();
-  }, []);
+  }, [idApi]);
+
+  const handleFavorite = () => {
+    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (lastSave.find((recipe) => recipe.id === drink.idDrink)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        lastSave.filter((recipe) => recipe.id !== drink.idDrink),
+      ));
+      setIsFavorite(false);
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...lastSave, getFavorite(drink)],
+      ));
+      setIsFavorite(true);
+    }
+  };
 
   const handleCheckboxChange = ({ target }) => {
     setIngredients({
@@ -101,7 +141,19 @@ const BebidasEmProcesso = () => {
       <div data-testid="recipe-glass">{drink.strGlass}</div>
       <div data-testid="recipe-alcoholic">{drink.strAlcoholic}</div>
       <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favorito</button>
+
+      <button
+        type="button"
+        // data-testid="favorite-btn"
+        onClick={ handleFavorite }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt={ `Botão para adicionar ou retirar ${drink.strDrink} dos favoritos` }
+        />
+      </button>
+
       {renderIngredients(getIngredientsKeys(drink))}
       <p data-testid="instructions">{drink.strInstructions}</p>
       <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>

@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loading from '../components/Loading';
 
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+
 const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+
+const getFavorite = (food) => ({
+  id: food.idMeal,
+  type: 'comida',
+  area: food.strArea,
+  category: food.strCategory,
+  alcoholicOrNot: '',
+  name: food.strMeal,
+  image: food.strMealThumb,
+});
 
 const getIngredientsKeys = (meal) => Object.keys(meal)
   .filter((ingredient) => ingredient
@@ -21,6 +34,7 @@ const getIngredientsList = (target, idApi, ingredients, food) => {
 
 const ComidasEmProcesso = () => {
   const [food, setFood] = useState();
+  const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState({ wereFetched: false });
   const location = useLocation();
   const idApi = location.pathname.split('/')[2];
@@ -33,21 +47,45 @@ const ComidasEmProcesso = () => {
 
       setFood(meal);
 
-      const lastSave = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+      const lastSaveFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      const favoriteFound = lastSaveFavorite
+        .find((recipe) => recipe.id === data.meals[0].idMeal);
+      if (favoriteFound) {
+        setIsFavorite(Object.values(favoriteFound)[0]);
+      } else {
+        setIsFavorite(false);
+      }
+
+      const lastSaveProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
         meals: {}, cocktails: {},
       };
       const ingredientsKeys = getIngredientsKeys(meal);
       setIngredients({
         [meal.idMeal]: ingredientsKeys.map((ingredientKey, index) => ({
-          [meal[ingredientKey]]: lastSave.meals[idApi]
-            ? lastSave.meals[idApi][index][meal[ingredientKey]]
+          [meal[ingredientKey]]: lastSaveProgress.meals[idApi]
+            ? lastSaveProgress.meals[idApi][index][meal[ingredientKey]]
             : false,
         })),
         wereFetched: true,
       });
     };
     api();
-  }, []);
+  }, [idApi]);
+
+  const handleFavorite = () => {
+    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (lastSave.find((recipe) => recipe.id === food.idMeal)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        lastSave.filter((recipe) => recipe.id !== food.idMeal),
+      ));
+      setIsFavorite(false);
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...lastSave, getFavorite(food)],
+      ));
+      setIsFavorite(true);
+    }
+  };
 
   const handleCheckboxChange = ({ target }) => {
     setIngredients({
@@ -101,7 +139,19 @@ const ComidasEmProcesso = () => {
       <img src={ food.strMealThumb } alt="recipe" data-testid="recipe-photo" />
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
       <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favorito</button>
+
+      <button
+        type="button"
+        // data-testid="favorite-btn"
+        onClick={ handleFavorite }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt={ `Botão para adicionar ou retirar ${food.strMeal} dos favoritos` }
+        />
+      </button>
+
       <p data-testid="recipe-category">{food.strCategory}</p>
       {renderIngredients(getIngredientsKeys(food))}
       <p data-testid="instructions">{food.strInstructions}</p>
