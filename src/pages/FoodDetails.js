@@ -100,7 +100,7 @@ const FoodDetails = () => {
   return (
     <div>
       {
-        foodDetails.map(({
+        foodDetails && foodDetails.map(({
           strMealThumb,
           strMeal,
           strCategory,

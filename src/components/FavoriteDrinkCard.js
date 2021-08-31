@@ -7,7 +7,6 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const FavoriteDrinkCard = ({ recipe }, index) => {
   const { id, image, name, alcoholicOrNot } = recipe;
-  console.log(recipe);
 
   const [favorite, setFavorite] = useState(true);
 
