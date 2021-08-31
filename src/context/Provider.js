@@ -61,7 +61,11 @@ function Provider({ children }) {
   const requestRandomAPI = async (type) => {
     const response = await fetch(`https://www.the${type}db.com/api/json/v1/1/random.php`);
     const result = await response.json();
-    setRecipes({ ...recipes, list: result, loading: false });
+    if (type === 'meal') {
+      setFoodRecipes({ ...foodRecipes, list: result, loading: false });
+    } else {
+      setDrinkRecipes({ ...drinkRecipes, list: result, loading: false });
+    }
   };
 
   const requestCategory = async (categories, func) => {
@@ -84,9 +88,9 @@ function Provider({ children }) {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     } else {
       if (filter.src === 'meal') {
-        setFoodRecipes({ ...recipes, list: result, loading: false });
+        setFoodRecipes({ ...foodRecipes, list: result, loading: false });
       }
-      setDrinkRecipes({ ...recipes, list: result, loading: false });
+      setDrinkRecipes({ ...drinkRecipes, list: result, loading: false });
     }
   };
 
