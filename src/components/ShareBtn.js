@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import clipboardCopy from '../utils/clipboardCopy';
 import shareIcon from '../images/shareIcon.svg';
 
 function ShareBtn({ id, type }) {
   return (
     <div>
-      <button
+      <Button
         type="button"
         onClick={ () => clipboardCopy(type, id) }
         data-testid="share-btn"
@@ -16,7 +17,7 @@ function ShareBtn({ id, type }) {
           alt="Share Icon"
         />
         <p id={ `copyMessage${id}` }> Compartilhar </p>
-      </button>
+      </Button>
     </div>
   );
 }

@@ -29,13 +29,6 @@ function ExploreDrinks() {
         Por Ingredientes
       </Button>
       <Button
-        variant="primary"
-        data-testid="explore-by-area"
-        onClick={ () => shouldRedirect('/explorar/bebidas/area') }
-      >
-        Por Local de Origem
-      </Button>
-      <Button
         variant="warning"
         data-testid="explore-surprise"
         onClick={ randomDrink }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
+import { Form } from 'react-bootstrap';
 
 function RadiosButton(props) {
   const { handleChange, radios, value, name } = props;
@@ -12,17 +13,17 @@ function RadiosButton(props) {
           const { textId = '', valueRadio } = radio;
 
           return (
-            <label htmlFor={ valueRadio } key={ v4() }>
-              { valueRadio }
-              <input
-                checked={ value === valueRadio }
-                data-testid={ textId }
-                name={ name }
-                onChange={ handleChange }
-                type="radio"
-                value={ valueRadio }
-              />
-            </label>
+            <Form.Check
+              key={ v4() }
+              data-testid={ textId }
+              type="radio"
+              id={ textId }
+              label={ valueRadio }
+              checked={ value === valueRadio }
+              onChange={ handleChange }
+              value={ valueRadio }
+              name={ name }
+            />
           );
         })
       }
