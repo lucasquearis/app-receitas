@@ -19,7 +19,7 @@ function AllRecipes() {
       <BtnCategory
         category={ currentRout ? categoryMeal : categoryDrinks }
       />
-      <RecipesContainer />
+      <RecipesContainer category={ currentRout ? 'comidas' : 'bebidas' } />
       <Footer />
     </div>
   );
