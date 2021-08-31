@@ -1,5 +1,5 @@
 export default function handleFavorites(recipe, isFood) {
-  const favoriteRecipe = {
+  const favoriteRecipe = recipe.type ? recipe : {
     id: recipe[isFood ? 'idMeal' : 'idDrink'],
     type: isFood ? 'comida' : 'bebida',
     area: isFood ? recipe.strArea : '',
@@ -11,12 +11,11 @@ export default function handleFavorites(recipe, isFood) {
   const recipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
   const containRecipe = recipes
-    .some((item) => (favoriteRecipe.id === item.id && favoriteRecipe.type === item.type));
+    .some((item) => (favoriteRecipe.id === item.id));
 
   const handleFavorite = containRecipe
     ? recipes
-      .filter((item) => (favoriteRecipe.id !== item.id
-        && favoriteRecipe.type !== item.type))
+      .filter((item) => (favoriteRecipe.id !== item.id))
     : recipes.concat(favoriteRecipe);
 
   localStorage.setItem('favoriteRecipes', JSON.stringify(handleFavorite));

@@ -107,7 +107,8 @@ export default function Routes() {
 
         <Route
           path="/receitas-favoritas"
-          component={ FavoritesRecipes }
+          // component={ FavoritesRecipes }
+          render={ (props) => <FavoritesRecipes { ...props } /> }
         />
 
       </Switch>
