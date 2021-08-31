@@ -68,7 +68,7 @@ const FavoriteButton = ({ recipe, id, horizontal, index }) => {
 
 FavoriteButton.propTypes = {
   recipe: PropTypes.shape({}),
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   horizontal: PropTypes.bool,
   index: PropTypes.number,
 };
