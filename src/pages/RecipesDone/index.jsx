@@ -6,8 +6,10 @@ import RecipesDoneCard from './RecipesDoneCard';
 function RecipesDone() {
   const [filter, setFilter] = useState('');
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const drinksFilted = doneRecipes.filter((recipe) => recipe.type.includes('bebida'));
-  const foodsFilted = doneRecipes.filter((recipe) => recipe.type.includes('comida'));
+  const drinksFilted = (!doneRecipes)
+    ? {} : doneRecipes.filter((recipe) => recipe.type.includes('bebida'));
+  const foodsFilted = (!doneRecipes)
+    ? {} : doneRecipes.filter((recipe) => recipe.type.includes('comida'));
 
   const headerProps = {
     title: 'Receitas Feitas',
@@ -15,6 +17,9 @@ function RecipesDone() {
   };
 
   const filterByBtn = () => {
+    if (!doneRecipes) {
+      return (<h3>Nenhuma Receita Feita</h3>);
+    }
     if (filter === 'comida') {
       return foodsFilted
         .map((recipe, index) => (
@@ -57,8 +62,6 @@ function RecipesDone() {
         Drinks
       </Button>
       { filterByBtn() }
-      {/* { doneRecipes
-        .map((recipe, index) => RecipesDoneCard(recipe, index))} */}
     </div>
   );
 }
