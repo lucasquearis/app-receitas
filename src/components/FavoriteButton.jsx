@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import useLocalStorage from '../helpers/useLocalStorage';
 
 function FavoriteButton(props) {
   const [favorite, setFavorite] = useState(false);
   const [favoriteList, setFavoriteList] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useLocalStorage('favoriteRecipes', []);
   const { recipe } = props;
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
-      setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')).filter(
+    if (favoriteRecipes) {
+      setFavoriteList(favoriteRecipes.filter(
         (favRecipe) => favRecipe.id !== recipe.id || favRecipe.type !== recipe.type,
       ));
-      setFavorite(JSON.parse(localStorage.getItem('favoriteRecipes')).some(
+      setFavorite(favoriteRecipes.some(
         (favRecipe) => favRecipe.id === recipe.id && favRecipe.type === recipe.type,
       ));
     }
@@ -21,9 +23,9 @@ function FavoriteButton(props) {
 
   useEffect(() => {
     if (favorite) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteList, recipe]));
+      setFavoriteRecipes([...favoriteList, recipe]);
     } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteList]));
+      setFavoriteRecipes([...favoriteList]);
     }
   }, [favorite, favoriteList, recipe]);
 
@@ -54,13 +56,13 @@ function FavoriteButton(props) {
 
 FavoriteButton.propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    area: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    alcoholicOrNot: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    type: PropTypes.string,
+    area: PropTypes.string,
+    category: PropTypes.string,
+    alcoholicOrNot: PropTypes.string,
+    name: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
 };
 

@@ -5,6 +5,7 @@ import IngredientsCheckList from '../components/IngredientsCheckList';
 import FinishRecipeButton from '../components/FinishRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import useLocalStorage from '../helpers/useLocalStorage';
 
 function ProgressRecipes(props) {
   const [recipe, setRecipe] = useState();
@@ -14,6 +15,9 @@ function ProgressRecipes(props) {
   const { match, history } = props;
   const { type, id } = match.params;
   const { pathname } = history.location;
+ /*  const [ingredients, setIngredients] = useState([]);
+  const [cocktailsStorage, setCocktailsStorage] = useLocalStorage('cocktails', {});
+  const [mealsStorage, setMealsStorage] = useLocalStorage('meals', {}); */
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -68,9 +72,9 @@ function ProgressRecipes(props) {
                   ? recipe[enType][0].strCategory
                   : recipe[enType][0].strAlcoholic }
               </h2>
-              <section>
+              <div>
                 <IngredientsCheckList recipe={ recipe[enType][0] } />
-              </section>
+              </div>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
 
               <FinishRecipeButton

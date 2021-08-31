@@ -8,7 +8,6 @@ const Iframe = (props) => {
     const stringLink = link;
     const re = 'watch?v=';
     const convertedLink = stringLink.replace(re, 'embed/');
-    console.log(convertedLink);
     return convertedLink;
   };
 
