@@ -14,7 +14,7 @@ const Recipes = () => {
   const RECIPES = 12;
 
   if (foods === null) {
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   } else if (foods.length === 1 && mealsByCategories === false) {
     history.push(`/comidas/${foods[0].idMeal}`);
   }

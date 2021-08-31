@@ -34,7 +34,7 @@ const SearchBar = (location) => {
     const { searchText, search } = filterState;
     const { location: { pathname } } = location;
     if (search === 'Primeira letra' && searchText.length > 1) {
-      return alert('Sua busca deve conter somente 1 (um) caracter');
+      return global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (pathname === '/comidas' || pathname === '/comidas/') {
       setFoodFilter(filterState);

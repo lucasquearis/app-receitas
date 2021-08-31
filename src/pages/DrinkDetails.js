@@ -56,32 +56,6 @@ const DrinkDetails = () => {
     }
   }
 
-  const getFavorite = () => {
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (actualStorage && drinkDetails.length > 0) {
-      const isFavorited = actualStorage.some(
-        (item) => item.id === drinkDetails[0].idDrink,
-      );
-      setFavorite(isFavorited);
-    }
-  };
-
-  const getIngredients = () => {
-    const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Ingredient') && i[1] !== null));
-    const ingredientsOnly = ingredientsArr.map((item) => item
-      .map((i) => i.pop())).map((item) => item);
-    setIngredients(ingredientsOnly);
-  };
-
-  const getMeasure = () => {
-    const measuresArr = drinkDetails.map((item) => Object.entries(item)
-      .filter((i) => i[0].includes('Measure') && i[1] !== null && i[1] !== 'undefined'));
-    const measuresOnly = measuresArr.map((item) => item
-      .map((i) => i.pop())).map((item) => item);
-    setMeasures(measuresOnly);
-  };
-
   const copy = () => {
     Copy(url);
     setShowMsg(true);
@@ -89,9 +63,33 @@ const DrinkDetails = () => {
 
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
-  }, [actualPath]);
+  }, [actualPath, setDrinkDetails]);
 
   useEffect(() => {
+    const getFavorite = () => {
+      const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      if (actualStorage && drinkDetails.length > 0) {
+        const isFavorited = actualStorage.some(
+          (item) => item.id === drinkDetails[0].idDrink,
+        );
+        setFavorite(isFavorited);
+      }
+    };
+    const getMeasure = () => {
+      const measuresArr = drinkDetails.map((item) => Object.entries(item)
+        .filter((i) => i[0]
+          .includes('Measure') && i[1] !== null && i[1] !== 'undefined'));
+      const measuresOnly = measuresArr.map((item) => item
+        .map((i) => i.pop())).map((item) => item);
+      setMeasures(measuresOnly);
+    };
+    const getIngredients = () => {
+      const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
+        .filter((i) => i[0].includes('Ingredient') && i[1] !== null));
+      const ingredientsOnly = ingredientsArr.map((item) => item
+        .map((i) => i.pop())).map((item) => item);
+      setIngredients(ingredientsOnly);
+    };
     getFavorite();
     getIngredients();
     getMeasure();

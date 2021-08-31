@@ -27,7 +27,7 @@ const SearchByOrigin = () => {
       }
     };
     filterRecipes();
-  }, [areaValue]);
+  }, [areaValue, setFoods]);
 
   return (
     <div>

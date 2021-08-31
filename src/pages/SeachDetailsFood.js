@@ -17,7 +17,7 @@ const SearchDetailsFood = () => {
       setRandomMeal(id);
     };
     fetchRandom();
-  }, [turnRandom]);
+  }, [turnRandom, setRandomMeal]);
 
   return (
     <div>
