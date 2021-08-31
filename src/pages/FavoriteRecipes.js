@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 function FoodAreaExp() {
   return (
-    <Header name="Receitas Favoritas" search={ false } />
+    <Header title="Receitas Favoritas" search={ false } />
   );
 }
 

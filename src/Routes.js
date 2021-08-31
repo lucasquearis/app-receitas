@@ -10,7 +10,7 @@ import FoodExp from './pages/Explore/FoodExp';
 import DrinkExp from './pages/Explore/DrinkExp';
 import DrinkIngredients from './pages/Explore/DrinkIngredients';
 import NotFound from './pages/NotFound';
-// import FoodIngredients from './pages/Explore/FoodIngredients';
+import FoodIngredients from './pages/Explore/FoodIngredients';
 import FoodAreaExp from './pages/Explore/FoodAreaExp';
 import Profile from './pages/Profile';
 import FavoriteRecipes from './pages/FavoriteRecipes';
@@ -21,9 +21,8 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/explorar/comidas/ingredientes" component={ DrinkIngredients } />
-        {/* <Route
-          path="/explorar/bebidas/ingredientes" component={ FoodIngredients } /> */}
+        <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
+        <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
         <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/comidas" component={ Foods } />
