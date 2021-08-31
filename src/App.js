@@ -2,30 +2,24 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { AppProvider } from './Context/ContextApp';
 import Header from './Components/Header/index';
-import Foods from './Pages/Foods';
-import Drinks from './Pages/Drinks/index';
+import AllRecipes from './Pages/AllRecipes';
 import Login from './Pages/Login/Login';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import ExploreDrinksOrFoods from './Pages/ExploreDrinksOrFoods';
 import ExploreArea from './Pages/ExploreArea';
 import Explore from './Pages/Explore';
+import ExploreIngredients from './Pages/ExploreIngredients';
 import Profile from './Pages/Profile/Profile';
 import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
+import ReceitasFeitas from './Pages/ReceitasFeitas/ReceitasFeitas';
 
 function App() {
-  const exploreFoodDrink = (
-    <Header
-      title="Explorar Ingredientes"
-      searchButton={ false }
-    />
-  );
-
   return (
     <AppProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/comidas" component={ Foods } />
-        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas" component={ AllRecipes } />
+        <Route exact path="/bebidas" component={ AllRecipes } />
         <Route
           exact
           path="/explorar"
@@ -39,7 +33,7 @@ function App() {
         <Route
           exact
           path="/explorar/comidas/ingredientes"
-          render={ () => exploreFoodDrink }
+          component={ ExploreIngredients }
         />
         <Route
           exact
@@ -54,7 +48,7 @@ function App() {
         <Route
           exact
           path="/explorar/bebidas/ingredientes"
-          render={ () => exploreFoodDrink }
+          component={ ExploreIngredients }
         />
         <Route
           exact
@@ -71,20 +65,15 @@ function App() {
           exact
           path="/receitas-feitas"
           render={ () => (
-            <Header
-              title="Receitas Feitas"
-              searchButton={ false }
-            />
+            <Header />
           ) }
+          component={ ReceitasFeitas }
         />
         <Route
           exact
           path="/receitas-favoritas"
           render={ () => (
-            <Header
-              title="Receitas Favoritas"
-              searchButton={ false }
-            />
+            <Header />
           ) }
           component={ ReceitasFavoritas }
         />

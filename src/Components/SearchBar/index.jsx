@@ -58,7 +58,9 @@ function SearchBar() {
       <Button
         variant="contained"
         data-testid="exec-search-btn"
-        onClick={ () => searchRecipes(previousSearch, currentRout, url, history) }
+        onClick={ () => {
+          searchRecipes(previousSearch, currentRout, url, history);
+        } }
       >
         Pesquisar
       </Button>
