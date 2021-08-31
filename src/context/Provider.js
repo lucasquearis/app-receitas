@@ -31,11 +31,11 @@ function Provider({ children }) {
   }, []);
 
   async function resetFilter() {
-    const initalMeals = await fetchMeals();
-    setMeals(initalMeals);
+    const allMeals = await fetchMeals();
+    setMeals(allMeals);
     setCategory('All');
-    const initialDrinks = await fetchDrinks();
-    setCocktails(initialDrinks);
+    const allDrinks = await fetchDrinks();
+    setCocktails(allDrinks);
   }
 
   function handleToggle(strCategory) {
