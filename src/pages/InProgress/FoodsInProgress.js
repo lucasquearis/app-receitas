@@ -12,9 +12,10 @@ function FoodsInProgress() {
   // const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
   // const INITIAL_STATE = { ...previousLocalStorage, meals: { [id]: [] } };
 
-  const [inProgress, setInProgress] = useState(JSON
-    .parse(localStorage.getItem('inProgressRecipes'))); // array de ingredientes que vão sendo checados
+  // const [inProgress, setInProgress] = useState(JSON
+  //   .parse(localStorage.getItem('inProgressRecipes'))); // array de ingredientes que vão sendo checados
 
+  const [inProgress, setInProgress] = useState('');
   const [disabled, setDisabled] = useState(true);
   // localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
 
@@ -24,6 +25,7 @@ function FoodsInProgress() {
   //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
   // }
 
+  // useEffect p fetch
   useEffect(() => {
     const getRecipeFood = async () => {
       // const { id } = useParams();
@@ -34,9 +36,26 @@ function FoodsInProgress() {
     getRecipeFood();
   }, [id]);
 
+  // useEffect p checar o q existe no localStorage
   useEffect(() => {
-    const LS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setInProgress({ ...LS });
+    const previousLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!previousLocalStorage) {
+      const newLocalStorage = { cocktails: {}, meals: { [id]: [] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newLocalStorage));
+      setInProgress(newLocalStorage);
+      // console.log(localStorage.meals[id]);
+    } else if (!previousLocalStorage.meals[id]) {
+      const { meals } = previousLocalStorage;
+      const newLocalStorage = { ...previousLocalStorage, meals: { ...meals, [id]: [] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newLocalStorage));
+      setInProgress(newLocalStorage);
+    } else {
+      setInProgress(previousLocalStorage);
+    }
+    // if (!previousLocalStorage.meals[id]) {
+    //   const newLocalStorage = { }
+    // }
+    // setInProgress({ ...previousLocalStorage });
 
     // const setLocalStorage = () => {
     //   const previousLocalStorage = JSON.parse(localStorage.getItem('InProgressRecipes'));
@@ -45,7 +64,7 @@ function FoodsInProgress() {
     //   localStorage.setItem('inProgressRecipes', JSON.stringify(INITIAL_STATE));
     // };
     // setLocalStorage();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const ingredientsList = () => {
@@ -67,11 +86,24 @@ function FoodsInProgress() {
   }, [recipeFood]);
 
   // tentiva p ajudar no req 50
-  if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
-    const inProgressRecipes = { cocktails: {}, meals: { [id]: [] } };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-  }
+  // if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
+  //   const inProgressRecipes = { cocktails: {}, meals: { [id]: [] } };
+  //   localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  // }
   // Requisito 50
+
+  const handleDisabled = () => {
+    if (inProgress.meals[id].length !== ingredients.length || ingredients.length === 0) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  };
+
+  useEffect(() => {
+    if (inProgress) handleDisabled();
+  }, [inProgress]);
+
   const handleCheckItem = (ingredient) => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const { meals } = inProgressRecipes;
@@ -88,10 +120,12 @@ function FoodsInProgress() {
         .setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
     }
 
+    // p checar se existe o igrendiente
     const newIngredients = meals[id]
       .includes(ingredient) ? meals[id]
         .filter((item) => item !== ingredient) : [...meals[id], ingredient];
 
+    // add ingrediente novo
     const newInProgressRecipes = {
       ...inProgressRecipes,
       meals: {
@@ -101,6 +135,7 @@ function FoodsInProgress() {
     };
 
     setInProgress(newInProgressRecipes);
+    // handleDisabled();
     return localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(newInProgressRecipes),
@@ -108,14 +143,6 @@ function FoodsInProgress() {
   };
 
   const handleCheked = (ingredient) => (inProgress.meals[id].includes(ingredient));
-
-  useEffect(() => {
-    if (inProgress.meals[id].length !== ingredients.length || ingredients.length === 0) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  }, [inProgress, ingredients, id]);
 
   const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
 
@@ -130,7 +157,8 @@ function FoodsInProgress() {
       <div className="indredients">
         <h3>Ingredientes</h3>
         {
-          ingredients.map((ingredient, index) => (
+          inProgress
+          && ingredients.map((ingredient, index) => (
             <div key={ index } data-testid={ `${index}-ingredient-step` }>
               <label htmlFor={ `${ingredient}` }>
                 <input
