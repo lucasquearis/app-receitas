@@ -18,7 +18,7 @@ function Provider({ children }) {
   const [recipeType, setRecipeType] = useState('meals');
   const [category, setCategory] = useState('All');
   const [toggle, setToggle] = useState(false);
-  const [btnstrCategory, setBtnstrCategory] = useState('');
+  const [btnName, setBtnName] = useState('');
 
   useEffect(() => {
     async function fetchAPI() {
@@ -38,15 +38,15 @@ function Provider({ children }) {
     setCocktails(initialDrinks);
   }
 
-  function handleToggle(strCategory) {
+  function handleToggle(name) {
     const arr = [
       !toggle,
-      toggle && strCategory === btnstrCategory,
-      toggle && strCategory !== btnstrCategory,
+      toggle && name === btnName,
+      toggle && name !== btnName,
     ];
     switch (arr.indexOf(true)) {
     case 0:
-      setBtnstrCategory(strCategory);
+      setBtnName(name);
       setToggle(true);
       break;
     case 1:
@@ -54,7 +54,7 @@ function Provider({ children }) {
       resetFilter();
       break;
     case 2:
-      setBtnstrCategory(strCategory);
+      setBtnName(name);
       break;
     default:
       global.alert('');
@@ -76,10 +76,10 @@ function Provider({ children }) {
   const history = useHistory();
 
   const handleInputs = ({ target }) => {
-    const { strCategory, value } = target;
+    const { name, value } = target;
     setUser({
       ...user,
-      [strCategory]: value,
+      [name]: value,
     });
     validButton();
     const inputEmail = document.getElementById('email-input');
