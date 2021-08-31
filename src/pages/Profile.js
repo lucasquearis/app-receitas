@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Profile() {
@@ -7,6 +8,8 @@ function Profile() {
   return (
 
     <div>
+      <Header title="Perfil" hideSearch />
+      <p>Profile</p>
       <p>Perfil</p>
       <span data-testid="profile-email">{email}</span>
       <Link to="/receitas-feitas">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function ExploreDrinksOrMeals() {
@@ -40,6 +41,7 @@ function ExploreDrinksOrMeals() {
   if (pathname === '/explorar/comidas') {
     return (
       <div>
+        <Header title="Explorar Comidas" hideSearch />
         <p>Explore Drinks or Meals</p>
         <Link to="/explorar/comidas/ingredientes">
           <button type="button" data-testid="explore-by-ingredient">
@@ -67,6 +69,7 @@ function ExploreDrinksOrMeals() {
   }
   return (
     <div>
+      <Header title="Explorar Bebidas" hideSearch />
       <Link to="/explorar/bebidas/ingredientes">
         <button type="button" data-testid="explore-by-ingredient">
           Por Ingredientes
