@@ -1,0 +1,4 @@
+.recipeDetails {
+  overflow-y: scroll;
+  width: 100vw;
+}
