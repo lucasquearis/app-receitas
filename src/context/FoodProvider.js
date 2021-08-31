@@ -44,7 +44,7 @@ const FoodProvider = ({ children }) => {
       setAreas(data.meals);
     });
   }, []);
-  
+
   const contextValue = {
     foods,
     foodFilter,
