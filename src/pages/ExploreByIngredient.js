@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import genericFetchAPI from '../services/genericFetchAPI';
 
-function ExploreByIngredient() {
+function ExploreByIngredient(title) {
+  const history = useHistory();
+  const URL = history.location.pathname;
+  if (URL === '/explorar/bebidas/ingredientes'
+|| URL === '/explorar/comidas/ingredientes') {
+    title = 'Explorar Ingredientes';
+  }
+    
   const [state, setState] = useState({
     mealOrCocktail: '',
     type: '',
     start: '',
     search: '',
   });
-
   const [dataFood, setDataFood] = useState({});
   const [dataDrink, setDataDrinks] = useState({});
-
   const { pathname } = useLocation();
   const resolveFood = async () => {
     const response = await genericFetchAPI('meal', 'list', 'f', 'list');
@@ -30,45 +37,9 @@ function ExploreByIngredient() {
     resolveDrinks();
   }
 
-  // useEffect(() => {
-  //   const pathnameIngredient = () => {
-  //     if (pathname === '/explorar/comidas/ingredientes') {
-  //       setState({
-  //         mealOrCocktail: 'meal',
-  //         type: 'list',
-  //         start: 'f',
-  //         search: 'list',
-  //       });
-  //     } else {
-  //       setState({
-  //         mealOrCocktail: 'cocktail',
-  //         type: 'list',
-  //         start: 'f',
-  //         search: 'list',
-  //       });
-  //     }
-  //   };
-  //   pathnameIngredient();
-  // }, [pathname]);
-
-  // if (state.mealOrCocktail.length) {
-  //   const { mealOrCocktail, type, start, search } = state;
-  //   const fecthIngredient = async () => {
-  //     const response = await genericFetchAPI(mealOrCocktail, type, start, search);
-  //     setData({ response });
-  //   };
-  //   fecthIngredient();
-    // return fecthIngredient();
-  // }
-  // return <p>Loading ...</p>;
-
-  // if (pathname === '/explorar/comidas/ingredientes') {
-  //   console.log(data);
-  // } else {
-  //   console.log(data);
-  // }
-  return (
+return (
     <div>
+      <Header title={ title } hideSearch />
       <p>Explore by Ingredient</p>
       {
 
