@@ -29,7 +29,8 @@ export default function HandleFavoriteAndShare(
 
   const handleShare = () => {
     const url = window.location.href;
-    const newUrl = url.replace('/receitas-favoritas', `/${type}s/${id}`);
+    const newUrl = url.replace('/receitas-favoritas', `/${type}s/${id}`)
+      .replace('/receitas-feitas', `/${type}s/${id}`);
     copy(newUrl);
     setCopyMsg(true);
   };
@@ -75,9 +76,10 @@ HandleFavoriteAndShare.propTypes = {
   recipe: shape().isRequired,
   isFood: bool,
   index: number.isRequired,
-  removeFavorite: func.isRequired,
+  removeFavorite: func,
 };
 
 HandleFavoriteAndShare.defaultProps = {
   isFood: false,
+  removeFavorite: () => {},
 };
