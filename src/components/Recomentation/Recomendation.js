@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from 'react-bootstrap';
+import './Recomendation.css';
 
 const Recomendation = ({ list, type }) => {
   if (!list) return <Spinner animation="border" />;
@@ -14,11 +15,12 @@ const Recomendation = ({ list, type }) => {
   return (
     <div className="component-details">
       <h1>Recomendation</h1>
-      <div>
+      <div className="recomendation">
         { newArray.map((obj, index) => (
           <div
             key={ index }
             data-testid={ `${index}-recomendation-card` }
+            // className="card-recomendation"
           >
             <img
               width="30%"
