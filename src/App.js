@@ -1,15 +1,15 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Switch, Route } from 'react-router-dom';
 import ProviderContext from './context/ProviderContext';
 import Login from './pages/Login';
-import Foods from './pages/Foods';
-import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
 import ExploreFood from './pages/ExploreFood';
 import ExploreDrink from './pages/ExploreDrink';
 import ExploreOrigin from './pages/ExploreOrigin';
+import ExploreNotFound from './pages/ExploreNotFound';
 import IngredientsExploreFood from './pages/IngredientsExploreFood';
 import IngredientsExploreDrink from './pages/IngredientsExploreDrink';
 import Profile from './pages/Profile';
@@ -17,18 +17,20 @@ import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipesInProgress from './pages/RecipesInProgress';
+import FoodsOrDrinks from './pages/FoodsOrDrinks';
 
 function App() {
   return (
     <ProviderContext>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/comidas" component={ Foods } />
-        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas" render={ () => <FoodsOrDrinks title="Comidas" /> } />
+        <Route exact path="/bebidas" render={ () => <FoodsOrDrinks title="Bebidas" /> } />
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreFood } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
         <Route exact path="/explorar/comidas/area" component={ ExploreOrigin } />
+        <Route path="/explorar/bebidas/area" component={ ExploreNotFound } />
         <Route
           exact
           path="/explorar/comidas/ingredientes"

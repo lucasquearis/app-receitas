@@ -2,3 +2,7 @@
   bottom: 0;
   position: fixed;
 }
+
+.recipe-image {
+  width: 40vw;
+}

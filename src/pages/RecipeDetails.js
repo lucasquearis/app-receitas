@@ -47,6 +47,7 @@ function RecipeDetails(props) {
                 src={ recipe[enType][0][`str${enCasedType}Thumb`] }
                 alt="Foto do Prato"
                 data-testid="recipe-photo"
+                className="recipe-image"
               />
               <h1
                 data-testid="recipe-title"
@@ -64,6 +65,7 @@ function RecipeDetails(props) {
                     name: recipe[enType][0][`str${enCasedType}`],
                     image: recipe[enType][0][`str${enCasedType}Thumb`] }
                 }
+                testId="favorite-btn"
               />
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
