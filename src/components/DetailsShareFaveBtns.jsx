@@ -6,20 +6,16 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/Details.css';
 
+const clipboardCopy = require('clipboard-copy');
+
 function DetailsShareFaveBtns({ details }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const { favorites, setFavorites } = useContext(Context);
 
-  // aprendido por aqui: https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
-  function copyRecipeURL() {
-    const url = document.createElement('input');
-    url.value = window.location.href;
-    document.body.appendChild(url);
-    url.select();
-    document.execCommand('copy');
-    document.body.removeChild(url);
+  function copyToClipboard() {
+    clipboardCopy(window.location.href);
     setIsCopied(true);
   }
 
@@ -69,7 +65,7 @@ function DetailsShareFaveBtns({ details }) {
         type="button"
         data-testid="share-btn"
         className="share-btn"
-        onClick={ copyRecipeURL }
+        onClick={ copyToClipboard }
       >
         <img src={ shareIcon } alt="share icon" className="share-icon" />
       </button>

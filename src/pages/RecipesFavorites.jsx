@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/RecipesFavorites.css';
 
+const clipboardCopy = require('clipboard-copy');
+
 export default function RecipesFavorites() {
-  const [unfavorite, setUnfavorite] = useState(false);
+  const [copy, setCopy] = useState({ id: '', copied: false });
 
   function getFavorites() {
     const storedFavorites = JSON
@@ -15,9 +16,11 @@ export default function RecipesFavorites() {
   }
 
   function handleClick(id) {
-    setUnfavorite(true);
     const editedFavorites = getFavorites().filter((item) => item.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(editedFavorites));
+    const specificCard = `${id}-favorite-card`;
+    const favoriteCard = document.getElementById(specificCard);
+    favoriteCard.remove();
   }
 
   function renderArea(item) {
@@ -36,9 +39,18 @@ export default function RecipesFavorites() {
     );
   }
 
+  function copyToClipboard(id, type) {
+    const url = window.location.href;
+    console.log(url);
+    const urlArr = url.split('/');
+    const link = urlArr[2];
+    clipboardCopy(`http://${link}/${type}s/${id}`);
+    setCopy({ id, copied: true });
+  }
+
   function renderFavorites() {
     return getFavorites().map((item, index) => (
-      <div key={ item.id } className="favorite-card">
+      <div key={ item.id } id={ `${item.id}-favorite-card` }>
         <img
           className="recipe-pic"
           key={ item.image }
@@ -46,31 +58,36 @@ export default function RecipesFavorites() {
           alt="favorite recipe"
           data-testid={ `${index}-horizontal-image` }
         />
+        <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
+          { item.name }
+        </h3>
         <p key={ item.category } data-testid={ `${index}-horizontal-top-text` }>
           { item.category }
         </p>
         { item.type === 'comida' && renderArea(item) }
         { item.type === 'bebida' && renderAlcoholic(item) }
-        <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
-          { item.name }
-        </h3>
-        <button type="button">
+        <button
+          className="share-btn"
+          type="button"
+          onClick={ () => copyToClipboard(item.id, item.type) }
+        >
           <img
             src={ shareIcon }
             alt="share icon"
             data-testid={ `${index}-horizontal-share-btn` }
           />
         </button>
+        { copy.copied && copy.id === item.id
+          ? <div className="copy-div">Link copiado!</div> : <div /> }
         <button
           className="unfavorite-btn"
-          key={ item.id }
           type="button"
           onClick={ () => handleClick(item.id) }
         >
           <img
-            src={ unfavorite ? whiteHeartIcon : blackHeartIcon }
+            src={ blackHeartIcon }
             alt="favorited icon"
-            data-testid={ `${index}-horizontal-unfavorite-btn` }
+            data-testid={ `${index}-horizontal-favorite-btn` }
           />
         </button>
       </div>
@@ -78,7 +95,7 @@ export default function RecipesFavorites() {
   }
 
   return (
-    <main>
+    <main className="favorite-recipes-main">
       <Header title="Receitas Favoritas" />
       <button
         type="button"
