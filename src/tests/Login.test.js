@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen, fireEvent } from '@testing-library/dom';
+import { screen } from '@testing-library/react';
 
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
@@ -71,14 +71,15 @@ describe('Verifica os componentes requeridos na tela:', () => {
   it('Verifica o botão redireciona corretamente', () => {
     const { history } = renderWithRouter(<App />);
 
-    const email = screen.queryByTestId(INPUT_EMAIL_SELECTOR);
-    const password = screen.queryByTestId(INPUT_PASSWORD_SELECTOR);
-    const button = screen.queryByTestId(LOGIN_BUTTON_SELECTOR);
+    const email = screen.getByTestId(INPUT_EMAIL_SELECTOR);
+    const password = screen.getByTestId(INPUT_PASSWORD_SELECTOR);
+    const button = screen.getByTestId(LOGIN_BUTTON_SELECTOR);
 
     userEvent.type(email, VALID_EMAIL);
     userEvent.type(password, VALID_PASSWORD);
-    fireEvent.click(button);
+    userEvent.click(button);
 
-    expect(history.location.pathname).toBe('/comidas');
+    const { pathname } = history.location;
+    expect(pathname).toBe('/comidas');
   });
 });
