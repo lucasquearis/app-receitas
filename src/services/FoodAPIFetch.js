@@ -2,6 +2,8 @@ const urlFoodList = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const urlFoodCategories = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const urlFoodListByCategory = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const urlFoodRandom = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const urlFoodIngredientsList = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const urlFoodFilterByIngredientList = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
 
 export async function fetchAPIList() {
   try {
@@ -36,6 +38,26 @@ export async function fetchAPIListByCategory(category) {
 export async function fetchFoodRandom() {
   try {
     const response = await fetch(urlFoodRandom);
+    const resolve = await response.json();
+    return resolve.meals;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function fetchFoodIngredientsList() {
+  try {
+    const response = await fetch(urlFoodIngredientsList);
+    const resolve = await response.json();
+    return resolve.meals;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function fetchFoodFilterByIngredientList(title) {
+  try {
+    const response = await fetch(`${urlFoodFilterByIngredientList}${title}`);
     const resolve = await response.json();
     return resolve.meals;
   } catch (error) {
