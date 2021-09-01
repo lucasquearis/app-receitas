@@ -24,8 +24,9 @@ export const AppProvider = ({ children }) => {
     redirect,
     setRedirect } = LoginHook();
   const history = useHistory();
+  const search = 'search.php?s=';
   const { location: { pathname } } = history;
-  const currentRout = pathname.includes('/comidas');
+  const currentRout = pathname.includes('/comidas') || pathname === '/';
   const urlRender = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
   const fetchApi = async (url, type, searchInput = '') => {
     const request = await fetch(`${url}${type}${searchInput}`);
@@ -33,7 +34,7 @@ export const AppProvider = ({ children }) => {
     return setRecipes(response.meals || response.drinks);
   };
   if (recipes.length === 0) {
-    fetchApi(urlRender, 'search.php?s=');
+    fetchApi(urlRender, search);
   }
 
   const ContProps = {

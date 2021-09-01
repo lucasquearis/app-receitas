@@ -26,7 +26,6 @@ const ModalHook = () => {
   };
 
   const handleCopy = () => {
-    console.log(window.location.href);
     copy(window.location.href);
     openModal();
   };
