@@ -4,8 +4,12 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
+jest.mock('clipboard-copy', () => jest.fn());
+const copyToClipBoard = require('clipboard-copy');
+
 const url = '/receitas-favoritas';
 
+const cardID = 'favorite-card';
 const allBtnID = 'filter-by-all-btn';
 const foodBtnID = 'filter-by-food-btn';
 const drinkBtnID = 'filter-by-drink-btn';
@@ -57,7 +61,7 @@ describe('Testes da pagina de receitas favoritas', () => {
     const { history } = renderWithRouter(<App />);
     history.push(url);
 
-    const cards = await screen.findAllByTestId('favorite-card');
+    const cards = await screen.findAllByTestId(cardID);
 
     expect(cards.length).toBe(2);
   });
@@ -91,7 +95,9 @@ describe('Testes da pagina de receitas favoritas', () => {
     expect(shareBtn2).toBeDefined();
 
     expect(favoriteBtn1).toBeDefined();
+    expect(favoriteBtn1).toHaveProperty('src', 'http://localhost/blackHeartIcon.svg');
     expect(favoriteBtn2).toBeDefined();
+    expect(favoriteBtn2).toHaveProperty('src', 'http://localhost/blackHeartIcon.svg');
   });
 
   it('Verifica se ao clicar nos filtros, realmente filtram a listagem', async () => {
@@ -112,7 +118,7 @@ describe('Testes da pagina de receitas favoritas', () => {
 
     const allBtn = screen.getByTestId(allBtnID);
     userEvent.click(allBtn);
-    const cards = await screen.findAllByTestId('favorite-card');
+    const cards = await screen.findAllByTestId(cardID);
     expect(cards.length).toBe(2);
   });
 
@@ -142,4 +148,31 @@ describe('Testes da pagina de receitas favoritas', () => {
     userEvent.click(title2);
     expect(history.location.pathname).toBe('/bebidas/178319');
   });
+
+  it('Verifica se ao clicar no botão de compartilhar, a função é chamda', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(url);
+
+    const shareBtn1 = await screen.findByTestId('0-horizontal-share-btn');
+    userEvent.click(shareBtn1);
+    expect(copyToClipBoard).toHaveBeenCalledTimes(1);
+  });
+
+  it('Verifica se ao clicar no botão de favoritos, a receita é desfavoritada',
+    async () => {
+      const { history } = renderWithRouter(<App />);
+      history.push(url);
+      const favoritesBefore = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+      expect(favoritesBefore.length).toBe(2);
+
+      const favoriteBtn1 = await screen.findByTestId('0-horizontal-favorite-btn');
+      userEvent.click(favoriteBtn1);
+
+      const favoritesAfter = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const cards = await screen.findAllByTestId(cardID);
+
+      expect(cards.length).toBe(1);
+      expect(favoritesAfter.length).toBe(1);
+    });
 });
