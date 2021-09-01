@@ -17,7 +17,6 @@ export default function Drinks() {
     feedDataFilter,
     selectedIngredient,
   } = useContext(MyContext);
-  console.log(feed);
   const [resultList, setResultList] = useState();
 
   useEffect(() => {
@@ -44,7 +43,7 @@ export default function Drinks() {
       setFeed(drinks.slice(0, MAX_FOODS));
     };
     resolviDrink();
-  }, [setFeed, feedDataFilter]);
+  }, [setFeed, feedDataFilter, selectedIngredient]);
 
   const renderList = () => {
     if (resultList === null) {
