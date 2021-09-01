@@ -53,6 +53,8 @@ function ShareAndFavBtn({ recipe }) {
         onClick={ () => favoriteRecipes(
           addOrRemoveFav, setAddOrRemoveFav, recipe, pathname,
         ) }
+        src={ addOrRemoveFav
+          ? '../images/blackHeartIcon.svg' : '../images/whiteHeartIcon.svg' }
       >
         Favorite
       </button>
