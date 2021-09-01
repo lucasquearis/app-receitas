@@ -1,22 +1,13 @@
-// vitals
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
-// styles
 import '../styles/Profile.css';
 
 function Profile() {
   const history = useHistory();
-
   const localStorageData = JSON.parse(localStorage.getItem('user'));
-
-  const userMail = localStorageData
-    ? localStorageData.email : 'Sem e-mail salvo no localStorage';
-
-  const clearLocalStorage = () => {
-    localStorage.clear();
-  };
+  const userMail = localStorageData.email;
 
   return (
     <div className="main-profile">
@@ -25,8 +16,7 @@ function Profile() {
         data-testid="profile-email"
         className="email-container"
       >
-        {/* { 'email:'`${userMail}` } */}
-        { `email: ${userMail}` }
+        {userMail}
       </div>
       <div
         className="buttons-container"
@@ -45,15 +35,16 @@ function Profile() {
         >
           Receitas Favoritas
         </button>
-        <Link to="/">
-          <button
-            type="button"
-            data-testid="profile-logout-btn"
-            onClick={ () => clearLocalStorage() }
-          >
-            Sair
-          </button>
-        </Link>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ () => {
+            history.push('/');
+            localStorage.clear();
+          } }
+        >
+          Sair
+        </button>
         <FooterMenu />
       </div>
     </div>
