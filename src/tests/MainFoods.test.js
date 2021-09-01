@@ -1,5 +1,5 @@
-import userEvent from '@testing-library/user-event';
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -65,7 +65,7 @@ describe('Realiza todos os testes da página de Comidas', () => {
       expect(card).toBeInTheDocument();
     });
   });
-  it('os botoes de categoria são renderizados corretamente', () => {
+  it('Os botões de categoria são renderizados corretamente', () => {
     const { getByTestId, container, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
