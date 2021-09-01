@@ -5,10 +5,13 @@ import RecipesContext from '../context/RecipesContext';
 function OriginSelector() {
   const [areas, setAreas] = useState([]);
   const { setArea } = useContext(RecipesContext);
-  useEffect(async () => {
-    const meals = await fetchArea();
-    setAreas(meals);
-  }, [setAreas]);
+  useEffect(() => {
+    const areasFetch = async () => {
+      const meals = await fetchArea();
+      setAreas(meals);
+    };
+    areasFetch();
+  }, []);
   return (
     <select
       data-testid="explore-by-area-dropdown"
