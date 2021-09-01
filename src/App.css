@@ -27,81 +27,141 @@
 
 .btn-done {
   background-color: #606c38;
-  position: absolute;
   height: 36px;
   left: 90px;
-  width: 180px;
+  position: absolute;
   top: 360px;
+  width: 180px;
 }
 
 .btn-favorite {
   background-color: #606c38;
-  position: absolute;
   height: 36px;
   left: 90px;
-  width: 180px;
+  position: absolute;
   top: 430px;
+  width: 180px;
 }
 
 .btn-logout {
   background-color: #606c38;
-  position: absolute;
   height: 36px;
   left: 90px;
-  width: 180px;
+  position: absolute;
   top: 500px;
+  width: 180px;
+  
 }
 
 .logo {
   align-items: center;
   border-radius: 80px;
-  height: 166px;
+  height: 280px;
+  left: 5px;
   position: absolute;
-  left: 63px;
-  width: 234px;
-  top: 80px;
+  top: 90px;
+  width: 340px;
 }
 
 .login {
   align-items: center;
-  background: rgba(255, 254, 251, 0.85);
+  /* background: rgba(255, 254, 251, 0.85); */
   border-radius: 40px;
   display: flex;
-  position: absolute;
   flex-direction: column;
-  height: 432px;
-  left: 42px;
-  width: 275px;
+  height: 402px;
+  left: 31px;
+  position: absolute;
   top: 106px;
+  width: 275px;
+}
+
+.page-profile {
+  align-items: center;
+  /* background: rgba(255, 254, 251, 0.85); */
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 402px;
+  left: 41px;
+  position: absolute;
+  top: 106px;
+  width: 275px;
+}
+
+.profile {
+  color: black;
+  display: flex;
+  left: 85px;
+  position: absolute;
+  top: 175px;
+}
+
+.email {
+  color:black;
+  display: flex;
+  font-size:medium;
+  left: 50px;
+  position: absolute;
+  top: 207px;
+}
+
+.btn-done {
+  align-items: center;
+  border-radius: 80%;
+  height: 36px;
+  left: 21px;
+  position:absolute;
+  top: 245px;
+  width: 234px;
+}
+
+.btn-favorite {
+  align-items: center;
+  border-radius: 80px;
+  height: 36px;
+  left: 21px;
+  position:absolute;
+  top: 300px;
+  width: 234px;
+}
+
+.btn-logout {
+  background-color: #606c38;
+  height: 36px;
+  left: 60px;
+  position: absolute;
+  top: 355px;
+  width: 149px;
 }
 
 .mb-1 {
   align-items: center;
   border-radius: 80%;
   height: 46px;
-  position:absolute;
   left: 21px;
+  position:absolute;
+  top: 210px;
   width: 234px;
-  top: 250px;
 }
 
 .mb-2 {
   align-items: center;
   border-radius: 80px;
   height: 46px;
-  position:absolute;
   left: 21px;
+  position:absolute;
+  top: 260px;
   width: 234px;
-  top: 300px;
 }
 
 .mb-3 {
   background-color: #606c38;
-  position: absolute;
   height: 36px;
   left: 60px;
+  position: absolute;
+  top: 320px;
   width: 149px;
-  top: 360px;
 }
 
 .rocksGlass {
