@@ -19,6 +19,7 @@ function Provider({ children }) {
   const [category, setCategory] = useState('All');
   const [toggle, setToggle] = useState(false);
   const [categoryName, setcategoryName] = useState('');
+  const [exploreIngredient, setExploreIngredient] = useState([]);
 
   useEffect(() => {
     async function fetchAPI() {
@@ -102,6 +103,8 @@ function Provider({ children }) {
     setCategory,
     resetFilter,
     handleToggle,
+    exploreIngredient,
+    setExploreIngredient,
   };
 
   return (

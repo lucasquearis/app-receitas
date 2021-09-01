@@ -45,7 +45,7 @@ const whichOne = (foodOrDrink) => {
 function FavoriteButton(props) {
   const { foodOrDrink, dataTestId, loadFavoritesCB = () => {} } = props;
   const [isFavorite, setIsFavorite] = useState(false);
-  console.log(dataTestId);
+
   useEffect(() => {
     const lastSaveFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const favoriteFound = lastSaveFavorite

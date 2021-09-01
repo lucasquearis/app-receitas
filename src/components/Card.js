@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import styles from './Header/Header.module.css';
+import './Card.css';
 
 function Card({ item, index }) {
   return (
