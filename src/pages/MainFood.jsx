@@ -9,10 +9,13 @@ import FoodCategories from '../components/FoodCategories';
 
 function MainFood() {
   const dispatch = useDispatch();
+  const isClicked = useSelector(({ foodReducer }) => foodReducer.foodIsClicked);
   useEffect(() => {
-    dispatch(foodListFetch());
+    if (!isClicked) {
+      dispatch(foodListFetch());
+    }
     dispatch(foodCategoriesFetch());
-  }, [dispatch]);
+  }, [dispatch, isClicked]);
 
   const foodCardList = useSelector(({ foodReducer }) => foodReducer.foodCardList);
 

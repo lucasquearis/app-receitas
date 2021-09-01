@@ -9,10 +9,13 @@ import DrinkCategories from '../components/DrinkCategories';
 
 function MainDrink() {
   const dispatch = useDispatch();
+  const isClicked = useSelector(({ drinkReducer }) => drinkReducer.drinkIsClicked);
   useEffect(() => {
-    dispatch(drinkListFetch());
+    if (!isClicked) {
+      dispatch(drinkListFetch());
+    }
     dispatch(drinkCategoriesFetch());
-  }, [dispatch]);
+  }, [dispatch, isClicked]);
 
   const drinkCardList = useSelector(({ drinkReducer }) => drinkReducer.drinkCardList);
 
