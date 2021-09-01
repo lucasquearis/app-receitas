@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-.btn {
+.btnExplore {
   background-color: white;
   border: black solid 1px;
   box-shadow: 3px 5px gray;
@@ -42,11 +42,11 @@
   width: 90%;
 }
 
-.btn:hover {
+.btnExplore:hover {
   background-color: white;
 }
 
-.btn2 {
+.btnExplore2 {
   background-color: white;
   border: black solid 1px;
   box-shadow: 3px 5px gray;
@@ -60,6 +60,6 @@
   width: 40%;
 }
 
-.btn2:hover {
+.btnExplore2:hover {
   background-color: white;
 }

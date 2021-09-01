@@ -12,7 +12,7 @@ function Header(props) {
   const rederizaBarra = () => (showBar ? setShowBar(false) : setShowBar(true));
 
   const iconePesquisa = () => (
-    <button type="button" onClick={ rederizaBarra }>
+    <button className="btnSearch" type="button" onClick={ rederizaBarra }>
       <img
         src={ searchIcon }
         alt="icone de busca"

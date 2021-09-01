@@ -31,27 +31,29 @@ function Categories({
   };
 
   return (
-    <aside className="categoryButtons">
-      <Button
-        data-testid="All-category-filter"
-        variant="dark"
-        onClick={ handleCategoryButton }
-      >
-        All
-      </Button>
-      {
-        list.map((item, index) => index > MAXIMUM_INDEX
-        || (
-          <Button
-            data-testid={ `${item.strCategory}-category-filter` }
-            variant="dark"
-            key={ index }
-            onClick={ handleCategoryButton }
-          >
-            { item.strCategory }
-          </Button>
-        ))
-      }
+    <aside className="categoryContainer">
+      <nav className="categoryButtons">
+        <Button
+          className="btnCategorias"
+          data-testid="All-category-filter"
+          onClick={ handleCategoryButton }
+        >
+          All
+        </Button>
+        {
+          list.map((item, index) => index > MAXIMUM_INDEX
+          || (
+            <Button
+              className="btnCategorias"
+              data-testid={ `${item.strCategory}-category-filter` }
+              key={ index }
+              onClick={ handleCategoryButton }
+            >
+              { item.strCategory }
+            </Button>
+          ))
+        }
+      </nav>
     </aside>
   );
 }

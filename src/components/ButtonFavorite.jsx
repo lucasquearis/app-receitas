@@ -24,7 +24,7 @@ function ButtonFavorite(data) {
   };
 
   return (
-    <button type="button" onClick={ favoriteClick }>
+    <button className="btnFavorite" type="button" onClick={ favoriteClick }>
       <img
         src={ isFavorite ? favoriteIconFull : favoriteIconTransp }
         alt="Favorite"

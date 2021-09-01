@@ -34,7 +34,7 @@ function ReceitasFeitas() {
   return (
     <div>
       <Header titulo="Receitas Feitas" pesquisa="false" />
-      <div className="buttons">
+      <div className="btnFavoriteRecipes">
         <button
           name=""
           type="button"

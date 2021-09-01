@@ -1,6 +1,6 @@
 .header {
   align-items: center;
-  background-color: lightgray;
+  background-color: whitesmoke;
   display: flex;
   height: 50px;
   justify-content: space-around;
@@ -12,4 +12,10 @@
 
 .filtros {
   margin-top: 50px;
+}
+
+.btnSearch {
+  background-color: transparent;
+  border: none;
+  mix-blend-mode: multiply;
 }

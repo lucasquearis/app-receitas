@@ -18,7 +18,7 @@ function ShareButton() {
 
   return (
     <>
-      <button type="button" onClick={ shareImgClick }>
+      <button className="btnShare" type="button" onClick={ shareImgClick }>
         <img
           src={ shareIcon }
           alt="Compartilhe o link desta receita"

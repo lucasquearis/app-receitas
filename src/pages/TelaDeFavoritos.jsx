@@ -71,54 +71,55 @@ function ReceitasFeitas() {
         </button>
       </div>
       <div className="paiDeTodos">
-        {showRecipes.map((recipe, index) => (
-          <Card
-            name={ recipe.name }
-            style={ { width: '18rem' } }
-            key={ index }
-          >
-            <Card.Img
-              data-testid={ `${index}-horizontal-image` }
-              variant="top"
-              onClick={ () => onLink(recipe.type, recipe.id) }
-              src={ `${recipe.image}` }
-              alt={ recipe.name }
-            />
-            <Card.Body>
-              <div className="paizao">
-                <Card.Title
-                  data-testid={ `${index}-horizontal-name` }
-                  onClick={ () => onLink(recipe.type, recipe.id) }
-                >
-                  { recipe.name }
-                </Card.Title>
-                <ShareButton url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
-                <button
-                  type="button"
-                  className="button-filtro"
-                  name={ recipe.name }
-                  onClick={ () => desfavorite(recipe.name) }
-                >
+        {showRecipes.length === 0
+          ? 'Lista vazia!' : showRecipes.map((recipe, index) => (
+            <Card
+              name={ recipe.name }
+              style={ { width: '18rem' } }
+              key={ index }
+            >
+              <Card.Img
+                data-testid={ `${index}-horizontal-image` }
+                variant="top"
+                onClick={ () => onLink(recipe.type, recipe.id) }
+                src={ `${recipe.image}` }
+                alt={ recipe.name }
+              />
+              <Card.Body>
+                <div className="paizao">
+                  <Card.Title
+                    data-testid={ `${index}-horizontal-name` }
+                    onClick={ () => onLink(recipe.type, recipe.id) }
+                  >
+                    { recipe.name }
+                  </Card.Title>
+                  <ShareButton url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
+                  <button
+                    type="button"
+                    className="button-filtro"
+                    name={ recipe.name }
+                    onClick={ () => desfavorite(recipe.name) }
+                  >
 
-                  <img
-                    className="shareIcon"
-                    alt={ recipe.name }
-                    src={ blackHeart }
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                  />
-                </button>
-              </div>
-              <div
-                className="mb-2 text-muted"
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {recipe.area.length === 0 ? recipe.alcoholicOrNot
-                  : `${recipe.area} - ${recipe.category}`}
+                    <img
+                      className="shareIcon"
+                      alt={ recipe.name }
+                      src={ blackHeart }
+                      data-testid={ `${index}-horizontal-favorite-btn` }
+                    />
+                  </button>
+                </div>
+                <div
+                  className="mb-2 text-muted"
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {recipe.area.length === 0 ? recipe.alcoholicOrNot
+                    : `${recipe.area} - ${recipe.category}`}
 
-              </div>
-            </Card.Body>
-          </Card>
-        ))}
+                </div>
+              </Card.Body>
+            </Card>
+          ))}
       </div>
 
     </main>

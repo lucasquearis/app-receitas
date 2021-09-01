@@ -43,7 +43,7 @@ function Comidas() {
   return loading
     ? <div>Loading... </div>
     : (
-      <>
+      <div className="pageComida">
         <Header titulo="Comidas" pesquisa="true" />
         <Categories
           type="food"
@@ -56,7 +56,7 @@ function Comidas() {
         />
         {changeRender(renderFoods)}
         <Footer />
-      </>
+      </div>
     );
 }
 

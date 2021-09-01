@@ -1,12 +1,88 @@
-.cardRecipe {
-  width: 100%;
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.cardRecipe img {
-  width: 100%;
+.pageComida {
+  background: url('../images/page.png');
+  background-size: auto;
+  height: 100vh;
+}
+
+.categoryContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 70px;
 }
 
 .categoryButtons {
-  margin-bottom: 20px;
-  margin-top: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.btnCategorias {
+  background-color: white;
+  border: black solid 1px;
+  border-radius: 5px;
+  color: black;
+  font-size: 2.5vh;
+  height: 25px;
+  line-height: 2px;
+  margin: 2px;
+  max-width: 180px;
+  width: 30vw;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.cardList {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.recipeThumbnail {
+  width: 100%;
+  z-index: 3;
+}
+
+.cardRecipe span {
+  background-color: rgba(245, 245, 245, 0.678);
+  border-radius: 0 0.5em 0.5em 0;
+  color: black;
+  display: block;
+  font-size: 3.5vh;
+  font-weight: 900;
+  line-height: 30px;
+  margin-top: -30px;
+  padding: 0 4px;
+  position: absolute;
+  text-decoration: none;
+  top: 40px;
+  z-index: 10;
+}
+
+.cardList a {
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  margin: 2vh;
+  max-width: 400px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 60vw;
+}
+
+.cardList a:hover {
+  text-decoration: none;
 }
