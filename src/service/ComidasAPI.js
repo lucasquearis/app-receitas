@@ -23,6 +23,12 @@ export async function buscarAleatoria() {
   const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
 
   const response = await fetch(ENDPOINT).then((data) => data.json());
-  console.log(response);
+  return response.meals;
+}
+
+export async function buscarIngrediente() {
+  const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
   return response.meals;
 }
