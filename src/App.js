@@ -38,8 +38,8 @@ function App() {
           path="/explorar/comidas/ingredientes"
           component={ SearchFoodByIngredients }
         />
-        <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
         <Route path="/explorar/comidas" component={ SearchDetailsFood } />
+        <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route path="/receitas-feitas" component={ FinishedRecipes } />
         <Route path="/perfil" component={ Profile } />
