@@ -9,9 +9,11 @@ import FoodExplore from './Pages/FoodExplore';
 import FoodIngredientesExplore from './Pages/FoodIngredientesExplore';
 import FoodPlaceExplore from './Pages/FoodPlaceExplore';
 import Profile from './Pages/Profile';
+import DoneRecipes from './Pages/DoneRecipes';
 import FoodDetails from './Pages/FoodDetails';
 import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import DrinksDetails from './Pages/DrinksDetails';
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
         path="/explorar/comidas/ingredientes"
         component={ FoodIngredientesExplore }
       />
+      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route
         exact
         path="/explorar/bebidas/ingredientes"
