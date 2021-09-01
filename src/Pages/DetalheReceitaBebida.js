@@ -5,7 +5,7 @@ import { buscarBebidasID } from '../service/BebidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import getRecipeIngredients from '../service/getRecipeIngredients';
-import * as functions from '../service/In Progress Recipe';
+import * as functions from '../service/InProgressRecipe';
 
 const defaultParams = {
   strDrink: '',
