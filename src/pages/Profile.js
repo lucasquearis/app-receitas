@@ -1,17 +1,13 @@
-// vitals
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
-// styles
 import '../styles/Profile.css';
 
 function Profile() {
   const history = useHistory();
   const localStorageData = JSON.parse(localStorage.getItem('user'));
-
-  const userMail = localStorageData
-    ? localStorageData.email : 'Sem e-mail salvo no localStorage';
+  const userMail = localStorageData.email;
 
   return (
     <div className="main-profile">

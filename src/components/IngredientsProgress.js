@@ -17,7 +17,6 @@ export default function IngredientsProgress() {
 
   useEffect(() => {
     if (Object.keys(objRecipeProgress[text]).length === 0) {
-      console.log('aqui');
       setObjRecipeProgress({ ...objRecipeProgress,
         [text]:
           { ...objRecipeProgress[text],

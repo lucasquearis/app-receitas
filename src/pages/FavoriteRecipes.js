@@ -1,23 +1,18 @@
-// vitals
 import React, { useEffect, useState } from 'react';
-// components
 import Header from '../components/Header';
-import Footer from '../components/FooterMenu';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
-// styles
 import '../styles/FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   const [favoritesArray, setFavoritesArray] = useState();
   const [filterByType, setFilterByType] = useState('');
 
-  const localStorageData = localStorage.getItem('favoriteRecipes');
-
   useEffect(() => {
-    if (localStorageData) {
-      setFavoritesArray(JSON.parse(localStorageData));
+    if (localStorage.favoriteRecipes) {
+      const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      setFavoritesArray(request);
     }
-  }, [localStorageData]);
+  }, []);
 
   return (
     <main>
@@ -77,7 +72,6 @@ function FavoriteRecipes() {
 
           )) : <h4>Sem favoritos salvos.</h4>}
       </div>
-      <Footer />
     </main>
   );
 }

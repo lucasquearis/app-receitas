@@ -1,8 +1,6 @@
-// vitals
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import myContext from '../context/myContext';
-// constants
 import { START_CARD, NUMBER_CATEGORIES } from '../services/data';
 
 export default function Filter() {

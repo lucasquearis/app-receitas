@@ -6,7 +6,6 @@ import FooterMenu from '../components/FooterMenu';
 function ExplorerDrinks() {
   const [randomDrink, setRandomDrink] = useState();
   const history = useHistory();
-  console.log(randomDrink);
   useEffect(() => {
     try {
       const URL = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
