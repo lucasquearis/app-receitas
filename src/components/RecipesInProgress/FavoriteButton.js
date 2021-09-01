@@ -1,26 +1,30 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function FavoriteButton(props) {
   const { infos } = props;
   const { id } = infos;
-  console.log(infos);
-  // const [favorite, setFavorite] = useState();
+  // console.log(infos);
 
   const getFavorite = () => JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
-  const removeFavorite = (favoritesRemove, idRemove) => favoritesRemove
-    .filter((favorite) => favorite.id !== idRemove);
-  const addFavorite = (itens) => localStorage
-    .setItem('favoriteRecipes', JSON.stringify(itens));
+  const removeFavorite = (currentId) => {
+    const filtered = getFavorite().filter((ids) => ids.id !== currentId);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...filtered]));
+  };
 
-  // useEffect para setar o estado do favorite através do LS.
-  // useEffect(() => setFavorite(getFavorite()
-  //   .find(({ id: id2 }) => id === id2)), [setFavorite, id]);
+  const addFavorite = (item) => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...getFavorite(), item]));
+  };
+
+  const [favorite, setFavorite] = useState();
+
+  useEffect(() => setFavorite(getFavorite().find(({ currentId }) => currentId === id)),
+    [setFavorite, id]);
 
   return (
     <Button
@@ -28,22 +32,17 @@ function FavoriteButton(props) {
       data-testid="favorite-btn"
       type="button"
       onClick={ () => {
-        const favorites = getFavorite();
-        if (favorites.length !== 0) { // condicional se ainda n existe nenhum favorito
+        if (favorite) {
+          removeFavorite(id);
+          setFavorite(false);
+        } else {
           addFavorite([infos]);
-        } else { // se existe
-          const exist = favorites.find((favorite) => favorite.id === id);
-          if (exist) { // se já existir o id ele vai remover
-            const favoriteFilter = removeFavorite(favorites, id);
-            addFavorite(favoriteFilter);
-          } else { // se n ele vai add o novo id
-            addFavorite([...favorites, infos]);
-          }
+          setFavorite(true);
         }
       } }
 
     >
-      <img src={ whiteHeartIcon } alt="favorite-icon" />
+      <img src={ favorite ? blackHeartIcon : whiteHeartIcon } alt="favorite-icon" />
     </Button>
   );
 }
@@ -55,13 +54,3 @@ function FavoriteButton(props) {
 // };
 
 export default FavoriteButton;
-
-// const favoriteRecipes = [{
-//   id,
-//   type,
-//   area,
-//   category,
-//   alcoholicOrNot,
-//   name,
-//   image,
-// }];
