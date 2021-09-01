@@ -26,6 +26,12 @@ function CategoryDrinkBtn() {
     }
   };
 
+  if (!categories) {
+    return (
+      <div>Loading</div>
+    );
+  }
+
   return (
     <div>
       <Button
