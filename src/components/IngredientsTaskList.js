@@ -4,7 +4,7 @@ import './css/IngredientsTaskList.css';
 
 function IngredientsTaskList({ ingList, handleCheckIngredient }) {
   return (
-    <ul>
+    <ul className="progress-ing-list">
       {ingList.map(({ ing, checked }, index) => (
         <li key={ ing }>
           <label

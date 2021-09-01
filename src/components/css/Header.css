@@ -10,20 +10,20 @@
 }
 
 .profile-icon-container {
-  border: solid 1px darkgrey;
+  border: none;
   border-radius: 6px;
-  box-shadow: 0 0 6px -1px darkgrey;
+  box-shadow: 0 0 6px darkgrey;
   margin: 0;
   margin-left: 0.5em;
-
+  padding: 6px;
 }
 
 .search-icon-container {
-  border: solid 1px darkgrey;
+  border: none;
   border-radius: 6px;
-  box-shadow: 0 0 6px -1px darkgrey;
+  box-shadow: 0 0 6px darkgrey;
   margin-right: 0.5em;
-
+  padding: 6px;
 }
 
 .profile-icon {

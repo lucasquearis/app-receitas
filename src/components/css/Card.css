@@ -1,7 +1,7 @@
 .card {
   border: transparent;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px 2px rgb(195, 195, 195);
+  border-radius: 9px;
+  box-shadow: 0 0 9px rgb(195, 195, 195);
   height: 12em;
   margin: 0.4em 0.1em;
   width: 13.2em;
@@ -15,7 +15,7 @@
 }
 
 .thumb {
-  border-radius: 12px;
+  border-radius: 9px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   height: 74%;

@@ -64,26 +64,44 @@ function MealsInProgress() {
   useEffect(isFinished, [rcp]);
 
   return (
-    <>
-      <img data-testid="recipe-photo" src={ rcp.strMealThumb } alt={ rcp.strMeal } />
-      <h1 data-testid="recipe-title">{rcp.strMeal}</h1>
-      <ShareButton />
-      <FavoriteButton recipe={ rcp } id={ id } />
-      <p data-testid="instructions">{rcp.strInstructions}</p>
-      <h3 data-testid="recipe-category">{rcp.strCategory}</h3>
+    <section className="in-progress-container">
+      <img
+        className="recipe-photo"
+        data-testid="recipe-photo"
+        src={ rcp.strMealThumb }
+        alt={ rcp.strMeal }
+      />
+      <section className="recipe-title-container">
+        <div className="recipe-title">
+          <h1 data-testid="recipe-title">{rcp.strMeal}</h1>
+          <h3 className="category-title" data-testid="recipe-category">
+            {rcp.strCategory}
+          </h3>
+        </div>
+        <div className="recipe-buttons-container">
+          <ShareButton />
+          <FavoriteButton recipe={ rcp } id={ id } />
+        </div>
+      </section>
+      <h3 className="sub-title">Instruções</h3>
+      <p className="instructions-paragraph" data-testid="instructions">
+        {rcp.strInstructions}
+      </p>
+      <h3 className="sub-title">Lista de Ingredientes</h3>
       <IngredientsTaskList
         ingList={ rcp.ingList }
         handleCheckIngredient={ handleCheckIngredient }
       />
       <button
         data-testid="finish-recipe-btn"
+        className="finish-recipe-btn"
         type="button"
         disabled={ btnDisable }
         onClick={ doneRecipeHandler }
       >
         Finalizar
       </button>
-    </>
+    </section>
   );
 }
 
