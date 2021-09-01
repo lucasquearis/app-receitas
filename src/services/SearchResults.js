@@ -19,8 +19,6 @@ export async function byFoodFirstLetter(firstLetter) {
 export async function byDrinkIngredient(ingredient) {
   const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const { drinks } = await fetch(endpoint).then((data) => data.json());
-  console.log(drinks);
-  console.log(drinks.ingredient);
   return drinks;
 }
 
