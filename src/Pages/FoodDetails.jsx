@@ -1,67 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import Carousel from 'react-bootstrap/Carousel';
 import Loading from '../Components/Loading';
-import getDetails from '../services/FetchDetails';
 import RecipeHeader from '../Components/RecipeHeader';
 import IngredientsAndMeasures from '../Components/IngredientsAndMeasures';
+import { createRecomendationsDrink } from '../helper/renderRecomendations';
+import * as required from '../helper/requiredDetails';
 
 function FoodDetails() {
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState({});
   const [recomendation, setRecomendation] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [doneRecipe, setDoneRecipe] = useState(true);
+  const [progressRecipe, setProgressRecipe] = useState(false);
   const { id } = useParams();
+  const { push } = useHistory();
+
+  const { consultFood,
+    getDrinkRecommendations,
+    verificationDoneRecipe,
+    verificationProgressRecipe } = required;
 
   useEffect(() => {
-    async function consult() {
-      const END_POINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const { meals } = await getDetails(END_POINT);
-      setRecipe(meals[0]);
-    }
-    consult();
-  }, [id]);
+    setRecipe(consultFood(id));
+    setRecomendation(getDrinkRecommendations);
+    setDoneRecipe(verificationDoneRecipe(id));
+    setProgressRecipe(verificationProgressRecipe(id, 'meals'));
+    console.log(recipe);
+  }, [id, consultFood,
+    getDrinkRecommendations,
+    verificationDoneRecipe,
+    verificationProgressRecipe, recipe]);
 
-  useEffect(() => {
-    async function getRecomendations() {
-      const count = 0;
-      const max = 6;
-      const END_POINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-      const { drinks } = await getDetails(END_POINT);
-      const result = drinks.slice(count, max);
-      setRecomendation(result);
-    }
-    getRecomendations();
-  }, [recipe]);
-
-  const handleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    console.log(isFavorite);
-  };
-
-  const handleShare = () => {
-    console.log('compartilhou');
-  };
-
-  const createRecomendations = (item, index) => {
-    const { idDrink, strDrink, strAlcoholic, strDrinkThumb } = item;
-    return (
-      <div key={ idDrink }>
-        <img
-          src={ strDrinkThumb }
-          data-testid={ `${index}-card-img` }
-          alt={ strDrink }
-        />
-        <div>
-          <span data-testid={ `${index}-card-name` }>
-            { strDrink }
-          </span>
-          <br />
-          <span>
-            { strAlcoholic }
-          </span>
-        </div>
-      </div>
-    );
+  const handleRedirect = () => {
+    push({ pathname: `/comidas/${id}/in-progress`,
+      search: '?query=abc',
+      state: recipe });
   };
 
   if (recipe.length === 0) {
@@ -73,9 +47,7 @@ function FoodDetails() {
         thumb={ recipe.strMealThumb }
         title={ recipe.strMeal }
         category={ recipe.strCategory }
-        handleShare={ handleShare }
-        handleFavorite={ handleFavorite }
-        isFavorite={ isFavorite }
+        recipe={ recipe }
       />
       <IngredientsAndMeasures
         recipe={ recipe }
@@ -86,14 +58,20 @@ function FoodDetails() {
       <div>
         <ReactPlayer url={ recipe.strYoutube } controls data-testid="video" />
       </div>
-      {recomendation.map((item, index) => createRecomendations(item, index))}
-      <div />
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      <Carousel>
+        {recomendation.map((item, index) => createRecomendationsDrink(item, index))}
+      </Carousel>
+      <div>
+        {!doneRecipe && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ handleRedirect }
+          >
+            { progressRecipe ? 'Continuar Receita' : 'Iniciar Receita' }
+          </button>
+        )}
+      </div>
     </section>
   );
 }
