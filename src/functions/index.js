@@ -48,7 +48,6 @@ export const filterFoodLocalStorage = (id) => {
 export const ingredientsMeasuresFunc = (obj) => {
   const objKey = Object.keys(obj);
   const objEntries = Object.entries(obj[objKey][0]);
-  console.log(obj);
 
   const objEntriesIngredient = objEntries.filter((entry) => (
     entry[0].includes('strIngredient') && entry[1]))
@@ -72,4 +71,16 @@ export const updateLocalStorage = (id, ing, array, type) => {
     key[type][id] = [...array, ing];
   }
   localStorage.setItem('inProgressRecipes', JSON.stringify(key));
+};
+
+export const disableFinishRecipeBtn = (array, id, type) => {
+  const localStorageRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const localStorageRecipeIngredients = localStorageRecipes[type][id];
+  const recipeIngredients = array[id];
+
+  if (localStorageRecipeIngredients && recipeIngredients) {
+    const bool = localStorageRecipeIngredients.length === recipeIngredients.length;
+    return bool;
+  }
+  return false;
 };

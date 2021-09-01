@@ -9,6 +9,7 @@ import {
   updateLocalStorage,
   ingredientsMeasuresFunc,
 } from '../../functions';
+import RecipeFinishBtn from './RecipeFinishBtn';
 
 const FoodProcess = ({ match: { params: { id } } }) => {
   const type = 'meals';
@@ -116,14 +117,10 @@ const FoodProcess = ({ match: { params: { id } } }) => {
           {itensInfo.instructions}
         </p>
       </div>
-      <div>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-        >
-          Finalizar Receita
-        </button>
-      </div>
+      <RecipeFinishBtn
+        id={ id }
+        type={ type }
+      />
     </div>
   );
 };
