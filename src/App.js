@@ -9,6 +9,7 @@ import Perfil from './pages/perfil/Profile';
 import DetailsFood from './pages/foods/DetailsFood';
 import RecipesInProgress from './pages/foods/RecipesInProgress';
 import DrinksInProgress from './pages/drinks/drinksInProgress';
+import Explorar from './pages/explorar/index';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         />
         <Route exact path="/" component={ Login } />
         <Route path="/perfil" component={ Perfil } />
+        <Route path="/explorar" component={ Explorar } />
       </Switch>
     </div>
   );
