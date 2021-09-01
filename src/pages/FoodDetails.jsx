@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -19,21 +19,21 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 function FoodDetails() {
   const id = 52771;
   const indexo = 0;
-  const getHistory = useHistory();
-  const { location: { pathname } } = getHistory;
+  // const getHistory = useHistory();
+  // const { location: { pathname } } = window;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
 
   useEffect(() => {
     try {
-      const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+      const urlFoods = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        console.log(getHistory);
-        const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
-        console.log(pathname);
-        const request = await fetch(`${goURL}${id}`);
+        // console.log(getHistory);
+        // const goURL = (pathname.includes('comida') ? urlFoods : urlDrinks);
+        // console.log(pathname);
+        const request = await fetch(urlFoods);
         const response = await request.json();
         const resolve = await response.meals[0];
         console.log(resolve);
@@ -43,7 +43,7 @@ function FoodDetails() {
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
@@ -95,13 +95,15 @@ function FoodDetails() {
         <p data-testid={ `${indexo}-recomendation-card` }>carousel</p>
       </div>
       <div>
-        <button
-          className="button-details"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          iniciar receita
-        </button>
+        <Link to={ `/comidas/${id}/in-progress` }>
+          <button
+            className="button-details"
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            iniciar receita
+          </button>
+        </Link>
       </div>
     </div>
   );

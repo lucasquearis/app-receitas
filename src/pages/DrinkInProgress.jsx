@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/RecipeInProgress.css';
+import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
 
 // função para puxar os ingredientes e sua medidas
@@ -46,11 +47,12 @@ function DrinkInProgess() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const drinkProgress = [{
-    cocktails: {
+
+  const drinkProgress = {
+    meals: {
       [id]: [...ingredient],
     },
-  }];
+  };
 
   function saveLocalStorage({ target }) {
     const { name, checked } = target;
@@ -73,6 +75,45 @@ function DrinkInProgess() {
     checkButton();
   }, [checkedOptions]);
 
+  function doneRecipe() {
+    // const checkedInputs = document.querySelectorAll('input');
+    let tags = '';
+
+    if (tags !== null || tags !== undefined) {
+      tags = [getRecipe.strTags];
+    } else {
+      tags = '';
+    }
+
+    const { strAlcoholic } = getRecipe;
+
+    let alcoholicOrNot;
+
+    if (strAlcoholic !== null || strAlcoholic !== undefined) {
+      alcoholicOrNot = strAlcoholic;
+    } else {
+      alcoholicOrNot = '';
+    }
+
+    const recipes = {
+      id,
+      type: 'bebidas',
+      area: '',
+      category: getRecipe.strCategory,
+      alcoholicOrNot,
+      name: getRecipe.strDrink,
+      image: getRecipe.strMealThumb,
+      doneDate: moment().format('DD-MM-YYYY'),
+      tags: [tags],
+    };
+
+    function setLocalStorage(recipe) {
+      const locStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+      locStorage.push(recipe);
+      localStorage.setItem('doneRecipes', JSON.stringify(locStorage));
+    }
+    return setLocalStorage(recipes);
+  }
   return (
     <div>
       <div>
@@ -96,7 +137,7 @@ function DrinkInProgess() {
         <h4>Ingredients</h4>
         <ul>
           { ingredient.map((item, index) => (
-            <li key={ index } onChange={ saveLocalStorage }>
+            <li key={ index } onChange="">
               <label htmlFor={ `${index}-s` } data-testid={ `${index}-ingredient-step` }>
                 <input
                   name={ `${index}` }
@@ -118,7 +159,7 @@ function DrinkInProgess() {
         <span data-testid={ `${indexo}-recomendation-card` }>cards</span>
       </div>
       <div>
-        <Link to="/receitas-feitas">
+        <Link to="/receitas-feitas" onClick={ doneRecipe }>
           <button
             id="finish-recipe"
             className="button-details"

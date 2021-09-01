@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -90,13 +90,15 @@ function DrinkDetails() {
         <span data-testid={ `${indexo}-recomendation-card` }>cards</span>
       </div>
       <div>
-        <button
-          className="button-details"
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          iniciar receita
-        </button>
+        <Link to={ `/bebidas/${id}/in-progress` }>
+          <button
+            className="button-details"
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            iniciar receita
+          </button>
+        </Link>
       </div>
     </div>
   );

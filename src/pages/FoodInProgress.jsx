@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/RecipeInProgress.css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 import whiteHeart from '../images/whiteHeartIcon.svg';
-import blackHeart from '../images/blackHeartIcon.svg';
+import MyContext from '../context/MyContext';
+// import blackHeart from '../images/blackHeartIcon.svg';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -22,12 +24,11 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 function FoodInProgress() {
   const id = 52771;
   const indexo = 0;
-  const getHistory = useHistory();
-  const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [checkedOptions, setCheckedOptions] = useState('');
+  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -43,7 +44,7 @@ function FoodInProgress() {
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
@@ -75,6 +76,32 @@ function FoodInProgress() {
     }
     checkButton();
   }, [checkedOptions]);
+
+  function doneRecipe() {
+    // const checkedInputs = document.querySelectorAll('input');
+    let tags = '';
+
+    if (tags !== null || tags !== undefined) {
+      tags = [getRecipe.strTags];
+    } else {
+      tags = '';
+    }
+
+    const recipes = {
+      id,
+      type: 'comidas',
+      area: getRecipe.strArea,
+      category: getRecipe.strCategory,
+      alcoholicOrNot: '',
+      name: getRecipe.strMeal,
+      image: getRecipe.strMealThumb,
+      doneDate: moment().format('DD-MM-YYYY'),
+      tags: [tags],
+    };
+    setLocalStorageItems(...localStorageItems, recipes);
+
+    return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
+  }
 
   return (
     <div>
@@ -122,7 +149,7 @@ function FoodInProgress() {
         <span data-testid={ `${indexo}-recomendation-card` }>cards</span>
       </div>
       <div>
-        <Link to="/receitas-feitas">
+        <Link to="/receitas-feitas" onClick={ doneRecipe }>
           <button
             id="finish-recipe"
             className="button-details"
