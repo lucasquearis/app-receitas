@@ -4,9 +4,6 @@ import { Spinner, Card } from 'react-bootstrap';
 import Header from '../Component/Header';
 import Footer from '../Component/Footer';
 
-
-
-
 function ExploreFoodsByOrigin() {
   const [foods, setFoods] = useState([1]);
   const [areas, setAreas] = useState([]);
@@ -66,6 +63,10 @@ function ExploreFoodsByOrigin() {
         {areas.map((ar) => (
           <option
           key={ ar.strArea }
+      <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
+        {areas.map((ar) => (
+          <option
+            key={ ar.strArea }
             value={ ar.strArea }
             data-testid={ `${ar.strArea}-option` }
           >
@@ -86,12 +87,12 @@ function ExploreFoodsByOrigin() {
           if (index < numCards) {
             return (
               <Card
-              data-testid={ `${index}-recipe-card` }
+                data-testid={ `${index}-recipe-card` }
                 key={ index }
                 className="main-card"
                 style={ { width: '8.75rem' } }
                 onClick={ () => getId(item.idMeal) }
-                >
+              >
                 <Card.Img
                   data-testid={ `${index}-card-img` }
                   variant="top"
