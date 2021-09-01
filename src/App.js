@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+// teste
 function App() {
   return (
     <div className="meals">
