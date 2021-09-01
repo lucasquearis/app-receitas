@@ -32,6 +32,10 @@ function BarraDeBusca() {
   function verify(response) { // analise o que vem da API e verifica se iremos atualizar o estado G. ou redirecionar
     const urlHistory = pathname.split('/')[1];
     const ternario = (pathname === '/comidas') ? 'Meal' : 'Drink';
+    const notFound = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+    if (response === null) {
+      return global.alert(notFound);
+    }
     if (response.length === 1) {
       return history.push(`/${urlHistory}/${response[0][`id${ternario}`]}`);
     }
