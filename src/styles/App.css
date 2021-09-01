@@ -1,10 +1,16 @@
-@import './CategoryButtons.css';
-@import './Explore.css';
-@import './Footer.css';
-@import './Header.css';
-@import './ItemCard.css';
-@import './SearchBar.css';
-@import './Login.css';
+@import './CategoryButtons.css' ;
+
+@import './Explore.css' ;
+
+@import './Footer.css' ;
+
+@import './Header.css' ;
+
+@import './ItemCard.css' ;
+
+@import './SearchBar.css' ;
+
+@import './Login.css' ;
 
 .meals {
   align-items: center;
