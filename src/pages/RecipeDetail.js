@@ -3,42 +3,15 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import RecomendationCard from '../components/RecomendationCard';
 import genericFetchAPI from '../services/genericFetchAPI';
-
-function favoriteRecipes(addOrRemove, setAddOrRemove, recipe, pathname) {
-  setAddOrRemove(!addOrRemove);
-  let favoriteRecipesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'))
-  || [];
-
-  if (!addOrRemove) {
-    favoriteRecipesStorage.push({
-      id: recipe.idMeal || recipe.idDrink,
-      type: pathname.includes('comidas') ? 'meal' : 'drink',
-      area: recipe.strArea || '',
-      category: recipe.strCategory || '',
-      alchoolicOrNot: recipe.strAlcoholic || '',
-      name: recipe.strMeal || recipe.strDrink,
-      image: recipe.strMealThumb || recipe.strDrinkThumb,
-      doneDate: 0,
-      tags: 0,
-    });
-  } else {
-    favoriteRecipesStorage = favoriteRecipesStorage
-      .filter((recipeArr) => recipeArr.id !== (recipe.idMeal || recipe.idDrink));
-  }
-  localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipesStorage));
-}
+import ShareAndFavBtn from '../components/ShareAndFaveBtn';
 
 function getIngredients(
-  recipe, setIngredientName, setIngredientMeasure, setAddOrRemoveFav,
+  recipe, setIngredientName, setIngredientMeasure,
 ) {
   const MAX_INGREDIENTS = 20;
   if (recipe) {
     const listNames = [];
     const listMeasure = [];
-    const favoriteRecipesStorage = JSON
-      .parse(localStorage.getItem('favoriteRecipes')) || [];
-    setAddOrRemoveFav(favoriteRecipesStorage
-      .some((recipeArr) => (recipeArr.id).includes(recipe.idMeal || recipe.idDrink)));
     for (let index = 1; index <= MAX_INGREDIENTS; index += 1) {
       if (recipe[`strIngredient${index}`]) {
         listNames.push(recipe[`strIngredient${index}`]);
@@ -51,11 +24,9 @@ function getIngredients(
 }
 
 function RecipeDetail() {
-  const [addOrRemoveFav, setAddOrRemoveFav] = useState();
   const { pathname } = useLocation();
   const { id: recipeId } = useParams();
   const [recipe, setRecipe] = useState();
-  const [copyOk, setCopyOk] = useState(false);
   const [ingredientName, setIngredientName] = useState([1, 2]);
   const [ingredientMeasure, setIngredientMeasure] = useState([]);
   const youtubeId = 32;
@@ -72,7 +43,7 @@ function RecipeDetail() {
   }, [pathname, recipeId]);
 
   useEffect(() => {
-    getIngredients(recipe, setIngredientName, setIngredientMeasure, setAddOrRemoveFav);
+    getIngredients(recipe, setIngredientName, setIngredientMeasure);
   }, [recipe]);
 
   return recipe ? (
@@ -84,23 +55,7 @@ function RecipeDetail() {
         style={ { width: '200px', height: '150px' } }
       />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-      <button
-        data-testid="share-btn"
-        type="button"
-        onClick={ () => { navigator.clipboard.writeText(pathname); setCopyOk(true); } }
-      >
-        Share
-      </button>
-      <button
-        data-testid="favorite-btn"
-        type="button"
-        onClick={ () => favoriteRecipes(
-          addOrRemoveFav, setAddOrRemoveFav, recipe, pathname,
-        ) }
-      >
-        Favorite
-      </button>
-      { copyOk ? <p>Link copiado!</p> : null}
+      { recipe && <ShareAndFavBtn recipe={ recipe } />}
       <h4>Category:</h4>
       <p
         data-testid="recipe-category"
