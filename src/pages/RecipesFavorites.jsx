@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -8,6 +9,8 @@ const clipboardCopy = require('clipboard-copy');
 
 export default function RecipesFavorites() {
   const [copy, setCopy] = useState({ id: '', copied: false });
+  const [filter, setFilter] = useState('all');
+  const [favorites, setFavorites] = useState([]);
 
   function getFavorites() {
     const storedFavorites = JSON
@@ -49,20 +52,24 @@ export default function RecipesFavorites() {
   }
 
   function renderFavorites() {
-    return getFavorites().map((item, index) => (
+    return favorites.map((item, index) => (
       <div key={ item.id } id={ `${item.id}-favorite-card` }>
-        <img
-          className="recipe-pic"
-          key={ item.image }
-          src={ item.image }
-          alt="favorite recipe"
-          data-testid={ `${index}-horizontal-image` }
-        />
+        <Link to={ `/${item.type}s/${item.id}` }>
+          <img
+            className="recipe-pic"
+            key={ item.image }
+            src={ item.image }
+            alt="favorite recipe"
+            data-testid={ `${index}-horizontal-image` }
+          />
+        </Link>
         { item.type === 'comida' && renderAreaAndCategory(item, index) }
         { item.type === 'bebida' && renderAlcoholic(item, index) }
-        <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
-          { item.name }
-        </h3>
+        <Link to={ `/${item.type}s/${item.id}` }>
+          <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
+            { item.name }
+          </h3>
+        </Link>
         <button
           className="share-btn"
           type="button"
@@ -91,24 +98,36 @@ export default function RecipesFavorites() {
     ));
   }
 
+  useEffect(() => {
+    if (filter === 'all') {
+      setFavorites(getFavorites());
+    } else {
+      const array = getFavorites().filter((item) => item.type === filter);
+      setFavorites(array);
+    }
+  }, [filter]);
+
   return (
     <main className="favorite-recipes-main">
       <Header title="Receitas Favoritas" />
       <button
         type="button"
         data-testid="filter-by-all-btn"
+        onClick={ () => setFilter('all') }
       >
         All
       </button>
       <button
         type="button"
         data-testid="filter-by-food-btn"
+        onClick={ () => setFilter('comida') }
       >
         Food
       </button>
       <button
         type="button"
         data-testid="filter-by-drink-btn"
+        onClick={ () => setFilter('bebida') }
       >
         Drinks
       </button>
