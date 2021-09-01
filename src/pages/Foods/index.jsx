@@ -21,11 +21,11 @@ function Foods() {
     renderSearchBar: true,
   };
 
-  if (meals.length === 0) {
-    return (
-      <h1>Loading</h1>
-    );
-  }
+  // if (meals.length === 0 || !meals) {
+  //   return (
+  //     <h1>Loading</h1>
+  //   );
+  // }
 
   if (redirect) {
     return <Redirect to={ `/comidas/${redirect}` } />;
@@ -36,7 +36,7 @@ function Foods() {
       <Header { ...headerProps } />
       <div className="recipes-list">
         <CategoryFoodBtn />
-        {meals.slice(0, foodsLimits).map(
+        {meals && meals.slice(0, foodsLimits).map(
           (food, id) => FoodsCards(
             food, 'comidas', id,
           ),

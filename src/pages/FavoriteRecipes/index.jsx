@@ -12,10 +12,12 @@ function FavoriteRecipes() {
     ? {} : favoriteRecipes.filter((recipe) => recipe.type.includes('bebida'));
   const foodsFilted = (!favoriteRecipes)
     ? {} : favoriteRecipes.filter((recipe) => recipe.type.includes('comida'));
+
   const headerProps = {
     title: 'Receitas Favoritas',
     renderSearchBar: false,
   };
+
   const filterByBtn = () => {
     if (!favoriteRecipes) {
       return (<h3>Nenhuma Receita Favorita</h3>);

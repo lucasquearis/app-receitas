@@ -50,7 +50,7 @@ export default function RecipesDoneCard({ recipe, index }) {
             { recipe.doneDate }
           </Typography>
           <ul>
-            { recipe.tags.map((tag, i) => (
+            {recipe.tags.map((tag, i) => (
               <li
                 key={ i }
                 data-testid={ `${index}-${tag}-horizontal-tag` }

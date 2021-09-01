@@ -21,11 +21,11 @@ function Drinks() {
     renderSearchBar: true,
   };
 
-  if (drinks.length === 0) {
-    return (
-      <h1>Loading</h1>
-    );
-  }
+  // if (drinks.length === 0 || !drinks) {
+  //   return (
+  //     <h1>Loading</h1>
+  //   );
+  // }
 
   if (redirect) {
     return <Redirect to={ `/bebidas/${redirect}` } />;
@@ -37,7 +37,7 @@ function Drinks() {
       <div className="recipes-list">
         <CategoryDrinkBtn />
 
-        {drinks.slice(0, drinksLimits).map(
+        {drinks && drinks.slice(0, drinksLimits).map(
           (drink, id) => DrinksCards(
             drink, 'bebidas', id,
           ),

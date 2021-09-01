@@ -69,7 +69,6 @@ export default function RecipesDoneCard({ recipe, index, setFavoriteRecipes }) {
               alt="shareIt"
             />
           </button>
-
           <button
             onClick={ () => handleFavoriteClick(recipe.id) }
             type="button"
@@ -80,7 +79,6 @@ export default function RecipesDoneCard({ recipe, index, setFavoriteRecipes }) {
               alt="favorite"
             />
           </button>
-
           <Typography
             variant="subtitle1"
             color="textSecondary"
