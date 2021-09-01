@@ -116,8 +116,9 @@ function FoodsInProgress() {
       <img data-testid="recipe-photo" alt="recipe" src={ strMealThumb } />
       <h1 data-testid="recipe-title">{ strMeal }</h1>
       <h4 data-testid="recipe-category">{ strCategory }</h4>
-      <ShareButton url={ window.location.href } />
-      {/* <button data-testid="share-btn" type="button">btn compartilhar</button> */}
+
+      <ShareButton />
+
       <FavoriteButton
         infos={ {
           id,
@@ -131,7 +132,7 @@ function FoodsInProgress() {
           // tags
         } }
       />
-      {/* <button data-testid="favorite-btn" type="button">btn favoritar</button> */}
+
       <div className="indredients">
         <h3>Ingredientes</h3>
         {
