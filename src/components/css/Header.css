@@ -80,11 +80,12 @@
 
 .exec-search-btn {
   background-color: rgb(196, 196, 196);
-  border: solid 1px darkgrey;
+  border: transparent;
   border-radius: 3px;
   box-shadow: 0 0 6px -1px darkgrey;
   font-size: 0.9em;
   margin-top: 0.6em;
+  padding: 6px;
   width: fit-content;
 }
 

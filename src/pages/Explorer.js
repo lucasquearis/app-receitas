@@ -9,14 +9,14 @@ const Explorer = () => (
     <Header title="Explorar" />
     <div className="button-container">
       <Button
-        className="explore-food"
+        className="explore-food explore-btn"
         buttonText="Explorar Comidas"
         type="button"
         isDisable={ false }
         pathname="/explorar/comidas"
       />
       <Button
-        className="explore-drinks"
+        className="explore-drinks explore-btn"
         buttonText="Explorar Bebidas"
         type="button"
         isDisable={ false }
