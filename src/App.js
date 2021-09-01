@@ -6,7 +6,7 @@ import Provider from './context/Provider';
 import { Login, Drinks, Meals, MealDetails, DrinkDetails, MealInProgress,
   DrinkInProgress, Explore, ExploreMeals, ExploreDrinks, ExploreMealByIngredients,
   ExploreDrinkByIngredients, ExploreMealByArea, Profile, RecipesDone,
-  RecipesFavorites } from './pages';
+  RecipesFavorites, NotFound } from './pages';
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
           path="/explorar/bebidas/ingredientes"
           component={ ExploreDrinkByIngredients }
         />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/explorar/comidas/area" component={ ExploreMealByArea } />
         <Route path="/explorar/comidas" component={ ExploreMeals } />
         <Route path="/explorar/bebidas" component={ ExploreDrinks } />

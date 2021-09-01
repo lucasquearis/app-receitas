@@ -1,0 +1,18 @@
+p {
+  margin: 3px;
+}
+
+.recipe-pic {
+  margin: 3px;
+  width: 80%;
+}
+
+.favorite-card {
+  margin: 5px;
+  padding: 5px;
+}
+
+.unfavorite-btn {
+  background: none;
+  border: none;
+}
