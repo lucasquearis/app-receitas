@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { v4 } from 'uuid';
 import { getMeal } from '../redux/actions';
 import HeaderWithSearch from '../components/HeaderWithSearch';
 import Footer from '../components/Footer';
@@ -16,10 +17,11 @@ function MealsList() {
   const TWELVE = 12;
   const SELECTED_MEAL = 'selected-meal';
   const { shouldRedirect, redirect } = useRedirect();
+  const { search, searchType } = useSelector((state) => state.reducerAPI);
 
   useEffect(() => {
-    dispatch(getMeal());
-  }, [dispatch]);
+    dispatch(getMeal(search, searchType));
+  }, [dispatch, search, searchType]);
 
   useEffect(() => {
     if (meals === null) {
@@ -34,13 +36,10 @@ function MealsList() {
   const [catList, setCatList] = useState([]);
   const CATURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const categories = useCategories(CATURL, 'meals');
+
   useEffect(() => {
     setCatList(categories);
   }, [categories]);
-
-  // if (loading) {
-  //   return <h1>Carregando...</h1>;
-  // }
 
   if (meals !== null && meals.length === 1) {
     return <Redirect to={ `/comidas/${meals[0].idMeal}` } />;
@@ -74,10 +73,10 @@ function MealsList() {
         <HeaderWithSearch>
           Comidas
         </HeaderWithSearch>
-        { catList.map(({ strCategory }, index) => (
+        { catList.map(({ strCategory }) => (
           <button
             type="button"
-            key={ index }
+            key={ v4() }
             onClick={ ({ target }) => handleClick(target, strCategory) }
             data-testid={ `${strCategory}-category-filter` }
             className={ selected === strCategory ? SELECTED_MEAL : 'not-selected' }
@@ -99,7 +98,7 @@ function MealsList() {
           <button
             type="button"
             onClick={ () => shouldRedirect(`/comidas/${item.idMeal}`) }
-            key={ index }
+            key={ v4() }
             data-testid={ `${index}-recipe-card` }
             className="recipe-card"
           >
@@ -108,7 +107,12 @@ function MealsList() {
               src={ item.strMealThumb }
               data-testid={ `${index}-card-img` }
             />
-            <h4 data-testid={ `${index}-card-name` }>{item.strMeal}</h4>
+            <h4
+              data-testid={ `${index}-card-name` }
+              className="card-name"
+            >
+              {item.strMeal}
+            </h4>
           </button>
         ))}
       </div>

@@ -18,6 +18,7 @@ function RadiosButton(props) {
                 checked={ value === valueRadio }
                 data-testid={ textId }
                 name={ name }
+                id={ valueRadio }
                 onChange={ handleChange }
                 type="radio"
                 value={ valueRadio }

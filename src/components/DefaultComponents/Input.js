@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Form } from 'react-bootstrap';
 
 function Input(props) {
   const {
@@ -14,19 +15,18 @@ function Input(props) {
   } = props;
 
   return (
-    <label htmlFor={ name }>
-      { label }
-      <input
+    <Form.Group className="mb-3" controlId={ name }>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        type={ type }
         className={ className }
         data-testid={ testId }
-        id={ name }
         name={ name }
         onChange={ handleChange }
         placeholder={ placeholder }
-        type={ type }
         value={ value }
       />
-    </label>
+    </Form.Group>
   );
 }
 

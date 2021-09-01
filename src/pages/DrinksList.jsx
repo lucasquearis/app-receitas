@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { v4 } from 'uuid';
 import { getCocktail } from '../redux/actions';
 import HeaderWithSearch from '../components/HeaderWithSearch';
-import useCategories from '../hooks/useCategories';
 import Footer from '../components/Footer';
+import useCategories from '../hooks/useCategories';
 import { setLoading } from '../redux/actions/loading';
 import useRedirect from '../hooks/useRedirect';
 
@@ -16,30 +17,29 @@ function DrinksList() {
   const TWELVE = 12;
   const SELECTED_DRINK = 'selected-drink';
   const { shouldRedirect, redirect } = useRedirect();
+  const { search, searchType } = useSelector((state) => state.reducerAPI);
 
   useEffect(() => {
-    dispatch(getCocktail());
-  }, [dispatch]);
-
-  const [catList, setCatList] = useState([]);
-  const CATURL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-  const categories = useCategories(CATURL, 'drinks');
-
-  useEffect(() => setCatList(categories), [categories]);
+    dispatch(getCocktail(search, searchType));
+  }, [dispatch, searchType, search]);
 
   useEffect(() => {
     if (cocktails === null) {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (cocktails !== null && cocktails.length > 1) {
-      const newCocktails = [...cocktails.slice(0, TWELVE)];
-      setRenderedCocktails(newCocktails);
+      const newDrinks = [...cocktails.slice(0, TWELVE)];
+      setRenderedCocktails(newDrinks);
     }
   }, [cocktails]);
 
-  // if (loading) {
-  //   return <h1>Carregando...</h1>;
-  // }
+  const [catList, setCatList] = useState([]);
+  const CATURL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const categories = useCategories(CATURL, 'drinks');
+
+  useEffect(() => {
+    setCatList(categories);
+  }, [categories]);
 
   if (cocktails !== null && cocktails.length === 1) {
     return <Redirect to={ `/bebidas/${cocktails[0].idDrink}` } />;
@@ -48,7 +48,6 @@ function DrinksList() {
   const handleClickAll = async () => {
     const newCocktails = [...cocktails.slice(0, TWELVE)];
     setRenderedCocktails(newCocktails);
-    setSelected('all');
   };
 
   const handleClick = async (target, name) => {
@@ -57,7 +56,7 @@ function DrinksList() {
       setSelected(name);
       const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`;
       const results = await fetch(url).then((response) => response.json());
-      const firstTwelve = results.drinks.slice(0, TWELVE);
+      const firstTwelve = await results.drinks.slice(0, TWELVE);
       setRenderedCocktails(firstTwelve);
     } else {
       setSelected('all');
@@ -74,11 +73,10 @@ function DrinksList() {
         <HeaderWithSearch>
           Bebidas
         </HeaderWithSearch>
-
-        { catList.map(({ strCategory }, index) => (
+        { catList.map(({ strCategory }) => (
           <button
             type="button"
-            key={ index }
+            key={ v4() }
             onClick={ ({ target }) => handleClick(target, strCategory) }
             data-testid={ `${strCategory}-category-filter` }
             className={ selected === strCategory ? SELECTED_DRINK : 'not-selected' }
@@ -88,7 +86,7 @@ function DrinksList() {
         ))}
         <button
           type="button"
-          onClick={ () => handleClickAll() }
+          onClick={ handleClickAll }
           data-testid="All-category-filter"
           className={ selected === 'all' ? SELECTED_DRINK : 'not-selected' }
         >
@@ -100,7 +98,7 @@ function DrinksList() {
           <button
             type="button"
             onClick={ () => shouldRedirect(`/bebidas/${item.idDrink}`) }
-            key={ index }
+            key={ v4() }
             data-testid={ `${index}-recipe-card` }
             className="recipe-card"
           >
