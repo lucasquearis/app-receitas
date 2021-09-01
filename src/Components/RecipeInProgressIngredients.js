@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import Spinner from 'react-bootstrap/Spinner';
 import AppContext from '../Context/AppContext';
 
 import RecipeInProgressCheckBox from './RecipeInProgressCheckBox';
 
-function RecipeInProgressIngredients({ type, recipeID }) {
+const defaultInProgresStorage = {
+  cocktails: {},
+  meals: {},
+};
+
+function RecipeInProgressIngredients({ ingredientList, type, recipeID }) {
   const [ingredientsList, setIngredientsList] = useState([]);
   const { setMadeRecipe } = useContext(AppContext);
 
@@ -13,19 +17,19 @@ function RecipeInProgressIngredients({ type, recipeID }) {
 
   useEffect(() => {
     const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (type === 'food' && inProgressStorage !== undefined) {
-      console.log(typeof(recipeID));
-      console.log((inProgressStorage.meals));
-      console.log(inProgressStorage.meals[recipeID]);
-      setIngredientsList((inProgressStorage.meals)[recipeID]);
-      console.log(ingredientsList);
+
+    if (inProgressStorage === null) {
+      setIngredientsList(ingredientList);
     }
 
-    if (type === 'drink' && inProgressStorage !== undefined) {
+    if (type === 'food'
+    && inProgressStorage !== null) {
+      setIngredientsList(inProgressStorage.meals[recipeID]);
+    } else if (type === 'drink'
+    && inProgressStorage !== null) {
       setIngredientsList(inProgressStorage.cocktails[recipeID]);
-      console.log(ingredientsList);
     }
-  }, [recipeID, type, ingredientsList]);
+  }, [recipeID, type, ingredientList]);
 
   const changeChecked = (index) => {
     const newIngredientsList = ingredientsList;
@@ -38,13 +42,16 @@ function RecipeInProgressIngredients({ type, recipeID }) {
       setMadeRecipe(false);
     }
 
-    const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (type === 'food') {
+    const inProgressStorage = JSON
+      .parse(localStorage.getItem('inProgressRecipes')) || defaultInProgresStorage;
+    if (type === 'food' && inProgressStorage !== null) {
       inProgressStorage.meals[recipeID] = ingredientsList;
-    } else {
-      inProgressStorage.cocktails[recipeID] = ingredientsList;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressStorage));
     }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressStorage));
+    if (type === 'drink' && inProgressStorage !== null) {
+      inProgressStorage.cocktails[recipeID] = ingredientsList;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressStorage));
+    }
   };
 
   useEffect(() => {
@@ -52,14 +59,6 @@ function RecipeInProgressIngredients({ type, recipeID }) {
       setMadeRecipe(ingredientsList.every(verifyItsDone));
     }
   });
-
-  if (ingredientsList === undefined) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden"> </span>
-      </Spinner>
-    );
-  }
 
   return (
     <div className="ingredientsContainer">
@@ -86,6 +85,7 @@ function RecipeInProgressIngredients({ type, recipeID }) {
 RecipeInProgressIngredients.propTypes = {
   recipeID: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  ingredientList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RecipeInProgressIngredients;

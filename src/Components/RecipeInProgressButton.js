@@ -12,9 +12,10 @@ function RecipeInProgressButton({ type, recipe, recipeID }) {
     const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const doneRecipesStorage = JSON.parse(localStorage.getItem('doneRecipes'));
 
-    if (type === 'food') {
+    if (type === 'food' && inProgressStorage !== null) {
       delete inProgressStorage.meals[recipeID];
-    } else {
+    }
+    if (type === 'drink' && inProgressStorage !== null) {
       delete inProgressStorage.cocktails[recipeID];
     }
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressStorage));

@@ -19,7 +19,7 @@ function RecipeInProgressCheckBox({ isChecked, ingredient, index, changeChecked 
       <input
         id={ `${ingredient}-checkbox` }
         type="checkbox"
-        checked={ checkState }
+        checked={ checkState ? 'checked' : false }
         onChange={ () => handleCheck(index) }
       />
       {ingredient}

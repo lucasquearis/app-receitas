@@ -35,7 +35,13 @@ function RecipeDetailFavoriteButton({ recipe, type, recipeID }) {
       image: recipe.strMealThumb || recipe.strDrinkThumb,
     };
 
-    const newFavorites = [...favoritesRecipes, favoriteData];
+    let newFavorites = [];
+
+    if (favoritesRecipes !== null) {
+      newFavorites = [...favoritesRecipes, favoriteData];
+    } else {
+      newFavorites = [favoriteData];
+    }
 
     localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     setIsFavorite(true);
