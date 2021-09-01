@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { Button } from 'react-bootstrap';
 
 function CategoryButton(props) {
   const { strCategory, handleClick } = props;

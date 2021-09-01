@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Container, Row, Button } from 'react-bootstrap';
 import CategoryButton from '../components/CategoryButton';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
+import './comidas.css';
 
 function Comidas(props) {
   const { history: { location: { pathname, state } } } = props;
@@ -59,29 +61,7 @@ function Comidas(props) {
   };
 
   return (
-    <div>
-      <MyContext.Provider value={ newFoodRecipes }>
-        <Header titulo="Comidas" showProfileIcon="sim" pathname={ pathname } />
-      </MyContext.Provider>
-      { foodCategories.map(({ strCategory }, index) => {
-        if (index < MAX_CATEGORIES) {
-          return (
-            <CategoryButton
-              key={ strCategory }
-              strCategory={ strCategory }
-              handleClick={ handleClick }
-            />
-          );
-        }
-        return null;
-      }) }
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        onClick={ getAllFoods }
-      >
-        All
-      </button>
+    <div className="main-container">
       <div className="card-container">
         { foodRecipes.map(({ strMealThumb, strMeal, idMeal }, index) => {
           if (index < MAX_RECIPES) {
@@ -98,6 +78,32 @@ function Comidas(props) {
           return null;
         }) }
       </div>
+      <Container className="category-container">
+        <Row className="category-btn">
+          { foodCategories.map(({ strCategory }, index) => {
+            if (index < MAX_CATEGORIES) {
+              return (
+                <CategoryButton
+                  key={ strCategory }
+                  strCategory={ strCategory }
+                  handleClick={ handleClick }
+                />
+              );
+            }
+            return null;
+          }) }
+          <button
+            data-testid="All-category-filter"
+            type="button"
+            onClick={ getAllFoods }
+          >
+            All
+          </button>
+        </Row>
+      </Container>
+      <MyContext.Provider value={ newFoodRecipes }>
+        <Header titulo="Comidas" showProfileIcon="sim" pathname={ pathname } />
+      </MyContext.Provider>
       <Footer />
     </div>
   );

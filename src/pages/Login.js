@@ -7,7 +7,7 @@ import '../components/login.css';
 export default function Login() {
   return (
     <Container fluid className="meals">
-      <Image src={ rockGlass } alt="rockGlass" className="rockGlass" />
+      <Image src={ rockGlass } alt="rocksGlass" className="rocksGlass" />
       <LoginForms />
     </Container>
   );
