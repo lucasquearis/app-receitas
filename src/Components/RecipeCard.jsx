@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, number } from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
 
 function RecipeCard(props) {
@@ -24,14 +24,9 @@ function RecipeCard(props) {
   );
 }
 
-const { string, number } = PropTypes;
-RecipeCard.defaultProps = {
-  id: null,
-  thumbnail: '',
-};
 RecipeCard.propTypes = {
-  id: string,
-  thumbnail: string,
+  id: string.isRequired,
+  thumbnail: string.isRequired,
   title: string.isRequired,
   index: number.isRequired,
 };

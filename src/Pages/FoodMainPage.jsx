@@ -4,7 +4,7 @@ import { Spinner } from 'react-bootstrap';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import RecipeCard from '../Components/RecipeCard';
-import CategoryFoodButtons from '../Components/categoryFoddButtons';
+import CategoryFoodButtons from '../Components/CategoryFoodButtons';
 import '../styles/MainPages.css';
 
 function FoodMainPage() {

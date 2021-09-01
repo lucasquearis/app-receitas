@@ -9,8 +9,8 @@ import FoodExplore from './Pages/FoodExplore';
 import FoodIngredientesExplore from './Pages/FoodIngredientesExplore';
 import FoodPlaceExplore from './Pages/FoodPlaceExplore';
 import Profile from './Pages/Profile';
-import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import FoodDetails from './Pages/FoodDetails';
+import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import DrinksDetails from './Pages/DrinksDetails';
 
 function App() {
@@ -34,16 +34,8 @@ function App() {
       <Route exact path="/explorar/comidas" component={ FoodExplore } />
       <Route exact path="/explorar/bebidas" component={ DrinksExplore } />
       <Route exact path="/perfil" component={ Profile } />
-      <Route
-        exact
-        path="/comidas/:id"
-        render={ (props) => <FoodDetails { ...props } /> }
-      />
-      <Route
-        exact
-        path="/bebidas/:id"
-        render={ (props) => <DrinksDetails { ...props } /> }
-      />
+      <Route exact path="/comidas/:id" component={ FoodDetails } />
+      <Route exact path="/bebidas/:id" component={ DrinksDetails } />
       <Route exact path="/comidas" component={ FoodMainPage } />
       <Route exact path="/bebidas" component={ DrinkMainPage } />
       <Route exact path="/explorar" component={ Explore } />
