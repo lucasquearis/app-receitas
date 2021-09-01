@@ -72,8 +72,8 @@ function RecipesInProgress(props) {
               <section>
                 <IngredientsCheckList
                   recipe={ recipe[enType][0] }
+                  pathname={ pathname }
                   id={ id }
-                  type={ type }
                 />
               </section>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
