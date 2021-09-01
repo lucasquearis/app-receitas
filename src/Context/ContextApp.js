@@ -2,7 +2,6 @@ import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import LoginHook from '../Hooks/LoginHook';
-import FoodHook from '../Hooks/FoodHook';
 import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 import recipesHooks from '../Hooks/recipesHooks';
 import SingleRecipeHook from '../Hooks/SingleRecipeHook';
@@ -24,7 +23,6 @@ export const AppProvider = ({ children }) => {
     handleClick,
     redirect,
     setRedirect } = LoginHook();
-  const { drinks, meal, getRecipes } = FoodHook();
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
@@ -50,11 +48,8 @@ export const AppProvider = ({ children }) => {
     categoryDrinks,
     filterIngredient,
     filter,
-    getRecipes,
     setRecipes,
     setRedirect,
-    drinks,
-    meal,
     singleRecipe,
     handleRecipe,
     handleStart,
@@ -64,6 +59,7 @@ export const AppProvider = ({ children }) => {
     handleModal,
     handleFav,
     fav,
+    fetchApi,
   };
 
   return (

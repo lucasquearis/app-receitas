@@ -19,9 +19,12 @@ function RecipeDetails({ match: { params } }) {
   const { feedType, id } = params;
   const { handleCopy, closeModal, modal, modalStyles } = ModalHook();
   const {
-    handleRecipe, singleRecipe, drinks, meal, handleStart, doneRecipe,
-    handleBtnType, handleFav, fav,
+    handleRecipe, singleRecipe, recipes, handleStart, doneRecipe,
+    handleBtnType, handleFav, fav, fetchApi,
   } = useContext(ContextApp);
+
+  const urlRender = feedType !== 'comidas' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
+  fetchApi(urlRender, 'search.php?s=');
 
   if (!singleRecipe) {
     handleRecipe(params);
@@ -114,8 +117,8 @@ function RecipeDetails({ match: { params } }) {
       <Vid { ...vidProps } />
       <div className="carousel">
         { (params.feedType === 'comidas')
-          ? <Food recipes={ drinks } maxRecipes={ 6 } />
-          : <Food recipes={ meal } maxRecipes={ 6 } />}
+          ? <Food recipes={ recipes } maxRecipes={ 6 } />
+          : <Food recipes={ recipes } maxRecipes={ 6 } />}
       </div>
       {!doneRecipe.some((e) => e.id === id)
         ? <Link to={ `/${feedType}/${id}/in-progress` }><Btn { ...btnProps } /></Link>
