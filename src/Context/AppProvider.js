@@ -14,7 +14,7 @@ function Provider({ children }) {
   const [userEmail, setUserEmail] = useState('');
   const [search, setSearch] = useState([]);
   const [loadSearch, setLoadSearch] = useState(false);
-  
+
   const globalState = {
     email: userEmail,
     meals,
