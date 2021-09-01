@@ -1,13 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../cssPages/Header.css';
 import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
+  const styles = {
+    0: 'neutralStyle',
+    1: 'drinkStyle',
+    2: 'foodStyle',
+  };
   const { titulo, pesquisa } = props;
+  const path = Number((useLocation().pathname).includes('bebidas'))
+    + 2 * Number((useLocation().pathname).includes('comidas'));
+  console.log(path);
   const [showBar, setShowBar] = useState(false);
   const rederizaBarra = () => (showBar ? setShowBar(false) : setShowBar(true));
 
@@ -23,7 +31,7 @@ function Header(props) {
 
   return (
     <div>
-      <header className="header">
+      <header className={ `header ${styles[path]}` }>
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"

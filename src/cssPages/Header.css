@@ -17,5 +17,23 @@
 .btnSearch {
   background-color: transparent;
   border: none;
-  mix-blend-mode: multiply;
+}
+
+.header img {
+/*   background-color: white; */
+}
+
+.neutralStyle {
+  background-color: whitesmoke;
+}
+
+.drinkStyle {
+  background-color: #1385f6;
+  color: white;
+}
+
+
+.foodStyle {
+  background-color: #ff470a;
+  color: white;
 }

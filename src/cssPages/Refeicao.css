@@ -6,8 +6,11 @@ body {
 
 .pageComida {
   background: url('../images/page.png');
-  background-size: auto;
+  background-position: center;
+  background-size: cover;
   height: 100vh;
+  overflow-y: scroll;
+  position: fixed;
 }
 
 .categoryContainer {
