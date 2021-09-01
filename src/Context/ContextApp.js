@@ -1,28 +1,26 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import LoginHook from '../Hooks/LoginHook';
+import UseUserHook from '../Hooks/UseUserHook';
 import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 import recipesHooks from '../Hooks/recipesHooks';
 import SingleRecipeHook from '../Hooks/SingleRecipeHook';
 import DoneRecipeHook from '../Hooks/DoneRecipeHook';
 import ModalHook from '../Hooks/ModalHook';
+import { fetchApiCategory, fetchApiRecipes } from '../Helpers/fetchApi';
 
 export const ContextApp = createContext();
+
 export const AppProvider = ({ children }) => {
+  const [recipeCategory, setRecipeCategory] = useState({});
+  const [recipes, setRecipes] = useState([]);
+
   const { singleRecipe, handleRecipe, handleFav, fav } = SingleRecipeHook();
   const { handleStart, doneRecipe, inProgress, handleBtnType } = DoneRecipeHook();
   const { handleModal } = ModalHook();
-  const { searchRecipes, recipes, setRecipes } = recipesHooks();
-  const { categoryMeal, categoryDrinks, filterIngredient,
-    filter } = BtnFilterCategory();
-  const {
-    handleInput,
-    Login,
-    disabled,
-    handleClick,
-    redirect,
-    setRedirect } = LoginHook();
+  const { searchRecipes } = recipesHooks();
+  const { filterIngredient, filter } = BtnFilterCategory();
+  const { Login, redirect, setRedirect } = UseUserHook();
   const history = useHistory();
   const search = 'search.php?s=';
   const { location: { pathname } } = history;
@@ -36,17 +34,19 @@ export const AppProvider = ({ children }) => {
   if (recipes.length === 0) {
     fetchApi(urlRender, search);
   }
+  useEffect(() => {
+    const initialFetch = async () => {
+      setRecipeCategory(await fetchApiCategory());
+      setRecipes(await fetchApiRecipes());
+    };
+    initialFetch();
+  }, []);
 
   const ContProps = {
     recipes,
     searchRecipes,
-    disabled,
-    handleInput,
     Login,
-    handleClick,
     redirect,
-    categoryMeal,
-    categoryDrinks,
     filterIngredient,
     filter,
     setRecipes,
@@ -61,6 +61,8 @@ export const AppProvider = ({ children }) => {
     handleFav,
     fav,
     fetchApi,
+
+    recipeCategory,
   };
 
   return (

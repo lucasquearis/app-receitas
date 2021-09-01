@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import fetchApi from '../Helpers/fetchApi';
+import { fetchApi } from '../Helpers/fetchApi';
 
 const showAlert = (callback, msg) => {
   callback(msg);

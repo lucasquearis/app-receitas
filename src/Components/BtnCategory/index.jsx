@@ -1,20 +1,20 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { ContextApp } from '../../Context/ContextApp';
 
-const BtnCategory = ({ category }) => {
+const BtnCategory = () => {
   const maxCategory = 5;
-  const { searchRecipes, setRecipes } = useContext(ContextApp);
+  const { searchRecipes, setRecipes, recipeCategory } = useContext(ContextApp);
+
   const history = useHistory();
   const { location: { pathname } } = history;
   const currentRout = pathname.includes('/comidas');
   const url = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
-
+  const category = currentRout ? recipeCategory.meals : recipeCategory.drinks;
   const [currentCategory, setCurrentCategory] = useState('');
 
-  if (category === undefined) {
-    return <div>loding</div>;
+  if (!(recipeCategory.meals && recipeCategory.drinks)) {
+    return <h2>Getting Categories...</h2>;
   }
   const returnAll = () => {
     setRecipes([]);
@@ -35,7 +35,7 @@ const BtnCategory = ({ category }) => {
         <button
           type="button"
           name={ strCategory }
-          Key={ strCategory }
+          key={ strCategory }
           value={ strCategory }
           data-testid={ `${strCategory}-category-filter` }
           onClick={ ({ target: { value } }) => {
@@ -54,10 +54,6 @@ const BtnCategory = ({ category }) => {
         </button>))}
     </div>
   );
-};
-
-BtnCategory.propTypes = {
-  category: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default BtnCategory;

@@ -6,7 +6,7 @@ import Header from '../../Components/Header';
 import BottomMenu from '../../Components/Footer/BottomMenu';
 import Btn from '../../Components/Btn';
 
-import fetchApi from '../../Helpers/fetchApi';
+import { fetchApi } from '../../Helpers/fetchApi';
 
 function ExploreDrinksOrFoods() {
   const history = useHistory();
