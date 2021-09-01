@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Header, Footer } from '../components';
+import './css/MealsExplorer.css';
 
 const MealsExplorer = () => {
   const history = useHistory();
@@ -32,31 +33,36 @@ const MealsExplorer = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Header title="Explorar Comidas" />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ handleClickIngredients }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-by-area"
-        onClick={ handleClickArea }
-      >
-        Por Local de Origem
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClickSurprise }
-      >
-        Me Surpreenda!
-      </button>
-      <Footer />
-    </div>
+      <main className="button-container">
+        <button
+          type="button"
+          className="explore-btn"
+          data-testid="explore-by-ingredient"
+          onClick={ handleClickIngredients }
+        >
+          Por Ingredientes
+        </button>
+        <button
+          type="button"
+          className="explore-btn"
+          data-testid="explore-by-area"
+          onClick={ handleClickArea }
+        >
+          Por Local de Origem
+        </button>
+        <button
+          type="button"
+          className="explore-btn"
+          data-testid="explore-surprise"
+          onClick={ handleClickSurprise }
+        >
+          Me Surpreenda!
+        </button>
+        <Footer />
+      </main>
+    </>
   );
 };
 

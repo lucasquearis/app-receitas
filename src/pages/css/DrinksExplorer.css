@@ -1,0 +1,18 @@
+.button-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  justify-content: space-evenly;
+}
+
+.explore-btn {
+  background-color: whitesmoke;
+  border: transparent;
+  border-radius: 6px;
+  box-shadow: 0 0 6px -1px grey;
+  font-size: larger;
+  font-weight: 600;
+  height: 9vh;
+  width: 90vw;
+}

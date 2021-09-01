@@ -28,24 +28,28 @@ const DrinksExplorer = () => {
   }, []);
 
   return (
-    <main className="">
+    <>
       <Header title="Explorar Bebidas" />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ handleClickIngredients }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClickSurprise }
-      >
-        Me Surpreenda!
-      </button>
-      <Footer />
-    </main>
+      <main className="button-container">
+        <button
+          type="button"
+          className="explore-btn"
+          data-testid="explore-by-ingredient"
+          onClick={ handleClickIngredients }
+        >
+          Por Ingredientes
+        </button>
+        <button
+          type="button"
+          className="explore-btn"
+          data-testid="explore-surprise"
+          onClick={ handleClickSurprise }
+        >
+          Me Surpreenda!
+        </button>
+        <Footer />
+      </main>
+    </>
   );
 };
 
