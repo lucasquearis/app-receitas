@@ -10,7 +10,7 @@
 
 .recipe-photo {
   display: block;
-  min-width: 100vw;
+  max-width: 100vw;
 }
 
 .recipe-title-container h1 {
