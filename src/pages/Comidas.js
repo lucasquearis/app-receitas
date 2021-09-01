@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Container, Row, Button } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import CategoryButton from '../components/CategoryButton';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -79,7 +79,7 @@ function Comidas(props) {
         }) }
       </div>
       <Container className="category-container">
-        <Row className="category-btn">
+        <div className="category-btn">
           { foodCategories.map(({ strCategory }, index) => {
             if (index < MAX_CATEGORIES) {
               return (
@@ -99,7 +99,7 @@ function Comidas(props) {
           >
             All
           </button>
-        </Row>
+        </div>
       </Container>
       <MyContext.Provider value={ newFoodRecipes }>
         <Header titulo="Comidas" showProfileIcon="sim" pathname={ pathname } />
