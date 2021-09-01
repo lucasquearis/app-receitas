@@ -4,7 +4,6 @@ import Header from '../../components/Header';
 import myContext from '../../context/myContext';
 import '../../styles/Header.css';
 import Footer from '../../components/Footer';
-import '../../styles/Footer.css';
 
 function ExploreIngredients() {
   const doze = 12;

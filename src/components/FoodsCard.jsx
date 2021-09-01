@@ -8,7 +8,7 @@ function FoodsCard() {
   const doze = 12;
   const { meals } = useSelector((state) => state.recipes.foods);
   const loading = useSelector((state) => state.recipes.isLoading);
-  const { display } = useContext(myContext);
+  const { displayFood } = useContext(myContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function FoodsCard() {
   return (
     <div>
       {
-        display.length === 0 && meals && meals.map((meal, index) => index < doze && (
+        displayFood.length === 0 && meals && meals.map((meal, index) => index < doze && (
           <ItemCard
             title={ meal.strMeal }
             data-testid={ `${index}-recipe-card` }

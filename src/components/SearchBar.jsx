@@ -11,11 +11,10 @@ import '../styles/SearchBar.css';
 
 function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
+  const { removeDisplayList } = useContext(myContext);
   const dispatch = useDispatch();
-  const { foodIngredientSelected } = useContext(myContext);
   const { meals } = useSelector((state) => state.recipes.foods);
   const drinks = useSelector((state) => state.recipes.foods.drinks);
-  console.log(foodIngredientSelected);
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };
@@ -38,6 +37,7 @@ function SearchBar() {
     if (meals || drinks) {
       dispatch(clearSearch());
     }
+    removeDisplayList();
     if (search.type === 'ingredient') {
       return requestIngredient(result);
     }

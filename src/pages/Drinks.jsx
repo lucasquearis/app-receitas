@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
-// import myContext from '../context/myContext';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
-import '../styles/Header.css';
 import ItemCard from '../components/ItemCard';
 import Footer from '../components/Footer';
 import CategoryDrinkButtons from '../components/CategoryDrinkButtons';
 
 function Drinks(props) {
-  const { history } = props;
   const doze = 12;
+  const { history } = props;
   const { search } = useSelector((state) => state.recipes);
   const oneElementDetails = () => {
     if (search.drinks.length === 1) {
@@ -26,7 +24,7 @@ function Drinks(props) {
     if (search.drinks) {
       oneElementDetails();
     }
-  }, []);
+  });
 
   return (
     <div>
@@ -37,8 +35,8 @@ function Drinks(props) {
         dataId="search-top-btn"
         className="img-search"
       />
-      <CategoryDrinkButtons />
 
+      <CategoryDrinkButtons />
       <main>
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard
           title={ drink.strDrink }

@@ -9,12 +9,15 @@ import '../styles/CategoryButtons.css';
 function CategoryFoodButtons() {
   const cinco = 5;
   const doze = 12;
-  const categories = useSelector((state) => state.reducerCategories.categories.meals);
+  const categories = useSelector(
+    (state) => state.reducerCategories.categories
+      .meals,
+  );
   const {
     foodIngredientClick,
     foodIngredientSelected,
-    setDisplay,
-    display,
+    setDisplayFood,
+    displayFood,
     removeDisplayList,
   } = useContext(myContext);
   const dispatch = useDispatch();
@@ -28,7 +31,8 @@ function CategoryFoodButtons() {
 
   const renderCategoryFilter = async (category) => {
     try {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+      const response = await
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
       const data = await response.json();
       setCategoryClick(data);
     } catch (error) {
@@ -40,12 +44,13 @@ function CategoryFoodButtons() {
     const displayCategory = async () => {
       const res = await foodIngredientClick(foodIngredientSelected);
       const { meals } = await res;
-      setDisplay(meals.slice(0, doze));
+      setDisplayFood(meals.slice(0, doze));
       dispatch(clearSearch());
     };
     displayCategory();
     dispatch(fetchCategory());
     renderCategoryFilter();
+    foodIngredientClick();
   }, [dispatch]);
 
   const handleClick = (categoryStr) => {
@@ -58,7 +63,7 @@ function CategoryFoodButtons() {
   const handleClickAll = () => {
     setShowInput(true);
     removeDisplayList();
-    display.length = 0;
+    displayFood.length = 0;
   };
 
   return (
@@ -92,7 +97,7 @@ function CategoryFoodButtons() {
         ))
       }
       {
-        display.map((dish, index) => (
+        displayFood.map((dish, index) => (
           <ItemCard
             title={ dish.strMeal }
             thumb={ dish.strMealThumb }
@@ -105,11 +110,14 @@ function CategoryFoodButtons() {
         ))
       }
       {
-        showInput ? <FoodsCard /> : categoryClick.meals
+        showInput
+          ? <FoodsCard />
+          : categoryClick.meals
         && categoryClick.meals.map((dish, index) => index < doze && (
           <ItemCard
             title={ dish.strMeal }
             thumb={ dish.strMealThumb }
+            data-testid={ `${index}-recipe-card` }
             id={ dish.idMeal }
             index={ index }
             key={ index }

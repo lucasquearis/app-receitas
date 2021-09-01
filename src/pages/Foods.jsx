@@ -3,11 +3,9 @@ import { useSelector } from 'react-redux';
 import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
-import '../styles/Header.css';
 import Footer from '../components/Footer';
 import ItemCard from '../components/ItemCard';
 import CategoryFoodButtons from '../components/CategoryFoodButtons';
-import '../styles/Footer.css';
 
 function Foods(props) {
   const doze = 12;
@@ -21,7 +19,7 @@ function Foods(props) {
 
   useEffect(() => {
     if (search.meals === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (search.meals) {
       oneElementDetails();

@@ -10,6 +10,7 @@ function RecipesProvider({ children }) {
   const [drinkIngredientSelected, setDrinkIngredientSelected] = useState('');
   const [foodIngredientSelected, setFoodIngredientSelected] = useState('');
   const [display, setDisplay] = useState([]);
+  const [displayFood, setDisplayFood] = useState([]);
 
   const drinkIngredientClick = async (ingredient) => {
     const result = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
@@ -25,6 +26,7 @@ function RecipesProvider({ children }) {
 
   const removeDisplayList = () => {
     setDisplay([]);
+    setDisplayFood([]);
   };
 
   const providerState = {
@@ -34,6 +36,8 @@ function RecipesProvider({ children }) {
     foodIngredientClick,
     foodIngredientSelected,
     setFoodIngredientSelected,
+    displayFood,
+    setDisplayFood,
     // Drinks:
     randomDrink,
     drinkIngredients,
