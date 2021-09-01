@@ -1,6 +1,7 @@
 .footer {
   align-items: center;
-  background-color: rgb(196, 196, 196);
+  background-color: rgb(214, 40, 40);
+  border-radius: 9px 9px 0 0;
   bottom: 0;
   display: flex;
   justify-content: space-around;
@@ -10,5 +11,6 @@
 }
 
 .footer a input {
+  filter: invert(100%);
   vertical-align: middle;
 }

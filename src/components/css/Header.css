@@ -1,27 +1,30 @@
 .header-container {
   align-items: center;
-  background-color: rgb(196, 196, 196);
+  background-color: rgb(214, 40, 40);
+  border-radius: 0 0 9px 9px;
+
+  /* background-color: rgb(196, 196, 196); */
   display: flex;
   flex-grow: 0;
-  height: 3em;
+  height: 9vh;
   justify-content: space-around;
   min-width: 100vw;
   padding: 0.2em 0;
 }
 
 .profile-icon-container {
+  background-color: white;
   border: none;
   border-radius: 6px;
-  box-shadow: 0 0 6px darkgrey;
   margin: 0;
   margin-left: 0.5em;
   padding: 6px;
 }
 
 .search-icon-container {
+  background-color: white;
   border: none;
   border-radius: 6px;
-  box-shadow: 0 0 6px darkgrey;
   margin-right: 0.5em;
   padding: 6px;
 }
@@ -32,6 +35,7 @@
 }
 
 .title-content {
+  color: white;
   font-size: 1.7em;
   font-weight: 600;
   margin: 0;
