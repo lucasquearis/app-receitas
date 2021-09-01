@@ -15,17 +15,17 @@ class RecipesMadeCard extends Component {
 
     return (
       <div className="row">
-        <div
-          className="card card-list-food row"
-        >
-          <div className="col">
+        <div className="card-list-food">
+          <div>
             <img
               src={ image }
+              className="card-img"
               alt="card"
               data-testid={ `${index}-horizontal-image` }
             />
           </div>
-          <div className="col">
+
+          <div>
             <button type="button" className="share-fill">
               <img
                 src={ ShareIcon }
@@ -33,7 +33,10 @@ class RecipesMadeCard extends Component {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-            <p data-testid={ `${index}-horizontal-top-text` }>{ category }</p>
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              <span>Italian - </span>
+              <span>{ category }</span>
+            </p>
             <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
             <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
             {
