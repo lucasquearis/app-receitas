@@ -7,11 +7,13 @@ export default function Routes() {
     <Switch>
       <Route exact path="/" component={ Pages.LoginPage } />
 
-      <Route path="/comidas/:id/in-progress" component={ Pages.ComidasInProgress } />
+      <Route path="/comidas/:id/in-progress" component={ Pages.ReceitaEmProgressoPage } />
+
+      <Route path="/bebidas/:id/in-progress" component={ Pages.ReceitaEmProgressoPage } />
+
       <Route path="/comidas/:id" component={ Pages.ReceitasDetalhesPage } />
       <Route path="/comidas" component={ Pages.HomePage } />
 
-      <Route path="/bebidas/:id/in-progress" component={ Pages.BebidasInProgress } />
       <Route path="/bebidas/:id" component={ Pages.ReceitasDetalhesPage } />
       <Route path="/bebidas" component={ Pages.HomePage } />
 
@@ -31,7 +33,7 @@ export default function Routes() {
 
       <Route path="/explorar" component={ Pages.ExplorarPage } />
 
-      <Route path="/perfil" component={ Pages.PerfilPage } />
+      <Route exact path="/perfil" component={ Pages.PerfilPage } />
 
       <Route path="/receitas-feitas" component={ Pages.ReceitasFeitasPage } />
       <Route path="/receitas-favoritas" component={ Pages.ReceitasFavoritasPage } />

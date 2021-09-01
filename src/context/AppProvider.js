@@ -8,6 +8,7 @@ export default function AppProvider({ children }) {
   const [filterRecipes, setFilterRecipes] = useState('all');
   const [from, setFrom] = useState(false);
   const [recipeDetails, setRecipeDetails] = useState();
+  const [allChecked, setAllChecked] = useState(false);
   const [fvtRecipes, setFvtRecipes] = useState([]);
 
   const context = {
@@ -23,6 +24,8 @@ export default function AppProvider({ children }) {
     setFrom,
     recipeDetails,
     setRecipeDetails,
+    allChecked,
+    setAllChecked,
   };
 
   return (

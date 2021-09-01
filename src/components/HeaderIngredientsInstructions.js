@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import HeaderDetails from './HeaderDetails';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
+import IngredientsInProgress from './IngredientsInProgress';
 
-export default function HeaderIngredientsInstructions() {
+export default function HeaderIngredientsInstructions({ pathnameAPI, id }) {
   const { recipeDetails } = useContext(AppContext);
   const index = 0;
 
@@ -19,8 +21,28 @@ export default function HeaderIngredientsInstructions() {
         area={ recipeDetails && (recipeDetails.strArea) }
         alcoholic={ recipeDetails && (recipeDetails.strAlcoholic) }
       />
-      <Ingredients ingredients={ recipeDetails } index={ index } />
+      {
+        (pathnameAPI && id)
+          ? (
+            <IngredientsInProgress
+              ingredients={ recipeDetails }
+              pathnameAPI={ pathnameAPI }
+              id={ id }
+            />
+          )
+          : <Ingredients ingredients={ recipeDetails } index={ index } />
+      }
       <Instructions instructions={ recipeDetails && (recipeDetails.strInstructions) } />
     </section>
   );
 }
+
+HeaderIngredientsInstructions.defaultProps = {
+  pathnameAPI: null,
+  id: null,
+};
+
+HeaderIngredientsInstructions.propTypes = {
+  pathnameAPI: PropTypes.string,
+  id: PropTypes.string,
+};

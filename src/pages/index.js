@@ -4,9 +4,7 @@ export { default as HomePage } from './HomePage';
 
 export { default as ReceitasDetalhesPage } from './ReceitasDetalhesPage';
 
-export { default as ComidasInProgress } from './ComidasInProgress';
-
-export { default as BebidasInProgress } from './BebidasInProgress';
+export { default as ReceitaEmProgressoPage } from './ReceitaEmProgressoPage';
 
 export { default as ExplorarPage } from './ExplorarPage';
 
