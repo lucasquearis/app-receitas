@@ -83,6 +83,17 @@ export default function BebidasDetalhes() {
     }
   };
 
+  const copyPathname = () => {
+    const el = document.createElement('input');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    document.getElementById('share-button').innerHTML = 'Link copiado!';
+    // alert('Link copiado!');
+  };
+
   if (drink === undefined) {
     return <Loading />;
   }
@@ -104,7 +115,14 @@ export default function BebidasDetalhes() {
       <div data-testid="recipe-alcoholic">{drink.strCategory}</div>
 
       <div className={ styles.buttonBebidasDetails }>
-        <button type="button" data-testid="share-btn">Compartilhar</button>
+        <button
+          id="share-button"
+          type="button"
+          data-testid="share-btn"
+          onClick={ copyPathname }
+        >
+          Compartilhar
+        </button>
         <button
           type="button"
           onClick={ handleFavorite }

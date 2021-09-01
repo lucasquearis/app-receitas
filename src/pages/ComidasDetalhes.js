@@ -75,9 +75,16 @@ export default function ComidasDetalhes() {
     apiDrink();
   }, []);
 
-  if (food === undefined) {
-    return <Loading />;
-  }
+  const copyPathname = () => {
+    const el = document.createElement('input');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    document.getElementById('share-button').innerHTML = 'Link copiado!';
+    // alert('Link copiado!');
+  };
 
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
     .map((ingredientKey, index) => (
@@ -87,6 +94,10 @@ export default function ComidasDetalhes() {
       >
         {`${food[ingredientKey]} - ${food[`strMeasure${index + 1}`]}`}
       </li>));
+
+  if (food === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -103,7 +114,14 @@ export default function ComidasDetalhes() {
 
       <div>
         <div className={ styles.buttonComidasDetails }>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
+          <button
+            id="share-button"
+            type="button"
+            data-testid="share-btn"
+            onClick={ copyPathname }
+          >
+            Compartilhar
+          </button>
           <button
             type="button"
             onClick={ handleFavorite }
