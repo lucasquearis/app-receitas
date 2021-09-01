@@ -188,13 +188,11 @@ function ProgressDrink({
         <h2 data-testid="recipe-title">{strDrink}</h2>
         <Button
           data-testid="share-btn"
-          variant="contained"
-          color="primary"
           onClick={ handleShare }
         >
           <img src={ shareIcon } alt="share-icon" />
         </Button>
-        <Button variant="contained" color="primary" onClick={ handleFavorite }>
+        <Button onClick={ handleFavorite }>
           <img data-testid="favorite-btn" src={ favoriteIcon } alt="heart-icon" />
         </Button>
         {copyLink && <Chip label="Link copiado!" variant="outlined" size="small" />}

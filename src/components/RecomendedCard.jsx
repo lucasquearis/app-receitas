@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/RecipeCard.css'
 
 function RecomendedCard({ title, img, id, index, visible }) {
   const imgStyle = {
@@ -7,6 +8,7 @@ function RecomendedCard({ title, img, id, index, visible }) {
   };
   return (
     <li
+      className="recipecard"
       index={ id }
       name={ title }
       data-testid={ `${index}-recomendation-card` }

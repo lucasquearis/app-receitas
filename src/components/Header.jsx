@@ -32,17 +32,19 @@ function Header({ name }) {
     }
   };
   return (
-    <header className="header-container">
-      <Link to="/perfil">
-        <Button
-          className="header-btn"
-          type="button"
-        >
-          <img src={ profileIcon } data-testid="profile-top-btn" alt="profile" />
-        </Button>
-      </Link>
-      <h2 data-testid="page-title">{name}</h2>
-      { renderSearchButton() }
+    <header>
+      <div className="header-container">
+        <Link to="/perfil">
+          <Button
+            className="header-btn"
+            type="button"
+          >
+            <img src={ profileIcon } data-testid="profile-top-btn" alt="profile" />
+          </Button>
+        </Link>
+        <h2 data-testid="page-title">{name}</h2>
+        { renderSearchButton() }
+      </div>
       { hide && <SearchBar pageName={ name } />}
     </header>
   );

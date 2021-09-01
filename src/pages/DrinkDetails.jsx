@@ -182,8 +182,6 @@ function DrinkDetails({ match: { params: { id } } }) {
         </Button>
         { share && <p>Link copiado!</p> }
         <Button
-          variant="contained"
-          color="primary"
           type="button"
           onClick={ handleFavorite }
         >

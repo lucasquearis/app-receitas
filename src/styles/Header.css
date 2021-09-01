@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items:center;
   background-color: #f4d78d;
+  box-shadow: 0rem 0.1rem 0rem 0rem rgba(0, 0, 0, 0.45);
 }
 
 .header-btn {

@@ -10,6 +10,7 @@ import {
   fetchDrinksByIngredient,
   fetchDrinksByName,
   fetchDrinksByFirstLetter } from '../services/drinksAPI';
+import '../styles/SearchBar.css'
 
 function SearchBar({ pageName }) {
   const { setDrinks, setFoods } = useContext(AppContext);
@@ -82,46 +83,50 @@ function SearchBar({ pageName }) {
   };
 
   return (
-    <div>
-      <input
-        data-testid="search-input"
-        type="text"
-        value={ inputText }
-        onChange={ handleChangeInputText }
-      />
-      <div className="search-content-options">
-        <label htmlFor="ingredient-search">
-          <input
-            type="radio"
-            data-testid="ingredient-search-radio"
-            id="ingredient-search"
-            name="radio-filter"
-            onClick={ handleChangeInputRadio }
-          />
-          Ingrediente
-        </label>
-        <label htmlFor="name-search">
-          <input
-            type="radio"
-            data-testid="name-search-radio"
-            id="name-search"
-            name="radio-filter"
-            onClick={ handleChangeInputRadio }
-          />
-          Nome
-        </label>
-        <label htmlFor="first-letter-search">
-          <input
-            type="radio"
-            data-testid="first-letter-search-radio"
-            id="first-letter-search"
-            name="radio-filter"
-            onClick={ handleChangeInputRadio }
-          />
-          Primeira letra
-        </label>
+    <div className="search-container">
+      <div className="input-container">     
+        <input
+          className="text-input"
+          data-testid="search-input"
+          type="text"
+          value={ inputText }
+          onChange={ handleChangeInputText }
+        />
+        <div className="search-content-options">
+          <label htmlFor="ingredient-search">
+            <input
+              type="radio"
+              data-testid="ingredient-search-radio"
+              id="ingredient-search"
+              name="radio-filter"
+              onClick={ handleChangeInputRadio }
+            />
+            Ingrediente
+          </label>
+          <label htmlFor="name-search">
+            <input
+              type="radio"
+              data-testid="name-search-radio"
+              id="name-search"
+              name="radio-filter"
+              onClick={ handleChangeInputRadio }
+            />
+            Nome
+          </label>
+          <label htmlFor="first-letter-search">
+            <input
+              type="radio"
+              data-testid="first-letter-search-radio"
+              id="first-letter-search"
+              name="radio-filter"
+              onClick={ handleChangeInputRadio }
+            />
+            Primeira letra
+          </label>
+        </div>
       </div>
       <Button
+        className="search-btn"
         type="button"
         variant="contained"
         color="primary"
