@@ -1,14 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-// import { Button } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteButton(props) {
   const { infos } = props;
   const { id } = infos;
-  // console.log(infos);
 
   const getFavorite = () => JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
@@ -25,13 +23,10 @@ function FavoriteButton(props) {
   const removeFavorite = (currentId) => {
     const filtered = getFavorite().filter((ids) => ids.id !== currentId) || [];
     localStorage.setItem('favoriteRecipes', JSON.stringify(filtered));
-    // console.log(filtered);
     setFavorite(false);
   };
 
   const addFavorite = (item) => {
-    // console.log(getFavorite());
-    // console.log(item);
     localStorage.setItem('favoriteRecipes', JSON.stringify([...getFavorite(), item]));
     setFavorite(true);
   };
@@ -60,10 +55,10 @@ function FavoriteButton(props) {
   );
 }
 
-// FavoriteButton.propTypes = {
-//   infos: infos.PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
+FavoriteButton.propTypes = {
+  infos: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default FavoriteButton;
