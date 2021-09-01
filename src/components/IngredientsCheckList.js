@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { getLocalStorage, setLocalStorage } from './LocalStorage';
 
 function IngredientsCheckList({ recipe, pathname, id }) {
+  const containProgress = Object.keys(localStorage).includes('inProgressRecipes');
+  const type = (/comidas/.test(pathname)) ? 'meals' : 'cocktails';
   const ingredientList = [];
   const measureList = [];
   const maxIngredients = 15;
 
-  const defaultState = {
+  let defaultState = {
     cocktails: {
       [id]: [],
     },
@@ -16,15 +18,21 @@ function IngredientsCheckList({ recipe, pathname, id }) {
     },
   };
 
-  const storage = (getLocalStorage('inProgressRecipes'))
-    ? defaultState
-    : { ...getLocalStorage('inProgressRecipes'), ...defaultState };
+  if (containProgress) {
+    const local = getLocalStorage('inProgressRecipes');
+    defaultState = {
+      ...local,
+      ...defaultState,
+    };
 
-  const [state, setState] = useState(storage);
+    if (local[type] && local[type][id]) {
+      defaultState[type][id] = local[type][id];
+    }
+  }
+
+  const [state, setState] = useState(defaultState);
 
   async function onClick({ target: { name, checked } }) {
-    const type = (pathname === '/bebidas') ? 'cocktails' : 'meals';
-
     if (checked) {
       setState({
         ...state,
@@ -67,6 +75,7 @@ function IngredientsCheckList({ recipe, pathname, id }) {
             name={ `${ingredient}` }
             key={ index }
             onClick={ onClick }
+            checked={ state[type][id].includes(ingredient) }
           />
           { `${ingredient}: ${measureList[index]}` }
         </label>
