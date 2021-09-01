@@ -30,24 +30,16 @@ function BebidasDetails(props) {
   useEffect(() => {
     const getMeal = async () => {
       const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setDrink(data.drinks[0]);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await fetch(URL);
+      const data = await response.json();
+      setDrink(data.drinks[0]);
     };
     getMeal();
     const getRecomendations = async () => {
       const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setMeals(data.meals);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await fetch(URL);
+      const data = await response.json();
+      setMeals(data.meals);
     };
     getRecomendations();
   }, [id]);
@@ -56,13 +48,6 @@ function BebidasDetails(props) {
     copy(`http://localhost:3000${location.pathname}`);
     setShare(true);
   };
-
-  if (share) {
-    const threeSeconds = 3000;
-    setTimeout(() => {
-      setShare(false);
-    }, threeSeconds);
-  }
 
   const link = (
     <Link
