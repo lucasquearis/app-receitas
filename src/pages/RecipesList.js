@@ -3,8 +3,10 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HeaderSearchBar from '../components/HeaderSearchBar';
+import genericFetchAPI from '../services/genericFetchAPI';
 
 function RecipeList(title) {
+  const { ingredient } = state;
   const history = useHistory();
   const URL = history.location.pathname;
   if (URL === '/comidas') {
@@ -12,6 +14,15 @@ function RecipeList(title) {
   }
   if (URL === '/bebidas') {
     title = 'Bebidas';
+  }
+
+  if (URL === '/comidas' && ingredient) {
+    title = 'Comidas';
+    genericFetchAPI('meal', 'filter', 'i', ingredient);
+  }
+  if (URL === '/bebidas' && ingredient) {
+    title = 'Bebidas';
+    genericFetchAPI('cocktail', 'filter', 'i', ingredient);
   }
 
   useEffect(() => {

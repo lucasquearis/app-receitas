@@ -16,7 +16,6 @@ function ExploreByIngredient(title) {
 
   const [foods, setFood] = useState([]);
   const [bavarages, setDrink] = useState([]);
-
   const { pathname } = useLocation();
 
   const resolveFood = async () => {

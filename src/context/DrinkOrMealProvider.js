@@ -7,6 +7,7 @@ function DrinkOrMealProvider({ children }) {
   const [filter, setFilter] = useState('Nome');
   const [mealList, setMealList] = useState([]);
   const [drinkList, setDrinkList] = useState([]);
+  const [ingredient, setIngredient] = useState('');
 
   const history = useHistory();
 
@@ -115,6 +116,8 @@ function DrinkOrMealProvider({ children }) {
     setDrinkList,
     handleClickFood,
     handleClickDrink,
+    ingredient,
+    setIngredient,
   };
 
   return (
