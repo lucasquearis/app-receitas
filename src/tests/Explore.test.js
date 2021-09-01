@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-describe('Verifica a tela Explore', () => {
+describe('Verifica a tela Explorar', () => {
   it('Verifica se existem 2 botões na tela', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/explorar');
