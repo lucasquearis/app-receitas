@@ -7,8 +7,7 @@ import Footer from '../components/Footer';
 import Cards from '../components/Cards';
 
 function FoodsOrDrinks(props) {
-  const { title} = props;
-  console.log('INGREDIENTE',props)
+  const { title } = props;
   return (
     <div>
       <HeaderSearch title={ title } />

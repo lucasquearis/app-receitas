@@ -11,11 +11,6 @@ function useAPI(pathname) {
 
   const [foodsCategories, setFoodsCategories] = useState({ meals: [] });
   const [drinksCategories, setDrinksCategories] = useState({ drinks: [] });
-  const [ingredients, setIngredients] = useState('');
-
-  const getIngredients = () => {
-    setIngredients()
-  }
 
   const recipes = { drinks: drinks.drinks, meals: foods.meals };
 

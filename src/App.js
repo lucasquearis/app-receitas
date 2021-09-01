@@ -24,10 +24,6 @@ function App() {
     <ProviderContext>
       <Switch>
         <Route exact path="/" component={ Login } />
-<<<<<<< HEAD
-        <Route exact path="/comidas" render={ (props) => <FoodsOrDrinks props={ props } title="Comidas" /> } />
-        <Route exact path="/bebidas" render={ (props) => <FoodsOrDrinks props={ props } title="Bebidas" /> } />
-=======
         <Route
           exact
           path="/comidas"
@@ -38,7 +34,6 @@ function App() {
           path="/bebidas"
           render={ (props) => <FoodsOrDrinks props={ props } title="Bebidas" /> }
         />
->>>>>>> 5afb1f9d77102de9c42d7104e85e64f8651ab182
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreFood } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
