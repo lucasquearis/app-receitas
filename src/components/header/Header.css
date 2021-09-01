@@ -1,0 +1,28 @@
+.header-Search {
+  align-items: center;
+  background-color: rgb(204, 201, 201);
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  width: 100%;
+}
+
+.header-SearchImagem {
+  background-color: rgb(204, 201, 201);
+  display: flex;
+  margin-left: auto;
+  width: 120%;
+}
+
+.header-SearchText {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-SearchButton {
+  background-color: rgb(204, 201, 201);
+  border: none;
+}

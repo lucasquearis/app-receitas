@@ -1,0 +1,17 @@
+.exploreFood-btn {
+  background-color: white;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  display: inline-flex;
+  flex-direction: row;
+  font-size: 27px;
+  height: 98px;
+  justify-content: center;
+  margin-inline-end: 10px;
+  margin-inline-start: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
+  width: 45%;
+}

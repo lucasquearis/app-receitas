@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
+import './ExploreDrink.css';
 
 const ExploreDrink = () => {
   const [randomDrink, setRandomDrink] = useState('');
@@ -23,6 +24,7 @@ const ExploreDrink = () => {
       <HeaderWithoutSearch>Explorar Bebidas</HeaderWithoutSearch>
       <Link to="/explorar/bebidas/ingredientes">
         <button
+          className="exploreDrink-btn"
           type="button"
           data-testid="explore-by-ingredient"
         >
@@ -31,6 +33,7 @@ const ExploreDrink = () => {
       </Link>
       <Link to={ `/bebidas/${randomDrink}` }>
         <button
+          className="exploreDrink-btn"
           onClick={ () => setTurnDrinkOn(true) }
           type="button"
           data-testid="explore-surprise"

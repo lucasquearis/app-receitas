@@ -1,0 +1,30 @@
+.exploreFoodIng {
+  align-items: center;
+  background-color: white;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  display: inline-flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-size: 27px;
+  height: 185px;
+  justify-content: center;
+  margin-inline-end: 10px;
+  margin-inline-start: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
+  width: 45%;
+}
+
+.exploreFoodIngText {
+  color: black;
+  font-size: 20px;
+  margin-right: auto;
+  text-align-last: auto;
+}
+
+.exploreFoodIngImg {
+  width: 140px;
+}

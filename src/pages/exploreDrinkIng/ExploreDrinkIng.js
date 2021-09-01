@@ -5,6 +5,7 @@ import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import DrinkImage from './DrinkImage';
 import AppContext from '../../context/AppContext';
+import './ExploreDrinkIng.css';
 
 const ExploreDrinkIng = () => {
   const context = useContext(AppContext);
@@ -46,15 +47,22 @@ const ExploreDrinkIng = () => {
             key={ index }
           >
             <div
+              className="exploreDrinkIng"
               key={ index }
               data-testid={ `${index}-ingredient-card` }
             >
               <img
+                className="exploreDrinkIngImg"
                 data-testid={ `${index}-card-img` }
                 src={ DrinkImage(obj.strIngredient1) }
                 alt={ obj.strIngredient1 }
               />
-              <h3 data-testid={ `${index}-card-name` }>{obj.strIngredient1}</h3>
+              <h3
+                className="exploreDrinkIngText"
+                data-testid={ `${index}-card-name` }
+              >
+                {obj.strIngredient1}
+              </h3>
 
             </div>
           </Link>
