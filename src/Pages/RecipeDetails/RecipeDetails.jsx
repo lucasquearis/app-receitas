@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Share, Favorite as blackHeartIcon,
   FavoriteBorder as whiteHeartIcon } from '@material-ui/icons';
@@ -17,11 +17,20 @@ Modal.setAppElement('#root');
 
 function RecipeDetails({ match: { params } }) {
   const { feedType, id } = params;
+  const [carousel, setCarousel] = useState([]);
   const { handleCopy, closeModal, modal, modalStyles } = ModalHook();
   const {
-    handleRecipe, singleRecipe, drinks, meal, handleStart, doneRecipe,
+    handleRecipe, singleRecipe, handleStart, doneRecipe,
     handleBtnType, handleFav, fav,
   } = useContext(ContextApp);
+
+  const urlRender = feedType !== 'comidas' ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
+  const fetchApi = async (url, type, searchInput = '') => {
+    const request = await fetch(`${url}${type}${searchInput}`);
+    const response = await request.json();
+    return setCarousel(response.meals || response.drinks);
+  };
+  fetchApi(urlRender, 'search.php?s=');
 
   if (!singleRecipe) {
     handleRecipe(params);
@@ -29,8 +38,6 @@ function RecipeDetails({ match: { params } }) {
       <div>Loading</div>
     );
   }
-
-  console.log(singleRecipe);
 
   const titleProps = {
     'data-testid': 'recipe-title',
@@ -113,9 +120,7 @@ function RecipeDetails({ match: { params } }) {
       <p { ...InstructionProps }>{singleRecipe.strInstructions}</p>
       <Vid { ...vidProps } />
       <div className="carousel">
-        { (params.feedType === 'comidas')
-          ? <Food recipes={ drinks } maxRecipes={ 6 } />
-          : <Food recipes={ meal } maxRecipes={ 6 } />}
+        <Food recipes={ carousel } maxRecipes={ 6 } />
       </div>
       {!doneRecipe.some((e) => e.id === id)
         ? <Link to={ `/${feedType}/${id}/in-progress` }><Btn { ...btnProps } /></Link>

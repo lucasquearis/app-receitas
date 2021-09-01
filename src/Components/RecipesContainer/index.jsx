@@ -15,6 +15,7 @@ function RecipesContainer() {
           testId={ `${index}-recipe-card` }
           index={ index }
           id={ recipe.idMeal || recipe.idDrink }
+          feedType={ recipe.idMeal ? 'comidas' : 'bebidas' }
         />
       ))}
     </div>

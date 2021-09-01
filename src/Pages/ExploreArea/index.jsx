@@ -33,8 +33,7 @@ function ExploreArea() {
   return (
     <div>
       <Header
-        title="Explorar Ingredientes"
-        searchButton={ false }
+        title="Explorar Origem"
       />
       <div>
         <select

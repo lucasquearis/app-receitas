@@ -5,7 +5,7 @@ const urlMeal = 'https://www.themealdb.com/api/json/v1/1/';
 const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
 const SingleRecipeHook = () => {
-  const [singleRecipe, setSingleRecipe] = useState('');
+  const [singleRecipe, setSingleRecipe] = useState();
   const [fav, setFav] = useState(false);
 
   const handleRecipe = async ({ feedType, id }) => {

@@ -2,7 +2,6 @@ import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import LoginHook from '../Hooks/LoginHook';
-import FoodHook from '../Hooks/FoodHook';
 import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 import recipesHooks from '../Hooks/recipesHooks';
 import SingleRecipeHook from '../Hooks/SingleRecipeHook';
@@ -24,10 +23,10 @@ export const AppProvider = ({ children }) => {
     handleClick,
     redirect,
     setRedirect } = LoginHook();
-  const { drinks, meal, getRecipes } = FoodHook();
   const history = useHistory();
+  const search = 'search.php?s=';
   const { location: { pathname } } = history;
-  const currentRout = pathname.includes('/comidas');
+  const currentRout = pathname.includes('/comidas') || pathname === '/';
   const urlRender = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
   const fetchApi = async (url, type, searchInput = '') => {
     const request = await fetch(`${url}${type}${searchInput}`);
@@ -35,7 +34,7 @@ export const AppProvider = ({ children }) => {
     return setRecipes(response.meals || response.drinks);
   };
   if (recipes.length === 0) {
-    fetchApi(urlRender, 'search.php?s=');
+    fetchApi(urlRender, search);
   }
 
   const ContProps = {
@@ -50,11 +49,8 @@ export const AppProvider = ({ children }) => {
     categoryDrinks,
     filterIngredient,
     filter,
-    getRecipes,
     setRecipes,
     setRedirect,
-    drinks,
-    meal,
     singleRecipe,
     handleRecipe,
     handleStart,
@@ -64,6 +60,7 @@ export const AppProvider = ({ children }) => {
     handleModal,
     handleFav,
     fav,
+    fetchApi,
   };
 
   return (
