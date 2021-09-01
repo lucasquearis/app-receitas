@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
 import DrinksContext from '../context/DrinksContext';
@@ -12,9 +13,11 @@ const SearchDrinksByIngredients = () => {
   return (
     <div className="ingredient-container">
       <header>
-        <button type="button">
-          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-        </button>
+        <Link to="/perfil">
+          <button type="button">
+            <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+          </button>
+        </Link>
         <p data-testid="page-title">Explorar Ingredientes</p>
       </header>
       <div className="ingredient-list">

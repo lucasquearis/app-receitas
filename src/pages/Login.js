@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import './login.css';
 
 function Login({ history }) {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
@@ -42,7 +43,7 @@ function Login({ history }) {
   };
 
   return (
-    <>
+    <div className="login-container">
       <Input
         type="text"
         name="email"
@@ -63,7 +64,7 @@ function Login({ history }) {
         onClick={ () => handleClick() }
         datatestId="login-submit-btn"
       />
-    </>
+    </div>
   );
 }
 
