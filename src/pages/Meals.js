@@ -84,6 +84,7 @@ export default function Meals() {
       <Header title="Comidas" />
       <Categories />
       {renderList()}
+      <br />
       <BottomMenu />
     </>
   );

@@ -1,3 +1,8 @@
+header {
+  position: fixed;
+  top: 0;
+}
+
 .header__first-div {
   align-items: center;
   background-color: #f7d6cf;
@@ -88,9 +93,9 @@
 }
 
 .header__background_img {
+  height: 80px;
   position: absolute;
   top: 0;
-  z-index: -1;
-  height: 80px;
   width: 360px;
+  z-index: -1;
 }

@@ -72,7 +72,7 @@ export default function Categories() {
         onClick={ () => setFeedDataFilter([]) }
 
       >
-        ALL
+        All
 
       </button>
       {categoriesMeals.map((item, index) => (

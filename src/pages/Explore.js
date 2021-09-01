@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
+import mealIcon from '../images/mealIcon.png';
+import drinkIcon from '../images/drinkIcon.png';
 import './pageCSS/Explore.css';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
@@ -9,8 +11,20 @@ export default function Explore() {
     <>
       <HeaderNoSearch title="Explorar" />
       <div className="explore">
-        <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
-        <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
+        <div className="explore__link-button">
+          <Link data-testid="explore-food" to="/explorar/comidas">
+            <img src={ mealIcon } className="explore__icons" alt="Explore Meal Icon" />
+            <br />
+            Explorar Comidas
+          </Link>
+        </div>
+        <div className="explore__link-button">
+          <Link data-testid="explore-drinks" to="/explorar/bebidas">
+            <img src={ drinkIcon } className="explore__icons" alt="Explore Drink Icon" />
+            <br />
+            Explorar Bebidas
+          </Link>
+        </div>
       </div>
       <BottomMenu />
     </>
