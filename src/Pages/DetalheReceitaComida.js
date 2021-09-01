@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import copyToClipBoard from 'clipboard-copy';
 import { buscarComidasID } from '../service/ComidasAPI';
+import useIsFavorite from '../hooks/useIsFavorite';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import getRecipeIngredients from '../service/getRecipeIngredients';
 import * as functions from '../service/InProgressRecipe';
 
@@ -23,6 +25,7 @@ export default function DetalheReceitaComida(props) {
   const [shouldRedirect, changeRedirect] = useState(false);
   const [ingredientsDone, setIngredients] = useState([]);
   const [copyMessage, setCopyMessage] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     buscarComidasID(id)
@@ -42,6 +45,8 @@ export default function DetalheReceitaComida(props) {
     }
   }, [id, recipe]);
 
+  useIsFavorite(setFavorite, recipe[0], 'comida');
+
   const setMessageTime = () => {
     const messageTime = 1000;
     setTimeout(() => {
@@ -50,7 +55,8 @@ export default function DetalheReceitaComida(props) {
   };
 
   const onShareClicked = () => {
-    copyToClipBoard(window.location.href);
+    const URL = `http://localhost:3000/comidas/${id}`;
+    copyToClipBoard(URL);
     setCopyMessage(true);
     setMessageTime();
   };
@@ -72,6 +78,67 @@ export default function DetalheReceitaComida(props) {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     inProgress.meals[id] = ingredientsDone;
     return localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+  };
+
+  const onFavoriteClick = () => {
+    setFavorite(!favorite);
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    const newFood = {
+      id: recipe[0].idMeal,
+      type: 'comida',
+      area: recipe[0].strArea,
+      category: recipe[0].strCategory,
+      alcoholicOrNot: '',
+      name: recipe[0].strMeal,
+      image: recipe[0].strMealThumb,
+    };
+
+    if (favoriteRecipes !== null) {
+      if (favorite) {
+        const newFavoriteRecipes = favoriteRecipes.filter(
+          (receita) => receita.id !== recipe[0].idMeal,
+        );
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+        return;
+      }
+      const newFavoriteRecipes = [...favoriteRecipes, newFood];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+      return;
+    }
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify([newFood]));
+  };
+
+  const isFavorite = () => {
+    if (favorite) {
+      return (
+        <button
+          type="button"
+          className="favorite-btn-icon"
+          onClick={ onFavoriteClick }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ blackHeartIcon }
+            alt="icone de favoritar"
+          />
+        </button>
+      );
+    }
+    return (
+      <button
+        type="button"
+        className="favorite-btn-icon"
+        onClick={ onFavoriteClick }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ whiteHeartIcon }
+          alt="icone de favoritar"
+        />
+      </button>
+    );
   };
 
   const renderRecipe = () => {
@@ -101,16 +168,7 @@ export default function DetalheReceitaComida(props) {
                 alt="icone de compartilhar"
               />
             </button>
-            <button
-              type="button"
-              className="favorite-btn-icon"
-            >
-              <img
-                data-testid="favorite-btn"
-                src={ whiteHeartIcon }
-                alt="icone de favoritar"
-              />
-            </button>
+            { isFavorite() }
             { copyMessage
               ? <p className="copy-food-link-message">Link copiado!</p>
               : <p className="copy-food-link-message" /> }
