@@ -9,7 +9,6 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function ComidasProcess(props) {
   const { match: { params: { id } } } = props;
-  const { location } = props;
 
   const {
     favoritingRecipe,
@@ -25,6 +24,7 @@ function ComidasProcess(props) {
 
   const [isFav, setIsFav] = useState(favorite);
   const [share, setShare] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const { ingredients, measures } = renderingIngredients(meal);
 
@@ -37,7 +37,7 @@ function ComidasProcess(props) {
   }, [id]);
 
   const handleShare = () => {
-    copy(`http://localhost:3000${location.pathname}`);
+    copy(`http://localhost:3000/comidas/${id}`);
     setShare(true);
   };
 
@@ -48,16 +48,27 @@ function ComidasProcess(props) {
     }, threeSeconds);
   }
 
-  // const inProgressRecipe = ({ target: { value } }) => {
-  //   const values = [];
-  //   values.push(value);
+  const values = [];
+  const inProgressRecipe = ({ target }) => {
+    const takingLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const obj = takingLocalStorage || {};
 
-  //   const progress = {
-  //     meals: [...values],
-  //   };
+    values.push(target.id);
 
-  //   return localStorage.setItem('inProgressRecipes', JSON.stringify(progress));
-  // };
+    const progress = {
+      ...obj,
+      meals: {
+        ...obj.meals,
+        [id]: [...values],
+      },
+    };
+
+    target.parentNode.style.textDecoration = 'line-through';
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify(progress));
+
+    if (values.length === ingredients.length) setDisabled(false);
+  };
 
   return (
     <div>
@@ -96,28 +107,45 @@ function ComidasProcess(props) {
         <ul>
           {
             ingredients
-              .map((ingredient, index) => (
-                <li
-                  key={ ingredient }
-                  data-testid={ `${index}-ingredient-step` }
-                >
-                  <label htmlFor="check-ingredients">
-                    { `${ingredient} - ${measures[index]}`}
-                    <input
-                      type="checkbox"
-                      value={ index }
-                      id="check-ingredients"
-                      // onChange={ inProgressRecipe }
-                    />
-                  </label>
-                </li>))
+              .map((ingredient, index) => {
+                const tkLocalStor = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+                let checked = false;
+
+                if (tkLocalStor) {
+                  checked = tkLocalStor.meals[id].some((ind) => Number(ind) === index);
+                }
+
+                return (
+                  <li
+                    key={ ingredient }
+                    data-testid={ `${index}-ingredient-step` }
+                  >
+                    <label htmlFor={ index }>
+                      { `${ingredient} - ${measures[index]}`}
+                      <input
+                        type="checkbox"
+                        name={ `${measures[index]}-check` }
+                        id={ index }
+                        checked={ checked }
+                        onChange={ inProgressRecipe }
+                      />
+                    </label>
+                  </li>);
+              })
           }
         </ul>
       </div>
       <h3>Instructions</h3>
       <p data-testid="instructions">{ strInstructions }</p>
       <Link to="/receitas-feitas">
-        <button type="button" data-testid="finish-recipe-btn">Finish</button>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ disabled }
+        >
+          Finish
+        </button>
       </Link>
     </div>
   );

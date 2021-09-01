@@ -9,7 +9,6 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function BebidasProcess(props) {
   const { match: { params: { id } } } = props;
-  const { location } = props;
 
   const {
     favoritingRecipe,
@@ -25,6 +24,7 @@ function BebidasProcess(props) {
 
   const [isFav, setIsFav] = useState(favorite);
   const [share, setShare] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const { ingredients, measures } = renderingIngredients(drink);
 
@@ -37,7 +37,7 @@ function BebidasProcess(props) {
   }, [id]);
 
   const handleShare = () => {
-    copy(`http://localhost:3000${location.pathname}`);
+    copy(`http://localhost:3000/bebidas/${id}`);
     setShare(true);
   };
 
@@ -48,7 +48,27 @@ function BebidasProcess(props) {
     }, threeSeconds);
   }
 
-  console.log(inProgress);
+  const values = [];
+  const inProgressRecipe = ({ target }) => {
+    const takingLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const obj = takingLocalStorage || {};
+
+    values.push(target.id);
+
+    const progress = {
+      ...obj,
+      cocktails: {
+        ...obj.cocktails,
+        [id]: [...values],
+      },
+    };
+
+    target.parentNode.parentNode.style.textDecoration = 'none solid black';
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify(progress));
+
+    if (values.length === ingredients.length) setDisabled(false);
+  };
 
   return (
     <div>
@@ -87,23 +107,46 @@ function BebidasProcess(props) {
         <ul>
           {
             ingredients
-              .map((ingredient, index) => (
-                <li
-                  key={ ingredient }
-                  data-testid={ `${index}-ingredient-step` }
-                >
-                  <label htmlFor="check-ingredients">
-                    { `${ingredient} - ${measures[index]}`}
-                    <input type="checkbox" id="check-ingredients" />
-                  </label>
-                </li>))
+              .map((ingredient, index) => {
+                const tkLocalStor = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+                let checked = false;
+
+                if (tkLocalStor) {
+                  checked = tkLocalStor.cocktails[id]
+                    .some((ind) => Number(ind) === index);
+                }
+
+                return (
+                  <li
+                    key={ ingredient }
+                    data-testid={ `${index}-ingredient-step` }
+                  >
+                    <label htmlFor={ index }>
+                      { `${ingredient} - ${measures[index]}`}
+                      <input
+                        type="checkbox"
+                        name={ `${measures[index]}-check` }
+                        id={ index }
+                        checked={ checked }
+                        onChange={ inProgressRecipe }
+                      />
+                    </label>
+                  </li>);
+              })
           }
         </ul>
       </div>
       <h3>Instructions</h3>
       <p data-testid="instructions">{ strInstructions }</p>
       <Link to="/receitas-feitas">
-        <button type="button" data-testid="finish-recipe-btn">Finish</button>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ disabled }
+        >
+          Finish
+        </button>
       </Link>
     </div>
   );
