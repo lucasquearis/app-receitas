@@ -8,6 +8,7 @@ import {
   foodAndDrinksInProcessLocalStorage,
   updateLocalStorage,
   ingredientsMeasuresFunc,
+  defineChecked,
 } from '../../functions';
 import RecipeFinishBtn from '../foodProcess/RecipeFinishBtn';
 
@@ -19,6 +20,7 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
     image: '',
     title: '',
     category: '',
+    recipe: {},
     instructions: '',
   });
 
@@ -41,6 +43,7 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
           image: strDrinkThumb,
           title: strDrink,
           category: strCategory,
+          recipe: response.drinks[0],
           instructions: strInstructions,
         });
         const ingredients = ingredientsMeasuresFunc(response);
@@ -80,6 +83,8 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
           image={ itensInfo.image }
           title={ itensInfo.title }
           category={ itensInfo.category }
+          recipe={ itensInfo.recipe }
+          id={ id }
         />
       </div>
       <div>
@@ -87,13 +92,8 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
         <div>
           {
             cocktails[id].map((ing, index) => {
-              const key = JSON.parse(localStorage.getItem('inProgressRecipes'));
-              let checked;
-              if (key.cocktails[id] !== undefined) {
-                checked = key.cocktails[id].some((ingredient) => ingredient === ing);
-              } else {
-                checked = false;
-              }
+              const checked = defineChecked(ing, id, type);
+              const style = checked ? 'inputChecked' : '';
               return (
                 <div
                   key={ ing }
@@ -107,6 +107,7 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
                   />
                   <label
                     htmlFor={ ing }
+                    className={ style }
                   >
                     {ing}
                   </label>

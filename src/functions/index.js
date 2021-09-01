@@ -84,3 +84,14 @@ export const disableFinishRecipeBtn = (array, id, type) => {
   }
   return false;
 };
+
+export const defineChecked = (ing, id, type) => {
+  const key = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let checked;
+  if (key[type][id] !== undefined) {
+    checked = key[type][id].some((ingredient) => ingredient === ing);
+  } else {
+    checked = false;
+  }
+  return checked;
+};
