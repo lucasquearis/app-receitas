@@ -5,10 +5,24 @@ import FavoriteButton from '../components/FavoriteButton';
 import IngredientsCheckboxList from '../components/IngredientsCheckboxList';
 import Loading from '../components/Loading';
 import RecipeAllDoneContext from '../context/RecipeAllDone';
+import shareIcon from '../images/shareIcon.svg';
 
 const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 
 const getIdFromURL = (pathname) => pathname.split('/')[2];
+
+async function copyPageUrl() {
+  const sliceUntil = -12;
+  try {
+    await navigator.clipboard.writeText(
+      window.location.href.slice(-window.location.href.length, sliceUntil),
+    );
+    console.log('Link copiado!');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+  document.getElementById('share-button').innerHTML = 'Link copiado!';
+}
 
 const ComidasEmProcesso = () => {
   const [food, setFood] = useState();
@@ -31,9 +45,24 @@ const ComidasEmProcesso = () => {
 
   return (
     <div>
-      <img src={ food.strMealThumb } alt="recipe" data-testid="recipe-photo" />
+      <img
+        src={ food.strMealThumb }
+        alt="recipe"
+        data-testid="recipe-photo"
+        style={ { width: '100%' } }
+      />
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
+      <button
+        id="share-button"
+        type="button"
+        onClick={ copyPageUrl }
+      >
+        <img
+          data-testid="share-btn"
+          src={ shareIcon }
+          alt="Botão copiar compartilhar esta receita"
+        />
+      </button>
       <FavoriteButton
         foodOrDrink={ food }
         dataTestId="favorite-btn"

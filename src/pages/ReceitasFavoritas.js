@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FavoriteButton from '../components/FavoriteButton';
+import shareIcon from '../images/shareIcon.svg';
 
 import Header from '../components/Header/Header';
 
@@ -26,15 +27,27 @@ const loadFavorites = (setFavoriteRecipes, setFilteredRecipes) => {
   setFilteredRecipes(lastSave);
 };
 
+async function copyPageUrl() {
+  try {
+    await navigator.clipboard.writeText(window.location.href(window.location.href));
+    console.log('Link copiado!');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+  document.getElementById('share-button').innerHTML = 'Link copiado!';
+}
+
 export default function ReceitasFavoritas() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
+
   useEffect(() => {
     loadFavorites(setFavoriteRecipes, setFilteredRecipes);
   }, []);
   const loadFavoritesCB = () => loadFavorites(
     setFavoriteRecipes, setFilteredRecipes,
   );
+
   return (
     <div>
       <Header>Receitas Favoritas</Header>
@@ -78,11 +91,15 @@ export default function ReceitasFavoritas() {
                 {`${filteredRecipe.area} - ${filteredRecipe.category}`}
               </p>
               <button
-                data-testid={ `${index}-horizontal-share-btn` }
+                id="share-button"
                 type="button"
-                src="shareIcon"
+                onClick={ copyPageUrl }
               >
-                Share
+                <img
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt="Botão copiar compartilhar esta receita"
+                />
               </button>
               <FavoriteButton
                 foodOrDrink={ formatFoodRecipe(filteredRecipe) }
@@ -110,11 +127,15 @@ export default function ReceitasFavoritas() {
                 {filteredRecipe.alcoholicOrNot}
               </p>
               <button
-                data-testid={ `${index}-horizontal-share-btn` }
+                id="share-button"
                 type="button"
-                src="shareIcon"
+                onClick={ copyPageUrl }
               >
-                Share
+                <img
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt="Botão copiar compartilhar esta receita"
+                />
               </button>
               <FavoriteButton
                 foodOrDrink={ formatDrinkRecipe(filteredRecipe) }

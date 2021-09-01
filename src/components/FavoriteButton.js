@@ -7,21 +7,22 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 const getFavorite = (foodOrDrink, whichOne) => {
   const getFavoriteDrink = (drink) => ({
     id: drink.idDrink,
+    area: '',
     type: 'bebida',
-    alcoholicOrNot: drink.strCategory,
+    alcoholicOrNot: drink.strAlcoholic,
     name: drink.strDrink,
     image: drink.strDrinkThumb,
-    idDrink: true,
+    category: drink.strCategory,
   });
 
   const getFavoriteFood = (food) => ({
+    alcoholicOrNot: '',
     id: food.idMeal,
     type: 'comida',
     area: food.strArea,
     category: food.strCategory,
     name: food.strMeal,
     image: food.strMealThumb,
-    idMeal: true,
   });
 
   if (whichOne === 'idMeal') {
