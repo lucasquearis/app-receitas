@@ -16,6 +16,7 @@ function ExplorerDrinks() {
       };
       getDrink();
     } catch (error) {
+      console.log(error)
     }
   }, []);
 
