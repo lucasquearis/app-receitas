@@ -83,7 +83,7 @@ function SearchBar({ title }) {
   };
 
   return (
-    <div>
+    <div className="header__second-div">
       <form>
         <fieldset>
           <label htmlFor="search-input">
