@@ -9,14 +9,6 @@ function Search({ ingredient }) {
   const { API } = useContext(RecipesContext);
   const { searchByFilters, pathname } = API;
 
-  if (/ingredient/.test(pathname)) {
-    ingredient = pathname.replace(/.*ingredient=([^&]+).*/, '$1');
-  }
-
-  if (/search/.test(pathname)) {
-    search = pathname.replace(/.*search=([^&]+).*/, '$1');
-  }
-
   function handleChange({ target }) {
     setSearchValue(target.value);
   }
@@ -64,7 +56,8 @@ function Search({ ingredient }) {
   });
 
   return (
-    <div>
+    <div className="search-open">
+      <div className="search-input">
       <input
         type="search"
         placeholder="Pesquisa"
@@ -72,7 +65,7 @@ function Search({ ingredient }) {
         onChange={ (e) => handleChange(e) }
         value={ searchValue }
       />
-      <div onChange={ ({ target: { value } }) => change(value) }>
+      <div className="search-radio" onChange={ ({ target: { value } }) => change(value) }>
         <label htmlFor="labelName">
           <input
             type="radio"
@@ -83,7 +76,6 @@ function Search({ ingredient }) {
           />
           <span>Nome</span>
         </label>
-
         <label htmlFor="labelIngredient">
           <input
             type="radio"
@@ -94,7 +86,6 @@ function Search({ ingredient }) {
           />
           <span>Ingrediente</span>
         </label>
-
         <label htmlFor="labelFirst">
           <input
             type="radio"
@@ -106,9 +97,16 @@ function Search({ ingredient }) {
           <span>Primeira letra</span>
         </label>
       </div>
-      <button type="button" id="exec" data-testid="exec-search-btn" onClick={ click }>
+      <button
+        class="btn btn-success"
+        type="button"
+        id="exec"
+        data-testid="exec-search-btn"
+        onClick={ click }
+      >
         Pesquisar
       </button>
+      </div>
     </div>
   );
 }

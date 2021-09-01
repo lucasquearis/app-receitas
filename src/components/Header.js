@@ -17,7 +17,7 @@ class HeaderSearch extends React.Component {
   render() {
     const { title } = this.props;
     return (
-      <div>
+      <div className="header-profile">
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"
