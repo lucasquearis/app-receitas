@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
+// import myContext from '../context/myContext';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
@@ -20,12 +21,12 @@ function Drinks(props) {
 
   useEffect(() => {
     if (search.drinks === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (search.drinks) {
       oneElementDetails();
     }
-  });
+  }, []);
 
   return (
     <div>

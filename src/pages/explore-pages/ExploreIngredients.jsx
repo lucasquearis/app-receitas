@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import myContext from '../../context/myContext';
 import '../../styles/Header.css';
@@ -7,7 +8,7 @@ import '../../styles/Footer.css';
 
 function ExploreIngredients() {
   const doze = 12;
-  const { foodIngredients } = useContext(myContext);
+  const { foodIngredients, setFoodIngredientSelected } = useContext(myContext);
 
   return (
     <div>
@@ -19,20 +20,33 @@ function ExploreIngredients() {
             className="div-card"
             data-testid={ `${index}-ingredient-card` }
           >
-            <button type="button" className="section-card">
-              <p
-                className="card-title"
-                data-testid={ `${index}-card-name` }
+            <Link
+              to="/comidas"
+              onClick={ (e) => {
+                setFoodIngredientSelected(e.target.id);
+              } }
+            >
+              <button
+                type="button"
+                className="section-card"
+                id={ ingredient.strIngredient }
               >
-                { ingredient.strIngredient }
-              </p>
-              <img
-                className="card-img"
-                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-                alt=""
-                data-testid={ `${index}-card-img` }
-              />
-            </button>
+                <p
+                  className="card-title"
+                  data-testid={ `${index}-card-name` }
+                  id={ ingredient.strIngredient }
+                >
+                  { ingredient.strIngredient }
+                </p>
+                <img
+                  className="card-img"
+                  src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                  alt={ ingredient.strIngredient }
+                  data-testid={ `${index}-card-img` }
+                  id={ ingredient.strIngredient }
+                />
+              </button>
+            </Link>
           </div>
         ))
       }

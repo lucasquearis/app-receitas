@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchIngredientAPI,
@@ -6,13 +6,16 @@ import {
   fetchLetterAPI,
   clearSearch,
 } from '../redux/actions/mainActions';
+import myContext from '../context/myContext';
 import '../styles/SearchBar.css';
 
 function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
   const dispatch = useDispatch();
+  const { foodIngredientSelected } = useContext(myContext);
   const { meals } = useSelector((state) => state.recipes.foods);
   const drinks = useSelector((state) => state.recipes.foods.drinks);
+  console.log(foodIngredientSelected);
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };

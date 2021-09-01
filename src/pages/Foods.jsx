@@ -6,7 +6,6 @@ import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
 import Footer from '../components/Footer';
 import ItemCard from '../components/ItemCard';
-// import FoodsCard from '../components/FoodsCard';
 import CategoryFoodButtons from '../components/CategoryFoodButtons';
 import '../styles/Footer.css';
 

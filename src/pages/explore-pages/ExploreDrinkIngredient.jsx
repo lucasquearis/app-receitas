@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import myContext from '../../context/myContext';
 import '../../styles/Header.css';
@@ -7,7 +8,10 @@ import '../../styles/Footer.css';
 
 function ExploreDrinkIngredient() {
   const doze = 12;
-  const { drinkIngredients } = useContext(myContext);
+  const {
+    drinkIngredients,
+    setDrinkIngredientSelected,
+  } = useContext(myContext);
   return (
     <div>
       <Header brand="Explorar Ingredientes" className="img-search" />
@@ -18,20 +22,33 @@ function ExploreDrinkIngredient() {
             className="div-card"
             data-testid={ `${index}-ingredient-card` }
           >
-            <button type="button" className="section-card">
-              <p
-                className="card-title"
-                data-testid={ `${index}-card-name` }
+            <Link
+              to="/bebidas"
+              onClick={ (e) => {
+                setDrinkIngredientSelected(e.target.id);
+              } }
+            >
+              <button
+                id={ ingredient.strIngredient1 }
+                type="button"
+                className="section-card"
               >
-                { ingredient.strIngredient1 }
-              </p>
-              <img
-                className="card-img"
-                src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
-                alt=""
-                data-testid={ `${index}-card-img` }
-              />
-            </button>
+                <p
+                  className="card-title"
+                  data-testid={ `${index}-card-name` }
+                  id={ ingredient.strIngredient1 }
+                >
+                  { ingredient.strIngredient1 }
+                </p>
+                <img
+                  className="card-img"
+                  src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
+                  alt=""
+                  id={ ingredient.strIngredient1 }
+                  data-testid={ `${index}-card-img` }
+                />
+              </button>
+            </Link>
           </div>
         ))
       }

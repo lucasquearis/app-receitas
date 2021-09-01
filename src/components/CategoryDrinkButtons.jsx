@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import myContext from '../context/myContext';
 import { fetchDrinksCategories, clearSearch } from '../redux/actions/mainActions';
 import DrinksCard from './DrinksCard';
 import ItemCard from './ItemCard';
@@ -7,6 +8,13 @@ import ItemCard from './ItemCard';
 function CategoryDrinkButtons() {
   const doze = 12;
   const cinco = 5;
+  const {
+    drinkIngredientClick,
+    drinkIngredientSelected,
+    setDisplay,
+    display,
+    removeDisplayList,
+  } = useContext(myContext);
   const categories = useSelector(
     (state) => state.reducerCategories.drinksCategories.drinks,
   );
@@ -31,19 +39,30 @@ function CategoryDrinkButtons() {
   };
 
   useEffect(() => {
+    const displayCategory = async () => {
+      const res = await drinkIngredientClick(drinkIngredientSelected);
+      const { drinks } = await res;
+      setDisplay(drinks.slice(0, doze));
+      dispatch(clearSearch());
+    };
+    displayCategory();
     dispatch(fetchDrinksCategories());
     filterDrinkCategory();
+    drinkIngredientClick();
   }, [dispatch]);
 
   const handleClick = (categoryStr) => {
     filterDrinkCategory(categoryStr);
     setLastClick(categoryStr);
     showInputClick();
+    removeDisplayList();
     dispatch(clearSearch());
   };
 
   const handleClickAll = () => {
     setShowInput(true);
+    removeDisplayList();
+    display.length = 0;
   };
 
   return (
@@ -72,6 +91,19 @@ function CategoryDrinkButtons() {
           >
             {category.strCategory}
           </button>
+        ))
+      }
+      {
+        display.map((drink, index) => (
+          <ItemCard
+            title={ drink.strDrink }
+            thumb={ drink.strDrinkThumb }
+            data-testid={ `${index}-recipe-card` }
+            id={ drink.idDrink }
+            index={ index }
+            key={ index }
+            to={ `/bebidas/${drink.idDrink}` }
+          />
         ))
       }
       { showInput
