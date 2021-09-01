@@ -2,3 +2,7 @@ button {
   background-color: transparent;
   border: none;
 }
+
+.search-bar {
+  display: block;
+}

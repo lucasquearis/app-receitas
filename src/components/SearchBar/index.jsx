@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import GenericBtn from '../GenericBtn';
-import IconBtn from '../IconBtn';
 import RadioInput from '../RadioInput';
 import TextInput from '../TextInput';
 import './style.css';
@@ -14,20 +13,10 @@ import {
   fetchDrinkByIngredient,
   fetchDrinkByName,
 } from '../../redux/actions/foodActions';
-import searchIcon from '../../images/searchIcon.svg';
 
-function SearchBar({ title }) {
-  const [searchInputs, setSearchInputs] = useState(false);
+function SearchBar({ title, searchInputs }) {
   const [formInputs, setFormInput] = useState({});
   const dispatch = useDispatch();
-
-  const handleClick = () => {
-    if (searchInputs) {
-      setSearchInputs(false);
-    } else {
-      setSearchInputs(true);
-    }
-  };
 
   const handleChange = ({ target: { value, type, name, checked } }) => {
     if (type === 'checkbox') {
@@ -87,13 +76,6 @@ function SearchBar({ title }) {
     }
   };
 
-  const searchBtnProps = {
-    onClick: handleClick,
-    dataId: 'search-top-btn',
-    src: searchIcon,
-    alt: 'search-button',
-  };
-
   const searchInputProps = {
     id: 'search-input',
     onChange: handleChange,
@@ -142,8 +124,7 @@ function SearchBar({ title }) {
   };
 
   return (
-    <>
-      <IconBtn { ...searchBtnProps } />
+    <div className="search-bar">
       {
         searchInputs && (
           <form>
@@ -154,7 +135,7 @@ function SearchBar({ title }) {
             <GenericBtn { ...searchBtn } />
           </form>)
       }
-    </>
+    </div>
   );
 }
 
