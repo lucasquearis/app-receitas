@@ -15,6 +15,13 @@ function CategoryDrink() {
   };
 
   useEffect(() => {
+    const getCategories = async () => {
+      const drinkApiCategories = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+      const { drinks } = await fetch(drinkApiCategories).then((data) => data.json());
+      setDrinkCategories(drinks);
+    };
+
+    getCategories();
     searchDrink();
   }, []);
 
@@ -25,14 +32,9 @@ function CategoryDrink() {
       setDrinkRecipes(drinks);
     };
 
-    const getCategories = async () => {
-      const drinkApiCategories = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-      const { drinks } = await fetch(drinkApiCategories).then((data) => data.json());
-      setDrinkCategories(drinks);
-    };
-
-    getDrinks();
-    getCategories();
+    if (category.length) {
+      getDrinks();
+    }
   }, [category]);
 
   const categoriesBtn = () => {
@@ -41,8 +43,8 @@ function CategoryDrink() {
         data-testid={ `${strCategory}-category-filter` }
         type="button"
         key={ strCategory }
-        onClick={ (() => (
-          (category !== strCategory) ? setCategory(strCategory) : searchDrink())) }
+        onClick={ () => (
+          (category !== strCategory) ? setCategory(strCategory) : searchDrink()) }
       >
         { strCategory }
       </button>
