@@ -10,13 +10,13 @@ function ButtonFoods() {
     setHistory.push(`/comidas/${ide}/in-progress`);
   };
 
-  useEffect(() => {
-    const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (recipe) {
-      const findRecipe = recipe.find((item) => item.id === ide);
-      if (findRecipe) setNone(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
+  //   if (recipe) {
+  //     const findRecipe = recipe.find((item) => item.id === ide);
+  //     if (findRecipe) setNone(true);
+  //   }
+  // }, []);
 
   return (
     <div className="div-button-details">

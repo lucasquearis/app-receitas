@@ -10,13 +10,13 @@ function ButtonDrinks() {
     setHistory.push(`/bebidas/${ido}/in-progress`);
   };
 
-  useEffect(() => {
-    const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (recipe) {
-      const findRecipe = recipe.find((item) => item.id === ido);
-      if (findRecipe) setNone(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
+  //   if (recipe) {
+  //     const findRecipe = recipe.find((item) => item.id === ido);
+  //     if (findRecipe) setNone(true);
+  //   }
+  // }, []);
 
   return (
     <div className="div-button-details">
