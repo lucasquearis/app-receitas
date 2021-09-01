@@ -78,8 +78,10 @@ export default function BebidasDetalhes() {
       <div data-testid="recipe-alcoholic">{drink.strCategory}</div>
 
       <div className={ styles.buttonBebidasDetails }>
-
-        <FavoriteButton foodOrDrink={ drink } />
+        <FavoriteButton
+          foodOrDrink={ drink }
+          dataTestId="favorite-btn"
+        />
         <button
           id="share-button"
           type="button"
@@ -88,7 +90,6 @@ export default function BebidasDetalhes() {
         >
           Compartilhar
         </button>
-
       </div>
       <ul className={ styles.optionsDrinks }>
         {renderIngredients(getIngredientsKeys(drink))}
