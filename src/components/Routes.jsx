@@ -13,8 +13,6 @@ import Profile from '../pages/Profile';
 import CookedRecipies from '../pages/CookedRecipies';
 import FavoriteRecipies from '../pages/FavoriteRecipies';
 import RecipeDetails from '../pages/RecipeDetails';
-import InProgressRecipe from '../pages/InProgressRecipe';
-import NotFound from '../pages/NotFound';
 
 function Routes() {
   return (
@@ -22,16 +20,7 @@ function Routes() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ MainFood } />
       <Route exact path="/bebidas" component={ MainDrink } />
-      {/* <Route
-        exact
-        path="/comidas/{id-da-receita}/in-progress"
-        component={ InProgressFood }
-      />
-      <Route
-        exact
-        path="/bebidas/{id-da-receita}/in-progress"
-        component={ InProgressDrink }
-      /> */}
+      <Route path="/bebidas/:id" component={ RecipeDetails } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
       <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
@@ -49,13 +38,6 @@ function Routes() {
       <Route exact path="/perfil" component={ Profile } />
       <Route exact path="/receitas-feitas" component={ CookedRecipies } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipies } />
-      <Route
-        exact
-        path="/:type/:id/in-progress"
-        component={ InProgressRecipe }
-      />
-      <Route exact path="/:receita/:id"><RecipeDetails /></Route>
-      <Route exact path="/explorar/bebidas/area" component={ NotFound } />
     </Switch>
   );
 }
