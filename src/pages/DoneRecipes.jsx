@@ -4,7 +4,6 @@ import copy from 'clipboard-copy';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import MyContext from '../context/MyContext';
 import share from '../images/shareIcon.svg';
 
@@ -124,7 +123,6 @@ function DoneRecipes() {
           recipes()
         }
       </div>
-      <Footer />
     </div>
   );
 }
