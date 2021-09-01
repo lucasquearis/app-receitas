@@ -5,9 +5,9 @@
   border-radius: 5px;
   box-shadow: 1px 5px 10px rgb(204, 201, 201);
   display: inline-flex;
+  flex-flow: wrap;
   flex-direction: row;
   font-size: 27px;
-  flex-flow: wrap;
   height: 185px;
   justify-content: center;
   margin-inline-end: 10px;
