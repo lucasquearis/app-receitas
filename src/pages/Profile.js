@@ -6,8 +6,11 @@ import '../styles/Profile.css';
 
 function Profile() {
   const history = useHistory();
+
   const localStorageData = JSON.parse(localStorage.getItem('user'));
-  const userMail = localStorageData.email;
+
+  const userMail = localStorageData
+    ? localStorageData.email : 'email: email@gmai.com';
 
   return (
     <div className="main-profile">
@@ -45,8 +48,8 @@ function Profile() {
         >
           Sair
         </button>
-        <FooterMenu />
       </div>
+      <FooterMenu />
     </div>
   );
 }

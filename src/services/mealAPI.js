@@ -33,4 +33,24 @@ async function getMealsCategories() {
   }
 }
 
-export { getMeals, getMealsById, getMealsCategories };
+async function getMealsAreaList() {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  try {
+    const result = await fetch(URL).then((resp) => resp.json());
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function getMealsArea(area) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
+  try {
+    const result = await fetch(URL).then((resp) => resp.json());
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export { getMeals, getMealsById, getMealsCategories, getMealsAreaList, getMealsArea };

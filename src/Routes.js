@@ -16,6 +16,7 @@ import Ingredients from './pages/Ingredients';
 import OriginExplorer from './pages/OriginExplorer';
 import DoneRecipes from './pages/DoneRecipes';
 import RecipeProgress from './pages/RecipeProgress';
+import NotFound from './pages/NotFound';
 
 function Routes() {
   return (
@@ -31,6 +32,7 @@ function Routes() {
       <Route exact path="/explorar/comidas" component={ ExplorerFoods } />
       <Route exact path="/explorar/comidas/ingredientes" component={ Ingredients } />
       <Route exact path="/explorar/comidas/area" component={ OriginExplorer } />
+      <Route exact path="/explorar/bebidas/area" component={ NotFound } />
       <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route exact path="/comidas/:id" component={ RecipesDetails } />
       <Route exact path="/bebidas/:id" component={ RecipesDetails } />
