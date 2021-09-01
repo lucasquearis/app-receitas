@@ -1,32 +1,76 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import './ComidasDetalhes.css';
 import Loading from '../components/Loading';
 import styles from './ComidasDetalhes.module.css';
 
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+
+const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const maxRecommendedRecipes = 6;
+
+const getFavorite = (food) => ({
+  id: food.idMeal,
+  type: 'comida',
+  area: food.strArea,
+  category: food.strCategory,
+  alcoholicOrNot: '',
+  name: food.strMeal,
+  image: food.strMealThumb,
+});
+
+const getIngredientsKeys = (meal) => Object.keys(meal)
+  .filter((ingredient) => ingredient
+    .includes('strIngredient')
+      && meal[ingredient] !== null && meal[ingredient] !== '');
+
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
-  const [recomendedDrink, setRecoomendedDrink] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [recommendedDrinks, setRecommendedDrink] = useState([]);
+  const history = useHistory();
   const location = useLocation();
-  const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+  const idApi = location.pathname.split('/')[2];
 
   useEffect(() => {
     const api = async () => {
-      const idApi = location.pathname.split('/')[2];
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
       setFood(data.meals[0]);
+      const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      const favoriteFound = lastSave
+        .find((recipe) => recipe.id === data.meals[0].idMeal);
+      if (favoriteFound) {
+        setIsFavorite(Object.values(favoriteFound)[0]);
+      } else {
+        setIsFavorite(false);
+      }
     };
     api();
-  }, []);
+  }, [idApi]);
+
+  const handleFavorite = () => {
+    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (lastSave.find((recipe) => recipe.id === food.idMeal)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        lastSave.filter((recipe) => recipe.id !== food.idMeal),
+      ));
+      setIsFavorite(false);
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...lastSave, getFavorite(food)],
+      ));
+      setIsFavorite(true);
+    }
+  };
 
   useEffect(() => {
     const apiDrink = async () => {
-      const magicalNumber = 6;
-      const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-      const data = await fetch(URL).then((response) => response.json());
-      const firstSix = await data.drinks.slice(0, magicalNumber);
-      setRecoomendedDrink(firstSix);
+      const data = await fetch(URL_DRINK).then((response) => response.json());
+      const recommendedRecipes = await data.drinks.slice(0, maxRecommendedRecipes);
+      setRecommendedDrink(recommendedRecipes);
     };
     apiDrink();
   }, []);
@@ -35,21 +79,14 @@ export default function ComidasDetalhes() {
     return <Loading />;
   }
 
-  const setIngredients = () => {
-    const ingredients1 = Object.keys(food)
-      .filter((ingridient) => ingridient
-        .includes('strIngredient')
-        && food[ingridient] !== null && food[ingridient] !== '');
-    return ingredients1.map((jonas, index) => (
+  const renderIngredients = (ingredientsKeys) => ingredientsKeys
+    .map((ingredientKey, index) => (
       <li
         data-testid={ `${index}-ingredient-name-and-measure` }
         key={ index }
       >
-        {food[jonas]}
-        -
-        {food[`strMeasure${index + 1}`]}
+        {`${food[ingredientKey]} - ${food[`strMeasure${index + 1}`]}`}
       </li>));
-  };
 
   return (
     <div>
@@ -62,17 +99,30 @@ export default function ComidasDetalhes() {
         />
       </div>
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
-      {/* <div className={ styles.buttonComidasDetails }> */}
+      <p data-testid="recipe-category">{food.strCategory}</p>
+
       <div>
-        <button type="button" data-testid="share-btn">Compartilhar</button>
-        <button type="button" data-testid="favorite-btn">Favorito</button>
-        {/* </div> */}
-        <p data-testid="recipe-category">{food.strCategory}</p>
+        <div className={ styles.buttonComidasDetails }>
+          <button type="button" data-testid="share-btn">Compartilhar</button>
+          <button
+            type="button"
+            onClick={ handleFavorite }
+          >
+            <img
+              data-testid="favorite-btn"
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt={ `Botão para adicionar ou retirar ${food.strMeal} dos favoritos` }
+            />
+          </button>
+        </div>
+
         <ul>
-          {setIngredients()}
+          {renderIngredients(getIngredientsKeys(food))}
         </ul>
+
         <p data-testid="instructions">{food.strInstructions}</p>
       </div>
+
       <div className={ styles.videoComida }>
         <iframe
           src={ food.strYoutube }
@@ -80,7 +130,8 @@ export default function ComidasDetalhes() {
           data-testid="video"
         />
       </div>
-      {recomendedDrink.map((recomendation, index) => (
+
+      {recommendedDrinks.map((recommendation, index) => (
         <div
           data-testid={ `${index}-recomendation-card` }
           key={ index }
@@ -90,17 +141,18 @@ export default function ComidasDetalhes() {
               className={ index <= 1 ? '' : 'displayNone' }
               data-testid={ `${index}-recomendation-title` }
             >
-              { recomendation.strDrink }
+              { recommendation.strDrink }
             </li>
           </ul>
         </div>
       ))}
+
       <button
         type="button"
-        className="start-recipe-btn"
         data-testid="start-recipe-btn"
+        onClick={ () => history.push(`/comidas/${idApi}/in-progress`) }
       >
-        Iniciar Receita
+        Começar receita
       </button>
     </div>
   );
