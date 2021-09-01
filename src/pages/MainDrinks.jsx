@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { requestCategoryList } from '../redux/actions/fetchActions';
 import { Header, RecipeList, Footer, CategoryFilter } from '../components';
 import UseInitialRecipes from '../hook/UseInitialRecipes';
-import MainBackGround from '../UI globalStyles';
+import { MainBackGround } from '../UI globalStyles';
 
 function MainDrinks() {
   const dispatch = useDispatch();

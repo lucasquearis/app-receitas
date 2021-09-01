@@ -30,7 +30,7 @@ function FavoriteRecipes() {
           recipe={ recipe }
           cardIndex={ index }
           handleClick={ removeFavFromLocal }
-        />)) : <h1>Carregando...</h1>}
+        />)) : <h1>Você não tem receitas favoritas ainda!</h1>}
     </main>
   );
 }

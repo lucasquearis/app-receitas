@@ -63,3 +63,20 @@ header > button {
 
   to { transform: scale(1); }
 }
+
+@keyframes fade {
+  0%, 50% {
+      opacity: 0;
+      transform: scale(0);
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0.3;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

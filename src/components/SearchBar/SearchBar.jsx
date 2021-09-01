@@ -1,22 +1,36 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 import UseSearchBar from '../../hook/UseSearchBar';
+import { SearchBarForm, SearchBarLabel, SearchBarDiv,
+  SearchBarButton, SearchBarRadio } from './styles';
 
 function SearchBar() {
   const { searchObj: { searchText }, handleChange, handleClick } = UseSearchBar();
 
   return (
-    <form>
-      <input
+    <SearchBarForm>
+      <TextField
+        focused={ false }
+        style={ { border: '1px solid white', borderRadius: '4px' } }
+        InputLabelProps={ { style: { color: 'white',
+          border: 'none',
+          backgroundColor: 'rgb(128, 15, 15)',
+          padding: '4px' } } }
+        label="Buscar Receita"
         type="text"
         name="searchText"
-        data-testid="search-input"
-        placeholder="Buscar Receita"
-        value={ searchText }
+        id="outlined-margin-dense"
+        margin="dense"
         onChange={ handleChange }
+        value={ searchText }
+        variant="outlined"
+        inputProps={ { 'data-testid': 'search-input',
+          autocomplete: 'off',
+          style: { color: 'white' } } }
       />
-      <div onChange={ handleChange }>
-        <label htmlFor="ingredient">
-          <input
+      <SearchBarDiv onChange={ handleChange }>
+        <SearchBarLabel htmlFor="ingredient">
+          <SearchBarRadio
             id="ingredient"
             type="radio"
             name="searchRadio"
@@ -24,9 +38,9 @@ function SearchBar() {
             data-testid="ingredient-search-radio"
           />
           Ingrediente
-        </label>
-        <label htmlFor="name">
-          <input
+        </SearchBarLabel>
+        <SearchBarLabel htmlFor="name">
+          <SearchBarRadio
             id="name"
             type="radio"
             name="searchRadio"
@@ -34,9 +48,9 @@ function SearchBar() {
             data-testid="name-search-radio"
           />
           Nome
-        </label>
-        <label htmlFor="firstLetter">
-          <input
+        </SearchBarLabel>
+        <SearchBarLabel htmlFor="firstLetter">
+          <SearchBarRadio
             id="firstLetter"
             type="radio"
             name="searchRadio"
@@ -44,16 +58,16 @@ function SearchBar() {
             data-testid="first-letter-search-radio"
           />
           Primeira letra
-        </label>
-      </div>
-      <button
+        </SearchBarLabel>
+      </SearchBarDiv>
+      <SearchBarButton
         type="button"
         data-testid="exec-search-btn"
         onClick={ handleClick }
       >
         Buscar
-      </button>
-    </form>
+      </SearchBarButton>
+    </SearchBarForm>
   );
 }
 
