@@ -37,7 +37,7 @@ function Drinks() {
   }
 
   const handleClick = ({ target: { innerText } }) => {
-    if (filter === innerText) {
+    if (filter === innerText || innerText === 'All') {
       setFilter('All');
       return setAPI(INITIAL_API);
     }
