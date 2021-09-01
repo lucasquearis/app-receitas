@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { drinkRandomFetch } from '../redux/actions/actionDrink';
-import './ExploreDrink.css';
 
 function ExploreDrink() {
   const dispatch = useDispatch();
