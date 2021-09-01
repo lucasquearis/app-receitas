@@ -17,10 +17,11 @@ function DrinksList() {
   const TWELVE = 12;
   const SELECTED_DRINK = 'selected-drink';
   const { shouldRedirect, redirect } = useRedirect();
+  const { search, searchType } = useSelector((state) => state.reducerAPI);
 
   useEffect(() => {
-    dispatch(getCocktail());
-  }, [dispatch]);
+    dispatch(getCocktail(search, searchType));
+  }, [dispatch, searchType, search]);
 
   useEffect(() => {
     if (cocktails === null) {

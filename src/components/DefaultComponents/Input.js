@@ -21,7 +21,6 @@ function Input(props) {
         type={ type }
         className={ className }
         data-testid={ testId }
-        id={ name }
         name={ name }
         onChange={ handleChange }
         placeholder={ placeholder }

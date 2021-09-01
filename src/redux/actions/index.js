@@ -11,3 +11,12 @@ export {
   GET_API_MEAL_ERROR,
   getMeal,
 } from './actionAPIMeal';
+
+export const SWITCH_SEARCH = 'SWITCH_SEARCH';
+export const switchSearch = (search, searchType) => ({
+  type: SWITCH_SEARCH,
+  payload: {
+    search,
+    searchType,
+  },
+});

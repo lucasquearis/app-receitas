@@ -5,12 +5,15 @@ import {
   GET_API_MEAL,
   GET_API_MEAL_SUCESS,
   GET_API_MEAL_ERROR,
+  SWITCH_SEARCH,
 } from '../actions';
 import { LOADING } from '../actions/loading';
 
 const INITIAL_STATE = {
   cocktails: [],
   meals: [],
+  search: '',
+  searchType: 'Nome',
   error: null,
   loading: true,
 };
@@ -39,6 +42,13 @@ const recipes = (state = INITIAL_STATE, action) => {
 
   case GET_API_MEAL_ERROR:
     return { ...state, error: payload, loading: false };
+
+  case SWITCH_SEARCH:
+    return {
+      ...state,
+      search: action.payload.search,
+      searchType: action.payload.searchType,
+    };
 
   default:
     return state;

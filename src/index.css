@@ -93,7 +93,7 @@
   margin-bottom: 50px;
 }
 
-.ingredient {
+.ingredient-card {
   width: 175px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -114,7 +114,7 @@
   text-align: center;
 }
 
-.ingredient img {
+.ingredient-card img {
   width: 175px;
   border-radius: 5px 5px 0 0;
 }

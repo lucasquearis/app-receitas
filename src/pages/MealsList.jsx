@@ -17,10 +17,11 @@ function MealsList() {
   const TWELVE = 12;
   const SELECTED_MEAL = 'selected-meal';
   const { shouldRedirect, redirect } = useRedirect();
+  const { search, searchType } = useSelector((state) => state.reducerAPI);
 
   useEffect(() => {
-    dispatch(getMeal());
-  }, [dispatch]);
+    dispatch(getMeal(search, searchType));
+  }, [dispatch, search, searchType]);
 
   useEffect(() => {
     if (meals === null) {
