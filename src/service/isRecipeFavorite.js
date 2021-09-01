@@ -3,9 +3,7 @@ export default function isRecipeFavorite(recipe, type) {
   let favorite = false;
   if (favoriteRecipes !== null && type === 'comida') {
     const hasFavorite = favoriteRecipes.some(
-      (favRecipe) => (
-        favRecipe.id === recipe.idMeal
-      ),
+      (favRecipe) => favRecipe.id === recipe.idMeal,
     );
     if (hasFavorite) {
       favorite = true;
