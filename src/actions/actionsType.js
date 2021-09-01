@@ -1,4 +1,7 @@
 export const STORE_ITEMS = 'STORE_ITEMS';
 export const REQUEST_ITEMS = 'REQUEST_ITEMS';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
+export const STORE_IN_PROCESS_FOOD = 'STORE_IN_PROCESS_FOOD';
+export const STORE_IN_PROCESS_COCKTAIL = 'STORE_IN_PROCESS_COCKTAIL';
+export const REQUEST_OK = 'REQUEST_OK';
 export const temp = 0;

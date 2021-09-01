@@ -1,4 +1,9 @@
-import { REQUEST_ITEMS, REQUEST_SUCCESS, STORE_ITEMS } from '../actions/actionsType';
+import {
+  REQUEST_ITEMS,
+  REQUEST_SUCCESS,
+  STORE_ITEMS,
+  REQUEST_OK,
+} from '../actions/actionsType';
 
 const INITIAL_STATE = {
   items: [],
@@ -15,6 +20,10 @@ const itemsReducer = (state = INITIAL_STATE, action) => {
   case REQUEST_ITEMS:
     return {
       ...state, isLoading: true,
+    };
+  case REQUEST_OK:
+    return {
+      ...state, isLoading: false,
     };
   case REQUEST_SUCCESS:
     return {

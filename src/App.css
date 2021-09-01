@@ -37,6 +37,10 @@
   font-weight: 900;
 }
 
+input[type="checkbox"]:checked + label{
+  text-decoration: line-through;
+}
+
 @keyframes shake {
 
   0% {

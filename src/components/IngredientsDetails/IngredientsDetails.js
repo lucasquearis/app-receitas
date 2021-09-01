@@ -4,7 +4,6 @@ import { filterIngredientsDetails } from '../../functions';
 
 const IngredientsDetails = ({ recipe }) => {
   const ingredients = filterIngredientsDetails(recipe);
-  console.log(ingredients);
   return (
     <div>
       <h1>Ingredients</h1>
