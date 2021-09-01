@@ -1,69 +1,46 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import 'react-multi-carousel/lib/styles.css';
-import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
-import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
-import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import FoodContext from '../context/FoodContext';
+import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
 import getFavoriteDrink from '../util/getFavoriteDrink';
 import onFavoriteDrink from '../util/onFavoriteDrink';
 import Copy from '../components/Clipboard-Copy';
-import './details.css';
 
-const DrinkDetails = () => {
+const DrinkInProgress = () => {
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
-  const url = window.location.href;
 
   const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
-  const { foods } = useContext(FoodContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
-  const RECOMENDATION_CARDS = 6;
 
-  const copy = () => {
-    Copy(url);
+  function DetailUrl() {
+    const url = window.location.href;
+    const splitUrl = url.split('/');
+    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/bebidas/${actualPath}`;
+    Copy(detailUrl);
     setShowMsg(true);
-  };
+  }
 
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
-  }, [actualPath, setDrinkDetails]);
+  }, [setDrinkDetails, actualPath]);
 
   useEffect(() => {
     getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
-
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-      slidesToSlide: 1,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-  };
 
   return (
     <div className="drink-details-container">
@@ -74,7 +51,6 @@ const DrinkDetails = () => {
           strCategory,
           strInstructions,
           strAlcoholic,
-          idDrink,
         }, i) => (
           <div key={ i }>
             <img
@@ -91,7 +67,7 @@ const DrinkDetails = () => {
                   type="button"
                   data-testid="share-btn"
                   key={ shareIcon }
-                  onClick={ () => copy() }
+                  onClick={ DetailUrl }
                 >
                   <img src={ shareIcon } alt="share-icon" />
                 </button>
@@ -114,36 +90,27 @@ const DrinkDetails = () => {
             <h3>Ingredients</h3>
             <ul>
               {
-                ingredients.map((ingredient) => ingredient.map((item, index) => (
-                  <li
-                    key={ item }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${item} - ${measures[0][index]}`}
-                  </li>
-                )))
+                ingredients.map((ingredient) => ingredient
+                  .map((item, index) => (
+                    <li
+                      key={ item }
+                      data-testid={ `${index}-ingredient-step` }
+                    >
+                      <input type="checkbox" id={ item } name={ item } />
+                      {`${item} - ${measures[0][index]}`}
+                    </li>
+                  )))
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            <Carousel
-              responsive={ responsive }
-              swipeable={ false }
-              draggable={ false }
-              showDots
-              ssr
-            >
-              { foods.slice(0, RECOMENDATION_CARDS).map((recipe, index) => (
-                <FoodRecomendationCard key={ index } recipe={ recipe } index={ index } />
-              ))}
-            </Carousel>
-            <Link to={ `/bebidas/${idDrink}/in-progress` }>
+            <Link to="/receitas-feitas">
               <button
-                data-testid="start-recipe-btn"
+                data-testid="finish-recipe-btn"
                 key={ i }
                 type="button"
                 className="start-recipe-btn"
               >
-                Iniciar receita
+                Finalizar receita
               </button>
             </Link>
           </div>))
@@ -152,4 +119,4 @@ const DrinkDetails = () => {
   );
 };
 
-export default DrinkDetails;
+export default DrinkInProgress;
