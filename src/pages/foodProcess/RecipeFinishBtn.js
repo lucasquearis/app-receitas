@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { string } from 'prop-types';
+import { Link } from 'react-router-dom';
 import { disableFinishRecipeBtn } from '../../functions';
 
 const RecipeFinishBtn = ({ id, type }) => {
@@ -16,13 +17,15 @@ const RecipeFinishBtn = ({ id, type }) => {
   const disable = disableFinishRecipeBtn(foodType, id, recipeType);
 
   return (
-    <button
-      type="button"
-      disabled={ !disable }
-      data-testid="finish-recipe-btn"
-    >
-      Finalizar Receita
-    </button>
+    <Link to="/receitas-feitas">
+      <button
+        type="button"
+        disabled={ !disable }
+        data-testid="finish-recipe-btn"
+      >
+        Finalizar Receita
+      </button>
+    </Link>
   );
 };
 
