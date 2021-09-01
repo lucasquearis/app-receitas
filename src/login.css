@@ -1,0 +1,29 @@
+.login-button {
+   width: 100px;
+   margin: 20px 0  0 280px;
+}
+
+.login-email {
+    margin: 0 10px 0 10px;
+}
+
+.login-senha{
+    margin: 0 10px 0 10px;
+}
+
+.login-form {
+    text-align: center;
+}
+
+.login-section { 
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 30%;
+    background-image: url('./images/horaDoRango.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 40px;
+}
