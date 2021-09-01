@@ -14,7 +14,7 @@ jest.spyOn(global, 'fetch').mockImplementationOnce(() => Promise.resolve(
 
 const update = () => Promise.resolve();
 
-describe('Realiza os testes da pagina de Drink Details', () => {
+describe('Realiza os testes da pagina de Drink Progress', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('Verifica se todos os elementos estão na tela', async () => {
@@ -29,7 +29,6 @@ describe('Realiza os testes da pagina de Drink Details', () => {
     const recipeShare = screen.getByRole('img', { name: /botao-compartilhar/i });
     const recipeFavorite = screen.getByRole('button', { name: /fav/i });
     const category = screen.getByRole('heading', { name: /cocktail/i });
-    // const recipeLastIngredient = screen.getByTestId('3-ingredient-name-and-measure');
     const recipeInstruction = screen.getByTestId('instructions');
     const finishButton = screen.getByRole('button', { name: /finalizar receita/i });
 
@@ -43,6 +42,7 @@ describe('Realiza os testes da pagina de Drink Details', () => {
     expect(finishButton).toBeInTheDocument();
     expect(finishButton).toBeDisabled();
 
+    // Marca todas as checkbox, no caso as 3.
     const MAX = 4;
     for (let i = 0; i < MAX; i += 1) {
       const checkBox = screen.getByTestId(`${i}-ingredient-step`);
