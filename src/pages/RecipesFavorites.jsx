@@ -52,58 +52,62 @@ export default function RecipesFavorites() {
   }
 
   function renderFavorites() {
-    return favorites.map((item, index) => (
-      <div key={ item.id } id={ `${item.id}-favorite-card` }>
-        <Link to={ `/${item.type}s/${item.id}` }>
-          <img
-            className="recipe-pic"
-            key={ item.image }
-            src={ item.image }
-            alt="favorite recipe"
-            data-testid={ `${index}-horizontal-image` }
-          />
-        </Link>
-        { item.type === 'comida' && renderAreaAndCategory(item, index) }
-        { item.type === 'bebida' && renderAlcoholic(item, index) }
-        <Link to={ `/${item.type}s/${item.id}` }>
-          <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
-            { item.name }
-          </h3>
-        </Link>
-        <button
-          className="share-btn"
-          type="button"
-          onClick={ () => copyToClipboard(item.id, item.type) }
-        >
-          <img
-            src={ shareIcon }
-            alt="share icon"
-            data-testid={ `${index}-horizontal-share-btn` }
-          />
-        </button>
-        { copy.copied && copy.id === item.id
-          ? <div className="copy-div">Link copiado!</div> : <div /> }
-        <button
-          className="unfavorite-btn"
-          type="button"
-          onClick={ () => handleClick(item.id) }
-        >
-          <img
-            src={ blackHeartIcon }
-            alt="favorited icon"
-            data-testid={ `${index}-horizontal-favorite-btn` }
-          />
-        </button>
-      </div>
-    ));
+    if (localStorage.favoriteRecipes) {
+      return favorites.map((item, index) => (
+        <div key={ item.id } id={ `${item.id}-favorite-card` }>
+          <Link to={ `/${item.type}s/${item.id}` }>
+            <img
+              className="recipe-pic"
+              key={ item.image }
+              src={ item.image }
+              alt="favorite recipe"
+              data-testid={ `${index}-horizontal-image` }
+            />
+          </Link>
+          { item.type === 'comida' && renderAreaAndCategory(item, index) }
+          { item.type === 'bebida' && renderAlcoholic(item, index) }
+          <Link to={ `/${item.type}s/${item.id}` }>
+            <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
+              { item.name }
+            </h3>
+          </Link>
+          <button
+            className="share-btn"
+            type="button"
+            onClick={ () => copyToClipboard(item.id, item.type) }
+          >
+            <img
+              src={ shareIcon }
+              alt="share icon"
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+          { copy.copied && copy.id === item.id
+            ? <div className="copy-div">Link copiado!</div> : <div /> }
+          <button
+            className="unfavorite-btn"
+            type="button"
+            onClick={ () => handleClick(item.id) }
+          >
+            <img
+              src={ blackHeartIcon }
+              alt="favorited icon"
+              data-testid={ `${index}-horizontal-favorite-btn` }
+            />
+          </button>
+        </div>
+      ));
+    }
   }
 
   useEffect(() => {
-    if (filter === 'all') {
-      setFavorites(getFavorites());
-    } else {
-      const array = getFavorites().filter((item) => item.type === filter);
-      setFavorites(array);
+    if (localStorage.favoriteRecipes) {
+      if (filter === 'all') {
+        setFavorites(getFavorites());
+      } else {
+        const array = getFavorites().filter((item) => item.type === filter);
+        setFavorites(array);
+      }
     }
   }, [filter]);
 
@@ -131,7 +135,7 @@ export default function RecipesFavorites() {
       >
         Drinks
       </button>
-      { renderFavorites() }
+      { localStorage.favoriteRecipes && renderFavorites() }
     </main>
   );
 }
