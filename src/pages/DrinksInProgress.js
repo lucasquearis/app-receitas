@@ -84,7 +84,9 @@ function DrinksInProgress() {
         </div>
       </section>
       <h3 className="sub-title">Instruções</h3>
-      <p data-testid="instructions">{rcp.strInstructions}</p>
+      <p className="instructions-paragraph" data-testid="instructions">
+        {rcp.strInstructions}
+      </p>
       <h3 className="sub-title">Lista de Ingredientes</h3>
 
       <IngredientsTaskList

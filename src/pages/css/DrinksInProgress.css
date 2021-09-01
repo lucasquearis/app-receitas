@@ -73,7 +73,7 @@
 }
 
 .finish-recipe-btn {
-  background-color: green;
+  background-color: rgb(247, 127, 0);
   border: transparent;
   border-radius: 9px;
   color: white;
@@ -85,7 +85,7 @@
 }
 
 .finish-recipe-btn:disabled {
-  background-color: rgb(132, 197, 132);
+  background-color: rgb(255, 206, 155);
   border: transparent;
   border-radius: 9px;
   color: white;
