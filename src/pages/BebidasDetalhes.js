@@ -69,7 +69,10 @@ export default function BebidasDetalhes() {
 
       <div className={ styles.buttonBebidasDetails }>
         <button type="button" data-testid="share-btn">Compartilhar</button>
-        <FavoriteButton foodOrDrink={ drink } />
+        <FavoriteButton
+          foodOrDrink={ drink }
+          dataTestId="favorite-btn"
+        />
       </div>
       <ul className={ styles.optionsDrinks }>
         {renderIngredients(getIngredientsKeys(drink))}

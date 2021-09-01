@@ -8,11 +8,10 @@ const getFavorite = (foodOrDrink, whichOne) => {
   const getFavoriteDrink = (drink) => ({
     id: drink.idDrink,
     type: 'bebida',
-    area: '',
-    category: drink.strCategory,
-    alcoholicOrNot: drink.strAlcoholic,
+    alcoholicOrNot: drink.strCategory,
     name: drink.strDrink,
     image: drink.strDrinkThumb,
+    idDrink: true,
   });
 
   const getFavoriteFood = (food) => ({
@@ -20,9 +19,9 @@ const getFavorite = (foodOrDrink, whichOne) => {
     type: 'comida',
     area: food.strArea,
     category: food.strCategory,
-    alcoholicOrNot: '',
     name: food.strMeal,
     image: food.strMealThumb,
+    idMeal: true,
   });
 
   if (whichOne === 'idMeal') {
@@ -43,9 +42,9 @@ const whichOne = (foodOrDrink) => {
 };
 
 function FavoriteButton(props) {
-  const { foodOrDrink } = props;
+  const { foodOrDrink, dataTestId, loadFavoritesCB = () => {} } = props;
   const [isFavorite, setIsFavorite] = useState(false);
-
+  console.log(dataTestId);
   useEffect(() => {
     const lastSaveFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const favoriteFound = lastSaveFavorite
@@ -73,6 +72,7 @@ function FavoriteButton(props) {
   const handleFavorite = () => {
     const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     saveFavorite(lastSave, whichOne(foodOrDrink));
+    loadFavoritesCB();
   };
 
   return (
@@ -81,7 +81,7 @@ function FavoriteButton(props) {
       onClick={ handleFavorite }
     >
       <img
-        data-testid="favorite-btn"
+        data-testid={ dataTestId }
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         alt="Botão para adicionar ou retirar esta receita dos favoritos"
       />
@@ -91,6 +91,8 @@ function FavoriteButton(props) {
 
 FavoriteButton.propTypes = {
   foodOrDrink: PropTypes.shape().isRequired,
+  dataTestId: PropTypes.string.isRequired,
+  loadFavoritesCB: PropTypes.func.isRequired,
 };
 
 export default FavoriteButton;

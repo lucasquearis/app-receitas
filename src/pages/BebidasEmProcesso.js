@@ -37,7 +37,10 @@ const BebidasEmProcesso = () => {
       <div data-testid="recipe-glass">{drink.strGlass}</div>
       <div data-testid="recipe-alcoholic">{drink.strAlcoholic}</div>
       <button type="button" data-testid="share-btn">Compartilhar</button>
-      <FavoriteButton foodOrDrink={ drink } />
+      <FavoriteButton
+        foodOrDrink={ drink }
+        dataTestId="favorite-btn"
+      />
       <RecipeAllDoneContext.Provider value={ { setAllDone } }>
         <IngredientsCheckboxList foodOrDrink={ drink } />
       </RecipeAllDoneContext.Provider>

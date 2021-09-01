@@ -69,7 +69,10 @@ export default function ComidasDetalhes() {
       <div>
         <div className={ styles.buttonComidasDetails }>
           <button type="button" data-testid="share-btn">Compartilhar</button>
-          <FavoriteButton foodOrDrink={ food } />
+          <FavoriteButton
+            foodOrDrink={ food }
+            dataTestId="favorite-btn"
+          />
         </div>
 
         <ul>

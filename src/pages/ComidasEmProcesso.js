@@ -34,7 +34,10 @@ const ComidasEmProcesso = () => {
       <img src={ food.strMealThumb } alt="recipe" data-testid="recipe-photo" />
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
       <button type="button" data-testid="share-btn">Compartilhar</button>
-      <FavoriteButton foodOrDrink={ food } />
+      <FavoriteButton
+        foodOrDrink={ food }
+        dataTestId="favorite-btn"
+      />
       <RecipeAllDoneContext.Provider value={ { setAllDone } }>
         <IngredientsCheckboxList foodOrDrink={ food } />
       </RecipeAllDoneContext.Provider>
