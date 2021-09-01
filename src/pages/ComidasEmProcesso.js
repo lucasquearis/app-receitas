@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import FavoriteButton from '../components/FavoriteButton';
 import IngredientsCheckboxList from '../components/IngredientsCheckboxList';
 import Loading from '../components/Loading';
@@ -19,8 +20,7 @@ const ComidasEmProcesso = () => {
     const api = async () => {
       const response = await fetch(`${URL_FOOD}${idURL}`);
       const data = await response.json();
-      const meal = data.meals[0];
-      setFood(meal);
+      setFood(data.meals[0]);
     };
     api();
   }, [idURL]);

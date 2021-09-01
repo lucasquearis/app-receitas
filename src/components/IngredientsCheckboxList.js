@@ -46,15 +46,15 @@ const saveFoodProgress = (target, idURL, ingredients, food) => {
   }));
 };
 
-const buildIngredients = (cocktail, idURL) => {
-  const ingredientsKeys = getIngredientsKeys(cocktail);
+const buildIngredients = (foodOrDrink, idURL, storageKey) => {
+  const ingredientsKeys = getIngredientsKeys(foodOrDrink);
   const lastSaveProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
     meals: {}, cocktails: {},
   };
   return {
     [idURL]: ingredientsKeys.map((ingredientKey, index) => ({
-      [cocktail[ingredientKey]]: lastSaveProgress.cocktails[idURL]
-        ? lastSaveProgress.cocktails[idURL][index][cocktail[ingredientKey]]
+      [foodOrDrink[ingredientKey]]: lastSaveProgress[storageKey][idURL]
+        ? lastSaveProgress[storageKey][idURL][index][foodOrDrink[ingredientKey]]
         : false,
     })),
     wereFetched: true,
@@ -72,7 +72,11 @@ function IngredientsCheckboxList(props) {
   const ingredientsKeys = getIngredientsKeys(foodOrDrink);
 
   useEffect(() => {
-    setIngredients(buildIngredients(foodOrDrink, idURL));
+    if (foodOrDrink.idMeal) {
+      setIngredients(buildIngredients(foodOrDrink, idURL, 'meals'));
+    } else if (foodOrDrink.idDrink) {
+      setIngredients(buildIngredients(foodOrDrink, idURL, 'cocktails'));
+    }
   }, [foodOrDrink, idURL]);
 
   const isAllDone = () => ingredients.wereFetched && ingredients[idURL]
@@ -83,11 +87,10 @@ function IngredientsCheckboxList(props) {
       [idURL]: getIngredientsList(target, idURL, ingredients, foodOrDrink),
       wereFetched: true,
     });
-    console.log(target.id);
-    if (target.id.includes('food')) {
+    if (foodOrDrink.idMeal) {
       saveFoodProgress(target, idURL, ingredients, foodOrDrink);
     }
-    if (target.id.includes('drink')) {
+    if (foodOrDrink.idDrink) {
       saveDrinkProgress(target, idURL, ingredients, foodOrDrink);
     }
   };
@@ -99,7 +102,7 @@ function IngredientsCheckboxList(props) {
       {ingredientsKeys.map((ingredientKey, index) => (
         <div key={ index }>
           <label
-            htmlFor={ foodOrDrink.idMeal ? `${index}food` : `${index}drink` }
+            htmlFor={ `${index}${foodOrDrink[ingredientKey]}` }
             data-testid={ `${index}-ingredient-step` }
             style={ ingredients.wereFetched
           && ingredients[idURL][index][foodOrDrink[ingredientKey]]
@@ -107,14 +110,15 @@ function IngredientsCheckboxList(props) {
               : {} }
           >
             <input
-              id={ foodOrDrink.idMeal ? `${index}food` : `${index}drink` }
+              id={ `${index}${foodOrDrink[ingredientKey]}` }
               name={ foodOrDrink[ingredientKey] }
               type="checkbox"
               onChange={ handleCheckboxChange }
-              checked={ ingredients.wereFetched
+              defaultChecked={ ingredients.wereFetched
               && ingredients[idURL][index][foodOrDrink[ingredientKey]] }
+              // checked={ ingredients.wereFetched
+              // && ingredients[idURL][index][foodOrDrink[ingredientKey]] }
             />
-            {console.log(foodOrDrink.idMeal ? `${index}food` : `${index}drink`)}
             {` ${foodOrDrink[ingredientKey]} - ${foodOrDrink[`strMeasure${index + 1}`]}`}
           </label>
         </div>
