@@ -23,31 +23,33 @@ const DrinksByIngredients = () => {
   };
 
   return (
-    <div>
+    <>
       <Header title="Explorar Ingredientes" />
+      <main className="meals-cards-container">
 
-      {
-        ingredients
-          ? (ingredients.map((ingredient, index) => (
-            <Link
-              to="/bebidas"
-              key={ ingredient }
-              className="drink-card-link"
-              onClick={ () => setExpIng(ingredient.strIngredient1) }
-            >
-              <Card
-                key={ ingredient.strIngredient1 }
-                type="ingredient"
-                index={ index }
-                thumb={ formatIngredient(ingredient) }
-                name={ ingredient.strIngredient1 }
-              />
-            </Link>
-          )))
-          : ''
-      }
-      <Footer />
-    </div>
+        {
+          ingredients
+            ? (ingredients.map((ingredient, index) => (
+              <Link
+                to="/bebidas"
+                key={ ingredient }
+                className="drink-card-link"
+                onClick={ () => setExpIng(ingredient.strIngredient1) }
+              >
+                <Card
+                  key={ ingredient.strIngredient1 }
+                  type="ingredient"
+                  index={ index }
+                  thumb={ formatIngredient(ingredient) }
+                  name={ ingredient.strIngredient1 }
+                />
+              </Link>
+            )))
+            : ''
+        }
+        <Footer />
+      </main>
+    </>
   );
 };
 

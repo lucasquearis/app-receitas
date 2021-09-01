@@ -78,5 +78,6 @@
 .favorite-btn {
   background-color: transparent;
   border: 0;
-  max-width: 100%;
+  max-height: 26px;
+  max-width: 26px;
 }

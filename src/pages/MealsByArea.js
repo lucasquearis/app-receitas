@@ -43,7 +43,7 @@ const MealsByArea = () => {
       <label htmlFor="area-select" className="explore-by-area-select-container">
         <select
           id="area-select"
-          className="explore-by-area-select"
+          className="explore-by-area-select form-select"
           data-testid="explore-by-area-dropdown"
           value={ areaSelected }
           onChange={ handleChange }
