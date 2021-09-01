@@ -7,6 +7,7 @@ export default function Provider({ children }) {
   const [feed, setFeed] = useState([]);
   const [feedDataFilter, setFeedDataFilter] = useState([]);
   const [search, setSearch] = useState(false);
+  const [selectedIngredient, setSelectedIngredient] = useState('');
 
   const context = {
     setSearchBarResult,
@@ -17,6 +18,8 @@ export default function Provider({ children }) {
     setFeedDataFilter,
     search,
     setSearch,
+    selectedIngredient,
+    setSelectedIngredient,
   };
 
   return (

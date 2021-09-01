@@ -1,13 +1,58 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './pageCSS/MealProcess.css';
 import PropTypes from 'prop-types';
 import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
 import Loading from '../components/Loading';
 
+const callbackHandleClick = (id, name) => {
+  const getLocalStorage = () => JSON.parse(localStorage
+    .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [name] } };
+
+  if (!getLocalStorage().meals[id]) {
+    localStorage
+      .setItem('inProgressRecipes', JSON
+        .stringify({
+          ...getLocalStorage(),
+          meals: { ...getLocalStorage().meals,
+            [id]: [name] } }));
+    return false;
+  }
+
+  const removeIngredient = getLocalStorage().meals[id]
+    .filter((ingredient) => ingredient !== name);
+
+  const isOnList = getLocalStorage().meals[id].includes(name);
+
+  if (!isOnList) {
+    localStorage.setItem('inProgressRecipes', JSON
+      .stringify({
+        ...getLocalStorage(),
+        meals: { ...getLocalStorage().meals,
+          [id]: [...getLocalStorage().meals[id],
+            name] } }));
+    return false;
+  }
+
+  localStorage.setItem('inProgressRecipes', JSON
+    .stringify({
+      ...getLocalStorage(),
+      meals: { ...getLocalStorage().meals,
+        [id]: removeIngredient } }));
+};
+
+const returnListFromKeys = (keys) => {
+  const listIngredients = keys.filter((item) => item
+    .includes('strIngredient'));
+  const listMeasures = keys.filter((item) => item.includes('strMeasure'));
+  return [listIngredients, listMeasures];
+};
+
 export default function MealProcess(props) {
   const { match: { params: { id } } } = props;
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
+  const [isFullyChecked, setIsFullyChecked] = useState([false]);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -37,6 +82,18 @@ export default function MealProcess(props) {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (resultMealRecipe.length > 0
+      && checkedIngredients.length > 0
+      && checkedIngredients.length === Object.entries(resultMealRecipe[0])
+        .filter((string) => string[0]
+          .includes('strIngredient') && string[1]).length) {
+      setIsFullyChecked(true);
+    } else {
+      setIsFullyChecked(false);
+    }
+  }, [checkedIngredients, resultMealRecipe]);
+
   const isIngredientChecked = (comparison) => checkedIngredients
     .some((ingredient) => ingredient === comparison);
 
@@ -47,39 +104,7 @@ export default function MealProcess(props) {
   };
 
   const handleClick = ({ target: { name } }) => {
-    const getLocalStorage = () => JSON.parse(localStorage
-      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [name] } };
-
-    if (!getLocalStorage().meals[id]) {
-      localStorage
-        .setItem('inProgressRecipes', JSON
-          .stringify({
-            ...getLocalStorage(),
-            meals: { ...getLocalStorage().meals,
-              [id]: [name] } }));
-      return false;
-    }
-
-    const removeIngredient = getLocalStorage().meals[id]
-      .filter((ingredient) => ingredient !== name);
-
-    const isOnList = getLocalStorage().meals[id].includes(name);
-
-    if (!isOnList) {
-      localStorage.setItem('inProgressRecipes', JSON
-        .stringify({
-          ...getLocalStorage(),
-          meals: { ...getLocalStorage().meals,
-            [id]: [...getLocalStorage().meals[id],
-              name] } }));
-      return false;
-    }
-
-    localStorage.setItem('inProgressRecipes', JSON
-      .stringify({
-        ...getLocalStorage(),
-        meals: { ...getLocalStorage().meals,
-          [id]: removeIngredient } }));
+    callbackHandleClick(id, name);
   };
 
   if (resultMealRecipe.length > 0) {
@@ -89,10 +114,7 @@ export default function MealProcess(props) {
       strCategory,
       strInstructions,
     } = resultMealRecipe[0];
-    const keysIngredients = Object.keys(resultMealRecipe[0]);
-    const listIngredients = keysIngredients.filter((item) => item
-      .includes('strIngredient'));
-    const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
+    const listFromKeys = returnListFromKeys(Object.keys(resultMealRecipe[0]));
     return (
       <>
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -101,7 +123,7 @@ export default function MealProcess(props) {
         <button data-testid="favorite-btn" type="button">Favoritar</button>
         <span data-testid="recipe-category">{strCategory}</span>
         <ul className="progress__checkbox-list">
-          {listIngredients.map((ingredient, index) => {
+          {listFromKeys[0].map((ingredient, index) => {
             if (resultMealRecipe[0][ingredient]) {
               return (
                 <li
@@ -122,7 +144,7 @@ export default function MealProcess(props) {
                       {' '}
                       -
                       {' '}
-                      {resultMealRecipe[0][listMeasures[index]]}
+                      {resultMealRecipe[0][listFromKeys[1][index]]}
                     </span>
                   </label>
                 </li>
@@ -133,12 +155,15 @@ export default function MealProcess(props) {
         </ul>
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
-        <button
-          data-testid="finish-recipe-btn"
-          type="button"
-        >
-          Finalizar Receita
-        </button>
+        <Link to="/receitas-feitas">
+          <button
+            data-testid="finish-recipe-btn"
+            type="button"
+            disabled={ !isFullyChecked }
+          >
+            Finalizar Receita
+          </button>
+        </Link>
       </>
     );
   }

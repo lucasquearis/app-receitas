@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import './pageCSS/MealRecipeDetails.css';
 import { Link } from 'react-router-dom';
+import shareIcon from '../images/shareIcon.svg';
 import searchMealAPI
   from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
@@ -10,6 +12,7 @@ import Loading from '../components/Loading';
 export default function MealRecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
+  const [linkShare, setLinkShare] = useState(false);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -40,7 +43,20 @@ export default function MealRecipeDetails(props) {
           src={ strMealThumb }
           alt={ strMeal }
         />
-        <button data-testid="share-btn" type="button">Compartilhar</button>
+        <button
+          data-testid="share-btn"
+          onClick={ () => {
+            copy(`http://localhost:3000/comidas/${id}`);
+            setLinkShare(true);
+          } }
+          type="button"
+        >
+          <img
+            src={ shareIcon }
+            alt="imagem de compartilhar"
+          />
+        </button>
+        { linkShare && 'Link copiado!' }
         <button data-testid="favorite-btn" type="button">Favoritar</button>
         <span>Categoria: </span>
         <span data-testid="recipe-category">{strCategory}</span>

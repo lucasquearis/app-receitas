@@ -6,9 +6,17 @@ import MyContext from '../context';
 import Card from '../components/Card';
 import Categories from '../components/Categories';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
+import searchDrinksByIngredient
+  from '../services/Header-SearchBar/Drinks/searchDrinksByIngredient';
 
 export default function Drinks() {
-  const { feed, setFeed, searchBarResult, feedDataFilter } = useContext(MyContext);
+  const {
+    feed,
+    setFeed,
+    searchBarResult,
+    feedDataFilter,
+    selectedIngredient,
+  } = useContext(MyContext);
   console.log(feed);
   const [resultList, setResultList] = useState();
 
@@ -23,6 +31,13 @@ export default function Drinks() {
 
   useEffect(() => {
     const resolviDrink = async () => {
+      if (selectedIngredient !== '') {
+        const MAX_DRINKS = 12;
+        const result = await searchDrinksByIngredient(selectedIngredient);
+        const { drinks } = result;
+        setFeed(drinks.slice(0, MAX_DRINKS));
+        return true;
+      }
       const MAX_FOODS = 12;
       const result = await fetchDrinks();
       const { drinks } = result;

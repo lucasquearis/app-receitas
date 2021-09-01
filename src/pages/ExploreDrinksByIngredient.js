@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './ExploreMealsByIngredient';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import fetchIngredients from '../services/Header-SearchBar/Drinks/fetchIngredients';
 import BottomMenu from '../components/BottomMenu';
 import Loading from '../components/Loading';
+import MyContext from '../context';
 
 export default function ExploreDrinksByIngredient() {
   const [ingredients, setIngredients] = useState([]);
   const max = 12;
+  const { setSelectedIngredient } = useContext(MyContext);
 
   const cardIngredient = (index, data) => {
     const { strIngredient1 } = data;
     return (
-      <Link to="/bebidas">
+      <Link to="/bebidas" onClick={ () => setSelectedIngredient(strIngredient1) }>
         <div
           data-testid={ `${index}-ingredient-card` }
         >
