@@ -5,15 +5,16 @@ import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import FoodRecomendationCard from '../components/FoodRecomendationCard';
-import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
-import Copy from '../components/Clipboard-Copy';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
 import getFavorite from '../util/getFavorite';
+import onFavoriteDrink from '../util/onFavoriteDrink';
+import Copy from '../components/Clipboard-Copy';
+import './details.css';
 
 const DrinkDetails = () => {
   const history = useHistory();
@@ -29,35 +30,6 @@ const DrinkDetails = () => {
   const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
   const RECOMENDATION_CARDS = 6;
-
-  function onFavorite() {
-    setFavorite(!favorite);
-
-    const {
-      idDrink: id,
-      strCategory: category,
-      strAlcoholic: alcoholicOrNot,
-      strDrink: name,
-      strDrinkThumb: image,
-    } = drinkDetails[0];
-
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
-    if (actualStorage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-
-    if (!favorite) {
-      actualStorage.push(item);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
-    } else {
-      const newStorage = actualStorage.filter(
-        (favoriteItem) => favoriteItem.id !== item.id,
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-  }
 
   const copy = () => {
     Copy(url);
@@ -123,7 +95,7 @@ const DrinkDetails = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={ onFavorite }
+                  onClick={ () => onFavoriteDrink(drinkDetails, setFavorite, favorite) }
                   key={ blackHeartIcon }
                 >
                   <img

@@ -9,6 +9,7 @@ import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
 import getFavorite from '../util/getFavorite';
+import onFavoriteDrink from '../util/onFavoriteDrink';
 // import Copy from '../components/Clipboard-Copy';
 
 const DrinkInProgress = () => {
@@ -22,36 +23,6 @@ const DrinkInProgress = () => {
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg] = useState(false);
-
-  function onFavorite() {
-    setFavorite(!favorite);
-
-    const {
-      idDrink: id,
-      strCategory: category,
-      strAlcoholic: alcoholicOrNot,
-      strDrink: name,
-      strDrinkThumb: image,
-    } = drinkDetails[0];
-
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'comida', area: '', category, alcoholicOrNot, name, image };
-
-    if (actualStorage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-
-    if (!favorite) {
-      actualStorage.push(item);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
-    } else {
-      const newStorage = actualStorage.filter(
-        (favoriteItem) => favoriteItem.id !== item.id,
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-  }
 
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
@@ -94,7 +65,7 @@ const DrinkInProgress = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={ onFavorite }
+                  onClick={ () => onFavoriteDrink(drinkDetails, setFavorite, favorite) }
                   key={ blackHeartIcon }
                 >
                   <img
