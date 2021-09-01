@@ -1,6 +1,45 @@
 .login-button {
    width: 100px;
-   margin: 20px 0  0 280px;
+   margin: 20px 0  0 260px;
+   border-radius: 15px;
+   font-weight: bold;
+   background-color: white;
+   color: rgb(202, 201, 201);
+   cursor: pointer;
+   display: block;
+   position: relative;
+   border: 2px solid black;
+   transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+/* Estilo do botão retirado da página: https://edrodrigues.com.br/blog/20-incriveis-botoes-animados-de-css-puro/ 
+  pertencente a Ed Rodrigues */
+
+.enable:hover {
+    color: #000 !important;
+	background-color: transparent;
+	text-shadow: none;
+}
+
+.enable:hover:before {
+	bottom: 0%;
+	top: auto;
+	height: 100%;
+}
+
+.enable:before {
+    border-radius: 15px;
+    width: 100px;
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 0px;
+	width: 100%;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: green;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }
 
 .login-email {
@@ -26,4 +65,40 @@
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: 40px;
+}
+
+.texto-email {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.texto-senha {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+
+
+
+
+a.animated-button.thar-one:hover:before {
+	bottom: 0%;
+	top: auto;
+	height: 100%;
+}
+a.animated-button.thar-one:before {
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 0px;
+	width: 100%;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: #F7CA18;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 }

@@ -51,7 +51,7 @@ function Login() {
   return (
     <section className="login-section">
       <form className="login-form">
-        <label htmlFor="email">
+        <label htmlFor="email" className="texto-email">
           Email:
           <input
             className="login-email"
@@ -63,7 +63,7 @@ function Login() {
             onChange={ handleChange }
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className="texto-senha">
           Senha:
           <input
             className="login-senha"
@@ -77,7 +77,7 @@ function Login() {
         </label>
       </form>
       <button
-        className="login-button"
+        className={ !checkLogin() ? 'login-button' : 'login-button enable' }
         data-testid="login-submit-btn"
         type="button"
         onClick={ handleClick }
