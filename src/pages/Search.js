@@ -7,9 +7,11 @@ import './search.css';
 const FoodDetails = () => (
   <div className="container-search">
     <div className="header">
-      <button type="button">
-        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      </button>
+      <Link to="/perfil">
+        <button type="button">
+          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+        </button>
+      </Link>
       <p data-testid="page-title">Explorar</p>
     </div>
     <div className="buttons">
