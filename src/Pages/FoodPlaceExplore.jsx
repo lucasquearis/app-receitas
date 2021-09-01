@@ -5,12 +5,15 @@ function FoodPlaceExplore() {
   const [filter, setFilter] = useState('American');
   const [dataFilter, setDataFilter] = useState([]);
 
-  const getArea = async () => {
-    const END_POINT = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
-    const response = await fetch(END_POINT);
-    const { meals } = await response.json();
-    setData(meals);
-  };
+  useEffect(() => {
+    const getArea = async () => {
+      const END_POINT = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+      const response = await fetch(END_POINT);
+      const { meals } = await response.json();
+      setData(meals);
+    };
+    getArea();
+  }, [setData]);
 
   useEffect(() => {
     const mealsFilter = async () => {
@@ -20,9 +23,9 @@ function FoodPlaceExplore() {
       setDataFilter(meals);
     };
     mealsFilter();
-    getArea();
-  }, [setData, filter]);
+  }, [filter, setFilter]);
 
+  const MNumber = '12';
   return (
     <div>
       <select
@@ -49,20 +52,7 @@ function FoodPlaceExplore() {
       </p>
       {
         dataFilter
-          .filter(({ idMeal }) => (idMeal !== '52887'
-          && idMeal !== '52906'
-          && idMeal !== '52980'
-          && idMeal !== '53006'
-          && idMeal !== '52791'
-          && idMeal !== '52811'
-          && idMeal !== '52871'
-          && idMeal !== '52926'
-          && idMeal !== '52931'
-          && idMeal !== '52963'
-          && idMeal !== '52774'
-          && idMeal !== '52781'
-          && idMeal !== '52832'
-          ))
+          .slice(0, MNumber)
           .map(({ strMeal, strMealThumb, idMeal }, index) => (
             <div
               key={ idMeal }
