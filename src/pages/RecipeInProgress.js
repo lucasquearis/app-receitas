@@ -8,9 +8,9 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
-import getFavorite from '../util/getFavorite';
+import getFavoriteFood from '../util/getFavoriteFood';
 import onFavoriteFood from '../util/onFavoriteFood';
-// import Copy from '../components/Clipboard-Copy';
+import Copy from '../components/Clipboard-Copy';
 
 const RecipeInProgress = () => {
   const history = useHistory();
@@ -22,14 +22,22 @@ const RecipeInProgress = () => {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
-  const [showMsg] = useState(false);
+  const [showMsg, setShowMsg] = useState(false);
+
+  function DetailUrl() {
+    const url = window.location.href;
+    const splitUrl = url.split('/');
+    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/comidas/${actualPath}`;
+    Copy(detailUrl);
+    setShowMsg(true);
+  }
 
   useEffect(() => {
     fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
   }, [actualPath, setFoodDetails]);
 
   useEffect(() => {
-    getFavorite(foodDetails, setFavorite);
+    getFavoriteFood(foodDetails, setFavorite);
     getIngredients(foodDetails, setIngredients);
     getMeasure(foodDetails, setMeasures);
   }, [foodDetails]);
@@ -51,30 +59,30 @@ const RecipeInProgress = () => {
               data-testid="recipe-photo"
               className="details-image"
             />
-            <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
-            <button
-              type="button"
-              data-testid="share-btn"
-              key={ shareIcon }
-            >
-              <img
-                src={ shareIcon }
-                alt="share-icon"
-                className="detail-img-btn"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={ () => onFavoriteFood(foodDetails, setFavorite, favorite) }
-              key={ blackHeartIcon }
-            >
-              <img
-                data-testid="favorite-btn"
-                className="detail-img-btn"
-                src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-icon"
-              />
-            </button>
+            <div className="details-buttons">
+              <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
+              <div>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  key={ shareIcon }
+                  onClick={ DetailUrl }
+                >
+                  <img src={ shareIcon } alt="share-icon" />
+                </button>
+                <button
+                  type="button"
+                  onClick={ () => onFavoriteFood(foodDetails, setFavorite, favorite) }
+                  key={ blackHeartIcon }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
+                    alt="favorite-icon"
+                  />
+                </button>
+              </div>
+            </div>
             { showMsg && <p>Link copiado!</p> }
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
@@ -86,7 +94,7 @@ const RecipeInProgress = () => {
                       key={ item }
                       data-testid={ `${index}-ingredient-step` }
                     >
-                      <input type="checkbox" id={ item } name={ item } />
+                      <input type="checkbox" id={ item } name={ item } value={ item } />
                       {`${item} - ${measures[0][index]}`}
                     </li>
                   )))

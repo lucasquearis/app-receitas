@@ -8,9 +8,9 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
-import getFavorite from '../util/getFavorite';
+import getFavoriteDrink from '../util/getFavoriteDrink';
 import onFavoriteDrink from '../util/onFavoriteDrink';
-// import Copy from '../components/Clipboard-Copy';
+import Copy from '../components/Clipboard-Copy';
 
 const DrinkInProgress = () => {
   const history = useHistory();
@@ -22,14 +22,22 @@ const DrinkInProgress = () => {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
-  const [showMsg] = useState(false);
+  const [showMsg, setShowMsg] = useState(false);
+
+  function DetailUrl() {
+    const url = window.location.href;
+    const splitUrl = url.split('/');
+    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/bebidas/${actualPath}`;
+    Copy(detailUrl);
+    setShowMsg(true);
+  }
 
   useEffect(() => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
   }, [setDrinkDetails, actualPath]);
 
   useEffect(() => {
-    getFavorite(drinkDetails, setFavorite);
+    getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
@@ -59,7 +67,7 @@ const DrinkInProgress = () => {
                   type="button"
                   data-testid="share-btn"
                   key={ shareIcon }
-                //   onClick={ () => copy() }
+                  onClick={ DetailUrl }
                 >
                   <img src={ shareIcon } alt="share-icon" />
                 </button>

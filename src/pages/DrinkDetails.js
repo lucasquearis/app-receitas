@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
@@ -11,7 +12,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
-import getFavorite from '../util/getFavorite';
+import getFavoriteDrink from '../util/getFavoriteDrink';
 import onFavoriteDrink from '../util/onFavoriteDrink';
 import Copy from '../components/Clipboard-Copy';
 import './details.css';
@@ -41,7 +42,7 @@ const DrinkDetails = () => {
   }, [actualPath, setDrinkDetails]);
 
   useEffect(() => {
-    getFavorite(drinkDetails, setFavorite);
+    getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
@@ -73,6 +74,7 @@ const DrinkDetails = () => {
           strCategory,
           strInstructions,
           strAlcoholic,
+          idDrink,
         }, i) => (
           <div key={ i }>
             <img
@@ -134,14 +136,16 @@ const DrinkDetails = () => {
                 <FoodRecomendationCard key={ index } recipe={ recipe } index={ index } />
               ))}
             </Carousel>
-            <button
-              data-testid="start-recipe-btn"
-              key={ i }
-              type="button"
-              className="start-recipe-btn"
-            >
-              Iniciar receita
-            </button>
+            <Link to={ `/bebidas/${idDrink}/in-progress` }>
+              <button
+                data-testid="start-recipe-btn"
+                key={ i }
+                type="button"
+                className="start-recipe-btn"
+              >
+                Iniciar receita
+              </button>
+            </Link>
           </div>))
       }
     </div>

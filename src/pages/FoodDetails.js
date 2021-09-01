@@ -12,7 +12,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
-import getFavorite from '../util/getFavorite';
+import getFavoriteFood from '../util/getFavoriteFood';
 import onFavoriteFood from '../util/onFavoriteFood';
 import Copy from '../components/Clipboard-Copy';
 import './details.css';
@@ -44,7 +44,7 @@ const FoodDetails = () => {
   }, [actualPath, setFoodDetails]);
 
   useEffect(() => {
-    getFavorite(foodDetails, setFavorite);
+    getFavoriteFood(foodDetails, setFavorite);
     getIngredients(foodDetails, setIngredients);
     getMeasure(foodDetails, setMeasures);
   }, [foodDetails]);
