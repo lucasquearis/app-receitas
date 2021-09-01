@@ -25,6 +25,8 @@ function Routes() {
         <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
         <Route path="/explorar/bebidas/area" component={ NotFound } />
+        <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
+        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/comidas" component={ Foods } />
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/explorar/comidas" component={ FoodExp } />
@@ -33,8 +35,6 @@ function Routes() {
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
-        <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
-        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
       </Switch>
     </Router>
   );

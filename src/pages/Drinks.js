@@ -7,20 +7,24 @@ import Context from '../context/Context';
 import DrinkFilterButton from '../components/DrinkFilterButton';
 
 function Drinks() {
-  const { drinkRecipes,
+  const {
     drinkCategories: { loading },
+    drinkRecipes,
     requestCategory,
     setDrinkRecipes,
     setDrinkCategories,
+    redirect,
     drinkCategoryAPI } = useContext(Context);
   const { list: recipes } = drinkRecipes;
   const { loading: loadcard } = drinkRecipes;
   const INITIAL_API = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-  const [API, setAPI] = useState('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const [API, setAPI] = useState(INITIAL_API);
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-    requestCategory(API, setDrinkRecipes);
+    if (!redirect) {
+      requestCategory(API, setDrinkRecipes);
+    }
     requestCategory(drinkCategoryAPI, setDrinkCategories);
   }, [API]);
 
@@ -29,9 +33,7 @@ function Drinks() {
   const cards = [];
   const maxCards = 11;
   for (let index = 0; index < recipes.drinks.length; index += 1) {
-    if (loadcard === false) {
-      cards.push(<DrinkCard drink={ recipes.drinks[index] } index={ index } />);
-    }
+    cards.push(<DrinkCard drink={ recipes.drinks[index] } index={ index } />);
   }
 
   const handleClick = ({ target: { innerText } }) => {

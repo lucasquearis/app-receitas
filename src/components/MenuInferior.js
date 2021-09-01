@@ -1,5 +1,5 @@
 import React from 'react';
-import './foother.css';
+import './footer.css';
 import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
@@ -25,7 +25,7 @@ export default function MenuInferior() {
           </Link>
 
           <Link
-            to="explorar"
+            to="/explorar"
             className="img-link"
             // data-testid="explore-bottom-btn"
           >
