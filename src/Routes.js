@@ -21,6 +21,7 @@ import {
   MEAL_DETAIL,
   DRINK_DETAIL,
 } from './services';
+import Progress from './pages/Progress';
 
 function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisório.
   return (
@@ -79,6 +80,28 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
         path="/bebidas/:id"
         render={ (props) => (
           <DetailsMeals
+            { ...props }
+            recipeEndPoint={ DRINK_DETAIL }
+            recommendationEndPoint={ MEALS_LIST }
+          />
+        ) }
+      />
+      <Route
+        exact
+        path="/comidas/:id/in-progress"
+        render={ (props) => (
+          <Progress
+            { ...props }
+            recipeEndPoint={ MEAL_DETAIL }
+            recommendationEndPoint={ DRINKS_LIST }
+          />
+        ) }
+      />
+      <Route
+        exact
+        path="/bebidas/:id/in-progress"
+        render={ (props) => (
+          <Progress
             { ...props }
             recipeEndPoint={ DRINK_DETAIL }
             recommendationEndPoint={ MEALS_LIST }
