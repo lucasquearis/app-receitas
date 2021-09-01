@@ -16,6 +16,8 @@ function Provider({ children }) {
   const [food, setFood] = useState(true);
   const [mealRandom, setMealRandom] = useState('');
   const [drinkRandom, setDrinkRandom] = useState('');
+  const [area, setArea] = useState('British');
+  const [areaData, setAreaData] = useState('British');
 
   const favoritingRecipe = (isFav, setIsFav, id, recipe) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -87,6 +89,10 @@ function Provider({ children }) {
   }, []);
 
   const contextValue = {
+    area,
+    setArea,
+    areaData,
+    setAreaData,
     email,
     setEmail,
     foodData,

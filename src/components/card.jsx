@@ -55,10 +55,15 @@ const Card = ({ item, foodOrDrink, index, ingredientes }) => {
 };
 
 Card.propTypes = {
-  item: PropTypes.objectOf(PropTypes.string).isRequired,
+  item: PropTypes.objectOf(PropTypes.string),
   foodOrDrink: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-  ingredientes: PropTypes.bool.isRequired,
+  index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  ingredientes: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  item: {},
+  ingredientes: true,
 };
 
 export default Card;
