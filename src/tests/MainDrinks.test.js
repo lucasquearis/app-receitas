@@ -8,35 +8,30 @@ const PASSWORD_TEST_ID = 'password-input';
 const LOGIN_BTN_TEST_ID = 'login-submit-btn';
 const MOCK_EMAIL = 'alguem@alguem.com';
 
-describe('Realiza todos os testes da página de Comidas', () => {
-  it('A paǵina de comidas é a primeira a aparecer após o login', () => {
+describe('Realiza todos os testes da página de Bebidas', () => {
+  it('A tela de bebidas possui um header com os botões corretos', () => {
     const { getByTestId, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
 
-    expect(history.location.pathname).toBe('/comidas');
-  });
-
-  it('A página de comidas possui um header com os botões corretos', () => {
-    const { getByTestId } = renderWithRouter(<App />);
-
-    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
-    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
-    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+    history.push('/bebidas');
 
     expect(getByTestId('profile-top-btn')).toBeInTheDocument();
-    expect(getByTestId('page-title')).toHaveTextContent('Comidas');
+    expect(getByTestId('page-title')).toHaveTextContent('Bebidas');
     expect(getByTestId('search-top-btn')).toBeInTheDocument();
   });
 
   it('A barra de busca é renderizada ao clicar no botão', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/bebidas');
+
     userEvent.click(getByTestId('search-top-btn'));
 
     expect(getByTestId('search-input')).toBeInTheDocument();
@@ -46,14 +41,14 @@ describe('Realiza todos os testes da página de Comidas', () => {
     expect(getByTestId('exec-search-btn')).toBeInTheDocument();
   });
 
-  it('A página renderiza inicialmente 12 Comidas', async () => {
+  it('A página renderiza inicialmente 12 Bebidas', async () => {
     const { getByTestId, findAllByTestId, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
 
-    history.push('/comidas');
+    history.push('/bebidas');
 
     const cardRegEx = /.-recipe-card/;
     const AMOUNT_OF_CARDS = 12;
@@ -65,6 +60,7 @@ describe('Realiza todos os testes da página de Comidas', () => {
       expect(card).toBeInTheDocument();
     });
   });
+
   it('os botoes de categoria são renderizados corretamente', () => {
     const { getByTestId, container, history } = renderWithRouter(<App />);
 
@@ -72,7 +68,7 @@ describe('Realiza todos os testes da página de Comidas', () => {
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
 
-    history.push('/comidas');
+    history.push('/bebidas');
 
     const categoryButtons = container.querySelectorAll('.category-buttons');
 
