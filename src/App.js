@@ -25,23 +25,23 @@ function App() {
     // muito obrigado ao meu amigo Gedeão por ajudar à montar e organizar as minhas rotas.
     <BrowserRouter>
       <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/comidas" component={ Recipes } />
+        <Route path="/bebidas" component={ Drinks } />
+        <Route path="/comidas/:id" component={ FoodDetails } />
+        <Route path="/bebidas/:id" component={ DrinkDetails } />
         <Route path="/comidas/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
-        <Route path="/bebidas/:id" component={ DrinkDetails } />
-        <Route path="/comidas/:id" component={ FoodDetails } />
-        <Route path="/explorar/comidas/area" component={ SearchByOrigin } />
-        <Route path="/explorar/bebidas/ingredientes" component={ DrinksIngredients } />
-        <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
+        <Route path="/explorar" component={ Search } />
         <Route path="/explorar/comidas" component={ SearchDetailsFood } />
         <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
-        <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
+        <Route path="/explorar/bebidas/ingredientes" component={ DrinksIngredients } />
+        <Route path="/explorar/comidas/area" component={ SearchByOrigin } />
         <Route path="/receitas-feitas" component={ FinishedRecipes } />
         <Route path="/perfil" component={ Profile } />
-        <Route path="/explorar" component={ Search } />
-        <Route path="/bebidas" component={ Drinks } />
-        <Route path="/comidas" component={ Recipes } />
-        <Route exact path="/" component={ Login } />
-        <Route path="*" component={ NotFound } />
+        <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );

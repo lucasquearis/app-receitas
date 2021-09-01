@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
@@ -88,7 +89,7 @@ const DrinkDetails = () => {
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 2,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1,
     },
   };
 
@@ -101,6 +102,7 @@ const DrinkDetails = () => {
           strCategory,
           strInstructions,
           strAlcoholic,
+          idDrink,
         }, i) => (
           <div key={ i }>
             <img
@@ -162,14 +164,16 @@ const DrinkDetails = () => {
                 <FoodRecomendationCard key={ index } recipe={ recipe } index={ index } />
               ))}
             </Carousel>
-            <button
-              data-testid="start-recipe-btn"
-              key={ i }
-              type="button"
-              className="start-recipe-btn"
-            >
-              Iniciar receita
-            </button>
+            <Link to={ `/bebidas/${idDrink}/in-progress` }>
+              <button
+                data-testid="start-recipe-btn"
+                key={ i }
+                type="button"
+                className="start-recipe-btn"
+              >
+                Iniciar receita
+              </button>
+            </Link>
           </div>))
       }
     </div>
