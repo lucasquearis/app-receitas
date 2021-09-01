@@ -1,8 +1,5 @@
-// vitals
 import React, { useState, useEffect } from 'react';
-// components
 import Header from '../components/Header';
-import Footer from '../components/FooterMenu';
 import DoneRecipeCard from '../components/DoneRecipeCard';
 
 function DoneRecipes() {
@@ -77,7 +74,6 @@ function DoneRecipes() {
 
           )) : <h4>Sem receitas feitas.</h4>}
       </div>
-      <Footer />
 
     </main>
   );

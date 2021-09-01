@@ -1,8 +1,7 @@
-// vitals
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-// styles
 import '../styles/Header.css';
+import { useParams } from 'react-router-dom';
 import profilePicture from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
@@ -17,9 +16,11 @@ const renderTitle = (path) => {
     '/bebidas': 'Bebidas',
     '/perfil': 'Perfil',
     '/explorar/comidas': 'Explorar Comidas',
+    '/explorar/comidas/ingredientes': 'Explorar Comidas',
     '/explorar/bebidas': 'Explorar Bebidas',
     '/receitas-feitas': 'Receitas Feitas',
     '/receitas-favoritas': 'Receitas Favoritas',
+    '/explorar': 'Explorar',
   };
 
   return `${possiblePaths[path]}`;
@@ -40,7 +41,7 @@ function Header() {
   // states
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
-
+  const { id } = useParams();
   const history = useHistory();
   const { location: { pathname } } = history;
 
@@ -54,13 +55,20 @@ function Header() {
     }
   }, [pathname]);
 
+  const toggleFilter = pathname.includes('explorar')
+    || pathname.includes('ingredientes')
+    || pathname.includes(id)
+    || pathname.includes('perfil')
+    || pathname.includes('area')
+    || pathname.includes('receita')
+    || pathname.includes('perfil');
   return (
     <>
       <header className="header-div">
         <input
           type="image"
           className="header-button"
-          onClick={ () => history.push('/profile') }
+          onClick={ () => history.push('/perfil') }
           src={ profilePicture }
           alt="Ícone que indica o botão pra ir para o perfil de usuário"
           data-testid="profile-top-btn"
@@ -81,7 +89,10 @@ function Header() {
           ? <SearchBar />
           : ''}
       </div>
-      <Filter />
+      <div>
+        { !toggleFilter && <Filter />}
+      </div>
+
     </>
   );
 }

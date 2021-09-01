@@ -1,16 +1,12 @@
-// Vitals
 import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import myContext from '../context/myContext';
-// API
 import { getMealsById } from '../services/mealAPI';
 import { getDrinksById } from '../services/drinkAPI';
-// Components
 import Sugestions from '../components/Sugestions';
 import HeaderDetails from '../components/HeaderDetails';
 import Ingredients from '../components/Ingredients';
 import Video from '../components/Video';
-// Styles
 import '../styles/Details.css';
 import Intructions from '../components/Intructions';
 import StartButton from '../components/StartButton';

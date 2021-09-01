@@ -10,16 +10,6 @@ function StartButton() {
   const { id } = useParams();
   const text = pathname.includes('comidas') ? 'meals' : 'cocktails';
 
-  // useEffect(() => {
-  //   if (localStorage.favoriteRecipes) {
-  //     const request = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //     const filterLocal = request.filter((item) => item.id === id);
-  //     if (filterLocal.length !== 0) {
-  //       setButtonText(true);
-  //     }
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (localStorage.doneRecipes) {
       const request = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -40,7 +30,6 @@ function StartButton() {
       [text]: { ...objRecipeProgress[text],
         [id]: [...new Array(lists.ingredients.length).fill(false)] } });
     localStorage.setItem('idRecipe', JSON.stringify([id]));
-    // setButtonText(true);
   };
 
   const mensagem = () => {

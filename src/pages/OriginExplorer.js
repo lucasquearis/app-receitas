@@ -1,10 +1,11 @@
 import React from 'react';
 import FooterMenu from '../components/FooterMenu';
+import Header from '../components/Header';
 
 function OriginExplorer() {
   return (
     <div>
-      <h1>OriginExplorer</h1>
+      <Header />
       <FooterMenu />
     </div>
   );

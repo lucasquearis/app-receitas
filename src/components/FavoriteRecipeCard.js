@@ -1,9 +1,7 @@
-// vitals
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-// styles
 import '../styles/FavoriteRecipes.css';
 import favoriteButton from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';

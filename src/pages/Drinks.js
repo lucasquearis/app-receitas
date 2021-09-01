@@ -11,9 +11,6 @@ export default function Foods() {
   if (!filteredDrinks || !baseDataDrinks) return <p>Loading...</p>;
   const { drinks } = filteredDrinks;
   let cards = '';
-  // console.log('base', baseDataDrinks);
-  // console.log('fil', filteredDrinks);
-  // console.log('drinks', drinks);
   if (!drinks) return '';
   if (drinks !== null) cards = drinks.slice(START_CARD, NUMBER_CARDS);
   if (drinks === null) cards = baseDataDrinks.drinks.slice(START_CARD, NUMBER_CARDS);
