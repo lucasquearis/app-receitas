@@ -8,9 +8,19 @@ function CategoryFood() {
   const maxCategories = 5;
   const maxList = 12;
 
+  const searchFood = async () => {
+    const foodApi = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+    const { meals } = await fetch(foodApi).then((data) => data.json());
+    setFoodRecipes(meals);
+  };
+
+  useEffect(() => {
+    searchFood();
+  }, []);
+
   useEffect(() => {
     const getFood = async () => {
-      const foodApi = `https://www.themealdb.com/api/json/v1/1/search.php?s=${category}`;
+      const foodApi = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
       const { meals } = await fetch(foodApi).then((data) => data.json());
       setFoodRecipes(meals);
     };
@@ -32,7 +42,7 @@ function CategoryFood() {
         type="button"
         key={ strCategory }
         onClick={ (() => (
-          (category !== strCategory) ? setCategory(strCategory) : setCategory(''))) }
+          (category !== strCategory) ? setCategory(strCategory) : searchFood())) }
       >
         { strCategory }
       </button>
@@ -43,7 +53,7 @@ function CategoryFood() {
   return (
     <div>
       <div>
-        <button type="button" onClick={ (() => setCategory('')) }>
+        <button type="button" data-testid="All-category-filter" onClick={ searchFood }>
           All
         </button>
         { categoriesBtn() }

@@ -8,21 +8,33 @@ function CategoryDrink() {
   const maxCategories = 5;
   const maxList = 12;
 
-  useEffect(() => {
-    const getDrinks = async () => {
-      const drinkApi = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${category}`;
-      const { drinks } = await fetch(drinkApi).then((data) => data.json());
-      setDrinkRecipes(drinks);
-    };
+  const searchDrink = async () => {
+    const drinkApi = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+    const { drinks } = await fetch(drinkApi).then((data) => data.json());
+    setDrinkRecipes(drinks);
+  };
 
+  useEffect(() => {
     const getCategories = async () => {
       const drinkApiCategories = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
       const { drinks } = await fetch(drinkApiCategories).then((data) => data.json());
       setDrinkCategories(drinks);
     };
 
-    getDrinks();
     getCategories();
+    searchDrink();
+  }, []);
+
+  useEffect(() => {
+    const getDrinks = async () => {
+      const drinkApi = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
+      const { drinks } = await fetch(drinkApi).then((data) => data.json());
+      setDrinkRecipes(drinks);
+    };
+
+    if (category.length) {
+      getDrinks();
+    }
   }, [category]);
 
   const categoriesBtn = () => {
@@ -31,8 +43,8 @@ function CategoryDrink() {
         data-testid={ `${strCategory}-category-filter` }
         type="button"
         key={ strCategory }
-        onClick={ (() => (
-          (category !== strCategory) ? setCategory(strCategory) : setCategory(''))) }
+        onClick={ () => (
+          (category !== strCategory) ? setCategory(strCategory) : searchDrink()) }
       >
         { strCategory }
       </button>
@@ -43,7 +55,7 @@ function CategoryDrink() {
   return (
     <div>
       <div>
-        <button type="button" onClick={ (() => setCategory('')) }>
+        <button type="button" data-testid="All-category-filter" onClick={ searchDrink }>
           All
         </button>
         { categoriesBtn() }
