@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, act } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import { DrinksDetails } from '../pages';
-import { justDrinkMockFetch, drinksMockFetch } from './helpers/mockedFetchs';
+import { justDrinkMockFetch } from './helpers/mockedFetchs';
 
 describe('Testa a página de receitas feitas', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -28,6 +28,4 @@ describe('Testa a página de receitas feitas', () => {
     expect(recipeCategory).toBeInTheDocument();
     expect(instructions).toBeInTheDocument();
   });
-
-  drinksMockFetch();
 });
