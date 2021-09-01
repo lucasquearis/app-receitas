@@ -40,8 +40,14 @@ export default function ComidasDetalhes() {
     apiDrink();
   }, []);
 
-  if (food === undefined) {
-    return <Loading />;
+  async function copyPageUrl() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      console.log('Link copiado!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+    document.getElementById('share-button').innerHTML = 'Link copiado!';
   }
 
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
@@ -52,6 +58,10 @@ export default function ComidasDetalhes() {
       >
         {`${food[ingredientKey]} - ${food[`strMeasure${index + 1}`]}`}
       </li>));
+
+  if (food === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -68,8 +78,16 @@ export default function ComidasDetalhes() {
 
       <div>
         <div className={ styles.buttonComidasDetails }>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
           <FavoriteButton foodOrDrink={ food } />
+          <button
+            id="share-button"
+            type="button"
+            data-testid="share-btn"
+            onClick={ copyPageUrl }
+          >
+            Compartilhar
+          </button>
+
         </div>
 
         <ul>
@@ -104,11 +122,12 @@ export default function ComidasDetalhes() {
       ))}
 
       <button
+        className="start-recipe-btn"
         type="button"
         data-testid="start-recipe-btn"
         onClick={ () => history.push(`/comidas/${idApi}/in-progress`) }
       >
-        Começar receita
+        Iniciar receita
       </button>
     </div>
   );

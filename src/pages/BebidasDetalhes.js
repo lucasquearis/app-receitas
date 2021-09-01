@@ -48,6 +48,32 @@ export default function BebidasDetalhes() {
         {` ${drink[ingredientKey]} - ${drink[`strMeasure${index + 1}`]}`}
       </li>));
 
+  const handleFavorite = () => {
+    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (lastSave.find((recipe) => recipe.id === drink.idDrink)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        lastSave.filter((recipe) => recipe.id !== drink.idDrink),
+      ));
+      setIsFavorite(false);
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(
+        [...lastSave, getFavorite(drink)],
+      ));
+      setIsFavorite(true);
+    }
+  };
+
+  async function copyPageUrl() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      console.log('Link copiado!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+    document.getElementById('share-button').innerHTML = 'Link copiado!';
+  }
+
+
   if (drink === undefined) {
     return <Loading />;
   }
@@ -68,8 +94,17 @@ export default function BebidasDetalhes() {
       <div data-testid="recipe-alcoholic">{drink.strCategory}</div>
 
       <div className={ styles.buttonBebidasDetails }>
-        <button type="button" data-testid="share-btn">Compartilhar</button>
+
         <FavoriteButton foodOrDrink={ drink } />
+        <button
+          id="share-button"
+          type="button"
+          data-testid="share-btn"
+          onClick={ copyPageUrl }
+        >
+          Compartilhar
+        </button>
+
       </div>
       <ul className={ styles.optionsDrinks }>
         {renderIngredients(getIngredientsKeys(drink))}
@@ -96,7 +131,7 @@ export default function BebidasDetalhes() {
         data-testid="start-recipe-btn"
         onClick={ () => history.push(`/bebidas/${idApi}/in-progress`) }
       >
-        Começar receita
+        Iniciar receita
       </button>
     </div>
   );
