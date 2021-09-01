@@ -17,7 +17,8 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
     }
   }, [id]);
   const copyLink = () => {
-    copy(window.location.href);
+    const link = window.location.href;
+    copy(link.replace('/in-progress', ''));
     setCopied('Link copiado!');
   };
   const favoriteSet = () => {
@@ -113,7 +114,7 @@ HeaderDetails.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  recipe: PropTypes.node.isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
 };
 

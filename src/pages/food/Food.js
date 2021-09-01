@@ -47,6 +47,7 @@ const Food = () => {
         <Header>Comidas</Header>
         <CategoriesFilterButtons />
         <CardsList array={ items } teste="recipe-card" />
+        <FooterMenu />
       </div>
     );
   }

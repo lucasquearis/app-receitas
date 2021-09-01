@@ -26,3 +26,72 @@ export const filterIngredientsDetails = (recipe) => {
   }
   return ingredientsMeaseure;
 };
+
+export const foodAndDrinksInProcessLocalStorage = () => {
+  const mealsAndDrinksInProgress = {
+    cocktails: {
+    },
+    meals: {
+    },
+  };
+
+  localStorage.setItem('inProgressRecipes', JSON.stringify(mealsAndDrinksInProgress));
+};
+
+export const filterFoodLocalStorage = (id) => {
+  const key = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const keyFiltered = key.meals[id];
+  console.log(keyFiltered);
+  return keyFiltered;
+};
+
+export const ingredientsMeasuresFunc = (obj) => {
+  const objKey = Object.keys(obj);
+  const objEntries = Object.entries(obj[objKey][0]);
+
+  const objEntriesIngredient = objEntries.filter((entry) => (
+    entry[0].includes('strIngredient') && entry[1]))
+    .map((array) => array[1]);
+
+  const objEntriesMeasure = objEntries.filter((entry) => (
+    entry[0].includes('strMeasure') && entry[1]))
+    .map((array) => array[1]);
+
+  const entriesIngredientArrays = objEntriesIngredient.map((ingredient, index) => (
+    `${ingredient} - ${objEntriesMeasure[index]}`));
+
+  return entriesIngredientArrays;
+};
+
+export const updateLocalStorage = (id, ing, array, type) => {
+  const key = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (key[type][id] && key[type][id].includes(ing)) {
+    key[type][id] = key[type][id].filter((ingredient) => ingredient !== ing);
+  } else {
+    key[type][id] = [...array, ing];
+  }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(key));
+};
+
+export const disableFinishRecipeBtn = (array, id, type) => {
+  const localStorageRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const localStorageRecipeIngredients = localStorageRecipes[type][id];
+  const recipeIngredients = array[id];
+
+  if (localStorageRecipeIngredients && recipeIngredients) {
+    const bool = localStorageRecipeIngredients.length === recipeIngredients.length;
+    return bool;
+  }
+  return false;
+};
+
+export const defineChecked = (ing, id, type) => {
+  const key = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let checked;
+  if (key[type][id] !== undefined) {
+    checked = key[type][id].some((ingredient) => ingredient === ing);
+  } else {
+    checked = false;
+  }
+  return checked;
+};
