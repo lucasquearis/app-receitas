@@ -25,10 +25,6 @@
   width: 5.5em;
 }
 
-.recipes-categories:hover {
-  border: 0.1em solid black;
-}
-
 .done-cards-container {
   display: flex;
   flex-flow: wrap;
@@ -67,7 +63,7 @@
   }
 
   .recipes-categories:hover {
-    border: 0.2em solid black;
+    box-shadow: 0 0 6px grey;
   }
 
 }

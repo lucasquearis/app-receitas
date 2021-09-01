@@ -82,7 +82,7 @@ const DoneRecipes = () => {
           type="button"
           id="filter-by-food-btn"
           className="recipes-categories comida"
-          buttonText="Food"
+          buttonText="Foods"
           onClick={ handleFilterClick }
           isDisable={ false }
         />

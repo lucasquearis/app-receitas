@@ -3,3 +3,15 @@
   max-width: 600px;
   width: 90vw;
 }
+
+.filter-recipes-container {
+  display: flex;
+}
+
+.recipes-categories {
+  background-color: whitesmoke;
+  border: transparent;
+  border-radius: 6px;
+  box-shadow: 0 0 4px -1px grey;
+  font-weight: 500;
+}
