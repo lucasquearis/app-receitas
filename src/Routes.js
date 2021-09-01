@@ -5,6 +5,7 @@ import Principal from './pages/Principal';
 import Perfil from './pages/Perfil';
 import Explore from './pages/Explore';
 import NotFound from './pages/NotFound';
+import DetailsMeals from './pages/DetailsMeals';
 import {
   MEALS_LIST,
   MEALS_BY_CATEGORY,
@@ -14,6 +15,8 @@ import {
   DRINKS_LIST,
   INGREDIENT_MEALS,
   INGREDIENT_DRINKS,
+  MEAL_DETAIL,
+  DRINK_DETAIL,
 } from './services';
 
 function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisório.
@@ -41,8 +44,9 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
       <Route
         exact
         path="/comidas"
-        render={ () => (
+        render={ (props) => (
           <Principal
+            { ...props }
             categoriesEndPoint={ MEALS_CATEGORIES }
             getByCategoryEndPoint={ MEALS_BY_CATEGORY }
             getByIngredientsEndPoint={ INGREDIENT_MEALS }
@@ -54,9 +58,29 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/perfil" component={ Perfil } />
       <Route exact path="/" component={ Login } />
+      <Route
+        exact
+        path="/comidas/:id"
+        render={ (props) => (
+          <DetailsMeals
+            { ...props }
+            recipeEndPoint={ MEAL_DETAIL }
+            recommendationEndPoint={ DRINKS_LIST }
+          />
+        ) }
+      />
+      <Route
+        exact
+        path="/bebidas/:id"
+        render={ (props) => (
+          <DetailsMeals
+            { ...props }
+            recipeEndPoint={ DRINK_DETAIL }
+            recommendationEndPoint={ MEALS_LIST }
+          />
+        ) }
+      />
       <Route component={ NotFound } />
-      {/* <Route exact path="/comidas/:id" component={ Detalhe } />
-      <Route exact path="/bebidas/:id" component={ Detalhe } /> */}
     </Switch>
   );
 }

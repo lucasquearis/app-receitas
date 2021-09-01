@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import AppContext from '../../context/AppContext';
 
 function Login() {
+  const { setMealsToken, setCocktailsToken, setUser } = useContext(AppContext);
+
   const [inputLogin, setInputLogin] = useState({
     email: '',
     password: '',
@@ -15,12 +18,9 @@ function Login() {
   };
 
   const handleClick = () => {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify({ email: inputLogin.email }));
-    localStorage.setItem('doneRecipes', '');
-    localStorage.setItem('favoriteRecipes', '');
-    localStorage.setItem('inProgressRecipes', '');
+    setMealsToken(1);
+    setCocktailsToken(1);
+    setUser({ email: inputLogin.email });
   };
 
   const verifyLogin = () => {
