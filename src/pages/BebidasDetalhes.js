@@ -48,21 +48,6 @@ export default function BebidasDetalhes() {
         {` ${drink[ingredientKey]} - ${drink[`strMeasure${index + 1}`]}`}
       </li>));
 
-  const handleFavorite = () => {
-    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    if (lastSave.find((recipe) => recipe.id === drink.idDrink)) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        lastSave.filter((recipe) => recipe.id !== drink.idDrink),
-      ));
-      setIsFavorite(false);
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [...lastSave, getFavorite(drink)],
-      ));
-      setIsFavorite(true);
-    }
-  };
-
   async function copyPageUrl() {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -72,7 +57,6 @@ export default function BebidasDetalhes() {
     }
     document.getElementById('share-button').innerHTML = 'Link copiado!';
   }
-
 
   if (drink === undefined) {
     return <Loading />;
