@@ -7,7 +7,8 @@ function FoodProvider({ children }) {
   const [filter, setFilter] = useState('Nome');
   const [search, setSearch] = useState('');
   const [mealList, setMealList] = useState([]);
-
+  const [areas, setAreas] = useState([]);
+  const [areaSelected, setAreaSelected] = ('');
   const history = useHistory();
 
   const fetchIngredientFood = async () => {
@@ -62,6 +63,10 @@ function FoodProvider({ children }) {
     setSearch,
     mealList,
     handleClickFood,
+    areas,
+    setAreas,
+    areaSelected,
+    setAreaSelected,
   };
 
   return (
