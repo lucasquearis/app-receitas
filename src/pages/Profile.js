@@ -5,6 +5,10 @@ import profileIcon from '../images/profileIcon.svg';
 
 const Profile = () => {
   const emailStorage = JSON.parse(localStorage.getItem('user'));
+  let getEmail = '';
+  if (emailStorage) {
+    getEmail = emailStorage.email;
+  }
   const handleClick = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('favoriteRecipes');
@@ -16,9 +20,17 @@ const Profile = () => {
 
   return (
     <div>
+      <header>
+        <Link to="/perfil">
+          <button type="button">
+            <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+          </button>
+        </Link>
+        <p data-testid="page-title">Perfil</p>
+      </header>
       <label htmlFor="email-perfil">
         Email:
-        <p id="email-perfil" data-testid="profile-email">{ emailStorage.email }</p>
+        <p id="email-perfil" data-testid="profile-email">{ getEmail }</p>
       </label>
       <Link to="/receitas-feitas">
         <button
@@ -48,10 +60,6 @@ const Profile = () => {
           Sair
         </button>
       </Link>
-      <button type="button">
-        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      </button>
-      <p data-testid="page-title">Perfil</p>
       <FooterMenu />
     </div>
   );

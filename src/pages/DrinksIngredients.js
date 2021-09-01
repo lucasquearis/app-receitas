@@ -1,20 +1,23 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
 import DrinksContext from '../context/DrinksContext';
 import IngredientCard from '../components/IngredientsCard';
 import './ingredientDrinks.css';
 
-const SearchDrinksByIngredients = () => {
+const DrinksIngredients = () => {
   const { ingredients } = useContext(DrinksContext);
   const NUMBER_OF_CARDS = 12;
 
   return (
     <div className="ingredient-container">
       <header>
-        <button type="button">
-          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-        </button>
+        <Link to="/perfil">
+          <button type="button">
+            <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+          </button>
+        </Link>
         <p data-testid="page-title">Explorar Ingredientes</p>
       </header>
       <div className="ingredient-list">
@@ -33,4 +36,4 @@ const SearchDrinksByIngredients = () => {
   );
 };
 
-export default SearchDrinksByIngredients;
+export default DrinksIngredients;

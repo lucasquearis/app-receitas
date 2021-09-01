@@ -21,9 +21,13 @@ const SearchDetailsFood = () => {
 
   return (
     <div>
-      <button type="button">
-        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      </button>
+      <header>
+        <Link to="/perfil">
+          <button type="button">
+            <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+          </button>
+        </Link>
+      </header>
       <p data-testid="page-title">Explorar Comidas</p>
       <div className="buttons">
         <Link to="/explorar/comidas/ingredientes">

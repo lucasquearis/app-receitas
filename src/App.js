@@ -10,8 +10,8 @@ import DrinkDetails from './pages/DrinkDetails';
 import Search from './pages/Search';
 import SearchDetailsFood from './pages/SeachDetailsFood';
 import SearchDetailsDrinks from './pages/SearchDetailsDrinks';
-import SearchFoodByIngredients from './pages/SearchFoodByIngredients';
-import SearchDrinksByIngredients from './pages/SearchDrinksByIngredients';
+import FoodIngredients from './pages/FoodIngredients';
+import DrinksIngredients from './pages/DrinksIngredients';
 import SearchByOrigin from './pages/SearchByOrigin';
 import Profile from './pages/Profile';
 import FinishedRecipes from './pages/FinishedRecipes';
@@ -30,14 +30,8 @@ function App() {
         <Route path="/bebidas/:id" component={ DrinkDetails } />
         <Route path="/comidas/:id" component={ FoodDetails } />
         <Route path="/explorar/comidas/area" component={ SearchByOrigin } />
-        <Route
-          path="/explorar/bebidas/ingredientes"
-          component={ SearchDrinksByIngredients }
-        />
-        <Route
-          path="/explorar/comidas/ingredientes"
-          component={ SearchFoodByIngredients }
-        />
+        <Route path="/explorar/bebidas/ingredientes" component={ DrinksIngredients } />
+        <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
         <Route path="/explorar/comidas" component={ SearchDetailsFood } />
         <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
