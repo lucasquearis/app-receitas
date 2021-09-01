@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import FoodContext from '../context/FoodContext';
-import DrinksContext from '../context/DrinksContext';
+import AppContext from '../context/AppContext';
 import Input from './Input';
 import Button from './Button';
 
@@ -10,8 +9,9 @@ const SearchBar = (location) => {
     search: '',
   });
   const [disabled, setDisabled] = useState(true);
-  const { setFoodFilter, setMealsByCategories } = useContext(FoodContext);
-  const { setDrinkFilter, setDrinksByCategories } = useContext(DrinksContext);
+  const { setFoodFilter,
+    setMealsByCategories,
+    setDrinkFilter, setDrinksByCategories } = useContext(AppContext);
 
   function handleChange({ target }) {
     const { name, value } = target;

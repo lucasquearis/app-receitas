@@ -4,12 +4,12 @@ import HeaderFood from '../components/HeaderFood';
 import FooterMenu from '../components/FooterMenu';
 import './recipes.css';
 import RecipeCard from '../components/RecipeCard';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import '../components/recipeCard.css';
 import ButtonCategories from '../components/ButtonsCategory';
 
 const Recipes = () => {
-  const { foods, categoriesMeal, mealsByCategories } = useContext(FoodContext);
+  const { foods, categoriesMeal, mealsByCategories } = useContext(AppContext);
   const history = useHistory();
   const RECIPES = 12;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
@@ -19,11 +19,12 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeInProgress from './pages/RecipeInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
 import NotFound from './pages/NotFound';
+import Provider from './context/Provider';
 
 function App() {
   return (
     // muito obrigado ao meu amigo Gedeão por ajudar à montar e organizar as minhas rotas.
-    <BrowserRouter>
+    <Provider>
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ Recipes } />
@@ -43,7 +44,7 @@ function App() {
         <Route path="/receitas-feitas" component={ FinishedRecipes } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       </Switch>
-    </BrowserRouter>
+    </Provider>
   );
 }
 

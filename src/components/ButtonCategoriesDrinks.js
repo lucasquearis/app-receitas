@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import DrinksContext from '../context/DrinksContext';
+import AppContext from '../context/AppContext';
 import { fetchDrinksByCategoryName, fetchDrinksApi } from '../services/fetchDrinksApi';
 import './buttonsCategory.css';
 
 const ButtonCategoriesDrinks = ({ categories }) => {
-  const { setDrinks, setDrinksByCategories } = useContext(DrinksContext);
+  const { setDrinks, setDrinksByCategories } = useContext(AppContext);
   const CATEGORIES = 5;
   const buttons = document.getElementsByName('category-buttons');
   const checked = false;

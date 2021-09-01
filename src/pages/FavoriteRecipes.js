@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import Button from '../components/Button';
 import FavoriteFoodCard from '../components/FavoriteFoodCard';
 import FavoriteDrinkCard from '../components/FavoriteDrinkCard';
 import profileIcon from '../images/profileIcon.svg';
 
 const FavoriteRecipes = () => {
-  const { changed } = useContext(FoodContext);
+  const { changed } = useContext(AppContext);
   const [storage, setStorage] = useState([]);
   const [filter, setFilter] = useState('');
 

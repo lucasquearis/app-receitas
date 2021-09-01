@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -17,7 +17,7 @@ const RecipeInProgress = () => {
   const pathnameSeparate = pathname.split('/');
   const actualPath = pathnameSeparate[2];
 
-  const { foodDetails, setFoodDetails } = useContext(FoodContext);
+  const { foodDetails, setFoodDetails } = useContext(AppContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);

@@ -3,14 +3,13 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
-import DrinksContext from '../context/DrinksContext';
+import AppContext from '../context/AppContext';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import FoodContext from '../context/FoodContext';
 import Copy from '../components/Clipboard-Copy';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
@@ -23,8 +22,7 @@ const DrinkDetails = () => {
   const actualPath = pathnameSeparate[2];
   const url = window.location.href;
 
-  const { drinkDetails, setDrinkDetails } = useContext(DrinksContext);
-  const { foods } = useContext(FoodContext);
+  const { drinkDetails, setDrinkDetails, foods } = useContext(AppContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);

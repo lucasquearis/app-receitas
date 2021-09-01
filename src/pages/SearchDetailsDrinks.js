@@ -2,10 +2,10 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
-import DrinksContext from '../context/DrinksContext';
+import AppContext from '../context/AppContext';
 
 const SearchDetailsFood = () => {
-  const { randomDrinks, setRandomDrinks } = useContext(DrinksContext);
+  const { randomDrinks, setRandomDrinks } = useContext(AppContext);
   const [turnRandom, setTurnRandom] = useState(false);
 
   useEffect(() => {

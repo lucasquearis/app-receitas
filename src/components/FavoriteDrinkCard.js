@@ -5,14 +5,14 @@ import './favoriteFoodCard.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import Copy from './Clipboard-Copy';
 
 const FavoriteDrinkCard = ({ recipe, index }) => {
   const { id, image, name, alcoholicOrNot } = recipe;
   const [copy, setCopy] = useState('');
   const [favorite, setFavorite] = useState(true);
-  const { changed, setChanged } = useContext(FoodContext);
+  const { changed, setChanged } = useContext(AppContext);
 
   function DetailUrl() {
     const url = window.location.href;

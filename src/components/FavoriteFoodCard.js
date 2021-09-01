@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import './favoriteFoodCard.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -12,7 +12,7 @@ const FavoriteFoodCard = ({ recipe, index }) => {
   const { id, image, name, area, category } = recipe;
   const [favorite, setFavorite] = useState(true);
   const [copy, setCopy] = useState('');
-  const { changed, setChanged } = useContext(FoodContext);
+  const { changed, setChanged } = useContext(AppContext);
 
   function DetailUrl() {
     const url = window.location.href;

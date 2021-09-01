@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import IngredientCard from '../components/IngredientsCard';
 
 const FoodIngredients = () => {
-  const { ingredients } = useContext(FoodContext);
+  const { ingredients } = useContext(AppContext);
   const NUMBER_OF_CARDS = 12;
 
   return (

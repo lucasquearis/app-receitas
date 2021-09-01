@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 
 import Carousel from 'react-multi-carousel';
-import FoodContext from '../context/FoodContext';
 import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
-import DrinksContext from '../context/DrinksContext';
+import AppContext from '../context/AppContext';
 import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';
@@ -24,8 +23,7 @@ const FoodDetails = () => {
   const actualPath = pathnameSeparate[2];
   const url = window.location.href;
 
-  const { foodDetails, setFoodDetails } = useContext(FoodContext);
-  const { drinks } = useContext(DrinksContext);
+  const { drinks, foodDetails, setFoodDetails } = useContext(AppContext);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);

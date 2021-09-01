@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import FoodContext from '../context/FoodContext';
+import AppContext from '../context/AppContext';
 import { fetchMealByName, fetchMealByAreaName } from '../services/fetchMealApi';
 
 const SearchByOrigin = () => {
-  const { areas, foods, setFoods } = useContext(FoodContext);
+  const { areas, foods, setFoods } = useContext(AppContext);
   const [areaValue, setAreaValue] = useState('All');
   const [showBar, setShowBar] = useState(false);
   const RECIPES = 12;
