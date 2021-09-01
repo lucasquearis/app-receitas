@@ -1,10 +1,28 @@
-import React from 'react';
-import { bool, func } from 'prop-types';
+import React, { useState } from 'react';
+import Alert from 'react-bootstrap/Alert';
+import { string, objectOf } from 'prop-types';
 import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
+import favoriteRecipes from '../helper/setLocalStorage';
 
-function Button({ favorite, handleFavorite, handleShare }) {
+function Button({ recipe }) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    localStorage.setItem('favoriteRecipes',
+      JSON.stringify(favoriteRecipes(recipe, 'comida')));
+  };
+
+  const handleShare = async () => {
+    const time = 2000;
+    navigator.clipboard.writeText(window.location.href);
+    setShow(true);
+    await setTimeout(() => setShow(false), time);
+  };
+
   return (
     <>
       <button
@@ -23,17 +41,19 @@ function Button({ favorite, handleFavorite, handleShare }) {
       >
         <img
           data-testid="favorite-btn"
-          src={ favorite ? blackHeart : whiteHeart }
+          src={ isFavorite ? blackHeart : whiteHeart }
           alt="Favorite"
         />
       </button>
+      <Alert show={ show }>
+        Link copiado!
+      </Alert>
     </>
   );
 }
 
 Button.propTypes = {
-  favorite: bool.isRequired,
-  handleFavorite: func.isRequired,
-  handleShare: func.isRequired,
+  recipe: objectOf(string).isRequired,
 };
+
 export default Button;
