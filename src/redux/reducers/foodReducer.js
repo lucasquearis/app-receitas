@@ -4,6 +4,8 @@ import {
   FOOD_RANDOM_SUCCESS,
   FOOD_INGREDIENTS_LIST_SUCCESS,
   FOOD_HANDLECLICK_INGREDIENT,
+  FOOD_PER_AREA_LIST_SUCCESS,
+  FOOD_PER_AREA_FILTER_SUCCESS,
 } from '../actions/actionFood';
 
 const INITIAL_STATE = {
@@ -12,6 +14,8 @@ const INITIAL_STATE = {
   foodRandom: [],
   foodIngredientsList: [],
   foodIsClicked: false,
+  foodPerAreaList: [],
+  foodPerAreaFilter: [],
 };
 
 const cardListLenght = 12;
@@ -43,6 +47,16 @@ function foodReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       foodIsClicked: action.payload,
+    };
+  case FOOD_PER_AREA_LIST_SUCCESS:
+    return {
+      ...state,
+      foodPerAreaList: action.payload,
+    };
+  case FOOD_PER_AREA_FILTER_SUCCESS:
+    return {
+      ...state,
+      foodPerAreaFilter: action.payload.slice(0, cardListLenght),
     };
   default:
     return state;
