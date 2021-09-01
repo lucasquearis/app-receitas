@@ -1,16 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router';
-import FoodDAPI from '../service/foodAPI';
 import Buttons from '../components/categoriesButton';
 import RecipesContext from '../context/RecipesContext';
 import Recipes from '../components/Recipes';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import FoodDAPI from '../service/foodAPI';
 
 function Comidas() {
-  const { foodCategory, foodData, searchBar } = useContext(RecipesContext);
-  FoodDAPI();
-  const [food] = useState(true);
+  const {
+    foodCategory,
+    foodData,
+    searchBar,
+    filter } = useContext(RecipesContext);
+  if (filter === '') {
+    FoodDAPI();
+  }
   if (foodData === null) {
     return (
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
@@ -24,8 +29,8 @@ function Comidas() {
     return (
       <div>
         <Header title="Comidas" />
-        <Buttons food={ food } />
-        <Recipes food={ food } />
+        <Buttons food />
+        <Recipes food ingredientes={ false } />
         <Footer />
       </div>
     );

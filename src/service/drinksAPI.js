@@ -1,9 +1,11 @@
 import { useContext, useEffect } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
-function DrinksAPI() {
-  const { setDrinkData, setDrinkCategory, drinkCategory } = useContext(RecipesContext);
+function DrinksAPI(food) {
   const empthRequest = 'search.php?s=';
+  const { setDrinkData,
+    setDrinkCategory,
+    drinkCategory } = useContext(RecipesContext);
   const numberCategory = 5;
   useEffect(() => {
     const response = async (request) => {
@@ -15,14 +17,16 @@ function DrinksAPI() {
           } else setDrinkCategory(drinks.slice(0, numberCategory));
         });
     };
-    if (drinkCategory.length) {
-      const ent = empthRequest;
-      response(ent);
-    } else {
-      response('search.php?s=');
-      response('list.php?c=list');
+    if (!food) {
+      if (drinkCategory.length) {
+        const ent = empthRequest;
+        response(ent);
+      } else {
+        response(empthRequest);
+        response('list.php?c=list');
+      }
     }
-  }, [setDrinkData, setDrinkCategory, drinkCategory]);
+  }, [setDrinkData, setDrinkCategory, drinkCategory, food]);
 }
 
 export default DrinksAPI;
