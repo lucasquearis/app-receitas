@@ -37,16 +37,6 @@
   padding: 9px;
 }
 
-.progress-ing-list {
-  align-self: flex-start;
-  padding-left: 15px;
-  text-align: left;
-}
-
-.progress-ing-list input {
-  margin-right: 9px;
-}
-
 .recipe-title-container {
   align-items: center;
   box-shadow: 0 0 6px -1px darkgrey;

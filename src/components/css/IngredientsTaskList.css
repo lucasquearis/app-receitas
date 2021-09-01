@@ -1,7 +1,17 @@
-li {
+.progress-ing-list li {
   list-style: none;
 }
 
 .ing-checked {
   text-decoration: line-through solid black;
+}
+
+.progress-ing-list {
+  align-self: flex-start;
+  padding-left: 15px;
+  text-align: left;
+}
+
+.progress-ing-list input {
+  margin-right: 9px;
 }
