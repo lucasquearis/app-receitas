@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import AppContext from '../context/AppContext';
 import { Button, FavCard } from '../components';
 import Header from '../components/Header';
-// import './css/DoneRecipes.css';
+import './css/FavouriteRecipes.css';
 
 const copy = require('clipboard-copy');
 
@@ -67,7 +67,7 @@ const DoneRecipes = () => {
   };
 
   return (
-    <div className="fav-recipes-container">
+    <main className="fav-recipes-container">
       <Header title="Receitas Favoritas" />
       <div className="filter-recipes-container">
         <Button
@@ -105,7 +105,7 @@ const DoneRecipes = () => {
           />
         ))}
       </div>
-    </div>
+    </main>
   );
 };
 
