@@ -2,6 +2,26 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getLocalStorage, setLocalStorage } from './LocalStorage';
 
+function enableDisableButton() {
+  const inputsChecked = document.querySelectorAll('input:checked');
+  const finishBtn = document.querySelector('.finish-recipe-button');
+  const inputs = document.querySelectorAll('input[type="checkbox"]');
+
+  if (inputs.length === inputsChecked.length) {
+    finishBtn.removeAttribute('disabled');
+  } else {
+    finishBtn.setAttribute('disabled', 'disabled');
+  }
+
+  inputs.forEach((e) => {
+    e.parentElement.style.textDecoration = 'none';
+  });
+
+  inputsChecked.forEach((e) => {
+    e.parentElement.style.textDecoration = 'line-through';
+  });
+}
+
 function IngredientsCheckList({ recipe, pathname, id }) {
   const containProgress = Object.keys(localStorage).includes('inProgressRecipes');
   const type = (/comidas/.test(pathname)) ? 'meals' : 'cocktails';
@@ -32,7 +52,7 @@ function IngredientsCheckList({ recipe, pathname, id }) {
 
   const [state, setState] = useState(defaultState);
 
-  async function onClick({ target: { name, checked } }) {
+  function onClick({ target: { name, checked } }) {
     if (checked) {
       setState({
         ...state,
@@ -52,6 +72,7 @@ function IngredientsCheckList({ recipe, pathname, id }) {
 
   useEffect(() => {
     setLocalStorage('inProgressRecipes', state);
+    enableDisableButton();
   }, [state]);
 
   const renderList = () => {
