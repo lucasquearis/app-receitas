@@ -35,11 +35,6 @@ function CategoryFood() {
     getCategories();
   }, [category]);
 
-  const handleClick = () => {
-    setCategory('');
-    searchFood();
-  };
-
   const categoriesBtn = () => {
     const categoryBtn = foodCategories.slice(0, maxCategories).map(({ strCategory }) => (
       <button
@@ -47,7 +42,7 @@ function CategoryFood() {
         type="button"
         key={ strCategory }
         onClick={ (() => (
-          (category !== strCategory) ? setCategory(strCategory) : handleClick())) }
+          (category !== strCategory) ? setCategory(strCategory) : searchFood())) }
       >
         { strCategory }
       </button>
