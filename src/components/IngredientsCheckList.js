@@ -2,22 +2,28 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getLocalStorage, setLocalStorage } from './LocalStorage';
 
-function IngredientsCheckList({ recipe, type: pathname, id }) {
+function IngredientsCheckList({ recipe, pathname, id }) {
   const ingredientList = [];
   const measureList = [];
   const maxIngredients = 15;
 
-  const [state, setState] = useState({
+  const defaultState = {
     cocktails: {
       [id]: [],
     },
     meals: {
       [id]: [],
     },
-  });
+  };
+
+  const storage = (getLocalStorage('inProgressRecipes'))
+    ? defaultState
+    : { ...getLocalStorage('inProgressRecipes'), ...defaultState };
+
+  const [state, setState] = useState(storage);
 
   async function onClick({ target: { name, checked } }) {
-    const type = (pathname === 'bebidas') ? 'cocktails' : 'meals';
+    const type = (pathname === '/bebidas') ? 'cocktails' : 'meals';
 
     if (checked) {
       setState({
