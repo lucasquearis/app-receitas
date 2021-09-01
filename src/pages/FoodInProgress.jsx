@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import '../styles/RecipeInProgress.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import whiteHeart from '../images/whiteHeartIcon.svg';
 import MyContext from '../context/MyContext';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 // import blackHeart from '../images/blackHeartIcon.svg';
 
 // função para puxar os ingredientes e sua medidas
@@ -23,7 +24,6 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function FoodInProgress() {
   const id = 52771;
-  const indexo = 0;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
@@ -115,10 +115,8 @@ function FoodInProgress() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
-        <button type="button" data-testid="favorite-btn">
-          <img id="favIcon" src={ whiteHeart } alt="heart" />
-        </button>
-        <button type="button" data-testid="share-btn">favorito</button>
+        <ShareButton />
+        <FavoriteButton />
         <p data-testid="recipe-category">
           { getRecipe.strCategory }
         </p>
@@ -146,7 +144,7 @@ function FoodInProgress() {
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
       <div>
-        <span data-testid={ `${indexo}-recomendation-card` }>cards</span>
+        {/* <span data-testid={ `${indexo}-recomendation-card` }>cards</span> */}
       </div>
       <div>
         <Link to="/receitas-feitas" onClick={ doneRecipe }>

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import '../styles/Details.css';
+import RecomendationsDrinks from '../components/RecomendationsDrinks';
+import ButtonFoods from '../components/ButtonFoods';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -18,25 +22,17 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function FoodDetails() {
   const id = 52771;
-  const indexo = 0;
-  // const getHistory = useHistory();
-  // const { location: { pathname } } = window;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
 
   useEffect(() => {
     try {
-      const urlFoods = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+      const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        // console.log(getHistory);
-        // const goURL = (pathname.includes('comida') ? urlFoods : urlDrinks);
-        // console.log(pathname);
-        const request = await fetch(urlFoods);
+        const request = await fetch(`${urlFoods}${id}`);
         const response = await request.json();
         const resolve = await response.meals[0];
-        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
@@ -61,8 +57,10 @@ function FoodDetails() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
-        <button type="button" data-testid="share-btn">compartilhar</button>
-        <button type="button" data-testid="favorite-btn">favorito</button>
+        <div className="icons">
+          <ShareButton />
+          <FavoriteButton />
+        </div>
         <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>
       <section>
@@ -91,19 +89,11 @@ function FoodDetails() {
           data-testid="video"
         />
       </div>
-      <div>
-        <p data-testid={ `${indexo}-recomendation-card` }>carousel</p>
+      <div className="recomendations">
+        <RecomendationsDrinks />
       </div>
       <div>
-        <Link to={ `/comidas/${id}/in-progress` }>
-          <button
-            className="button-details"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            iniciar receita
-          </button>
-        </Link>
+        <ButtonFoods />
       </div>
     </div>
   );

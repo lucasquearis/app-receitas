@@ -56,18 +56,31 @@ function DoneRecipes() {
               </Card.Title>
             </Link>
             <Card.Body>
-              <span data-testid={ `${i}-horizontal-top-text` }>{ item.area } - { item.category }</span>
+              <span data-testid={ `${i}-horizontal-top-text` }>
+                { item.area }
+                -
+                { item.category }
+              </span>
               <div>
                 <span data-testid={ `${i}-horizontal-done-date` }>{ item.doneDate }</span>
                 <button
                   type="button"
                   onClick={ () => linkToClipboard(item.id, item.type) }
                 >
-                  <img src={ share } alt="sh" data-testid={ `${i}-horizontal-share-btn` } />
+                  <img
+                    src={ share }
+                    alt="share"
+                    data-testid={ `${i}-horizontal-share-btn` }
+                  />
                 </button>
               </div>
               { item.tags.map((tag) => (
-                <span key={ tag } data-testid={ `${i}-${tag}-horizontal-tag` }>{ tag }</span>
+                <span
+                  key={ tag }
+                  data-testid={ `${i}-${tag}-horizontal-tag` }
+                >
+                  { tag }
+                </span>
               ))}
               <div id="copiedLink" />
             </Card.Body>

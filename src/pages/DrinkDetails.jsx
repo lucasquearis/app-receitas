@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
-import { useHistory, Link } from 'react-router-dom';
+import RecomendationsFoods from '../components/RecomendationsFoods';
+import ButtonDrinks from '../components/ButtonDrinks';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -19,32 +22,24 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function DrinkDetails() {
   const id = 178319;
-  const indexo = 0;
-  const getHistory = useHistory();
-  const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
 
   useEffect(() => {
     try {
-      const urlFoods = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
       const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
       const fetchDetailsRecipe = async () => {
-        console.log(getHistory);
-        const goURL = (pathname.includes('comidas') ? urlFoods : urlDrinks);
-        console.log(pathname);
-        const request = await fetch(`${goURL}${id}`);
+        const request = await fetch(`${urlDrinks}${id}`);
         const response = await request.json();
         const resolve = await response.drinks[0];
-        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
@@ -62,8 +57,10 @@ function DrinkDetails() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
-        <button type="button" data-testid="share-btn">compartilhar</button>
-        <button type="button" data-testid="favorite-btn">favorito</button>
+        <div className="icons">
+          <ShareButton />
+          <FavoriteButton />
+        </div>
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
@@ -86,19 +83,11 @@ function DrinkDetails() {
         <h5>Preparation</h5>
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
-      <div>
-        <span data-testid={ `${indexo}-recomendation-card` }>cards</span>
+      <div className="recomendations">
+        <RecomendationsFoods />
       </div>
       <div>
-        <Link to={ `/bebidas/${id}/in-progress` }>
-          <button
-            className="button-details"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            iniciar receita
-          </button>
-        </Link>
+        <ButtonDrinks />
       </div>
     </div>
   );

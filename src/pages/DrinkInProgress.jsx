@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../styles/RecipeInProgress.css';
 import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -20,7 +22,6 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 
 function DrinkInProgess() {
   const id = 178319;
-  const indexo = 0;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
   const [getRecipe, setGetRecipe] = useState({});
@@ -46,7 +47,6 @@ function DrinkInProgess() {
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
-
 
   const drinkProgress = {
     meals: {
@@ -126,8 +126,8 @@ function DrinkInProgess() {
       </div>
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
-        <button type="button" data-testid="share-btn">compartilhar</button>
-        <button type="button" data-testid="favorite-btn">favorito</button>
+        <ShareButton />
+        <FavoriteButton />
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
@@ -156,7 +156,7 @@ function DrinkInProgess() {
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
       <div>
-        <span data-testid={ `${indexo}-recomendation-card` }>cards</span>
+        {/* <span data-testid={ `${indexo}-recomendation-card` }>cards</span> */}
       </div>
       <div>
         <Link to="/receitas-feitas" onClick={ doneRecipe }>
