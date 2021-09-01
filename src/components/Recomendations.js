@@ -17,7 +17,7 @@ const Recomendations = ({ recomendations, isMeal, isDrink }) => {
         <div
           className="card-info"
         >
-          <p>{meal.strCategory}</p>
+          <h6>{meal.strCategory}</h6>
           <h4
             data-testid={ `${index}-recomendation-title` }
           >
@@ -55,7 +55,7 @@ const Recomendations = ({ recomendations, isMeal, isDrink }) => {
 
   return (
     <section className="recomendations-container">
-      <h3>Recomendations</h3>
+      <h3 className="sub-title">Recomendations</h3>
       <div className="recomendations-cards">
         { (isMeal) && mealCards() }
         { (isDrink) && drinkCards() }

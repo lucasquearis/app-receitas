@@ -1,5 +1,5 @@
 .recomendations-container {
-  width: 100%;
+  margin-bottom: 13vh;
 }
 
 .recomendations-cards {
@@ -10,18 +10,25 @@
 }
 
 .recipe-card {
-  height: 300px;
+  height: 190px;
   min-width: 48%;
   overflow: hidden;
   padding: 2%;
   width: 50%;
 }
 
+.recipe-card h6 {
+  font-weight: 300;
+  margin: 0;
+  padding-top: 3px;
+}
+
 .card-image {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 40%;
+  border-radius: 3px;
+  min-height: 60%;
   width: 100%;
 }
 

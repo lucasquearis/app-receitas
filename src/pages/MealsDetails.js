@@ -5,7 +5,7 @@ import { RecipeDetails, Recomendations,
   StartRecipeBtn, ContinueRecipeBtn } from '../components';
 import { checkDoneRecipes, getIngredients, getMeasures } from '../helpers';
 import { checkMealsInProgressRecipes } from '../helpers/checkInProgressRecipes';
-// import './css/MealsDetails.css';
+import './css/MealsDetails.css';
 
 const MealsDetails = () => {
   const [meal, setMeal] = useState({});

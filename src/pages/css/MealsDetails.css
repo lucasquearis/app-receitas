@@ -1,5 +1,5 @@
 .details {
-  background-color: azure;
+  background-color: whitesmoke;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -10,9 +10,16 @@
 
 .start-recipe-btn {
   background-color: green;
+  border: transparent;
+  border-radius: 9px;
   bottom: 0%;
-  box-sizing: border-box;
-  height: 10%;
+  color: white;
+  font-size: larger;
+  font-weight: 600;
+  height: 9vh;
+  margin-bottom: 6px;
   position: fixed;
-  width: 100%;
+  right: 50%;
+  transform: translateX(50%);
+  width: 96vw;
 }

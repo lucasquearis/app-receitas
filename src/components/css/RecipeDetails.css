@@ -1,6 +1,5 @@
 .recipe-container {
   align-items: center;
-  background-color: whitesmoke;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -67,6 +66,7 @@
 }
 
 .recipe-video {
+  height: 201px;
   width: 100%;
 }
 
