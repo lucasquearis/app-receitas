@@ -6,6 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 function ShareButton({ index, address, pathname }) {
   const [copied, setCopied] = useState(false);
   const localHostAddress = 'http://localhost:3000';
+
   const handleClick = () => {
     copy(`${localHostAddress}${address || pathname}`);
     setCopied(true);
@@ -15,7 +16,7 @@ function ShareButton({ index, address, pathname }) {
     <div>
       <button
         type="button"
-        onClick={ handleClick }
+        onClick={ () => handleClick() }
         src={ shareIcon }
         data-testid={ `${index}-horizontal-share-btn` }
       >
