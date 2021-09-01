@@ -35,9 +35,9 @@ function App() {
         <Route path="/bebidas/:id" component={ DrinkDetails } />
         <Route path="/explorar/comidas" component={ SearchDetailsFood } />
         <Route path="/explorar/bebidas" component={ SearchDetailsDrinks } />
-        <Route path="/explorar" component={ Search } />
-        <Route path="/comidas" component={ Recipes } />
-        <Route path="/bebidas" component={ Drinks } />
+        <Route exact path="/explorar" component={ Search } />
+        <Route exact path="/comidas" component={ Recipes } />
+        <Route exact path="/bebidas" component={ Drinks } />
         <Route path="/receitas-feitas" component={ FinishedRecipes } />
         <Route path="/perfil" component={ Profile } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
