@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
 
 function Explore() {
   const [redirectTo, setRedirectTo] = useState({ foods: false, drinks: false });
@@ -16,6 +18,7 @@ function Explore() {
   }
   return (
     <>
+      <Header titlePage=" Explorar " />
       <Button
         name="foods"
         variant="link"
@@ -32,6 +35,7 @@ function Explore() {
       >
         Explorar Bebidas
       </Button>
+      <Footer />
     </>
   );
 }
