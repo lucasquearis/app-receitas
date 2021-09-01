@@ -46,8 +46,8 @@ function App() {
         <Route path="/explorar" component={ Search } />
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/comidas" component={ Recipes } />
-        <Route path="*" component={ NotFound } />
         <Route exact path="/" component={ Login } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );

@@ -11,6 +11,9 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
 import Copy from '../components/Clipboard-Copy';
+import getIngredients from '../util/getIngredients';
+import getMeasure from '../util/getMeasures';
+import getFavorite from '../util/getFavorite';
 
 const DrinkDetails = () => {
   const history = useHistory();
@@ -66,33 +69,9 @@ const DrinkDetails = () => {
   }, [actualPath, setDrinkDetails]);
 
   useEffect(() => {
-    const getFavorite = () => {
-      const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (actualStorage && drinkDetails.length > 0) {
-        const isFavorited = actualStorage.some(
-          (item) => item.id === drinkDetails[0].idDrink,
-        );
-        setFavorite(isFavorited);
-      }
-    };
-    const getMeasure = () => {
-      const measuresArr = drinkDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0]
-          .includes('Measure') && i[1] !== null && i[1] !== 'undefined'));
-      const measuresOnly = measuresArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      setMeasures(measuresOnly);
-    };
-    const getIngredients = () => {
-      const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Ingredient') && i[1] !== null));
-      const ingredientsOnly = ingredientsArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      setIngredients(ingredientsOnly);
-    };
-    getFavorite();
-    getIngredients();
-    getMeasure();
+    getFavorite(drinkDetails, setFavorite);
+    getIngredients(drinkDetails, setIngredients);
+    getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
 
   const responsive = {

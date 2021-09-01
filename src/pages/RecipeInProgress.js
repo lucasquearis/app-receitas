@@ -6,6 +6,9 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
+import getIngredients from '../util/getIngredients';
+import getMeasure from '../util/getMeasures';
+import getFavorite from '../util/getFavorite';
 // import Copy from '../components/Clipboard-Copy';
 
 const RecipeInProgress = () => {
@@ -19,7 +22,6 @@ const RecipeInProgress = () => {
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg] = useState(false);
-  const EIGHT = 8;
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -56,38 +58,9 @@ const RecipeInProgress = () => {
   }, [actualPath, setFoodDetails]);
 
   useEffect(() => {
-    // const EIGHT = 8;
-    const getFavorite = () => {
-      const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (actualStorage && foodDetails.length > 0) {
-        const isFavorited = actualStorage.some(
-          (item) => item.id === foodDetails[0].idMeal,
-        );
-        setFavorite(isFavorited);
-      }
-    };
-
-    const getIngredients = () => {
-      const ingredientsArr = foodDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Ingredient') && i[1] !== '' && i[1] !== 'null'));
-      const ingredientsOnly = ingredientsArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      //   const ingredientsF = ingredientsOnly.slice(0, EIGHT);
-      setIngredients(ingredientsOnly);
-    };
-
-    const getMeasure = () => {
-      const measuresArr = foodDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
-      const measuresOnly = measuresArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      //   const measuresF = measuresOnly.slice(0, EIGHT);
-      setMeasures(measuresOnly);
-    };
-
-    getFavorite();
-    getIngredients();
-    getMeasure();
+    getFavorite(foodDetails, setFavorite);
+    getIngredients(foodDetails, setIngredients);
+    getMeasure(foodDetails, setMeasures);
   }, [foodDetails]);
 
   return (
@@ -131,13 +104,13 @@ const RecipeInProgress = () => {
                 alt="favorite-icon"
               />
             </button>
-            { showMsg ? <p>Link copiado!</p> : undefined }
+            { showMsg && <p>Link copiado!</p> }
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
             <ul>
               {
                 ingredients.map((ingredient) => ingredient
-                  .slice(0, EIGHT).map((item, index) => (
+                  .map((item, index) => (
                     <li
                       key={ item }
                       data-testid={ `${index}-ingredient-step` }

@@ -6,6 +6,9 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+import getIngredients from '../util/getIngredients';
+import getMeasure from '../util/getMeasures';
+import getFavorite from '../util/getFavorite';
 // import Copy from '../components/Clipboard-Copy';
 
 const DrinkInProgress = () => {
@@ -19,7 +22,6 @@ const DrinkInProgress = () => {
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg] = useState(false);
-  const THREE = 3;
 
   function onFavorite() {
     setFavorite(!favorite);
@@ -56,38 +58,9 @@ const DrinkInProgress = () => {
   }, [setDrinkDetails, actualPath]);
 
   useEffect(() => {
-    // const EIGHT = 8;
-    const getFavorite = () => {
-      const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      if (actualStorage && drinkDetails.length > 0) {
-        const isFavorited = actualStorage.some(
-          (item) => item.id === drinkDetails[0].idMeal,
-        );
-        setFavorite(isFavorited);
-      }
-    };
-
-    const getIngredients = () => {
-      const ingredientsArr = drinkDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Ingredient') && i[1] !== '' && i[1] !== 'null'));
-      const ingredientsOnly = ingredientsArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      //   const ingredientsF = ingredientsOnly.slice(0, EIGHT);
-      setIngredients(ingredientsOnly);
-    };
-
-    const getMeasure = () => {
-      const measuresArr = drinkDetails.map((item) => Object.entries(item)
-        .filter((i) => i[0].includes('Measure') && i[1] !== ' '));
-      const measuresOnly = measuresArr.map((item) => item
-        .map((i) => i.pop())).map((item) => item);
-      //   const measuresF = measuresOnly.slice(0, EIGHT);
-      setMeasures(measuresOnly);
-    };
-
-    getFavorite();
-    getIngredients();
-    getMeasure();
+    getFavorite(drinkDetails, setFavorite);
+    getIngredients(drinkDetails, setIngredients);
+    getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
 
   return (
@@ -132,14 +105,14 @@ const DrinkInProgress = () => {
                 </button>
               </div>
             </div>
-            { showMsg ? <p>Link copiado!</p> : undefined }
+            { showMsg && <p>Link copiado!</p> }
             <h2 data-testid="recipe-category" key={ strAlcoholic }>{strAlcoholic}</h2>
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
             <ul>
               {
                 ingredients.map((ingredient) => ingredient
-                  .slice(0, THREE).map((item, index) => (
+                  .map((item, index) => (
                     <li
                       key={ item }
                       data-testid={ `${index}-ingredient-step` }
