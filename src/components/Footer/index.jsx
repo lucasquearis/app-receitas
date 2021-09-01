@@ -4,6 +4,7 @@ import IconBtn from '../IconBtn';
 import drinkIcon from '../../images/drinkIcon.svg';
 import exploreIcon from '../../images/exploreIcon.svg';
 import mealIcon from '../../images/mealIcon.svg';
+import './style.css';
 
 function Footer() {
   const bebidasBtnProps = {
@@ -25,7 +26,7 @@ function Footer() {
   };
 
   return (
-    <div data-testid="footer">
+    <div className="footer" data-testid="footer">
       <Link to="/bebidas">
         <IconBtn { ...bebidasBtnProps } />
       </Link>
