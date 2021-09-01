@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function ExploreFoods() {
   const history = useHistory();
@@ -11,9 +13,14 @@ function ExploreFoods() {
     history.push(`/comidas/${idMeal}`);
   };
 
+  const headerProps = {
+    title: 'Explorar Comidas',
+    renderSearchBar: false,
+  };
+
   return (
     <div>
-      <h1>Explorar Comidas</h1>
+      <Header { ...headerProps } />
       <Link to="/explorar/comidas/ingredientes">
         <button
           type="button"
@@ -37,6 +44,7 @@ function ExploreFoods() {
       >
         Me Surpreenda!
       </button>
+      <Footer />
     </div>
   );
 }

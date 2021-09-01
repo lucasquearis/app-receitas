@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function Explore() {
+  const headerProps = {
+    title: 'Explorar Comidas',
+    renderSearchBar: false,
+  };
+
   return (
     <div>
-      <h1>Explorar</h1>
+      <Header { ...headerProps } />
       <Link to="/explorar/comidas">
         <button
           type="button"
@@ -21,6 +28,7 @@ function Explore() {
           Explorar Bebidas
         </button>
       </Link>
+      <Footer />
     </div>
   );
 }

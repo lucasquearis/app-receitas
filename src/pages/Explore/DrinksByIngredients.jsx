@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import IngredientsCard from './IngredientsCard';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function ExploreDrinksByIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -18,9 +20,14 @@ function ExploreDrinksByIngredients() {
     });
   }, []);
 
+  const headerProps = {
+    title: 'Explorar Ingredientes',
+    renderSearchBar: false,
+  };
+
   return (
     <div>
-      <h1 data-testid="page-title">Explorar Ingredientes</h1>
+      <Header { ...headerProps } />
       { ingredients.slice(0, exploreLimits).map((ingredient, index) => (
         <IngredientsCard
           key={ index }
@@ -30,6 +37,7 @@ function ExploreDrinksByIngredients() {
           path="thecocktaildb"
         />
       ))}
+      <Footer />
     </div>
   );
 }

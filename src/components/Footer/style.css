@@ -1,10 +1,9 @@
-body {
-  background-color: transparent;
-}
-
-nav {
-  align-items: center;
+.footer {
   background-color: gray;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
+  padding: 5px;
+  position: fixed;
+  width: 100%;
 }
