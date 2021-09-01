@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -29,24 +30,27 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-container">
+      <h1 className="login-header">Login</h1>
       <input
         type="email"
         data-testid="email-input"
+        className="inputs"
         placeholder="E-mail"
         onChange={ (e) => handleChange(setEmail, e) }
       />
       <input
         type="password"
         data-testid="password-input"
+        className="inputs password"
         placeholder="Password"
         onChange={ (e) => handleChange(setPassword, e) }
       />
       <Link to="/comidas">
         <button
-          data-testid="login-submit-btn"
           type="button"
+          data-testid="login-submit-btn"
+          className="enter-button"
           disabled={ buttonDisabled }
           onClick={ handleClick }
         >

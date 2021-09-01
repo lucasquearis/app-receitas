@@ -61,18 +61,15 @@ function SearchBar() {
 
   return (
     <section>
-      <label htmlFor="searchText">
-        Search:
-        <input
-          id="searchText"
-          type="text"
-          name="inputSearch"
-          value={ filters.inputSearch }
-          onChange={ handleChange }
-          data-testid="search-input"
-          placeholder="Find Recipe"
-        />
-      </label>
+      <input
+        id="searchText"
+        type="text"
+        name="inputSearch"
+        value={ filters.inputSearch }
+        onChange={ handleChange }
+        data-testid="search-input"
+        placeholder="Find Recipe"
+      />
       <label htmlFor="ingredientSearch">
         <input
           id="ingredientSearch"

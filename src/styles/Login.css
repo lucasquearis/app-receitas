@@ -1,0 +1,50 @@
+.login-container {
+  background-color: #f7f8f9;
+  height: 640px;
+  position: relative;
+  width: 360px;
+}
+
+.login-header {
+  color: #f51720;
+  font-size: 48px;
+  font-weight: 500;
+  left: 118px;
+  margin-top: 0;
+  position: absolute;
+  top: 80px;
+}
+
+.inputs {
+  background: white;
+  border: 2px solid dimgray;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 28px;
+  height: 60px;
+  left: 45px;
+  position: absolute;
+  top: 196px;
+  width: 270px;
+}
+
+.password {
+  top: 300px;
+}
+
+.enter-button {
+  background: #f51720;
+  border-radius: 30px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 32px;
+  height: 45px;
+  left: 79px;
+  position: absolute;
+  top: 450px;
+  width: 202.5px;
+}
+
+.enter-button:disabled {
+  opacity: 0.5;
+}
