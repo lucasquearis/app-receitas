@@ -3,7 +3,9 @@ import Header from '../components/Header';
 
 function ExploreArea() {
   return (
-    <Header />
+    <div>
+      <Header titulo="Explorar Origem" showSearch />
+    </div>
   );
 }
 

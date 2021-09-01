@@ -40,7 +40,7 @@ function Food() {
 
   return (
     <div>
-      <Header titulo="Comidas" />
+      <Header titulo="Comidas" showSearch />
 
       { searchedRecipe.length > 1
         ? searchedFoodRecipes() : redirectFood()}
