@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap') ;
 
 body {
-  background-color: whitesmoke;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .loginContainer {
   align-items: center;
+  background: url('../images/loginBck.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
-  gap: 5vh;
+  gap: 3vh;
+  height: 100%;
   justify-content: center;
   left: 50%;
-  mix-blend-mode: multiply;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -19,46 +25,108 @@ body {
 
 .loginContainer img {
   height: 20vh;
+  mix-blend-mode: multiply;
 }
 
 .loginContainer h1 {
   font-family: Roboto Slab , serif;
   font-size: 3.5vh;
+  text-align: center;
+  width: 80vw;
+}
+
+.container {
+  align-items: center;
+  background-color: white;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  height: 25vh;
+  justify-content: space-evenly;
+  mix-blend-mode: multiply;
+  width: 300px;
 }
 
 .loginForm {
   align-items: center;
-  background-color: rgb(240, 240, 240);
-  border: none;
-  border-radius: 1em;
+
+  /* background-color: whitesmoke; */
   display: flex;
-  flex-direction: column;
-  height: 35vh;
-  justify-content: space-evenly;
-  width: 300px;
+  justify-content: flex-start;
+  mix-blend-mode: multiply;
+  width: 100vw;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-}
-
-.login {
-  border: solid black 1px;
-  /* height: 5%; */
-  width: 70%;
-}
-
-.btn {
+.btnLogin {
   background-color: rgb(35, 37, 35);
   border: white solid 1px;
   border-radius: 10px;
   color: white;
   font-size: 15px;
-  height: 10%;
-  width: 50%;
+  height: 25px;
+
+  /* width: 50%; */
 }
 
 .btn:hover {
   background-color: rgb(57, 138, 57);
+}
+
+/* link:
+https://velhobit.com.br/design/como-fazer-efeito-float-label-animado-com-css3-puro.html */
+
+.label-float {
+  position: relative;
+
+}
+
+.label-float input {
+  appearance: none;
+  background-color: white;
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  font-size: 16px;
+  min-width: 250px;
+  outline: none;
+  padding: 5px 20px 3px;
+  transition: all 0.1s linear;
+}
+
+.label-float input:focus {
+  border: 2px solid #3951b2;
+}
+
+.label-float input::placeholder {
+  color: transparent;
+}
+
+.label-float p {
+  background-color: white;
+  box-sizing: border-box;
+  left: 15px;
+  padding: 0 5px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateY(32%);
+  transition: all 0.1s linear;
+}
+
+.label-float input:not( :placeholder-shown ) + p {
+  color: #3951b2;
+  font-size: 13px;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.label-float input:required:invalid + p {
+  color: red;
+}
+
+.label-float input:focus:required:invalid {
+  border: 2px solid red;
+}
+
+.label-float input:required:invalid + p:before {
+  content: '*';
 }
