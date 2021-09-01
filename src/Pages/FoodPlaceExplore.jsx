@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function FoodPlaceExplore() {
   const [data, setData] = useState([]);
@@ -26,6 +27,8 @@ function FoodPlaceExplore() {
   }, [filter, setFilter]);
 
   const MNumber = '12';
+  const path = (id) => `/comidas/${id}`;
+
   return (
     <div>
       <select
@@ -54,24 +57,25 @@ function FoodPlaceExplore() {
         dataFilter
           .slice(0, MNumber)
           .map(({ strMeal, strMealThumb, idMeal }, index) => (
-            <div
-              key={ idMeal }
-              id={ idMeal }
-              data-testid={ `${index}-recipe-card` }
-            >
-              <img
-                src={ strMealThumb }
-                data-testid={ `${index}-card-img` }
-                alt={ strMeal }
-              />
-              <div>
-                <h4
-                  data-testid={ `${index}-card-name` }
-                >
-                  { strMeal }
-                </h4>
+            <Link key={ idMeal } to={ path(idMeal) }>
+              <div
+                id={ idMeal }
+                data-testid={ `${index}-recipe-card` }
+              >
+                <img
+                  src={ strMealThumb }
+                  data-testid={ `${index}-card-img` }
+                  alt={ strMeal }
+                />
+                <div>
+                  <h4
+                    data-testid={ `${index}-card-name` }
+                  >
+                    { strMeal }
+                  </h4>
+                </div>
               </div>
-            </div>
+            </Link>
           ))
       }
     </div>
