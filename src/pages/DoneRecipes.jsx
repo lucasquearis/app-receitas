@@ -21,10 +21,10 @@ function DoneRecipes() {
       const copyDiv = document.getElementById('copiedLink');
       const time = 2000;
 
-      if (type === 'comidas') {
-        recipeType = '/comidas/';
-      } else {
+      if (type === 'bebidas') {
         recipeType = '/bebidas/';
+      } else {
+        recipeType = '/comidas/';
       }
       const fullLink = `http://${host}:${port}${recipeType}${id}`;
       copy(fullLink);
@@ -37,7 +37,7 @@ function DoneRecipes() {
 
     return (
       <div>
-        { items.map((item, i) => (
+        {items.map((item, i) => (
           <Card
             key={ i }
             data-testid={ `${i}-recipe-card` }
@@ -49,20 +49,20 @@ function DoneRecipes() {
                 variant="top"
                 src={ item.image }
               />
-              <Card.Title
-                data-testid={ `${i}-horizontal-name` }
-              >
+              <Card.Title data-testid={ `${i}-horizontal-name` }>
                 { item.name }
               </Card.Title>
             </Link>
             <Card.Body>
               <span data-testid={ `${i}-horizontal-top-text` }>
                 { item.area }
-                -
-                { item.category }
+                {' - '}
+                { item.category === 'Cocktail' ? 'Alcoholic' : item.category }
               </span>
               <div>
-                <span data-testid={ `${i}-horizontal-done-date` }>{ item.doneDate }</span>
+                <span data-testid={ `${i}-horizontal-done-date` }>
+                  { item.doneDate }
+                </span>
                 <button
                   type="button"
                   onClick={ () => linkToClipboard(item.id, item.type) }
@@ -75,10 +75,7 @@ function DoneRecipes() {
                 </button>
               </div>
               { item.tags.map((tag) => (
-                <span
-                  key={ tag }
-                  data-testid={ `${i}-${tag}-horizontal-tag` }
-                >
+                <span key={ tag } data-testid={ `${i}-${tag}-horizontal-tag` }>
                   { tag }
                 </span>
               ))}
@@ -86,8 +83,7 @@ function DoneRecipes() {
             </Card.Body>
           </Card>
         ))}
-        {console.log(localStorageItems)}
-
+        { console.log(localStorageItems) }
       </div>
     );
   }
@@ -118,11 +114,7 @@ function DoneRecipes() {
           Drinks
         </Button>
       </div>
-      <div>
-        {
-          recipes()
-        }
-      </div>
+      <div>{ recipes() }</div>
       <Footer />
     </div>
   );
