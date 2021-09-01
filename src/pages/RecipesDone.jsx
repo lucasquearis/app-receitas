@@ -28,7 +28,7 @@ export default function RecipesDone() {
         type: 'bebida',
         area: '',
         category: 'Cocktail',
-        alcoholicOrNot:  'Alcoholic',
+        alcoholicOrNot: 'Alcoholic',
         name: 'Aquamarine',
         image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
         doneDate: '23/06/2020',
@@ -40,7 +40,7 @@ export default function RecipesDone() {
     if (!storage) localStorage.setItem('doneRecipes', JSON.stringify(recipesDone));
     else setRecipesDone(storage);
     setIsLoading(false);
-  }, []);
+  }, [recipesDone, setRecipesDone]);
 
   function recipesChecker() {
     if (!recipesDone.length) return <NoRecipesDone />;
