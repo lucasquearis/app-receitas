@@ -5,7 +5,7 @@ import DrinksContext from '../context/DrinksContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+import { fetchDrinkDetailsApi } from '../services/fetchDrinksApi';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
 import getFavorite from '../util/getFavorite';

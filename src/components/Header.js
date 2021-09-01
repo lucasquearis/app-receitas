@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
-import './headerFood.css';
+import './headerDrinks.css';
 import './searchBar.css';
 
-const Header = () => {
+const Header = ({ title }) => {
   const [showBar, setShowBar] = useState(false);
   const location = useLocation();
 
@@ -18,16 +19,20 @@ const Header = () => {
             <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
           </Link>
         </button>
-        <p data-testid="page-title">Comidas</p>
+        <p data-testid="page-title">{title}</p>
         <button type="button" onClick={ () => setShowBar(!showBar) }>
           <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
         </button>
       </div>
       <div>
-        {showBar && <SearchBar location={ location } />}
+        { showBar && <SearchBar location={ location } /> }
       </div>
     </div>
   );
+};
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default Header;

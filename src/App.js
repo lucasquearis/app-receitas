@@ -30,6 +30,7 @@ function App() {
         <Route path="/bebidas/:id" component={ DrinkDetails } />
         <Route path="/comidas/:id" component={ FoodDetails } />
         <Route path="/explorar/comidas/area" component={ SearchByOrigin } />
+        <Route exact path="/explorar/bebidas/area" component={ NotFound } />
         <Route
           path="/explorar/bebidas/ingredientes"
           component={ SearchDrinksByIngredients }
@@ -47,7 +48,6 @@ function App() {
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/comidas" component={ Recipes } />
         <Route exact path="/" component={ Login } />
-        <Route path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
   );

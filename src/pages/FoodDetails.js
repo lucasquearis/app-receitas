@@ -5,7 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 
 import Carousel from 'react-multi-carousel';
 import FoodContext from '../context/FoodContext';
-import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
+import { fetchMealDetailsApi } from '../services/fetchMealApi';
 import DrinksContext from '../context/DrinksContext';
 import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
 import './details.css';

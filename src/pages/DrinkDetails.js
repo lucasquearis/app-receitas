@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
-import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
+import { fetchDrinkDetailsApi } from '../services/fetchDrinksApi';
 import FoodRecomendationCard from '../components/FoodRecomendationCard';
 import './details.css';
 import shareIcon from '../images/shareIcon.svg';

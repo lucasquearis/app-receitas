@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import HeaderDrinks from '../components/HeaderDrinks';
-import DrinksCard from '../components/DrinksCard';
+import Header from '../components/Header';
+import RecipeCard from '../components/RecipeCard';
 import DrinksContext from '../context/DrinksContext';
 import FooterMenu from '../components/FooterMenu';
 import ButtonCategoriesDrinks from '../components/ButtonCategoriesDrinks';
@@ -21,7 +21,7 @@ const Drinks = () => {
 
   return (
     <div className="container">
-      <HeaderDrinks />
+      <Header title="Bebidas" />
 
       <ButtonCategoriesDrinks categories={ categoriesDrinks } />
 
@@ -29,10 +29,11 @@ const Drinks = () => {
         {drinks && drinks.slice(0, DRINKS)
           .map((drink, index) => (
             <Link key={ index } to={ `/bebidas/${drink.idDrink}` }>
-              <DrinksCard
+              <RecipeCard
                 key={ index }
                 index={ index }
-                drink={ drink }
+                srtRecipeThumb={ drink.strDrinkThumb }
+                srtRecipe={ drink.strDrink }
               />
             </Link>
           ))}

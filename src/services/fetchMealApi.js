@@ -59,3 +59,9 @@ export const fetchMealByAreaName = async (areaName) => {
   const { meals } = await response.json();
   return meals;
 };
+
+export const fetchMealDetailsApi = async (id) => {
+  const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const request = await fetch(url);
+  return request.json();
+};
