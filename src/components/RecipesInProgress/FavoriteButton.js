@@ -28,7 +28,8 @@ function FavoriteButton(props) {
 
   return (
     <Button
-      variant="success"
+      // variant="success"
+      src={ favorite ? blackHeartIcon : whiteHeartIcon }
       data-testid="favorite-btn"
       type="button"
       onClick={ () => {
