@@ -12,7 +12,7 @@ function DoneButton({ recipe, typeRecipe }) {
     idMeal,
     idDrink,
     strTags,
-    dateModifiled,
+    dateModifield,
   } = recipe;
 
   const defaultDoneDrinks = {
@@ -24,7 +24,7 @@ function DoneButton({ recipe, typeRecipe }) {
     name: strDrink,
     image: strDrinkThumb,
     tags: strTags,
-    doneDate: dateModifiled,
+    doneDate: dateModifield,
   };
 
   const defaultDoneFoods = {
@@ -36,11 +36,14 @@ function DoneButton({ recipe, typeRecipe }) {
     name: strMeal,
     image: strMealThumb,
     tags: strTags,
-    doneDate: dateModifiled,
+    doneDate: dateModifield,
   };
 
-  let recipeStorage = [...JSON.parse(localStorage.getItem('doneRecipes'))];
-
+  let recipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (recipeStorage === null) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+  recipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
   if (typeRecipe === 'bebida') {
     recipeStorage = [...recipeStorage, defaultDoneDrinks];
     localStorage.setItem('doneRecipes', JSON.stringify(recipeStorage));

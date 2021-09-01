@@ -17,6 +17,8 @@ function DoneCard({ recipe, index }) {
     tags,
   } = recipe;
 
+  const tagsTratada = tags === null ? [] : [tags];
+
   const [sharedMessage, setSharedMessage] = useState(false);
   const PERIOD_OF_MESSAGE = 1000;
   const showSharedMessage = () => {
@@ -68,8 +70,8 @@ function DoneCard({ recipe, index }) {
       { sharedMessage && <p>Link copiado!</p> }
 
       <p id={ `${index}-horizontal-share-btn` }>Compartilhar</p>
-      { tags
-        ? tags.map((tag) => (
+      { tagsTratada
+        ? tagsTratada.map((tag) => (
           <p
             key={ index }
             data-testid={ `${index}-${tag}-horizontal-tag` }
