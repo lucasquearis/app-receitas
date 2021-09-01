@@ -8,6 +8,7 @@ import FoodExplore from './Pages/FoodExplore';
 import FoodIngredientesExplore from './Pages/FoodIngredientesExplore';
 import FoodPlaceExplore from './Pages/FoodPlaceExplore';
 import Profile from './Pages/Profile';
+import DoneRecipes from './Pages/DoneRecipes';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         path="/explorar/comidas/ingredientes"
         component={ FoodIngredientesExplore }
       />
+      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route exact path="/explorar/comidas" component={ FoodExplore } />
       <Route exact path="/explorar/bebidas" component={ DrinksExplore } />
       <Route exact path="/perfil" component={ Profile } />
