@@ -20,6 +20,7 @@ import MealProcess from './pages/MealProcess';
 import MealRecipeDetails from './pages/MealRecipeDetails';
 import Meals from './pages/Meals';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 // prettier-ignore
 function App() {
@@ -45,9 +46,11 @@ function App() {
           component={ ExploreDrinksByIngredient }
         />
         <Route path="/explorar/comidas/area" component={ ExploreMealsByOrigin } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route exact path="/perfil" component={ Profile } />
         <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </Provider>
   );
