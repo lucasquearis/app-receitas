@@ -5,7 +5,9 @@ function Input(props) {
   const { label, type, value, testId, id, onChange, className } = props;
   return (
     <label htmlFor={ id }>
-      { label }
+      <span className="sr-only">
+        { label}
+      </span>
       <input
         type={ type }
         value={ value }
@@ -13,6 +15,7 @@ function Input(props) {
         id={ id }
         onChange={ onChange }
         className={ className }
+        placeholder={ label }
       />
     </label>
   );
