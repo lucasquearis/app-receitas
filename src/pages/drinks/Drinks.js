@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CardsList from '../../components/CardsList/CardsList';
 import Header from '../../components/header/Header';
@@ -7,8 +7,12 @@ import { fetchApi } from '../../components/SearchBar/utils';
 import CategoriesFilterButtons from
   '../../components/FilterCategoriesButtons.js/CategoriesFilterButtons';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
+import AppContext from '../../context/AppContext';
 
 const Drinks = () => {
+  const context = useContext(AppContext);
+  const { ingredient } = context;
+  console.log('verificador de ing', ingredient);
   const [erro, setErro] = useState(false);
   const { items } = useSelector((state) => state.itemsReducer);
   const dispatch = useDispatch();
@@ -28,6 +32,15 @@ const Drinks = () => {
   }, [dispatch]);
 
   if (erro) return <p>Algo deu errado. Tente novamente.</p>;
+  if (ingredient.length > 0) {
+    return (
+      <div>
+        <Header>Comidas</Header>
+        <CategoriesFilterButtons />
+        <CardsList array={ ingredient } teste="recipe-card" />
+      </div>
+    );
+  }
   if (items.length > 0) {
     return (
       <div>

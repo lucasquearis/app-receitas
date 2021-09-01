@@ -5,7 +5,7 @@ import { filterIngredientsDetails } from '../../functions';
 const IngredientsDetails = ({ recipe }) => {
   const ingredients = filterIngredientsDetails(recipe);
   return (
-    <div>
+    <div className="component-details">
       <h1>Ingredients</h1>
       <ul>
         {ingredients.map((ingredient, index) => (
@@ -21,7 +21,9 @@ const IngredientsDetails = ({ recipe }) => {
 };
 
 IngredientsDetails.propTypes = {
-  recipe: PropTypes.arrayOf(PropTypes.array).isRequired,
+  recipe: PropTypes.shape({
+    strIngredient1: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default IngredientsDetails;

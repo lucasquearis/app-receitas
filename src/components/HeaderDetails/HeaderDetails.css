@@ -20,6 +20,11 @@ p {
   text-align: left;
 }
 
+.input-image {
+  width: 25px;
+}
+
+
 .info-container {
   display: flex;
   justify-content: space-between;
@@ -27,7 +32,9 @@ p {
 }
 
 .buttons-container {
-  display: inline;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
   width: 105px;
 }
 
