@@ -23,32 +23,32 @@ const MealsByIngredients = () => {
   };
 
   return (
-    <div>
+    <>
       <Header title="Explorar Ingredientes" />
-
-      {
-        ingredients
-          ? (ingredients.map((ingredient, index) => (
-            <Link
-              to="/comidas"
-              key={ ingredient }
-              className="meal-card-link"
-              onClick={ () => setExpIng(ingredient.strIngredient) }
-            >
-              <Card
-                key={ ingredient.strIngredient }
-                type="ingredient"
-                index={ index }
-                thumb={ formatIngredient(ingredient) }
-                name={ ingredient.strIngredient }
-              />
-            </Link>
-
-          )))
-          : ''
-      }
-      <Footer />
-    </div>
+      <main className="meals-cards-container">
+        {
+          ingredients
+            ? (ingredients.map((ingredient, index) => (
+              <Link
+                to="/comidas"
+                key={ ingredient }
+                className="meal-card-link"
+                onClick={ () => setExpIng(ingredient.strIngredient) }
+              >
+                <Card
+                  key={ ingredient.strIngredient }
+                  type="ingredient"
+                  index={ index }
+                  thumb={ formatIngredient(ingredient) }
+                  name={ ingredient.strIngredient }
+                />
+              </Link>
+            )))
+            : ''
+        }
+        <Footer />
+      </main>
+    </>
   );
 };
 
