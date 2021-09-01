@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import './pageCSS/ExploreDrinks.css';
 import HeaderNoSearch from '../components/HeaderNoSearch';
+import drinkIcon from '../images/drinkIcon.png';
 
 export default function ExploreDrinks() {
   const [random, setRondam] = useState([]);
@@ -16,22 +17,28 @@ export default function ExploreDrinks() {
     };
     resolviRandom();
   }, []);
+
   return (
     <>
-      <HeaderNoSearch title="Explorar Bebidas" />
+      <HeaderNoSearch title="Explorar" />
       <div className="explore">
-        <Link
-          data-testid="explore-by-ingredient"
-          to="/explorar/bebidas/ingredientes"
-        >
-          Por Ingredientes
-        </Link>
-        <Link
-          data-testid="explore-surprise"
-          to={ `/bebidas/${random}` }
-        >
-          Me Surpreenda!
-        </Link>
+      <img src={ drinkIcon } className="explore-drinks__icons" alt="Explore Drink Icon" />
+        <div className="explore-drinks__link-button">
+          <Link
+            data-testid="explore-by-ingredient"
+            to="/explorar/bebidas/ingredientes"
+          >
+            Por ingredientes
+          </Link>
+        </div>
+        <div className="explore-drinks__link-button">
+          <Link
+            data-testid="explore-surprise"
+            to={ `/bebidas/${random}` }
+          >
+            Surpreenda-me!
+          </Link>
+        </div>
       </div>
       <BottomMenu />
     </>

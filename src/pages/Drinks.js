@@ -87,6 +87,7 @@ export default function Drinks() {
       <Header title="Bebidas" />
       <Categories />
       {renderList()}
+      <br />
       <BottomMenu />
     </>
   );

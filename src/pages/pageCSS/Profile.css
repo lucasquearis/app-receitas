@@ -1,3 +1,37 @@
-.profile__btn-section {
-  margin-top: 35px;
+.profile__div {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  margin-top: 140px;
+  text-align: center;
+}
+
+.profile__email {
+  font-family: Dancing Script , cursive;
+  font-size: 22px;
+  margin: 0 0 10px;
+}
+
+.pure-button-primary {
+  background-color: #f7d6cf;
+  border-radius: 10px;
+  color: #821d30;
+  height: 40px;
+  margin: 5px 0;
+  margin-top: 5px;
+  width: 197px;
+}
+
+.pure-button-logout {
+  background-color: #821d30;
+  border-radius: 10px;
+  color: white;
+  height: 40px;
+  margin-top: 5px;
+  width: 197px;
+}
+
+.profile__icon {
+  height: 125px;
+  margin: 10px auto 20px;
 }

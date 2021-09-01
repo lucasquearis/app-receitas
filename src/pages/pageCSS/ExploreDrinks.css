@@ -1,9 +1,29 @@
-.no-empty-for-lint-only {
-  display: none;
+.explore {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  margin-top: 100px;
+  text-align: center;
 }
 
-.explore {
-  display: grid;
-  justify-content: center;
-  margin-top: 100px;
+.explore-drinks__link-button {
+  background-color: #f7d6cf;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px lightcoral;
+  color: #492b22;
+  font-family: Dancing Script , cursive;
+  font-size: 26px;
+  margin: 20px auto;
+  min-width: 250px;
+  padding: 15px;
+}
+
+.explore-drinks__icons {
+  height: 100px;
+  margin: 50px auto 0;
+  width: 100px;
+}
+
+a {
+  color: inherit;
 }

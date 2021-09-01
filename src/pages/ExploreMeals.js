@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import './pageCSS/ExploreMeals.css';
 import HeaderNoSearch from '../components/HeaderNoSearch';
+import mealIcon from '../images/mealIcon.png';
 
 export default function ExploreMeals() {
   const [random, setRondam] = useState([]);
@@ -18,26 +19,33 @@ export default function ExploreMeals() {
 
   return (
     <>
-      <HeaderNoSearch title="Explorar Comidas" />
+      <HeaderNoSearch title="Explorar" />
       <div className="explore">
-        <Link
-          data-testid="explore-by-ingredient"
-          to="/explorar/comidas/ingredientes"
-        >
-          Por Ingredientes
-        </Link>
-        <Link
-          data-testid="explore-by-area"
-          to="/explorar/comidas/area"
-        >
-          Por Local de Origem
-        </Link>
-        <Link
-          data-testid="explore-surprise"
-          to={ `/comidas/${random}` }
-        >
-          Me Surpreenda!
-        </Link>
+        <img src={ mealIcon } className="explore-meals__icons" alt="Explore Meal Icon" />
+        <div className="explore-meals__link-button">
+          <Link
+            data-testid="explore-by-ingredient"
+            to="/explorar/comidas/ingredientes"
+          >
+            Por ingredientes
+          </Link>
+        </div>
+        <div className="explore-meals__link-button">
+          <Link
+            data-testid="explore-by-area"
+            to="/explorar/comidas/area"
+          >
+            Por local de origem
+          </Link>
+        </div>
+        <div className="explore-meals__link-button">
+          <Link
+            data-testid="explore-surprise"
+            to={ `/comidas/${random}` }
+          >
+            Surpreenda-me!
+          </Link>
+        </div>
       </div>
       <BottomMenu />
     </>
