@@ -2,8 +2,24 @@
   display: none;
 }
 
+.cards {
+  width: 200px;
+}
+
 .div-btn-start-recipe {
   height: 80px;
+}
+
+.favorite-btn {
+  background-color: white;
+  border: none;
+  padding: 0;
+}
+
+.share-btn {
+  background-color: white;
+  border: none;
+  padding: 0;
 }
 
 .finish-btn {

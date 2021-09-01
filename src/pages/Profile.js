@@ -5,7 +5,7 @@ import BottomMenu from '../components/BottomMenu';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
 export default function Profile() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user')) || { email: '' };
 
   const handleLogout = () => {
     localStorage.clear();
