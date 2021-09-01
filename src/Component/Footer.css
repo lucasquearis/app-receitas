@@ -1,0 +1,9 @@
+[data-testid="footer"] {
+position: fixed; 
+bottom: 0;
+left: 0; 
+text-align: center;
+width: 100%;
+}
+
+

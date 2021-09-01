@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  /*position: fixed; */
+  justify-content: space-between;
+  width: 100vw;
+
+  /*box-sizing: border-box;
+  flex-flow: row;
+  margin: 0;
+  padding: 0;
+  /*flex-flow: row;*/
+  /*box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  text-align: center;
+  */
+}
+  
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+}

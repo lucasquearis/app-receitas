@@ -4,16 +4,21 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [userEmail, setUserEmail] = useState('');
-
+  const [search, setSearch] = useState([]);
+  const [loadSearch, setLoadSearch] = useState(false);
   const globalState = {
     user: {
       email: userEmail,
     },
+    search,
+    loadSearch,
   };
 
   const contextValue = {
     globalState,
     setUserEmail,
+    setSearch,
+    setLoadSearch,
   };
 
   return (

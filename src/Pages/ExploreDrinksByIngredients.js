@@ -1,7 +1,14 @@
 import React from 'react';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
 
 function ExploreDrinksByIngredients() {
-  return <div>Tela de explorar bebidas por ingrediente</div>;
+  return (
+    <div>
+      <Header titlePage=" Explorar Ingredientes " />
+      <Footer />
+    </div>
+  );
 }
 
 export default ExploreDrinksByIngredients;
