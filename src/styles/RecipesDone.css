@@ -2,8 +2,11 @@ button {
   background-color: #FA9500;
   border-radius: 20px;
   border: none;
-  display: flex;
-  font-family: sans-serif;
   padding: 10px 20px;
   margin: 10px 10px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-around;
 }
