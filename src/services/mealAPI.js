@@ -5,6 +5,8 @@ const FOOD_CATEGORIES_API_URL = 'https://www.themealdb.com/api/json/v1/1/list.ph
 const FOODS_BY_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const FOOD_BY_ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const RANDOM_MEAL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const FOOD_AREA = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+const FOOD_FILTER_AREA = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
 
 export async function fetchFoods() {
   const fetchURL = await fetch(FOOD_API_URL);
@@ -59,5 +61,15 @@ export async function fetchFoodByFilters(filters) {
 
 export async function fetchRandomMeal() {
   const fetchURL = await fetch(RANDOM_MEAL);
+  return fetchURL.json();
+}
+
+export async function fetchByArea() {
+  const fetchURL = await fetch(FOOD_AREA);
+  return fetchURL.json();
+}
+
+export async function fetchFilterByArea(area) {
+  const fetchURL = await fetch(`${FOOD_FILTER_AREA}${area}`);
   return fetchURL.json();
 }
