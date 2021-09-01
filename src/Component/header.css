@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+}

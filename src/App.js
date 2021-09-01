@@ -9,16 +9,7 @@ import Provider from './Context/AppProvider';
 function App() {
   return (
     <Provider>
-      <img className="logo" src={ logoreceitapp } alt="Logo da aplicação" />
-      <div className="meals">
-        {/* <span className="logo">TRYBE</span> */}
-        {/* <object
-          className="rocksGlass"
-          type="image/svg+xml"
-          data={ rockGlass }
-        >
-          Glass
-        </object> */}
+      <div>
         <Routes />
       </div>
     </Provider>

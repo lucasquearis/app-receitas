@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -11,6 +13,7 @@ function Profile() {
   }
   return (
     <section className="profile-page">
+      <Header titlePage=" Perfil " />
       <p className="profile-card" />
       <p className="profile">Meu Perfil</p>
       <p data-testid="profile-email" className="email">{ getUser }</p>
@@ -47,6 +50,7 @@ function Profile() {
           </Button>
         </Link>
       </Form>
+      <Footer />
     </section>
   );
 }
