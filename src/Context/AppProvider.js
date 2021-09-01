@@ -5,7 +5,6 @@ import { fetchMeals, fetchMealsCategories } from '../Services/fetchMeals';
 import { fetchCocktails, fetchCocktailsCategories } from '../Services/fetchCocktails';
 
 function Provider({ children }) {
-  const [userEmail, setUserEmail] = useState('');
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
@@ -13,6 +12,9 @@ function Provider({ children }) {
   const [madeRecipe, setMadeRecipe] = useState(false);
   const [ingredientFilter, setIngredientFilter] = useState('');
   const [foodOrDrink, setFoodOrDrink] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [search, setSearch] = useState([]);
+  const [loadSearch, setLoadSearch] = useState(false);
 
   const globalState = {
     email: userEmail,
@@ -23,12 +25,16 @@ function Provider({ children }) {
     madeRecipe,
     ingredientFilter,
     foodOrDrink,
+    search,
+    loadSearch,
   };
 
   const contextValue = {
     globalState,
     setUserEmail,
     setMadeRecipe,
+    setSearch,
+    setLoadSearch,
     setIngredientFilter,
     setFoodOrDrink,
   };

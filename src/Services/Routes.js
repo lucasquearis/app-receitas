@@ -7,6 +7,7 @@ import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
 import FoodsAndDrinks from '../Pages/FoodsAndDrinks';
 import Login from '../Pages/Login';
 import MadeAndFavoriteRecipes from '../Pages/MadeAndFavoriteRecipes';
+import NotFound from '../Pages/NotFound';
 import Profile from '../Pages/Profile';
 import RecipesDetails from '../Pages/RecipesDetails';
 import RecipeInProgress from '../Pages/RecipeInProgress';
