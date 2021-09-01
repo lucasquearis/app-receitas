@@ -34,15 +34,7 @@ export default function DetalheReceitaBebida(props) {
       .then((ingredients) => setdrinkIngredients(ingredients))
       .then(() => changeLoading(false));
 
-    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (!progressRecipes) {
-      const inProgress = JSON.stringify({ cocktails: { }, meals: { } });
-      return localStorage.setItem('inProgressRecipes', inProgress);
-    }
-
-    if (progressRecipes.cocktails[id] && progressRecipes.cocktails[id].length > 0) {
-      return setIngredients(progressRecipes.cocktails[id]);
-    }
+    functions.setLocalStorage(setIngredients, id, 'cocktails');
   }, [id, recipe]);
 
   useIsFavorite(setFavorite, recipe[0], 'bebida');
@@ -72,12 +64,6 @@ export default function DetalheReceitaBebida(props) {
 
   const redirectTo = () => {
     changeRedirect(true);
-  };
-
-  const saveToLocalStorage = () => {
-    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    inProgress.cocktails[id] = ingredientsDone;
-    return localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
   };
 
   const onFavoriteClick = () => {
@@ -144,7 +130,7 @@ export default function DetalheReceitaBebida(props) {
     const { strDrink, strDrinkThumb, strCategory, strInstructions } = recipe[0];
     return (
       <>
-        {saveToLocalStorage()}
+        {functions.saveIngrediensInLocalStorage(ingredientsDone, id, 'cocktails')}
         <img
           data-testid="recipe-photo"
           src={ strDrinkThumb }
