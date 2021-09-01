@@ -75,16 +75,26 @@ export default function ComidasDetalhes() {
     apiDrink();
   }, []);
 
-  const copyPathname = () => {
-    const el = document.createElement('input');
-    el.value = window.location.href;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
+  async function copyPageUrl() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      console.log('Link copiado!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
     document.getElementById('share-button').innerHTML = 'Link copiado!';
-    // alert('Link copiado!');
-  };
+  }
+
+  // const copyPathname = () => {
+  //   const el = document.createElement('input');
+  //   el.value = window.location.href;
+  //   document.body.appendChild(el);
+  //   el.select();
+  //   document.execCommand('copy');
+  //   document.body.removeChild(el);
+  //   document.getElementById('share-button').innerHTML = 'Link copiado!';
+  //   // alert('Link copiado!');
+  // };
 
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
     .map((ingredientKey, index) => (
@@ -118,7 +128,7 @@ export default function ComidasDetalhes() {
             id="share-button"
             type="button"
             data-testid="share-btn"
-            onClick={ copyPathname }
+            onClick={ copyPageUrl }
           >
             Compartilhar
           </button>
@@ -166,11 +176,12 @@ export default function ComidasDetalhes() {
       ))}
 
       <button
+        className="start-recipe-btn"
         type="button"
         data-testid="start-recipe-btn"
         onClick={ () => history.push(`/comidas/${idApi}/in-progress`) }
       >
-        Começar receita
+        Iniciar receita
       </button>
     </div>
   );

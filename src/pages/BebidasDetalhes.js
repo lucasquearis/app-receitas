@@ -159,7 +159,7 @@ export default function BebidasDetalhes() {
         data-testid="start-recipe-btn"
         onClick={ () => history.push(`/bebidas/${idApi}/in-progress`) }
       >
-        Começar receita
+        Iniciar receita
       </button>
     </div>
   );
