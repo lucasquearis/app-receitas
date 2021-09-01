@@ -4,22 +4,11 @@ import './ComidasDetalhes.css';
 import Loading from '../components/Loading';
 import styles from './ComidasDetalhes.module.css';
 
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FavoriteButton from '../components/FavoriteButton';
 
 const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const URL_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const maxRecommendedRecipes = 6;
-
-const getFavorite = (food) => ({
-  id: food.idMeal,
-  type: 'comida',
-  area: food.strArea,
-  category: food.strCategory,
-  alcoholicOrNot: '',
-  name: food.strMeal,
-  image: food.strMealThumb,
-});
 
 const getIngredientsKeys = (meal) => Object.keys(meal)
   .filter((ingredient) => ingredient
@@ -28,7 +17,6 @@ const getIngredientsKeys = (meal) => Object.keys(meal)
 
 export default function ComidasDetalhes() {
   const [food, setFood] = useState();
-  const [isFavorite, setIsFavorite] = useState(false);
   const [recommendedDrinks, setRecommendedDrink] = useState([]);
   const history = useHistory();
   const location = useLocation();
@@ -39,32 +27,9 @@ export default function ComidasDetalhes() {
       const response = await fetch(`${URL_FOOD}${idApi}`);
       const data = await response.json();
       setFood(data.meals[0]);
-      const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-      const favoriteFound = lastSave
-        .find((recipe) => recipe.id === data.meals[0].idMeal);
-      if (favoriteFound) {
-        setIsFavorite(Object.values(favoriteFound)[0]);
-      } else {
-        setIsFavorite(false);
-      }
     };
     api();
   }, [idApi]);
-
-  const handleFavorite = () => {
-    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    if (lastSave.find((recipe) => recipe.id === food.idMeal)) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        lastSave.filter((recipe) => recipe.id !== food.idMeal),
-      ));
-      setIsFavorite(false);
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [...lastSave, getFavorite(food)],
-      ));
-      setIsFavorite(true);
-    }
-  };
 
   useEffect(() => {
     const apiDrink = async () => {
@@ -104,16 +69,7 @@ export default function ComidasDetalhes() {
       <div>
         <div className={ styles.buttonComidasDetails }>
           <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button
-            type="button"
-            onClick={ handleFavorite }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-              alt={ `Botão para adicionar ou retirar ${food.strMeal} dos favoritos` }
-            />
-          </button>
+          <FavoriteButton foodOrDrink={ food } />
         </div>
 
         <ul>

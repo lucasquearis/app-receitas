@@ -1,44 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import FavoriteButton from '../components/FavoriteButton';
 import Loading from '../components/Loading';
 
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-
 const URL_FOOD = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-
-const getFavorite = (food) => ({
-  id: food.idMeal,
-  type: 'comida',
-  area: food.strArea,
-  category: food.strCategory,
-  alcoholicOrNot: '',
-  name: food.strMeal,
-  image: food.strMealThumb,
-});
 
 const getIngredientsKeys = (meal) => Object.keys(meal)
   .filter((ingredient) => ingredient
     .includes('strIngredient')
       && meal[ingredient] !== null && meal[ingredient] !== '');
 
-const getIngredientsList = (target, idApi, ingredients, food) => {
+const getIngredientsList = (target, idURL, ingredients, food) => {
   const ingredientsKeys = getIngredientsKeys(food);
   return ingredientsKeys
     .map((ingredientKey, index) => ({
       [food[ingredientKey]]: target.name === food[ingredientKey]
         ? target.checked
-        : ingredients[idApi][index][food[ingredientKey]],
+        : ingredients[idURL][index][food[ingredientKey]],
     }));
 };
 
-const saveProgress = (target, idApi, ingredients, food) => {
+const saveProgress = (target, idURL, ingredients, food) => {
   const lastSave = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
   localStorage.setItem('inProgressRecipes', JSON.stringify({
     ...lastSave,
     meals: {
       ...lastSave.meals,
-      [idApi]: getIngredientsList(target, idApi, ingredients, food),
+      [idURL]: getIngredientsList(target, idURL, ingredients, food),
     },
     cocktails: {
       ...lastSave.cocktails,
@@ -46,75 +34,47 @@ const saveProgress = (target, idApi, ingredients, food) => {
   }));
 };
 
-const buildIngredients = (meal, idApi) => {
+const buildIngredients = (meal, idURL) => {
   const lastSaveProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
     meals: {}, cocktails: {},
   };
   const ingredientsKeys = getIngredientsKeys(meal);
   return {
     [meal.idMeal]: ingredientsKeys.map((ingredientKey, index) => ({
-      [meal[ingredientKey]]: lastSaveProgress.meals[idApi]
-        ? lastSaveProgress.meals[idApi][index][meal[ingredientKey]]
+      [meal[ingredientKey]]: lastSaveProgress.meals[idURL]
+        ? lastSaveProgress.meals[idURL][index][meal[ingredientKey]]
         : false,
     })),
     wereFetched: true,
   };
 };
 
-const setFavorite = (favoriteFound, setIsFavorite) => {
-  if (favoriteFound) {
-    setIsFavorite(Object.values(favoriteFound)[0]);
-  } else {
-    setIsFavorite(false);
-  }
-};
+const getIdFromURL = (location) => location.pathname.split('/')[2];
 
 const ComidasEmProcesso = () => {
   const [food, setFood] = useState();
-  const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState({ wereFetched: false });
   const history = useHistory();
   const location = useLocation();
-  const idApi = location.pathname.split('/')[2];
+  const idURL = getIdFromURL(location);
 
   useEffect(() => {
     const api = async () => {
-      const response = await fetch(`${URL_FOOD}${idApi}`);
+      const response = await fetch(`${URL_FOOD}${idURL}`);
       const data = await response.json();
       const meal = data.meals[0];
-
       setFood(meal);
-
-      const lastSaveFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-      const favoriteFound = lastSaveFavorite
-        .find((recipe) => recipe.id === meal.idMeal);
-      setFavorite(favoriteFound, setIsFavorite);
-      setIngredients(buildIngredients(meal, idApi));
+      setIngredients(buildIngredients(meal, idURL));
     };
     api();
-  }, [idApi]);
-
-  const handleFavorite = () => {
-    const lastSave = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    if (lastSave.find((recipe) => recipe.id === food.idMeal)) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        lastSave.filter((recipe) => recipe.id !== food.idMeal),
-      ));
-      setIsFavorite(false);
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
-        [...lastSave, getFavorite(food)],
-      ));
-      setIsFavorite(true);
-    }
-  };
+  }, [idURL]);
 
   const handleCheckboxChange = ({ target }) => {
     setIngredients({
-      [idApi]: getIngredientsList(target, idApi, ingredients, food),
+      [idURL]: getIngredientsList(target, idURL, ingredients, food),
       wereFetched: true,
     });
-    saveProgress(target, idApi, ingredients, food);
+    saveProgress(target, idURL, ingredients, food);
   };
 
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
@@ -124,7 +84,7 @@ const ComidasEmProcesso = () => {
           htmlFor={ food[ingredientKey] }
           data-testid={ `${index}-ingredient-step` }
           style={ ingredients.wereFetched
-          && ingredients[idApi][index][food[ingredientKey]]
+          && ingredients[idURL][index][food[ingredientKey]]
             ? { 'text-decoration': 'line-through' }
             : {} }
         >
@@ -134,14 +94,14 @@ const ComidasEmProcesso = () => {
             type="checkbox"
             onChange={ handleCheckboxChange }
             checked={ ingredients.wereFetched
-              && ingredients[idApi][index][food[ingredientKey]] }
+              && ingredients[idURL][index][food[ingredientKey]] }
           />
           {` ${food[ingredientKey]} - ${food[`strMeasure${index + 1}`]}`}
         </label>
       </div>
     ));
 
-  const allDone = () => ingredients.wereFetched && ingredients[idApi]
+  const allDone = () => ingredients.wereFetched && ingredients[idURL]
     .every((ingredient) => Object.values(ingredient)[0] === true);
 
   if (food === undefined) {
@@ -154,16 +114,7 @@ const ComidasEmProcesso = () => {
       <h2 data-testid="recipe-title">{food.strMeal}</h2>
       <button type="button" data-testid="share-btn">Compartilhar</button>
 
-      <button
-        type="button"
-        onClick={ handleFavorite }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt={ `Botão para adicionar ou retirar ${food.strMeal} dos favoritos` }
-        />
-      </button>
+      <FavoriteButton foodOrDrink={ food } />
 
       <p data-testid="recipe-category">{food.strCategory}</p>
       {renderIngredients(getIngredientsKeys(food))}
