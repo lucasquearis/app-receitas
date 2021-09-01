@@ -10,7 +10,10 @@ import FavoriteButton from '../../components/FavoriteButton';
 import ListDetails from './ListDetails';
 import RecipesRecommendation from './RecipesRecommendation';
 
+import { getSavedAssistent } from '../../utils';
+
 export default function DetailsPage() {
+  const savedDones = getSavedAssistent('doneRecipes');
   const { pathname } = useLocation();
 
   // id recebido pela url;
@@ -82,12 +85,14 @@ export default function DetailsPage() {
           />
         ) }
         <RecipesRecommendation type={ type } />
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-        </button>
+        { !savedDones.some(({ id: savedId }) => savedId === id) && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
+        ) }
       </>
     );
   };
