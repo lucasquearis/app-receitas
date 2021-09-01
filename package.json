@@ -17,7 +17,11 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
     "react-logger": "^1.1.0",
+<<<<<<< HEAD
     "react-router-dom": "^5.2.1",
+=======
+    "react-router-dom": "^5.2.0",
+>>>>>>> 297911fbdb44b7ad6801235a36fb9ecc93dc6695
     "react-scripts": "3.4.1",
     "websocket-extensions": ">=0.1.4"
   },
