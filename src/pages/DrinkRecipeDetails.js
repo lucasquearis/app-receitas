@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './pageCSS/DrinkRecipeDetails.css';
+import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import shareIcon from '../images/shareIcon.svg';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
@@ -9,6 +11,7 @@ import Loading from '../components/Loading';
 function DrinkRecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const [resultDrinkRecipe, setResultDrinkRecipe] = useState([]);
+  const [linkShare, setLinkShare] = useState(false);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -33,7 +36,20 @@ function DrinkRecipeDetails(props) {
       <>
         <h1 data-testid="recipe-title">{strDrink}</h1>
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt={ strDrink } />
-        <button data-testid="share-btn" type="button">Compartilhar</button>
+        <button
+          data-testid="share-btn"
+          onClick={ () => {
+            copy(`http://localhost:3000/bebidas/${id}`);
+            setLinkShare(true);
+          } }
+          type="button"
+        >
+          <img
+            src={ shareIcon }
+            alt="imagem de compartilhar"
+          />
+        </button>
+        { linkShare && 'Link copiado!' }
         <button data-testid="favorite-btn" type="button">Favoritar</button>
         <p data-testid="recipe-category">{strAlcoholic}</p>
         <ul>
