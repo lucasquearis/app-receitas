@@ -14,7 +14,7 @@ export default function Profile() {
   return (
     <>
       <HeaderNoSearch title="Perfil" />
-      <spam data-testid="profile-email">{ user.email }</spam>
+      <span data-testid="profile-email">{ user.email }</span>
       <section className="profile__btn-section">
         <Link to="/receitas-feitas">
           <button
