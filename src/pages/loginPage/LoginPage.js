@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import { saveLoginInfoLocalStorage, validateEmailPassword } from '../../functions';
 import './LoginPage.css';
 
@@ -49,14 +50,15 @@ const LoginPage = () => {
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
-        <button
+        <Button
+          variant="success"
           className="confirm-button"
           type="submit"
           disabled={ disabled }
           data-testid="login-submit-btn"
         >
           Entrar
-        </button>
+        </Button>
       </form>
     </div>
   );
