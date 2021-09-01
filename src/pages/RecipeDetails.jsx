@@ -59,12 +59,15 @@ function RecipeDetails(props) {
                 data-testid="recipe-photo"
                 style={ { width: '100%' } }
               />
+
               <h1
                 data-testid="recipe-title"
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
+
               <ShareButton pathname={ pathname } />
+
               <FavoriteButton
                 recipe={
                   { id,
@@ -76,22 +79,25 @@ function RecipeDetails(props) {
                     image: recipe[enType][0][`str${enCasedType}Thumb`] }
                 }
               />
+
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
                   ? recipe[enType][0].strCategory
                   : recipe[enType][0].strAlcoholic }
               </h2>
+
               <ul>
                 <IngredientsList recipe={ recipe[enType][0] } />
               </ul>
+
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
               {
                 type === 'comidas'
                 && <Iframe link={ recipe[enType][0].strYoutube } />
               }
-              {
-                recipe && <Suggestions type={ type } />
-              }
+
+              { recipe && <Suggestions type={ type } /> }
+
               <StartRecipeButton
                 id={ id }
                 type={ type }
