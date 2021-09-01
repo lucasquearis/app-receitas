@@ -78,7 +78,7 @@ describe('79 - Desenvolva as mesmas especificações da tela de receitas princip
     checkFirstMeals(italianMealsMock.meals);
   });
 
-  it('Ao clicar no card, a rota deve mudar para a tela de detalhes da receita com o ID da mesma na URL', () => {
+  it.only('Ao clicar no card, a rota deve mudar para a tela de detalhes da receita com o ID da mesma na URL', () => {
     cy.visit('http://localhost:3000/explorar/comidas/area', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;

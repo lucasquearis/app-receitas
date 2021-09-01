@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { fetchByArea, fetchFoods, fetchFilterByArea } from '../services/mealAPI';
+import '../styles/Area.css';
 
 function Area() {
   const LOCATION = useLocation().pathname;
@@ -65,19 +66,19 @@ function Area() {
       </select>
       {
         receitas && receitas.slice(0, MAX).map((recipe, index) => (
-          <div data-testid={ `${index}-recipe-card` } key={ index }>
-            <Link to={ `/comidas/${recipe.idMeal}` }>
+          <Link to={ `/comidas/${recipe.idMeal}` } key={ index }>
+            <div data-testid={ `${index}-recipe-card` }>
               <img
                 data-testid={ `${index}-card-img` }
                 src={ recipe.strMealThumb }
                 alt="thumbnail recipe"
-                width="100"
+                width="200"
               />
               <p data-testid={ `${index}-card-name` }>
                 { recipe.strMeal }
               </p>
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))
       }
       <Footer />
