@@ -9,42 +9,47 @@
   justify-content: center;
   width: 100%;
 }
-
 .header-profile {
+  padding-left: 50px;
   display: flex;
   flex-direction: column;
   background-color: aquamarine;
 }
 
+.header-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .btn-success {
-  margin: 0 5px;
+  margin: 10px 5px;
+  
+}
+
+/* 
+/* .radio-btn {
+  margin-left: 10px;
 }
 
 .header-search {
-  display: inline-block;
+  display: flex;
+  padding-left: 30px;
 }
 
 .search-open {
   display: flex;
-  transition: all 1s;
 }
 
 .search-input {
-  display: inline-block;
+  display: flex;
+  height: 30px;
+  width: 800px;
 }
 
 .search-radio {
   display: flex;
-}
-
-.header-title {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-evenly;
-  align-items: center;
-  transition: all 0.2s;
-}
+} */
 
 .rocksGlass {
   animation: shake 1s infinite ease;
@@ -79,6 +84,37 @@
 .cardTumb:hover {
   box-shadow: 0px 0px 10px rgb(158, 156, 156);
   transform: scale(1.02);
+}
+
+@media only screen and (max-width: 360px) {
+  .header-profile {
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+  }
+
+  .header-search {
+    display: inline-block;
+  }
+
+  .search-open {
+    display: flex;
+  }
+
+  .search-input {
+    display: inline-block;
+  }
+
+  .search-radio {
+    display: flex;
+  }
+
+  .header-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /*

@@ -68,6 +68,7 @@ function Search({ ingredient }) {
       <div className="search-radio" onChange={ ({ target: { value } }) => change(value) }>
         <label htmlFor="labelName">
           <input
+            className="radio-btn"
             type="radio"
             name="radio"
             value="search"
@@ -78,6 +79,7 @@ function Search({ ingredient }) {
         </label>
         <label htmlFor="labelIngredient">
           <input
+            className="radio-btn"
             type="radio"
             name="radio"
             value="ingredient"
@@ -88,6 +90,7 @@ function Search({ ingredient }) {
         </label>
         <label htmlFor="labelFirst">
           <input
+            className="radio-btn"
             type="radio"
             name="radio"
             value="first"
