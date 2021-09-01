@@ -32,7 +32,6 @@ const SearchByOrigin = () => {
   return (
     <div>
       <header>
-
         <Link to="/perfil">
           <button type="button">
             <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
