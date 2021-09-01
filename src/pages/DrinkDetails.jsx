@@ -8,6 +8,7 @@ import shareIcon from '../images/shareIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
+import '../styles/Details.css'
 
 function DrinkDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -20,10 +21,6 @@ function DrinkDetails({ match: { params: { id } } }) {
   const mystyle = {
     bottom: '0px',
     position: 'fixed',
-  };
-
-  const imgStyle = {
-    width: '300px',
   };
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
@@ -42,7 +39,7 @@ function DrinkDetails({ match: { params: { id } } }) {
     const sliceRecomended = recomendedFood.slice(0, SEIS);
     if (sliceRecomended.length > 0) {
       return (
-        <ul>
+        <ul className="recomended-container">
           {sliceRecomended.map((meal, index) => (
             <RecomendedCard
               title={ meal.strMeal }
@@ -156,17 +153,16 @@ function DrinkDetails({ match: { params: { id } } }) {
 
   return (
     <div>
-      Detalhes de bebidas:
       <div>
         <img
-          style={ imgStyle }
+          className="details-img"
           data-testid="recipe-photo"
           src={ strDrinkThumb }
           alt={ drink }
         />
       </div>
-      <div>
-        <h3 data-testid="recipe-title">{ strDrink }</h3>
+      <div className="content-container">
+        <h2 data-testid="recipe-title">{ strDrink }</h2>
         <Button
           onClick={ () => {
             copy(`http://localhost:3000${location.pathname}`);

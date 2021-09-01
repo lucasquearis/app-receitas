@@ -16,6 +16,10 @@ li {
   max-width: 142px;
 }
 
+.recipecard img {
+  max-width: 100px;
+}
+
 a {
   text-decoration: none;
 }

@@ -1,0 +1,12 @@
+.details-img {
+  width: 365px;
+}
+
+.recomended-container {
+  display: flex;
+  padding: 0px;
+}
+
+.content-container {
+  padding: 5px;
+}
