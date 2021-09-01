@@ -46,7 +46,7 @@ function Cards() {
 
   case 1:
     if (action === 'search-filters') {
-      return <Redirect to={ `${endpoint}/${cards[0][id]}` } />;
+      return <Redirect to={ `/redirecting${endpoint}/${cards[0][id]}` } />;
     }
     break;
 
@@ -58,7 +58,7 @@ function Cards() {
     <div className="cardsContent">
       {cards.map((item, i) => (
         <Link
-          to={ `${endpoint}/${item[id]}` }
+          to={ `/redirecting${endpoint}/${item[id]}` }
           key={ i }
           className="cardFlex"
           data-testid={ `${i}-recipe-card` }

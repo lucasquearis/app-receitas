@@ -47,7 +47,7 @@ function RecipeDetails(props) {
   return (
     <div>
       {
-        recipe
+        recipe && recipe[enType] && recipe[enType][0]
           ? (
             <div>
               <img
