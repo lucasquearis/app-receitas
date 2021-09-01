@@ -10,6 +10,7 @@ class RecipesMadeList extends Component {
       <div>
         {
           recipes.map(({
+            id,
             image,
             category,
             name,
@@ -21,6 +22,7 @@ class RecipesMadeList extends Component {
           }, i) => (
             <div key={ i }>
               <RecipesMadeCard
+                id={ id }
                 index={ i }
                 image={ image }
                 category={ category }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ShareIcon from '../images/shareIcon.svg';
+import ShareButton from './shareButton';
 
 class RecipesMadeCard extends Component {
   constructor(props) {
@@ -12,12 +12,14 @@ class RecipesMadeCard extends Component {
 
   renderFoodCard() {
     const {
+      id,
       image,
       category,
       name,
       doneDate,
       tags,
       area,
+      type,
       index,
     } = this.props;
 
@@ -34,13 +36,11 @@ class RecipesMadeCard extends Component {
           </div>
 
           <div>
-            <button type="button" className="share-fill">
-              <img
-                src={ ShareIcon }
-                alt="share button"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
+            <ShareButton
+              position={ index }
+              id={ id }
+              type={ type }
+            />
             <p data-testid={ `${index}-horizontal-top-text` }>
               <span>{ `${area} - ` }</span>
               <span>{ category }</span>
@@ -65,6 +65,8 @@ class RecipesMadeCard extends Component {
 
   renderDrinkCard() {
     const {
+      id,
+      type,
       image,
       alcoholicOrNot,
       name,
@@ -85,13 +87,11 @@ class RecipesMadeCard extends Component {
           </div>
 
           <div>
-            <button type="button" className="share-fill">
-              <img
-                src={ ShareIcon }
-                alt="share button"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
+            <ShareButton
+              position={ index }
+              id={ id }
+              type={ type }
+            />
             <p data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</p>
             <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
             <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
