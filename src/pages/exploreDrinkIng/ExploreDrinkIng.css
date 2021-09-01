@@ -6,14 +6,14 @@
   box-shadow: 1px 5px 10px rgb(204, 201, 201);
   display: inline-flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: wrap;
   font-size: 27px;
   height: 198px;
   justify-content: center;
-  margin-inline-end:  10px;
+  margin-inline-end: 10px;
   margin-inline-start: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-top: 30px;
   width: 45%;
 }
@@ -22,7 +22,7 @@
   color: black;
   font-size: 20px;
   margin-right: auto;
-  text-align-last:auto;
+  text-align-last: auto;
 }
 
 .exploreDrinkIngImg {
