@@ -4,15 +4,14 @@ import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import HeaderWithSearch from '../components/HeaderWithSearch';
 import { getMeal } from '../redux/actions';
-import Select from '../components/DefaultComponents/Select';
 import useRedirect from '../hooks/useRedirect';
 
 function FoodByOrigin() {
-  const [origins, setOrigins] = useState(['All']);
+  const [originsListFilter, setOriginsListFilter] = useState([]);
+  const [origins, setOrigins] = useState([]);
   const [firstTwelve, setFistTwelve] = useState([]);
   const [originSelect, setOriginSelect] = useState({ selected: 'All' });
   const { shouldRedirect, redirect } = useRedirect();
-
   const TWELVE = 12;
 
   const { selected } = originSelect;
@@ -25,28 +24,38 @@ function FoodByOrigin() {
   }, [dispatch]);
 
   useEffect(() => {
+    const fetchFilterOrigins = async () => {
+      if (selected !== 'All') {
+        const END_POINT = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${selected}`;
+
+        const response = await fetch(END_POINT);
+        const { meals: filterOriginsList } = await response.json();
+        return setOriginsListFilter(filterOriginsList);
+      }
+    };
+    fetchFilterOrigins();
+  }, [selected]);
+
+  useEffect(() => {
     const fetchOrigins = async () => {
       const END_POINT = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 
       const response = await fetch(END_POINT);
       const { meals: originsList } = await response.json();
-      const results = originsList.map(({ strArea }) => strArea);
-      const teste = [...origins, ...results];
-      return setOrigins(teste);
+      const originsMap = originsList.map(({ strArea }) => strArea);
+      const results = ['All', ...originsMap];
+      return setOrigins(results);
     };
     fetchOrigins();
   }, [origins]);
 
   useEffect(() => {
     if (selected === 'All') {
-      const result = meals.slice(0, TWELVE);
-      setFistTwelve(result);
+      setFistTwelve(meals.slice(0, TWELVE));
     } else {
-      const result = meals
-        .filter(({ strArea }) => strArea === selected).slice(0, TWELVE);
-      setFistTwelve(result);
+      setFistTwelve(originsListFilter.slice(0, TWELVE));
     }
-  }, [meals, selected]);
+  }, [originsListFilter, meals, selected]);
 
   const handleChange = ({ target: { name, type, value, checked } }) => {
     function newValue() {
@@ -68,17 +77,29 @@ function FoodByOrigin() {
   return (
     <>
       <HeaderWithSearch>Explorar Origem</HeaderWithSearch>
-      <Select
-        handleChange={ handleChange }
-        label="Origin"
-        name="selected"
-        options={ origins }
-        testIdSelect="explore-by-area-dropdown"
-        value={ selected }
-      />
-      <>
+      <label htmlFor="selected">
+        Origin
+        <select
+          data-testid="explore-by-area-dropdown"
+          id="selected"
+          name="selected"
+          onChange={ handleChange }
+          value={ selected }
+        >
+          { origins.map((option) => (
+            <option
+              data-testid={ `${option}-option` }
+              key={ option }
+              value={ option }
+            >
+              { option }
+            </option>
+          )) }
+        </select>
+      </label>
+      <div>
         {
-          firstTwelve.map(({ idMeal, strMeal, strMealThumb }, index) => (
+          firstTwelve.map(({ idMeal, strMealThumb, strMeal }, index) => (
             <button
               type="button"
               onClick={ () => shouldRedirect(`/comidas/${idMeal}`) }
@@ -95,7 +116,7 @@ function FoodByOrigin() {
             </button>
           ))
         }
-      </>
+      </div>
       <Footer />
     </>
   );
