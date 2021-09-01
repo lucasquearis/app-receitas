@@ -5,7 +5,10 @@ import DoneCard from '../components/DoneCard';
 function ReceitasFeitas() {
   const [showDoneRecipes, setShowDoneRecipes] = useState([]);
 
-  const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  let allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (allRecipes === null) {
+    allRecipes = [];
+  }
   const showDoneFoods = allRecipes.filter((recipe) => recipe.type === 'comida');
   const showDoneDrinks = allRecipes.filter((recipe) => recipe.type === 'bebida');
 
