@@ -69,7 +69,11 @@ function ProgressRecipes(props) {
                   : recipe[enType][0].strAlcoholic }
               </h2>
               <section>
-                <IngredientsCheckList recipe={ recipe[enType][0] } />
+                <IngredientsCheckList
+                  id={ id }
+                  recipe={ recipe }
+                  enType={ enType }
+                />
               </section>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
 
