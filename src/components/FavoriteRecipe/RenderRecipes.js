@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
 import favoriteIcon from '../../images/blackHeartIcon.svg';
+import './FavoriteRecipe.css';
 
 const RenderRecipes = ({ array, copied, copyLink, unfavoriteRecipe }) => {
   if (array) {
@@ -12,20 +13,76 @@ const RenderRecipes = ({ array, copied, copyLink, unfavoriteRecipe }) => {
           index) => {
           if (type === 'comida') {
             return (
-              <div key={ index }>
+              <div key={ index } className="favorite-recipe-card">
+                <div className="favorite-recipe-image-div">
+                  <Link to={ `/${type}s/${id}` }>
+                    <img
+                      data-testid={ `${index}-horizontal-image` }
+                      src={ image }
+                      alt={ name }
+                      style={ { height: '180px', width: '180px' } }
+                    />
+                  </Link>
+                </div>
+                <div className="favorite-recipe-infos-div">
+                  <p data-testid={ `${index}-horizontal-top-text` }>
+                    { `${area} - ${category}` }
+                  </p>
+                  <Link to={ `/${type}s/${id}` }>
+                    <p
+                      data-testid={ `${index}-horizontal-name` }
+                      className="favorite-recipe-name"
+                    >
+                      { name }
+                    </p>
+                  </Link>
+                  <section className="buttons-container">
+                    <label htmlFor="share">
+                      <input
+                        id="share"
+                        type="image"
+                        alt="Botão compartilhar"
+                        src={ shareIcon }
+                        data-testid={ `${index}-horizontal-share-btn` }
+                        onClick={ copyLink }
+                      />
+                      {copied}
+                    </label>
+                    <input
+                      type="image"
+                      src={ favoriteIcon }
+                      alt="Botão de favoritar"
+                      data-testid={ `${index}-horizontal-favorite-btn` }
+                      onClick={ unfavoriteRecipe }
+                    />
+                  </section>
+                </div>
+              </div>
+            );
+          }
+          return (
+            <div key={ index } className="favorite-recipe-card">
+              <div className="favorite-recipe-image-div">
                 <Link to={ `/${type}s/${id}` }>
                   <img
                     data-testid={ `${index}-horizontal-image` }
                     src={ image }
                     alt={ name }
-                    style={ { height: '300px', width: '300px' } }
+                    style={ { height: '180px', width: '180px' } }
                   />
                 </Link>
+              </div>
+              <div className="favorite-recipe-infos-div">
                 <p data-testid={ `${index}-horizontal-top-text` }>
-                  { `${area} - ${category}` }
+                  { `${alcoholicOrNot}` }
                 </p>
                 <Link to={ `/${type}s/${id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+                  <p
+                    data-testid={ `${index}-horizontal-name` }
+                    className="favorite-recipe-name"
+                  >
+                    { name }
+                  </p>
                 </Link>
                 <section className="buttons-container">
                   <label htmlFor="share">
@@ -48,44 +105,6 @@ const RenderRecipes = ({ array, copied, copyLink, unfavoriteRecipe }) => {
                   />
                 </section>
               </div>
-            );
-          }
-          return (
-            <div key={ index }>
-              <Link to={ `/${type}s/${id}` }>
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ image }
-                  alt={ name }
-                  style={ { height: '300px', width: '300px' } }
-                />
-              </Link>
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                { `${alcoholicOrNot}` }
-              </p>
-              <Link to={ `/${type}s/${id}` }>
-                <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-              </Link>
-              <section className="buttons-container">
-                <label htmlFor="share">
-                  <input
-                    id="share"
-                    type="image"
-                    alt="Botão compartilhar"
-                    src={ shareIcon }
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    onClick={ copyLink }
-                  />
-                  {copied}
-                </label>
-                <input
-                  type="image"
-                  src={ favoriteIcon }
-                  alt="Botão de favoritar"
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  onClick={ unfavoriteRecipe }
-                />
-              </section>
             </div>
           );
         }) }
