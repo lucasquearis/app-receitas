@@ -18,6 +18,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipesInProgress from './pages/RecipesInProgress';
 import FoodsOrDrinks from './pages/FoodsOrDrinks';
+import Redirecting from './pages/Redirecting';
 
 function App() {
   return (
@@ -56,6 +57,11 @@ function App() {
           exact
           path="/:type/:id"
           render={ (props) => <RecipeDetails { ...props } /> }
+        />
+        <Route
+          exact
+          path="/redirecting/:type/:id"
+          render={ (props) => <Redirecting { ...props } /> }
         />
         <Route
           exact

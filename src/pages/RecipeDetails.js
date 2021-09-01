@@ -9,33 +9,40 @@ import FavoriteButton from '../components/FavoriteButton';
 import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
-  const [recipe, setRecipe] = useState();
-  const [enType, setEnType] = useState('drinks');
-  const [enCasedType, setEnCasedType] = useState('Drink');
-  const [favoriteType, setFavoriteType] = useState('bebida');
   const { match, history } = props;
   const { type, id } = match.params;
+  const [recipe, setRecipe] = useState();
+  const [enType, setEnType] = useState(type === 'comidas' ? 'meals' : 'drinks');
+  const [enCasedType, setEnCasedType] = useState('Drink');
+  const [favoriteType, setFavoriteType] = useState('bebida');
   const { pathname } = history.location;
+  const YOUTUBE_ID_START = 32;
+  const YOUTUBE_ID_END = 64;
+
+  const getRecipe = async () => {
+    let endpoint = '';
+    if (type === 'comidas') {
+      endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      setEnType('meals');
+      setEnCasedType('Meal');
+      setFavoriteType('comida');
+    } else {
+      endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+    }
+    await fetch(endpoint)
+      .then((data) => data.json())
+      .then((response) => {
+        setRecipe(response);
+      });
+  };
 
   useEffect(() => {
-    const getRecipe = async () => {
-      let endpoint = '';
-      if (type === 'comidas') {
-        endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-        setEnType('meals');
-        setEnCasedType('Meal');
-        setFavoriteType('comida');
-      } else {
-        endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-      }
-      await fetch(endpoint)
-        .then((data) => data.json())
-        .then((response) => {
-          setRecipe(response);
-        });
-    };
     getRecipe();
   }, []);
+
+  useEffect(() => {
+    getRecipe();
+  }, [props]);
 
   return (
     <div>
@@ -77,12 +84,14 @@ function RecipeDetails(props) {
               </ul>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
               {
-                type === 'comidas'
+                type === 'comidas' && recipe[enType][0].strYoutube
                 && (
                   <iframe
                     title="Video"
                     data-testid="video"
-                    src={ recipe[enType][0].strYoutube }
+                    src={
+                      `https://www.youtube.com/embed/${recipe[enType][0].strYoutube.slice(YOUTUBE_ID_START, YOUTUBE_ID_END)}`
+                    }
                   />
                 )
               }
