@@ -1,0 +1,18 @@
+.explore-btn {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  width: 80%;
+  /* align-items: center; */
+  justify-content: center;
+  font-size: 27px;
+  border: white;
+
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+
+  box-shadow: 1px 5px 10px rgb(204, 201, 201);;
+  border-radius: 5px;
+  background-color: white;
+}

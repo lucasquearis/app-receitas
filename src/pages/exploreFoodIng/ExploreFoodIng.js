@@ -4,8 +4,7 @@ import HeaderWithoutSearch from '../../components/header/HeaderWithoutSearch';
 import FoodImage from './foodImage';
 import FooterMenu from '../../components/FooterMenu/FooterMenu';
 import AppContext from '../../context/AppContext';
-// import CardsList from '../../components/CardsList/CardsList';
-// import requestFoodByIngredients from '../../services/requestFood';
+import './ExploreFoodIng.css';
 
 const ExploreFoodIng = () => {
   const context = useContext(AppContext);
@@ -51,13 +50,20 @@ const ExploreFoodIng = () => {
             <div
               key={ index }
               data-testid={ `${index}-ingredient-card` }
+              className="exploreFoodIng"
             >
               <img
+                className="exploreFoodIngImg"
                 data-testid={ `${index}-card-img` }
                 src={ FoodImage(obj.strIngredient) }
                 alt={ obj.strIngredient }
               />
-              <h3 data-testid={ `${index}-card-name` }>{obj.strIngredient}</h3>
+              <h3
+                className="exploreFoodIngText"
+                data-testid={ `${index}-card-name` }
+              >
+                {obj.strIngredient}
+              </h3>
             </div>
           </Link>
         )) }
