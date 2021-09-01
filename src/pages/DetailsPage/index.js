@@ -26,7 +26,7 @@ export default function DetailsPage() {
 
   const type = pathname.includes('/comidas/') ? 'food' : 'drinks';
 
-  // define o caminho para a página de receitas em andamento de acorodo com o path atual;
+  // define o caminho para a pagina de receitas em andamento de acorodo com o path atual;
   const path = pathname.includes('/comidas/') ? '/comidas' : '/bebidas';
 
   // Quando o componente for montado irá executar a função "getItem";
