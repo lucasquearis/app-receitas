@@ -11,8 +11,10 @@ import ListDetails from './ListDetails';
 import RecipesRecommendation from './RecipesRecommendation';
 
 import './detailsPage.css';
+import { getSavedAssistent } from '../../utils';
 
 export default function DetailsPage() {
+  const savedDones = getSavedAssistent('doneRecipes');
   const { pathname } = useLocation();
 
   const history = useHistory();
@@ -89,14 +91,16 @@ export default function DetailsPage() {
           />
         ) }
         <RecipesRecommendation type={ type } />
-        <button
-          className="start-recipe-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ () => history.push(`${path}/${id}/in-progress`) }
-        >
-          Iniciar Receita
-        </button>
+        { !savedDones.some(({ id: savedId }) => savedId === id) && (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="start-recipe-btn"
+            onClick={ () => history.push(`${path}/${id}/in-progress`) }
+          >
+            Iniciar Receita
+          </button>
+        ) }
       </>
     );
   };
