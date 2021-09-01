@@ -45,9 +45,14 @@ export const handleButton = (history) => {
   );
 };
 
-export const handleShare = (setLink) => {
+export const handleShare = (setLink, id = '') => {
   setLink('Link copiado!');
-  const actualLocation = window.location.href;
+  let actualLocation;
+  if (id.length) {
+    actualLocation = `${document.location.origin}/${id}`;
+  } else {
+    actualLocation = window.location.href;
+  }
   const dummy = document.createElement('input');
   document.body.appendChild(dummy);
   dummy.value = actualLocation;

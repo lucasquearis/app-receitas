@@ -27,6 +27,12 @@ export async function fetchDrinkById(id) {
   return data;
 }
 
+export async function fetchDrinkByIngredient(ingredient) {
+  const fetchURL = await fetch(`${COCKTAIL_BY_INGREDIENT}${ingredient}`);
+  const data = await fetchURL.json();
+  return data;
+}
+
 export async function fetchCocktailByFilters(filters) {
   const { inputSearch, ingredient, name, firstLetter } = filters;
   let response = [];

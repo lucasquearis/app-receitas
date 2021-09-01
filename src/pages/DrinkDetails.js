@@ -17,14 +17,9 @@ function DrinkDetails({ history, match: { params: { id } } }) {
   const [icon, setIcon] = useState(isFavorite);
 
   useEffect(() => {
-    fetchDrinkById(id).then(({ drinks }) => setDrinkDetails(drinks));
-    fetchFoods().then(({ meals }) => setRecMeal(meals));
-  }, [id]);
-
-  useEffect(() => {
-    if (ingredients.length === 0) {
+    fetchDrinkById(id).then(({ drinks }) => {
       const MAX_INGREDIENT = 20;
-      drinkDetails.map((item) => {
+      drinks.forEach((item) => {
         let arr = [];
         for (let i = 1; i <= MAX_INGREDIENT; i += 1) {
           const itemIngredient = `strIngredient${i}`;
@@ -38,10 +33,15 @@ function DrinkDetails({ history, match: { params: { id } } }) {
             { strMeasure: item[itemMeasure], strIngredient: item[itemIngredient] },
           ];
         }
-        return ingredients;
       });
-    }
-  }, [drinkDetails, ingredients]);
+      setDrinkDetails(drinks);
+    });
+    fetchFoods().then(({ meals }) => setRecMeal(meals));
+  }, [id]);
+
+  if (!drinkDetails.length) {
+    return <h1>Loading...</h1>;
+  }
 
   const handleFavorite = () => {
     const objSave = drinkDetails.map((item) => {
@@ -58,7 +58,6 @@ function DrinkDetails({ history, match: { params: { id } } }) {
     })[0];
     handleFavoriteAuxiliar(objSave, setIcon, icon);
   };
-
   return (
     <div>
       { drinkDetails.map((item) => {
@@ -108,7 +107,6 @@ function DrinkDetails({ history, match: { params: { id } } }) {
     </div>
   );
 }
-
 DrinkDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -122,5 +120,4 @@ DrinkDetails.propTypes = {
     }),
   }).isRequired,
 };
-
 export default DrinkDetails;

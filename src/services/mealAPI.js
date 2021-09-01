@@ -29,6 +29,12 @@ export async function fetchFoodById(id) {
   return data;
 }
 
+export async function fetchFoodByIngredient(ingredient) {
+  const fetchURL = await fetch(`${FOOD_BY_INGREDIENT}${ingredient}`);
+  const data = await fetchURL.json();
+  return data;
+}
+
 export async function fetchFoodByFilters(filters) {
   const { inputSearch, ingredient, name, firstLetter } = filters;
   let response = [];

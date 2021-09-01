@@ -10,9 +10,20 @@ function IngredientCard({ ingredient, type, index }) {
     return `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`;
   });
 
+  const handleClick = () => {
+    let ingredientToSave;
+    if (type === 'comidas') {
+      ingredientToSave = ingredient.strIngredient;
+    } else {
+      ingredientToSave = ingredient.strIngredient1;
+    }
+    localStorage.setItem('filterIngredient', ingredientToSave);
+  };
+
   return (
     <Link
       to={ `/${type}` }
+      onClick={ handleClick }
     >
       <div data-testid={ `${index}-ingredient-card` }>
         <img
