@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
 
 function ButtonFoods() {
   const ide = 52771;
-  const [none, setNone] = useState(false);
+  // const [none, setNone] = useState(false);
   const setHistory = useHistory();
 
   const handleClick = () => {
     setHistory.push(`/comidas/${ide}/in-progress`);
   };
 
-  useEffect(() => {
-    const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (recipe) {
-      const findRecipe = recipe.find((item) => item.id === ide);
-      if (findRecipe) setNone(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
+  //   if (recipe) {
+  //     const findRecipe = recipe.find((item) => item.id === ide);
+  //     if (findRecipe) setNone(true);
+  //   }
+  // }, []);
 
   return (
     <div className="div-button-details">
       <button
-        hidden={ none }
+        hidden={ false }
         className="button-details"
         type="button"
         data-testid="start-recipe-btn"
