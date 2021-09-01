@@ -23,8 +23,8 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/comidas/:id/in-progress" component={ FoodsInProgress } />
         <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
+        <Route path="/comidas/:id/in-progress" component={ FoodsInProgress } />
         <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
