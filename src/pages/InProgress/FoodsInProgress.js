@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import FavoriteButton from '../../components/RecipesInProgress/FavoriteButton';
-import ShareButton from '../../components/RecipesInProgress/ShareButton';
+import FavoriteButton from '../../components/FavoriteButton';
+import ShareButton from '../../components/ShareButton';
 
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
