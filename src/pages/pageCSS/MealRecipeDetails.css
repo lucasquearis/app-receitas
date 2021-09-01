@@ -10,6 +10,12 @@
   height: 80px;
 }
 
+.favorite-btn {
+  background-color: white;
+  border: none;
+  padding: 0;
+}
+
 .finish-btn {
   background-color: #6ce34f;
   border: none;

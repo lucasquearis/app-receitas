@@ -6,10 +6,13 @@ import searchMealAPI
   from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
+import notFavoriteIcon from '../images/whiteHeartIcon.svg';
+import favoriteIcon from '../images/blackHeartIcon.svg';
 
 export default function MealRecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
+  const [favoriteRecipe, setFavoriteRecipe] = useState(false);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -28,6 +31,16 @@ export default function MealRecipeDetails(props) {
     return 'Iniciar Receita';
   };
 
+  const handleclickFavButton = () => {
+    if (!favoriteRecipe) {
+      setFavoriteRecipe(true);
+      console.log('Favoritou');
+    } else {
+      setFavoriteRecipe(false);
+      console.log('Desfavoritou');
+    }
+  };
+
   if (resultMealRecipe.length > 0) {
     const {
       strMealThumb,
@@ -36,6 +49,8 @@ export default function MealRecipeDetails(props) {
       strInstructions,
       strYoutube,
     } = resultMealRecipe[0];
+    const splittedLink = strYoutube.split('v=');
+    const embededLink = `https://www.youtube.com/embed/${splittedLink[1]}`;
     const keysIngredients = Object.keys(resultMealRecipe[0]);
     const listIngredients = keysIngredients.filter((item) => item
       .includes('strIngredient'));
@@ -50,7 +65,17 @@ export default function MealRecipeDetails(props) {
           alt={ strMeal }
         />
         <button data-testid="share-btn" type="button">Compartilhar</button>
-        <button data-testid="favorite-btn" type="button">Favoritar</button>
+        <button
+          data-testid="favorite-btn"
+          className="favorite-btn"
+          type="button"
+          onClick={ handleclickFavButton }
+        >
+          <img
+            src={ favoriteRecipe ? favoriteIcon : notFavoriteIcon }
+            alt="icone favorito"
+          />
+        </button>
         <span>Categoria: </span>
         <span data-testid="recipe-category">{strCategory}</span>
         <ul>
@@ -78,8 +103,8 @@ export default function MealRecipeDetails(props) {
           data-testid="video"
           title="Video da receita"
           width="360"
-          height="640"
-          src={ strYoutube }
+          height="360"
+          src={ embededLink }
           frameBorder="0"
           allowFullScreen
         />
