@@ -9,6 +9,7 @@ import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
 import initialStep from '../helpers/InitialValues';
 import IngredientsCheckList from '../components/IngredientsCheckList';
+import '../styles/Progress.css';
 
 function ProgressFood({
   match: {
@@ -184,22 +185,28 @@ function ProgressFood({
 
     return (
       <div>
-        <img src={ strMealThumb } alt="meal thumb" data-testid="recipe-photo" />
-        <h2 data-testid="recipe-title">{strMeal}</h2>
-        <Button
-          data-testid="share-btn"
-          onClick={ handleShare }
-        >
-          <img src={ shareIcon } alt="share-icon" />
-        </Button>
-        <Button onClick={ handleFavorite }>
-          <img data-testid="favorite-btn" src={ favoriteIcon } alt="heart-icon" />
-        </Button>
-        {copyLink && <Chip label="Link copiado!" variant="outlined" size="small" />}
-        <h4 data-testid="recipe-category">{strCategory}</h4>
-        <IngredientsCheckList steps={ steps } handleCheck={ handleCheck } />
-        <p data-testid="instructions">{strInstructions}</p>
-        {renderFinishButton()}
+        <img className="progress-img" src={ strMealThumb } alt="meal thumb" data-testid="recipe-photo" />
+        <div className="content-container">
+          <div className="title-container">
+            <h2 data-testid="recipe-title">{strMeal}</h2>
+            <div className="btn-container">
+              <Button
+                data-testid="share-btn"
+                onClick={ handleShare }
+              >
+                <img src={ shareIcon } alt="share-icon" />
+              </Button>
+              <Button onClick={ handleFavorite }>
+                <img data-testid="favorite-btn" src={ favoriteIcon } alt="heart-icon" />
+              </Button>
+            </div>
+          </div>
+          {copyLink && <Chip label="Link copiado!" variant="outlined" size="small" />}
+          <h4 data-testid="recipe-category">{strCategory}</h4>
+          <IngredientsCheckList steps={ steps } handleCheck={ handleCheck } />
+          <p data-testid="instructions">{strInstructions}</p>
+          {renderFinishButton()}
+        </div>
       </div>
     );
   };

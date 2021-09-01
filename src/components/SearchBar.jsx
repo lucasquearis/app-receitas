@@ -129,7 +129,7 @@ function SearchBar({ pageName }) {
         className="search-btn"
         type="button"
         variant="contained"
-        color="primary"
+        color="secondary"
         data-testid="exec-search-btn"
         onClick={ handleClickButton }
       >

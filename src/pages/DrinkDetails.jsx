@@ -162,30 +162,34 @@ function DrinkDetails({ match: { params: { id } } }) {
         />
       </div>
       <div className="content-container">
-        <h2 data-testid="recipe-title">{ strDrink }</h2>
-        <Button
-          onClick={ () => {
-            copy(`http://localhost:3000${location.pathname}`);
-            setShare(true);
-          } }
-          type="button"
-        >
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-            data-testid="share-btn"
-          />
-        </Button>
-        { share && <p>Link copiado!</p> }
-        <Button
-          type="button"
-          onClick={ handleFavorite }
-        >
-          <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
-        </Button>
+        <div className="title-container">         
+          <h2 data-testid="recipe-title">{ strDrink }</h2>
+          <div className="btn-container">
+            <Button
+              onClick={ () => {
+                copy(`http://localhost:3000${location.pathname}`);
+                setShare(true);
+              } }
+              type="button"
+            >
+              <img
+                src={ shareIcon }
+                alt="imagem de compartilhar"
+                data-testid="share-btn"
+              />
+            </Button>
+            { share && <p>Link copiado!</p> }
+            <Button
+              type="button"
+              onClick={ handleFavorite }
+            >
+              <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
+            </Button>
+          </div>
+        </div>
         <p data-testid="recipe-category">{ strAlcoholic }</p>
         <p>Ingredientes:</p>
-        <ul>
+        <ul className="ingredient-list">
           {ingredientList.map((ingredient, index) => (
             <li
               key={ index }
@@ -198,7 +202,7 @@ function DrinkDetails({ match: { params: { id } } }) {
         {renderRecomendedFood()}
         <Link to={ `/bebidas/${id}/in-progress` }>
           <button
-            style={ mystyle }
+            className="recipe-btn"
             variant="contained"
             color="primary"
             type="button"

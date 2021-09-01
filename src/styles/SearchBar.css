@@ -5,6 +5,7 @@
   box-shadow: 0rem 0.1rem 0rem 0rem rgba(0, 0, 0, 0.45);
   background-color: #f4d78d;
   padding-bottom: 5px;
+  padding-left: 10px;
 }
 
 .input-container {
@@ -25,4 +26,5 @@
 
 .search-btn {
   width: 30%;
+  align-self:baseline
 }

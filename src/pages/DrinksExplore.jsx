@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../styles/Explore.css';
 
 function ExploreDrinks() {
   const [surpriseId, setSurpriseId] = useState(0);
@@ -21,16 +22,26 @@ function ExploreDrinks() {
   return (
     <div>
       <Header name="Explorar Bebidas" />
-      <Link to="/explorar/bebidas/ingredientes">
-        <Button data-testid="explore-by-ingredient">
-          Por Ingredientes
-        </Button>
-      </Link>
-      <Link to={ `/bebidas/${surpriseId}` }>
-        <Button data-testid="explore-surprise">
-          Me Surpreenda!
-        </Button>
-      </Link>
+      <div className="explore-btn-container">
+        <Link to="/explorar/bebidas/ingredientes">
+          <Button 
+            data-testid="explore-by-ingredient"
+            variant="contained"
+            color="secondary"
+          >
+            Por Ingredientes
+          </Button>
+        </Link>
+        <Link to={ `/bebidas/${surpriseId}` }>
+          <Button
+            data-testid="explore-surprise"
+            variant="contained"
+            color="secondary"
+          >
+            Me Surpreenda!
+          </Button>
+        </Link>
+      </div>
       <Footer />
     </div>
   );

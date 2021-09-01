@@ -87,7 +87,7 @@ function FinishRecipeButton({ disable, recipe, type }) {
     <Button
       data-testid="finish-recipe-btn"
       variant="contained"
-      color="primary"
+      color="secondary"
       disabled={ disable }
       onClick={ handleFinishBtn }
     >

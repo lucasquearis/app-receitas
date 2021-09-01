@@ -7,6 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
+import '../styles/Details.css'
 
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
@@ -27,9 +28,6 @@ function FoodDetails({ match: { params: { id } } }) {
     bottom: '0px',
     position: 'fixed',
   };
-  const imgStyle = {
-    width: '300px',
-  };
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
   const [favorite, setFavorite] = useState(false);
@@ -47,7 +45,7 @@ function FoodDetails({ match: { params: { id } } }) {
     const sliceRecomended = recomendedDrink.slice(0, SEIS);
     if (sliceRecomended.length > 0) {
       return (
-        <ul>
+        <ul className="recomended-container">
           {sliceRecomended.map((drink, index) => (
             <RecomendedCard
               title={ drink.strDrink }
@@ -158,40 +156,43 @@ function FoodDetails({ match: { params: { id } } }) {
 
   return (
     <div>
-      Detalhes de comidas:
       <div>
         <img
-          style={ imgStyle }
+          className="details-img"
           data-testid="recipe-photo"
           src={ strMealThumb }
           alt={ food }
         />
       </div>
-      <div>
-        <h3 data-testid="recipe-title">{ strMeal }</h3>
-        <Button
-          onClick={ () => {
-            copy(`http://localhost:3000${location.pathname}`);
-            setShare(true);
-          } }
-          type="button"
-        >
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-            data-testid="share-btn"
-          />
-        </Button>
-        { share && <p>Link copiado!</p> }
-        <Button
-          type="button"
-          onClick={ handleFavorite }
-        >
-          <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
-        </Button>
+      <div className="content-container">
+        <div className="title-container">
+          <h2 data-testid="recipe-title">{ strMeal }</h2>
+          <div className="btn-container">
+            <Button
+              onClick={ () => {
+                copy(`http://localhost:3000${location.pathname}`);
+                setShare(true);
+              } }
+              type="button"
+            >
+              <img
+                src={ shareIcon }
+                alt="imagem de compartilhar"
+                data-testid="share-btn"
+              />
+            </Button>
+            { share && <p>Link copiado!</p> }
+            <Button
+              type="button"
+              onClick={ handleFavorite }
+            >
+              <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
+            </Button>
+          </div>
+        </div>
         <p data-testid="recipe-category">{ strCategory }</p>
         <p>Ingredientes:</p>
-        <ul>
+        <ul className="ingredient-list">
           {ingredientList.map((ingredient, index) => (
             <li
               key={ index }
@@ -210,7 +211,7 @@ function FoodDetails({ match: { params: { id } } }) {
 
         <Link to={ `/comidas/${id}/in-progress` }>
           <button
-            style={ mystyle }
+            className="recipe-btn"
             variant="contained"
             color="primary"
             type="button"

@@ -5,6 +5,7 @@ import RecipeCard from '../components/RecipeCard';
 import AppContext from '../context/AppContext';
 import DrinkList from '../components/DrinkList';
 import Footer from '../components/Footer';
+import '../styles/Main.css'
 
 function MainDrinks() {
   const { drinks } = useContext(AppContext);
@@ -13,7 +14,7 @@ function MainDrinks() {
       { drinks.length === 1
         && <Redirect to={ `/bebidas/${drinks[0].idDrink}` } /> }
       <Header name="Bebidas" />
-      <div>
+      <div className="foodcard-container">
         { drinks.length !== 0 ? drinks.map((recipe, index) => (
           <div key={ recipe.idDrink }>
             <Link to={ `/bebidas/${recipe.idDrink}` }>

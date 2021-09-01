@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 function IngredientsCheckList({ steps, handleCheck }) {
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend">Ingredients</FormLabel>
+      <FormLabel color="primary" component="legend">Ingredients</FormLabel>
       <FormGroup>
         {steps.map((step, index) => (
           <FormControlLabel

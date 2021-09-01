@@ -8,7 +8,7 @@ function RecomendedCard({ title, img, id, index, visible }) {
   };
   return (
     <li
-      className="recipecard"
+      className="recipecard-recomend"
       index={ id }
       name={ title }
       data-testid={ `${index}-recomendation-card` }

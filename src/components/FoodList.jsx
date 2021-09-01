@@ -66,7 +66,7 @@ function FoodList() {
             value={ cat.strCategory }
           />))}
         </div>
-        <ol className="foodcard-container">
+        <ol className="list">
           {foods.meals.slice(0, DOZE).map((food, index) => (
             <FoodCard key={ food.idMeal } food={ food } index={ index } />
           ))}

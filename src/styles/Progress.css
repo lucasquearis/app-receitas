@@ -1,0 +1,17 @@
+.progress-img {
+  width: 365px;
+}
+
+.content-container {
+  padding: 5px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-container {
+  display: flex;
+}
