@@ -18,6 +18,17 @@ function DrinkRecipeDetails(props) {
     resolveAPI();
   }, [id]);
 
+  console.log();
+
+  const continueRecipe = () => {
+    const parseStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: { [id]: [] } };
+    if (parseStorage.cocktails[id]) {
+      return 'Continuar Receita';
+    }
+    return 'Iniciar Receita';
+  };
+
   if (resultDrinkRecipe.length > 0) {
     const {
       strDrink,
@@ -57,14 +68,17 @@ function DrinkRecipeDetails(props) {
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
         <RecomendationCard page="drinks" />
-        <Link to={ `/bebidas/${id}/in-progress` }>
-          <button
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            Iniciar Receita
-          </button>
-        </Link>
+        <div className="div-btn-start-recipe">
+          <Link to={ `/bebidas/${id}/in-progress` }>
+            <button
+              className="finish-btn"
+              data-testid="start-recipe-btn"
+              type="button"
+            >
+              { continueRecipe() }
+            </button>
+          </Link>
+        </div>
       </>
     );
   }

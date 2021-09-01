@@ -5,3 +5,17 @@
 .cards {
   width: 200px;
 }
+
+.div-btn-start-recipe {
+  height: 80px;
+}
+
+.finish-btn {
+  background-color: #6ce34f;
+  border: none;
+  bottom: 0;
+  display: block;
+  height: 70px;
+  position: fixed;
+  width: 360px;
+}

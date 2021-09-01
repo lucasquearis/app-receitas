@@ -19,6 +19,15 @@ export default function MealRecipeDetails(props) {
     resolveAPI();
   }, [id]);
 
+  const continueRecipe = () => {
+    const parseStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { meals: { [id]: [] } };
+    if (parseStorage.meals[id]) {
+      return 'Continuar Receita';
+    }
+    return 'Iniciar Receita';
+  };
+
   if (resultMealRecipe.length > 0) {
     const {
       strMealThumb,
@@ -75,14 +84,17 @@ export default function MealRecipeDetails(props) {
           allowFullScreen
         />
         <RecomendationCard page="meals" />
-        <Link to={ `/comidas/${id}/in-progress` }>
-          <button
-            data-testid="start-recipe-btn"
-            type="button"
-          >
-            Iniciar Receita
-          </button>
-        </Link>
+        <div className="div-btn-start-recipe">
+          <Link to={ `/comidas/${id}/in-progress` }>
+            <button
+              className="finish-btn"
+              data-testid="start-recipe-btn"
+              type="button"
+            >
+              { continueRecipe() }
+            </button>
+          </Link>
+        </div>
       </>
     );
   }
