@@ -38,6 +38,7 @@ function useFilter() {
     filter,
     setFilter,
     category,
+    setCategory,
   };
 }
 
