@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { Redirect, useLocation } from 'react-router-dom';
 import AppContext from '../Context/AppContext';
 import useFilter from '../hooks/useFilter';
 import useFilterIngredient from '../hooks/useFilterIngredient';
+import '../styles/foods-drinks.css';
 
 function FoodsAndDrinks() {
   const { globalState } = useContext(AppContext);
@@ -53,15 +53,17 @@ function FoodsAndDrinks() {
 
   const getButtons = () => {
     const buttonList = buttons.map(({ strCategory }, index) => (
-      <Button
+      <button
         data-testid={ `${strCategory}-category-filter` }
+        className="button-filter"
+        type="button"
         key={ index }
         variant="secondary"
         value={ strCategory }
         onClick={ filterCategory }
       >
         { `${strCategory}` }
-      </Button>
+      </button>
     ));
     return buttonList;
   };
@@ -100,23 +102,25 @@ function FoodsAndDrinks() {
   };
 
   return (
-    <>
+    <div className="pag-foods-drinks">
       { redirect && <Redirect to={ `${pathname}/${id}` } /> }
-      <section className="main-buttons">
-        <Button
+      <section className="container-button-filter">
+        <button
           data-testid="All-category-filter"
+          className="button-filter"
+          type="button"
           variant="secondary"
           value="All"
           onClick={ filterCategory }
         >
           All
-        </Button>
+        </button>
         { getButtons() }
       </section>
-      <section className="main-cards">
+      <section className="container-cards">
         { fillCards() }
       </section>
-    </>
+    </div>
   );
 }
 

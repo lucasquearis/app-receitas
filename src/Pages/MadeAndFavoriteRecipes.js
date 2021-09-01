@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import copy from 'clipboard-copy';
 import useFilterMadeAndFavorite from '../hooks/useFilterMadeAndFavorite';
 import CardMade from '../components/CardMade';
 import CardFavorite from '../components/CardFavorite';
-import '../styles/made-recipes.css';
+import '../styles/made-favorite-recipes.css';
 
 function MadeAndFavoriteRecipes() {
   const { madeRecipes, filter, setFilter, setRecipes } = useFilterMadeAndFavorite();
@@ -74,24 +73,26 @@ function MadeAndFavoriteRecipes() {
   };
 
   return (
-    <>
-      <section>
+    <div className="pag-made-favorite">
+      <section className="container-button-filter">
         { types.slice(0, numButtons).map((item, index) => (
-          <Button
+          <button
             data-testid={ `filter-by-${item}-btn` }
+            className="button-filter"
+            type="button"
             key={ item }
             variant="primary"
             value={ item }
             onClick={ filterType }
           >
             { types[index + numButtons] }
-          </Button>
+          </button>
         )) }
       </section>
-      <section>
+      <section className="container-cards">
         { fillCards() }
       </section>
-    </>
+    </div>
   );
 }
 

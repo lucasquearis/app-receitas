@@ -11,18 +11,21 @@ function CardMade(props) {
 
   if (type === 'comida') {
     return (
-      <div key={ index } className="card-done">
+      <div key={ index } className="card-made-favorite">
         <Link to={ urlDetails }>
           <img
             data-testid={ `${index}-horizontal-image` }
-            className="img-card-done"
+            className="img-card"
             src={ image }
             alt={ name }
           />
         </Link>
-        <div className="card-done-infos">
+        <div className="card-infos">
           <div className="card-done-share">
-            <span data-testid={ `${index}-horizontal-top-text` }>
+            <span
+              data-testid={ `${index}-horizontal-top-text` }
+              className="card-category"
+            >
               { `${area} - ${category}` }
             </span>
             <input
@@ -38,6 +41,7 @@ function CardMade(props) {
           </div>
           <Link
             data-testid={ `${index}-horizontal-name` }
+            className="recipe-name"
             to={ `/${type}s/${id}` }
           >
             { name }
@@ -59,18 +63,23 @@ function CardMade(props) {
   }
 
   return (
-    <div key={ index } className="card-done">
+    <div key={ index } className="card-made-favorite">
       <Link to={ urlDetails }>
         <img
           data-testid={ `${index}-horizontal-image` }
-          className="img-card-done"
+          className="img-card"
           src={ image }
           alt={ name }
         />
       </Link>
-      <div className="card-done-infos">
+      <div className="card-infos">
         <div className="card-done-share">
-          <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span>
+          <span
+            data-testid={ `${index}-horizontal-top-text` }
+            className="card-category"
+          >
+            { alcoholicOrNot }
+          </span>
           <input
             data-testid={ `${index}-horizontal-share-btn` }
             className="icon-share"
@@ -84,6 +93,7 @@ function CardMade(props) {
         </div>
         <Link
           data-testid={ `${index}-horizontal-name` }
+          className="recipe-name"
           to={ `/${type}s/${id}` }
         >
           { name }
