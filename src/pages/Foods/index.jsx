@@ -21,7 +21,7 @@ function Foods() {
     renderSearchBar: true,
   };
 
-  // if (meals.length === 0) {
+  // if (meals.length === 0 || !meals) {
   //   return (
   //     <h1>Loading</h1>
   //   );

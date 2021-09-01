@@ -21,7 +21,7 @@ function Drinks() {
     renderSearchBar: true,
   };
 
-  // if (drinks.length === 0) {
+  // if (drinks.length === 0 || !drinks) {
   //   return (
   //     <h1>Loading</h1>
   //   );
