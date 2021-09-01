@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import * as ComidasAPI from '../service/ComidasAPI';
 import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import RecipesContext from '../Context/RecipesContext';
 
 const fetchInitialFoods = async (setComidas) => {
   const maxFood = 12;
@@ -13,20 +14,16 @@ const fetchInitialFoods = async (setComidas) => {
 
 const mudaFiltro = (event, filtro, setFiltro, setComidas) => {
   const { target: value } = event;
-  console.log(value.innerText);
   if (filtro === value.innerText) {
     fetchInitialFoods(setComidas);
     setFiltro('');
-    // document.getElementById(`${value}-category-filter`).disabled = false;
   }
   if (value.innerText === 'All' && filtro !== 'All') {
     fetchInitialFoods(setComidas);
     setFiltro(value.innerText);
-    // document.getElementById(`${value}-category-filter`).disabled = true;
   }
   if (filtro !== value.innerText) {
     setFiltro(value.innerText);
-    // document.getElementById(`${value}-category-filter`).disabled = true;
   }
 };
 
@@ -35,11 +32,9 @@ export default function Comidas() {
   const [categorias, setCategorias] = useState([]);
   const [filtro, setFiltro] = useState('');
 
-  // const fetchInitialFoods = async () => {
-  //   const maxFood = 12;
-  //   const results = await ComidasAPI.buscarComidaPorNome('');
-  //   setComidas(results.filter((result, index) => index < maxFood));
-  // };
+  const { recipes, recipeType } = useContext(RecipesContext);
+  const TWELVE = 12;
+
   const fetchCategorias = async () => {
     const maxCategorias = 5;
     const botaoALL = { strCategory: 'All' };
@@ -83,6 +78,16 @@ export default function Comidas() {
     );
   }
 
+  const renderRecipes = (receitas) => (
+    receitas.map((receita, index) => (
+      index < TWELVE
+      && (
+        <Link key={ receita.idMeal } to={ `/comidas/${receita.idMeal}` }>
+          <Card key={ receita.idMeal } comida={ receita } index={ index } isFood />
+        </Link>)
+    ))
+  );
+
   return (
     <section>
       <Header title="Comidas" searchIcon />
@@ -103,17 +108,8 @@ export default function Comidas() {
           )
         }
       </section>
-      {
-        comidas.map(
-          (comida, index) => (
-            <Link key={ comida.idMeal } to={ `/comidas/${comida.idMeal}` }>
-              <Card key={ comida.idMeal } comida={ comida } index={ index } isFood />
-            </Link>
-          ),
-        )
-      }
-      { console.log('comidas:', comidas) }
-      { console.log('categorias:', categorias) }
+      {(recipes && recipeType === 'comida')
+        ? renderRecipes(recipes) : renderRecipes(comidas)}
       <Footer />
     </section>
   );

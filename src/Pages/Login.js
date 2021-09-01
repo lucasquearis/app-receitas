@@ -20,9 +20,10 @@ export default function Login() {
 
   const validateLogin = () => {
     const { email, password } = userInfo;
-    const emailValidation = /^[a-z0-9_]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/.test(email);
+    const emailValidation = /^[a-z0-9_]+[.-]?@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/
+      .test(email);
     const SIX = 6;
-    return !(emailValidation && password.length >= SIX);
+    return !(emailValidation && password.length > SIX);
   };
 
   return (

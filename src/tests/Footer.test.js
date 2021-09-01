@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import renderWithRouter from '../RenderWithRouter';
+import renderWithRouter from './renderWithRouter';
 import Footer from '../Components/Footer';
 import App from '../App';
 
