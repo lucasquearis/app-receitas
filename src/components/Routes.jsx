@@ -10,11 +10,10 @@ import FoodPerIngredient from '../pages/FoodPerIngredient';
 import DrinkPerIngredient from '../pages/DrinkPerIngredient';
 import ExplorePerArea from '../pages/ExplorePerArea';
 import Profile from '../pages/Profile';
-import InProgressDrink from '../pages/InProgressDrink';
-import InProgressFood from '../pages/InProgressFood';
 import CookedRecipies from '../pages/CookedRecipies';
 import FavoriteRecipies from '../pages/FavoriteRecipies';
 import RecipeDetails from '../pages/RecipeDetails';
+import InProgressRecipe from '../pages/InProgressRecipe';
 
 function Routes() {
   return (
@@ -49,6 +48,11 @@ function Routes() {
       <Route exact path="/perfil" component={ Profile } />
       <Route exact path="/receitas-feitas" component={ CookedRecipies } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipies } />
+      <Route
+        exact
+        path="/:type/:id/in-progress"
+        component={ InProgressRecipe }
+      />
       <Route exact path="/:receita/:id"><RecipeDetails /></Route>
     </Switch>
   );
