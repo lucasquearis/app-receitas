@@ -4,16 +4,16 @@
 
 .filters-buttons-div button {
   border-radius: 5px;
-  padding: 5px;
   margin: 10px;
+  padding: 5px;
   width: 100%;
 }
 
 .favorite-recipe-card {
   border-radius: 5px;
-  margin: 10px;
   box-shadow: 1px 1px 5px black;
   display: flex;
+  margin: 10px;
 }
 
 img {
