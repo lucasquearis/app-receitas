@@ -1,3 +1,18 @@
+.details-container img {
+  height: 240px;
+  width: 100%;
+}
+
+.share-btn {
+  height: 40px;
+  width: 40px;
+}
+
+.share-btn img {
+  height: 40px;
+  width: 20px;
+}
+
 .recomended {
   display: flex;
   flex-direction: row;

@@ -137,31 +137,38 @@ const FoodDetails = () => {
               data-testid="recipe-photo"
               className="details-image"
             />
-            <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
-            <button
-              type="button"
-              data-testid="share-btn"
-              key={ shareIcon }
-              onClick={ () => copy(url) }
-            >
-              <img
-                src={ shareIcon }
-                alt="share-icon"
-                className="detail-img-btn"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={ onFavorite }
-              key={ blackHeartIcon }
-            >
-              <img
-                data-testid="favorite-btn"
-                className="detail-img-btn"
-                src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-icon"
-              />
-            </button>
+            <div className="details-buttons">
+              <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
+              <div>
+
+                <button
+                  className="share-btn"
+                  type="button"
+                  data-testid="share-btn"
+                  key={ shareIcon }
+                  onClick={ () => copy(url) }
+                >
+                  <img
+                    src={ shareIcon }
+                    alt="share-icon"
+                    className="detail-img-btn"
+                  />
+                </button>
+                <button
+                  className="share-btn"
+                  type="button"
+                  onClick={ onFavorite }
+                  key={ blackHeartIcon }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    className="detail-img-btn"
+                    src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
+                    alt="favorite-icon"
+                  />
+                </button>
+              </div>
+            </div>
             { showMsg ? <p>Link copiado!</p> : undefined }
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
