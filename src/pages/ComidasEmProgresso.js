@@ -131,7 +131,7 @@ function ComidasEmProgresso(props) {
     );
   }
 
-  return <h1>In Progress...</h1>;
+  return <div className="c-loader" />;
 }
 
 ComidasEmProgresso.propTypes = {

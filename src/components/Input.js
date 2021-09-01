@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Form } from 'react-bootstrap';
 
 export default function Input(props) {
   const {
@@ -14,9 +15,9 @@ export default function Input(props) {
     value } = props;
 
   return (
-    <label htmlFor={ id }>
+    <Form.Label htmlFor={ id }>
       { label }
-      <input
+      <Form.Control
         className={ className }
         data-testid={ testId }
         id={ id }
@@ -26,7 +27,7 @@ export default function Input(props) {
         type={ type }
         value={ value }
       />
-    </label>
+    </Form.Label>
   );
 }
 
