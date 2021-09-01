@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { fetchFoodById } from '../services/mealAPI';
 import { fetchCocktails } from '../services/cocktailAPI';
 import '../styles/Details.css';
@@ -9,7 +10,8 @@ import { getFavorites, handleButton, handleShare, handleFavoriteAuxiliar }
   from '../auxiliar/auxiliarFunctions';
 
 const youtubeEmbed = 'https://www.youtube.com/embed/';
-function FoodDetails({ history, match: { params: { id } } }) {
+function FoodDetails({ match: { params: { id } } }) {
+  const history = useHistory();
   const isFavorite = getFavorites(id);
   const [foodInfo, setFoodInfo] = useState([]);
   const [recDrink, setRecDrinks] = useState([]);
@@ -115,17 +117,13 @@ function FoodDetails({ history, match: { params: { id } } }) {
     </div>
   );
 }
+
 FoodDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
   }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }).isRequired,
 };
+
 export default FoodDetails;

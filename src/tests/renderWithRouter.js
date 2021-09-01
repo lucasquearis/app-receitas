@@ -3,8 +3,9 @@ import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
-const renderWithRouter = (component) => {
+const renderWithRouter = (component, url) => {
   const mockHistory = createMemoryHistory();
+  mockHistory.push(url);
 
   return { ...render(
     <Router history={ mockHistory }>
