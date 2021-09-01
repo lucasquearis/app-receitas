@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Spinner, Card } from 'react-bootstrap';
-import Header from '../Component/Header';
-import Footer from '../Component/Footer';
 
 function ExploreFoodsByOrigin() {
   const [foods, setFoods] = useState([1]);
@@ -58,7 +56,6 @@ function ExploreFoodsByOrigin() {
   }
   return (
     <>
-      <Header titlePage=" Explorar Origem " btSearch />
       <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
         {areas.map((ar) => (
           <option
@@ -97,7 +94,7 @@ function ExploreFoodsByOrigin() {
                 <Card.Body>
                   <Card.Title
                     data-testid={ `${index}-card-name` }
-                    <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>     >
+                  >
                     { item.strMeal }
                   </Card.Title>
                 </Card.Body>
@@ -107,9 +104,7 @@ function ExploreFoodsByOrigin() {
           return null;
         }) }
       </section>
-      <Footer />
     </>
-
   );
 }
 
