@@ -1,0 +1,13 @@
+.div-profile-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.profile-button {
+  margin: 10px;
+  padding: 10px;
+  width: 80%;
+}
