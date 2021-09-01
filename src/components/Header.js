@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Container, Row, Image } from 'react-bootstrap';
 import searchIcon from '../images/searchIcon.svg';
 import DrinksSearchBar from './DrinksSearchBar';
 import RecipesSearchBar from './RecipesSearchBar';
 import profileIcon from '../images/profileIcon.svg';
+import './header.css';
 
 function Header(props) {
   const { titulo, showProfileIcon, pathname } = props;
@@ -30,33 +32,34 @@ function Header(props) {
   const revealIconSearch = () => {
     if (showProfileIcon === 'sim') {
       return (
-        <button type="button" onClick={ revealSearchBar }>
-          <img
-            src={ searchIcon }
-            alt="Ícone de pesquisa"
-            data-testid="search-top-btn"
-          />
-        </button>
+        <Image
+          onClick={ revealSearchBar }
+          src={ searchIcon }
+          alt="Ícone de pesquisa"
+          data-testid="search-top-btn"
+        />
       );
     }
     return (null);
   };
 
   return (
-    <header>
-      <Link to="/perfil">
-        <img
-          src={ profileIcon }
-          alt="Avatar do usuário"
-          data-testid="profile-top-btn"
-        />
-      </Link>
+    <Container className="header">
+      <Row style={ { justifyContent: 'space-evenly' } }>
+        <Link to="/perfil">
+          <img
+            src={ profileIcon }
+            alt="Avatar do usuário"
+            data-testid="profile-top-btn"
+          />
+        </Link>
 
-      <h1 data-testid="page-title">{titulo}</h1>
+        <h2 data-testid="page-title">{titulo}</h2>
 
-      {revealIconSearch()}
-      {searchBar()}
-    </header>
+        {revealIconSearch()}
+        {searchBar()}
+      </Row>
+    </Container>
   );
 }
 

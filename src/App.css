@@ -1,4 +1,16 @@
+:root {
+  --D-orange: #ff6d00;
+  --L-orange: #ffaa00;
+}
+
+*{
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .footer {
+  background-color: var(--D-orange);
   bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -10,7 +22,7 @@
   animation: is-rotating 1s infinite;
   border: 6px solid #e5e5e5;
   border-radius: 50%;
-  border-top-color: #51d4db;
+  border-top-color: var(--D-orange);
   height: 50px;
   width: 50px;
 }
@@ -22,7 +34,6 @@
 }
 
 body {
-  background: #0fa36b;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -32,7 +43,7 @@ body {
 
 .meals {
   align-items: center;
-  background: #0fa36b;
+  background: var(--D-orange);
   color: #464646;
   display: flex;
   flex-direction: column;
