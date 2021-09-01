@@ -9,7 +9,16 @@ class RecipesMadeList extends Component {
     return (
       <div>
         {
-          recipes.map(({ image, category, name, tags, doneDate }, i) => (
+          recipes.map(({
+            image,
+            category,
+            name,
+            tags,
+            doneDate,
+            type,
+            alcoholicOrNot,
+            area,
+          }, i) => (
             <div key={ i }>
               <RecipesMadeCard
                 index={ i }
@@ -18,6 +27,9 @@ class RecipesMadeList extends Component {
                 name={ name }
                 tags={ tags }
                 doneDate={ doneDate }
+                type={ type }
+                alcoholicOrNot={ alcoholicOrNot }
+                area={ area }
               />
             </div>
           ))
