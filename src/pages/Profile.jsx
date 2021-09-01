@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import '../styles/Profile.css';
 
 export default function Profile() {
-  const [shouldRedirect, setRedirect] = useState({
+  const [redirect, setRedirect] = useState({
     done: false,
     favorites: false,
     login: false,
@@ -15,13 +15,13 @@ export default function Profile() {
   const email = storageMail ? storageMail.email : null;
 
   function updateRedirect({ target: { name } }) {
-    setRedirect({ ...shouldRedirect, [name]: true });
+    setRedirect({ ...redirect, [name]: true });
     if (name === 'login') localStorage.clear();
   }
 
-  if (shouldRedirect.done) return <Redirect to="/receitas-feitas" />;
-  if (shouldRedirect.favorites) return <Redirect to="/receitas-favoritas" />;
-  if (shouldRedirect.login) return <Redirect to="/" />;
+  if (redirect.done) return <Redirect to="/receitas-feitas" />;
+  if (redirect.favorites) return <Redirect to="/receitas-favoritas" />;
+  if (redirect.login) return <Redirect to="/" />;
   return (
     <main>
       <Header title="Perfil" />

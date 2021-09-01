@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import fetchAPI from '../services/fetchAPI';
 import '../styles/InProgress.css';
-import { updateInProgressStorage } from '../services/inProgressStorage';
+import { updateInProgressStorage,
+  initialInProgressStorage } from '../services/inProgressStorage';
 
 export default function MealInProgress(props) {
   const [meal, setMeal] = useState({});
   const [loading, setLoading] = useState(true);
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [checkedSteps, setCheckedSteps] = useState({});
+  const [redirect, setRedirect] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const { match: { params: { id } } } = props;
 
   useEffect(() => {
     const END_POINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const fetchDetails = async () => {
       const { meals } = await fetchAPI(END_POINT);
-      console.log(meals);
       setMeal(meals[0]);
       setLoading(false);
     };
@@ -23,15 +26,24 @@ export default function MealInProgress(props) {
   }, []);
 
   useEffect(() => {
-    console.log(storage);
-    if (storage.meals[id]) {
-      console.log('didMount');
+    if (!storage) {
+      initialInProgressStorage();
+    } else if (storage.meals[id]) {
       setCheckedSteps(storage.meals[id]);
     }
   }, []);
 
   useEffect(() => {
     updateInProgressStorage('meals', id, checkedSteps);
+    if (Object.keys(checkedSteps).length) {
+      console.log(Object.values(checkedSteps).every((value) => value === true));
+      if (Object.values(checkedSteps).every((value) => value === true)) {
+        console.log('setDisabled false');
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    }
   }, [checkedSteps]);
 
   function share() {
@@ -43,7 +55,7 @@ export default function MealInProgress(props) {
   }
 
   function finish() {
-    console.log('finalizando');
+    setRedirect(true);
   }
 
   function mNI(type) {
@@ -59,7 +71,7 @@ export default function MealInProgress(props) {
   }
 
   if (loading) return <span>Loading...</span>;
-
+  if (redirect) return <Redirect to="/receitas-feitas" />;
   return (
     <div className="in-progress-div">
       <img
@@ -79,7 +91,6 @@ export default function MealInProgress(props) {
       <ul className="lista">
         { mNI('strMeasure').map((objectKey, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
-            { console.log(checkedSteps, checkedSteps[index]) }
             <input
               type="checkbox"
               checked={ checkedSteps[index] ? checkedSteps[index] : false }
@@ -91,7 +102,12 @@ export default function MealInProgress(props) {
         ))}
       </ul>
       <p data-testid="instructions">{ meal.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn" onClick={ finish }>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        onClick={ finish }
+        disabled={ disabled }
+      >
         Finalizar
       </button>
     </div>

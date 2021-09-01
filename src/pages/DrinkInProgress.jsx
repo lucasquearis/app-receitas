@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import fetchAPI from '../services/fetchAPI';
 import '../styles/InProgress.css';
+import { updateInProgressStorage,
+  initialInProgressStorage } from '../services/inProgressStorage';
 
 export default function DrinkInProgress(props) {
   const [drink, setDrink] = useState({});
   const [loading, setLoading] = useState(true);
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const [checkedSteps, setCheckedSteps] = useState({});
+  const [redirect, setRedirect] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const { match: { params: { id } } } = props;
 
   useEffect(() => {
-    const { match: { params: { id } } } = props;
     const END_POINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     const fetchDetails = async () => {
       const { drinks } = await fetchAPI(END_POINT);
@@ -17,6 +24,25 @@ export default function DrinkInProgress(props) {
     };
     fetchDetails();
   }, []);
+
+  useEffect(() => {
+    if (!storage) {
+      initialInProgressStorage();
+    } else if (storage.drinks[id]) {
+      setCheckedSteps(storage.drinks[id]);
+    }
+  }, []);
+
+  useEffect(() => {
+    updateInProgressStorage('drinks', id, checkedSteps);
+    if (Object.keys(checkedSteps).length) {
+      if (Object.values(checkedSteps).every((value) => value === true)) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    }
+  }, [checkedSteps]);
 
   function share() {
     console.log('compartilhando');
@@ -27,7 +53,7 @@ export default function DrinkInProgress(props) {
   }
 
   function finish() {
-    console.log('finalizando');
+    setRedirect(true);
   }
 
   function mNI(type) {
@@ -35,18 +61,24 @@ export default function DrinkInProgress(props) {
       && drink[item] !== ' ' && drink[item] !== '' && drink[item] !== null);
   }
 
-  if (loading) return <span>Loading...</span>;
+  function updateCheckedSteps({ target: { name, checked } }) {
+    setCheckedSteps({
+      ...checkedSteps,
+      [name]: checked,
+    });
+  }
 
+  if (loading) return <span>Loading...</span>;
+  if (redirect) return <Redirect to="/receitas-feitas" />;
   return (
     <div className="in-progress-div">
-      { console.log(mNI('strMeasure'), drink)}
       <img
         data-testid="recipe-photo"
         alt="imagem da receita"
         src={ drink.strDrinkThumb }
         className="recipe-photo"
       />
-      <div data-testid="recipe-title">{ drink.strDrink }</div>
+      <div data-testid="recipe-title">{ drink.strMeal }</div>
       <button type="button" data-testid="share-btn" onClick={ share }>
         Compartilhar
       </button>
@@ -57,13 +89,23 @@ export default function DrinkInProgress(props) {
       <ul className="lista">
         { mNI('strMeasure').map((objectKey, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={ checkedSteps[index] ? checkedSteps[index] : false }
+              name={ index }
+              onChange={ updateCheckedSteps }
+            />
             { `${drink[objectKey]} of ${drink[mNI('strIngredient')[index]]} `}
           </li>
         ))}
       </ul>
       <p data-testid="instructions">{ drink.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn" onClick={ finish }>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        onClick={ finish }
+        disabled={ disabled }
+      >
         Finalizar
       </button>
     </div>
