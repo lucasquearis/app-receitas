@@ -11,8 +11,8 @@ const VALID_EMAIL = 'alguem@email.com';
 const VALID_PASSWORD = '1234567';
 const FOOTER_SELECTOR = 'footer';
 const DRINKS_BTN_SELECTOR = 'drinks-bottom-btn';
-const FOOD_BTN_SELECTOR = 'food-bottom-btn'
-const EXPLORE_BTN_SELECTOR = 'explore-bottom-btn'
+const FOOD_BTN_SELECTOR = 'food-bottom-btn';
+const EXPLORE_BTN_SELECTOR = 'explore-bottom-btn';
 
 describe('Testa renderização do componente Footer.jsx', () => {
   it('Testa se existe elemento footer', () => {
