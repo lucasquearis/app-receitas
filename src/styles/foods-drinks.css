@@ -21,7 +21,7 @@
 }
 
 .card-body {
-  height: 3.125rem;
+  min-height: 3.125rem;
   padding: 0;
   text-align: center;
 }
@@ -36,7 +36,7 @@
 .card-title {
   color: #161616;
   font-family: Lato , sans-serif;
-  font-size: 1.375rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 0.625rem 0;
 }
