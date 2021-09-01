@@ -23,11 +23,11 @@ function Routes() {
       <Route path={ `/comidas/${1}/in-progress` } component={ FoodDetails } />
       <Route path={ `/bebidas/${1}/in-progress` } component={ DrinkDetails } />
       <Route exact path="/explorar" component={ Explore } />
-      <Route path="/explorar/comidas" component={ ExploreFoods } />
-      <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route path="/explorar/comidas/area" component={ ExploreArea } />
       <Route path="/explorar/comidas/ingredientes" component={ null } />
       <Route path="/explorar/bebidas/ingredientes" component={ null } />
-      <Route path="/explorar/comidas/area" component={ ExploreArea } />
+      <Route path="/explorar/comidas" component={ ExploreFoods } />
+      <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route exact path="/perfil" component={ Perfil } />
       <Route path="/receitas-feitas" component={ FoodRecipe } />
       <Route path="/receitas-favoritas" component={ Perfil } />
