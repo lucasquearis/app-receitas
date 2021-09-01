@@ -62,10 +62,6 @@ function ExploreFoodsByOrigin() {
       <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
         {areas.map((ar) => (
           <option
-          key={ ar.strArea }
-      <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
-        {areas.map((ar) => (
-          <option
             key={ ar.strArea }
             value={ ar.strArea }
             data-testid={ `${ar.strArea}-option` }
@@ -101,7 +97,7 @@ function ExploreFoodsByOrigin() {
                 <Card.Body>
                   <Card.Title
                     data-testid={ `${index}-card-name` }
-                  >
+                    <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>     >
                     { item.strMeal }
                   </Card.Title>
                 </Card.Body>
@@ -113,6 +109,7 @@ function ExploreFoodsByOrigin() {
       </section>
       <Footer />
     </>
+
   );
 }
 
