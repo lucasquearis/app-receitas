@@ -4,6 +4,7 @@ const FOOD_FIRST_LETTER_SEARCH_API = 'https://www.themealdb.com/api/json/v1/1/se
 const FOOD_DETAILS_BY_ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const FOOD_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const FOOD_FOR_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+const FOOD_INGREDIENTS = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const FOOD_RANDOM = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const FOOD_AREAS = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const FOOD_BY_AREA = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
@@ -14,6 +15,7 @@ const DRINK_FIRST_LETTER_SEARCH_API = 'https://www.thecocktaildb.com/api/json/v1
 const DRINK_DETAILS_BY_ID = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 const DRINK_CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const DRINK_FOR_CATEGORY = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+const DRINK_INGREDIENTS = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 const DRINK_RANDOM = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
 export const fetchSearchFoodsApi = async (consultBy, query) => {
@@ -120,6 +122,17 @@ export const fetchDrinkById = async (id) => {
   }
 };
 
+export const fetchIngredientsFoodsApi = async () => {
+  try {
+    const response = await fetch(FOOD_INGREDIENTS);
+    const data = await response.json();
+    return data.meals || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 export const fetchRandomFood = async () => {
   try {
     const response = await fetch(FOOD_RANDOM);
@@ -136,6 +149,17 @@ export const fetchRandomDrink = async () => {
     const response = await fetch(DRINK_RANDOM);
     const data = await response.json();
     return data.drinks || [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const fetchIngredientsDrinksApi = async () => {
+  try {
+    const response = await fetch(DRINK_INGREDIENTS);
+    const data = await response.json();
+    return data.drinks;
   } catch (error) {
     console.log(error);
     return [];
