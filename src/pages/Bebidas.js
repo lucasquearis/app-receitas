@@ -13,8 +13,39 @@ export default function Bebidas() {
     cocktails,
     setRecipeType,
     category,
+    exploreIngredient,
   } = useContext(Context);
   setRecipeType('cocktail');
+
+  if (exploreIngredient.length > 0) {
+    return (
+      <div>
+        <Header recipeType="drinks">
+          Bebidas
+        </Header>
+        <CategoriesBar />
+        <MenuInferior />
+        <div>
+          {
+            exploreIngredient.map((item, index) => {
+              const MAXLENGHT = 11;
+              if (index <= MAXLENGHT) {
+                return (
+                  <div key={ item.idDrink }>
+                    { `categoria: ${item.strCategory}` }
+                    <Link to={ `/bebidas/${item.idDrink}` }>
+                      <Card item={ item } index={ index } />
+                    </Link>
+                  </div>
+                );
+              }
+              return null;
+            })
+          }
+        </div>
+      </div>
+    );
+  }
 
   if (cocktails.length === 1 && category === 'All') {
     return history.push(`/bebidas/${cocktails[0].idDrink}`);

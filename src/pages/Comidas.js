@@ -13,8 +13,30 @@ export default function Comidas() {
     setRecipeType,
     meals,
     category,
+    exploreIngredient,
   } = useContext(Context);
   setRecipeType('meals');
+  if (exploreIngredient.length > 0) {
+    return (
+      <div>
+        <Header>
+          Comidas
+        </Header>
+        <CategoriesBar />
+        <MenuInferior />
+        <div>
+          {exploreIngredient.map((item, index) => (
+            <div key={ item.idMeal }>
+              { `categoria: ${item.strCategory}` }
+              <Link to={ `/comidas/${item.idMeal}` }>
+                <Card item={ item } index={ index } />
+              </Link>
+            </div>
+          )) }
+        </div>
+      </div>
+    );
+  }
 
   if (meals.length === 1 && category === 'All') {
     return history.push(`/comidas/${meals[0].idMeal}`);
