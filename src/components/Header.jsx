@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './componentCSS/HeaderFood.css';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
+import headerBg from '../images/header_bg.png';
 import SubHeader from './SubHeader';
 
 export default function Header({ title }) {
@@ -11,6 +12,7 @@ export default function Header({ title }) {
 
   return (
     <header className="header-food">
+      <img className="header__background_img" src={ headerBg } alt="Header Bg" />
       <SubHeader title={ title } />
       <button
         type="button"

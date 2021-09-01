@@ -1,10 +1,22 @@
-.footer__navigation {
+footer {
   bottom: 0;
+  left: 0;
+  margin-bottom: 0;
   position: fixed;
+  right: 0;
+  width: 360px;
 }
 
 .footer__navigation img {
-  height: 35px;
-  margin: 0 27.5px;
-  padding: 5px;
+  height: 55px;
+  padding: 10px;
+}
+
+.footer__bottom-menu-icon-div {
+  align-items: center;
+  background-color: #f7d6cf;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
 }

@@ -1,6 +1,6 @@
 .header__first-div {
   align-items: center;
-  background-color: #c4c4c4;
+  background-color: #f7d6cf;
   display: flex;
   flex-direction: row;
   height: 58px;
@@ -13,7 +13,7 @@
 
 .header-no-search {
   align-items: center;
-  background-color: #c4c4c4;
+  background-color: #f7d6cf;
   display: flex;
   flex-direction: row;
   height: 58px;
@@ -25,19 +25,22 @@
 }
 
 .header__first-div h1 {
-  margin: auto 90px;
+  font-family: Dancing Script , cursive;
+  font-weight: 400;
+  margin: auto 105px;
 }
 
 .header-no-search h1 {
   align-items: flex-end;
   color: black;
   display: flex;
+  font-family: Dancing Script , cursive;
   font-size: 30px;
   font-style: normal;
+  font-weight: 400;
   height: 35px;
-  left: 100px;
   line-height: 35px;
-  margin: auto 0;
+  margin: auto 105px;
   width: 211px;
 }
 
@@ -46,7 +49,7 @@
 }
 
 .search-btn {
-  background-color: #c4c4c4;
+  background-color: #f7d6cf;
   border: none;
   height: 35px;
   left: 295px;
@@ -82,4 +85,12 @@
   left: 123px;
   line-height: 35px;
   width: 119px;
+}
+
+.header__background_img {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  height: 80px;
+  width: 360px;
 }
