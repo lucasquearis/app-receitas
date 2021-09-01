@@ -85,17 +85,6 @@ export default function ComidasDetalhes() {
     document.getElementById('share-button').innerHTML = 'Link copiado!';
   }
 
-  // const copyPathname = () => {
-  //   const el = document.createElement('input');
-  //   el.value = window.location.href;
-  //   document.body.appendChild(el);
-  //   el.select();
-  //   document.execCommand('copy');
-  //   document.body.removeChild(el);
-  //   document.getElementById('share-button').innerHTML = 'Link copiado!';
-  //   // alert('Link copiado!');
-  // };
-
   const renderIngredients = (ingredientsKeys) => ingredientsKeys
     .map((ingredientKey, index) => (
       <li

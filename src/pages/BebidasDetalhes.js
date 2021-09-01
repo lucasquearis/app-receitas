@@ -83,16 +83,15 @@ export default function BebidasDetalhes() {
     }
   };
 
-  const copyPathname = () => {
-    const el = document.createElement('input');
-    el.value = window.location.href;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
+  async function copyPageUrl() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      console.log('Link copiado!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
     document.getElementById('share-button').innerHTML = 'Link copiado!';
-    // alert('Link copiado!');
-  };
+  }
 
   if (drink === undefined) {
     return <Loading />;
@@ -119,7 +118,7 @@ export default function BebidasDetalhes() {
           id="share-button"
           type="button"
           data-testid="share-btn"
-          onClick={ copyPathname }
+          onClick={ copyPageUrl }
         >
           Compartilhar
         </button>
