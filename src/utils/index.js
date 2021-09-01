@@ -7,23 +7,16 @@ export const validateLogin = (email, password) => {
 };
 
 export const saveLoginLocalStorage = (email) => {
-  const user = { email };
-
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
-  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('user', JSON.stringify({ email }));
 };
 
-export const doesInprogressExist = (key) => {
-  if (key) return key;
-  return {
-    cocktails: {},
-    meals: {},
-  };
-};
-
-export const doesItExist = (key) => {
-  if (key) return key;
+export const getLocalStorage = (key) => {
+  const storage = JSON.parse(localStorage.getItem(key));
+  if (storage) return storage;
+  if (key === 'user') return { email: '' };
+  if (key === 'inProgressRecipes') return { cocktails: {}, meals: {} };
   return [];
 };
 
@@ -44,15 +37,12 @@ export const createIngredients = (response, max) => {
   return newIngredients;
 };
 
-export const createDecorations = (ingredients) => {
-  const newDecorations = ingredients.map((ingredient) => {
-    if (ingredient.done) {
-      return ({ textDecoration: 'line-through' });
-    }
-    return {};
-  });
-  return newDecorations;
-};
+export const createDecorations = (ingredients) => (ingredients.map((ingredient) => {
+  if (ingredient.done) {
+    return ({ textDecoration: 'line-through' });
+  }
+  return {};
+}));
 
 export const handleDisabled = (ingredients) => !ingredients
   .every((ingredient) => ingredient.done);

@@ -8,12 +8,12 @@ import { getDrinkTypesList, getDrinkByFilter, getDrink } from '../../services/dr
 import Loading from '../Loading';
 
 const DrinkList = () => {
-  const TWELVE = 12;
-  const FIVE = 5;
+  const NUMBER_TWELVE = 12;
+  const NUMBER_FIVE = 5;
   const loading = useSelector(({ drink }) => drink.loading);
   const drinks = useSelector(({ drink }) => drink.drinks);
   const error = useSelector(({ drink }) => drink.error);
-  const getParameter = useSelector(({ drink }) => drink.redirectedWithParameter);
+  const redirectionParameter = useSelector(({ drink }) => drink.redirectedWithParameter);
   const dispatch = useDispatch();
   const [drinkTypesList, setDrinkTypesList] = useState(false);
   const [loadingList, setLoadingList] = useState(true);
@@ -23,12 +23,12 @@ const DrinkList = () => {
 
   useEffect(() => {
     const getFirstDrinks = async () => {
-      const { parameter, term } = getParameter;
+      const { parameter, term } = redirectionParameter;
       if (parameter === 'ingredient') {
-        const filteredByIngredient = await getDrink(term);
-        dispatch({ type: DRINK_RESPONSE, payload: filteredByIngredient });
-        setOriginalDrinks(filteredByIngredient);
-        setFilteredDrinks(filteredByIngredient);
+        const drinksfilteredByIngredient = await getDrink(term);
+        dispatch({ type: DRINK_RESPONSE, payload: drinksfilteredByIngredient });
+        setOriginalDrinks(drinksfilteredByIngredient);
+        setFilteredDrinks(drinksfilteredByIngredient);
       } else {
         const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
         const { drinks: startDrinks } = await response.json();
@@ -38,17 +38,15 @@ const DrinkList = () => {
       }
     };
     getFirstDrinks();
-  }, [dispatch, getParameter]);
+  }, [dispatch, redirectionParameter]);
 
   useEffect(() => {
     getDrinkTypesList().then((list) => {
-      const reducedList = list.filter((el, index) => index < FIVE);
-      setDrinkTypesList(reducedList);
+      const fiveDrinkTypesList = list.filter((el, index) => index < NUMBER_FIVE);
+      setDrinkTypesList(fiveDrinkTypesList);
       setLoadingList(false);
     });
   }, []);
-
-  useEffect(() => () => dispatch({ type: DRINK_PARAMETER_RESET }), [dispatch]);
 
   useEffect(() => {
     if (drinkFilter) {
@@ -63,6 +61,8 @@ const DrinkList = () => {
   useEffect(() => {
     setFilteredDrinks(drinks);
   }, [drinks]);
+
+  useEffect(() => () => dispatch({ type: DRINK_PARAMETER_RESET }), [dispatch]);
 
   const clickHandler = (drinkType) => {
     if (drinkType === drinkFilter) {
@@ -124,7 +124,7 @@ const DrinkList = () => {
       </div>
       <div className="d-flex flex-row flex-wrap">
         {
-          filteredDrinks.filter((e, index) => index < TWELVE)
+          filteredDrinks.filter((e, index) => index < NUMBER_TWELVE)
             .map((drink, index) => (
               <DrinkCard
                 key={ `${index}-card-name` }

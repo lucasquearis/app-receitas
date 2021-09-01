@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import { getLocalStorage } from '../../utils';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import './style.css';
 
-const copy = require('clipboard-copy');
-
 const InfoCard = ({ recipe, setRecipes, index }) => {
   const [shared, setShared] = useState(false);
-
   const {
     alcoholicOrNot,
     area,
@@ -22,7 +21,7 @@ const InfoCard = ({ recipe, setRecipes, index }) => {
     tags,
   } = recipe;
   const history = useHistory();
-  const { location: { pathname } } = history;
+  const { pathname } = useLocation();
 
   const handleShare = () => {
     copy(`http://localhost:3000/${type}s/${id}`);
@@ -30,7 +29,7 @@ const InfoCard = ({ recipe, setRecipes, index }) => {
   };
 
   const handleFavorite = () => {
-    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const favorites = getLocalStorage('favoriteRecipes');
     const filteredFavorites = favorites.filter(({ id: idStorage }) => id !== idStorage);
     localStorage.setItem('favoriteRecipes', JSON.stringify(filteredFavorites));
     setRecipes(filteredFavorites);

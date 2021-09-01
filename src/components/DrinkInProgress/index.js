@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useParams, useLocation } from 'react-router';
+import { useParams } from 'react-router';
 import { Button } from 'react-bootstrap';
 import { getDrink } from '../../services/drinkAPI';
-import { doesItExist, doesInprogressExist } from '../../utils';
+import { getLocalStorage } from '../../utils';
 import {
-  // DRINK_ERROR_RESPONSE,
   NEW_DRINK_SEARCH,
   DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
 import Ingredients from '../Ingredients';
@@ -21,73 +20,17 @@ const DrinkInProgress = () => {
   const error = useSelector(({ drink }) => drink.error);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const location = useLocation();
   const [disabled, setDisabled] = useState(true);
-  const maxIngredients = 15;
+  const MAX_INGREDIENTS = 15;
 
   useEffect(() => {
     const fetchDrink = async () => {
-      // try {
       dispatch({ type: NEW_DRINK_SEARCH });
       const response = await getDrink(id, 'id');
       dispatch({ type: DRINK_RESPONSE, payload: response });
-      // } catch (error) {
-      //   console.log(error);
-      //   dispatch({ type: DRINK_ERROR_RESPONSE });
-      // }
     };
     fetchDrink();
-  }, [id, dispatch, location]);
-
-  const handleFavorite = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const { idDrink, strDrink, strDrinkThumb, strCategory, strAlcoholic } = drinks[0];
-    const oldFavorites = doesItExist(favoriteRecipes);
-    if (!oldFavorites.some((recipe) => recipe.id === idDrink)) {
-      const newFavorites = [
-        ...oldFavorites,
-        {
-          id: idDrink,
-          type: 'bebida',
-          area: '',
-          category: strCategory,
-          alcoholicOrNot: strAlcoholic,
-          name: strDrink,
-          image: strDrinkThumb,
-        },
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    } else {
-      const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    }
-  };
-
-  const handleFinish = () => {
-    const { idDrink, strDrink, strDrinkThumb, strCategory, strAlcoholic } = drinks[0];
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const getInprogress = doesInprogressExist(inProgressRecipes);
-    if (getInprogress.cocktails[idDrink]) delete getInprogress.cocktails[idDrink];
-    localStorage.setItem('inProgressRecipes', JSON.stringify(getInprogress));
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    const oldDoneRecipes = doesItExist(doneRecipes);
-    const newDoneRecipes = [
-      ...oldDoneRecipes,
-      {
-        id: idDrink,
-        type: 'bebida',
-        area: '',
-        category: strCategory,
-        alcoholicOrNot: strAlcoholic,
-        name: strDrink,
-        image: strDrinkThumb,
-        doneDate: new Date(),
-        tags: [],
-      },
-    ];
-    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
-    history.push('/receitas-feitas');
-  };
+  }, [id, dispatch]);
 
   if (loading) return <Loading />;
 
@@ -99,7 +42,71 @@ const DrinkInProgress = () => {
     );
   }
 
-  const { strDrink, strDrinkThumb, strAlcoholic, strInstructions } = drinks[0];
+  const {
+    strDrink,
+    strDrinkThumb,
+    strAlcoholic,
+    strInstructions,
+    idDrink,
+    strCategory } = drinks[0];
+
+  const createNewLocalStorageFavorite = (favorites) => [
+    ...favorites,
+    {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    },
+  ];
+
+  const handleFavorite = () => {
+    const oldFavorites = getLocalStorage('favoriteRecipes');
+    if (!oldFavorites.some((recipe) => recipe.id === idDrink)) {
+      localStorage.setItem(
+        'favoriteRecipes',
+        JSON.stringify(createNewLocalStorageFavorite(oldFavorites)),
+      );
+    } else {
+      const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idDrink);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    }
+  };
+
+  const removeFromInProgressLocalStorage = () => {
+    const recipeInProgress = getLocalStorage('inProgressRecipes');
+    if (recipeInProgress.cocktails[idDrink]) delete recipeInProgress.cocktails[idDrink];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+  };
+
+  const addToDoneLocalStorage = () => {
+    const oldDoneRecipes = getLocalStorage('doneRecipes');
+    const today = new Date();
+    const newDoneRecipes = [
+      ...oldDoneRecipes,
+      {
+        id: idDrink,
+        type: 'bebida',
+        area: '',
+        category: strCategory,
+        alcoholicOrNot: strAlcoholic,
+        name: strDrink,
+        image: strDrinkThumb,
+        doneDate: `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`,
+        tags: [],
+      },
+    ];
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
+  };
+
+  const handleFinish = () => {
+    removeFromInProgressLocalStorage();
+    addToDoneLocalStorage();
+    history.push('/receitas-feitas');
+  };
 
   return (
     <div className="recipe-details">
@@ -113,7 +120,11 @@ const DrinkInProgress = () => {
       <br />
       <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
       <p data-testid="recipe-category">{ strAlcoholic }</p>
-      <Ingredients max={ maxIngredients } page="inProgress" setDisabled={ setDisabled } />
+      <Ingredients
+        max={ MAX_INGREDIENTS }
+        page="inProgress"
+        setDisabled={ setDisabled }
+      />
       <p className="instructions" data-testid="instructions">{ strInstructions }</p>
       <Button
         type="button"

@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { getFood } from '../../services/foodAPI';
 import { getDrinksForRecommendation } from '../../services/drinkAPI';
-import { doesItExist, createIngredients } from '../../utils';
-import {
-  // FOOD_ERROR_RESPONSE,
-  NEW_FOOD_SEARCH,
-  FOOD_RESPONSE } from '../../redux/reducers/foodReducer';
+import { getLocalStorage, createIngredients } from '../../utils';
+import { NEW_FOOD_SEARCH, FOOD_RESPONSE } from '../../redux/reducers/foodReducer';
 import Ingredients from '../Ingredients';
 import Recommendations from '../Recommendations';
 import StartRecipe from '../StartRecipe';
@@ -23,7 +20,7 @@ const MealDetails = () => {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
-  const maxIngredients = 20;
+  const MAX_INGREDIENTS = 20;
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -31,44 +28,15 @@ const MealDetails = () => {
       setRecommendations(response);
     };
     const fetchFood = async () => {
-      // try {
       dispatch({ type: NEW_FOOD_SEARCH });
       const response = await getFood(id, 'id');
-      const getIngredients = createIngredients(response, maxIngredients);
-      await setIngredients(getIngredients);
+      const recipeIngredients = createIngredients(response, MAX_INGREDIENTS);
+      await setIngredients(recipeIngredients);
       await fetchDrinks();
       dispatch({ type: FOOD_RESPONSE, payload: response });
-      // } catch (error) {
-      //   console.log(error);
-      //   dispatch({ type: FOOD_ERROR_RESPONSE });
-      // }
     };
     fetchFood();
   }, [id, dispatch]);
-
-  const handleFavorite = () => {
-    const { idMeal, strMeal, strMealThumb, strCategory, strArea } = meals[0];
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const oldFavorites = doesItExist(favoriteRecipes);
-    if (!oldFavorites.some((recipe) => recipe.id === idMeal)) {
-      const newFavorites = [
-        ...oldFavorites,
-        {
-          id: idMeal,
-          type: 'comida',
-          area: strArea,
-          category: strCategory,
-          alcoholicOrNot: '',
-          name: strMeal,
-          image: strMealThumb,
-        },
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    } else {
-      const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idMeal);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    }
-  };
 
   if (loading) return <Loading />;
 
@@ -80,7 +48,40 @@ const MealDetails = () => {
     );
   }
 
-  const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = meals[0];
+  const {
+    strMeal,
+    strMealThumb,
+    strCategory,
+    strInstructions,
+    strYoutube,
+    idMeal,
+    strArea } = meals[0];
+
+  const createNewLocalStorageFavorite = (favorites) => [
+    ...favorites,
+    {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    },
+  ];
+
+  const handleFavorite = () => {
+    const oldFavorites = getLocalStorage('favoriteRecipes');
+    if (!oldFavorites.some((recipe) => recipe.id === idMeal)) {
+      localStorage.setItem(
+        'favoriteRecipes',
+        JSON.stringify(createNewLocalStorageFavorite(oldFavorites)),
+      );
+    } else {
+      const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idMeal);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    }
+  };
 
   return (
     <div className="recipe-details">
@@ -94,7 +95,7 @@ const MealDetails = () => {
       <br />
       <DetailsButtonsField recipeType="comidas" handleFavorite={ handleFavorite } />
       <p data-testid="recipe-category">{ strCategory }</p>
-      <Ingredients max={ maxIngredients } page="details" />
+      <Ingredients max={ MAX_INGREDIENTS } page="details" />
       <p className="instructions" data-testid="instructions">{ strInstructions }</p>
       <iframe src={ strYoutube } title="video" data-testid="video" />
       <Recommendations recommendations={ recommendations } />

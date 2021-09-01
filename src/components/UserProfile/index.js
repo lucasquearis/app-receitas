@@ -1,11 +1,11 @@
 import React, {} from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
+import { getLocalStorage } from '../../utils';
 
 const UserProfile = () => {
-  const userEmail = JSON.parse(localStorage.getItem('user'));
   const clearEmail = () => localStorage.clear();
-  const email = userEmail ? userEmail.email : '';
+  const { email } = getLocalStorage('user');
   const history = useHistory();
 
   return (

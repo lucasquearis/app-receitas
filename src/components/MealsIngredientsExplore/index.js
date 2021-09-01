@@ -6,13 +6,13 @@ import './style.css';
 
 const MealsIngredientsExplore = () => {
   const [ingredients, setIngredients] = useState([]);
-  const maxIngredients = 12;
+  const MAX_INGREDIENTS = 12;
 
   useEffect(() => {
     const fetchIngredients = async () => {
       const response = await getFoodIngredients();
       const filteredResponse = response
-        .filter((_ingredient, num) => num < maxIngredients);
+        .filter((_ingredient, num) => num < MAX_INGREDIENTS);
       setIngredients(filteredResponse);
     };
     fetchIngredients();

@@ -8,12 +8,12 @@ import MealCard from '../MealCard';
 import Loading from '../Loading';
 
 const FoodList = () => {
-  const TWELVE = 12;
-  const FIVE = 5;
+  const NUMBER_TWELVE = 12;
+  const NUMBER_FIVE = 5;
   const loading = useSelector(({ food }) => food.loading);
   const meals = useSelector(({ food }) => food.meals);
   const error = useSelector(({ food }) => food.error);
-  const getParameter = useSelector(({ food }) => food.redirectedWithParameter);
+  const redirectionParameter = useSelector(({ food }) => food.redirectedWithParameter);
   const dispatch = useDispatch();
   const [foodTypesList, setFoodTypesList] = useState(false);
   const [loadingList, setLoadingList] = useState(true);
@@ -23,12 +23,12 @@ const FoodList = () => {
 
   useEffect(() => {
     const getFirstMeals = async () => {
-      const { parameter, term } = getParameter;
+      const { parameter, term } = redirectionParameter;
       if (parameter === 'ingredient') {
-        const filteredByIngredient = await getFood(term);
-        dispatch({ type: FOOD_RESPONSE, payload: filteredByIngredient });
-        setOriginalMeals(filteredByIngredient);
-        setFilteredMeals(filteredByIngredient);
+        const mealsfilteredByIngredient = await getFood(term);
+        dispatch({ type: FOOD_RESPONSE, payload: mealsfilteredByIngredient });
+        setOriginalMeals(mealsfilteredByIngredient);
+        setFilteredMeals(mealsfilteredByIngredient);
       } else {
         const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
         const { meals: startMeals } = await response.json();
@@ -38,14 +38,12 @@ const FoodList = () => {
       }
     };
     getFirstMeals();
-  }, [dispatch, getParameter]);
-
-  useEffect(() => () => dispatch({ type: FOOD_PARAMETER_RESET }), [dispatch]);
+  }, [dispatch, redirectionParameter]);
 
   useEffect(() => {
     getFoodTypesList().then((list) => {
-      const reducedList = list.filter((el, index) => index < FIVE);
-      setFoodTypesList(reducedList);
+      const fiveMealTypesList = list.filter((el, index) => index < NUMBER_FIVE);
+      setFoodTypesList(fiveMealTypesList);
       setLoadingList(false);
     });
   }, []);
@@ -63,6 +61,8 @@ const FoodList = () => {
   useEffect(() => {
     setFilteredMeals(meals);
   }, [meals]);
+
+  useEffect(() => () => dispatch({ type: FOOD_PARAMETER_RESET }), [dispatch]);
 
   const clickHandler = (foodType) => {
     if (foodType === foodFilter) {
@@ -124,7 +124,7 @@ const FoodList = () => {
       </div>
       <div className="d-flex flex-row flex-wrap">
         {
-          filteredMeals.filter((e, index) => index < TWELVE)
+          filteredMeals.filter((e, index) => index < NUMBER_TWELVE)
             .map((meal, index) => (
               <MealCard
                 key={ `${index}-card-name` }

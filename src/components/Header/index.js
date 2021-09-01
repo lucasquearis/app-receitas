@@ -6,15 +6,15 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import './style.css';
 
-const renderSearchButton = (searchBar, setSearchBar) => (
-  <button type="button" onClick={ () => setSearchBar(!searchBar) }>
-    <img src={ searchIcon } alt="Procurar" data-testid="search-top-btn" />
-  </button>
-);
-
 const Header = ({ page, search }) => {
   const history = useHistory();
   const [searchBar, setSearchBar] = useState(false);
+
+  const renderSearchButton = () => (
+    <button type="button" onClick={ () => setSearchBar(!searchBar) }>
+      <img src={ searchIcon } alt="Procurar" data-testid="search-top-btn" />
+    </button>
+  );
 
   return (
     <>
@@ -24,7 +24,7 @@ const Header = ({ page, search }) => {
         </button>
         <p data-testid="page-title">{ page }</p>
         {
-          search && renderSearchButton(searchBar, setSearchBar)
+          search && renderSearchButton()
         }
       </header>
       {

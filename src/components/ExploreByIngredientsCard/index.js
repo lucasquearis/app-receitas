@@ -11,7 +11,7 @@ const ExploreByIngredientsCard = ({ ingredient, tag, index }) => {
   const converter = tag === 'cocktail' ? '1' : '';
   const key = `strIngredient${converter}`;
   const ingredientName = ingredient[key];
-  const imgSrc = `https://www.the${tag}db.com/images/ingredients/${ingredientName}-Small.png`;
+  const IMG_SRC = `https://www.the${tag}db.com/images/ingredients/${ingredientName}-Small.png`;
 
   const handleRedirect = () => {
     dispatch({
@@ -32,7 +32,7 @@ const ExploreByIngredientsCard = ({ ingredient, tag, index }) => {
     >
       <img
         className="explored-ingredient-photo"
-        src={ imgSrc }
+        src={ IMG_SRC }
         alt={ ingredientName }
         data-testid={ `${index}-card-img` }
       />

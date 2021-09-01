@@ -3,19 +3,18 @@ import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router';
 import { string, arrayOf, shape } from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { doesInprogressExist } from '../../utils';
+import { getLocalStorage } from '../../utils';
 
 const StartRecipe = ({ recipeType, ingredients }) => {
   const history = useHistory();
   const { id } = useParams();
   const [display, setDisplay] = useState({});
   const recipeParam = recipeType === 'meals' ? 'comidas' : 'bebidas';
-  const inProgressRecipes = doesInprogressExist(JSON
-    .parse(localStorage.getItem('inProgressRecipes')));
+  const inProgressRecipes = getLocalStorage('inProgressRecipes');
 
   useEffect(() => {
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes && doneRecipes.some((recipe) => recipe.id === id)) {
+    const doneRecipes = getLocalStorage('doneRecipes');
+    if (doneRecipes.some((recipe) => recipe.id === id)) {
       setDisplay({ display: 'none' });
     }
   }, [id]);

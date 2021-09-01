@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { getLocalStorage } from '../../utils';
 import ToggleButtons from '../ToggleButtons';
 import InfoCard from '../InfoCard';
 
 const FavoriteRecipes = () => {
-  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const [recipes, setRecipes] = useState(favoriteRecipes || []);
+  const favoriteRecipes = getLocalStorage('favoriteRecipes');
+  const [recipes, setRecipes] = useState(favoriteRecipes);
   const filter = useSelector((state) => state.recipes.filter);
 
   const renderInfoCards = (array) => {

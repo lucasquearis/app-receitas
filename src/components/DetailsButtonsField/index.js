@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { func, string } from 'prop-types';
 import { Button } from 'react-bootstrap';
+import copy from 'clipboard-copy';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
-
-const copy = require('clipboard-copy');
+import { getLocalStorage } from '../../utils';
 
 const DetailsButtonsField = ({ recipeType, handleFavorite }) => {
   const { id } = useParams();
@@ -14,8 +14,8 @@ const DetailsButtonsField = ({ recipeType, handleFavorite }) => {
   const [heart, setHeart] = useState(whiteHeartIcon);
 
   useEffect(() => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes && favoriteRecipes.some((recipe) => recipe.id === id)) {
+    const favoriteRecipes = getLocalStorage('favoriteRecipes');
+    if (favoriteRecipes.some((recipe) => recipe.id === id)) {
       setHeart(blackHeartIcon);
     }
   }, [id]);

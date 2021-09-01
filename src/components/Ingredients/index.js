@@ -3,61 +3,64 @@ import { useSelector } from 'react-redux';
 import { useParams, useLocation } from 'react-router';
 import { func, number, string } from 'prop-types';
 import { createIngredients, createDecorations,
-  doesItExist, handleDisabled } from '../../utils';
+  getLocalStorage, handleDisabled } from '../../utils';
 import Loading from '../Loading';
 
 const Ingredients = ({ max, page, setDisabled }) => {
   const { id } = useParams();
   const meals = useSelector(({ food }) => food.meals);
   const drinks = useSelector(({ drink }) => drink.drinks);
-  const location = useLocation();
+  const { pathname } = useLocation();
   const [ingredients, setIngredients] = useState([]);
   const [textDecorations, setDecorations] = useState([]);
-  const recipeParam = location.pathname.split('/')[1];
-  const recipeType = recipeParam === 'comidas' ? 'meals' : 'cocktails';
+  const recipeType = pathname.includes('comidas') ? 'meals' : 'cocktails';
 
   useEffect(() => {
-    const recipe = recipeParam === 'comidas' ? meals : drinks;
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const recipe = recipeType === 'meals' ? meals : drinks;
+    const inProgressRecipes = getLocalStorage('inProgressRecipes');
     const buildIngredients = async () => {
-      if (!inProgressRecipes || !inProgressRecipes[recipeType][id]) {
-        const getIngredients = createIngredients(recipe, max);
-        const getDecorations = createDecorations(getIngredients);
-        const getDisabled = handleDisabled(getIngredients);
-        setIngredients(getIngredients);
-        setDecorations(getDecorations);
-        setDisabled(getDisabled);
+      if (!inProgressRecipes[recipeType][id]) {
+        const newIngredients = createIngredients(recipe, max);
+        const newDecorations = createDecorations(newIngredients);
+        const newDisabled = handleDisabled(newIngredients);
+        setIngredients(newIngredients);
+        setDecorations(newDecorations);
+        setDisabled(newDisabled);
       } else {
-        const getIngredients = inProgressRecipes[recipeType][id];
-        const getDecorations = createDecorations(getIngredients);
-        const getDisabled = handleDisabled(getIngredients);
-        setIngredients(getIngredients);
-        setDecorations(getDecorations);
-        setDisabled(getDisabled);
+        const newIngredients = inProgressRecipes[recipeType][id];
+        const newDecorations = createDecorations(newIngredients);
+        const newDisabled = handleDisabled(newIngredients);
+        setIngredients(newIngredients);
+        setDecorations(newDecorations);
+        setDisabled(newDisabled);
       }
     };
     buildIngredients();
-  }, [id, location, meals, drinks, max, recipeParam, recipeType, setDisabled]);
+  }, [id, meals, drinks, max, recipeType, setDisabled]);
 
-  const handleDone = (index) => {
+  const saveProgressToLocalStorage = (index) => {
     const newIngredients = ingredients.map((ingredient, ingredientIndex) => {
       if (ingredientIndex === index) {
         return { ...ingredient, done: !ingredient.done };
       }
       return ingredient;
     });
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const oldInProgress = doesItExist(inProgressRecipes);
+    const oldInProgress = getLocalStorage('inProgressRecipes');
     const newInprogress = {
       ...oldInProgress,
       [recipeType]: { ...oldInProgress[recipeType], [id]: newIngredients },
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogress));
+    return newIngredients;
+  };
+
+  const handleDone = (index) => {
+    const newIngredients = saveProgressToLocalStorage(index);
     const newDecorations = createDecorations(newIngredients);
-    const getDisabled = handleDisabled(newIngredients);
+    const newDisabled = handleDisabled(newIngredients);
     setIngredients(newIngredients);
     setDecorations(newDecorations);
-    setDisabled(getDisabled);
+    setDisabled(newDisabled);
   };
 
   if (!ingredients) return <Loading />;
@@ -100,7 +103,7 @@ const Ingredients = ({ max, page, setDisabled }) => {
 };
 
 Ingredients.defaultProps = {
-  setDisabled: () => 'Xablau',
+  setDisabled: () => {},
 };
 
 Ingredients.propTypes = {

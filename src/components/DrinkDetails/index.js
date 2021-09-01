@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { getDrink } from '../../services/drinkAPI';
 import { getMealsForRecommendation } from '../../services/foodAPI';
-import { doesItExist, createIngredients } from '../../utils';
-import {
-  // DRINK_ERROR_RESPONSE,
-  NEW_DRINK_SEARCH,
-  DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
+import { getLocalStorage, createIngredients } from '../../utils';
+import { NEW_DRINK_SEARCH, DRINK_RESPONSE } from '../../redux/reducers/drinkReducer';
 import Ingredients from '../Ingredients';
 import Recommendations from '../Recommendations';
 import StartRecipe from '../StartRecipe';
@@ -23,7 +20,7 @@ const DrinkDetails = () => {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
-  const maxIngredients = 15;
+  const MAX_INGREDIENTS = 15;
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -31,44 +28,15 @@ const DrinkDetails = () => {
       setRecommendations(response);
     };
     const fetchDrink = async () => {
-      // try {
       dispatch({ type: NEW_DRINK_SEARCH });
       const response = await getDrink(id, 'id');
-      const getIngredients = createIngredients(response, maxIngredients);
-      await setIngredients(getIngredients);
+      const recipeIngredients = createIngredients(response, MAX_INGREDIENTS);
+      await setIngredients(recipeIngredients);
       await fetchMeals();
       dispatch({ type: DRINK_RESPONSE, payload: response });
-      // } catch (error) {
-      //   console.log(error);
-      //   dispatch({ type: DRINK_ERROR_RESPONSE });
-      // }
     };
     fetchDrink();
   }, [id, dispatch]);
-
-  const handleFavorite = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const { idDrink, strDrink, strDrinkThumb, strCategory, strAlcoholic } = drinks[0];
-    const oldFavorites = doesItExist(favoriteRecipes);
-    if (!oldFavorites.some((recipe) => recipe.id === idDrink)) {
-      const newFavorites = [
-        ...oldFavorites,
-        {
-          id: idDrink,
-          type: 'bebida',
-          area: '',
-          category: strCategory,
-          alcoholicOrNot: strAlcoholic,
-          name: strDrink,
-          image: strDrinkThumb,
-        },
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    } else {
-      const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-    }
-  };
 
   if (loading) return <Loading />;
 
@@ -80,7 +48,39 @@ const DrinkDetails = () => {
     );
   }
 
-  const { strDrink, strDrinkThumb, strAlcoholic, strInstructions } = drinks[0];
+  const {
+    strDrink,
+    strDrinkThumb,
+    strAlcoholic,
+    strInstructions,
+    idDrink,
+    strCategory } = drinks[0];
+
+  const createNewLocalStorageFavorite = (favorites) => [
+    ...favorites,
+    {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    },
+  ];
+
+  const handleFavorite = () => {
+    const oldFavorites = getLocalStorage('favoriteRecipes');
+    if (!oldFavorites.some((recipe) => recipe.id === idDrink)) {
+      localStorage.setItem(
+        'favoriteRecipes',
+        JSON.stringify(createNewLocalStorageFavorite(oldFavorites)),
+      );
+    } else {
+      const newFavorites = oldFavorites.filter((recipe) => recipe.id !== idDrink);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    }
+  };
 
   return (
     <div className="recipe-details">
@@ -94,7 +94,7 @@ const DrinkDetails = () => {
       <br />
       <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
       <p data-testid="recipe-category">{ strAlcoholic }</p>
-      <Ingredients max={ maxIngredients } page="details" />
+      <Ingredients max={ MAX_INGREDIENTS } page="details" />
       <p className="instructions" data-testid="instructions">{ strInstructions }</p>
       <Recommendations recommendations={ recommendations } />
       <StartRecipe recipeType="cocktails" ingredients={ ingredients } />
