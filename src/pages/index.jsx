@@ -14,3 +14,4 @@ export { default as ExploreMealByArea } from './ExploreMealByArea';
 export { default as Profile } from './Profile';
 export { default as RecipesDone } from './RecipesDone';
 export { default as RecipesFavorites } from './RecipesFavorites';
+export { default as NotFound } from './NotFound';
