@@ -1,9 +1,9 @@
 .no-recipes-wrapper {
+  align-items: center;
   display: flex;
   flex-direction: column;
   height: 400px;
   justify-content: center;
-  align-items: center;
   font-family: sans-serif;
 }
 
