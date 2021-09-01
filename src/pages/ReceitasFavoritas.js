@@ -94,6 +94,7 @@ export default function ReceitasFavoritas() {
                   data-testid={ `${index}-horizontal-image` }
                   src={ filteredRecipe.image }
                   alt={ filteredRecipe.name }
+                  style={ { width: '100%' } }
                 />
               </Link>
             </div>
@@ -125,6 +126,7 @@ export default function ReceitasFavoritas() {
                   data-testid={ `${index}-horizontal-image` }
                   src={ filteredRecipe.image }
                   alt={ filteredRecipe.name }
+                  style={ { width: '100%' } }
                 />
               </Link>
             </div>
