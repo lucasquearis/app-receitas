@@ -5,58 +5,16 @@ import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
 import StartContinueDoneButton from './StartContinueDoneButton';
 import IngredientList from './IngredientList';
-
-const RecomendList = (array, type) => {
-  const recomendlegth = 6;
-  if (array === null || array === undefined || type === undefined) return <p>2</p>;
-  if (type === 'comidas' && array.drinks) {
-    const obj = array.drinks.map((n, index) => (
-      <Link key={ index } to={ `/bebidas/${n.idDrink}` }>
-        <div
-          className="RecommendCard"
-          data-testid={ `${index}-recomendation-card` }
-        >
-          <p
-            data-testid={ `${index}-recomendation-title` }
-            className="recipeName"
-          >
-            {n.strDrink}
-          </p>
-          <img className="RecomendImg" alt="recomendamos!" src={ n.strDrinkThumb } />
-        </div>
-
-      </Link>
-    ));
-    return obj.slice(0, recomendlegth);
-  }
-  if (type === 'bebidas' && array.meals) {
-    const obj = array.meals.map((n, index) => (
-      <Link key={ index } to={ `/comidas/${n.idMeal}` }>
-        <div
-          className="RecommendCard"
-          data-testid={ `${index}-recomendation-card` }
-        >
-          <p
-            data-testid={ `${index}-recomendation-title` }
-            className="recipeName"
-          >
-            {n.strMeal}
-          </p>
-          <img className="RecomendImg" alt="recomendamos!" src={ n.strMealThumb } />
-        </div>
-      </Link>
-    ));
-    return obj.slice(0, recomendlegth);
-  }
-};
-
-const RecomendExist = (objeto) => {
-  if (objeto === null || objeto === undefined) return null;
-  return objeto;
-};
+import RecomendList from './RecomendList';
+import InProgressMount from './InProgressMount';
 
 function Details(props) {
-  const { Receita, DetailedRecipe, RecomendedRecipe, Id } = props;
+  const { Receita, DetailedRecipe, RecomendedRecipe, Id, InProgress } = props;
+  if (InProgress) {
+    return (
+      <InProgressMount data={ DetailedRecipe } />
+    );
+  }
 
   return (
     <div className="body-details">
@@ -91,16 +49,24 @@ function Details(props) {
       }
       <h2 data-testid="1-recomendation-title">Recomendadas</h2>
       <div className="sugestions">
-        {RecomendList(RecomendExist(RecomendedRecipe), Receita)}
+        {RecomendedRecipe && <RecomendList
+          list={ RecomendedRecipe }
+          type={ Receita }
+          id={ Id }
+        />}
       </div>
       <Link to={ `/${Receita}/${Id}/in-progress` }>
-        <StartContinueDoneButton id={ Id } type={ Receita } />
+        <StartContinueDoneButton
+          id={ Id }
+          type={ Receita }
+          ingredients={ DetailedRecipe }
+        />
       </Link>
     </div>
   );
 }
 
-const { string, shape, objectOf } = PropTypes;
+const { bool, string, shape, objectOf } = PropTypes;
 Details.propTypes = {
   Receita: string.isRequired,
   Id: string.isRequired,
@@ -115,6 +81,7 @@ Details.propTypes = {
     measures: string.isRequired,
   }).isRequired,
   RecomendedRecipe: objectOf(string.isRequired).isRequired,
+  InProgress: bool.isRequired,
 };
 
 export default Details;
