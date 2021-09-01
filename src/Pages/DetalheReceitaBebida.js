@@ -5,6 +5,7 @@ import { buscarBebidasID } from '../service/BebidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import getRecipeIngredients from '../service/getRecipeIngredients';
+import * as functions from '../service/In Progress Recipe';
 
 const defaultParams = {
   strDrink: '',
@@ -58,20 +59,6 @@ export default function DetalheReceitaBebida(props) {
     return localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
   };
 
-  const isChecked = (idIngr) => {
-    if (ingredientsDone) {
-      const checkID = ingredientsDone.some((ingr) => ingr === idIngr.toString());
-      return checkID;
-    }
-  };
-
-  const disabledButton = () => {
-    if (drinkIngredients.length === ingredientsDone.length) {
-      return false;
-    }
-    return true;
-  };
-
   const renderRecipe = () => {
     const { strDrink, strDrinkThumb, strCategory, strInstructions } = recipe[0];
     return (
@@ -120,7 +107,7 @@ export default function DetalheReceitaBebida(props) {
                   type="checkbox"
                   id={ index }
                   onClick={ saveIngredients }
-                  defaultChecked={ isChecked(index) }
+                  defaultChecked={ functions.isChecked(index, ingredientsDone) }
                 />
                 <label htmlFor={ index }>
                   { ingredient }
@@ -134,7 +121,7 @@ export default function DetalheReceitaBebida(props) {
           type="button"
           data-testid="finish-recipe-btn"
           onClick={ redirectTo }
-          disabled={ disabledButton() }
+          disabled={ functions.enableButton(drinkIngredients, ingredientsDone) }
         >
           Finalizar Receita
         </button>

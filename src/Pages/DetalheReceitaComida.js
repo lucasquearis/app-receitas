@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
+import copyToClipBoard from 'clipboard-copy';
 import { buscarComidasID } from '../service/ComidasAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import getRecipeIngredients from '../service/getRecipeIngredients';
+import * as functions from '../service/In Progress Recipe';
 
 const defaultParams = {
   strMeal: '',
@@ -20,6 +22,7 @@ export default function DetalheReceitaComida(props) {
   const [isLoading, changeLoading] = useState(true);
   const [shouldRedirect, changeRedirect] = useState(false);
   const [ingredientsDone, setIngredients] = useState([]);
+  const [copyMessage, setCopyMessage] = useState(false);
 
   useEffect(() => {
     buscarComidasID(id)
@@ -38,6 +41,19 @@ export default function DetalheReceitaComida(props) {
       return setIngredients(progressRecipes.meals[id]);
     }
   }, [id, recipe]);
+
+  const setMessageTime = () => {
+    const messageTime = 1000;
+    setTimeout(() => {
+      setCopyMessage(false);
+    }, messageTime);
+  };
+
+  const onShareClicked = () => {
+    copyToClipBoard(window.location.href);
+    setCopyMessage(true);
+    setMessageTime();
+  };
 
   const saveIngredients = ({ target }) => {
     if (ingredientsDone.includes(target.id)) {
@@ -58,20 +74,6 @@ export default function DetalheReceitaComida(props) {
     return localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
   };
 
-  const isChecked = (idIngr) => {
-    if (ingredientsDone) {
-      const checkID = ingredientsDone.some((ingr) => ingr === idIngr.toString());
-      return checkID;
-    }
-  };
-
-  const disabledButton = () => {
-    if (foodIngredients.length === ingredientsDone.length) {
-      return false;
-    }
-    return true;
-  };
-
   const renderRecipe = () => {
     const { strMeal, strMealThumb, strCategory, strInstructions } = recipe[0];
     return (
@@ -90,6 +92,7 @@ export default function DetalheReceitaComida(props) {
             <button
               type="button"
               className="share-food-btn-icon"
+              onClick={ onShareClicked }
             >
               <img
                 data-testid="share-btn"
@@ -108,6 +111,9 @@ export default function DetalheReceitaComida(props) {
                 alt="icone de favoritar"
               />
             </button>
+            { copyMessage
+              ? <p className="copy-food-link-message">Link copiado!</p>
+              : <p className="copy-food-link-message" /> }
           </div>
           <p data-testid="recipe-category">{ strCategory }</p>
         </section>
@@ -120,7 +126,7 @@ export default function DetalheReceitaComida(props) {
                   type="checkbox"
                   id={ index }
                   onClick={ saveIngredients }
-                  defaultChecked={ isChecked(index) }
+                  defaultChecked={ functions.isChecked(index, ingredientsDone) }
                 />
                 <label htmlFor={ index }>
                   { ingredient }
@@ -134,7 +140,7 @@ export default function DetalheReceitaComida(props) {
           type="button"
           data-testid="finish-recipe-btn"
           onClick={ redirectTo }
-          disabled={ disabledButton() }
+          disabled={ functions.enableButton(foodIngredients, ingredientsDone) }
         >
           Finalizar Receita
         </button>
