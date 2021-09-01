@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .checked{
     text-decoration: line-through;
 }
@@ -5,3 +6,12 @@
 .unchecked {
     text-Decoration: none;
 }
+=======
+.checked {
+  text-decoration: line-through;
+}
+
+.unchecked {
+  text-decoration: none;
+}
+>>>>>>> 06eaa488a1aaa9a34e8ea622dd8697f2512072f8
