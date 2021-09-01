@@ -11,7 +11,7 @@ function FoodIngredientesExplore() {
   };
   useEffect(() => {
     getIngredient();
-  }, [data]);
+  }, [setData]);
 
   const srcImg = (name) => `https://www.themealdb.com/images/ingredients/${name}-Small.png`;
 
