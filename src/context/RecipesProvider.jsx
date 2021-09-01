@@ -6,6 +6,8 @@ function RecipesProvider({ children }) {
   const [favorite, setFavorite] = useState({});
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(false);
+  const [randomFood, setRandomFood] = useState([]);
+  const [randomDrink, setRandomDrink] = useState([]);
   const [keyType, setKeysType] = useState('');
   const [url, setUrl] = useState();
   const [lists, setLists] = useState({
@@ -24,7 +26,27 @@ function RecipesProvider({ children }) {
     setLoading,
     favorite,
     setFavorite,
+    randomFood,
+    randomDrink,
   };
+
+  useEffect(() => {
+    const getRandomFood = async () => {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+      const data = await response.json();
+      setRandomFood(data.meals);
+    };
+    getRandomFood();
+  }, []);
+
+  useEffect(() => {
+    const getRandomFood = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+      const data = await response.json();
+      setRandomDrink(data.drinks);
+    };
+    getRandomFood();
+  }, []);
 
   useEffect(() => {
     const favoriteClick = () => {
