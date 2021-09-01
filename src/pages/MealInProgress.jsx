@@ -10,7 +10,7 @@ export default function MealInProgress(props) {
   const [meal, setMeal] = useState({});
   const [loading, setLoading] = useState(true);
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const [checkedSteps, setCheckedSteps] = useState({});
+  const [checkedSteps, setCheckedSteps] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const { match: { params: { id } } } = props;
@@ -35,15 +35,6 @@ export default function MealInProgress(props) {
 
   useEffect(() => {
     updateInProgressStorage('meals', id, checkedSteps);
-    if (Object.keys(checkedSteps).length) {
-      console.log(Object.values(checkedSteps).every((value) => value === true));
-      if (Object.values(checkedSteps).every((value) => value === true)) {
-        console.log('setDisabled false');
-        setDisabled(false);
-      } else {
-        setDisabled(true);
-      }
-    }
   }, [checkedSteps]);
 
   function share() {
@@ -63,11 +54,17 @@ export default function MealInProgress(props) {
       && meal[item] !== ' ' && meal[item] !== '' && meal[item] !== null);
   }
 
-  function updateCheckedSteps({ target: { name, checked } }) {
-    setCheckedSteps({
-      ...checkedSteps,
-      [name]: checked,
-    });
+  useEffect(() => {
+    const disable = mNI('strIngredient').length === checkedSteps.length;
+    setDisabled(!disable);
+  }, [checkedSteps, meal]);
+
+  function updateCheckedSteps({ target: { value } }) {
+    if (!checkedSteps.some((ing) => ing === value)) {
+      setCheckedSteps([...checkedSteps, value]);
+    } else {
+      setCheckedSteps(checkedSteps.filter((ing) => ing !== value));
+    }
   }
 
   if (loading) return <span>Loading...</span>;
@@ -93,8 +90,10 @@ export default function MealInProgress(props) {
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
             <input
               type="checkbox"
-              checked={ checkedSteps[index] ? checkedSteps[index] : false }
+              checked={ checkedSteps
+                .some((ing) => ing === meal[mNI('strIngredient')[index]]) }
               name={ index }
+              value={ meal[mNI('strIngredient')[index]] }
               onChange={ updateCheckedSteps }
             />
             { `${meal[objectKey]} of ${meal[mNI('strIngredient')[index]]} `}

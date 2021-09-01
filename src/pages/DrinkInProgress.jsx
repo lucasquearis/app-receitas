@@ -10,7 +10,7 @@ export default function DrinkInProgress(props) {
   const [drink, setDrink] = useState({});
   const [loading, setLoading] = useState(true);
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const [checkedSteps, setCheckedSteps] = useState({});
+  const [checkedSteps, setCheckedSteps] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const { match: { params: { id } } } = props;
@@ -35,13 +35,6 @@ export default function DrinkInProgress(props) {
 
   useEffect(() => {
     updateInProgressStorage('drinks', id, checkedSteps);
-    if (Object.keys(checkedSteps).length) {
-      if (Object.values(checkedSteps).every((value) => value === true)) {
-        setDisabled(false);
-      } else {
-        setDisabled(true);
-      }
-    }
   }, [checkedSteps]);
 
   function share() {
@@ -61,11 +54,17 @@ export default function DrinkInProgress(props) {
       && drink[item] !== ' ' && drink[item] !== '' && drink[item] !== null);
   }
 
-  function updateCheckedSteps({ target: { name, checked } }) {
-    setCheckedSteps({
-      ...checkedSteps,
-      [name]: checked,
-    });
+  useEffect(() => {
+    const disable = mNI('strIngredient').length === checkedSteps.length;
+    setDisabled(!disable);
+  }, [checkedSteps, drink]);
+
+  function updateCheckedSteps({ target: { value } }) {
+    if (!checkedSteps.some((ing) => ing === value)) {
+      setCheckedSteps([...checkedSteps, value]);
+    } else {
+      setCheckedSteps(checkedSteps.filter((ing) => ing !== value));
+    }
   }
 
   if (loading) return <span>Loading...</span>;
@@ -78,7 +77,7 @@ export default function DrinkInProgress(props) {
         src={ drink.strDrinkThumb }
         className="recipe-photo"
       />
-      <div data-testid="recipe-title">{ drink.strMeal }</div>
+      <div data-testid="recipe-title">{ drink.strDrink }</div>
       <button type="button" data-testid="share-btn" onClick={ share }>
         Compartilhar
       </button>
@@ -91,8 +90,10 @@ export default function DrinkInProgress(props) {
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
             <input
               type="checkbox"
-              checked={ checkedSteps[index] ? checkedSteps[index] : false }
+              checked={ checkedSteps
+                .some((ing) => ing === drink[mNI('strIngredient')[index]]) }
               name={ index }
+              value={ drink[mNI('strIngredient')[index]] }
               onChange={ updateCheckedSteps }
             />
             { `${drink[objectKey]} of ${drink[mNI('strIngredient')[index]]} `}
