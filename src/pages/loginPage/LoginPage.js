@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import { saveLoginInfoLocalStorage, validateEmailPassword } from '../../functions';
+import './LoginPage.css';
 
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState('');
@@ -18,37 +20,47 @@ const LoginPage = () => {
     history.push('/comidas');
   };
   return (
-    <form
-      onSubmit={ handleBtnSubmit }
+    <div
+      className="login-container"
     >
-      <label htmlFor="email-input">
-        E-mail
-        <input
-          type="email"
-          id="email-input"
-          data-testid="email-input"
-          name="email"
-          onChange={ ({ target }) => setUserEmail(target.value) }
-        />
-      </label>
-      <label htmlFor="password-input">
-        Password
-        <input
-          type="password"
-          id="password-input"
-          data-testid="password-input"
-          name="password"
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
-      </label>
-      <button
-        type="submit"
-        disabled={ disabled }
-        data-testid="login-submit-btn"
+      <h1>LOGIN</h1>
+      <form
+        onSubmit={ handleBtnSubmit }
+        className="form-container"
       >
-        Entrar
-      </button>
-    </form>
+        <label htmlFor="email-input">
+          <input
+            placeholder="E-mail"
+            type="email"
+            id="email-input"
+            data-testid="email-input"
+            name="email"
+            className="input-login"
+            onChange={ ({ target }) => setUserEmail(target.value) }
+          />
+        </label>
+        <label htmlFor="password-input">
+          <input
+            placeholder="Senha"
+            type="password"
+            id="password-input"
+            data-testid="password-input"
+            name="password"
+            className="input-login"
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
+        </label>
+        <Button
+          variant="success"
+          className="confirm-button"
+          type="submit"
+          disabled={ disabled }
+          data-testid="login-submit-btn"
+        >
+          Entrar
+        </Button>
+      </form>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import './ButtonDetails.css';
 
 const ButtonDetails = ({ id, type }) => {
   const [stateButton, setStateButton] = useState('start-button');
@@ -26,13 +27,16 @@ const ButtonDetails = ({ id, type }) => {
   };
   if (redirect) return <Redirect to={ `${id}/in-progress ` } />;
   return (
-    <Button
-      data-testid="start-recipe-btn"
-      className={ stateButton }
-      onClick={ handleClick }
-    >
-      {nameButton}
-    </Button>
+    <div className="button-container">
+      <Button
+        data-testid="start-recipe-btn"
+        className={ stateButton }
+        onClick={ handleClick }
+        variant="success"
+      >
+        {nameButton}
+      </Button>
+    </div>
   );
 };
 
