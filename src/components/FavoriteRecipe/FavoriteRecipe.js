@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
 import RenderRecipes from './RenderRecipes';
-import './FavoriteRecipe.css';
 
 const FavoriteRecipe = () => {
   const [copied, setCopied] = useState('');
@@ -20,7 +19,7 @@ const FavoriteRecipe = () => {
     const labelButton = target.parentNode;
     const sectionButtons = labelButton.parentNode;
     const divRecipe = sectionButtons.parentNode;
-    const pNameRecipe = divRecipe.children[1];
+    const pNameRecipe = divRecipe.children[2];
     const nameRecipe = pNameRecipe.innerText;
 
     const newSavedRecipes = recipes.filter((recipe) => recipe.name === nameRecipe);
@@ -32,7 +31,7 @@ const FavoriteRecipe = () => {
   const unfavoriteRecipe = ({ target }) => {
     const sectionButtons = target.parentNode;
     const divRecipe = sectionButtons.parentNode;
-    const pNameRecipe = divRecipe.children[1];
+    const pNameRecipe = divRecipe.children[2];
     const nameRecipe = pNameRecipe.innerText;
 
     const newSavedRecipes = recipes.filter((recipe) => recipe.name !== nameRecipe);
@@ -56,78 +55,7 @@ const FavoriteRecipe = () => {
 
   if (filter) {
     return (
-      <div className="favorite-recipes-content">
-        <div className="filters-buttons-div">
-          <button
-            type="button"
-            data-testid="filter-by-all-btn"
-            onClick={ noFilter }
-          >
-            All
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-food-btn"
-            onClick={ filterByFood }
-          >
-            Food
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-drink-btn"
-            onClick={ filterByDrink }
-          >
-            Drinks
-          </button>
-        </div>
-        <RenderRecipes
-          array={ filter }
-          copied={ copied }
-          copyLink={ copyLink }
-          unfavoriteRecipe={ unfavoriteRecipe }
-        />
-      </div>
-    );
-  }
-
-  if (recipes) {
-    return (
-      <div className="favorite-recipes-content">
-        <div className="filters-buttons-div">
-          <button
-            type="button"
-            data-testid="filter-by-all-btn"
-            onClick={ noFilter }
-          >
-            All
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-food-btn"
-            onClick={ filterByFood }
-          >
-            Food
-          </button>
-          <button
-            type="button"
-            data-testid="filter-by-drink-btn"
-            onClick={ filterByDrink }
-          >
-            Drinks
-          </button>
-        </div>
-        <RenderRecipes
-          array={ recipes }
-          copied={ copied }
-          copyLink={ copyLink }
-          unfavoriteRecipe={ unfavoriteRecipe }
-        />
-      </div>
-    );
-  }
-  return (
-    <div className="favorite-recipes-content">
-      <div className="filters-buttons-div">
+      <div>
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -149,7 +77,72 @@ const FavoriteRecipe = () => {
         >
           Drinks
         </button>
+        <RenderRecipes
+          array={ filter }
+          copied={ copied }
+          copyLink={ copyLink }
+          unfavoriteRecipe={ unfavoriteRecipe }
+        />
       </div>
+    );
+  }
+
+  if (recipes) {
+    return (
+      <div>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ noFilter }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ filterByFood }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ filterByDrink }
+        >
+          Drinks
+        </button>
+        <RenderRecipes
+          array={ recipes }
+          copied={ copied }
+          copyLink={ copyLink }
+          unfavoriteRecipe={ unfavoriteRecipe }
+        />
+      </div>
+    );
+  }
+  return (
+    <div>
+      <button
+        type="button"
+        data-testid="filter-by-all-btn"
+        onClick={ noFilter }
+      >
+        All
+      </button>
+      <button
+        type="button"
+        data-testid="filter-by-food-btn"
+        onClick={ filterByFood }
+      >
+        Food
+      </button>
+      <button
+        type="button"
+        data-testid="filter-by-drink-btn"
+        onClick={ filterByDrink }
+      >
+        Drinks
+      </button>
     </div>
   );
 };
