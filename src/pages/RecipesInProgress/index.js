@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 
 import { useDataContext } from '../../context/DataProvider';
 import { getDetails } from '../../services';
@@ -15,6 +15,7 @@ const savedIngredients = getSavedAssistent(
 
 export default function RecipesInProgress() {
   const { loading, setLoading } = useDataContext();
+  const history = useHistory();
   const { id } = useParams();
   const [recipeDetails, setRecipeDetails] = useState({});
 
@@ -38,19 +39,33 @@ export default function RecipesInProgress() {
     })();
   }, [id, setLoading, type]);
 
-  const infos = useCallback(() => {
+  const infos = useMemo(() => {
     const detailKeys = Object.keys(recipeDetails);
 
-    const ingredients = detailKeys
-      .filter((key) => key.includes('strIngredient') && recipeDetails[key])
-      .map((key) => recipeDetails[key]);
+    return {
+      ingredients: detailKeys
+        .filter((key) => key.includes('strIngredient') && recipeDetails[key])
+        .map((key) => recipeDetails[key]),
 
-    const measures = detailKeys
-      .filter((key) => key.includes('strMeasure') && recipeDetails[key])
-      .map((key) => recipeDetails[key]);
-
-    return { ingredients, measures };
+      measures: detailKeys
+        .filter((key) => key.includes('strMeasure') && recipeDetails[key])
+        .map((key) => recipeDetails[key]),
+    };
   }, [recipeDetails]);
+
+  const allChecked = useMemo(() => {
+    if (checkedItems.meals[id]) {
+      return infos.ingredients.every((ingredient) => (
+        checkedItems.meals[id].includes(ingredient)
+      ));
+    }
+    if (checkedItems.cocktails[id]) {
+      return infos.ingredients.every((ingredient) => (
+        checkedItems.cocktails[id].includes(ingredient)
+      ));
+    }
+    return false;
+  }, [checkedItems, id, infos.ingredients]);
 
   return (
     <div>
@@ -62,7 +77,7 @@ export default function RecipesInProgress() {
               data-testid="recipe-photo"
               alt={ recipeDetails.strDrink }
               // estilo temporário para passar nos requisitos;
-              style={ { width: '250px' } }
+              style={ { width: '200px' } }
             />
             <div>
               <CopyButton path={ `/${url}s/${id}` } />
@@ -76,12 +91,12 @@ export default function RecipesInProgress() {
             </p>
             <h3>Ingredients</h3>
             <ul>
-              { infos().ingredients.map((ingredient, index) => (
+              { infos.ingredients.map((ingredient, index) => (
                 <CheckList
                   key={ ingredient }
                   type={ type }
                   ingredient={ ingredient }
-                  measures={ infos().measures }
+                  measures={ infos.measures }
                   checkedItems={ checkedItems }
                   setCheckedItems={ setCheckedItems }
                   id={ id }
@@ -89,14 +104,16 @@ export default function RecipesInProgress() {
                 />
               )) }
             </ul>
-            <h3>Instructions</h3>
-            <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              disabled={ !allChecked }
+              onClick={ () => history.push('/receitas-feitas') }
             >
               Finalizar receita
             </button>
+            <h3>Instructions</h3>
+            <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
           </>
         ) : <h1>Carregando...</h1> }
     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
@@ -12,14 +12,15 @@ export default function CheckList({
   index,
   id,
 }) {
-  const isSaved = () => {
+  const isSaved = useMemo(() => {
     if (checkedItems.meals[id]) {
       return checkedItems.meals[id].includes(ingredient);
     }
     if (checkedItems.cocktails[id]) {
       return checkedItems.cocktails[id].includes(ingredient);
     }
-  };
+    return false;
+  }, [checkedItems.cocktails, checkedItems.meals, id, ingredient]);
 
   const handleToggleCheck = ({ target: { checked } }) => {
     setCheckedItems((prevItems) => {
@@ -61,9 +62,9 @@ export default function CheckList({
   return (
     <li
       data-testid={ `${index}-ingredient-step` }
-      className={ isSaved() ? 'checked-item' : 'unChecked-item' }
+      className={ isSaved ? 'checked-item' : 'unChecked-item' }
     >
-      <input type="checkbox" onChange={ handleToggleCheck } checked={ isSaved() } />
+      <input type="checkbox" onChange={ handleToggleCheck } checked={ isSaved } />
       {`${ingredient}-${measures[index]}`}
     </li>
   );
