@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { fetchByArea, fetchFoods, fetchFilterByArea } from '../services/mealAPI';
-import '../styles/Area.css';
 
 function Area() {
   const LOCATION = useLocation().pathname;
