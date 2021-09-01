@@ -4,16 +4,16 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-import mockedFood from './mockFood';
-import mockedDrink from './mockDrink';
+import { mockedSpecificFood } from '../mocks/mockFood';
+import { mockedDrinks } from '../mocks/mockDrink';
 
 const url = '/comidas/52977';
 
 // Recebi ajuda do colega Leo Ferreira para fazer o mock das fetchs para a api.
 jest.spyOn(global, 'fetch').mockImplementationOnce(() => Promise.resolve(
-  { json: () => Promise.resolve(mockedFood) },
+  { json: () => Promise.resolve(mockedSpecificFood) },
 )).mockImplementationOnce(() => Promise.resolve(
-  { json: () => Promise.resolve((mockedDrink)) },
+  { json: () => Promise.resolve((mockedDrinks)) },
 ));
 
 // jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve(
