@@ -11,7 +11,7 @@ function IngredientsList({ list }) {
         {list.map((ingredient, index) => (
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
-            key={ ingredient.name }
+            key={ index }
           >
             { `- ${ingredient.name} - ${ingredient.measure}` }
           </li>

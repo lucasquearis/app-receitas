@@ -1,8 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from '.';
 import { fetchAPI,
-  fetchRandomRecipe } from '../services/API';
+  fetchRandomRecipe,
+  fetchRecipeByArea,
+  fetchListByFilter } from '../services/API';
 
 import useFavorite from '../hooks/useFavorite';
 import useDone from '../hooks/useDone';
@@ -18,12 +20,23 @@ function Provider({ children }) {
   const [favoriteList, setFavoriteList] = useFavorite([]);
   const [doneRecipes, setDoneRecipes] = useDone([]);
   const [inProgressList, setInProgressList] = useInProgress();
+  const [activeArea, setActiveArea] = useState('All');
+  const [areasApi, setAreasApi] = useState(null);
+  const [recipes, setRecipes] = useState({ recipe: null });
   const requestApiData = useCallback(async (URL) => {
     const searchType = radioValue === 'i' || radioValue === 'c' ? 'filter' : 'search';
     setIsFetching(true);
     setApiData([await fetchAPI(URL, searchType, radioValue, inputText)]);
     setIsFetching(false);
   }, [inputText, radioValue]);
+
+  useEffect(() => {
+    const fetching = async () => {
+      setRecipes(await fetchRecipeByArea(activeArea));
+      setAreasApi(await fetchListByFilter('themealdb', 'a'));
+    };
+    fetching();
+  }, [activeArea]);
 
   async function requestRandomRecipe(endpoint) {
     setIsFetching(true);
@@ -49,6 +62,10 @@ function Provider({ children }) {
     inProgressList,
     setInProgressList,
     requestRandomRecipe,
+    activeArea,
+    setActiveArea,
+    areasApi,
+    recipes,
   };
 
   return (

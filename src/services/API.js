@@ -54,12 +54,18 @@ export async function fetchRandomRecipe(endpoint) {
   }
 }
 
-export async function fetchRecipeByArea(area) {
+export async function fetchRecipeByArea(area = 'All') {
   const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
   try {
-    const requestReturn = await fetch(url);
-    const requestObject = await requestReturn.json();
-    return requestObject;
+    let requestArray = null;
+    if (area === 'All') {
+      requestArray = (await fetchAPI('themealdb', 'search', 's', '')) || [];
+    } else {
+      const requestReturn = await fetch(url);
+      const requestObject = await requestReturn.json();
+      requestArray = requestObject;
+    }
+    return requestArray;
   } catch (error) {
     return { recipe: null };
   }

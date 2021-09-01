@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Proptypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import Context from '../../context';
 
 const radioSearchOptions = [
@@ -8,7 +8,7 @@ const radioSearchOptions = [
   ['first-letter', 'Primeira letra', 'f'],
 ];
 
-function SearchBar({ endpoint }) {
+function SearchBar() {
   const {
     inputText,
     setInputText,
@@ -17,6 +17,9 @@ function SearchBar({ endpoint }) {
     requestApiData,
     setToggle,
   } = useContext(Context);
+
+  const { pathname } = useLocation();
+  const endpoint = pathname.includes('comida') ? 'themeadldb' : 'thecocktaildb';
 
   function handleClick(e) {
     e.preventDefault();
@@ -68,9 +71,5 @@ function SearchBar({ endpoint }) {
     </div>
   );
 }
-
-SearchBar.propTypes = {
-  endpoint: Proptypes.string.isRequired,
-};
 
 export default SearchBar;

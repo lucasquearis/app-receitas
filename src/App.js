@@ -14,8 +14,10 @@ import Explore from './pages/Explore';
 import ExploreFoods from './pages/Explore/ExploreFoods';
 import ExplorarDrinks from './pages/Explore/ExploreDrinks';
 import ExploreIngredients from './pages/ExploreIngredients';
+import OriginFood from './pages/Explore/Origin/OriginFood';
 
 import './App.css';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -26,8 +28,8 @@ function App() {
         <Route exact path="/bebidas" component={ Recipes } />
         <Route exact path="/comidas/:id" component={ MealDetails } />
         <Route exact path="/bebidas/:id" component={ DrinkDetails } />
-        <Route path="/comidas/:id/in-progress" component={ InProgress } />
-        <Route path="/bebidas/:id/in-progress" component={ InProgress } />
+        <Route exact path="/comidas/:id/in-progress" component={ InProgress } />
+        <Route exact path="/bebidas/:id/in-progress" component={ InProgress } />
         <Route exact path="/explorar" component={ Explore } />
         <Route
           exact
@@ -39,12 +41,21 @@ function App() {
           path="/explorar/bebidas"
           render={ (props) => <ExplorarDrinks { ...props } endpoint="thecocktaildb" /> }
         />
-        <Route path="/explorar/comidas/ingredientes" component={ ExploreIngredients } />
-        <Route path="/explorar/bebidas/ingredientes" component={ ExploreIngredients } />
-        <Route path="/explorar/comidas/area" />
-        <Route path="/receitas-feitas" component={ DoneRecipes } />
-        <Route path="/perfil" component={ Profile } />
-        <Route path="/receitas-favoritas" component={ Favorites } />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ ExploreIngredients }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes"
+          component={ ExploreIngredients }
+        />
+        <Route exact path="/explorar/comidas/area" component={ OriginFood } />
+        <Route exact path="/receitas-feitas" component={ DoneRecipes } />
+        <Route exact path="/perfil" component={ Profile } />
+        <Route exact path="/receitas-favoritas" component={ Favorites } />
+        <Route component={ NotFound } />
       </Switch>
     </Provider>
   );
