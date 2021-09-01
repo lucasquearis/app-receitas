@@ -44,7 +44,7 @@ export default function Meals() {
       setFeed(meals.slice(0, MAX_FOODS));
     };
     resolviFood();
-  }, [setFeed, feedDataFilter]);
+  }, [setFeed, feedDataFilter, selectedIngredient]);
 
   const renderList = () => {
     if (resultList === null) {

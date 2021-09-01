@@ -21,7 +21,7 @@ export default function ExploreMealsByOrigin() {
     fetchFoods().then((response) => {
       setMealsData(response.meals);
     });
-  }, []);
+  }, [pathname]);
 
   const setDataMealsctedArea = async ({ target: { value } }) => {
     if (value !== 'All') {
