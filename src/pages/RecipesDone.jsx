@@ -56,7 +56,7 @@ function RecipesDone() {
       <main>
         <FilterButtons setFilterRecipes={ setfilterRecipesDone } />
         ;
-        { renderFilterRecipesDone() }
+        { recipesDone() && renderFilterRecipesDone() }
       </main>
     </>
   );
