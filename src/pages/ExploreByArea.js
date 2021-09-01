@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MainContext from '../context/MainContext';
@@ -6,10 +6,18 @@ import MainContext from '../context/MainContext';
 function ExploreByArea() {
   const { areas, setAreas } = useContext(MainContext);
 
+  const resolveArea = async () => {
+    const areaList = await genericFetchAPI('meal', 'filter', 'i', ingredient);
+    setAreas(areaList);
+  };
+
   function handleChange({ target: { value } }) {
     return setArea(value);
   }
 
+  useEffect(() => {
+    resolveArea();
+  }, []);
   return (
     <div>
       <Header title="Explorar Origem" />
@@ -21,9 +29,9 @@ function ExploreByArea() {
           onChange={ handleChange }
         >
           {
-            area.map((cdarea, index) => (
-              <option data-testid={ `${cdarea}-option` } key={ index } value={ cdarea }>
-                {cdarea}
+            areas.map((area, index) => (
+              <option data-testid={ `${area}-option` } key={ index } value={ area }>
+                {area}
               </option>))
           }
         </select>
