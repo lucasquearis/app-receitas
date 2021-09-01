@@ -1,6 +1,6 @@
-.meals {
+.login-page {
   align-items: center;
-  background-image: url("./images/background.jpg");
+  background-image: url('./images/background.jpg');
   color: #464646;
   display: flex;
   flex-direction: column;
@@ -10,137 +10,117 @@
   width: 100%;
 }
 
-.profile {
-  color: white;
-  display: flex;
-  font-size: 20px;
-  top: 30px;
-}
-
-.email {
-  color: white;
-  display: flex;
-  font-size: 20px;
-  left: 80px;
-  top: 60px;
-}
-
-.btn-done {
-  background-color: #606c38;
-  height: 36px;
-  left: 90px;
-  position: absolute;
-  top: 360px;
-  width: 180px;
-}
-
-.btn-favorite {
-  background-color: #606c38;
-  height: 36px;
-  left: 90px;
-  position: absolute;
-  top: 430px;
-  width: 180px;
-}
-
-.btn-logout {
-  background-color: #606c38;
-  height: 36px;
-  left: 90px;
-  position: absolute;
-  top: 500px;
-  width: 180px;
-  
-}
-
-.logo {
+.profile-page {
   align-items: center;
-  border-radius: 80px;
-  height: 280px;
-  left: 5px;
-  position: absolute;
-  top: 90px;
-  width: 340px;
+  color: #464646;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
 }
 
-.login {
+.profile-card {
   align-items: center;
-  /* background: rgba(255, 254, 251, 0.85); */
+  background: rgba(255, 254, 251, 0.85);
   border-radius: 40px;
   display: flex;
   flex-direction: column;
   height: 402px;
   left: 31px;
   position: absolute;
-  top: 106px;
-  width: 275px;
-}
-
-.page-profile {
-  align-items: center;
-  /* background: rgba(255, 254, 251, 0.85); */
-  border-radius: 40px;
-  display: flex;
-  flex-direction: column;
-  height: 402px;
-  left: 41px;
-  position: absolute;
-  top: 106px;
-  width: 275px;
+  top: 86px;
+  width: 255px;
 }
 
 .profile {
   color: black;
   display: flex;
-  left: 85px;
+  font-family: Lato , sans-serif;
+  left: 120px;
   position: absolute;
-  top: 175px;
+  top: 100px;
 }
 
 .email {
-  color:black;
+  color: black;
   display: flex;
-  font-size:medium;
-  left: 50px;
+  font-family: Lato , sans-serif;
+  font-size: medium;
+  left: 73px;
   position: absolute;
-  top: 207px;
+  top: 130px;
 }
 
 .btn-done {
   align-items: center;
   border-radius: 80%;
   height: 36px;
-  left: 21px;
-  position:absolute;
-  top: 245px;
-  width: 234px;
+  left: 69px;
+  position: absolute;
+  top: 260px;
+  width: 180px;
 }
 
 .btn-favorite {
   align-items: center;
   border-radius: 80px;
   height: 36px;
-  left: 21px;
-  position:absolute;
-  top: 300px;
-  width: 234px;
+  left: 69px;
+  position: absolute;
+  top: 330px;
+  width: 180px;
 }
 
 .btn-logout {
   background-color: #606c38;
   height: 36px;
-  left: 60px;
+  left: 69px;
   position: absolute;
-  top: 355px;
-  width: 149px;
+  top: 400px;
+  width: 180px;
+}
+
+.logo {
+  align-items: center;
+  border-radius: 80px;
+  height: 280px;
+  left: -10px;
+  position: absolute;
+  top: 70px;
+  width: 340px;
+}
+
+.profile-logo {
+  align-items: center;
+  border-radius: 80px;
+  height: 280px;
+  left: -32px;
+  position: absolute;
+  top: -30px;
+  width: 340px;
+}
+
+.login {
+  align-items: center;
+  background: rgba(255, 254, 251, 0.85);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 402px;
+  left: 30px;
+  position: absolute;
+  top: 86px;
+  width: 255px;
 }
 
 .mb-1 {
   align-items: center;
   border-radius: 80%;
   height: 46px;
-  left: 21px;
-  position:absolute;
+  left: 11px;
+  position: absolute;
   top: 210px;
   width: 234px;
 }
@@ -149,8 +129,8 @@
   align-items: center;
   border-radius: 80px;
   height: 46px;
-  left: 21px;
-  position:absolute;
+  left: 11px;
+  position: absolute;
   top: 260px;
   width: 234px;
 }
@@ -158,65 +138,8 @@
 .mb-3 {
   background-color: #606c38;
   height: 36px;
-  left: 60px;
+  left: 53px;
   position: absolute;
   top: 320px;
   width: 149px;
-}
-
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
-}
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
 }

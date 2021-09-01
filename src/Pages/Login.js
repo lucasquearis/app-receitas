@@ -41,7 +41,7 @@ function Login() {
   };
 
   return (
-    <section>
+    <section className="login-page">
       { redirectValidation && <Redirect to="/comidas" /> }
       <Form className="login">
         <Form.Group className="mb-1" controlId="formBasicEmail">

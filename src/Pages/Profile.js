@@ -10,7 +10,8 @@ function Profile() {
     getUser = mailUser.email;
   }
   return (
-    <section className="page-profile">
+    <section className="profile-page">
+      <p className="profile-card" />
       <p className="profile">Meu Perfil</p>
       <p data-testid="profile-email" className="email">{ getUser }</p>
       <Form>
