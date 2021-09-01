@@ -62,6 +62,7 @@ function RecipesInProgress(props) {
                     name: recipe[enType][0][`str${enCasedType}`],
                     image: recipe[enType][0][`str${enCasedType}Thumb`] }
                 }
+                testId="favorite-btn"
               />
               <h2 data-testid="recipe-category">
                 { type === 'comidas'

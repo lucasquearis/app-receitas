@@ -6,7 +6,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 function FavoriteButton(props) {
   const [favorite, setFavorite] = useState(false);
   const [favoriteList, setFavoriteList] = useState([]);
-  const { recipe } = props;
+  const { recipe, testId } = props;
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
@@ -44,7 +44,7 @@ function FavoriteButton(props) {
         <img
           type="image/svg+xml"
           src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          data-testid="favorite-btn"
+          data-testid={ testId }
           alt="Adicionar a favoritos"
         />
       </button>
@@ -62,6 +62,7 @@ FavoriteButton.propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
+  testId: PropTypes.string.isRequired,
 };
 
 export default FavoriteButton;

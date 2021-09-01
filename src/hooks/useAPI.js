@@ -4,6 +4,8 @@ function useAPI(pathname) {
   const foodAPI = 'https://www.themealdb.com/api/json/v1/1';
   const drinkAPI = 'https://www.thecocktaildb.com/api/json/v1/1';
 
+  const [action, setAction] = useState('');
+
   const [foods, setFoods] = useState({ meals: [] });
   const [drinks, setDrinks] = useState({ drinks: [] });
 
@@ -15,31 +17,23 @@ function useAPI(pathname) {
     setIngredients()
   }
 
+  const recipes = { drinks: drinks.drinks, meals: foods.meals };
+
   let api;
   let set;
   let cat;
-  const recipes = { drinks: drinks.drinks, meals: foods.meals };
   let categories;
 
-  switch (true) {
-  case /comidas/.test(pathname):
-    categories = foodsCategories;
-
+  if (/comidas/.test(pathname)) {
     api = foodAPI;
     set = setFoods;
     cat = setFoodsCategories;
-    break;
-
-  case /bebidas/.test(pathname):
-    categories = drinksCategories;
-
+    categories = foodsCategories;
+  } else if (/bebidas/.test(pathname)) {
     api = drinkAPI;
     set = setDrinks;
     cat = setDrinksCategories;
-    break;
-
-  default:
-    break;
+    categories = drinksCategories;
   }
 
   function setRecipes(data, setter) {
@@ -62,6 +56,7 @@ function useAPI(pathname) {
   }
 
   function searchByFilters(filter = 's', query = '') {
+    setAction('search-filters');
     if (filter === 'i') {
       return request(`${api}/filter.php?${filter}=${query}`, set);
     }
@@ -69,17 +64,15 @@ function useAPI(pathname) {
   }
 
   function searchByCategory(query = '') {
+    setAction('search-categories');
     if (!query) {
       return request(`${api}/search.php?s=`, set);
     }
     request(`${api}/filter.php?c=${query}`, set);
   }
 
-  function listCategories() {
-    request(`${api}/list.php?c=list`, cat);
-  }
-
   function searchByArea(query) {
+    setAction('search-area');
     if (query !== 'All') {
       request(`${api}/filter.php?a=${query}`, set);
     } else {
@@ -87,7 +80,13 @@ function useAPI(pathname) {
     }
   }
 
+  function listCategories() {
+    setAction('list-categories');
+    request(`${api}/list.php?c=list`, cat);
+  }
+
   return {
+    action,
     recipes,
     pathname,
     categories,
