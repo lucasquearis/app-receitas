@@ -3,11 +3,15 @@ import {
   fetchAPIList,
   fetchAPIListByCategory,
   fetchDrinkRandom,
+  fetchDrinkIngredientsList,
+  fetchFilterByIngredientList,
 } from '../../services/DrinkAPIFetch';
 
 export const DRINK_LIST_SUCCESS = 'DRINK_LIST_SUCCESS';
 export const DRINK_CATEGORIES_SUCCESS = 'DRINK_CATEGORIES_SUCCESS';
 export const DRINK_RANDOM_SUCCESS = 'DRINK_RANDOM_SUCCESS';
+export const DRINK_INGREDIENTS_LIST_SUCCESS = 'DRINK_INGREDIENTS_LIST_SUCCESS';
+export const DRINK_HANDLECLICK_INGREDIENT = 'DRINK_HANDLECLICK_INGREDIENT';
 
 export const drinkListSuccess = (payload) => ({
   type: DRINK_LIST_SUCCESS,
@@ -45,3 +49,23 @@ export const drinkRandomFetch = () => async (dispatch) => {
   const returnFetch = await fetchDrinkRandom();
   dispatch(drinkRandomSuccess(returnFetch));
 };
+
+export const drinkIngredientsListSuccess = (payload) => ({
+  type: DRINK_INGREDIENTS_LIST_SUCCESS,
+  payload,
+});
+
+export const drinkIngredientsListFetch = () => async (dispatch) => {
+  const returnFetch = await fetchDrinkIngredientsList();
+  dispatch(drinkIngredientsListSuccess(returnFetch));
+};
+
+export const drinkFilterByIngredientListFetch = (title) => async (dispatch) => {
+  const returnFetch = await fetchFilterByIngredientList(title);
+  dispatch(drinkListSuccess(returnFetch));
+};
+
+export const drinkHandleClickIngredient = (payload) => ({
+  type: DRINK_HANDLECLICK_INGREDIENT,
+  payload,
+});

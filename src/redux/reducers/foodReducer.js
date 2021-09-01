@@ -2,12 +2,16 @@ import {
   FOOD_CATEGORIES_SUCCESS,
   FOOD_LIST_SUCCESS,
   FOOD_RANDOM_SUCCESS,
+  FOOD_INGREDIENTS_LIST_SUCCESS,
+  FOOD_HANDLECLICK_INGREDIENT,
 } from '../actions/actionFood';
 
 const INITIAL_STATE = {
   foodCardList: [],
   foodCategoriesList: [],
   foodRandom: [],
+  foodIngredientsList: [],
+  foodIsClicked: false,
 };
 
 const cardListLenght = 12;
@@ -29,6 +33,16 @@ function foodReducer(state = INITIAL_STATE, action) {
     return {
       ...state,
       foodRandom: action.payload[0].idMeal,
+    };
+  case FOOD_INGREDIENTS_LIST_SUCCESS:
+    return {
+      ...state,
+      foodIngredientsList: action.payload.slice(0, cardListLenght),
+    };
+  case FOOD_HANDLECLICK_INGREDIENT:
+    return {
+      ...state,
+      foodIsClicked: action.payload,
     };
   default:
     return state;
