@@ -18,6 +18,7 @@ import DrinkInProgress from './pages/DrinkInProgress';
 import Profile from './pages/Profile';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipesDone from './pages/RecipesDone';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path="/explorar/comidas/ingredientes" component={ FoodByIngredients } />
       <Route path="/explorar/bebidas/ingredientes" component={ DrinksByIngredients } />
       <Route path="/explorar/comidas/area" component={ ExploreByArea } />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route path="/explorar/comidas/" component={ ExploreFoods } />
       <Route path="/explorar" component={ Explore } />
