@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/RecipeCard.css'
 
 function RecipeCard({ recipe, index }) {
   return (
 
     <div
+      className="recipecard"
       key={ recipe.idMeal || recipe.idDrink }
       data-testid={ `${index}-recipe-card` }
     >
@@ -16,9 +18,9 @@ function RecipeCard({ recipe, index }) {
         />
       </div>
       <div>
-        <h2 data-testid={ `${index}-card-name` }>
+        <p data-testid={ `${index}-card-name` }>
           { recipe.strMeal || recipe.strDrink }
-        </h2>
+        </p>
       </div>
     </div>
   );

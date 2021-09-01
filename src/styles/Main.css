@@ -1,0 +1,7 @@
+.foodcard-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 5px;
+  justify-content: space-around;
+}

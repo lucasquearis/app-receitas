@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import '../styles/FoodCard.css'
+import '../styles/RecipeCard.css'
 
 function FoodCard({ food, index }) {
   return (
     <Link to={ `/comidas/${food.idMeal}` }>
-      <div className="foodcard">
+      <div className="recipecard">
         <li
           index={ food.idMeal }
           name={ food.strMeal }

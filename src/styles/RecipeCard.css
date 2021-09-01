@@ -5,11 +5,17 @@ li {
   max-width: 40%;
 }
 
-.foodcard {
+.recipecard {
   border: 1px solid #ffff;
+  box-shadow: 0.05rem 0.1rem 0.3rem -0.03rem rgba(0, 0, 0, 0.45);
   border-radius: 4px;
   text-decoration: none;
   margin: 5px;
   padding: 5px 10px;
   background-color: white;
+  max-width: 142px;
+}
+
+a {
+  text-decoration: none;
 }
