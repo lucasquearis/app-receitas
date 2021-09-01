@@ -31,9 +31,11 @@ const SearchByOrigin = () => {
 
   return (
     <div>
-      <button type="button">
-        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      </button>
+      <Link to="/perfil">
+        <button type="button">
+          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+        </button>
+      </Link>
       <p data-testid="page-title">Explorar Origem</p>
       <button onClick={ () => setShowBar(!showBar) } type="button">
         <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
