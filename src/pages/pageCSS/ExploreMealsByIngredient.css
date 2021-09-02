@@ -1,3 +1,18 @@
-.no-empty-for-lint-only {
-  display: none;
+.explore-ingredients--meals__card-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.explore-ingredients--meals__card img {
+  height: 125px;
+}
+
+.explore-ingredients--meals__card h3 {
+  color: #873d40;
+  font-family: Dancing Script , cursive;
+  font-weight: 600;
+  margin: 5px 0 30px;
 }

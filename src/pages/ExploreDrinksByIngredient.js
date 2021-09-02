@@ -1,30 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './ExploreMealsByIngredient';
-import HeaderNoSearch from '../components/HeaderNoSearch';
-import fetchIngredients from '../services/Header-SearchBar/Drinks/fetchIngredients';
 import BottomMenu from '../components/BottomMenu';
+import './pageCSS/ExploreDrinksByIngredient.css';
+import fetchIngredients from '../services/Header-SearchBar/Drinks/fetchIngredients';
+import HeaderNoSearch from '../components/HeaderNoSearch';
 import Loading from '../components/Loading';
 
 export default function ExploreDrinksByIngredient() {
   const [ingredients, setIngredients] = useState([]);
   const max = 12;
 
+  useEffect(() => {
+    fetchIngredients().then((response) => {
+      setIngredients(response.drinks);
+    });
+  }, []);
+
   const cardIngredient = (index, data) => {
     const { strIngredient1 } = data;
     return (
-      <Link to="/bebidas">
-        <div
-          data-testid={ `${index}-ingredient-card` }
-        >
-          <img
-            src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
-            alt={ strIngredient1 }
-            data-testid={ `${index}-card-img` }
-          />
-          <p data-testid={ `${index}-card-name` }>{ strIngredient1 }</p>
-        </div>
-      </Link>
+      <div className="explore-ingredients--drinks__card">
+        <Link to="/bebidas">
+          <div
+            data-testid={ `${index}-ingredient-card` }
+          >
+            <img
+              src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
+              alt={ strIngredient1 }
+              data-testid={ `${index}-card-img` }
+            />
+            <h3 data-testid={ `${index}-card-name` }>{ strIngredient1 }</h3>
+          </div>
+        </Link>
+      </div>
     );
   };
 
@@ -34,17 +42,14 @@ export default function ExploreDrinksByIngredient() {
       .map((ingredient, index) => cardIngredient(index, ingredient));
   };
 
-  useEffect(() => {
-    fetchIngredients().then((response) => {
-      setIngredients(response.drinks);
-    });
-  }, []);
-
   if (ingredients) {
     return (
       <>
-        <HeaderNoSearch title="Explorar Ingredientes" />
-        { fillIngredients() }
+        <HeaderNoSearch title="Ingredientes" />
+        <div className="explore-ingredients--drinks__card-div">
+          { fillIngredients() }
+        </div>
+        <br />
         <BottomMenu />
       </>
     );

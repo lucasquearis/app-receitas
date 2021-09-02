@@ -2,6 +2,27 @@
   display: none;
 }
 
-.cards {
-  width: 200px;
+.recipe-details__div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-details__div h1 {
+  color: #873d40;
+  font-family: Dancing Script , cursive;
+  font-size: 54px;
+  font-weight: 600;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.recipe-details__div button {
+  margin: 5px;
+}
+
+.recipe-details__thumb {
+  border-radius: 20px;
+  margin: 15px 0 30px;
+  width: 300px;
 }

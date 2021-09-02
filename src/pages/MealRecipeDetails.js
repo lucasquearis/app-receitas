@@ -32,10 +32,10 @@ export default function MealRecipeDetails(props) {
       .includes('strIngredient'));
     const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
     return (
-      <>
+      <div className="recipe-details__div">
         <h1 data-testid="recipe-title">{strMeal}</h1>
         <img
-          className="cards"
+          className="recipe-details__thumb"
           data-testid="recipe-photo"
           src={ strMealThumb }
           alt={ strMeal }
@@ -83,7 +83,7 @@ export default function MealRecipeDetails(props) {
             Iniciar Receita
           </button>
         </Link>
-      </>
+      </div>
     );
   }
 
