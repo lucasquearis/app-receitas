@@ -4,6 +4,8 @@ import './pageCSS/DrinkProcess.css';
 import PropTypes from 'prop-types';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
 import Loading from '../components/Loading';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
 
 const callbackHandleClick = (id, name) => {
   const getLocalStorage = () => JSON.parse(localStorage
@@ -48,11 +50,13 @@ const returnListFromKeys = (keys) => {
   return [listIngredients, listMeasures];
 };
 
-export default function DrinkRecipeDetails(props) {
+export default function DrinkProcess(props) {
   const { match: { params: { id } } } = props;
   const [resultDrinkRecipe, setResultDrinkRecipe] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [isFullyChecked, setIsFullyChecked] = useState([false]);
+  const [linkShare, setLinkShare] = useState(false);
+  const [favoriteRecipe, setFavoriteRecipe] = useState(false);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -94,6 +98,14 @@ export default function DrinkRecipeDetails(props) {
     }
   }, [checkedIngredients, resultDrinkRecipe]);
 
+  useEffect(() => {
+    const parseLocalStorage = JSON
+      .parse(localStorage
+        .getItem('favoriteRecipes')) || [];
+    const verifyFavorite = parseLocalStorage.some((item) => item.id === id);
+    setFavoriteRecipe(verifyFavorite);
+  }, [id, favoriteRecipe]);
+
   const isIngredientChecked = (comparison) => checkedIngredients
     .some((ingredient) => ingredient === comparison);
 
@@ -113,14 +125,29 @@ export default function DrinkRecipeDetails(props) {
       strDrinkThumb,
       strAlcoholic,
       strInstructions,
+      strCategory,
     } = resultDrinkRecipe[0];
     const listFromKeys = returnListFromKeys(Object.keys(resultDrinkRecipe[0]));
     return (
       <>
         <h1 data-testid="recipe-title">{strDrink}</h1>
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt={ strDrink } />
-        <button data-testid="share-btn" type="button">Compartilhar</button>
-        <button data-testid="favorite-btn" type="button">Favoritar</button>
+        <ShareButton
+          id={ id }
+          setLinkShare={ setLinkShare }
+          type="bebidas"
+        />
+        { linkShare && 'Link copiado!' }
+        <FavoriteButton
+          id={ id }
+          type="bebida"
+          category={ strCategory }
+          alcoholicOrNot={ strAlcoholic }
+          name={ strDrink }
+          image={ strDrinkThumb }
+          favoriteRecipe={ favoriteRecipe }
+          setFavoriteRecipe={ setFavoriteRecipe }
+        />
         <span data-testid="recipe-category">{strAlcoholic}</span>
         <ul className="progress__checkbox-list">
           {listFromKeys[0].map((ingredient, index) => {
@@ -171,6 +198,6 @@ export default function DrinkRecipeDetails(props) {
   return <Loading />;
 }
 
-DrinkRecipeDetails.propTypes = {
+DrinkProcess.propTypes = {
   id: PropTypes.number,
 }.isRequired;

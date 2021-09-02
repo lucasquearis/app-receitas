@@ -57,6 +57,7 @@ export default function MealProcess(props) {
   const [isFullyChecked, setIsFullyChecked] = useState([false]);
   const [linkShare, setLinkShare] = useState(false);
   const [favoriteRecipe, setFavoriteRecipe] = useState(false);
+
   useEffect(() => {
     const resolveAPI = async () => {
       const { meals } = await searchMealAPI(id);
@@ -134,6 +135,7 @@ export default function MealProcess(props) {
         <ShareButton
           id={ id }
           setLinkShare={ setLinkShare }
+          type="comidas"
         />
         { linkShare && 'Link copiado!' }
         <FavoriteButton
