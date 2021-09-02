@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { v4 } from 'uuid';
+import { Redirect } from 'react-router-dom';
 import ShareBtn from '../components/ShareBtn';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import { setLoading } from '../redux/actions/loading';
+import useRedirect from '../hooks/useRedirect';
 
 function RecipesDone() {
+  const { shouldRedirect, redirect } = useRedirect();
+
   const [recipes, setRecipes] = useState([]);
   const { loading } = useSelector((state) => state);
 
@@ -32,15 +37,29 @@ function RecipesDone() {
     } = card;
 
     const types = type === 'comida' ? 'comida' : 'bebida';
+    if (redirect.should) return <Redirect to={ redirect.path } />;
 
     return (
       <div key={ index } className="recipes-card">
-        <img
-          src={ image }
-          alt="recipe"
-          data-testid={ `${index}-horizontal-image` }
-          width="250"
-        />
+        <button
+          type="button"
+          onClick={ () => shouldRedirect(`/${type}s/${id}`) }
+          key={ v4() }
+          data-testid={ `${index}-recipe-card` }
+          className="recipe-card"
+        >
+          <img
+            src={ image }
+            alt="recipe"
+            data-testid={ `${index}-horizontal-image` }
+            width="250"
+          />
+          <p
+            data-testid={ `${index}-horizontal-name` }
+          >
+            { name }
+          </p>
+        </button>
         <div>
           {alcoholicOrNot === ''
             ? (
@@ -57,11 +76,6 @@ function RecipesDone() {
               </p>)}
         </div>
         <p
-          data-testid={ `${index}-horizontal-name` }
-        >
-          { name }
-        </p>
-        <p
           data-testid={ `${index}-horizontal-done-date` }
         >
           { doneDate }
@@ -73,7 +87,12 @@ function RecipesDone() {
         />
         { tags.map((item) => {
           const tagItem = (
-            <p key={ item } data-testid={ `${index}-${item}-horizontal-tag` }>{ item }</p>
+            <p
+              key={ item }
+              data-testid={ `${index}-${item}-horizontal-tag` }
+            >
+              { item }
+            </p>
           );
           return tagItem;
         }) }
