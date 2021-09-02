@@ -29,29 +29,31 @@ function Profile() {
   };
 
   return (
-    <div>
+    <main className="profile-container">
       <Header title="Perfil" />
-      <h1 data-testid="profile-email">{ getEmail() }</h1>
-      <Button
-        className="profile-done-btn"
-        type="submit"
-        buttonText="Receitas Feitas"
-        onClick={ doneRecipes }
-      />
-      <Button
-        className="profile-favorite-btn"
-        type="submit"
-        buttonText="Receitas Favoritas"
-        onClick={ favoriteRecipes }
-      />
-      <Button
-        className="profile-logout-btn"
-        type="submit"
-        buttonText="Sair"
-        onClick={ loginPage }
-      />
+      <h1 className="profile-email-title" data-testid="profile-email">{ getEmail() }</h1>
+      <section className="button-container">
+        <Button
+          className="profile-done-btn"
+          type="submit"
+          buttonText="Receitas Feitas"
+          onClick={ doneRecipes }
+        />
+        <Button
+          className="profile-favorite-btn"
+          type="submit"
+          buttonText="Receitas Favoritas"
+          onClick={ favoriteRecipes }
+        />
+        <Button
+          className="profile-logout-btn"
+          type="submit"
+          buttonText="Sair"
+          onClick={ loginPage }
+        />
+      </section>
       <Footer />
-    </div>
+    </main>
   );
 }
 export default Profile;

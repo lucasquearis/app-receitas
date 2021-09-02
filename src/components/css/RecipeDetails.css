@@ -43,6 +43,7 @@
 
 .details-ing-list {
   align-self: flex-start;
+  list-style: none;
   padding-left: 15px;
   text-align: left;
 }

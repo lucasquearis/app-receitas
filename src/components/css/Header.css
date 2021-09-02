@@ -49,11 +49,13 @@
 .search-bar-container {
   align-items: center;
   background-color: whitesmoke;
-  box-shadow: 0 2px 5px -3px black;
+  border-radius: 0 0 9px 9px;
+  box-shadow: 0 2px 6px -3px grey;
   display: flex;
   flex-direction: column;
   height: 5.6em;
   justify-content: space-between;
+  margin-bottom: 1em;
   min-width: 100vw;
   padding-bottom: 40%;
 }

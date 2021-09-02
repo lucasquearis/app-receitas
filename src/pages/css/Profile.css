@@ -1,79 +1,21 @@
-.Container {
+.profile-container {
   display: flex;
   flex-direction: column;
 }
 
-.loginEmail {
-  color: teal;
-  font-family: Yanone Kaffeesatz , sans-serif , bold;
-  padding-top: 20px;
+.profile-email-title {
+  font-size: 1.6em;
+  padding: 6px;
   text-align: center;
 }
 
-.profile-done-btn {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
-  margin: auto;
-  margin-top: 2%;
-  padding: 3%;
-  width: 40%;
-}
-
-.profile-favorite-btn {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
-  margin: auto;
-  margin-top: 2%;
-  padding: 3%;
-  width: 40%;
-}
-
-.profile-logout-btn {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
-  margin: auto;
-  margin-top: 2%;
-  padding: 3%;
-  width: 40%;
-}
-
-@media screen and ( min-width : 340px ) and ( max-width : 380px ) {
-
-  .Container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .profile-done-btn {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
-    margin: auto;
-    margin-top: 10%;
-    padding: 3%;
-    width: 90%;
-  }
-
-  .profile-favorite-btn {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
-    margin: auto;
-    margin-top: 10%;
-    padding: 3%;
-    width: 90%;
-  }
-
-  .profile-logout-btn {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
-    margin: auto;
-    margin-top: 10%;
-    padding: 3%;
-    width: 90%;
-  }
+.profile-done-btn, .profile-favorite-btn, .profile-logout-btn {
+  background-color: whitesmoke;
+  border: transparent;
+  border-radius: 6px;
+  box-shadow: 0 0 6px -1px grey;
+  font-size: larger;
+  font-weight: 600;
+  height: 9vh;
+  width: 90vw;
 }
