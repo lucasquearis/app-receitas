@@ -8,6 +8,7 @@ body {
   align-items: center;
   background-color: #f71;
   display: flex;
+  height: 45px;
   justify-content: space-around;
 }
 
