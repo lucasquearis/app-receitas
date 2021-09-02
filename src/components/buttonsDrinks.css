@@ -22,11 +22,11 @@
   }
   
   .all-categories {
-    color: #cf3304;
     background-color: #ffffff;
     border-radius: 4px;
-    font-weight: 600;
+    color: #cf3304;
     font-size: 22px;
+    font-weight: 600;
     opacity: 0.8;
     width: 100px;
   }

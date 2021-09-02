@@ -1,9 +1,9 @@
 .container-search {
   background: url('../images//recipes-back4.jpg') top;
   background-size: inherit;
+  height: 100vh;
   margin: 0 auto;
   width: 360px;
-  height: 100vh;
 }
 
 .header {

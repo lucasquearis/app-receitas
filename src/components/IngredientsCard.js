@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const IngredientsCard = ({ index, ingredientImg, ingredientName, path }) => (
   <div
-    className="ingredient-card"
+    className="recipe-card"
     data-testid={ `${index}-ingredient-card` }
   >
     <img

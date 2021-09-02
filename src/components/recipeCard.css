@@ -1,10 +1,10 @@
 .recipe-card {
+  background-color: #e7e7e7;
   border-radius: 8px;
   box-shadow: 4px 4px 4px #969595;
-  background-color: #e7e7e7;
   height: 170px;
-  max-width: 140px;
   margin-bottom: 8px;
+  max-width: 140px;
   overflow-y: hidden;
 }
 
@@ -12,7 +12,6 @@
   color: #e7361f;
   font-size: 18px;
   font-weight: 600;
- 
   text-align: center;
 }
 
