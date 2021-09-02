@@ -86,6 +86,7 @@ function FoodsAndDrinks() {
       >
         <Card.Img
           data-testid={ `${index}-card-img` }
+          alt={ item[`str${type}`] }
           variant="top"
           src={ item[`str${type}Thumb`] }
         />
