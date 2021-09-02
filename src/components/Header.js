@@ -45,7 +45,9 @@ function Header(props) {
 
   return (
     <Container className="header">
-      <Row style={ { justifyContent: 'space-evenly' } }>
+      <Row
+        style={ { justifyContent: 'space-evenly', alignItems: 'center' } }
+      >
         <Link to="/perfil">
           <img
             src={ profileIcon }
@@ -54,7 +56,7 @@ function Header(props) {
           />
         </Link>
 
-        <h2 data-testid="page-title">{titulo}</h2>
+        <h3 data-testid="page-title">{titulo}</h3>
 
         {revealIconSearch()}
         {searchBar()}

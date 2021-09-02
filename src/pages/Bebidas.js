@@ -14,6 +14,7 @@ function Bebidas(props) {
   const { history: { location: { pathname, state } } } = props;
   const [drinkRecipes, setDrinkRecipes] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
   const drinkEndpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -39,7 +40,8 @@ function Bebidas(props) {
 
     fetch(drinkCategoriesEndpoint)
       .then((res) => res.json())
-      .then(({ drinks }) => setDrinkCategories(drinks));
+      .then(({ drinks }) => setDrinkCategories(drinks))
+      .then(setIsLoading(true));
   }, []);
 
   const handleClick = ({ target }) => {
@@ -60,52 +62,56 @@ function Bebidas(props) {
     }
   };
 
-  return (
-    <div className="main-container">
-      <div className="card-container">
-        { drinkRecipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => {
-          if (index < MAX_RECIPES) {
-            return (
-              <Link key={ strDrink } to={ `/bebidas/${idDrink}` } className="card">
-                <RecipeCard
-                  key={ strDrink }
-                  thumb={ strDrinkThumb }
-                  name={ strDrink }
-                  index={ index }
+  if (isLoading) {
+    return (
+      <div className="main-container">
+        <div className="card-container">
+          { drinkRecipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => {
+            if (index < MAX_RECIPES) {
+              return (
+                <Link key={ strDrink } to={ `/bebidas/${idDrink}` } className="card">
+                  <RecipeCard
+                    key={ strDrink }
+                    thumb={ strDrinkThumb }
+                    name={ strDrink }
+                    index={ index }
+                  />
+                </Link>
+              );
+            }
+            return null;
+          }) }
+        </div>
+        <Row className="category-btn">
+          { drinkCategories.map(({ strCategory }, index) => {
+            if (index < MAX_CATEGORIES) {
+              return (
+                <CategoryButton
+                  key={ strCategory }
+                  strCategory={ strCategory }
+                  handleClick={ handleClick }
                 />
-              </Link>
-            );
-          }
-          return null;
-        }) }
+              );
+            }
+            return null;
+          }) }
+          <button
+            data-testid="All-category-filter"
+            type="button"
+            onClick={ getAllDrinks }
+          >
+            All
+          </button>
+        </Row>
+        <MyContext.Provider value={ newDrinkRecipes }>
+          <Header titulo="Bebidas" showProfileIcon="sim" pathname={ pathname } />
+        </MyContext.Provider>
+        <Footer />
       </div>
-      <Row className="category-btn">
-        { drinkCategories.map(({ strCategory }, index) => {
-          if (index < MAX_CATEGORIES) {
-            return (
-              <CategoryButton
-                key={ strCategory }
-                strCategory={ strCategory }
-                handleClick={ handleClick }
-              />
-            );
-          }
-          return null;
-        }) }
-        <button
-          data-testid="All-category-filter"
-          type="button"
-          onClick={ getAllDrinks }
-        >
-          All
-        </button>
-      </Row>
-      <MyContext.Provider value={ newDrinkRecipes }>
-        <Header titulo="Bebidas" showProfileIcon="sim" pathname={ pathname } />
-      </MyContext.Provider>
-      <Footer />
-    </div>
-  );
+    );
+  }
+
+  return <div className="main-container"><div className="c-loader" /></div>;
 }
 
 Bebidas.propTypes = {

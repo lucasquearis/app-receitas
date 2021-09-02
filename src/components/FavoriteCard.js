@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Image } from 'react-bootstrap';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import './doneCard.css';
 
 const copy = require('clipboard-copy');
 
@@ -40,42 +42,46 @@ function FavoriteCard(props) {
   };
 
   return (
-    <div>
+    <div className="done-card">
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <Image
+          fluid
           src={ image }
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
-          width="100px"
         />
       </Link>
-      { (type === 'comida') ? (
-        <p data-testid={ `${index}-horizontal-top-text` }>
-          <span>{ area }</span>
-          {' - '}
-          <span>{ category }</span>
-        </p>
-      ) : (
-        <p data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</p>
-      ) }
-      <Link to={ `/${type}s/${id}` }>
-        <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-      </Link>
-      { sharedMessage && <p>Link copiado!</p> }
-      <input
-        alt="Remove from favorites"
-        type="image"
-        onClick={ () => removeFromFavorites(id) }
-        data-testid={ `${index}-horizontal-favorite-btn` }
-        src={ blackHeartIcon }
-      />
-      <input
-        alt="Share button"
-        type="image"
-        data-testid={ `${index}-horizontal-share-btn` }
-        src={ shareIcon }
-        onClick={ copyLink }
-      />
+      <div className="info-favorite">
+        <div className="category-area">
+          { (type === 'comida') ? (
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              <span>{ area }</span>
+              {' - '}
+              <span>{ category }</span>
+            </p>
+          ) : (
+            <p data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</p>
+          ) }
+        </div>
+        <Link to={ `/${type}s/${id}` }>
+          <h4 data-testid={ `${index}-horizontal-name` }>{ name }</h4>
+        </Link>
+        <div className="icons">
+          <Image
+            alt="Remove from favorites"
+            onClick={ () => removeFromFavorites(id) }
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            src={ blackHeartIcon }
+          />
+          <Image
+            alt="Share button"
+            data-testid={ `${index}-horizontal-share-btn` }
+            src={ shareIcon }
+            onClick={ copyLink }
+          />
+        </div>
+        { sharedMessage && <p>Link copiado!</p> }
+      </div>
     </div>
   );
 }

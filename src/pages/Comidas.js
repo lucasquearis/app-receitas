@@ -40,9 +40,8 @@ function Comidas(props) {
 
     fetch(foodCategoriesEndpoint)
       .then((res) => res.json())
-      .then(({ meals }) => setFoodCategories(meals));
-
-    setIsLoading(true);
+      .then(({ meals }) => setFoodCategories(meals))
+      .then(setIsLoading(true));
   }, []);
 
   const handleClick = ({ target }) => {
@@ -111,7 +110,7 @@ function Comidas(props) {
     );
   }
 
-  return <div className="c-loader" />;
+  return <div className="main-container"><div className="c-loader" /></div>;
 }
 
 Comidas.propTypes = {

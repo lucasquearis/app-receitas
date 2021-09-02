@@ -100,7 +100,7 @@ function ComidasEmProgresso(props) {
   };
 
   const disableButton = () => {
-    const listItem = document.getElementsByTagName('li').length;
+    const listItem = document.getElementsByTagName('label').length;
     return listItem !== completeIngredient.length;
   };
 
@@ -146,7 +146,7 @@ function ComidasEmProgresso(props) {
     );
   }
 
-  return <div className="c-loader" />;
+  return <div className="main-container"><div className="c-loader" /></div>;
 }
 
 ComidasEmProgresso.propTypes = {

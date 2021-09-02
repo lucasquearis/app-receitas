@@ -1,0 +1,17 @@
+.favorite-btn-container {
+  align-content: center;
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px;
+  position: fixed;
+  top: 6%;
+  width: 100%;
+}
+
+.favorite-btn-container button {
+  background-color: var(--L-orange);
+  border: none;
+  color: black;
+  margin: 0;
+}

@@ -1,10 +1,6 @@
-:root {
-  --D-orange: #ff6d00;
-  --L-orange: #ffaa00;
-}
-
 .header {
   background-color: var(--D-orange);
+  padding: 3px;
   position: fixed;
   top: 0;
 }
