@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
+import '../App.css';
 
 export default function Header({ title, search = true }) {
   const [showSearch, setShowSearch] = useState(false);
