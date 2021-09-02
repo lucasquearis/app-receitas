@@ -15,7 +15,6 @@ function ExpComidasIngredientes() {
 
   return (
     <div>
-      <Header titulo="Explorar Ingredientes" />
       <div className="card-container">
         { data.map(({ strIngredient, idIngredient }, index) => {
           if (index < MAX_RECIPES) {
@@ -37,6 +36,7 @@ function ExpComidasIngredientes() {
           return null;
         }) }
       </div>
+      <Header titulo="Explorar Ingredientes" />
       <Footer />
     </div>
   );
