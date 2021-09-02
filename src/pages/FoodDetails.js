@@ -61,6 +61,7 @@ function FoodDetails({ match: { params: { id } } }) {
     })[0];
     handleFavoriteAuxiliar(objSave, setIcon, icon);
   };
+
   return (
     <div>
       { foodInfo.map((item) => {

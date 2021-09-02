@@ -1,38 +1,34 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
-import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
+import { waitForDomChange } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import { mockedSpecificFood } from '../mocks/mockFood';
 import { mockedDrinks } from '../mocks/mockDrink';
 
+const helpers = require('../auxiliar/auxiliarFunctions');
+
 const url = '/comidas/52977';
 
 // Recebi ajuda do colega Leo Ferreira para fazer o mock das fetchs para a api.
-jest.spyOn(global, 'fetch').mockImplementationOnce(() => Promise.resolve(
-  { json: () => Promise.resolve(mockedSpecificFood) },
-)).mockImplementationOnce(() => Promise.resolve(
-  { json: () => Promise.resolve((mockedDrinks)) },
-));
-
+const mock = () => jest
+  .spyOn(global, 'fetch').mockImplementationOnce(() => Promise.resolve(
+    { json: () => Promise.resolve(mockedSpecificFood) },
+  )).mockImplementationOnce(() => Promise.resolve(
+    { json: () => Promise.resolve((mockedDrinks)) },
+  ));
 // jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve(
 //   { json: () => Promise.resolve(mockedFood) },
 // ));
-
-const update = () => Promise.resolve();
 
 describe('Realiza os testes da pagina de Food Details', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('Verifica se todos os elementos estão na tela', async () => {
-    await act(async () => {
-      renderWithRouter(<App />, url);
-    });
-
-    await update();
-
-    const source = 'whiteHeartIcon.svg';
+    mock();
+    renderWithRouter(<App />, url);
+    await waitForDomChange();
 
     const recipeImage = screen.getByTestId('recipe-photo');
     const recipeName = screen.getByRole('heading', { name: /corba/i });
@@ -48,7 +44,6 @@ describe('Realiza os testes da pagina de Food Details', () => {
     const nextButton = screen.getByRole('button', { name: /next/i });
     const startButton = screen.getByRole('button', { name: /iniciar receita/i });
 
-    // Checa se os elementos existem
     expect(recipeImage).toBeInTheDocument();
     expect(recipeName).toBeInTheDocument();
     expect(recipeShare).toBeInTheDocument();
@@ -62,17 +57,45 @@ describe('Realiza os testes da pagina de Food Details', () => {
     expect(previousButton).toBeInTheDocument();
     expect(nextButton).toBeInTheDocument();
     expect(startButton).toBeInTheDocument();
-    expect(recipeFavorite).toHaveAttribute('src', source);
+  });
+  it('Checa se ao clicar no favorito, a imagem troca.', async () => {
+    mock();
+    renderWithRouter(<App />, url);
+    await waitForDomChange();
 
-    // Checa se ao clicar no favorito, a imagem troca.
+    const source = 'whiteHeartIcon.svg';
+
+    const recipeFavorite = screen.getByRole('button', { name: /fav/i });
+    expect(recipeFavorite).toHaveAttribute('src', source);
     userEvent.click(recipeFavorite);
     expect(recipeFavorite).not.toHaveAttribute('src', source);
+  });
+  it('Checa se ao clicar em compartilhar mostra o texto.', async () => {
+    mock();
+    renderWithRouter(<App />, url);
+    await waitForDomChange();
 
-    // Checa se o texto link copiado não é mostrado na tela..
+    helpers.handleShare = jest.fn((func) => {
+      func('Link copiado!');
+    });
+
+    const recipeShare = screen.getByRole('button', { name: /share/i });
     const linkCopiado = screen.queryByText(/link copiado!/i);
     expect(linkCopiado).not.toBeInTheDocument();
+    userEvent.click(recipeShare);
+    expect(helpers.handleShare).toBeCalledTimes(1);
+  });
+  it('Checa se todas as bebidas são mostradas corretamente.', async () => {
+    mock();
+    renderWithRouter(<App />, url);
+    await waitForDomChange();
 
-    // Checa se ao clicar em next a primeira bebida não mostra mais e ao voltar continua la.
+    const firstDrink = screen.getByText(/gg/i);
+    const nextButton = screen.getByRole('button', { name: /next/i });
+    const previousButton = screen.getByRole('button', { name: /previous/i });
+    expect(firstDrink).toBeVisible();
+    expect(nextButton).toBeInTheDocument();
+    expect(previousButton).toBeInTheDocument();
     userEvent.click(nextButton);
     expect(firstDrink).not.toBeVisible();
     userEvent.click(previousButton);
