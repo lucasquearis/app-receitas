@@ -3,10 +3,29 @@
 @import "./styles/recipes-list";
 @import "./styles/details";
 @import "./styles/in-progress";
-@import './styles/ingredients';
+@import "./styles/ingredients";
+@import "./styles/login";
 
 @font-face {
   font-family: MinhaFonte;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
 }
 
+@font-face {
+  font-family: Poppins;
+  src: url("./fonts/Poppins/Poppins-Regular.ttf");
+}
+
+main {
+  height: 100vh;
+}
+
+body {
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}

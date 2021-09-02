@@ -15,39 +15,40 @@ function Login() {
   if (redirect.should) return <Redirect to={ redirect.path } />;
 
   return (
-    <Form>
-      <h1>Login</h1>
-      <Form.Group className="mb-3" controlId="email-input">
-        <Form.Label>E-mail</Form.Label>
-        <Form.Control
-          name="email"
-          type="email"
-          placeholder="Enter e-mail"
-          data-testid="email-input"
-          onChange={ handleChange }
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="password-input">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          name="password"
-          type="password"
-          placeholder="Enter password"
-          data-testid="password-input"
-          onChange={ handleChange }
-        />
-      </Form.Group>
-      <Button
-        variant="primary"
-        data-testid="login-submit-btn"
-        disabled={ !validate }
-        onClick={ () => {
-          shouldRedirect('/comidas');
-          handleSubmit(data.email);
-        } }
-      >
-        Entrar
-      </Button>
+    <Form className="login">
+      <div className="inputs">
+        <Form.Group className="mb-3" controlId="email-input">
+          <Form.Label>E-mail</Form.Label>
+          <Form.Control
+            name="email"
+            type="email"
+            placeholder="Enter e-mail"
+            data-testid="email-input"
+            onChange={ handleChange }
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password-input">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            data-testid="password-input"
+            onChange={ handleChange }
+          />
+        </Form.Group>
+        <Button
+          variant="primary"
+          data-testid="login-submit-btn"
+          disabled={ !validate }
+          onClick={ () => {
+            shouldRedirect('/comidas');
+            handleSubmit(data.email);
+          } }
+        >
+          Entrar
+        </Button>
+      </div>
     </Form>
   );
 }
