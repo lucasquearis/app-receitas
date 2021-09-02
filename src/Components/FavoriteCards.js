@@ -45,7 +45,7 @@ export default function FavoriteCards(props) {
   };
 
   return (
-    <section className="favorite-card">
+    <section className="favorite-card" data-testid="favorite-card">
       <div className="image-section">
         <button
           type="button"
