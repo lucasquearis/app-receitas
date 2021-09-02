@@ -29,6 +29,45 @@
 }
 */
 
+.containerLogin {
+  align-items: center;
+  background: #ef6a07;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.form-label {
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.containerLogin button {
+  background-color: #727272!important;
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 70px;
+  width: 100%;
+}
+
+.textLogin {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
+}
+
+.textLogin img {
+  width: 65px;
+}
+
+.textLogin h1 {
+  color: #ffffff;
+  font-size: 55px;
+}
+
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
@@ -64,23 +103,23 @@ footer {
 }
 
 .bodyDiv {
-  width: 280px;
   background-color: #070707c2;
   color: rgb(113, 182, 243);
+  width: 280px;
 }
 
 .cardExplore {
   border-radius: 5px;
   box-shadow: 5px 5px 5px #ff7f07 ;
   display: inline-flex;
-  margin: 0px 8px 15px 0px;
+  margin: 1px 8px 15px 1px;
   width: 130px;
 }
 
 .cardExplore p {
   font-size: medium;
   font-weight: 700;
-  margin-bottom: 0px;
+  margin-bottom: 1px;
   text-align: center;
 }
 
@@ -103,7 +142,6 @@ footer {
 .bodyIngredient {
 
 }
-
 
 @keyframes shake {
 
