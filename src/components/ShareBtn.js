@@ -4,14 +4,15 @@ import { Button } from 'react-bootstrap';
 import clipboardCopy from '../utils/clipboardCopy';
 import shareIcon from '../images/shareIcon.svg';
 
-function ShareBtn({ id, type }) {
+function ShareBtn({ id, type, testid = 'share-btn' }) {
   return (
     <div>
       <Button
         type="button"
         className="btn-share"
         onClick={ () => clipboardCopy(type, id) }
-        data-testid="share-btn"
+        data-testid={ testid }
+        src={ shareIcon }
       >
         <img
           src={ shareIcon }

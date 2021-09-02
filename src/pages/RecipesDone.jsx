@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import ShareBtn from '../components/ShareBtn';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import { setLoading } from '../redux/actions/loading';
-import shareIcon from '../images/shareIcon.svg';
 
 function RecipesDone() {
   const [recipes, setRecipes] = useState([]);
@@ -32,7 +31,7 @@ function RecipesDone() {
       id,
     } = card;
 
-    const types = type === 'comida' ? 'comidas' : 'bebidas';
+    const types = type === 'comida' ? 'comida' : 'bebida';
 
     return (
       <div key={ index } className="recipes-card">
@@ -68,16 +67,10 @@ function RecipesDone() {
           { doneDate }
         </p>
         <ShareBtn
-          data-testid={ `${index}-horizontal-share-btn` }
+          testid={ `${index}-horizontal-share-btn` }
           id={ id }
           type={ types }
-        >
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            alt="share recipe"
-          />
-        </ShareBtn>
+        />
         { tags.map((item) => {
           const tagItem = (
             <p key={ item } data-testid={ `${index}-${item}-horizontal-tag` }>{ item }</p>
