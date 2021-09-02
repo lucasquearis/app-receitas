@@ -18,8 +18,8 @@
 }
 
 .complete {
-  text-decoration: line-through;
   font-size: small;
+  text-decoration: line-through;
 }
 
 .itenLits {
