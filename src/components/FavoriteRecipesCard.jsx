@@ -37,7 +37,11 @@ export default function FavoriteRecipesCard({
             { alcoholicOrNot }
             { `${area} - ${category}` }
           </p>
-          <ShareButton datatestid={ `${index}-horizontal-share-btn` } />
+          <ShareButton
+            datatestid={ `${index}-horizontal-share-btn` }
+            id={ id }
+            type={ `${type}s` }
+          />
           <FavoriteButton
             id={ id }
             type={ type }

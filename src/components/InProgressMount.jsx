@@ -26,7 +26,12 @@ export default function InProgressMount(props) {
           id={ id }
           datatestid="share-btn"
         />
-        <FavoriteButton recipe={ data } id={ id } type={ type } />
+        <FavoriteButton
+          datatestid="favorite-btn"
+          recipe={ data }
+          id={ id }
+          type={ type }
+        />
       </div>
       <h3 data-testid="recipe-category">{data.category}</h3>
       { data && type === 'bebidas'

@@ -31,7 +31,12 @@ function Details(props) {
           id={ Id }
           datatestid="share-btn"
         />
-        <FavoriteButton recipe={ DetailedRecipe } id={ Id } type={ Receita } />
+        <FavoriteButton
+          recipe={ DetailedRecipe }
+          id={ Id }
+          type={ Receita }
+          datatestid="favorite-btn"
+        />
       </div>
       <h3 data-testid="recipe-category">{DetailedRecipe.category}</h3>
       { DetailedRecipe && Receita === 'bebidas'
