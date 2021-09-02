@@ -1,67 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import React from 'react';
+import { func, string, bool } from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import useLocalStorage from '../helpers/useLocalStorage';
 
-function FavoriteButton(props) {
-  const [favorite, setFavorite] = useState(false);
-  const [favoriteList, setFavoriteList] = useState([]);
-  const { recipe } = props;
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem('favoriteRecipes'))) {
-      setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')).filter(
-        (favRecipe) => favRecipe.id !== recipe.id || favRecipe.type !== recipe.type,
-      ));
-      setFavorite(JSON.parse(localStorage.getItem('favoriteRecipes')).some(
-        (favRecipe) => favRecipe.id === recipe.id && favRecipe.type === recipe.type,
-      ));
-    }
-  }, [recipe]);
-
-  useEffect(() => {
-    if (favorite) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteList, recipe]));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteList]));
-    }
-  }, [favorite, favoriteList, recipe]);
+const FavoriteButton = (props) => {
+  const [favoriteStorage, setFavoriteStorage] = useLocalStorage('favoriteRecipes', []);
+  const { recipe, index, favoriteRecipe, setFavoriteRecipe } = props;
+  const {
+    id,
+    type,
+    area = '',
+    category = '',
+    alcoholicOrNot = '',
+    name,
+    image,
+  } = recipe;
 
   const handleClick = () => {
-    if (favorite === false) {
-      setFavorite(true);
+    const verifyFavorite = favoriteStorage.some((item) => item.id === id);
+    setFavoriteRecipe(verifyFavorite);
+    if (!favoriteRecipe) {
+      const defaultRecipe = {
+        id,
+        type,
+        area,
+        category,
+        alcoholicOrNot,
+        name,
+        image,
+      };
+      setFavoriteRecipe(true);
+      console.log('Favoritou');
+      setFavoriteStorage([...favoriteStorage, defaultRecipe]);
     } else {
-      setFavorite(false);
+      const removeFavorite = favoriteStorage.filter((item) => item.id !== id);
+      setFavoriteStorage([...removeFavorite]);
+      setFavoriteRecipe(false);
+      console.log('Desfavoritou');
     }
   };
-
   return (
-    <div>
-      <button
-        type="button"
-        onClick={ handleClick }
-      >
-        <img
-          type="image/svg+xml"
-          src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          data-testid="favorite-btn"
-          alt="Adicionar a favoritos"
-        />
-      </button>
-    </div>
+    <button
+      className="favorite-btn"
+      type="button"
+      onClick={ () => handleClick() }
+    >
+      <img
+        data-testid={ `${index}-horizontal-favorite-btn` }
+        src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+        alt="icone favorito"
+      />
+    </button>
   );
-}
+};
 
 FavoriteButton.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    area: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    alcoholicOrNot: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-  }).isRequired,
-};
+  id: string,
+  type: string,
+  category: string,
+  alcoholicOrNot: string,
+  name: bool,
+  image: string,
+  area: string,
+  favoriteRecipe: bool,
+  setFavoriteRecipe: func,
+}.isRequired;
 
 export default FavoriteButton;

@@ -49,24 +49,6 @@ function RecipesProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const favoriteClick = () => {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([{
-        id: '',
-        type: '',
-        area: '',
-        category: '',
-        alcoholicOrNot: '',
-        name: '',
-        image: '',
-        doneDate: '',
-        tags: '',
-      }]));
-    };
-
-    favoriteClick();
-  }, []);
-
-  useEffect(() => {
     const filterIngredients = () => {
       const ingFilter = Object.keys(recipe).filter(
         (recipes) => recipes.includes('Ingredient'),
