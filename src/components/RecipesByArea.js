@@ -20,14 +20,23 @@ function RecipesByArea() {
   console.log(show);
   return (
     show.map((s, index) => (
-      <Link key={ s.strMeal } to={ `/comidas/${s.idMeal}` }>
-        <div data-testid={ `${index}-recipe-card` }>
+      <Link
+        key={ s.strMeal }
+        to={ `/comidas/${s.idMeal}` }
+      >
+        <div className="card bg-info mb-2" data-testid={ `${index}-recipe-card` }>
           <img
             data-testid={ `${index}-card-img` }
             alt="Recipe"
             src={ s.strMealThumb }
+            className="card-img-top"
           />
-          <p data-testid={ `${index}-card-name` }>{ s.strMeal }</p>
+          <p
+            className="card-body text-body text-center"
+            data-testid={ `${index}-card-name` }
+          >
+            { s.strMeal }
+          </p>
         </div>
       </Link>
     )));

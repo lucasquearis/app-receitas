@@ -16,6 +16,7 @@ function OriginSelector() {
     <select
       data-testid="explore-by-area-dropdown"
       onChange={ ({ target: { value } }) => setArea(value) }
+      className="w-100 p-2 mb-2 border border-dark bg-light"
     >
       <option data-testid="All-option">All</option>
       {areas
