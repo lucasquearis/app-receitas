@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
+import './CookedAndFavoriteCard.css';
 
 export default function FavoriteRecipesCard({
   index,
@@ -15,12 +17,13 @@ export default function FavoriteRecipesCard({
   id,
 }) {
   return (
-    <div>
+    <Card>
       <Link to={ `/${type}s/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="foto-da-api-"
+          className="imageRecipes"
         />
         <p
           data-testid={ `${index}-horizontal-name` }
@@ -30,11 +33,6 @@ export default function FavoriteRecipesCard({
       </Link>
       <div>
         <div>
-          <p
-            Data-testid={ `${index}-horizontal-top-text` }
-          >
-            { category }
-          </p>
           <p data-testid={ `${index}-horizontal-top-text` }>
             { alcoholicOrNot }
             { `${area} - ${category}` }
@@ -46,7 +44,7 @@ export default function FavoriteRecipesCard({
           { alcoholicOrNot }
         </p>
       </div>
-    </div>
+    </Card>
 
   );
 }

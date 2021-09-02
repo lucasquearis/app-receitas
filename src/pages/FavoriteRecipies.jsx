@@ -13,7 +13,7 @@ function FavoriteRecipies() {
 
   const filterType = (type) => {
     if (type === 'all') {
-      setFavoriteRecipes(favoriteRecipes);
+      setFavoriteRecipes(local);
     } else {
       const filteredFood = favoriteRecipes.filter((item) => item.type === type);
       setFavoriteRecipes(filteredFood);

@@ -15,9 +15,7 @@ function CookedRecipies() {
   };
 
   const filterType = (type) => {
-    filterAll();
     const filteredFood = doneRecipes.filter((item) => item.type === type);
-    console.log(filteredFood);
     setDoneRecipes(filteredFood);
   };
 

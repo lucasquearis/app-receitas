@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareButton from './ShareButton';
+import './CookedAndFavoriteCard.css';
 
 export default function CookedRecipesCard({
   index,
@@ -23,6 +24,7 @@ export default function CookedRecipesCard({
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="foto-da-api-"
+          className="imageRecipes"
         />
         <p
           data-testid={ `${index}-horizontal-name` }
