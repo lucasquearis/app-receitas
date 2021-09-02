@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
   box-sizing: border-box;
   margin: 0;
@@ -36,4 +37,150 @@
   font-weight: 700;
   min-width: 6.25rem;
   outline: none;
+=======
+.login-page {
+  align-items: center;
+  background-image: url('./images/background.jpg');
+  color: #464646;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile-page {
+  align-items: center;
+  color: #464646;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile-card {
+  align-items: center;
+  background: rgba(255, 254, 251, 0.85);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 402px;
+  left: 31px;
+  position: absolute;
+  top: 86px;
+  width: 255px;
+}
+
+.profile {
+  color: black;
+  display: flex;
+  font-family: Lato , sans-serif;
+  left: 120px;
+  position: absolute;
+  top: 100px;
+}
+
+.email {
+  color: black;
+  display: flex;
+  font-family: Lato , sans-serif;
+  font-size: medium;
+  left: 73px;
+  position: absolute;
+  top: 130px;
+}
+
+.btn-done {
+  align-items: center;
+  border-radius: 80%;
+  height: 36px;
+  left: 69px;
+  position: absolute;
+  top: 260px;
+  width: 180px;
+}
+
+.btn-favorite {
+  align-items: center;
+  border-radius: 80px;
+  height: 36px;
+  left: 69px;
+  position: absolute;
+  top: 330px;
+  width: 180px;
+}
+
+.btn-logout {
+  background-color: #606c38;
+  height: 36px;
+  left: 69px;
+  position: absolute;
+  top: 400px;
+  width: 180px;
+}
+
+.logo {
+  align-items: center;
+  border-radius: 80px;
+  height: 280px;
+  left: -10px;
+  position: absolute;
+  top: 70px;
+  width: 340px;
+}
+
+.profile-logo {
+  align-items: center;
+  border-radius: 80px;
+  height: 280px;
+  left: -32px;
+  position: absolute;
+  top: -30px;
+  width: 340px;
+}
+
+.login {
+  align-items: center;
+  background: rgba(255, 254, 251, 0.85);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 402px;
+  left: 30px;
+  position: absolute;
+  top: 86px;
+  width: 255px;
+}
+
+.mb-1 {
+  align-items: center;
+  border-radius: 80%;
+  height: 46px;
+  left: 11px;
+  position: absolute;
+  top: 210px;
+  width: 234px;
+}
+
+.mb-2 {
+  align-items: center;
+  border-radius: 80px;
+  height: 46px;
+  left: 11px;
+  position: absolute;
+  top: 260px;
+  width: 234px;
+}
+
+.mb-3 {
+  background-color: #606c38;
+  height: 36px;
+  left: 53px;
+  position: absolute;
+  top: 320px;
+  width: 149px;
+>>>>>>> 41611d46afc8e4d4fe06279493fddd384485bc2a
 }

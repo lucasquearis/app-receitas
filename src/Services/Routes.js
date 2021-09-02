@@ -1,17 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import DrinkInProgress from '../Pages/DrinkInProgress';
 import Explore from '../Pages/Explore';
 import ExploreDrinksAndFoods from '../Pages/ExploreDrinksAndFoods';
 import ExploreDrinksAndFoodsByIng from '../Pages/ExploreDrinksAndFoodsByIngredients';
 import ExploreFoodsByOrigin from '../Pages/ExploreFoodsByOrigin';
 import FoodsAndDrinks from '../Pages/FoodsAndDrinks';
-import FoodInProgress from '../Pages/FoodInProgress';
 import Login from '../Pages/Login';
 import MadeAndFavoriteRecipes from '../Pages/MadeAndFavoriteRecipes';
 import NotFound from '../Pages/NotFound';
 import Profile from '../Pages/Profile';
 import RecipesDetails from '../Pages/RecipesDetails';
+import RecipeInProgress from '../Pages/RecipeInProgress';
 
 function Routes() {
   return (
@@ -19,8 +18,8 @@ function Routes() {
       <Route exact path="/bebidas" component={ FoodsAndDrinks } />
       <Route
         exact
-        path="/bebidas/:id-da-receita/in-progress"
-        component={ DrinkInProgress }
+        path="/bebidas/:recipeID/in-progress"
+        render={ (props) => <RecipeInProgress { ...props } type="drink" /> }
       />
       <Route
         exact
@@ -45,8 +44,8 @@ function Routes() {
       <Route exact path="/comidas" component={ FoodsAndDrinks } />
       <Route
         exact
-        path="/comidas/:id-da-receita/in-progress"
-        component={ FoodInProgress }
+        path="/comidas/:recipeID/in-progress"
+        render={ (props) => <RecipeInProgress { ...props } type="food" /> }
       />
       <Route
         exact
