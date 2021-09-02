@@ -12,14 +12,14 @@ function Provider({ children }) {
   const [selectedArea, setSelectedArea] = useState('');
   const [recipes, setRecipes] = useState([]);
 
-  const [
-    mealsToken,
-    setMealsToken,
-  ] = useState(getFromLocalStorage('mealsToken', 0));
-  const [
-    cocktailsToken,
-    setCocktailsToken,
-  ] = useState(getFromLocalStorage('cocktailsToken', 0));
+  // const [
+  //   mealsToken,
+  //   setMealsToken,
+  // ] = useState(getFromLocalStorage('mealsToken', null));
+  // const [
+  //   cocktailsToken,
+  //   setCocktailsToken,
+  // ] = useState(getFromLocalStorage('cocktailsToken', null));
   const [
     doneRecipes,
     setDoneRecipes,
@@ -36,15 +36,15 @@ function Provider({ children }) {
     setFavoriteRecipes,
   ] = useState(getFromLocalStorage('favoriteRecipes', []));
 
-  useEffect(
-    () => setInLocalStorage('mealsToken', mealsToken),
-    [mealsToken],
-  );
+  // useEffect(
+  //   () => setInLocalStorage('mealsToken', mealsToken),
+  //   [mealsToken],
+  // );
 
-  useEffect(
-    () => setInLocalStorage('cocktailsToken', cocktailsToken),
-    [cocktailsToken],
-  );
+  // useEffect(
+  //   () => setInLocalStorage('cocktailsToken', cocktailsToken),
+  //   [cocktailsToken],
+  // );
 
   useEffect(
     () => setInLocalStorage('doneRecipes', doneRecipes),
@@ -62,22 +62,22 @@ function Provider({ children }) {
   );
 
   const contextValue = {
-    cocktailsToken,
+    // cocktailsToken,
     doneRecipes,
     favoriteRecipes,
     inProgressRecipes,
     isLoading,
-    mealsToken,
+    // mealsToken,
     recipes,
     selectedArea,
     selectedCategory,
     selectedIngredient,
-    setCocktailsToken,
+    // setCocktailsToken,
     setDoneRecipes,
     setFavoriteRecipes,
     setInProgressRecipes,
     setIsLoading,
-    setMealsToken,
+    // setMealsToken,
     setRecipes,
     setSelectedArea,
     setSelectedCategory,

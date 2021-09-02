@@ -17,6 +17,10 @@ const useHeaderTitle = (path) => {
     title = 'Bebidas';
   } else if (path === '/perfil') {
     title = 'Perfil';
+  } else if (path === '/receitas-feitas') {
+    title = 'Receitas Feitas';
+  } else if (path === '/receitas-favoritas') {
+    title = 'Receitas Favoritas';
   }
 
   return [title];

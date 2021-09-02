@@ -9,9 +9,9 @@ import {
 
 import Header from '../../components/Header';
 import RecipesList from '../../components/RecipesList';
-import MenuInferior from '../../components/MenuInferior';
+import FooterBar from '../../components/FooterBar';
 import BarraDeBusca from '../../components/BarraDeBusca';
-import BarraCategorias from '../../components/BarraCategorias';
+import CategoryBar from '../../components/CategoryBar';
 
 function Principal({
   listEndPoint,
@@ -98,7 +98,7 @@ function Principal({
 
   const renderBars = () => {
     if (showBar) return <BarraDeBusca />;
-    return (<BarraCategorias
+    return (<CategoryBar
       categoriesList={ categories }
       whatIsTheType={ pathname }
     />);
@@ -111,7 +111,7 @@ function Principal({
       />
       { renderBars() }
       <RecipesList />
-      <MenuInferior />
+      <FooterBar />
     </>
   );
 }

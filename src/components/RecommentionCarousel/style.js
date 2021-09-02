@@ -5,8 +5,7 @@ export const CarouselWrapper = styled.div`  display: flex;
   width: 100%;
 `;
 
-export const RecommendationCard = styled.div` border: 1px solid red;
-  margin-left: 15px;
+export const RecommendationCard = styled.div`  margin-left: 15px;
 
   h1 {
     font-size: 24px;

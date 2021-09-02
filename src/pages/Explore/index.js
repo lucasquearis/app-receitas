@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { fetchApi, MEALS_LIST, MEALS_BY_AREA } from '../../services';
 
-import MenuInferior from '../../components/MenuInferior';
 import Header from '../../components/Header';
+import FooterBar from '../../components/FooterBar';
 import MainContent from './MainContent';
 import MealsOrDrinks from './MealsOrDrinks';
 import AreaFilterBar from './AreaFilterBar';
@@ -43,7 +43,7 @@ function Explorar() {
       )}
       <MealsOrDrinks />
       {(pathname.includes('ingredientes')) && <IngrendientsList />}
-      <MenuInferior />
+      <FooterBar />
     </>
   );
 }

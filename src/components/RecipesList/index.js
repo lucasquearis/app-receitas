@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import AppContext from '../context/AppContext';
+import AppContext from '../../context/AppContext';
 
-import Card from './Card';
+import Card from '../Card';
+
+import { CardsListWrapper, CardWrapper } from './style';
 
 function CardsList() {
   const { pathname } = useLocation();
@@ -16,27 +18,29 @@ function CardsList() {
     if (index < recipesListLimit && recipe[`id${keyType}`]) {
       const urlInitialPart = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
       return (
-        <Link
-          key={ `${keyType}-card-${index}` }
-          to={ `/${urlInitialPart}/${recipe[`id${keyType}`]}` }
-        >
-          <div data-testid={ `${index}-recipe-card` }>
-            <Card
-              img={ recipe[`str${keyType}Thumb`] }
-              index={ index }
-              name={ recipe[`str${keyType}`] }
-            />
-          </div>
-        </Link>
+        <CardWrapper>
+          <Link
+            key={ `${keyType}-card-${index}` }
+            to={ `/${urlInitialPart}/${recipe[`id${keyType}`]}` }
+          >
+            <div data-testid={ `${index}-recipe-card` }>
+              <Card
+                img={ recipe[`str${keyType}Thumb`] }
+                index={ index }
+                name={ recipe[`str${keyType}`] }
+              />
+            </div>
+          </Link>
+        </CardWrapper>
       );
     }
     return null;
   });
 
   return (
-    <div>
+    <CardsListWrapper>
       { isLoading ? <h1>Loading...</h1> : renderCards() }
-    </div>
+    </CardsListWrapper>
   );
 }
 

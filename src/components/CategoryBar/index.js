@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from '../context/AppContext';
+import AppContext from '../../context/AppContext';
 
-function BarraCategorias({ categoriesList }) {
+import { ButtonsWrapper, Button } from './style';
+
+function CategoryBar({ categoriesList }) {
   const {
     selectedCategory,
     setSelectedCategory,
@@ -10,8 +12,8 @@ function BarraCategorias({ categoriesList }) {
   } = useContext(AppContext);
 
   return (
-    <>
-      <button
+    <ButtonsWrapper>
+      <Button
         data-testid="All-category-filter"
         key="category-filter-all"
         onClick={ () => {
@@ -21,13 +23,13 @@ function BarraCategorias({ categoriesList }) {
         type="button"
       >
         All
-      </button>
+      </Button>
       {categoriesList.map(({ strCategory }, index) => {
         const categoriesListLimit = 5;
 
         if (index < categoriesListLimit) {
           return (
-            <button
+            <Button
               data-testid={ `${strCategory}-category-filter` }
               key={ `category-filter-${index}` }
               onClick={ () => {
@@ -37,17 +39,17 @@ function BarraCategorias({ categoriesList }) {
               type="button"
             >
               { strCategory }
-            </button>
+            </Button>
           );
         }
         return null;
       })}
-    </>
+    </ButtonsWrapper>
   );
 }
 
-BarraCategorias.propTypes = {
+CategoryBar.propTypes = {
   categoriesList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default BarraCategorias;
+export default CategoryBar;

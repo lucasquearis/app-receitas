@@ -42,7 +42,6 @@ const FavoriteRecipes = () => {
     <div>
       { console.log('test') }
       <Header />
-      <h1 data-testid="page-title">Receitas Favoritas</h1>
       <button
         type="button"
         value="all"

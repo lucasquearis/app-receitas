@@ -5,10 +5,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Provider from './context/Provider';
+import Reset from './style/generic/Reset';
+import Font from './style/generic/Font';
 
 ReactDOM.render(
   <Provider>
     <BrowserRouter>
+      <Reset />
+      <Font />
       <App />
     </BrowserRouter>
   </Provider>,

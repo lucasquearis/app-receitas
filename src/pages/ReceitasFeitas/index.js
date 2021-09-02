@@ -41,7 +41,6 @@ const DoneRecepies = () => {
     <div>
       { console.log('test') }
       <Header />
-      <h1 data-testid="page-title">Receitas Feitas</h1>
       <button
         type="button"
         value="all"
