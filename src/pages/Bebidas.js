@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import CategoryButton from '../components/CategoryButton';
 import Header from '../components/Header';
@@ -7,6 +8,7 @@ import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
+import './comidas.css';
 
 function Bebidas(props) {
   const { history: { location: { pathname, state } } } = props;
@@ -59,29 +61,7 @@ function Bebidas(props) {
   };
 
   return (
-    <div>
-      <MyContext.Provider value={ newDrinkRecipes }>
-        <Header titulo="Bebidas" showProfileIcon="sim" pathname={ pathname } />
-      </MyContext.Provider>
-      { drinkCategories.map(({ strCategory }, index) => {
-        if (index < MAX_CATEGORIES) {
-          return (
-            <CategoryButton
-              key={ strCategory }
-              strCategory={ strCategory }
-              handleClick={ handleClick }
-            />
-          );
-        }
-        return null;
-      }) }
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        onClick={ getAllDrinks }
-      >
-        All
-      </button>
+    <div className="main-container">
       <div className="card-container">
         { drinkRecipes.map(({ strDrinkThumb, strDrink, idDrink }, index) => {
           if (index < MAX_RECIPES) {
@@ -99,6 +79,30 @@ function Bebidas(props) {
           return null;
         }) }
       </div>
+      <Row className="category-btn">
+        { drinkCategories.map(({ strCategory }, index) => {
+          if (index < MAX_CATEGORIES) {
+            return (
+              <CategoryButton
+                key={ strCategory }
+                strCategory={ strCategory }
+                handleClick={ handleClick }
+              />
+            );
+          }
+          return null;
+        }) }
+        <button
+          data-testid="All-category-filter"
+          type="button"
+          onClick={ getAllDrinks }
+        >
+          All
+        </button>
+      </Row>
+      <MyContext.Provider value={ newDrinkRecipes }>
+        <Header titulo="Bebidas" showProfileIcon="sim" pathname={ pathname } />
+      </MyContext.Provider>
       <Footer />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Container, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
 import './searchBar.css';
@@ -40,7 +40,7 @@ function RecipesSearchBar() {
   if (data.length === 1) return <Redirect to={ `/comidas/${data[0].idMeal}` } />;
 
   return (
-    <Form>
+    <Form className="formSearchBar">
       <Form.Control
         name="newSearch"
         data-testid="search-input"
