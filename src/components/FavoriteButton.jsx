@@ -6,7 +6,8 @@ function FavoriteButton() {
   // const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
   const [heart] = useState(whiteHeartIcon);
 
-  // const saveLocalStorage = () => {
+  const saveLocalStorage = (item) => localStorage
+    .setItem('doneRecipes', JSON.stringify([item]));
   //   const recipes = {
   //     id,
   //     type: 'comidas',
@@ -17,16 +18,12 @@ function FavoriteButton() {
   //     image: getRecipe.strMealThumb,
   //   };
   //   localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
-  // };
-  // setLocalStorageItems(...localStorageItems, recipes);
-
-  // return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
 
   return (
     <button
       type="button"
       data-testid="favorite-btn"
-      // onClick={ saveLocalStorage }
+      onClick={ saveLocalStorage }
     >
       <img src={ heart } alt="Favorite" data-testid="favorite-btn" />
     </button>
