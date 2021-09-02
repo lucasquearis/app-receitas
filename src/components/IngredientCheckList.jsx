@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './IngredientCheckList.css';
 
@@ -11,20 +12,64 @@ const IngredientListHandle = (array) => {
   return obj.filter((n) => (n !== null));
 };
 
-const classHandler = (state, index) => {
-  console.log(state);
-  const fon = state;
-  fon[index] = true;
-  console.log(fon);
-  return fon;
+const UpdateStoraInProgressID = (ID) => {
+  const storageGet = JSON.parse(localStorage.getItem('InProgressIds'));
+  const id = ID;
+  if (storageGet === null) {
+    localStorage.setItem('InProgressIds', JSON.stringify([]));
+    return UpdateStoraInProgressID(ID);
+  }
+  const getid = storageGet.find((n) => n[0] === id);
+  if (getid === undefined) {
+    const addReciToInProg = Object.entries({ [id]: [false] });
+    storageGet.push(addReciToInProg[0]);
+    localStorage.setItem('InProgressIds', JSON.stringify(storageGet));
+    return UpdateStoraInProgressID(ID);
+  }
+  return null;
+};
+
+const SetstoraInProgressID = (ID, indexes) => {
+  const storageGet = JSON.parse(localStorage.getItem('InProgressIds'));
+  const id = ID;
+  const getid = storageGet.find((n) => n[0] === id);
+  if (getid) {
+    storageGet[0][1][indexes] = !storageGet[0][1][indexes];
+    localStorage.setItem('InProgressIds', JSON.stringify(storageGet));
+  }
+};
+
+/*
+Essa função ClassHandle, foi resolvida o conteudo desse link, onde fazendo o spread do state,
+o react visualiza que tem que ser re-renderizada a pagina
+https://stackoverflow.com/questions/56266575/why-is-usestate-not-triggering-re-render
+*/
+
+const classHandler = (state, indexes, ID) => {
+  const neww = [...state];
+  neww[indexes] = !neww[indexes];
+  SetstoraInProgressID(ID, indexes);
+  return neww;
 };
 
 export default function IngredientCheckList(props) {
   const { array } = props;
+  const { id } = useParams();
   const measures = IngredientListHandle(array.measures);
   const ingredients = IngredientListHandle(array.ingredients);
+  UpdateStoraInProgressID(id);
+  const preRender = JSON.parse(localStorage.getItem('InProgressIds'));
   const [CBox, setclass] = useState(ingredients.map(() => false));
-  const checkhandle = CBox;
+  const [CBoxM, setMark] = useState(preRender);
+
+  useEffect(() => {
+    UpdateStoraInProgressID(id);
+  }, [id]);
+
+  useEffect(() => {
+    const storaget = JSON.parse(localStorage.getItem('InProgressIds'));
+    setMark([...storaget[0][1]]);
+  }, [CBox]);
 
   return (
     <>
@@ -32,14 +77,13 @@ export default function IngredientCheckList(props) {
         <li Key={ index }>
           <label
             htmlFor={ `${index}-key` }
-            id="id"
-            className={ CBox[index] ? 'checked' : 'unchecked' }
+            className={ CBoxM[index] ? 'checked' : 'unchecked' }
+            data-testid={ `${index}-ingredient-step` }
           >
             <input
-              data-testid={ `${index}-ingredient-step` }
+              checked={ CBoxM[index] }
               type="checkbox"
-              id={ `${index}-key` }
-              onClick={ () => setclass(classHandler(checkhandle, index)) }
+              onChange={ () => setclass(classHandler(CBox, index, id)) }
             />
             {`${n} ${measures[index]}`}
           </label>
