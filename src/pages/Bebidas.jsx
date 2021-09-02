@@ -45,16 +45,18 @@ function Bebidas() {
     : (
       <>
         <Header titulo="Bebidas" pesquisa="true" />
-        <Categories
-          type="drink"
-          action="filterCategory"
-          list={ drinkCategories }
-          callback={ setDrinkData }
-          setLoading={ setLoading }
-          toggle={ toggleCategory }
-          toggleCallback={ setToggleCategory }
-        />
-        {changeRender(renderDrinks)}
+        <div className="pageComida">
+          <Categories
+            type="drink"
+            action="filterCategory"
+            list={ drinkCategories }
+            callback={ setDrinkData }
+            setLoading={ setLoading }
+            toggle={ toggleCategory }
+            toggleCallback={ setToggleCategory }
+          />
+          {changeRender(renderDrinks)}
+        </div>
         <Footer />
       </>
     );

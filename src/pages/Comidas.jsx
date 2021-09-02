@@ -43,20 +43,22 @@ function Comidas() {
   return loading
     ? <div>Loading... </div>
     : (
-      <div className="pageComida">
+      <>
         <Header titulo="Comidas" pesquisa="true" />
-        <Categories
-          type="food"
-          action="filterCategory"
-          list={ foodCategories }
-          callback={ setFoodData }
-          setLoading={ setLoading }
-          toggle={ toggleCategory }
-          toggleCallback={ setToggleCategory }
-        />
-        {changeRender(renderFoods)}
+        <div className="pageComida">
+          <Categories
+            type="food"
+            action="filterCategory"
+            list={ foodCategories }
+            callback={ setFoodData }
+            setLoading={ setLoading }
+            toggle={ toggleCategory }
+            toggleCallback={ setToggleCategory }
+          />
+          {changeRender(renderFoods)}
+        </div>
         <Footer />
-      </div>
+      </>
     );
 }
 

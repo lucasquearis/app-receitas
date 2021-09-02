@@ -1,11 +1,16 @@
 .footer {
+  align-items: center;
   background-color: lightgray;
   bottom: 0;
   display: flex;
+  height: 8vh;
   justify-content: space-between;
+  max-width: 800px;
   padding: 1vh;
   position: fixed;
-  width: 100%;
+  right: 50vw;
+  transform: translateX(50%);
+  width: 100vw;
   z-index: 99;
 }
 

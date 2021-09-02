@@ -24,7 +24,7 @@ function Explorar() {
   return (
     <div>
       <Header titulo="Explorar" />
-      <main>
+      <main className="pageComida">
         <div className="div">
           <Button
             data-testid="explore-food"

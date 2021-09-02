@@ -62,7 +62,7 @@ function SearchBar() {
     }
   };
   return (
-    <div>
+    <div className="serchBar">
       <input
         data-testid="search-input"
         name="pesquisa"

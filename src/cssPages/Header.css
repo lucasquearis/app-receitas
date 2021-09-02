@@ -2,12 +2,26 @@
   align-items: center;
   color: black;
   display: flex;
-  height: 50px;
+  height: 8vh;
   justify-content: space-evenly;
+  max-width: 800px;
   position: fixed;
+  right: 50vw;
   top: 0;
-  width: 100%;
+  transform: translateX(50%);
+  width: 100vw;
   z-index: 99;
+}
+
+.header h3 {
+  margin: 0;
+}
+
+.header a {
+  border: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
 }
 
 .filtros {
@@ -33,4 +47,13 @@
 
 .foodStyle {
   background-color: #ff470a;
+}
+
+.serchBar {
+  background-color: whitesmoke;
+  border-radius: 0 0 0.8em 0.8em;
+  padding-top: 1vh;
+  position: fixed;
+  top: 8vh;
+  z-index: 3;
 }

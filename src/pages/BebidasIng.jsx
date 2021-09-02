@@ -46,7 +46,7 @@ function BebidasIng() {
   return (
     <div>
       <Header titulo="Explorar Ingredientes" />
-      <main className="div">
+      <main className="pageComida">
         { ingredients.map(({ strIngredient1 }, index) => (
           <Card
             data-testid={ `${index}-ingredient-card` }

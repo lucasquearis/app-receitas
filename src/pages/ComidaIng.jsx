@@ -44,9 +44,9 @@ function ComidaIng() {
   if (redirect.redirect) return <Redirect to="/comidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (
-    <div className="pageComida">
+    <div>
       <Header titulo="Explorar Ingredientes" />
-      <main>
+      <main className="pageComida">
         <div>
           <CardList
             list={ ingredients }

@@ -35,7 +35,7 @@ function ComidasExp() {
   return (
     <div>
       <Header titulo="Explorar Comidas" />
-      <main>
+      <main className="pageComida">
         <div className="div2">
           <Button
             data-testid="explore-by-ingredient"
