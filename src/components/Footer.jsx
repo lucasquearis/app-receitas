@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import '../App.css';
 
 function Footer() {
   return (
@@ -12,6 +13,7 @@ function Footer() {
         bottom: '0',
       } }
       data-testid="footer"
+      className="footer-links"
     >
       <Link to="/bebidas">
         <img
