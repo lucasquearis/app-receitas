@@ -5,6 +5,7 @@ import Card from '../Components/Card';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import RecipesContext from '../Context/RecipesContext';
+import './Comidas.css';
 
 const fetchInitialFoods = async (setComidas) => {
   const maxFood = 12;
@@ -89,13 +90,14 @@ export default function Comidas() {
   );
 
   return (
-    <section>
+    <section className="main-recipe-section">
       <Header title="Comidas" searchIcon />
-      <section>
+      <section className="filter-button">
         {
           categorias.map(
             (categoria, key) => (
               <button
+                className="btn btn-success"
                 key={ key }
                 type="button"
                 data-testid={ `${categoria.strCategory}-category-filter` }
@@ -108,8 +110,10 @@ export default function Comidas() {
           )
         }
       </section>
-      {(recipes && recipeType === 'comida')
-        ? renderRecipes(recipes) : renderRecipes(comidas)}
+      <section className="recipe-section">
+        {(recipes && recipeType === 'comida')
+          ? renderRecipes(recipes) : renderRecipes(comidas)}
+      </section>
       <Footer />
     </section>
   );

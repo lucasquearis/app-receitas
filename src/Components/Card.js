@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Card.css';
 
 export default function Card({ comida, bebida, index, isFood }) {
   if (isFood) {
     return (
-      <section data-testid={ `${index}-recipe-card` }>
+      <section className="card" data-testid={ `${index}-recipe-card` }>
         <img
           data-testid={ `${index}-card-img` }
           src={ comida.strMealThumb }
@@ -16,7 +17,7 @@ export default function Card({ comida, bebida, index, isFood }) {
   }
 
   return (
-    <section data-testid={ `${index}-recipe-card` }>
+    <section className="card" data-testid={ `${index}-recipe-card` }>
       <img
         data-testid={ `${index}-card-img` }
         src={ bebida.strDrinkThumb }

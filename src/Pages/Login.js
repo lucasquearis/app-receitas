@@ -50,6 +50,7 @@ export default function Login() {
           handleChange={ handleChange }
         />
         <button
+          className="button"
           type="button"
           data-testid="login-submit-btn"
           disabled={ validateLogin() }
