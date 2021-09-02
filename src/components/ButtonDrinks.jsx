@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-function ButtonDrinks() {
-  const ido = 178319;
+function ButtonDrinks(props) {
+  const { id } = props;
   // const [none, setNone] = useState(false);
   const setHistory = useHistory();
 
   const handleClick = () => {
-    setHistory.push(`/bebidas/${ido}/in-progress`);
+    setHistory.push(`/bebidas/${id}/in-progress`);
   };
 
   // useEffect(() => {

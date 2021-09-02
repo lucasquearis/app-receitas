@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
+import { useParams } from 'react-router-dom';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
 import ShareButton from '../components/ShareButton';
@@ -21,7 +22,7 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 };
 
 function DrinkDetails() {
-  const id = 178319;
+  const { id } = useParams();
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
@@ -87,7 +88,7 @@ function DrinkDetails() {
         <RecomendationsFoods />
       </div>
       <div>
-        <ButtonDrinks />
+        <ButtonDrinks id={ id } />
       </div>
     </div>
   );

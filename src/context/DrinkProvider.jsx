@@ -6,17 +6,22 @@ import { fetchInicialDrinks, fetchDrinkCategories } from '../services/cocktailAP
 function DrinkProvider({ children }) {
   const [Drinks, setDrinks] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [checkedDrinkOptions, setCheckedDrinkOptions] = useState([]);
 
   useEffect(() => {
     fetchInicialDrinks().then(({ drinks }) => setDrinks(drinks));
     fetchDrinkCategories().then(({ drinks }) => setDrinksCategories(drinks));
   }, []);
+  localStorage.setItem('doneRecipes', JSON.stringify([]));
+  localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
 
   const context = {
     Drinks,
     setDrinks,
     drinksCategories,
     setDrinksCategories,
+    checkedDrinkOptions,
+    setCheckedDrinkOptions,
   };
 
   return (

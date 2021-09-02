@@ -7,6 +7,7 @@ import FoodProvider from './context/FoodProvider';
 import DrinkProvider from './context/DrinkProvider';
 
 function App() {
+  localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
   return (
     <FoodProvider>
       <DrinkProvider>

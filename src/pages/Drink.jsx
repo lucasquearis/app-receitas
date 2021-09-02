@@ -44,7 +44,7 @@ function Drink() {
 
   return (
     <div>
-      <Header titulo="Bebidas" />
+      <Header titulo="Bebidas" showSearch />
       { searchedRecipe.length > 1
         ? searchedDrinkRecipes() : redirectDrink()}
 

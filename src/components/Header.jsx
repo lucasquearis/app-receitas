@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 
 function Header(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const { titulo } = props;
+  const { titulo, showSearch } = props;
 
   const showBar = () => {
     if (showSearchBar) {
@@ -25,13 +25,16 @@ function Header(props) {
           alt="Icone de perfil"
         />
       </Link>
-      <button onClick={ showBar } type="button">
-        <img
-          data-testid="search-top-btn"
-          src={ searchIcon }
-          alt="Icone de busca"
-        />
-      </button>
+      {
+        showSearch ? (
+          <button onClick={ showBar } type="button">
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="Icone de busca"
+            />
+          </button>) : null
+      }
       <h1 data-testid="page-title">{ titulo }</h1>
       <div>
         { showSearchBar ? <SearchBar /> : null }
@@ -42,6 +45,7 @@ function Header(props) {
 
 Header.propTypes = {
   titulo: PropTypes.string.isRequired,
+  showSearch: PropTypes.bool.isRequired,
 };
 
 export default Header;

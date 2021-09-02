@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MyContext from '../context/MyContext';
 import share from '../images/shareIcon.svg';
@@ -37,7 +36,8 @@ function DoneRecipes() {
 
     return (
       <div>
-        { items.map((item, i) => (
+        <Header titulo="Receitas Feitas" showSearch={ false } />
+        { items && items.map((item, i) => (
           <Card
             key={ i }
             data-testid={ `${i}-recipe-card` }
@@ -94,7 +94,7 @@ function DoneRecipes() {
 
   return (
     <div>
-      <Header titulo="Receitas Feitas" />
+      <Header titulo="Receitas Feitas" showSearch={ false } />
       <div>
         <Button
           type="button"
@@ -123,7 +123,6 @@ function DoneRecipes() {
           recipes()
         }
       </div>
-      <Footer />
     </div>
   );
 }
