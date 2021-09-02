@@ -6,6 +6,7 @@ import { fetchInicialDrinks, fetchDrinkCategories } from '../services/cocktailAP
 function DrinkProvider({ children }) {
   const [Drinks, setDrinks] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [checkedDrinkOptions, setCheckedDrinkOptions] = useState([]);
 
   useEffect(() => {
     fetchInicialDrinks().then(({ drinks }) => setDrinks(drinks));
@@ -17,6 +18,8 @@ function DrinkProvider({ children }) {
     setDrinks,
     drinksCategories,
     setDrinksCategories,
+    checkedDrinkOptions,
+    setCheckedDrinkOptions,
   };
 
   return (

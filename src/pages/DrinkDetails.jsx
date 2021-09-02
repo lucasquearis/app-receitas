@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
-import ButtonDrinks from '../components/ButtonDrinks';
 import ShareButton from '../components/ShareButton';
+import ButtonDrinks from '../components/ButtonDrinks';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MyContext from '../context/MyContext';
@@ -112,7 +112,7 @@ function DrinkDetails() {
         <RecomendationsFoods />
       </div>
       <div>
-        <ButtonDrinks />
+        <ButtonDrinks id={ id } />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import ShareButton from '../components/ShareButton';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MyContext from '../context/MyContext';
+import DrinkContext from '../context/DrinkContext';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -28,8 +29,8 @@ function DrinkInProgess() {
   const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
+  const { checkedDrinkOptions, setCheckedDrinkOptions } = useContext(DrinkContext);
   const [measure, setMeasure] = useState([]);
-  const [checkedOptions, setCheckedOptions] = useState('');
   const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
@@ -45,30 +46,23 @@ function DrinkInProgess() {
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
-  }, [getRecipe]);
-
-  const drinkProgress = {
-    meals: {
-      [id]: [...ingredient],
-    },
-  };
+  }, [getRecipe, checkedDrinkOptions]);
 
   function saveLocalStorage({ target }) {
-    const { name, checked } = target;
-    setCheckedOptions({
-      ...checkedOptions,
-      [name]: checked,
-    });
-    localStorage.setItem('inProgressRecipes', JSON.stringify([drinkProgress]));
+    const { checked } = target;
+    setCheckedDrinkOptions([
+      ...checkedDrinkOptions,
+      checked,
+    ]);
   }
 
   useEffect(() => {
     function checkButton() {
-      const check = Object.keys(checkedOptions);
+      const check = Object.keys(checkedDrinkOptions);
       const input = document.querySelectorAll('input');
       if (check.length > 0 && check.length === input.length) {
         const button = document.getElementById('finish-recipe');
@@ -76,7 +70,7 @@ function DrinkInProgess() {
       }
     }
     checkButton();
-  }, [checkedOptions]);
+  }, [checkedDrinkOptions]);
 
   function doneRecipe() {
     let tags = '';
@@ -156,15 +150,23 @@ function DrinkInProgess() {
         <h4>Ingredients</h4>
         <ul>
           { ingredient.map((item, index) => (
-            <li key={ index } onChange="">
+            <li key={ index }>
               <label htmlFor={ `${index}-s` } data-testid={ `${index}-ingredient-step` }>
                 <input
                   name={ `${index}` }
                   id={ `${index}-s` }
-                  type="checkbox"
                   onChange={ saveLocalStorage }
+                  type="checkbox"
+                  value={ `${measure[index]} - ${item}` }
+                  checked={ checkedDrinkOptions[index] }
                 />
-                <span className="marked-checkbox">{ `${measure[index]} - ${item}` }</span>
+                <span
+                  id={ `${index}-value` }
+                  className="marked-checkbox"
+                  aria-hidden="true"
+                >
+                  { `${measure[index]} - ${item}` }
+                </span>
               </label>
             </li>
           ))}

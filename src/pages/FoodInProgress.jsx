@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import MyContext from '../context/MyContext';
 import ShareButton from '../components/ShareButton';
-// import blackHeart from '../images/blackHeartIcon.svg';
+import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -26,6 +26,7 @@ function FoodInProgress() {
   const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
+  const [favorite, setFavorite] = useState(false);
   const [measure, setMeasure] = useState([]);
   const [checkedOptions, setCheckedOptions] = useState('');
   const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
@@ -51,19 +52,12 @@ function FoodInProgress() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const foodProgress = {
-    meals: {
-      [id]: [...ingredient],
-    },
-  };
-
   function saveLocalStorage({ target }) {
     const { name, checked } = target;
     setCheckedOptions({
       ...checkedOptions,
       [name]: checked,
     });
-    localStorage.setItem('inProgressRecipes', JSON.stringify([foodProgress]));
   }
 
   useEffect(() => {
@@ -99,11 +93,16 @@ function FoodInProgress() {
       tags: [tags],
     };
     setLocalStorageItems(...localStorageItems, recipes);
-
+    localStorage.setItem('doneRecipes', []);
     return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
 
   const favorites = () => {
+    if (favorite === false) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
     const recipes = {
       id,
       type: 'comida',
@@ -135,7 +134,7 @@ function FoodInProgress() {
           data-testid="favorite-btn"
           onClick={ favorites }
         >
-          <img src={ whiteHeartIcon } alt="Favorite" />
+          <img src={ favorite ? blackHeart : whiteHeartIcon } alt="Favorite" />
         </button>
         <p data-testid="recipe-category">
           { getRecipe.strCategory }
@@ -170,7 +169,7 @@ function FoodInProgress() {
             className="button-details"
             type="button"
             data-testid="finish-recipe-btn"
-            disabled
+            disabled="true"
           >
             Finalizar Receita
           </button>
