@@ -73,6 +73,11 @@
   margin-bottom: 10px;
 }
 
+.recipe-progress__share-and-favorite-btn-div button {
+  background-color: white;
+  border: none;
+}
+
 .recipe-details__div ul {
   width: 358px;
 }

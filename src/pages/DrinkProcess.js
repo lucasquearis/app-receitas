@@ -124,8 +124,10 @@ export default function DrinkRecipeDetails(props) {
           src={ strDrinkThumb }
           alt={ strDrink }
         />
-        <button data-testid="share-btn" type="button">Compartilhar</button>
-        <button data-testid="favorite-btn" type="button">Favoritar</button>
+        <div className="recipe-progress__share-and-favorite-btn-div">
+          <button data-testid="share-btn" type="button">Compartilhar</button>
+          <button data-testid="favorite-btn" type="button">Favoritar</button>
+        </div>
         <span data-testid="recipe-category">{strAlcoholic}</span>
         <ul className="progress__checkbox-list">
           {listFromKeys[0].map((ingredient, index) => {
@@ -165,6 +167,7 @@ export default function DrinkRecipeDetails(props) {
             data-testid="finish-recipe-btn"
             type="button"
             disabled={ !isFullyChecked }
+            className="recipe-progress__finish-btn"
           >
             Finalizar Receita
           </button>

@@ -116,11 +116,13 @@ export default function MealProcess(props) {
     } = resultMealRecipe[0];
     const listFromKeys = returnListFromKeys(Object.keys(resultMealRecipe[0]));
     return (
-      <>
+      <div className="recipe-details__div">
         <h1 data-testid="recipe-title">{strMeal}</h1>
         <img data-testid="recipe-photo" src={ strMealThumb } alt={ strMeal } />
-        <button data-testid="share-btn" type="button">Compartilhar</button>
-        <button data-testid="favorite-btn" type="button">Favoritar</button>
+        <div className="recipe-progress__share-and-favorite-btn-div">
+          <button data-testid="share-btn" type="button">Compartilhar</button>
+          <button data-testid="favorite-btn" type="button">Favoritar</button>
+        </div>
         <span data-testid="recipe-category">{strCategory}</span>
         <ul className="progress__checkbox-list">
           {listFromKeys[0].map((ingredient, index) => {
@@ -155,16 +157,18 @@ export default function MealProcess(props) {
         </ul>
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
+        <br />
         <Link to="/receitas-feitas">
           <button
             data-testid="finish-recipe-btn"
             type="button"
             disabled={ !isFullyChecked }
+            className="recipe-progress__finish-btn"
           >
             Finalizar Receita
           </button>
         </Link>
-      </>
+      </div>
     );
   }
 
