@@ -40,9 +40,9 @@ function ReceitasFeitas() {
   if (redirect) return <Redirect to={ redirect } />;
   return (
     <>
-      <Header titulo="Receitas Favoritas" pesquisa="false" />
+      <Header titulo="Receitas Favoritas" pesquisa="false" className="textFavorites" />
       <main className="pageRF">
-        <div className="buttons">
+        <div className="btnFavoriteRecipes">
           <button
             name="all"
             type="button"
