@@ -15,6 +15,7 @@ function MyProvider({ children }) {
   const [searchFilter, setSearchFilter] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [searchedRecipe, setSearchedRecipe] = useState([]);
+  const [localStorageItems, setLocalStorageItems] = useState([]);
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -123,6 +124,8 @@ function MyProvider({ children }) {
     filterByPage,
     redirectFood,
     redirectDrink,
+    localStorageItems,
+    setLocalStorageItems,
   };
 
   return (

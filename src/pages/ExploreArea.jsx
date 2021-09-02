@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchArea, fetchMeals, fetchRegionMeal } from '../services/areaAPI';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
+import Footer from '../components/Footer';
 
 function ExploreArea() {
   const [area, setArea] = useState([]);
@@ -70,6 +71,7 @@ function ExploreArea() {
         </select>
         { select() }
       </div>
+      <Footer />
     </>
   );
 }
