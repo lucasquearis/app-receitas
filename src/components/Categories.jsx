@@ -21,14 +21,6 @@ function Categories({
     drink: 'procuraBebida',
   };
 
-  // const changeBtnColor = (rightButton) => {
-  //   const buttonList = document.getElementsByClassName('btnCategorias');
-  //   console.log(buttonList);
-  //   buttonList[].classList.add('btnClicked');
-  //   rightButton.classList.add('btnClicked');
-  //   console.log(buttonList);
-  // };
-
   const handleCategoryButton = async ({ target }) => {
     setFilterByIng(null);
     setLoading(true);
@@ -40,7 +32,6 @@ function Categories({
     setLoading(false);
     const toggleValue = value === toggle ? 'All' : value;
     toggleCallback(toggleValue);
-    // changeBtnColor(target);
   };
 
   console.log(toggle);
