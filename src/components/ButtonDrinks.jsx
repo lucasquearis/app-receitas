@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
-function ButtonDrinks(props) {
-  const { id } = props;
+function ButtonDrinks() {
+  const { pathname } = useLocation();
+  const id = pathname.replace(/([^\d])+/gim, '');
   // const [none, setNone] = useState(false);
   const setHistory = useHistory();
 

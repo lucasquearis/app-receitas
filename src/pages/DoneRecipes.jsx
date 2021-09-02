@@ -42,7 +42,7 @@ function DoneRecipes() {
             data-testid={ `${i}-recipe-card` }
             style={ { width: '10rem' } }
           >
-            <Link to={ `/${item.type}/${item.id}` }>
+            <Link to={ `/${item.type}s/${item.id}` }>
               <Card.Img
                 data-testid={ `${i}-horizontal-image` }
                 variant="top"
