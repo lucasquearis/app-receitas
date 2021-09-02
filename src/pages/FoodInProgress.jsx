@@ -79,7 +79,6 @@ function FoodInProgress() {
   }, [checkedOptions]);
 
   function doneRecipe() {
-    // const checkedInputs = document.querySelectorAll('input');
     let tags = '';
 
     if (tags !== null || tags !== undefined) {
@@ -164,9 +163,6 @@ function FoodInProgress() {
         <h5>Preparation</h5>
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
-      <div>
-        {/* <span data-testid={ `${indexo}-recomendation-card` }>cards</span> */}
-      </div>
       <div>
         <Link to="/receitas-feitas" onClick={ doneRecipe }>
           <button
