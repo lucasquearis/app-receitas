@@ -5,16 +5,17 @@ import Recipes from '../components/Recipes';
 import RecipesContext from '../context/RecipesContext';
 
 function BebidasIngredientes() {
-  const { setSearch, setFilter, food, setFood } = useContext(RecipesContext);
+  const { setSearch, setFilter } = useContext(RecipesContext);
   const onClick = ({ target }) => {
     setSearch('ingrediente');
     setFilter(target.parentNode.innerText);
   };
-  setFood(false);
   return (
     <div>
       <Header title="Explorar Ingredientes" renderSearch={ false } />
-      <Recipes food={ food } ingredientes onClick={ onClick } />
+      <main className="ingredients-container">
+        <Recipes food={ false } ingredientes onClick={ onClick } />
+      </main>
       <Footer />
     </div>
   );

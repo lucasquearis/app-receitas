@@ -1,3 +1,38 @@
 .explore-button {
   width: 300px;
 }
+
+.ingredients-container {
+  display: flex;
+  flex-flow: row wrap;
+  width: 340px;
+}
+
+.card-ingredient {
+  background-color: ivory;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 2% 2.5%;
+  width: 45%;
+}
+
+.card-container-drink {
+  background-color: ivory;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.card-text-drink {
+  color: black;
+  text-align: center;
+}
+
+.card-text-food {
+  align-items: center;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.card-image-food {
+  width: 200px;
+}

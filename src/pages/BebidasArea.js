@@ -1,7 +1,7 @@
 import React from 'react';
 
 function BebidasArea() {
-  return <p>Not Found</p>;
+  return <h3>Not Found</h3>;
 }
 
 export default BebidasArea;

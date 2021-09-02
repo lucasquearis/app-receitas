@@ -49,6 +49,7 @@ const DrinkOrFood = ({ food, ingredientes, onClick }) => {
         }
         onClick={ onClick }
         key={ index }
+        className="card-ingredient"
       >
         <Card
           item={ item }
