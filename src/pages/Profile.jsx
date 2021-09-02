@@ -40,7 +40,7 @@ export default function Profile() {
             onClick={ () => setRoutes({ ...routes, redirectDone: true }) }
             className="profile-btn"
           >
-            <h4>Receitas Feitas</h4>
+            <span className="label-btn">Receitas Feitas</span>
           </button>
           <button
             variant="primary"
@@ -49,7 +49,7 @@ export default function Profile() {
             onClick={ () => setRoutes({ ...routes, redirectFavorites: true }) }
             className="profile-btn"
           >
-            <h4>Receitas Favoritas</h4>
+            <span className="label-btn">Receitas Favoritas</span>
           </button>
           <button
             variant="primary"
@@ -61,7 +61,7 @@ export default function Profile() {
             } }
             className="profile-btn"
           >
-            <h4>Sair</h4>
+            <span className="label-btn">Sair</span>
           </button>
         </div>
       </main>
