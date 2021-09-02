@@ -87,7 +87,7 @@ function ReceitasFeitas() {
                     >
                       { recipe.name }
                     </Card.Title>
-                    <ShareButton className="shareButton" url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
+                    <ShareButton className="btnShare" url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
                   </div>
                   <Card.Subtitle
                     className="mb-2 text-muted"

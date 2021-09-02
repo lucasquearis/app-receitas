@@ -6,7 +6,7 @@ const shareMsgDuration = 2000;
 const copy = require('clipboard-copy');
 
 function ShareButton(data) {
-  const { url, index, shareButton } = data;
+  const { url, index } = data;
   const [showShareMsg, setShowShareMsg] = useState(false);
   const { pathname } = useLocation();
 
@@ -19,9 +19,8 @@ function ShareButton(data) {
 
   return (
     <>
-      <button type="button" onClick={ shareImgClick }>
+      <button type="button" onClick={ shareImgClick } className="btnShare">
         <img
-          className={ shareButton }
           src={ shareIcon }
           alt="Compartilhe o link desta receita"
           data-testid={ `${index}-horizontal-share-btn` }
