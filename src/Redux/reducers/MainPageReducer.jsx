@@ -1,4 +1,5 @@
-import { GET_FOODS_SUCCESS, GET_DRINKS_SUCCESS } from '../actions/apiActions';
+import { GET_FOODS_SUCCESS,
+  GET_DRINKS_SUCCESS } from '../actions/apiActions';
 
 const INICIAL_STATE = {
   meals: [],
