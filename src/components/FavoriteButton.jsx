@@ -32,3 +32,4 @@ function FavoriteButton() {
 // teste
 
 export default FavoriteButton;
+
