@@ -23,7 +23,14 @@ function RecipesDone() {
     }
   }, []);
 
-  function doneCard(card, index) {
+  // const handleClickAll = () => {
+  //   const newMeals = [...meals.slice(0, TWELVE)];
+  //   setRenderedMeals(newMeals);
+  // };
+
+  function doneCard(cards, index) {
+    // const filterFood = cards.filter((card) => card.type === 'comida');
+    // const filterDrink = cards.filter((card) => card.type === 'bebida');
     const {
       area = '',
       alcoholicOrNot = '',
@@ -34,7 +41,7 @@ function RecipesDone() {
       tags,
       type,
       id,
-    } = card;
+    } = cards;
 
     const types = type === 'comida' ? 'comida' : 'bebida';
     if (redirect.should) return <Redirect to={ redirect.path } />;
@@ -100,6 +107,25 @@ function RecipesDone() {
     );
   }
 
+  // { catList.map(({ strCategory }) => (
+  //   <button
+  //     type="button"
+  //     key={ v4() }
+  //     onClick={ ({ target }) => handleClick(target, strCategory) }
+  //     data-testid={ `${strCategory}-category-filter` }
+  //     className={ selected === strCategory ? SELECTED_MEAL : 'not-selected' }
+  //   >
+  //     {strCategory}
+  //   </button>
+  // ))}
+  // <button
+  //   type="button"
+  //   onClick={ handleClickAll }
+  //   data-testid="All-category-filter"
+  //   className={ selected === 'all' ? SELECTED_MEAL : 'not-selected' }
+  // >
+  //   All
+  // </button>
   return (
     <div>
       <HeaderWithoutSearch>Receitas Feitas</HeaderWithoutSearch>
