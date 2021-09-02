@@ -12,6 +12,13 @@ const fetchInitialDrinks = async (setBebidas) => {
   setBebidas(results.filter((result, index) => index < maxDrinks));
 };
 
+const getIngredients = async (ingredientName, setBebidas) => {
+  const searchFoods = 12;
+  const results = await BebidasAPI.buscarBebidasIngrediente(ingredientName);
+  const twelveRecipes = results.filter((_res, index) => index < searchFoods);
+  setBebidas(twelveRecipes);
+};
+
 const mudaFiltro = (event, filtro, setFiltro, setBebidas) => {
   const { target: value } = event;
 
@@ -33,7 +40,7 @@ export default function Bebidas() {
   const [categorias, setCategorias] = useState([]);
   const [filtro, setFiltro] = useState('');
 
-  const { recipes, recipeType } = useContext(RecipesContext);
+  const { recipes, recipeType, ingredient } = useContext(RecipesContext);
   const TWELVE = 12;
 
   const fetchCategorias = async () => {
@@ -50,10 +57,11 @@ export default function Bebidas() {
   };
 
   useEffect(() => {
-    if (bebidas.length <= 0) {
+    if (!ingredient.ing) {
       fetchInitialDrinks(setBebidas);
     }
-  }, [bebidas]);
+    getIngredients(ingredient.nameIng, setBebidas);
+  }, [ingredient]);
   useEffect(() => {
     if (categorias.length <= 0) {
       fetchCategorias();

@@ -51,3 +51,18 @@ export async function buscarBebidaPeloID(id) {
   const response = fetch(ENDPOINT).then((data) => data.json());
   return response;
 }
+
+export async function seachDrinkRandom() {
+  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  console.log(response);
+  return response.drinks;
+}
+
+export async function buscarIngrediente() {
+  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response;
+}

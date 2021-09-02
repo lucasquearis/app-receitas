@@ -12,6 +12,14 @@ const fetchInitialFoods = async (setComidas) => {
   setComidas(results.filter((result, index) => index < maxFood));
 };
 
+// Função que pega as comidas por ingredientes
+const getIngredients = async (ingredientName, setComidas) => {
+  const searchFoods = 12;
+  const results = await ComidasAPI.buscarComidasIngrediente(ingredientName);
+  const twelveRecipes = results.filter((_res, index) => index < searchFoods);
+  setComidas(twelveRecipes);
+};
+
 const mudaFiltro = (event, filtro, setFiltro, setComidas) => {
   const { target: value } = event;
   if (filtro === value.innerText) {
@@ -32,7 +40,7 @@ export default function Comidas() {
   const [categorias, setCategorias] = useState([]);
   const [filtro, setFiltro] = useState('');
 
-  const { recipes, recipeType } = useContext(RecipesContext);
+  const { recipes, recipeType, ingredient } = useContext(RecipesContext);
   const TWELVE = 12;
 
   const fetchCategorias = async () => {
@@ -48,10 +56,12 @@ export default function Comidas() {
     setCategorias(myCategories);
   };
   useEffect(() => {
-    if (comidas.length <= 0) {
+    if (!ingredient.ing) {
       fetchInitialFoods(setComidas);
     }
-  }, [comidas]);
+    getIngredients(ingredient.nameIng, setComidas);
+  }, [ingredient]);
+
   useEffect(() => {
     if (categorias.length <= 0) {
       fetchCategorias();
