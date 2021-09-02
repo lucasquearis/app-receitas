@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Input from '../../components/Input';
+import handleDoneRecipes from '../../helpers/handleDoneRecipes';
 
 export default function ProgressFoodCard({ recipe, id }) {
   const initialState = {
@@ -29,23 +30,23 @@ export default function ProgressFoodCard({ recipe, id }) {
     .filter((ele) => recipe[ele])
     .map((item) => recipe[item]);
 
-  const finishedRecipe = () => {
-    const recipeLength = KeysList.length;
-    const itemsListLength = meals[id].length;
-    const result = recipeLength !== itemsListLength;
-    setBtnState(result);
-  };
-
   useEffect(() => {
+    const finishedRecipe = () => {
+      const recipeLength = KeysList.length;
+      const itemsListLength = meals[id].length;
+      const result = recipeLength !== itemsListLength;
+      setBtnState(result);
+    };
     localStorage.setItem('inProgressRecipes', JSON.stringify(state));
     if (KeysList.length > 0) finishedRecipe();
-  }, [state]);
+  }, [KeysList.length, id, meals, state]);
+
   const handleCheck = ({ target }) => {
     const { name, checked } = target;
-    const variavel = checked
+    const ingredients = checked
       ? [...meals[id], name]
       : meals[id].filter((item) => item !== name);
-    setState({ ...state, meals: { ...state.meals, [id]: variavel } });
+    setState({ ...state, meals: { ...state.meals, [id]: ingredients } });
   };
   if (redirect) {
     return <Redirect to="/receitas-feitas" />;
@@ -81,7 +82,10 @@ export default function ProgressFoodCard({ recipe, id }) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnState }
-        onClick={ () => setRedirect(true) }
+        onClick={ () => {
+          handleDoneRecipes(recipe, true);
+          setRedirect(true);
+        } }
       >
         Complete
       </button>
