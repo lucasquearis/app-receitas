@@ -15,7 +15,7 @@ function DrinksCard() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="food-cards">
       {
         display.length === 0 && drinks && drinks.map((drink, index) => index < doze && (
           <ItemCard

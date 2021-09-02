@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import myContext from '../../context/myContext';
 import '../../styles/Header.css';
 import Footer from '../../components/Footer';
+import '../../styles/ExploreIngredient.css';
 
 function ExploreIngredients() {
   const doze = 12;
@@ -11,43 +12,45 @@ function ExploreIngredients() {
   return (
     <div>
       <Header brand="Explorar Ingredientes" className="img-search" />
-      {
-        foodIngredients && foodIngredients.map((ingredient, index) => index < doze && (
-          <div
-            key={ index }
-            className="div-card"
-            data-testid={ `${index}-ingredient-card` }
-          >
-            <Link
-              to="/comidas"
-              onClick={ (e) => {
-                setFoodIngredientSelected(e.target.id);
-              } }
+      <div className="div-ingredient-card">
+        {
+          foodIngredients && foodIngredients.map((ingredient, index) => index < doze && (
+            <div
+              key={ index }
+              className="div-card"
+              data-testid={ `${index}-ingredient-card` }
             >
-              <button
-                type="button"
-                className="section-card"
-                id={ ingredient.strIngredient }
+              <Link
+                to="/comidas"
+                onClick={ (e) => {
+                  setFoodIngredientSelected(e.target.id);
+                } }
               >
-                <p
-                  className="card-title"
-                  data-testid={ `${index}-card-name` }
+                <button
+                  type="button"
+                  className="section-card"
                   id={ ingredient.strIngredient }
                 >
-                  { ingredient.strIngredient }
-                </p>
-                <img
-                  className="card-img"
-                  src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
-                  alt={ ingredient.strIngredient }
-                  data-testid={ `${index}-card-img` }
-                  id={ ingredient.strIngredient }
-                />
-              </button>
-            </Link>
-          </div>
-        ))
-      }
+                  <p
+                    className="card-title"
+                    data-testid={ `${index}-card-name` }
+                    id={ ingredient.strIngredient }
+                  >
+                    { ingredient.strIngredient }
+                  </p>
+                  <img
+                    className="card-img"
+                    src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                    alt={ ingredient.strIngredient }
+                    data-testid={ `${index}-card-img` }
+                    id={ ingredient.strIngredient }
+                  />
+                </button>
+              </Link>
+            </div>
+          ))
+        }
+      </div>
       <Footer />
     </div>
   );

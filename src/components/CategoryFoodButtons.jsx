@@ -73,63 +73,71 @@ function CategoryFoodButtons() {
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={ handleClickAll }
-        data-testid="All-category-filter"
-      >
-        All
-      </button>
-      {
-        categories && categories.map((category, index) => index < cinco && (
-          <section key={ index } className="category-btn">
-            <button
-              type="button"
-              key={ `${category.strCategory}-category-filter` }
-              data-testid={ `${category.strCategory}-category-filter` }
-              onClick={ () => {
-                handleClick(category.strCategory);
-                if (category.strCategory === lastClick) {
-                  setShowInput(true);
-                } else {
-                  setShowInput(false);
-                }
-              } }
-            >
-              {category.strCategory}
-            </button>
-          </section>
-        ))
-      }
-      {
-        displayFood.map((dish, index) => (
-          <ItemCard
-            title={ dish.strMeal }
-            thumb={ dish.strMealThumb }
-            data-testid={ `${index}-recipe-card` }
-            id={ dish.idMeal }
-            index={ index }
-            key={ index }
-            to={ `/bebidas/${dish.idMeal}` }
-          />
-        ))
-      }
-      {
-        showInput
-          ? <FoodsCard />
-          : categoryClick.meals
-        && categoryClick.meals.map((dish, index) => index < doze && (
-          <ItemCard
-            title={ dish.strMeal }
-            thumb={ dish.strMealThumb }
-            data-testid={ `${index}-recipe-card` }
-            id={ dish.idMeal }
-            index={ index }
-            key={ index }
-            to={ `comidas/${dish.idMeal}` }
-          />
-        ))
-      }
+      <div className="div-categories-wrapper">
+        <section className="category-btn">
+          <button
+            className="each-category-btn"
+            type="button"
+            onClick={ handleClickAll }
+            data-testid="All-category-filter"
+          >
+            All
+          </button>
+        </section>
+        {
+          categories && categories.map((category, index) => index < cinco && (
+            <section key={ index } className="category-btn">
+              <button
+                className="each-category-btn"
+                type="button"
+                key={ `${category.strCategory}-category-filter` }
+                data-testid={ `${category.strCategory}-category-filter` }
+                onClick={ () => {
+                  handleClick(category.strCategory);
+                  if (category.strCategory === lastClick) {
+                    setShowInput(true);
+                  } else {
+                    setShowInput(false);
+                  }
+                } }
+              >
+                {category.strCategory}
+              </button>
+            </section>
+          ))
+        }
+        <div className="food-cards">
+          {
+            displayFood.map((dish, index) => (
+              <ItemCard
+                title={ dish.strMeal }
+                thumb={ dish.strMealThumb }
+                data-testid={ `${index}-recipe-card` }
+                id={ dish.idMeal }
+                index={ index }
+                key={ index }
+                to={ `/bebidas/${dish.idMeal}` }
+              />
+            ))
+          }
+          {
+            showInput
+              ? <FoodsCard />
+              : categoryClick.meals
+            && categoryClick.meals.map((dish, index) => index < doze && (
+              <ItemCard
+                title={ dish.strMeal }
+                thumb={ dish.strMealThumb }
+                data-testid={ `${index}-recipe-card` }
+                id={ dish.idMeal }
+                index={ index }
+                key={ index }
+                to={ `comidas/${dish.idMeal}` }
+              />
+            ))
+          }
+        </div>
+      </div>
     </div>
   );
 }
