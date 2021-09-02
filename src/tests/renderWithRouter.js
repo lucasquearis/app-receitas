@@ -7,13 +7,14 @@ const renderWithRouter = (component, url) => {
   const mockHistory = createMemoryHistory();
   mockHistory.push(url);
 
-  return { ...render(
-    <Router history={ mockHistory }>
-      {component}
-    </Router>,
-  ),
-  history: mockHistory,
-  };
+  return ({
+    ...render(
+      <Router history={ mockHistory }>
+        {component}
+      </Router>,
+    ),
+    history: mockHistory,
+  });
 };
 
 export default renderWithRouter;
