@@ -6,6 +6,7 @@ import DrinksCards from '../../components/DrinksCard';
 import CategoryDrinkBtn from '../../components/CategoryDrinkBtn';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import './style.css';
 
 function Drinks() {
   const dispatch = useDispatch();
@@ -21,18 +22,12 @@ function Drinks() {
     renderSearchBar: true,
   };
 
-  // if (drinks.length === 0 || !drinks) {
-  //   return (
-  //     <h1>Loading</h1>
-  //   );
-  // }
-
   if (redirect) {
     return <Redirect to={ `/bebidas/${redirect}` } />;
   }
 
   return (
-    <>
+    <section className="drink-section">
       <Header { ...headerProps } />
       <div className="recipes-list">
         <CategoryDrinkBtn />
@@ -45,7 +40,7 @@ function Drinks() {
 
       </div>
       <Footer />
-    </>
+    </section>
   );
 }
 

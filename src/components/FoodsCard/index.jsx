@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function FoodsCards(food, foodOrDrink, id) {
   return (
-    <Card key={ food.idMeal } data-testid={ `${id}-recipe-card` }>
+    <Card key={ food.idMeal } data-testid={ `${id}-recipe-card` } className="recipe-card">
       <Link to={ `/${foodOrDrink}/${food.idMeal}` }>
         <CardMedia
           component="img"
@@ -13,6 +13,7 @@ function FoodsCards(food, foodOrDrink, id) {
           image={ food.strMealThumb }
           title={ food.strMeal }
           data-testid={ `${id}-card-img` }
+          className="cardmedia"
         />
       </Link>
       <Typography
@@ -20,6 +21,7 @@ function FoodsCards(food, foodOrDrink, id) {
         variant="h5"
         component="h2"
         data-testid={ `${id}-card-name` }
+        className="card-name"
       >
         { food.strMeal }
       </Typography>

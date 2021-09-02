@@ -22,12 +22,6 @@ function Foods() {
     renderSearchBar: true,
   };
 
-  // if (meals.length === 0 || !meals) {
-  //   return (
-  //     <h1>Loading</h1>
-  //   );
-  // }
-
   if (redirect) {
     return <Redirect to={ `/comidas/${redirect}` } />;
   }

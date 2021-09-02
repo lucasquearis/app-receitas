@@ -33,7 +33,7 @@ function CategoryDrinkBtn() {
   }
 
   return (
-    <div>
+    <section className="recipe-category">
       <Button
         color="secondary"
         variant="contained"
@@ -54,7 +54,7 @@ function CategoryDrinkBtn() {
             { category.strCategory }
           </Button>),
       )}
-    </div>
+    </section>
   );
 }
 

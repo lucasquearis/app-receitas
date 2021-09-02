@@ -35,11 +35,10 @@ function CategoryFoodBtn() {
   return (
     <section className="recipe-category">
       <Button
-        // color="secondary"
+        color="secondary"
         variant="contained"
         data-testid="All-category-filter"
         onClick={ () => handleClick('All') }
-        className="Button"
       >
         All
       </Button>
@@ -53,7 +52,8 @@ function CategoryFoodBtn() {
             onClick={ () => handleClick(category.strCategory) }
           >
             { category.strCategory }
-          </Button>),
+          </Button>
+        ),
       )}
     </section>
   );

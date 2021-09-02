@@ -4,7 +4,11 @@ import { Card, CardMedia, Typography } from '@material-ui/core';
 
 function DrinksCards(drink, foodOrDrink, id) {
   return (
-    <Card key={ drink.idDrink } data-testid={ `${id}-recipe-card` }>
+    <Card
+      key={ drink.idDrink }
+      data-testid={ `${id}-recipe-card` }
+      className="recipe-card"
+    >
       <Link to={ `/${foodOrDrink}/${drink.idDrink}` }>
         <CardMedia
           component="img"
@@ -13,6 +17,7 @@ function DrinksCards(drink, foodOrDrink, id) {
           alt={ drink.strDrink }
           title={ drink.strDrink }
           data-testid={ `${id}-card-img` }
+          className="cardmedia"
         />
       </Link>
       <Typography
@@ -20,6 +25,7 @@ function DrinksCards(drink, foodOrDrink, id) {
         variant="h4"
         component="h2"
         data-testid={ `${id}-card-name` }
+        className="card-name"
       >
         { drink.strDrink }
       </Typography>
