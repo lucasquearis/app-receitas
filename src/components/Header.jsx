@@ -11,10 +11,14 @@ function Header(props) {
     0: 'neutralStyle',
     1: 'drinkStyle',
     2: 'foodStyle',
+    3: 'favoriteAndDone',
   };
-  const { titulo, pesquisa } = props;
+  const numero3 = 3;
+  const { titulo, pesquisa, className } = props;
   const path = Number((useLocation().pathname).includes('bebidas'))
-    + 2 * Number((useLocation().pathname).includes('comidas'));
+    + 2 * Number((useLocation().pathname).includes('comidas'))
+    + numero3 * Number((useLocation().pathname).includes('perfil'));
+
   const [showBar, setShowBar] = useState(false);
   const rederizaBarra = () => (showBar ? setShowBar(false) : setShowBar(true));
 
@@ -38,7 +42,7 @@ function Header(props) {
             alt="imagem de pefil"
           />
         </Link>
-        <h3 data-testid="page-title">{ titulo }</h3>
+        <h3 data-testid="page-title" className={ className }>{ titulo }</h3>
         { pesquisa === 'true' ? iconePesquisa() : null }
       </header>
       <div className="filtros">
@@ -51,6 +55,7 @@ function Header(props) {
 Header.propTypes = {
   pesquisa: PropTypes.string,
   titulo: PropTypes.any,
+  className: PropTypes.string,
 }.isRequired;
 
 export default Header;

@@ -58,15 +58,18 @@ function Detalhes() {
   if (!recipe || !recommended) return <h1>Carregando...</h1>;
 
   return (
-    <>
+    <main className="main-details">
       <img
         src={ recipe[`str${jsonTranslator[type]}Thumb`] }
         alt={ recipeName }
         data-testid="recipe-photo"
+        className="thumbnail-details"
       />
       <h1 data-testid="recipe-title">{recipeName}</h1>
-      <ButtonShare />
-      <ButtonFavorite favoriteObject={ localStrObject } />
+      <div className="btnIcons">
+        <ButtonShare />
+        <ButtonFavorite favoriteObject={ localStrObject } />
+      </div>
       <h2 data-testid="recipe-category">
         {type === 'comidas' ? recipe.strCategory : recipe.strAlcoholic}
       </h2>
@@ -93,7 +96,7 @@ function Detalhes() {
         key={ pathname }
         renderData={ { pathname, id, renderType, completed, localStrObject } }
       />
-    </>
+    </main>
   );
 }
 

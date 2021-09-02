@@ -48,7 +48,7 @@ function Comidas() {
     ? <div>Loading... </div>
     : (
       <>
-        <Header titulo="Comidas" pesquisa="true" />
+        <Header titulo="Comidas" pesquisa="true" className="foodStyle" />
         <div className="pageComida">
           <Categories
             type="food"

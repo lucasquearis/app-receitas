@@ -33,7 +33,7 @@ function ReceitasFeitas() {
   if (redirect) return <Redirect to={ redirect } />;
   return (
     <>
-      <Header titulo="Receitas Feitas" pesquisa="false" />
+      <Header titulo="Receitas Feitas" pesquisa="false" className="textPerfil" />
       <main className="pageRF">
         <div className="btnFavoriteRecipes">
           <button
@@ -87,7 +87,7 @@ function ReceitasFeitas() {
                     >
                       { recipe.name }
                     </Card.Title>
-                    <ShareButton url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
+                    <ShareButton className="btnShare" url={ `http://localhost:3000/${recipe.type}s/${recipe.id}` } index={ index } />
                   </div>
                   <Card.Subtitle
                     className="mb-2 text-muted"
@@ -105,6 +105,7 @@ function ReceitasFeitas() {
                       recipe.tags.length === 0 ? ''
                         : recipe.tags.map((tag, count) => count > minNumber || (
                           <ListGroup.Item
+                            className="listaReceitas"
                             key={ count }
                             data-testid={ `${index}-${tag}-horizontal-tag` }
                           >

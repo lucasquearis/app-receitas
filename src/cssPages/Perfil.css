@@ -4,3 +4,31 @@
   flex-direction: column;
 }
 
+.PerfilContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.PerfilContainer button {
+  border-radius: 10px;
+  margin: 10px;
+  min-height: 7vh;
+  min-width: 15vw;
+}
+
+.email {
+  border: solid black 2px;
+  border-radius: 10px;
+  color: rgb(8, 8, 8);
+  font-size: 2rem;
+  margin-top: 7vh;
+  padding: 5px;
+}
+
+@media only screen and ( min-width : 360px ) {
+
+  .email {
+    font-size: 1.5rem;
+  }
+}

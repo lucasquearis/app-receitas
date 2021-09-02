@@ -48,7 +48,7 @@ function Bebidas() {
     ? <div>Loading... </div>
     : (
       <>
-        <Header titulo="Bebidas" pesquisa="true" />
+        <Header titulo="Bebidas" pesquisa="true" className="drinkStyle" />
         <div className="pageComida">
           <Categories
             type="drink"

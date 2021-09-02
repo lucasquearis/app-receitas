@@ -25,30 +25,32 @@ function Perfil(props) {
 
   return (
     <div>
-      <Header titulo="Perfil" />
+      <Header titulo="Perfil" className="textPerfil" />
       <div className="perfil pageComida">
-        <p data-testid="profile-email">{ email }</p>
-        <button
-          data-testid="profile-done-btn"
-          type="button"
-          onClick={ () => history.push('/receitas-feitas') }
-        >
-          Receitas Feitas
-        </button>
-        <button
-          data-testid="profile-favorite-btn"
-          type="button"
-          onClick={ () => history.push('/receitas-favoritas') }
-        >
-          Receitas Favoritas
-        </button>
-        <button
-          data-testid="profile-logout-btn"
-          type="button"
-          onClick={ () => logOut() }
-        >
-          Sair
-        </button>
+        <p data-testid="profile-email" className="email">{ email }</p>
+        <div className="PerfilContainer">
+          <button
+            data-testid="profile-done-btn"
+            type="button"
+            onClick={ () => history.push('/receitas-feitas') }
+          >
+            Receitas Feitas
+          </button>
+          <button
+            data-testid="profile-favorite-btn"
+            type="button"
+            onClick={ () => history.push('/receitas-favoritas') }
+          >
+            Receitas Favoritas
+          </button>
+          <button
+            data-testid="profile-logout-btn"
+            type="button"
+            onClick={ () => logOut() }
+          >
+            Sair
+          </button>
+        </div>
       </div>
       <Footer />
     </div>

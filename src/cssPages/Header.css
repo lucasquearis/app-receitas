@@ -13,9 +13,12 @@
   z-index: 99;
 }
 
-.header h3 {
-  margin: 0;
+.favoriteAndDone {
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
 }
+
 
 .header a {
   border: none;
@@ -34,7 +37,20 @@
 }
 
 .neutralStyle {
-  background-color: lightgray;
+  background-color: white;
+}
+
+
+.textPerfil {
+  display: inline;
+  margin-right: 200px;
+}
+
+@media only screen and ( max-width : 360px ) {
+
+  .textPerfil {
+    margin-right: 80px;
+  }
 }
 
 .drinkStyle {

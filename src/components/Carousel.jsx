@@ -51,13 +51,15 @@ function Carousel(data) {
   if (redirect) return <Redirect to={ redirect } />;
 
   return (
-    <>
-      { carouselBtn('<', -carouselStep) }
-      { carouselBtn('>', carouselStep) }
+    <section className="carousel">
+      <div className="carouselBtnArea">
+        { carouselBtn('<', -carouselStep) }
+        { carouselBtn('>', carouselStep) }
+      </div>
       <div className="recommendedShow">
         {recommended.map((recipe, index) => recommendedCard(recipe, index))}
       </div>
-    </>
+    </section>
   );
 }
 

@@ -11,7 +11,6 @@ function VideoEmbed(data) {
   return (
     <iframe
       height="480"
-      width="853"
       src={ url.replace('/watch?v=', '/embed/') }
       frameBorder="0"
       allow={ allow }

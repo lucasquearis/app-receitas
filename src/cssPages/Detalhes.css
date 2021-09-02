@@ -1,11 +1,61 @@
+.main-details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.thumbnail-details {
+  align-self: center;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.btnShare, .btnFavorite {
+  background-color: rgb(240, 240, 240);
+  border-radius: 100%;
+  box-shadow: 2px 3px rgba(0, 0, 0, 30%);
+  margin-bottom: 18px;
+  margin-right: 16px;
+  margin-top: 12px;
+  padding: 13px;
+}
+
+.carousel {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.carouselBtnArea {
+  align-self: center;
+}
+
+.carouselBtnArea button {
+  border: none;
+  border-radius: 30px;
+  box-shadow: 2px 3px rgba(0, 0, 0, 30%);
+  font-size: 1.3rem;
+  font-weight: 900;
+  height: 50px;
+  line-height: 0px;
+  margin: 15px;
+  padding: 16px 12px 12px;
+  width: 50px;
+}
+
 .recommendedShow {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .recommendedCard {
-  border: 3px solid black;
   height: 36vw;
+  margin-bottom: 80px;
   width: 30vw;
 }
 
@@ -14,5 +64,34 @@
 }
 
 .recommendedCard img {
+  border-radius: 10px;
+  box-shadow: 2px 3px rgba(0, 0, 0, 30%);
+  margin-bottom: 12px;
   width: 100%;
+}
+
+.recommendedCard p {
+  margin-bottom: 6px;
+}
+
+.redirectBtn {
+  align-self: center;
+  background-color: rgb(214, 214, 214);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 3px rgba(0, 0, 0, 30%);
+  font-size: 0.95rem;
+  font-weight: 900;
+  margin-bottom: 3px;
+  padding: 5px;
+  width: 90%;
+}
+
+@media screen and ( min-width : 361px ) {
+
+  .main-details {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
 }

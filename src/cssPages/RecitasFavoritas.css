@@ -6,20 +6,6 @@
   margin-top: 2vh;
 }
 
-.pageRF {
-  background: url('../images/background5.jpg');
-  background-position: center;
-  background-size: cover;
-  bottom: 0;
-  max-width: 800px;
-  overflow-y: scroll;
-  position: fixed;
-  right: 50vw;
-  top: 8vh;
-  transform: translateX(50%);
-  width: 100vw;
-}
-
 .btnFavoriteRecipes button {
   border-radius: 5px;
   margin: 8% 5px 5%;
