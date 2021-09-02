@@ -2,10 +2,9 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 
-const Card = ({ item, foodOrDrink, index, ingredientes }) => {
-  const { foodData, drinkData, ingredientesData } = useContext(RecipesContext);
-  const test = foodOrDrink === 'Meal' ? foodData : drinkData;
-  if (ingredientes && ingredientesData.length > 0) {
+const Card = ({ item, foodOrDrink, index }) => {
+  const { ingredientData, ingredient } = useContext(RecipesContext);
+  if (ingredient && ingredientData.length > 0) {
     return foodOrDrink === 'Meal' ? (
       <div data-testid={ `${index}-ingredient-card` }>
         <img
@@ -32,14 +31,14 @@ const Card = ({ item, foodOrDrink, index, ingredientes }) => {
           />
           <span
             data-testid={ `${index}-card-name` }
-            value={ item.strIngredient }
+            value={ item.strIngredient1 }
           >
             {item.strIngredient1}
           </span>
         </div>
       );
   }
-  if (test !== null && test.length > 0 && ingredientes === false) {
+  if (ingredient === false) {
     return (
       <div data-testid={ `${index}-recipe-card` }>
         <img
@@ -58,12 +57,10 @@ Card.propTypes = {
   item: PropTypes.objectOf(PropTypes.string),
   foodOrDrink: PropTypes.string.isRequired,
   index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  ingredientes: PropTypes.bool,
 };
 
 Card.defaultProps = {
   item: {},
-  ingredientes: true,
 };
 
 export default Card;

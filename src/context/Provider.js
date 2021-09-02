@@ -2,22 +2,66 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 import generatingFavoriteObj from '../service/auxiliarFunctions';
+import FoodAPI from '../service/foodAPI';
+import drinkAPI from '../service/drinksAPI';
+import drinksFilterAPI from '../service/drinksFilterAPI';
+import foodFilterAPI from '../service/foodFilterAPI';
+import IngredientAPI from '../service/IngredientAPI';
 
 function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [foodData, setFoodData] = useState([]);
   const [drinkData, setDrinkData] = useState([]);
-  const [drinkCategory, setDrinkCategory] = useState([]);
   const [foodCategory, setFoodCategory] = useState([]);
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
   const [searchBar, setSearchBar] = useState(false);
-  const [ingredientesData, setData] = useState([]);
+  const [ingredientData, setIngredientData] = useState([]);
+  const [ingredient, setIngredient] = useState(false);
   const [food, setFood] = useState(true);
   const [mealRandom, setMealRandom] = useState('');
   const [drinkRandom, setDrinkRandom] = useState('');
   const [area, setArea] = useState('British');
   const [areaData, setAreaData] = useState('British');
+  const [drinkCategory, setDrinkCategory] = useState([]);
+
+  const itsMeal = () => {
+    if (ingredient) {
+      IngredientAPI('meal', setIngredientData);
+    }
+    if (filter !== '' && !ingredient) {
+      foodFilterAPI(setFoodData, filter, search);
+    }
+    if ((foodData.length === 0 || filter === '') && !ingredient) {
+      FoodAPI(setFoodData, setFoodCategory, 'search.php?s=');
+    }
+    if (foodCategory.length === 0) {
+      FoodAPI(setFoodData, setFoodCategory, 'list.php?c=list');
+    }
+  };
+
+  const itsDrinks = () => {
+    if (ingredient) {
+      IngredientAPI('cocktail', setIngredientData);
+    }
+    if (filter !== '' && !ingredient) {
+      drinksFilterAPI(search, filter, setDrinkData);
+    }
+    if ((drinkData.length === 0 || filter === '') && !ingredient) {
+      drinkAPI(setDrinkData, setDrinkCategory, 'search.php?s=');
+    }
+    if (drinkCategory.length === 0) {
+      drinkAPI(setDrinkData, setDrinkCategory, 'list.php?c=list');
+    }
+  };
+
+  useEffect(() => {
+    if (food) {
+      itsMeal();
+    } else {
+      itsDrinks();
+    }
+  }, [filter, food, ingredient]);
 
   const favoritingRecipe = (isFav, setIsFav, id, recipe) => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -99,10 +143,8 @@ function Provider({ children }) {
     setFoodData,
     drinkData,
     setDrinkData,
-    drinkCategory,
-    setDrinkCategory,
     foodCategory,
-    setFoodCategory,
+    drinkCategory,
     filter,
     setFilter,
     search,
@@ -116,10 +158,12 @@ function Provider({ children }) {
     favoritingRecipe,
     renderingIngredients,
     verifyingRecipe,
-    ingredientesData,
-    setData,
+    ingredientData,
+    setIngredientData,
     food,
     setFood,
+    setIngredient,
+    ingredient,
   };
 
   return (

@@ -1,32 +1,15 @@
-import { useContext, useEffect } from 'react';
-import RecipesContext from '../context/RecipesContext';
-
-function DrinksAPI(food) {
-  const empthRequest = 'search.php?s=';
-  const { setDrinkData,
-    setDrinkCategory,
-    drinkCategory } = useContext(RecipesContext);
+async function drinkAPI(drinkData, category, request = '') {
   const numberCategory = 5;
-  useEffect(() => {
-    const response = async (request) => {
-      const url = `https://www.thecocktaildb.com/api/json/v1/1/${request}`;
-      await fetch(url).then((packJason) => packJason.json())
-        .then(({ drinks }) => {
-          if (request === empthRequest) {
-            setDrinkData(drinks);
-          } else setDrinkCategory(drinks.slice(0, numberCategory));
-        });
-    };
-    if (!food) {
-      if (drinkCategory.length) {
-        const ent = empthRequest;
-        response(ent);
+  const endNumber = 12;
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/${request}`;
+  await fetch(url).then((packJason) => packJason.json())
+    .then(({ drinks }) => {
+      if (request === 'search.php?s=') {
+        drinkData(drinks.slice(0, endNumber));
       } else {
-        response(empthRequest);
-        response('list.php?c=list');
+        category(drinks.slice(0, numberCategory));
       }
-    }
-  }, [setDrinkData, setDrinkCategory, drinkCategory, food]);
+    });
 }
 
-export default DrinksAPI;
+export default drinkAPI;

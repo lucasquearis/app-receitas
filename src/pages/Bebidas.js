@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router';
-import DrinksAPI from '../service/drinksAPI';
 import Buttons from '../components/categoriesButton';
 import RecipesContext from '../context/RecipesContext';
 import Recipes from '../components/Recipes';
@@ -12,10 +11,19 @@ function Bebidas() {
     drinkCategory,
     drinkData,
     searchBar,
-    filter } = useContext(RecipesContext);
-  if (filter === '') {
-    DrinksAPI(false);
-  }
+    setFood,
+    food,
+    ingredient,
+    setIngredient } = useContext(RecipesContext);
+
+  useEffect(() => {
+    if (food) {
+      setFood(false);
+    } if (ingredient) {
+      setIngredient(false);
+    }
+  }, [food, ingredient, setFood, setIngredient]);
+
   if (drinkData === null) {
     return (
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
