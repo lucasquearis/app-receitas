@@ -3,7 +3,12 @@ import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import ShareBtn from '../components/ShareBtn';
 import useRedirect from '../hooks/useRedirect';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import fuctionSetFavorite from '../utils/functionSetFavorite';
+import functionRenderRecipe from '../utils/functionRenderRecipe';
 
 function DrinksDetails(props) {
   const { match: { params: { id } } } = props;
@@ -11,18 +16,36 @@ function DrinksDetails(props) {
   const [loading, setloading] = useState(true);
   const { shouldRedirect, redirect } = useRedirect();
   const [mealsRecomendation, setmealsRecomendation] = useState([]);
+  const [heartColor, setHeartColor] = useState(false);
+  const [start, setStart] = useState(true);
 
   useEffect(() => {
+    setloading(true);
     const fetchAPI = async () => {
-      const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const results = await fetch(url).then((response) => response.json());
-      setRecipeRender(results.drinks);
+      const END_POINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const response = await fetch(END_POINT);
+      const { drinks } = await response.json();
+      setRecipeRender(drinks);
     };
     fetchAPI();
     setloading(false);
   }, [id]);
 
   useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
+    if (favoriteRecipes.some((item) => item.id === id)) {
+      setHeartColor(true);
+    }
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    if (inProgressRecipes && inProgressRecipes.cocktails[id]) {
+      setStart(false);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    setloading(true);
     const fetchAPIMeals = async () => {
       const SIX = 6;
       const urlDrinks = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -34,33 +57,13 @@ function DrinksDetails(props) {
     setloading(false);
   }, []);
 
-  const renderRecipe = () => {
-    if (recipeRender !== undefined) {
-      const ingredients = recipeRender.map((value) => Object.entries(value)
-        .filter((ingredient) => ingredient[0]
-          .includes('strIngredient') && ingredient[1] && ingredient[1].length
-      && ingredient[1] !== null).map((item) => item[1]));
-
-      const measures = recipeRender.map((value) => Object.entries(value)
-        .filter((ingredient) => ingredient[0]
-          .includes('strMeasure') && ingredient[1] && ingredient[1] !== ' '
-      && ingredient[1] !== null).map((item) => item[1]));
-
-      const ingredientsAndMeasures = ingredients
-        .map((name, index) => ({ nome: name, quantidade: measures[index] }));
-
-      const ingredientsAndMeasuresList = (ingredientsAndMeasures && ingredientsAndMeasures
-        .length && Object.values(ingredientsAndMeasures[0]));
-
-      return ingredientsAndMeasuresList;
-    }
-  };
-
   if (loading) {
     return <h1>...carregando</h1>;
   }
 
-  if (redirect.should) return <Redirect to={ redirect.path } />;
+  if (redirect.should) {
+    return <Redirect to={ redirect.path } />;
+  }
 
   return (
     <div>
@@ -76,25 +79,32 @@ function DrinksDetails(props) {
             />
             <p data-testid="recipe-title">{item.strDrink}</p>
 
-            <Button type="button" data-testid="share-btn">Share</Button>
+            <ShareBtn id={ id } type="bebida" className="btn-share" />
 
             <Button
               variant="danger"
               type="button"
-              data-testid="favorite-btn"
+              className="favorite-btn"
+              onClick={ () => fuctionSetFavorite(recipeRender, id, setHeartColor) }
             >
-              Favorite
+              <img
+                id="fav-btn"
+                src={ heartColor ? blackHeartIcon : whiteHeartIcon }
+                alt="favoritar"
+                data-testid="favorite-btn"
+                className="favorite-img"
+              />
             </Button>
 
             <p data-testid="recipe-category">{item.strAlcoholic}</p>
             <ul>
-              {renderRecipe()[0].map((ingredient, position) => (
+              {functionRenderRecipe(recipeRender)[0].map((ingredient, position) => (
                 <li
                   data-testid={ `${position}-ingredient-name-and-measure` }
                   key={ v4() }
                 >
                   {ingredient}
-                  {renderRecipe()[1][position]}
+                  {functionRenderRecipe(recipeRender)[1][position]}
                 </li>))}
             </ul>
             <p data-testid="instructions">{item.strInstructions}</p>
@@ -128,7 +138,7 @@ function DrinksDetails(props) {
               data-testid="start-recipe-btn"
               onClick={ () => shouldRedirect(`/bebidas/${item.idDrink}/in-progress`) }
             >
-              Start
+              { start ? 'Start' : 'Continuar Receita' }
             </Button>
           </div>
         ))}

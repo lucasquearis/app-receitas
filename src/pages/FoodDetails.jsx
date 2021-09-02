@@ -3,7 +3,12 @@ import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import ShareBtn from '../components/ShareBtn';
 import useRedirect from '../hooks/useRedirect';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import functionSetFavoriteFood from '../utils/functionSetFavoriteFood';
+import functionRenderRecipe from '../utils/functionRenderRecipe';
 
 function FoodDetails(props) {
   const { match: { params: { id } } } = props;
@@ -11,15 +16,32 @@ function FoodDetails(props) {
   const [loading, setloading] = useState(true);
   const { shouldRedirect, redirect } = useRedirect();
   const [drinksRecomendation, setdrinksRecomendation] = useState([]);
+  const [heartColor, setHeartColor] = useState(false);
+  const [start, setStart] = useState(true);
 
   useEffect(() => {
+    setloading(true);
     const fetchAPI = async () => {
-      const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const results = await fetch(url).then((response) => response.json());
-      setRecipeRender(results.meals);
+      const END_POINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const response = await fetch(END_POINT);
+      const { meals } = await response.json();
+      setRecipeRender(meals);
     };
     fetchAPI();
     setloading(false);
+  }, [id]);
+
+  useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
+    if (favoriteRecipes.some((item) => item.id === id)) {
+      setHeartColor(true);
+    }
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    if (inProgressRecipes && inProgressRecipes.meals[id]) {
+      setStart(false);
+    }
   }, [id]);
 
   useEffect(() => {
@@ -34,26 +56,13 @@ function FoodDetails(props) {
     setloading(false);
   }, []);
 
-  const ingredients = recipeRender.map((value) => Object.entries(value)
-    .filter((ingredient) => ingredient[0]
-      .includes('strIngredient') && ingredient[1] && ingredient[1].length
-  && ingredient[1] !== null).map((item) => item[1]));
-
-  const measures = recipeRender.map((value) => Object.entries(value)
-    .filter((ingredient) => ingredient[0]
-      .includes('strMeasure') && ingredient[1] && ingredient[1] !== ' '
-      && ingredient[1] !== null).map((item) => item[1]));
-
-  const ingredientsAndMeasures = ingredients
-    .map((name, index) => ({ nome: name, quantidade: measures[index] }));
-
   if (loading) {
     return <h1>...carregando</h1>;
   }
-  const ingredientsAndMeasuresList = (ingredientsAndMeasures && ingredientsAndMeasures
-    .length && Object.values(ingredientsAndMeasures[0]));
 
-  if (redirect.should) return <Redirect to={ redirect.path } />;
+  if (redirect.should) {
+    return <Redirect to={ redirect.path } />;
+  }
 
   return (
     <div>
@@ -68,30 +77,33 @@ function FoodDetails(props) {
           />
           <p data-testid="recipe-title">{item.strMeal}</p>
 
-          <Button
-            type="button"
-            data-testid="share-btn"
-          >
-            Share
-          </Button>
+          <ShareBtn id={ id } type="comida" className="btn-share" />
 
           <Button
             variant="danger"
             type="button"
-            data-testid="favorite-btn"
+            className="favorite-btn"
+            onClick={ () => functionSetFavoriteFood(recipeRender, id, setHeartColor) }
           >
-            Favorite
+            <img
+              id="fav-btn"
+              src={ heartColor ? blackHeartIcon : whiteHeartIcon }
+              alt="favoritar"
+              data-testid="favorite-btn"
+              className="favorite-img"
+            />
           </Button>
 
           <p data-testid="recipe-category">{item.strCategory}</p>
+
           <ul>
-            {ingredientsAndMeasuresList[0].map((ingredient, position) => (
+            {functionRenderRecipe(recipeRender)[0].map((ingredient, position) => (
               <li
                 data-testid={ `${position}-ingredient-name-and-measure` }
                 key={ v4() }
               >
                 {ingredient}
-                {ingredientsAndMeasuresList[1][position]}
+                {functionRenderRecipe(recipeRender)[1][position]}
               </li>))}
           </ul>
           <p data-testid="instructions">{item.strInstructions}</p>
@@ -125,7 +137,7 @@ function FoodDetails(props) {
             variant="success"
             onClick={ () => shouldRedirect(`/comidas/${item.idMeal}/in-progress`) }
           >
-            Start
+            { start ? 'Start' : 'Continuar Receita' }
           </Button>
         </div>
       ))}

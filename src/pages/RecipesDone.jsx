@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import ShareBtn from '../components/ShareBtn';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import { setLoading } from '../redux/actions/loading';
 import shareIcon from '../images/shareIcon.svg';
 
-function RecipeDone() {
-  const { id } = useParams();
+function RecipesDone() {
   const [recipes, setRecipes] = useState([]);
   const { loading } = useSelector((state) => state);
 
@@ -31,6 +29,7 @@ function RecipeDone() {
       name,
       tags,
       type,
+      id,
     } = card;
 
     const types = type === 'comida' ? 'comidas' : 'bebidas';
@@ -69,6 +68,7 @@ function RecipeDone() {
           { doneDate }
         </p>
         <ShareBtn
+          data-testid={ `${index}-horizontal-share-btn` }
           id={ id }
           type={ types }
         >
@@ -124,4 +124,4 @@ function RecipeDone() {
   );
 }
 
-export default RecipeDone;
+export default RecipesDone;

@@ -9,14 +9,21 @@ function ShareBtn({ id, type }) {
     <div>
       <Button
         type="button"
+        className="btn-share"
         onClick={ () => clipboardCopy(type, id) }
         data-testid="share-btn"
       >
         <img
           src={ shareIcon }
           alt="Share Icon"
+          className="share-icon"
         />
-        <p id={ `copyMessage${id}` }> Compartilhar </p>
+        <p
+          id={ `copyMessage${id}` }
+          className="share-txt"
+        >
+          Compartilhar
+        </p>
       </Button>
     </div>
   );
