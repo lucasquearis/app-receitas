@@ -33,12 +33,13 @@ function CategoryFoodBtn() {
   }
 
   return (
-    <div>
+    <section className="recipe-category">
       <Button
-        color="secondary"
+        // color="secondary"
         variant="contained"
         data-testid="All-category-filter"
         onClick={ () => handleClick('All') }
+        className="Button"
       >
         All
       </Button>
@@ -54,7 +55,7 @@ function CategoryFoodBtn() {
             { category.strCategory }
           </Button>),
       )}
-    </div>
+    </section>
   );
 }
 

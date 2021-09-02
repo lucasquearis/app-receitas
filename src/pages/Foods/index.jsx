@@ -6,6 +6,7 @@ import FoodsCards from '../../components/FoodsCard';
 import CategoryFoodBtn from '../../components/CategoryFoodBtn';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import './style.css';
 
 function Foods() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function Foods() {
   }
 
   return (
-    <>
+    <section className="food-section">
       <Header { ...headerProps } />
       <div className="recipes-list">
         <CategoryFoodBtn />
@@ -43,7 +44,7 @@ function Foods() {
         )}
       </div>
       <Footer />
-    </>
+    </section>
   );
 }
 

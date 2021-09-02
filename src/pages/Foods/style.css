@@ -1,0 +1,11 @@
+.Button {
+  color: black;
+}
+
+.food-section {
+  background-color: white;
+}
+
+.recipe-category {
+  display: flex;
+}

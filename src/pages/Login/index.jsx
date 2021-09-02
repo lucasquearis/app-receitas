@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import './style.css';
 
 function Login({ history }) {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -32,10 +33,10 @@ function Login({ history }) {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <section className="login-page">
+      <h2 className="h2-title">Login</h2>
       <div className="form-group">
-        <label htmlFor="email">
+        <label className="label-login" htmlFor="email">
           Email
           <input
             name="email"
@@ -47,7 +48,7 @@ function Login({ history }) {
           />
         </label>
       </div>
-      <label htmlFor="password">
+      <label className="label-login" htmlFor="password">
         Password
         <input
           name="password"
@@ -70,7 +71,7 @@ function Login({ history }) {
           Entrar
         </button>
       </div>
-    </div>
+    </section>
 
   );
 }
