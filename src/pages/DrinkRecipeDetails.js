@@ -41,7 +41,7 @@ export default function DrinkRecipeDetails(props) {
     setFavoriteRecipe(verifyFavorite);
   }, [id, favoriteRecipe]);
 
-  const handleclickFavButton = (alcoholicOrNot, name, image, category = '') => {
+  const handleFavButton = (alcoholicOrNot, name, image, category = '') => {
     const parseLocalStorage = JSON
       .parse(localStorage
         .getItem('favoriteRecipes')) || [];
@@ -102,7 +102,7 @@ export default function DrinkRecipeDetails(props) {
             className="favorite-btn"
             type="button"
             onClick={
-              () => handleclickFavButton(strAlcoholic, strDrink, strDrinkThumb, strCategory)
+              () => handleFavButton(strAlcoholic, strDrink, strDrinkThumb, strCategory)
             }
           >
             <img

@@ -116,9 +116,14 @@ export default function DrinkRecipeDetails(props) {
     } = resultDrinkRecipe[0];
     const listFromKeys = returnListFromKeys(Object.keys(resultDrinkRecipe[0]));
     return (
-      <>
+      <div className="recipe-details__div">
         <h1 data-testid="recipe-title">{strDrink}</h1>
-        <img data-testid="recipe-photo" src={ strDrinkThumb } alt={ strDrink } />
+        <img
+          data-testid="recipe-photo"
+          className="recipe-details__thumb"
+          src={ strDrinkThumb }
+          alt={ strDrink }
+        />
         <button data-testid="share-btn" type="button">Compartilhar</button>
         <button data-testid="favorite-btn" type="button">Favoritar</button>
         <span data-testid="recipe-category">{strAlcoholic}</span>
@@ -164,7 +169,7 @@ export default function DrinkRecipeDetails(props) {
             Finalizar Receita
           </button>
         </Link>
-      </>
+      </div>
     );
   }
 
