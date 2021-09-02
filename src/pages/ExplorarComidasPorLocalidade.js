@@ -11,14 +11,13 @@ export default function ExplorarComidasPorLocalidade() {
   const [selectableAreas, setSelectableAreas] = useState([]);
   const [area, setArea] = useState('Canadian');
   const { meals, setMeals, resetFilter } = useContext(Context);
-  const amount = 12;
 
   const getMealsByArea = async () => {
     const slicedMeals = await fetchMealsArea();
     setSelectableAreas(slicedMeals);
   };
 
-  const getMealsFilteredByArea = async (area) => {
+  const getMealsFilteredByArea = async () => {
     const slicedFilteredMeals = await filterMealsArea(area);
     setMeals(slicedFilteredMeals);
   };
@@ -29,7 +28,7 @@ export default function ExplorarComidasPorLocalidade() {
 
   useEffect(() => {
     const handleFilter = () => (
-      area === 'All' ? resetFilter() : getMealsFilteredByArea(area)
+      area === 'All' ? resetFilter() : getMealsFilteredByArea()
     );
     handleFilter();
   }, [area, setMeals]);
