@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior';
 import Context from '../context/Context';
-import { fetchMealsArea } from '../services/requestMealsAPI';
+import { fetchMealsArea, filterMealsArea } from '../services/requestMealsAPI';
 import Loading from '../components/Loading';
 import Card from '../components/Card';
 
@@ -18,22 +18,18 @@ export default function ExplorarComidasPorLocalidade() {
     setSelectableAreas(slicedMeals);
   };
 
+  const getMealsFilteredByArea = async (area) => {
+    const slicedFilteredMeals = await filterMealsArea(area);
+    setMeals(slicedFilteredMeals);
+  };
+
   useEffect(() => {
     getMealsByArea();
   }, []);
 
   useEffect(() => {
-    const filterMealsArea = (origem) => {
-      const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${origem}`;
-      return fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          const dataMeals = data.meals;
-          setMeals(dataMeals.slice(dataMeals, amount));
-        });
-    };
     const handleFilter = () => (
-      area === 'All' ? resetFilter() : filterMealsArea(area)
+      area === 'All' ? resetFilter() : getMealsFilteredByArea(area)
     );
     handleFilter();
   }, [area, setMeals]);

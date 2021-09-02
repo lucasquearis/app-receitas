@@ -103,3 +103,13 @@ export const fetchMealsArea = () => {
       return dataMeals.slice(0, limitMealsArea);
     });
 };
+
+export const filterMealsArea = (origem) => {
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${origem}`;
+  return fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const dataMeals = data.meals;
+      return dataMeals.slice(dataMeals, amount);
+    });
+};
