@@ -52,10 +52,19 @@ class Search extends Component {
 
   async handleFoods() {
     const { radio, text } = this.state;
-    const { setSearchIngredient,
-      setSearchLetter, setSearchNome } = this.props;
+
+    const {
+      setSearchIngredient,
+      setSearchLetter,
+      setSearchNome,
+    } = this.props;
+
     if (radio === 'Ingrediente') {
       await setSearchIngredient(text);
+      const { nome } = this.props;
+      if (nome.length === 1) {
+        this.setState({ redirect: true, id: nome[0].idMeal });
+      }
     } else if (radio === 'Nome') {
       await setSearchNome(text);
       const { nome } = this.props;
@@ -64,6 +73,10 @@ class Search extends Component {
       }
     } else if (radio === 'Primeira letra' && text.length === 1) {
       await setSearchLetter(text);
+      const { nome } = this.props;
+      if (nome.length === 1) {
+        this.setState({ redirect: true, id: nome[0].idMeal });
+      }
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
@@ -132,6 +145,7 @@ class Search extends Component {
         { redirect && window.location.pathname === '/comidas'
           ? <Redirect to={ `/comidas/${id}` } />
           : redirect && <Redirect to={ `/bebidas/${id}` } /> }
+
       </div>
     );
   }

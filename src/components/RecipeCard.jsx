@@ -10,9 +10,7 @@ class RecipeCard extends Component {
     return (
 
       <Link className="remove-line" to={ `/comidas/${id}` }>
-        <div
-          className="col"
-        >
+        <div className="row">
           <div
             className="card card-list-food"
             data-testid={ `${index}-recipe-card` }
