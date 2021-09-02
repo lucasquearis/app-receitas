@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
-import AppContext from '../context/AppContext';
-import './Header.css';
-import { useHeaderTitle } from '../hooks';
+import AppContext from '../../context/AppContext';
+import { useHeaderTitle } from '../../hooks';
+import { HeaderWrapper } from './style';
+import profileIcon from '../../images/profileIcon.svg';
+import searchIcon from '../../images/searchIcon.svg';
 
 function Header({ showSearchBtn }) { //
   const [redirect, setRedirect] = useState(false); // esse estado local começa como false.
@@ -18,7 +18,7 @@ function Header({ showSearchBtn }) { //
     return <Redirect to="/perfil" />;
   }
   return (
-    <header>
+    <HeaderWrapper>
       <input
         type="image"
         data-testid="profile-top-btn"
@@ -38,7 +38,7 @@ function Header({ showSearchBtn }) { //
         src={ searchIcon }
         onClick={ () => setShowBar(!showBar) }
       /> }
-    </header> // ao clicar no ícone de busca, vai mudar o estado Global.
+    </HeaderWrapper> // ao clicar no ícone de busca, vai mudar o estado Global.
   );
 }
 Header.propTypes = {
