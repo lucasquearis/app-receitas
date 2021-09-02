@@ -8,7 +8,7 @@ import MyContext from '../context/MyContext';
 import '../cssPages/Refeicao.css';
 
 function Comidas() {
-  const { filterByIng, renderFoods, dataMeals } = useContext(MyContext);
+  const { filterByIng, renderFoods, dataMeals, setFilterByIng } = useContext(MyContext);
   const [foodData, setFoodData] = useState({});
   const [foodCategories, setFoodCategories] = useState([]);
   const [food, loading, categories, setLoading] = HookComidas();
@@ -22,6 +22,10 @@ function Comidas() {
       categories.meals,
     );
   }, [food, categories]);
+
+  useEffect(() => () => {
+    setFilterByIng(null);
+  }, [setFilterByIng]);
 
   const changeRender = (condition) => {
     if (condition) {
