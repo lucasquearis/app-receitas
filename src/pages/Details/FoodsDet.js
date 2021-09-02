@@ -23,7 +23,7 @@ function FoodDetails() {
   const [recipesFood, setRecipesFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  // const [recipesRecommendations, setRecipesRecommendations] = useState([]);
+  const [recipesRecommendations, setRecipesRecommendations] = useState([]);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const { id } = useParams();
