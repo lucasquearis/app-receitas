@@ -7,7 +7,7 @@ function ItemCard(props) {
   const { title, thumb, id, index, to } = props;
   return (
     <div className="div-card" data-testid={ `${index}-recipe-card` }>
-      <Link to={ to }>
+      <Link style={ { textDecoration: 'none' } } to={ to }>
         <section className="section-card">
           <span
             className="card-title"

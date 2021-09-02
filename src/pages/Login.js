@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { loginAction } from '../redux/actions/mainActions';
 import useLocalStorage from '../helpers/useLocalStorage';
 import Input from '../components/Input';
+import testImg from '../images/testImg.jpeg';
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -40,31 +41,43 @@ function Login(props) {
   };
 
   return (
-    <div className="login__page">
-      <Input
-        type="text"
-        text="Email: "
-        value={ email }
-        onChange={ (e) => setEmail(e.target.value) }
-        dataTestId="email-input"
-        id="email"
+    <div className="login">
+      <form className="login__form">
+        <h1>Larica na Mesa</h1>
+
+        <Input
+          type="text"
+          text="Email: "
+          value={ email }
+          onChange={ (e) => setEmail(e.target.value) }
+          dataTestId="email-input"
+          id="email"
+        />
+
+        <Input
+          type="password"
+          text="Senha: "
+          value={ password }
+          onChange={ (e) => setPassword(e.target.value) }
+          dataTestId="password-input"
+          id="password"
+        />
+
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          className="login__button"
+          disabled={ !isEligible() }
+          onClick={ (e) => submitLogin(e) }
+        >
+          Entrar
+        </button>
+      </form>
+      <img
+        src={ testImg }
+        alt="logo"
+        className="login__img"
       />
-      <Input
-        type="password"
-        text="Senha: "
-        value={ password }
-        onChange={ (e) => setPassword(e.target.value) }
-        dataTestId="password-input"
-        id="password"
-      />
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ !isEligible() }
-        onClick={ (e) => submitLogin(e) }
-      >
-        Entrar
-      </button>
     </div>
   );
 }

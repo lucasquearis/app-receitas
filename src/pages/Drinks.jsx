@@ -20,7 +20,7 @@ function Drinks(props) {
 
   useEffect(() => {
     if (search.drinks === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (search.drinks) {
       oneElementDetails();
@@ -38,7 +38,6 @@ function Drinks(props) {
       />
 
       <CategoryDrinkButtons />
-
       <main>
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard
           title={ drink.strDrink }

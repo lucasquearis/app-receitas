@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import myContext from '../context/myContext';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
@@ -9,9 +10,11 @@ import '../styles/Footer.css';
 
 function Footer() {
   const dispatch = useDispatch();
+  const { removeDisplayList } = useContext(myContext);
 
   const handleClick = () => {
     dispatch(clearSearch());
+    removeDisplayList();
   };
 
   return (
