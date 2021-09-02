@@ -47,10 +47,10 @@ class DetailsDrink extends Component {
               ({ strDrink, strCategory, strDrinkThumb, strAlcoholic }, index) => (
                 <div key={ index }>
                   <div>
-                    <img 
-                      data-testid="recipe-photo" 
-                      src={ strDrinkThumb } 
-                      alt="foto" 
+                    <img
+                      data-testid="recipe-photo"
+                      src={ strDrinkThumb }
+                      alt="foto"
                       width="600 px"
                     />
                   </div>
