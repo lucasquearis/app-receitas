@@ -19,7 +19,7 @@ function FoodIngredientesExplore() {
   return (
     <>
       {data
-        .filter((_, item) => (item < MNumber))
+        .slice(0, MNumber)
         .map(({ strIngredient, idIngredient }, index) => (
           <div
             key={ idIngredient }

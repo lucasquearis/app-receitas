@@ -13,6 +13,7 @@ import DoneRecipes from './Pages/DoneRecipes';
 import FoodDetails from './Pages/FoodDetails';
 import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import DrinksDetails from './Pages/DrinksDetails';
+import NotFound from './Pages/NotFound';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       <Route exact path="/bebidas" component={ DrinkMainPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
+      <Route exact path="*" component={ NotFound } />
     </Switch>
   );
 }
