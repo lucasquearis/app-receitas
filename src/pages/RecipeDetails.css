@@ -6,9 +6,14 @@
 }
 
 .card {
+  background-color: #5c5c5c;
+  box-shadow: 5px 5px 5px #ebfc02;
+  color: rgb(0, 0, 0);
   display: inline-block;
+  font-weight: 700;
   height: 250px;
   margin: 5px 5px 50px 10px;
+  text-shadow: 0.1em 0.1em 0.2em #ebfc02;
   width: 45vw;
 }
 
@@ -26,8 +31,30 @@
   width: 100vw;
 } */
 
+.btnShareHeart {
+  align-items:flex-start;
+  display: flex;
+  width: 30%;
+  margin: auto;
+}
+
+.btnShareHeart {
+  margin-top: 5px;
+}
+
 .contentBtn {
   display: flex;
   justify-content: center;
   position: relative;
+  margin-bottom: 0;
+}
+
+.btn {
+  width: 100%;
+}
+
+.divPaiTitleButton {
+  background-color: #5c5c5c;
+  display: flex;
+  margin: 10px;
 }

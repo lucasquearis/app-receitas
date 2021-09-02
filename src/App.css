@@ -166,8 +166,27 @@ footer {
   background-color: #ef6a07;
 }
 
-.mainDetail h2, p {
+.mainDetail h1, h2, span, li {
   color: white;
+}
+
+.nameDrinkMealsDetails {
+  align-items: center;
+  background-color: #5c5c5c;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding-bottom: 15px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.recomendadosMealDrinks {
+  background-color: #5c5c5c;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding-bottom: 10px;
+  text-shadow: 0.1em 0.1em 0.2em black;
 }
 
 @keyframes shake {

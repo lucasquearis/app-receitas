@@ -62,36 +62,38 @@ export default function DrinksDetails(props) {
         alt="element"
         data-testid="recipe-photo"
       />
-      <div className="btnShareHeart">
-        {
-          clipBoardCop ? (
-            <p>Link copiado!</p>
-          ) : null
-        }
-        <button
-          type="button"
-          onClick={ clipboard }
-        >
-          <img src={ ShareIcon } data-testid="share-btn" alt="share" />
-        </button>
-        <button
-          type="button"
-          onClick={ favorite }
-        >
+      <div className="divPaiTitleButton">
+        <div className="nameDrinkMealsDetails">
+          <h1 data-testid="recipe-title">{drink}</h1>
+          <span data-testid="recipe-category">{`${category} (${alcoholic})`}</span>
+        </div>
+        <div className="btnShareHeart">
           {
-            btnFavorite ? (
-              <img src={ BleckHeart } data-testid="favorite-btn" alt="favorit" />
-            ) : (
-              <img src={ WhiteHeart } data-testid="favorite-btn" alt="No Favorit" />
-            )
+            clipBoardCop ? (
+              <p>Link copiado!</p>
+            ) : null
           }
-        </button>
+          <button
+            type="button"
+            onClick={ clipboard }
+          >
+            <img src={ ShareIcon } data-testid="share-btn" alt="share" />
+          </button>
+          <button
+            type="button"
+            onClick={ favorite }
+          >
+            {
+              btnFavorite ? (
+                <img src={ BleckHeart } data-testid="favorite-btn" alt="favorit" />
+              ) : (
+                <img src={ WhiteHeart } data-testid="favorite-btn" alt="No Favorit" />
+              )
+            }
+          </button>
+        </div>
       </div>
-      <div>
-        <h1 data-testid="recipe-title">{drink}</h1>
-        <p data-testid="recipe-category">{`${category} (${alcoholic})`}</p>
-      </div>
-      <div>
+      <div className="nameDrinkMealsDetails">
         <h2>Ingredients</h2>
         <ul>
           {
@@ -106,11 +108,11 @@ export default function DrinksDetails(props) {
           }
         </ul>
       </div>
-      <div>
+      <div className="nameDrinkMealsDetails">
         <h2>Introdutions</h2>
         <span className="instructions" data-testid="instructions">{instructions}</span>
       </div>
-      <h2>Redomendadas</h2>
+      <h2 className="recomendadosMealDrinks">Redomendadas</h2>
       <div
         className="cardRecipeMeals"
       >
@@ -128,7 +130,7 @@ export default function DrinksDetails(props) {
               />
               <div>
                 <p>{item.strCategory}</p>
-                <h2 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h2>
+                <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
               </div>
             </div>
           ))
@@ -143,7 +145,7 @@ export default function DrinksDetails(props) {
               onClick={ getButton }
               data-testid="start-recipe-btn"
             >
-              <p>Continuar Receita</p>
+              Continuar Receita
             </Button>
           ) : (
             <Button

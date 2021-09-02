@@ -52,7 +52,7 @@ export default function FoodDetails(props) {
     return (<Redirect to={ `/comidas/${id}/in-progress` } />);
   }
   return (
-    <main mainDetail>
+    <main className="mainDetail">
       <img
         width="100%"
         height="250"
@@ -60,33 +60,37 @@ export default function FoodDetails(props) {
         alt="element"
         data-testid="recipe-photo"
       />
-      <div className="btnShareHeart">
-        {
-          clipBoardCop ? (
-            <p>Link copiado!</p>
-          ) : null
-        }
-        <button
-          type="button"
-          onClick={ clipboard }
-        >
-          <img src={ ShareIcon } data-testid="share-btn" alt="share" />
-        </button>
-        {
-          btnFavorite ? (
-            <button type="button" onClick={ favorite }>
-              <img src={ BleckHeartIcon } data-testid="favorite-btn" alt="favorit" />
-            </button>
-          ) : (
-            <button type="button" onClick={ favorite }>
-              <img src={ WhiteHeartIcon } data-testid="favorite-btn" alt="No Favorit" />
-            </button>
-          )
-        }
+      <div className="divPaiTitleButton">
+        <div className="nameDrinkMealsDetails">
+          <h1 data-testid="recipe-title">{meal}</h1>
+          <span data-testid="recipe-category">{category}</span>
+        </div>
+        <div className="btnShareHeart">
+          {
+            clipBoardCop ? (
+              <p>Link copiado!</p>
+            ) : null
+          }
+          <button
+            type="button"
+            onClick={ clipboard }
+          >
+            <img src={ ShareIcon } data-testid="share-btn" alt="share" />
+          </button>
+          {
+            btnFavorite ? (
+              <button type="button" onClick={ favorite }>
+                <img src={ BleckHeartIcon } data-testid="favorite-btn" alt="favorit" />
+              </button>
+            ) : (
+              <button type="button" onClick={ favorite }>
+                <img src={ WhiteHeartIcon } data-testid="favorite-btn" alt="No Favorit" />
+              </button>
+            )
+          }
+        </div>
       </div>
-      <h1 data-testid="recipe-title">{meal}</h1>
-      <p data-testid="recipe-category">{category}</p>
-      <div>
+      <div className="nameDrinkMealsDetails">
         <h2>Ingredients</h2>
         <ul>
           {
@@ -101,7 +105,7 @@ export default function FoodDetails(props) {
           }
         </ul>
       </div>
-      <div>
+      <div className="nameDrinkMealsDetails">
         <h2>Introdutions</h2>
         <span className="instructions" data-testid="instructions">{instructions}</span>
       </div>
@@ -115,7 +119,7 @@ export default function FoodDetails(props) {
           Veja O Video
         </a>
       </div>
-      <h2>Redomendadas</h2>
+      <h2 className="recomendadosMealDrinks">Redomendadas</h2>
       <div
         className="cardRecipeMeals"
       >
@@ -133,7 +137,7 @@ export default function FoodDetails(props) {
                   alt={ item.strDrink }
                 />
                 <p>{item.strCategory}</p>
-                <h2 data-testid={ `${index}-recomendation-title` }>{item.strDrink}</h2>
+                <h3 data-testid={ `${index}-recomendation-title` }>{item.strDrink}</h3>
               </div>
             </div>
           ))
