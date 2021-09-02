@@ -63,6 +63,7 @@ function DrinkRecipeDetails(props) {
         <ShareButton
           id={ id }
           setLinkShare={ setLinkShare }
+          type="bebidas"
         />
         { linkShare && 'Link copiado!' }
         <FavoriteButton

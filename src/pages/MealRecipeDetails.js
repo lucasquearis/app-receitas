@@ -78,6 +78,7 @@ export default function MealRecipeDetails(props) {
         <ShareButton
           id={ id }
           setLinkShare={ setLinkShare }
+          type="comidas"
         />
         { linkShare && 'Link copiado!' }
         <span>Categoria: </span>
