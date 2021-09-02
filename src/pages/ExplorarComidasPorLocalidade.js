@@ -52,6 +52,7 @@ export default function ExplorarComidasPorLocalidade() {
           data-testid="explore-by-area-dropdown"
           onChange={ ({ target: { value } }) => setArea(value) }
         >
+          <option data-testid="All-option" value="All">All</option>
           {(selectableAreas !== []) && selectableAreas.map(({ strArea }, index) => (
             <option key={ index } data-testid={ `${strArea}-option` } value={ strArea }>
               {strArea}
