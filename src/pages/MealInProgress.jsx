@@ -5,6 +5,7 @@ import fetchAPI from '../services/fetchAPI';
 import '../styles/InProgress.css';
 import { updateInProgressStorage,
   initialInProgressStorage } from '../services/inProgressStorage';
+import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 
 export default function MealInProgress(props) {
   const [meal, setMeal] = useState({});
@@ -37,14 +38,6 @@ export default function MealInProgress(props) {
     updateInProgressStorage('meals', id, checkedSteps);
   }, [checkedSteps]);
 
-  function share() {
-    console.log('compartilhando');
-  }
-
-  function favoriteIt() {
-    console.log('favoritando');
-  }
-
   function finish() {
     setRedirect(true);
   }
@@ -69,6 +62,17 @@ export default function MealInProgress(props) {
 
   if (loading) return <span>Loading...</span>;
   if (redirect) return <Redirect to="/receitas-feitas" />;
+
+  const obj = {
+    id: meal.idMeal,
+    type: 'comida',
+    area: meal.strArea,
+    category: meal.strCategory,
+    alcoholicOrNot: '',
+    name: meal.strMeal,
+    image: meal.strMealThumb,
+  };
+
   return (
     <div className="in-progress-div">
       <img
@@ -78,12 +82,7 @@ export default function MealInProgress(props) {
         className="recipe-photo"
       />
       <div data-testid="recipe-title">{ meal.strMeal }</div>
-      <button type="button" data-testid="share-btn" onClick={ share }>
-        Compartilhar
-      </button>
-      <button type="button" data-testid="favorite-btn" onClick={ favoriteIt }>
-        Favoritar
-      </button>
+      <DetailsShareFaveBtns details={ obj } />
       <div data-testid="recipe-category">{ meal.strCategory }</div>
       <ul className="lista">
         { mNI('strMeasure').map((objectKey, index) => (
