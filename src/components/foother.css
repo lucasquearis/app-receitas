@@ -7,7 +7,7 @@
   position: fixed;
   width: 100%;
 }
-.barra-de-navegacao { 
+.barra-de-navegacao {
   display: flex;
   justify-content: space-around;
 }
