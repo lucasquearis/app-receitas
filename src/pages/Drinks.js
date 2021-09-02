@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import Header from '../components/Header';
-import DrinksCard from '../components/DrinksCard';
+import RecipeCard from '../components/RecipeCard';
 import DrinksContext from '../context/DrinksContext';
 import FooterMenu from '../components/FooterMenu';
 import ButtonCategoriesDrinks from '../components/ButtonCategoriesDrinks';
@@ -20,24 +20,27 @@ const Drinks = () => {
   }
 
   return (
-    <div className="container">
-      <Header title="Bebidas" />
+    <div className="root-drinks">
+      <div className="container">
+        <Header title="Bebidas" />
 
-      <ButtonCategoriesDrinks categories={ categoriesDrinks } />
+        <ButtonCategoriesDrinks categories={ categoriesDrinks } />
 
-      <div className="drinks-container">
-        {drinks && drinks.slice(0, DRINKS)
-          .map((drink, index) => (
-            <Link key={ index } to={ `/bebidas/${drink.idDrink}` }>
-              <DrinksCard
-                key={ index }
-                index={ index }
-                drink={ drink }
-              />
-            </Link>
-          ))}
+        <div className="drinks-container">
+          {drinks && drinks.slice(0, DRINKS)
+            .map((drink, index) => (
+              <Link key={ index } to={ `/bebidas/${drink.idDrink}` }>
+                <RecipeCard
+                  key={ index }
+                  index={ index }
+                  strRecipeThumb={ drink.strDrinkThumb }
+                  strRecipe={ drink.strDrink }
+                />
+              </Link>
+            ))}
+        </div>
+        <FooterMenu />
       </div>
-      <FooterMenu />
     </div>
   );
 };

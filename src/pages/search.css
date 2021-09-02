@@ -1,14 +1,18 @@
 .container-search {
+  background: url('../images//recipes-back4.jpg') top;
+  background-size: inherit;
   margin: 0 auto;
   width: 360px;
+  height: 100vh;
 }
 
 .header {
-  background-color: #9e9a9a;
+  background-color: #e74e1f;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin-bottom: 16px;
-  padding: 8px;
+  padding: 0;
 }
 
 .header button {
@@ -22,9 +26,10 @@
 }
 
 .header p {
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 600;
   margin-bottom: 0;
-  margin-left: 80px;
+  margin-left: 70px;
 }
 
 .buttons {
@@ -35,9 +40,11 @@
 }
 
 .buttons button {
+  background-color: #e74e1f;
   border: 0;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 32px;
   padding: 8px;
   width: 240px;

@@ -20,24 +20,27 @@ const Recipes = () => {
   }
 
   return (
-    <div className="container">
-      <Header title="Comidas" />
+    <div className="root-recipes">
+      <div className="container">
+        <Header title="Comidas" />
 
-      <ButtonCategories categories={ categoriesMeal } />
+        <ButtonCategories categories={ categoriesMeal } />
 
-      <div className="recipe-container">
-        {foods && foods.slice(0, RECIPES)
-          .map((recipe, index) => (
-            <Link key={ index } to={ `/comidas/${recipe.idMeal}` }>
-              <RecipeCard
-                key={ index }
-                index={ index }
-                recipe={ recipe }
-              />
-            </Link>
-          ))}
+        <div className="recipe-container">
+          {foods && foods.slice(0, RECIPES)
+            .map((recipe, index) => (
+              <Link key={ index } to={ `/comidas/${recipe.idMeal}` }>
+                <RecipeCard
+                  key={ index }
+                  index={ index }
+                  strRecipeThumb={ recipe.strMealThumb }
+                  strRecipe={ recipe.strMeal }
+                />
+              </Link>
+            ))}
+        </div>
+        <FooterMenu />
       </div>
-      <FooterMenu />
     </div>
   );
 };

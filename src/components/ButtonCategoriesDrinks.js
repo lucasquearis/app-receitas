@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import DrinksContext from '../context/DrinksContext';
 import { fetchDrinksByCategoryName, fetchDrinksApi } from '../services/fetchDrinksApi';
-import './buttonsCategory.css';
+import './buttonsDrinks.css';
 
 const ButtonCategoriesDrinks = ({ categories }) => {
   const { setDrinks, setDrinksByCategories } = useContext(DrinksContext);
@@ -39,10 +39,10 @@ const ButtonCategoriesDrinks = ({ categories }) => {
   };
 
   return (
-    <div className="buttons-container">
+    <div className="buttons-drinks-container">
       {categories.map((category, index) => (
         index < CATEGORIES ? (
-          <div className="check-filter">
+          <div className="check-drinks-filter">
             <label htmlFor="category-buttons" key={ index }>
               <input
                 name="category-buttons"
@@ -59,7 +59,7 @@ const ButtonCategoriesDrinks = ({ categories }) => {
           </div>
         ) : null
       ))}
-      <label htmlFor="category-buttons">
+      <label className="all-categories" htmlFor="category-buttons">
         <input
           type="checkbox"
           name="category-buttons"

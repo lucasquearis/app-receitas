@@ -20,8 +20,8 @@ const SearchDetailsFood = () => {
   }, [turnRandom, setRandomDrinks]);
 
   return (
-    <div>
-      <header>
+    <div className="container-search">
+      <header className="header">
         <Link to="/perfil">
           <button type="button">
             <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />

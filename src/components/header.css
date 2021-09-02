@@ -4,6 +4,7 @@
 }
 
 .header-container .header {
+  background-color: #e74e1f;
   display: flex;
   justify-content: space-between;
   width: 100%;

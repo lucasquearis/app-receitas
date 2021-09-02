@@ -1,26 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RecipeCard = ({ recipe, index }) => (
+const RecipeCard = ({ index, strRecipeThumb, strRecipe }) => (
   <div
     className="recipe-card"
     data-testid={ `${index}-recipe-card` }
   >
     <img
-      src={ recipe.strMealThumb }
+      src={ strRecipeThumb }
       alt="recipe"
       data-testid={ `${index}-card-img` }
     />
-    <p data-testid={ `${index}-card-name` }>{ recipe.strMeal }</p>
+    <p data-testid={ `${index}-card-name` }>{ strRecipe }</p>
   </div>
 );
 
 RecipeCard.propTypes = {
-  recipe: PropTypes.shape({
-    idMeal: PropTypes.string.isRequired,
-    strMealThumb: PropTypes.string.isRequired,
-    strMeal: PropTypes.string.isRequired,
-  }).isRequired,
+  strRecipeThumb: PropTypes.string.isRequired,
+  strRecipe: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
 };
 

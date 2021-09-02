@@ -59,7 +59,7 @@ const ButtonCategories = ({ categories }) => {
           </div>
         ) : null
       ))}
-      <label htmlFor="category-buttons">
+      <label className="all-categories" htmlFor="category-buttons">
         <input
           type="checkbox"
           name="category-buttons"

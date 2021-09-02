@@ -74,15 +74,17 @@
 } */
 
 .footer {
-  background-color: yellow;
+  background-color: #e74e1f;
   bottom: 0;
   margin: 0 auto;
   margin-top: 100vh;
+  padding: 4px 0;
   position: fixed;
   text-align: center;
   width: 360px;
 }
 
 .footer input {
-  margin: 0 40px;
+  margin: 0 42px;
+  width: 35px;
 }

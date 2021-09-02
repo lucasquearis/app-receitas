@@ -1,4 +1,5 @@
 .container {
+  padding: 0;
   width: 360px;
 }
 
@@ -6,6 +7,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 16px;
+  margin-bottom: 48px;
+  margin-top: 24px;
+  width: 360px;
+}
+
+.root-recipes {
+  background: url('../images//recipes-back4.jpg') no-repeat top;
+  background-size: cover;
+  margin: 0 auto;
   width: 360px;
 }
