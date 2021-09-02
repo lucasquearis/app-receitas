@@ -13,12 +13,14 @@ function Explore() {
       <Header title="Explorar" searchButton={ false } />
       <div className="explore-buttons">
         <Btn
+          className="default-button"
           name="Explorar Comidas"
           data-testid="explore-food"
           variant="contained"
           onClick={ () => history.push('/explorar/comidas') }
         />
         <Btn
+          className="default-button"
           name="Explorar Bebidas"
           data-testid="explore-drinks"
           variant="contained"
