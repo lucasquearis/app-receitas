@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
+import '../styles/Header.css';
 import ItemCard from '../components/ItemCard';
 import Footer from '../components/Footer';
 import CategoryDrinkButtons from '../components/CategoryDrinkButtons';

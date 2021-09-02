@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
-function ShareButton({ index, pathname }) {
+function ShareButton({ index, address, pathname }) {
   const [copied, setCopied] = useState(false);
-
+  const localHostAddress = 'http://localhost:3000';
   const handleClick = () => {
-    copy(`${pathname}`);
+    copy(`${localHostAddress}${address || pathname}`);
     setCopied(true);
-    console.log(pathname);
   };
 
   return (

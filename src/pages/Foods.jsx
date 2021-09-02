@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
 import Header from '../components/Header';
 import searchIcon from '../images/searchIcon.svg';
+import '../styles/Header.css';
 import Footer from '../components/Footer';
 import ItemCard from '../components/ItemCard';
+// import FoodsCard from '../components/FoodsCard';
 import CategoryFoodButtons from '../components/CategoryFoodButtons';
+import '../styles/Footer.css';
 
 function Foods(props) {
   const doze = 12;

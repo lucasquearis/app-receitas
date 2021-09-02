@@ -52,13 +52,12 @@ function RecipeDetails(props) {
       {
         recipe
           ? (
-            <div>
+            <section className="section-card">
               <img
                 className="card-img"
                 src={ recipe[enType][0][`str${enCasedType}Thumb`] }
                 alt="Foto do Prato"
                 data-testid="recipe-photo"
-                style={ { width: '100%' } }
               />
 
               <h1
@@ -99,13 +98,15 @@ function RecipeDetails(props) {
                 type === 'comidas'
                 && <Iframe link={ recipe[enType][0].strYoutube } />
               }
+
               { recipe && <Suggestions type={ type } /> }
+
               <StartRecipeButton
                 id={ id }
                 type={ type }
                 enType={ enType }
               />
-            </div>
+            </section>
           )
           : (
             <object
