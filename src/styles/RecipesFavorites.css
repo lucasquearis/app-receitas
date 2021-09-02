@@ -7,6 +7,7 @@ p {
 }
 
 .fav-card {
+  border-radius: 5px;
   box-shadow: 5px 6px 5px #cecece;
   display: flex;
   flex-direction: row;

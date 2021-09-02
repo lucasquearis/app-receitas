@@ -1,7 +1,6 @@
 header {
   background-color: #eb6424;
   display: block;
-  padding: 5px;
 }
 
 input {
@@ -9,6 +8,7 @@ input {
 }
 
 .header-div {
+  padding: 5px;
   display: flex;
   flex-direction: row wrap;
   justify-content: space-between;
