@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { actionRequestItems, actionRequestSuccess } from '../../actions';
 import { fetchApi } from '../SearchBar/utils';
+import './CategoriesFilterButtons.css';
 
 const CategoriesFilterButtons = () => {
   const [categories, setCategories] = useState([]);
@@ -64,6 +65,7 @@ const CategoriesFilterButtons = () => {
   return (
     <div>
       <button
+        className="buttonFilter"
         type="button"
         data-testid="All-category-filter"
         onClick={ () => { fetchItems(apiUrl); } }
@@ -75,6 +77,7 @@ const CategoriesFilterButtons = () => {
           const name = Object.values(categorie);
           return (
             <button
+              className="buttonFilter"
               key={ index }
               data-testid={ `${categorie.strCategory}-category-filter` }
               type="button"

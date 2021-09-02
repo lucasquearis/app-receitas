@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './CardList.css';
 
 const CardsList = ({ array, teste }) => {
   if (array !== undefined) {
@@ -27,16 +28,23 @@ const CardsList = ({ array, teste }) => {
       <div>
         { newArray.map((obj, index) => (
           <div
+            className="cardListDiv"
             key={ index }
             data-testid={ `${index}-${teste}` }
           >
             <Link to={ `/${path}/${obj[`id${type}`]}` }>
               <img
+                className="cardListImg"
                 data-testid={ `${index}-card-img` }
                 src={ obj[`str${type}Thumb`] }
                 alt={ obj[`str${type}`] }
               />
-              <h3 data-testid={ `${index}-card-name` }>{ obj[`str${type}`] }</h3>
+              <h3
+                className="CardListText"
+                data-testid={ `${index}-card-name` }
+              >
+                { obj[`str${type}`] }
+              </h3>
             </Link>
           </div>
         )) }

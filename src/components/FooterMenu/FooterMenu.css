@@ -3,6 +3,7 @@ footer {
   left: 0;
   position: fixed;
   width: 100%;
+  background-color: rgb(204, 201, 201);
 }
 
 .buttons-footer {

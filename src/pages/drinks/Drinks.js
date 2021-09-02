@@ -37,7 +37,7 @@ const Drinks = () => {
       <div>
         <Header>Comidas</Header>
         <CategoriesFilterButtons />
-        <CardsList array={ ingredient } teste="recipe-card" />
+        <CardsList array={ ingredient } teste="recipe-card" className="cardList" />
       </div>
     );
   }
