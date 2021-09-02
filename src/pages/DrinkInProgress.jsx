@@ -63,7 +63,7 @@ function DrinkInProgess() {
       ...checkedOptions,
       [name]: checked,
     });
-    localStorage.setItem('inProgressRecipes', JSON.stringify([drinkProgress]));
+    localStorage.setItem('inProgressRecipes', JSON.stringify(drinkProgress));
   }
 
   useEffect(() => {

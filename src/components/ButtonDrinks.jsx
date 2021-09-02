@@ -6,7 +6,9 @@ function ButtonDrinks() {
   const { pathname } = useLocation();
   const id = pathname.replace(/([^\d])+/gim, '');
   const [none, setNone] = useState(false);
+  const [inStorage, setInStorage] = useState(false);
   const setHistory = useHistory();
+  const type = 'cocktails';
 
   const handleClick = () => {
     setHistory.push(`/bebidas/${id}/in-progress`);
@@ -20,6 +22,12 @@ function ButtonDrinks() {
     }
   }, [id]);
 
+  useEffect(() => {
+    setInStorage(localStorage.getItem('inProgressRecipes')
+      && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes'))[
+        type]).some((drinks) => drinks === id));
+  }, [id]);
+
   return (
     <div className="div-button-details">
       <button
@@ -29,8 +37,7 @@ function ButtonDrinks() {
         data-testid="start-recipe-btn"
         onClick={ handleClick }
       >
-        Iniciar Receita
-        {/* {inProgress ? 'Continuar Receita' : 'Iniciar Receita'} */}
+        {inStorage ? 'Continuar Receita' : 'Iniciar Receita'}
       </button>
     </div>
   );

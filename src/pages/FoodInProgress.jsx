@@ -63,7 +63,7 @@ function FoodInProgress() {
       ...checkedOptions,
       [name]: checked,
     });
-    localStorage.setItem('inProgressRecipes', JSON.stringify([foodProgress]));
+    localStorage.setItem('inProgressRecipes', JSON.stringify(foodProgress));
   }
 
   useEffect(() => {
