@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { getFromLocalStorage } from '../../helpers';
 
+import { Main, Form, Title, Button } from './style';
+
 function Login() {
   const {
     setCocktailsToken,
@@ -48,40 +50,39 @@ function Login() {
   };
 
   return (
-    <div>
-      <div>
-        <form>
-          <label htmlFor="email-input">
-            <input
-              data-testid="email-input"
-              id="email"
-              type="text"
-              placeholder="Email"
-              onChange={ handleChange }
-            />
-          </label>
-          <label htmlFor="password-input">
-            <input
-              data-testid="password-input"
-              id="password"
-              type="password"
-              placeholder="Senha"
-              onChange={ handleChange }
-            />
-          </label>
-          <Link to="/comidas">
-            <button
-              data-testid="login-submit-btn"
-              type="button"
-              onClick={ handleClick }
-              disabled={ verifyLogin() }
-            >
-              Entrar
-            </button>
-          </Link>
-        </form>
-      </div>
-    </div>
+    <Main>
+      <Title>Recipe App</Title>
+      <Form>
+        <label htmlFor="email-input">
+          <input
+            data-testid="email-input"
+            id="email"
+            type="text"
+            placeholder="Email"
+            onChange={ handleChange }
+          />
+        </label>
+        <label htmlFor="password-input">
+          <input
+            data-testid="password-input"
+            id="password"
+            type="password"
+            placeholder="Senha"
+            onChange={ handleChange }
+          />
+        </label>
+        <Link to="/comidas">
+          <Button
+            data-testid="login-submit-btn"
+            type="button"
+            onClick={ handleClick }
+            disabled={ verifyLogin() }
+          >
+            Entrar
+          </Button>
+        </Link>
+      </Form>
+    </Main>
   );
 }
 
