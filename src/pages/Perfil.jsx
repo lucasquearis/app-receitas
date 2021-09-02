@@ -26,7 +26,7 @@ function Perfil(props) {
   return (
     <div>
       <Header titulo="Perfil" />
-      <div className="perfil">
+      <div className="perfil pageComida">
         <p data-testid="profile-email">{ email }</p>
         <button
           data-testid="profile-done-btn"
