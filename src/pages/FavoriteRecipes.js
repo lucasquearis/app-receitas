@@ -44,17 +44,24 @@ export default function FavoriteRecipes() {
         </Link>
 
         <div className="done__card-infos">
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}` }
-          </span>
-          <Link
-            data-testid={ `${index}-horizontal-name` }
-            to={ `/${type}s/${id}` }
-          >
-            { name }
-          </Link>
-          <div className="favorite__card-share">
-
+          <div className="done__card-share">
+            <span data-testid={ `${index}-horizontal-top-text` }>
+              { `${area} - ${category}` }
+            </span>
+            <Link
+              data-testid={ `${index}-horizontal-name` }
+              to={ `/${type}s/${id}` }
+            >
+              { name }
+            </Link>
+            <input
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              className="icon-favorite"
+              type="image"
+              src={ blackHeartIcon }
+              alt="Favorite"
+              onClick={ () => removeFavorites(id) }
+            />
             <button
               onClick={ () => {
                 copy(`http://localhost:3000/${type}s/${id}`);
@@ -68,15 +75,7 @@ export default function FavoriteRecipes() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-            { linkShare && 'Link copiado!' }
-            <input
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              className="icon-favorite"
-              type="image"
-              src={ blackHeartIcon }
-              alt="Favorite"
-              onClick={ () => removeFavorites(id) }
-            />
+            { linkShare && <span className="favorite__copy-span">Link copiado!</span>}
           </div>
         </div>
       </div>
@@ -105,6 +104,14 @@ export default function FavoriteRecipes() {
             { name }
           </Link>
           <div className="favorite__card-share">
+            <input
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              className="icon-favorite"
+              type="image"
+              src={ blackHeartIcon }
+              alt="Favorite"
+              onClick={ () => removeFavorites(id) }
+            />
             <button
               onClick={ () => {
                 copy(`http://localhost:3000/${type}s/${id}`);
@@ -118,15 +125,7 @@ export default function FavoriteRecipes() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-            { linkShare && 'Link copiado!' }
-            <input
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              className="icon-favorite"
-              type="image"
-              src={ blackHeartIcon }
-              alt="Favorite"
-              onClick={ () => removeFavorites(id) }
-            />
+            { linkShare && <span className="favorite__copy-span">Link copiado!</span>}
           </div>
         </div>
       </div>
@@ -145,8 +144,8 @@ export default function FavoriteRecipes() {
 
   return (
     <div>
-      <HeaderNoSearch title="Receitas Favoritas" />
-      <section className="favorite__filter-btn-section">
+      <HeaderNoSearch title="Favoritos" />
+      <section className="favorite__category-container ">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -173,7 +172,7 @@ export default function FavoriteRecipes() {
         </button>
 
       </section>
-      <section>
+      <section className="favorite__cards-div">
         { fillCardsMealsAndDrinks() }
       </section>
     </div>

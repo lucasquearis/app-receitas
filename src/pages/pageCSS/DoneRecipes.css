@@ -39,3 +39,35 @@
 .icon-share, .icon-favorite {
   width: 1.25rem;
 }
+
+.favorite__category-container {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  gap: 10px;
+  height: 60px;
+  justify-content: space-evenly;
+  margin: 80px auto 20px;
+  width: 100%;
+}
+
+.favorite__category-container button {
+  background-color: white;
+  border: none;
+  color: #492b22;
+  font-family: Dancing Script , cursive;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.favorite__cards-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite__copy-span {
+  font-family: sans-serif;
+  font-size: 18px;
+  margin: 5px 0 0 5px;
+}
