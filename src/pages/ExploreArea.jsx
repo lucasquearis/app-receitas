@@ -49,7 +49,7 @@ function ExploreArea() {
 
   return (
     <>
-      <Header titulo="Explorar Origem" />
+      <Header titulo="Explorar Origem" showSearch />
       <div>
         <select
           data-testid="explore-by-area-dropdown"

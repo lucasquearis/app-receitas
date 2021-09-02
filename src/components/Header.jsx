@@ -43,6 +43,7 @@ function Header(props) {
               />
             </button>) : null
         }
+        { showSearchBar ? <SearchBar /> : null }
       </div>
       <h1
         data-testid="page-title"
@@ -50,9 +51,6 @@ function Header(props) {
       >
         { titulo }
       </h1>
-      <div>
-        { showSearchBar ? <SearchBar /> : null }
-      </div>
     </header>
   );
 }
