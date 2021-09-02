@@ -6,7 +6,7 @@ function Ingredients() {
   return (
     <div>
       <div className="ingredients-container">
-        <h3 className="title-ingrendients">Ingredients</h3>
+        <h3 className="title-ingredients">Ingredients</h3>
         <ul className="list">
           {
             lists.ingredients.map((item, key) => (
