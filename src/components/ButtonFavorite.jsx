@@ -4,7 +4,6 @@ import favoriteIconFull from '../images/blackHeartIcon.svg';
 import '../cssPages/ButtonFavorite.css';
 
 function ButtonFavorite(data) {
-  console.log(data);
   const { favoriteObject } = data;
   const { id: idRecipe } = favoriteObject;
   const favorites = localStorage.getItem('favoriteRecipes')

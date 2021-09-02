@@ -27,9 +27,11 @@ function Detalhes() {
   useEffect(() => {
     const detailsFetchs = async (params) => {
       const [kind, action, value, size, callback] = params;
+      console.log(kind, action, value, size, callback);
       const apiResult = await fetchFoods(kind, action, value);
       const { meals, drinks } = apiResult;
       let result = meals || drinks;
+      console.log(result);
       result = (size > 1) ? result.slice(0, size) : result[0];
       callback(result);
     };
@@ -70,7 +72,10 @@ function Detalhes() {
       </h2>
       <br />
       <h3>Ingredients</h3>
-      <IngredientsList data={ { id, type, renderType, recipe, setCompleted } } />
+      <IngredientsList
+        key={ pathname }
+        data={ { id, type, renderType, recipe, setCompleted } }
+      />
       <br />
       <h3>Instructions</h3>
       <p data-testid="instructions">
@@ -79,7 +84,10 @@ function Detalhes() {
       <br />
       <VideoEmbed videoData={ { url, recipeName } } />
       <br />
-      <Carousel recipes={ recommended } />
+      <Carousel
+        key={ pathname }
+        recipes={ { recommended, recommendedType } }
+      />
       <br />
       <ButtonRedirect
         key={ pathname }

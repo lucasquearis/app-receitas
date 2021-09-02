@@ -1,20 +1,25 @@
 /* eslint-disable no-magic-numbers */
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import '../cssPages/Detalhes.css';
 
 const carouselStep = 1;
 
 function Carousel(data) {
-  const { recipes } = data;
+  console.log(data);
+  const { recipes: { recommended, recommendedType } } = data;
   const [showIndex, setShowIndex] = useState(0);
+  const [redirect, setRedirect] = useState(null);
 
   const recommendedCard = (recipe, index) => {
     const hideCard = Math.floor(index / 2) !== showIndex ? ' hideCard' : '';
     return (
-      <div
+      <button
         className={ `recommendedCard${hideCard}` }
         data-testid={ `${index}-recomendation-card` }
         key={ index }
+        type="button"
+        onClick={ () => setRedirect(`/${recommendedType}/${recipe.idMeal || recipe.idDrink}`) }
       >
         <img
           src={ recipe.strMealThumb || recipe.strDrinkThumb }
@@ -26,7 +31,7 @@ function Carousel(data) {
         <h3 data-testid={ `${index}-recomendation-title` }>
           {recipe.strMeal || recipe.strDrink}
         </h3>
-      </div>
+      </button>
     );
   };
 
@@ -43,12 +48,14 @@ function Carousel(data) {
     </button>
   );
 
+  if (redirect) return <Redirect to={ redirect } />;
+
   return (
     <>
       { carouselBtn('<', -carouselStep) }
       { carouselBtn('>', carouselStep) }
       <div className="recommendedShow">
-        {recipes.map((recipe, index) => recommendedCard(recipe, index))}
+        {recommended.map((recipe, index) => recommendedCard(recipe, index))}
       </div>
     </>
   );
