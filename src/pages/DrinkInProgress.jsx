@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import '../styles/RecipeInProgress.css';
 import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
 import ShareButton from '../components/ShareButton';
-import FavoriteButton from '../components/FavoriteButton';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import MyContext from '../context/MyContext';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -28,6 +30,7 @@ function DrinkInProgess() {
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [checkedOptions, setCheckedOptions] = useState('');
+  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -102,18 +105,35 @@ function DrinkInProgess() {
       category: getRecipe.strCategory,
       alcoholicOrNot,
       name: getRecipe.strDrink,
-      image: getRecipe.strMealThumb,
+      image: getRecipe.strDrinkThumb,
       doneDate: moment().format('DD-MM-YYYY'),
       tags: [tags],
     };
+    setLocalStorageItems(...localStorageItems, recipes);
 
-    function setLocalStorage(recipe) {
-      const locStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-      locStorage.push(recipe);
-      localStorage.setItem('doneRecipes', JSON.stringify(locStorage));
-    }
-    return setLocalStorage(recipes);
+    return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
+    // function setLocalStorage(recipe) {
+    //   const locStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    //   locStorage.push(recipe);
+    //   localStorage.setItem('doneRecipes', JSON.stringify(locStorage));
+    // }
+    // return setLocalStorage(recipes);
   }
+
+  const favorites = () => {
+    const recipes = {
+      id,
+      type: 'bebida',
+      area: '',
+      category: getRecipe.strCategory,
+      alcoholicOrNot: getRecipe.strAlcoholic,
+      name: getRecipe.strDrink,
+      image: getRecipe.strDrinkThumb,
+    };
+    setLocalStorageItems(...localStorageItems, recipes);
+    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+  };
+
   return (
     <div>
       <div>
@@ -127,7 +147,13 @@ function DrinkInProgess() {
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <ShareButton />
-        <FavoriteButton />
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          onClick={ favorites }
+        >
+          <img src={ whiteHeartIcon } alt="Favorite" />
+        </button>
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
@@ -165,7 +191,7 @@ function DrinkInProgess() {
             className="button-details"
             type="button"
             data-testid="finish-recipe-btn"
-            disabled="true"
+            disabled
           >
             Finalizar Receita
           </button>

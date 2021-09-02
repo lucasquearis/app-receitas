@@ -54,11 +54,11 @@ function DrinkDetails() {
     const recipes = {
       id,
       type: 'bebida',
-      area: getRecipe.strArea,
+      area: '',
       category: getRecipe.strCategory,
-      alcoholicOrNot: '',
-      name: getRecipe.strMeal,
-      image: getRecipe.strMealThumb,
+      alcoholicOrNot: getRecipe.strAlcoholic,
+      name: getRecipe.strDrink,
+      image: getRecipe.strDrinkThumb,
     };
     setLocalStorageItems(...localStorageItems, recipes);
     return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
