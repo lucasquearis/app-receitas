@@ -42,11 +42,11 @@
 }
 
 .main-containe button {
-  position: fixed;
   background-color: var(--L-orange);
   border: none;
   bottom: 0;
   color: black;
   margin: 0 0 0 10px;
+  position: fixed;
   width: 95%;
 }

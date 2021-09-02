@@ -1,6 +1,8 @@
 :root {
+
   --D-orange: #ff6d00;
-  --L-orange: #ffaa00;
+
+  --L-orange: #fa0;
 }
 
 * {
@@ -29,6 +31,7 @@
 }
 
 @keyframes is-rotating {
+
   to {
     transform: rotate(1turn);
   }
