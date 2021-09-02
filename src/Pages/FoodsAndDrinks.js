@@ -1,15 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Card from 'react-bootstrap/Card';
 import { Redirect, useLocation } from 'react-router-dom';
 import AppContext from '../Context/AppContext';
 import useFilter from '../hooks/useFilter';
 import useFilterIngredient from '../hooks/useFilterIngredient';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
 import '../styles/foods-drinks.css';
 
 function FoodsAndDrinks() {
-  const { globalState } = useContext(AppContext);
-  const { meals, drinks, mealsCategories, drinksCategories } = globalState;
+  const { globalState, setLoadSearch } = useContext(AppContext);
+  const { meals, drinks, mealsCategories, drinksCategories,
+    loadSearch, search } = globalState;
   const { pathname } = useLocation();
   const { filter, setFilter, category, setCategory } = useFilter();
   const { itemsByIngredient, setItemsByIngredient } = useFilterIngredient();
@@ -19,6 +21,7 @@ function FoodsAndDrinks() {
   let type = 'Meal';
   let cards = meals;
   let buttons = mealsCategories;
+  let pag = 'Comidas';
 
   useEffect(() => {
     if (itemsByIngredient.length !== 0) {
@@ -31,11 +34,12 @@ function FoodsAndDrinks() {
     type = 'Drink';
     cards = drinks;
     buttons = drinksCategories;
+    pag = 'Bebidas';
   }
 
   if (!cards.length || !buttons.length) {
     return (
-      <Spinner animation="border" role="status">
+      <Spinner className="loading" animation="border" role="status">
         <span className="visually-hidden"> </span>
       </Spinner>
     );
@@ -49,6 +53,7 @@ function FoodsAndDrinks() {
     } else {
       setFilter(value);
     }
+    setLoadSearch(false);
   };
 
   const getButtons = () => {
@@ -74,36 +79,40 @@ function FoodsAndDrinks() {
   };
 
   const fillCards = () => {
+    let cardList = loadSearch ? search : category;
+
     if (!category.length) return <span>Nenhum resultado encontrado</span>;
 
-    const cardList = category.map((item, index) => (
-      <Card
+    cardList = cardList.map((item, index) => (
+      <button
         data-testid={ `${index}-recipe-card` }
+        type="button"
         key={ index }
-        className="main-card"
-        style={ { width: '8.75rem' } }
+        className="horizontal-card"
         onClick={ () => redirectToRecipe(item[`id${type}`]) }
       >
-        <Card.Img
+        <img
           data-testid={ `${index}-card-img` }
+          className="img-horizontal-card"
           alt={ item[`str${type}`] }
-          variant="top"
           src={ item[`str${type}Thumb`] }
         />
-        <Card.Body>
-          <Card.Title
+        <div className="horizontal-card-infos">
+          <span
             data-testid={ `${index}-card-name` }
+            className="name-horizontal-card"
           >
             { item[`str${type}`] }
-          </Card.Title>
-        </Card.Body>
-      </Card>
+          </span>
+        </div>
+      </button>
     ));
     return cardList;
   };
 
   return (
     <div className="pag-foods-drinks">
+      <Header titlePage={ pag } btSearch />
       { redirect && <Redirect to={ `${pathname}/${id}` } /> }
       <section className="container-button-filter">
         <button
@@ -121,6 +130,7 @@ function FoodsAndDrinks() {
       <section className="container-cards">
         { fillCards() }
       </section>
+      <Footer />
     </div>
   );
 }

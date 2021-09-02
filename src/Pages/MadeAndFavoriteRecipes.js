@@ -4,6 +4,7 @@ import copy from 'clipboard-copy';
 import useFilterMadeAndFavorite from '../hooks/useFilterMadeAndFavorite';
 import CardMade from '../components/CardMade';
 import CardFavorite from '../components/CardFavorite';
+import Header from '../Component/Header';
 import '../styles/made-favorite-recipes.css';
 
 function MadeAndFavoriteRecipes() {
@@ -13,6 +14,11 @@ function MadeAndFavoriteRecipes() {
   const [shareId, setShareId] = useState('');
   const types = ['all', 'food', 'drink', 'All', 'Food', 'Drinks'];
   const numButtons = 3;
+  let pag = 'Receitas Feitas';
+
+  if (pathname === '/receitas-favoritas') {
+    pag = 'Receitas Favoritas';
+  }
 
   const filterType = ({ target: { value } }) => {
     const type = {
@@ -74,6 +80,7 @@ function MadeAndFavoriteRecipes() {
 
   return (
     <div className="pag-made-favorite">
+      <Header titlePage={ pag } />
       <section className="container-button-filter">
         { types.slice(0, numButtons).map((item, index) => (
           <button

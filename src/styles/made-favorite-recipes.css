@@ -7,7 +7,7 @@
 .pag-made-favorite {
   background-color: #fefae0;
   color: #161616;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container-cards {

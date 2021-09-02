@@ -8,42 +8,46 @@ import './Footer.css';
 function Footer() {
   return (
     <footer data-testid="footer">
-      <div>
+      <div className="footer">
         <Link to="/bebidas">
-          <button type="button" data-testid="drinks-bottom-btn" src={ iconDrink }>
+          <button
+            className="footer-buttons"
+            type="button"
+            data-testid="drinks-bottom-btn"
+            src={ iconDrink }
+          >
             <img
+              className="footer-icon"
               src={ iconDrink }
               alt="icone de bebida"
-              width="15px"
-              height="15px"
             />
           </button>
         </Link>
         <Link to="/explorar">
           <button
+            className="footer-buttons"
             type="button"
             data-testid="explore-bottom-btn"
             src={ iconExplore }
           >
             <img
+              className="footer-icon"
               src={ iconExplore }
               alt="Icone de explorar"
-              width="15px"
-              height="15px"
             />
           </button>
         </Link>
         <Link to="/comidas">
           <button
+            className="footer-buttons"
             type="button"
             data-testid="food-bottom-btn"
             src={ iconFood }
           >
             <img
+              className="footer-icon"
               src={ iconFood }
               alt="Icone de comida"
-              width="15px"
-              height="15px"
             />
           </button>
         </Link>
