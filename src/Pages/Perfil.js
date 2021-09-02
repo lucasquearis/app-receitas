@@ -6,9 +6,13 @@ import Footer from '../Components/Footer';
 
 export default function Perfil() {
   const user = localStorage.getItem('user');
-  const email = user.split('"')[3];
+  let email = 'email@mail.com';
+  if (user) {
+    const [, , , myArray] = user.split('"');
+    email = myArray;
+  }
   const history = useHistory();
-  console.log(document.history);
+  console.log(history);
 
   const logout = () => {
     localStorage.clear();
