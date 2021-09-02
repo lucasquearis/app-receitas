@@ -3,7 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import MyContext from '../context';
 import Header from '../components/Header';
-import Card from '../components/Card';
+// import Card from '../components/Card';n
 import Categories from '../components/Categories';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import searchFoodsByIngredient from
@@ -52,14 +52,32 @@ export default function Meals() {
     }
     if (!resultList) {
       return (
-        feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
-          <Card
-            key={ idMeal }
-            idType={ idMeal }
-            id={ index }
-            strThumb={ strMealThumb }
-            str={ strMeal }
-          />
+        // feed.map(({ strMealThumb, strMeal, idMeal }, index) => (
+        //   <Card
+        //     key={ idMeal }
+        //     idType={ idMeal }
+        //     id={ index }
+        //     strThumb={ strMealThumb }
+        //     str={ strMeal }
+        //   />
+        // ))
+        feed.map(({ strMeal, strMealThumb, idMeal }, index) => (
+          <Link key={ idMeal } to={ `comidas/${idMeal}` }>
+            <div
+              data-testid={ `${index}-recipe-card` }
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ strMealThumb }
+                alt={ strMeal }
+              />
+              <h2
+                data-testid={ `${index}-card-name` }
+              >
+                {strMeal}
+              </h2>
+            </div>
+          </Link>
         ))
       );
     }
