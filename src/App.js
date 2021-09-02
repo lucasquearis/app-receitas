@@ -24,10 +24,14 @@ function App() {
           path="/explorar/bebidas/ingredientes"
           component={ Pages.ExplorarBebidaIngrediente }
         />
+        <Route
+          exact
+          path="/explorar/comidas/area"
+          component={ Pages.ExplorarLocalOrigem }
+        />
         <Route path="/explorar/comidas" component={ Pages.ExplorarComidas } />
-        <Route path="/explorar/bebidas" component={ Pages.ExplorarBebidas } />
-        <Route path="/explorar/comidas/area" component={ Pages.ExplorarLocalOrigem } />
-        <Route path="/explorar" component={ Pages.Explorar } />
+        <Route exact path="/explorar/bebidas" component={ Pages.ExplorarBebidas } />
+        <Route exact path="/explorar" component={ Pages.Explorar } />
         <Route path="/perfil" component={ Pages.Perfil } />
         <Route path="/receitas-feitas" component={ Pages.ReceitasFeitas } />
         <Route path="/receitas-favoritas" component={ Pages.ReceitasFavoritas } />
