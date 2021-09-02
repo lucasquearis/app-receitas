@@ -30,7 +30,7 @@ export default function () {
 
   return (
     <div className="foods-page">
-      <Header title="Comidas" />
+      <Header title="Comidas" search />
       <button
         type="button"
         onClick={ () => setCategory('') }

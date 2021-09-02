@@ -11,24 +11,37 @@ export default function Header({ title, search = true }) {
   const renderSearch = () => (
     <button
       type="button"
-      className="search-btn"
+      className="header-brn"
       onClick={ () => setShowSearch(!showSearch) }
     >
-      <img data-testid="search-top-btn" src={ searchIcon } alt="search icon" />
+      <img
+        data-testid="search-top-btn"
+        src={ searchIcon }
+        alt="search icon"
+        style={ { width: '9vw', height: '7vh' } }
+      />
     </button>
   );
   return (
     <>
-      <header>
+      <header className="div-header">
         <Link to="/perfil">
           <button
             type="button"
-            className="profile-top-btn"
+            className="profile-top-btn header-brn"
           >
-            <img data-testid="profile-top-btn" src={ profileIcon } alt="profile icon" />
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="profile icon"
+              style={ { width: '6vh' } }
+            />
           </button>
         </Link>
-        <h1 data-testid="page-title">
+        <h1
+          data-testid="page-title"
+          className="header-title"
+        >
           {title}
         </h1>
         {search && renderSearch()}
