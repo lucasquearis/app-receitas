@@ -52,18 +52,32 @@ class Search extends Component {
 
   async handleFoods() {
     const { radio, text } = this.state;
-    const { setSearchIngredient,
-      setSearchLetter, setSearchNome } = this.props;
+
+    const {
+      setSearchIngredient,
+      setSearchLetter,
+      setSearchNome,
+    } = this.props;
+
     if (radio === 'Ingrediente') {
       await setSearchIngredient(text);
+      const { setNome } = this.props;
+      if (setNome.length === 1) {
+        this.setState({ redirect: true, id: setNome[0].idMeal });
+      }
     } else if (radio === 'Nome') {
       await setSearchNome(text);
-      const { nome } = this.props;
-      if (nome.length === 1) {
-        this.setState({ redirect: true, id: nome[0].idMeal });
+      const { setNome } = this.props;
+      console.log(setNome);
+      if (setNome.length === 1) {
+        this.setState({ redirect: true, id: setNome[0].idMeal });
       }
     } else if (radio === 'Primeira letra' && text.length === 1) {
       await setSearchLetter(text);
+      const { setNome } = this.props;
+      if (setNome.length === 1) {
+        this.setState({ redirect: true, id: setNome[0].idMeal });
+      }
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
@@ -132,6 +146,7 @@ class Search extends Component {
         { redirect && window.location.pathname === '/comidas'
           ? <Redirect to={ `/comidas/${id}` } />
           : redirect && <Redirect to={ `/bebidas/${id}` } /> }
+
       </div>
     );
   }
@@ -150,7 +165,9 @@ Search.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   setSearchIngredient: (url) => dispatch(fetchSearchIngredientMeals(url)),
+
   setSearchNome: (nome) => dispatch(fetchMealsByName(nome)),
+
   setSearchLetter: (url) => dispatch(fetchSearchLetterMeals(url)),
   setSearchIngredientDrinks: (url) => dispatch(fetchSearchIngredientDrinks(url)),
   setSearchNomeDrinks: (url) => dispatch(fetchDrinksByName(url)),
