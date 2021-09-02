@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import myContext from '../context/myContext';
 import { fetchFoods } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
+import '../styles/ItemCard.css';
 
 function FoodsCard() {
   const doze = 12;
   const { meals } = useSelector((state) => state.recipes.foods);
-  const loading = useSelector((state) => state.recipes.isLoading);
+  const { displayFood } = useContext(myContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchFoods());
   }, [dispatch]);
-
-  if (loading) return <p>Carregando...</p>;
   return (
-    <div>
+    <div className="food-cards">
       {
-        meals && meals.map((meal, index) => index < doze && (
+        displayFood.length === 0 && meals && meals.map((meal, index) => index < doze && (
           <ItemCard
             title={ meal.strMeal }
             data-testid={ `${index}-recipe-card` }

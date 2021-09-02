@@ -3,31 +3,51 @@ import PropTypes from 'prop-types';
 import myContext from './myContext';
 
 function RecipesProvider({ children }) {
-  const [favorite, setFavorite] = useState({});
-  const [recipe, setRecipe] = useState({});
-  const [loading, setLoading] = useState(false);
   const [randomFood, setRandomFood] = useState([]);
   const [randomDrink, setRandomDrink] = useState([]);
-  const [keyType, setKeysType] = useState('');
-  const [url, setUrl] = useState();
-  const [lists, setLists] = useState({
-    ingredients: [],
-    measure: [],
-  });
+  const [foodIngredients, setFoodIngredients] = useState([]);
+  const [drinkIngredients, setDrinkIngredients] = useState([]);
+  const [drinkIngredientSelected, setDrinkIngredientSelected] = useState('');
+  const [foodIngredientSelected, setFoodIngredientSelected] = useState('');
+  const [display, setDisplay] = useState([]);
+  const [displayFood, setDisplayFood] = useState([]);
+
+  const drinkIngredientClick = async (ingredient) => {
+    const result = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+    const data = await result.json();
+    return data;
+  };
+
+  const foodIngredientClick = async (ingredient) => {
+    const result = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+    const data = await result.json();
+    return data;
+  };
+
+  const removeDisplayList = () => {
+    setDisplay([]);
+    setDisplayFood([]);
+  };
 
   const providerState = {
-    url,
-    lists,
-    keyType,
-    setKeysType,
-    recipe,
-    setRecipe,
-    loading,
-    setLoading,
-    favorite,
-    setFavorite,
+    // Foods:
     randomFood,
+    foodIngredients,
+    foodIngredientClick,
+    foodIngredientSelected,
+    setFoodIngredientSelected,
+    displayFood,
+    setDisplayFood,
+    // Drinks:
     randomDrink,
+    drinkIngredients,
+    drinkIngredientClick,
+    drinkIngredientSelected,
+    setDrinkIngredientSelected,
+    // Others:
+    display,
+    setDisplay,
+    removeDisplayList,
   };
 
   useEffect(() => {
@@ -36,42 +56,29 @@ function RecipesProvider({ children }) {
       const data = await response.json();
       setRandomFood(data.meals);
     };
-    getRandomFood();
-  }, []);
-
-  useEffect(() => {
-    const getRandomFood = async () => {
+    const getRandomDrink = async () => {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
       const data = await response.json();
       setRandomDrink(data.drinks);
     };
+    getRandomDrink();
     getRandomFood();
   }, []);
 
   useEffect(() => {
-    const filterIngredients = () => {
-      const ingFilter = Object.keys(recipe).filter(
-        (recipes) => recipes.includes('Ingredient'),
-      );
-      const ingList = ingFilter.map((key) => recipe[key]);
-      const measureFilter = Object.keys(recipe).filter(
-        (recipes) => recipes.includes('Measure'),
-      );
-      const measureList = measureFilter.map((key) => recipe[key]);
-      setLists({
-        ...lists,
-        ingredients: ingList.filter((item) => item),
-        measure: measureList.filter((item) => item),
-      });
+    const getFoodIngredients = async () => {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+      const data = await response.json();
+      setFoodIngredients(data.meals);
     };
-    const correctUrl = () => {
-      const youtubeURL = recipe.strYoutube;
-      if (youtubeURL) setUrl(youtubeURL.replace('watch?v=', 'embed/'));
+    const getDrinkIngredients = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+      const data = await response.json();
+      setDrinkIngredients(data.drinks);
     };
-
-    correctUrl();
-    filterIngredients();
-  }, [recipe]);
+    getDrinkIngredients();
+    getFoodIngredients();
+  }, []);
 
   return (
     <myContext.Provider value={ providerState }>

@@ -11,7 +11,6 @@ function ExploreDrinks(props) {
 
   const handleClick = () => {
     history.push(`/bebidas/${randomDrink[0].idDrink}`);
-    console.log(randomDrink);
   };
 
   return (

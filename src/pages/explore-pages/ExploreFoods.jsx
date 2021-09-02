@@ -11,7 +11,6 @@ function ExploreFoods(props) {
 
   const handleClick = () => {
     history.push(`/comidas/${randomFood[0].idMeal}`);
-    console.log(randomFood);
   };
 
   return (
