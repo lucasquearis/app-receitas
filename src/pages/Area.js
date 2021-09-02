@@ -44,9 +44,9 @@ function Area() {
       selected: value,
     });
   }
-
+  const ids = 'PageNotFound';
   if (!area || !receitas) return <p>Loading...</p>;
-  if (LOCATION === '/explorar/bebidas/area') return <p>Not Found</p>;
+  if (LOCATION === '/explorar/bebidas/area') return <p data-testid={ ids }>Not Found</p>;
   return (
     <div>
       <Header title="Explorar Origem" />
