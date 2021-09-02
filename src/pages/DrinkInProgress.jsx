@@ -60,13 +60,13 @@ function DrinkInProgess() {
     ]);
   }
 
-  useEffect(() => {
-    const actualStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      ...actualStorage,
-      cocktails: [{ ...actualStorage.cocktails, [id]: [...checkedDrinkOptions] }],
-    }));
-  }, [checkedDrinkOptions]);
+  // useEffect(() => {
+  //   const actualStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   localStorage.setItem('inProgressRecipes', JSON.stringify({
+  //     ...actualStorage,
+  //     cocktails: [{ ...actualStorage.cocktails, [id]: [...checkedDrinkOptions] }],
+  //   }));
+  // }, [checkedDrinkOptions]);
 
   useEffect(() => {
     function checkButton() {
@@ -112,8 +112,7 @@ function DrinkInProgess() {
     };
     setLocalStorageItems(...localStorageItems, recipes);
 
-    const drinks = JSON.parse(localStorage.getItem('doneRecipes'));
-    return localStorage.setItem('doneRecipes', JSON.stringify([...drinks, recipes]));
+    return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
 
   const favorites = () => {

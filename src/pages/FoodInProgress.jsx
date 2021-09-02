@@ -99,8 +99,7 @@ function FoodInProgress() {
       tags: [tags],
     };
     setLocalStorageItems(...localStorageItems, recipes);
-    const foods = JSON.parse(localStorage.getItem('doneRecipes'));
-    return localStorage.setItem('doneRecipes', JSON.stringify([...foods, recipes]));
+    return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
 
   const favorites = () => {
