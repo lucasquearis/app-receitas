@@ -32,6 +32,12 @@ export async function buscarBebidasIngrediente(ingr) {
   return response.drinks;
 }
 
+export async function buscarBebidasID(id) {
+  const ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response.drinks;
+}
+
 export async function buscarBebidaAleatoria() {
   const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
@@ -43,5 +49,20 @@ export async function buscarBebidaPeloID(id) {
   const ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
 
   const response = fetch(ENDPOINT).then((data) => data.json());
+  return response;
+}
+
+export async function seachDrinkRandom() {
+  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  console.log(response);
+  return response.drinks;
+}
+
+export async function buscarIngrediente() {
+  const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+
+  const response = await fetch(ENDPOINT).then((data) => data.json());
   return response;
 }

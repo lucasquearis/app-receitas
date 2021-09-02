@@ -35,7 +35,6 @@ export default function Header(props) {
         </button>
       );
     }
-
     return (
       <div />
     );
