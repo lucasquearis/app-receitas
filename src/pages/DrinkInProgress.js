@@ -24,7 +24,6 @@ const DrinkInProgress = () => {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
-
   const [showMsg, setShowMsg] = useState(false);
 
   function DetailUrl() {
