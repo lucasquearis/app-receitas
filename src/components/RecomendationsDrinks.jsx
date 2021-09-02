@@ -42,7 +42,7 @@ class RecomendationsDrinks extends Component {
                 data-testid={ `${index}-recomendation-card` }
                 src={ strDrinkThumb }
                 alt="foto"
-                width="300 px"
+                width="200 px"
               />
             </div>
           ))

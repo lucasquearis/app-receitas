@@ -6,6 +6,7 @@ import Ingredients from '../../components/Ingredients';
 import Instructions from '../../components/Instructions';
 import Video from '../../components/Video';
 import RecomendationsDrinks from '../../components/RecomendationsDrinks';
+import FavoriteButton from '../../components/FavoriteButton';
 import ShareButton from '../../components/shareButton';
 import fetchRecipes from '../../Redux/actions/fetchRecipes';
 import fetchDrinks from '../../Redux/actions/fetchDrinks';
@@ -70,7 +71,7 @@ class DetailsFood extends Component {
                   Iniciar Receita
                 </button>
                 <ShareButton />
-                {}
+                <FavoriteButton />
               </div>
             ))
           }

@@ -6,7 +6,7 @@ import IngredientsDrink from '../../components/IngredientsDrink';
 import Instructions from '../../components/Instructions';
 import RecomendationsFoods from '../../components/RecomendationsFoods';
 import ShareButton from '../../components/shareButton';
-import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import FavoriteButton from '../../components/FavoriteButton';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
 import fetchMeals from '../../Redux/actions/fetchMeals';
 import './style.css';
@@ -73,13 +73,7 @@ class DetailsDrink extends Component {
                     Iniciar Receita
                   </button>
                   <ShareButton />
-                  <button type="button">
-                    <img
-                      src={ WhiteHeartIcon }
-                      alt="favorite button"
-                      data-testid="favorite-btn"
-                    />
-                  </button>
+                  <FavoriteButton />
                 </div>
               ),
             )
