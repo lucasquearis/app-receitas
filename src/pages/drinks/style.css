@@ -2,3 +2,6 @@
   bottom: 0;
   position: fixed;
 }
+.complete {
+  text-decoration: line-through;
+}

@@ -6,6 +6,7 @@ import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import Instructions from '../../components/Instructions';
 import FoodsCheckIngredients from '../../components/FoodsCheckIngredients';
+import './style.css';
 
 class RecipesInProgress extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class RecipesInProgress extends Component {
   }
 
   render() {
-    const { recipe } = this.props;
+    const { recipe, match: { params: { id } } } = this.props;
     return (
       <>
         {
@@ -50,7 +51,7 @@ class RecipesInProgress extends Component {
                     data-testid="favorite-btn"
                   />
                 </button>
-                <FoodsCheckIngredients />
+                <FoodsCheckIngredients id={ id } />
               </div>
             </div>
           ))

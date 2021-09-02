@@ -17,3 +17,6 @@
   position: fixed;
 }
 
+.complete {
+  text-decoration: line-through;
+}

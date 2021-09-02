@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Instructions from '../../components/Instructions';
-import RecomendationsDrinks from '../../components/RecomendationsDrinks';
+import Recomendations from '../../components/RecomendationsDrinks';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
 import DrinkscheckIngredients from '../../components/DrinksCheckIngredients';
+import './style.css';
 
 class DetailsDrink extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class DetailsDrink extends Component {
   }
 
   render() {
-    const { cocktail } = this.props;
+    const { cocktail, match: { params: { id } } } = this.props;
     return (
       <div>
         <div>
@@ -52,9 +53,9 @@ class DetailsDrink extends Component {
                       />
                     </button>
                   </div>
-                  <DrinkscheckIngredients />
+                  <DrinkscheckIngredients id={ id } />
                   <Instructions />
-                  <RecomendationsDrinks />
+                  <Recomendations />
                   <buttons
                     className="btn btn-warning"
                     type="button"
