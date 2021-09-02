@@ -58,6 +58,7 @@
 }
 
 .drinkStyle img, .drinkStyle h3, .foodStyle img, .foodStyle h3 {
+  background: transparent;
   filter: invert(100%);
 }
 
