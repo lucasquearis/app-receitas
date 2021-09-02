@@ -1,0 +1,52 @@
+.favorite-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite-container h2 {
+  margin-left: 10px;
+}
+
+.ingredients-container {
+  background-color: var(--L-orange);
+  border-radius: 5px;
+  margin: 15px;
+  padding: 10px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80px;
+}
+
+.icons img {
+  border-left: 10px;
+  width: 26px;
+}
+
+.main-containe h4 {
+  color: var(--D-orange);
+  margin-left: 20px;
+}
+
+.main-containe h5 {
+  color: gray;
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
+
+.main-containe p {
+  margin: 15px;
+  padding: 10px;
+}
+
+.main-containe button {
+  position: fixed;
+  background-color: var(--L-orange);
+  border: none;
+  bottom: 0;
+  color: black;
+  margin: 0 0 0 10px;
+  width: 95%;
+}
