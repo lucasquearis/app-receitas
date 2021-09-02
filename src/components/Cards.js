@@ -62,14 +62,14 @@ function Cards() {
           key={ i }
           className="cardFlex"
           data-testid={ `${i}-recipe-card` }
-        >
+          >
+          <span className="ingredient-name" data-testid={ `${i}-card-name` }>{item[cardName]}</span>
           <img
             className="cardTumb"
             src={ item[img] }
             alt="imagem da comida"
             data-testid={ `${i}-card-img` }
           />
-          <span data-testid={ `${i}-card-name` }>{item[cardName]}</span>
         </Link>
       ))}
     </div>
