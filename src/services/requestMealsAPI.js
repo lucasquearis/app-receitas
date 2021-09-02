@@ -99,7 +99,6 @@ export const fetchMealsArea = () => {
   return fetch(url)
     .then((res) => res.json())
     .then((data) => {
-     
       const dataMeals = data.meals;
       return dataMeals.slice(0, limitMealsArea);
     });
