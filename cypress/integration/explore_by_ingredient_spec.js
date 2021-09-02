@@ -93,9 +93,9 @@ describe('77 -  Redireciona a pessoa usuária ao clicar no card do ingrediente, 
 
       cy.get(`[data-testid="${index}-card-img"]`)
         .should('have.attr', 'src')
-        .should('include', meal['strMealThumb']);
+        .should('include', meal.strMealThumb);
 
-      cy.get(`[data-testid="${index}-card-name"]`).contains(meal['strMeal']);
+      cy.get(`[data-testid="${index}-card-name"]`).contains(meal.strMeal);
     });
 
     cy.get('[data-testid="12-recipe-card"]').should('not.exist');
@@ -117,9 +117,9 @@ describe('77 -  Redireciona a pessoa usuária ao clicar no card do ingrediente, 
 
       cy.get(`[data-testid="${index}-card-img"]`)
         .should('have.attr', 'src')
-        .should('include', drink['strDrinkThumb']);
+        .should('include', drink.strDrinkThumb);
 
-      cy.get(`[data-testid="${index}-card-name"]`).contains(drink['strDrink']);
+      cy.get(`[data-testid="${index}-card-name"]`).contains(drink.strDrink);
     });
 
     cy.get('[data-testid="12-recipe-card"]').should('not.exist');

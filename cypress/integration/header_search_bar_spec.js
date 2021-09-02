@@ -200,9 +200,9 @@ describe('17 - Mostre as receitas em cards caso mais de uma receita seja encontr
 
       cy.get(`[data-testid="${index}-card-img"]`)
         .should('have.attr', 'src')
-        .should('include', meal['strMealThumb']);
+        .should('include', meal.strMealThumb);
 
-      cy.get(`[data-testid="${index}-card-name"]`).contains(meal['strMeal']);
+      cy.get(`[data-testid="${index}-card-name"]`).contains(meal.strMeal);
     });
 
     cy.get('[data-testid="10-recipe-card"]').should('not.exist');
@@ -227,9 +227,9 @@ describe('17 - Mostre as receitas em cards caso mais de uma receita seja encontr
 
       cy.get(`[data-testid="${index}-card-img"]`)
         .should('have.attr', 'src')
-        .should('include', drink['strDrinkThumb']);
+        .should('include', drink.strDrinkThumb);
 
-      cy.get(`[data-testid="${index}-card-name"]`).contains(drink['strDrink']);
+      cy.get(`[data-testid="${index}-card-name"]`).contains(drink.strDrink);
     });
 
     cy.get('[data-testid="12-recipe-card"]').should('not.exist');

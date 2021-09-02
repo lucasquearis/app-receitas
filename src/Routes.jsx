@@ -42,7 +42,6 @@ export default function Routes() {
         />
 
         <Route
-          exact
           path="/comidas/:id/in-progress"
           component={ ProgressFood }
         />
@@ -53,14 +52,13 @@ export default function Routes() {
         />
 
         <Route
-          exact
           path="/comidas/:id"
-          render={ (props) => <DetailsFood { ...props } /> }
+          component={ DetailsFood }
         />
 
         <Route
           path="/bebidas/:id"
-          render={ (props) => <DetailsDrink { ...props } /> }
+          component={ DetailsDrink }
         />
 
         <Route
