@@ -33,7 +33,7 @@ function ExploreFoods() {
           </Button>
         </Link>
         <Link to="/explorar/comidas/area">
-          <Button 
+          <Button
             data-testid="explore-by-area"
             variant="contained"
             color="secondary"

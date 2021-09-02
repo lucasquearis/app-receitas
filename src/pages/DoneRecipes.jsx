@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
+import '../styles/DoneRecipes.css';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -55,27 +56,27 @@ function DoneRecipes() {
   };
 
   const renderFilterButtons = () => (
-    <div>
+    <div className="done-recipes-btn">
       <Button
         data-testid="filter-by-all-btn"
-        variant="outlined"
-        color="primary"
+        variant="contained"
+        color="secondary"
         onClick={ handleAllClick }
       >
         All
       </Button>
       <Button
         data-testid="filter-by-food-btn"
-        variant="outlined"
-        color="primary"
+        variant="contained"
+        color="secondary"
         onClick={ handleFoodClick }
       >
         Food
       </Button>
       <Button
         data-testid="filter-by-drink-btn"
-        variant="outlined"
-        color="primary"
+        variant="contained"
+        color="secondary"
         onClick={ handleDrinkClick }
       >
         Drinks

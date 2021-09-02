@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
-// import Carousel from 'react-elastic-carousel';
+import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
-import '../styles/Details.css'
+import '../styles/Details.css';
 
 function DrinkDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -18,10 +18,6 @@ function DrinkDetails({ match: { params: { id } } }) {
   const location = useLocation();
   const [share, setShare] = useState(false);
   const [visible, setVisible] = useState([false, false, true, true, true, true]);
-  const mystyle = {
-    bottom: '0px',
-    position: 'fixed',
-  };
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
   const [favorite, setFavorite] = useState(false);
@@ -39,18 +35,18 @@ function DrinkDetails({ match: { params: { id } } }) {
     const sliceRecomended = recomendedFood.slice(0, SEIS);
     if (sliceRecomended.length > 0) {
       return (
-        <ul className="recomended-container">
+        <Carousel data-testid="recomendation-card" itemsToShow={ 2 } itemsToScroll={ 2 }>
           {sliceRecomended.map((meal, index) => (
-            <RecomendedCard
-              title={ meal.strMeal }
-              key={ meal.idMeal }
-              id={ meal.idMeal }
-              index={ index }
-              img={ meal.strMealThumb }
-              visible={ visible[index] }
-            />
+            <Link key={ meal.idMeal } to={ `/comidas/${meal.idMeal}` }>
+              <RecomendedCard
+                title={ meal.strMeal }
+                id={ meal.idMeal }
+                index={ index }
+                img={ meal.strMealThumb }
+              />
+            </Link>
           ))}
-        </ul>
+        </Carousel>
       );
     }
   };
@@ -153,6 +149,13 @@ function DrinkDetails({ match: { params: { id } } }) {
 
   return (
     <div>
+      <Link to="/bebidas">
+        <img
+          src="https://img.icons8.com/ios-glyphs/90/000000/circled-left.png"
+          alt="back"
+          className="back-btn"
+        />
+      </Link>
       <div>
         <img
           className="details-img"
@@ -162,7 +165,7 @@ function DrinkDetails({ match: { params: { id } } }) {
         />
       </div>
       <div className="content-container">
-        <div className="title-container">         
+        <div className="title-container">
           <h2 data-testid="recipe-title">{ strDrink }</h2>
           <div className="btn-container">
             <Button
@@ -199,6 +202,7 @@ function DrinkDetails({ match: { params: { id } } }) {
             </li>))}
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
+        <h3>Comidas recomendadas</h3>
         {renderRecomendedFood()}
         <Link to={ `/bebidas/${id}/in-progress` }>
           <button
@@ -210,7 +214,6 @@ function DrinkDetails({ match: { params: { id } } }) {
             hidden={ doneRecipe }
           >
             {continueRecipe}
-
           </button>
         </Link>
       </div>

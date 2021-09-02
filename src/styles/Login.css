@@ -1,17 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .login-container {
+  font-family: 'Lobster', cursive;
   display: flex;
-  flex-direction: column;
   width: 80%;
+  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin: 50% auto;
+  margin: auto;
+  height: 100vh;
+  gap: 8px;
 }
 
 .input-login {
-  border-radius: 7px solid grey;
-  margin: 5px;
+  border-radius: 10px solid grey;
+  margin: 3px;
   padding: 5px;
+  height: 18px;
 }
 
 .palmirinha-img {
-  height: 100px;
+  height: 110px;
+}
+
+h1 {
+  color: #001427;
+  margin: 0 0 7px 0;
+  font-size: 38px;
 }

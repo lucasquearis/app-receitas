@@ -37,15 +37,17 @@ function FoodIngredients() {
   return (
     <div>
       <Header name="Explorar Ingredientes" />
-      {
-        ingredients.map((ingredient, index) => (
-          <FoodIngredientCard
-            key={ ingredient.idIngredient }
-            ingredients={ ingredient }
-            index={ index }
-            onClick={ () => { handleClick(ingredient.strIngredient); } }
-          />))
-      }
+      <ul className="explore-ing-food-container">
+        {
+          ingredients.map((ingredient, index) => (
+            <FoodIngredientCard
+              key={ ingredient.idIngredient }
+              ingredients={ ingredient }
+              index={ index }
+              onClick={ () => { handleClick(ingredient.strIngredient); } }
+            />))
+        }
+      </ul>
       <Footer />
     </div>
   );

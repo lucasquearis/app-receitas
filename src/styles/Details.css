@@ -1,5 +1,6 @@
 .details-img {
   width: 365px;
+  z-index: 1;
 }
 
 .recomended-container {
@@ -19,20 +20,37 @@
   background: #042647;
 	color: #f8f9f0;
 	border: 1px solid gray;
-  border-radius: 2px;
-	padding: 5px 3px;
+  border-radius: 3px;
+	padding: 8px 6px;
 	font: inherit;
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
 	cursor: pointer;
 	outline: inherit;
-  margin: 2px;
+  margin: 12px auto 5px auto;
 }
 
 .title-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 8vh;
 }
 
 .btn-container {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 10vh;
+  margin: 0;
+}
+
+.back-btn {
+  z-index: 3;
+  width: 50px;
+  margin: 2px;
+  float: left;
+  position:absolute;
+  background-color: transparent;
 }

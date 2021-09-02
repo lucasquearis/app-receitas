@@ -10,7 +10,7 @@ import {
   fetchDrinksByIngredient,
   fetchDrinksByName,
   fetchDrinksByFirstLetter } from '../services/drinksAPI';
-import '../styles/SearchBar.css'
+import '../styles/SearchBar.css';
 
 function SearchBar({ pageName }) {
   const { setDrinks, setFoods } = useContext(AppContext);
@@ -84,7 +84,7 @@ function SearchBar({ pageName }) {
 
   return (
     <div className="search-container">
-      <div className="input-container">     
+      <div className="input-container">
         <input
           className="text-input"
           data-testid="search-input"
@@ -95,6 +95,7 @@ function SearchBar({ pageName }) {
         <div className="search-content-options">
           <label htmlFor="ingredient-search">
             <input
+              className="radio-input"
               type="radio"
               data-testid="ingredient-search-radio"
               id="ingredient-search"
@@ -124,17 +125,18 @@ function SearchBar({ pageName }) {
             Primeira letra
           </label>
         </div>
+        <Button
+          className="search-btn"
+          type="button"
+          variant="contained"
+          color="secondary"
+          data-testid="exec-search-btn"
+          onClick={ handleClickButton }
+          size="small"
+        >
+          Buscar
+        </Button>
       </div>
-      <Button
-        className="search-btn"
-        type="button"
-        variant="contained"
-        color="secondary"
-        data-testid="exec-search-btn"
-        onClick={ handleClickButton }
-      >
-        Buscar
-      </Button>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
-import palmirinha from '../images/turma-12-palmirinha.png'
-import '../styles/Login.css'
+import palmirinha from '../images/turma-12-palmirinha.png';
+import '../styles/Login.css';
 
 function Login() {
   const SEIS = 6;
@@ -40,7 +40,7 @@ function Login() {
   return (
     <div className="login-container">
       <h1>Palmirinha App</h1>
-      <img className="palmirinha-img" src={ palmirinha } />
+      <img className="palmirinha-img" src={ palmirinha } alt="palm" />
       <input
         className="input-login"
         data-testid="email-input"

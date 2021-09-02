@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
+import Carousel from 'react-elastic-carousel';
 import copy from 'clipboard-copy';
 import Button from '@material-ui/core/Button';
 import shareIcon from '../images/shareIcon.svg';
 import bHIcon from '../images/blackHeartIcon.svg';
 import wHIcon from '../images/whiteHeartIcon.svg';
 import RecomendedCard from '../components/RecomendedCard';
-import '../styles/Details.css'
+import '../styles/Details.css';
 
 function FoodDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({});
@@ -24,10 +25,6 @@ function FoodDetails({ match: { params: { id } } }) {
   const location = useLocation();
   const [share, setShare] = useState(false);
   const [visible, setVisible] = useState([false, false, true, true, true, true]);
-  const mystyle = {
-    bottom: '0px',
-    position: 'fixed',
-  };
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [continueRecipe, setContinueRecipe] = useState('Iniciar Receita');
   const [favorite, setFavorite] = useState(false);
@@ -45,18 +42,18 @@ function FoodDetails({ match: { params: { id } } }) {
     const sliceRecomended = recomendedDrink.slice(0, SEIS);
     if (sliceRecomended.length > 0) {
       return (
-        <ul className="recomended-container">
+        <Carousel data-testid="recomendation-card" itemsToShow={ 2 } itemsToScroll={ 2 }>
           {sliceRecomended.map((drink, index) => (
-            <RecomendedCard
-              title={ drink.strDrink }
-              key={ drink.idDrink }
-              id={ drink.idDrink }
-              index={ index }
-              img={ drink.strDrinkThumb }
-              visible={ visible[index] }
-            />
+            <Link key={ drink.idDrink } to={ `/comidas/${drink.idDrink}` }>
+              <RecomendedCard
+                title={ drink.strDrink }
+                id={ drink.idDrink }
+                index={ index }
+                img={ drink.strDrinkThumb }
+              />
+            </Link>
           ))}
-        </ul>
+        </Carousel>
       );
     }
   };
@@ -153,9 +150,15 @@ function FoodDetails({ match: { params: { id } } }) {
       setFavoriteIcon(wHIcon);
     }
   }, [favorite]);
-
   return (
     <div>
+      <Link to="/bebidas">
+        <img
+          src="https://img.icons8.com/ios-glyphs/90/000000/circled-left.png"
+          alt="back"
+          className="back-btn"
+        />
+      </Link>
       <div>
         <img
           className="details-img"
@@ -175,11 +178,7 @@ function FoodDetails({ match: { params: { id } } }) {
               } }
               type="button"
             >
-              <img
-                src={ shareIcon }
-                alt="imagem de compartilhar"
-                data-testid="share-btn"
-              />
+              <img src={ shareIcon } alt="imagem de compartilhar" data-testid="share-btn" />
             </Button>
             { share && <p>Link copiado!</p> }
             <Button
@@ -202,13 +201,17 @@ function FoodDetails({ match: { params: { id } } }) {
             </li>))}
         </ul>
         <p data-testid="instructions">{ strInstructions }</p>
-        <iframe
+        {strYoutube && <iframe
           title={ strMeal }
-          src={ strYoutube }
+          src={ `https://www.youtube.com/embed/${strYoutube.split('=')[1]}` }
           data-testid="video"
-        />
+          width="300"
+          height="200"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        />}
+        <h3>Drinks recomendados</h3>
         {renderRecomendedDrink()}
-
         <Link to={ `/comidas/${id}/in-progress` }>
           <button
             className="recipe-btn"

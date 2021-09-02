@@ -6,6 +6,7 @@ function FoodIngredientCard({ ingredients, index, onClick }) {
   return (
     <li
       data-testid={ `${index}-ingredient-card` }
+      className="explore-ing-food"
     >
       <Card onClick={ onClick }>
         <p

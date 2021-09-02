@@ -1,3 +1,6 @@
+body {
+  background-color: #f8f9f0;
+}
 
 .app-container {
   display: flex;
