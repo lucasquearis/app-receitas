@@ -1,5 +1,9 @@
 .footer {
-  background-color: gray;
+
+  /* stylelint-disable-next-line */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  border: 2px solid black;
+  border-radius: 10px 2px;
   bottom: 0;
   display: flex;
   justify-content: space-between;

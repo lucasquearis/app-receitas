@@ -4,7 +4,18 @@ body {
 
 nav {
   align-items: center;
-  background-color: gray;
   display: flex;
   justify-content: space-between;
+}
+
+.user-header-footer {
+
+  /* stylelint-disable-next-line */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  border: 2px solid black;
+  border-radius: 10px 2px;
+}
+
+.title {
+  text-shadow: 0.2px 5px 5px lightgray;
 }

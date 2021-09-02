@@ -32,12 +32,12 @@ function Header({ title, renderSearchBar }) {
   };
 
   return (
-    <header>
+    <header className="user-header-footer">
       <nav>
         <Link to="/perfil">
           <IconBtn { ...profileBtnProps } />
         </Link>
-        <h1 data-testid="page-title">{title}</h1>
+        <h1 data-testid="page-title" className="title">{title}</h1>
         {renderSearchBar && <IconBtn { ...searchBtnProps } />}
       </nav>
       {renderSearchBar
