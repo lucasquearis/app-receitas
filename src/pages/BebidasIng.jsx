@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
+import CardList from '../components/CardList';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import fetchFoods from '../fetchs/FetchFood';
@@ -44,33 +44,17 @@ function BebidasIng() {
   if (redirect.redirect) return <Redirect to="/bebidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (
-    <div>
+    <div className="pageComida">
       <Header titulo="Explorar Ingredientes" />
-      <main className="div">
-        { ingredients.map(({ strIngredient1 }, index) => (
-          <Card
-            data-testid={ `${index}-ingredient-card` }
-            style={ { width: '18rem' } }
-            name={ strIngredient1 }
-            key={ index }
+      <main>
+        <div>
+          <CardList
+            list={ ingredients }
+            apiType="Ingredient"
+            page="bebidas"
             onClick={ onClick }
-          >
-            <Card.Img
-              data-testid={ `${index}-card-img` }
-              variant="top"
-              name={ strIngredient1 }
-              src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
-            />
-            <Card.Body>
-              <Card.Title
-                data-testid={ `${index}-card-name` }
-                name={ strIngredient1 }
-              >
-                { strIngredient1 }
-              </Card.Title>
-            </Card.Body>
-          </Card>
-        )) }
+          />
+        </div>
       </main>
       <Footer />
     </div>

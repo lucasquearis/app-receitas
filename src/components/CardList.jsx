@@ -6,7 +6,12 @@ import Card from './Card';
 const MAXIMUM_INDEX = 11;
 
 function CardList({ list, apiType, page, onClick }) {
+  console.log(apiType);
+  console.log(page);
   const changeRender = (item, index) => {
+    const food = item[`str${apiType}`];
+    const drink = item[`str${apiType}1`];
+    console.log(item);
     if (apiType !== 'Ingredient') {
       return (
         <Link
@@ -22,11 +27,24 @@ function CardList({ list, apiType, page, onClick }) {
         </Link>
       );
     }
+    if (page !== 'bebidas') {
+      return (
+        <div className="singleCard">
+          <Card
+            index={ index }
+            thumb={ `https://www.themealdb.com/images/ingredients/${food}-Small.png` }
+            name={ item[`str${apiType}`] }
+            onClick={ onClick }
+            apiType={ apiType }
+          />
+        </div>
+      );
+    }
     return (
       <div className="singleCard">
         <Card
           index={ index }
-          thumb={ `https://www.themealdb.com/images/ingredients/${item[`str${apiType}`]}-Small.png` }
+          thumb={ `https://www.thecocktaildb.com/images/ingredients/${drink}-Small.png` }
           name={ item[`str${apiType}`] }
           onClick={ onClick }
           apiType={ apiType }
