@@ -1,41 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import ShareBtn from '../components/ShareBtn';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import { setLoading } from '../redux/actions/loading';
-import shareIcon from '../images/shareIcon.svg';
 
-function RecipeDone() {
+function RecipesDone() {
   const [recipes, setRecipes] = useState([]);
   const { loading } = useSelector((state) => state);
 
   useEffect(() => {
-    // teste
-  //   const doneRecipes = [
-  //     {
-  //       id: '52771',
-  //       type: 'comida',
-  //       area: 'Italian',
-  //       category: 'Vegetarian',
-  //       alcoholicOrNot: '',
-  //       name: 'Spicy Arrabiata Penne',
-  //       image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  //       doneDate: '23/06/2020',
-  //       tags: ['Pasta', 'Curry'],
-  //     },
-  //     {
-  //       id: '178319',
-  //       type: 'bebida',
-  //       area: '',
-  //       category: 'Cocktail',
-  //       alcoholicOrNot: 'Alcoholic',
-  //       name: 'Aquamarine',
-  //       image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-  //       doneDate: '23/06/2020',
-  //       tags: [],
-  //     },
-  //   ];
-  //   localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     setLoading(true);
     const getData = JSON.parse(localStorage.getItem('doneRecipes'));
     if (getData) {
@@ -53,7 +27,12 @@ function RecipeDone() {
       image,
       name,
       tags,
+      type,
+      id,
     } = card;
+
+    const types = type === 'comida' ? 'comida' : 'bebida';
+
     return (
       <div key={ index } className="recipes-card">
         <img
@@ -87,10 +66,10 @@ function RecipeDone() {
         >
           { doneDate }
         </p>
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ shareIcon }
-          alt="share recipe"
+        <ShareBtn
+          testid={ `${index}-horizontal-share-btn` }
+          id={ id }
+          type={ types }
         />
         { tags.map((item) => {
           const tagItem = (
@@ -138,4 +117,4 @@ function RecipeDone() {
   );
 }
 
-export default RecipeDone;
+export default RecipesDone;
