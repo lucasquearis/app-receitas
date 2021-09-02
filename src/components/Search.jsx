@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import fetchSearchIngredientMeals from '../Redux/actions/fetchSearchIngredientMeals';
-import fetchSearchNomeMeals from '../Redux/actions/fetchSearchNomeMeals';
 import fetchSearchLetterMeals from '../Redux/actions/fetchLetterMeals';
-import fetchSearchNomeDrinks from '../Redux/actions/fetchSearchNomeDrinks';
+import { fetchDrinksByName } from '../Redux/actions/fetchDrinks';
 import fetchSearchLetterDrinks from '../Redux/actions/fetchLetterDrinks';
 import fetchSearchIngredientDrinks from '../Redux/actions/fetchSearchIngredientDrinks';
+import { fetchMealsByName } from '../Redux/actions/fetchMeals';
 
 class Search extends Component {
   constructor(props) {
@@ -56,22 +56,14 @@ class Search extends Component {
       setSearchLetter, setSearchNome } = this.props;
     if (radio === 'Ingrediente') {
       await setSearchIngredient(text);
-      // if (setNome.length === 1) {
-      //   this.setState({ redirect: true, id: ingrediente[0].idMeal });
-      // }
     } else if (radio === 'Nome') {
       await setSearchNome(text);
       const { nome } = this.props;
-      console.log('to no radio nome');
       if (nome.length === 1) {
         this.setState({ redirect: true, id: nome[0].idMeal });
       }
     } else if (radio === 'Primeira letra' && text.length === 1) {
-      // const { letter } = this.props;
       await setSearchLetter(text);
-      // if (setNome.length === 1) {
-      //   this.setState({ redirect: true, id: letter[0].idMeal });
-      // }
     } else { global.alert('Sua busca deve conter somente 1 (um) caracter'); }
   }
 
@@ -158,16 +150,16 @@ Search.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   setSearchIngredient: (url) => dispatch(fetchSearchIngredientMeals(url)),
-  setSearchNome: (url) => dispatch(fetchSearchNomeMeals(url)),
+  setSearchNome: (nome) => dispatch(fetchMealsByName(nome)),
   setSearchLetter: (url) => dispatch(fetchSearchLetterMeals(url)),
   setSearchIngredientDrinks: (url) => dispatch(fetchSearchIngredientDrinks(url)),
-  setSearchNomeDrinks: (url) => dispatch(fetchSearchNomeDrinks(url)),
+  setSearchNomeDrinks: (url) => dispatch(fetchDrinksByName(url)),
   setSearchLetterDrinks: (url) => dispatch(fetchSearchLetterDrinks(url)),
 });
 
 const mapStateToProps = (state) => ({
-  nome: state.searchNomeReducer.search,
-  nomeDrink: state.searchNomeDrinksReducer.search,
+  nome: state.foods.meals,
+  nomeDrink: state.drinks.drinks,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
