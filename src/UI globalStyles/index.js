@@ -8,8 +8,7 @@ export const MainBackGround = styled.div`
             rgba(0, 0, 0, 0.6)
           ),
     url('https://images.pexels.com/photos/6546425/pexels-photo-6546425.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
-    background-size: cover;
-    padding-bottom: 30px;
+  background-size: cover;
 `;
 
 export const ProfileContent = styled.div`
@@ -21,8 +20,8 @@ background:
           ),
     url('https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     background-size: cover;
-    padding-bottom: 30px;
   width: 100vw;
+  height: 86vh;
 `;
 
 export const NavProfileDiv = styled.div`
@@ -71,6 +70,13 @@ export const ProfileEmailContent = styled.div`
   width: 99vw;
 `;
 
+export const DatailsMain = styled.main`
+  background-color: #EFEFEF;
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 30px;
+  width: 100vw;
+  `;
 export const ExploreContent = styled.div`
 background: 
     linear-gradient(
@@ -137,12 +143,12 @@ export const IngredientsBackground = styled.div`
     return 'url("https://content.paodeacucar.com/wp-content/uploads/2017/05/receitas-de-drinks-capa-2.jpg")';
   }};
     background-size: cover;
-    padding-bottom: 30px;
+    min-height: 76vh;
     width: 100vw;
     max-height: 150vh;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 10vh;
 `;

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;700&display=swap') ;
 
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap') ;
+
 * {
   border: 0;
   font-family: Commissioner , sans-serif;
@@ -8,15 +10,17 @@
   text-decoration: none;
 }
 
-.start-recipe, .finish-recipe {
+.finish-recipe {
   bottom: 0;
   left: 0;
   position: fixed;
 }
 
 .horizontal-slider {
+  background-color: white;
   display: block;
   overflow-x: scroll;
+  padding: 3vh 0;
   white-space: nowrap;
   width: 100%;
 }
@@ -28,6 +32,7 @@
 }
 
 .recomendation-card img {
+  border-radius: 3px;
   width: 150px;
 }
 
@@ -64,6 +69,18 @@ header > button {
   to { transform: scale(1); }
 }
 
+@keyframes popoutDetailBtn {
+
+  from { transform: scale(0); }
+
+  70% { transform: scale(0);}
+
+  80% { transform: scale(1.2); }
+
+  to { transform: scale(1); }
+}
+
+
 @keyframes fade {
 
   0%, 50% {
@@ -72,7 +89,7 @@ header > button {
   }
 }
 
-@keyframes slideIn {
+@keyframes slideRight {
 
   from {
     opacity: 0.3;
@@ -82,5 +99,40 @@ header > button {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes slideTop {
+
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+
+  from {
+    opacity: 0.3;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

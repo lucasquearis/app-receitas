@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { IngredintSection, IngredientH3, IngredintLi, Div } from './styles';
 
 function Ingredients({ recipe }) {
   const ingredients = [];
@@ -19,16 +20,21 @@ function Ingredients({ recipe }) {
   }
 
   return (
-    <section>
-      <h3>Ingredientes</h3>
-      <ul>
-        {ingredients.map((ingredient, index) => (
-          <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`${ingredient} - ${measures[index]}`}
-          </li>
-        ))}
-      </ul>
-    </section>
+    <IngredintSection>
+      <Div>
+        <IngredientH3>Ingredientes</IngredientH3>
+        <ul>
+          {ingredients.map((ingredient, index) => (
+            <IngredintLi
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {`${ingredient} - ${measures[index]}`}
+            </IngredintLi>
+          ))}
+        </ul>
+      </Div>
+    </IngredintSection>
   );
 }
 

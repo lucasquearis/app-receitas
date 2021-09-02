@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import propTypes from 'prop-types';
 import { RecipeDetails } from '../components';
 import UseRecomendationRecipes from '../hook/UseRecomendationRecipes';
+import { DatailsMain } from '../UI globalStyles';
 
 function MealDetails({ match: { params: { id } } }) {
   const dispatch = useDispatch();
@@ -24,13 +25,13 @@ function MealDetails({ match: { params: { id } } }) {
   }, [dispatch]);
 
   return (
-    <main>
+    <DatailsMain>
       { recipe.map((oneRecipe) => (
         <RecipeDetails key="0" recipe={ oneRecipe } type="Meal" />)) }
       <section className="horizontal-slider">
         {recomendation}
       </section>
-    </main>
+    </DatailsMain>
   );
 }
 

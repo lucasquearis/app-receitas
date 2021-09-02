@@ -24,7 +24,6 @@ function SelectArea({ setArea }) {
       </SelectOrigin>
     );
   }
-  return (<p>Loading Areas...</p>);
 }
 
 SelectArea.propTypes = {

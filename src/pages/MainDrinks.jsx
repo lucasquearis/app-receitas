@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { requestCategoryList } from '../redux/actions/fetchActions';
-import { Header, RecipeList, Footer, CategoryFilter } from '../components';
+import { Header, RecipeList, Footer, CategoryFilter, Loading } from '../components';
 import UseInitialRecipes from '../hook/UseInitialRecipes';
 import { MainBackGround } from '../UI globalStyles';
 
@@ -21,6 +21,16 @@ function MainDrinks() {
   if (recipes.drinks && recipes.drinks.length === 1 && filter === 'searchBar') {
     const drinkId = recipes.drinks[0].idDrink;
     return <Redirect to={ `/bebidas/${drinkId}` } />;
+  }
+  if (!recipes.drinks) {
+    return (
+      <div>
+        <Header title="Comidas" searchIcon />
+        <MainBackGround>
+          <Loading />
+        </MainBackGround>
+      </div>
+    );
   }
   return (
     <div>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ListSection = styled.section`
   width: 100vw;
-  min-height: 80vh;
+  min-height: 86vh;
   max-height: 150vh;
 `;
 

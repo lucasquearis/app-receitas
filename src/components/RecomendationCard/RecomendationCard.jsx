@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import H4 from './styles';
 
 const RecomendationCard = ({ recipe, index }) => (
   <section data-testid={ `${index}-recomendation-card` } className="recomendation-card">
     <img
-      // style={ { width: '90px' } }
       src={ recipe.strMealThumb || recipe.strDrinkThumb }
       alt="food thumb"
     />
-    <h4 data-testid={ `${index}-recomendation-title` }>
+    <H4 data-testid={ `${index}-recomendation-title` }>
       {recipe.strMeal || recipe.strDrink}
-    </h4>
+    </H4>
   </section>
 );
 

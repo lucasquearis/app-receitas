@@ -12,7 +12,7 @@ export const SearchBarForm = styled.form`
   position: fixed;
   top: 14vh;
   z-index: 1000;
-  animation: slideIn 500ms;
+  animation: slideRight 500ms;
   color: white;
 `;
 

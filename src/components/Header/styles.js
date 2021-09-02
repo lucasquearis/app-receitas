@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderSection = styled.header`
   background-color: rgba(215, 133, 33, 1);
-  padding: 2vw;
+  padding: 1vh 2vw;
   width: 96vw;
   height: 12vh;
   display: flex;

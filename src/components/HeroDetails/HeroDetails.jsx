@@ -5,6 +5,8 @@ import shareIconImg from '../../images/shareIcon.svg';
 import UseFavorite from '../../hook/UseFavorite';
 import ModalCopy from '../ModalCopy/ModalCopy';
 import UseModal from '../../hook/UseModal';
+import { DetailImg, DetailBar, DetailName, DetailCategory,
+  DetailBarIcon, LeftHeroDiv, BtnDiv } from './styles';
 
 function HeroDetails({ recipe, type }) {
   const { changeFavorite, heart } = UseFavorite(recipe);
@@ -17,43 +19,59 @@ function HeroDetails({ recipe, type }) {
 
   return (
     <section>
-      <img
+      <DetailImg
         src={ recipe[`str${type}Thumb`] }
         alt="recipe"
         data-testid="recipe-photo"
         width="100px"
         height="100px"
       />
-      <h2 data-testid="recipe-title">{recipe[`str${type}`]}</h2>
-      <button
-        src={ shareIconImg }
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => copyLink() }
-      >
-        <img src={ shareIconImg } alt="share-button" width="20px" height="20px" />
-      </button>
-      <Modal
-        isOpen={ modalIsOpen }
-        onRequestClose={ closeModal }
-        style={ customStyles }
-        contentLabel="Example Modal"
-      >
-        <ModalCopy />
-      </Modal>
-      <button
-        src={ heart }
-        type="button"
-        data-testid="favorite-btn"
-        onClick={ () => changeFavorite() }
-      >
-        <img src={ heart } alt="favorite-button" width="20px" height="20px" />
-      </button>
-      <h3 data-testid="recipe-category">
-        {recipe.strCategory}
-        {'  '}
-        {recipe.strAlcoholic}
-      </h3>
+      <DetailBar>
+        <LeftHeroDiv>
+          <DetailName data-testid="recipe-title">{recipe[`str${type}`]}</DetailName>
+          <DetailCategory data-testid="recipe-category">
+            {recipe.strCategory}
+            {'  '}
+            {recipe.strAlcoholic}
+          </DetailCategory>
+        </LeftHeroDiv>
+        <BtnDiv>
+          <button
+            src={ shareIconImg }
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => copyLink() }
+          >
+            <DetailBarIcon
+              src={ shareIconImg }
+              alt="share-button"
+              width="20px"
+              height="20px"
+            />
+          </button>
+          <Modal
+            isOpen={ modalIsOpen }
+            onRequestClose={ closeModal }
+            style={ customStyles }
+            contentLabel="Example Modal"
+          >
+            <ModalCopy />
+          </Modal>
+          <button
+            src={ heart }
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ () => changeFavorite() }
+          >
+            <DetailBarIcon
+              src={ heart }
+              alt="favorite-button"
+              width="20px"
+              height="20px"
+            />
+          </button>
+        </BtnDiv>
+      </DetailBar>
     </section>
   );
 }

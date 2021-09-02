@@ -30,7 +30,6 @@ function ExploreIngredients({ path }) {
         image={ ingredientImgUrl(strIngredient, path) }
       />)));
   }
-  return (<h1>LOADING...</h1>);
 }
 
 ExploreIngredients.propTypes = {
