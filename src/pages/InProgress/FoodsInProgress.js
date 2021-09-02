@@ -128,8 +128,8 @@ function FoodsInProgress() {
           alcoholicOrNot: '',
           name: strMeal,
           image: strMealThumb,
-          // doneDate,
-          // tags
+          doneDate: '',
+          tags:
         } }
       />
 

@@ -1,4 +1,5 @@
 import React/* , { useState } */ from 'react';
+// import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 function FavoriteRecipes() {
@@ -19,13 +20,16 @@ function FavoriteRecipes() {
 
       <div>
         { favoritesLocalStorage.map((favorite, index) => (
-          <div key={ favoritesLocalStorage.id }>
-            {/* <Link to={path...}> */}
+          <div key={ favorite.id }>
+            {/* <Link to={ }> */}
             <img
               data-testid={ `${index}-horizontal-image` }
               src={ favorite.image }
               alt={ favorite.name }
+              style={ { width: '100vw' } }
             />
+            <h4 data-testid={ `${index}-horizontal-top-text` }>{ favorite.category }</h4>
+
             {/* </Link> */}
           </div>
 
