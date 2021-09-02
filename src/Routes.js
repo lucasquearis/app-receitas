@@ -8,16 +8,16 @@ export default function Routes() {
       <Switch>
         <Route
           path="/explorar/bebidas/ingredientes"
-          component={ Pages.ExploreDrinkByIngredients }
+          component={ Pages.ExploreByIngredients }
         />
         <Route
           path="/explorar/comidas/ingredientes"
-          component={ Pages.ExploreFoodByIngredients }
+          component={ Pages.ExploreByIngredients }
         />
         <Route path="/explorar/comidas/area" component={ Pages.ExploreByLocation } />
         <Route path="/bebidas/:id/in-progress" component={ Pages.RecipesInProgress } />
         <Route path="/comidas/:id/in-progress" component={ Pages.RecipesInProgress } />
-        <Route path="/receitas-favoritas" component={ Pages.FavorieRecipes } />
+        <Route path="/receitas-favoritas" component={ Pages.FavoriteRecipes } />
         <Route path="/receitas-feitas" component={ Pages.DoneRecipes } />
         <Route path="/bebidas/:id" component={ Pages.DetailsPage } />
         <Route path="/comidas/:id" component={ Pages.DetailsPage } />
