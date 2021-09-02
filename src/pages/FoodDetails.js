@@ -2,20 +2,21 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
-
 import Carousel from 'react-multi-carousel';
 import FoodContext from '../context/FoodContext';
 import fetchMealDetailsApi from '../services/fetchMealDetailsApi';
 import DrinksContext from '../context/DrinksContext';
 import DrinkRecomendationCard from '../components/DrinkRecomendationCard';
-import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import Copy from '../components/Clipboard-Copy';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
+import getFavoriteFood from '../util/getFavoriteFood';
+import onFavoriteFood from '../util/onFavoriteFood';
+import Copy from '../components/Clipboard-Copy';
 import getFavorite from '../util/getFavorite';
+import './details.css';
 
 const FoodDetails = () => {
   const history = useHistory();
@@ -32,36 +33,6 @@ const FoodDetails = () => {
   const [showMsg, setShowMsg] = useState(false);
   const RECOMENDATION_CARDS = 6;
 
-  function onFavorite() {
-    setFavorite(!favorite);
-
-    const {
-      idMeal: id,
-      strCategory: category,
-      strArea: area,
-      strMeal: name,
-      strMealThumb: image,
-    } = foodDetails[0];
-
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'comida', area, category, alcoholicOrNot: '', name, image };
-
-    if (actualStorage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-
-    if (!favorite) {
-      actualStorage.push(item);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
-    } else {
-      const newStorage = actualStorage.filter(
-        (favoriteItem) => favoriteItem.id !== item.id,
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-  }
-
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
 
   const copy = (path) => {
@@ -75,6 +46,7 @@ const FoodDetails = () => {
 
   useEffect(() => {
     getFavorite(foodDetails, setFavorite);
+    getFavoriteFood(foodDetails, setFavorite);
     getIngredients(foodDetails, setIngredients);
     getMeasure(foodDetails, setMeasures);
   }, [foodDetails]);
@@ -131,7 +103,7 @@ const FoodDetails = () => {
             </button>
             <button
               type="button"
-              onClick={ onFavorite }
+              onClick={ () => onFavoriteFood(foodDetails, setFavorite, favorite) }
               key={ blackHeartIcon }
             >
               <img

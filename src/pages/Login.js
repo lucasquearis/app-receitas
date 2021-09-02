@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import './login.css';
 
 function Login({ history }) {
   const [loginState, setLoginState] = useState({ email: '', password: '' });
@@ -42,28 +43,30 @@ function Login({ history }) {
   };
 
   return (
-    <>
-      <Input
-        type="text"
-        name="email"
-        datatestId="email-input"
-        placeH="Insira o seu e-mail:"
-        onChange={ (e) => handleChange(e) }
-      />
-      <Input
-        type="password"
-        name="password"
-        datatestId="password-input"
-        placeH="Insira a sua senha:"
-        onChange={ (e) => handleChange(e) }
-      />
-      <Button
-        btnText="Entrar"
-        disabled={ disabled }
-        onClick={ () => handleClick() }
-        datatestId="login-submit-btn"
-      />
-    </>
+    <div className="container-root">
+      <div className="login-container">
+        <Input
+          type="text"
+          name="email"
+          datatestId="email-input"
+          placeH="Insira o seu e-mail:"
+          onChange={ (e) => handleChange(e) }
+        />
+        <Input
+          type="password"
+          name="password"
+          datatestId="password-input"
+          placeH="Insira a sua senha:"
+          onChange={ (e) => handleChange(e) }
+        />
+        <Button
+          btnText="Entrar"
+          disabled={ disabled }
+          onClick={ () => handleClick() }
+          datatestId="login-submit-btn"
+        />
+      </div>
+    </div>
   );
 }
 

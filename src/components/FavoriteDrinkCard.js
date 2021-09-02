@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './favoriteFoodCard.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
 import Copy from './Clipboard-Copy';
+import './favoriteFoodCard.css';
 
 const FavoriteDrinkCard = ({ recipe, index }) => {
   const { id, image, name, alcoholicOrNot } = recipe;

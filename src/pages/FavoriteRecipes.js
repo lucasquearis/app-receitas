@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FoodContext from '../context/FoodContext';
 import Button from '../components/Button';
 import FavoriteFoodCard from '../components/FavoriteFoodCard';
@@ -12,7 +13,11 @@ const FavoriteRecipes = () => {
 
   useEffect(() => {
     const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    setStorage(actualStorage);
+    let storageItems = '';
+    if (actualStorage) {
+      storageItems = actualStorage;
+    }
+    setStorage(storageItems);
   }, [changed]);
 
   const filterStorage = () => {
@@ -33,9 +38,11 @@ const FavoriteRecipes = () => {
   return (
     <div>
       <div>
-        <button type="button">
-          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-        </button>
+        <Link to="/perfil">
+          <button type="button">
+            <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+          </button>
+        </Link>
         <h2 data-testid="page-title">Receitas Favoritas</h2>
       </div>
       <div>

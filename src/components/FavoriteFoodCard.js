@@ -11,7 +11,7 @@ import Copy from './Clipboard-Copy';
 const FavoriteFoodCard = ({ recipe, index }) => {
   const { id, image, name, area, category } = recipe;
   const [favorite, setFavorite] = useState(true);
-  const [copy, setCopy] = useState('');
+  const [copy, setCopy] = useState(false);
   const { changed, setChanged } = useContext(FoodContext);
 
   function DetailUrl() {

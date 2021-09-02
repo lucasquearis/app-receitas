@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import HeaderDrinks from '../components/HeaderDrinks';
+import Header from '../components/Header';
 import DrinksCard from '../components/DrinksCard';
 import DrinksContext from '../context/DrinksContext';
 import FooterMenu from '../components/FooterMenu';
@@ -21,7 +21,7 @@ const Drinks = () => {
 
   return (
     <div className="container">
-      <HeaderDrinks />
+      <Header title="Bebidas" />
 
       <ButtonCategoriesDrinks categories={ categoriesDrinks } />
 

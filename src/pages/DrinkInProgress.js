@@ -10,6 +10,9 @@ import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
 import getFavorite from '../util/getFavorite';
 // import Copy from '../components/Clipboard-Copy';
+import getFavoriteDrink from '../util/getFavoriteDrink';
+import onFavoriteDrink from '../util/onFavoriteDrink';
+import Copy from '../components/Clipboard-Copy';
 
 const DrinkInProgress = () => {
   const history = useHistory();
@@ -21,36 +24,15 @@ const DrinkInProgress = () => {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
-  const [showMsg] = useState(false);
 
-  function onFavorite() {
-    setFavorite(!favorite);
+  const [showMsg, setShowMsg] = useState(false);
 
-    const {
-      idDrink: id,
-      strCategory: category,
-      strAlcoholic: alcoholicOrNot,
-      strDrink: name,
-      strDrinkThumb: image,
-    } = drinkDetails[0];
-
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'comida', area: '', category, alcoholicOrNot, name, image };
-
-    if (actualStorage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-
-    if (!favorite) {
-      actualStorage.push(item);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
-    } else {
-      const newStorage = actualStorage.filter(
-        (favoriteItem) => favoriteItem.id !== item.id,
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
+  function DetailUrl() {
+    const url = window.location.href;
+    const splitUrl = url.split('/');
+    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/bebidas/${actualPath}`;
+    Copy(detailUrl);
+    setShowMsg(true);
   }
 
   useEffect(() => {
@@ -59,6 +41,7 @@ const DrinkInProgress = () => {
 
   useEffect(() => {
     getFavorite(drinkDetails, setFavorite);
+    getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
@@ -88,13 +71,13 @@ const DrinkInProgress = () => {
                   type="button"
                   data-testid="share-btn"
                   key={ shareIcon }
-                //   onClick={ () => copy() }
+                  onClick={ DetailUrl }
                 >
                   <img src={ shareIcon } alt="share-icon" />
                 </button>
                 <button
                   type="button"
-                  onClick={ onFavorite }
+                  onClick={ () => onFavoriteDrink(drinkDetails, setFavorite, favorite) }
                   key={ blackHeartIcon }
                 >
                   <img
@@ -139,5 +122,4 @@ const DrinkInProgress = () => {
     </div>
   );
 };
-
 export default DrinkInProgress;

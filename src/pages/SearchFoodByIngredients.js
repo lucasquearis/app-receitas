@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import FooterMenu from '../components/FooterMenu';
 import profileIcon from '../images/profileIcon.svg';
 import FoodContext from '../context/FoodContext';
@@ -10,11 +11,14 @@ const SearchFoodByIngredients = () => {
 
   return (
     <div>
-      <button type="button">
-        { console.log(ingredients)}
-        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      </button>
-      <p data-testid="page-title">Explorar Ingredientes</p>
+      <header>
+        <Link to="/perfil">
+          <button type="button">
+            <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+          </button>
+        </Link>
+        <p data-testid="page-title">Explorar Ingredientes</p>
+      </header>
       { ingredients.slice(0, NUMBER_OF_CARDS).map((ingredient, index) => (
         <IngredientCard
           key={ index }

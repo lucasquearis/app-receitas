@@ -1,19 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import DrinksContext from '../context/DrinksContext';
 import fetchDrinkDetailsApi from '../services/fetchDrinkDetailsApi';
 import FoodRecomendationCard from '../components/FoodRecomendationCard';
-import './details.css';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import FoodContext from '../context/FoodContext';
-import Copy from '../components/Clipboard-Copy';
 import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
+import getFavoriteDrink from '../util/getFavoriteDrink';
+import onFavoriteDrink from '../util/onFavoriteDrink';
+import Copy from '../components/Clipboard-Copy';
 import getFavorite from '../util/getFavorite';
+import './details.css';
 
 const DrinkDetails = () => {
   const history = useHistory();
@@ -30,35 +33,6 @@ const DrinkDetails = () => {
   const [showMsg, setShowMsg] = useState(false);
   const RECOMENDATION_CARDS = 6;
 
-  function onFavorite() {
-    setFavorite(!favorite);
-
-    const {
-      idDrink: id,
-      strCategory: category,
-      strAlcoholic: alcoholicOrNot,
-      strDrink: name,
-      strDrinkThumb: image,
-    } = drinkDetails[0];
-
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'bebida', area: '', category, alcoholicOrNot, name, image };
-    if (actualStorage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-
-    if (!favorite) {
-      actualStorage.push(item);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
-    } else {
-      const newStorage = actualStorage.filter(
-        (favoriteItem) => favoriteItem.id !== item.id,
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-  }
-
   const copy = () => {
     Copy(url);
     setShowMsg(true);
@@ -70,6 +44,7 @@ const DrinkDetails = () => {
 
   useEffect(() => {
     getFavorite(drinkDetails, setFavorite);
+    getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
@@ -101,6 +76,7 @@ const DrinkDetails = () => {
           strCategory,
           strInstructions,
           strAlcoholic,
+          idDrink,
         }, i) => (
           <div key={ i }>
             <img
@@ -123,7 +99,7 @@ const DrinkDetails = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={ onFavorite }
+                  onClick={ () => onFavoriteDrink(drinkDetails, setFavorite, favorite) }
                   key={ blackHeartIcon }
                 >
                   <img
@@ -162,14 +138,16 @@ const DrinkDetails = () => {
                 <FoodRecomendationCard key={ index } recipe={ recipe } index={ index } />
               ))}
             </Carousel>
-            <button
-              data-testid="start-recipe-btn"
-              key={ i }
-              type="button"
-              className="start-recipe-btn"
-            >
-              Iniciar receita
-            </button>
+            <Link to={ `/bebidas/${idDrink}/in-progress` }>
+              <button
+                data-testid="start-recipe-btn"
+                key={ i }
+                type="button"
+                className="start-recipe-btn"
+              >
+                Iniciar receita
+              </button>
+            </Link>
           </div>))
       }
     </div>

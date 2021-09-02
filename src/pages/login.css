@@ -1,0 +1,54 @@
+.container-root {
+  background: url("../images/recipes-app.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+  height: 100vh;
+}
+
+.login-container {
+  align-items: center;
+  background-color: #f8f4f0;
+  border: 1px solid #1f1f1f;
+  border-radius: 8px;
+  bottom: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: -240px;
+  max-width: 360px;
+  opacity: 0.9;
+  padding: 16px;
+}
+
+.login-container input {
+  border: 1px solid #1f1f1f;
+  border-radius: 6px;
+  background-color: #f8f4f0;
+  color: #241d1d;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 8px 0;
+  outline: none;
+  padding: 4px 8px;
+  width: 240px;
+}
+
+.login-container button {
+  background-color: #e7361f;
+  border: 1px solid #e7361f;
+  border-radius: 4px;
+  color: #f8f8f8;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 8px 0;
+  padding: 4px;
+  transition: background-color 0.2s;
+  width: 240px;
+}
+
+.login-container button:hover {
+  background-color: #ac2917;
+}

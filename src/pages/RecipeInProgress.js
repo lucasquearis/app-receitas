@@ -10,6 +10,9 @@ import getIngredients from '../util/getIngredients';
 import getMeasure from '../util/getMeasures';
 import getFavorite from '../util/getFavorite';
 // import Copy from '../components/Clipboard-Copy';
+import getFavoriteFood from '../util/getFavoriteFood';
+import onFavoriteFood from '../util/onFavoriteFood';
+import Copy from '../components/Clipboard-Copy';
 
 const RecipeInProgress = () => {
   const history = useHistory();
@@ -21,36 +24,15 @@ const RecipeInProgress = () => {
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
-  const [showMsg] = useState(false);
 
-  function onFavorite() {
-    setFavorite(!favorite);
+  const [showMsg, setShowMsg] = useState(false);
 
-    const {
-      idMeal: id,
-      strCategory: category,
-      strArea: area,
-      strMeal: name,
-      strMealThumb: image,
-    } = foodDetails[0];
-
-    const actualStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const item = { id, type: 'comida', area, category, alcoholicOrNot: '', name, image };
-
-    if (actualStorage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([item]));
-      return;
-    }
-
-    if (!favorite) {
-      actualStorage.push(item);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(actualStorage));
-    } else {
-      const newStorage = actualStorage.filter(
-        (favoriteItem) => favoriteItem.id !== item.id,
-      );
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
+  function DetailUrl() {
+    const url = window.location.href;
+    const splitUrl = url.split('/');
+    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/comidas/${actualPath}`;
+    Copy(detailUrl);
+    setShowMsg(true);
   }
 
   useEffect(() => {
@@ -59,6 +41,7 @@ const RecipeInProgress = () => {
 
   useEffect(() => {
     getFavorite(foodDetails, setFavorite);
+    getFavoriteFood(foodDetails, setFavorite);
     getIngredients(foodDetails, setIngredients);
     getMeasure(foodDetails, setMeasures);
   }, [foodDetails]);
@@ -80,30 +63,30 @@ const RecipeInProgress = () => {
               data-testid="recipe-photo"
               className="details-image"
             />
-            <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
-            <button
-              type="button"
-              data-testid="share-btn"
-              key={ shareIcon }
-            >
-              <img
-                src={ shareIcon }
-                alt="share-icon"
-                className="detail-img-btn"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={ onFavorite }
-              key={ blackHeartIcon }
-            >
-              <img
-                data-testid="favorite-btn"
-                className="detail-img-btn"
-                src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite-icon"
-              />
-            </button>
+            <div className="details-buttons">
+              <h1 key={ strMeal } data-testid="recipe-title">{strMeal}</h1>
+              <div>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  key={ shareIcon }
+                  onClick={ DetailUrl }
+                >
+                  <img src={ shareIcon } alt="share-icon" />
+                </button>
+                <button
+                  type="button"
+                  onClick={ () => onFavoriteFood(foodDetails, setFavorite, favorite) }
+                  key={ blackHeartIcon }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    src={ (favorite) ? blackHeartIcon : whiteHeartIcon }
+                    alt="favorite-icon"
+                  />
+                </button>
+              </div>
+            </div>
             { showMsg && <p>Link copiado!</p> }
             <h2 data-testid="recipe-category" key={ strCategory }>{strCategory}</h2>
             <h3>Ingredients</h3>
@@ -116,6 +99,7 @@ const RecipeInProgress = () => {
                       data-testid={ `${index}-ingredient-step` }
                     >
                       <input type="checkbox" id={ item } name={ item } />
+                      <input type="checkbox" id={ item } name={ item } value={ item } />
                       {`${item} - ${measures[0][index]}`}
                     </li>
                   )))

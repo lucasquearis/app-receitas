@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import HeaderFood from '../components/HeaderFood';
+import Header from '../components/Header';
 import FooterMenu from '../components/FooterMenu';
 import './recipes.css';
 import RecipeCard from '../components/RecipeCard';
@@ -21,7 +21,7 @@ const Recipes = () => {
 
   return (
     <div className="container">
-      <HeaderFood />
+      <Header title="Comidas" />
 
       <ButtonCategories categories={ categoriesMeal } />
 
