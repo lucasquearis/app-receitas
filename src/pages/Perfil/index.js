@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
-import MenuInferior from '../../components/MenuInferior';
+import FooterBar from '../../components/FooterBar';
 
 function Perfil() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -46,7 +46,7 @@ function Perfil() {
         >
           Sair
         </button>
-        <MenuInferior />
+        <FooterBar />
       </Link>
     </div>
   );
