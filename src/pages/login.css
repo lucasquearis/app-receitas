@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 200px;
-  justify-content: center ;
+  justify-content: center;
   text-align: center;
   width: 200px;
 }
@@ -60,6 +60,6 @@ body {
 }
 
 .input-login:focus {
-  box-shadow: 2px 2px 5px #673;
   border: 1px solid #673;
+  box-shadow: 2px 2px 5px #673;
 }

@@ -1,8 +1,9 @@
 body {
   background-color: rgba(255, 187, 51, 0.144);
   color: #350;
-  font-family: 'Poppins', sans-serif;
+  font-family: Poppins , sans-serif;
 }
+
 .container-header {
   align-items: center;
   background-color: #f71;
@@ -17,7 +18,7 @@ body {
 }
 
 .header-title {
-  font-family: 'Rochester', cursive;
+  font-family: Rochester , cursive;
   font-size: 30px;
 }
 

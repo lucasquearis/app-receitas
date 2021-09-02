@@ -1,9 +1,9 @@
 .filter-food {
   align-items: center;
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
   height: 50px;
+  justify-content: space-evenly;
   width: 100%;
 }
 

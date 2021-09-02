@@ -31,3 +31,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 30%;
   border: 2px solid aqua;
 }
+
+#root {
+  height: 100%;
+}

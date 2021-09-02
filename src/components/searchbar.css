@@ -7,8 +7,8 @@ body {
   background-color: #fe7f1886;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100px;
+  justify-content: space-between;
 }
 
 .nav-search label {
@@ -19,25 +19,25 @@ body {
   border: 1px solid black;
   border-radius: 5px;
   height: 30px;
+  margin-top: 5px;
   outline: none;
   padding: 10px;
   width: 100%;
-  margin-top: 5px;
 }
 
 .searchbar-btn {
   background-color: #673;
   border: none;
   border-radius: 5px;
+  box-shadow: 2px 2px 5px gray;
   color: white;
   padding: 8px;
   width: 70%;
-  box-shadow: 2px 2px 5px gray;
 }
 
 .input-searchbar:focus {
-  box-shadow: 2px 2px 5px #673;
   border: 1px solid #673;
+  box-shadow: 2px 2px 5px #673;
 }
 
 .nav-search div {

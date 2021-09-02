@@ -1,20 +1,16 @@
-#root {
-  height: 100%;
-}
-
 .loading-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%;
+  justify-content: center;
   width: 100vw;
 }
 
 .logo-container {
   animation: degrade infinite ease 1s;
-  overflow: hidden;
   margin-left: 32.5vw;
   max-width: 35vw;
+  overflow: hidden;
   transition: 0.5s;
 }
 
