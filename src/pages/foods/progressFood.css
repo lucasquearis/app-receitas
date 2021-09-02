@@ -49,7 +49,10 @@
 }
 
 .progress-food-ingredients {
+  background-color: #fed;
+  margin: 20px auto;
   padding: 10px;
+  width: 95%;
 }
 
 .progress-food-ingredients li {
