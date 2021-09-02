@@ -41,6 +41,23 @@
   text-decoration: line-through solid;
 }
 
+.div-header {
+  background-color: #ef6a07;
+  display:flex;
+  justify-content: space-around;
+  padding: 3vh 0;
+}
+
+.header-brn {
+  border-radius: 50px;
+  height: 7vh;
+}
+
+.header-title {
+  color: #fff;
+  font-weight: bold;
+}
+
 footer {
   background-color: lightblue;
   padding: 10px;
