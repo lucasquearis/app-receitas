@@ -15,55 +15,73 @@ function SearchBar() {
     });
   };
 
+  const optionChecked = () => {
+    if (state.radioSearch === undefined) {
+      /* eslint-disable */
+      alert('Necessário selecionar um tipo de pesquisa!');
+        /* eslint-enable */
+      return false;
+    }
+    if (state.inputSearch === undefined) {
+      /* eslint-disable */
+      alert('Necessário digitar pelo menos um caracter para pesquisa!');
+        /* eslint-enable */
+      return false;
+    }
+    if (state.inputSearch.length > 1 && state.radioSearch === 'firstLetter') {
+      /* eslint-disable */
+      alert('Sua busca deve conter somente 1 (um) caracter');
+       /* eslint-enable */
+      return false;
+    }
+    return true;
+  };
+
   const recipesSearch = async () => {
     // const contentSearch = state.inputSearch;
-    let results;
-    const typeSearch = state.radioSearch;
-    if (state.radioSearch === 'ingredient') {
-      results = await FetchSearch(pathname, typeSearch, state.inputSearch);
-      setState({
-        ...state, results,
-      });
-    }
-    if (state.radioSearch === 'name') {
-      results = await FetchSearch(pathname, typeSearch, state.inputSearch);
-      setState({
-        ...state, results,
-      });
-    }
-
-    if (state.radioSearch === 'firstLetter') {
-      if (state.inputSearch.length > 1) {
-        /* eslint-disable */
-        alert('Sua busca deve conter somente 1 (um) caracter');
-         /* eslint-enable */
-      } else {
+    if (optionChecked()) {
+      let results;
+      const typeSearch = state.radioSearch;
+      if (state.radioSearch === 'ingredient') {
         results = await FetchSearch(pathname, typeSearch, state.inputSearch);
         setState({
           ...state, results,
         });
       }
-    }
-    if (results) {
-      if (results.length === 1 && pathname.indexOf('comidas') >= 0) {
+      if (state.radioSearch === 'name') {
+        results = await FetchSearch(pathname, typeSearch, state.inputSearch);
         setState({
-          ...state, oneRecipe: results[0].idMeal,
+          ...state, results,
         });
       }
-      if (results.length === 1 && pathname.indexOf('bebidas') >= 0) {
+      if (state.radioSearch === 'firstLetter') {
+        results = await FetchSearch(pathname, typeSearch, state.inputSearch);
         setState({
-          ...state, oneRecipe: results[0].idDrink,
+          ...state, results,
         });
       }
-      const maxRecipes = 12;
-      setSearch(results.splice(0, maxRecipes));
-      setLoadSearch(true);
-    } else {
-      /* eslint-disable */
+      // console.log(results);
+      if (results) {
+        if (results.length === 1 && pathname.indexOf('comidas') >= 0) {
+          setState({
+            ...state, oneRecipe: results[0].idMeal,
+          });
+        }
+        if (results.length === 1 && pathname.indexOf('bebidas') >= 0) {
+          setState({
+            ...state, oneRecipe: results[0].idDrink,
+          });
+        }
+        const maxRecipes = 12;
+        setSearch(results.splice(0, maxRecipes));
+        setLoadSearch(true);
+      } else {
+        /* eslint-disable */
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-      /* eslint-enable */
+         /* eslint-enable */
+      }
+      return results;
     }
-    return results;
   };
 
   const redirectTo = () => {

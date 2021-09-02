@@ -18,7 +18,7 @@ function Explore() {
   }
   return (
     <>
-      <Header titlePage=" Explorar " />
+      <Header titlePage=" Bebidas " btSearch />
       <Button
         name="foods"
         variant="link"
