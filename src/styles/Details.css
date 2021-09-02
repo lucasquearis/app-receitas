@@ -1,3 +1,7 @@
+.recipe-photo {
+  width: 100vw;
+}
+
 .fave-btn {
   background: none;
   border: none;
@@ -24,9 +28,12 @@
   color: #eb6424;
 }
 
-.start-recipe-btn {
+.button-wrapper-details {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
   position: fixed;
-  top: 0;
+  width: 100vw;
 }
 
 h3 {
@@ -36,6 +43,7 @@ h3 {
 .carousel {
   background-color: black;
   color: white;
+  margin-bottom: 2em;
   padding: 20px;
   text-align: center;
 }

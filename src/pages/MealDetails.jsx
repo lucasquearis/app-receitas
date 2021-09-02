@@ -105,6 +105,7 @@ export default function MealDetails(props) {
     return (
       <main>
         <img
+          className="recipe-photo"
           data-testid="recipe-photo"
           alt="imagem da receita"
           src={ details.strMealThumb }
@@ -131,7 +132,7 @@ export default function MealDetails(props) {
         <div data-testid="video">
           <iframe
             title="recipe title"
-            width="420"
+            width="360"
             height="315"
             src={ `https://youtube.com/embed/${getYouTubeId(details.strYoutube)}` }
           />
@@ -151,7 +152,7 @@ export default function MealDetails(props) {
             ))
           }
         </Carousel>
-        <div className="button-wrapper">
+        <div className="button-wrapper-details">
           <Link to={ `/comidas/${props.match.params.id}/in-progress` }>
             <button
               type="button"

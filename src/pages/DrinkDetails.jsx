@@ -94,6 +94,7 @@ export default function DrinkDetails(props) {
     return (
       <main>
         <img
+          className="recipe-photo"
           data-testid="recipe-photo"
           alt="imagem da receita"
           src={ details.strDrinkThumb }
@@ -135,16 +136,17 @@ export default function DrinkDetails(props) {
             ))
           }
         </Carousel>
-        <Link to={ `/bebidas/${props.match.params.id}/in-progress` }>
-          <button
-            type="button"
-            className="start-recipe-btn"
-            data-testid="start-recipe-btn"
-            onClick={ handleStartRecipe }
-          >
-            { verifyIfRecipeInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
-          </button>
-        </Link>
+        <div className="button-wrapper-details">
+          <Link to={ `/bebidas/${props.match.params.id}/in-progress` }>
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              onClick={ handleStartRecipe }
+            >
+              { verifyIfRecipeInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
+            </button>
+          </Link>
+        </div>
       </main>
     );
   }
