@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { requestByIngredient } from '../../../redux/actions/fetchActions';
 import { changeFilterType } from '../../../redux/actions/filterAction';
+import { CardH2, CardImg, CardSection } from './styles';
 
 function IngredientsCard({ name, i, image, path }) {
   const dispatch = useDispatch();
@@ -23,10 +24,10 @@ function IngredientsCard({ name, i, image, path }) {
   }
   return (
     <Link to={ pathCheck(path) } onClick={ handleClick }>
-      <div data-testid={ `${i}-ingredient-card` }>
-        <img src={ image } alt={ name } data-testid={ `${i}-card-img` } />
-        <h3 data-testid={ `${i}-card-name` }>{ name }</h3>
-      </div>
+      <CardSection data-testid={ `${i}-ingredient-card` }>
+        <CardImg src={ image } alt={ name } data-testid={ `${i}-card-img` } />
+        <CardH2 data-testid={ `${i}-card-name` }>{ name }</CardH2>
+      </CardSection>
     </Link>
   );
 }

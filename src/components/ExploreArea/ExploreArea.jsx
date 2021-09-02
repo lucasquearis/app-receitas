@@ -6,6 +6,7 @@ import {
   requestDefault } from '../../redux/actions/fetchActions';
 import SelectArea from './SelectArea/SelectArea';
 import RecipeList from '../RecipeList/RecipeList';
+import { ExploreAreaBackGround } from './styles';
 
 function ExploreArea() {
   const dispatch = useDispatch();
@@ -20,10 +21,10 @@ function ExploreArea() {
   });
 
   return (
-    <main>
+    <ExploreAreaBackGround>
       <SelectArea setArea={ setArea } />
       <RecipeList />
-    </main>
+    </ExploreAreaBackGround>
   );
 }
 

@@ -1,13 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { SelectOrigin } from '../styles';
 
 function SelectArea({ setArea }) {
   const areaList = useSelector(({ meals }) => meals.areas);
 
   if (areaList.meals) {
     return (
-      <select
+      <SelectOrigin
         data-testid="explore-by-area-dropdown"
         onChange={ ({ target }) => setArea(target.value) }
       >
@@ -20,7 +21,7 @@ function SelectArea({ setArea }) {
           >
             { strArea }
           </option>))}
-      </select>
+      </SelectOrigin>
     );
   }
   return (<p>Loading Areas...</p>);
