@@ -9,7 +9,7 @@ export default function ExplorarComidas() {
   const history = useHistory();
   const handleClick = async () => {
     const randomFetchFood = await fatchFoodSurprise();
-    const id = randomFetchFood[0].idFood;
+    const id = randomFetchFood[0].idMeal;
     history.push(`/comidas/${id}`);
   };
   return (
