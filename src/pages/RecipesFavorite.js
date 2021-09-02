@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FilterRecipesMade from '../components/FilterRecipesMade';
-import RecipesMadeList from '../components/RecipesMadeList';
+import RecipesFavoriteList from '../components/RecipesFavoriteList';
 
 class RecipesFavorite extends Component {
   constructor(props) {
@@ -10,15 +10,15 @@ class RecipesFavorite extends Component {
       doneRecipes: [],
     };
 
-    this.setDoneRecipes = this.setDoneRecipes.bind(this);
-    this.filterRecipesDone = this.filterRecipesDone.bind(this);
+    this.setFavoriteRecipes = this.setFavoriteRecipes.bind(this);
+    this.filterRecipesFavorite = this.filterRecipesFavorite.bind(this);
   }
 
   componentDidMount() {
-    this.setDoneRecipes();
+    this.setFavoriteRecipes();
   }
 
-  setDoneRecipes() {
+  setFavoriteRecipes() {
     const recipes = [
       {
         id: '52771',
@@ -47,24 +47,24 @@ class RecipesFavorite extends Component {
     this.setState({ doneRecipes: recipes });
   }
 
-  filterRecipesDone({ target }) {
+  filterRecipesFavorite({ target }) {
     const filterType = target.innerText;
 
     switch (filterType) {
     case 'All':
-      return this.setDoneRecipes();
+      return this.setFavoriteRecipes();
     case 'Foods':
-      this.setDoneRecipes();
+      this.setFavoriteRecipes();
       return this.setState((state) => ({
         doneRecipes: state.doneRecipes.filter(({ type }) => type === 'comida'),
       }));
     case 'Drinks':
-      this.setDoneRecipes();
+      this.setFavoriteRecipes();
       return this.setState((state) => ({
         doneRecipes: state.doneRecipes.filter(({ type }) => type === 'bebida'),
       }));
     default:
-      return this.setDoneRecipes();
+      return this.setFavoriteRecipes();
     }
   }
 
@@ -80,9 +80,9 @@ class RecipesFavorite extends Component {
       <div>
         <FilterRecipesMade
           categories={ categories }
-          handleClick={ this.filterRecipesDone }
+          handleClick={ this.filterRecipesFavorite }
         />
-        <RecipesMadeList recipes={ doneRecipes } />
+        <RecipesFavoriteList recipes={ doneRecipes } />
       </div>
     );
   }
