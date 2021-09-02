@@ -30,16 +30,18 @@ function IngredientsExploreFood() {
   return (
     <div>
       <Header title="Explorar Ingredientes das Comidas" />
-      {foodIngredients.slice(min, max)
-        .map(({ strIngredient: ingredient }, index) => (
-          <Link key={ index } to={ { pathname: '/comidas', state: { ingredient } } }>
-            <IngredientsCard
-              index={ index }
-              src={ foodImage(ingredient) }
-              name={ ingredient }
-            />
-          </Link>
-        ))}
+      <div className="image-div">
+        {foodIngredients.slice(min, max)
+          .map(({ strIngredient: ingredient }, index) => (
+            <Link key={ index } to={ { pathname: '/comidas', state: { ingredient } } }>
+              <IngredientsCard
+                index={ index }
+                src={ foodImage(ingredient) }
+                name={ ingredient }
+                />
+            </Link>
+          ))}
+        </div>
       <Footer />
     </div>
   );

@@ -59,6 +59,7 @@ function Search({ ingredient }) {
     <div className="search-open">
       <div className="search-input">
       <input
+        className="input-text"
         type="search"
         placeholder="Pesquisa"
         data-testid="search-input"

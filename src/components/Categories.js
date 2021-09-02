@@ -41,7 +41,7 @@ function Categories() {
   useEffect(didMountUpdate);
 
   return (
-    <div>
+    <div className="categories">
       <button
         class="btn btn-success"
         type="button"

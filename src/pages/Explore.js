@@ -7,17 +7,19 @@ function Explore() {
   return (
     <div>
       <Header title="Explorar" />
-      <Link to="/explorar/comidas">
-        <button type="button" data-testid="explore-food">
-          Explorar Comidas
-        </button>
-      </Link>
-      <Link to="/explorar/bebidas">
-        <button type="button" data-testid="explore-drinks">
-          Explorar Bebidas
-        </button>
-      </Link>
-      <Footer />
+      <div className="categories">
+        <Link to="/explorar/comidas">
+          <button className="btn btn-success" type="button" data-testid="explore-food">
+            Explorar Comidas
+          </button>
+        </Link>
+        <Link to="/explorar/bebidas">
+          <button className="btn btn-success" type="button" data-testid="explore-drinks">
+            Explorar Bebidas
+          </button>
+        </Link>
+        <Footer />
+      </div>
     </div>
   );
 }

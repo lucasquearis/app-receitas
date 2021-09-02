@@ -21,24 +21,27 @@ function ExploreFood() {
   return (
     <div>
       <Header title="Explorar Comidas" />
-      <Link to="/explorar/comidas/ingredientes">
-        <button type="button" data-testid="explore-by-ingredient">
-          Por Ingredientes
+      <div className="categories">
+        <Link to="/explorar/comidas/ingredientes">
+          <button className="btn btn-success" type="button" data-testid="explore-by-ingredient">
+            Por Ingredientes
+          </button>
+        </Link>
+        <Link to="/explorar/comidas/area">
+          <button className="btn btn-success" type="button" data-testid="explore-by-area">
+            Por Local de Origem
+          </button>
+        </Link>
+        <button
+          className="btn btn-success"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
         </button>
-      </Link>
-      <Link to="/explorar/comidas/area">
-        <button type="button" data-testid="explore-by-area">
-          Por Local de Origem
-        </button>
-      </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
-      <Footer />
+        <Footer />
+        </div>
     </div>
   );
 }

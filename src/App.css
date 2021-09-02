@@ -9,8 +9,8 @@
   justify-content: center;
   width: 100%;
 }
+
 .header-profile {
-  padding-left: 50px;
   display: flex;
   flex-direction: column;
   background-color: aquamarine;
@@ -20,11 +20,30 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  text-align: center;
+}
+
+.image-div {
+  text-align: center;
+}
+
+.image-section {
+  display: inline-block;
+  margin: 10px 10px;
+  text-align: center;
+}
+
+.ingredient-image {
+  text-align: center;
+  margin: 0 10px;
+  padding: 10px;
+  display: flex;
+  width: 250px;
+  box-shadow: 0px 0px 10px rgb(158, 156, 156);
 }
 
 .btn-success {
   margin: 10px 5px;
-  
 }
 
 /* 
@@ -93,20 +112,42 @@
     background-color: aquamarine;
   }
 
+  .search-input {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .cardFlex {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .radio-btn {
+    margin: 0 10px;
+  }
+
   .header-search {
     display: inline-block;
   }
-
+  
   .search-open {
     display: flex;
   }
 
-  .search-input {
-    display: inline-block;
+  .categories {
+    text-align: center;
   }
 
+  .input-text {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+  }
+  
   .search-radio {
     display: flex;
+    padding-top: 10px;
   }
 
   .header-title {
