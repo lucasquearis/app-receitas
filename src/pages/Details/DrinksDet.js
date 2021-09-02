@@ -3,7 +3,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useParams, Link } from 'react-router-dom';
-import { Image, Button } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import ShareButton from '../../components/ShareButton';
 import FavoriteButton from '../../components/FavoriteButton';
 
@@ -13,6 +13,11 @@ const responsive = {
     items: 2,
   },
 };
+
+// const teste = [{
+//   id: 15997,
+// }];
+// localStorage.setItem('doneRecipes', JSON.stringify(teste));
 
 function DrinksDetails() {
   const [recipesDrink, setRecipesDrink] = useState([{}]);
@@ -33,23 +38,27 @@ function DrinksDetails() {
   }, [id]);
 
   useEffect(() => {
-    const getIngredientsAndMeasures = () => {
-      const key = Object.keys(recipesDrink[0])
-        .filter((item) => item.includes('strIngredient'));
-      const ingredientNotEmpty = key
-        .filter((item) => recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null);
-      const ingredientsList = ingredientNotEmpty
-        .map((keyDrink) => recipesDrink[0][keyDrink]);
-      setIngredients(ingredientsList);
+    if (recipesDrink !== undefined) {
+      const getIngredientsAndMeasures = () => {
+        const key = Object.keys(recipesDrink[0])
+          .filter((item) => item.includes('strIngredient'));
+        const ingredientNotEmpty = key
+          .filter((item) => (
+            recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
+        const ingredientsList = ingredientNotEmpty
+          .map((keyDrink) => recipesDrink[0][keyDrink]);
+        setIngredients(ingredientsList);
 
-      const keyMeasure = Object.keys(recipesDrink[0])
-        .filter((item) => item.includes('strMeasure'));
-      const measureNoEmpty = keyMeasure
-        .filter((item) => recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null);
-      const measureList = measureNoEmpty.map((kMeasure) => recipesDrink[0][kMeasure]);
-      setMeasure(measureList);
-    };
-    getIngredientsAndMeasures();
+        const keyMeasure = Object.keys(recipesDrink[0])
+          .filter((item) => item.includes('strMeasure'));
+        const measureNoEmpty = keyMeasure
+          .filter((item) => (
+            recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
+        const measureList = measureNoEmpty.map((kMeasure) => recipesDrink[0][kMeasure]);
+        setMeasure(measureList);
+      };
+      getIngredientsAndMeasures();
+    }
   }, [recipesDrink]);
 
   useEffect(() => {
@@ -69,8 +78,9 @@ function DrinksDetails() {
   useEffect(() => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const filterDoneRecipes = getDoneRecipes ? getDoneRecipes
-      .filter((item) => item.id === parseInt(id, 10)) : [];
+      .filter((item) => console.log(item.id) === parseInt(id, 10)) : [];
     setDoneRecipes(filterDoneRecipes);
+    // console.log(filterDoneRecipes);
 
     const getInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const filterInProgress = getInProgress ? Object.keys(getInProgress.cocktails)
@@ -80,8 +90,7 @@ function DrinksDetails() {
 
   return (
     <div>
-      { console.log(recipesDrink) }
-      { recipesDrink && recipesDrink.map((item, index) => (
+      { recipesDrink !== undefined ? recipesDrink.map((item, index) => (
         <div key={ index }>
           <Image
             data-testid="recipe-photo"
@@ -129,18 +138,18 @@ function DrinksDetails() {
             )) }
           </Carousel>
           <Link to={ `/bebidas/${id}/in-progress` }>
-            <Button
+            <button
               type="button"
-              className="fixed-bottom"
+              style={ { position: 'fixed', bottom: 0 } }
               data-testid="start-recipe-btn"
               hidden={ doneRecipes.length !== 0 }
             >
               { inProgress.length !== 0
                 ? 'Continuar Receita' : 'Iniciar Receita' }
-            </Button>
+            </button>
           </Link>
         </div>
-      )) }
+      )) : <p>Loading...</p> }
     </div>
   );
 }
