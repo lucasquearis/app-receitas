@@ -19,5 +19,6 @@ export const ImgProfile = styled.img`
 
 export const HeaderTitle = styled.h1`
   color: white;
-  text-shadow: 2px 2px 4px black
+  text-shadow: 2px 2px 4px black;
+  text-align: center;
 `;
