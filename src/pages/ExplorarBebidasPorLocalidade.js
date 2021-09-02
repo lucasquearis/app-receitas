@@ -6,7 +6,7 @@ export default function ExplorarBebidasPorLocalidade() {
   return (
     <div>
       <Header>
-        Explorar Origem
+        Not Found
       </Header>
       <MenuInferior />
     </div>

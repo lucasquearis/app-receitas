@@ -1,4 +1,5 @@
 const amountRecommended = 6;
+const limitMealsArea = 27;
 const amountCategory = 5;
 const amount = 12;
 
@@ -91,4 +92,24 @@ export const fetchMealsIngredients = () => {
     .then((res) => res.json())
     .then((data) => data.meals)
     .catch((error) => error);
+};
+
+export const fetchMealsArea = () => {
+  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  return fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const dataMeals = data.meals;
+      return dataMeals.slice(0, limitMealsArea);
+    });
+};
+
+export const filterMealsArea = (origem) => {
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${origem}`;
+  return fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      const dataMeals = data.meals;
+      return dataMeals.slice(dataMeals, amount);
+    });
 };
