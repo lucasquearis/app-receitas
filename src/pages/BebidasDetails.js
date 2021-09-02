@@ -7,6 +7,7 @@ import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../styles/ComidasDetails.css';
 
 function BebidasDetails(props) {
   const { match: { params: { id } } } = props;
@@ -53,24 +54,25 @@ function BebidasDetails(props) {
     <Link
       data-testid="start-recipe-btn"
       to={ `/bebidas/${id}/in-progress` }
-      className="details-button"
+      className="details-button btn btn-info"
     >
       {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
     </Link>
   );
 
   return (
-    <main>
+    <main className="d-flex flex-column">
       <div>
         <img
           data-testid="recipe-photo"
           src={ drink.strDrinkThumb }
           alt="imagem do prato"
+          className="image-details-comida"
         />
       </div>
-      <div>
+      <div className="d-flex justify-content-between">
         <h1 data-testid="recipe-title">{drink.strDrink}</h1>
-        <div>
+        <div className="button-container-details">
           <button
             onClick={ handleShare }
             type="button"
@@ -93,31 +95,36 @@ function BebidasDetails(props) {
             />
           </button>
         </div>
-        <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-        <div>
-          <h3>Ingredients</h3>
-          <ul>
-            {
-              ingredients
-                .map((ingredient, index) => (
-                  <li
-                    key={ ingredient }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    { `${ingredient} - ${measures[index]}`}
-                  </li>))
-            }
-          </ul>
-        </div>
-        <div>
-          <h3>Instructions</h3>
-          <p data-testid="instructions">{ drink.strInstructions }</p>
-        </div>
-        <div>
-          <h3>Recomendadas</h3>
-          <div className="recomendations-container">
-            { renderRecomendationCard(meals, 'Meal').map((recipe) => recipe) }
-          </div>
+      </div>
+      <p
+        data-testid="recipe-category"
+        className="category-details-comidas"
+      >
+        {drink.strAlcoholic}
+      </p>
+      <div className="ingredients-details">
+        <h3>Ingredients</h3>
+        <ul>
+          {
+            ingredients
+              .map((ingredient, index) => (
+                <li
+                  key={ ingredient }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  { `${ingredient} - ${measures[index]}`}
+                </li>))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3>Instructions</h3>
+        <p data-testid="instructions">{ drink.strInstructions }</p>
+      </div>
+      <div className="ingredients-details">
+        <h3>Recomendadas</h3>
+        <div className="recomendations-container">
+          { renderRecomendationCard(meals, 'Meal', 'comidas').map((recipe) => recipe) }
         </div>
         { !done && link }
       </div>
