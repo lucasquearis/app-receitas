@@ -1,4 +1,5 @@
 .container-nav {
+  
   margin-top: 3px;
   margin-left: 3px;
   display: flex;
@@ -11,19 +12,31 @@
   font-family: "Hina Mincho", serif;
 }
 .img-busca {
-  background-color: transparent;
+  background-color:transparent;
+
   border-color: transparent;
   margin-left: 45%;
   margin-top: 3px;
 }
 
 .xadlkdksjfkl {
-  background-color: blue;
+  
+  background-color: transparent;
   align-items: center;
   display: flex;
   flex-direction: column;
 }
-.input-busca {
+.input-busca {  
   padding: 8px;
   width: 180px;
+}
+
+
+/* card */
+.aline-cards{
+  background-color: blue;
+}
+
+.img-cards{
+  width: 60px;
 }

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./LoginForm.css";
-import foodInternet from "../images/foodInternet.jpg";
 
 function Login() {
   const [email, setEmail] = useState([]);

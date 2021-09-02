@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import Provider from './context/Provider';
 import Routes from './Routes';
 // import rockGlass from './images/rockGlass.svg';

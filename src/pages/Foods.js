@@ -14,7 +14,7 @@ function Foods() {
     foodCategoryAPI } = useContext(Context);
   const { loading: loadcard } = foodRecipes;
   const { list: recipes } = foodRecipes;
-
+  // console.log(foodRecipes);
   useEffect(() => {
     if (loadcard) {
       requestCategory('https://www.themealdb.com/api/json/v1/1/search.php?s=', setFoodRecipes);
