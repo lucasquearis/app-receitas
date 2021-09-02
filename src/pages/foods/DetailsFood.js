@@ -6,8 +6,7 @@ import Ingredients from '../../components/Ingredients';
 import Instructions from '../../components/Instructions';
 import Video from '../../components/Video';
 import RecomendationsDrinks from '../../components/RecomendationsDrinks';
-import ShareIcon from '../../images/shareIcon.svg';
-import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import ShareButton from '../../components/shareButton';
 import fetchRecipes from '../../Redux/actions/fetchRecipes';
 import fetchDrinks from '../../Redux/actions/fetchDrinks';
 import './style.css';
@@ -70,20 +69,8 @@ class DetailsFood extends Component {
                 >
                   Iniciar Receita
                 </button>
-                <button type="button" className="share-fill">
-                  <img
-                    src={ ShareIcon }
-                    alt="share button"
-                    data-testid="share-btn"
-                  />
-                </button>
-                <button type="button" className="share-fill">
-                  <img
-                    src={ WhiteHeartIcon }
-                    alt="favorite button"
-                    data-testid="favorite-btn"
-                  />
-                </button>
+                <ShareButton />
+                {}
               </div>
             ))
           }

@@ -9,6 +9,7 @@ import Perfil from './pages/perfil/Profile';
 import DetailsFood from './pages/foods/DetailsFood';
 import RecipesInProgress from './pages/foods/RecipesInProgress';
 import DrinksInProgress from './pages/drinks/drinksInProgress';
+import FoodRecipesMade from './pages/foods/FoodRecipesMade';
 
 function App() {
   return (
@@ -44,8 +45,13 @@ function App() {
             <DrinksInProgress { ...props } />
           ) }
         />
+        <Route
+          exact
+          path="/receitas-feitas"
+          component={ FoodRecipesMade }
+        />
+        <Route exact path="/perfil" component={ Perfil } />
         <Route exact path="/" component={ Login } />
-        <Route path="/perfil" component={ Perfil } />
       </Switch>
     </div>
   );

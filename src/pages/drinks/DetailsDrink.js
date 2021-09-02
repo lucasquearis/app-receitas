@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import IngredientsDrink from '../../components/IngredientsDrink';
 import Instructions from '../../components/Instructions';
 import RecomendationsFoods from '../../components/RecomendationsFoods';
-import ShareIcon from '../../images/shareIcon.svg';
+import ShareButton from '../../components/shareButton';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
 import fetchMeals from '../../Redux/actions/fetchMeals';
@@ -72,9 +72,7 @@ class DetailsDrink extends Component {
                   >
                     Iniciar Receita
                   </button>
-                  <button type="button">
-                    <img src={ ShareIcon } alt="share button" data-testid="share-btn" />
-                  </button>
+                  <ShareButton />
                   <button type="button">
                     <img
                       src={ WhiteHeartIcon }

@@ -15,10 +15,16 @@
   background-color: rgba(255, 255, 255, 0.158);
   border-radius: 4px;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .remove-line {
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
+}
+
+.card-img {
+  width: 140px;
 }
