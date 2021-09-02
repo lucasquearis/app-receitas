@@ -11,7 +11,7 @@ function FoodIngredientesExplore() {
   };
   useEffect(() => {
     getIngredient();
-  }, [data]);
+  }, [setData]);
 
   const srcImg = (name) => `https://www.themealdb.com/images/ingredients/${name}-Small.png`;
 
@@ -19,7 +19,7 @@ function FoodIngredientesExplore() {
   return (
     <>
       {data
-        .filter((_, item) => (item < MNumber))
+        .slice(0, MNumber)
         .map(({ strIngredient, idIngredient }, index) => (
           <div
             key={ idIngredient }

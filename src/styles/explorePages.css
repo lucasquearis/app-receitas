@@ -1,0 +1,28 @@
+html main body {
+  max-height: 360px;
+  max-width: 640px;
+}
+
+.explore-buttons {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 100px;
+  position: absolute;
+  vertical-align: middle;
+}
+
+.explore-buttons button {
+  background-color: white;
+  border: transparent;
+  box-shadow: 2px 0 25px 2px rgba(113, 109, 109, 0.69);
+  color: #940022;
+  font-size: 18px;
+  font-weight: 800;
+  height: 60px;
+  margin: 10px;
+  width: 300px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap') ;

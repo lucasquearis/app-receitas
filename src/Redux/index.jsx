@@ -3,10 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import foodcategories from './reducers/CategorieButtonsReducer';
 import mainPage from './reducers/MainPageReducer';
+import drinksReducer from './reducers/CategorieDrinksReducer';
 
 const store = createStore(
   combineReducers({
-    mainPage, foodcategories,
+    mainPage, foodcategories, drinksReducer,
   }), composeWithDevTools(applyMiddleware(thunk)),
 );
 

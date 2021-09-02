@@ -3,14 +3,15 @@ import { Switch, Route } from 'react-router-dom';
 import Explore from './Pages/Explore';
 import Login from './Pages/Login';
 import FoodMainPage from './Pages/FoodMainPage';
+import DrinkMainPage from './Pages/DrinkMainPage';
 import DrinksExplore from './Pages/DrinksExplore';
 import FoodExplore from './Pages/FoodExplore';
 import FoodIngredientesExplore from './Pages/FoodIngredientesExplore';
 import FoodPlaceExplore from './Pages/FoodPlaceExplore';
 import Profile from './Pages/Profile';
 import FoodDetails from './Pages/FoodDetails';
-import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import DrinkDetails from './Pages/DrinkDetails';
+import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         path="/explorar/comidas/ingredientes"
         component={ FoodIngredientesExplore }
       />
+      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route
         exact
         path="/explorar/bebidas/ingredientes"
@@ -36,8 +38,10 @@ function App() {
       <Route exact path="/comidas/:id" component={ FoodDetails } />
       <Route exact path="/bebidas/:id" component={ DrinkDetails } />
       <Route exact path="/comidas" component={ FoodMainPage } />
+      <Route exact path="/bebidas" component={ DrinkMainPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
+      <Route exact path="*" component={ NotFound } />
     </Switch>
   );
 }
