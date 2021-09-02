@@ -5,6 +5,7 @@ import * as fetchAPI from '../service/fetchAPI';
 import './ComidasEmProgresso.css';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import DoneButton from '../components/DoneButton';
 
 const INITIAL_STORAGE_STATE = { cocktails: {}, meals: {} };
 
@@ -68,6 +69,12 @@ function ComidasEmProgresso(props) {
     return check;
   };
 
+  const finaleRecipe = () => {
+    const typeRecipe = 'comida';
+    DoneButton({ recipe, typeRecipe });
+    setShouldRedirect(true);
+  };
+
   const displayList = (item, index) => {
     if (item !== null && item.length > 0) {
       return (
@@ -122,7 +129,7 @@ function ComidasEmProgresso(props) {
           type="button"
           data-testid="finish-recipe-btn"
           disabled={ disableButton() }
-          onClick={ () => setShouldRedirect(true) }
+          onClick={ () => finaleRecipe() }
         >
           Finalizar Receita
         </button>
