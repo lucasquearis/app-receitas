@@ -29,6 +29,45 @@
 }
 */
 
+.containerLogin {
+  align-items: center;
+  background: #ef6a07;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.form-label {
+  color: white;
+  font-size: 25px;
+}
+
+.containerLogin button {
+  background-color: #727272;
+  color: white;
+  font-weight: 700;
+  margin-top: 70px;
+  width: 100%;
+}
+
+.textLogin {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
+}
+
+.textLogin img {
+  width: 65px;
+}
+
+.textLogin h1 {
+  color: white;
+  font-size: 55px;
+}
+
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
@@ -84,6 +123,51 @@ footer {
   font-size: 30px;
   margin: 10px;
   padding: 10px 20px;
+}
+
+.cardFoodDrinkExplore {
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ef6a07;
+  display: inline-flex;
+  margin: 5px 20px 10px 10px;
+  width: 150px;
+}
+
+.cardFoodDrinkExplore h2 {
+  color: #ff6f00;
+  display: flex;
+  font-size: 35px;
+  justify-content: center;
+  opacity: 0.8;
+  text-shadow: 0.1em 0.1em 0.05em #b9b9b9;
+}
+
+.containerCardsMealsDrinks {
+  margin-bottom: 60px;
+}
+
+.buttonMealsDrinks {
+  background-color: #5c5c5c;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  height: 40px;
+  margin: 10px 2px;
+}
+
+.scrollMelsDrinks {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100vw;
+}
+
+.mainDetail {
+  background-color: #ef6a07;
+}
+
+.mainDetail h2, p {
+  color: white;
 }
 
 @keyframes shake {

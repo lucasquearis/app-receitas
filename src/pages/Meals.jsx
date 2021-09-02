@@ -35,6 +35,7 @@ export default function () {
         type="button"
         onClick={ () => setCategory('') }
         data-testid="All-category-filter"
+        className="buttonMealsDrinks"
       >
         All
       </button>
@@ -45,6 +46,7 @@ export default function () {
             <button
               key={ i }
               type="button"
+              className="buttonMealsDrinks"
               data-testid={ `${strCategory}-category-filter` }
               onClick={ () => {
                 if (category === strCategory) {
@@ -62,20 +64,22 @@ export default function () {
         }
         return false;
       })}
-      {meals.map(({ strMealThumb, strMeal, idMeal }, i) => {
-        const mealLength = 12;
-        if (i < mealLength) {
-          return (
-            <RecipeCard
-              link={ `comidas/${idMeal}` }
-              key={ i }
-              id={ i }
-              thumb={ strMealThumb }
-              name={ strMeal }
-            />);
-        }
-        return false;
-      })}
+      <div className="containerCardsMealsDrinks">
+        {meals.map(({ strMealThumb, strMeal, idMeal }, i) => {
+          const mealLength = 12;
+          if (i < mealLength) {
+            return (
+              <RecipeCard
+                link={ `comidas/${idMeal}` }
+                key={ i }
+                id={ i }
+                thumb={ strMealThumb }
+                name={ strMeal }
+              />);
+          }
+          return false;
+        })}
+      </div>
       <Footer />
     </div>
   );

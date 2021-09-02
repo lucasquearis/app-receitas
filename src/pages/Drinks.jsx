@@ -27,51 +27,57 @@ export default function () {
   return (
     <div className="drinks-page">
       <Header title="Bebidas" />
-      <button
-        type="button"
-        onClick={ () => setCategory('') }
-        data-testid="All-category-filter"
-      >
-        All
-      </button>
-      {drinkCategories.map(({ strCategory }, i) => {
-        const maxLength = 5;
-        if (i < maxLength) {
-          return (
-            <button
-              key={ i }
-              type="button"
-              data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => {
-                if (category === strCategory) {
-                  setCategory('');
-                } else {
+      <div className="scrollMelsDrinks">
+        <button
+          type="button"
+          onClick={ () => setCategory('') }
+          data-testid="All-category-filter"
+          className="buttonMealsDrinks"
+        >
+          All
+        </button>
+        {drinkCategories.map(({ strCategory }, i) => {
+          const maxLength = 5;
+          if (i < maxLength) {
+            return (
+              <button
+                key={ i }
+                type="button"
+                className="buttonMealsDrinks"
+                data-testid={ `${strCategory}-category-filter` }
+                onClick={ () => {
+                  if (category === strCategory) {
+                    setCategory('');
+                  } else {
                   // console.log(mealsCategoryFilter);
-                  console.log(strCategory);
-                  setCategory(strCategory);
-                }
-              } }
-            >
-              {strCategory}
-            </button>
-          );
-        }
-        return false;
-      })}
-      {drinks.map(({ strDrinkThumb, strDrink, idDrink }, i) => {
-        const recipesLength = 12;
-        if (i < recipesLength) {
-          return (
-            <RecipeCard
-              link={ `bebidas/${idDrink}` }
-              key={ i }
-              id={ i }
-              thumb={ strDrinkThumb }
-              name={ strDrink }
-            />);
-        }
-        return false;
-      })}
+                    console.log(strCategory);
+                    setCategory(strCategory);
+                  }
+                } }
+              >
+                {strCategory}
+              </button>
+            );
+          }
+          return false;
+        })}
+      </div>
+      <div className="containerCardsMealsDrinks">
+        {drinks.map(({ strDrinkThumb, strDrink, idDrink }, i) => {
+          const recipesLength = 12;
+          if (i < recipesLength) {
+            return (
+              <RecipeCard
+                link={ `bebidas/${idDrink}` }
+                key={ i }
+                id={ i }
+                thumb={ strDrinkThumb }
+                name={ strDrink }
+              />);
+          }
+          return false;
+        })}
+      </div>
       <Footer />
     </div>
   );

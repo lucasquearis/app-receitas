@@ -55,17 +55,22 @@ function Login() {
   if (redirect) return <Redirect to="/comidas" />;
 
   return (
-    <Container>
+    <Container className="containerLogin">
+      <div className="textLogin">
+        <h1>Food</h1>
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/bug--v1.png" alt="" />
+        <h1>Bugs</h1>
+      </div>
       <Form>
         <Form.Group className="mb-3">
           <Form.Label
             htmlFor="email-input"
           >
-            Email
             <Form.Control
               type="email"
               data-testid="email-input"
               value={ email }
+              placeholder="Email"
               onChange={ handleChangeEmail }
             />
           </Form.Label>
@@ -75,18 +80,17 @@ function Login() {
           <Form.Label
             htmlFor="password-input"
           >
-            Senha
             <Form.Control
               type="password"
               data-testid="password-input"
               value={ password }
+              placeholder="Senha"
               onChange={ handleChangePassword }
             />
           </Form.Label>
         </Form.Group>
 
         <Button
-          variant="primary"
           type="button"
           data-testid="login-submit-btn"
           disabled={ disabledButton }

@@ -17,6 +17,7 @@ import {
   ExploreDrinks,
   ExploreMeals } from './pages';
 import Provider from './context/Provider';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/explorar/comidas/area" component={ ExploreOrigin } />
         <Route path="/explorar/comidas" component={ ExploreMeals } />
         <Route path="/explorar/bebidas/ingredientes" component={ ExploreIngredients } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route path="/explorar" component={ Explore } />
         <Route path="/receitas-favoritas" component={ FavoritesRecipes } />

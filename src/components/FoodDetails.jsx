@@ -52,7 +52,7 @@ export default function FoodDetails(props) {
     return (<Redirect to={ `/comidas/${id}/in-progress` } />);
   }
   return (
-    <main>
+    <main mainDetail>
       <img
         width="100%"
         height="250"
