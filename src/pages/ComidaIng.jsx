@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Card from 'react-bootstrap/Card';
+/* import Card from 'react-bootstrap/Card'; */
 import { Redirect } from 'react-router-dom';
+import CardList from '../components/CardList';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import '../cssPages/Ingredients.css';
 import fetchFoods from '../fetchs/FetchFood';
 import MyContext from '../context/MyContext';
 
@@ -29,6 +29,7 @@ function ComidaIng() {
   };
 
   function onClick(event) {
+    console.log(event.target);
     const { name } = event.target;
     setRedirect({
       redirect: true,
@@ -43,33 +44,17 @@ function ComidaIng() {
   if (redirect.redirect) return <Redirect to="/comidas" />;
   if (!ingredients) return <p>Loading...</p>;
   return (
-    <div>
+    <div className="pageComida">
       <Header titulo="Explorar Ingredientes" />
-      <main className="div">
-        { ingredients.map(({ strIngredient }, index) => (
-          <Card
-            data-testid={ `${index}-ingredient-card` }
-            style={ { width: '18rem' } }
-            name={ strIngredient }
-            key={ index }
+      <main>
+        <div>
+          <CardList
+            list={ ingredients }
+            apiType="Ingredient"
+            page="comidas"
             onClick={ onClick }
-          >
-            <Card.Img
-              data-testid={ `${index}-card-img` }
-              variant="top"
-              name={ strIngredient }
-              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-            />
-            <Card.Body>
-              <Card.Title
-                data-testid={ `${index}-card-name` }
-                name={ strIngredient }
-              >
-                { strIngredient }
-              </Card.Title>
-            </Card.Body>
-          </Card>
-        )) }
+          />
+        </div>
       </main>
       <Footer />
     </div>

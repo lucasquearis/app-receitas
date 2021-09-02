@@ -47,9 +47,10 @@ function LocalDeOrigem() {
     });
   }
 
+  console.log(receitas);
   if (!area) return <p>Loading...</p>;
   return (
-    <div>
+    <div className="pageComida">
       <Header titulo="Explorar Origem" pesquisa="true" />
       <main className="origem">
         <select

@@ -15,7 +15,6 @@ function Header(props) {
   const { titulo, pesquisa } = props;
   const path = Number((useLocation().pathname).includes('bebidas'))
     + 2 * Number((useLocation().pathname).includes('comidas'));
-  console.log(path);
   const [showBar, setShowBar] = useState(false);
   const rederizaBarra = () => (showBar ? setShowBar(false) : setShowBar(true));
 

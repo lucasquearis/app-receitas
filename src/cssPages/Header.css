@@ -1,9 +1,9 @@
 .header {
   align-items: center;
-  background-color: whitesmoke;
+  color: black;
   display: flex;
   height: 50px;
-  justify-content: space-around;
+  justify-content: space-evenly;
   position: fixed;
   top: 0;
   width: 100%;
@@ -11,7 +11,7 @@
 }
 
 .filtros {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .btnSearch {
@@ -19,21 +19,18 @@
   border: none;
 }
 
-.header img {
-/*   background-color: white; */
-}
-
 .neutralStyle {
-  background-color: whitesmoke;
+  background-color: lightgray;
 }
 
 .drinkStyle {
   background-color: #1385f6;
-  color: white;
 }
 
+.drinkStyle img, .drinkStyle h3, .foodStyle img, .foodStyle h3 {
+  filter: invert(100%);
+}
 
 .foodStyle {
   background-color: #ff470a;
-  color: white;
 }

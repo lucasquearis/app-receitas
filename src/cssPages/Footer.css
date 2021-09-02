@@ -3,6 +3,24 @@
   bottom: 0;
   display: flex;
   justify-content: space-between;
+  padding: 1vh;
   position: fixed;
   width: 100%;
+  z-index: 99;
+}
+
+.neutralStyle {
+  background-color: whitesmoke;
+}
+
+.drinkStyle {
+  background-color: #1385f6;
+}
+
+.drinkStyle img, .drinkStyle h3, .foodStyle img, .foodStyle h3 {
+  filter: invert(100%);
+}
+
+.foodStyle {
+  background-color: #ff470a;
 }
