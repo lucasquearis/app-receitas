@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Form, Button } from 'react-bootstrap';
 import { sendUserInfo } from '../redux/actions/userActions';
+import logo from '../images/logo.png';
 
 export default function Login() {
   const history = useHistory();
@@ -51,7 +51,7 @@ export default function Login() {
     const emailFormat = /^[a-z0-9_.-]+@[a-z]+\.[a-z]{2,3}(?:\.[a-z]{2})?$/;
     const MIN_PASSWORD_LENGTH = 6;
     const isValidEntries = emailFormat.test(email)
-      && password.length > MIN_PASSWORD_LENGTH;
+    && password.length > MIN_PASSWORD_LENGTH;
 
     if (isValidEntries) {
       setButtonDisabled(false);
@@ -61,8 +61,9 @@ export default function Login() {
   }, [state]);
 
   return (
-    <main>
-      <Form>
+    <main className="vh-100 d-flex flex-column align-items-center justify-content-center">
+      <img src={ logo } alt="logo" className="image" />
+      <Form className="w-75 d-flex flex-column justify-content-center">
         <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
