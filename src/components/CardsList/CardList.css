@@ -19,8 +19,8 @@
   background-color: white;
   border: white;
   border-radius: 5px;
-  display: inline-flex;
   box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  display: inline-flex;
   flex-flow: wrap;
   flex-direction: row;
   font-size: 27px;
