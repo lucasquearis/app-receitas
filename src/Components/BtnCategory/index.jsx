@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { ContextApp } from '../../Context/ContextApp';
+import './style.css';
 
 const BtnCategory = ({ category }) => {
   const maxCategory = 5;
@@ -20,7 +21,7 @@ const BtnCategory = ({ category }) => {
     setRecipes([]);
   };
   return (
-    <div>
+    <div className="category-container">
       <button
         type="button"
         name="All"
