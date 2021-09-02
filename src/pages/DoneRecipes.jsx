@@ -19,7 +19,6 @@ function DoneRecipes() {
       let recipeType;
       const copyDiv = document.getElementById('copiedLink');
       const time = 2000;
-
       if (type === 'bebidas') {
         recipeType = '/bebidas/';
       } else {
