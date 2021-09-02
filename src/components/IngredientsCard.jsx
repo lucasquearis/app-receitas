@@ -4,6 +4,7 @@ import React from 'react';
 export default function IngredientsCard({ index, name, isFood, onClick }) {
   const END_POINT = isFood ? 'https://www.themealdb.com/images/ingredients/'
     : 'https://www.thecocktaildb.com/images/ingredients/';
+  // https://github.com/tryber/sd-012-project-recipes-app/pull/848
   return (
     <div data-testid={ `${index}-ingredient-card` }>
       <button
