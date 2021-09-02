@@ -19,6 +19,7 @@ function CategoryFoodButtons() {
     setDisplayFood,
     displayFood,
     removeDisplayList,
+    setFoodIngredientSelected,
   } = useContext(myContext);
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
@@ -42,10 +43,13 @@ function CategoryFoodButtons() {
 
   useEffect(() => {
     const displayCategory = async () => {
-      const res = await foodIngredientClick(foodIngredientSelected);
-      const { meals } = await res;
-      setDisplayFood(meals.slice(0, doze));
-      dispatch(clearSearch());
+      if (foodIngredientSelected !== '') {
+        const res = await foodIngredientClick(foodIngredientSelected);
+        const { meals } = res;
+        setDisplayFood(meals.slice(0, doze));
+        dispatch(clearSearch());
+        setShowInput(false);
+      }
     };
     displayCategory();
     dispatch(fetchCategory());
@@ -56,14 +60,15 @@ function CategoryFoodButtons() {
   const handleClick = (categoryStr) => {
     renderCategoryFilter(categoryStr);
     setLastClick(categoryStr);
-    dispatch(clearSearch());
-    removeDisplayList();
     showInputClick();
+    removeDisplayList();
+    dispatch(clearSearch());
   };
+
   const handleClickAll = () => {
     setShowInput(true);
     removeDisplayList();
-    displayFood.length = 0;
+    setFoodIngredientSelected('');
   };
 
   return (

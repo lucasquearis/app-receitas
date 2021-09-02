@@ -7,15 +7,12 @@ import ItemCard from './ItemCard';
 function FoodsCard() {
   const doze = 12;
   const { meals } = useSelector((state) => state.recipes.foods);
-  const loading = useSelector((state) => state.recipes.isLoading);
   const { displayFood } = useContext(myContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchFoods());
   }, [dispatch]);
-
-  if (loading) return <p>Carregando...</p>;
   return (
     <div>
       {

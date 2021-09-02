@@ -14,6 +14,7 @@ function CategoryDrinkButtons() {
     setDisplay,
     display,
     removeDisplayList,
+    setDrinkIngredientSelected,
   } = useContext(myContext);
   const categories = useSelector(
     (state) => state.reducerCategories.drinksCategories.drinks,
@@ -40,10 +41,13 @@ function CategoryDrinkButtons() {
 
   useEffect(() => {
     const displayCategory = async () => {
-      const res = await drinkIngredientClick(drinkIngredientSelected);
-      const { drinks } = await res;
-      setDisplay(drinks.slice(0, doze));
-      dispatch(clearSearch());
+      if (drinkIngredientSelected !== '') {
+        const res = await drinkIngredientClick(drinkIngredientSelected);
+        const { drinks } = await res;
+        setDisplay(drinks.slice(0, doze));
+        dispatch(clearSearch());
+        setShowInput(false);
+      }
     };
     displayCategory();
     dispatch(fetchDrinksCategories());
@@ -62,7 +66,7 @@ function CategoryDrinkButtons() {
   const handleClickAll = () => {
     setShowInput(true);
     removeDisplayList();
-    display.length = 0;
+    setDrinkIngredientSelected('');
   };
 
   return (

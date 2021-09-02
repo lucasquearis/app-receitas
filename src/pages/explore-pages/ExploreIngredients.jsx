@@ -8,7 +8,6 @@ import Footer from '../../components/Footer';
 function ExploreIngredients() {
   const doze = 12;
   const { foodIngredients, setFoodIngredientSelected } = useContext(myContext);
-
   return (
     <div>
       <Header brand="Explorar Ingredientes" className="img-search" />
