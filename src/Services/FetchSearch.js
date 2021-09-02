@@ -8,7 +8,8 @@ const URL_D_LETTER = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f='
 
 async function FetchSearch(pathname, typeSearch, contentSearch) {
   // console.log(`quem ${pathname} tipo ${typeSearch} o que ${contentSearch}`);
-  if (pathname === '/comidas') {
+
+  if (pathname.indexOf('comidas') >= 0) {
     if (typeSearch === 'ingredient') {
       const { meals } = await fetch(URL_F_INGREDIENT + contentSearch)
         .then((response) => response.json());
@@ -26,7 +27,7 @@ async function FetchSearch(pathname, typeSearch, contentSearch) {
     }
   }
 
-  if (pathname === '/bebidas') {
+  if (pathname.indexOf('bebidas') >= 0) {
     if (typeSearch === 'ingredient') {
       const { drinks } = await fetch(URL_D_INGREDIENT + contentSearch)
         .then((response) => response.json());

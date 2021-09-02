@@ -16,54 +16,53 @@ function SearchBar() {
   };
 
   const recipesSearch = async () => {
-    const contentSearch = state.inputSearch;
-    // console.log(state.radioSearch);
+    // const contentSearch = state.inputSearch;
     let results;
     const typeSearch = state.radioSearch;
     if (state.radioSearch === 'ingredient') {
-      results = await FetchSearch(pathname, typeSearch, contentSearch);
+      results = await FetchSearch(pathname, typeSearch, state.inputSearch);
       setState({
         ...state, results,
       });
     }
     if (state.radioSearch === 'name') {
-      results = await FetchSearch(pathname, typeSearch, contentSearch);
+      results = await FetchSearch(pathname, typeSearch, state.inputSearch);
       setState({
         ...state, results,
       });
     }
 
     if (state.radioSearch === 'firstLetter') {
-      if (contentSearch.length > 1) {
+      if (state.inputSearch.length > 1) {
+        /* eslint-disable */
         alert('Sua busca deve conter somente 1 (um) caracter');
+         /* eslint-enable */
       } else {
-        results = await FetchSearch(pathname, typeSearch, contentSearch);
+        results = await FetchSearch(pathname, typeSearch, state.inputSearch);
         setState({
           ...state, results,
         });
       }
     }
-    console.log(results);
-    if (!results) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    }
-
     if (results) {
-      if (results.length === 1 && pathname === '/comidas') {
-      // console.log(results[0].idMeal);
+      if (results.length === 1 && pathname.indexOf('comidas') >= 0) {
         setState({
           ...state, oneRecipe: results[0].idMeal,
         });
       }
-      if (results.length === 1 && pathname === '/bebidas') {
+      if (results.length === 1 && pathname.indexOf('bebidas') >= 0) {
         setState({
           ...state, oneRecipe: results[0].idDrink,
         });
       }
+      const maxRecipes = 12;
+      setSearch(results.splice(0, maxRecipes));
+      setLoadSearch(true);
+    } else {
+      /* eslint-disable */
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      /* eslint-enable */
     }
-    const maxRecipes = 12;
-    setSearch(results.splice(0, maxRecipes));
-    setLoadSearch(true);
     return results;
   };
 

@@ -27,6 +27,7 @@ function ExploreDrinksAndFoods() {
     if (redirectTo.surprise === true) {
       return <Redirect to={ `/comidas/${id}` } />;
     }
+
     return (
       <>
         <Button

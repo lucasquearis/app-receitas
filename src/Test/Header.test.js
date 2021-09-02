@@ -1,7 +1,7 @@
-// import React from 'react';
-// import { screen } from '@testing-library/react';
-// import Header from '../Component/Header';
-// import renderWithRouter from './renderWithRouter';
+import React from 'react';
+import { screen } from '@testing-library/react';
+import Header from '../Component/Header';
+import renderWithRouter from '../helper/renderWithRouter';
 
 /* describe('Testando o componente Header', () => {
   beforeEach(() => {
