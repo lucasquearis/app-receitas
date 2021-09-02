@@ -1,6 +1,6 @@
 export function initialInProgressStorage() {
   localStorage.setItem('inProgressRecipes', JSON.stringify({
-    drinks: {},
+    cocktails: {},
     meals: {},
   }));
 }

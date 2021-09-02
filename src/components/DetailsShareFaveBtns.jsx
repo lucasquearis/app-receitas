@@ -15,7 +15,9 @@ function DetailsShareFaveBtns({ details }) {
   const { favorites, setFavorites } = useContext(Context);
 
   function copyToClipboard() {
-    clipboardCopy(window.location.href);
+    if (window.location.href.includes('in-progress')) {
+      clipboardCopy(window.location.href.replace('/in-progress', ''));
+    } else { clipboardCopy(window.location.href); }
     setIsCopied(true);
   }
 

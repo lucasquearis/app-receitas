@@ -5,6 +5,7 @@ import fetchAPI from '../services/fetchAPI';
 import '../styles/InProgress.css';
 import { updateInProgressStorage,
   initialInProgressStorage } from '../services/inProgressStorage';
+import DetailsShareFaveBtns from '../components/DetailsShareFaveBtns';
 
 export default function DrinkInProgress(props) {
   const [drink, setDrink] = useState({});
@@ -28,22 +29,14 @@ export default function DrinkInProgress(props) {
   useEffect(() => {
     if (!storage) {
       initialInProgressStorage();
-    } else if (storage.drinks[id]) {
-      setCheckedSteps(storage.drinks[id]);
+    } else if (storage.cocktails[id]) {
+      setCheckedSteps(storage.cocktails[id]);
     }
   }, []);
 
   useEffect(() => {
-    updateInProgressStorage('drinks', id, checkedSteps);
+    updateInProgressStorage('cocktails', id, checkedSteps);
   }, [checkedSteps]);
-
-  function share() {
-    console.log('compartilhando');
-  }
-
-  function favoriteIt() {
-    console.log('favoritando');
-  }
 
   function finish() {
     setRedirect(true);
@@ -69,6 +62,17 @@ export default function DrinkInProgress(props) {
 
   if (loading) return <span>Loading...</span>;
   if (redirect) return <Redirect to="/receitas-feitas" />;
+
+  const obj = {
+    id: drink.idDrink,
+    type: 'bebida',
+    area: '',
+    category: drink.strCategory,
+    alcoholicOrNot: drink.strAlcoholic,
+    name: drink.strDrink,
+    image: drink.strDrinkThumb,
+  };
+
   return (
     <div className="in-progress-div">
       <img
@@ -78,12 +82,7 @@ export default function DrinkInProgress(props) {
         className="recipe-photo"
       />
       <div data-testid="recipe-title">{ drink.strDrink }</div>
-      <button type="button" data-testid="share-btn" onClick={ share }>
-        Compartilhar
-      </button>
-      <button type="button" data-testid="favorite-btn" onClick={ favoriteIt }>
-        Favoritar
-      </button>
+      <DetailsShareFaveBtns details={ obj } />
       <div data-testid="recipe-category">{ drink.strCategory }</div>
       <ul className="lista">
         { mNI('strMeasure').map((objectKey, index) => (
