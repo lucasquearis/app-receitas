@@ -32,6 +32,12 @@ export async function buscarBebidasIngrediente(ingr) {
   return response.drinks;
 }
 
+export async function buscarBebidasID(id) {
+  const ENDPOINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response.drinks;
+}
+
 export async function buscarBebidaAleatoria() {
   const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
