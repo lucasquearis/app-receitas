@@ -1,6 +1,7 @@
 header {
   background-color: #eb6424;
   display: block;
+  padding: 5px;
 }
 
 input {
@@ -36,11 +37,13 @@ input {
   justify-content: center;
 }
 
-h3 {
-  color: white;
+.header-title {
+  color: #fff7eb;
   display: flex;
   flex-direction: column;
+  font-family: 'Capriola', sans-serif;
   justify-content: center;
+  margin: 0px;
 }
 
 .search-form {

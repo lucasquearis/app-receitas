@@ -42,7 +42,7 @@ function Header({ title, searchIcon = '' }) {
             alt="profile icon"
           />
         </Link>
-        <h3 data-testid="page-title">{ title }</h3>
+        <h3 data-testid="page-title" className="header-title">{ title }</h3>
         { renderSearchIcon() }
       </div>
       { showSearchBar && <SearchBar title={ title } /> }
