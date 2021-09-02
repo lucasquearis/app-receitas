@@ -70,7 +70,6 @@ function RecipeInProgress() {
     else setCompleted(false);
   };
 
-  setDoneRecipes(recipeDetails, recipeKey);
   const newBtnColor = { background: '#6ce34f', color: 'white' };
   return (
     <div className="progress-container">
@@ -88,7 +87,7 @@ function RecipeInProgress() {
         name="Finalizar"
         disabled={ !completed }
         link="/receitas-feitas"
-        onClick={ setDoneRecipes }
+        onClick={ () => setDoneRecipes(recipeDetails, recipeKey) }
         className="btn-finalizar"
         style={ completed ? newBtnColor : {} }
       />
