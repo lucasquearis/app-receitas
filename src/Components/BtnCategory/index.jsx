@@ -16,8 +16,6 @@ const BtnCategory = ({ category }) => {
   const btnAllProps = {
     type: 'button',
     name: 'All',
-    key: 'All',
-    value: 'All',
     'data-testid': 'All-category-filter',
     onClick: resetFilter,
     variant: 'contained',
