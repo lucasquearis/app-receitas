@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function CardItems({ title, thumb, index, type, onClick }) {
   return (
     <Card
-      className="border border-dark m-3"
+      className="border m-3"
       onClick={ onClick }
       data-testid={ `${index}-${type}-card` }
     >
