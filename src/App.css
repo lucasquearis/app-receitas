@@ -68,6 +68,27 @@
   font-size: 55px;
 }
 
+.main-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-email {
+  margin-top: 5vh;
+  margin-bottom: 8vh;
+}
+
+.profile-btn {
+  width: 100%;
+  height: 10vh;
+  margin: 2vh 0;
+  color: white;
+  background-color: #ef6a07;
+  border-color: #ef6a07;
+  border-radius: 5px;
+}
+
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
