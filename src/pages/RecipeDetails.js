@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import rockGlass from '../images/rockGlass.svg';
+import jacare from '../images/jacare.png';
 import IngredientsList from '../components/IngredientsList';
 import Recomendations from '../components/Recomendations';
 import StartRecipeButton from '../components/StartRecipeButton';
@@ -50,30 +51,39 @@ function RecipeDetails(props) {
         recipe && recipe[enType] && recipe[enType][0]
           ? (
             <div>
-              <img
-                src={ recipe[enType][0][`str${enCasedType}Thumb`] }
-                alt="Foto do Prato"
-                data-testid="recipe-photo"
-                className="recipe-image"
-              />
+              <div className="images">
+                <img
+                  src={ recipe[enType][0][`str${enCasedType}Thumb`] }
+                  alt="Foto do Prato"
+                  data-testid="recipe-photo"
+                  className="recipe-image"
+                />
+                <img
+                  className="jacare-img"
+                  src={ jacare }
+                  alt="jacaré"
+                />
+              </div>
               <h1
                 data-testid="recipe-title"
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
-              <ShareButton pathname={ pathname } />
-              <FavoriteButton
-                recipe={
-                  { id,
-                    type: favoriteType,
-                    area: recipe[enType][0].strArea || '',
-                    category: recipe[enType][0].strCategory,
-                    alcoholicOrNot: recipe[enType][0].strAlcoholic || '',
-                    name: recipe[enType][0][`str${enCasedType}`],
-                    image: recipe[enType][0][`str${enCasedType}Thumb`] }
-                }
-                testId="favorite-btn"
-              />
+              <div className="buttons">
+                <ShareButton pathname={ pathname } />
+                <FavoriteButton
+                  recipe={
+                    { id,
+                      type: favoriteType,
+                      area: recipe[enType][0].strArea || '',
+                      category: recipe[enType][0].strCategory,
+                      alcoholicOrNot: recipe[enType][0].strAlcoholic || '',
+                      name: recipe[enType][0][`str${enCasedType}`],
+                      image: recipe[enType][0][`str${enCasedType}Thumb`] }
+                  }
+                  testId="favorite-btn"
+                />
+              </div>
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
                   ? recipe[enType][0].strCategory
@@ -87,6 +97,7 @@ function RecipeDetails(props) {
                 type === 'comidas' && recipe[enType][0].strYoutube
                 && (
                   <iframe
+                    className="video"
                     title="Video"
                     data-testid="video"
                     src={
@@ -95,6 +106,7 @@ function RecipeDetails(props) {
                   />
                 )
               }
+              <h3>Recomendações</h3>
               {
                 recipe && <Recomendations type={ type } />
               }

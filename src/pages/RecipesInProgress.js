@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import rockGlass from '../images/rockGlass.svg';
+import jacare from '../images/jacare.png';
 import IngredientsCheckList from '../components/IngredientsCheckList';
 import FinishRecipeButton from '../components/FinishRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import '../styles/RecipeDetails.css';
 
 function RecipesInProgress(props) {
   const [recipe, setRecipe] = useState();
@@ -41,29 +43,39 @@ function RecipesInProgress(props) {
         recipe
           ? (
             <div>
-              <img
-                src={ recipe[enType][0][`str${enCasedType}Thumb`] }
-                alt="Foto do Prato"
-                data-testid="recipe-photo"
-              />
+              <div className="images">
+                <img
+                  src={ recipe[enType][0][`str${enCasedType}Thumb`] }
+                  alt="Foto do Prato"
+                  data-testid="recipe-photo"
+                  className="recipe-image"
+                />
+                <img
+                  className="jacare-img"
+                  src={ jacare }
+                  alt="jacaré"
+                />
+              </div>
               <h1
                 data-testid="recipe-title"
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
-              <ShareButton pathname={ pathname.split('/in')[0] } />
-              <FavoriteButton
-                recipe={
-                  { id,
-                    type: favoriteType,
-                    area: recipe[enType][0].strArea || '',
-                    category: recipe[enType][0].strCategory,
-                    alcoholicOrNot: recipe[enType][0].strAlcoholic || '',
-                    name: recipe[enType][0][`str${enCasedType}`],
-                    image: recipe[enType][0][`str${enCasedType}Thumb`] }
-                }
-                testId="favorite-btn"
-              />
+              <div className="buttons">
+                <ShareButton pathname={ pathname } />
+                <FavoriteButton
+                  recipe={
+                    { id,
+                      type: favoriteType,
+                      area: recipe[enType][0].strArea || '',
+                      category: recipe[enType][0].strCategory,
+                      alcoholicOrNot: recipe[enType][0].strAlcoholic || '',
+                      name: recipe[enType][0][`str${enCasedType}`],
+                      image: recipe[enType][0][`str${enCasedType}Thumb`] }
+                  }
+                  testId="favorite-btn"
+                />
+              </div>
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
                   ? recipe[enType][0].strCategory
