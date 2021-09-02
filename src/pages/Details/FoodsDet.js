@@ -4,8 +4,8 @@ import 'react-multi-carousel/lib/styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Image } from 'react-bootstrap';
-import ShareButton from '../../components/Details/ShareButton';
-import FavoriteButton from '../../components/Details/FavoriteButton';
+import ShareButton from '../../components/ShareButton';
+import FavoriteButton from '../../components/FavoriteButton';
 
 const responsive = {
   mobile: {

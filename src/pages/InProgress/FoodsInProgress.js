@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import FavoriteButton from '../../components/FavoriteButton';
+import ShareButton from '../../components/ShareButton';
 
 function FoodsInProgress() {
   const [recipeFood, setRecipeFood] = useState([{}]);
@@ -106,7 +108,7 @@ function FoodsInProgress() {
 
   const handleCheked = (ingredient) => (inProgress.meals[id].includes(ingredient));
 
-  const { strMealThumb, strMeal, strCategory, strInstructions } = recipeFood[0];
+  const { strMealThumb, strMeal, strCategory, strInstructions, strArea } = recipeFood[0];
 
   return (
     <div className="food-in-progress">
@@ -114,8 +116,23 @@ function FoodsInProgress() {
       <img data-testid="recipe-photo" alt="recipe" src={ strMealThumb } />
       <h1 data-testid="recipe-title">{ strMeal }</h1>
       <h4 data-testid="recipe-category">{ strCategory }</h4>
-      <button data-testid="share-btn" type="button">btn compartilhar</button>
-      <button data-testid="favorite-btn" type="button">btn favoritar</button>
+
+      <ShareButton />
+
+      <FavoriteButton
+        infos={ {
+          id,
+          type: 'comida',
+          area: strArea,
+          category: strCategory,
+          alcoholicOrNot: '',
+          name: strMeal,
+          image: strMealThumb,
+          // doneDate,
+          // tags
+        } }
+      />
+
       <div className="indredients">
         <h3>Ingredientes</h3>
         {
