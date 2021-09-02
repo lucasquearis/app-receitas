@@ -15,9 +15,6 @@ const ButtonDetails = ({ id, type }) => {
       if (findRecipe) setStateButton('start-button-none');
     }
     const continueRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(continueRecipe);
-    console.log(id);
-    console.log(type);
     if (continueRecipe
       && continueRecipe[type]
       && continueRecipe[type][id]) setNameButton('Continuar Receita');
@@ -25,7 +22,7 @@ const ButtonDetails = ({ id, type }) => {
   const handleClick = () => {
     setRedirect(true);
   };
-  if (redirect) return <Redirect to={ `${id}/in-progress ` } />;
+  if (redirect) return <Redirect to={ `${id}/in-progress` } />;
   return (
     <div className="button-container">
       <Button

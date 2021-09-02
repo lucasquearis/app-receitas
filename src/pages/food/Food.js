@@ -12,7 +12,6 @@ import AppContext from '../../context/AppContext';
 const Food = () => {
   const context = useContext(AppContext);
   const { ingredient } = context;
-  console.log('verificador de ing', ingredient);
   const [erro, setErro] = useState(false);
   const { items } = useSelector((state) => state.itemsReducer);
   const dispatch = useDispatch();
@@ -25,7 +24,6 @@ const Food = () => {
         dispatch(actionRequestSuccess(meals));
       } catch (error) {
         setErro(true);
-        console.log(`Erro ao carregar as primeiras receitas: ${error}`);
       }
     };
     fetchItems();

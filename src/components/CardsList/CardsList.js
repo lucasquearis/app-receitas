@@ -21,7 +21,6 @@ const CardsList = ({ array, teste }) => {
     } else {
       newArray = array;
     }
-    console.log(newArray);
 
     return (
       <div>
