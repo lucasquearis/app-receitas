@@ -49,7 +49,7 @@ export default function DataProvider({ children }) {
 
   useEffect(() => { setInitialData(); }, [setInitialData]);
 
-  // Quando o componente for montado, salva categorias e áreas no estado
+  // Quando o componente for montado, salva as categorias no estado
   const sendCategories = useCallback(async () => {
     const { meals } = await getCategories('food');
     const { drinks } = await getCategories('drinks');
@@ -62,12 +62,14 @@ export default function DataProvider({ children }) {
 
   useEffect(() => { sendCategories(); }, [sendCategories]);
 
+  // Quando o componente for montado, salva os ingredientes no estado
   const sendIngredients = useCallback(async () => {
     const { meals } = await getIngredients('food');
     const { drinks } = await getIngredients('drinks');
-    // !Está dando problema de funções repetidas
-    setIngredients((prevCategories) => ({
-      ...prevCategories,
+
+    // Só mudei o nome do parâmetro;
+    setIngredients((prevIngredients) => ({
+      ...prevIngredients,
       food: meals,
       drinks,
     }));
@@ -75,6 +77,7 @@ export default function DataProvider({ children }) {
 
   useEffect(() => { sendIngredients(); }, [sendIngredients]);
 
+  // Quando o componente for montado, salva as áreas no estado
   const sendAreas = useCallback(async () => {
     const { meals } = await getAreas();
     setAreas(meals);
