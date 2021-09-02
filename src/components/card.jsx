@@ -52,7 +52,12 @@ const Card = ({ item, foodOrDrink, index, ingredientes }) => {
           data-testid={ `${index}-card-img` }
           className="card-img-top"
         />
-        <span className="card-body main-body" data-testid={ `${index}-card-name` }>{item[`str${foodOrDrink}`]}</span>
+        <span
+          className="card-body main-body"
+          data-testid={ `${index}-card-name` }
+        >
+          {item[`str${foodOrDrink}`]}
+        </span>
       </div>
     );
   }

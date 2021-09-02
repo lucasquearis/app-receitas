@@ -27,7 +27,7 @@ const CategoriesButton = ({ food }) => {
             text={ strCategory }
             testId={ `${strCategory}-category-filter` }
             onClick={ onClick }
-            className="category-btn btn btn-info" 
+            className="category-btn btn btn-info"
           />))}
     </div>
   );
