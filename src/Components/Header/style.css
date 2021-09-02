@@ -1,4 +1,11 @@
 .header-top {
+  align-items: center;
+  background-color: #F4A881;
   display: flex;
-  justify-content: space-between;
+  height: 55px;
+  justify-content: space-around;
+}
+
+.header-top h1 {
+  margin: 0;
 }

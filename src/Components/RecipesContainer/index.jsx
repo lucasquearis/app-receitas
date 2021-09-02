@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { ContextApp } from '../../Context/ContextApp';
 import RecipeCard from '../RecipeCard';
+import './style.css';
 
 function RecipesContainer() {
   const { recipes } = useContext(ContextApp);
   const number = 12;
   return (
-    <div>
+    <div className="recipe-container">
       {recipes.slice(0, number).map((recipe, index) => (
         <RecipeCard
           key={ index }
