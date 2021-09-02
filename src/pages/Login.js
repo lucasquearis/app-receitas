@@ -42,7 +42,7 @@ function Login() {
           testId="email-input"
           id="email"
           onChange={ handleOnChange }
-          className="border-top border-right border-left p-2"
+          className="border-top-0 border-right-0 border-left-0 p-2"
         />
         <Input
           label="Senha"
@@ -51,7 +51,7 @@ function Login() {
           testId="password-input"
           id="password"
           onChange={ handleOnChange }
-          className="border-top border-right border-left p-2"
+          className="border-top-0 border-right-0 border-left-0 p-2"
         />
         <Link to="/comidas">
           <Button

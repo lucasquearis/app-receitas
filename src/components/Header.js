@@ -6,6 +6,7 @@ import Profile from '../images/profileIcon.svg';
 import Search from '../images/searchIcon.svg';
 import SearchIcon from './SearchIcon';
 import SearchBar from './SearchBar';
+import '../styles/Header.css';
 
 function Header(props) {
   const [searchBar, setSearchBar] = useState(false);
@@ -18,7 +19,7 @@ function Header(props) {
     }
   };
   return (
-    <Navbar bg="light" variant="light">
+    <nav className="navbar navbar-expand header-bg">
       <Container>
         <Link to="/perfil">
           <img src={ Profile } data-testid="profile-top-btn" alt="Icone de Perfil" />
@@ -29,7 +30,7 @@ function Header(props) {
         { searchBar
           ? <SearchBar /> : null}
       </Container>
-    </Navbar>
+    </nav>
   );
 }
 
