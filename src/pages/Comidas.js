@@ -6,6 +6,7 @@ import Recipes from '../components/Recipes';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodDAPI from '../service/foodAPI';
+import '../styles/MainPage.css';
 
 function Comidas() {
   const {

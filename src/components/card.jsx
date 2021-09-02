@@ -45,13 +45,14 @@ const Card = ({ item, foodOrDrink, index, ingredientes }) => {
   }
   if (test !== null && test.length > 0 && ingredientes === false) {
     return (
-      <div data-testid={ `${index}-recipe-card` }>
+      <div className="card" data-testid={ `${index}-recipe-card` }>
         <img
           src={ item[`str${foodOrDrink}Thumb`] }
           alt="recipe"
           data-testid={ `${index}-card-img` }
+          className="card-img-top"
         />
-        <span data-testid={ `${index}-card-name` }>{item[`str${foodOrDrink}`]}</span>
+        <span className="card-body main-body" data-testid={ `${index}-card-name` }>{item[`str${foodOrDrink}`]}</span>
       </div>
     );
   }

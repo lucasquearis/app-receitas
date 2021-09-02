@@ -13,8 +13,13 @@ const CategoriesButton = ({ food }) => {
   };
   const foodOrDrink = food ? foodCategory : drinkCategory;
   return (
-    <div>
-      <Button text="All" onClick={ onClick } testId="All-category-filter" />
+    <div className="d-flex flex-wrap">
+      <Button
+        className="category-btn btn btn-info"
+        text="All"
+        onClick={ onClick }
+        testId="All-category-filter"
+      />
       { foodOrDrink
         .map(({ strCategory }) => (
           <Button
@@ -22,6 +27,7 @@ const CategoriesButton = ({ food }) => {
             text={ strCategory }
             testId={ `${strCategory}-category-filter` }
             onClick={ onClick }
+            className="category-btn btn btn-info" 
           />))}
     </div>
   );
