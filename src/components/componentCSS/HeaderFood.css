@@ -7,9 +7,9 @@ header {
   align-items: center;
   background-color: #f7d6cf;
   display: flex;
+  flex: start;
   flex-direction: row;
   height: 58px;
-  justify-content: start;
   left: 0;
   margin: 0;
   padding: 0;
