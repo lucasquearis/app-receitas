@@ -61,6 +61,7 @@ export default function Comidas() {
     }
     getIngredients(ingredient.nameIng, setComidas);
   }, [ingredient]);
+
   useEffect(() => {
     if (categorias.length <= 0) {
       fetchCategorias();
