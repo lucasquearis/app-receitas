@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-=======
-import { Button } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 import Header from '../Component/Header';
 import Footer from '../Component/Footer';
->>>>>>> 41611d46afc8e4d4fe06279493fddd384485bc2a
 
 function Explore() {
   const [redirectTo, setRedirectTo] = useState({ foods: false, drinks: false });
@@ -23,10 +18,7 @@ function Explore() {
   }
   return (
     <>
-<<<<<<< HEAD
-=======
       <Header titlePage=" Explorar " />
->>>>>>> 41611d46afc8e4d4fe06279493fddd384485bc2a
       <Button
         name="foods"
         variant="link"
@@ -43,10 +35,7 @@ function Explore() {
       >
         Explorar Bebidas
       </Button>
-<<<<<<< HEAD
-=======
       <Footer />
->>>>>>> 41611d46afc8e4d4fe06279493fddd384485bc2a
     </>
   );
 }

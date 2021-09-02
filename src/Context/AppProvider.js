@@ -22,11 +22,11 @@ function Provider({ children }) {
     drinks,
     mealsCategories,
     drinksCategories,
+    madeRecipe,
     ingredientFilter,
     foodOrDrink,
     search,
     loadSearch,
-    madeRecipe,
   };
 
   const contextValue = {

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 * {
   box-sizing: border-box;
   margin: 0;
@@ -37,7 +36,8 @@
   font-weight: 700;
   min-width: 6.25rem;
   outline: none;
-=======
+}
+
 .login-page {
   align-items: center;
   background-image: url('./images/background.jpg');
@@ -182,5 +182,4 @@
   position: absolute;
   top: 320px;
   width: 149px;
->>>>>>> 41611d46afc8e4d4fe06279493fddd384485bc2a
 }
