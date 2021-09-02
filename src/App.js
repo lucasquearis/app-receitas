@@ -11,6 +11,7 @@ import Profile from './Pages/Profile';
 import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import FoodDetails from './Pages/FoodDetails';
 import DrinksDetails from './Pages/DrinksDetails';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
       <Route exact path="/comidas" component={ FoodMainPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
+      <Route exact path="*" component={ NotFound } />
     </Switch>
   );
 }

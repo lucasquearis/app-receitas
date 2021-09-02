@@ -17,15 +17,7 @@ function FoodPlaceExplore() {
   }, [setData]);
 
   useEffect(() => {
-    if (filter === All) {
-      const mealsFilter = async () => {
-        const END_POINT2 = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filter}`;
-        const response = await fetch(END_POINT2);
-        const { meals } = await response.json();
-        setDataFilter(meals);
-      };
-      mealsFilter();
-    } else {
+    if (filter === 'All') {
       const allMeals = async () => {
         const END_POINT2 = 'https://www.themealdb.com/api/json/v1/1/search.php?s=All';
         const response = await fetch(END_POINT2);
@@ -33,6 +25,14 @@ function FoodPlaceExplore() {
         setDataFilter(meals);
       };
       allMeals();
+    } else {
+      const mealsFilter = async () => {
+        const END_POINT2 = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filter}`;
+        const response = await fetch(END_POINT2);
+        const { meals } = await response.json();
+        setDataFilter(meals);
+      };
+      mealsFilter();
     }
   }, [filter, setFilter]);
 
