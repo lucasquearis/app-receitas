@@ -5,8 +5,8 @@
   border-radius: 5px;
   box-shadow: 1px 5px 10px rgb(204, 201, 201);
   display: inline-flex;
-  flex-direction: row;
   flex-flow: wrap;
+  flex-direction: row;
   font-size: 27px;
   height: 110px;
   justify-content: center;
@@ -17,8 +17,8 @@
 
 .cardListDiv {
   background-color: white;
-  display: inline-flex;
   border: white;
+  display: inline-flex;
   border-radius: 5px;
   box-shadow: 1px 5px 10px rgb(204, 201, 201);
   flex-flow: wrap;
