@@ -25,12 +25,12 @@ function Routes() {
         <Route exact path="/" component={ Login } />
         <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
         <Route path="/comidas/:id/in-progress" component={ FoodsInProgress } />
+        <Route path="/comidas/:id" component={ FoodsDet } />
+        <Route path="/bebidas/:id" component={ DrinksDet } />
         <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
         <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
         <Route path="/explorar/bebidas/area" component={ NotFound } />
-        <Route path="/comidas/:id" component={ FoodsDet } />
-        <Route path="/bebidas/:id" component={ DrinksDet } />
         <Route path="/explorar/comidas" component={ FoodExp } />
         <Route path="/explorar/bebidas" component={ DrinkExp } />
         <Route path="/comidas" component={ Foods } />

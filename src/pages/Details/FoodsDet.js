@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Link, useParams } from 'react-router-dom';
-import { Button, Image } from 'react-bootstrap';
+import { useParams, Link } from 'react-router-dom';
+import { Image, Button } from 'react-bootstrap';
 import ShareButton from '../../components/ShareButton';
 import FavoriteButton from '../../components/FavoriteButton';
 
@@ -19,6 +19,8 @@ function FoodDetails() {
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [recipesRecommendations, setRecipesRecommendations] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -64,18 +66,21 @@ function FoodDetails() {
     getRecommendations();
   }, [recipesFood]);
 
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  useEffect(() => {
+    const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const filterDoneRecipes = getDoneRecipes ? getDoneRecipes
+      .filter((item) => item.id === parseInt(id, 10)) : [];
+    setDoneRecipes(filterDoneRecipes);
 
-  const filterDoneRecipes = doneRecipes ? doneRecipes
-    .filter((item) => item.id === parseInt(id, 10)) : [];
-  console.log(filterDoneRecipes);
-
-  const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const verifyInProgress = inProgress ? Object.keys(inProgress.meals)
-    .filter((item) => item === id) : [];
+    const getInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const filterInProgress = getInProgress ? Object.keys(getInProgress.meals)
+      .filter((item) => item === id) : [];
+    setInProgress(filterInProgress);
+  }, [id, setDoneRecipes]);
 
   return (
     <>
+      <h1>Tela de detalhes</h1>
       { recipesFood.map((item, index) => (
         <div key={ index }>
           <Image
@@ -87,7 +92,19 @@ function FoodDetails() {
           <h2 data-testid="recipe-title">{ item.strMeal }</h2>
           <p data-testid="recipe-category">{ item.strCategory }</p>
           <ShareButton />
-          <FavoriteButton />
+          <FavoriteButton
+            infos={ {
+              id,
+              type: 'comida',
+              area: item.strArea,
+              category: item.strCategory,
+              alcoholicOrNot: '',
+              name: item.strMeal,
+              image: item.strMealThumb,
+              // doneDate,
+              // tags
+            } }
+          />
           <div>
             <h3>Ingredientes</h3>
             <ul>
@@ -97,7 +114,6 @@ function FoodDetails() {
                   data-testid={ `${indx}-ingredient-name-and-measure` }
                 >
                   { `${measure[indx]} ${ingredient}` }
-
                 </li>
               )) }
             </ul>
@@ -121,16 +137,14 @@ function FoodDetails() {
           <Link to={ `/comidas/${id}/in-progress` }>
             <Button
               className="fixed-bottom"
-              variant="success"
               data-testid="start-recipe-btn"
               type="button"
-              hidden={ filterDoneRecipes.length === 0 }
+              hidden={ doneRecipes.length !== 0 }
             >
-              { verifyInProgress.length !== 0
+              { inProgress.length !== 0
                 ? 'Continuar Receita' : 'Iniciar Receita' }
             </Button>
           </Link>
-
         </div>
       )) }
     </>

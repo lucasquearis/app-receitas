@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Link, useParams } from 'react-router-dom';
-import { Button, Image } from 'react-bootstrap';
+import { useParams, Link } from 'react-router-dom';
+import { Image, Button } from 'react-bootstrap';
 import ShareButton from '../../components/ShareButton';
 import FavoriteButton from '../../components/FavoriteButton';
 
@@ -19,6 +19,8 @@ function DrinksDetails() {
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
   const [recipesRecommendations, setRecipesRecommendations] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -64,14 +66,17 @@ function DrinksDetails() {
     getRecommendations();
   }, [recipesDrink]);
 
-  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+  useEffect(() => {
+    const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const filterDoneRecipes = getDoneRecipes ? getDoneRecipes
+      .filter((item) => item.id === parseInt(id, 10)) : [];
+    setDoneRecipes(filterDoneRecipes);
 
-  const filterDoneRecipes = localStorageDoneRecipes
-    .filter((item) => item.id === parseInt(id, 10));
-
-  const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const verifyInProgress = inProgress ? Object.keys(inProgress.cocktails)
-    .filter((item) => item === id) : [];
+    const getInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const filterInProgress = getInProgress ? Object.keys(getInProgress.cocktails)
+      .filter((item) => item === id) : [];
+    setInProgress(filterInProgress);
+  }, [id, setDoneRecipes]);
 
   return (
     <>
@@ -86,7 +91,19 @@ function DrinksDetails() {
           <h2 data-testid="recipe-title">{ item.strDrink }</h2>
           <p data-testid="recipe-category">{ item.strAlcoholic }</p>
           <ShareButton />
-          <FavoriteButton />
+          <FavoriteButton
+            infos={ {
+              id,
+              type: 'bebida',
+              area: '',
+              category: item.strCategory,
+              alcoholicOrNot: item.strAlcoholic,
+              name: item.strDrink,
+              image: item.strDrinkThumb,
+              // doneDate,
+              // tags
+            } }
+          />
           <div>
             <h3>Ingredientes</h3>
             <ul>
@@ -112,15 +129,13 @@ function DrinksDetails() {
           </Carousel>
           <Link to={ `/bebidas/${id}/in-progress` }>
             <Button
-              className="fixed-bottom"
-              variant="success"
-              data-testid="start-recipe-btn"
               type="button"
-              hidden={ filterDoneRecipes.length === 0 }
+              className="fixed-bottom"
+              data-testid="start-recipe-btn"
+              hidden={ doneRecipes.length !== 0 }
             >
-              { verifyInProgress.length !== 0
+              { inProgress.length !== 0
                 ? 'Continuar Receita' : 'Iniciar Receita' }
-
             </Button>
           </Link>
         </div>
