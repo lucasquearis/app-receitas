@@ -8,12 +8,12 @@ import * as ComidasAPI from '../service/ComidasAPI';
 export default function ExplorarComidaIngrediente() {
   const [ingredients, setIngredients] = useState([]);
 
-  const { setIngredient } = useContext(RecipesContext)
+  const { setIngredient } = useContext(RecipesContext);
   useEffect(() => {
     const getIngredients = async () => {
       const ingredient = await ComidasAPI.buscarIngrediente();
-      // console.log(ingredient);
-      const ingredientResult = ingredient.filter((_ing, index) => index < 12);
+      const numberFoods = 12;
+      const ingredientResult = ingredient.filter((_ing, index) => index < numberFoods);
       setIngredients(ingredientResult);
     };
     getIngredients();

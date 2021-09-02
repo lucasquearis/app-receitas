@@ -12,8 +12,10 @@ export default function ExplorarBebidasIngrediente() {
   useEffect(() => {
     const getIngredients = async () => {
       const ingredient = await BebidasAPI.buscarIngrediente();
-      // console.log(ingredient);
-      const ingredientResult = ingredient.drinks.filter((_ing, index) => index < 12);
+      const numberDrinks = 12;
+      const ingredientResult = ingredient.drinks.filter(
+        (_ing, index) => index < numberDrinks,
+      );
       setIngredients(ingredientResult);
     };
     getIngredients();
