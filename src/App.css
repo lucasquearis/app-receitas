@@ -69,24 +69,24 @@
 }
 
 .main-profile {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .profile-email {
-  margin-top: 5vh;
   margin-bottom: 8vh;
+  margin-top: 5vh;
 }
 
 .profile-btn {
-  width: 100%;
   height: 10vh;
-  margin: 2vh 0;
-  color: white;
+  width: 100%;
   background-color: #ef6a07;
   border-color: #ef6a07;
   border-radius: 5px;
+  color: white;
+  margin: 2vh 0;
 }
 
 .meals > .logo {
