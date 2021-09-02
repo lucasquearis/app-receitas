@@ -9,7 +9,6 @@ function FavoriteRecipies() {
   useEffect(() => {
     setFavoriteRecipes(local);
   }, []);
-  console.log(local);
 
   const filterType = (type) => {
     if (type === 'all') {

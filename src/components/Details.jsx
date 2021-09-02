@@ -26,7 +26,11 @@ function Details(props) {
       />
       <h1 data-testid="recipe-title">{DetailedRecipe.tittle}</h1>
       <div>
-        <ShareButton type={ Receita } id={ Id } />
+        <ShareButton
+          type={ Receita }
+          id={ Id }
+          datatestid="share-btn"
+        />
         <FavoriteButton recipe={ DetailedRecipe } id={ Id } type={ Receita } />
       </div>
       <h3 data-testid="recipe-category">{DetailedRecipe.category}</h3>

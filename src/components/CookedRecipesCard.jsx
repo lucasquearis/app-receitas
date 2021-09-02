@@ -32,7 +32,11 @@ export default function CookedRecipesCard({
       </Link>
       <div>
         <div>
-          <ShareButton datatestid={ `${index}-horizontal-share-btn` } />
+          <ShareButton
+            id={ id }
+            type={ `${type}s` }
+            datatestid={ `${index}-horizontal-share-btn` }
+          />
         </div>
         <p data-testid={ `${index}-horizontal-top-text` }>
           { alcoholicOrNot }
