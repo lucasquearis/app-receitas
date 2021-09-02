@@ -67,14 +67,18 @@ export default function ExploreMealsByOrigin() {
   );
   return (
     <>
-      <Header title="Explorar Origem" />
-      <select
-        data-testid="explore-by-area-dropdown"
-        onChange={ setDataMealsctedArea }
-      >
-        { fillSelectItems() }
-      </select>
-      { fillCardsMeals() }
+      <Header title="Origem" />
+      <div className="origin__card-div">
+        <select
+          data-testid="explore-by-area-dropdown"
+          onChange={ setDataMealsctedArea }
+          className="origin__country-selection"
+          id="multi-state"
+        >
+          { fillSelectItems() }
+        </select>
+        { fillCardsMeals() }
+      </div>
       <BottomMenu />
     </>
   );
