@@ -17,13 +17,23 @@ function FoodPlaceExplore() {
   }, [setData]);
 
   useEffect(() => {
-    const mealsFilter = async () => {
-      const END_POINT2 = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filter}`;
-      const response = await fetch(END_POINT2);
-      const { meals } = await response.json();
-      setDataFilter(meals);
-    };
-    mealsFilter();
+    if (filter === All) {
+      const mealsFilter = async () => {
+        const END_POINT2 = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${filter}`;
+        const response = await fetch(END_POINT2);
+        const { meals } = await response.json();
+        setDataFilter(meals);
+      };
+      mealsFilter();
+    } else {
+      const allMeals = async () => {
+        const END_POINT2 = 'https://www.themealdb.com/api/json/v1/1/search.php?s=All';
+        const response = await fetch(END_POINT2);
+        const { meals } = await response.json();
+        setDataFilter(meals);
+      };
+      allMeals();
+    }
   }, [filter, setFilter]);
 
   const MNumber = '12';
@@ -36,6 +46,12 @@ function FoodPlaceExplore() {
         value={ filter }
         onChange={ ({ target: { value } }) => setFilter(value) }
       >
+        <option
+          data-testid="All-option"
+          value="All"
+        >
+          All
+        </option>
         {
           data
             .map(({ strArea }, index) => (
