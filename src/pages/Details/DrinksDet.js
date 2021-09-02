@@ -110,8 +110,8 @@ function DrinksDetails() {
               alcoholicOrNot: item.strAlcoholic,
               name: item.strDrink,
               image: item.strDrinkThumb,
-              doneDate: '',
-              tags: [],
+              // doneDate: '',
+              // tags: [],
             } }
           />
           <div>
