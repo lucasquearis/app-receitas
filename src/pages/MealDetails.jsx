@@ -151,16 +151,17 @@ export default function MealDetails(props) {
             ))
           }
         </Carousel>
-        <Link to={ `/comidas/${props.match.params.id}/in-progress` }>
-          <button
-            type="button"
-            className="start-recipe-btn"
-            data-testid="start-recipe-btn"
-            onClick={ handleStartRecipe }
-          >
-            { verifyIfRecipeInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
-          </button>
-        </Link>
+        <div className="button-wrapper">
+          <Link to={ `/comidas/${props.match.params.id}/in-progress` }>
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              onClick={ handleStartRecipe }
+            >
+              { verifyIfRecipeInProgress() ? 'Continuar Receita' : 'Iniciar Receita' }
+            </button>
+          </Link>
+        </div>
       </main>
     );
   }
