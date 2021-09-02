@@ -7,12 +7,9 @@ import { Main, Form, Title, Button } from './style';
 
 function Login() {
   const {
-    setCocktailsToken,
     setDoneRecipes,
     setFavoriteRecipes,
     setInProgressRecipes,
-    setMealsToken,
-    // setUser,
   } = useContext(AppContext);
 
   const [inputLogin, setInputLogin] = useState({
@@ -28,8 +25,8 @@ function Login() {
   };
 
   const handleClick = () => {
-    setMealsToken(1);
-    setCocktailsToken(1);
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: inputLogin.email }));
     setDoneRecipes(getFromLocalStorage('doneRecipes', []));
     setInProgressRecipes(getFromLocalStorage('inProgressRecipes', {
