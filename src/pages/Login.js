@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { loginAction } from '../redux/actions/mainActions';
 import useLocalStorage from '../helpers/useLocalStorage';
 import Input from '../components/Input';
-import logo from '../images/larica.png';
+import testImg from '../images/testImg.jpeg';
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -43,12 +43,6 @@ function Login(props) {
   return (
     <div className="login">
       <form className="login__form">
-        <img
-          src={ logo }
-          alt="logo"
-          className="login__img"
-        />
-
         <h1>Larica na Mesa</h1>
 
         <Input
@@ -79,6 +73,11 @@ function Login(props) {
           Entrar
         </button>
       </form>
+      <img
+        src={ testImg }
+        alt="logo"
+        className="login__img"
+      />
     </div>
   );
 }
