@@ -48,11 +48,13 @@ export default function ProgressFoodCard({ recipe, id }) {
       : meals[id].filter((item) => item !== name);
     setState({ ...state, meals: { ...state.meals, [id]: ingredients } });
   };
+
   if (redirect) {
     return <Redirect to="/receitas-feitas" />;
   }
+
   return (
-    <div>
+    <div className="progress-food">
       <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
       <img data-testid="recipe-photo" src={ recipe.strMealThumb } alt="foto de comida" />
       <FavoriteAndShare
