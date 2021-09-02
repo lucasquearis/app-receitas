@@ -18,7 +18,7 @@ function DoneCard({ recipe, index }) {
   } = recipe;
 
   // // const tagsTratada = tags === null ? [] : tags.split(',');
-  const tagsTratada = tags === null ? [] : tags;
+  const tagsTratada = tags === null ? [] : [...tags];
 
   const [sharedMessage, setSharedMessage] = useState(false);
   const PERIOD_OF_MESSAGE = 1000;
