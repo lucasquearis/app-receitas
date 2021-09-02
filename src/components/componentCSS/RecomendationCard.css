@@ -15,5 +15,11 @@
 }
 
 .details__carousel-card img {
+  border-radius: 10px;
   width: 100%;
+}
+
+.details__carousel-card p {
+  color: white;
+  margin: auto;
 }

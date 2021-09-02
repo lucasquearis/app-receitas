@@ -10,11 +10,28 @@ import Loading from '../components/Loading';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function DrinkRecipeDetails(props) {
+export default function DrinkRecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const [resultDrinkRecipe, setResultDrinkRecipe] = useState([]);
   const [favoriteRecipe, setFavoriteRecipe] = useState(false);
   const [linkShare, setLinkShare] = useState(false);
+
+  useEffect(() => {
+    const resolveAPI = async () => {
+      const { drinks } = await searchDrinkId(id);
+      setResultDrinkRecipe(drinks);
+    };
+    resolveAPI();
+  }, [id]);
+
+  const continueRecipe = () => {
+    const parseStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: { [id]: [] } };
+    if (parseStorage.cocktails[id]) {
+      return 'Continuar Receita';
+    }
+    return 'Iniciar Receita';
+  };
 
   useEffect(() => {
     const parseLocalStorage = JSON
@@ -55,25 +72,6 @@ function DrinkRecipeDetails(props) {
     }
   };
 
-  useEffect(() => {
-    const resolveAPI = async () => {
-      const { drinks } = await searchDrinkId(id);
-      setResultDrinkRecipe(drinks);
-    };
-    resolveAPI();
-  }, [id]);
-
-  console.log();
-
-  const continueRecipe = () => {
-    const parseStorage = JSON.parse(localStorage
-      .getItem('inProgressRecipes')) || { cocktails: { [id]: [] } };
-    if (parseStorage.cocktails[id]) {
-      return 'Continuar Receita';
-    }
-    return 'Iniciar Receita';
-  };
-
   if (resultDrinkRecipe.length > 0) {
     const {
       strDrink,
@@ -87,43 +85,48 @@ function DrinkRecipeDetails(props) {
       .includes('strIngredient'));
     const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
     return (
-      <>
+      <div className="recipe-details__div">
         <h1 data-testid="recipe-title">{strDrink}</h1>
         <img
-          className="cards"
+          className="recipe-details__thumb"
           data-testid="recipe-photo"
           src={ strDrinkThumb }
           alt={ strDrink }
         />
-        <button
-          data-testid="share-btn"
-          className="share-btn"
-          onClick={ () => {
-            copy(`http://localhost:3000/bebidas/${id}`);
-            setLinkShare(true);
-          } }
-          type="button"
-        >
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-          />
-        </button>
+        <div className="recipe-details__category-name-div">
+          <span><b>Álcool: </b></span>
+          <span data-testid="recipe-category">{strAlcoholic}</span>
+        </div>
+        <div className="recipe-details__share-and-favorite-btn-div">
+          <button
+            className="favorite-btn"
+            type="button"
+            onClick={
+              () => handleclickFavButton(strAlcoholic, strDrink, strDrinkThumb, strCategory)
+            }
+          >
+            <img
+              data-testid="favorite-btn"
+              src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+              alt="icone favorito"
+            />
+          </button>
+          <button
+            data-testid="share-btn"
+            className="share-btn"
+            onClick={ () => {
+              copy(`http://localhost:3000/bebidas/${id}`);
+              setLinkShare(true);
+            } }
+            type="button"
+          >
+            <img
+              src={ shareIcon }
+              alt="imagem de compartilhar"
+            />
+          </button>
+        </div>
         { linkShare && 'Link copiado!' }
-        <button
-          className="favorite-btn"
-          type="button"
-          onClick={
-            () => handleclickFavButton(strAlcoholic, strDrink, strDrinkThumb, strCategory)
-          }
-        >
-          <img
-            data-testid="favorite-btn"
-            src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
-            alt="icone favorito"
-          />
-        </button>
-        <p data-testid="recipe-category">{strAlcoholic}</p>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultDrinkRecipe[0][ingredient]) {
@@ -144,11 +147,12 @@ function DrinkRecipeDetails(props) {
         </ul>
         <h2>Instruções:</h2>
         <p data-testid="instructions">{strInstructions}</p>
+        <h2 className="recipe-details__combine-title">Combina com...</h2>
         <RecomendationCard page="drinks" />
         <div className="div-btn-start-recipe">
           <Link to={ `/bebidas/${id}/in-progress` }>
             <button
-              className="finish-btn"
+              className="recipe-details__finish-btn"
               data-testid="start-recipe-btn"
               type="button"
             >
@@ -156,17 +160,13 @@ function DrinkRecipeDetails(props) {
             </button>
           </Link>
         </div>
-      </>
+      </div>
     );
   }
 
-  return (
-    <Loading />
-  );
+  return (<Loading />);
 }
 
 DrinkRecipeDetails.propTypes = {
   id: PropTypes.number,
 }.isRequired;
-
-export default DrinkRecipeDetails;

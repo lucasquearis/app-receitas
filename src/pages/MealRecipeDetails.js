@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import copy from 'clipboard-copy';
 import './pageCSS/MealRecipeDetails.css';
+import copy from 'clipboard-copy';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import searchMealAPI
-  from '../services/Header-SearchBar/Foods/searchFoodId';
+import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -97,36 +96,40 @@ export default function MealRecipeDetails(props) {
           src={ strMealThumb }
           alt={ strMeal }
         />
-        <button
-          className="favorite-btn"
-          type="button"
-          onClick={
-            () => handleclickFavButton(strArea, strCategory, strMeal, strMealThumb)
-          }
-        >
-          <img
-            data-testid="favorite-btn"
-            src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
-            alt="icone favorito"
-          />
-        </button>
-        <button
-          className="share-btn"
-          data-testid="share-btn"
-          onClick={ () => {
-            copy(`http://localhost:3000/comidas/${id}`);
-            setLinkShare(true);
-          } }
-          type="button"
-        >
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-          />
-        </button>
+        <div className="recipe-details__category-name-div">
+          <span><b>Categoria: </b></span>
+          <span data-testid="recipe-category">{strCategory}</span>
+        </div>
+        <div className="recipe-details__share-and-favorite-btn-div">
+          <button
+            className="favorite-btn"
+            type="button"
+            onClick={
+              () => handleclickFavButton(strArea, strCategory, strMeal, strMealThumb)
+            }
+          >
+            <img
+              data-testid="favorite-btn"
+              src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+              alt="icone favorito"
+            />
+          </button>
+          <button
+            className="share-btn"
+            data-testid="share-btn"
+            onClick={ () => {
+              copy(`http://localhost:3000/comidas/${id}`);
+              setLinkShare(true);
+            } }
+            type="button"
+          >
+            <img
+              src={ shareIcon }
+              alt="imagem de compartilhar"
+            />
+          </button>
+        </div>
         { linkShare && 'Link copiado!' }
-        <span>Categoria: </span>
-        <span data-testid="recipe-category">{strCategory}</span>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultMealRecipe[0][ingredient]) {
@@ -146,7 +149,7 @@ export default function MealRecipeDetails(props) {
             return false;
           })}
         </ul>
-        <h2>Instruções:</h2>
+        <h2>Instruções</h2>
         <p data-testid="instructions">{strInstructions}</p>
         <iframe
           data-testid="video"
@@ -157,11 +160,12 @@ export default function MealRecipeDetails(props) {
           frameBorder="0"
           allowFullScreen
         />
+        <h2 className="recipe-details__combine-title">Combina com...</h2>
         <RecomendationCard page="meals" />
         <div className="div-btn-start-recipe">
           <Link to={ `/comidas/${id}/in-progress` }>
             <button
-              className="finish-btn"
+              className="recipe-details__finish-btn"
               data-testid="start-recipe-btn"
               type="button"
             >
