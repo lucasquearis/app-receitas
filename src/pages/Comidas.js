@@ -27,7 +27,7 @@ function Comidas() {
   if (foodData === null) {
     return (
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
-      && <Redirect to="/bebidas" />
+      && <Redirect to="/comidas" />
     );
   }
   if (foodData.length === 1 && searchBar === true) {
@@ -37,8 +37,8 @@ function Comidas() {
     return (
       <div>
         <Header title="Comidas" />
-        <Buttons food />
-        <Recipes food ingredientes={ false } />
+        <Buttons />
+        <Recipes />
         <Footer />
       </div>
     );

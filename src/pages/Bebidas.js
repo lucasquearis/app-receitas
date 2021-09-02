@@ -37,8 +37,8 @@ function Bebidas() {
     return (
       <div>
         <Header title="Bebidas" />
-        <Buttons food={ false } />
-        <Recipes food={ false } ingredientes={ false } />
+        <Buttons />
+        <Recipes />
         <Footer />
       </div>
     );

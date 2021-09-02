@@ -8,9 +8,11 @@ async function drinksFilterAPI(search, filter, setDrinkData) {
   } else if (search === 'primeira letra') {
     url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filter}`;
   }
-  await fetch(url).then((packJason) => packJason.json())
+  await fetch(url).then((response) => response.json())
     .then(({ drinks }) => {
-      setDrinkData(drinks.slice(0, endNumber));
+      if (drinks !== null) {
+        setDrinkData(drinks.slice(0, endNumber));
+      } else setDrinkData(null);
     });
 }
 

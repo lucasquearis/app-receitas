@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 import Button from './Button';
 
-const CategoriesButton = ({ food }) => {
-  const { drinkCategory, foodCategory, filter, setFilter } = useContext(RecipesContext);
+const CategoriesButton = () => {
+  const {
+    drinkCategory,
+    foodCategory,
+    filter,
+    setFilter,
+    food } = useContext(RecipesContext);
   const onClick = ({ target }) => {
     const toggle = (filter === target
       .value) || (target
@@ -25,10 +29,6 @@ const CategoriesButton = ({ food }) => {
           />))}
     </div>
   );
-};
-
-CategoriesButton.propTypes = {
-  food: PropTypes.bool.isRequired,
 };
 
 export default CategoriesButton;

@@ -7,6 +7,7 @@ function SearchBar() {
   const onClick = () => {
     setFilter(searchTerm);
     setSearchBar(true);
+    setSearchTerm('');
   };
   return (
     <div>

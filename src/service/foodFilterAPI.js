@@ -10,7 +10,9 @@ async function foodFilterAPI(setFoodData, filter, search) {
   }
   await fetch(url).then((packJason) => packJason.json())
     .then(({ meals }) => {
-      setFoodData(meals.slice(0, endNumber));
+      if (meals !== null) {
+        setFoodData(meals.slice(0, endNumber));
+      } else setFoodData(null);
     });
 }
 

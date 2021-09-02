@@ -11,10 +11,6 @@ function BebidasIngredientes() {
     setFood,
     ingredient,
     setIngredient } = useContext(RecipesContext);
-  const onClick = ({ target }) => {
-    setSearch('ingrediente');
-    setFilter(target.parentNode.innerText);
-  };
 
   useEffect(() => {
     if (food) {
@@ -24,10 +20,15 @@ function BebidasIngredientes() {
     }
   }, [food, ingredient, setFood, setIngredient]);
 
+  const onClick = ({ target }) => {
+    setSearch('ingrediente');
+    setFilter(target.parentNode.innerText);
+  };
+
   return (
     <div>
       <Header title="Explorar Ingredientes" renderSearch={ false } />
-      <Recipes food={ food } ingredientes onClick={ onClick } />
+      <Recipes onClick={ onClick } />
       <Footer />
     </div>
   );
