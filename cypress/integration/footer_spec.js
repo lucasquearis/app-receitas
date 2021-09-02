@@ -15,8 +15,8 @@ describe('20 - Posicione o menu inferior de forma fixa e apresente 3 ícones: um
   it('O menu inferior deve ficar fixado sempre ao final da página', () => {
     cy.visit('http://localhost:3000/comidas');
 
-    cy.get('[data-testid="footer"]').should('have.css','position', 'fixed');
-    cy.get('[data-testid="footer"]').should('have.css','bottom', '0px');
+    cy.get('[data-testid="footer"]').should('have.css', 'position', 'fixed');
+    cy.get('[data-testid="footer"]').should('have.css', 'bottom', '0px');
   });
 
   it('Apresenta os ícones corretos', () => {

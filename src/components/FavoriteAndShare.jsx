@@ -26,8 +26,11 @@ export default function FavoriteAndShare({ id, recipe, isFood }) {
   useEffect(setFavorite);
 
   const handleShare = () => {
+    const regExp = /\S+[bebidas]?[comidas]\//i;
     const url = window.location.href;
-    copy(url);
+    const newUrl = url.match(regExp)[0] + id;
+    console.log(newUrl);
+    copy(newUrl);
     setCopyMsg(true);
   };
 

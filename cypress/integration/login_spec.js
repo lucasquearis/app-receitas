@@ -81,7 +81,6 @@ describe('6 - Salve 2 tokens no localStorage após a submissão, identificados p
       expect(win.localStorage.getItem('cocktailsToken')).to.be.null;
     });
 
-
     cy.get('[data-testid="email-input"]').type('email@mail.com');
     cy.get('[data-testid="password-input"]').type('1234567');
     cy.get('[data-testid="login-submit-btn"]').click();
@@ -107,7 +106,6 @@ describe('7 - Salve o e-mail da pessoa usuária no localStorage na chave user ap
       expect(win.localStorage.getItem('user')).to.be.null;
     });
 
-
     cy.get('[data-testid="email-input"]').type('email@mail.com');
     cy.get('[data-testid="password-input"]').type('1234567');
     cy.get('[data-testid="login-submit-btn"]').click();
@@ -131,7 +129,6 @@ describe('8 - Redirecione a pessoa usuária para a tela principal de receitas de
     cy.window().then((win) => {
       expect(win.localStorage.getItem('user')).to.be.null;
     });
-
 
     cy.get('[data-testid="email-input"]').type('email@mail.com');
     cy.get('[data-testid="password-input"]').type('1234567');

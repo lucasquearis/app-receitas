@@ -48,7 +48,6 @@ describe('25 - Implemente os elementos da tela principal de receitas respeitando
       cy.get(`[data-testid="${index}-card-name"]`);
     }
 
-
     cy.get('[data-testid="12-recipe-card"]').should('not.exist');
     cy.get('[data-testid="12-card-img"]').should('not.exist');
     cy.get('[data-testid="12-card-name"]').should('not.exist');

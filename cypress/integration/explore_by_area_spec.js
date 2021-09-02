@@ -13,9 +13,9 @@ const checkFirstMeals = (meals, limit = 12) => {
 
     cy.get(`[data-testid="${index}-card-img"]`)
       .should('have.attr', 'src')
-      .should('include', meal['strMealThumb']);
+      .should('include', meal.strMealThumb);
 
-    cy.get(`[data-testid="${index}-card-name"]`).contains(meal['strMeal']);
+    cy.get(`[data-testid="${index}-card-name"]`).contains(meal.strMeal);
   });
 
   cy.get(`[data-testid="${limit}-recipe-card"]`).should('not.exist');

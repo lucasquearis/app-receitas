@@ -198,13 +198,13 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
         const favoriteRecipes = [{
-          "id": "52771",
-          "type": "comida",
-          "area": "Italian",
-          "category": "Vegetarian",
-          "alcoholicOrNot": "",
-          "name": "Spicy Arrabiata Penne",
-          "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+          id: '52771',
+          type: 'comida',
+          area: 'Italian',
+          category: 'Vegetarian',
+          alcoholicOrNot: '',
+          name: 'Spicy Arrabiata Penne',
+          image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
         }];
         localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
         win.fetch = fetchMock;
@@ -232,13 +232,13 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
     cy.visit('http://localhost:3000/bebidas/178319/in-progress', {
       onBeforeLoad(win) {
         const favoriteRecipes = [{
-          "id": "178319",
-          "type": "bebida",
-          "area": "",
-          "category": "Cocktail",
-          "alcoholicOrNot": "Alcoholic",
-          "name": "Aquamarine",
-          "image": "https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg",
+          id: '178319',
+          type: 'bebida',
+          area: '',
+          category: 'Cocktail',
+          alcoholicOrNot: 'Alcoholic',
+          name: 'Aquamarine',
+          image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
         }];
         localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
         win.fetch = fetchMock;
@@ -284,13 +284,13 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
         const favoriteRecipes = [{
-          "id": "52771",
-          "type": "comida",
-          "area": "Italian",
-          "category": "Vegetarian",
-          "alcoholicOrNot": "",
-          "name": "Spicy Arrabiata Penne",
-          "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+          id: '52771',
+          type: 'comida',
+          area: 'Italian',
+          category: 'Vegetarian',
+          alcoholicOrNot: '',
+          name: 'Spicy Arrabiata Penne',
+          image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
         }];
         localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
         win.fetch = fetchMock;
@@ -330,13 +330,13 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
     cy.visit('http://localhost:3000/bebidas/178319/in-progress', {
       onBeforeLoad(win) {
         const favoriteRecipes = [{
-          "id": "178319",
-          "type": "bebida",
-          "area": "",
-          "category": "Cocktail",
-          "alcoholicOrNot": "Alcoholic",
-          "name": "Aquamarine",
-          "image": "https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg",
+          id: '178319',
+          type: 'bebida',
+          area: '',
+          category: 'Cocktail',
+          alcoholicOrNot: 'Alcoholic',
+          name: 'Aquamarine',
+          image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
         }];
         localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
         win.fetch = fetchMock;
@@ -395,7 +395,7 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
           type: 'bebida',
           area: '',
           category: 'Cocktail',
-          alcoholicOrNot:  'Alcoholic',
+          alcoholicOrNot: 'Alcoholic',
           name: 'Aquamarine',
           image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
         },
@@ -407,7 +407,7 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
   });
 });
 
-describe('52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
+describe.only('52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
   it('verifica se botão para finalizar está desabilitado em receitas de comidas', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
