@@ -24,7 +24,6 @@ function Cards({ element, index, type }) {
         </p>
       </section>
     </Link>
-
   );
 }
 

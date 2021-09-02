@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import '../styles/Header.css';
 
 function Header(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -17,25 +18,38 @@ function Header(props) {
     }
   };
   return (
-    <header>
-      <Link to="/perfil">
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="Icone de perfil"
-        />
-      </Link>
-      {
-        showSearch ? (
-          <button onClick={ showBar } type="button">
-            <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="Icone de busca"
-            />
-          </button>) : null
-      }
-      <h1 data-testid="page-title">{ titulo }</h1>
+    <header className="headerPags">
+      <div className="divButtonsHeader">
+        <Link to="/perfil">
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="Icone de perfil"
+            width="33"
+          />
+        </Link>
+        {
+          showSearch ? (
+            <button
+              onClick={ showBar }
+              className="buttonShowSearch"
+              type="button"
+            >
+              <img
+                data-testid="search-top-btn"
+                src={ searchIcon }
+                alt="Icone de busca"
+                width="33"
+              />
+            </button>) : null
+        }
+      </div>
+      <h1
+        data-testid="page-title"
+        className="h1Header"
+      >
+        { titulo }
+      </h1>
       <div>
         { showSearchBar ? <SearchBar /> : null }
       </div>
