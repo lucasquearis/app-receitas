@@ -14,7 +14,7 @@ function SearchBar() {
   const { removeDisplayList } = useContext(myContext);
   const dispatch = useDispatch();
   const { meals } = useSelector((state) => state.recipes.foods);
-  const drinks = useSelector((state) => state.recipes.foods.drinks);
+  const { drinks } = useSelector((state) => state.recipes.foods.drinks);
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };
