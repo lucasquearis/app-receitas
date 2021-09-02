@@ -18,7 +18,6 @@ const getIngredients = async (ingredientName, setBebidas) => {
   const twelveRecipes = results.filter((_res, index) => index < searchFoods);
   setBebidas(twelveRecipes);
 };
-
 const mudaFiltro = (event, filtro, setFiltro, setBebidas) => {
   const { target: value } = event;
 
@@ -63,6 +62,7 @@ export default function Bebidas() {
     }
     getIngredients(ingredient.nameIng, setBebidas);
   }, [ingredient]);
+  
   useEffect(() => {
     if (categorias.length <= 0) {
       fetchCategorias();
