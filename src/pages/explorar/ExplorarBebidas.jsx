@@ -12,8 +12,8 @@ export default function ExplorarBebidas() {
         <Link to="/explorar/bebidas/ingredientes">
           <button
             className="btn btn-warning button-size"
-            type="button"
             data-testid="explore-by-ingredient"
+            type="button"
           >
             Por Ingredientes
           </button>
