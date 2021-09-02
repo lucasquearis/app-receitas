@@ -10,8 +10,20 @@ export async function buscarTodasComidasPorLetra(letra) {
   return response.meals;
 }
 
+export async function buscarComidaPeloID(id) {
+  const ENDPOINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response.meals;
+}
+
 export async function buscarComidaPorNome(nome) {
   const ENDPOINT = `https://www.themealdb.com/api/json/v1/1/search.php?s=${nome}`;
+  const response = await fetch(ENDPOINT).then((data) => data.json());
+  return response.meals;
+}
+
+export async function buscarComidasAleatoria() {
+  const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(ENDPOINT).then((data) => data.json());
   return response.meals;
 }
@@ -24,12 +36,6 @@ export async function buscarComidasPorCategoria(categoria) {
 
 export async function buscarComidasIngrediente(ingr) {
   const ENDPOINT = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingr}`;
-  const response = await fetch(ENDPOINT).then((data) => data.json());
-  return response.meals;
-}
-
-export async function buscarComidasID(id) {
-  const ENDPOINT = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(ENDPOINT).then((data) => data.json());
   return response.meals;
 }

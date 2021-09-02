@@ -1,0 +1,82 @@
+.filter-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+}
+
+.filter-section button {
+  background-color: rgb(204, 204, 204);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 25%;
+}
+
+.filter-section button:active {
+  background-color: rgb(158, 158, 158);
+}
+
+.filter-section button:focus {
+  outline: none;
+}
+
+.favorite-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.favorite-card {
+  border-radius: 10px;
+  box-shadow: 2px 6px 5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  margin: 15px auto;
+  width: 85%;
+}
+
+.image-section {
+  width: 45%;
+}
+
+.image-section img {
+  height: 100%;
+  width: 100%;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 6px;
+  width: 50%;
+}
+
+.infos p {
+  color: rgb(139, 139, 139);
+  margin: 0;
+}
+
+.infos h4 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.buttons-section {
+  display: flex;
+  justify-content: space-around;
+}
+
+.copy-message {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.card-btn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.card-btn:focus {
+  outline: none;
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import copyToClipBoard from 'clipboard-copy';
-import { buscarComidasID } from '../service/ComidasAPI';
+import { buscarComidaPeloID } from '../service/ComidasAPI';
 import useIsFavorite from '../hooks/useIsFavorite';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -28,7 +28,7 @@ export default function DetalheReceitaComida(props) {
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    buscarComidasID(id)
+    buscarComidaPeloID(id)
       .then((result) => setRecipe(result))
       .then(() => getRecipeIngredients(recipe))
       .then((ingredients) => setFoodIngredients(ingredients))
