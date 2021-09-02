@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 function Login() {
   const [email, setEmail] = useState([]);
@@ -24,33 +25,35 @@ function Login() {
   }
 
   return (
-    <form>
-      <input
-        data-testid="email-input"
-        placeholder="Email"
-        value={ email }
-        onChange={ (e) => setEmail(e.target.value) }
-        name="email"
-      />
-      <input
-        data-testid="password-input"
-        placeholder="Senha"
-        value={ password }
-        onChange={ (e) => setPassword(e.target.value) }
-        name="password"
-        type="password"
-      />
+    <Container className="auto">
+      <form>
+        <input
+          data-testid="email-input"
+          placeholder="Email"
+          value={ email }
+          onChange={ (e) => setEmail(e.target.value) }
+          name="email"
+        />
+        <input
+          data-testid="password-input"
+          placeholder="Senha"
+          value={ password }
+          onChange={ (e) => setPassword(e.target.value) }
+          name="password"
+          type="password"
+        />
 
-      <button
-        data-testid="login-submit-btn"
-        onClick={ handleClick }
-        type="button"
-        disabled={ !isValid() }
-      >
-        Entrar
-      </button>
+        <button
+          data-testid="login-submit-btn"
+          onClick={ handleClick }
+          type="button"
+          disabled={ !isValid() }
+        >
+          Entrar
+        </button>
 
-    </form>
+      </form>
+    </Container>
   );
 }
 
