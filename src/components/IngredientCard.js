@@ -15,9 +15,9 @@ function IngredientCard({ ingredient: { strIngredient, strIngredient1 }, index, 
 
   const requestCategories = () => {
     if (type === 'cocktail') {
-      requestCategory(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${strIngredient1}`, setDrinkRecipes);
+      return requestCategory(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${strIngredient1}`, setDrinkRecipes);
     }
-    requestCategory(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${strIngredient}`, setFoodRecipes);
+    return requestCategory(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${strIngredient}`, setFoodRecipes);
   };
 
   const handleClick = () => {
