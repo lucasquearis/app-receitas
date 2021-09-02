@@ -66,7 +66,9 @@ function FoodDetails(props) {
 
   return (
     <div>
-      <h2>Detalhes</h2>
+      <header className="header">
+        <h2>Detalhes</h2>
+      </header>
       {recipeRender.map((item) => (
         <div key={ v4() } className="details">
           <img
@@ -74,6 +76,7 @@ function FoodDetails(props) {
             key={ v4() }
             src={ item.strMealThumb }
             data-testid="recipe-photo"
+            className="meal-img"
           />
           <p data-testid="recipe-title">{item.strMeal}</p>
 

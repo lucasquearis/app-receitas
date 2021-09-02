@@ -43,15 +43,17 @@ function SearchBar() {
   };
 
   return (
-    <form>
+    <form className="search-form">
       <InputSearch
         handleChange={ handleChange }
         value={ search }
       />
-      <RadiosButtonSearch
-        handleChange={ handleChange }
-        value={ typeSearch }
-      />
+      <div className="radios">
+        <RadiosButtonSearch
+          handleChange={ handleChange }
+          value={ typeSearch }
+        />
+      </div>
       <ButtonSearch
         handleClick={ handleClick }
 

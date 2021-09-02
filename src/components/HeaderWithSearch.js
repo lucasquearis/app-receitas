@@ -17,26 +17,36 @@ function HeaderWithSearch({ children }) {
 
   return (
     <div>
-      <header className="header-search">
-        <Button type="button" onClick={ () => shouldRedirect('/perfil') }>
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="ícone de perfil"
-          />
-        </Button>
+      <header className="header-with-search header">
         <h2 data-testid="page-title">{ children }</h2>
-        <Button type="button" onClick={ handleToggleClass }>
-          <img
-            data-testid="search-top-btn"
-            src={ searchIcon }
-            alt="ícone de busca"
-          />
-        </Button>
+        <div className="header-buttons">
+          <Button
+            type="button"
+            onClick={ () => shouldRedirect('/perfil') }
+          >
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="ícone de perfil"
+              className="icon"
+            />
+          </Button>
+          <Button
+            type="button"
+            onClick={ handleToggleClass }
+          >
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="ícone de busca"
+              className="icon"
+            />
+          </Button>
+        </div>
       </header>
       { visibleSearch
         && (
-          <div>
+          <div className="search-bar">
             <SearchBar />
           </div>) }
     </div>

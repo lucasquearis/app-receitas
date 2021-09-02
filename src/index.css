@@ -67,7 +67,7 @@
   word-wrap: break-word;
 }
 
-.details img {
+.details .drink-img, .details .meal-img {
   width: 100vw;
 }
 
@@ -130,7 +130,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #04ab96;
+  background-color: #00a9a2;
+  background-image: url("./images/tryberchef.jpg");
+  background-size: cover;
 }
 
 .login .inputs {
@@ -150,7 +152,78 @@
 }
 
 @font-face {
-  font-family: MinhaFonte;
+  font-family: KithcenHome;
+  src: url("./fonts/KitchenHome-rg0gB.ttf");
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #00a9a2;
+  width: 100vw;
+  font-family: KithcenHome, sans-serif;
+  padding: 5px;
+  color: #e5ece9;
+}
+
+.header h2 {
+  font-weight: 600;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 5vw;
+  margin-bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.search-bar {
+  position: absolute;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  top: 51px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #e5ece9;
+  width: 100vw;
+  border-radius: 0 0 5px 5px;
+}
+
+.search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 5px;
+}
+
+.radios {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@font-face {
+  font-family: KithcenHome;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
 }
 
@@ -161,6 +234,7 @@
 
 main {
   height: 100vh;
+  font-family: Poppins, sans-serif;
 }
 
 body {
@@ -173,5 +247,15 @@ body {
 * {
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
+}
+
+.btn-primary {
+  background-color: #00a9a2 !important;
+  border: none !important;
+}
+
+.icon, .share-icon, .favorite-img {
+  -webkit-filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
+          filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
 }
 /*# sourceMappingURL=index.css.map */

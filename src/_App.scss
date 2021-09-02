@@ -5,9 +5,13 @@
 @import "./styles/in-progress";
 @import "./styles/ingredients";
 @import "./styles/login";
+<<<<<<< HEAD
+@import "./styles/header";
+=======
+>>>>>>> 411f43e678fe1b7529a183afc24e41d30e409645
 
 @font-face {
-  font-family: MinhaFonte;
+  font-family: KithcenHome;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
 }
 
@@ -18,6 +22,10 @@
 
 main {
   height: 100vh;
+<<<<<<< HEAD
+  font-family: Poppins, sans-serif;
+=======
+>>>>>>> 411f43e678fe1b7529a183afc24e41d30e409645
 }
 
 body {
@@ -28,4 +36,14 @@ body {
 
 * {
   box-sizing: inherit;
+}
+
+
+.btn-primary {
+  background-color: $cool-green !important;
+  border: none !important;
+}
+
+.icon, .share-icon, .favorite-img {
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
 }

@@ -13,7 +13,6 @@ function RadiosButton(props) {
 
           return (
             <label htmlFor={ valueRadio } key={ v4() }>
-              { valueRadio }
               <input
                 checked={ value === valueRadio }
                 data-testid={ textId }
@@ -23,6 +22,7 @@ function RadiosButton(props) {
                 type="radio"
                 value={ valueRadio }
               />
+              { valueRadio }
             </label>
           );
         })
