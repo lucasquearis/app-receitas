@@ -23,7 +23,7 @@ class CategoriesFilter extends Component {
     return (
       <div className="categoryStyle">
         <button
-          className="btn btn-warning "
+          className="btn btn-warning space-btn"
           type="button"
           data-testid="All-category-filter"
           onClick={ handleClick }
@@ -33,7 +33,7 @@ class CategoriesFilter extends Component {
         {
           filteredCategories.map(({ strCategory }) => (
             <button
-              className="btn btn-warning "
+              className="btn btn-warning space-btn"
               key={ strCategory }
               type="button"
               data-testid={ `${strCategory}-category-filter` }
