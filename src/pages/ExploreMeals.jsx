@@ -9,7 +9,7 @@ export default function ExploreMeals() {
   useEffect(() => {
     fetchRandomMeal()
       .then((response) => setRandomMeal(response.meals[0].idMeal));
-  });
+  }, []);
   return (
     <div>
       <Header title="Explorar Comidas" search={ false } />
