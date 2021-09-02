@@ -4,7 +4,7 @@ import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
 import ShareButton from '../components/ShareButton';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MyContext from '../context/MyContext';
 
@@ -29,6 +29,7 @@ function DrinkDetails() {
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
+  const [favorite, setfavorite] = useState(false);
   const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
@@ -64,6 +65,14 @@ function DrinkDetails() {
     return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
   };
 
+  useEffect(() => {
+    const heart = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (heart) {
+      const yes = heart.find((favorited) => favorited.id === id);
+      if (yes) setfavorite(true);
+    }
+  }, [id]);
+
   return (
     <div>
       <div>
@@ -82,8 +91,9 @@ function DrinkDetails() {
             type="button"
             data-testid="favorite-btn"
             onClick={ favorites }
+            src={ favorite ? blackHeartIcon : whiteHeartIcon }
           >
-            <img src={ whiteHeartIcon } alt="Favorite" />
+            <img src={ favorite ? blackHeartIcon : whiteHeartIcon } alt="botão de favorito" />
           </button>
         </div>
         <p data-testid="recipe-category">
