@@ -40,6 +40,7 @@ function Foods(props) {
       />
 
       <CategoryFoodButtons />
+
       <main>
         { search.meals && search.meals.map((meal, index) => index < doze && (<ItemCard
           title={ meal.strMeal }
