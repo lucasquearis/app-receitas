@@ -1,12 +1,38 @@
 .detailsFood {
   padding-bottom: 80px;
-  padding-top: 10px;
   width: 100vw;
+}
+
+.detailsFood a {
+  color: #350;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
 }
 
 .food-title-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+}
+
+
+.food-title-container div {
+  display: flex;
+  gap: 9px;
+  justify-content: flex-end;
+}
+
+
+.food-title-container h1 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .share-btn {
@@ -17,18 +43,20 @@
 .favorite-btn {
   background: none;
   border: none;
+  padding-right: 10px;
 }
 
 .detailsFood img {
   display: block;
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
 }
 
 .detailsFood iframe {
+  border-radius: 3px;
   display: block;
   height: 95%;
-  margin: 10px auto;
+  margin: 30px auto;
 }
 
 .food-ingredients {
@@ -36,17 +64,56 @@
 }
 
 .recommendations-drinks {
+  box-shadow: 5px 5px 5px gray;
   display: flex;
+  gap: 3px;
   overflow-x: scroll;
   width: 100vw;
 }
 
+.recommendations-drinks div {
+  margin-top: 5px;
+  position: relative;
+}
+
 .recommendations-drinks img {
+  border-radius: 3px;
   width: 51vw;
 }
 
+.container-details-ingredients {
+  background-color: #fed;
+}
+
+.detailsFood ul {
+  background-color: #fed;
+  margin: 20px auto;
+  padding: 10px;
+  width: 95%;
+}
+
+.recommendations-drinks span {
+  background-color: rgba(240, 248, 255, 0.7);
+  border-radius: 5px;
+  bottom: 2px;
+  font-family: Fjalla One , sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  left: 4px;
+  padding: 3px;
+  position: absolute;
+  text-align: center;
+  width: 95%;
+}
+
+
+.instructions {
+  margin: 0 10px;
+  text-align: justify;
+}
+
 .start-recipe-food-btn {
-  background-color: limegreen;
+  background-color: #673;
   border: none;
   bottom: 0;
   color: white;

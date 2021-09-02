@@ -1,0 +1,42 @@
+.container-card {
+  background-color: #fed;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px gray;
+  display: flex;
+  height: 150px;
+  margin: 10px;
+  position: relative;
+}
+
+.container-textAndIcons {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-textAndIcons p {
+  color: gray;
+  font-size: 14px;
+}
+
+.container-textAndIcons h3 {
+  font-size: 22px;
+}
+
+.container-card a {
+  color: #673;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.container-card a img {
+  height: 150px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.container-icons {
+  display: flex;
+  gap: 80px;
+  margin-top: 20px;
+}

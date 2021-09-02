@@ -6,6 +6,7 @@ import './detailsFood.css';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Video from './Video';
 import StartRecipeButton from '../../components/StartRecipeButton';
+import Loading from '../../components/Loading';
 
 function DetailsFood({ match: { params: { id } } }) {
   const [state, setState] = useState({
@@ -62,7 +63,7 @@ function DetailsFood({ match: { params: { id } } }) {
 
   useEffect(initialUpdate);
 
-  if (isLoading) return <div>Carregando...</div>;
+  if (isLoading) return <Loading />;
 
   const keysFoods = Object.keys(food);
 
@@ -87,18 +88,21 @@ function DetailsFood({ match: { params: { id } } }) {
           isFood
         />
       </section>
-      <p data-testid="recipe-category">{food.strCategory}</p>
-      <ul className="food-ingredients">
-        {keysIngredients.map((key, index) => (
-          <li
-            key={ key }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {`${food[key]} - ${food[keysMeasures[index]]}`}
-          </li>
-        ))}
-      </ul>
-      <p data-testid="instructions">{food.strInstructions}</p>
+      <p className="subtitle" data-testid="recipe-category">{food.strCategory}</p>
+      <div className="container-details-ingredients">
+
+        <ul className="food-ingredients">
+          {keysIngredients.map((key, index) => (
+            <li
+              key={ key }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {`${food[key]} - ${food[keysMeasures[index]]}`}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="instructions" data-testid="instructions">{food.strInstructions}</p>
       <Video
         src={ food.strYoutube }
       />

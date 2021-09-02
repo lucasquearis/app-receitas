@@ -37,7 +37,7 @@ export default function HandleFavoriteAndShare(
 
   const COPY_MSG = 'Link copiado!';
   return (
-    <div>
+    <>
       <button
         type="button"
         className="share-btn"
@@ -67,7 +67,7 @@ export default function HandleFavoriteAndShare(
         />
       </button>
       {(copyMsg) ? <p>{COPY_MSG}</p> : ''}
-    </div>
+    </>
   );
 }
 

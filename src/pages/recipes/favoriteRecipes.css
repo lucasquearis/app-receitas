@@ -1,0 +1,13 @@
+.filter-favorite-btn {
+  background-color: #673;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin: 10px 5px;
+  padding: 3px 0;
+  width: 30%;
+}
+
+.container-filters {
+  text-align: center;
+}
