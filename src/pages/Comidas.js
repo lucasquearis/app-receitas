@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Row } from 'react-bootstrap';
 import CategoryButton from '../components/CategoryButton';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeCard from '../components/RecipeCard';
 import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
+import './comidas.css';
 
 function Comidas(props) {
   const { history: { location: { pathname, state } } } = props;
   const [foodRecipes, setFoodRecipes] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
   const foodEndpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -37,7 +40,8 @@ function Comidas(props) {
 
     fetch(foodCategoriesEndpoint)
       .then((res) => res.json())
-      .then(({ meals }) => setFoodCategories(meals));
+      .then(({ meals }) => setFoodCategories(meals))
+      .then(setIsLoading(true));
   }, []);
 
   const handleClick = ({ target }) => {
@@ -58,49 +62,55 @@ function Comidas(props) {
     }
   };
 
-  return (
-    <div>
-      <MyContext.Provider value={ newFoodRecipes }>
-        <Header titulo="Comidas" showProfileIcon="sim" pathname={ pathname } />
-      </MyContext.Provider>
-      { foodCategories.map(({ strCategory }, index) => {
-        if (index < MAX_CATEGORIES) {
-          return (
-            <CategoryButton
-              key={ strCategory }
-              strCategory={ strCategory }
-              handleClick={ handleClick }
-            />
-          );
-        }
-        return null;
-      }) }
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        onClick={ getAllFoods }
-      >
-        All
-      </button>
-      <div className="card-container">
-        { foodRecipes.map(({ strMealThumb, strMeal, idMeal }, index) => {
-          if (index < MAX_RECIPES) {
-            return (
-              <Link key={ strMeal } to={ `/comidas/${idMeal}` } className="card">
-                <RecipeCard
-                  thumb={ strMealThumb }
-                  name={ strMeal }
-                  index={ index }
+  if (isLoading) {
+    return (
+      <div className="main-container">
+        <div className="card-container">
+          { foodRecipes.map(({ strMealThumb, strMeal, idMeal }, index) => {
+            if (index < MAX_RECIPES) {
+              return (
+                <Link key={ strMeal } to={ `/comidas/${idMeal}` } className="card">
+                  <RecipeCard
+                    thumb={ strMealThumb }
+                    name={ strMeal }
+                    index={ index }
+                  />
+                </Link>
+              );
+            }
+            return null;
+          }) }
+        </div>
+        <Row className="category-btn">
+          { foodCategories.map(({ strCategory }, index) => {
+            if (index < MAX_CATEGORIES) {
+              return (
+                <CategoryButton
+                  key={ strCategory }
+                  strCategory={ strCategory }
+                  handleClick={ handleClick }
                 />
-              </Link>
-            );
-          }
-          return null;
-        }) }
+              );
+            }
+            return null;
+          }) }
+          <button
+            data-testid="All-category-filter"
+            type="button"
+            onClick={ getAllFoods }
+          >
+            All
+          </button>
+        </Row>
+        <MyContext.Provider value={ newFoodRecipes }>
+          <Header titulo="Comidas" showProfileIcon="sim" pathname={ pathname } />
+        </MyContext.Provider>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
+    );
+  }
+
+  return <div className="main-container"><div className="c-loader" /></div>;
 }
 
 Comidas.propTypes = {

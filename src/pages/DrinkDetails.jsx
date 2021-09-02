@@ -7,6 +7,7 @@ import * as fetchAPI from '../service/fetchAPI';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import './details.css';
 
 const maxSuggestions = 6;
 
@@ -94,32 +95,35 @@ function DrinkDetails(props) {
 
   if (loading) return <h1>Loading...</h1>;
   return (
-    <div>
+    <div className="main-containe">
       <Image fluid data-testid="recipe-photo" src={ strDrinkThumb } alt="recipe" />
       <div className="favorite-container">
         <h2 data-testid="recipe-title">{strDrink}</h2>
-        <Image
-          data-testid="share-btn"
-          src={ shareIcon }
-          alt="share icon"
-          onClick={ () => shareHandleClick() }
-        />
-        {copied && <span>Link copiado!</span>}
-        <Image
-          data-testid="favorite-btn"
-          alt="heart"
-          src={ icon }
-          onClick={ () => toggleHeartIcon() }
-        />
-        <h4 data-testid="recipe-category">{ strAlcoholic }</h4>
+        <div className="icons">
+          <Image
+            data-testid="share-btn"
+            src={ shareIcon }
+            alt="share icon"
+            onClick={ () => shareHandleClick() }
+          />
+          {copied && <span>Link copiado!</span>}
+          <Image
+            data-testid="favorite-btn"
+            alt="heart"
+            src={ icon }
+            onClick={ () => toggleHeartIcon() }
+          />
+        </div>
       </div>
+      <h5 data-testid="recipe-category">{ strAlcoholic }</h5>
       <h4>Ingredientes</h4>
       <div className="ingredients-container">
         {getIngredients()}
       </div>
       <h4>Instruções</h4>
       <p data-testid="instructions">{ strInstructions }</p>
-      <Carousel>
+      <h4>Recomendadas</h4>
+      <Carousel indicators={ false }>
         {
           tip && tip.map((recipe, index) => (
             index < maxSuggestions

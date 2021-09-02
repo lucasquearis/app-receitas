@@ -33,8 +33,6 @@ function ExplorarOrigem() {
 
   return (
     <div>
-      <Header titulo="Explorar Origem" showProfileIcon="sim" />
-      <ExploreArea data={ areaList } onChange={ handleChange } />
       <div className="card-container">
         { recipe.map(({ strMealThumb, strMeal, idMeal }, index) => {
           if (index < MAX_RECIPES) {
@@ -51,6 +49,8 @@ function ExplorarOrigem() {
           return null;
         }) }
       </div>
+      <Header titulo="Explorar Origem" showProfileIcon="sim" />
+      <ExploreArea data={ areaList } onChange={ handleChange } />
       <Footer />
     </div>
   );

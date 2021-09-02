@@ -7,6 +7,7 @@ import * as fetchAPI from '../service/fetchAPI';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import './details.css';
 
 const maxSuggestions = 6;
 
@@ -77,7 +78,6 @@ function RecipesDetails(props) {
 
   const buttonName = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    // const condition = inProgress ? inProgress.meals[data.idMeal] : undefined;
     return inProgress ? 'Continuar Receita' : 'Iniciar Receita';
   };
 
@@ -102,25 +102,27 @@ function RecipesDetails(props) {
   if (redirect) return <Redirect to={ `/comidas/${data.idMeal}/in-progress` } />;
   if (loading) return <h1>Loading...</h1>;
   return (
-    <div>
+    <div className="main-containe">
       <Image fluid data-testid="recipe-photo" src={ strMealThumb } alt="recipe" />
       <div className="favorite-container">
         <h2 data-testid="recipe-title">{strMeal}</h2>
-        <Image
-          data-testid="share-btn"
-          src={ shareIcon }
-          alt="share icon"
-          onClick={ () => shareHandleClick() }
-        />
-        {copied && <span>Link copiado!</span>}
-        <Image
-          data-testid="favorite-btn"
-          alt="heart"
-          src={ icon }
-          onClick={ () => toggleHeartIcon() }
-        />
-        <h4 data-testid="recipe-category">{ strCategory }</h4>
+        <div className="icons">
+          <Image
+            data-testid="share-btn"
+            src={ shareIcon }
+            alt="share icon"
+            onClick={ () => shareHandleClick() }
+          />
+          {copied && <span>Link copiado!</span>}
+          <Image
+            data-testid="favorite-btn"
+            alt="heart"
+            src={ icon }
+            onClick={ () => toggleHeartIcon() }
+          />
+        </div>
       </div>
+      <h5 data-testid="recipe-category">{ strCategory }</h5>
       <h4>Ingredientes</h4>
       <div className="ingredients-container">
         {getIngredients()}
@@ -130,11 +132,13 @@ function RecipesDetails(props) {
       <h4>Video</h4>
       <iframe
         data-testid="video"
+        height="215px"
         width="100%"
         title="recipe"
         src={ `https://www.youtube.com/embed/${URLId}` }
       />
-      <Carousel>
+      <h4>Recomendadas</h4>
+      <Carousel className="carousel" indicators={ false }>
         {
           tip && tip.map((recipe, index) => (
             index < maxSuggestions
@@ -148,7 +152,6 @@ function RecipesDetails(props) {
         }
       </Carousel>
       <Button
-        style={ { position: 'fixed', bottom: '0' } }
         type="button"
         data-testid="start-recipe-btn"
         className="btn-success"

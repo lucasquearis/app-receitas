@@ -1,0 +1,12 @@
+.perfil-btn-container {
+  display: flex;
+  flex-flow: column;
+  padding: 30px;
+  text-align: center;
+}
+
+.perfil-btn-container button {
+  background-color: var(--L-orange);
+  border: none;
+  color: black;
+}

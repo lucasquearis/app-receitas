@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
+import { Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
+import './doneCard.css';
 
 function DoneCard({ recipe, index }) {
   const {
@@ -17,8 +19,7 @@ function DoneCard({ recipe, index }) {
     tags,
   } = recipe;
 
-  // // const tagsTratada = tags === null ? [] : tags.split(',');
-  const tagsTratada = tags === null ? [] : tags;
+  const tagsTratada = tags === null ? [] : [...tags];
 
   const [sharedMessage, setSharedMessage] = useState(false);
   const PERIOD_OF_MESSAGE = 1000;
@@ -35,51 +36,49 @@ function DoneCard({ recipe, index }) {
   };
 
   return (
-    <div>
+    <div className="done-card">
       <Link to={ `/${type}s/${id}` }>
-        <input
-          type="image"
+        <Image
+          fluid
           src={ image }
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
-          width="100px"
         />
       </Link>
+      <div className="info">
+        <div className="category-area">
+          {(type === 'bebida')
+            ? (<p data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</p>)
+            : (
+              <p data-testid={ `${index}-horizontal-top-text` }>
+                { `${area} - ${category}` }
+              </p>
+            )}
+          <Image
+            data-testid={ `${index}-horizontal-share-btn` }
+            src={ shareIcon }
+            alt="share icon"
+            onClick={ copyLink }
+          />
+        </div>
+        <Link to={ `/${type}s/${id}` }>
+          <h4 data-testid={ `${index}-horizontal-name` }>{name}</h4>
+        </Link>
+        <p data-testid={ `${index}-horizontal-done-date` }>
+          {`Feita em: ${doneDate}`}
+        </p>
+        { sharedMessage && <p>Link copiado!</p> }
 
-      <div>
-        {(type === 'bebida')
-          ? (<p data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</p>)
-          : (
-            <p data-testid={ `${index}-horizontal-top-text` }>
-              { `${area} - ${category}` }
+        { tagsTratada
+          ? tagsTratada.map((tag) => (
+            <p
+              key={ index }
+              data-testid={ `${index}-${tag}-horizontal-tag` }
+            >
+              {tag}
             </p>
-          )}
+          )) : null}
       </div>
-      <Link to={ `/${type}s/${id}` }>
-        <p data-testid={ `${index}-horizontal-name` }>{name}</p>
-      </Link>
-      <p data-testid={ `${index}-horizontal-done-date` }>
-        {`Feita em: ${doneDate}`}
-      </p>
-      <input
-        type="image"
-        data-testid={ `${index}-horizontal-share-btn` }
-        src={ shareIcon }
-        alt="share icon"
-        onClick={ copyLink }
-      />
-      { sharedMessage && <p>Link copiado!</p> }
-
-      <p id={ `${index}-horizontal-share-btn` }>Compartilhar</p>
-      { tagsTratada
-        ? tagsTratada.map((tag) => (
-          <p
-            key={ index }
-            data-testid={ `${index}-${tag}-horizontal-tag` }
-          >
-            {tag}
-          </p>
-        )) : null}
     </div>
   );
 }

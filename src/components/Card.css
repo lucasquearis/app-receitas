@@ -7,14 +7,22 @@
 .card-container {
   display: flex;
   flex-flow: wrap;
-  width: 80%;
+  justify-content: center;
+  margin-top: 100px;
+  width: 100%;
 }
 
 .card {
+  color: var(--D-orange);
   display: flex;
   flex-flow: column;
   margin: 10px;
+  text-align: center;
   width: 40%;
+}
+
+.card:hover {
+  border: 1px solid var(--L-orange);
 }
 
 .card-image {
@@ -23,4 +31,5 @@
 
 .recipe-name {
   font-size: 15px;
+  margin-top: 10px;
 }

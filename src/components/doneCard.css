@@ -1,0 +1,46 @@
+.done-card {
+  border-radius: 7px;
+  box-shadow: 1px 5px 7px gray;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 95%;
+}
+
+.done-card p {
+  margin: 0;
+}
+
+.done-card h4 {
+  color: var(--D-orange);
+}
+
+.done-card a {
+  object-fit: cover;
+  width: 50%;
+}
+
+.category-area {
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-flow: column;
+  padding: 5px;
+}
+
+.info-favorite {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  margin-right: 30px;
+  padding: 5px;
+}
+
+.icons {
+  display: flex;
+}

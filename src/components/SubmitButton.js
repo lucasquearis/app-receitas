@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
 export default function SubmitButton(props) {
   const { className, disabled, id, name, onClick, testId, text } = props;
   return (
-    <button
+    <Button
       className={ className }
       data-testid={ testId }
       disabled={ disabled }
@@ -14,7 +15,7 @@ export default function SubmitButton(props) {
       type="submit"
     >
       { text }
-    </button>
+    </Button>
   );
 }
 

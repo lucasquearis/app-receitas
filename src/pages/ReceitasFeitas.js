@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import DoneCard from '../components/DoneCard';
+import './receitasFeitas.css';
 
 function ReceitasFeitas() {
   const [showDoneRecipes, setShowDoneRecipes] = useState([]);
@@ -23,42 +25,49 @@ function ReceitasFeitas() {
   };
 
   return (
-    <>
+    <div className="main-container">
       <Header titulo="Receitas Feitas" />
-      <button
-        name="all"
-        type="button"
-        onClick={ showRecipes }
-        data-testid="filter-by-all-btn"
-      >
-        All
-      </button>
-      <button
-        name="comida"
-        type="button"
-        onClick={ showRecipes }
-        data-testid="filter-by-food-btn"
-      >
-        Food
-      </button>
-      <button
-        name="bebida"
-        type="button"
-        onClick={ showRecipes }
-        data-testid="filter-by-drink-btn"
-      >
-        Drinks
-      </button>
-      {
-        showDoneRecipes.map((recipe, index) => (
-          <DoneCard
-            key={ recipe.name }
-            recipe={ recipe }
-            index={ index }
-          />
-        ))
-      }
-    </>
+      <div className="favorite-btn-container">
+        <Button
+          variant="outline-warning"
+          name="all"
+          type="button"
+          onClick={ showRecipes }
+          data-testid="filter-by-all-btn"
+        >
+          All
+        </Button>
+        <Button
+          variant="outline-warning"
+          name="comida"
+          type="button"
+          onClick={ showRecipes }
+          data-testid="filter-by-food-btn"
+        >
+          Food
+        </Button>
+        <Button
+          variant="outline-warning"
+          name="bebida"
+          type="button"
+          onClick={ showRecipes }
+          data-testid="filter-by-drink-btn"
+        >
+          Drinks
+        </Button>
+      </div>
+      <div className="card-container">
+        {
+          showDoneRecipes.map((recipe, index) => (
+            <DoneCard
+              key={ recipe.name }
+              recipe={ recipe }
+              index={ index }
+            />
+          ))
+        }
+      </div>
+    </div>
   );
 }
 

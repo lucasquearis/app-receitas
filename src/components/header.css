@@ -1,0 +1,6 @@
+.header {
+  background-color: var(--D-orange);
+  padding: 3px;
+  position: fixed;
+  top: 0;
+}

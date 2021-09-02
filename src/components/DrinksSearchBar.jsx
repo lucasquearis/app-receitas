@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 import MyContext from '../context/MyContext';
 import * as fetchAPI from '../service/fetchAPI';
+import './searchBar.css';
 
 function DrinksSearchBar() {
   const [type, setType] = useState('');
@@ -36,39 +38,44 @@ function DrinksSearchBar() {
 
   if (data.length === 1) return <Redirect to={ `/bebidas/${data[0].idDrink}` } />;
   return (
-    <>
-      <input
+    <Form className="formSearchBar">
+      <Form.Control
         name="newSearch"
         data-testid="search-input"
         type="text"
         onChange={ handleChange }
       />
-      <label htmlFor="filter">
-        <input
-          id="ingredient"
-          name="filter"
-          type="radio"
-          data-testid="ingredient-search-radio"
-          onChange={ handleChange }
-        />
-        Ingrediente
-        <input
-          id="name"
-          name="filter"
-          type="radio"
-          data-testid="name-search-radio"
-          onChange={ handleChange }
-        />
-        Nome
-        <input
-          id="firstLetter"
-          name="filter"
-          type="radio"
-          data-testid="first-letter-search-radio"
-          onChange={ handleChange }
-        />
-        Primeira Letra
-      </label>
+      <Form.Label htmlFor="filter">
+        <div className="mb-3">
+          <Form.Check
+            inline
+            label="Ingrediente"
+            id="ingredient"
+            name="filter"
+            type="radio"
+            data-testid="ingredient-search-radio"
+            onChange={ handleChange }
+          />
+          <Form.Check
+            inline
+            label="Nome"
+            id="name"
+            name="filter"
+            type="radio"
+            data-testid="name-search-radio"
+            onChange={ handleChange }
+          />
+          <Form.Check
+            inline
+            label="Primeira Letra"
+            id="firstLetter"
+            name="filter"
+            type="radio"
+            data-testid="first-letter-search-radio"
+            onChange={ handleChange }
+          />
+        </div>
+      </Form.Label>
       <button
         type="button"
         data-testid="exec-search-btn"
@@ -76,7 +83,7 @@ function DrinksSearchBar() {
       >
         Buscar
       </button>
-    </>
+    </Form>
   );
 }
 

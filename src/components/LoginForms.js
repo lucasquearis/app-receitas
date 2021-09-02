@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
+import { Form } from 'react-bootstrap';
 import emailChecker from '../service/AuxiliaryFunctions';
 import Input from './Input';
 import PASSWORD_MINIMUM_LENGTH from '../service/Constants';
@@ -21,7 +22,7 @@ export default function LoginForms() {
   const emailInputProps = {
     testId: 'email-input',
     id: 'emailInputField',
-    label: 'Login',
+    label: '',
     name: 'email',
     onChange: ({ target: { value } }) => setUserEmail(value),
     placeholder: 'Digite seu email',
@@ -32,7 +33,7 @@ export default function LoginForms() {
   const passwordInputProps = {
     testId: 'password-input',
     id: 'passwordInputField',
-    label: 'Senha',
+    label: '',
     name: 'password',
     onChange: ({ target: { value } }) => setUserPassword(value),
     placeholder: 'Digite sua senha',
@@ -47,14 +48,15 @@ export default function LoginForms() {
     onClick: handleClick,
     testId: 'login-submit-btn',
     text: 'Entrar',
+    size: 'lg',
   };
 
   return (
-    <form>
+    <Form>
       <Input { ...emailInputProps } />
       <Input { ...passwordInputProps } />
       <SubmitButton { ...submitButtonInputProps } />
       { redirect ? <Redirect to="/comidas" /> : null }
-    </form>
+    </Form>
   );
 }

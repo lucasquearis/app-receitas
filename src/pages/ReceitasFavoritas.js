@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import FavoriteCard from '../components/FavoriteCard';
 import Header from '../components/Header';
+import './receitasFeitas.css';
 
 function ReceitasFavoritas() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -30,29 +32,31 @@ function ReceitasFavoritas() {
   }, []);
 
   return (
-    <div>
+    <div className="main-container">
       <Header titulo="Receitas Favoritas" />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ getAllFavorite }
-      >
-        All
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ showFood }
-      >
-        Food
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ showDrinks }
-      >
-        Drinks
-      </button>
+      <div className="favorite-btn-container">
+        <Button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ getAllFavorite }
+        >
+          All
+        </Button>
+        <Button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ showFood }
+        >
+          Food
+        </Button>
+        <Button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ showDrinks }
+        >
+          Drinks
+        </Button>
+      </div>
       {favoriteRecipes ? (
         favoriteRecipes.map((recipe, index) => (
           <FavoriteCard
