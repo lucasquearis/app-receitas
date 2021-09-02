@@ -1,0 +1,7 @@
+.food-recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 52px;
+  width: 100vw;
+}

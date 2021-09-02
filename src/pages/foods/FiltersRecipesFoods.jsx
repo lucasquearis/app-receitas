@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import { fetchCategoriesFoodsApi } from '../../services/fetchApi';
 import { fetchRecipesForCategory, fetchSearchRecipes } from '../../redux/actions';
+import './filtersRecipesFoods.css';
 
 const PARAMS_NOT_FILTER = { query: '', consultBy: 'name', foodPage: true };
 
@@ -10,6 +11,7 @@ function FiltersRecipesFoods({ getCategory, recipesNotFilter }) {
   const [categories, setCategories] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
   const [isToggle, setIsToggle] = useState('');
+  const [category, setCategory] = useState('All');
   const [isFilteredCategory, setFilteredCategory] = useState(false);
 
   const getCategories = () => {
@@ -25,42 +27,50 @@ function FiltersRecipesFoods({ getCategory, recipesNotFilter }) {
 
   useEffect(getCategories);
 
-  function handleClick({ value }) {
-    if (!isFilteredCategory || isToggle !== value) {
-      getCategory(value);
+  function handleClick({ name }) {
+    if (!isFilteredCategory || isToggle !== name) {
+      setCategory(name);
+      getCategory(name);
       setFilteredCategory(true);
-      return setIsToggle(value);
+      return setIsToggle(name);
     }
+    setCategory('All');
     recipesNotFilter();
     setFilteredCategory(false);
   }
 
   function setCategoryAll() {
+    setCategory('All');
     recipesNotFilter();
     setFilteredCategory(false);
   }
 
   return (
-    <>
+    <div className="filter-food">
       {categories.map(({ strCategory }) => (
         <button
+          className="filter-food-btn"
           key={ strCategory }
           type="button"
           data-testid={ `${strCategory}-category-filter` }
-          value={ strCategory }
+          name={ strCategory }
           onClick={ ({ target }) => handleClick(target) }
+          style={ { backgroundColor: category === strCategory ? '#350' : '#673' } }
         >
           {strCategory}
         </button>
       ))}
       <button
+        className="filter-food-btn"
+        style={ { backgroundColor: category === 'All' ? '#350' : '#673' } }
         type="button"
         data-testid="All-category-filter"
         onClick={ setCategoryAll }
+        name="All"
       >
         All
       </button>
-    </>
+    </div>
   );
 }
 

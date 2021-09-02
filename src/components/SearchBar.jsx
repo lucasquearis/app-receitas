@@ -4,6 +4,7 @@ import { bool, func, arrayOf, shape } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Input from './Input';
 import { fetchSearchRecipes } from '../redux/actions';
+import './searchbar.css';
 
 const MSG_ALERT = 'Sua busca deve conter somente 1 (um) caracter';
 
@@ -42,54 +43,58 @@ function SearchBar({ foodPage, searchRecipes, recipes }) {
   const typeId = foodPage ? 'idMeal' : 'idDrink';
 
   return (
-    <nav>
+    <nav className="nav-search">
       {recipes.length === 1
         ? <Redirect to={ `/${typeRecipe}/${recipes[0][typeId]}` } />
         : ''}
-
       <Input
         id="search-input"
         type="text"
         onChange={ handleChange }
         name="query"
         value={ query }
+        classNameInput="input-searchbar"
       />
-      <br />
-      <Input
-        id="ingredient-search-radio"
-        type="radio"
-        onChange={ handleChange }
-        name="consultBy"
-        textLabel="Ingrediente"
-        value="ingredient"
-        checked={ consultBy === 'ingredient' }
-      />
-      <Input
-        id="name-search-radio"
-        type="radio"
-        onChange={ handleChange }
-        name="consultBy"
-        textLabel="Nome"
-        value="name"
-        checked={ consultBy === 'name' }
-      />
-      <Input
-        id="first-letter-search-radio"
-        type="radio"
-        onChange={ handleChange }
-        name="consultBy"
-        textLabel="Primeira Letra"
-        value="first-letter"
-        checked={ consultBy === 'first-letter' }
-      />
-      <br />
       <button
         onClick={ handleSearch }
         data-testid="exec-search-btn"
         type="button"
+        className="searchbar-btn"
       >
         Buscar
       </button>
+      <div>
+        <Input
+          id="ingredient-search-radio"
+          type="radio"
+          onChange={ handleChange }
+          name="consultBy"
+          textLabel="Ingrediente"
+          value="ingredient"
+          checked={ consultBy === 'ingredient' }
+          classNameInput="radio-searchBar"
+        />
+        <Input
+          id="name-search-radio"
+          type="radio"
+          onChange={ handleChange }
+          name="consultBy"
+          textLabel="Nome"
+          value="name"
+          checked={ consultBy === 'name' }
+          classNameInput="radio-searchBar"
+        />
+        <Input
+          id="first-letter-search-radio"
+          type="radio"
+          onChange={ handleChange }
+          name="consultBy"
+          textLabel="Primeira Letra"
+          value="first-letter"
+          checked={ consultBy === 'first-letter' }
+          classNameInput="radio-searchBar"
+        />
+      </div>
     </nav>
   );
 }

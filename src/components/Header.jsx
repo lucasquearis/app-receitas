@@ -3,8 +3,9 @@ import { string, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import './header.css';
 import SearchBar from './SearchBar';
+import folha from '../images/folha.svg';
+import './header.css';
 
 function Header({ title, showButton, foodPage }) {
   const [showAndHideSearchBar, setShowAndHideSearchBar] = useState(false);
@@ -22,9 +23,11 @@ function Header({ title, showButton, foodPage }) {
           title
             ? (
               <h2
+                className="header-title"
                 data-testid="page-title"
               >
                 {title}
+                <img className="logo-folha" src={ folha } alt="logo folha" />
               </h2>
             )
             : ''
