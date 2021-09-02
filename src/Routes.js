@@ -7,7 +7,7 @@ import Explore from './pages/Explore';
 import NotFound from './pages/NotFound';
 import DetailsMeals from './pages/DetailsMeals';
 import DoneRecepies from './pages/ReceitasFeitas';
-import FavoritesRecipes from './pages/ReceitasFavoritas';
+import FavoriteRecipes from './pages/ReceitasFavoritas';
 
 import {
   MEALS_LIST,
@@ -59,7 +59,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
           />
         ) }
       />
-      <Route exact path="/receitas-favoritas" component={ FavoritesRecipes } />
+      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/receitas-feitas" component={ DoneRecepies } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/perfil" component={ Perfil } />
