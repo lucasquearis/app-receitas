@@ -1,7 +1,7 @@
-const FetchFood = async () => {
-  const endpoint = 'https://www.themealdb.com/api/json/v1/1/random.php';
-  const meals = await fetch(endpoint).then((data) => data.json());
-  return meals.meals;
-};
+export const fetchFood = () => (
+  fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
+    .then((res) => res.json())
+    .then((response) => response)
+);
 
-export default FetchFood;
+export default fetchFood;
