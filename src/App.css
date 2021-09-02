@@ -11,15 +11,15 @@
 }
 
 .header-profile {
+  background-color: aquamarine;
   display: flex;
   flex-direction: column;
-  background-color: aquamarine;
 }
 
 .header-title {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   text-align: center;
 }
 
@@ -29,46 +29,22 @@
 
 .image-section {
   display: inline-block;
-  margin: 10px 10px;
+  margin: 10px;
   text-align: center;
 }
 
 .ingredient-image {
-  text-align: center;
+  box-shadow: 0 0 10px rgb(158, 156, 156);
+  display: flex;
   margin: 0 10px;
   padding: 10px;
-  display: flex;
+  text-align: center;
   width: 250px;
-  box-shadow: 0px 0px 10px rgb(158, 156, 156);
 }
 
 .btn-success {
   margin: 10px 5px;
 }
-
-/* 
-/* .radio-btn {
-  margin-left: 10px;
-}
-
-.header-search {
-  display: flex;
-  padding-left: 30px;
-}
-
-.search-open {
-  display: flex;
-}
-
-.search-input {
-  display: flex;
-  height: 30px;
-  width: 800px;
-}
-
-.search-radio {
-  display: flex;
-} */
 
 .rocksGlass {
   animation: shake 1s infinite ease;
@@ -92,34 +68,33 @@
 }
 
 .cardTumb {
-  /* border: solid black 5px; */
-  /* border-radius: 5px; */
   height: 300px;
   margin-bottom: 10px;
-  width: 350px;
   transition: all 0.2s;
+  width: 350px;
 }
 
 .cardTumb:hover {
-  box-shadow: 0px 0px 10px rgb(158, 156, 156);
+  box-shadow: 0 0 10px rgb(158, 156, 156);
   transform: scale(1.02);
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and ( max-width : 360px ) {
+
   .header-profile {
+    background-color: aquamarine;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
   }
 
   .search-input {
     display: inline-block;
     text-align: center;
   }
-  
+
   .cardFlex {
-    font-weight: bold;
     font-size: 25px;
+    font-weight: 700;
   }
 
   .radio-btn {
@@ -129,7 +104,7 @@
   .header-search {
     display: inline-block;
   }
-  
+
   .search-open {
     display: flex;
   }
@@ -139,38 +114,24 @@
   }
 
   .input-text {
-    padding: 5px;
-    border-radius: 5px;
     border: none;
+    border-radius: 5px;
+    padding: 5px;
     width: 100%;
   }
-  
+
   .search-radio {
     display: flex;
     padding-top: 10px;
   }
 
   .header-title {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
   }
 }
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;
