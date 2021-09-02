@@ -1,5 +1,6 @@
 import React from 'react';
 import { objectOf } from 'prop-types';
+import './Ingredients.css';
 
 export default function Ingredients(props) {
   const max = 20;
@@ -13,16 +14,19 @@ export default function Ingredients(props) {
   return (
     <div>
       <h2>Ingredients</h2>
-      {
-        ingredients.map((ingredient, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            { ingredient }
-          </li>
-        ))
-      }
+      <div className="ingredients">
+        {
+          ingredients.map((ingredient, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { ingredient }
+            </li>
+          ))
+        }
+      </div>
+
     </div>
   );
 }

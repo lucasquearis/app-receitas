@@ -1,5 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
+import './Instructions.css';
 
 export default function Instructions(props) {
   const { instructions } = props;
