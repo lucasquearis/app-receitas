@@ -5,32 +5,31 @@ import useLocalStorage from '../helpers/useLocalStorage';
 function IngredientsCheckList(props) {
   const { recipe, enType, id } = props;
   const [recipes, setRecipes] = useState([]);
-  const [mealsStorage, setMealsStorage] = useLocalStorage('meals', {});
-  const [cocktailsStorage, setCocktailsStorage] = useLocalStorage('cocktails', {});
+  const [recipesStg, setRecipesStg] = useLocalStorage('inProgressRecipes', {});
   const recipeOne = recipe[enType][0];
   const lineThrough = 'line-through';
 
   useEffect(() => {
-    if (enType === 'meals' && !mealsStorage) {
-      setMealsStorage({});
+    if (!recipesStg) {
+      setRecipesStg({
+        meals: '',
+        cocktails: '',
+      });
     }
-    if (enType === 'meals' && mealsStorage) {
-      setRecipes(mealsStorage[id]);
+    if (recipesStg.meals) {
+      setRecipes(recipesStg.meals[id]);
     }
-    if (enType === 'drinks' && !cocktailsStorage) {
-      setCocktailsStorage({});
-    }
-    if (enType === 'drinks' && cocktailsStorage) {
-      setRecipes(cocktailsStorage[id]);
+    if (recipesStg.cocktails) {
+      setRecipes(recipesStg.cocktails[id]);
     }
   }, []);
 
   useEffect(() => {
     if (enType === 'meals' && recipes) {
-      setMealsStorage({ [id]: recipes });
+      setRecipesStg({ meals: { [id]: recipes } });
     }
     if (enType === 'drinks' && recipes) {
-      setCocktailsStorage({ [id]: recipes });
+      setRecipesStg({ cocktails: { [id]: recipes } });
     }
   }, [recipes]);
 
@@ -75,6 +74,7 @@ function IngredientsCheckList(props) {
         }
       }
     }
+
     return (
       ingredientList.map((ingredient, index) => (
         <label
