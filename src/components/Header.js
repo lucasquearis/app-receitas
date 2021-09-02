@@ -24,7 +24,7 @@ function Header(props) {
         <Link to="/perfil">
           <img src={ Profile } data-testid="profile-top-btn" alt="Icone de Perfil" />
         </Link>
-        <h1 data-testid="page-title" className="justify-content-center">{ title }</h1>
+        <h1 data-testid="page-title" className="text-center">{ title }</h1>
         {renderSearch
           ? <SearchIcon onClick={ showAndHide } search={ Search } /> : <div />}
         { searchBar
