@@ -53,21 +53,9 @@ export default function SearchBar() {
     global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
-  const handleInputText = ({ target: { value } }) => {
-    setSearchInput(value);
-  };
+  const handleInputText = ({ target: { value } }) => setSearchInput(value);
 
-  const handleChange = ({ target: { id } }) => {
-    setSearchRadio(id);
-  };
-
-  const handleClick = () => {
-    if (recipeType === 'meals') {
-      getMeals();
-    } else {
-      getDrinks();
-    }
-  };
+  const handleChange = ({ target: { id } }) => setSearchRadio(id);
 
   return (
     <div>
@@ -117,7 +105,7 @@ export default function SearchBar() {
         type="button"
         className="button-search"
         data-testid="exec-search-btn"
-        onClick={ handleClick }
+        onClick={ () => ((recipeType === 'meals') ? getMeals() : getDrinks()) }
       >
         Buscar
       </button>
