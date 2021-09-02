@@ -1,0 +1,50 @@
+.image-details-comida {
+  width: 340px;
+}
+
+.name-details-comida {
+  font-size: 25px;
+}
+
+.category-details-comidas {
+  color: gray;
+  font-size: 16px;
+}
+
+.button-container-details button {
+  background-color: white;
+  border: 0;
+}
+
+.ingredients-details {
+  background-color: gainsboro;
+}
+
+.ingredients-details li {
+  list-style: square;
+}
+
+.details-button {
+  bottom: 0;
+  left: 115px;
+  position: fixed;
+}
+
+.recomendations-container {
+  display: flex;
+  height: 250px;
+  overflow: scroll;
+  width: 340px;
+}
+
+.recomendation-card {
+  color: black;
+  height: 100px;
+  margin-left: 5px;
+  margin-right: 10px;
+  width: 48%;
+}
+
+.recomendation-card img {
+  width: 170px;
+}
