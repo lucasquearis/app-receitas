@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import UseUserHook from '../Hooks/UseUserHook';
-import BtnFilterCategory from '../Hooks/BtnFilterCategory';
 import recipesHooks from '../Hooks/recipesHooks';
 import SingleRecipeHook from '../Hooks/SingleRecipeHook';
 import DoneRecipeHook from '../Hooks/DoneRecipeHook';
@@ -19,7 +18,6 @@ export const AppProvider = ({ children }) => {
   const { handleStart, doneRecipe, inProgress, handleBtnType } = DoneRecipeHook();
   const { handleModal } = ModalHook();
   const { searchRecipes } = recipesHooks();
-  const { filterIngredient, filter } = BtnFilterCategory();
   const { Login, redirect, setRedirect } = UseUserHook();
   const history = useHistory();
   const search = 'search.php?s=';
@@ -47,8 +45,6 @@ export const AppProvider = ({ children }) => {
     searchRecipes,
     Login,
     redirect,
-    filterIngredient,
-    filter,
     setRecipes,
     setRedirect,
     singleRecipe,

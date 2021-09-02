@@ -6,7 +6,7 @@ import RecipeCard from '../RecipeCard';
 function RecipesContainer({ category }) {
   const { recipes } = useContext(ContextApp);
   const number = 12;
-  if (!recipes.meals) {
+  if (!recipes[category]) {
     return <h1>Getting Recipes</h1>;
   }
   return (

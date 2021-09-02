@@ -12,7 +12,7 @@ function AllRecipes() {
   return (
     <div>
       <Header title={ currentRout ? 'Comidas' : 'Bebidas' } />
-      <BtnCategory />
+      <BtnCategory category={ currentRout ? 'meals' : 'drinks' } />
       <RecipesContainer category={ currentRout ? 'meals' : 'drinks' } />
       <Footer />
     </div>
