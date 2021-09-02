@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Button from 'react-bootstrap/Button';
@@ -9,82 +9,88 @@ import share from '../images/shareIcon.svg';
 
 function DoneRecipes() {
   const { localStorageItems } = useContext(MyContext);
+  const [type, setType] = useState([]);
+
   const items = JSON.parse(localStorage.getItem('doneRecipes'));
-  console.log(items);
 
-  function recipes() {
-    function linkToClipboard(id, type) {
-      const host = window.location.hostname;
-      const { port } = window.location;
-      let recipeType;
-      const copyDiv = document.getElementById('copiedLink');
-      const time = 2000;
-      if (type === 'bebidas') {
-        recipeType = '/bebidas/';
-      } else {
-        recipeType = '/comidas/';
-      }
-      const fullLink = `http://${host}:${port}${recipeType}${id}`;
-      copy(fullLink);
-      copyDiv.innerHTML = 'Link copiado!';
-      const clear = () => {
-        copyDiv.innerHTML = '';
-      };
-      setTimeout(clear, time);
+  function linkToClipboard(id) {
+    const host = window.location.hostname;
+    const { port } = window.location;
+    let recipeType;
+    const copyDiv = document.getElementById('copiedLink');
+    const time = 2000;
+    if (type === 'bebida') {
+      recipeType = '/bebidas/';
+    } else {
+      recipeType = '/comidas/';
     }
+    const fullLink = `http://${host}:${port}${recipeType}${id}`;
+    copy(fullLink);
+    copyDiv.innerHTML = 'Link copiado!';
+    const clear = () => {
+      copyDiv.innerHTML = '';
+    };
+    setTimeout(clear, time);
+  }
 
+  function renderItems() {
     return (
-      <div>
-        <Header titulo="Receitas Feitas" showSearch={ false } />
-        { items && items.map((item, i) => (
-          <Card
-            key={ i }
-            data-testid={ `${i}-recipe-card` }
-            style={ { width: '10rem' } }
-          >
-            <Link to={ `/${item.type}s/${item.id}` }>
-              <Card.Img
-                data-testid={ `${i}-horizontal-image` }
-                variant="top"
-                src={ item.image }
-              />
-              <Card.Title data-testid={ `${i}-horizontal-name` }>
-                { item.name }
-              </Card.Title>
-            </Link>
-            <Card.Body>
-              <span data-testid={ `${i}-horizontal-top-text` }>
-                { item.area }
-                {' - '}
-                { item.category === 'Cocktail' ? 'Alcoholic' : item.category }
-              </span>
-              <div>
-                <span data-testid={ `${i}-horizontal-done-date` }>
-                  { item.doneDate }
+      <div id="cards">
+        { items.filter((i) => i.type === type || i.doneDate.includes(type))
+          .map((i, index) => (
+            <Card
+              key={ index }
+              data-testid={ `${index}-recipe-card` }
+              style={ { width: '10rem' } }
+            >
+              <Link to={ `/${i.type}s/${i.id}` }>
+                <Card.Img
+                  data-testid={ `${index}-horizontal-image` }
+                  variant="top"
+                  src={ i.image }
+                />
+                <Card.Title data-testid={ `${index}-horizontal-name` }>
+                  { i.name }
+                </Card.Title>
+              </Link>
+              <Card.Body>
+                <span data-testid={ `${index}-horizontal-top-text` }>
+                  { i.area }
+                  {' - '}
+                  { i.category === 'Cocktail' ? 'Alcoholic' : i.category }
                 </span>
-                <button
-                  type="button"
-                  onClick={ () => linkToClipboard(item.id, item.type) }
-                >
-                  <img
-                    src={ share }
-                    alt="share"
-                    data-testid={ `${i}-horizontal-share-btn` }
-                  />
-                </button>
-              </div>
-              { item.tags.map((tag) => (
-                <span key={ tag } data-testid={ `${i}-${tag}-horizontal-tag` }>
-                  { tag }
-                </span>
-              ))}
-              <div id="copiedLink" />
-            </Card.Body>
-          </Card>
-        ))}
+                <div>
+                  <span data-testid={ `${index}-horizontal-done-date` }>
+                    { i.doneDate }
+                  </span>
+                  <button
+                    type="button"
+                    onClick={ () => linkToClipboard(i.id) }
+                  >
+                    <img
+                      src={ share }
+                      alt="share"
+                      data-testid={ `${index}-horizontal-share-btn` }
+                    />
+                    <div id="copiedLink" />
+                  </button>
+                </div>
+                { i.tags.map((tag) => (
+                  <span key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
+                    { tag }
+                  </span>
+                ))}
+              </Card.Body>
+            </Card>
+          ))}
         { console.log(localStorageItems) }
       </div>
     );
+  }
+
+  function handleClick({ target }) {
+    const { value } = target;
+    setType(value);
   }
 
   return (
@@ -93,31 +99,31 @@ function DoneRecipes() {
       <div>
         <Button
           type="button"
+          value=""
           data-testid="filter-by-all-btn"
-          onClick={ () => recipes() }
+          onClick={ handleClick }
         >
           All
         </Button>
         <Button
           type="button"
           data-testid="filter-by-food-btn"
-          onClick={ () => recipes() }
+          value="comida"
+          onClick={ handleClick }
         >
           Food
         </Button>
         <Button
           type="button"
           data-testid="filter-by-drink-btn"
-          onClick={ () => recipes() }
+          value="bebida"
+          onClick={ handleClick }
         >
           Drinks
         </Button>
       </div>
-      <div>
-        {
-          recipes()
-        }
-      </div>
+      { renderItems() }
+
     </div>
   );
 }

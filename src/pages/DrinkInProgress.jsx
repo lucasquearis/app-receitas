@@ -31,7 +31,6 @@ function DrinkInProgess() {
   const [ingredient, setIngredient] = useState([]);
   const { checkedDrinkOptions, setCheckedDrinkOptions } = useContext(DrinkContext);
   const [measure, setMeasure] = useState([]);
-  const [checkedOptions, setCheckedOptions] = useState('');
   const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
@@ -60,6 +59,7 @@ function DrinkInProgess() {
       checked,
     ]);
   }
+
   useEffect(() => {
     const actualStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     localStorage.setItem('inProgressRecipes', JSON.stringify({
@@ -112,7 +112,8 @@ function DrinkInProgess() {
     };
     setLocalStorageItems(...localStorageItems, recipes);
 
-    return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
+    const drinks = JSON.parse(localStorage.getItem('doneRecipes'));
+    return localStorage.setItem('doneRecipes', JSON.stringify([...drinks, recipes]));
   }
 
   const favorites = () => {
