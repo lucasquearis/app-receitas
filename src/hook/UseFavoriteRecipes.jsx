@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFavoriteRecipe } from '../redux/actions/favoriteRecipesActions';
 
 function UseFavoriteRecipes() {
-  const favRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const dispatch = useDispatch();
+  const favRecipes = useSelector((state) => state.favoriteRecipes);
   const [filteredFav, setFilteredFav] = useState(favRecipes);
+
+  useEffect(() => { setFilteredFav(favRecipes); }, [favRecipes]);
 
   const allFilter = () => {
     if (favRecipes) {
@@ -25,10 +30,7 @@ function UseFavoriteRecipes() {
   };
 
   const removeFavFromLocal = (id) => {
-    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const filter = local.filter((e) => e.id !== id);
-    setFilteredFav(filter);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(filter));
+    dispatch(removeFavoriteRecipe(id));
   };
 
   return { filteredFav, allFilter, mealFilter, drinkFilter, removeFavFromLocal };
