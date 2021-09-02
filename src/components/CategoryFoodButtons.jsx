@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategory, clearSearch } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
 import FoodsCard from './FoodsCard';
-import '../styles/CategoryButtons.css';
 
 function CategoryFoodButtons() {
-  const cinco = 5;
   const doze = 12;
+  const cinco = 5;
   const categories = useSelector((state) => state.reducerCategories.categories.meals);
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
@@ -39,6 +38,7 @@ function CategoryFoodButtons() {
     dispatch(clearSearch());
     showInputClick();
   };
+
   const handleClickAll = () => {
     setShowInput(true);
   };
