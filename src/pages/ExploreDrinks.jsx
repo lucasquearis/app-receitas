@@ -19,22 +19,25 @@ function ExploreDrinks() {
   if (redirect.should) return <Redirect to={ redirect.path } />;
 
   return (
-    <div>
+    <div className="explore">
       <HeaderWithoutSearch>Explorar Bebidas</HeaderWithoutSearch>
-      <Button
-        variant="success"
-        data-testid="explore-by-ingredient"
-        onClick={ () => shouldRedirect('/explorar/bebidas/ingredientes') }
-      >
-        Por Ingredientes
-      </Button>
-      <Button
-        variant="warning"
-        data-testid="explore-surprise"
-        onClick={ randomDrink }
-      >
-        Me Surpreenda!
-      </Button>
+      <div className="explore-btns">
+
+        <Button
+          variant="success"
+          data-testid="explore-by-ingredient"
+          onClick={ () => shouldRedirect('/explorar/bebidas/ingredientes') }
+        >
+          Por Ingredientes
+        </Button>
+        <Button
+          variant="warning"
+          data-testid="explore-surprise"
+          onClick={ randomDrink }
+        >
+          Me Surpreenda!
+        </Button>
+      </div>
       <Footer />
     </div>
   );

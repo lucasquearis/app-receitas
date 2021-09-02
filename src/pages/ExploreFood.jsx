@@ -19,29 +19,32 @@ export default function ExploreFood() {
   if (redirect.should) return <Redirect to={ redirect.path } />;
 
   return (
-    <div>
+    <div className="explore">
       <HeaderWithoutSearch>Explorar Comidas</HeaderWithoutSearch>
-      <Button
-        variant="success"
-        data-testid="explore-by-ingredient"
-        onClick={ () => shouldRedirect('/explorar/comidas/ingredientes') }
-      >
-        Por Ingredientes
-      </Button>
-      <Button
-        variant="primary"
-        data-testid="explore-by-area"
-        onClick={ () => shouldRedirect('/explorar/comidas/area') }
-      >
-        Por Local de Origem
-      </Button>
-      <Button
-        variant="warning"
-        data-testid="explore-surprise"
-        onClick={ randomMeal }
-      >
-        Me Surpreenda!
-      </Button>
+      <div className="explore-btns">
+
+        <Button
+          variant="success"
+          data-testid="explore-by-ingredient"
+          onClick={ () => shouldRedirect('/explorar/comidas/ingredientes') }
+        >
+          Por Ingredientes
+        </Button>
+        <Button
+          variant="primary"
+          data-testid="explore-by-area"
+          onClick={ () => shouldRedirect('/explorar/comidas/area') }
+        >
+          Por Local de Origem
+        </Button>
+        <Button
+          variant="warning"
+          data-testid="explore-surprise"
+          onClick={ randomMeal }
+        >
+          Me Surpreenda!
+        </Button>
+      </div>
       <Footer />
     </div>
   );

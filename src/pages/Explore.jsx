@@ -10,22 +10,24 @@ function Explore() {
 
   if (redirect.should) return <Redirect to={ redirect.path } />;
   return (
-    <div>
+    <div className="explore">
       <HeaderWithoutSearch>Explorar</HeaderWithoutSearch>
-      <Button
-        variant="danger"
-        data-testid="explore-food"
-        onClick={ () => shouldRedirect('/explorar/comidas') }
-      >
-        Explorar Comidas
-      </Button>
-      <Button
-        variant="primary"
-        data-testid="explore-drinks"
-        onClick={ () => shouldRedirect('/explorar/bebidas') }
-      >
-        Explorar Bebidas
-      </Button>
+      <div className="explore-btns">
+        <Button
+          variant="danger"
+          data-testid="explore-food"
+          onClick={ () => shouldRedirect('/explorar/comidas') }
+        >
+          Explorar Comidas
+        </Button>
+        <Button
+          variant="primary"
+          data-testid="explore-drinks"
+          onClick={ () => shouldRedirect('/explorar/bebidas') }
+        >
+          Explorar Bebidas
+        </Button>
+      </div>
       <Footer />
     </div>
   );

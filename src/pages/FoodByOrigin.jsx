@@ -75,9 +75,9 @@ function FoodByOrigin() {
     return <Redirect to={ redirect.path } />;
   }
   return (
-    <>
+    <div className="explore">
       <HeaderWithSearch>Explorar Origem</HeaderWithSearch>
-      <label htmlFor="selected">
+      <label htmlFor="selected" className="origin-select">
         Origin
         <select
           data-testid="explore-by-area-dropdown"
@@ -97,7 +97,7 @@ function FoodByOrigin() {
           )) }
         </select>
       </label>
-      <div>
+      <div className="ingredients-list">
         {
           firstTwelve.map(({ idMeal, strMealThumb, strMeal }, index) => (
             <button
@@ -118,7 +118,7 @@ function FoodByOrigin() {
         }
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
