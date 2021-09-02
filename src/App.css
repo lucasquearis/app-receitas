@@ -40,14 +40,14 @@
 }
 
 .form-label {
-  color: #ffffff;
+  color: white;
   font-size: 25px;
 }
 
 .containerLogin button {
-  background-color: #727272!important;
-  color: #ffffff;
-  font-weight: 700px;
+  background-color: #727272 ! important;
+  color: white;
+  font-weight: 700;
   margin-top: 70px;
   width: 100%;
 }
@@ -64,7 +64,7 @@
 }
 
 .textLogin h1 {
-  color: #ffffff;
+  color: white;
   font-size: 55px;
 }
 
@@ -150,9 +150,9 @@ footer {
   background-color: #5c5c5c;
   border: none;
   border-radius: 4px;
-  color: #ffffff;
-  margin: 10px 2px;
+  color: white;
   height: 40px;
+  margin: 10px 2px;
 }
 
 .scrollMelsDrinks {
@@ -167,7 +167,7 @@ footer {
 }
 
 .mainDetail h2, p {
-  
+  color: white;
 }
 
 @keyframes shake {
