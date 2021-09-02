@@ -7,7 +7,7 @@ function Search({ ingredient }) {
   const [searchValue, setSearchValue] = useState('');
 
   const { API } = useContext(RecipesContext);
-  const { searchByFilters } = API;
+  const { searchByFilters, pathname } = API;
 
   function handleChange({ target }) {
     setSearchValue(target.value);
@@ -56,17 +56,20 @@ function Search({ ingredient }) {
   });
 
   return (
-    <div>
+    <div className="search-open">
+      <div className="search-input">
       <input
+        className="input-text"
         type="search"
         placeholder="Pesquisa"
         data-testid="search-input"
         onChange={ (e) => handleChange(e) }
         value={ searchValue }
       />
-      <div onChange={ ({ target: { value } }) => change(value) }>
+      <div className="search-radio" onChange={ ({ target: { value } }) => change(value) }>
         <label htmlFor="labelName">
           <input
+            className="radio-btn"
             type="radio"
             name="radio"
             value="search"
@@ -75,9 +78,9 @@ function Search({ ingredient }) {
           />
           <span>Nome</span>
         </label>
-
         <label htmlFor="labelIngredient">
           <input
+            className="radio-btn"
             type="radio"
             name="radio"
             value="ingredient"
@@ -86,9 +89,9 @@ function Search({ ingredient }) {
           />
           <span>Ingrediente</span>
         </label>
-
         <label htmlFor="labelFirst">
           <input
+            className="radio-btn"
             type="radio"
             name="radio"
             value="first"
@@ -98,9 +101,16 @@ function Search({ ingredient }) {
           <span>Primeira letra</span>
         </label>
       </div>
-      <button type="button" id="exec" data-testid="exec-search-btn" onClick={ click }>
+      <button
+        class="btn btn-success"
+        type="button"
+        id="exec"
+        data-testid="exec-search-btn"
+        onClick={ click }
+      >
         Pesquisar
       </button>
+      </div>
     </div>
   );
 }

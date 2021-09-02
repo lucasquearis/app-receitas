@@ -10,6 +10,66 @@
   width: 100%;
 }
 
+.header-profile {
+  display: flex;
+  flex-direction: column;
+  background-color: aquamarine;
+}
+
+.header-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+}
+
+.image-div {
+  text-align: center;
+}
+
+.image-section {
+  display: inline-block;
+  margin: 10px 10px;
+  text-align: center;
+}
+
+.ingredient-image {
+  text-align: center;
+  margin: 0 10px;
+  padding: 10px;
+  display: flex;
+  width: 250px;
+  box-shadow: 0px 0px 10px rgb(158, 156, 156);
+}
+
+.btn-success {
+  margin: 10px 5px;
+}
+
+/* 
+/* .radio-btn {
+  margin-left: 10px;
+}
+
+.header-search {
+  display: flex;
+  padding-left: 30px;
+}
+
+.search-open {
+  display: flex;
+}
+
+.search-input {
+  display: flex;
+  height: 30px;
+  width: 800px;
+}
+
+.search-radio {
+  display: flex;
+} */
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
@@ -32,11 +92,70 @@
 }
 
 .cardTumb {
-  border: solid black 5px;
-  border-radius: 5px;
+  /* border: solid black 5px; */
+  /* border-radius: 5px; */
   height: 300px;
   margin-bottom: 10px;
   width: 350px;
+  transition: all 0.2s;
+}
+
+.cardTumb:hover {
+  box-shadow: 0px 0px 10px rgb(158, 156, 156);
+  transform: scale(1.02);
+}
+
+@media only screen and (max-width: 360px) {
+  .header-profile {
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+  }
+
+  .search-input {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .cardFlex {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .radio-btn {
+    margin: 0 10px;
+  }
+
+  .header-search {
+    display: inline-block;
+  }
+  
+  .search-open {
+    display: flex;
+  }
+
+  .categories {
+    text-align: center;
+  }
+
+  .input-text {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+  }
+  
+  .search-radio {
+    display: flex;
+    padding-top: 10px;
+  }
+
+  .header-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /*

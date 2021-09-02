@@ -25,28 +25,33 @@ function HeaderSearch({ title }) {
   }, [state]);
 
   return (
-    <div>
-      <Link to="/perfil">
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="imagem do link do perfil"
-        />
-      </Link>
-      <h1 data-testid="page-title">{title}</h1>
-      <button
-        type="button"
-        onClick={ handleSearch }
-        data-testid="search-top-btn"
-        src={ searchIcon }
-        id="button"
-      >
-        <img
-          src={ searchIcon }
-          alt="imagem do link de pesquisa"
-        />
-      </button>
-      {(show) ? <Search ingredient={ ingredient } /> : null }
+    <div className="header-profile">
+      <div className="header-title">
+        <Link to="/perfil">
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="imagem do link do perfil"
+            />
+        </Link>
+        <h1 data-testid="page-title">{title}</h1>
+          <button
+            class="btn btn-success"
+            type="button"
+            onClick={ handleSearch }
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            id="button"
+            >
+            <img
+              src={ searchIcon }
+              alt="imagem do link de pesquisa"
+              />
+          </button>
+        <div className="header-search">
+          {(show) ? <Search ingredient={ ingredient } /> : null }
+        </div>
+      </div>
     </div>
   );
 }
