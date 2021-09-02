@@ -1,20 +1,30 @@
 .recipe-card {
-  background-color: white;
-  border: 1px solid gray;
+  background-color: black;
+  border: none;
   border-radius: 6px;
-  height: 172px;
-  width: 161px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: fit-content;
+  margin: 0;
+  padding: 0;
+  width: 150px;
 }
 
 .recipe-card img {
+  border-radius: 6px 6px 0 0;
   height: 109px;
   width: 100%;
 }
 
 .recipe-card div {
   align-items: flex-start;
+  border-radius: 0 0 6px 6px;
+  color: white;
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
-  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 700;
+  gap: 2px;
+  height: 45px;
+  padding-left: 5px;
+  padding-top: 5px;
 }

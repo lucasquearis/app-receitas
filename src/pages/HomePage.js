@@ -53,10 +53,10 @@ export default function HomePage() {
   }
 
   return (
-    <>
+    <div className="home-page-container">
       <Header title={ title() } showSearchIcon />
-      <FiltersMenu type={ pathname } />
-      <main>
+      <main className="main-bkc home-page">
+        <FiltersMenu type={ pathname } />
         { recipeList
         && recipeList.slice(0, TWELVE)
           .map((recipe, index) => (
@@ -72,6 +72,6 @@ export default function HomePage() {
           )) }
       </main>
       <FooterMenu key={ pathname } />
-    </>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Header, FavoriteRecipeCard, FilteringButtons } from '../components';
 import AppContext from '../context/AppContext';
-import '../styles/receitasFeitasPage.css';
+import '../styles/receitasFavoritasPage.css';
 
 export default function ReceitasFavoritasPage() {
   const [idDetails, setIdDetails] = useState(null);
@@ -34,25 +34,27 @@ export default function ReceitasFavoritasPage() {
   return (
     <div>
       <Header title="Receitas Favoritas" showSearchIcon={ false } />
-      <FilteringButtons />
-      <section className="cards-area">
-        { fvtRecipes && fvtRecipesResult(filterRecipes, fvtRecipes)
-          .map((recipe, index) => (
-            <FavoriteRecipeCard
-              key={ recipe.id }
-              id={ recipe.id }
-              type={ recipe.type }
-              index={ index }
-              img={ recipe.image }
-              name={ recipe.name }
-              alcoholicOrNot={ recipe.alcoholicOrNot }
-              area={ recipe.area }
-              category={ recipe.category }
-              setIdDetails={ setIdDetails }
-              setTypeDetails={ setTypeDetails }
-            />
-          ))}
-      </section>
+      <main className="main-bkc receitas-favoritas-page">
+        <FilteringButtons />
+        <section className="cards-area">
+          { fvtRecipes && fvtRecipesResult(filterRecipes, fvtRecipes)
+            .map((recipe, index) => (
+              <FavoriteRecipeCard
+                key={ recipe.id }
+                id={ recipe.id }
+                type={ recipe.type }
+                index={ index }
+                img={ recipe.image }
+                name={ recipe.name }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+                area={ recipe.area }
+                category={ recipe.category }
+                setIdDetails={ setIdDetails }
+                setTypeDetails={ setTypeDetails }
+              />
+            ))}
+        </section>
+      </main>
     </div>
   );
 }

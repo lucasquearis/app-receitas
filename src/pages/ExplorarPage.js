@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { Header, FooterMenu } from '../components';
+import '../styles/explorarPage.css';
 
 export default function ExplorarPage() {
   const [redirect, setRedirect] = useState({ page: '', shouldRedirect: false });
@@ -17,22 +18,25 @@ export default function ExplorarPage() {
   return (
     <div>
       <Header title="Explorar" showSearchIcon={ false } />
-      <button
-        name="comidas"
-        type="button"
-        onClick={ clickHandler }
-        data-testid="explore-food"
-      >
-        Explorar Comidas
-      </button>
-      <button
-        name="bebidas"
-        type="button"
-        onClick={ clickHandler }
-        data-testid="explore-drinks"
-      >
-        Explorar Bebidas
-      </button>
+      <div className="main-bkc explorar-page">
+        <button
+          name="comidas"
+          type="button"
+          onClick={ clickHandler }
+          data-testid="explore-food"
+        >
+          Explorar Comidas
+        </button>
+        <button
+          className="btn"
+          name="bebidas"
+          type="button"
+          onClick={ clickHandler }
+          data-testid="explore-drinks"
+        >
+          Explorar Bebidas
+        </button>
+      </div>
       <FooterMenu />
     </div>
   );

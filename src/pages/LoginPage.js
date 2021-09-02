@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { setLocalStorage } from '../utils';
+import dinnorLogo from '../images/dinnorLogo.png';
+import '../styles/loginPage.css';
 
 export default function LoginPage() {
   const [redirectToFoods, setRedirectToFoods] = useState(false);
@@ -33,31 +35,34 @@ export default function LoginPage() {
     return <Redirect to="/comidas" />;
   }
   return (
-    <form>
-      <input
-        type="email"
-        data-testid="email-input"
-        placeholder="Email"
-        onChange={ handleChange }
-        name="email"
-        value={ email }
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        placeholder="Senha"
-        onChange={ handleChange }
-        name="password"
-        value={ password }
-      />
-      <button
-        type="button"
-        disabled={ !handleValidation() }
-        onClick={ handleClick }
-        data-testid="login-submit-btn"
-      >
-        Login
-      </button>
-    </form>
+    <main className="login-page">
+      <img src={ dinnorLogo } alt="Dinnor logo" />
+      <form className="login-form">
+        <input
+          type="email"
+          data-testid="email-input"
+          placeholder="Email"
+          onChange={ handleChange }
+          name="email"
+          value={ email }
+        />
+        <input
+          type="password"
+          data-testid="password-input"
+          placeholder="Senha"
+          onChange={ handleChange }
+          name="password"
+          value={ password }
+        />
+        <button
+          type="button"
+          disabled={ !handleValidation() }
+          onClick={ handleClick }
+          data-testid="login-submit-btn"
+        >
+          Entrar
+        </button>
+      </form>
+    </main>
   );
 }

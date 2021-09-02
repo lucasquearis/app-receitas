@@ -1,6 +1,12 @@
-main {
+.home-page-container {
+  height: 640px;
+  width: 360px;
+}
+
+.home-page {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+  padding-bottom: 68px;
 }

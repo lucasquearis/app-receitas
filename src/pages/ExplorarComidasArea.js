@@ -38,8 +38,8 @@ export default function ExplorarComidasArea() {
   return (
     <div>
       <Header title="Explorar Origem" showSearchIcon />
-      <AreaSelect />
-      <main>
+      <main className="main-bkc explorar-area-page">
+        <AreaSelect />
         { recipeList
         && recipeList.slice(0, TWELVE)
           .map((recipe, index) => (

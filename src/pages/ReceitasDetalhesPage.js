@@ -41,14 +41,14 @@ export default function ReceitasDetailsPage() {
 
   if (loading) return <Loading />;
   return (
-    <div>
+    <div className="main-bkc receitas-detalhes-container">
       <HeaderIngredientsInstructions />
       {showVideo && (
         <Video
           video={ recipeDetails && recipeDetails.strYoutube }
         />
       )}
-      <CarouselContainer pathnameAPI={ pathnameAPI } />
+      <CarouselContainer />
 
       {showButton && (
         <DetailsButton />

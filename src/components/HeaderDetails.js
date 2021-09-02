@@ -59,26 +59,32 @@ export default function HeaderDetails(
   };
 
   return (
-    <header>
+    <header className="header-details">
       <img src={ img } alt={ name } data-testid="recipe-photo" />
-      <h1 data-testid="recipe-title">{ name }</h1>
-      <input
-        src={ shareIcon }
-        alt="Share Icon"
-        type="image"
-        data-testid="share-btn"
-        onClick={ () => clipboardCopy(type, id) }
-      />
-      <span id={ `share-text${id}` } />
-      <input
-        src={ heartColor }
-        alt="Favorite Icon"
-        type="image"
-        data-testid="favorite-btn"
-        onClick={ handleFavorite }
-      />
-      { aux && <p data-testid="recipe-category">{ aux }</p> }
-      { alcoholic && <p data-testid="recipe-category">{ alcoholic }</p> }
+      <div className="title-and-icons">
+        <div className="title-and-aux">
+          <p data-testid="recipe-title">{ name }</p>
+          { aux && <p data-testid="recipe-category">{ aux }</p> }
+          { alcoholic && <p data-testid="recipe-category">{ alcoholic }</p> }
+        </div>
+        <div className="icons">
+          <input
+            src={ shareIcon }
+            alt="Share Icon"
+            type="image"
+            data-testid="share-btn"
+            onClick={ () => clipboardCopy(type, id) }
+          />
+          <input
+            src={ heartColor }
+            alt="Favorite Icon"
+            type="image"
+            data-testid="favorite-btn"
+            onClick={ handleFavorite }
+          />
+          <p id={ `share-text${id}` } />
+        </div>
+      </div>
     </header>
   );
 }

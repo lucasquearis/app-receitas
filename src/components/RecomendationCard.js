@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../styles/recipeCard.css';
 
-export default function RecomendationCard({ id, name, img, aux, index }) {
-  const [idDetails, setIdDetails] = useState(false);
+export default function RecomendationCard({ id, name, img, pathnameAPI, aux, index }) {
   const [redirectToDetails, setRedirectToDetails] = useState(false);
-  const { location: { pathname } } = useHistory();
-  const ONE = 1;
-  const EIGHT = 8;
-  const pathnameURL = pathname.slice(ONE, EIGHT);
-  const pathnameFinal = pathnameURL === 'comidas' ? 'bebidas' : 'comidas';
-
-  useEffect(() => {
-    if (idDetails) {
-      setRedirectToDetails(true);
-    }
-  }, [idDetails]);
 
   if (redirectToDetails) {
-    return <Redirect to={ `/${pathnameFinal}/${id}` } />;
+    return <Redirect to={ `/${pathnameAPI}/${id}` } />;
   }
 
   return (
@@ -27,7 +15,7 @@ export default function RecomendationCard({ id, name, img, aux, index }) {
       type="button"
       className="recipe-card"
       data-testid={ `${index}-recomendation-card` }
-      onClick={ () => { setIdDetails(true); } }
+      onClick={ () => { setRedirectToDetails(true); } }
     >
       <img src={ img } alt={ name } data-testid={ `${index}-card-img` } />
       <div>
@@ -46,6 +34,7 @@ RecomendationCard.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
+  pathnameAPI: PropTypes.string.isRequired,
   aux: PropTypes.string,
   index: PropTypes.number.isRequired,
 };

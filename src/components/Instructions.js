@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 export default function Instructions({ instructions }) {
   return (
-    <section data-testid="instructions">
-      <p data-testid="instructions">{instructions}</p>
-    </section>
+    <div className="instructions">
+      <h2>Instructions</h2>
+      <section data-testid="instructions">
+        <p data-testid="instructions">{instructions}</p>
+      </section>
+    </div>
   );
 }
 

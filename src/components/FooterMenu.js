@@ -35,7 +35,7 @@ export default function FooterMenu() {
   if (redirectToFoods) return <Redirect to="/comidas" />;
 
   return (
-    <footer data-testid="footer">
+    <footer className="footer" data-testid="footer">
       <input
         src={ drinkIcon }
         alt="Drinks Icon"

@@ -19,50 +19,57 @@ export default function DoneRecipeCard({
   doneDate,
   tags,
 }) {
+  const tagsArr = typeof tags === 'string' ? tags.split(',') : tags;
   return (
-    <div className="recipe-card">
+    <div className="done-recipe-card">
       <input
-        className="image-card"
+        className="done-image-card"
         type="image"
         src={ img }
         alt={ name }
         data-testid={ `${index}-horizontal-image` }
         onClick={ () => { setIdDetails(id); setTypeDetails(type); } }
       />
-      <div>
-        { (type === 'bebida') ? (
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            {alcoholicOrNot}
-          </span>
-        ) : (
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}`}
-          </span>
-        )}
+      <div className="done-card-info">
+        <div className="aux-and-share">
+          { (type === 'bebida') ? (
+            <span data-testid={ `${index}-horizontal-top-text` }>
+              {alcoholicOrNot}
+            </span>
+          ) : (
+            <span data-testid={ `${index}-horizontal-top-text` }>
+              { `${area} - ${category}`}
+            </span>
+          )}
+          <div>
+            <input
+              src={ shareIcon }
+              alt="Share Button"
+              type="image"
+              data-testid={ `${index}-horizontal-share-btn` }
+              onClick={ () => clipboardCopy(type, id) }
+            />
+            <span id={ `share-text${id}` } />
+          </div>
+        </div>
         <Link to={ `/${type}s/${id}` }>
-          <span data-testid={ `${index}-horizontal-name` }>
+          <p className="done-link" data-testid={ `${index}-horizontal-name` }>
             {name}
-          </span>
+          </p>
         </Link>
-        <span data-testid={ `${index}-horizontal-done-date` }>
+        <p data-testid={ `${index}-horizontal-done-date` }>
           {`Feita em: ${doneDate}`}
-        </span>
-        <input
-          src={ shareIcon }
-          alt="Share Button"
-          type="image"
-          data-testid={ `${index}-horizontal-share-btn` }
-          onClick={ () => clipboardCopy(type, id) }
-        />
-        <span id={ `share-text${id}` }>Compartilhar?</span>
-        { tags.map((tag) => (
-          <span
-            key={ index }
-            data-testid={ `${index}-${tag}-horizontal-tag` }
-          >
-            {tag}
-          </span>
-        ))}
+        </p>
+        <div className="done-tags">
+          { tagsArr.map((tag, i) => (
+            <span
+              key={ `${i}-tag` }
+              data-testid={ `${index}-${tag}-horizontal-tag` }
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -78,7 +85,10 @@ DoneRecipeCard.propTypes = {
   area: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   doneDate: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tags: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string,
+  ]).isRequired,
   setIdDetails: PropTypes.func.isRequired,
   setTypeDetails: PropTypes.func.isRequired,
 };

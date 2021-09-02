@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import AliceCarousel from 'react-alice-carousel';
-import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import RecomendationCard from './RecomendationCard';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
-export default function CarouselContainer({ pathnameAPI }) {
+export default function CarouselContainer() {
   const { recipeList } = useContext(AppContext);
   const SIX = 6;
 
@@ -16,8 +15,8 @@ export default function CarouselContainer({ pathnameAPI }) {
   };
 
   return (
-
     <AliceCarousel
+      disableButtonsControls
       responsive={ responsive }
       items={
 
@@ -28,16 +27,12 @@ export default function CarouselContainer({ pathnameAPI }) {
             name={ recipe.strMeal || recipe.strDrink }
             img={ recipe.strMealThumb || recipe.strDrinkThumb }
             index={ index }
-            aux={ pathnameAPI === '/comidas' ? recipe.strCategory : recipe.strAlcoholic }
+            pathnameAPI={ recipe.idMeal ? 'comidas' : 'bebidas' }
+            aux={ recipe.idMeal ? recipe.strCategory : recipe.strAlcoholic }
             testId="recomendation-title"
           />
         ))
       }
     />
-
   );
 }
-
-CarouselContainer.propTypes = {
-  pathnameAPI: PropTypes.string.isRequired,
-};

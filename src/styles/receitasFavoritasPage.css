@@ -1,0 +1,80 @@
+.receitas-favoritas-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 640px;
+  margin-bottom: -58px;
+  padding-top: 20px;
+  width: 360px;
+}
+
+.filtering-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.filtering-buttons button {
+  background-color: #edac05;
+  border: none;
+  border-radius: 4px;
+  font-size: 25px;
+  height: 45px;
+  padding: 0;
+  width: 102px;
+}
+
+.cards-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.fvt-recipe-card {
+  background-color: #edac05;
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  height: 143px;
+  margin: 5px;
+  width: 330px;
+}
+
+.fvt-image-card {
+  border-radius: 6px 0 0 6px;
+  height: 143px;
+  width: 165px;
+}
+
+.fvt-card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 165px;
+}
+
+.fvt-card-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.fvt-card-title span {
+  color: #312e2e;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.fvt-card-title .fvt-link {
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.fvt-card-icons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: -20px;
+}

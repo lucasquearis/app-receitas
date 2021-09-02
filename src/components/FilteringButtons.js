@@ -13,7 +13,7 @@ export default function FilteringButtons() {
   };
 
   return (
-    <section className="filter-buttons">
+    <section className="filtering-buttons">
       { typeList.map((type, index) => (
         <button
           key={ index }

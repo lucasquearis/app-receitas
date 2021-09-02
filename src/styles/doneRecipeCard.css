@@ -1,21 +1,60 @@
-.recipe-card {
-  background-color: white;
-  border: 1px solid gray;
+.done-recipe-card {
+  background-color: #edac05;
   border-radius: 6px;
-  height: 350px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  height: 143px;
   margin: 5px;
-  width: 161px;
+  width: 330px;
 }
 
-.image-card {
-  height: 109px;
-  width: 100%;
+.done-image-card {
+  border-radius: 6px 0 0 6px;
+  height: 143px;
+  width: 165px;
 }
 
-.recipe-card div {
-  align-items: flex-start;
+.done-card-info {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   margin-top: 5px;
+  width: 165px;
+}
+
+.aux-and-share {
+  align-items: center;
+  color: #312e2e;
+  display: flex;
+  font-size: 15px;
+  font-weight: 400;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.aux-and-share input {
+  height: 22px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+
+.done-link {
+  color: black;
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.done-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.done-tags span {
+  background-color: #312e2e;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  padding: 4px;
 }

@@ -66,3 +66,9 @@
     transform: rotate(-10deg);
   }
 }
+
+.main-bkc {
+  background-color: #312e2e;
+  margin-bottom: 58px;
+  margin-top: 58px;
+}

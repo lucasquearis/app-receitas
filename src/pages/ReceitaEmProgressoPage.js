@@ -5,6 +5,7 @@ import { fetchAPIDetails } from '../services';
 import { HeaderIngredientsInstructions } from '../components';
 import FinishRecipeButton from '../components/FinishRecipeButton';
 import Loading from '../components/Loading';
+import '../styles/receitasEmProgressoPage.css';
 
 export default function ReceitaEmProgressoPage() {
   const [loading, setLoading] = useState(true);
@@ -28,13 +29,11 @@ export default function ReceitaEmProgressoPage() {
   if (redirectToDone) return <Redirect to="/receitas-feitas" />;
 
   return (
-    <div>
-      <section>
-        <HeaderIngredientsInstructions pathnameAPI={ pathnameAPI } id={ id } />
-        <FinishRecipeButton
-          setRedirectToDone={ setRedirectToDone }
-        />
-      </section>
-    </div>
+    <section className="main-bkc receitas-in-progress-container">
+      <HeaderIngredientsInstructions pathnameAPI={ pathnameAPI } id={ id } />
+      <FinishRecipeButton
+        setRedirectToDone={ setRedirectToDone }
+      />
+    </section>
   );
 }

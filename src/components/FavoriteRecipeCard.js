@@ -5,7 +5,6 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import AppContext from '../context/AppContext';
 import { clipboardCopy } from '../utils';
-import '../styles/favoriteRecipeCard.css';
 
 export default function FavoriteRecipeCard({
   id,
@@ -30,45 +29,49 @@ export default function FavoriteRecipeCard({
   };
 
   return (
-    <div className="recipe-card">
+    <div className="fvt-recipe-card">
       <input
-        className="image-card"
+        className="fvt-image-card"
         type="image"
         src={ img }
         alt={ name }
         data-testid={ `${index}-horizontal-image` }
         onClick={ () => { setIdDetails(id); setTypeDetails(type); } }
       />
-      <div>
-        { (type === 'bebida') ? (
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            {alcoholicOrNot}
-          </span>
-        ) : (
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}`}
-          </span>
-        )}
-        <Link to={ `${type}s/${id}` }>
-          <span data-testid={ `${index}-horizontal-name` }>
-            {name}
-          </span>
-        </Link>
-        <input
-          src={ shareIcon }
-          alt="Share Button"
-          type="image"
-          data-testid={ `${index}-horizontal-share-btn` }
-          onClick={ () => clipboardCopy(type, id) }
-        />
-        <span id={ `share-text${id}` }>Compartilhar?</span>
-        <input
-          src={ blackHeartIcon }
-          alt="Favorite Button"
-          type="image"
-          data-testid={ `${index}-horizontal-favorite-btn` }
-          onClick={ () => removeFavorite(id) }
-        />
+      <div className="fvt-card-info">
+        <div className="fvt-card-title">
+          { (type === 'bebida') ? (
+            <span data-testid={ `${index}-horizontal-top-text` }>
+              {alcoholicOrNot}
+            </span>
+          ) : (
+            <span data-testid={ `${index}-horizontal-top-text` }>
+              { `${area} - ${category}`}
+            </span>
+          )}
+          <Link to={ `${type}s/${id}` }>
+            <span className="fvt-link" data-testid={ `${index}-horizontal-name` }>
+              {name}
+            </span>
+          </Link>
+        </div>
+        <div className="fvt-card-icons">
+          <input
+            src={ shareIcon }
+            alt="Share Button"
+            type="image"
+            data-testid={ `${index}-horizontal-share-btn` }
+            onClick={ () => clipboardCopy(type, id) }
+          />
+          <input
+            src={ blackHeartIcon }
+            alt="Favorite Button"
+            type="image"
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            onClick={ () => removeFavorite(id) }
+          />
+          <span id={ `share-text${id}` } />
+        </div>
       </div>
     </div>
   );

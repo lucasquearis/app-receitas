@@ -33,27 +33,29 @@ export default function ReceitasFeitasPage() {
   return (
     <div>
       <Header title="Receitas Feitas" showSearchIcon={ false } />
-      <FilteringButtons />
-      <section className="cards-area">
-        { doneRecipes && doneRecipesResult(filterRecipes, doneRecipes)
-          .map((recipe, index) => (
-            <DoneRecipeCard
-              key={ recipe.id }
-              id={ recipe.id }
-              type={ recipe.type }
-              index={ index }
-              img={ recipe.image }
-              name={ recipe.name }
-              alcoholicOrNot={ recipe.alcoholicOrNot }
-              area={ recipe.area }
-              category={ recipe.category }
-              doneDate={ recipe.doneDate }
-              tags={ recipe.tags }
-              setIdDetails={ setIdDetails }
-              setTypeDetails={ setTypeDetails }
-            />
-          ))}
-      </section>
+      <main className="main-bkc receitas-feitas-page">
+        <FilteringButtons />
+        <section className="cards-area">
+          { doneRecipes && doneRecipesResult(filterRecipes, doneRecipes)
+            .map((recipe, index) => (
+              <DoneRecipeCard
+                key={ recipe.id }
+                id={ recipe.id }
+                type={ recipe.type }
+                index={ index }
+                img={ recipe.image }
+                name={ recipe.name }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+                area={ recipe.area }
+                category={ recipe.category }
+                doneDate={ recipe.doneDate }
+                tags={ recipe.tags }
+                setIdDetails={ setIdDetails }
+                setTypeDetails={ setTypeDetails }
+              />
+            ))}
+        </section>
+      </main>
     </div>
   );
 }

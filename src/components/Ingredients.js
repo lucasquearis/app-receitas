@@ -21,7 +21,7 @@ export default function Ingredients({ ingredients }) {
   };
 
   return (
-    <section>
+    <section className="ingredients">
       <h2>Ingredients</h2>
 
       <ul>

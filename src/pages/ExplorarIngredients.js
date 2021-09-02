@@ -50,24 +50,26 @@ export default function ExplorarIngredients() {
   return (
     <div>
       <Header title="Explorar Ingredientes" showSearchIcon={ false } />
-      {ingredients && ingredients.slice(0, TWELVE).map((item, i) => (
-        <button
-          name={ item }
-          type="button"
-          key={ i }
-          onClick={ getFiltererdReceipes }
-          data-testid={ `${i}-ingredient-card` }
-          className="recipe-card"
-        >
-          <img
-            data-testid={ `${i}-card-img` }
-            src={ urlImg(typeOfRecipe, item) }
+      <main className="main-bkc explorar-ingredients-page">
+        {ingredients && ingredients.slice(0, TWELVE).map((item, i) => (
+          <button
             name={ item }
-            alt="no pic"
-          />
-          <p name={ item } data-testid={ `${i}-card-name` }>{item}</p>
-        </button>
-      ))}
+            type="button"
+            key={ i }
+            onClick={ getFiltererdReceipes }
+            data-testid={ `${i}-ingredient-card` }
+            className="recipe-card"
+          >
+            <img
+              data-testid={ `${i}-card-img` }
+              src={ urlImg(typeOfRecipe, item) }
+              name={ item }
+              alt="no pic"
+            />
+            <p name={ item } data-testid={ `${i}-card-name` }>{item}</p>
+          </button>
+        ))}
+      </main>
       <FooterMenu />
     </div>
   );

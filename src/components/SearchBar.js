@@ -43,7 +43,7 @@ export default function SearchBar({ type }) {
   if (redirectToDetails) return <Redirect to={ `/${type.toLowerCase()}/${idDetails}` } />;
 
   return (
-    <form>
+    <form className="search-bar">
       <input
         type="text"
         placeholder="Buscar Receita"
@@ -52,42 +52,44 @@ export default function SearchBar({ type }) {
         onChange={ handleChange }
         data-testid="search-input"
       />
-      <label htmlFor="ingredient-search-radio">
-        <input
-          id="ingredient-search-radio"
-          type="radio"
-          name="searchRadio"
-          value="ingredient"
-          checked={ searchRadio === 'ingredient' }
-          onChange={ handleChange }
-          data-testid="ingredient-search-radio"
-        />
-        Ingrediente
-      </label>
-      <label htmlFor="name-search-radio">
-        <input
-          id="name-search-radio"
-          type="radio"
-          name="searchRadio"
-          value="name"
-          checked={ searchRadio === 'name' }
-          onChange={ handleChange }
-          data-testid="name-search-radio"
-        />
-        Nome
-      </label>
-      <label htmlFor="first-letter-search-radio">
-        <input
-          id="first-letter-search-radio"
-          type="radio"
-          name="searchRadio"
-          value="firstLetter"
-          checked={ searchRadio === 'firstLetter' }
-          onChange={ handleChange }
-          data-testid="first-letter-search-radio"
-        />
-        Primeira letra
-      </label>
+      <div className="search-bar-filters">
+        <label htmlFor="ingredient-search-radio">
+          <input
+            id="ingredient-search-radio"
+            type="radio"
+            name="searchRadio"
+            value="ingredient"
+            checked={ searchRadio === 'ingredient' }
+            onChange={ handleChange }
+            data-testid="ingredient-search-radio"
+          />
+          Ingrediente
+        </label>
+        <label htmlFor="name-search-radio">
+          <input
+            id="name-search-radio"
+            type="radio"
+            name="searchRadio"
+            value="name"
+            checked={ searchRadio === 'name' }
+            onChange={ handleChange }
+            data-testid="name-search-radio"
+          />
+          Nome
+        </label>
+        <label htmlFor="first-letter-search-radio">
+          <input
+            id="first-letter-search-radio"
+            type="radio"
+            name="searchRadio"
+            value="firstLetter"
+            checked={ searchRadio === 'firstLetter' }
+            onChange={ handleChange }
+            data-testid="first-letter-search-radio"
+          />
+          Primeira letra
+        </label>
+      </div>
       <button
         type="button"
         onClick={ handleClick }

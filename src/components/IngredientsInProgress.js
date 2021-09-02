@@ -98,25 +98,27 @@ export default function IngredientsInProgress({ ingredients, pathnameAPI, id }) 
   };
 
   return (
-    <section>
+    <section className="ingredients-in-progress">
       <h2>Ingredients</h2>
-      {makeList().map((ingredient, index) => (
-        <label
-          htmlFor={ ingredient }
-          key={ ingredient }
-          style={ checkedIngredients.some((item) => item === ingredient)
-            ? { textDecorationLine: 'line-through' } : null }
-          data-testid={ `${index}-ingredient-step` }
-        >
-          <input
-            type="checkbox"
-            name={ ingredient }
-            onChange={ handleChange }
-            checked={ checkedLS(id, ingredient) }
-          />
-          {ingredient}
-        </label>
-      ))}
+      <section>
+        {makeList().map((ingredient, index) => (
+          <label
+            htmlFor={ ingredient }
+            key={ ingredient }
+            style={ checkedIngredients.some((item) => item === ingredient)
+              ? { textDecorationLine: 'line-through' } : null }
+            data-testid={ `${index}-ingredient-step` }
+          >
+            <input
+              type="checkbox"
+              name={ ingredient }
+              onChange={ handleChange }
+              checked={ checkedLS(id, ingredient) }
+            />
+            {ingredient}
+          </label>
+        ))}
+      </section>
     </section>
   );
 }
@@ -124,5 +126,5 @@ export default function IngredientsInProgress({ ingredients, pathnameAPI, id }) 
 IngredientsInProgress.propTypes = {
   ingredients: PropTypes.shape({ ingredient: PropTypes.string }).isRequired,
   pathnameAPI: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };

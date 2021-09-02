@@ -1,12 +1,16 @@
-.filter-buttons {
+.home-page .filter-buttons button {
+  background-color: #edac05;
+  border-radius: 6px;
+  font-size: 17px;
+  height: 28px;
+  width: 160px;
+}
+
+.home-page .filter-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   justify-content: center;
   margin: 10px;
-}
-
-.filter-buttons button {
-  height: 28px;
-  width: 105px;
+  width: 95%;
 }

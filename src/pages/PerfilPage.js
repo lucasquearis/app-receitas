@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Header, FooterMenu } from '../components';
+import '../styles/perfilPage.css';
 
 export default function PerfilPage() {
   const [redirectToDoneRecipes, setRedirectToDoneRecipes] = useState(false);
@@ -33,31 +34,33 @@ export default function PerfilPage() {
     <div>
       <Header title="Perfil" showSearchIcon={ false } />
 
-      <p data-testid="profile-email">{userEmail}</p>
+      <div className="main-bkc perfil-page">
+        <p data-testid="profile-email">{userEmail}</p>
 
-      <button
-        type="button"
-        data-testid="profile-done-btn"
-        onClick={ handleClickDoneRecipes }
-      >
-        Receitas Feitas
-      </button>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ handleClickDoneRecipes }
+        >
+          Receitas Feitas
+        </button>
 
-      <button
-        type="button"
-        data-testid="profile-favorite-btn"
-        onClick={ handleClickFavRecipes }
-      >
-        Receitas Favoritas
-      </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ handleClickFavRecipes }
+        >
+          Receitas Favoritas
+        </button>
 
-      <button
-        type="button"
-        data-testid="profile-logout-btn"
-        onClick={ handleClickLogin }
-      >
-        Sair
-      </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ handleClickLogin }
+        >
+          Sair
+        </button>
+      </div>
       <FooterMenu />
     </div>
   );

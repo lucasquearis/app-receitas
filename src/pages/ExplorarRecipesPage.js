@@ -35,25 +35,27 @@ export default function ExplorarRecipesPage() {
   return (
     <div>
       <Header title={ `Explorar ${title()}` } showSearchIcon={ false } />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        name="ingedient"
-        value="true"
-        onClick={ handleClick }
-      >
-        Por Ingredientes
-      </button>
-      {typeOfRecipe === '/comidas' && <AreaSearchButton handleClick={ handleClick } /> }
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        name="surprise"
-        value="true"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
+      <div className="main-bkc explorar-recipes-page">
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+          name="ingedient"
+          value="true"
+          onClick={ handleClick }
+        >
+          Por Ingredientes
+        </button>
+        {typeOfRecipe === '/comidas' && <AreaSearchButton handleClick={ handleClick } /> }
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          name="surprise"
+          value="true"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <FooterMenu />
     </div>
   );

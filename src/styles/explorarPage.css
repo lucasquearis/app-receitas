@@ -1,0 +1,63 @@
+.explorar-page {
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+  width: 360px;
+}
+
+.explorar-page button {
+  background-color: #edac05;
+  border: none;
+  border-radius: 6px;
+  font-size: 32px;
+  height: 82px;
+  margin-top: 40px;
+  padding: 0;
+}
+
+.explorar-recipes-page {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  height: 640px;
+  width: 360px;
+}
+
+.explorar-recipes-page button {
+  background-color: #edac05;
+  border: none;
+  border-radius: 6px;
+  font-size: 24px;
+  height: 82px;
+  margin-top: 40px;
+  padding: 0;
+  width: 161px;
+}
+
+.explorar-ingredients-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.explorar-ingredients-page button {
+  background-color: black;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 18px;
+  height: 172px;
+  padding: 5px;
+  width: 161px;
+}
+
+.explorar-area-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 15px 0;
+}

@@ -1,0 +1,24 @@
+.perfil-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 640px;
+  width: 360px;
+}
+
+.perfil-page button {
+  background-color: #edac05;
+  border: none;
+  border-radius: 4px;
+  font-size: 25px;
+  height: 53px;
+  padding: 0;
+  width: 329px;
+}
+
+.perfil-page p {
+  color: white;
+  font-size: 30px;
+  margin: 20px 0 0;
+  text-align: center;
+}
