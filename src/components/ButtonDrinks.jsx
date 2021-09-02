@@ -9,7 +9,7 @@ function ButtonDrinks(props) {
   const handleClick = () => {
     setHistory.push(`/bebidas/${id}/in-progress`);
   };
-
+  // testando
   // useEffect(() => {
   //   const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
   //   if (recipe) {
