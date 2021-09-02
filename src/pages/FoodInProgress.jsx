@@ -153,7 +153,7 @@ function FoodInProgress() {
             className="button-details"
             type="button"
             data-testid="finish-recipe-btn"
-            disabled="true"
+            disabled
           >
             Finalizar Receita
           </button>

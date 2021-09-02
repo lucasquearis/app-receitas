@@ -33,6 +33,7 @@ function FoodDetails() {
         const request = await fetch(`${urlFoods}${id}`);
         const response = await request.json();
         const resolve = await response.meals[0];
+        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();

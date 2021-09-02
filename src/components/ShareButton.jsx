@@ -21,8 +21,8 @@ function ShareButton() {
         onClick={ () => handleShare() }
       >
         <img src={ shareIcon } alt="share-icon" />
-        { showMsg ? <p>Link copiado!</p> : undefined }
       </button>
+      { showMsg ? <span>Link copiado!</span> : undefined }
     </div>
   );
 }
