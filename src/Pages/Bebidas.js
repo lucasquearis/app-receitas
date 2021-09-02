@@ -40,14 +40,6 @@ export default function Bebidas() {
     const maxCategorias = 5;
     const botaoALL = { strCategory: 'All' };
     const results = await BebidasAPI.buscarCategorias('');
-<<<<<<< HEAD
-    console.log(results);
-=======
-
-    if (results[0].strCategory !== 'All') {
-      results.unshift(botaoALL);
-    }
->>>>>>> 1bf586a88ffc0075446acc345f2766e3055d0aca
     const myCategories = results.filter(
       (result, index) => index < maxCategorias,
     );
@@ -93,7 +85,12 @@ export default function Bebidas() {
       index < TWELVE
       && (
         <Link key={ receita.idDrink } to={ `/bebidas/${receita.idDrink}` }>
-          <Card key={ receita.idDrink } bebida={ receita } index={ index } />
+          <Card
+            key={ receita.idDrink }
+            bebida={ receita }
+            index={ index }
+            isFood={ false }
+          />
         </Link>
       )
     ))
@@ -121,7 +118,7 @@ export default function Bebidas() {
       </section>
       { (recipes && recipeType === 'bebida')
         ? renderRecipes(recipes) : renderRecipes(bebidas)}
-
+      {console.log(bebidas)}
       <Footer />
     </section>
   );
