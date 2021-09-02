@@ -60,14 +60,6 @@ function DrinkInProgess() {
     ]);
   }
 
-  // useEffect(() => {
-  //   const actualStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //   localStorage.setItem('inProgressRecipes', JSON.stringify({
-  //     ...actualStorage,
-  //     cocktails: [{ ...actualStorage.cocktails, [id]: [...checkedDrinkOptions] }],
-  //   }));
-  // }, [checkedDrinkOptions]);
-
   useEffect(() => {
     function checkButton() {
       const check = Object.keys(checkedDrinkOptions);

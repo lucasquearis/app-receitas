@@ -1,14 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Header from '../components/Header';
-import MyContext from '../context/MyContext';
 import share from '../images/shareIcon.svg';
 
 function DoneRecipes() {
-  const { localStorageItems } = useContext(MyContext);
   const [type, setType] = useState([]);
 
   const items = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -34,6 +32,9 @@ function DoneRecipes() {
   }
 
   function renderItems() {
+    if (items === null || items === undefined) {
+      return <div> Sem Receitas feitas </div>;
+    }
     return (
       <div id="cards">
         { items.filter((i) => i.type === type || i.doneDate.includes(type))
@@ -83,7 +84,6 @@ function DoneRecipes() {
               </Card.Body>
             </Card>
           ))}
-        { console.log(localStorageItems) }
       </div>
     );
   }

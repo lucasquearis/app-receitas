@@ -27,9 +27,9 @@ function Routes() {
       <Route exact path="/explorar/comidas/area" component={ ExploreArea } />
       <Route exact path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
       <Route exact path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
-      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
       <Route path="/bebidas/:id/in-progress" component={ DrinkInProgess } />
+      <Route path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/comidas/:id" component={ FoodDetails } />
       <Route path="/bebidas/:id" component={ DrinkDetails } />
       <Route exact path="/explorar" component={ Explore } />
@@ -40,8 +40,6 @@ function Routes() {
       <Route path="/explorar/comidas" component={ ExploreFoods } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route exact path="/perfil" component={ Perfil } />
-      <Route path="/receitas-feitas" component={ DoneRecipes } />
-      <Route path="/receitas-favoritas" component={ Perfil } />
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
     </Switch>
   );

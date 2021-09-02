@@ -12,7 +12,6 @@ function DrinkProvider({ children }) {
     fetchInicialDrinks().then(({ drinks }) => setDrinks(drinks));
     fetchDrinkCategories().then(({ drinks }) => setDrinksCategories(drinks));
   }, []);
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
 
   const context = {
     Drinks,
