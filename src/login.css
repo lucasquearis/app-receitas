@@ -1,0 +1,143 @@
+.login-button {
+  width: 100px;
+  border-radius: 15px;
+  font-weight: bold;
+  background-color: white;
+  color: rgb(202, 201, 201);
+  cursor: pointer;
+  margin-top: 5vh;
+  position: relative;
+  border: 2px solid black;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+/* Estilo do botão retirado da página: https://edrodrigues.com.br/blog/20-incriveis-botoes-animados-de-css-puro/ 
+  pertencente a Ed Rodrigues */
+
+.enable {
+  color: black;
+  border-color: green;
+}
+
+.enable:hover {
+  color: #000 !important;
+  background-color: transparent;
+  text-shadow: none;
+}
+
+.enable:hover:before {
+  bottom: 0%;
+  top: auto;
+  height: 100%;
+}
+
+.enable:before {
+  border-radius: 15px;
+  width: 100px;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 0px;
+  width: 100%;
+  z-index: -1;
+  content: '';
+  color: #000 !important;
+  background: green;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+.login-email {
+  background-color: green;
+  border: 3px solid green;
+  border-radius: 5px;
+  color: goldenrod;
+  font-family: sans-serif;
+  font-weight: bold;
+  width: 77vw;
+}
+
+.login-email:focus {
+  background-color: darkgreen;
+  border: 3px solid black;
+  border-radius: 5px;
+  outline: none;
+}
+
+.login-senha{
+  background-color: green;
+  border: 3px solid green;
+  border-radius: 5px;
+  color: goldenrod;
+  font-family: sans-serif;
+  font-weight: bold;
+  width: 77vw;
+}
+
+.login-senha:focus {
+  background-color: darkgreen;
+  border: 3px solid black;
+  border-radius: 5px;
+  outline: none;
+}
+
+.login-form {
+  text-align: center;
+  margin-top: 35vh;
+}
+
+.login-section { 
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  text-transform: uppercase;
+  background-image: url('./images/horaDoRango.png');
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 40px;
+}
+
+.texto-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.texto-senha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+
+
+
+a.animated-button.thar-one:hover:before {
+  bottom: 0%;
+  top: auto;
+  height: 100%;
+}
+a.animated-button.thar-one:before {
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 0px;
+  width: 100%;
+  z-index: -1;
+  content: '';
+  color: #000 !important;
+  background: #F7CA18;
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
