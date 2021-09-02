@@ -7,7 +7,7 @@ function Search({ ingredient }) {
   const [searchValue, setSearchValue] = useState('');
 
   const { API } = useContext(RecipesContext);
-  const { searchByFilters, pathname } = API;
+  const { searchByFilters } = API;
 
   function handleChange({ target }) {
     setSearchValue(target.value);
@@ -58,58 +58,61 @@ function Search({ ingredient }) {
   return (
     <div className="search-open">
       <div className="search-input">
-      <input
-        className="input-text"
-        type="search"
-        placeholder="Pesquisa"
-        data-testid="search-input"
-        onChange={ (e) => handleChange(e) }
-        value={ searchValue }
-      />
-      <div className="search-radio" onChange={ ({ target: { value } }) => change(value) }>
-        <label htmlFor="labelName">
-          <input
-            className="radio-btn"
-            type="radio"
-            name="radio"
-            value="search"
-            id="labelName"
-            data-testid="name-search-radio"
-          />
-          <span>Nome</span>
-        </label>
-        <label htmlFor="labelIngredient">
-          <input
-            className="radio-btn"
-            type="radio"
-            name="radio"
-            value="ingredient"
-            id="labelIngredient"
-            data-testid="ingredient-search-radio"
-          />
-          <span>Ingrediente</span>
-        </label>
-        <label htmlFor="labelFirst">
-          <input
-            className="radio-btn"
-            type="radio"
-            name="radio"
-            value="first"
-            id="labelFirst"
-            data-testid="first-letter-search-radio"
-          />
-          <span>Primeira letra</span>
-        </label>
-      </div>
-      <button
-        class="btn btn-success"
-        type="button"
-        id="exec"
-        data-testid="exec-search-btn"
-        onClick={ click }
-      >
-        Pesquisar
-      </button>
+        <input
+          className="input-text"
+          type="search"
+          placeholder="Pesquisa"
+          data-testid="search-input"
+          onChange={ (e) => handleChange(e) }
+          value={ searchValue }
+        />
+        <div
+          className="search-radio"
+          onChange={ ({ target: { value } }) => change(value) }
+        >
+          <label htmlFor="labelName">
+            <input
+              className="radio-btn"
+              type="radio"
+              name="radio"
+              value="search"
+              id="labelName"
+              data-testid="name-search-radio"
+            />
+            <span>Nome</span>
+          </label>
+          <label htmlFor="labelIngredient">
+            <input
+              className="radio-btn"
+              type="radio"
+              name="radio"
+              value="ingredient"
+              id="labelIngredient"
+              data-testid="ingredient-search-radio"
+            />
+            <span>Ingrediente</span>
+          </label>
+          <label htmlFor="labelFirst">
+            <input
+              className="radio-btn"
+              type="radio"
+              name="radio"
+              value="first"
+              id="labelFirst"
+              data-testid="first-letter-search-radio"
+            />
+            <span>Primeira letra</span>
+          </label>
+        </div>
+        <button
+          className="btn btn-success"
+          type="button"
+          id="exec"
+          data-testid="exec-search-btn"
+          onClick={ click }
+        >
+          Pesquisar
+        </button>
       </div>
     </div>
   );

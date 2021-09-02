@@ -43,7 +43,7 @@ function Categories() {
   return (
     <div className="categories">
       <button
-        class="btn btn-success"
+        className="btn btn-success"
         type="button"
         onClick={ (e) => select(e) }
         data-testid="All-category-filter"
@@ -52,7 +52,7 @@ function Categories() {
       </button>
       {list.map(({ strCategory }, i) => (
         <button
-          class="btn btn-success"
+          className="btn btn-success"
           key={ i }
           type="button"
           onClick={ (e) => select(e) }

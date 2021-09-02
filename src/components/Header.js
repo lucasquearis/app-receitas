@@ -24,7 +24,7 @@ class HeaderSearch extends React.Component {
               data-testid="profile-top-btn"
               src={ profileIcon }
               alt="imagem do link do perfil"
-              />
+            />
           </Link>
           <h1 data-testid="page-title">{title}</h1>
         </div>

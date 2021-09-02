@@ -40,7 +40,7 @@ function IngredientsExploreDrink() {
               />
             </Link>
           ))}
-        </div>
+      </div>
       <Footer />
     </div>
   );

@@ -38,10 +38,10 @@ function IngredientsExploreFood() {
                 index={ index }
                 src={ foodImage(ingredient) }
                 name={ ingredient }
-                />
+              />
             </Link>
           ))}
-        </div>
+      </div>
       <Footer />
     </div>
   );

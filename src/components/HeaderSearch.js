@@ -32,22 +32,22 @@ function HeaderSearch({ title }) {
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="imagem do link do perfil"
-            />
+          />
         </Link>
         <h1 data-testid="page-title">{title}</h1>
-          <button
-            class="btn btn-success"
-            type="button"
-            onClick={ handleSearch }
-            data-testid="search-top-btn"
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={ handleSearch }
+          data-testid="search-top-btn"
+          src={ searchIcon }
+          id="button"
+        >
+          <img
             src={ searchIcon }
-            id="button"
-            >
-            <img
-              src={ searchIcon }
-              alt="imagem do link de pesquisa"
-              />
-          </button>
+            alt="imagem do link de pesquisa"
+          />
+        </button>
         <div className="header-search">
           {(show) ? <Search ingredient={ ingredient } /> : null }
         </div>

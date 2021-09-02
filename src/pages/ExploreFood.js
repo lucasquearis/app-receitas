@@ -23,7 +23,11 @@ function ExploreFood() {
       <Header title="Explorar Comidas" />
       <div className="categories">
         <Link to="/explorar/comidas/ingredientes">
-          <button className="btn btn-success" type="button" data-testid="explore-by-ingredient">
+          <button
+            className="btn btn-success"
+            type="button"
+            data-testid="explore-by-ingredient"
+          >
             Por Ingredientes
           </button>
         </Link>
@@ -41,7 +45,7 @@ function ExploreFood() {
           Me Surpreenda!
         </button>
         <Footer />
-        </div>
+      </div>
     </div>
   );
 }

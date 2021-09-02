@@ -27,7 +27,7 @@ function ExploreDrink() {
             className="btn btn-success"
             type="button"
             data-testid="explore-by-ingredient"
-            >
+          >
             Por Ingredientes
           </button>
         </Link>
@@ -36,7 +36,7 @@ function ExploreDrink() {
           type="button"
           data-testid="explore-surprise"
           onClick={ handleClick }
-          >
+        >
           Me Surpreenda!
         </button>
       </div>
