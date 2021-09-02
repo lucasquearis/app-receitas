@@ -58,6 +58,10 @@ class DetailsFood extends Component {
                   <h1 data-testid="recipe-title">{ strMeal }</h1>
                   <h2 data-testid="recipe-category">{ strCategory }</h2>
                 </div>
+                <div className="buttons">
+                  <ShareButton />
+                  <FavoriteButton />
+                </div>
                 <Ingredients />
                 <Instructions />
                 <Video />
@@ -70,8 +74,6 @@ class DetailsFood extends Component {
                 >
                   Iniciar Receita
                 </button>
-                <ShareButton />
-                <FavoriteButton />
               </div>
             ))
           }

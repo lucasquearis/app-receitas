@@ -48,10 +48,10 @@ class DetailsDrink extends Component {
                 <div key={ index }>
                   <div>
                     <img
+                      className="img-details"
                       data-testid="recipe-photo"
                       src={ strDrinkThumb }
                       alt="foto"
-                      width="600 px"
                     />
                   </div>
                   <div>
@@ -60,6 +60,10 @@ class DetailsDrink extends Component {
                       { strCategory }
                       { strAlcoholic }
                     </h2>
+                  </div>
+                  <div className="buttons">
+                    <ShareButton />
+                    <FavoriteButton />
                   </div>
                   <IngredientsDrink />
                   <Instructions />
@@ -72,8 +76,6 @@ class DetailsDrink extends Component {
                   >
                     Iniciar Receita
                   </button>
-                  <ShareButton />
-                  <FavoriteButton />
                 </div>
               ),
             )

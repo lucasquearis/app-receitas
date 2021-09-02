@@ -1,4 +1,14 @@
+.img-details {
+  border-radius: 4px;
+  width: 50%;
+}
+
 .start-recipe-button {
   bottom: 0;
   position: fixed;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
 }
