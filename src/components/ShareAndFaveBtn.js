@@ -7,14 +7,12 @@ function favoriteRecipes(addOrRemove, setAddOrRemove, recipe, pathname) {
   if (!addOrRemove) {
     favoriteRecipesStorage.push({
       id: recipe.idMeal || recipe.idDrink,
-      type: pathname.includes('comidas') ? 'meal' : 'drink',
+      type: pathname.includes('comidas') ? 'comida' : 'bebida',
       area: recipe.strArea || '',
       category: recipe.strCategory || '',
-      alchoolicOrNot: recipe.strAlcoholic || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
       name: recipe.strMeal || recipe.strDrink,
       image: recipe.strMealThumb || recipe.strDrinkThumb,
-      doneDate: 0,
-      tags: 0,
     });
   } else {
     favoriteRecipesStorage = favoriteRecipesStorage

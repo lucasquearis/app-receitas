@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import RecomendationCard from '../components/RecomendationCard';
 import genericFetchAPI from '../services/genericFetchAPI';
 import ShareAndFavBtn from '../components/ShareAndFaveBtn';
+import StartRecipeBtn from '../components/StartRecipeBtn';
 
 function getIngredients(
   recipe, setIngredientName, setIngredientMeasure,
@@ -81,20 +82,7 @@ function RecipeDetail() {
         <YoutubeEmbed videoId={ recipe.strYoutube.substring(youtubeId) } />) : null}
       <h4>Recomendadas</h4>
       <RecomendationCard type={ pathname.includes('comidas') ? 'drinks' : 'meals' } />
-      <Link to={ `${pathname}/in-progress` }>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          style={ {
-            position: 'fixed',
-            bottom: '0',
-            marginLeft: '45vw',
-            marginRight: '45vw',
-          } }
-        >
-          Iniciar Receita
-        </button>
-      </Link>
+      { recipe && <StartRecipeBtn recipe={ recipe } pathname={ pathname } />}
     </section>
   ) : <p>Loading</p>;
 }
