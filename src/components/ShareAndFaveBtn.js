@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 
 function favoriteRecipes(addOrRemove, setAddOrRemove, recipe, pathname) {
   let favoriteRecipesStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -37,13 +40,17 @@ function ShareAndFavBtn({ recipe }) {
     <section>
       <button
         data-testid="share-btn"
+        src={ shareIcon }
         type="button"
         onClick={ () => {
           navigator.clipboard.writeText(window.location.href);
           setCopyOk(true);
         } }
       >
-        Share
+        <img
+          src={ shareIcon }
+          alt="shareBtn"
+        />
       </button>
       <button
         data-testid="favorite-btn"
@@ -51,10 +58,12 @@ function ShareAndFavBtn({ recipe }) {
         onClick={ () => favoriteRecipes(
           addOrRemoveFav, setAddOrRemoveFav, recipe, pathname,
         ) }
-        src={ addOrRemoveFav
-          ? '../images/blackHeartIcon.svg' : '../images/whiteHeartIcon.svg' }
       >
-        Favorite
+        <img
+          src={ addOrRemoveFav
+            ? blackHeartIcon : whiteHeartIcon }
+          alt="favoriteBtn"
+        />
       </button>
       { copyOk ? <p>Link copiado!</p> : null}
     </section>
