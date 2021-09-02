@@ -50,7 +50,9 @@ export default function Drinks() {
   };
 
   return (
-    <section>
+    <section
+      className="body"
+    >
       <Header
         onClickShowInput={ () => setShowSearchBar((prevShow) => !prevShow) }
         pageTitle="Bebidas"

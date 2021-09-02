@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function CardItems({ title, thumb, index, type, onClick }) {
   return (
     <Card
+      className="border m-3"
       onClick={ onClick }
       data-testid={ `${index}-${type}-card` }
     >
@@ -13,12 +14,13 @@ export default function CardItems({ title, thumb, index, type, onClick }) {
         src={ thumb }
         alt={ title }
       />
-      <Card.Body>
-        <Card.Title
+      <Card.Body className="bg-color">
+        <Card.Text
+          className="h5 bg-color"
           data-testid={ `${index}-card-name` }
         >
           { title }
-        </Card.Title>
+        </Card.Text>
       </Card.Body>
     </Card>
   );

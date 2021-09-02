@@ -46,7 +46,7 @@ export default function ExploreOrigin() {
   };
 
   return (
-    <section>
+    <section className="body">
       <Header
         onClickShowInput={ () => setShowSearchBar((prevShow) => !prevShow) }
         pageTitle="Explorar Origem"

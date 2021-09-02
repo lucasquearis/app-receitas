@@ -4,19 +4,22 @@ import PropTypes from 'prop-types';
 
 export default function Categories({ categories, onClick }) {
   return (
-    <section>
-      {
-        categories.map(({ strCategory }, index) => (
-          <Button
-            key={ index + 1 }
-            variant="light"
-            data-testid={ `${strCategory}-category-filter` }
-            onClick={ () => onClick(strCategory) }
-          >
-            { strCategory }
-          </Button>
-        ))
-      }
+    <section className="container mt-2">
+      <div className="row-cols-3">
+        {
+          categories.map(({ strCategory }, index) => (
+            <Button
+              className="col border"
+              variant="light"
+              key={ index + 1 }
+              data-testid={ `${strCategory}-category-filter` }
+              onClick={ () => onClick(strCategory) }
+            >
+              { strCategory }
+            </Button>
+          ))
+        }
+      </div>
     </section>
   );
 }
