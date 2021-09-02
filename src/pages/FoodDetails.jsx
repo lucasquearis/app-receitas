@@ -39,7 +39,6 @@ function FoodDetails() {
         const request = await fetch(`${urlFoods}${id}`);
         const response = await request.json();
         const resolve = await response.meals[0];
-        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
@@ -52,7 +51,8 @@ function FoodDetails() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const favorites = () => {
+  const favorited = () => {
+    setfavorite(!favorite);
     const recipes = {
       id,
       type: 'comida',
@@ -63,13 +63,40 @@ function FoodDetails() {
       image: getRecipe.strMealThumb,
     };
     setLocalStorageItems([...localStorageItems, recipes]);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (storage === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+      return;
+    } if (storage.some((favoriteItem) => favoriteItem.id === recipes.id)) {
+      return;
+    } if (!favorite) {
+      storage.push(recipes);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(storage));
+    } else {
+      const storaged = storage.filter((favoriteItem) => favoriteItem.id !== recipes.id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(storaged));
+    }
   };
+
+  // const favorites = () => {
+  //   const recipes = {
+  //     id,
+  //     type: 'comida',
+  //     area: getRecipe.strArea,
+  //     category: getRecipe.strCategory,
+  //     alcoholicOrNot: '',
+  //     name: getRecipe.strMeal,
+  //     image: getRecipe.strMealThumb,
+  //   };
+  //   setLocalStorageItems([...localStorageItems, recipes]);
+
+  //   if (favorite ? localStorage.removeItem('favoriteRecipes') && setfavorite(false) : localStorage.setItem('favoriteRecipes', JSON.stringify([recipes])) && setfavorite(true));
+  // };
 
   useEffect(() => {
     const heart = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (heart) {
-      const yes = heart.find((favorited) => favorited.id === id);
+      const yes = heart.find((i) => i.id === id);
       if (yes) setfavorite(true);
     }
   }, [id]);
@@ -91,10 +118,13 @@ function FoodDetails() {
           <button
             type="button"
             data-testid="favorite-btn"
-            onClick={ favorites }
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
+            onClick={ favorited }
           >
-            <img src={ favorite ? blackHeartIcon : whiteHeartIcon } alt="botão de favorito" />
+            <img
+              data-testid="favorite-btn"
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt="botão de favorito"
+            />
           </button>
         </div>
         <p data-testid="recipe-category">{ getRecipe.strCategory }</p>

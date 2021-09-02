@@ -93,7 +93,10 @@ function DrinkDetails() {
             onClick={ favorites }
             src={ favorite ? blackHeartIcon : whiteHeartIcon }
           >
-            <img src={ favorite ? blackHeartIcon : whiteHeartIcon } alt="botão de favorito" />
+            <img
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt="botão de favorito"
+            />
           </button>
         </div>
         <p data-testid="recipe-category">
