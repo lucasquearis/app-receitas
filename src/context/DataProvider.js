@@ -66,7 +66,6 @@ export default function DataProvider({ children }) {
     const { meals } = await getIngredients('food');
     const { drinks } = await getIngredients('drinks');
     // !Está dando problema de funções repetidas
-    // eslint-disable-next-line sonarjs/no-identical-functions
     setIngredients((prevCategories) => ({
       ...prevCategories,
       food: meals,
