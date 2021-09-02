@@ -66,11 +66,13 @@ function Header(props) {
 Header.propTypes = {
   titulo: PropTypes.string.isRequired,
   showProfileIcon: PropTypes.string,
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.string,
 };
 
 Header.defaultProps = {
   showProfileIcon: <p>Sem valor</p>,
+  pathname: <p>Sem valor</p>,
+
 };
 
 export default Header;
