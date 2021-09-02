@@ -42,9 +42,15 @@
 }
 
 footer {
-  background-color: lightblue;
+  background-color: rgb(230, 133, 23);
   padding: 10px;
   width: 100%;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+
 }
 
 .explore-container {
