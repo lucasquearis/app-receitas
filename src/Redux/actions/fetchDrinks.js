@@ -18,7 +18,7 @@ const getDrinksError = (error) => ({
   payload: error,
 });
 
-const fetchDrinks = () => async (dispatch) => {
+export const fetchDrinks = () => async (dispatch) => {
   dispatch(getDrinks());
   const endPoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(endPoint);
@@ -31,4 +31,18 @@ const fetchDrinks = () => async (dispatch) => {
   }
 };
 
-export default fetchDrinks;
+export const fetchDrinksByName = (text) => async (dispatch) => {
+  dispatch(getDrinks());
+  const endPoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`;
+  const response = await fetch(endPoint);
+  const json = await response.json();
+  if (json.drinks === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  } else {
+    try {
+      dispatch(getDrinksSuccess(json.drinks));
+    } catch (error) {
+      dispatch(getDrinksError(error));
+    }
+  }
+};

@@ -18,7 +18,7 @@ const getMealsError = (error) => ({
   payload: error,
 });
 
-const fetchMeals = () => async (dispatch) => {
+export const fetchMeals = () => async (dispatch) => {
   dispatch(getMeals());
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(endPoint);
@@ -31,4 +31,18 @@ const fetchMeals = () => async (dispatch) => {
   }
 };
 
-export default fetchMeals;
+export const fetchMealsByName = (text) => async (dispatch) => {
+  dispatch(getMeals());
+  const endPoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
+  const response = await fetch(endPoint);
+  const json = await response.json();
+  if (json.meals === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  } else {
+    try {
+      dispatch(getMealsSuccess(json.meals));
+    } catch (error) {
+      dispatch(getMealsError(error));
+    }
+  }
+};

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import fetchDrinks from '../../Redux/actions/fetchDrinks';
+import { fetchDrinks } from '../../Redux/actions/fetchDrinks';
 import fetchDrinksByCategory from '../../Redux/actions/fetchDrinksByCategory';
 import fetchDrinksCategories from '../../Redux/actions/fetchDrinksCategories';
 import CategoriesFilter from '../../components/CategoriesFilter';
