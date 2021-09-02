@@ -59,7 +59,6 @@ function App() {
         />
         <Route exact path="/perfil" component={ Perfil } />
         <Route exact path="/" component={ Login } />
-
         <Route path="/perfil" component={ Perfil } />
         <Route exact path="/explorar" component={ Explorar } />
         <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
@@ -68,9 +67,6 @@ function App() {
         <Route path="/explorar/bebidas/ingredientes" component={ DrinksIngredients } />
         <Route path="/explorar/comidas/area" component={ AreaFood } />
         <Route path="/explorar/bebidas/area" component={ AreaDrink } />
-
-
-
       </Switch>
     </div>
   );
