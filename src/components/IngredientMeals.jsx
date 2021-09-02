@@ -19,8 +19,10 @@ export default function IngredientMeals() {
         <div
           key={ item }
           data-testid={ `${index}-ingredient-card` }
+          className="ingredient"
+
         >
-          <div>
+          <div className="bodyIngredient">
             <img
               src={ `https://www.themealdb.com/images/ingredients/${item}.png` }
               alt="imagem"

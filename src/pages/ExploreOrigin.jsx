@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
+import { Form } from 'react-bootstrap';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fetchMeals } from '../services/fechRecipes';
+import '../App.css';
 
 export default function ExploreOrigin() {
   const [filterAllIngredients, setfilterAllIngredients] = useState([]);
@@ -44,38 +46,37 @@ export default function ExploreOrigin() {
     return (<Redirect to={ `/comidas/${idLink}` } />);
   }
   return (
-    <div>
+    <div className="bodyDiv">
       <Header title="Explorar Origem" />
-      <div>
-        <label htmlFor="area">
-          <select
-            data-testid="explore-by-area-dropdown"
-            name="area"
-            id="area"
-            onChange={ handle }
-          >
-            {
-              filterAllIngredients ? filterAllIngredients.slice(0, max).map((item) => (
+      <div className="labelExplore">
+        <Form.Control
+          as="select"
+          data-testid="explore-by-area-dropdown"
+          custom
+          onChange={ handle }
+        >
+          {
+            filterAllIngredients ? filterAllIngredients.slice(0, max)
+              .map((item, index) => (
                 <option
                   key={ item }
                   data-testid={ `${item}-option` }
-                  value={ item }
+                  value={ index + 1 }
                 >
                   {item}
                 </option>
               )) : (null)
-            }
-            <option
-              value=""
-              data-testid="All-option"
-              onClick={ resetFilter }
-            >
-              ALL
-            </option>
-          </select>
-        </label>
+          }
+          <option
+            value=""
+            data-testid="All-option"
+            onClick={ resetFilter }
+          >
+            ALL
+          </option>
+        </Form.Control>
       </div>
-      <div>
+      <div className="bodyCardExplorer">
         {
           inputSelect ? (
             meals.filter((item) => item.strArea === inputSelect)
@@ -86,6 +87,7 @@ export default function ExploreOrigin() {
                     key={ item.idMeal }
                     onClickCapture={ goLink }
                     id={ item.idMeal }
+                    className="cardExplore"
                   >
                     <div>
                       <img
@@ -110,6 +112,7 @@ export default function ExploreOrigin() {
               key={ item.idMeal }
               onClickCapture={ goLink }
               id={ item.idMeal }
+              className="cardExplore"
             >
               <div>
                 <img

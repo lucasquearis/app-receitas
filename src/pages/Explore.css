@@ -1,0 +1,28 @@
+.bodyDiv {
+  width: 280px;
+  background-color: #070707c2;
+  color: rgb(113, 182, 243);
+}
+
+.cardExplore {
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ff7f07 ;
+  display: inline-flex;
+  margin: 0px 8px 15px 0px;
+  width: 130px;
+}
+
+.cardExplore p {
+  font-size: medium;
+  font-weight: 700;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.bodyCardExplorer {
+  margin-bottom: 55px;
+}
+
+.option {
+  background-color: rgb(238, 255, 0);
+}
