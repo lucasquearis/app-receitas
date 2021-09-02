@@ -40,14 +40,14 @@ export default function RecipesDone() {
     if (!storage) localStorage.setItem('doneRecipes', JSON.stringify(recipesDone));
     else setRecipesDone(storage);
     setIsLoading(false);
-  }, [recipesDone, setRecipesDone]);
+  }, []);
 
   function recipesChecker() {
     if (!recipesDone.length) return <NoRecipesDone />;
     return recipesDone.map(
       (recipe, index) => (recipe.type === 'comida'
         ? <RenderFood key={ index } index={ index } recipe={ recipe } />
-        : <RenderDrink index={ index } recipe={ recipe } />),
+        : <RenderDrink key={ index } index={ index } recipe={ recipe } />),
     );
   }
 

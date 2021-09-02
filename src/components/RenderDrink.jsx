@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
 function RenderDrink({ recipe, index }) {
+  const [copied, setCopied] = useState(false);
   return (
     <section key={ recipe.name }>
       <img
@@ -15,12 +17,17 @@ function RenderDrink({ recipe, index }) {
       <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
       <button
         type="button"
+        onClick={ () => {
+          copy(`http://localhost:3000/comidas/${recipe.id}`);
+          setCopied(true);
+        } }
       >
         <img
           data-testid={ `${index}-horizontal-share-btn` }
           alt="ícone de compartilhar"
           src={ shareIcon }
         />
+        { copied ? <p>Link copiado!</p> : null }
       </button>
     </section>
   );
@@ -28,7 +35,7 @@ function RenderDrink({ recipe, index }) {
 
 RenderDrink.propTypes = {
   recipe: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     type: PropTypes.string,
     area: PropTypes.string,
     category: PropTypes.string,
