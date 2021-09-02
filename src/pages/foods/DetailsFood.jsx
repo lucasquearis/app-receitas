@@ -6,6 +6,7 @@ import './detailsFood.css';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Video from './Video';
 import StartRecipeButton from '../../components/StartRecipeButton';
+import Loading from '../../components/Loading';
 
 function DetailsFood({ match: { params: { id } } }) {
   const [state, setState] = useState({
@@ -62,7 +63,7 @@ function DetailsFood({ match: { params: { id } } }) {
 
   useEffect(initialUpdate);
 
-  if (isLoading) return <div>Carregando...</div>;
+  if (isLoading) return <Loading />;
 
   const keysFoods = Object.keys(food);
 
@@ -81,13 +82,15 @@ function DetailsFood({ match: { params: { id } } }) {
       />
       <section className="food-title-container">
         <h1 data-testid="recipe-title">{food.strMeal}</h1>
-        <FavoriteAndShare
-          id={ id }
-          recipe={ food }
-          isFood
-        />
+        <div>
+          <FavoriteAndShare
+            id={ id }
+            recipe={ food }
+            isFood
+          />
+        </div>
       </section>
-      <p data-testid="recipe-category">{food.strCategory}</p>
+      <p className="subtitle" data-testid="recipe-category">{food.strCategory}</p>
       <ul className="food-ingredients">
         {keysIngredients.map((key, index) => (
           <li
@@ -98,7 +101,7 @@ function DetailsFood({ match: { params: { id } } }) {
           </li>
         ))}
       </ul>
-      <p data-testid="instructions">{food.strInstructions}</p>
+      <p className="instructions" data-testid="instructions">{food.strInstructions}</p>
       <Video
         src={ food.strYoutube }
       />
