@@ -80,13 +80,13 @@
 }
 
 .profile-btn {
-  height: 10vh;
-  width: 100%;
   background-color: #ef6a07;
   border-color: #ef6a07;
   border-radius: 5px;
   color: white;
   margin: 2vh 0;
+  height: 10vh;
+  width: 100%;
 }
 
 .meals > .logo {
