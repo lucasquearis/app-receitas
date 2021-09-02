@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './pageCSS/DrinkRecipeDetails.css';
-import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
 
 export default function DrinkRecipeDetails(props) {
   const { match: { params: { id } } } = props;
@@ -41,38 +39,7 @@ export default function DrinkRecipeDetails(props) {
     setFavoriteRecipe(verifyFavorite);
   }, [id, favoriteRecipe]);
 
-  const handleFavButton = (alcoholicOrNot, name, image, category = '') => {
-    const parseLocalStorage = JSON
-      .parse(localStorage
-        .getItem('favoriteRecipes')) || [];
-    const verifyFavorite = parseLocalStorage.some((item) => item.id === id);
-    setFavoriteRecipe(verifyFavorite);
-    if (!favoriteRecipe) {
-      const defaultRecipe = {
-        id,
-        type: 'bebida',
-        area: '',
-        category,
-        alcoholicOrNot,
-        name,
-        image,
-      };
-      setFavoriteRecipe(true);
-      console.log('Favoritou');
-      localStorage
-        .setItem('favoriteRecipes', JSON
-          .stringify([...parseLocalStorage, defaultRecipe]));
-    } else {
-      const removeFavorite = parseLocalStorage.filter((recipe) => recipe.id !== id);
-      localStorage
-        .setItem('favoriteRecipes', JSON
-          .stringify([...removeFavorite]));
-      setFavoriteRecipe(false);
-      console.log('Desfavoritou');
-    }
-  };
-
-  if (resultDrinkRecipe.length > 0) {
+  if (resultDrinkRecipe && (resultDrinkRecipe.length > 0)) {
     const {
       strDrink,
       strDrinkThumb,
@@ -93,40 +60,23 @@ export default function DrinkRecipeDetails(props) {
           src={ strDrinkThumb }
           alt={ strDrink }
         />
-        <div className="recipe-details__category-name-div">
-          <span><b>Álcool: </b></span>
-          <span data-testid="recipe-category">{strAlcoholic}</span>
-        </div>
-        <div className="recipe-details__share-and-favorite-btn-div">
-          <button
-            className="favorite-btn"
-            type="button"
-            onClick={
-              () => handleFavButton(strAlcoholic, strDrink, strDrinkThumb, strCategory)
-            }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
-              alt="icone favorito"
-            />
-          </button>
-          <button
-            data-testid="share-btn"
-            className="share-btn"
-            onClick={ () => {
-              copy(`http://localhost:3000/bebidas/${id}`);
-              setLinkShare(true);
-            } }
-            type="button"
-          >
-            <img
-              src={ shareIcon }
-              alt="imagem de compartilhar"
-            />
-          </button>
-        </div>
+        <ShareButton
+          id={ id }
+          setLinkShare={ setLinkShare }
+          type="bebidas"
+        />
         { linkShare && 'Link copiado!' }
+        <FavoriteButton
+          id={ id }
+          type="bebida"
+          category={ strCategory }
+          alcoholicOrNot={ strAlcoholic }
+          name={ strDrink }
+          image={ strDrinkThumb }
+          favoriteRecipe={ favoriteRecipe }
+          setFavoriteRecipe={ setFavoriteRecipe }
+        />
+        <p data-testid="recipe-category">{strAlcoholic}</p>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultDrinkRecipe[0][ingredient]) {
@@ -163,8 +113,9 @@ export default function DrinkRecipeDetails(props) {
       </div>
     );
   }
-
-  return (<Loading />);
+  return (
+    <Loading />
+  );
 }
 
 DrinkRecipeDetails.propTypes = {

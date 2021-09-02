@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import Header from '../components/Header';
 import MyContext from '../context';
-import Card from '../components/Card';
 import Categories from '../components/Categories';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import searchDrinksByIngredient
@@ -51,21 +50,28 @@ export default function Drinks() {
     }
     if (!resultList) {
       return (
-        feed.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
-          <Card
-            key={ idDrink }
-            idType={ idDrink }
-            id={ index }
-            strThumb={ strDrinkThumb }
-            str={ strDrink }
-          />
+        feed.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+          <Link key={ idDrink } to={ `bebidas/${idDrink}` }>
+            <div
+              data-testid={ `${index}-recipe-card` }
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ strDrinkThumb }
+                alt={ strDrink }
+              />
+              <h2
+                data-testid={ `${index}-card-name` }
+              >
+                {strDrink}
+              </h2>
+            </div>
+          </Link>
         ))
       );
-    } if (resultList.length === 1) {
-      return <Redirect to={ `/bebidas/${resultList[0].idDrink}` } />;
     }
-    if (resultList.length === null) {
-      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    if (resultList.length === 1) {
+      return <Redirect to={ `/bebidas/${resultList[0].idDrink}` } />;
     }
     return (
       <ul>
@@ -73,7 +79,7 @@ export default function Drinks() {
           const MAX_ITENS = 12;
           if (index < MAX_ITENS) {
             return (
-              <Link key={ item.idDrink } to={ `bebidas/${item.idDrink}` }>
+              <Link key={ item.idDrink } to={ `bebidas${item.idDrink}` }>
                 <li
                   data-testid={ `${index}-recipe-card` }
                 >

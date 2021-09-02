@@ -8,6 +8,9 @@ export default function Provider({ children }) {
   const [feedDataFilter, setFeedDataFilter] = useState([]);
   const [search, setSearch] = useState(false);
   const [selectedIngredient, setSelectedIngredient] = useState('');
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
+  const [resultAPIMeals, setResultAPIMeals] = useState([]);
+  const [resultAPIDrinks, setResultAPIDrinks] = useState([]);
 
   const context = {
     setSearchBarResult,
@@ -20,6 +23,12 @@ export default function Provider({ children }) {
     setSearch,
     selectedIngredient,
     setSelectedIngredient,
+    checkedIngredients,
+    setCheckedIngredients,
+    resultAPIMeals,
+    setResultAPIMeals,
+    resultAPIDrinks,
+    setResultAPIDrinks,
   };
 
   return (

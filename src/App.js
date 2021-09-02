@@ -5,7 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Provider from './context/MyContextProvider';
 import DoneRecipes from './pages/DoneRecipes';
-import DrinkProcess from './pages/DrinkProcess';
+import DrinkProgress from './pages/DrinkProgress';
 import DrinkRecipeDetails from './pages/DrinkRecipeDetails';
 import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
@@ -16,13 +16,12 @@ import ExploreMealsByIngredient from './pages/ExploreMealsByIngredient';
 import ExploreMealsByOrigin from './pages/ExploreMealsByOrigin';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Login from './pages/Login';
-import MealProcess from './pages/MealProcess';
+import MealProgress from './pages/MealProgress';
 import MealRecipeDetails from './pages/MealRecipeDetails';
 import Meals from './pages/Meals';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 
-// prettier-ignore
 function App() {
   return (
     <Provider>
@@ -32,8 +31,8 @@ function App() {
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path="/comidas/:id" component={ MealRecipeDetails } />
         <Route exact path="/bebidas/:id" component={ DrinkRecipeDetails } />
-        <Route path="/comidas/:id/in-progress" component={ MealProcess } />
-        <Route path="/bebidas/:id/in-progress" component={ DrinkProcess } />
+        <Route path="/comidas/:id/in-progress" component={ MealProgress } />
+        <Route path="/bebidas/:id/in-progress" component={ DrinkProgress } />
         <Route exact path="/explorar" component={ Explore } />
         <Route exact path="/explorar/comidas" component={ ExploreMeals } />
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
