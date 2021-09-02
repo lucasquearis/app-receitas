@@ -7,14 +7,12 @@ import FoodsCard from './FoodsCard';
 
 function CategoryFoodButtons() {
   const doze = 12;
-<<<<<<< HEAD
   const cinco = 5;
-  const categories = useSelector((state) => state.reducerCategories.categories.meals);
-=======
   const categories = useSelector(
     (state) => state.reducerCategories.categories
       .meals,
   );
+
   const {
     foodIngredientClick,
     foodIngredientSelected,
@@ -23,7 +21,7 @@ function CategoryFoodButtons() {
     removeDisplayList,
     setFoodIngredientSelected,
   } = useContext(myContext);
->>>>>>> 048988cd921b482ecca20ff704e5cf8a5d362440
+
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
   const [showInput, setShowInput] = useState(true);

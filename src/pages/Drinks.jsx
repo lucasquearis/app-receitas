@@ -35,11 +35,6 @@ function Drinks(props) {
         dataId="search-top-btn"
         className="img-search"
       />
-<<<<<<< HEAD
-
-      <CategoryDrinkButtons />
-=======
->>>>>>> 048988cd921b482ecca20ff704e5cf8a5d362440
 
       <CategoryDrinkButtons />
       <main>
