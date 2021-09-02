@@ -21,6 +21,14 @@ function Categories({
     drink: 'procuraBebida',
   };
 
+  // const changeBtnColor = (rightButton) => {
+  //   const buttonList = document.getElementsByClassName('btnCategorias');
+  //   console.log(buttonList);
+  //   buttonList[].classList.add('btnClicked');
+  //   rightButton.classList.add('btnClicked');
+  //   console.log(buttonList);
+  // };
+
   const handleCategoryButton = async ({ target }) => {
     setFilterByIng(null);
     setLoading(true);
@@ -30,16 +38,21 @@ function Categories({
       : await fetchFoods(type, action, value);
     callback(result);
     setLoading(false);
-    toggleCallback(value);
-    target.classList.add('abc');
-    console.log(target.classList);
+    const toggleValue = value === toggle ? 'All' : value;
+    toggleCallback(toggleValue);
+    // changeBtnColor(target);
   };
 
+  console.log(toggle);
   return (
     <aside className="categoryContainer">
       <nav className="categoryButtons">
         <Button
-          className="btnCategorias"
+          className={
+            toggle === 'All'
+              ? 'btnCategorias btnClicked'
+              : 'btnCategorias'
+          }
           data-testid="All-category-filter"
           onClick={ handleCategoryButton }
         >
@@ -49,7 +62,11 @@ function Categories({
           list.map((item, index) => index > MAXIMUM_INDEX
           || (
             <Button
-              className="btnCategorias"
+              className={
+                toggle !== item.strCategory
+                  ? 'btnCategorias'
+                  : 'btnCategorias btnClicked'
+              }
               data-testid={ `${item.strCategory}-category-filter` }
               key={ index }
               onClick={ handleCategoryButton }

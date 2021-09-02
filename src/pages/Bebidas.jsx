@@ -12,7 +12,7 @@ function Bebidas() {
   const [drinkData, setDrinkData] = useState({});
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [drink, loading, categories, setLoading] = HookBebidas();
-  const [toggleCategory, setToggleCategory] = useState('');
+  const [toggleCategory, setToggleCategory] = useState('All');
 
   useEffect(() => {
     setDrinkData({

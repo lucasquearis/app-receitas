@@ -12,7 +12,7 @@ function Comidas() {
   const [foodData, setFoodData] = useState({});
   const [foodCategories, setFoodCategories] = useState([]);
   const [food, loading, categories, setLoading] = HookComidas();
-  const [toggleCategory, setToggleCategory] = useState('');
+  const [toggleCategory, setToggleCategory] = useState('All');
 
   useEffect(() => {
     setFoodData({
