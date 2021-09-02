@@ -1,12 +1,30 @@
+body {
+  background-color: rgba(255, 187, 51, 0.144);
+  color: #350;
+  font-family: Poppins , sans-serif;
+}
+
 .container-header {
   align-items: center;
-  background-color: turquoise;
+  background-color: #f71;
   display: flex;
-  justify-content: space-between;
+  height: 45px;
+  justify-content: space-around;
 }
 
 .btn-search {
   background-color: transparent;
   border: none;
   height: 100%;
+}
+
+.header-title {
+  font-family: Rochester , cursive;
+  font-size: 30px;
+}
+
+.logo-folha {
+  margin-left: -2px;
+  transform: rotate(-45deg);
+  width: 30px;
 }

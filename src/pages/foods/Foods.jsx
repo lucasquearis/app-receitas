@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import FoodRecipeCards from './FoodRecipeCards';
 import FiltersRecipesFoods from './FiltersRecipesFoods';
+import Loading from '../../components/Loading';
+import './foods.css';
 
 function Foods({ setRecipes, isFetching, selectIngredient, changeIngredient }) {
   const [isMount, setIsMount] = useState(false);
@@ -27,7 +29,7 @@ function Foods({ setRecipes, isFetching, selectIngredient, changeIngredient }) {
       <Header title="Comidas" showButton foodPage />
       <FiltersRecipesFoods />
       {isFetching
-        ? <div>Carregando ...</div>
+        ? <Loading />
         : <FoodRecipeCards />}
       <Footer />
     </>

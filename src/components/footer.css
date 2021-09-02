@@ -1,8 +1,10 @@
 .footer {
-  background-color: turquoise;
+  align-items: center;
+  background-color: #f71;
   bottom: 0;
   display: flex;
-  justify-content: space-between;
+  height: 50px;
+  justify-content: space-around;
   position: fixed;
   width: 100%;
 }
