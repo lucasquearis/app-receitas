@@ -95,10 +95,10 @@ class DrinkscheckIngredients extends Component {
       <ul>
         {
           ingredients.map((ingredient, index) => (
-            <h2
+            <h3
               id="check"
               key={ index }
-              data-testid={ `${index} ingredient-step` }
+              data-testid={ `${index}-ingredient-step` }
               className="itenLits"
             >
               <input
@@ -113,7 +113,7 @@ class DrinkscheckIngredients extends Component {
                 `${Object.keys(ingredient)[0]}:
                 ${Object.values(ingredient)[0]}`
               }
-            </h2>
+            </h3>
           ))
         }
       </ul>

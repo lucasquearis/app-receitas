@@ -93,7 +93,7 @@ class Ingredients extends Component {
       <div>
         {
           ingredients.map((ingredient, index) => (
-            <h2
+            <h3
               id="iten"
               key={ index }
               value={ `${Object.keys(ingredient)[0]}` }
@@ -113,7 +113,7 @@ class Ingredients extends Component {
                 `${Object.keys(ingredient)[0]}: 
                 ${Object.values(ingredient)[0]}`
               }
-            </h2>
+            </h3>
           ))
         }
       </div>

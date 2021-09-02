@@ -1,6 +1,6 @@
 .img-details {
   border-radius: 4px;
-  width: 600px;
+  width: 80%;
 }
 
 .share-fill {
@@ -19,4 +19,9 @@
 
 .complete {
   text-decoration: line-through;
+  font-size: small;
+}
+
+.itenLits {
+  font-size: small;
 }
