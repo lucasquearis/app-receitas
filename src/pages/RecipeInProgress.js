@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import FoodContext from '../context/FoodContext';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -16,25 +15,105 @@ const RecipeInProgress = () => {
   const history = useHistory();
   const { pathname } = history.location;
   const pathnameSeparate = pathname.split('/');
-  const actualPath = pathnameSeparate[2];
+  const id = pathnameSeparate[2];
 
-  const { foodDetails, setFoodDetails } = useContext(FoodContext);
+  const [foodDetails, setFoodDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
 
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
+  const [isFullyChecked, setIsFullyChecked] = useState(false);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      const { meals } = await fetchMealDetailsApi(id);
+      setFoodDetails(meals);
+    };
+    fetchDetails();
+    const { meals } = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [] } };
+    if (meals[id]) {
+      setCheckedIngredients([...meals[id]]);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { meals: {}, cocktails: {} };
+    const defaultObject = {
+      ...getLocalStorage,
+      meals: { ...getLocalStorage.meals,
+        [id]: [] },
+    };
+
+    if (!getLocalStorage.meals[id]) {
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify(defaultObject));
+      return false;
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (foodDetails.length > 0
+      && checkedIngredients.length > 0
+      && checkedIngredients.length === Object.entries(foodDetails[0])
+        .filter((string) => string[0]
+          .includes('strIngredient') && string[1]).length) {
+      setIsFullyChecked(true);
+    } else {
+      setIsFullyChecked(false);
+    }
+  }, [checkedIngredients, foodDetails]);
+
+  const handleClick = ({ target: { name } }) => {
+    const getLocalStorage = () => JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [name] } };
+
+    const removeIngredient = getLocalStorage().meals[id]
+      .filter((ingredient) => ingredient !== name);
+
+    const isOnList = getLocalStorage().meals[id].includes(name);
+
+    if (!isOnList) {
+      localStorage.setItem('inProgressRecipes', JSON
+        .stringify({
+          ...getLocalStorage(),
+          meals: { ...getLocalStorage().meals,
+            [id]: [...getLocalStorage().meals[id],
+              name] } }));
+      return false;
+    }
+
+    localStorage.setItem('inProgressRecipes', JSON
+      .stringify({
+        ...getLocalStorage(),
+        meals: { ...getLocalStorage().meals,
+          [id]: removeIngredient } }));
+  };
+
+  const updateStateFromLocalStorage = () => {
+    const { meals } = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: { [id]: [] } };
+    setCheckedIngredients([...meals[id]]);
+  };
+
+  const isIngredientChecked = (comparison) => checkedIngredients
+    .some((ingredient) => ingredient === comparison);
+
   function DetailUrl() {
     const url = window.location.href;
     const splitUrl = url.split('/');
-    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/comidas/${actualPath}`;
+    const detailUrl = `${splitUrl[0]}//${splitUrl[2]}/comidas/${id}`;
     Copy(detailUrl);
     setShowMsg(true);
   }
 
   useEffect(() => {
-    fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
-  }, [actualPath, setFoodDetails]);
+    fetchMealDetailsApi(id).then((data) => setFoodDetails(data.meals));
+  }, [id, setFoodDetails]);
 
   useEffect(() => {
     getFavoriteFood(foodDetails, setFavorite);
@@ -94,7 +173,15 @@ const RecipeInProgress = () => {
                       key={ item }
                       data-testid={ `${index}-ingredient-step` }
                     >
-                      <input type="checkbox" id={ item } name={ item } value={ item } />
+                      <input
+                        type="checkbox"
+                        id={ item }
+                        name={ item }
+                        value={ item }
+                        onClick={ handleClick }
+                        onChange={ updateStateFromLocalStorage }
+                        checked={ isIngredientChecked(item) }
+                      />
                       {`${item} - ${measures[0][index]}`}
                     </li>
                   )))
@@ -107,6 +194,7 @@ const RecipeInProgress = () => {
                 key={ i }
                 type="button"
                 className="start-recipe-btn"
+                disabled={ !isFullyChecked }
               >
                 Finalizar receita
               </button>
