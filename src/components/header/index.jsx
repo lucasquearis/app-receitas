@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { HeaderWrapper, ProfileIcon, PageTitle, SearchIcon } from './styles';
 import SearchBar from '../SearchBar';
 import { titleGenerator } from '../../services';
+import Filters from '../Filters';
 
 const Header = ({ title, routeParams, hideSearch }) => {
   const [searchBar, setSearchBar] = useState(false);
@@ -26,24 +27,27 @@ const Header = ({ title, routeParams, hideSearch }) => {
           {`${title} ${titleGenerator(routeParams)}`}
         </PageTitle>
         {
-          hideSearch && routeParams[1] !== 'area'
-            ? null
+
+          hideSearch && routeParams[1] !== 'area' ? null
             : (
-              <SearchIcon
-                data-testid="search-top-btn"
-                src="/images/searchIcon.svg"
-                alt="Search Icon"
-                onClick={ () => setSearchBar(!searchBar) }
-              />
+              <>
+                <SearchIcon
+                  data-testid="search-top-btn"
+                  src="/images/searchIcon.svg"
+                  alt="Search Icon"
+                  onClick={ () => setSearchBar(!searchBar) }
+                />
+                {
+                  searchBar ? <SearchBar
+                    placeholder="Digite sua busca..."
+                    data-testid="search-input"
+                    type={ title }
+                  /> : <Filters title2={ routeParams[1] } title={ title } />
+                }
+              </>
             )
         }
-        {
-          searchBar ? <SearchBar
-            placeholder="Digite sua busca..."
-            data-testid="search-input"
-            type={ title }
-          /> : null
-        }
+
       </HeaderWrapper>
     );
   }

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/header';
-// import { Container } from './styles';
+import Footer from '../../components/Footer';
 
 const Explorar = ({ match: { params: { param1, param2 } } }) => (
-  <Header title="Explorar" hideSearch routeParams={ [param1, param2] } />
+  <>
+    <Header title="Explorar" hideSearch routeParams={ [param1, param2] } />
+    <Footer />
+  </>
 );
 
 Explorar.propTypes = {

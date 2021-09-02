@@ -8,7 +8,7 @@ import {
 function SearchBar({ type }) {
   const { getRecipes } = useContext(RecipesContext);
   const [search, setSearch] = useState('');
-  const [option, setOption] = useState('ingredientes');
+  const [option, setOption] = useState('');
 
   return (
     <SearchBarWrapper>

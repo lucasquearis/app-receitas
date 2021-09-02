@@ -10,3 +10,23 @@ export const titleGenerator = (routeParams) => {
   if (routeParams[0] !== undefined) return (capitalizeFirstLetter(routeParams[0]));
   return '';
 };
+
+export const endpoints = {
+  comidas: {
+    ingrediente: (search) => fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`),
+    firstLetter: (search) => fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`),
+    name: (search) => fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`),
+    random: () => fetch('https://www.themealdb.com/api/json/v1/1/random.php'),
+  },
+  bebidas: {
+    ingrediente: (search) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`),
+    firstLetter: (search) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`),
+    name: (search) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`),
+    random: () => fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php'),
+  },
+};
+
+export const categoryEndpoints = {
+  comidas: (category) => fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`),
+  bebidas: (category) => fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`),
+};

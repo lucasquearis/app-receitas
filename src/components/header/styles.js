@@ -15,6 +15,7 @@ export const HeaderWrapper = styled.header`
   height: 60px;
   overflow-y: visible;
   border-bottom: 1px solid  rgba(33, 26, 30, 0.1);
+  top: 0;
 `;
 
 export const ProfileIcon = styled.img`
