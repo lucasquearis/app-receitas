@@ -56,7 +56,7 @@ export default function ProgressFoodCard({ recipe, id }) {
   const decoration = (item) => (`${meals[id].includes(item) ? 'line-through' : 'none'}`);
 
   return (
-    <div className="progress-food">
+    <>
       <img
         className="progress-img"
         data-testid="recipe-photo"
@@ -111,7 +111,7 @@ export default function ProgressFoodCard({ recipe, id }) {
       >
         Complete
       </button>
-    </div>
+    </>
   );
 }
 

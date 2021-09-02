@@ -3,6 +3,13 @@
   width: 100vw;
 }
 
+.progress-food .loading-container {
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  z-index: 999;
+}
+
 .progress-img {
   max-width: 100%;
   width: 100%;
@@ -83,4 +90,5 @@
 
 .progress-btn:disabled {
   background-color: #818f59;
+  z-index: 998;
 }

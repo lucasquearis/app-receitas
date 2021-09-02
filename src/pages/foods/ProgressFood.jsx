@@ -20,9 +20,12 @@ const ProgressFood = ({ match: { params: { id } } }) => {
 
   useEffect(getRecipe, [id]);
 
-  if (isLoading) return <Loading />;
-
-  return <ProgressFoodCard recipe={ recipe } id={ id } />;
+  return (
+    <div className="progress-food">
+      {isLoading ? <Loading /> : ''}
+      <ProgressFoodCard recipe={ recipe } id={ id } />
+    </div>
+  );
 };
 
 ProgressFood.propTypes = {
