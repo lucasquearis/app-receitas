@@ -22,15 +22,14 @@
 
 .btnFavoriteRecipes button {
   border-radius: 5px;
-  margin: 8% 5px 5%;
+  margin: 3vh 0.7vh 5vh;
   padding: 5px 25px;
 }
 
-@media only screen and ( max-width : 360px ) {
+@media only screen and (max-width : 360px) {
 
   .btnFavoriteRecipes button {
     border-radius: 5px;
-    margin-top: 20%;
   }
 }
 
