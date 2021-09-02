@@ -48,9 +48,10 @@ const ProgressFood = ({ match: { params: { id } } }) => {
       const result = recipeLength !== itemsListLength;
       setBtnState(result);
     };
-
-    localStorage.setItem('inProgressRecipes', JSON.stringify(state));
-
+    const saveInLocalStorage = () => {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(state));
+    };
+    saveInLocalStorage();
     if (KeysList.length > 0) finishedRecipe();
   };
 
