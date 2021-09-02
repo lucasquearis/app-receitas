@@ -6,12 +6,28 @@ import { getDetails } from '../../services';
 import CopyButton from '../../components/CopyButton';
 import FavoriteButton from '../../components/FavoriteButton';
 import CheckList from './CheckList';
-import { getSavedAssistent, saveAssistent } from '../../utils';
+import { dateToday, getSavedAssistent, saveAssistent } from '../../utils';
 
 const savedIngredients = getSavedAssistent(
   'inProgressRecipes',
   { cocktails: {}, meals: {} },
 );
+
+const savedDones = getSavedAssistent('doneRecipes');
+
+const arrayCreator = (...info) => info;
+
+const handleSubmitAndSave = (id, path, recipeDetails) => ({
+  id,
+  type: path.includes('/comidas') ? 'comida' : 'bebida',
+  area: !recipeDetails.strArea ? '' : recipeDetails.strArea,
+  category: !recipeDetails.strCategory ? '' : recipeDetails.strCategory,
+  alcoholicOrNot: !recipeDetails.strAlcoholic ? '' : recipeDetails.strAlcoholic,
+  name: recipeDetails.strMeal || recipeDetails.strDrink,
+  image: recipeDetails.strMealThumb || recipeDetails.strDrinkThumb,
+  tags: recipeDetails.strTags ? arrayCreator(recipeDetails.strTags) : [],
+  doneDate: dateToday(),
+});
 
 export default function RecipesInProgress() {
   const { loading, setLoading } = useDataContext();
@@ -67,6 +83,10 @@ export default function RecipesInProgress() {
     return false;
   }, [checkedItems, id, infos.ingredients]);
 
+  const storageInfo = useMemo(() => (
+    handleSubmitAndSave(id, pathname, recipeDetails)
+  ), [id, pathname, recipeDetails]);
+
   return (
     <div>
       { !loading
@@ -108,7 +128,10 @@ export default function RecipesInProgress() {
               type="button"
               data-testid="finish-recipe-btn"
               disabled={ !allChecked }
-              onClick={ () => history.push('/receitas-feitas') }
+              onClick={ () => {
+                history.push('/receitas-feitas');
+                saveAssistent('doneRecipes', [...savedDones, storageInfo]);
+              } }
             >
               Finalizar receita
             </button>
