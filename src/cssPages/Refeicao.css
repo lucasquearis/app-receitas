@@ -5,8 +5,8 @@ body {
 }
 
 .pageComida {
-  background: url('../images/normalBack01.jpg');
-  background-position: center;
+  background: url('../images/background4.jpg');
+  background-position: inherit;
   background-size: cover;
   bottom: 8vh;
   max-width: 800px;

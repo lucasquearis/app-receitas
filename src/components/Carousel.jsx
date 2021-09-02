@@ -44,13 +44,15 @@ function Carousel(data) {
   );
 
   return (
-    <>
-      { carouselBtn('<', -carouselStep) }
-      { carouselBtn('>', carouselStep) }
+    <section className="carousel">
+      <div className="carouselBtnArea">
+        { carouselBtn('<', -carouselStep) }
+        { carouselBtn('>', carouselStep) }
+      </div>
       <div className="recommendedShow">
         {recipes.map((recipe, index) => recommendedCard(recipe, index))}
       </div>
-    </>
+    </section>
   );
 }
 

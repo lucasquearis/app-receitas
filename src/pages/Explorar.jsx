@@ -25,10 +25,10 @@ function Explorar() {
     <div>
       <Header titulo="Explorar" />
       <main className="pageComida">
-        <div className="div">
+        <div className="exploreContainer">
           <Button
             data-testid="explore-food"
-            className="btn"
+            className="btnExplore"
             type="button"
             name="comidas"
             variant="light"
@@ -39,7 +39,7 @@ function Explorar() {
           </Button>
           <Button
             data-testid="explore-drinks"
-            className="btn"
+            className="btnExplore"
             type="button"
             name="bebidas"
             variant="light"

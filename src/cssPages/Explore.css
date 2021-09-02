@@ -1,37 +1,3 @@
-.div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 5%;
-  padding-left: 5%;
-  padding-top: 7%;
-}
-
-.div2 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: 5%;
-  padding-left: 5%;
-  padding-top: 7%;
-}
-
-.origem {
-  margin-top: 11%;
-  width: 100%;
-}
-
-.btnExplore {
-  background-color: white;
-  border: black solid 1px;
-  box-shadow: 3px 5px gray;
-  color: black;
-  margin-bottom: 2%;
-  margin-right: 5%;
-  margin-top: 5%;
-  width: 80%;
-}
-
 .select-area {
   background-color: white;
   border: black solid 1px;
@@ -43,24 +9,44 @@
   width: 50vh;
 }
 
-.btnExplore:hover {
-  background-color: white;
+.exploreContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 2vh;
 }
 
-.btnExplore2 {
+.btnExplore {
   background-color: white;
   border: black solid 1px;
-  box-shadow: 3px 5px gray;
+  box-shadow: 2px 3px black;
   color: black;
-  height: 20%;
-  margin-bottom: 2%;
-  margin-right: 5%;
-  margin-top: 5%;
-  padding: 4%;
-  text-align: left;
-  width: 40%;
+  margin: 1vh;
+  width: 70%;
 }
 
-.btnExplore2:hover {
+.btnExploreComidas {
   background-color: white;
+  border: black solid 1px;
+  box-shadow: 2px 3px #ff470a;
+  color: black;
+  margin: 1vh;
+  width: 70%;
+}
+
+.btnExploreBebidas {
+  background-color: white;
+  border: black solid 1px;
+  box-shadow: 2px 3px #1385f6;
+  color: black;
+  margin: 1vh;
+  width: 70%;
+}
+
+@media screen and ( max-width : 400px ) {
+
+  .btnExplore {
+    min-width: 45%;
+  }
+
 }
