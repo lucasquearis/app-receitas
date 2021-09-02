@@ -60,7 +60,7 @@ function DrinkDetails() {
       name: getRecipe.strDrink,
       image: getRecipe.strDrinkThumb,
     };
-    setLocalStorageItems(...localStorageItems, recipes);
+    setLocalStorageItems([...localStorageItems, recipes]);
     return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
   };
 

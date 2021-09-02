@@ -90,7 +90,6 @@ function DoneRecipes() {
 
   return (
     <div>
-      <Header titulo="Receitas Feitas" showSearch={ false } />
       <div>
         <Button
           type="button"

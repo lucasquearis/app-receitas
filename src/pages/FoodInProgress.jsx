@@ -98,7 +98,7 @@ function FoodInProgress() {
       doneDate: moment().format('DD-MM-YYYY'),
       tags: [tags],
     };
-    setLocalStorageItems(...localStorageItems, recipes);
+    setLocalStorageItems([...localStorageItems, recipes]);
 
     return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
