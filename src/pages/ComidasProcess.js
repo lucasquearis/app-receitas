@@ -86,7 +86,7 @@ function ComidasProcess(props) {
         >
           {strMeal}
         </h1>
-        <div>
+        <div className="button-container-details">
           <button
             onClick={ handleShare }
             type="button"
