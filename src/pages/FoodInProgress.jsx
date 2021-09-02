@@ -10,7 +10,6 @@ import useRedirect from '../hooks/useRedirect';
 function FoodInProgress() {
   const { id } = useParams();
   const [foodDetails, setFoodDetails] = useState({});
-  // const [redirect, setRedirect] = useState(false);
   const { shouldRedirect, redirect } = useRedirect();
   const [progress, setProgress] = useState([]);
   const [disabled, setDisabled] = useState(true);
@@ -164,6 +163,7 @@ function FoodInProgress() {
       localStorage.removeItem('favoriteRecipes');
     }
   };
+  console.log(foodDetails);
 
   return (
     <div onChange={ isDisabled } className="in-progress">

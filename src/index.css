@@ -119,6 +119,51 @@
   border-radius: 5px 5px 0 0;
 }
 
+.items-wrapper {
+  width: 95vw;
+  margin: auto;
+}
+
+.items {
+  display: flex;
+  overflow-x: auto;
+}
+
+.item {
+  flex: none;
+  width: 50vw;
+  text-align: center;
+}
+
+.btn-share .favorite-btn {
+  display: flex;
+  width: 35vw;
+  height: 8vh;
+}
+
+.share-icon {
+  display: flex;
+  max-width: 10vw;
+  height: 3vh;
+  margin: auto;
+}
+
+.share-txt {
+  display: flex;
+  width: 30vw;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.favorite-img {
+  display: flex;
+  max-width: 10vw;
+  height: 5vh;
+  margin: auto;
+}
+
 @font-face {
   font-family: MinhaFonte;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
