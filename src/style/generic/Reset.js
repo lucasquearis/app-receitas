@@ -155,6 +155,10 @@ const Reset = createGlobalStyle`  /* http://meyerweb.com/eric/tools/css/reset/
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  * {
+    box-sizing: border-box;
+  }
 `;
 
 export default Reset;
