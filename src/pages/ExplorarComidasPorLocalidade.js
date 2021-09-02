@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import MenuInferior from '../components/MenuInferior';
 import Context from '../context/Context';
@@ -9,7 +10,7 @@ import Card from '../components/Card';
 export default function ExplorarComidasPorLocalidade() {
   const [selectableAreas, setSelectableAreas] = useState([]);
   const [area, setArea] = useState('Canadian');
-  const { meals, setMeals } = useContext(Context);
+  const { meals, setMeals, resetFilter } = useContext(Context);
   const amount = 12;
 
   const getMealsByArea = async () => {
@@ -31,7 +32,10 @@ export default function ExplorarComidasPorLocalidade() {
           setMeals(dataMeals.slice(dataMeals, amount));
         });
     };
-    filterMealsArea();
+    const handleFilter = () => (
+      area === 'All' ? resetFilter() : filterMealsArea(area)
+    );
+    handleFilter();
   }, [area, setMeals]);
 
   if (selectableAreas.length === 0) {
@@ -58,7 +62,9 @@ export default function ExplorarComidasPorLocalidade() {
       <div>
         { (meals !== []) && meals.map((item, index) => (
           <div key={ item.idMeal }>
-            <Card item={ item } index={ index } />
+            <Link to={ `/comidas/${item.idMeal}` }>
+              <Card item={ item } index={ index } />
+            </Link>
           </div>
         )) }
       </div>
