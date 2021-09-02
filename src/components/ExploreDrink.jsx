@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import * as fetchAPI from '../service/fetchAPI';
+import '../pages/perfil.css';
 
 function ExploreDrink() {
   const [location, setLocation] = useState({
@@ -24,21 +26,23 @@ function ExploreDrink() {
   if (location.surprise) return <Redirect to={ `/bebidas/${randomId}` } />;
 
   return (
-    <div>
-      <button
+    <div className="perfil-btn-container">
+      <Button
+        size="lg"
         type="button"
         data-testid="explore-by-ingredient"
         onClick={ () => redirect('ingredient') }
       >
         Por Ingredientes
-      </button>
-      <button
+      </Button>
+      <Button
+        size="lg"
         type="button"
         data-testid="explore-surprise"
         onClick={ () => redirectToRandom() }
       >
         Me Surpreenda!
-      </button>
+      </Button>
     </div>
   );
 }

@@ -10,7 +10,3 @@
   border: none;
   color: black;
 }
-
-.perfil-btn-container button:hover {
-  border: 1px solid var(--D-orange);
-}
