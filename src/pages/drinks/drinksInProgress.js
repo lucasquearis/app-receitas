@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Instructions from '../../components/Instructions';
-import Recomendations from '../../components/Recomendations';
+import RecomendationsDrinks from '../../components/RecomendationsDrinks';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
@@ -54,7 +54,7 @@ class DetailsDrink extends Component {
                   </div>
                   <DrinkscheckIngredients />
                   <Instructions />
-                  <Recomendations />
+                  <RecomendationsDrinks />
                   <buttons
                     className="btn btn-warning"
                     type="button"

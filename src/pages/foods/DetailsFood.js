@@ -5,10 +5,10 @@ import { Redirect } from 'react-router-dom';
 import Ingredients from '../../components/Ingredients';
 import Instructions from '../../components/Instructions';
 import Video from '../../components/Video';
-import Recomendations from '../../components/Recomendations';
-import ShareIcon from '../../images/shareIcon.svg';
-import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import RecomendationsDrinks from '../../components/RecomendationsDrinks';
+import ShareButton from '../../components/shareButton';
 import fetchRecipes from '../../Redux/actions/fetchRecipes';
+import fetchDrinks from '../../Redux/actions/fetchDrinks';
 import './style.css';
 
 class DetailsFood extends Component {
@@ -22,9 +22,10 @@ class DetailsFood extends Component {
   }
 
   componentDidMount() {
-    const { fetchRecipe, match } = this.props;
+    const { fetchRecipe, match, setDrinks } = this.props;
     const { params: { id } } = match;
     fetchRecipe(id);
+    setDrinks();
   }
 
   setRedirect() {
@@ -59,7 +60,7 @@ class DetailsFood extends Component {
                 <Ingredients />
                 <Instructions />
                 <Video />
-                <Recomendations />
+                <RecomendationsDrinks />
                 <button
                   className="start-recipe-button"
                   type="button"
@@ -68,20 +69,8 @@ class DetailsFood extends Component {
                 >
                   Iniciar Receita
                 </button>
-                <button type="button" className="share-fill">
-                  <img
-                    src={ ShareIcon }
-                    alt="share button"
-                    data-testid="share-btn"
-                  />
-                </button>
-                <button type="button" className="share-fill">
-                  <img
-                    src={ WhiteHeartIcon }
-                    alt="favorite button"
-                    data-testid="favorite-btn"
-                  />
-                </button>
+                <ShareButton />
+                {}
               </div>
             ))
           }
@@ -102,10 +91,12 @@ DetailsFood.propTypes = {
 
 const mapStateToProps = (state) => ({
   recipe: state.foods.recipes,
+  drinks: state.drinks.drinks,
 });
 
 const mapDispatchToProps = (dispach) => ({
   fetchRecipe: (id) => dispach(fetchRecipes(id)),
+  setDrinks: () => dispach(fetchDrinks()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsFood);
