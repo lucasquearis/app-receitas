@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareButton from './ShareButton';
@@ -8,6 +8,7 @@ import IngredientCheckList from './IngredientCheckList';
 
 export default function InProgressMount(props) {
   const { data } = props;
+  const [handleState, setState] = useState(false);
   const { id, type } = useParams();
 
   return (
@@ -30,8 +31,12 @@ export default function InProgressMount(props) {
       <h2>Ingredientes</h2>
 
       <div className="ingredients">
-        <lo>
-          <IngredientCheckList array={ data } />
+        <lo
+          onChange={ () => setState(!handleState) }
+        >
+          <IngredientCheckList
+            array={ data }
+          />
         </lo>
       </div>
       <h2>Instruções</h2>

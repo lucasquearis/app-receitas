@@ -17,46 +17,41 @@ export default function CookedRecipesCard({
 }) {
   const lenghtTag = 2;
   return (
-    <Link to={ `/${type}/${id}` }>
-      <div>
+    <div>
+      <Link to={ `/${type}s/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="foto-da-api-"
         />
+        <p
+          data-testid={ `${index}-horizontal-name` }
+        >
+          { name }
+        </p>
+      </Link>
+      <div>
         <div>
-          <div>
-            <p
-              Data-testid={ `${index}-horizontal-top-text` }
-            >
-              { category }
-            </p>
-            <ShareButton data-testid={ `${index}-horizontal-share-btn` } />
-          </div>
-          <p>
-            { alcoholicOrNot }
-            { area }
-          </p>
-          <p
-            data-testid={ `${index}-horizontal-name` }
-          >
-            { name }
-          </p>
-          <p
-            data-testid={ `${index}-horizontal-done-date` }
-          >
-            { doneDate }
-          </p>
-          {tags.slice(0, lenghtTag).map((tag) => (
-            <p
-              key={ tag }
-              data-testid={ `${index}-${tags}-horizontal-tag` }
-            >
-              { tag }
-            </p>))}
+          <ShareButton datatestid={ `${index}-horizontal-share-btn` } />
         </div>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          { alcoholicOrNot }
+          { `${area} - ${category}` }
+        </p>
+        <p
+          data-testid={ `${index}-horizontal-done-date` }
+        >
+          { doneDate }
+        </p>
+        {tags.slice(0, lenghtTag).map((tag) => (
+          <p
+            key={ tag }
+            data-testid={ `${index}-${tag}-horizontal-tag` }
+          >
+            { tag }
+          </p>))}
       </div>
-    </Link>
+    </div>
 
   );
 }

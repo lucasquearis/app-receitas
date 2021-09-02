@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import CookedRecipesCard from '../components/CookedRecipesCard';
 import Header from '../components/Header';
@@ -6,9 +6,13 @@ import Header from '../components/Header';
 function CookedRecipies() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const local = JSON.parse(localStorage.getItem('doneRecipes'));
-  setDoneRecipes(local);
+  useEffect(() => {
+    setDoneRecipes(local);
+  }, []);
+  console.log(local);
 
   const filterType = (type) => {
+    console.log(type);
     if (type === 'all') {
       setDoneRecipes(doneRecipes);
     } else {
@@ -37,9 +41,10 @@ function CookedRecipies() {
       >
         Drinks
       </Button>
-      {doneRecipes.map((item) => (
+      {doneRecipes.map((item, index) => (
         <CookedRecipesCard
           key={ item.id }
+          index={ index }
           id={ item.id }
           type={ item.type }
           category={ item.category }

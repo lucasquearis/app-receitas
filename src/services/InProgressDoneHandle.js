@@ -32,6 +32,37 @@ const newobjObj = (array, ID, INGREDIENTS, thetype) => {
   localStorage.setItem('inProgressRecipes', JSON.stringify(objreturn));
 };
 
+const setNewdoneobj = (ID, type, ingredients) => {
+  const obj = localStorage.getItem('doneRecipes');
+  const donejson = JSON.parse(obj);
+  const objdonemount = {
+    id: ID,
+    type: type === 'comidas' ? 'comida' : 'bebida',
+    area: type === 'comidas' ? ingredients.area : '',
+    category: ingredients.category,
+    alcoholicOrNot: type === 'bebidas' ? ingredients.type : '',
+    name: ingredients.tittle,
+    image: ingredients.img,
+    doneDate: new Date().toLocaleString(),
+    tags: ingredients.tag ? ingredients.tag.split(',') : null,
+  };
+  if (donejson) { donejson.push(objdonemount); }
+  const doneReturn = donejson || [objdonemount];
+  localStorage.setItem('doneRecipes', JSON.stringify(doneReturn));
+};
+
+export const setDone = (ID, type, ingredients) => {
+  const obj = localStorage.getItem('doneRecipes');
+  const objjson = JSON.parse(obj);
+  if (objjson === null || objjson === undefined) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+    return setNewdoneobj(ID, type, ingredients);
+  }
+  const workingObj = objjson.find((n) => n.id === ID);
+  if (workingObj) return null;
+  setNewdoneobj(ID, type, ingredients);
+};
+
 const SetInProgress = (ID, TYPE, INGREDIENTS) => {
   const obj = localStorage.getItem('inProgressRecipes');
   const objjson = JSON.parse(obj);
