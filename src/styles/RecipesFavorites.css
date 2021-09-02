@@ -1,10 +1,83 @@
+p , h3 {
+  font-family: 'Roboto', sans-serif;
+}
+
 p {
   margin: 3px;
 }
 
+.fav-card {
+  border-radius: 5px;
+  box-shadow: 5px 6px 5px #cecece;
+  display: flex;
+  flex-direction: row;
+  height: 55vw;
+  justify-content: space-around;
+  margin: 10px;
+  width: 95vw;
+}
+
+.fav-card h3 {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.recipe {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.recipe img {
+  border-radius: 5px;
+  width: 180px;
+  object-fit: fill;
+}
+
+.icon-btns {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.card-info-btns {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
+
+.title-subtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter-btn-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.favorite-filter-btn {
+  background-color: #fa9500;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  padding: 5px 15px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #ee7a44;
+  border: none;
+}
+
 .recipe-pic {
   margin: 3px;
-  width: 80%;
+  width: 80vw;
 }
 
 .favorite-card {

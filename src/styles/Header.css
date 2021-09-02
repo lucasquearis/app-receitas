@@ -8,6 +8,7 @@ input {
 }
 
 .header-div {
+  padding: 5px;
   display: flex;
   flex-direction: row wrap;
   justify-content: space-between;
@@ -36,11 +37,13 @@ input {
   justify-content: center;
 }
 
-h3 {
-  color: white;
+.header-title {
+  color: #fff7eb;
   display: flex;
   flex-direction: column;
+  font-family: 'Capriola', sans-serif;
   justify-content: center;
+  margin: 0px;
 }
 
 .search-form {

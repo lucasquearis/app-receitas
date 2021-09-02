@@ -8,10 +8,11 @@
 }
 
 .button {
-  background-color: #eb6424;
+  background-color: #fa9500;
   border: none;
   border-radius: 5px;
-  color: #fff7eb;
+  color: white;
+  font-family: 'Roboto', sans-serif;
   display: flex;
   flex-wrap: wrap;
   margin: 3px;

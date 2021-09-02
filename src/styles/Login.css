@@ -1,6 +1,12 @@
+.logo-howtochef {
+  width: 260px;
+  padding: 10px;
+}
+
 .login-div {
   align-items: center;
   display: flex;
+  flex-flow: column wrap;
   height: 100vh;
   justify-content: center;
   width: 100%;

@@ -54,47 +54,55 @@ export default function RecipesFavorites() {
   function renderFavorites() {
     if (localStorage.favoriteRecipes) {
       return favorites.map((item, index) => (
-        <div key={ item.id } id={ `${item.id}-favorite-card` }>
-          <Link to={ `/${item.type}s/${item.id}` }>
-            <img
-              className="recipe-pic"
-              key={ item.image }
-              src={ item.image }
-              alt="favorite recipe"
-              data-testid={ `${index}-horizontal-image` }
-            />
-          </Link>
-          { item.type === 'comida' && renderAreaAndCategory(item, index) }
-          { item.type === 'bebida' && renderAlcoholic(item, index) }
-          <Link to={ `/${item.type}s/${item.id}` }>
-            <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
-              { item.name }
-            </h3>
-          </Link>
-          <button
-            className="share-btn"
-            type="button"
-            onClick={ () => copyToClipboard(item.id, item.type) }
-          >
-            <img
-              src={ shareIcon }
-              alt="share icon"
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
-          { copy.copied && copy.id === item.id
-            ? <div className="copy-div">Link copiado!</div> : <div /> }
-          <button
-            className="unfavorite-btn"
-            type="button"
-            onClick={ () => handleClick(item.id) }
-          >
-            <img
-              src={ blackHeartIcon }
-              alt="favorited icon"
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />
-          </button>
+        <div key={ item.id } id={ `${item.id}-favorite-card` } className="fav-card">
+          <div className="recipe">
+            <Link to={ `/${item.type}s/${item.id}` }>
+              <img
+                className="recipe-pic"
+                key={ item.image }
+                src={ item.image }
+                alt="favorite recipe"
+                data-testid={ `${index}-horizontal-image` }
+              />
+            </Link>
+          </div>
+          <div className="card-info-btns">
+            <div className="title-subtitle">
+              { item.type === 'comida' && renderAreaAndCategory(item, index) }
+              { item.type === 'bebida' && renderAlcoholic(item, index) }
+              <Link to={ `/${item.type}s/${item.id}` }>
+                <h3 key={ item.name } data-testid={ `${index}-horizontal-name` }>
+                  { item.name }
+                </h3>
+              </Link>
+            </div>
+            <div className="icon-btns">
+              <button
+                className="share-btn"
+                type="button"
+                onClick={ () => copyToClipboard(item.id, item.type) }
+              >
+                <img
+                  src={ shareIcon }
+                  alt="share icon"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                />
+              </button>
+              { copy.copied && copy.id === item.id
+                ? <div className="copy-div">Link copiado!</div> : <div /> }
+              <button
+                className="unfavorite-btn"
+                type="button"
+                onClick={ () => handleClick(item.id) }
+              >
+                <img
+                  src={ blackHeartIcon }
+                  alt="favorited icon"
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                />
+              </button>
+            </div>
+          </div>
         </div>
       ));
     }
@@ -114,27 +122,32 @@ export default function RecipesFavorites() {
   return (
     <main className="favorite-recipes-main">
       <Header title="Receitas Favoritas" />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => setFilter('all') }
-      >
-        All
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ () => setFilter('comida') }
-      >
-        Food
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => setFilter('bebida') }
-      >
-        Drinks
-      </button>
+      <div className="filter-btn-div">
+        <button
+          className="favorite-filter-btn"
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilter('all') }
+        >
+          All
+        </button>
+        <button
+          className="favorite-filter-btn"
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => setFilter('comida') }
+        >
+          Food
+        </button>
+        <button
+          className="favorite-filter-btn"
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => setFilter('bebida') }
+        >
+          Drinks
+        </button>
+      </div>
       { localStorage.favoriteRecipes && renderFavorites() }
     </main>
   );

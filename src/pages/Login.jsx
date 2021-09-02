@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import logoHowToChef from '../images/logo-how-to-chef.svg';
 import '../styles/Login.css';
 
 export default function Login() {
@@ -39,6 +40,7 @@ export default function Login() {
 
   return (
     <div className="login-div">
+      <img src={ logoHowToChef } alt="logo da marca" className="logo-howtochef" />
       <form className="form">
         <input
           className="login-input"
