@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import IngredientsDrink from '../../components/IngredientsDrink';
 import Instructions from '../../components/Instructions';
-import Recomendations from '../../components/Recomendations';
-import ShareIcon from '../../images/shareIcon.svg';
-import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import RecomendationsFoods from '../../components/RecomendationsFoods';
+import ShareButton from '../../components/shareButton';
+import FavoriteButton from '../../components/FavoriteButton';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
+import fetchMeals from '../../Redux/actions/fetchMeals';
 import './style.css';
 
 class DetailsDrink extends Component {
@@ -21,9 +22,10 @@ class DetailsDrink extends Component {
   }
 
   componentDidMount() {
-    const { setCocktail, match } = this.props;
+    const { setCocktail, match, setMeals } = this.props;
     const { params: { id } } = match;
     setCocktail(id);
+    setMeals();
   }
 
   setRedirect() {
@@ -45,7 +47,12 @@ class DetailsDrink extends Component {
               ({ strDrink, strCategory, strDrinkThumb, strAlcoholic }, index) => (
                 <div key={ index }>
                   <div>
-                    <img data-testid="recipe-photo" src={ strDrinkThumb } alt="foto" />
+                    <img
+                      data-testid="recipe-photo"
+                      src={ strDrinkThumb }
+                      alt="foto"
+                      width="600 px"
+                    />
                   </div>
                   <div>
                     <h1 data-testid="recipe-title">{ strDrink }</h1>
@@ -56,7 +63,7 @@ class DetailsDrink extends Component {
                   </div>
                   <IngredientsDrink />
                   <Instructions />
-                  <Recomendations />
+                  <RecomendationsFoods />
                   <button
                     className="start-recipe-button"
                     type="button"
@@ -65,16 +72,8 @@ class DetailsDrink extends Component {
                   >
                     Iniciar Receita
                   </button>
-                  <button type="button">
-                    <img src={ ShareIcon } alt="share button" data-testid="share-btn" />
-                  </button>
-                  <button type="button">
-                    <img
-                      src={ WhiteHeartIcon }
-                      alt="favorite button"
-                      data-testid="favorite-btn"
-                    />
-                  </button>
+                  <ShareButton />
+                  <FavoriteButton />
                 </div>
               ),
             )
@@ -96,10 +95,12 @@ DetailsDrink.propTypes = {
 
 const mapStateToProps = (state) => ({
   cocktail: state.drinks.cocktails,
+  meals: state.foods.meals,
 });
 
 const mapDispatchToProps = (dispach) => ({
   setCocktail: (id) => dispach(fetchCocktail(id)),
+  setMeals: () => dispach(fetchMeals()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsDrink);

@@ -45,7 +45,11 @@ class ShareButton extends Component {
           text={ path }
           onCopy={ this.copyHandle }
         >
-          <button type="button" className="share-fill">
+          <button
+            type="button"
+            className="share-fill"
+            data-testid="share-btn"
+          >
             <img
               src={ ShareIcon }
               alt="share button"
