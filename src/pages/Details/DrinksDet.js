@@ -79,8 +79,8 @@ function DrinksDetails() {
   }, [id, setDoneRecipes]);
 
   return (
-    <>
-      { recipesDrink.map((item, index) => (
+    <div>
+      { recipesDrink && recipesDrink.map((item, index) => (
         <div key={ index }>
           <Image
             data-testid="recipe-photo"
@@ -140,7 +140,7 @@ function DrinksDetails() {
           </Link>
         </div>
       )) }
-    </>
+    </div>
   );
 }
 
