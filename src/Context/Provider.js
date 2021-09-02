@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from './LoginContext';
+import RecipesContext from './RecipesContext';
 
 export default function Provider({ children }) {
   const [userInfo, setUserInfo] = useState({ email: '', password: '', redirect: false });
   const contextLogin = { userInfo, setUserInfo };
 
+  const [recipes, setRecipes] = useState([]);
+  const [recipeType, setRecipeType] = useState(false);
+  const [ingredient, setIngredient] = useState({ ing: false, nameIng: '' });
+  const contextRecipes = {
+    recipes,
+    setRecipes,
+    recipeType,
+    setRecipeType,
+    ingredient,
+    setIngredient,
+  };
+
   return (
     <LoginContext.Provider value={ contextLogin }>
-      {children}
+      <RecipesContext.Provider value={ contextRecipes }>
+        {children}
+      </RecipesContext.Provider>
     </LoginContext.Provider>
   );
 }

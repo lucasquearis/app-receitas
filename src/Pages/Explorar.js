@@ -26,6 +26,12 @@ export default function Explorar() {
         </button>
       </Link>
       <Footer />
+      <Link to="/explorar/comidas">
+        <button type="button">Explorar Comidas</button>
+      </Link>
+      <Link to="/explorar/comidas/ingredientes">
+        <button type="button">ingredientes</button>
+      </Link>
     </>
   );
 }
