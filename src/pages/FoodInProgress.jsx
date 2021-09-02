@@ -91,7 +91,7 @@ function FoodInProgress() {
 
     const recipes = {
       id,
-      type: 'comidas',
+      type: 'comida',
       area: getRecipe.strArea,
       category: getRecipe.strCategory,
       alcoholicOrNot: '',

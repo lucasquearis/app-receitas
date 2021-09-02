@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
 import ShareButton from '../components/ShareButton';
-import FavoriteButton from '../components/FavoriteButton';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import MyContext from '../context/MyContext';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -27,6 +29,7 @@ function DrinkDetails() {
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
+  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -47,6 +50,20 @@ function DrinkDetails() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
+  const favorites = () => {
+    const recipes = {
+      id,
+      type: 'bebida',
+      area: getRecipe.strArea,
+      category: getRecipe.strCategory,
+      alcoholicOrNot: '',
+      name: getRecipe.strMeal,
+      image: getRecipe.strMealThumb,
+    };
+    setLocalStorageItems(...localStorageItems, recipes);
+    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+  };
+
   return (
     <div>
       <div>
@@ -61,7 +78,13 @@ function DrinkDetails() {
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <div className="icons">
           <ShareButton />
-          <FavoriteButton />
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ favorites }
+          >
+            <img src={ whiteHeartIcon } alt="Favorite" />
+          </button>
         </div>
         <p data-testid="recipe-category">
           { getRecipe

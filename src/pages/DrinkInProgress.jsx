@@ -97,7 +97,7 @@ function DrinkInProgess() {
 
     const recipes = {
       id,
-      type: 'bebidas',
+      type: 'bebida',
       area: '',
       category: getRecipe.strCategory,
       alcoholicOrNot,
