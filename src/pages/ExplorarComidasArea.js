@@ -3,6 +3,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { Header, FooterMenu, RecipeCard, AreaSelect } from '../components';
 import AppContext from '../context/AppContext';
 import { fetchAPI } from '../services';
+import Loading from '../components/Loading';
 
 export default function ExplorarComidasArea() {
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ export default function ExplorarComidasArea() {
 
   const TWELVE = 12;
 
-  if (loading) return <h1>Carregando...</h1>;
+  if (loading) return <Loading />;
 
   if (redirectToDetails) {
     return <Redirect to={ `/comidas/${idDetails}` } />;

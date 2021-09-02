@@ -4,6 +4,7 @@ import AppContext from '../context/AppContext';
 import { fetchAPIDetails } from '../services';
 import { HeaderIngredientsInstructions } from '../components';
 import FinishRecipeButton from '../components/FinishRecipeButton';
+import Loading from '../components/Loading';
 
 export default function ReceitaEmProgressoPage() {
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ export default function ReceitaEmProgressoPage() {
     })();
   }, [setRecipeDetails, id, pathnameAPI]);
 
-  if (loading) return <h1>Carregando...</h1>;
+  if (loading) return <Loading />;
 
   if (redirectToDone) return <Redirect to="/receitas-feitas" />;
 

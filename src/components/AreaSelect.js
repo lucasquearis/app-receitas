@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../context/AppContext';
 import { fetchAPI, fetchAPIByAreas, fetchAPIAreas } from '../services';
+import Loading from './Loading';
 import '../styles/areaSelect.css';
 
 export default function AreaSelect() {
@@ -30,7 +31,7 @@ export default function AreaSelect() {
     setAreaSelected(value);
   };
 
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <Loading />;
 
   return (
     <section className="area-select-container">

@@ -6,6 +6,7 @@ import { CarouselContainer, HeaderIngredientsInstructions, DetailsButton, Video 
 import { fetchAPI, fetchAPIDetails } from '../services';
 import '../styles/receitasDetalhesPage.css';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import Loading from '../components/Loading';
 
 export default function ReceitasDetailsPage() {
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ export default function ReceitasDetailsPage() {
     }
   }, [setRecipeDetails, setRecipeList, id, pathnameAPI]);
 
-  if (loading) return <h1>Carregando...</h1>;
+  if (loading) return <Loading />;
   return (
     <div>
       <HeaderIngredientsInstructions />

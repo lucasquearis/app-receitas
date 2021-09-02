@@ -1,0 +1,59 @@
+.loading-div {
+  align-items: center;
+  background-color: #312e2e;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+}
+
+.dinossauro {
+  animation: dinossauroAni 1.5s infinite;
+  height: auto;
+  width: 150px;
+}
+
+@keyframes dinossauroAni {
+
+  from {
+    opacity: 0.8;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+  50% {
+    transform: rotate(-25deg);
+  }
+
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.dinnor-logo {
+  height: auto;
+  width: 130px;
+}
+
+.ploading {
+  animation: ploadingAni 1s infinite;
+  color: #edac05;
+  font-size: 23px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+@keyframes ploadingAni {
+
+  from {
+    opacity: 0.8;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

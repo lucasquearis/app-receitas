@@ -4,6 +4,7 @@ import { Header, FooterMenu, RecipeCard, FiltersMenu } from '../components';
 import AppContext from '../context/AppContext';
 import { fetchAPI, fetchAPICategories } from '../services';
 import '../styles/homePage.css';
+import Loading from '../components/Loading';
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -45,7 +46,7 @@ export default function HomePage() {
 
   const TWELVE = 12;
 
-  if (loading) return <h1>Carregando...</h1>;
+  if (loading) return <Loading />;
 
   if (redirectToDetails) {
     return <Redirect to={ `${pathname}/${idDetails}` } />;

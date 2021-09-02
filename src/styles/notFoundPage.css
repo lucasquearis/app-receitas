@@ -1,6 +1,9 @@
 .not-found-page {
   align-items: center;
+  background-color: #312e2e;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   height: 100vh;
   justify-content: center;
   text-align: center;
@@ -9,7 +12,11 @@
 }
 
 .not-found-page h1 {
-  border: 1px solid black;
-  color: red;
-  padding: 15px;
+  color: #edac05;
+  font-weight: 700;
+}
+
+.adam-driver {
+  height: 100%;
+  width: 300px;
 }
