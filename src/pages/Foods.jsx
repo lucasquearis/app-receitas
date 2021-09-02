@@ -50,7 +50,9 @@ export default function Foods() {
   };
 
   return (
-    <section>
+    <section
+      className="body"
+    >
       <Header
         onClickShowInput={ () => setShowSearchBar((prevShow) => !prevShow) }
         pageTitle="Comidas"

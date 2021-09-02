@@ -12,46 +12,56 @@ export default function SearchBar(
   },
 ) {
   return (
-    <div>
-      <input
-        data-testid="search-input"
-        type="text"
-        value={ inputValue }
-        onChange={ (e) => handleChange(e.target.value) }
-      />
-      <label htmlFor="ingredient-radio">
-        Ingrediente
+    <div className="d-flex flex-column navbar fixed-top bg-light search">
+      <div className="w-100">
         <input
-          name="search"
-          onChange={ () => setIngredientValue(true) }
-          id="ingredient-radio"
-          data-testid="ingredient-search-radio"
-          type="radio"
+          className="w-100"
+          data-testid="search-input"
+          type="text"
+          value={ inputValue }
+          onChange={ (e) => handleChange(e.target.value) }
         />
-      </label>
-      <label htmlFor="name-radio">
-        Nome
-        <input
-          name="search"
-          onChange={ () => setNameValue(true) }
-          id="name-radio"
-          data-testid="name-search-radio"
-          type="radio"
-        />
-      </label>
-      <label htmlFor="letter-radio">
-        Primeira letra
-        <input
-          name="search"
-          onChange={ () => setLetterValue(true) }
-          id="letter-radio"
-          data-testid="first-letter-search-radio"
-          type="radio"
-        />
-      </label>
-      <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
-        Buscar
-      </button>
+      </div>
+      <div className="w-100 d-flex justify-content-around">
+        <label htmlFor="ingredient-radio">
+          <input
+            className="mr-1"
+            name="search"
+            onChange={ () => setIngredientValue(true) }
+            id="ingredient-radio"
+            data-testid="ingredient-search-radio"
+            type="radio"
+          />
+          Ingrediente
+        </label>
+        <label htmlFor="name-radio">
+          <input
+            className="mr-1"
+            name="search"
+            onChange={ () => setNameValue(true) }
+            id="name-radio"
+            data-testid="name-search-radio"
+            type="radio"
+          />
+          Nome
+        </label>
+        <label htmlFor="letter-radio">
+          <input
+            className="mr-1"
+            name="search"
+            onChange={ () => setLetterValue(true) }
+            id="letter-radio"
+            data-testid="first-letter-search-radio"
+            type="radio"
+          />
+          Primeira letra
+        </label>
+      </div>
+      <div className="w-100 d-flex">
+        <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
+          Buscar
+        </button>
+      </div>
     </div>
   );
 }

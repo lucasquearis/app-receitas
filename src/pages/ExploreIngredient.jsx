@@ -5,7 +5,7 @@ import Ingredients from '../components/Ingredients';
 
 export default function ExploreIngredient() {
   return (
-    <section>
+    <section className="body">
       <Header showExploreIcon pageTitle="Explorar Ingredientes" />
       <Ingredients />
       <Footer />

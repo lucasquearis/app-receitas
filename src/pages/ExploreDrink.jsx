@@ -5,7 +5,7 @@ import ExploreRecipes from '../components/ExploreRecipes';
 
 export default function ExploreDrink() {
   return (
-    <section>
+    <section className="body">
       <Header showExploreIcon pageTitle="Explorar Bebidas" />
       <ExploreRecipes />
       <Footer />

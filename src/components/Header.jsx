@@ -14,7 +14,7 @@ export default function Header(
 ) {
   return (
     <div>
-      <header style={ { display: 'flex', justifyContent: 'space-around' } }>
+      <header className="d-flex navbar fixed-top justify-content-around bg-color">
         <nav>
           {!showProfileIcon
             ? (
