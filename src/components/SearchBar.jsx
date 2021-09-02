@@ -12,7 +12,7 @@ function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });
   const dispatch = useDispatch();
   const { meals } = useSelector((state) => state.recipes.foods);
-  const drinks = useSelector((state) => state.recipes.foods.drinks);
+  const { drinks } = useSelector((state) => state.recipes.foods);
   const handleChange = ({ target: { value, name } }) => {
     setSearch({ ...search, [name]: value });
   };
