@@ -10,6 +10,8 @@
   background-color: rgba(255, 255, 255, 0.158);
   border-radius: 4px;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .remove-line {
@@ -18,10 +20,15 @@
   text-decoration: none;
 }
 
+
 .space-btn {
   color: aliceblue;
   justify-content: space-between;
   margin-bottom: 5px;
   margin-top: 5px;
   padding: 5px;
+
+.card-img {
+  width: 140px;
+
 }
