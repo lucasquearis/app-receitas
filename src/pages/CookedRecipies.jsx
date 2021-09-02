@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import DoneRecipesCard from '../components/DoneRecipesCard';
+import CookedRecipesCard from '../components/CookedRecipesCard';
 import Header from '../components/Header';
 
 function CookedRecipies() {
@@ -38,7 +38,7 @@ function CookedRecipies() {
         Drinks
       </Button>
       {doneRecipes.map((item) => (
-        <DoneRecipesCard
+        <CookedRecipesCard
           key={ item.id }
           id={ item.id }
           type={ item.type }
