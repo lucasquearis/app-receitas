@@ -1,32 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { fetchArea } from '../services/areaAPI';
-import { fetchInicialFoods } from '../services/mealAPI';
+import { fetchArea, fetchMeals, fetchRegionMeal } from '../services/areaAPI';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
 
 function ExploreArea() {
-  const [area, setArea] = useState();
-  const [selectedArea, setSelectedArea] = useState();
-  const [mealsArea, setMealsArea] = useState();
+  const [area, setArea] = useState([]);
+  const [selectedArea, setSelectedArea] = useState('All');
+  const [mealsAll, setMealsAll] = useState([]);
+  const [mealsArea, setMealsArea] = useState({});
+
+  const NUMBER_ELEVEN = 11;
 
   useEffect(() => {
-    fetchArea().
-      then((response) => setArea(response.meals));
+    fetchArea().then((response) => setArea(response.meals));
   });
 
   useEffect(() => {
-    fetchInicialFoods().
-      then((response) => setMealsArea(response));
-  }, []);
-  console.log(mealsArea);
+    fetchMeals().then((response) => setMealsAll(response.meals));
+  });
 
-  const selectArea = () => {
-    mealsArea.forEach((mealObj) => {
-      if (selectedArea === mealObj.strArea) {
-        return <Cards element={ mealObj } index="0" type="Meal" />;
+  useEffect(() => {
+    fetchRegionMeal(selectedArea).then((response) => setMealsArea(response.meals));
+  }, [selectedArea]);
+
+  const select = () => {
+    switch (true) {
+    case selectedArea !== 'All': {
+      if (mealsArea) {
+        return mealsArea.map((meal, index) => (
+          <Cards key={ index } element={ meal } index={ index } type="Meal" />
+        ));
       }
-    })
-  }
+      break;
+    }
+    case selectedArea === 'All': {
+      if (mealsAll) {
+        return mealsAll.filter((_e, index) => (index <= NUMBER_ELEVEN)).map((meal, i) => (
+          <Cards key={ i } element={ meal } index={ i } type="Meal" />
+        ));
+      }
+      break;
+    }
+    default:
+      break;
+    }
+  };
 
   return (
     <>
@@ -34,24 +52,23 @@ function ExploreArea() {
       <div>
         <select
           data-testid="explore-by-area-dropdown"
+          onChange={ ({ target: { value } }) => setSelectedArea(value) }
         >
           <option
             data-testid="All-option"
-            onChange={ ({ target: { value } }) => setSelectedArea(value) }
           >
             All
           </option>
           { area ? area.map(({ strArea }) => (
             <option
-              key={ `${ strArea }-key` }
-              data-testid={ `${ strArea }-option` }
-              onChange={ ({ target: { value } }) => setSelectedArea(value) }
+              key={ `${strArea}-key` }
+              data-testid={ `${strArea}-option` }
             >
               { strArea }
             </option>
           )) : null }
         </select>
-        { selectArea() }
+        { select() }
       </div>
     </>
   );

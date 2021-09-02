@@ -9,7 +9,8 @@ function FoodProvider({ children }) {
   const [foodRandom, setFoodRandom] = useState(0);
   const [area, setArea] = useState([]);
   const [selectedArea, setSelectedArea] = useState('All');
-  const [mealsArea, setMealsArea] = useState([]);
+  const [mealsAll, setMealsAll] = useState([]);
+  const [mealsArea, setMealsArea] = useState({});
 
   useEffect(() => {
     fetchInicialFoods().then(({ meals }) => setFoods(meals));
@@ -27,6 +28,8 @@ function FoodProvider({ children }) {
     setArea,
     selectedArea,
     setSelectedArea,
+    mealsAll,
+    setMealsAll,
     mealsArea,
     setMealsArea,
   };

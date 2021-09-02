@@ -11,6 +11,7 @@ import FoodDetails from './pages/FoodDetails';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreArea from './pages/ExploreArea';
+import NotFound from './pages/NotFound.jsx';
 
 function Routes() {
   return (
@@ -23,6 +24,7 @@ function Routes() {
       <Route path={ `/comidas/${1}/in-progress` } component={ FoodDetails } />
       <Route path={ `/bebidas/${1}/in-progress` } component={ DrinkDetails } />
       <Route exact path="/explorar" component={ Explore } />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route path="/explorar/comidas/area" component={ ExploreArea } />
       <Route path="/explorar/comidas/ingredientes" component={ null } />
       <Route path="/explorar/bebidas/ingredientes" component={ null } />
