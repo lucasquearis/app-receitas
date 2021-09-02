@@ -11,7 +11,9 @@ function Foods() {
     requestCategory,
     setFoodRecipes,
     setFoodCategories,
+    redirect,
     foodCategoryAPI } = useContext(Context);
+
   const { loading } = foodRecipes;
   const { list } = foodRecipes;
   const INITIAL_API = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -19,7 +21,9 @@ function Foods() {
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-    requestCategory(API, setFoodRecipes);
+    if (!redirect) {
+      requestCategory(API, setFoodRecipes);
+    }
     requestCategory(foodCategoryAPI, setFoodCategories);
   }, [API]);
 

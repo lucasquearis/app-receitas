@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
@@ -14,6 +14,7 @@ function ExploreButtons({ type }) {
     drinkRecipes: { loading: drinkLoading },
   } = useContext(Context);
   const history = useHistory();
+  const [surprise, setSurprise] = useState(false);
   const typeFood = () => type === 'foods';
   const isLoading = foodLoading && drinkLoading;
   const redirectButtonArea = () => {
@@ -50,6 +51,7 @@ function ExploreButtons({ type }) {
 
   const handleSurpriseClick = () => {
     const urlType = type === 'foods' ? 'meal' : 'cocktail';
+    setSurprise(true);
     requestRandomAPI(urlType);
   };
 
@@ -66,9 +68,11 @@ function ExploreButtons({ type }) {
         onClick={ () => handleSurpriseClick() }
       />
       {!isLoading
+      && surprise
       && type === 'foods'
       && <Redirect to={ `/comidas/${foodRecipes.list.meals[0].idMeal}` } />}
       {!isLoading
+      && surprise
       && type !== 'foods'
       && <Redirect to={ `/bebidas/${drinkRecipes.list.drinks[0].idDrink}` } />}
       {showAreaButton()}
