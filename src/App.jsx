@@ -12,7 +12,7 @@ import ExploreFoods from './pages/Explore/ExploreFoods';
 import ExploreDrinks from './pages/Explore/ExploreDrinks';
 import FoodByIngredients from './pages/Explore/FoodByIngredients';
 import DrinksByIngredients from './pages/Explore/DrinksByIngredients';
-import ExploreByArea from './pages/Explore/ExploreByArea';
+import ExploreByArea from './pages/ExploreByArea';
 import FoodInProgress from './pages/FoodInProgress';
 import DrinkInProgress from './pages/DrinkInProgress';
 import Profile from './pages/Profile';

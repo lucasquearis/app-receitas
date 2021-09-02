@@ -127,6 +127,26 @@ export const fetchFirstLetterDrinks = async (firstLetter) => {
   }
 };
 
+export const fetchMealsArea = async () => {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchRecipesByArea = async (area) => {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const copyToClipboard = () => {
   copy(window.location.href);
   return true;
