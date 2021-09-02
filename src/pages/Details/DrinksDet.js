@@ -78,9 +78,8 @@ function DrinksDetails() {
   useEffect(() => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const filterDoneRecipes = getDoneRecipes ? getDoneRecipes
-      .filter((item) => console.log(item.id) === parseInt(id, 10)) : [];
+      .filter((item) => item.id === id) : [];
     setDoneRecipes(filterDoneRecipes);
-    // console.log(filterDoneRecipes);
 
     const getInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const filterInProgress = getInProgress ? Object.keys(getInProgress.cocktails)

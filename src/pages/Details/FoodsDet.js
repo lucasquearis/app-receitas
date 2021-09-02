@@ -14,11 +14,16 @@ const responsive = {
   },
 };
 
+// const teste = [{
+//   id: '52977',
+// }];
+// localStorage.setItem('doneRecipes', JSON.stringify(teste));
+
 function FoodDetails() {
   const [recipesFood, setRecipesFood] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const [recipesRecommendations, setRecipesRecommendations] = useState([]);
+  // const [recipesRecommendations, setRecipesRecommendations] = useState([]);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const { id } = useParams();
@@ -69,7 +74,7 @@ function FoodDetails() {
   useEffect(() => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     const filterDoneRecipes = getDoneRecipes ? getDoneRecipes
-      .filter((item) => item.id === parseInt(id, 10)) : [];
+      .filter((item) => item.id === id) : [];
     setDoneRecipes(filterDoneRecipes);
 
     const getInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
