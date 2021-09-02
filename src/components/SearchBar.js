@@ -54,7 +54,6 @@ export default function SearchBar() {
   };
 
   const handleInputText = ({ target: { value } }) => setSearchInput(value);
-
   const handleChange = ({ target: { id } }) => setSearchRadio(id);
 
   return (
