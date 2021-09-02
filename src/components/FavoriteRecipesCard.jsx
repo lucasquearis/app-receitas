@@ -15,35 +15,38 @@ export default function FavoriteRecipesCard({
   id,
 }) {
   return (
-    <Link to={ `/${type}s/${id}` }>
-      <div>
+    <div>
+      <Link to={ `/${type}s/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="foto-da-api-"
         />
+        <p
+          data-testid={ `${index}-horizontal-name` }
+        >
+          { name }
+        </p>
+      </Link>
+      <div>
         <div>
-          <div>
-            <p
-              Data-testid={ `${index}-horizontal-top-text` }
-            >
-              { category }
-            </p>
-            <ShareButton data-testid={ `${index}-horizontal-share-btn` } />
-            <FavoriteButton />
-          </div>
-          <p>
-            { alcoholicOrNot }
-            { area }
-          </p>
           <p
-            data-testid={ `${index}-horizontal-name` }
+            Data-testid={ `${index}-horizontal-top-text` }
           >
-            { name }
+            { category }
           </p>
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            { alcoholicOrNot }
+            { `${area} - ${category}` }
+          </p>
+          <ShareButton datatestid={ `${index}-horizontal-share-btn` } />
+          <FavoriteButton datatestid={ `${index}-horizontal-favorite-btn` } />
         </div>
+        <p>
+          { alcoholicOrNot }
+        </p>
       </div>
-    </Link>
+    </div>
 
   );
 }

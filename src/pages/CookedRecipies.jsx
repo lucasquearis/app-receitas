@@ -9,22 +9,23 @@ function CookedRecipies() {
   useEffect(() => {
     setDoneRecipes(local);
   }, []);
-  console.log(local);
+
+  const filterAll = () => {
+    setDoneRecipes(local);
+  };
 
   const filterType = (type) => {
-    console.log(type);
-    if (type === 'all') {
-      setDoneRecipes(doneRecipes);
-    } else {
-      const filteredFood = doneRecipes.filter((item) => item.type === type);
-      setDoneRecipes(filteredFood);
-    }
+    filterAll();
+    const filteredFood = doneRecipes.filter((item) => item.type === type);
+    console.log(filteredFood);
+    setDoneRecipes(filteredFood);
   };
+
   return (
     <div>
       <Header title="Receitas Feitas" />
       <Button
-        onClick={ () => filterType('all') }
+        onClick={ filterAll }
         data-testid="filter-by-all-btn"
       >
         All

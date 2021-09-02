@@ -38,7 +38,7 @@ const FavoriteChanger = (itFavoriteOrNot, Recipe, id, type) => {
 };
 
 function FavoriteButton(props) {
-  const { id, recipe, type } = props;
+  const { id, recipe, type, datatestid } = props;
   const initialfavorite = getFavorite(id);
   const [favorbutton, setfavorite] = useState(initialfavorite ? bIcon : wIcon);
 
@@ -53,7 +53,7 @@ function FavoriteButton(props) {
         setfavorite(FavoriteChanger(getFavorite(id), recipe, id, type));
       } }
     >
-      <img data-testid="favorite-btn" src={ favorbutton } alt="white-heart" />
+      <img data-testid={ datatestid } src={ favorbutton } alt="white-heart" />
     </button>
   );
 }
@@ -72,6 +72,7 @@ FavoriteButton.propTypes = {
     ingredients: string.isRequired,
     measures: string.isRequired,
   }).isRequired,
+  datatestid: string.isRequired,
 
 };
 

@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import FavoriteRecipesCard from '../components/FavoriteRecipesCard';
 
 function FavoriteRecipies() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  const local = JSON.parse(localStorage.getItem('favoriteFood'));
-  setFavoriteRecipes(local);
+  const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  useEffect(() => {
+    setFavoriteRecipes(local);
+  }, []);
+  console.log(local);
 
   const filterType = (type) => {
     if (type === 'all') {
@@ -37,9 +40,10 @@ function FavoriteRecipies() {
       >
         Drinks
       </Button>
-      {favoriteRecipes.map((item) => (
+      {favoriteRecipes.map((item, index) => (
         <FavoriteRecipesCard
           key={ item.id }
+          index={ index }
           id={ item.id }
           type={ item.type }
           category={ item.category }
