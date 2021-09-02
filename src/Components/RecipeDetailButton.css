@@ -5,6 +5,10 @@
 
 .recipeButtonContainer .recipeButton {
   bottom: 0;
+  font-size: 29px;
+  left: 10%;
+  padding: 5px 0;
   position: fixed;
+  width: 75%;
   z-index: 2;
 }

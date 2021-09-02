@@ -1,4 +1,4 @@
-.recipeDetails {
+.recipeInProgress {
   background-color: #e5e5e5;
   overflow-y: scroll;
   position: absolute;
@@ -6,7 +6,7 @@
   z-index: 1;
 }
 
-.recipeDetailImage {
+.recipeInProgressImage {
   border-radius: 0 0 30px 30px;
   height: 260px;
   position: absolute;
@@ -50,7 +50,7 @@
   margin: 5px;
 }
 
-.recipeDetails h3 {
+.recipeInProgress h3 {
   color: #606c38;
   font-size: 26px;
   font-weight: 700;
@@ -58,11 +58,6 @@
   text-align: center;
 }
 
-.ingredientsContainer ul {
-  list-style: none;
-  padding-inline-start: 20px;
-}
-
-.videoContainer iframe {
-  border-radius: 10px;
+.recipeInProgress .ingredientsContainer input {
+  margin-right: 5px;
 }

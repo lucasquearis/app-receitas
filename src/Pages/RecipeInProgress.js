@@ -10,6 +10,8 @@ import RecipeDetailInstructions from '../Components/RecipeDetailInstructions';
 import RecipeInProgressIngredients from '../Components/RecipeInProgressIngredients';
 import RecipeInProgressButton from '../Components/RecipeInProgressButton';
 
+import './RecipeInProgress.css';
+
 function RecipeInProgress({ type }) {
   const [recipe, setRecipe] = useState({});
   const [ingredientsEMeasuresList, setIngredientsEMeasuresList] = useState([]);
@@ -62,23 +64,23 @@ function RecipeInProgress({ type }) {
 
   if (recipe !== {}) {
     return (
-      <div className="recipeDetails">
+      <div className="recipeInProgress">
         <img
-          width="100%"
-          height="200px"
           src={ recipe.strMealThumb || recipe.strDrinkThumb }
           alt="Recipe"
           data-testid="recipe-photo"
+          className="recipeInProgressImage"
         />
-        <RecipeDetailHeader type={ type } recipe={ recipe } recipeID={ recipeID } />
-        <RecipeInProgressIngredients
-          ingredientList={ ingredientsEMeasuresList }
-          type={ type }
-          recipeID={ recipeID }
-        />
-        <RecipeDetailInstructions recipe={ recipe } />
-
-        <RecipeInProgressButton type={ type } recipe={ recipe } recipeID={ recipeID } />
+        <div className="infoContainer">
+          <RecipeDetailHeader type={ type } recipe={ recipe } recipeID={ recipeID } />
+          <RecipeInProgressIngredients
+            ingredientList={ ingredientsEMeasuresList }
+            type={ type }
+            recipeID={ recipeID }
+          />
+          <RecipeDetailInstructions recipe={ recipe } />
+          <RecipeInProgressButton type={ type } recipe={ recipe } recipeID={ recipeID } />
+        </div>
       </div>
     );
   }
