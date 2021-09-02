@@ -54,7 +54,7 @@ export default function DrinksDetails(props) {
     return (<Redirect to={ `/bebidas/${id}/in-progress` } />);
   }
   return (
-    <main>
+    <main className="mainDetail">
       <img
         width="100%"
         height="250"
@@ -87,8 +87,10 @@ export default function DrinksDetails(props) {
           }
         </button>
       </div>
-      <h1 data-testid="recipe-title">{drink}</h1>
-      <p data-testid="recipe-category">{`${category} (${alcoholic})`}</p>
+      <div>
+        <h1 data-testid="recipe-title">{drink}</h1>
+        <p data-testid="recipe-category">{`${category} (${alcoholic})`}</p>
+      </div>
       <div>
         <h2>Ingredients</h2>
         <ul>
