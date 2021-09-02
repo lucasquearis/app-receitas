@@ -105,6 +105,13 @@ export const ExploreBtn = styled.div`
     font-size: 20px;
     color: whitesmoke;
   }
+  span{
+    display: block;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: whitesmoke;
+  }
   svg {
     transform: translateY(-40px);
     margin-bottom: -40px;
