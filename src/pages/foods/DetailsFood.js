@@ -8,7 +8,7 @@ import Video from '../../components/Video';
 import RecomendationsDrinks from '../../components/RecomendationsDrinks';
 import ShareButton from '../../components/shareButton';
 import fetchRecipes from '../../Redux/actions/fetchRecipes';
-import fetchDrinks from '../../Redux/actions/fetchDrinks';
+import { fetchDrinks } from '../../Redux/actions/fetchDrinks';
 import './style.css';
 
 class DetailsFood extends Component {

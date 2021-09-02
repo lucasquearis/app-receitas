@@ -11,6 +11,8 @@ import {
   RECIPE,
   RECIPE_ERROR,
   RECIPE_SUCCESS,
+  MEALS_SEARCH,
+  MEALS_SEARCH_SUCCESS,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -47,6 +49,10 @@ export default (state = INITIAL_STATE, action) => {
     return { ...state, recipes: [...action.payload], loading: false };
   case RECIPE_ERROR:
     return { ...state, error: action.payload, loading: false };
+  case MEALS_SEARCH:
+    return { ...state, loading: true };
+  case MEALS_SEARCH_SUCCESS:
+    return { ...state, meals: [...action.payload], loading: false };
   default:
     return state;
   }
