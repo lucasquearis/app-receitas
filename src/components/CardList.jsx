@@ -6,12 +6,9 @@ import Card from './Card';
 const MAXIMUM_INDEX = 11;
 
 function CardList({ list, apiType, page, onClick }) {
-  console.log(apiType);
-  console.log(page);
   const changeRender = (item, index) => {
     const food = item[`str${apiType}`];
     const drink = item[`str${apiType}1`];
-    console.log(item);
     if (apiType !== 'Ingredient') {
       return (
         <Link
@@ -45,7 +42,7 @@ function CardList({ list, apiType, page, onClick }) {
         <Card
           index={ index }
           thumb={ `https://www.thecocktaildb.com/images/ingredients/${drink}-Small.png` }
-          name={ item[`str${apiType}`] }
+          name={ item[`str${apiType}1`] }
           onClick={ onClick }
           apiType={ apiType }
         />

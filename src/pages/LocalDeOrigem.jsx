@@ -50,9 +50,9 @@ function LocalDeOrigem() {
   console.log(receitas);
   if (!area) return <p>Loading...</p>;
   return (
-    <div className="pageComida">
+    <div>
       <Header titulo="Explorar Origem" pesquisa="true" />
-      <main className="origem">
+      <main className="pageComida">
         <select
           className="select-area"
           data-testid="explore-by-area-dropdown"

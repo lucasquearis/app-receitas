@@ -8,7 +8,7 @@ import MyContext from '../context/MyContext';
 import '../cssPages/Refeicao.css';
 
 function Bebidas() {
-  const { filterByIng, renderDrinks, dataDrinks } = useContext(MyContext);
+  const { filterByIng, renderDrinks, dataDrinks, setFilterByIng } = useContext(MyContext);
   const [drinkData, setDrinkData] = useState({});
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [drink, loading, categories, setLoading] = HookBebidas();
@@ -22,6 +22,10 @@ function Bebidas() {
       categories.drinks,
     );
   }, [drink, categories]);
+
+  useEffect(() => () => {
+    setFilterByIng(null);
+  }, [setFilterByIng]);
 
   const changeRender = (condition) => {
     if (condition) {

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import fetchFoods from '../fetchs/FetchFood';
+import MyContext from '../context/MyContext';
 
 function Categories({
   type,
@@ -12,6 +13,7 @@ function Categories({
   toggle,
   toggleCallback,
 }) {
+  const { setFilterByIng } = useContext(MyContext);
   const MAXIMUM_INDEX = 4;
 
   const fetchActions = {
@@ -20,6 +22,7 @@ function Categories({
   };
 
   const handleCategoryButton = async ({ target }) => {
+    setFilterByIng(null);
     setLoading(true);
     const value = target.innerText;
     const result = toggle === value || value === 'All'
@@ -28,6 +31,8 @@ function Categories({
     callback(result);
     setLoading(false);
     toggleCallback(value);
+    target.classList.add('abc');
+    console.log(target.classList);
   };
 
   return (

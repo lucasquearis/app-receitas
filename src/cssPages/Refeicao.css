@@ -37,12 +37,17 @@ body {
   border: black solid 1px;
   border-radius: 5px;
   color: black;
-  font-size: 2.5vh;
-  height: 25px;
-  line-height: 2px;
+  font-size: 1rem;
   margin: 2px;
-  max-width: 180px;
-  width: 30vw;
+  min-height: 25px;
+  min-width: 10vw;
+}
+
+@media screen and ( max-width : 400px ) {
+
+  .btnCategorias {
+    min-width: 45%;
+  }
 }
 
 .cardContainer {
