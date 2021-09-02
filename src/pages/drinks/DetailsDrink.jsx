@@ -5,6 +5,7 @@ import RecommendationCard from '../../components/RecommendationCard';
 import './detailsDrink.css';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import StartRecipeButton from '../../components/StartRecipeButton';
+import Loading from '../../components/Loading';
 
 function DetailsDrink({ match: { params: { id } } }) {
   const [state, setState] = useState({
@@ -61,7 +62,7 @@ function DetailsDrink({ match: { params: { id } } }) {
 
   useEffect(initialUpdate);
 
-  if (isLoading) return <div>Carregando...</div>;
+  if (isLoading) return <Loading />;
 
   const keysDrinks = Object.keys(drink);
 

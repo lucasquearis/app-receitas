@@ -1,0 +1,61 @@
+.perfilPage {
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.logo-email-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(60% - 95px);
+  justify-content: space-around;
+  padding-bottom: 50px;
+}
+
+.profile-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.btn-container-profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  justify-content: space-around;
+  padding-bottom: 51px;
+  width: 100%;
+}
+
+.proile-btn {
+  align-items: center;
+  background-color: #673;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px gray;
+  color: white;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  justify-content: center;
+  outline: none;
+  width: 90%;
+}
+
+.proile-btn button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.proile-btn:active {
+  box-shadow: none;
+}

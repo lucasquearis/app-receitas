@@ -3,6 +3,9 @@ import { fetchAreas, fetchByArea, fetchSearchFoodsApi } from '../../services/fet
 import Header from '../../components/Header';
 import RecipeCard from '../../components/RecipeCard';
 import Footer from '../../components/Footer';
+import './exploreFoodsByArea.css';
+import '../foods/FoodRecipeCards';
+import Loading from '../../components/Loading';
 
 export default function ExploreFoodsByArea() {
   const [isMounted, setIsMounted] = useState(false);
@@ -50,29 +53,32 @@ export default function ExploreFoodsByArea() {
   return (
     <>
       <Header title="Explorar Origem" showButton foodPage />
-      <select
-        data-testid="explore-by-area-dropdown"
-        onChange={ setArea }
-      >
-        <option
-          value=""
-          data-testid="All-option"
+      <section className="dropdown-container">
+        <select
+          data-testid="explore-by-area-dropdown"
+          onChange={ setArea }
+          className="select-explore"
         >
-          All
-        </option>
-        {areas.map(({ strArea }, index) => (
           <option
-            key={ strArea + index }
-            value={ strArea }
-            data-testid={ `${strArea}-option` }
+            value=""
+            data-testid="All-option"
           >
-            {strArea}
+            All
           </option>
-        ))}
-      </select>
-      <section>
+          {areas.map(({ strArea }, index) => (
+            <option
+              key={ strArea + index }
+              value={ strArea }
+              data-testid={ `${strArea}-option` }
+            >
+              {strArea}
+            </option>
+          ))}
+        </select>
+      </section>
+      <section className="food-recipes">
         {isLoading
-          ? <div>Carregando ...</div>
+          ? <Loading />
           : recipes.map((recipe, index) => (
             <RecipeCard
               key={ index }

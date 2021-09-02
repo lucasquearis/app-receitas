@@ -35,4 +35,5 @@ body::-webkit-scrollbar-thumb {
 
 #root {
   height: 100%;
+  width: 100%;
 }

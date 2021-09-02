@@ -23,30 +23,32 @@ export default function ExploreFoods() {
   return (
     <section>
       <Header title="Explorar Comidas" />
-      <h1>Explorar Comidas</h1>
-      <Link to="/explorar/comidas/ingredientes">
+      <section className="btn-container">
+        <Link to="/explorar/comidas/ingredientes" className="explore-btn">
+          <button
+            data-testid="explore-by-ingredient"
+            type="button"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
+        <Link to="/explorar/comidas/area" className="explore-btn">
+          <button
+            data-testid="explore-by-area"
+            type="button"
+          >
+            Por Local de Origem
+          </button>
+        </Link>
         <button
-          data-testid="explore-by-ingredient"
+          data-testid="explore-surprise"
           type="button"
+          onClick={ getRandomFood }
+          className="explore-btn"
         >
-          Por Ingredientes
+          Me Surpreenda!
         </button>
-      </Link>
-      <Link to="/explorar/comidas/area">
-        <button
-          data-testid="explore-by-area"
-          type="button"
-        >
-          Por Local de Origem
-        </button>
-      </Link>
-      <button
-        data-testid="explore-surprise"
-        type="button"
-        onClick={ getRandomFood }
-      >
-        Me Surpreenda!
-      </button>
+      </section>
       <Footer />
     </section>
   );

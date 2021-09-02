@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import IngredientsCard from '../../components/IngredientsCard';
 import { fetchIngredientsFoodsApi } from '../../services/fetchApi';
 import { setIngredient } from '../../redux/actions';
+import Loading from '../../components/Loading';
 
 function ExploreIngredientsFood({ changeIngredient }) {
   const [isMount, setIsMount] = useState(false);
@@ -33,7 +34,7 @@ function ExploreIngredientsFood({ changeIngredient }) {
     }
   });
   if (redirect) return <Redirect to="/comidas" />;
-  if (isLoading) return <p>Carregando...</p>;
+  if (isLoading) return <Loading />;
 
   return (
     <>

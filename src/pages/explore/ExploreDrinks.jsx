@@ -24,22 +24,24 @@ export default function ExploreDrinks() {
   return (
     <section>
       <Header title="Explorar Bebidas" />
-      <h1>Explorar Bebidas</h1>
-      <Link to="/explorar/bebidas/ingredientes">
+      <section className="btn-container">
+        <Link to="/explorar/bebidas/ingredientes" className="explore-btn">
+          <button
+            data-testid="explore-by-ingredient"
+            type="button"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
         <button
-          data-testid="explore-by-ingredient"
+          data-testid="explore-surprise"
           type="button"
+          onClick={ getRandomDrink }
+          className="explore-btn"
         >
-          Por Ingredientes
+          Me Surpreenda!
         </button>
-      </Link>
-      <button
-        data-testid="explore-surprise"
-        type="button"
-        onClick={ getRandomDrink }
-      >
-        Me Surpreenda!
-      </button>
+      </section>
       <Footer />
     </section>
   );
