@@ -32,7 +32,6 @@ function FoodDetails() {
     verificationDoneRecipe,
     verificationProgressRecipe, recipe]);
 
-
   const handleRedirect = () => {
     push({ pathname: `/comidas/${id}/in-progress`,
       search: '?query=abc',

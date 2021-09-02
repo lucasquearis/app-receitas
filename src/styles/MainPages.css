@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap') ;
 
 
-main body {
+main body section {
   display: grid;
   grid-template-areas: 'header''btns''cards''footer';
   grid-template-rows: 0.2fr 0.6fr 3fr 0.2fr;
@@ -46,7 +46,7 @@ main body {
   display: flex;
   font-size: 8px;
   grid-area: btns;
-  margin-top: 50px;
+  margin-top: 68px;
   position: fixed;
   width: 100%;
 }
@@ -55,7 +55,7 @@ main body {
   align-items: center;
   background-image: url('../images/background3.jpg');
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
   grid-area: cards;
   scroll-behavior: smooth;
   width: 100%;
@@ -76,18 +76,24 @@ footer {
   border-radius: 18px;
   color: #940022;
   font-family: Leckerli One , Courier New , Courier , monospace;
-  font-size: 24px;
-  height: 350px;
-  margin: 10px;
+  font-size: 16px;
+  height: 180px;
+  margin: 5px;
   padding: 15px;
   text-align: center;
   text-decoration: none;
-  width: 80%;
+  width: 30%;
 }
 
 .recipe-cards img {
   border-radius: 18px;
   max-height: 60%;
   max-width: 98%;
+}
+
+.search-bar {
+  background-color: white;
+  margin-top: 68px;
+  position: fixed;
 }
 

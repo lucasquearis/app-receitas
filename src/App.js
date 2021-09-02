@@ -14,7 +14,6 @@ import FoodDetails from './Pages/FoodDetails';
 import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
 import DrinksDetails from './Pages/DrinksDetails';
 
-
 function App() {
   return (
     <Switch>

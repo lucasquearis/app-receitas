@@ -1,6 +1,7 @@
 import getFood from '../../services/FetchFoods';
 import getDrink from '../../services/FetchDrinks';
 
+export const CHANGE_FOOD_SEARCH = 'CHANGE_FOOD_SEARCH';
 export const GET_FOODS_SUCCESS = 'GET_FOODS_SUCCESS';
 export const GET_DRINKS_SUCCESS = 'GET_DRINKS_SUCCESS';
 
@@ -27,3 +28,8 @@ export function getDrinksApi(api) {
     dispatch(getDrinksSuccess(cocktail));
   };
 }
+
+export const changeFoodSearch = (search) => ({
+  type: CHANGE_FOOD_SEARCH,
+  payload: search,
+});
