@@ -9,15 +9,15 @@ export default function MenuFooter() {
   return (
     <div className="footerMenu">
       <footer data-testid="footer">
-        <Link to="/bebidas">
+        <Link to="/bebidas" className="fixed">
           <img data-testid="drinks-bottom-btn" src={ drink } alt="icon drink" />
         </Link>
 
-        <Link to="/explorar">
+        <Link to="/explorar" className="fixed">
           <img data-testid="explore-bottom-btn" src={ explore } alt="icon explore" />
         </Link>
 
-        <Link to="/comidas">
+        <Link to="/comidas" className="fixed">
           <img data-testid="food-bottom-btn" src={ food } alt="icon food" />
         </Link>
       </footer>
