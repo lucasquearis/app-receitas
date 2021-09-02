@@ -8,7 +8,6 @@ function HeaderSearchBar() {
   const { pathname } = useLocation();
   const history = useHistory();
 
-  // const [fetch, setFetch] = useState(false);
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [data, setData] = useState({});

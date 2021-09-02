@@ -16,7 +16,6 @@ function ExploreByIngredient(title) {
 
   const [foods, setFood] = useState([]);
   const [bavarages, setDrink] = useState([]);
-
   const { pathname } = useLocation();
 
   const resolveFood = async () => {
@@ -39,10 +38,6 @@ function ExploreByIngredient(title) {
     };
     verifyPathname();
   }, [pathname]);
-
-  if (foods.length || bavarages.length) {
-    console.log(bavarages);
-  }
 
   const maxList = 12;
 
