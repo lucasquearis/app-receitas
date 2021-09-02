@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ShareButton from './shareButton';
+import ShareButton from './ShareButton';
 
 class RecipesMadeCard extends Component {
   constructor(props) {

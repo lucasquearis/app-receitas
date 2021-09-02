@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import IngredientsDrink from '../../components/IngredientsDrink';
 import Instructions from '../../components/Instructions';
 import RecomendationsFoods from '../../components/RecomendationsFoods';
-import ShareButton from '../../components/shareButton';
+import ShareButton from '../../components/ShareButton';
 import FavoriteButton from '../../components/FavoriteButton';
 import fetchCocktail from '../../Redux/actions/fetchCocktail';
 import fetchMeals from '../../Redux/actions/fetchMeals';

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ShareButton from './shareButton';
-import WhiteHeartIcon from '../images/whiteHeartIcon.svg';
+import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
 
 class RecipesFavoriteCard extends Component {
   constructor(props) {
@@ -58,13 +58,10 @@ class RecipesFavoriteCard extends Component {
               id={ id }
               type={ type }
             />
-            <button type="button" className="share-fill">
-              <img
-                src={ WhiteHeartIcon }
-                alt="favorite button"
-                data-testid={ `${index}-horizontal-favorite-btn` }
-              />
-            </button>
+            <FavoriteButton
+              position={ index }
+              favorite
+            />
           </div>
         </div>
       </div>
@@ -105,13 +102,10 @@ class RecipesFavoriteCard extends Component {
               id={ id }
               type={ type }
             />
-            <button type="button" className="share-fill">
-              <img
-                src={ WhiteHeartIcon }
-                alt="favorite button"
-                data-testid={ `${index}-horizontal-favorite-btn` }
-              />
-            </button>
+            <FavoriteButton
+              position={ index }
+              favorite
+            />
           </div>
         </div>
       </div>

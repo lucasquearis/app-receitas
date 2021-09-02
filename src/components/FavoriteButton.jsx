@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import WhiteHeartIcon from '../images/whiteHeartIcon.svg';
 import BlackHeartIcon from '../images/blackHeartIcon.svg';
 
@@ -9,9 +10,13 @@ class FavoriteButton extends Component {
     this.state = {
       favorito: false,
     };
-    this.white = this.white.bind(this);
-    this.black = this.black.bind(this);
+
     this.handleClick = this.handleClick.bind(this);
+    this.setState = this.setState.bind(this);
+  }
+
+  componentDidMount() {
+    this.setFavorite();
   }
 
   handleClick() {
@@ -20,51 +25,33 @@ class FavoriteButton extends Component {
     if (!favorito) this.setState({ favorito: true });
   }
 
-  white() {
-    const { favorito } = this.state;
-    if (favorito === false) {
-      return (
-        <button
-          type="button"
-          className="share-fill"
-          onClick={ this.handleClick }
-        >
-          <img
-            src={ WhiteHeartIcon }
-            alt="favorite button"
-            data-testid="favorite-btn"
-          />
-        </button>
-      );
-    }
-  }
-
-  black() {
-    const { favorito } = this.state;
-    if (favorito === true) {
-      return (
-        <button
-          type="button"
-          className="share-fill"
-          onClick={ this.handleClick }
-        >
-          <img
-            src={ BlackHeartIcon }
-            alt="favorite button"
-            data-testid="favorite-btn"
-          />
-        </button>
-      );
-    }
+  setFavorite() {
+    const { favorite } = this.props;
+    this.setState({ favorito: favorite });
   }
 
   render() {
-    const blackButton = this.black();
-    const whiteButton = this.white();
     const { favorito } = this.state;
-    if (favorito === false) return whiteButton;
-    if (favorito === true) return blackButton;
+    const { position } = this.props;
+
+    return (
+      <button
+        type="button"
+        className="share-fill"
+        onClick={ this.handleClick }
+      >
+        <img
+          src={ favorito ? BlackHeartIcon : WhiteHeartIcon }
+          alt="favorite button"
+          data-testid={ `${position}-horizontal-favorite-btn` }
+        />
+      </button>
+    );
   }
 }
 
 export default FavoriteButton;
+
+FavoriteButton.propTypes = {
+  index: PropTypes.number,
+}.isRequired;

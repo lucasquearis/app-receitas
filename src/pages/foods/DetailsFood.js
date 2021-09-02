@@ -7,7 +7,7 @@ import Instructions from '../../components/Instructions';
 import Video from '../../components/Video';
 import RecomendationsDrinks from '../../components/RecomendationsDrinks';
 import FavoriteButton from '../../components/FavoriteButton';
-import ShareButton from '../../components/shareButton';
+import ShareButton from '../../components/ShareButton';
 import fetchRecipes from '../../Redux/actions/fetchRecipes';
 import fetchDrinks from '../../Redux/actions/fetchDrinks';
 import './style.css';
