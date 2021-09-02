@@ -14,14 +14,10 @@ function SearchBar() {
   const { removeDisplayList } = useContext(myContext);
   const dispatch = useDispatch();
   const { meals } = useSelector((state) => state.recipes.foods);
-  const { drinks } = useSelector((state) => state.recipes.foods);
+  const drinks = useSelector((state) => state.recipes.foods.drinks);
 
   const handleChange = ({ target: { value, name } }) => {
-    if (search) {
-      setSearch({ ...search, [name]: value });
-    } else {
-      setSearch({ [name]: value });
-    }
+    setSearch({ ...search, [name]: value });
   };
 
   const requestIngredient = (value) => {
