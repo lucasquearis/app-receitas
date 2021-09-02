@@ -6,14 +6,14 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 import favoriteRecipes from '../helper/setLocalStorage';
 
-function Button({ recipe }) {
+function Button({ recipe, type }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
     localStorage.setItem('favoriteRecipes',
-      JSON.stringify(favoriteRecipes(recipe, 'comida')));
+      JSON.stringify(favoriteRecipes(recipe, type)));
   };
 
   const handleShare = async () => {
@@ -54,6 +54,7 @@ function Button({ recipe }) {
 
 Button.propTypes = {
   recipe: objectOf(string).isRequired,
+  type: string.isRequired,
 };
 
 export default Button;

@@ -33,28 +33,17 @@ export async function getMealsRecommendations() {
 }
 
 export function verificationDoneRecipe(id) {
-  const response = JSON.parse(localStorage.getItem('doneRecipes'));
-  if (response !== null) {
-    const result = response.some((item) => item.id === id);
+  const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (doneRecipe) {
+    const result = doneRecipe.some((item) => item.id === id);
     return result;
   } return false;
 }
 
-export function verificationProgressRecipe(id, type) {
-  const idRecipe = [];
-  const history = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (!history) {
-    if (type === 'meals') {
-      const { meals } = history;
-      idRecipe.push(Object.keys(meals));
-    } else {
-      const { cocktails } = history;
-      idRecipe.push(Object.keys(cocktails));
-    } return idRecipe.some((item) => item === id);
-  } return false;
+export function verificatioinProgressRecipe(id) {
+  let inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!inProgress) inProgress = [];
+  const categories = Object.keys(inProgress);
+  const idRecipe = categories.map((item) => Object.keys(inProgress[item]));
+  return idRecipe.some((item) => item[0] === id);
 }
-
-/* if (idRecipe.length > 0) {
-  const result = idRecipe.some((item) => item === id);
-  return result;
-} */

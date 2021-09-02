@@ -2,7 +2,7 @@ import React from 'react';
 import { string, objectOf } from 'prop-types';
 import Button from './Button';
 
-function RecipeHeader({ thumb, title, category, recipe }) {
+function RecipeHeader({ thumb, title, category, recipe, type }) {
   return (
     <header>
       <img
@@ -12,7 +12,7 @@ function RecipeHeader({ thumb, title, category, recipe }) {
       />
       <h1 data-testid="recipe-title">{ title }</h1>
       <h2 data-testid="recipe-category">{ category }</h2>
-      <Button recipe={ recipe } />
+      <Button recipe={ recipe } type={ type } />
     </header>
   );
 }
@@ -22,6 +22,7 @@ RecipeHeader.propTypes = {
   thumb: string.isRequired,
   category: string.isRequired,
   recipe: objectOf(string).isRequired,
+  type: string.isRequired,
 };
 
 export default RecipeHeader;

@@ -1,36 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import Carousel from 'react-bootstrap/Carousel';
 import Loading from '../Components/Loading';
 import RecipeHeader from '../Components/RecipeHeader';
 import IngredientsAndMeasures from '../Components/IngredientsAndMeasures';
-import { createRecomendationsDrink } from '../helper/renderRecomendations';
 import * as required from '../helper/requiredDetails';
+import RenderRecommendations from '../Components/RenderRecommendations';
 
 function FoodDetails() {
-  const [recipe, setRecipe] = useState({});
-  const [recomendation, setRecomendation] = useState([]);
+  const [recipe, setRecipe] = useState([]);
+  const [recommendation, setRecommendation] = useState([]);
   const [doneRecipe, setDoneRecipe] = useState(true);
   const [progressRecipe, setProgressRecipe] = useState(false);
+
   const { id } = useParams();
   const { push } = useHistory();
 
   const { consultFood,
     getDrinkRecommendations,
     verificationDoneRecipe,
-    verificationProgressRecipe } = required;
+    verificatioinProgressRecipe } = required;
 
   useEffect(() => {
-    setRecipe(consultFood(id));
-    setRecomendation(getDrinkRecommendations);
-    setDoneRecipe(verificationDoneRecipe(id));
-    setProgressRecipe(verificationProgressRecipe(id, 'meals'));
-    console.log(recipe);
+    async function waitingForReturn() {
+      setRecipe(await consultFood(id));
+      setRecommendation(await getDrinkRecommendations());
+      setDoneRecipe(verificationDoneRecipe(id));
+      setProgressRecipe(verificatioinProgressRecipe(id));
+    }
+    waitingForReturn();
   }, [id, consultFood,
     getDrinkRecommendations,
     verificationDoneRecipe,
-    verificationProgressRecipe, recipe]);
+    verificatioinProgressRecipe]);
 
   const handleRedirect = () => {
     push({ pathname: `/comidas/${id}/in-progress`,
@@ -48,6 +50,7 @@ function FoodDetails() {
         title={ recipe.strMeal }
         category={ recipe.strCategory }
         recipe={ recipe }
+        type="comida"
       />
       <IngredientsAndMeasures
         recipe={ recipe }
@@ -58,9 +61,11 @@ function FoodDetails() {
       <div>
         <ReactPlayer url={ recipe.strYoutube } controls data-testid="video" />
       </div>
-      <Carousel>
-        {recomendation.map((item, index) => createRecomendationsDrink(item, index))}
-      </Carousel>
+      <div>
+        <RenderRecommendations
+          recommendation={ recommendation }
+        />
+      </div>
       <div>
         {!doneRecipe && (
           <button
