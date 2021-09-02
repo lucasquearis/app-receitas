@@ -8,6 +8,10 @@ import '../App.css';
 function Footer() {
   return (
     <footer
+      style={ {
+        position: 'fixed',
+        bottom: '0',
+      } }
       data-testid="footer"
       className="footer-links"
     >
