@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import Search from './Search';
+import header from './style/header.css';
 
 export default class Header extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class Header extends Component {
     const { title } = this.props;
     return (
       <div className="header">
-        <header>
+        <header className="header">
           <Link to="/perfil">
             <button
               type="button"

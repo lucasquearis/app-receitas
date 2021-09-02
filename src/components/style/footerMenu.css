@@ -1,7 +1,14 @@
 .footerMenu {
+  align-items: center;
   background: linear-gradient(90deg, rgb(253, 225, 149) 0%, rgb(255, 166, 0) 100%);
+  bottom: 0;
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding: 5px;
+  height: 60px;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+}
+
+.fixed {
+  display: flex;
 }

@@ -5,21 +5,18 @@ import './style/categoryStyle.css';
 class CategoriesFilter extends Component {
   constructor(props) {
     super(props);
-
     this.filterFiveCategories = this.filterFiveCategories.bind(this);
   }
 
   filterFiveCategories() {
     const { categories } = this.props;
     const FIVE = 5;
-
     return categories.filter((_categories, index) => index < FIVE);
   }
 
   render() {
     const { handleClick } = this.props;
     const filteredCategories = this.filterFiveCategories();
-
     return (
       <div className="categoryStyle">
         <button
@@ -47,9 +44,7 @@ class CategoriesFilter extends Component {
     );
   }
 }
-
 CategoriesFilter.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;
-
 export default CategoriesFilter;

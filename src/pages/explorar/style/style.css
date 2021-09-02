@@ -1,0 +1,17 @@
+.container-button-explorar {
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.button-size {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  text-decoration: none;
+  width: 80%;
+}
