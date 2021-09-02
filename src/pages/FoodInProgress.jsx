@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../styles/RecipeInProgress.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import MyContext from '../context/MyContext';
 import ShareButton from '../components/ShareButton';
@@ -23,7 +23,8 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 };
 
 function FoodInProgress() {
-  const id = 52771;
+  const { pathname } = useLocation();
+  const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
@@ -33,6 +34,7 @@ function FoodInProgress() {
   useEffect(() => {
     try {
       const urlFoods = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      console.log(urlFoods);
 
       const fetchDetailsRecipe = async () => {
         const request = await fetch(urlFoods);

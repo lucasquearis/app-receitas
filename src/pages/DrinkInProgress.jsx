@@ -21,9 +21,9 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 };
 
 function DrinkInProgess() {
-  const id = 178319;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
+  const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);

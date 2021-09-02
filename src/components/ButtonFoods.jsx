@@ -1,13 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 function ButtonFoods() {
-  const ide = 52771;
+  const { pathname } = useLocation();
+  const id = pathname.replace(/([^\d])+/gim, '');
   // const [none, setNone] = useState(false);
   const setHistory = useHistory();
 
   const handleClick = () => {
-    setHistory.push(`/comidas/${ide}/in-progress`);
+    setHistory.push(`/comidas/${id}/in-progress`);
   };
 
   // useEffect(() => {

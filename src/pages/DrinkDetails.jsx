@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
@@ -16,12 +17,13 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
       itensMeasure.push(getRecipe[`strMeasure${i}`]);
     }
   }
-  setIngredient(itens);
+  setIngredient(itens.filter((it) => it !== null && it !== undefined && it.length >= 1));
   setMeasure(itensMeasure);
 };
 
 function DrinkDetails() {
-  const id = 178319;
+  const { pathname } = useLocation();
+  const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
