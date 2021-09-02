@@ -3,12 +3,12 @@ import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-const ShareButton = ({ id, setLinkShare }) => (
+const ShareButton = ({ id, setLinkShare, type }) => (
   <button
     data-testid="share-btn"
     className="share-btn"
     onClick={ () => {
-      copy(`http://localhost:3000/bebidas/${id}`);
+      copy(`http://localhost:3000/${type}/${id}`);
       setLinkShare(true);
     } }
     type="button"

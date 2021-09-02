@@ -9,7 +9,7 @@ const FavoriteButton = (props) => {
     type,
     area = '',
     category = '',
-    alcoholicOrNot,
+    alcoholicOrNot = '',
     name,
     image,
     favoriteRecipe,
