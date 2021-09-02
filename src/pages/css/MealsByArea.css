@@ -1,0 +1,20 @@
+.expore-by-area-container {
+  height: 97vh;
+  width: 97vw;
+}
+
+.explore-by-area-select-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 3em;
+  justify-content: center;
+  margin: 0.5em;
+  width: 100%;
+}
+
+.explore-by-area-select {
+  font-size: 1.5em;
+  padding: 0.2em 0;
+  width: 92%;
+}

@@ -1,0 +1,53 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.explore-food {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
+  margin: auto;
+  margin-top: 5%;
+  padding: 3%;
+  width: 40%;
+}
+
+.explore-drinks {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
+  margin: auto;
+  margin-top: 10%;
+  padding: 3%;
+  width: 40%;
+}
+
+@media screen and ( min-width : 340px ) and ( max-width : 380px ) {
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .explore-food {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
+    margin: auto;
+    margin-top: 10%;
+    padding: 3%;
+    width: 90%;
+  }
+
+  .explore-drinks {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px 5px rgb(195, 195, 195);
+    margin: auto;
+    margin-top: 10%;
+    padding: 3%;
+    width: 90%;
+  }
+
+}
