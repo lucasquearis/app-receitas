@@ -4,6 +4,8 @@ import Inp from '../../Components/Inp';
 import Btn from '../../Components/Btn';
 import { ContextApp } from '../../Context/ContextApp';
 
+import './Login.css';
+
 function Login() {
   const { handleInput, disabled, handleClick, redirect } = useContext(ContextApp);
   const emailProps = {
@@ -12,7 +14,8 @@ function Login() {
       'data-testid': 'email-input',
     },
     label: 'Email',
-    variant: 'outlined',
+    className: 'email',
+    variant: 'standard',
     type: 'Email',
     onChange: handleInput,
   };
@@ -22,7 +25,8 @@ function Login() {
       'data-testid': 'password-input',
     },
     label: 'Password',
-    variant: 'outlined',
+    className: 'password',
+    variant: 'standard',
     type: 'Password',
     onChange: handleInput,
   };
@@ -30,6 +34,7 @@ function Login() {
     name: 'Login',
     'data-testid': 'login-submit-btn',
     type: 'button',
+    className: 'button',
     variant: 'contained',
     disabled,
     onClick: handleClick,
@@ -37,22 +42,17 @@ function Login() {
 
   if (redirect) return <Redirect to="/comidas" />;
   return (
-    <>
-      <Inp { ...emailProps } />
-      <Inp { ...passwordProps } />
-      <Btn { ...buttonProps } />
-      <div>
-        <iframe
-          width="360"
-          height="202"
-          src="https://www.youtube.com/embed/3npflgAdwcc"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+    <div className="page-login">
+      <div className="login-form">
+        <div className="title">
+          <img src="https://image.flaticon.com/icons/png/512/3448/3448167.png" alt="logo" />
+          <h2>Fast Recipe</h2>
+        </div>
+        <Inp { ...emailProps } />
+        <Inp { ...passwordProps } />
+        <Btn { ...buttonProps } />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,3 +1,61 @@
-body {
+.page-login {
+  align-items: center;
+  background-image: url('https://cdn.dribbble.com/users/3320958/screenshots/15955423/media/ec2fe461084339c3a4d14efae1202847.jpeg?compress=1&resize=1200x900');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
   width: 100%;
+}
+
+.page-login .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-login .title h2 {
+  margin: 0;
+  margin-top: 15px;
+}
+
+.page-login .title img {
+  width: 50px;
+}
+
+.page-login .login-form {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+}
+
+.page-login .login-form .email {
+  margin-top: 10px;
+}
+
+.page-login .login-form .password {
+  margin-top: 10px;
+}
+
+.page-login .login-form .button {
+  border-radius: 5px;
+  color: white;
+  margin: 20px 0 10px;
+  padding: 2px 25px;
+}
+.page-login .login-form .button:disabled {
+  background: linear-gradient(to left, rgb(132, 197, 132), rgb(98, 153, 175));
+}
+
+.page-login .login-form .button:enabled {
+  background: linear-gradient(to left, rgb(87, 137, 87), rgb(68, 111, 128));
 }
