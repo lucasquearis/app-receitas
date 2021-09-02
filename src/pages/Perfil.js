@@ -15,7 +15,10 @@ function Perfil() {
     <div>
       <Header title="Perfil" renderSearch={ false } />
       <main className="d-flex flex-column align-items-center">
-        <div className="border border-info mb-5 mt-3 w-75 text-center" data-testid="profile-email">
+        <div
+          className="border border-info mb-5 mt-3 w-75 text-center"
+          data-testid="profile-email"
+        >
           { email }
         </div>
         <Link
