@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareButton from './shareButton';
 
@@ -8,6 +9,14 @@ class RecipesMadeCard extends Component {
 
     this.renderFoodCard = this.renderFoodCard.bind(this);
     this.renderDrinkCard = this.renderDrinkCard.bind(this);
+    this.redirectToDetails = this.redirectToDetails.bind(this);
+  }
+
+  redirectToDetails() {
+    const { id, type } = this.props;
+    const path = `http://localhost:3000/${type}s/${id}`;
+
+    return <Redirect to={ path } />;
   }
 
   renderFoodCard() {
@@ -27,12 +36,14 @@ class RecipesMadeCard extends Component {
       <div className="row">
         <div className="card-list-food">
           <div>
-            <img
-              src={ image }
-              className="card-img"
-              alt="card"
-              data-testid={ `${index}-horizontal-image` }
-            />
+            <Link to={ `/${type}s/${id}` }>
+              <img
+                src={ image }
+                className="card-img"
+                alt="card"
+                data-testid={ `${index}-horizontal-image` }
+              />
+            </Link>
           </div>
 
           <div>
@@ -45,7 +56,9 @@ class RecipesMadeCard extends Component {
               <span>{ `${area} - ` }</span>
               <span>{ category }</span>
             </p>
-            <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+            <Link to={ `/${type}s/${id}` }>
+              <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+            </Link>
             <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
             {
               tags.map((tag, i) => (
@@ -78,12 +91,14 @@ class RecipesMadeCard extends Component {
       <div className="row">
         <div className="card-list-food">
           <div>
-            <img
-              src={ image }
-              className="card-img"
-              alt="card"
-              data-testid={ `${index}-horizontal-image` }
-            />
+            <Link to={ `/${type}s/${id}` }>
+              <img
+                src={ image }
+                className="card-img"
+                alt="card"
+                data-testid={ `${index}-horizontal-image` }
+              />
+            </Link>
           </div>
 
           <div>
@@ -93,7 +108,9 @@ class RecipesMadeCard extends Component {
               type={ type }
             />
             <p data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</p>
-            <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+            <Link to={ `/${type}s/${id}` }>
+              <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+            </Link>
             <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
           </div>
         </div>

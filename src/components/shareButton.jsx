@@ -36,6 +36,9 @@ class ShareButton extends Component {
       ? `http://localhost:3000/comidas/${id}`
       : `http://localhost:3000/bebidas/${id}`;
 
+    // window.navigator.clipboard.readText()
+    //   .then((value) => console.log(value));
+
     return (
       <div>
         <CopyToClipboard
