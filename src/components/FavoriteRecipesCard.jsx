@@ -38,7 +38,11 @@ export default function FavoriteRecipesCard({
             { `${area} - ${category}` }
           </p>
           <ShareButton datatestid={ `${index}-horizontal-share-btn` } />
-          <FavoriteButton datatestid={ `${index}-horizontal-favorite-btn` } />
+          <FavoriteButton
+            id={ id }
+            type={ type }
+            datatestid={ `${index}-horizontal-favorite-btn` }
+          />
         </div>
         <p>
           { alcoholicOrNot }
