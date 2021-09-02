@@ -6,6 +6,7 @@ import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../styles/ComidasDetails.css';
 
 function ComidasProcess(props) {
   const { match: { params: { id } } } = props;
@@ -71,38 +72,51 @@ function ComidasProcess(props) {
   };
 
   return (
-    <div>
+    <main className="d-flex flex-column">
       <img
         src={ strMealThumb }
         alt={ `Foto de ${strMeal}` }
         data-testid="recipe-photo"
+        className="image-details-comida"
       />
-      <h2 data-testid="recipe-title">{strMeal}</h2>
-      <div>
-        <button
-          onClick={ handleShare }
-          type="button"
+      <div className="d-flex justify-content-between">
+        <h1
+          data-testid="recipe-title"
+          className="name-details-comida"
         >
-          <img
-            src={ shareIcon }
-            alt="imagem de compartilhar"
-            data-testid="share-btn"
-          />
-        </button>
-        { share && <p>Link copiado!</p> }
-        <button
-          onClick={ () => favoritingRecipe(isFav, setIsFav, id, meal) }
-          type="button"
-        >
-          <img
-            src={ isFav ? blackHeartIcon : whiteHeartIcon }
-            alt="imagem de favoritar"
-            data-testid="favorite-btn"
-          />
-        </button>
+          {strMeal}
+        </h1>
+        <div>
+          <button
+            onClick={ handleShare }
+            type="button"
+          >
+            <img
+              src={ shareIcon }
+              alt="imagem de compartilhar"
+              data-testid="share-btn"
+            />
+          </button>
+          { share && <p>Link copiado!</p> }
+          <button
+            onClick={ () => favoritingRecipe(isFav, setIsFav, id, meal) }
+            type="button"
+          >
+            <img
+              src={ isFav ? blackHeartIcon : whiteHeartIcon }
+              alt="imagem de favoritar"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
       </div>
-      <p data-testid="recipe-category">{ strCategory }</p>
-      <div>
+      <p
+        data-testid="recipe-category"
+        className="category-details-comidas"
+      >
+        { strCategory }
+      </p>
+      <div className="ingredients-details">
         <h3>Ingredients</h3>
         <ul>
           {
@@ -143,11 +157,12 @@ function ComidasProcess(props) {
           type="button"
           data-testid="finish-recipe-btn"
           disabled={ disabled }
+          className="btn btn-info w-100"
         >
           Finish
         </button>
       </Link>
-    </div>
+    </main>
   );
 }
 
