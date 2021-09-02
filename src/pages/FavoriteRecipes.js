@@ -2,11 +2,11 @@ import React/* , { useState } */ from 'react';
 // import { Link } from 'react-router-dom';
 // import copy from 'clipboard-copy';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+// import shareIcon from '../images/shareIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
-  const favoritesLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  // const favoritesLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   // const [copyLink, setCopyLink] = useState(false);
 
   // console.log(favoritesLocalStorage);
@@ -24,7 +24,7 @@ function FavoriteRecipes() {
     <>
       <Header title="Receitas Favoritas" search={ false } />
 
-      <div>
+      {/* <div>
         <button data-testid="filter-by-all-btn" type="button">All</button>
         <button type="button" data-testid="filter-by-food-btn">Food</button>
         <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
@@ -67,7 +67,7 @@ function FavoriteRecipes() {
 
         ))}
 
-      </div>
+      </div> */}
     </>
   );
 }
