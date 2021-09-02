@@ -1,15 +1,37 @@
 .container {
   display: flex;
   flex-flow: row nowrap;
-  margin-bottom: 20px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  height: 420px;
+  overflow-x: hidden;
   padding: 0;
+  width: 360px;
 }
 
 .card {
-  height: auto;
+  align-items: center;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 170px;
+  justify-content: space-between;
+  list-style: none;
+  margin-bottom: 20px;
   margin-right: 5px;
-  min-width: 49.6%;
-  width: 50%;
+  min-width: 165px;
+}
+
+.card img {
+  border-radius: 6px 6px 0 0;
+  height: 100px;
+  width: 165px;
+}
+
+.card h2 {
+  color: black;
+  font-size: 18px;
+}
+
+.card h3 {
+  color: gray;
+  font-size: 16px;
 }

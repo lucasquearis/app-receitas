@@ -1,0 +1,9 @@
+.ingredients {
+  background-color: rgb(227, 227, 227);
+  border-radius: 6px;
+  margin: 3px;
+}
+
+li {
+  margin-left: 10px;
+}
