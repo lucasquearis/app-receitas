@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [drinks, setDrinks] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [madeRecipe, setMadeRecipe] = useState(false);
   const [ingredientFilter, setIngredientFilter] = useState('');
   const [foodOrDrink, setFoodOrDrink] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -21,6 +22,7 @@ function Provider({ children }) {
     drinks,
     mealsCategories,
     drinksCategories,
+    madeRecipe,
     ingredientFilter,
     foodOrDrink,
     search,
@@ -30,6 +32,7 @@ function Provider({ children }) {
   const contextValue = {
     globalState,
     setUserEmail,
+    setMadeRecipe,
     setSearch,
     setLoadSearch,
     setIngredientFilter,

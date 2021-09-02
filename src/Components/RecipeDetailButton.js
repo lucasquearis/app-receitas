@@ -27,7 +27,12 @@ function RecipeDetailButton({ type, recipe, recipeID }) {
       });
 
     setIngredientsEMeasuresList(ingredientsList
-      .map((ingredient, index) => `${ingredient[1]} - ${measuresList[index]}`));
+      .map((ingredient, index) => (
+        {
+          ingredient: `${ingredient[1]} - ${measuresList[index]}`,
+          done: false,
+        }
+      )));
   }, [recipe]);
 
   const verifyItsDone = (recipeIsDone) => {
