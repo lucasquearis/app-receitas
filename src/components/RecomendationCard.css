@@ -1,0 +1,28 @@
+.recomendation-cards {
+  box-sizing: border-box;
+  display: flex;
+  height: 170px;
+  margin: 0 0 50px;
+  overflow-x: auto;
+  padding: 0;
+  scroll-behavior: smooth;
+  width: 240px;
+}
+
+.recomendation-cards div {
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  height: 150px;
+  margin: 0 8px;
+  max-height: 150px;
+  max-width: 150px;
+  text-align: center;
+  width: 150px;
+  word-wrap: break-word;
+}
+
+.recomendation-cards img {
+  border-radius: 5px;
+  height: 100px;
+  width: 100px;
+}
