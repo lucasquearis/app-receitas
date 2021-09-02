@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import * as ComidasAPI from '../service/ComidasAPI';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import RecipesContext from '../Context/RecipesContext';
-import * as ComidasAPI from '../service/ComidasAPI';
 
 export default function ExplorarComidaIngrediente() {
   const [ingredients, setIngredients] = useState([]);
