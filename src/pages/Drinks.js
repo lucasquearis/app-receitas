@@ -61,7 +61,7 @@ export default function Drinks() {
           />
         ))
       );
-    } if (resultList.length === 1) {
+    } if (resultList && (resultList.length === 1)) {
       return <Redirect to={ `/bebidas/${resultList[0].idDrink}` } />;
     }
     if (resultList.length === null) {
@@ -73,7 +73,7 @@ export default function Drinks() {
           const MAX_ITENS = 12;
           if (index < MAX_ITENS) {
             return (
-              <Link key={ item.idDrink } to={ `bebidas/${item.idDrink}` }>
+              <Link key={ item.idDrink } to={ `bebidas${item.idDrink}` }>
                 <li
                   data-testid={ `${index}-recipe-card` }
                 >

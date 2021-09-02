@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import './pageCSS/MealProcess.css';
 import PropTypes from 'prop-types';
 import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
 import Loading from '../components/Loading';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const callbackHandleClick = (id, name) => {
   const getLocalStorage = () => JSON.parse(localStorage
@@ -53,6 +57,8 @@ export default function MealProcess(props) {
   const [resultMealRecipe, setResultMealRecipe] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [isFullyChecked, setIsFullyChecked] = useState([false]);
+  const [linkShare, setLinkShare] = useState(false);
+  const [favoriteRecipe, setFavoriteRecipe] = useState(false);
 
   useEffect(() => {
     const resolveAPI = async () => {
@@ -83,6 +89,14 @@ export default function MealProcess(props) {
   }, [id]);
 
   useEffect(() => {
+    const parseLocalStorage = JSON
+      .parse(localStorage
+        .getItem('favoriteRecipes')) || [];
+    const verifyFavorite = parseLocalStorage.some((item) => item.id === id);
+    setFavoriteRecipe(verifyFavorite);
+  }, [id, favoriteRecipe]);
+
+  useEffect(() => {
     if (resultMealRecipe.length > 0
       && checkedIngredients.length > 0
       && checkedIngredients.length === Object.entries(resultMealRecipe[0])
@@ -107,8 +121,39 @@ export default function MealProcess(props) {
     callbackHandleClick(id, name);
   };
 
+  /*
+  const handleclickFavButton = (area = '', category, name, image) => {
+    const parseLocalStorage = JSON
+      .parse(localStorage
+        .getItem('favoriteRecipes')) || [];
+    const verifyFavorite = parseLocalStorage.some((item) => item.id === id);
+    setFavoriteRecipe(verifyFavorite);
+    if (!favoriteRecipe) {
+      const defaultRecipe = {
+        id,
+        type: 'comida',
+        area,
+        category,
+        alcoholicOrNot: '',
+        name,
+        image,
+      };
+      setFavoriteRecipe(true);
+      localStorage
+        .setItem('favoriteRecipes', JSON
+          .stringify([...parseLocalStorage, defaultRecipe]));
+    } else {
+      const removeFavorite = parseLocalStorage.filter((recipe) => recipe.id !== id);
+      localStorage
+        .setItem('favoriteRecipes', JSON
+          .stringify([...removeFavorite]));
+      setFavoriteRecipe(false);
+    }
+  }; */
+
   if (resultMealRecipe.length > 0) {
     const {
+      strArea,
       strMealThumb,
       strMeal,
       strCategory,
@@ -119,8 +164,34 @@ export default function MealProcess(props) {
       <>
         <h1 data-testid="recipe-title">{strMeal}</h1>
         <img data-testid="recipe-photo" src={ strMealThumb } alt={ strMeal } />
-        <button data-testid="share-btn" type="button">Compartilhar</button>
-        <button data-testid="favorite-btn" type="button">Favoritar</button>
+        <button
+          className="share-btn"
+          data-testid="share-btn"
+          onClick={ () => {
+            copy(`http://localhost:3000/comidas/${id}`);
+            setLinkShare(true);
+          } }
+          type="button"
+        >
+          <img
+            src={ shareIcon }
+            alt="imagem de compartilhar"
+          />
+        </button>
+        { linkShare && 'Link copiado!' }
+        <button
+          className="favorite-btn"
+          type="button"
+          onClick={
+            () => handleclickFavButton(strArea, strCategory, strMeal, strMealThumb)
+          }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+            alt="icone favorito"
+          />
+        </button>
         <span data-testid="recipe-category">{strCategory}</span>
         <ul className="progress__checkbox-list">
           {listFromKeys[0].map((ingredient, index) => {

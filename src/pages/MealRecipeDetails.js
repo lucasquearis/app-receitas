@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import './pageCSS/MealRecipeDetails.css';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
 import searchMealAPI
   from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
+import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
