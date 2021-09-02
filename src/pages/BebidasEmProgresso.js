@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
+import { Image, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import * as fetchAPI from '../service/fetchAPI';
-import './ComidasEmProgresso.css';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import DoneButton from '../components/DoneButton';
+import * as fetchAPI from '../service/fetchAPI';
+import './ComidasEmProgresso.css';
 
 const INITIAL_STORAGE_STATE = { cocktails: {}, meals: {} };
 
@@ -79,21 +80,22 @@ function ComidasEmProgresso(props) {
   const displayList = (item, index) => {
     if (item !== null && item.length > 0) {
       return (
-        <li key={ index }>
+        <span key={ index }>
           <label
             htmlFor="ingredient"
             data-testid={ `${index}-ingredient-step` }
             className={ checkStorage(item) ? 'complete' : '' }
           >
-            { item }
             <input
               type="checkbox"
               onClick={ (event) => doneIngredient(event, item) }
               defaultChecked={ checkStorage(item) }
             />
+            { ` ${item}` }
           </label>
-          <p data-testid="instructions">{ measures[index] }</p>
-        </li>
+          <span data-testid="instructions">{ ` - ${measures[index]}` }</span>
+          <br />
+        </span>
       );
     }
   };
@@ -105,31 +107,36 @@ function ComidasEmProgresso(props) {
 
   if (isLoaded) {
     return (
-      <section>
-        <h3 data-testid="recipe-title">
-          { strDrink }
-        </h3>
-        <h5 data-testid="recipe-category">
-          { strCategory }
-        </h5>
-        <h5>
-          { `Is Alcoholic: ${strAlcoholic}` }
-        </h5>
-        <ShareButton pathname={ pathToCopy } />
-        <FavoriteButton recipe={ recipe } id={ id } type="drink" />
-        <img
+      <section className="main-containe">
+        <Image
+          fluid
           src={ strDrinkThumb }
           alt="Imagem da receita"
           data-testid="recipe-photo"
         />
-        <ul>
+        <div className="favorite-container">
+          <h3 data-testid="recipe-title">
+            { strDrink }
+          </h3>
+          <div className="icons">
+            <ShareButton pathname={ pathToCopy } />
+            <FavoriteButton recipe={ recipe } id={ id } type="drink" />
+          </div>
+        </div>
+        <h5 data-testid="recipe-category">
+          { strCategory }
+        </h5>
+        <h5>
+          { strAlcoholic }
+        </h5>
+        <div className="ingredients-container">
           { ingredients.map((item, index) => displayList(item, index)) }
-        </ul>
+        </div>
         <div>
           <h4>Instructions</h4>
           <p>{ strInstructions }</p>
         </div>
-        <button
+        <Button
           type="button"
           data-testid="finish-recipe-btn"
           disabled={ completeIngredient.length !== disableButton() }
@@ -137,13 +144,13 @@ function ComidasEmProgresso(props) {
 
         >
           Finalizar Receita
-        </button>
+        </Button>
         { shouldRedirect ? <Redirect to="/receitas-feitas" /> : null }
       </section>
     );
   }
 
-  return <h1>In Progress...</h1>;
+  return <div className="c-loader" />;
 }
 
 ComidasEmProgresso.propTypes = {
