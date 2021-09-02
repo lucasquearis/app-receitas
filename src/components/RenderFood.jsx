@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
 function RenderFood({ recipe, index }) {
   const [copied, setCopied] = useState(false);
   return (
     <section key={ recipe.name }>
-      <img
-        alt="imagem da receita"
-        data-testid={ `${index}-horizontal-image` }
-        src={ recipe.image }
-      />
+      <Link
+        to={ `/comidas/${recipe.id}` }
+      >
+        <img
+          alt="imagem da receita"
+          className="recipe-img"
+          data-testid={ `${index}-horizontal-image` }
+          src={ recipe.image }
+        />
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         {`${recipe.area} - ${recipe.category}`}
       </p>

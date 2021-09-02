@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
 function RenderDrink({ recipe, index }) {
@@ -9,11 +10,16 @@ function RenderDrink({ recipe, index }) {
     <section key={ recipe.name }>
       <img
         alt="imagem da receita"
+        className="recipe-img"
         data-testid={ `${index}-horizontal-image` }
         src={ recipe.image }
       />
       <p data-testid={ `${index}-horizontal-top-text` }>{ recipe.alcoholicOrNot }</p>
-      <h1 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h1>
+      <Link
+        to={ `/bebidas/${recipe.id}` }
+      >
+        <h1 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h1>
+      </Link>
       <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
       <button
         type="button"
