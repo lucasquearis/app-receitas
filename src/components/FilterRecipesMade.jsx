@@ -9,21 +9,21 @@ class FilterRecipesMade extends Component {
     return (
       <div className="categoryStyle">
         <button
-          className="btn btn-warning "
           type="button"
-          data-testid="filter-by-all-btn"
           onClick={ handleClick }
+          className="btn btn-warning"
+          data-testid="filter-by-all-btn"
         >
           All
         </button>
         {
           categories.map(({ strCategory, strName }) => (
             <button
-              className="btn btn-warning "
-              key={ strCategory }
               type="button"
-              data-testid={ `filter-by-${strCategory}-btn` }
+              key={ strCategory }
               onClick={ handleClick }
+              className="btn btn-warning"
+              data-testid={ `filter-by-${strCategory}-btn` }
             >
               { strName }
             </button>
