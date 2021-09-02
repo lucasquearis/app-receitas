@@ -12,7 +12,7 @@ export default function Explore() {
   };
 
   return (
-    <section>
+    <section className="body">
       <Header showExploreIcon pageTitle="Explorar" />
       <Button
         variant="light"

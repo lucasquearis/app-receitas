@@ -15,7 +15,7 @@ export default function Profile() {
   };
 
   return (
-    <section>
+    <section className="body">
       <Header showExploreIcon pageTitle="Perfil" />
       <div>
         <h3 data-testid="profile-email">

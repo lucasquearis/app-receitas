@@ -32,7 +32,7 @@ export default function FavoriteRecipes() {
   console.log(favRecipes.filter((data) => data.type === 'comida'));
 
   return (
-    <section>
+    <section className="body">
       <Header
         showExploreIcon
         pageTitle="Receitas Favoritas"
