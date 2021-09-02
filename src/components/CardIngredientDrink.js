@@ -10,7 +10,7 @@ function CardIngredientDrink(props) {
 
   return (
     <div data-testid={ `${i}-ingredient-card` }>
-      <Link to="/bebidas">
+      <Link to="/bebidas" data-testid={ `${i}-recipe-card` }>
         <button type="button" onClick={ ingrediente }>
           <h4 data-testid={ `${i}-card-name` }>{drink.strIngredient1}</h4>
           <img

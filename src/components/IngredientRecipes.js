@@ -68,7 +68,6 @@ function IngredientRecipes() {
         ingredientDrinkList.map((drink, index) => {
           if (index < maxList) {
             return (<CardDrink
-              data-testid="0-recipe-card"
               key={ index }
               drink={ drink }
               i={ index }

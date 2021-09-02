@@ -10,9 +10,9 @@ function CardIngredientFood(props) {
 
   return (
     <div data-testid={ `${i}-ingredient-card` }>
-      <Link to="/comidas" data-testid="0-recipe-card">
-        <button type="button" onClick={ ingrediente } data-testid={ `${i}-card-name` }>
-          <h4>{food.strIngredient}</h4>
+      <Link to="/comidas" data-testid={ `${i}-recipe-card` }>
+        <button type="button" onClick={ ingrediente }>
+          <h4 data-testid={ `${i}-card-name` }>{food.strIngredient}</h4>
           <img
             data-testid={ `${i}-card-img` }
             src={ `https://www.themealdb.com/images/ingredients/${food.strIngredient}-Small.png` }
