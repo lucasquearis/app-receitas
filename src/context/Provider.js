@@ -13,10 +13,6 @@ function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
 
   const [
-    user,
-    setUser,
-  ] = useState(getFromLocalStorage('user', { email: '' }));
-  const [
     mealsToken,
     setMealsToken,
   ] = useState(getFromLocalStorage('mealsToken', 0));
@@ -39,11 +35,6 @@ function Provider({ children }) {
     favoriteRecipes,
     setFavoriteRecipes,
   ] = useState(getFromLocalStorage('favoriteRecipes', []));
-
-  useEffect(
-    () => setInLocalStorage('user', user),
-    [user],
-  );
 
   useEffect(
     () => setInLocalStorage('mealsToken', mealsToken),
@@ -92,9 +83,7 @@ function Provider({ children }) {
     setSelectedCategory,
     setSelectedIngredient,
     setShowBar,
-    setUser,
     showBar,
-    user,
   };
   return (
     <AppContext.Provider value={ contextValue }>
