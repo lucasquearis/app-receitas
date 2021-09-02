@@ -37,10 +37,10 @@ function BebidasExp() {
     <div>
       <Header titulo="Explorar Bebidas" />
       <main className="pageComida">
-        <div className="div2">
+        <div className="exploreContainer">
           <Button
             data-testid="explore-by-ingredient"
-            className="btn"
+            className="btnExploreBebidas"
             type="button"
             name="ingredientes"
             variant="light"
@@ -51,7 +51,7 @@ function BebidasExp() {
           </Button>
           <Button
             data-testid="explore-surprise"
-            className="btn"
+            className="btnExploreBebidas"
             type="button"
             name="surprise"
             variant="light"
