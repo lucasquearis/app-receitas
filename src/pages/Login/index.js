@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 import { saveAssistent } from '../../utils';
 
+import './styles.css';
+
 export default function Login() {
   const history = useHistory();
 
@@ -32,7 +34,8 @@ export default function Login() {
 
   return (
     <div>
-      <form onSubmit={ (e) => e.preventDefault() }>
+      <h1>Le.four</h1>
+      <form onSubmit={ (e) => e.preventDefault() } className="login-form">
         <FloatingLabel
           controlId="floatingInput"
           label="Email"

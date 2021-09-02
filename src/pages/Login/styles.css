@@ -1,0 +1,39 @@
+h1 {
+  margin: 100px 0 64px;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 70%;
+}
+
+.login-form button {
+  background-color: #4884ad;
+  border: none;
+}
+
+.login-form button:hover {
+  background-color: #07739e;
+}
+
+.login-form button:disabled {
+  background-color: #4884ad;
+  opacity: 0.8;
+}
+
+@media screen and ( min-width : 768px ) {
+
+  .login-form {
+    width: 40%;
+  }
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .login-form {
+    width: 30%;
+  }
+}

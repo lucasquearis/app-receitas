@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player/youtube';
 
@@ -14,6 +14,10 @@ import './detailsPage.css';
 import { getSavedAssistent } from '../../utils';
 
 export default function DetailsPage() {
+  const savedIngredients = getSavedAssistent(
+    'inProgressRecipes',
+    { cocktails: {}, meals: {} },
+  );
   const savedDones = getSavedAssistent('doneRecipes');
   const { pathname } = useLocation();
 
@@ -43,6 +47,10 @@ export default function DetailsPage() {
     };
     getItem(type, id);
   }, [id, setRecipeDetails, setLoading, type]);
+
+  const allIdsInProgress = useMemo(() => ({
+    ...savedIngredients.meals, ...savedIngredients.cocktails,
+  }), [savedIngredients.cocktails, savedIngredients.meals]);
 
   // Função que criará a "corpo" da página com detalhes;
   const details = () => {
@@ -98,7 +106,8 @@ export default function DetailsPage() {
             className="start-recipe-btn"
             onClick={ () => history.push(`${path}/${id}/in-progress`) }
           >
-            Iniciar Receita
+            { allIdsInProgress[id]
+              ? 'Continuar Receita' : 'Iniciar Receita'}
           </button>
         ) }
       </>
