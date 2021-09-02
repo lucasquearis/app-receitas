@@ -11,12 +11,13 @@ import '../styles/ItemCard.css';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
+  const [favoriteRecipe, setFavoriteRecipe] = useState(false);
   const [enType, setEnType] = useState('drinks');
   const [enCasedType, setEnCasedType] = useState('Drink');
   const [favoriteType, setFavoriteType] = useState('bebida');
-  const { match, history } = props;
+  const { match } = props;
   const { type, id } = match.params;
-  const { pathname } = history.location;
+  const localhost = 'http://localhost:3000/';
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -35,18 +36,16 @@ function RecipeDetails(props) {
           setRecipe(response);
         });
     };
-    // const getRandomFood = async () => {
-    //   try {
-    //     const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-    //     const data = await response.json();
-    //     setRandomFood(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // getRandomFood();
     getRecipe();
   }, []);
+
+  useEffect(() => {
+    const parseLocalStorage = JSON
+      .parse(localStorage
+        .getItem('favoriteRecipes')) || [];
+    const verifyFavorite = parseLocalStorage.some((item) => item.id === id);
+    setFavoriteRecipe(verifyFavorite);
+  }, [id, favoriteRecipe]);
 
   return (
     <div>
@@ -61,13 +60,16 @@ function RecipeDetails(props) {
                 data-testid="recipe-photo"
                 style={ { width: '100%' } }
               />
+
               <h1
                 className="card-title"
                 data-testid="recipe-title"
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
-              <ShareButton pathname={ pathname } />
+
+              <ShareButton pathname={ `${localhost}${favoriteType}s/${id}` } />
+
               <FavoriteButton
                 recipe={
                   { id,
@@ -78,15 +80,20 @@ function RecipeDetails(props) {
                     name: recipe[enType][0][`str${enCasedType}`],
                     image: recipe[enType][0][`str${enCasedType}Thumb`] }
                 }
+                favoriteRecipe={ favoriteRecipe }
+                setFavoriteRecipe={ setFavoriteRecipe }
               />
+
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
                   ? recipe[enType][0].strCategory
                   : recipe[enType][0].strAlcoholic }
               </h2>
+
               <ul>
                 <IngredientsList recipe={ recipe[enType][0] } />
               </ul>
+
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
               {
                 type === 'comidas'
