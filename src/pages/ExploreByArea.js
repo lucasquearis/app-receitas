@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MainContext from '../context/MainContext';
+import genericFetchAPI from '../services/genericFetchAPI';
 
 function ExploreByArea() {
   const { areas, setAreas } = useContext(MainContext);
@@ -29,12 +30,12 @@ function ExploreByArea() {
           data-testid="explore-by-area-dropdown"
           onChange={ handleChange }
         >
-          {
+          {/* {
             areas.map((area, index) => (
               <option data-testid={ `${area}-option` } key={ index } value={ area }>
                 {area}
               </option>))
-          }
+          } */}
         </select>
       </label>
       <Footer />

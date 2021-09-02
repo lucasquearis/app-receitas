@@ -39,10 +39,6 @@ function ExploreByIngredient(title) {
     verifyPathname();
   }, [pathname]);
 
-  if (foods.length || bavarages.length) {
-    console.log(bavarages);
-  }
-
   const maxList = 12;
 
   return (

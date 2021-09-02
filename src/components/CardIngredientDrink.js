@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import MainContext from '../context/MainContext';
 
 function CardIngredientDrink(props) {
   const { drink, i } = props;
-  const ingrediente = () => setIngredient(drink.strIngredient);
+  const { setIngredient } = useContext(MainContext);
+  const ingrediente = () => setIngredient(drink.strIngredient1);
 
   return (
     <div data-testid={ `${i}-ingredient-card` }>
-      <Link to="/explorar/bebidas">
+      <Link to="/bebidas">
         <button type="button" onClick={ ingrediente }>
           <h4 data-testid={ `${i}-card-name` }>{drink.strIngredient1}</h4>
           <img

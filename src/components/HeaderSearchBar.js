@@ -8,7 +8,6 @@ function HeaderSearchBar() {
   const { pathname } = useLocation();
   const history = useHistory();
 
-  // const [fetch, setFetch] = useState(false);
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [data, setData] = useState({});
@@ -82,12 +81,6 @@ function HeaderSearchBar() {
   return (
     <div>
       <section>
-        <button
-          type="button"
-          data-testid="search-top-btn"
-        >
-          teste
-        </button>
         <input
           type="text"
           onChange={ ({ target: { value } }) => setState({ ...state, search: value }) }
