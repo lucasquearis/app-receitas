@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MainContext from '../context/MainContext';
 
 function ExploreByArea() {
   const { areas, setAreas } = useContext(MainContext);
+  const [area, setArea] = useState('');
 
   const resolveArea = async () => {
-    const areaList = await genericFetchAPI('meal', 'filter', 'i', ingredient);
+    const areaList = await genericFetchAPI('meal', 'filter', 'a', area);
     setAreas(areaList);
   };
 
