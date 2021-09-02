@@ -18,7 +18,7 @@ const getSearchError = (error) => ({
   payload: error,
 });
 
-const fetchSearchNomeMeal = (text) => async (dispatch) => {
+const fetchSearchNomeMeals = (text) => async (dispatch) => {
   dispatch(getSearch());
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`);
   const json = await response.json();
@@ -33,4 +33,4 @@ const fetchSearchNomeMeal = (text) => async (dispatch) => {
   }
 };
 
-export default fetchSearchNomeMeal;
+export default fetchSearchNomeMeals;
