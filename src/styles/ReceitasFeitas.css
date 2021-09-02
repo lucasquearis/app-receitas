@@ -1,0 +1,43 @@
+.card-container {
+  background-color: ivory;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 171px;
+  width: 100%;
+}
+
+.card-container img {
+  width: 100%;
+}
+
+.copy-link-container {
+  align-items: center;
+  color: gray;
+  display: flex;
+  font-size: small;
+  justify-content: space-between;
+  width: 170px;
+}
+
+.recipe-done-name {
+  color: black;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-decoration: none;
+}
+
+.date-recipes-done {
+  font-size: 15px;
+}
+
+.tag-recipe-done {
+  background-color: gray;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+.card-container button {
+  background-color: ivory;
+  border: 0;
+}
