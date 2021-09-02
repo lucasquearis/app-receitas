@@ -33,8 +33,6 @@ function Routes() {
         <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/explorar/comidas" component={ FoodExp } />
         <Route path="/explorar/bebidas" component={ DrinkExp } />
-        <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
-        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
         <Route path="/comidas" component={ Foods } />
         <Route path="/bebidas" component={ Drinks } />
         <Route path="/explorar" component={ Explore } />

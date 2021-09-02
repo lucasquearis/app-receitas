@@ -15,6 +15,8 @@ function Provider({ children }) {
     src: '',
   });
 
+  const [redirect, setRedirect] = useState(false);
+
   const [recipes, setRecipes] = useState({
     list: [],
     loading: true,
@@ -166,6 +168,8 @@ function Provider({ children }) {
     foodIngredients,
     requestFoodIngredients,
     requestDrinkIngredients,
+    setRedirect,
+    redirect,
   };
 
   return (
