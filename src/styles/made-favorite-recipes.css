@@ -39,7 +39,7 @@
 .card-infos {
   display: flex;
   flex-flow: column wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-left: 0.938rem;
   width: 11.875rem;
 }
@@ -69,4 +69,36 @@
   display: flex;
   justify-content: space-between;
   min-width: 4.375rem;
+}
+
+.card-done-share {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-data {
+  align-self: flex-end;
+  color: #6a7a35;
+  font-family: Lato , sans-serif;
+  font-weight: 400;
+}
+
+.card-tag {
+  background-color: #dda15e;
+  border-radius: 1.25rem;
+  color: #fefae0;
+  font-family: Lato , sans-serif;
+  font-size: 0.75rem;
+  margin: 0 0.313rem;
+  min-width: 0.313rem;
+  padding: 0 0.25rem;
+  text-align: center;
+}
+
+.card-done-tags {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }

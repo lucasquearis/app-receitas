@@ -46,17 +46,23 @@ function CardMade(props) {
           >
             { name }
           </Link>
-          <span data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</span>
           <div className="card-done-tags">
             { tags.map((tag) => (
               <div
                 data-testid={ `${index}-${tag}-horizontal-tag` }
+                className="card-tag"
                 key={ tag }
               >
                 { tag }
               </div>
             ))}
           </div>
+          <span
+            className="card-data"
+            data-testid={ `${index}-horizontal-done-date` }
+          >
+            { doneDate }
+          </span>
         </div>
       </div>
     );
@@ -98,7 +104,12 @@ function CardMade(props) {
         >
           { name }
         </Link>
-        <span data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</span>
+        <span
+          className="card-data"
+          data-testid={ `${index}-horizontal-done-date` }
+        >
+          { doneDate }
+        </span>
       </div>
     </div>
   );
