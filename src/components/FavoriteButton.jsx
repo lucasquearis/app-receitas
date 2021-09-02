@@ -34,17 +34,10 @@ const FavoriteChanger = (itFavoriteOrNot, Recipe, id, type) => {
     FavoriteRemoverHandle(id);
     return wIcon;
   }
-  FavoriteChangerHandle(Recipe, id, type);
-  return bIcon;
-};
-
-const getapifavorite = async (id, receita) => {
-  try {
-    const fetchApi = await fetch(urlApiHandle(id, receita)[0]);
-    const thedata = await fetchApi.json();
-    return DataManeger(thedata, receita);
-  } catch (error) {
-    console.log(error);
+  if (Recipe) {
+    console.log('fon');
+    FavoriteChangerHandle(Recipe, id, type);
+    return bIcon;
   }
 };
 
@@ -52,11 +45,24 @@ function FavoriteButton(props) {
   const { id, recipe, type, datatestid } = props;
   const initialfavorite = getFavorite(id);
   const [favorbutton, setfavorite] = useState(initialfavorite ? bIcon : wIcon);
-  const Recipe = recipe || getapifavorite(id, type);
+  const [favorrecipe, setrecipe] = useState(null);
+  const Recipe = recipe || favorrecipe;
+  console.log(type);
 
   useEffect(() => {
     setfavorite(getFavorite(id) ? bIcon : wIcon);
-  }, [id]);
+    const getapifavorite = async () => {
+      try {
+        const fetchApi = await fetch(urlApiHandle(id, type)[0]);
+        const thedata = await fetchApi.json();
+        const finaldata = DataManeger(thedata, type);
+        setrecipe(finaldata);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getapifavorite();
+  }, [id, type, favorbutton]);
 
   return (
     <button
