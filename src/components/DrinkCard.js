@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function DrinkCard({ drink, index }) {
   const { strDrink, strDrinkThumb, idDrink } = drink;
   return (
-    <Link to={ { pathname: `/bebidas/${idDrink}`, id: idDrink } }>
+    <Link to={ { pathname: `/comidas/${idDrink}`, id: idDrink } }>
       <div
         data-testid={ `${index}-recipe-card` }
       >

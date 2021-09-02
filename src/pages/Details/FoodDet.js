@@ -64,13 +64,15 @@ function FoodDetails() {
     getRecommendations();
   }, [recipesFood]);
 
-  const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
-    .filter((item) => item.id === id);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
-  const localStorageInProgressRecipes = JSON
-    .parse(localStorage.getItem('inProgressRecipes'));
-  const filterProgressRecipes = Object.keys(localStorageInProgressRecipes.meals)
-    .filter((item) => parseInt(item, 10) === id);
+  const filterDoneRecipes = doneRecipes ? doneRecipes
+    .filter((item) => item.id === parseInt(id, 10)) : [];
+  console.log(filterDoneRecipes);
+
+  const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const verifyInProgress = inProgress ? Object.keys(inProgress.meals)
+    .filter((item) => item === id) : [];
 
   return (
     <>
@@ -116,20 +118,19 @@ function FoodDetails() {
               </div>
             )) }
           </Carousel>
-          { !localStorageDoneRecipes.length !== 0 ? (
-            <Link to={ `/comidas/${id}/in-progress` }>
-              <Button
-                className="fixed-bottom"
-                variant="success"
-                data-testid="start-recipe-btn"
-                type="button"
-              >
-                { filterProgressRecipes.length !== 0
-                  ? 'Continuar Receita' : 'Iniciar Receita' }
+          <Link to={ `/comidas/${id}/in-progress` }>
+            <Button
+              className="fixed-bottom"
+              variant="success"
+              data-testid="start-recipe-btn"
+              type="button"
+              hidden={ filterDoneRecipes.length === 0 }
+            >
+              { verifyInProgress.length !== 0
+                ? 'Continuar Receita' : 'Iniciar Receita' }
+            </Button>
+          </Link>
 
-              </Button>
-            </Link>
-          ) : '' }
         </div>
       )) }
     </>

@@ -52,7 +52,7 @@ export default function FoodAreaExp() {
     if (bool === false) {
       return (
         <div>
-          <Header title="Comidas" name="meal" search />
+          <Header title="Explorar Origem" name="meal" search />
           <select
             data-testid="explore-by-area-dropdown"
             value={ selectedArea }
