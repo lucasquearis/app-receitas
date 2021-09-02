@@ -70,12 +70,14 @@ const HeaderDetails = ({ image, title, category, recipe, id }) => {
   };
   return (
     <header className="header-details">
-      <img
-        src={ image }
-        alt={ title }
-        data-testid="recipe-photo"
-        className="img-header"
-      />
+      <div className="header-image">
+        <img
+          src={ image }
+          alt={ title }
+          data-testid="recipe-photo"
+          className="img-header"
+        />
+      </div>
       <div className="info-container">
         <section>
           <h1 data-testid="recipe-title" className="title-details">{title}</h1>

@@ -11,6 +11,7 @@ import {
   defineChecked,
 } from '../../functions';
 import RecipeFinishBtn from '../foodProcess/RecipeFinishBtn';
+import './DrinkProcess.css';
 
 const DrinkProcess = ({ match: { params: { id } } }) => {
   const type = 'cocktails';
@@ -77,7 +78,7 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
 
   if (cocktails[id] === undefined) return <h2>Loading...</h2>;
   return (
-    <div>
+    <div className="recipe-process-body">
       <div>
         <HeaderDetails
           image={ itensInfo.image }
@@ -87,9 +88,11 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
           id={ id }
         />
       </div>
-      <div>
-        <h3>Ingredients</h3>
-        <div>
+      <div className="cocktails-recipe-ingredients-box">
+        <div className="cocktails-recipe-ingredients-title">
+          <h3>Ingredients</h3>
+        </div>
+        <div className="cocktails-recipe-ingredients">
           {
             cocktails[id].map((ing, index) => {
               const checked = defineChecked(ing, id, type);
@@ -98,37 +101,48 @@ const DrinkProcess = ({ match: { params: { id } } }) => {
                 <div
                   key={ ing }
                   data-testid={ `${index}-ingredient-step` }
+                  className="label-checkbox-box"
                 >
-                  <input
-                    id={ ing }
-                    type="checkbox"
-                    onClick={ () => handleClick(ing) }
-                    defaultChecked={ checked }
-                  />
-                  <label
-                    htmlFor={ ing }
-                    className={ style }
-                  >
-                    {ing}
-                  </label>
+                  <div className="checkbox-box">
+                    <input
+                      id={ ing }
+                      type="checkbox"
+                      onClick={ () => handleClick(ing) }
+                      defaultChecked={ checked }
+                    />
+                  </div>
+                  <div className="label-box">
+                    <label
+                      htmlFor={ ing }
+                      className={ style }
+                    >
+                      {ing}
+                    </label>
+                  </div>
                 </div>
               );
             })
           }
         </div>
       </div>
-      <div>
-        <h3>Instructions</h3>
-        <p
-          data-testid="instructions"
-        >
-          {itensInfo.instructions}
-        </p>
+      <div className="cocktails-recipe-instructions-box">
+        <div className="cocktails-recipe-instructions-title">
+          <h3>Instructions</h3>
+        </div>
+        <div className="cocktails-recipe-instructions">
+          <p
+            data-testid="instructions"
+          >
+            {itensInfo.instructions}
+          </p>
+        </div>
+        <div className="finish-recipe-btn-box">
+          <RecipeFinishBtn
+            id={ id }
+            type={ type }
+          />
+        </div>
       </div>
-      <RecipeFinishBtn
-        id={ id }
-        type={ type }
-      />
     </div>
   );
 };

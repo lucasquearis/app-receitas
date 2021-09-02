@@ -1,0 +1,71 @@
+.recipe-process-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cocktails-recipe-ingredients-box {
+  width: 100%;
+}
+
+.cocktails-recipe-ingredients {
+  background-color: white;
+  border-radius: 1%;
+  box-shadow: 1px 5px 10px black;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10%;
+}
+
+.cocktails-recipe-ingredients-title {
+  margin-left: 5%;
+}
+
+.cocktails-recipe-instructions {
+  background-color: white;
+  border-radius: 1%;
+  box-shadow: 1px 5px 10px black;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10%;
+}
+
+.cocktails-recipe-instructions-title {
+  margin-left: 5%;
+  margin-top: 8%;
+}
+
+.finish-recipe-btn-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+}
+
+.finish-recipe-btn {
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 100%;
+  background-color: yellow;
+  border-radius: 5px;
+}
+
+.finish-btn {
+  width: 100%;
+  background-color: red;
+  color: white;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 3px;
+  font-size: 20px;
+}
+
+.label-checkbox-box {
+  display: flex;
+}
+
+.label-box {
+  margin-left: 3%;
+}

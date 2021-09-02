@@ -11,6 +11,7 @@ import {
   defineChecked,
 } from '../../functions';
 import RecipeFinishBtn from './RecipeFinishBtn';
+import './FoodProcess.css';
 
 const FoodProcess = ({ match: { params: { id } } }) => {
   const type = 'meals';
@@ -72,7 +73,7 @@ const FoodProcess = ({ match: { params: { id } } }) => {
 
   if (meals[id] === undefined) return <h2>Loading...</h2>;
   return (
-    <div>
+    <div className="recipe-process-body">
       <div>
         <HeaderDetails
           image={ itensInfo.image }
@@ -82,46 +83,61 @@ const FoodProcess = ({ match: { params: { id } } }) => {
           id={ id }
         />
       </div>
-      <div>
-        <h3>Ingredients</h3>
-        {
-          meals[id].map((ing, index) => {
-            const checked = defineChecked(ing, id, type);
-            const style = checked ? 'inputChecked' : '';
-            return (
-              <div
-                key={ ing }
-                data-testid={ `${index}-ingredient-step` }
-              >
-                <input
-                  id={ ing }
-                  type="checkbox"
-                  onClick={ () => handleClick(ing) }
-                  defaultChecked={ checked }
-                />
-                <label
-                  htmlFor={ ing }
-                  className={ style }
+      <div className="meals-recipe-ingredients-box">
+        <div className="meals-recipe-ingredients-title">
+          <h3>Ingredients</h3>
+        </div>
+        <div className="meals-recipe-ingredients">
+          {
+            meals[id].map((ing, index) => {
+              const checked = defineChecked(ing, id, type);
+              const style = checked ? 'inputChecked' : '';
+              return (
+                <div
+                  key={ ing }
+                  data-testid={ `${index}-ingredient-step` }
+                  className="label-checkbox-box"
                 >
-                  {ing}
-                </label>
-              </div>
-            );
-          })
-        }
+                  <div className="checkbox-box">
+                    <input
+                      id={ ing }
+                      type="checkbox"
+                      onClick={ () => handleClick(ing) }
+                      defaultChecked={ checked }
+                    />
+                  </div>
+                  <div className="label-box">
+                    <label
+                      htmlFor={ ing }
+                      className={ style }
+                    >
+                      {ing}
+                    </label>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
       </div>
-      <div>
-        <h3>Instructions</h3>
-        <p
-          data-testid="instructions"
-        >
-          {itensInfo.instructions}
-        </p>
+      <div className="meals-recipe-instructions-box">
+        <div className="meals-recipe-instructions-title">
+          <h3>Instructions</h3>
+        </div>
+        <div className="meals-recipe-instructions">
+          <p
+            data-testid="instructions"
+          >
+            {itensInfo.instructions}
+          </p>
+        </div>
       </div>
-      <RecipeFinishBtn
-        id={ id }
-        type={ type }
-      />
+      <div className="finish-recipe-btn-box">
+        <RecipeFinishBtn
+          id={ id }
+          type={ type }
+        />
+      </div>
     </div>
   );
 };

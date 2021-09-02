@@ -26,6 +26,8 @@ p {
 
 
 .info-container {
+  margin-left: 5%;
+  margin-right: 5%;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -39,8 +41,10 @@ p {
 }
 
 .img-header {
-  height: 155px;
-  width: 360px;
+  width: auto;
+  height: auto;
+  max-width: 360px;
+  max-height: 360px;
 }
 
 .icons {

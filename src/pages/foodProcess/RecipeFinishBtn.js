@@ -17,15 +17,21 @@ const RecipeFinishBtn = ({ id, type }) => {
   const disable = disableFinishRecipeBtn(foodType, id, recipeType);
 
   return (
-    <Link to="/receitas-feitas">
-      <button
-        type="button"
-        disabled={ !disable }
-        data-testid="finish-recipe-btn"
+    <div className="finish-recipe-btn">
+      <Link
+        to="/receitas-feitas"
+        className="finish-btn"
       >
-        Finalizar Receita
-      </button>
-    </Link>
+        <button
+          type="button"
+          disabled={ !disable }
+          data-testid="finish-recipe-btn"
+          className="finish-btn"
+        >
+          Finalizar Receita
+        </button>
+      </Link>
+    </div>
   );
 };
 
