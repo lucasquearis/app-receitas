@@ -1,0 +1,16 @@
+.filter-food {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 50px;
+  width: 100%;
+}
+
+.filter-food-btn {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 3px;
+  width: 30%;
+}

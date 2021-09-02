@@ -1,0 +1,36 @@
+#root {
+  height: 100%;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100vw;
+}
+
+.logo-container {
+  animation: degrade infinite ease 1s;
+  overflow: hidden;
+  margin-left: 32.5vw;
+  max-width: 35vw;
+  transition: 0.5s;
+}
+
+.load-logo {
+  width: 35vw;
+}
+
+@keyframes degrade {
+
+  0% {
+    opacity: 0;
+    width: 1vw;
+  }
+
+  100% {
+    opacity: 1;
+    width: 35vw;
+  }
+}
