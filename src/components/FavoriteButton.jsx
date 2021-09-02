@@ -7,6 +7,7 @@ import useLocalStorage from '../helpers/useLocalStorage';
 const FavoriteButton = (props) => {
   const [favoriteStorage, setFavoriteStorage] = useLocalStorage('favoriteRecipes', []);
   const { recipe, index, favoriteRecipe, setFavoriteRecipe } = props;
+  const { recipe, favoriteRecipe, setFavoriteRecipe } = props;
   const {
     id,
     type,
@@ -48,6 +49,7 @@ const FavoriteButton = (props) => {
     >
       <img
         data-testid={ `${index}-horizontal-favorite-btn` }
+        data-testid="favorite-btn"
         src={ favoriteRecipe ? blackHeartIcon : whiteHeartIcon }
         alt="icone favorito"
       />

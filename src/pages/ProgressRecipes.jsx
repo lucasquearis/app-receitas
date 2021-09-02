@@ -11,9 +11,10 @@ function ProgressRecipes(props) {
   const [enType, setEnType] = useState('drinks');
   const [enCasedType, setEnCasedType] = useState('Drink');
   const [favoriteType, setFavoriteType] = useState('bebida');
-  const { match, history } = props;
+  const [favoriteRecipe, setFavoriteRecipe] = useState(false);
+  const localhost = 'http://localhost:3000/';
+  const { match } = props;
   const { type, id } = match.params;
-  const { pathname } = history.location;
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -35,6 +36,14 @@ function ProgressRecipes(props) {
     getRecipe();
   }, [id, type]);
 
+  useEffect(() => {
+    const parseLocalStorage = JSON
+      .parse(localStorage
+        .getItem('favoriteRecipes')) || [];
+    const verifyFavorite = parseLocalStorage.some((item) => item.id === id);
+    setFavoriteRecipe(verifyFavorite);
+  }, [id, favoriteRecipe]);
+
   return (
     <div>
       {
@@ -51,7 +60,7 @@ function ProgressRecipes(props) {
               >
                 { recipe[enType][0][`str${enCasedType}`] }
               </h1>
-              <ShareButton pathname={ pathname } />
+              <ShareButton pathname={ `${localhost}${favoriteType}s/${id}` } />
               <FavoriteButton
                 recipe={
                   { id,
@@ -62,6 +71,8 @@ function ProgressRecipes(props) {
                     name: recipe[enType][0][`str${enCasedType}`],
                     image: recipe[enType][0][`str${enCasedType}Thumb`] }
                 }
+                favoriteRecipe={ favoriteRecipe }
+                setFavoriteRecipe={ setFavoriteRecipe }
               />
               <h2 data-testid="recipe-category">
                 { type === 'comidas'
@@ -69,7 +80,11 @@ function ProgressRecipes(props) {
                   : recipe[enType][0].strAlcoholic }
               </h2>
               <section>
-                <IngredientsCheckList recipe={ recipe[enType][0] } />
+                <IngredientsCheckList
+                  id={ id }
+                  recipe={ recipe }
+                  enType={ enType }
+                />
               </section>
               <p data-testid="instructions">{ recipe[enType][0].strInstructions }</p>
 

@@ -1,9 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
-import '../styles/Header.css';
 import Footer from '../components/Footer';
-import '../styles/Footer.css';
 
 function Profile() {
   const history = useHistory();
