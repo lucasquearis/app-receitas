@@ -8,7 +8,7 @@ function CookedRecipies() {
   const local = JSON.parse(localStorage.getItem('doneRecipes'));
   useEffect(() => {
     setDoneRecipes(local);
-  }, []);
+  }, [local]);
   console.log(local);
 
   const filterType = (type) => {

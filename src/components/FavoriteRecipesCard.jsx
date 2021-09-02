@@ -29,7 +29,7 @@ export default function FavoriteRecipesCard({
             >
               { category }
             </p>
-            <ShareButton data-testid={ `${index}-horizontal-share-btn` } />
+            <ShareButton datatestid={ `${index}-horizontal-share-btn` } />
             <FavoriteButton />
           </div>
           <p>

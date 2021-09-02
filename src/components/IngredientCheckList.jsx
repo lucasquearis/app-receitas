@@ -19,7 +19,8 @@ const UpdateStoraInProgressID = (ID) => {
     localStorage.setItem('InProgressIds', JSON.stringify([]));
     return UpdateStoraInProgressID(ID);
   }
-  const getid = storageGet.find((n) => n[0] === id);
+  const getid = storageGet.map((n, index) => (n[0] === id ? index : null))
+    .find((n) => n !== null);
   if (getid === undefined) {
     const addReciToInProg = Object.entries({ [id]: [false] });
     storageGet.push(addReciToInProg[0]);
@@ -32,9 +33,11 @@ const UpdateStoraInProgressID = (ID) => {
 const SetstoraInProgressID = (ID, indexes) => {
   const storageGet = JSON.parse(localStorage.getItem('InProgressIds'));
   const id = ID;
-  const getid = storageGet.find((n) => n[0] === id);
-  if (getid) {
-    storageGet[0][1][indexes] = !storageGet[0][1][indexes];
+  const getid = storageGet.map((n, index) => (n[0] === id ? index : null))
+    .find((n) => n !== null);
+  console.log(getid);
+  if (getid || getid === 0) {
+    storageGet[getid][1][indexes] = !storageGet[getid][1][indexes];
     localStorage.setItem('InProgressIds', JSON.stringify(storageGet));
   }
 };
@@ -68,8 +71,10 @@ export default function IngredientCheckList(props) {
 
   useEffect(() => {
     const storaget = JSON.parse(localStorage.getItem('InProgressIds'));
-    setMark([...storaget[0][1]]);
-  }, [CBox]);
+    const getid = storaget.map((n, index) => (n[0] === id ? index : null))
+      .find((n) => n !== null);
+    setMark([...storaget[getid][1]]);
+  }, [CBox, id]);
 
   return (
     <>

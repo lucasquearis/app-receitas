@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getFavorite from '../services/getFavorite';
+import urlApiHandle, { DataManeger } from '../services/urlApiHandle';
 import wIcon from '../images/whiteHeartIcon.svg';
 import bIcon from '../images/blackHeartIcon.svg';
 
@@ -37,10 +38,21 @@ const FavoriteChanger = (itFavoriteOrNot, Recipe, id, type) => {
   return bIcon;
 };
 
+const getapifavorite = async (id, receita) => {
+  try {
+    const fetchApi = await fetch(urlApiHandle(id, receita)[0]);
+    const thedata = await fetchApi.json();
+    return DataManeger(thedata, receita);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 function FavoriteButton(props) {
-  const { id, recipe, type } = props;
+  const { id, recipe, type, datatestid } = props;
   const initialfavorite = getFavorite(id);
   const [favorbutton, setfavorite] = useState(initialfavorite ? bIcon : wIcon);
+  const Recipe = recipe || getapifavorite(id, type);
 
   useEffect(() => {
     setfavorite(getFavorite(id) ? bIcon : wIcon);
@@ -50,10 +62,10 @@ function FavoriteButton(props) {
     <button
       type="button"
       onClick={ () => {
-        setfavorite(FavoriteChanger(getFavorite(id), recipe, id, type));
+        setfavorite(FavoriteChanger(getFavorite(id), Recipe, id, type));
       } }
     >
-      <img data-testid="favorite-btn" src={ favorbutton } alt="white-heart" />
+      <img data-testid={ datatestid } src={ favorbutton } alt="white-heart" />
     </button>
   );
 }
@@ -72,6 +84,7 @@ FavoriteButton.propTypes = {
     ingredients: string.isRequired,
     measures: string.isRequired,
   }).isRequired,
+  datatestid: string.isRequired,
 
 };
 
