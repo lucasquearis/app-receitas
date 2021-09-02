@@ -21,7 +21,7 @@
 @keyframes degrade {
 
   0% {
-    opacity: 0.1;
+    opacity: 0;
     width: 1vw;
   }
 

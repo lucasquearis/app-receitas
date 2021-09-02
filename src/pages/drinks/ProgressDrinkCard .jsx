@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Input from '../../components/Input';
+import handleDoneRecipes from '../../helpers/handleDoneRecipes';
 
 export default function ProgressDrinkCard({ recipe, id }) {
   const initialState = {
@@ -31,23 +32,23 @@ export default function ProgressDrinkCard({ recipe, id }) {
 
   const handleCheck = ({ target }) => {
     const { name, checked } = target;
-    const variavel = checked
+    const ingredients = checked
       ? [...cocktails[id], name]
       : cocktails[id].filter((item) => item !== name);
-    setState({ ...state, cocktails: { ...state.cocktails, [id]: variavel } });
-  };
-
-  const finishedRecipe = () => {
-    const recipeLength = KeysList.length;
-    const itemsListLength = cocktails[id].length;
-    const result = recipeLength !== itemsListLength;
-    setBtnState(result);
+    setState({ ...state, cocktails: { ...state.cocktails, [id]: ingredients } });
   };
 
   useEffect(() => {
+    const finishedRecipe = () => {
+      const recipeLength = KeysList.length;
+      const itemsListLength = cocktails[id].length;
+      const result = recipeLength !== itemsListLength;
+      setBtnState(result);
+    };
+
     localStorage.setItem('inProgressRecipes', JSON.stringify(state));
     if (KeysList.length > 0) finishedRecipe();
-  }, [state]);
+  }, [KeysList.length, cocktails, id, state]);
 
   if (redirect) {
     return <Redirect to="/receitas-feitas" />;
@@ -82,7 +83,10 @@ export default function ProgressDrinkCard({ recipe, id }) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnState }
-        onClick={ () => setRedirect(true) }
+        onClick={ () => {
+          handleDoneRecipes(recipe);
+          setRedirect(true);
+        } }
       >
         Complete
       </button>
