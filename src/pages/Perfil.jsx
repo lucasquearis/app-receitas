@@ -28,7 +28,7 @@ function Perfil(props) {
 
   return (
     <div>
-      <Header titulo="Perfil" />
+      <Header titulo="Perfil" showSearch={ false } />
       <h2 data-testid="profile-email">{ email }</h2>
       <Link to="/receitas-feitas">
         <button
