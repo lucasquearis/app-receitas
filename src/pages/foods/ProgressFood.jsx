@@ -3,6 +3,7 @@ import { shape, string } from 'prop-types';
 import { fetchFoodById } from '../../services/fetchApi';
 import ProgressFoodCard from './ProgressFoodCard';
 import Loading from '../../components/Loading';
+import './progressFood.css';
 
 const ProgressFood = ({ match: { params: { id } } }) => {
   const [recipe, setRecipe] = useState({});

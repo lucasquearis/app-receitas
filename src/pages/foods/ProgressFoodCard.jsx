@@ -53,22 +53,35 @@ export default function ProgressFoodCard({ recipe, id }) {
     return <Redirect to="/receitas-feitas" />;
   }
 
+  const decoration = (item) => (`${meals[id].includes(item) ? 'line-through' : 'none'}`);
+
   return (
     <div className="progress-food">
-      <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
-      <img data-testid="recipe-photo" src={ recipe.strMealThumb } alt="foto de comida" />
-      <FavoriteAndShare
-        id={ id }
-        isFood
-        recipe={ recipe }
+      <img
+        className="progress-img"
+        data-testid="recipe-photo"
+        src={ recipe.strMealThumb }
+        alt="foto de comida"
       />
-      <span data-testid="recipe-category">
+      <section className="progress-title-container">
+        <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
+        <FavoriteAndShare
+          id={ id }
+          isFood
+          recipe={ recipe }
+        />
+      </section>
+      <span
+        className="progress-category"
+        data-testid="recipe-category"
+      >
         {recipe.strCategory}
       </span>
-      <ul>
+      <ul className="progress-food-ingredients">
         {KeysList.map((item, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
             <Input
+              style={ { textDecoration: decoration(item) } }
               type="checkbox"
               id={ item + index }
               name={ item }
@@ -79,8 +92,15 @@ export default function ProgressFoodCard({ recipe, id }) {
           </li>
         ))}
       </ul>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <p
+        className="progress-instructions"
+        data-testid="instructions"
+      >
+        {recipe.strInstructions}
+
+      </p>
       <button
+        className="progress-btn"
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnState }
