@@ -129,7 +129,7 @@ function FoodsInProgress() {
           name: strMeal,
           image: strMealThumb,
           doneDate: '',
-          tags:
+          tags: [],
         } }
       />
 
