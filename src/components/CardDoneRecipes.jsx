@@ -14,13 +14,13 @@ export default function CardDoneRecipes({
   tags,
   type,
   id,
-  tagName,
+  alcoholicOrNot,
 }) {
   return (
     <div>
       <Link
         key="first"
-        to={ `${type}/${id}` }
+        to={ `${type}s/${id}` }
       >
         <Card>
           <Card.Img
@@ -36,16 +36,16 @@ export default function CardDoneRecipes({
             >
               { title }
             </Card.Title>
+            <Card.Text>
+              {/* area */}
+              { area }
+            </Card.Text>
             <Card.Text
               // category
               key="fourth"
               data-testid={ `${index}-horizontal-top-text` }
             >
               { category }
-            </Card.Text>
-            <Card.Text>
-              {/* area */}
-              { area }
             </Card.Text>
             <Card.Text
               // date
@@ -57,9 +57,21 @@ export default function CardDoneRecipes({
             <Card.Text
               // tags
               key="sixth"
-              data-testid={ `${index}-${tagName}-horizontal-tag` }
             >
-              { tags.map((tag, indexTag) => (<span key={ indexTag }>{ tag }</span>)) }
+              { tags.map((tag, indexTag) => (
+                <p
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                  key={ indexTag }
+                >
+                  { tag }
+                </p>
+              )) }
+            </Card.Text>
+            <Card.Text
+              // AlcoholicOrNot
+              key="eighth"
+            >
+              { alcoholicOrNot }
             </Card.Text>
           </Card.Body>
         </Card>
@@ -67,7 +79,7 @@ export default function CardDoneRecipes({
       <ShareButton
         type={ type }
         id={ id }
-        data-testid={ `${index}-horizontal-share-btn` }
+        testId={ `${index}-horizontal-share-btn` }
       />
     </div>
   );
@@ -81,7 +93,7 @@ CardDoneRecipes.propTypes = {
   date: PropTypes.number.isRequired,
   tags: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  tagName: PropTypes.string.isRequired,
+  alcoholicOrNot: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   area: PropTypes.string.isRequired,
 };

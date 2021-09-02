@@ -11,6 +11,7 @@ import {
   saveInProgressRecipes,
   saveOnLocalStorage,
   saveNewDoneRecipe,
+  getDataFromLocalStorage,
 } from '../helpers/saveOnLocalStorage';
 import { doneFood, doneDrink } from '../redux/actions/doneRecipesActions';
 
@@ -34,6 +35,7 @@ export default function ProgressRecipes() {
 
   function handleClick() {
     let type;
+
     if (currentPage.includes('comidas')) {
       type = 'comidas';
     } else {
@@ -41,6 +43,9 @@ export default function ProgressRecipes() {
     }
 
     const recipe = saveNewDoneRecipe(recipes, type);
+    const localRecipes = getDataFromLocalStorage('doneRecipes');
+    saveOnLocalStorage('doneRecipes', [...localRecipes, recipe]);
+
     if (currentPage.includes('comidas')) {
       dispatch(doneFood(recipe));
     } else {

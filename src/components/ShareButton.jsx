@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function ShareButton({ type, id }) {
+export default function ShareButton({ type, id, testId }) {
   const [msgLink, setMsgLink] = useState('');
   const onClickShare = () => {
     setMsgLink('Link copiado!');
-    navigator.clipboard.writeText(`http://localhost:3000/${type}/${id}`);
+    navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`);
   };
 
   return (
@@ -17,7 +17,7 @@ export default function ShareButton({ type, id }) {
         style={ { border: 'none', background: 'none' } }
         onClick={ onClickShare }
       >
-        <img data-testid="share-btn" src={ shareIcon } alt="Compartilhar" />
+        <img data-testid={ testId } src={ shareIcon } alt="Compartilhar" />
       </button>
     </div>
   );
@@ -26,4 +26,5 @@ export default function ShareButton({ type, id }) {
 ShareButton.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
 };

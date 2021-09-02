@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Header from '../components/Header';
 import CardDoneRecipes from '../components/CardDoneRecipes';
+import { getDataFromLocalStorage } from '../helpers/saveOnLocalStorage';
 
 export default function DoneRecipes() {
-  const food = useSelector((state) => state.doneRecipes.food);
-  const drink = useSelector((state) => state.doneRecipes.drink);
-  const [data, setData] = useState([...drink, ...food]);
+  const recipes = getDataFromLocalStorage('doneRecipes');
+  const [data, setData] = useState(recipes);
+  // const [filteredData, setFilteredData] = useState(data);
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     if (filter === 'All') {
-      setData([...drink, ...food]);
+      setData(recipes);
     } else if (filter === 'Food') {
-      setData(food);
+      setData(recipes.filter((recipe) => recipe.type === 'comida'));
     } else {
-      setData(drink);
+      setData(recipes.filter((recipe) => recipe.type === 'bebida'));
     }
-  }, [filter, food, drink]);
+  }, [filter]);
 
   return (
     <div>
@@ -46,17 +46,17 @@ export default function DoneRecipes() {
       >
         Drinks
       </Button>
-      {data.map((recipe) => (
+      {data.map((recipe, index) => (
         <CardDoneRecipes
           key={ recipe.id }
           id={ recipe.id }
           type={ recipe.type }
           thumb={ recipe.image }
           title={ recipe.name }
-          category={ recipe.category }
-          area={ recipe.area }
+          category={ `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
           date={ recipe.doneDate }
           tags={ recipe.tags }
+          index={ index }
         />
       ))}
     </div>
