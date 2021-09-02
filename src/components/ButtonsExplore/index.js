@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from '../Button';
+import './index.css';
 
 function ButtonsExplore() {
   return (
-    <div className="container">
+    <div className="explore-container">
 
       <Button
         link="/explorar/comidas"
