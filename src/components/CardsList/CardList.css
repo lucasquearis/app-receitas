@@ -1,0 +1,40 @@
+.cardListImg {
+  align-items: center;
+  background-color: white;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  display: inline-flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-size: 27px;
+  height: 110px;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 180px;
+}
+
+.cardListDiv {
+  background-color: white;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  display: inline-flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-size: 27px;
+  height: 185px;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
+  width: 180px;
+}
+
+.CardListText {
+  color: black;
+  font-size: 17px;
+  margin-left: 10px;
+  margin-top: 30px;
+}
