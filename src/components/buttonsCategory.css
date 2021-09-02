@@ -6,7 +6,7 @@
 }
 
 .check-filter label {
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 4px;
   opacity: 0.8;
   width: 100px;
@@ -14,13 +14,13 @@
 
 .check-filter span {
   color: #cf3304;
-  font-weight: 600;
   font-size: 22px;
+  font-weight: 600;
   margin-left: 6px;
 }
 
 .all-categories {
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 4px;
   color: #cf3304;
   font-size: 22px;

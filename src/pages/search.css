@@ -7,10 +7,10 @@
 }
 
 .header {
+  align-items: center;
   background-color: #e74e1f;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
   margin-bottom: 16px;
   padding: 0;
 }

@@ -1,6 +1,6 @@
 .container-root {
   align-items: center;
-  background: url("../images/recipes-app.jpg");
+  background: url('../images/recipes-app.jpg');
   background-size: cover;
   display: flex;
   height: 100vh;
