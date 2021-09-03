@@ -5,6 +5,7 @@ import HookBebidas from '../hooks/HookBebidas';
 import CardList from '../components/CardList';
 import Categories from '../components/Categories';
 import MyContext from '../context/MyContext';
+import loadMount from '../Functions/loadMount';
 import '../cssPages/Refeicao.css';
 
 function Bebidas() {
@@ -45,7 +46,7 @@ function Bebidas() {
   };
 
   return loading
-    ? <div>Loading... </div>
+    ? loadMount('Bebidas', 'true', 'drinkStyle')
     : (
       <>
         <Header titulo="Bebidas" pesquisa="true" className="drinkStyle" />

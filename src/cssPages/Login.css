@@ -24,7 +24,7 @@ body {
 }
 
 .loginContainer img {
-  height: 20vh;
+  height: 18vh;
   mix-blend-mode: multiply;
 }
 
@@ -37,11 +37,9 @@ body {
 
 .container {
   align-items: center;
-  background-color: white;
-  border-radius: 1em;
   display: flex;
   flex-direction: column;
-  height: 25vh;
+  gap: 2vh;
   justify-content: space-evenly;
   mix-blend-mode: multiply;
   width: 300px;
@@ -49,8 +47,6 @@ body {
 
 .loginForm {
   align-items: center;
-
-  /* background-color: whitesmoke; */
   display: flex;
   justify-content: flex-start;
   mix-blend-mode: multiply;
@@ -64,8 +60,7 @@ body {
   color: white;
   font-size: 15px;
   height: 25px;
-
-  /* width: 50%; */
+  width: 40%;
 }
 
 /* link:

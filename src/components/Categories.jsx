@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
 import MyContext from '../context/MyContext';
 
 function Categories({
@@ -26,8 +26,8 @@ function Categories({
     setLoading(true);
     const value = target.innerText;
     const result = toggle === value || value === 'All'
-      ? await fetchFoods(type, fetchActions[type])
-      : await fetchFoods(type, action, value);
+      ? await mainFetch(type, fetchActions[type])
+      : await mainFetch(type, action, value);
     callback(result);
     setLoading(false);
     const toggleValue = value === toggle ? 'All' : value;

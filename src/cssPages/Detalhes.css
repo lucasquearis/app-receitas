@@ -24,13 +24,17 @@
   width: 100%;
 }
 
+.btnIcons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 3vh;
+}
+
 .btnShare, .btnFavorite {
   background-color: rgb(240, 240, 240);
   border-radius: 100%;
   box-shadow: 2px 3px rgba(0, 0, 0, 30%);
-  margin-bottom: 18px;
-  margin-right: 16px;
-  margin-top: 12px;
   padding: 13px;
 }
 
@@ -107,4 +111,15 @@
     padding-right: 50px;
   }
 
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.loadingGif {
+  mix-blend-mode: multiply;
+  width: 300px;
 }

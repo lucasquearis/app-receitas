@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../cssPages/Explore.css';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
 import CardList from '../components/CardList';
 
 function LocalDeOrigem() {
@@ -13,11 +13,11 @@ function LocalDeOrigem() {
   });
 
   const getLocalOrigem = async () => {
-    const list = await fetchFoods('food', 'area');
+    const list = await mainFetch('food', 'area');
     const { meals } = list;
     const all = { strArea: 'All' };
     setArea([all, ...meals]);
-    const receitasList = await fetchFoods('food', 'procuraComida');
+    const receitasList = await mainFetch('food', 'procuraComida');
     setReceitas([...receitasList.meals]);
   };
 
@@ -28,11 +28,11 @@ function LocalDeOrigem() {
   useEffect(() => {
     const getReceitas = async () => {
       if (areaSelected.selected === 'All') {
-        const list = await fetchFoods('food', 'procuraComida');
+        const list = await mainFetch('food', 'procuraComida');
         const { meals } = list;
         setReceitas([...meals]);
       } else {
-        const list = await fetchFoods('food', 'filterByArea', areaSelected.selected);
+        const list = await mainFetch('food', 'filterByArea', areaSelected.selected);
         const { meals } = list;
         setReceitas([...meals]);
       }

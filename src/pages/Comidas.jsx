@@ -5,6 +5,7 @@ import HookComidas from '../hooks/HookComidas';
 import CardList from '../components/CardList';
 import Categories from '../components/Categories';
 import MyContext from '../context/MyContext';
+import loadMount from '../Functions/loadMount';
 import '../cssPages/Refeicao.css';
 
 function Comidas() {
@@ -45,7 +46,7 @@ function Comidas() {
   };
 
   return loading
-    ? <div>Loading... </div>
+    ? loadMount('Comidas', 'true', 'foodStyle')
     : (
       <>
         <Header titulo="Comidas" pesquisa="true" className="foodStyle" />

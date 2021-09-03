@@ -1,4 +1,4 @@
-const fetchFoods = async (type, action, value = '') => {
+const mainFetch = async (type, action, value = '') => {
   const actions = {
     procuraComida: 'search.php?s=',
     procuraId: 'lookup.php?i=',
@@ -24,4 +24,4 @@ const fetchFoods = async (type, action, value = '') => {
   return result;
 };
 
-export default fetchFoods;
+export default mainFetch;

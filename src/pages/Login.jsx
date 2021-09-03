@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import logo from '../images/image.png';
+import logo from '../images/logo.png';
 import '../cssPages/Login.css';
 
 function Login() {
@@ -33,7 +33,7 @@ function Login() {
   return (
     <div className="loginContainer">
       <header className="loginHeader">
-        <img src={ logo } alt="logo" />
+        <img className="logo" src={ logo } alt="logo" />
       </header>
       <h1>Find your favorite recipe on iTry!</h1>
       <div className="loginForm">

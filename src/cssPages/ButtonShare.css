@@ -1,4 +1,17 @@
+.btnShareContainer {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
 .btnShare {
   background-color: rgba(255, 255, 255, 0);
   border: none;
+}
+
+.btnShareContainer p {
+  left: -20px;
+  position: absolute;
+  top: 55px;
+  width: 100px;
 }

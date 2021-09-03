@@ -3,10 +3,11 @@ import { useLocation } from 'react-router-dom';
 import ButtonRedirect from '../components/ButtonRedirect';
 import ButtonFavorite from '../components/ButtonFavorite';
 import ButtonShare from '../components/ButtonShare';
-import VideoEmbed from '../components/VideoEmbed';
 import Carousel from '../components/Carousel';
 import IngredientsList from '../components/IngredientsList';
-import fetchFoods from '../fetchs/FetchFood';
+import Loading from '../components/Loading';
+import VideoEmbed from '../components/VideoEmbed';
+import mainFetch from '../fetchs/mainFetch';
 import '../cssPages/Detalhes.css';
 
 const fetchTranslator = { comidas: 'food', bebidas: 'drink' };
@@ -28,7 +29,7 @@ function Detalhes() {
     const detailsFetchs = async (params) => {
       const [kind, action, value, size, callback] = params;
       console.log(kind, action, value, size, callback);
-      const apiResult = await fetchFoods(kind, action, value);
+      const apiResult = await mainFetch(kind, action, value);
       const { meals, drinks } = apiResult;
       let result = meals || drinks;
       console.log(result);
@@ -55,7 +56,7 @@ function Detalhes() {
     tags: (recipe.strTags) ? recipe.strTags.split(',') : '',
   };
 
-  if (!recipe || !recommended) return <h1>Carregando...</h1>;
+  if (!recipe || !recommended) return <Loading />;
 
   return (
     <>

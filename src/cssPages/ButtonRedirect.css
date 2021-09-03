@@ -1,5 +1,6 @@
 .redirectBtn {
   bottom: 0;
+  max-width: 800px;
   position: fixed;
   right: 50vw;
   transform: translateX(50%);

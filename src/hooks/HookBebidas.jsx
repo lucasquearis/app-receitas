@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
 
 function HookComidas() {
   const [loading, setLoading] = useState(true);
@@ -9,9 +9,9 @@ function HookComidas() {
   useEffect(() => {
     const setFetchFood = async () => {
       setLoading(true);
-      const result = await fetchFoods('drink', 'procuraBebida');
+      const result = await mainFetch('drink', 'procuraBebida');
       setDrink(result);
-      const newCategories = await fetchFoods('drink', 'categories');
+      const newCategories = await mainFetch('drink', 'categories');
       setCategories(newCategories);
       setLoading(false);
     };

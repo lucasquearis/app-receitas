@@ -17,7 +17,7 @@ function ShareButton() {
   };
 
   return (
-    <>
+    <div className="btnShareContainer">
       <button className="btnShare" type="button" onClick={ shareImgClick }>
         <img
           src={ shareIcon }
@@ -26,7 +26,7 @@ function ShareButton() {
         />
       </button>
       {showShareMsg && <p>Link copiado!</p>}
-    </>
+    </div>
   );
 }
 

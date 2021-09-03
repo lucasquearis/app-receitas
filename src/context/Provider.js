@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from './MyContext';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
 
 function Provider({ children }) {
   const [name, setName] = useState('');
@@ -16,7 +16,7 @@ function Provider({ children }) {
   const [renderDrinks, setRenderDrinks] = useState(false);
 
   const handleClick = async (type, action, value, callback) => {
-    const result = await fetchFoods(type, action, value);
+    const result = await mainFetch(type, action, value);
     callback(result);
   };
 

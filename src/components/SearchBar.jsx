@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
 import MyContext from '../context/MyContext';
 
 function SearchBar() {
@@ -48,14 +48,14 @@ function SearchBar() {
     aviso();
     if (pathname === '/comidas') {
       const type = 'food';
-      const { meals } = await fetchFoods(type, tipo, pesquisa);
+      const { meals } = await mainFetch(type, tipo, pesquisa);
       setDataMeals(meals);
       foodConditions(meals);
       setRenderFoods(true);
     }
     if (pathname === '/bebidas') {
       const type = 'drink';
-      const { drinks } = await fetchFoods(type, tipo, pesquisa);
+      const { drinks } = await mainFetch(type, tipo, pesquisa);
       setDataDrinks(drinks);
       drinkConditions(drinks);
       setRenderDrinks(true);

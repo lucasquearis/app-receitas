@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../cssPages/Explore.css';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
 
 function BebidasExp() {
   const [surprise, setSurprise] = useState({ idDrink: '' });
@@ -13,7 +13,7 @@ function BebidasExp() {
   });
 
   const getRandomDrink = async () => {
-    const list = await fetchFoods('drink', 'random');
+    const list = await mainFetch('drink', 'random');
     console.log(list);
     const { drinks } = list;
     setSurprise({ idDrink: drinks[0].idDrink });

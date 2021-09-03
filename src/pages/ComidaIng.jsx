@@ -4,7 +4,8 @@ import { Redirect } from 'react-router-dom';
 import CardList from '../components/CardList';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import fetchFoods from '../fetchs/FetchFood';
+import mainFetch from '../fetchs/mainFetch';
+import loadMount from '../Functions/loadMount';
 import MyContext from '../context/MyContext';
 
 function ComidaIng() {
@@ -14,7 +15,7 @@ function ComidaIng() {
     redirect: false,
   });
   const getIngredients = async () => {
-    const list = await fetchFoods('food', 'ingredients');
+    const list = await mainFetch('food', 'ingredients');
     const { meals } = list;
     const limitator = 12;
     const foods = meals.filter((food, index) => index < limitator);
@@ -22,7 +23,7 @@ function ComidaIng() {
   };
 
   const getFoodById = async (ingredient) => {
-    const list = await fetchFoods('food', 'filterIngredient', ingredient);
+    const list = await mainFetch('food', 'filterIngredient', ingredient);
     setFilterByIng({
       ...list,
     });
@@ -41,7 +42,7 @@ function ComidaIng() {
   }, []);
 
   if (redirect.redirect) return <Redirect to="/comidas" />;
-  if (!ingredients) return <p>Loading...</p>;
+  if (!ingredients) return loadMount('Explorar Ingredientes');
   return (
     <div>
       <Header titulo="Explorar Ingredientes" />
