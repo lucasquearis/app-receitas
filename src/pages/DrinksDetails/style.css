@@ -1,0 +1,22 @@
+body {
+  background-image: url('../../images/simon-berger-JH_R66BihvA-unsplash.jpg');
+  font-size: 1.1em;
+  height: 100vh;
+  text-shadow: 1px 2px 10px grey;
+}
+
+.ingredients-list {
+  font-size: 1.2rem;
+  list-style: circle;
+}
+
+.gambi {
+  padding: 25px;
+}
+
+.share-fav-btn {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding: 20px;
+}

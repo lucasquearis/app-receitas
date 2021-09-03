@@ -10,6 +10,7 @@ import BtnDrinks from '../../components/BtnDrinks';
 import FavoriteDrinkBtn from '../../components/FavoriteDrinkBtn';
 import CarouselDrink from '../../components/CarouselDrink';
 import '../../components/foodDrinks.css';
+import './style.css';
 
 function DrinksDetails() {
   const { id } = useParams();
@@ -43,39 +44,42 @@ function DrinksDetails() {
     .map((e, index) => `${drinkDetails[e]} - ${drinkDetails[filterObjMeasure[index]]}`);
 
   return (
-    <section>
+    <body className="details-drink">
       <DrinkInfo drinkDetails={ drinkDetails } />
 
-      <IconBtn
-        dataId="share-btn"
-        onClick={ () => setShare(copyToClipboard) }
-        type="button"
-        src={ shareIcon }
-        alt="shareIt"
-      />
-      { share && <span>Link copiado!</span> }
+      <section className="share-fav-btn">
+        <IconBtn
+          dataId="share-btn"
+          onClick={ () => setShare(copyToClipboard) }
+          type="button"
+          src={ shareIcon }
+          alt="shareIt"
+        />
+        { share && <span>Link copiado!</span> }
 
-      <FavoriteDrinkBtn
-        details={ details }
-        dataId="favorite-btn"
-        alt="favorite"
-      />
-
-      <p data-testid="recipe-category">{ drinkDetails.strAlcoholic }</p>
-
-      <CarouselDrink />
+        <FavoriteDrinkBtn
+          details={ details }
+          dataId="favorite-btn"
+          alt="favorite"
+        />
+      </section>
 
       <ul>
         { ingredientesWithMeasures.map((ingredient, index) => (
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
             key={ index }
+            className="ingredients-list"
           >
             { ingredient }
           </li>)) }
       </ul>
 
       <p data-testid="instructions">{ drinkDetails.strInstructions }</p>
+
+      <CarouselDrink />
+
+      <p className="gambi" />
 
       <Link to={ `/bebidas/${id}/in-progress` }>
         <BtnDrinks
@@ -86,7 +90,7 @@ function DrinksDetails() {
         />
       </Link>
 
-    </section>
+    </body>
   );
 }
 

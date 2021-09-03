@@ -4,8 +4,9 @@ import Carousel from 'react-multi-carousel';
 import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import { fetchFoodRedux } from '../../redux/actions/foodActions';
+import './style.css';
 
-export default function CarouselFood() {
+export default function CarouselDrink() {
   const dispatch = useDispatch();
   const { meals } = useSelector((state) => state.foodsAndDrinks);
 
@@ -35,8 +36,9 @@ export default function CarouselFood() {
   };
 
   return (
-    <ul>
+    <ul className="carousel-list">
       <Carousel
+        className="recomendations"
         swipeable={ false }
         draggable={ false }
         showDots
@@ -56,8 +58,17 @@ export default function CarouselFood() {
             data-testid={ `${index}-recomendation-card` }
           >
             <Link to={ `/comidas/${food.idMeal}/` }>
-              <img src={ food.strMealThumb } alt="meal-recomendation" />
-              <p data-testid={ `${index}-recomendation-title` }>{ food.strMeal}</p>
+              <img
+                className="recomendation-carousel"
+                src={ food.strMealThumb }
+                alt="meal-recomendation"
+              />
+              <p
+                className="recomendation-food"
+                data-testid={ `${index}-recomendation-title` }
+              >
+                { food.strMeal}
+              </p>
             </Link>
           </div>)) }
       </Carousel>
