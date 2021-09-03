@@ -6,7 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 const ShareButton = ({ id, setLinkShare, type }) => (
   <button
     data-testid="share-btn"
-    className="share-btn"
+    className="details__share-btn"
     onClick={ () => {
       copy(`http://localhost:3000/${type}/${id}`);
       setLinkShare(true);

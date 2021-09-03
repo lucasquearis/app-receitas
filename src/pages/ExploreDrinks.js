@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
-import './pageCSS/ExploreDrinks.css';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import drinkIcon from '../images/drinkIcon.png';
 
@@ -22,7 +21,7 @@ export default function ExploreDrinks() {
     <>
       <HeaderNoSearch title="Explorar" />
       <div className="explore">
-      <img src={ drinkIcon } className="explore-drinks__icons" alt="Explore Drink Icon" />
+        <img src={ drinkIcon } className="explore-drinks__icons" alt="Explore Icon" />
         <div className="explore-drinks__link-button">
           <Link
             data-testid="explore-by-ingredient"

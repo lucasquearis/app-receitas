@@ -6,7 +6,9 @@ export default function NotFound() {
   return (
     <>
       <HeaderNoSearch title="Perfil" />
-      <h2>Not Found</h2>
+      <div className="not-found__loading-text">
+        <h2>Not Found</h2>
+      </div>
       <BottomMenu />
     </>
   );

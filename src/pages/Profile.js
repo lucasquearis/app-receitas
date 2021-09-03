@@ -1,5 +1,4 @@
 import React from 'react';
-import './pageCSS/Profile.css';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import HeaderNoSearch from '../components/HeaderNoSearch';

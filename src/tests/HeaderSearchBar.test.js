@@ -27,7 +27,7 @@ describe('Testa elementos na barra de busca', () => {
     userEvent.type(searchInput, 'banana');
     const ingredientRadio = screen.getByTestId('ingredient-search-radio');
     userEvent.click(ingredientRadio);
-    const searchButton = screen.getByTestId('exec-search-btn');
+    const searchButton = screen.getByTestId('exec-header__search-btn');
     userEvent.click(searchButton);
   });
 });

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
-import './pageCSS/ExploreMeals.css';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import mealIcon from '../images/mealIcon.png';
 

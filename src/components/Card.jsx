@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import CardTitleBg from '../images/card_title_bg.png';
-import './componentCSS/Card.css';
 
 export default function Card({ id, str, strThumb, idType }) {
   const history = useHistory();

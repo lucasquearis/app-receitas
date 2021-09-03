@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
 import mealIcon from '../images/mealIcon.png';
 import drinkIcon from '../images/drinkIcon.png';
-import './pageCSS/Explore.css';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 
 export default function Explore() {

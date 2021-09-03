@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
-import Header from '../components/Header';
 import MyContext from '../context';
+import Header from '../components/Header';
 import Categories from '../components/Categories';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import searchDrinksByIngredient
@@ -54,9 +54,11 @@ export default function Drinks() {
           <Link key={ idDrink } to={ `bebidas/${idDrink}` }>
             <div
               data-testid={ `${index}-recipe-card` }
+              className="card__recipe-card"
             >
               <img
                 data-testid={ `${index}-card-img` }
+                className="card__recipe-thumb"
                 src={ strDrinkThumb }
                 alt={ strDrink }
               />

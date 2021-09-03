@@ -48,7 +48,7 @@ const FavoriteButton = (props) => {
   };
   return (
     <button
-      className="favorite-btn"
+      className="details__favorite-btn"
       type="button"
       onClick={
         () => handleClick()

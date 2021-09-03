@@ -3,7 +3,6 @@ import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import shareIcon from '../images/shareIcon.svg';
-import './pageCSS/DoneRecipes.css';
 
 export default function DoneRecipes() {
   const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));

@@ -5,8 +5,6 @@ import HeaderNoSearch from '../components/HeaderNoSearch';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-import './pageCSS/FavoriteRecipes.css';
-
 export default function FavoriteRecipes() {
   const allRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   // const recipes = allRecipes ? allRecipes : [];
@@ -56,7 +54,7 @@ export default function FavoriteRecipes() {
             </Link>
             <input
               data-testid={ `${index}-horizontal-favorite-btn` }
-              className="icon-favorite"
+              className="details__icon-favorite"
               type="image"
               src={ blackHeartIcon }
               alt="Favorite"
@@ -106,7 +104,7 @@ export default function FavoriteRecipes() {
           <div className="favorite__card-share">
             <input
               data-testid={ `${index}-horizontal-favorite-btn` }
-              className="icon-favorite"
+              className="details__icon-favorite"
               type="image"
               src={ blackHeartIcon }
               alt="Favorite"

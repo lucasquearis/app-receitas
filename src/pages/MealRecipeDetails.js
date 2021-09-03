@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './pageCSS/MealRecipeDetails.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
@@ -63,23 +62,28 @@ export default function MealRecipeDetails(props) {
           src={ strMealThumb }
           alt={ strMeal }
         />
-        <FavoriteButton
-          id={ id }
-          type="comida"
-          category={ strCategory }
-          alcoholicOrNot=""
-          name={ strMeal }
-          image={ strMealThumb }
-          favoriteRecipe={ favoriteRecipe }
-          setFavoriteRecipe={ setFavoriteRecipe }
-          area={ strArea }
-        />
-        <ShareButton
-          id={ id }
-          setLinkShare={ setLinkShare }
-          type="comidas"
-        />
-        { linkShare && 'Link copiado!' }
+        <div className="recipe-details__category-name-div">
+          <p data-testid="recipe-category"><b>{strCategory}</b></p>
+        </div>
+        <div className="recipe-details__share-and-favorite-btn-div">
+          <ShareButton
+            id={ id }
+            setLinkShare={ setLinkShare }
+            type="comidas"
+          />
+          { linkShare && 'Link copiado!' }
+          <FavoriteButton
+            id={ id }
+            type="comida"
+            category={ strCategory }
+            alcoholicOrNot=""
+            name={ strMeal }
+            image={ strMealThumb }
+            favoriteRecipe={ favoriteRecipe }
+            setFavoriteRecipe={ setFavoriteRecipe }
+            area={ strArea }
+          />
+        </div>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultMealRecipe[0][ingredient]) {
@@ -112,7 +116,7 @@ export default function MealRecipeDetails(props) {
         />
         <h2 className="recipe-details__combine-title">Combina com...</h2>
         <RecomendationCard page="meals" />
-        <div className="div-btn-start-recipe">
+        <div className="details__div-btn-start-recipe">
           <Link to={ `/comidas/${id}/in-progress` }>
             <button
               className="recipe-details__finish-btn"

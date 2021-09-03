@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './pageCSS/DrinkRecipeDetails.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
@@ -60,23 +59,27 @@ export default function DrinkRecipeDetails(props) {
           src={ strDrinkThumb }
           alt={ strDrink }
         />
-        <ShareButton
-          id={ id }
-          setLinkShare={ setLinkShare }
-          type="bebidas"
-        />
-        { linkShare && 'Link copiado!' }
-        <FavoriteButton
-          id={ id }
-          type="bebida"
-          category={ strCategory }
-          alcoholicOrNot={ strAlcoholic }
-          name={ strDrink }
-          image={ strDrinkThumb }
-          favoriteRecipe={ favoriteRecipe }
-          setFavoriteRecipe={ setFavoriteRecipe }
-        />
-        <p data-testid="recipe-category">{strAlcoholic}</p>
+        <div className="recipe-details__category-name-div">
+          <p data-testid="recipe-category"><b>{strAlcoholic}</b></p>
+        </div>
+        <div className="recipe-details__share-and-favorite-btn-div">
+          <ShareButton
+            id={ id }
+            setLinkShare={ setLinkShare }
+            type="bebidas"
+          />
+          { linkShare && 'Link copiado!' }
+          <FavoriteButton
+            id={ id }
+            type="bebida"
+            category={ strCategory }
+            alcoholicOrNot={ strAlcoholic }
+            name={ strDrink }
+            image={ strDrinkThumb }
+            favoriteRecipe={ favoriteRecipe }
+            setFavoriteRecipe={ setFavoriteRecipe }
+          />
+        </div>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultDrinkRecipe[0][ingredient]) {
@@ -99,7 +102,7 @@ export default function DrinkRecipeDetails(props) {
         <p data-testid="instructions">{strInstructions}</p>
         <h2 className="recipe-details__combine-title">Combina com...</h2>
         <RecomendationCard page="drinks" />
-        <div className="div-btn-start-recipe">
+        <div className="details__div-btn-start-recipe">
           <Link to={ `/bebidas/${id}/in-progress` }>
             <button
               className="recipe-details__finish-btn"

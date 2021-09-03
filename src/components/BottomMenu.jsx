@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './componentCSS/BottomMenu.css';
 import exploreIcon from '../images/exploreIcon.png';
 import mealIcon from '../images/mealIcon.png';
 import drinkIcon from '../images/drinkIcon.png';

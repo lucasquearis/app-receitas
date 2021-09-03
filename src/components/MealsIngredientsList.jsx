@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import searchFoodId from '../services/Header-SearchBar/Foods/searchFoodId';
-import '../pages/pageCSS/MealProcess.css';
 import Loading from './Loading';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
@@ -90,26 +89,35 @@ const MealsIngredientsList = ({ id }) => {
         .includes('strMeasure'));
     return (
       <>
-        <img data-testid="recipe-photo" src={ strMealThumb } alt={ strMeal } />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <FavoriteButton
-          id={ id }
-          type="comida"
-          category={ strCategory }
-          alcoholicOrNot=""
-          name={ strMeal }
-          image={ strMealThumb }
-          favoriteRecipe={ favoriteRecipe }
-          setFavoriteRecipe={ setFavoriteRecipe }
-          area={ strArea }
+        <img
+          data-testid="recipe-photo"
+          className="recipe-details__thumb"
+          src={ strMealThumb }
+          alt={ strMeal }
         />
-        <ShareButton
-          id={ id }
-          setLinkShare={ setLinkShare }
-          type="comidas"
-        />
-        {linkShare && 'Link copiado!'}
-        <p data-testid="recipe-category">{ strCategory }</p>
+        <div className="recipe-progress__category-name-div">
+          <p data-testid="recipe-category"><b>{ strCategory }</b></p>
+        </div>
+        <div className="recipe-progress__share-and-favorite-btn-div">
+          <FavoriteButton
+            id={ id }
+            type="comida"
+            category={ strCategory }
+            alcoholicOrNot=""
+            name={ strMeal }
+            image={ strMealThumb }
+            favoriteRecipe={ favoriteRecipe }
+            setFavoriteRecipe={ setFavoriteRecipe }
+            area={ strArea }
+          />
+          <ShareButton
+            id={ id }
+            setLinkShare={ setLinkShare }
+            type="comidas"
+          />
+          {linkShare && 'Link copiado!'}
+        </div>
         <ul className="progress__checkbox-list">
           {filteredIngredients.map((ingredient, index) => {
             if (resultAPIMeals[0][ingredient]) {
@@ -139,12 +147,14 @@ const MealsIngredientsList = ({ id }) => {
             return true;
           })}
         </ul>
+        <h2>Instruções</h2>
         <p data-testid="instructions">{ strInstructions }</p>
       </>
     );
   }
   return <Loading />;
 };
+
 export default MealsIngredientsList;
 
 MealsIngredientsList.propTypes = {

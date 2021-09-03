@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
-import './pageCSS/ExploreDrinksByIngredient.css';
 import fetchIngredients from '../services/Header-SearchBar/Drinks/fetchIngredients';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import Loading from '../components/Loading';
