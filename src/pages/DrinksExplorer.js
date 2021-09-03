@@ -21,7 +21,7 @@ const DrinksExplorer = () => {
         const { drinks } = await fetch(url).then((response) => response.json());
         setSurprise(drinks[0].idDrink);
       } catch (e) {
-        console.log(e);
+        return null;
       }
     };
     fetchRandom();
