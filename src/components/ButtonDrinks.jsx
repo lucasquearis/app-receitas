@@ -1,15 +1,17 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 function ButtonDrinks() {
-  const ido = 178319;
+  const { pathname } = useLocation();
+  const id = pathname.replace(/([^\d])+/gim, '');
   // const [none, setNone] = useState(false);
   const setHistory = useHistory();
 
   const handleClick = () => {
-    setHistory.push(`/bebidas/${ido}/in-progress`);
+    setHistory.push(`/bebidas/${id}/in-progress`);
   };
-
+  // testando
   // useEffect(() => {
   //   const recipe = JSON.parse(localStorage.getItem('doneRecipes'));
   //   if (recipe) {

@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../styles/RecipeInProgress.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import MyContext from '../context/MyContext';
 import ShareButton from '../components/ShareButton';
-import FavoriteButton from '../components/FavoriteButton';
-// import blackHeart from '../images/blackHeartIcon.svg';
-
+import blackHeart from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
   const lenghtIndredients = 20; // quantidade máxima de ingredientes da receita
@@ -23,9 +22,11 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 };
 
 function FoodInProgress() {
-  const id = 52771;
+  const { pathname } = useLocation();
+  const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
+  const [favorite, setFavorite] = useState(false);
   const [measure, setMeasure] = useState([]);
   const [checkedOptions, setCheckedOptions] = useState('');
   const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
@@ -33,6 +34,7 @@ function FoodInProgress() {
   useEffect(() => {
     try {
       const urlFoods = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      console.log(urlFoods);
 
       const fetchDetailsRecipe = async () => {
         const request = await fetch(urlFoods);
@@ -50,19 +52,12 @@ function FoodInProgress() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const foodProgress = {
-    meals: {
-      [id]: [...ingredient],
-    },
-  };
-
   function saveLocalStorage({ target }) {
     const { name, checked } = target;
     setCheckedOptions({
       ...checkedOptions,
       [name]: checked,
     });
-    localStorage.setItem('inProgressRecipes', JSON.stringify([foodProgress]));
   }
 
   useEffect(() => {
@@ -78,7 +73,6 @@ function FoodInProgress() {
   }, [checkedOptions]);
 
   function doneRecipe() {
-    // const checkedInputs = document.querySelectorAll('input');
     let tags = '';
 
     if (tags !== null || tags !== undefined) {
@@ -89,7 +83,7 @@ function FoodInProgress() {
 
     const recipes = {
       id,
-      type: 'comidas',
+      type: 'comida',
       area: getRecipe.strArea,
       category: getRecipe.strCategory,
       alcoholicOrNot: '',
@@ -99,9 +93,28 @@ function FoodInProgress() {
       tags: [tags],
     };
     setLocalStorageItems(...localStorageItems, recipes);
-
+    localStorage.setItem('doneRecipes', []);
     return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
+
+  const favorites = () => {
+    if (favorite === false) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+    const recipes = {
+      id,
+      type: 'comida',
+      area: getRecipe.strArea,
+      category: getRecipe.strCategory,
+      alcoholicOrNot: '',
+      name: getRecipe.strMeal,
+      image: getRecipe.strMealThumb,
+    };
+    setLocalStorageItems(...localStorageItems, recipes);
+    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+  };
 
   return (
     <div>
@@ -116,7 +129,13 @@ function FoodInProgress() {
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
         <ShareButton />
-        <FavoriteButton />
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          onClick={ favorites }
+        >
+          <img src={ favorite ? blackHeart : whiteHeartIcon } alt="Favorite" />
+        </button>
         <p data-testid="recipe-category">
           { getRecipe.strCategory }
         </p>
@@ -143,9 +162,6 @@ function FoodInProgress() {
         <h5>Preparation</h5>
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
-      <div>
-        {/* <span data-testid={ `${indexo}-recomendation-card` }>cards</span> */}
-      </div>
       <div>
         <Link to="/receitas-feitas" onClick={ doneRecipe }>
           <button

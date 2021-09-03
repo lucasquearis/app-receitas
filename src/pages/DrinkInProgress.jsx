@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import '../styles/RecipeInProgress.css';
 import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
 import ShareButton from '../components/ShareButton';
-import FavoriteButton from '../components/FavoriteButton';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import MyContext from '../context/MyContext';
+import DrinkContext from '../context/DrinkContext';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -21,13 +24,14 @@ const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
 };
 
 function DrinkInProgess() {
-  const id = 178319;
   const getHistory = useHistory();
   const { location: { pathname } } = getHistory;
+  const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
+  const { checkedDrinkOptions, setCheckedDrinkOptions } = useContext(DrinkContext);
   const [measure, setMeasure] = useState([]);
-  const [checkedOptions, setCheckedOptions] = useState('');
+  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -42,30 +46,23 @@ function DrinkInProgess() {
     } catch (error) {
       console.log(error);
     }
-  }, [id, getHistory, pathname, setGetRecipe]);
+  }, [id, setGetRecipe]);
 
   useEffect(() => {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
-  }, [getRecipe]);
-
-  const drinkProgress = {
-    meals: {
-      [id]: [...ingredient],
-    },
-  };
+  }, [getRecipe, checkedDrinkOptions]);
 
   function saveLocalStorage({ target }) {
-    const { name, checked } = target;
-    setCheckedOptions({
-      ...checkedOptions,
-      [name]: checked,
-    });
-    localStorage.setItem('inProgressRecipes', JSON.stringify([drinkProgress]));
+    const { checked } = target;
+    setCheckedDrinkOptions([
+      ...checkedDrinkOptions,
+      checked,
+    ]);
   }
 
   useEffect(() => {
     function checkButton() {
-      const check = Object.keys(checkedOptions);
+      const check = Object.keys(checkedDrinkOptions);
       const input = document.querySelectorAll('input');
       if (check.length > 0 && check.length === input.length) {
         const button = document.getElementById('finish-recipe');
@@ -73,10 +70,9 @@ function DrinkInProgess() {
       }
     }
     checkButton();
-  }, [checkedOptions]);
+  }, [checkedDrinkOptions]);
 
   function doneRecipe() {
-    // const checkedInputs = document.querySelectorAll('input');
     let tags = '';
 
     if (tags !== null || tags !== undefined) {
@@ -97,23 +93,34 @@ function DrinkInProgess() {
 
     const recipes = {
       id,
-      type: 'bebidas',
+      type: 'bebida',
       area: '',
       category: getRecipe.strCategory,
       alcoholicOrNot,
       name: getRecipe.strDrink,
-      image: getRecipe.strMealThumb,
+      image: getRecipe.strDrinkThumb,
       doneDate: moment().format('DD-MM-YYYY'),
       tags: [tags],
     };
+    setLocalStorageItems(...localStorageItems, recipes);
 
-    function setLocalStorage(recipe) {
-      const locStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-      locStorage.push(recipe);
-      localStorage.setItem('doneRecipes', JSON.stringify(locStorage));
-    }
-    return setLocalStorage(recipes);
+    return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
+
+  const favorites = () => {
+    const recipes = {
+      id,
+      type: 'bebida',
+      area: '',
+      category: getRecipe.strCategory,
+      alcoholicOrNot: getRecipe.strAlcoholic,
+      name: getRecipe.strDrink,
+      image: getRecipe.strDrinkThumb,
+    };
+    setLocalStorageItems(...localStorageItems, recipes);
+    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+  };
+
   return (
     <div>
       <div>
@@ -127,7 +134,13 @@ function DrinkInProgess() {
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <ShareButton />
-        <FavoriteButton />
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          onClick={ favorites }
+        >
+          <img src={ whiteHeartIcon } alt="Favorite" />
+        </button>
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
@@ -137,15 +150,23 @@ function DrinkInProgess() {
         <h4>Ingredients</h4>
         <ul>
           { ingredient.map((item, index) => (
-            <li key={ index } onChange="">
+            <li key={ index }>
               <label htmlFor={ `${index}-s` } data-testid={ `${index}-ingredient-step` }>
                 <input
                   name={ `${index}` }
                   id={ `${index}-s` }
-                  type="checkbox"
                   onChange={ saveLocalStorage }
+                  type="checkbox"
+                  value={ `${measure[index]} - ${item}` }
+                  checked={ checkedDrinkOptions[index] }
                 />
-                <span className="marked-checkbox">{ `${measure[index]} - ${item}` }</span>
+                <span
+                  id={ `${index}-value` }
+                  className="marked-checkbox"
+                  aria-hidden="true"
+                >
+                  { `${measure[index]} - ${item}` }
+                </span>
               </label>
             </li>
           ))}
@@ -156,16 +177,13 @@ function DrinkInProgess() {
         <p data-testid="instructions">{ getRecipe.strInstructions }</p>
       </section>
       <div>
-        {/* <span data-testid={ `${indexo}-recomendation-card` }>cards</span> */}
-      </div>
-      <div>
         <Link to="/receitas-feitas" onClick={ doneRecipe }>
           <button
             id="finish-recipe"
             className="button-details"
             type="button"
             data-testid="finish-recipe-btn"
-            disabled="true"
+            disabled
           >
             Finalizar Receita
           </button>
