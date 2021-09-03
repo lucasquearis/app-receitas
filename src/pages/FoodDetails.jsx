@@ -1,16 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
 import { useLocation } from 'react-router-dom';
 import RecomendationsDrinks from '../components/RecomendationsDrinks';
 import ButtonFoods from '../components/ButtonFoods';
 import ShareButton from '../components/ShareButton';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import MyContext from '../context/MyContext';
+import FavoriteButtonFoods from '../components/FavoriteButtonFoods';
 
-// função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
-  const lenghtIndredients = 20; // quantidade máxima de ingredientes da receita
+  const lenghtIndredients = 20;
   const itens = [];
   const itensMeasure = [];
   if (getRecipe) {
@@ -29,7 +26,6 @@ function FoodDetails() {
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -38,7 +34,6 @@ function FoodDetails() {
         const request = await fetch(`${urlFoods}${id}`);
         const response = await request.json();
         const resolve = await response.meals[0];
-        console.log(resolve);
         setGetRecipe(resolve);
       };
       fetchDetailsRecipe();
@@ -51,25 +46,11 @@ function FoodDetails() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const favorites = () => {
-    const recipes = {
-      id,
-      type: 'comida',
-      area: getRecipe.strArea,
-      category: getRecipe.strCategory,
-      alcoholicOrNot: '',
-      name: getRecipe.strMeal,
-      image: getRecipe.strMealThumb,
-    };
-    setLocalStorageItems(...localStorageItems, recipes);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
-  };
-
   return (
     <div>
       <div>
         <img
-          alt={ getRecipe.strMealThumb }
+          alt="foto da comida"
           data-testid="recipe-photo"
           src={ getRecipe.strMealThumb }
           style={ { width: '10rem' } }
@@ -79,13 +60,7 @@ function FoodDetails() {
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
         <div className="icons">
           <ShareButton />
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ favorites }
-          >
-            <img src={ whiteHeartIcon } alt="Favorite" />
-          </button>
+          <FavoriteButtonFoods />
         </div>
         <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>

@@ -4,8 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import MyContext from '../context/MyContext';
 import ShareButton from '../components/ShareButton';
-import blackHeart from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FavoriteButtonFoods from '../components/FavoriteButtonFoods';
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
   const lenghtIndredients = 20; // quantidade máxima de ingredientes da receita
@@ -26,7 +25,6 @@ function FoodInProgress() {
   const id = pathname.replace(/([^\d])+/gim, '');
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
-  const [favorite, setFavorite] = useState(false);
   const [measure, setMeasure] = useState([]);
   const [checkedOptions, setCheckedOptions] = useState('');
   const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
@@ -97,25 +95,6 @@ function FoodInProgress() {
     return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
 
-  const favorites = () => {
-    if (favorite === false) {
-      setFavorite(true);
-    } else {
-      setFavorite(false);
-    }
-    const recipes = {
-      id,
-      type: 'comida',
-      area: getRecipe.strArea,
-      category: getRecipe.strCategory,
-      alcoholicOrNot: '',
-      name: getRecipe.strMeal,
-      image: getRecipe.strMealThumb,
-    };
-    setLocalStorageItems(...localStorageItems, recipes);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
-  };
-
   return (
     <div>
       <div>
@@ -129,13 +108,7 @@ function FoodInProgress() {
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
         <ShareButton />
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          onClick={ favorites }
-        >
-          <img src={ favorite ? blackHeart : whiteHeartIcon } alt="Favorite" />
-        </button>
+        <FavoriteButtonFoods />
         <p data-testid="recipe-category">
           { getRecipe.strCategory }
         </p>
