@@ -31,6 +31,7 @@ export default function Header(
           {!showExploreIcon
             ? (
               <button
+                className="border-0 bg-transparent"
                 type="button"
                 onClick={ () => onClickShowInput((prevCheck) => !prevCheck) }
               >

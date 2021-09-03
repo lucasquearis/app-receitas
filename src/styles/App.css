@@ -1,3 +1,10 @@
+*, p, h1, h2, h3, h4, h5 {
+  box-sizing: border-box;
+  color: #232323;
+  margin: 0;
+  padding: 0;
+}
+
 .body {
   font-family: Arial , Helvetica , sans-serif;
   padding-top: 64px;
@@ -9,8 +16,40 @@
 
 .bg-color {
   background-color: #b2b5bf;
+  color: #232323;
 }
 
-.image {
+.logo {
   width: 250px;
+}
+
+.react-multi-carousel-item {
+  display: flex;
+  font-family: Arial , Helvetica , sans-serif;
+  height: 220px;
+  justify-content: center;
+}
+
+.react-multi-carousel-item .card {
+  width: 85%;
+}
+
+.react-multi-carousel-item .card-title {
+  font-size: 16pt;
+  font-weight: 700;
+}
+
+.react-multi-carousel-item .card-text {
+  font-size: 14pt;
+}
+
+.recipes-checkbox {
+  align-items: center;
+  display: flex;
+  list-style: none;
+}
+
+:checked + span {
+  color: black;
+  text-decoration: line-through;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
 export default function SearchBar(
   {
@@ -58,9 +59,15 @@ export default function SearchBar(
         </label>
       </div>
       <div className="w-100 d-flex">
-        <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
+        <Button
+          className="p-1"
+          variant="outline-dark"
+          onClick={ handleClick }
+          type="button"
+          data-testid="exec-search-btn"
+        >
           Buscar
-        </button>
+        </Button>
       </div>
     </div>
   );
