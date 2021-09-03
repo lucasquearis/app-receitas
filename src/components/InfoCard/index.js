@@ -53,11 +53,10 @@ const InfoCard = ({ recipe, setRecipes, index }) => {
 
   const renderDonePage = () => (
     <div>
-      <p className="ml-3" data-testid={ `${index}-horizontal-done-date` }>
-        Feita em:
-        { ` ${doneDate}` }
+      <p className="date" data-testid={ `${index}-horizontal-done-date` }>
+        { `Feita em: ${doneDate}` }
       </p>
-      <div className="w-100 d-flex justify-content-around">
+      <div className="card-tags-div">
         {
           tags.filter((e, i) => i <= 1)
             .map((tag) => (
@@ -75,7 +74,7 @@ const InfoCard = ({ recipe, setRecipes, index }) => {
   );
 
   return (
-    <div className="info-card my-2 d-flex">
+    <div className="info-card" id="info-card">
       <img
         src={ image }
         alt={ `${name}` }

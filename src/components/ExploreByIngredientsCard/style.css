@@ -1,0 +1,9 @@
+.ingredient-card {
+  padding: 10px;
+}
+
+.ingredient-card p {
+  background-color: var(--color-secund);
+  margin: 5px;
+  padding: 10px 15px;
+}

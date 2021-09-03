@@ -1,0 +1,14 @@
+.buttons-filter-drinks button {
+  background-color: var(--color-secund);
+  border: none;
+  color: var(--bg-color);
+  font-family: var(--text-russo);
+  margin-top: 15px;
+  width: 80%;
+}
+
+.buttons-filter-drinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

@@ -97,7 +97,7 @@ const MealInProgress = () => {
         name: strMeal,
         image: strMealThumb,
         doneDate: `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`,
-        tags: strTags.split(','),
+        tags: strTags ? strTags.split(',') : [],
       },
     ];
     localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
@@ -111,22 +111,26 @@ const MealInProgress = () => {
 
   return (
     <div className="recipe-details">
-      <h3 className="recipe-title" data-testid="recipe-title">{ strMeal }</h3>
-      <img
-        className="recipe-photo"
-        src={ strMealThumb }
-        alt="recipe"
-        data-testid="recipe-photo"
-      />
-      <br />
-      <DetailsButtonsField recipeType="comidas" handleFavorite={ handleFavorite } />
-      <p data-testid="recipe-category">{ strCategory }</p>
+      <div className="block-photo">
+        <img
+          className="recipe-photo"
+          src={ strMealThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+        />
+        <h3 className="recipe-title" data-testid="recipe-title">{ strMeal }</h3>
+        <p className="recipe-category" data-testid="recipe-category">{ strCategory }</p>
+        <DetailsButtonsField recipeType="comidas" handleFavorite={ handleFavorite } />
+      </div>
       <Ingredients
         max={ MAX_INGREDIENTS }
         page="inProgress"
         setDisabled={ setDisabled }
       />
-      <p className="instructions" data-testid="instructions">{ strInstructions }</p>
+      <div className="instructions">
+        <p>Instructions</p>
+        <p className="instructions" data-testid="instructions">{ strInstructions }</p>
+      </div>
       <Button
         className="finish-recipe-btn"
         type="button"

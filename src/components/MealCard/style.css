@@ -1,22 +1,25 @@
 .meal-card {
   align-items: center;
-  border-radius: 6px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--color-secund);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgb(200, 200, 200);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 172px;
   justify-content: space-between;
-  margin: 8px auto;
-  width: 161px;
+  margin: 50px auto 0;
+  width: 70%;
 }
 
 .meal-card img {
-  border-radius: 6px 6px 0 0;
-  height: 109px;
-  width: 161px;
+  border-radius: 20px 20px 0 0;
+  height: auto;
+  width: 100%;
 }
 
 .meal-card p {
-  margin: 0;
-  margin-bottom: 10px;
+  font-family: var(--text-pacifico);
+  font-size: 35px;
+  margin-bottom: 30px;
+  margin-top: 20px;
 }

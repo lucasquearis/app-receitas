@@ -1,0 +1,14 @@
+.btn {
+  align-items: center;
+  background-color: var(--color-secund);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--text-russo);
+  margin: 40px auto;
+  padding: 30px;
+  width: 80%;
+}
+
+.icon {
+  width: 90px;
+}

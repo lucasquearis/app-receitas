@@ -7,6 +7,7 @@ import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import { getLocalStorage } from '../../utils';
+import './style.css';
 
 const DetailsButtonsField = ({ recipeType, handleFavorite }) => {
   const { id } = useParams();
@@ -36,13 +37,26 @@ const DetailsButtonsField = ({ recipeType, handleFavorite }) => {
 
   return (
     <div>
-      <Button className="share-btn" type="button" onClick={ handleShare }>
-        <img src={ shareIcon } alt="Share" data-testid="share-btn" />
-      </Button>
-      <Button className="favorite-btn" type="button" onClick={ handleClick }>
-        <img src={ heart } alt="Favorite" data-testid="favorite-btn" />
-      </Button>
-      { shared && <p>Link copiado!</p> }
+      <div className="divDetails">
+        <Button className="favorite-btn-details" type="button" onClick={ handleClick }>
+          <img
+            src={ heart }
+            alt="Favorite"
+            data-testid="favorite-btn"
+            className="favoirite-btn"
+          />
+        </Button>
+
+        <Button className="share-btn-details" type="button" onClick={ handleShare }>
+          <img
+            src={ shareIcon }
+            alt="Share"
+            data-testid="share-btn"
+            className="share-btn"
+          />
+        </Button>
+      </div>
+      { shared && <p className="link-shared">Link copiado!</p> }
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { DRINK_RESPONSE, DRINK_PARAMETER_RESET } from '../../redux/reducers/drin
 import DrinkCard from '../DrinkCard';
 import { getDrinkTypesList, getDrinkByFilter, getDrink } from '../../services/drinkAPI';
 import Loading from '../Loading';
+import './style.css';
 
 const DrinkList = () => {
   const NUMBER_TWELVE = 12;
@@ -101,7 +102,7 @@ const DrinkList = () => {
 
   return (
     <>
-      <div>
+      <div className="buttons-filter-drinks">
         <Button
           data-testid="All-category-filter"
           size="lg"

@@ -1,0 +1,30 @@
+.recomendations-container {
+  padding-bottom: 150px;
+}
+
+.recomendations-title {
+  background-color: var(--color-secund);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 0;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.slider {
+  background-color: var(--color-secund);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: 0;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  white-space: nowrap;
+  width: 360px;
+}
+
+.slides {
+  display: inline-block;
+  width: 185px;
+}

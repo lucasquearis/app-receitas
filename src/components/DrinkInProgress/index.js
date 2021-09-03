@@ -48,7 +48,8 @@ const DrinkInProgress = () => {
     strAlcoholic,
     strInstructions,
     idDrink,
-    strCategory } = drinks[0];
+    strCategory,
+    strTags } = drinks[0];
 
   const createNewLocalStorageFavorite = (favorites) => [
     ...favorites,
@@ -96,7 +97,7 @@ const DrinkInProgress = () => {
         name: strDrink,
         image: strDrinkThumb,
         doneDate: `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`,
-        tags: [],
+        tags: strTags ? strTags.split(',') : [],
       },
     ];
     localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
@@ -110,16 +111,17 @@ const DrinkInProgress = () => {
 
   return (
     <div className="recipe-details">
-      <h3 className="recipe-title" data-testid="recipe-title">{ strDrink }</h3>
-      <img
-        className="recipe-photo"
-        src={ strDrinkThumb }
-        alt="recipe"
-        data-testid="recipe-photo"
-      />
-      <br />
-      <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
-      <p data-testid="recipe-category">{ strAlcoholic }</p>
+      <div className="block-photo">
+        <img
+          className="recipe-photo"
+          src={ strDrinkThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+        />
+        <h3 className="recipe-title" data-testid="recipe-title">{ strDrink }</h3>
+        <p data-testid="recipe-category">{ strAlcoholic }</p>
+        <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
+      </div>
       <Ingredients
         max={ MAX_INGREDIENTS }
         page="inProgress"

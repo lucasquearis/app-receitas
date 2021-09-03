@@ -84,16 +84,17 @@ const DrinkDetails = () => {
 
   return (
     <div className="recipe-details">
-      <h3 className="recipe-title" data-testid="recipe-title">{ strDrink }</h3>
-      <img
-        className="recipe-photo"
-        src={ strDrinkThumb }
-        alt="recipe"
-        data-testid="recipe-photo"
-      />
-      <br />
-      <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
-      <p data-testid="recipe-category">{ strAlcoholic }</p>
+      <div className="block-photo">
+        <img
+          className="recipe-photo"
+          src={ strDrinkThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+        />
+        <h3 className="recipe-title" data-testid="recipe-title">{ strDrink }</h3>
+        <p className="recipe-category" data-testid="recipe-category">{ strAlcoholic }</p>
+        <DetailsButtonsField recipeType="bebidas" handleFavorite={ handleFavorite } />
+      </div>
       <Ingredients max={ MAX_INGREDIENTS } page="details" />
       <p className="instructions" data-testid="instructions">{ strInstructions }</p>
       <Recommendations recommendations={ recommendations } />

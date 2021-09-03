@@ -1,0 +1,16 @@
+.share-btn-details, .favorite-btn-details {
+  background-color: blue;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.divDetails {
+  background-color: var(--color-secund);
+  display: flex;
+}
+
+.link-shared {
+  font-size: 20px;
+  margin-top: 10px;
+}

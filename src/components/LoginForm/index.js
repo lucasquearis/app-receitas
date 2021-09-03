@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import { saveLoginLocalStorage, validateLogin } from '../../utils';
+import chef from '../../images/icons/chef.png';
 import './style.css';
 
 const LoginForm = () => {
@@ -27,7 +28,10 @@ const LoginForm = () => {
         className="login-form"
         onSubmit={ handleSubmit }
       >
-        <h1>Login</h1>
+        <h1>APP DE RECEITAS</h1>
+
+        <img src={ chef } alt="Chef" />
+        <h2>Login</h2>
         <Form.Group className="mb-3" controlId="loginFormEmail">
           <Form.Control
             type="email"

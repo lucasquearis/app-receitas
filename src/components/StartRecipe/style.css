@@ -1,0 +1,10 @@
+.start-recipe {
+  background-color: var(--color-first);
+  border-radius: 10px;
+  bottom: 0;
+  color: black;
+  font-family: var(--text-russo);
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+}

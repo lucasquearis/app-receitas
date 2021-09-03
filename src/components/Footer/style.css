@@ -1,20 +1,22 @@
 footer {
-  background-color: #c4c4c4;
+  background-color: var(--color-first);
+  border-top: solid 10px var(--bg-color);
   bottom: 0;
   display: flex;
+  height: 70px;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 5px 20px;
   position: fixed;
   width: 100%;
 }
 
-footer p {
+/* footer p {
   font-size: 28px;
   margin: auto;
-}
+} */
 
 footer img {
-  height: 80%;
+  height: 100%;
 }
 
 footer button {
@@ -22,6 +24,6 @@ footer button {
   border: none;
 }
 
-.footer-space {
+/* .footer-space {
   height: 62px;
-}
+} */

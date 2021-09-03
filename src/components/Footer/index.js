@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className="footer-space" />
+      {/* <div className="footer-space" /> */}
       <footer data-testid="footer">
         <button type="button" onClick={ () => history.push('/bebidas') }>
           <img src={ drinkIcon } alt="Perfil" data-testid="drinks-bottom-btn" />

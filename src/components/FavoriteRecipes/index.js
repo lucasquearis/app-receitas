@@ -26,7 +26,7 @@ const FavoriteRecipes = () => {
   };
 
   return (
-    <div className="w-100">
+    <div className="favorite-recipes">
       <ToggleButtons />
       {
         filter === 'All'

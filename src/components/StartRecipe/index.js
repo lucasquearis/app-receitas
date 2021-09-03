@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import { string, arrayOf, shape } from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { getLocalStorage } from '../../utils';
+import './style.css';
 
 const StartRecipe = ({ recipeType, ingredients }) => {
   const history = useHistory();

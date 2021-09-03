@@ -1,8 +1,9 @@
 import React from 'react';
 import { arrayOf, string } from 'prop-types';
+import './style.css';
 
 const Recommendations = ({ recommendations }) => (
-  <div>
+  <div className="recomendations-container">
     <h5 className="recomendations-title">Recommendations</h5>
     <div className="slider">
       { recommendations.map((recommendation, index) => (

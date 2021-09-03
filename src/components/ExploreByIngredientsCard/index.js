@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './style.css';
 import { number, shape, string } from 'prop-types';
 import { FOOD_PARAMETER_REDIRECT } from '../../redux/reducers/foodReducer';
 import { DRINK_PARAMETER_REDIRECT } from '../../redux/reducers/drinkReducer';

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import drinkIcon from '../../images/drinkIcon.svg';
-import mealIcon from '../../images/mealIcon.svg';
-import listIcon from '../../images/listIcon.svg';
-import surpriseIcon from '../../images/surpriseIcon.svg';
-import mapIcon from '../../images/mapIcon.svg';
+import drinkIcon from '../../images/icons/exploreDrinks.png';
+import mealIcon from '../../images/icons/exploreFood.png';
+import listIcon from '../../images/icons/ingredientsFood.png';
+import surpriseIcon from '../../images/icons/surpriseMe.png';
+import mapIcon from '../../images/icons/location.png';
+import './style.css';
 
 const ExploreCard = ({ type }) => {
   const history = useHistory();
@@ -66,8 +67,9 @@ const ExploreCard = ({ type }) => {
       type="button"
       onClick={ clickHandler }
       data-testid={ testId }
+      className="btn"
     >
-      <img src={ icon } alt="" />
+      <img src={ icon } alt="" className="icon" />
       <p>{text}</p>
     </button>
   );

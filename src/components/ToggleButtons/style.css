@@ -1,0 +1,10 @@
+.done-recipes-btn button {
+  background-color: var(--color-secund);
+  border: none;
+  border-radius: 10px;
+  color: var(--bg-color);
+  font-family: var(--text-russo);
+  font-size: 28px;
+  margin: 30px auto;
+  padding: 15px;
+}

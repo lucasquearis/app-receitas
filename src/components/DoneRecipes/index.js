@@ -26,7 +26,7 @@ const DoneRecipes = () => {
   };
 
   return (
-    <div className="w-100">
+    <div className="done-recipes">
       <ToggleButtons />
       {
         filter === 'All'

@@ -1,28 +1,29 @@
 header {
-  background-color: #c4c4c4;
+  background-color: var(--color-first);
+  border-bottom: solid 1px var(--bg-color);
   display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
+  height: 70px;
+  padding: auto 20px;
   position: sticky;
+  text-align: center;
   top: 0;
   z-index: 2;
 }
 
 header p {
+  font-family: var(--text-architects);
   font-size: 28px;
-  margin: auto;
+  line-height: 30px;
+  margin-bottom: auto;
+  margin-top: auto;
+  width: 56.11%;
 }
 
 header img {
-  height: 80%;
+  height: 100%;
 }
 
 header button {
   background-color: transparent;
   border: none;
-}
-
-.header-space {
-  height: 62px;
-  width: 320px;
 }

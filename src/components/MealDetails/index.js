@@ -85,19 +85,30 @@ const MealDetails = () => {
 
   return (
     <div className="recipe-details">
-      <h3 className="recipe-title" data-testid="recipe-title">{ strMeal }</h3>
-      <img
-        className="recipe-photo"
-        src={ strMealThumb }
-        alt="recipe"
-        data-testid="recipe-photo"
-      />
-      <br />
-      <DetailsButtonsField recipeType="comidas" handleFavorite={ handleFavorite } />
-      <p data-testid="recipe-category">{ strCategory }</p>
-      <Ingredients max={ MAX_INGREDIENTS } page="details" />
-      <p className="instructions" data-testid="instructions">{ strInstructions }</p>
-      <iframe src={ strYoutube } title="video" data-testid="video" />
+      <div className="block-photo">
+        <img
+          className="recipe-photo"
+          src={ strMealThumb }
+          alt="recipe"
+          data-testid="recipe-photo"
+        />
+        <h3 className="recipe-title" data-testid="recipe-title">{ strMeal }</h3>
+        <p className="recipe-category" data-testid="recipe-category">{ strCategory }</p>
+        <DetailsButtonsField recipeType="comidas" handleFavorite={ handleFavorite } />
+      </div>
+      <div className="block-ingredients">
+        <p>Ingredients:</p>
+        <Ingredients max={ MAX_INGREDIENTS } page="details" />
+      </div>
+
+      <div className="instructions">
+        <p>Instructions</p>
+        <p className="instruction" data-testid="instructions">{ strInstructions }</p>
+      </div>
+      <video height="225" width="300" controls data-testid="video">
+        <source src={ strYoutube } />
+        <track kind="captions" />
+      </video>
       <Recommendations recommendations={ recommendations } />
       <StartRecipe recipeType="meals" ingredients={ ingredients } />
     </div>

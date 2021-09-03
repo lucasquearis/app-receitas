@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { TOGGLE_FILTER } from '../../redux/reducers/recipesReducer';
+import './style.css';
 
 const ToggleButtons = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const ToggleButtons = () => {
   });
 
   return (
-    <div className="d-flex justify-content-around mx-auto my-4 w-100">
+    <div className="done-recipes-btn">
       <Button
         size="lg"
         data-testid="filter-by-all-btn"

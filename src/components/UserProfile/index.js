@@ -2,6 +2,7 @@ import React, {} from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import { getLocalStorage } from '../../utils';
+import './style.css';
 
 const UserProfile = () => {
   const clearEmail = () => localStorage.clear();
@@ -10,8 +11,10 @@ const UserProfile = () => {
 
   return (
     <div>
-      <header data-testid="profile-email">{ email }</header>
-      <section>
+      <header className="header-mail" data-testid="profile-email">
+        <p className="email-field">{ email }</p>
+      </header>
+      <section className="profile">
 
         <Button
           type="button"
@@ -30,6 +33,7 @@ const UserProfile = () => {
         </Button>
 
         <Button
+          className="profile-btn"
           type="button"
           onClick={ () => { clearEmail(); history.push('/'); } }
           data-testid="profile-logout-btn"

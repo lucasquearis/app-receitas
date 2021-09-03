@@ -2,7 +2,7 @@ import React from 'react';
 import loadingIcon from '../../images/loadingIcon.svg';
 
 const Loading = () => (
-  <div className="d-flex justify-content-center align-items-center">
+  <div className="d-flex justify-content-center align-items-center list">
     <img
       src={ loadingIcon }
       alt="Carregando..."

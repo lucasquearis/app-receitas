@@ -5,6 +5,7 @@ import { func, number, string } from 'prop-types';
 import { createIngredients, createDecorations,
   getLocalStorage, handleDisabled } from '../../utils';
 import Loading from '../Loading';
+import './style.css';
 
 const Ingredients = ({ max, page, setDisabled }) => {
   const { id } = useParams();
@@ -81,6 +82,7 @@ const Ingredients = ({ max, page, setDisabled }) => {
 
   return (
     <div className="ingredients-container">
+      <p>Ingredients</p>
       { ingredients.map((ingredient, index) => (
         <div
           key={ `ingredient-${index}` }

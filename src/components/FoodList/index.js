@@ -6,6 +6,7 @@ import { FOOD_RESPONSE, FOOD_PARAMETER_RESET } from '../../redux/reducers/foodRe
 import { getFoodTypesList, getFoodByFilter, getFood } from '../../services/foodAPI';
 import MealCard from '../MealCard';
 import Loading from '../Loading';
+import './style.css';
 
 const FoodList = () => {
   const NUMBER_TWELVE = 12;
@@ -101,7 +102,7 @@ const FoodList = () => {
 
   return (
     <>
-      <div>
+      <div className="buttons-filter">
         <Button
           data-testid="All-category-filter"
           size="lg"
