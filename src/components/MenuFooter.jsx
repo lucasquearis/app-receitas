@@ -7,19 +7,30 @@ import './style/footerMenu.css';
 
 export default function MenuFooter() {
   return (
-    <div className="footerMenu">
-      <footer data-testid="footer">
-
-        <Link to="/bebidas" className="fixed">
-          <img data-testid="drinks-bottom-btn" src={ drink } alt="icon drink" />
+    <div>
+      <footer data-testid="footer" className="footer">
+        <Link to="/bebidas">
+          <img
+            data-testid="drinks-bottom-btn"
+            src={ drink }
+            alt="icon drink"
+          />
         </Link>
 
-        <Link to="/explorar" className="fixed">
-          <img data-testid="explore-bottom-btn" src={ explore } alt="icon explore" />
+        <Link to="/explorar">
+          <img
+            data-testid="explore-bottom-btn"
+            src={ explore }
+            alt="icon explore"
+          />
         </Link>
 
-        <Link to="/comidas" className="fixed">
-          <img data-testid="food-bottom-btn" src={ food } alt="icon food" />
+        <Link to="/comidas">
+          <img
+            data-testid="food-bottom-btn"
+            src={ food }
+            alt="icon food"
+          />
         </Link>
 
       </footer>
