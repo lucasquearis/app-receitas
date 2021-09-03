@@ -14,6 +14,7 @@ import RecipesList from './pages/RecipesList';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainProvider from './context/MainProvider';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/comidas/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/bebidas/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/explorar/comidas/area" component={ ExploreByArea } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/explorar/comidas/ingredientes" component={ ExploreByIngredient } />
         <Route path="/explorar/bebidas/ingredientes" component={ ExploreByIngredient } />
         <Route path="/comidas/:id" component={ RecipeDetail } />
