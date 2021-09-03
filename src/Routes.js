@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import Login from './pages/Login';
 import Principal from './pages/Principal';
-import Perfil from './pages/Perfil';
+import Profile from './pages/Profile';
 import Explore from './pages/Explore';
 import NotFound from './pages/NotFound';
 import DetailsMeals from './pages/DetailsMeals';
@@ -62,7 +62,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route exact path="/receitas-feitas" component={ DoneRecepies } />
       <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/perfil" component={ Perfil } />
+      <Route exact path="/perfil" component={ Profile } />
       <Route exact path="/" component={ Login } />
       <Route
         exact

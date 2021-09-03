@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import FooterBar from '../../components/FooterBar';
 
+import { Button, Email, ProfileWrapper } from './style';
+
 function Perfil() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   function getEmail() {
     return (
-      <p type="text" data-testid="profile-email">
+      <Email type="text" data-testid="profile-email">
         {user.email}
-      </p>
+      </Email>
     );
   }
   return (
@@ -18,36 +20,41 @@ function Perfil() {
       <Header
         showSearchBtn={ false }
       />
-      {user && getEmail()}
-      <Link to="/receitas-feitas">
-        <button
+      <ProfileWrapper>
+        {user && getEmail()}
+        <Button
           type="button"
           data-testid="profile-done-btn"
 
         >
-          Receitas Feitas
-        </button>
-      </Link>
-      <Link to="/receitas-favoritas">
-        <button
+          <Link to="/receitas-feitas">
+            Receitas Feitas
+          </Link>
+        </Button>
+        <Button
           type="button"
           data-testid="profile-favorite-btn"
         >
-          Receitas Favoritas
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          type="button"
+          <Link to="/receitas-favoritas">
+            Receitas Favoritas
+          </Link>
+        </Button>
+        <Button
+          bgColor="#FF4747"
           data-testid="profile-logout-btn"
           onClick={ () => {
             localStorage.clear();
           } }
+          shadowColor="#CF3C3C"
+          type="button"
+          width="60vw"
         >
-          Sair
-        </button>
-        <FooterBar />
-      </Link>
+          <Link to="/">
+            Sair
+          </Link>
+        </Button>
+      </ProfileWrapper>
+      <FooterBar />
     </div>
   );
 }
