@@ -1,5 +1,7 @@
 .container {
   background-color: #669966;
+  height: 100%;
+  min-height: 100vh;
 }
 
 .favorite-card {
@@ -21,11 +23,11 @@
 }
 
 .favorite-category {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .favorite-name {
-  font-size: 7vw;
+  font-size: 4.5vw;
   color: darkgoldenrod;
 }
 
@@ -34,6 +36,34 @@
   flex-direction: row;
   justify-content: stretch;
   width: 100vw;
+}
+
+.favorite-done-date {
+  font-size: 10px;
+}
+
+.tags-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.favorite-tags {
+  font-size: 10px;
+}
+
+.favorite-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.favorite-buttons button {
+  background-color: rgb(255, 100, 185);
+  border: none;
+  border-radius: 10px;
+  filter: invert(100);
+  margin: 0;
+  padding: 10px;
 }
 
 .filter-button {

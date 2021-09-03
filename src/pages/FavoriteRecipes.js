@@ -92,7 +92,7 @@ function FavoriteRecipes() {
                   { recipe.name }
                 </h2>
               </Link>
-              <div className="buttons">
+              <div className="favorite-buttons">
                 <ShareButton
                   index={ index }
                   address={ `/${recipe.type}s/${recipe.id}` }
