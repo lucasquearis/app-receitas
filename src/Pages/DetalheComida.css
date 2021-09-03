@@ -1,5 +1,6 @@
 .food-image {
   height: 35vh;
+  margin: 5px;
   width: 100%;
 }
 
@@ -24,12 +25,22 @@
   border: none;
 }
 
+.favorite-btn-icon img {
+  filter: invert(100%) sepia(0%)
+    saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
+.share-food-btn-icon img {
+  filter: invert(100%) sepia(0%)
+    saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
 .favorite-btn-icon:focus {
   outline: none;
 }
 
 .food-category {
-  color: rgb(139, 139, 139);
+  color: rgb(189, 189, 189);
   font-size: 18px;
   font-weight: 00;
   margin-left: 12px;
@@ -40,7 +51,7 @@
 }
 
 .ingredients-section ul {
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(30, 75, 29);
   list-style: none;
   padding: 10px;
   width: 95%;
@@ -51,7 +62,7 @@
 }
 
 .instructions-section p {
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(30, 75, 29);
   padding: 20px;
   text-align: left;
   width: 95%;
@@ -103,8 +114,9 @@
 }
 
 .recomended-drink-info {
+  background-color: rgb(30, 80, 29);
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 5px 5px 10px rgb(30, 75, 29, 0.7);
   flex-shrink: 0;
   margin: 0 10px;
   width: 140px;
@@ -117,7 +129,7 @@
 }
 
 .recomended-drink-info p {
-  color: rgb(139, 139, 139);
+  color: rgb(189, 189, 189);
   font-size: 16px;
   font-weight: 00;
   margin: 8px;
@@ -142,4 +154,10 @@
   margin: 0 auto;
   text-align: center;
   width: 50%;
+}
+
+.food-info {
+  background: rgb(25, 62, 25) radial-gradient(circle, rgba(25, 62, 25, 1) 36%, black 85%);
+  color: white;
+  height: 100%;
 }
