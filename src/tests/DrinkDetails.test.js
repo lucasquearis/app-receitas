@@ -25,6 +25,7 @@ describe('Testa a página de receitas feitas', () => {
     expect(shareBtn).toBeInTheDocument();
     expect(favoriteBtn).toBeInTheDocument();
     expect(startBtn).toBeInTheDocument();
+    await screen.findByText('Iniciar Receita');
     expect(recipeCategory).toBeInTheDocument();
     expect(instructions).toBeInTheDocument();
   });
