@@ -23,8 +23,8 @@ const fetchEmptyMock = () => {
 };
 
 describe('Testa a página de detalhes das receitas', () => {
-  beforeEach(cleanup); 
-  fetchMock()
+  beforeEach(cleanup);
+  fetchMock();
   it('Verifica se a página contém os elementos esperados', async () => {
     const promise = Promise.resolve();
 
@@ -33,7 +33,7 @@ describe('Testa a página de detalhes das receitas', () => {
       const profileBtn = screen.getByTestId('profile-top-btn');
       const title = screen.getByTestId('page-title');
       const searchBtn = screen.getByTestId('search-top-btn');
-  
+
       expect(profileBtn).toBeInTheDocument();
       expect(title).toBeInTheDocument();
       expect(searchBtn).toBeInTheDocument();
@@ -41,7 +41,7 @@ describe('Testa a página de detalhes das receitas', () => {
     });
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa filtrando por ingredientes', async () => {
     const promise = Promise.resolve();
 
@@ -56,12 +56,12 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
 
     userEvent.click(ingredients);
-    userEvent.type(searchInput, 'chicken')
+    userEvent.type(searchInput, 'chicken');
     userEvent.click(searchBtn);
     await act(() => promise);
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa filtrando por nome', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -75,12 +75,12 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
 
     userEvent.click(name);
-    userEvent.type(searchInput, 'Brown Stew Chicken')
+    userEvent.type(searchInput, 'Brown Stew Chicken');
     userEvent.click(searchBtn);
     await act(() => promise);
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa filtrando por primeira letra', async () => {
     const promise = Promise.resolve();
 
@@ -95,13 +95,12 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
 
     userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'a')
+    userEvent.type(searchInput, 'a');
     userEvent.click(searchBtn);
     await act(() => promise);
-
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa sem filtro', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -113,12 +112,10 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
     userEvent.click(searchBtn);
     await act(() => promise);
-
-
   });
 
-  fetchMock()
-  it('Testa se aparece um alert quando a pesquisa por uma letra tem mais de uma letra', async () => {
+  fetchMock();
+  it('Faz pesquisa com mais de uma letra com o filtro de uma letra', async () => {
     const promise = Promise.resolve();
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
@@ -131,11 +128,11 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
 
     userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'aaa')
+    userEvent.type(searchInput, 'aaa');
     userEvent.click(searchBtn);
     await act(() => promise);
 
-    expect(window.alert)
+    expect(window.alert);
   });
 
   fetchEmptyMock()
@@ -152,11 +149,11 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
 
     userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'ugwadawgb')
+    userEvent.type(searchInput, 'ugwadawgb');
     userEvent.click(searchBtn);
 
     await act(() => promise);
 
-    expect(window.alert)
+    expect(window.alert);
   });
 });

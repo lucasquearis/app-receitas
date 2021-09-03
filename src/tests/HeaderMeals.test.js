@@ -4,7 +4,6 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import { HeaderMeals } from '../components';
-// import { justMealMockFetch } from './helpers/mockedFetchs';
 import { emptySearch, chickenSearch } from './mocks/chickenSearch';
 
 const fetchMock = () => {
@@ -25,8 +24,6 @@ const fetchEmptyMock = () => {
 
 const SEARCH_BTN = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
-
-
 
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
@@ -102,7 +99,6 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.type(i, 'a');
     userEvent.click(b);
     await act(() => promise);
-
   });
 
   fetchMock();
@@ -149,8 +145,8 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
     userEvent.click(activeSearchBtn);
     const firstLetter = screen.getByTestId('first-letter-search-radio');
-     const inpu80 = screen.getByTestId(SEARCH_INPUT);
-     const btn3 = screen.getByTestId(SEARCH_BTN);
+    const inpu80 = screen.getByTestId(SEARCH_INPUT);
+    const btn3 = screen.getByTestId(SEARCH_BTN);
 
     userEvent.click(firstLetter);
     userEvent.type(inpu80, 'ugwadawgb');
