@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { v4 } from 'uuid';
+import { Button } from 'react-bootstrap';
 import { getCocktail } from '../redux/actions';
 import HeaderWithSearch from '../components/HeaderWithSearch';
 import Footer from '../components/Footer';
@@ -16,7 +17,7 @@ function DrinksList() {
   const [renderedCocktails, setRenderedCocktails] = useState([]);
   const [selected, setSelected] = useState('all');
   const TWELVE = 12;
-  const SELECTED_DRINK = 'selected-drink';
+  const SELECTED_DRINK = 'cat selected-drink';
   const { shouldRedirect, redirect } = useRedirect();
   const { search, searchType } = useSelector((state) => state.reducerAPI);
 
@@ -47,6 +48,7 @@ function DrinksList() {
   }
 
   const handleClickAll = async () => {
+    setSelected('all');
     const newCocktails = [...cocktails.slice(0, TWELVE)];
     setRenderedCocktails(newCocktails);
   };
@@ -70,29 +72,31 @@ function DrinksList() {
 
   return (
     <div>
-      <div>
-        <HeaderWithSearch>
-          Bebidas
-        </HeaderWithSearch>
+      <HeaderWithSearch>
+        Bebidas
+      </HeaderWithSearch>
+      <div className="cat-btns">
         { catList.map(({ strCategory }) => (
-          <button
+          <Button
+            variant="warning"
             type="button"
             key={ v4() }
             onClick={ ({ target }) => handleClick(target, strCategory) }
             data-testid={ `${strCategory}-category-filter` }
-            className={ selected === strCategory ? SELECTED_DRINK : 'not-selected' }
+            className={ selected === strCategory ? SELECTED_DRINK : 'cat not-selected' }
           >
             {strCategory}
-          </button>
+          </Button>
         ))}
-        <button
+        <Button
+          variant="warning"
           type="button"
           onClick={ handleClickAll }
           data-testid="All-category-filter"
-          className={ selected === 'all' ? SELECTED_DRINK : 'not-selected' }
+          className={ selected === 'all' ? SELECTED_DRINK : 'cat not-selected' }
         >
           All
-        </button>
+        </Button>
       </div>
       <div className="cards-list">
         { loading ? <LoadingSmall /> : renderedCocktails.map((item, index) => (

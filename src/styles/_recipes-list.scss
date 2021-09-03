@@ -1,9 +1,9 @@
 .selected-drink {
-  background-color: $steel-blue;
+  background-color: var(--info) !important;
 }
 
 .selected-meal {
-  background-color: $honey-yellow;
+  background-color: var(--danger) !important;
 }
 
 .cards-list {
@@ -33,5 +33,17 @@
 
 .card-name {
   height: fit-content;
+  word-wrap: break-word;
+}
+
+.cat-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.cat {
+  width: 33%;
+  margin: 5px 0;
   word-wrap: break-word;
 }

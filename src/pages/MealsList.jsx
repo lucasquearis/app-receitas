@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { v4 } from 'uuid';
+import { Button } from 'react-bootstrap';
 import { getMeal } from '../redux/actions';
 import HeaderWithSearch from '../components/HeaderWithSearch';
 import Footer from '../components/Footer';
@@ -16,7 +17,7 @@ function MealsList() {
   const [renderedMeals, setRenderedMeals] = useState([]);
   const [selected, setSelected] = useState('all');
   const TWELVE = 12;
-  const SELECTED_MEAL = 'selected-meal';
+  const SELECTED_MEAL = 'cat selected-meal';
   const { shouldRedirect, redirect } = useRedirect();
   const { search, searchType } = useSelector((state) => state.reducerAPI);
 
@@ -47,6 +48,7 @@ function MealsList() {
   }
 
   const handleClickAll = () => {
+    setSelected('all');
     const newMeals = [...meals.slice(0, TWELVE)];
     setRenderedMeals(newMeals);
   };
@@ -70,29 +72,31 @@ function MealsList() {
 
   return (
     <div>
-      <div>
-        <HeaderWithSearch>
-          Comidas
-        </HeaderWithSearch>
+      <HeaderWithSearch>
+        Comidas
+      </HeaderWithSearch>
+      <div className="cat-btns">
         { catList.map(({ strCategory }) => (
-          <button
+          <Button
+            variant="info"
             type="button"
             key={ v4() }
             onClick={ ({ target }) => handleClick(target, strCategory) }
             data-testid={ `${strCategory}-category-filter` }
-            className={ selected === strCategory ? SELECTED_MEAL : 'not-selected' }
+            className={ selected === strCategory ? SELECTED_MEAL : 'cat not-selected' }
           >
             {strCategory}
-          </button>
+          </Button>
         ))}
-        <button
+        <Button
+          variant="info"
           type="button"
           onClick={ handleClickAll }
           data-testid="All-category-filter"
-          className={ selected === 'all' ? SELECTED_MEAL : 'not-selected' }
+          className={ selected === 'all' ? SELECTED_MEAL : 'cat not-selected' }
         >
           All
-        </button>
+        </Button>
       </div>
       <div className="cards-list">
         { loading ? <LoadingSmall /> : renderedMeals.map((item, index) => (
