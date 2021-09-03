@@ -1,0 +1,58 @@
+.container-madeRecipes-card {
+  background-color: #fed;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px gray;
+  display: flex;
+  height: 160px;
+  margin: 10px;
+  position: relative;
+}
+
+.container-madeRecipes-card a {
+  color: #673;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.container-madeRecipes-card a img {
+  height: 160px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.container-data {
+  font-weight: 300;
+  left: 180px;
+  position: absolute;
+  top: 90px;
+}
+
+.container-made-title {
+  font-size: 20px;
+  font-weight: 700;
+  left: 220px;
+  position: absolute;
+  top: 25px;
+}
+
+.container-tag {
+  background-color: rgba(255, 187, 51, 0.267);
+  border-radius: 12px;
+  font-size: 14px;
+  left: 180px;
+  position: absolute;
+  text-align: center;
+  top: 60px;
+  width: 60px;
+}
+
+.icons-madeRecipe {
+  display: flex;
+  gap: 40px;
+  left: 180px;
+  margin-top: 20px;
+  position: absolute;
+  top: 100px;
+}
+

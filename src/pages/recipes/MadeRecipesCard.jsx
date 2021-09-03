@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { arrayOf, bool, number, shape, string } from 'prop-types';
 import HandleFavoriteAndShare from './HandleFavoriteAndShare';
+import './madeRecipesCard.css';
 
 export default function MadeRecipesCard({ recipe, index, isFood, tags, doneDate }) {
   const { image, name, category, area, alcoholicOrNot, id } = recipe;
   return (
-    <div>
+    <div className="container-madeRecipes-card">
       <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${id}` }>
         <img
           src={ image }
@@ -28,31 +29,39 @@ export default function MadeRecipesCard({ recipe, index, isFood, tags, doneDate 
         )
       }
       <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${id}` }>
-        <p
-          data-testid={ `${index}-horizontal-name` }
-        >
-          {name}
-        </p>
-        <p
-          data-testid={ `${index}-horizontal-done-date` }
-        >
-          {`Feita em: ${doneDate}`}
-        </p>
+        <div className="container-made-title">
+          <p
+            data-testid={ `${index}-horizontal-name` }
+          >
+            {name}
+          </p>
+        </div>
+        <div className="container-data">
+          <p
+            data-testid={ `${index}-horizontal-done-date` }
+          >
+            {`Feita em: ${doneDate}`}
+          </p>
+        </div>
       </Link>
-      <HandleFavoriteAndShare
-        index={ index }
-        recipe={ recipe }
-        id={ id }
-        isFood={ recipe.type === 'comida' }
-      />
-      {tags.map((tag) => (
-        <p
-          key={ tag }
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-        >
-          {tag}
-        </p>
-      ))}
+      <div className="icons-madeRecipe">
+        <HandleFavoriteAndShare
+          index={ index }
+          recipe={ recipe }
+          id={ id }
+          isFood={ recipe.type === 'comida' }
+        />
+      </div>
+      <div className="container-tag">
+        {tags.map((tag) => (
+          <p
+            key={ tag }
+            data-testid={ `${index}-${tag}-horizontal-tag` }
+          >
+            {tag}
+          </p>
+        ))}
+      </div>
     </div>
   );
 }
