@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -25,35 +24,46 @@ export default function Profile() {
   return (
     <>
       <Header title="Perfil" search={ false } />
-      <main>
-        <h2 data-testid="profile-email">{ email }</h2>
-        <Button
-          variant="primary"
-          type="button"
-          data-testid="profile-done-btn"
-          onClick={ () => setRoutes({ ...routes, redirectDone: true }) }
+      <main className="main-profile">
+        <h2
+          data-testid="profile-email"
+          className="profile-email"
         >
-          Receitas Feitas
-        </Button>
-        <Button
-          variant="primary"
-          type="button"
-          data-testid="profile-favorite-btn"
-          onClick={ () => setRoutes({ ...routes, redirectFavorites: true }) }
-        >
-          Receitas Favoritas
-        </Button>
-        <Button
-          variant="primary"
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ () => {
-            localStorage.clear();
-            setRoutes({ ...routes, redirectLogout: true });
-          } }
-        >
-          Sair
-        </Button>
+          { email }
+
+        </h2>
+        <div>
+
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+            onClick={ () => setRoutes({ ...routes, redirectDone: true }) }
+            className="profile-btn"
+          >
+            <span className="label-btn">Receitas Feitas</span>
+          </button>
+          <button
+            variant="primary"
+            type="button"
+            data-testid="profile-favorite-btn"
+            onClick={ () => setRoutes({ ...routes, redirectFavorites: true }) }
+            className="profile-btn"
+          >
+            <span className="label-btn">Receitas Favoritas</span>
+          </button>
+          <button
+            variant="primary"
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ () => {
+              localStorage.clear();
+              setRoutes({ ...routes, redirectLogout: true });
+            } }
+            className="profile-btn"
+          >
+            <span className="label-btn">Sair</span>
+          </button>
+        </div>
       </main>
       <Footer />
     </>
