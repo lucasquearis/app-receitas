@@ -1,10 +1,18 @@
 .footer {
-  align-items: center;
+  align-items: flex-end;
   background-color: #f71;
   bottom: 0;
   display: flex;
-  height: 45px;
+  height: 55px;
   justify-content: space-around;
   position: fixed;
   width: 100%;
+}
+
+.footer a:nth-child( 2 ) {
+  align-self: center;
+}
+
+.footer a:nth-child( 3 ) {
+  align-self: center;
 }

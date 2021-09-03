@@ -12,7 +12,7 @@ function Header({ title, showButton, foodPage }) {
   return (
     <>
       <header className="container-header">
-        <Link to="/perfil">
+        <Link className="profile-logo" to="/perfil">
           <img
             data-testid="profile-top-btn"
             src={ profileIcon }

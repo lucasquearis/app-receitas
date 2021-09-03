@@ -7,24 +7,34 @@ body {
 .container-header {
   align-items: center;
   background-color: #f71;
-  display: flex;
+  display: grid;
+  grid-template-areas: 'profile title search';
+  grid-template-columns: 1fr 5fr 1fr;
   height: 45px;
-  justify-content: space-around;
 }
 
-.btn-search {
-  background-color: transparent;
-  border: none;
-  height: 100%;
+.profile-logo {
+  grid-area: profile;
+  text-align: center;
 }
 
 .header-title {
   font-family: Rochester , cursive;
   font-size: 30px;
+  grid-area: title;
+  text-align: center;
 }
 
 .logo-folha {
   margin-left: -2px;
   transform: rotate(-45deg);
   width: 30px;
+}
+
+.btn-search {
+  background-color: transparent;
+  border: none;
+  grid-area: search;
+  height: 100%;
+  text-align: center;
 }
