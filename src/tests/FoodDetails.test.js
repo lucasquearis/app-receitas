@@ -18,6 +18,7 @@ const mock = () => jest
   )).mockImplementationOnce(() => Promise.resolve(
     { json: () => Promise.resolve((mockedDrinks)) },
   ));
+
 // jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve(
 //   { json: () => Promise.resolve(mockedFood) },
 // ));
