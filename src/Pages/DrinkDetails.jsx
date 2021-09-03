@@ -6,7 +6,7 @@ import RecipeHeader from '../Components/RecipeHeader';
 import RenderRecommendations from '../Components/RenderRecommendations';
 import IngredientsAndMeasures from '../Components/IngredientsAndMeasures';
 import * as required from '../helper/requiredDetails';
-import { setRecipeDetails } from '../Redux/actions/actionSetRecipeDetails';
+import { setDrinkDetails } from '../Redux/actions/actionSetRecipeDetails';
 
 function DrinkDetails() {
   const [recipe, setRecipe] = useState([]);
@@ -34,7 +34,7 @@ function DrinkDetails() {
     verificatioinProgressRecipe]);
 
   const handleRedirect = () => {
-    dispatch(setRecipeDetails(recipe));
+    dispatch(setDrinkDetails(recipe));
     push(`/bebidas/${id}/in-progress`);
   };
 
