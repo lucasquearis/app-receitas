@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { fetchFoodById } from '../../services/fetchApi';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Input from '../../components/Input';
 import handleDoneRecipes from '../../helpers/handleDoneRecipes';
 import Loading from '../../components/Loading';
-import './progressFood.css';
+import '../css/progressRecipe.css';
 
 const ProgressFood = ({ match: { params: { id } } }) => {
   const initialState = {
@@ -28,22 +28,22 @@ const ProgressFood = ({ match: { params: { id } } }) => {
       setIsLoading(false);
     };
     fetchApi();
-    const Storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (Storage) {
-      return (Storage.meals[id])
-        ? setState({ ...Storage })
-        : setState({ ...Storage, meals: { ...Storage.meals, [id]: [] } });
+    const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (storage) {
+      return (storage.meals[id])
+        ? setState({ ...storage })
+        : setState({ ...storage, meals: { ...storage.meals, [id]: [] } });
     }
   };
 
-  const KeysList = Object.keys(recipe)
+  const keysList = Object.keys(recipe)
     .filter((ingredient) => ingredient.includes('strIngredient'))
     .filter((ele) => recipe[ele])
     .map((item) => recipe[item]);
 
   const updateDoneRecipes = () => {
     const finishedRecipe = () => {
-      const recipeLength = KeysList.length;
+      const recipeLength = keysList.length;
       const itemsListLength = meals[id].length;
       const result = recipeLength !== itemsListLength;
       setBtnState(result);
@@ -52,11 +52,11 @@ const ProgressFood = ({ match: { params: { id } } }) => {
       localStorage.setItem('inProgressRecipes', JSON.stringify(state));
     };
     saveInLocalStorage();
-    if (KeysList.length > 0) finishedRecipe();
+    if (keysList.length) finishedRecipe();
   };
 
   useEffect(initialUpdate, [id]);
-  useEffect(updateDoneRecipes, [KeysList.length, id, meals, state]);
+  useEffect(updateDoneRecipes, [keysList.length, id, meals, state]);
 
   const handleCheck = ({ target }) => {
     const { name, checked } = target;
@@ -73,7 +73,10 @@ const ProgressFood = ({ match: { params: { id } } }) => {
   const decoration = (item) => (`${meals[id].includes(item) ? 'line-through' : 'none'}`);
 
   return (
-    <div className="progress-food">
+    <div className="progress-recipe">
+      <Link className="to-home" to="/comidas">
+        <i className="bi bi-house-fill" />
+      </Link>
       {isLoading ? <Loading /> : ''}
       <img
         className="progress-img"
@@ -95,8 +98,8 @@ const ProgressFood = ({ match: { params: { id } } }) => {
       >
         {recipe.strCategory}
       </span>
-      <ul className="progress-food-ingredients">
-        {KeysList.map((item, index) => (
+      <ul className="progress-recipe-ingredients">
+        {keysList.map((item, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
             <Input
               style={ { textDecoration: decoration(item) } }
@@ -115,7 +118,6 @@ const ProgressFood = ({ match: { params: { id } } }) => {
         data-testid="instructions"
       >
         {recipe.strInstructions}
-
       </p>
       <button
         className="progress-btn"

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { fetchFoodById, fetchSearchDrinksApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
-import './detailsFood.css';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Video from './Video';
 import StartRecipeButton from '../../components/StartRecipeButton';
 import Loading from '../../components/Loading';
+import '../css/detailsRecipe.css';
 
 function DetailsFood({ match: { params: { id } } }) {
   const [state, setState] = useState({
@@ -74,13 +75,16 @@ function DetailsFood({ match: { params: { id } } }) {
     key.includes('strMeasure') && !!food[key]));
 
   return (
-    <div className="detailsFood">
+    <div className="detailsRecipe">
+      <Link className="to-home" to="/comidas">
+        <i className="bi bi-house-fill" />
+      </Link>
       <img
         src={ food.strMealThumb }
         alt="recipe"
         data-testid="recipe-photo"
       />
-      <section className="food-title-container">
+      <section className="recipe-title-container">
         <h1 data-testid="recipe-title">{food.strMeal}</h1>
         <FavoriteAndShare
           id={ id }
@@ -90,8 +94,7 @@ function DetailsFood({ match: { params: { id } } }) {
       </section>
       <p className="subtitle" data-testid="recipe-category">{food.strCategory}</p>
       <div className="container-details-ingredients">
-
-        <ul className="food-ingredients">
+        <ul className="recipe-ingredients">
           {keysIngredients.map((key, index) => (
             <li
               key={ key }
@@ -106,7 +109,7 @@ function DetailsFood({ match: { params: { id } } }) {
       <Video
         src={ food.strYoutube }
       />
-      <section className="recommendations-drinks">
+      <section className="recommendations-recipes">
         {recommendations.map((drink, index) => (
           <RecommendationCard
             foodPage

@@ -7,7 +7,7 @@ const TWELVE = 12;
 
 function DrinkRecipeCards({ recipes }) {
   return (
-    <>
+    <section className="main-recipes">
       {recipes.reduce((acc, recipe, index) => {
         if (index < TWELVE) {
           acc = [...acc, <RecipeCard
@@ -21,7 +21,7 @@ function DrinkRecipeCards({ recipes }) {
         }
         return acc;
       }, [])}
-    </>
+    </section>
   );
 }
 

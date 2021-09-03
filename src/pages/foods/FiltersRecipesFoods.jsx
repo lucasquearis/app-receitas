@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { func } from 'prop-types';
 import { fetchCategoriesFoodsApi } from '../../services/fetchApi';
 import { fetchRecipesForCategory, fetchSearchRecipes } from '../../redux/actions';
-import './filtersRecipesFoods.css';
 
 const PARAMS_NOT_FILTER = { query: '', consultBy: 'name', foodPage: true };
 
@@ -46,10 +45,10 @@ function FiltersRecipesFoods({ getCategory, recipesNotFilter }) {
   }
 
   return (
-    <div className="filter-food">
+    <div className="filter-recipes">
       {categories.map(({ strCategory }) => (
         <button
-          className="filter-food-btn"
+          className="filter-recipes-btn"
           key={ strCategory }
           type="button"
           data-testid={ `${strCategory}-category-filter` }
@@ -61,7 +60,7 @@ function FiltersRecipesFoods({ getCategory, recipesNotFilter }) {
         </button>
       ))}
       <button
-        className="filter-food-btn"
+        className="filter-recipes-btn"
         style={ { backgroundColor: category === 'All' ? '#350' : '#673' } }
         type="button"
         data-testid="All-category-filter"

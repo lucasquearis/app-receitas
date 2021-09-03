@@ -1,0 +1,28 @@
+.main-recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 57px;
+  width: 100vw;
+}
+
+.loading-container {
+  height: calc(100vh - 155px);
+}
+
+.filter-recipes {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 50px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.filter-recipes-btn {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 3px;
+  width: 30%;
+}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { fetchDrinkById, fetchSearchFoodsApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
-import './detailsDrink.css';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import StartRecipeButton from '../../components/StartRecipeButton';
 import Loading from '../../components/Loading';
+import '../css/detailsRecipe.css';
 
 function DetailsDrink({ match: { params: { id } } }) {
   const [state, setState] = useState({
@@ -73,32 +74,42 @@ function DetailsDrink({ match: { params: { id } } }) {
     key.includes('strMeasure') && !!drink[key]));
 
   return (
-    <div className="detailsDrink">
+    <div className="detailsRecipe">
+      <Link className="to-home" to="/bebidas">
+        <i className="bi bi-house-fill" />
+      </Link>
       <img
         src={ drink.strDrinkThumb }
         alt="recipe"
         data-testid="recipe-photo"
       />
-      <section className="drink-title-container">
+      <section className="recipe-title-container">
         <h1 data-testid="recipe-title">{drink.strDrink}</h1>
         <FavoriteAndShare
           id={ id }
           recipe={ drink }
         />
       </section>
-      <p data-testid="recipe-category">{`${drink.strCategory} ${drink.strAlcoholic}`}</p>
-      <ul className="drink-ingredients">
-        {keysIngredients.map((key, index) => (
-          <li
-            key={ key }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {`${drink[key]} - ${drink[keysMeasures[index]] || ''}`}
-          </li>
-        ))}
-      </ul>
-      <p data-testid="instructions">{drink.strInstructions}</p>
-      <section className="recommendations-foods">
+      <p
+        className="subtitle"
+        data-testid="recipe-category"
+      >
+        {`${drink.strCategory} ${drink.strAlcoholic}`}
+      </p>
+      <div className="container-details-ingredients">
+        <ul className="recipe-ingredients">
+          {keysIngredients.map((key, index) => (
+            <li
+              key={ key }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {`${drink[key]} - ${drink[keysMeasures[index]] || ''}`}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="instructions" data-testid="instructions">{drink.strInstructions}</p>
+      <section section className="recommendations-recipes">
         {recommendations.map((food, index) => (
           <RecommendationCard
             id={ food.idMeal }

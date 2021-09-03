@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { fetchDrinkById } from '../../services/fetchApi';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
 import Input from '../../components/Input';
 import handleDoneRecipes from '../../helpers/handleDoneRecipes';
+import Loading from '../../components/Loading';
+import '../css/progressRecipe.css';
 
 export default function ProgressDrink({ match: { params: { id } } }) {
   const initialState = {
@@ -12,6 +15,7 @@ export default function ProgressDrink({ match: { params: { id } } }) {
   };
 
   const [recipe, setRecipe] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState(initialState);
   const [btnState, setBtnState] = useState(true);
   const [redirect, setRedirect] = useState(false);
@@ -19,9 +23,9 @@ export default function ProgressDrink({ match: { params: { id } } }) {
 
   const initialUpdate = () => {
     const fetchApi = async () => {
-      const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const { drinks } = await fetch(url).then((r) => r.json());
-      setRecipe(drinks[0]);
+      const drinks = await fetchDrinkById(id);
+      setRecipe(drinks);
+      setIsLoading(false);
     };
     fetchApi();
     const Storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -32,25 +36,28 @@ export default function ProgressDrink({ match: { params: { id } } }) {
     }
   };
 
-  const KeysList = Object.keys(recipe)
+  const keysList = Object.keys(recipe)
     .filter((ingredient) => ingredient.includes('strIngredient'))
     .filter((ele) => recipe[ele])
     .map((item) => recipe[item]);
 
   const updateDoneRecipes = () => {
     const finishedRecipe = () => {
-      const recipeLength = KeysList.length;
+      const recipeLength = keysList.length;
       const itemsListLength = cocktails[id].length;
       const result = recipeLength !== itemsListLength;
       setBtnState(result);
     };
 
-    localStorage.setItem('inProgressRecipes', JSON.stringify(state));
-    if (KeysList.length > 0) finishedRecipe();
+    const saveInLocalStorage = () => {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(state));
+    };
+    saveInLocalStorage();
+    if (keysList.length) finishedRecipe();
   };
 
   useEffect(initialUpdate, [id]);
-  useEffect(updateDoneRecipes, [KeysList.length, cocktails, id, recipe, state]);
+  useEffect(updateDoneRecipes, [keysList.length, cocktails, id, recipe, state]);
 
   const handleCheck = ({ target }) => {
     const { name, checked } = target;
@@ -64,21 +71,40 @@ export default function ProgressDrink({ match: { params: { id } } }) {
     return <Redirect to="/receitas-feitas" />;
   }
 
+  const decoration = (item) => (`${cocktails[id].includes(item)
+    ? 'line-through'
+    : 'none'}`);
+
   return (
-    <div>
-      <h1 data-testid="recipe-title">{recipe.strDrink}</h1>
-      <img data-testid="recipe-photo" src={ recipe.strDrinkThumb } alt="foto de comida" />
-      <FavoriteAndShare
-        id={ id }
-        recipe={ recipe }
+    <div className="progress-recipe">
+      <Link className="to-home" to="/bebidas">
+        <i className="bi bi-house-fill" />
+      </Link>
+      {isLoading ? <Loading /> : ''}
+      <img
+        className="progress-img"
+        data-testid="recipe-photo"
+        src={ recipe.strDrinkThumb }
+        alt="foto de comida"
       />
-      <span data-testid="recipe-category">
+      <section className="progress-title-container">
+        <h1 data-testid="recipe-title">{recipe.strDrink}</h1>
+        <FavoriteAndShare
+          id={ id }
+          recipe={ recipe }
+        />
+      </section>
+      <span
+        className="progress-category"
+        data-testid="recipe-category"
+      >
         {recipe.strCategory}
       </span>
-      <ul>
-        {KeysList.map((item, index) => (
+      <ul className="progress-recipe-ingredients">
+        {keysList.map((item, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-step` }>
             <Input
+              style={ { textDecoration: decoration(item) } }
               type="checkbox"
               id={ item + index }
               name={ item }
@@ -89,8 +115,14 @@ export default function ProgressDrink({ match: { params: { id } } }) {
           </li>
         ))}
       </ul>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <p
+        className="progress-instructions"
+        data-testid="instructions"
+      >
+        {recipe.strInstructions}
+      </p>
       <button
+        className="progress-btn"
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ btnState }
