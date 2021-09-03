@@ -1,13 +1,13 @@
 .header-top {
-  position: relative;
   color: white;
+  position: relative;
 }
 
 .header-top button {
   background-color: rgb(245, 71, 73);
   border-radius: 8px;
-  min-width: 34px;
   min-height: 34px;
+  min-width: 34px;
 }
 
 .header-top button span svg {
@@ -28,8 +28,8 @@
 }
 
 .withoutSearch h1 {
-  position: absolute;
   left: 50%;
+  position: absolute;
   transform: translateX(-50%);
 }
 

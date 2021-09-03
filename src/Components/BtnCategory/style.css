@@ -4,14 +4,14 @@
 }
 
 .category-container button {
-  border: none;
-  text-transform: uppercase;
   background-color: transparent;
-  font-weight: 600;
+  border: none;
   color: rgb(82, 85, 91);
-  width: fit-content;
-  white-space: nowrap;
+  font-weight: 600;
   margin: 15px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: fit-content;
 }
 
 .category-container .selected {

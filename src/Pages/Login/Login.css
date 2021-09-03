@@ -10,10 +10,10 @@
 }
 
 .page-login .title {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .page-login .title h2 {
@@ -28,9 +28,9 @@
 .page-login .login-form {
   align-items: center;
   background-color: rgb(20, 25, 33);
+  border-radius: 15px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
   color: white;
-  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +41,7 @@
   color: white;
 }
 
-.page-login .login-form .MuiInput-underline:after  {
+.page-login .login-form .MuiInput-underline:after {
   border-bottom: 2px solid rgb(245, 71, 73);
 }
 
@@ -63,6 +63,7 @@
   margin: 20px 0 10px;
   padding: 2px 25px;
 }
+
 .page-login .login-form .button:disabled {
   background-color: rgb(29, 35, 45);
 }

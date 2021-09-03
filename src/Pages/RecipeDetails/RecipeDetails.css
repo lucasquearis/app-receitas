@@ -1,12 +1,12 @@
 .recipe-details {
-  position: absolute;
-  left: 5%;
-  width: 90%;
   color: white;
+  left: 5%;
+  position: absolute;
+  width: 90%;
 }
 
 .recipe-details .carousel {
-  background-color: rgb(37,43,50);
+  background-color: rgb(37, 43, 50);
   display: flex;
   flex-direction: row;
   margin-bottom: 60px;
@@ -21,16 +21,16 @@
 }
 
 .recipe-details h1 {
-  text-align: center;
+  left: 50%;
   margin: 0;
   position: absolute;
+  text-align: center;
   transform: translateX(-50%);
-  left: 50%;
 }
 
 .recipe-details img {
-  width: 100%;
   border-radius: 15px;
+  width: 100%;
 }
 
 .recipe-details p {
@@ -38,9 +38,9 @@
 }
 
 .recipe-details .buttons {
-  width: 100%;
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .recipe-details .buttons h2 {
@@ -48,14 +48,14 @@
 }
 
 .recipe-details button {
-  border: none;
   background-color: rgb(245, 71, 73);
+  border: none;
   border-radius: 8px;
-  min-width: 34px;
-  min-height: 34px;
-  padding: 10px;
-  margin-left: 10px;
   color: white;
+  margin-left: 10px;
+  min-height: 34px;
+  min-width: 34px;
+  padding: 10px;
 }
 
 .recipe-details button span svg {
