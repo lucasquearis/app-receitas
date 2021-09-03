@@ -124,7 +124,9 @@ export default function DetalheComida(props) {
 
   return (
     <section className="food-info">
-      { getDetailsInitialButton(food, 'comida') }
+      <div className="button-section">
+        { getDetailsInitialButton(food, 'comida') }
+      </div>
       <img
         className="food-image"
         data-testid="recipe-photo"

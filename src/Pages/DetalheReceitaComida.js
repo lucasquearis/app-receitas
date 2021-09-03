@@ -9,6 +9,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import getRecipeIngredients from '../service/getRecipeIngredients';
 import * as functions from '../service/InProgressRecipe';
+import './DetalheReceitaComida.css';
 
 const defaultParams = {
   strMeal: '',
@@ -130,16 +131,17 @@ export default function DetalheReceitaComida(props) {
   const renderRecipe = () => {
     const { strMeal, strMealThumb, strCategory, strInstructions } = recipe[0];
     return (
-      <>
+      <section className="main-section-progress">
         {functions.saveIngrediensInLocalStorage(ingredientsDone, id, 'meals')}
         <img
+          className="recipe-img"
           data-testid="recipe-photo"
           src={ strMealThumb }
           alt={ strMeal }
         />
         <section>
           <div>
-            <h4 data-testid="recipe-title">
+            <h4 className="title-progress" data-testid="recipe-title">
               { strMeal }
             </h4>
             <button
@@ -179,16 +181,24 @@ export default function DetalheReceitaComida(props) {
             ))
           }
         </section>
-        <p data-testid="instructions">{strInstructions}</p>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          onClick={ redirectTo }
-          disabled={ functions.enableButton(foodIngredients, ingredientsDone) }
+        <p
+          className="instructions-progress"
+          data-testid="instructions"
         >
-          Finalizar Receita
-        </button>
-      </>
+          {strInstructions}
+        </p>
+        <div className="button-section">
+          <button
+            className="start-recipe-btn"
+            type="button"
+            data-testid="finish-recipe-btn"
+            onClick={ redirectTo }
+            disabled={ functions.enableButton(foodIngredients, ingredientsDone) }
+          >
+            Finalizar Receita
+          </button>
+        </div>
+      </section>
     );
   };
 
