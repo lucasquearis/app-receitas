@@ -50,16 +50,16 @@
 }
 
 .start-recipe-button {
-    background: #fd8061;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 1px 3px 6px rgb(52, 54, 58);
-    color: white;
-    font-size: calc(5px + 3vmin);
-    font-weight: 700;
-    height: 30px;
-    width: 180px;
-    margin: 0 10px 0 10px;
+  background: #fd8061;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 1px 3px 6px rgb(52, 54, 58);
+  color: white;
+  font-size: calc(5px + 3vmin);
+  font-weight: 700;
+  height: 30px;
+  margin: 0 10px;
+  width: 180px;
 }
 
 .explore {
