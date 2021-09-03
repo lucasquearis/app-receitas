@@ -34,8 +34,9 @@ function ShareAndFavBtn({ recipe }) {
     const favoriteRecipesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'))
     || [];
     setAddOrRemoveFav(favoriteRecipesStorage
-      .some((recipeArr) => recipeArr.id === (recipe.idMeal || recipe.idDrink)));
+      .some((recipeArr) => recipeArr.id === (recipe.idMeal || recipe.idDrink || '')));
   }, [recipe]);
+
   return (
     <section>
       <button
@@ -73,7 +74,7 @@ function ShareAndFavBtn({ recipe }) {
 }
 
 ShareAndFavBtn.propTypes = {
-  recipe: PropTypes.objectOf.isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default ShareAndFavBtn;

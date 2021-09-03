@@ -52,7 +52,7 @@ function FavoriteRecipesMeals({ recipe, index, removeRecipe }) {
 }
 
 FavoriteRecipesMeals.propTypes = {
-  recipe: PropTypes.arrayOf(PropTypes.object).isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
   index: PropTypes.number.isRequired,
   removeRecipe: PropTypes.func.isRequired,
 };
