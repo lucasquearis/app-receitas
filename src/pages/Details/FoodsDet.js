@@ -69,7 +69,7 @@ function FoodDetails() {
       setRecipesRecommendations(recommendationList);
     };
     getRecommendations();
-  }, [recipesFood]);
+  }, [/* recipesFood */]);
 
   useEffect(() => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));

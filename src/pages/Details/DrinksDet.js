@@ -38,25 +38,28 @@ function DrinksDetails() {
   }, [id]);
 
   useEffect(() => {
-    const getIngredientsAndMeasures = () => {
-      const key = Object.keys(recipesDrink[0])
-        .filter((item) => item.includes('strIngredient'));
-      const ingredientNotEmpty = key
-        .filter((item) => (
-          recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
-      const ingredientsList = ingredientNotEmpty
-        .map((keyDrink) => recipesDrink[0][keyDrink]);
-      setIngredients(ingredientsList);
+    if (recipesDrink) {
+      const getIngredientsAndMeasures = () => {
+        const key = Object.keys(recipesDrink[0])
+          .filter((item) => item.includes('strIngredient'));
+        const ingredientNotEmpty = key
+          .filter((item) => (
+            recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
+        const ingredientsList = ingredientNotEmpty
+          .map((keyDrink) => recipesDrink[0][keyDrink]);
+        setIngredients(ingredientsList);
 
-      const keyMeasure = Object.keys(recipesDrink[0])
-        .filter((item) => item.includes('strMeasure'));
-      const measureNoEmpty = keyMeasure
-        .filter((item) => (
-          recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
-      const measureList = measureNoEmpty.map((kMeasure) => recipesDrink[0][kMeasure]);
-      setMeasure(measureList);
-    };
-    getIngredientsAndMeasures();
+        const keyMeasure = Object.keys(recipesDrink[0])
+          .filter((item) => item.includes('strMeasure'));
+        const measureNoEmpty = keyMeasure
+          .filter((item) => (
+            recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
+        const measureList = measureNoEmpty.map((kMeasure) => recipesDrink[0][kMeasure]);
+        setMeasure(measureList);
+      };
+
+      getIngredientsAndMeasures();
+    }
   }, [recipesDrink]);
 
   useEffect(() => {
@@ -71,7 +74,7 @@ function DrinksDetails() {
       setRecipesRecommendations(recommendationList);
     };
     getRecommendations();
-  }, [recipesDrink]);
+  }, [/* recipesDrink */]);
 
   useEffect(() => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
