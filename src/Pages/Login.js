@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../Context/AppContext';
+import logoreceitapp from '../images/logoreceitapp.png';
 
 function Login() {
   const { setUserEmail } = useContext(AppContext);
@@ -44,8 +44,8 @@ function Login() {
     <section className="login-page">
       { redirectValidation && <Redirect to="/comidas" /> }
       <Form className="login">
+        <img src={ logoreceitapp } alt="logo" className="logo" />
         <Form.Group className="mb-1" controlId="formBasicEmail">
-
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -53,9 +53,7 @@ function Login() {
             onChange={ (event) => setMail(event.target.value) }
             data-testid="email-input"
           />
-          <Form.Text className="text-muted" />
         </Form.Group>
-
         <Form.Group className="mb-2" controlId="formBasicPassword">
           <Form.Control
             type="password"
@@ -65,16 +63,15 @@ function Login() {
             data-testid="password-input"
           />
         </Form.Group>
-        <Button
-          className="mb-3"
-          variant="primary"
+        <button
+          className="button-general mb-3"
           type="button"
           data-testid="login-submit-btn"
           disabled={ formValidation }
           onClick={ handleSubmit }
         >
           Entrar
-        </Button>
+        </button>
       </Form>
     </section>
   );

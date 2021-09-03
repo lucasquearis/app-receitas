@@ -77,7 +77,7 @@ function SearchBar() {
   return (
     <div>
       { redirectTo()}
-      <form>
+      <form className="search-form">
         <input
           type="text"
           data-testid="search-input"
