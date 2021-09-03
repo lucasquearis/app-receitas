@@ -22,6 +22,10 @@ const fetchEmptyMock = () => {
   }));
 };
 
+const SEARCH_INPUT = 'search-input';
+const FIRST_LETTER = 'first-letter-search-radio';
+const SEARCH_BUTTON = 'search-top-btn';
+
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
   fetchMock();
@@ -32,11 +36,11 @@ describe('Testa a página de detalhes das receitas', () => {
       renderWithRouter(<HeaderDrinks />);
       const profileBtn = screen.getByTestId('profile-top-btn');
       const title = screen.getByTestId('page-title');
-      const searchBtn = screen.getByTestId('search-top-btn');
+      const searchBtn1 = screen.getByTestId(SEARCH_BUTTON);
 
       expect(profileBtn).toBeInTheDocument();
       expect(title).toBeInTheDocument();
-      expect(searchBtn).toBeInTheDocument();
+      expect(searchBtn1).toBeInTheDocument();
       await act(() => promise);
     });
   });
@@ -48,16 +52,16 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
     const ingredients = screen.getByTestId('ingredient-search-radio');
-    const searchInput = screen.getByTestId('search-input');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const searchInput5 = screen.getByTestId(SEARCH_INPUT);
+    const searchBtn2 = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(ingredients);
-    userEvent.type(searchInput, 'chicken');
-    userEvent.click(searchBtn);
+    userEvent.type(searchInput5, 'chicken');
+    userEvent.click(searchBtn2);
     await act(() => promise);
   });
 
@@ -67,15 +71,15 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
     const name = screen.getByTestId('name-search-radio');
-    const searchInput = screen.getByTestId('search-input');
+    const searchInput4 = screen.getByTestId(SEARCH_INPUT);
     const searchBtn = screen.getByTestId('exec-search-btn');
 
     userEvent.click(name);
-    userEvent.type(searchInput, 'Brown Stew Chicken');
+    userEvent.type(searchInput4, 'Brown Stew Chicken');
     userEvent.click(searchBtn);
     await act(() => promise);
   });
@@ -87,15 +91,15 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
-    const firstLetter = screen.getByTestId('first-letter-search-radio');
-    const searchInput = screen.getByTestId('search-input');
+    const firstLetter3 = screen.getByTestId(FIRST_LETTER);
+    const searchInput3 = screen.getByTestId(SEARCH_INPUT);
     const searchBtn = screen.getByTestId('exec-search-btn');
 
-    userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'a');
+    userEvent.click(firstLetter3);
+    userEvent.type(searchInput3, 'a');
     userEvent.click(searchBtn);
     await act(() => promise);
   });
@@ -106,7 +110,7 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
     const searchBtn = screen.getByTestId('exec-search-btn');
@@ -120,15 +124,15 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
-    const firstLetter = screen.getByTestId('first-letter-search-radio');
-    const searchInput = screen.getByTestId('search-input');
+    const firstLetter2 = screen.getByTestId(FIRST_LETTER);
+    const searchInput2 = screen.getByTestId(SEARCH_INPUT);
     const searchBtn = screen.getByTestId('exec-search-btn');
 
-    userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'aaa');
+    userEvent.click(firstLetter2);
+    userEvent.type(searchInput2, 'aaa');
     userEvent.click(searchBtn);
     await act(() => promise);
 
@@ -141,15 +145,15 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderDrinks />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
-    const firstLetter = screen.getByTestId('first-letter-search-radio');
-    const searchInput = screen.getByTestId('search-input');
+    const firstLetter1 = screen.getByTestId(FIRST_LETTER);
+    const searchInput1 = screen.getByTestId(SEARCH_INPUT);
     const searchBtn = screen.getByTestId('exec-search-btn');
 
-    userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'ugwadawgb');
+    userEvent.click(firstLetter1);
+    userEvent.type(searchInput1, 'ugwadawgb');
     userEvent.click(searchBtn);
 
     await act(() => promise);
