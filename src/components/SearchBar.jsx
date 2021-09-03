@@ -86,38 +86,38 @@ export default function SearchBar({ title }) {
         onChange={ ({ target: { value } }) => setSearchInput(value) }
       />
       <div className="search-radio-btns">
-        <input
-          name="radio-btns-search"
-          data-testid="ingredient-search-radio"
-          id="radio-ingredients"
-          type="radio"
-          value="ingrediente"
-          onChange={ ({ target: { value } }) => setSearchRadio(value) }
-        />
         <label htmlFor="radio-ingredients">
           Ingredientes
+          <input
+            name="radio-btns-search"
+            data-testid="ingredient-search-radio"
+            id="radio-ingredients"
+            type="radio"
+            value="ingrediente"
+            onChange={ ({ target: { value } }) => setSearchRadio(value) }
+          />
         </label>
-        <input
-          name="radio-btns-search"
-          data-testid="name-search-radio"
-          id="radio-name"
-          type="radio"
-          value="nome"
-          onChange={ ({ target: { value } }) => setSearchRadio(value) }
-        />
         <label htmlFor="radio-name">
           Nome
+          <input
+            name="radio-btns-search"
+            data-testid="name-search-radio"
+            id="radio-name"
+            type="radio"
+            value="nome"
+            onChange={ ({ target: { value } }) => setSearchRadio(value) }
+          />
         </label>
-        <input
-          name="radio-btns-search"
-          data-testid="first-letter-search-radio"
-          id="radio-first-letter"
-          type="radio"
-          value="primeira-letra"
-          onChange={ ({ target: { value } }) => setSearchRadio(value) }
-        />
         <label htmlFor="radio-first-letter">
           Primeira letra
+          <input
+            name="radio-btns-search"
+            data-testid="first-letter-search-radio"
+            id="radio-first-letter"
+            type="radio"
+            value="primeira-letra"
+            onChange={ ({ target: { value } }) => setSearchRadio(value) }
+          />
         </label>
       </div>
       <button

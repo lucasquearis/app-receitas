@@ -1,5 +1,5 @@
-p , h3 {
-  font-family: 'Roboto', sans-serif;
+p, h3 {
+  font-family: Roboto , sans-serif;
 }
 
 p {
@@ -18,8 +18,8 @@ p {
 }
 
 .fav-card h3 {
-  font-weight: 600;
   font-size: 22px;
+  font-weight: 600;
 }
 
 .recipe {
@@ -30,8 +30,8 @@ p {
 
 .recipe img {
   border-radius: 5px;
-  width: 180px;
   object-fit: fill;
+  width: 180px;
 }
 
 .icon-btns {
@@ -65,9 +65,9 @@ p {
   border: none;
   border-radius: 5px;
   color: white;
-  font-family: 'Roboto', sans-serif;
-  padding: 5px 15px;
+  font-family: Roboto , sans-serif;
   margin: 5px;
+  padding: 5px 15px;
 }
 
 button:hover {
