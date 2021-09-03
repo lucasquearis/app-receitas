@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import fetchApi from '../Helpers/fetchApi';
+import { fetchApi } from '../Helpers/fetchApi';
 
 const urlMeal = 'https://www.themealdb.com/api/json/v1/1/';
 const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/';
