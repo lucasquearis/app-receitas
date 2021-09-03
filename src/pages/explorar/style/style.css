@@ -15,3 +15,21 @@
   text-decoration: none;
   width: 80%;
 }
+
+.container-card-img {
+  align-content: space-between;
+  background-color: rgba(243, 243, 227, 0.308);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: auto;
+  width: 600px;
+}
+
+.card-img {
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+  padding: 5px;
+}
