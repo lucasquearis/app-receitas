@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import '../App.css';
 import drinkIcon from '../images/drinkIcon.svg';
@@ -7,8 +6,8 @@ import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
 function FooterMenu() {
-  const history = useHistory();
-  const handleClick = (path) => history.push(path);
+  const { push } = useHistory();
+  const handleClick = (path) => push(path);
 
   return (
     <div className="footer" data-testid="footer">
@@ -36,11 +35,5 @@ function FooterMenu() {
     </div>
   );
 }
-
-FooterMenu.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
 
 export default FooterMenu;

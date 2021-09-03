@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -111,9 +110,50 @@ const RecipeInProgress = () => {
     setShowMsg(true);
   }
 
+  function finishRecipe() {
+    const {
+      idMeal,
+      strCategory: category,
+      strArea: area,
+      strMeal: name,
+      strMealThumb: image,
+      strTags: tags,
+    } = foodDetails[0];
+
+    const item = {
+      id: idMeal,
+      type: 'comida',
+      area,
+      category,
+      alcoholicOrNot: '',
+      name,
+      image,
+      tags,
+      doneDate: Date(),
+    };
+
+    const doneStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+
+    if (doneStorage === null) {
+      localStorage.setItem('doneRecipes', JSON.stringify([item]));
+      return;
+    }
+
+    localStorage.setItem('doneRecipes', JSON
+      .stringify([
+        ...doneStorage,
+        item,
+      ]));
+
+    const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    delete progressStorage.meals[id];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(progressStorage));
+    history.push('/receitas-feitas');
+  }
+
   useEffect(() => {
     fetchMealDetailsApi(id).then((data) => setFoodDetails(data.meals));
-  }, [id, setFoodDetails]);
+  }, [id]);
 
   useEffect(() => {
     getFavoriteFood(foodDetails, setFavorite);
@@ -188,17 +228,16 @@ const RecipeInProgress = () => {
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            <Link to="/receitas-feitas">
-              <button
-                data-testid="finish-recipe-btn"
-                key={ i }
-                type="button"
-                className="start-recipe-btn"
-                disabled={ !isFullyChecked }
-              >
-                Finalizar receita
-              </button>
-            </Link>
+            <button
+              data-testid="finish-recipe-btn"
+              key={ i }
+              type="button"
+              className="start-recipe-btn"
+              disabled={ !isFullyChecked }
+              onClick={ finishRecipe }
+            >
+              Finalizar receita
+            </button>
           </div>))
       }
     </div>

@@ -16,7 +16,7 @@ const Input = ({
     <input
       type={ textInput }
       name={ name }
-      data-testId={ datatestId }
+      data-testid={ datatestId }
       onChange={ onChange }
       placeholder={ placeH }
       id={ id }
@@ -26,14 +26,21 @@ const Input = ({
 );
 
 Input.propTypes = {
-  textInput: PropTypes.string.isRequired,
-  textLabel: PropTypes.string.isRequired,
+  textInput: PropTypes.string,
+  textLabel: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   datatestId: PropTypes.string.isRequired,
   placeH: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  value: PropTypes.string,
+};
+
+Input.defaultProps = {
+  textInput: '',
+  textLabel: '',
+  id: '',
+  value: '',
 };
 
 export default Input;

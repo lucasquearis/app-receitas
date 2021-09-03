@@ -42,12 +42,11 @@ const ButtonCategoriesDrinks = ({ categories }) => {
     <div className="buttons-container">
       {categories.map((category, index) => (
         index < CATEGORIES ? (
-          <div className="check-filter">
-            <label htmlFor="category-buttons" key={ index }>
+          <div className="check-filter" key={ index }>
+            <label htmlFor="category-buttons">
               <input
                 name="category-buttons"
                 value={ category.strCategory }
-                key={ index }
                 type="checkbox"
                 data-testid={ `${category.strCategory}-category-filter` }
                 onClick={ (event) => {

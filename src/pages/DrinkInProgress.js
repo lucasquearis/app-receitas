@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -52,7 +51,6 @@ const DrinkInProgress = () => {
       localStorage
         .setItem('inProgressRecipes', JSON
           .stringify(defaultObject));
-      return false;
     }
   }, [id]);
 
@@ -113,13 +111,54 @@ const DrinkInProgress = () => {
 
   useEffect(() => {
     fetchDrinkDetailsApi(id).then((data) => setDrinkDetails(data.drinks));
-  }, [setDrinkDetails, id]);
+  }, [id]);
 
   useEffect(() => {
     getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
   }, [drinkDetails]);
+
+  function finishRecipe() {
+    const {
+      idDrink,
+      strCategory: category,
+      strAlcoholic: alcoholicOrNot,
+      strDrink: name,
+      strDrinkThumb: image,
+      strTags: tags,
+    } = drinkDetails[0];
+
+    const item = {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category,
+      alcoholicOrNot,
+      name,
+      image,
+      tags,
+      doneDate: Date(),
+    };
+
+    const doneStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+
+    if (doneStorage === null) {
+      localStorage.setItem('doneRecipes', JSON.stringify([item]));
+      return;
+    }
+
+    localStorage.setItem('doneRecipes', JSON
+      .stringify([
+        ...doneStorage,
+        item,
+      ]));
+
+    const progressStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    delete progressStorage.cocktails[id];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(progressStorage));
+    history.push('/receitas-feitas');
+  }
 
   return (
     <div className="drink-details-container">
@@ -190,17 +229,16 @@ const DrinkInProgress = () => {
               }
             </ul>
             <p data-testid="instructions" key={ strInstructions }>{strInstructions}</p>
-            <Link to="/receitas-feitas">
-              <button
-                data-testid="finish-recipe-btn"
-                key={ i }
-                type="button"
-                className="start-recipe-btn"
-                disabled={ !isFullyChecked }
-              >
-                Finalizar receita
-              </button>
-            </Link>
+            <button
+              data-testid="finish-recipe-btn"
+              key={ i }
+              type="button"
+              className="start-recipe-btn"
+              disabled={ !isFullyChecked }
+              onClick={ finishRecipe }
+            >
+              Finalizar receita
+            </button>
           </div>))
       }
     </div>
