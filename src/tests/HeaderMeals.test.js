@@ -25,7 +25,7 @@ const fetchEmptyMock = () => {
 const SEARCH_INPUT = 'search-input';
 const FIRST_LETTER = 'first-letter-search-radio';
 const SEARCH_BUTTON = 'search-top-btn';
-const EXEC_BUTTON = 'exec-search-btn'
+const EXEC_BUTTON = 'exec-search-btn';
 
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
