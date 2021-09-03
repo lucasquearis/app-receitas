@@ -13,8 +13,8 @@
 }
 
 .p-cooked-recip {
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .recip-card {
@@ -22,10 +22,10 @@
   border-radius: 10px;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: nowrap;
   height: 140px;
-  margin-top: 6px;
   margin-left: 6px;
+  margin-top: 6px;
   width: 347px;
 }
 
