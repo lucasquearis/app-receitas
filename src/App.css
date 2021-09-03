@@ -1,8 +1,4 @@
 /* Main CSS */
-a {
-  color: inherit;
-}
-
 footer {
   bottom: 0;
   left: 0;
@@ -106,8 +102,35 @@ iframe {
   padding: 0;
 }
 
-.done__card-img {
+.done__article {
+  display: flex;
+  flex-direction: row;
+}
+
+.done__card-thumb {
   width: 50vw;
+}
+
+.done__card-img {
+  border-radius: 20px;
+  margin: 5px 5px 5px 25px;
+  width: 100%;
+}
+
+.done__text-section {
+  align-items: center;
+  background-image: linear-gradient(to left, white 50%, rgba(255, 255, 255, 0));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: -50vw;
+  text-align: center;
+  width: 100vw;
+}
+
+.done__text-section button {
+  background-color: white;
+  border: none;
 }
 
 .done__filter-btn-section {
@@ -124,12 +147,19 @@ iframe {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-evenly;
+  margin-left: 50vw;
+}
+
+.done__card-infos a {
+  color: brown;
+  font-style: italic;
 }
 
 .done__card-share {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-left: 50vw;
 }
 
 .done__card-tags {
@@ -191,6 +221,18 @@ iframe {
   height: 400px;
   margin-top: 100px;
   text-align: center;
+}
+
+.explore__link-button a {
+  color: brown;
+}
+
+.explore-meals__link-button a {
+  color: brown;
+}
+
+.explore-drinks__link-button a {
+  color: brown;
 }
 
 .explore__link-button {

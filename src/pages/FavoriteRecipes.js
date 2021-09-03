@@ -31,18 +31,21 @@ export default function FavoriteRecipes() {
   const cardMeals = (recipe, index) => {
     const { id, type, name, image, area, category } = recipe;
     return (
-      <div key={ index } className="done__card">
-        <Link to={ `/${type}s/${id}` }>
-          <img
-            data-testid={ `${index}-horizontal-image` }
-            className="done__card-img"
-            src={ image }
-            alt={ name }
-          />
-        </Link>
-
-        <div className="done__card-infos">
-          <div className="done__card-share">
+      <div className="done__article">
+        <div key={ index } className="done__card">
+          <div className="done__card-thumb">
+            <Link to={ `/${type}s/${id}` }>
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                className="done__card-img"
+                src={ image }
+                alt={ name }
+              />
+            </Link>
+          </div>
+        </div>
+        <div className="done__text-section">
+          <div className="done__card-infos">
             <span data-testid={ `${index}-horizontal-top-text` }>
               { `${area} - ${category}` }
             </span>
@@ -52,6 +55,8 @@ export default function FavoriteRecipes() {
             >
               { name }
             </Link>
+          </div>
+          <div className="done__card-share">
             <input
               data-testid={ `${index}-horizontal-favorite-btn` }
               className="details__icon-favorite"
