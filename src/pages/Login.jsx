@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import loginValidation from '../services/loginValidation';
 import actionLogin from '../redux/actions/actionLogin';
+import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ const Login = () => {
   };
 
   return (
-    <Form>
+    <Form className="login">
       <Form.Group className="form-group">
         <Form.Label
           htmlFor="email"
@@ -43,6 +44,7 @@ const Login = () => {
         </Form.Label>
         <Link to="/comidas">
           <Button
+            className="login-button"
             data-testid="login-submit-btn"
             disabled={ !loginValidation({ email, password }) }
             onClick={ () => {

@@ -5,8 +5,9 @@ import './Card.css';
 
 function FoodCard({ food: { strMeal, strMealThumb }, index }) {
   return (
-    <Card data-testid={ `${index}-recipe-card` }>
+    <Card className="food-card" data-testid={ `${index}-recipe-card` }>
       <Card.Img
+        className="food-card-img"
         data-testid={ `${index}-card-img` }
         src={ strMealThumb }
         alt="foodandDrinkImages"

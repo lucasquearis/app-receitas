@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { foodListByCategoryFetch, foodListFetch } from '../redux/actions/actionFood';
+import './FoodCategories.css';
 
 export default function FoodCategories() {
   const [clickedCategory, setClickedCategory] = useState('');
@@ -24,7 +25,7 @@ export default function FoodCategories() {
     }
   };
   return (
-    <div>
+    <div className="food-category">
       <Button
         data-testid="All-category-filter"
         className="category-button"
