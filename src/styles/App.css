@@ -12,6 +12,10 @@
 
 @import './Login.css' ;
 
+@import './ExploreIngredient.css' ;
+
+@import './Loading.css' ;
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -25,7 +29,7 @@
 }
 
 .voltar {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 50%);
   height: 20px;
   position: fixed;
 }
@@ -43,6 +47,19 @@
   height: 20px;
   margin-left: 10px;
   position: absolute;
+}
+
+.start-recipe-button {
+    background: #fd8061;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 3px 6px rgb(52, 54, 58);
+    color: white;
+    font-size: calc(5px + 3vmin);
+    font-weight: 700;
+    height: 30px;
+    width: 180px;
+    margin: 0 10px 0 10px;
 }
 
 .explore {

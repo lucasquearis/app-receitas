@@ -5,7 +5,6 @@ import myContext from '../context/myContext';
 import ItemCard from './ItemCard';
 import FoodsCard from './FoodsCard';
 import Loading from './Loading';
-import '../styles/CategoryButtons.css';
 
 function CategoryFoodButtons() {
   const cinco = 5;

@@ -1,7 +1,6 @@
 import { string } from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/ItemCard.css';
 
 function ItemCard(props) {
   const { title, thumb, index, to } = props;

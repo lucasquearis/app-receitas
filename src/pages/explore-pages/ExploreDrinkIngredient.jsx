@@ -3,9 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import ArrowIcon from '../../images/ArrowIcon.svg';
 import Header from '../../components/Header';
 import myContext from '../../context/myContext';
-import '../../styles/Header.css';
 import Footer from '../../components/Footer';
-import '../../styles/ExploreIngredient.css';
 
 function ExploreDrinkIngredient() {
   const doze = 12;
