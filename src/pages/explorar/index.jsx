@@ -32,9 +32,18 @@ const Explorar = ({ match: { params: { param1, param2 } } }) => {
     );
   }
   return param1 === 'comidas' ? (
-    <ExploreFood />
+    <>
+      <Header title="Explorar" hideSearch routeParams={ [param1, param2] } />
+      <ExploreFood />
+      <Footer />
+    </>
   ) : (
-    <ExploreDrink />
+    <>
+      <Header title="Explorar" hideSearch routeParams={ [param1, param2] } />
+      <ExploreDrink />
+      <Footer />
+
+    </>
   );
 };
 
