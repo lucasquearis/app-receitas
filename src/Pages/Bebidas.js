@@ -105,14 +105,15 @@ export default function Bebidas() {
   );
 
   return (
-    <section>
+    <section className="main-recipe-section">
       <Header title="Bebidas" searchIcon />
-      <section>
+      <section className="filter-button">
         {
           categorias.map(
             (categoria, key) => (
               <button
                 key={ key }
+                className="btn btn-success"
                 type="button"
                 data-testid={ `${categoria.strCategory}-category-filter` }
                 id={ `${categoria.strCategory}-category-filter` }
@@ -124,9 +125,11 @@ export default function Bebidas() {
           )
         }
       </section>
-      { (recipes && recipeType === 'bebida')
-        ? renderRecipes(recipes) : renderRecipes(bebidas)}
-      {console.log(bebidas)}
+      <section className="recipe-section">
+        { (recipes && recipeType === 'bebida')
+          ? renderRecipes(recipes) : renderRecipes(bebidas)}
+        {console.log(bebidas)}
+      </section>
       <Footer />
     </section>
   );

@@ -151,6 +151,7 @@ export default function Header(props) {
         />
       </div>
       <button
+        className="btn btn-warning"
         type="button"
         data-testid="exec-search-btn"
         onClick={ searchRecipeByPath }

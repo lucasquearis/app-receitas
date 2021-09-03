@@ -1,6 +1,5 @@
 .main-recipe-section {
-  background: rgb(25,62,25);
-  background: radial-gradient(circle, rgba(25,62,25,1) 36%, rgba(0,0,0,1) 85%);
+  background: rgb(25, 62, 25) radial-gradient(circle, rgba(25, 62, 25, 1) 36%, black 85%);
 }
 
 .filter-button {
