@@ -18,31 +18,37 @@ function Profile() {
   return (
     <div>
       <HeaderWithoutSearch>Perfil</HeaderWithoutSearch>
-      <h3 data-testid="profile-email">{localStorage.length && storageUser.email}</h3>
-      <Button
-        variant="success"
-        data-testid="profile-done-btn"
-        onClick={ () => shouldRedirect('/receitas-feitas') }
-      >
-        Receitas Feitas
-      </Button>
-      <Button
-        variant="warning"
-        data-testid="profile-favorite-btn"
-        onClick={ () => shouldRedirect('/receitas-favoritas') }
-      >
-        Receitas Favoritas
-      </Button>
-      <Button
-        variant="danger"
-        data-testid="profile-logout-btn"
-        onClick={ () => {
-          shouldRedirect('/');
-          handleLogout();
-        } }
-      >
-        Sair
-      </Button>
+      <div className="profile-body">
+
+        <h3 data-testid="profile-email">{localStorage.length && storageUser.email}</h3>
+        <div className="profile-btns">
+
+          <Button
+            variant="success"
+            data-testid="profile-done-btn"
+            onClick={ () => shouldRedirect('/receitas-feitas') }
+          >
+            Receitas Feitas
+          </Button>
+          <Button
+            variant="warning"
+            data-testid="profile-favorite-btn"
+            onClick={ () => shouldRedirect('/receitas-favoritas') }
+          >
+            Receitas Favoritas
+          </Button>
+          <Button
+            variant="danger"
+            data-testid="profile-logout-btn"
+            onClick={ () => {
+              shouldRedirect('/');
+              handleLogout();
+            } }
+          >
+            Sair
+          </Button>
+        </div>
+      </div>
       <Footer />
     </div>
   );

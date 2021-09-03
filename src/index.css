@@ -332,6 +332,41 @@
           justify-content: space-between;
 }
 
+.profile-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.profile-body h3 {
+  margin-top: 50px;
+}
+
+.profile-btns {
+  margin-top: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile-btns button {
+  margin: 10px;
+}
+
 @font-face {
   font-family: KithcenHome;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
@@ -368,7 +403,9 @@ body {
   border: none !important;
 }
 
-.icon, .share-icon, .favorite-img {
+.icon,
+.share-icon,
+.favorite-img {
   -webkit-filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
           filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
 }
