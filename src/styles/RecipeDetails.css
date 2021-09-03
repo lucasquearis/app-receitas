@@ -1,16 +1,88 @@
-.start-recipe-button {
-  bottom: 0;
-  position: fixed;
+.images {
+  display: flex;
+  justify-content: space-between;
 }
 
 .recipe-image {
+  width: 45vw;
+}
+
+.jacare-img {
+  height: 30vh;
+  margin-right: 30px;
+  margin-top: 10px;
   width: 40vw;
 }
 
-.recomendation-image {
-  width: 90%;
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.buttons button {
+  background-color: rgb(255, 100, 185);
+  border: none;
+  border-radius: 10px;
+  filter: invert(100);
+  margin: 5px;
+  padding: 10px;
+}
+
+.video {
+  border: none;
+  height: 200px;
+  width: 100%;
 }
 
 .recomendation-card {
-  width: 45vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.recomendation-card a div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.recomendation-card a div h5 {
+  color: black;
+}
+
+.recomendation-image {
+  border: none;
+  border-radius: 15px;
+  width: 80%;
+}
+
+.start-recipe-button {
+  background-color: green;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  bottom: 0;
+  color: white;
+  font-family: Calibri , sans-serif;
+  font-size: larger;
+  position: fixed;
+  width: 100vw;
+}
+
+.finish-recipe-button {
+  background-color: dodgerblue;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  bottom: 0;
+  color: white;
+  font-family: Calibri , sans-serif;
+  font-size: larger;
+  position: fixed;
+  width: 60vw;
+}
+
+.finish-recipe-button:disabled {
+  background-color: rgb(145, 200, 255);
 }

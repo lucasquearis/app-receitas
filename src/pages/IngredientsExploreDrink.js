@@ -29,16 +29,18 @@ function IngredientsExploreDrink() {
   return (
     <div>
       <Header title="Explorar Ingredientes das Bebidas" />
-      {drinkIngredients.slice(min, max)
-        .map(({ strIngredient1: ingredient }, index) => (
-          <Link key={ index } to={ { pathname: '/bebidas', state: { ingredient } } }>
-            <IngredientsCard
-              index={ index }
-              src={ drinkImage(ingredient) }
-              name={ ingredient }
-            />
-          </Link>
-        ))}
+      <div className="image-div">
+        {drinkIngredients.slice(min, max)
+          .map(({ strIngredient1: ingredient }, index) => (
+            <Link key={ index } to={ { pathname: '/bebidas', state: { ingredient } } }>
+              <IngredientsCard
+                index={ index }
+                src={ drinkImage(ingredient) }
+                name={ ingredient }
+              />
+            </Link>
+          ))}
+      </div>
       <Footer />
     </div>
   );

@@ -56,51 +56,64 @@ function Search({ ingredient }) {
   });
 
   return (
-    <div>
-      <input
-        type="search"
-        placeholder="Pesquisa"
-        data-testid="search-input"
-        onChange={ (e) => handleChange(e) }
-        value={ searchValue }
-      />
-      <div onChange={ ({ target: { value } }) => change(value) }>
-        <label htmlFor="labelName">
-          <input
-            type="radio"
-            name="radio"
-            value="search"
-            id="labelName"
-            data-testid="name-search-radio"
-          />
-          <span>Nome</span>
-        </label>
-
-        <label htmlFor="labelIngredient">
-          <input
-            type="radio"
-            name="radio"
-            value="ingredient"
-            id="labelIngredient"
-            data-testid="ingredient-search-radio"
-          />
-          <span>Ingrediente</span>
-        </label>
-
-        <label htmlFor="labelFirst">
-          <input
-            type="radio"
-            name="radio"
-            value="first"
-            id="labelFirst"
-            data-testid="first-letter-search-radio"
-          />
-          <span>Primeira letra</span>
-        </label>
+    <div className="search-open">
+      <div className="search-input">
+        <input
+          className="input-text"
+          type="search"
+          placeholder="Pesquisa"
+          data-testid="search-input"
+          onChange={ (e) => handleChange(e) }
+          value={ searchValue }
+        />
+        <div
+          className="search-radio"
+          onChange={ ({ target: { value } }) => change(value) }
+        >
+          <label htmlFor="labelName">
+            <input
+              className="radio-btn"
+              type="radio"
+              name="radio"
+              value="search"
+              id="labelName"
+              data-testid="name-search-radio"
+            />
+            <span>Nome</span>
+          </label>
+          <label htmlFor="labelIngredient">
+            <input
+              className="radio-btn"
+              type="radio"
+              name="radio"
+              value="ingredient"
+              id="labelIngredient"
+              data-testid="ingredient-search-radio"
+            />
+            <span>Ingrediente</span>
+          </label>
+          <label htmlFor="labelFirst">
+            <input
+              className="radio-btn"
+              type="radio"
+              name="radio"
+              value="first"
+              id="labelFirst"
+              data-testid="first-letter-search-radio"
+            />
+            <span>Primeira letra</span>
+          </label>
+        </div>
+        <button
+          className="btn btn-success"
+          type="button"
+          id="exec"
+          data-testid="exec-search-btn"
+          onClick={ click }
+        >
+          Pesquisar
+        </button>
       </div>
-      <button type="button" id="exec" data-testid="exec-search-btn" onClick={ click }>
-        Pesquisar
-      </button>
     </div>
   );
 }

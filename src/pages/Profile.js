@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../styles/Profile.css';
 
 function Profile() {
   const [userEmail, setUserEmail] = useState('');
@@ -21,12 +22,18 @@ function Profile() {
       <Header title="Perfil" />
       { typeof userEmail === 'string' && userEmail.length > 0
         && (
-          <div>
-            <p data-testid="profile-email">{ userEmail }</p>
+          <div className="profile-container">
+            <p
+              data-testid="profile-email"
+              className="profile-email"
+            >
+              { userEmail }
+            </p>
             <Link to="/receitas-feitas">
               <button
                 type="button"
                 data-testid="profile-done-btn"
+                className="profile-button"
               >
                 Receitas Feitas
               </button>
@@ -35,6 +42,7 @@ function Profile() {
               <button
                 type="button"
                 data-testid="profile-favorite-btn"
+                className="profile-button"
               >
                 Receitas Favoritas
               </button>
@@ -44,6 +52,7 @@ function Profile() {
                 type="button"
                 data-testid="profile-logout-btn"
                 onClick={ logoutButton }
+                className="profile-logout-button"
               >
                 Sair
               </button>

@@ -10,6 +10,42 @@
   width: 100%;
 }
 
+.header-profile {
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.image-div {
+  text-align: center;
+}
+
+.image-section {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.ingredient-image {
+  box-shadow: 0 0 10px rgb(158, 156, 156);
+  display: flex;
+  margin: 0 10px;
+  padding: 10px;
+  text-align: center;
+  width: 250px;
+}
+
+.btn-success {
+  margin: 10px 5px;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
@@ -32,26 +68,76 @@
 }
 
 .cardTumb {
-  border: solid black 5px;
-  border-radius: 5px;
   height: 300px;
   margin-bottom: 10px;
+  transition: all 0.2s;
   width: 350px;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.cardTumb:hover {
+  box-shadow: 0 0 10px rgb(158, 156, 156);
+  transform: scale(1.02);
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
+@media only screen and ( max-width : 360px ) {
+
+  .header-profile {
+    background-color: lightgreen;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    height: 10vh;
+  }
+
+  .title {
+    font-size: 9vw;
+  }
+
+  .search-input {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .cardFlex {
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .radio-btn {
+    margin: 0 10px;
+  }
+
+  .header-search {
+    display: inline-block;
+  }
+
+  .search-open {
+    display: flex;
+  }
+
+  .categories {
+    text-align: center;
+  }
+
+  .input-text {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .search-radio {
+    display: flex;
+    padding-top: 10px;
+  }
+
+  .header-title {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
-*/
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;

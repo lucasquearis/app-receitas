@@ -17,15 +17,17 @@ class HeaderSearch extends React.Component {
   render() {
     const { title } = this.props;
     return (
-      <div>
-        <Link to="/perfil">
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="imagem do link do perfil"
-          />
-        </Link>
-        <h1 data-testid="page-title">{title}</h1>
+      <div className="header-profile">
+        <div className="header-title">
+          <Link to="/perfil">
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="imagem do link do perfil"
+            />
+          </Link>
+          <h1 data-testid="page-title" className="title">{title}</h1>
+        </div>
       </div>
     );
   }

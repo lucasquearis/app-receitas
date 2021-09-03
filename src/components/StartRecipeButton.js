@@ -21,8 +21,8 @@ function StartRecipeButton(props) {
   return (
     <Link to={ `/${type}/${id}/in-progress` }>
       <button
-        hidden={ done }
         className="start-recipe-button"
+        hidden={ done }
         type="button"
         data-testid="start-recipe-btn"
       >
