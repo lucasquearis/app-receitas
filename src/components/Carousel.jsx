@@ -19,7 +19,8 @@ function Carousel(data) {
         data-testid={ `${index}-recomendation-card` }
         key={ index }
         type="button"
-        onClick={ () => setRedirect(`/${recommendedType}/${recipe.idMeal || recipe.idDrink}`) }
+        onClick={ () => setRedirect(`/${recommendedType}/
+          ${recipe.idMeal || recipe.idDrink}`) }
       >
         <img
           src={ recipe.strMealThumb || recipe.strDrinkThumb }

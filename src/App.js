@@ -26,10 +26,10 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route exact path="/comidas" component={ Comidas } />
           <Route exact path="/bebidas" component={ Bebidas } />
-          <Route exact path="/comidas/:id" component={ Detalhes } />
-          <Route exact path="/bebidas/:id" component={ Detalhes } />
-          <Route exact path="/comidas/:id/in-progress" component={ Detalhes } />
-          <Route exact path="/bebidas/:id/in-progress" component={ Detalhes } />
+          <Route exact path="/comidas/:id" key={ 1 } component={ Detalhes } />
+          <Route exact path="/bebidas/:id" key={ 2 } component={ Detalhes } />
+          <Route exact path="/comidas/:id/in-progress" key={ 3 } component={ Detalhes } />
+          <Route exact path="/bebidas/:id/in-progress" key={ 4 } component={ Detalhes } />
           <Route exact path="/explorar/comidas" component={ ComidasExp } />
           <Route exact path="/explorar/bebidas" component={ BebidasExp } />
           <Route exact path="/explorar/comidas/area" component={ LocalDeOrigem } />

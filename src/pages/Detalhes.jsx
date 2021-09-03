@@ -58,45 +58,47 @@ function Detalhes() {
   if (!recipe || !recommended) return <h1>Carregando...</h1>;
 
   return (
-    <main className="main-details">
-      <img
-        src={ recipe[`str${jsonTranslator[type]}Thumb`] }
-        alt={ recipeName }
-        data-testid="recipe-photo"
-        className="thumbnail-details"
-      />
-      <h1 data-testid="recipe-title">{recipeName}</h1>
-      <div className="btnIcons">
-        <ButtonShare />
-        <ButtonFavorite favoriteObject={ localStrObject } />
-      </div>
-      <h2 data-testid="recipe-category">
-        {type === 'comidas' ? recipe.strCategory : recipe.strAlcoholic}
-      </h2>
-      <br />
-      <h3>Ingredients</h3>
-      <IngredientsList
-        key={ pathname }
-        data={ { id, type, renderType, recipe, setCompleted } }
-      />
-      <br />
-      <h3>Instructions</h3>
-      <p data-testid="instructions">
-        {recipe.strInstructions}
-      </p>
-      <br />
-      <VideoEmbed videoData={ { url, recipeName } } />
-      <br />
-      <Carousel
-        key={ pathname }
-        recipes={ { recommended, recommendedType } }
-      />
-      <br />
+    <>
+      <main className="main-details">
+        <img
+          src={ recipe[`str${jsonTranslator[type]}Thumb`] }
+          alt={ recipeName }
+          data-testid="recipe-photo"
+          className="thumbnail-details"
+        />
+        <h1 data-testid="recipe-title">{recipeName}</h1>
+        <div className="btnIcons">
+          <ButtonShare />
+          <ButtonFavorite favoriteObject={ localStrObject } />
+        </div>
+        <h2 data-testid="recipe-category">
+          {type === 'comidas' ? recipe.strCategory : recipe.strAlcoholic}
+        </h2>
+        <br />
+        <h3>Ingredients</h3>
+        <IngredientsList
+          key={ pathname }
+          data={ { id, type, renderType, recipe, setCompleted } }
+        />
+        <br />
+        <h3>Instructions</h3>
+        <p data-testid="instructions">
+          {recipe.strInstructions}
+        </p>
+        <br />
+        <VideoEmbed videoData={ { url, recipeName } } />
+        <br />
+        <Carousel
+          key={ pathname }
+          recipes={ { recommended, recommendedType } }
+        />
+        <br />
+      </main>
       <ButtonRedirect
         key={ pathname }
         renderData={ { pathname, id, renderType, completed, localStrObject } }
       />
-    </main>
+    </>
   );
 }
 
