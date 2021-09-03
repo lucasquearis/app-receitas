@@ -99,7 +99,7 @@ export default function RecipesInProgress() {
               data-testid="recipe-photo"
               alt={ recipeDetails.strDrink }
               // estilo temporário para passar nos requisitos;
-              className="main-image"
+              className="main-image small-image"
             />
             <div className="details-container">
               <div className="details-title-container">

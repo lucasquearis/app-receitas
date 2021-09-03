@@ -79,6 +79,10 @@ html {
   width: 100%; /* width of container */
 }
 
+.small-image {
+  height: 150px;
+}
+
 .details-container {
   padding: 16px;
 }
