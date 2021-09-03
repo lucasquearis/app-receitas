@@ -10,8 +10,8 @@ import ExploreArea from './Pages/ExploreArea';
 import Explore from './Pages/Explore';
 import ExploreIngredients from './Pages/ExploreIngredients';
 import Profile from './Pages/Profile/Profile';
-import ReceitasFavoritas from './Pages/ReceitasFavoritas/ReceitasFavoritas';
-import ReceitasFeitas from './Pages/ReceitasFeitas/ReceitasFeitas';
+import FavoriteRecipes from './Pages/FavoriteRecipes';
+import DoneRecipes from './Pages/DoneRecipes';
 
 function App() {
   return (
@@ -72,7 +72,7 @@ function App() {
           render={ () => (
             <Header />
           ) }
-          component={ ReceitasFeitas }
+          component={ DoneRecipes }
         />
         <Route
           exact
@@ -80,7 +80,7 @@ function App() {
           render={ () => (
             <Header />
           ) }
-          component={ ReceitasFavoritas }
+          component={ FavoriteRecipes }
         />
         <Route path="/:feedType/:id" component={ RecipeDetails } />
       </Switch>
