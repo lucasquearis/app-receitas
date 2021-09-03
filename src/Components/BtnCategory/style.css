@@ -1,16 +1,19 @@
 .category-container {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 5px;
+  overflow-x: auto;
 }
 
 .category-container button {
-  width: auto;
   border: none;
-  background-color: rgb(62, 137, 182);
-  width: calc(33.33% - 2px);
-  height:30px;
-  color: white;
-  margin: 1px;
+  text-transform: uppercase;
+  background-color: transparent;
+  font-weight: 600;
+  color: rgb(82, 85, 91);
+  width: fit-content;
+  white-space: nowrap;
+  margin: 15px;
+}
+
+.category-container .selected {
+  color: rgb(245, 71, 73);
 }

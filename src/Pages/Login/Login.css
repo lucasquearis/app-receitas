@@ -1,8 +1,6 @@
 .page-login {
   align-items: center;
-  background-image: url('https://cdn.dribbble.com/users/3320958/screenshots/15955423/media/ec2fe461084339c3a4d14efae1202847.jpeg?compress=1&resize=1200x900');
-  background-size: cover;
-  background-position: center;
+  background-color: rgb(12, 16, 21);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -29,13 +27,26 @@
 
 .page-login .login-form {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgb(20, 25, 33);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  color: white;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 15px;
+}
+
+.page-login .login-form input {
+  color: white;
+}
+
+.page-login .login-form .MuiInput-underline:after  {
+  border-bottom: 2px solid rgb(245, 71, 73);
+}
+
+.page-login .login-form label {
+  color: rgb(82, 85, 91);
 }
 
 .page-login .login-form .email {
@@ -53,9 +64,9 @@
   padding: 2px 25px;
 }
 .page-login .login-form .button:disabled {
-  background: linear-gradient(to left, rgb(132, 197, 132), rgb(98, 153, 175));
+  background-color: rgb(29, 35, 45);
 }
 
 .page-login .login-form .button:enabled {
-  background: linear-gradient(to left, rgb(87, 137, 87), rgb(68, 111, 128));
+  background: linear-gradient(to left, rgb(245, 71, 73), rgb(213, 57, 60));
 }

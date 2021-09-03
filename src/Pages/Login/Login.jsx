@@ -4,6 +4,8 @@ import Inp from '../../Components/Inp';
 import Btn from '../../Components/Btn';
 import { ContextApp } from '../../Context/ContextApp';
 
+import cooking from '../../images/cooking.png';
+
 import './Login.css';
 
 function Login() {
@@ -45,8 +47,8 @@ function Login() {
     <div className="page-login">
       <div className="login-form">
         <div className="title">
-          <img src="https://image.flaticon.com/icons/png/512/3448/3448167.png" alt="logo" />
-          <h2>Fast Recipe</h2>
+          <img src={ cooking } alt="logo" />
+          <h2>Food Seeker</h2>
         </div>
         <Inp { ...emailProps } />
         <Inp { ...passwordProps } />

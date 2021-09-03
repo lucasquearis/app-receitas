@@ -12,7 +12,7 @@ const BtnCategory = ({ category }) => {
   const currentRout = pathname.includes('/comidas');
   const url = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-  const [currentCategory, setCurrentCategory] = useState('');
+  const [currentCategory, setCurrentCategory] = useState('All');
 
   if (category === undefined) {
     return <div>loding</div>;
@@ -23,17 +23,22 @@ const BtnCategory = ({ category }) => {
   return (
     <div className="category-container">
       <button
+        className={ currentCategory === 'All' ? 'selected' : null }
         type="button"
         name="All"
         key="All"
         value="All"
         data-testid="All-category-filter"
-        onClick={ returnAll }
+        onClick={ () => {
+          returnAll();
+          setCurrentCategory('All');
+        } }
       >
         All
       </button>
       {category.slice(0, maxCategory).map(({ strCategory }) => (
         <button
+          className={ currentCategory === strCategory ? 'selected' : null }
           type="button"
           name={ strCategory }
           Key={ strCategory }

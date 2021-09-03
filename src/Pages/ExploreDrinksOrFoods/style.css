@@ -1,10 +1,16 @@
 .page-explore-drinks-or-foods {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  position: relative;
+  height: 100vh;
 }
 
 .page-explore-drinks-or-foods .explore-buttons {
   display: flex;
   flex-direction: column;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 75%;
 }

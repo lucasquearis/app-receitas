@@ -1,11 +1,45 @@
 .header-top {
-  align-items: center;
-  background-color: #F4A881;
-  display: flex;
-  height: 55px;
-  justify-content: space-around;
+  position: relative;
+  color: white;
+}
+
+.header-top button {
+  background-color: rgb(245, 71, 73);
+  border-radius: 8px;
+  min-width: 34px;
+  min-height: 34px;
+}
+
+.header-top button span svg {
+  fill: white;
 }
 
 .header-top h1 {
+  font-size: 1.5rem;
   margin: 0;
+  width: fit-content;
+}
+
+.withoutSearch {
+  align-items: center;
+  display: flex;
+  height: 55px;
+  justify-content: flex-start;
+}
+
+.withoutSearch h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.withoutSearch button {
+  margin-left: 2rem;
+}
+
+.withSearch {
+  align-items: center;
+  display: flex;
+  height: 55px;
+  justify-content: space-around;
 }
