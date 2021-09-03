@@ -63,6 +63,10 @@ body {
   width: 40%;
 }
 
+.btnLogin:disabled {
+  background-color: gray;
+}
+
 /* link:
 https://velhobit.com.br/design/como-fazer-efeito-float-label-animado-com-css3-puro.html */
 
