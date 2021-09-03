@@ -12,6 +12,8 @@ import {
 } from '../../services';
 import AppContext from '../../context/AppContext';
 
+import { SearchBarWrapper, SearchInput, Button } from './style';
+
 function BarraDeBusca() {
   const [bar, setBar] = useState({
     text: '',
@@ -77,47 +79,60 @@ function BarraDeBusca() {
     }
   };
   return (
-    <div>
+    <SearchBarWrapper>
 
-      <input
+      <SearchInput
         type="text"
         name="text"
         data-testid="search-input"
         placeholder="Busque alguma receita"
         onChange={ handleChange }
       />
-      <input
-        type="radio"
-        name="radio"
-        data-testid="ingredient-search-radio"
-        onChange={ handleChange }
-        value="ingredient"
-      />
-      Ingredientes
-      <input
-        type="radio"
-        name="radio"
-        data-testid="name-search-radio"
-        onChange={ handleChange }
-        value="name"
-      />
-      Nome
-      <input
-        type="radio"
-        name="radio"
-        data-testid="first-letter-search-radio"
-        onChange={ handleChange }
-        value="first-letter"
-      />
-      Primeira Letra
-      <button
+
+      <label htmlFor="ingredient">
+        Ingredientes
+        <input
+          id="ingredient"
+          type="radio"
+          name="radio"
+          data-testid="ingredient-search-radio"
+          onChange={ handleChange }
+          value="ingredient"
+        />
+      </label>
+
+      <label htmlFor="name">
+        Nome
+        <input
+          id="name"
+          type="radio"
+          name="radio"
+          data-testid="name-search-radio"
+          onChange={ handleChange }
+          value="name"
+        />
+      </label>
+
+      <label htmlFor="first-letter">
+        Primeira Letra
+        <input
+          id="first-letter"
+          type="radio"
+          name="radio"
+          data-testid="first-letter-search-radio"
+          onChange={ handleChange }
+          value="first-letter"
+        />
+      </label>
+
+      <Button
         type="button"
         data-testid="exec-search-btn"
         onClick={ handleClick }
       >
         Buscar
-      </button>
-    </div>
+      </Button>
+    </SearchBarWrapper>
 
   );
 }
