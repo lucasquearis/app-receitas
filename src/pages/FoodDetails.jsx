@@ -1,16 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Details.css';
 import { useLocation } from 'react-router-dom';
 import RecomendationsDrinks from '../components/RecomendationsDrinks';
 import ButtonFoods from '../components/ButtonFoods';
 import ShareButton from '../components/ShareButton';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import MyContext from '../context/MyContext';
+import FavoriteButtonFoods from '../components/FavoriteButtonFoods';
 
-// função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
-  const lenghtIndredients = 20; // quantidade máxima de ingredientes da receita
+  const lenghtIndredients = 20;
   const itens = [];
   const itensMeasure = [];
   if (getRecipe) {
@@ -29,8 +26,6 @@ function FoodDetails() {
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const [favorite, setfavorite] = useState(false);
-  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -51,61 +46,11 @@ function FoodDetails() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const favorited = () => {
-    setfavorite(!favorite);
-    const recipes = {
-      id,
-      type: 'comida',
-      area: getRecipe.strArea,
-      category: getRecipe.strCategory,
-      alcoholicOrNot: '',
-      name: getRecipe.strMeal,
-      image: getRecipe.strMealThumb,
-    };
-    setLocalStorageItems([...localStorageItems, recipes]);
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (storage === null) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
-      return;
-    } if (storage.some((favoriteItem) => favoriteItem.id === recipes.id)) {
-      return;
-    } if (!favorite) {
-      storage.push(recipes);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(storage));
-    } else {
-      const storaged = storage.filter((favoriteItem) => favoriteItem.id !== recipes.id);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(storaged));
-    }
-  };
-
-  // const favorites = () => {
-  //   const recipes = {
-  //     id,
-  //     type: 'comida',
-  //     area: getRecipe.strArea,
-  //     category: getRecipe.strCategory,
-  //     alcoholicOrNot: '',
-  //     name: getRecipe.strMeal,
-  //     image: getRecipe.strMealThumb,
-  //   };
-  //   setLocalStorageItems([...localStorageItems, recipes]);
-
-  //   if (favorite ? localStorage.removeItem('favoriteRecipes') && setfavorite(false) : localStorage.setItem('favoriteRecipes', JSON.stringify([recipes])) && setfavorite(true));
-  // };
-
-  useEffect(() => {
-    const heart = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (heart) {
-      const yes = heart.find((i) => i.id === id);
-      if (yes) setfavorite(true);
-    }
-  }, [id]);
-
   return (
     <div>
       <div>
         <img
-          alt={ getRecipe.strMealThumb }
+          alt="foto da comida"
           data-testid="recipe-photo"
           src={ getRecipe.strMealThumb }
           style={ { width: '10rem' } }
@@ -115,17 +60,7 @@ function FoodDetails() {
         <h2 data-testid="recipe-title">{ getRecipe.strMeal }</h2>
         <div className="icons">
           <ShareButton />
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ favorited }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ favorite ? blackHeartIcon : whiteHeartIcon }
-              alt="botão de favorito"
-            />
-          </button>
+          <FavoriteButtonFoods />
         </div>
         <p data-testid="recipe-category">{ getRecipe.strCategory }</p>
       </div>

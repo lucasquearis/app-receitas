@@ -1,16 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/Details.css';
 import RecomendationsFoods from '../components/RecomendationsFoods';
 import ButtonDrinks from '../components/ButtonDrinks';
 import ShareButton from '../components/ShareButton';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import MyContext from '../context/MyContext';
+import FavoriteButtonDrinks from '../components/FavoriteButtonDrinks';
 
-// função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
-  const lenghtIndredients = 20; // quantidade máxima de ingredientes da receita
+  const lenghtIndredients = 20;
   const itens = [];
   const itensMeasure = [];
   if (getRecipe) {
@@ -29,8 +26,6 @@ function DrinkDetails() {
   const [getRecipe, setGetRecipe] = useState({});
   const [ingredient, setIngredient] = useState([]);
   const [measure, setMeasure] = useState([]);
-  const [favorite, setfavorite] = useState(false);
-  const { localStorageItems, setLocalStorageItems } = useContext(MyContext);
 
   useEffect(() => {
     try {
@@ -51,28 +46,6 @@ function DrinkDetails() {
     listIgredientsAndMeasure(getRecipe, setIngredient, setMeasure);
   }, [getRecipe]);
 
-  const favorites = () => {
-    const recipes = {
-      id,
-      type: 'bebida',
-      area: '',
-      category: getRecipe.strCategory,
-      alcoholicOrNot: getRecipe.strAlcoholic,
-      name: getRecipe.strDrink,
-      image: getRecipe.strDrinkThumb,
-    };
-    setLocalStorageItems([...localStorageItems, recipes]);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
-  };
-
-  useEffect(() => {
-    const heart = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (heart) {
-      const yes = heart.find((favorited) => favorited.id === id);
-      if (yes) setfavorite(true);
-    }
-  }, [id]);
-
   return (
     <div>
       <div>
@@ -87,21 +60,18 @@ function DrinkDetails() {
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <div className="icons">
           <ShareButton />
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ favorites }
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          >
+          <FavoriteButtonDrinks />
+          {/* <button type="button" onClick={ favorited }>
             <img
               src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              data-testid="favorite-btn"
               alt="botão de favorito"
             />
-          </button>
+          </button> */}
         </div>
         <p data-testid="recipe-category">
-          { getRecipe
-            .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
+          { getRecipe.strCategory === 'Cocktail'
+            ? getRecipe.strAlcoholic : getRecipe.strCategory }
         </p>
       </div>
       <section>
