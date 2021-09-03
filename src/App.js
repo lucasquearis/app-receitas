@@ -12,6 +12,8 @@ import Profile from './Pages/Profile';
 import FoodDetails from './Pages/FoodDetails';
 import DrinkDetails from './Pages/DrinkDetails';
 import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
+import DoneRecipes from './Pages/DoneRecipes';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
