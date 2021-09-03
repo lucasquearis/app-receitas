@@ -1,9 +1,10 @@
 import React from 'react';
-import { string, bool, func, number } from 'prop-types';
+import { string, bool, func, number, shape } from 'prop-types';
 
 export default function Input({
   name,
   id,
+  style,
   classNameInput,
   classNameLabel,
   onChange,
@@ -18,6 +19,7 @@ export default function Input({
     <label
       htmlFor={ id }
       className={ classNameLabel }
+      style={ style }
     >
       { type === 'checkbox' || type === 'radio' ? '' : textLabel }
       <input
@@ -39,6 +41,7 @@ export default function Input({
 
 Input.propTypes = {
   id: string.isRequired,
+  style: shape(),
   name: string.isRequired,
   classNameInput: string,
   classNameLabel: string,
@@ -52,6 +55,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  style: {},
   classNameInput: '',
   classNameLabel: '',
   type: 'text',

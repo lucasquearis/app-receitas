@@ -1,0 +1,94 @@
+.progress-food {
+  padding-bottom: 80px;
+  width: 100vw;
+}
+
+.progress-food .loading-container {
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  z-index: 999;
+}
+
+.progress-img {
+  max-width: 100%;
+  width: 100%;
+}
+
+.progress-food a {
+  color: #350;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.progress-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.progress-title-container h1 {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.progress-title-container div {
+  display: flex;
+  gap: 9px;
+  justify-content: flex-end;
+}
+
+.progress-category {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.progress-title-container .share-btn {
+  background: none;
+  border: none;
+}
+
+.progress-title-container .favorite-btn {
+  background: none;
+  border: none;
+  padding-right: 10px;
+}
+
+.progress-food-ingredients {
+  background-color: #fed;
+  margin: 20px auto;
+  padding: 10px;
+  width: 95%;
+}
+
+.progress-food-ingredients li {
+  list-style: none;
+}
+
+.progress-food-ingredients input {
+  margin-right: 5px;
+}
+
+.progress-instructions {
+  margin: 0 10px;
+  text-align: justify;
+}
+
+.progress-btn {
+  background-color: #673;
+  border: none;
+  bottom: 0;
+  color: white;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  position: fixed;
+  width: 100vw;
+}
+
+.progress-btn:disabled {
+  background-color: #818f59;
+  z-index: 998;
+}

@@ -37,11 +37,13 @@ export default function Login() {
   return (
     <div className="container-form">
       <form className="box-form">
-        <img
-          className="logo-login"
-          src={ logo }
-          alt="Logo"
-        />
+        <div className="logo-login-container">
+          <img
+            className="logo-login"
+            src={ logo }
+            alt="Logo"
+          />
+        </div>
         <Input
           id="email-input"
           name="email"
