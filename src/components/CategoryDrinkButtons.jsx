@@ -4,6 +4,7 @@ import myContext from '../context/myContext';
 import { fetchDrinksCategories, clearSearch } from '../redux/actions/mainActions';
 import DrinksCard from './DrinksCard';
 import ItemCard from './ItemCard';
+import Loading from './Loading';
 
 function CategoryDrinkButtons() {
   const doze = 12;
@@ -18,6 +19,9 @@ function CategoryDrinkButtons() {
   } = useContext(myContext);
   const categories = useSelector(
     (state) => state.reducerCategories.drinksCategories.drinks,
+  );
+  const loading = useSelector(
+    (state) => state.reducerCategories.isLoading,
   );
   const dispatch = useDispatch();
   const [categoryClick, setCategoryClick] = useState([]);
@@ -69,6 +73,7 @@ function CategoryDrinkButtons() {
     setDrinkIngredientSelected('');
   };
 
+  if (loading) return <Loading />;
   return (
     <div>
       <div className="div-categories-wrapper">

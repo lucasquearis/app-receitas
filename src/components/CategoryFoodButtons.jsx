@@ -4,6 +4,7 @@ import { fetchCategory, clearSearch } from '../redux/actions/mainActions';
 import myContext from '../context/myContext';
 import ItemCard from './ItemCard';
 import FoodsCard from './FoodsCard';
+import Loading from './Loading';
 import '../styles/CategoryButtons.css';
 
 function CategoryFoodButtons() {
@@ -12,6 +13,9 @@ function CategoryFoodButtons() {
   const categories = useSelector(
     (state) => state.reducerCategories.categories
       .meals,
+  );
+  const loading = useSelector(
+    (state) => state.reducerCategories.isLoading,
   );
   const {
     foodIngredientClick,
@@ -70,7 +74,7 @@ function CategoryFoodButtons() {
     removeDisplayList();
     setFoodIngredientSelected('');
   };
-
+  if (loading) return <Loading />;
   return (
     <div>
       <div className="div-categories-wrapper">

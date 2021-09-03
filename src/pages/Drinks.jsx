@@ -37,7 +37,7 @@ function Drinks(props) {
       />
 
       <CategoryDrinkButtons />
-      <main>
+      <main className="food-cards">
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard
           title={ drink.strDrink }
           thumb={ drink.strDrinkThumb }

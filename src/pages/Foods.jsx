@@ -37,7 +37,7 @@ function Foods(props) {
       />
 
       <CategoryFoodButtons />
-      <main>
+      <main className="food-cards">
         { search.meals && search.meals.map((meal, index) => index < doze && (<ItemCard
           title={ meal.strMeal }
           data-testid={ `${index}-recipe-card` }

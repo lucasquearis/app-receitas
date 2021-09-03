@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import ArrowIcon from '../../images/ArrowIcon.svg';
 import Header from '../../components/Header';
 import myContext from '../../context/myContext';
 import '../../styles/Header.css';
@@ -12,16 +13,23 @@ function ExploreDrinkIngredient() {
     drinkIngredients,
     setDrinkIngredientSelected,
   } = useContext(myContext);
+  const history = useHistory();
+  const goToPreviousPath = () => {
+    history.goBack();
+  };
   return (
     <div>
       <Header brand="Explorar Ingredientes" className="img-search" />
-      <div className="div-ingredient-card">
+      <button className="voltar2 " type="button" onClick={ goToPreviousPath }>
+        <img className="explore" src={ ArrowIcon } alt="voltar" />
+      </button>
+      <div className="div-ingredients-card">
         {
           drinkIngredients
           && drinkIngredients.map((ingredient, index) => index < doze && (
             <div
               key={ index }
-              // className="div-ingredient-card"
+              className="div-ingredient-card"
               data-testid={ `${index}-ingredient-card` }
             >
               <Link

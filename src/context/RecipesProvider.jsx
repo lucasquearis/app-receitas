@@ -29,6 +29,23 @@ function RecipesProvider({ children }) {
     setDisplayFood([]);
   };
 
+  const removeRandomList = () => {
+    setRandomDrink([]);
+    setRandomFood([]);
+  };
+
+  const getRandomDrink = async () => {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    const data = await response.json();
+    setRandomDrink(data.drinks);
+  };
+
+  const getRandomFood = async () => {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+    const data = await response.json();
+    setRandomFood(data.meals);
+  };
+
   const providerState = {
     // Foods:
     randomFood,
@@ -38,32 +55,20 @@ function RecipesProvider({ children }) {
     setFoodIngredientSelected,
     displayFood,
     setDisplayFood,
+    getRandomFood,
     // Drinks:
     randomDrink,
     drinkIngredients,
     drinkIngredientClick,
     drinkIngredientSelected,
     setDrinkIngredientSelected,
+    getRandomDrink,
     // Others:
     display,
     setDisplay,
     removeDisplayList,
+    removeRandomList,
   };
-
-  useEffect(() => {
-    const getRandomFood = async () => {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-      const data = await response.json();
-      setRandomFood(data.meals);
-    };
-    const getRandomDrink = async () => {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-      const data = await response.json();
-      setRandomDrink(data.drinks);
-    };
-    getRandomDrink();
-    getRandomFood();
-  }, []);
 
   useEffect(() => {
     const getFoodIngredients = async () => {

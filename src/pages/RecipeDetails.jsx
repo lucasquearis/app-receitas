@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import ArrowIcon from '../images/ArrowIcon.svg';
 import rockGlass from '../images/rockGlass.svg';
 import IngredientsList from '../components/IngredientsList';
 import Suggestions from '../components/Suggestions';
@@ -7,6 +9,7 @@ import StartRecipeButton from '../components/StartRecipeButton';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import Iframe from '../components/Iframe';
+import myContext from '../context/myContext';
 
 function RecipeDetails(props) {
   const [recipe, setRecipe] = useState();
@@ -15,8 +18,14 @@ function RecipeDetails(props) {
   const [enCasedType, setEnCasedType] = useState('Drink');
   const [favoriteType, setFavoriteType] = useState('bebida');
   const { match } = props;
+  const { removeRandomList } = useContext(myContext);
   const { type, id } = match.params;
   const localhost = 'http://localhost:3000/';
+  const history = useHistory();
+  const goToPreviousPath = () => {
+    removeRandomList();
+    history.goBack();
+  };
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -52,6 +61,9 @@ function RecipeDetails(props) {
         recipe
           ? (
             <div>
+              <button className="voltar1" type="button" onClick={ goToPreviousPath }>
+                <img className="voltar" src={ ArrowIcon } alt="voltar" />
+              </button>
               <img
                 src={ recipe[enType][0][`str${enCasedType}Thumb`] }
                 alt="Foto do Prato"
