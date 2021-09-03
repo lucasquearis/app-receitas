@@ -56,7 +56,7 @@ class Foods extends Component {
 
     return (
       <div>
-        <Header title="Comidas" />
+        <Header title="Comidas" showSearchBottom />
         <CategoriesFilter
           categories={ mealCategories }
           handleClick={ this.filterMealsByCategory }

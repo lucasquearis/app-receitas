@@ -56,7 +56,7 @@ class Drinks extends Component {
 
     return (
       <div>
-        <Header title="Bebidas" />
+        <Header title="Bebidas" showSearchBottom />
         <CategoriesFilter
           categories={ drinksCategories }
           handleClick={ this.filterMealsByCategory }

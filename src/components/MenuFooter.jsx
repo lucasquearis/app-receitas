@@ -9,6 +9,7 @@ export default function MenuFooter() {
   return (
     <div className="footerMenu">
       <footer data-testid="footer">
+
         <Link to="/bebidas" className="fixed">
           <img data-testid="drinks-bottom-btn" src={ drink } alt="icon drink" />
         </Link>
@@ -20,6 +21,7 @@ export default function MenuFooter() {
         <Link to="/comidas" className="fixed">
           <img data-testid="food-bottom-btn" src={ food } alt="icon food" />
         </Link>
+
       </footer>
     </div>
   );

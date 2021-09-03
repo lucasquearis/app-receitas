@@ -6,7 +6,7 @@ export default class BebidasArea extends Component {
   render() {
     return (
       <div>
-        <Header title="Explorar Origem" hasSearchBar />
+        <Header title="Explorar Origem" hasSearchBar showSearchBottom={ false } />
         Explorar Bebidas Area
         <MenuFooter />
       </div>

@@ -14,7 +14,7 @@ export default function ExplorarBebidas() {
   };
   return (
     <div>
-      <Header title="Explorar Bebidas" />
+      <Header title="Explorar Bebidas" showSearchBottom={ false } />
       <div className="container-button-explorar">
         <Link to="/explorar/bebidas/ingredientes">
           <button
