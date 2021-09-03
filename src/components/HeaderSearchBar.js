@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import MainContext from '../context/MainContext';
 import genericFetchAPI from '../services/genericFetchAPI';
 import CardDrink from './CardDrink';
 import CardFood from './CardFood';
@@ -8,6 +9,7 @@ function HeaderSearchBar() {
   const { pathname } = useLocation();
   const history = useHistory();
 
+  const { setRenderCD, setRenderCF } = useContext(MainContext);
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [data, setData] = useState({});
@@ -42,6 +44,7 @@ function HeaderSearchBar() {
         history.push(`/comidas/${data.response.meals[0].idMeal}`);
       } else {
         setMeals(data.response.meals.slice(0, maxList));
+        setRenderCF(false);
       }
     };
     const resolveDrinks = () => {
@@ -51,6 +54,7 @@ function HeaderSearchBar() {
         history.push(`/bebidas/${data.response.drinks[0].idDrink}`);
       } else {
         setDrinks(data.response.drinks.slice(0, maxList));
+        setRenderCD(false);
       }
     };
     const verifyMealsOrDrinks = () => {
@@ -61,7 +65,7 @@ function HeaderSearchBar() {
       }
     };
     if (data.response) return verifyMealsOrDrinks();
-  }, [data, pathname, history]);
+  }, [data, pathname, history, setRenderCF, setRenderCD]);
 
   async function handleClick() {
     const { mealOrCocktail, type, inicio, search } = state;

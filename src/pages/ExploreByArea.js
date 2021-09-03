@@ -8,18 +8,17 @@ function ExploreByArea() {
   const { areas, setAreas } = useContext(MainContext);
   const [area, setArea] = useState('');
 
-  const resolveArea = async () => {
-    const areaList = await genericFetchAPI('meal', 'filter', 'a', area);
-    setAreas(areaList);
-  };
-
   function handleChange({ target: { value } }) {
     return setArea(value);
   }
 
   useEffect(() => {
+    const resolveArea = async () => {
+      const areaList = await genericFetchAPI('meal', 'filter', 'a', area);
+      setAreas(areaList);
+    };
     resolveArea();
-  }, []);
+  }, [area, areas, setAreas]);
   return (
     <div>
       <Header title="Explorar Origem" />
