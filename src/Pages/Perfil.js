@@ -19,7 +19,7 @@ export default function Perfil() {
     history.push('/');
   };
   return (
-    <section className="main-profile-section">
+    <section className="main-section">
       <section>
         <Header title="Perfil" searchIcon={ false } />
       </section>

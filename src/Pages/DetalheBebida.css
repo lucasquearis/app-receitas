@@ -50,7 +50,7 @@
 }
 
 .start-drink-recipe-btn {
-  background-color: lime;
+  background-color: rgb(1, 129, 1);
   border: none;
   bottom: 0;
   font-size: 18px;
@@ -66,7 +66,7 @@
 }
 
 .start-drink-recipe-btn:active {
-  background-color: rgb(0, 187, 0);
+  background-color: rgb(1, 129, 1);
 }
 
 .start-drink-recipe-btn:focus {

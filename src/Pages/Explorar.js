@@ -5,33 +5,37 @@ import Footer from '../Components/Footer';
 
 export default function Explorar() {
   return (
-    <>
-      <section>
+    <section className="main-section">
+      <section className="header-section">
         <Header title="Explorar" searchIcon />
       </section>
-      <Link to="/explorar/comidas">
-        <button
-          type="button"
-          data-testid="explore-food"
-        >
-          Explorar Comidas
-        </button>
-      </Link>
-      <Link to="/explorar/bebidas">
-        <button
-          type="button"
-          data-testid="explore-drinks"
-        >
-          Explorar Bebidas
-        </button>
-      </Link>
+      <section className="profile-button">
+        <Link to="/explorar/comidas">
+          <button
+            className="btn btn-success"
+            type="button"
+            data-testid="explore-food"
+          >
+            Explorar Comidas
+          </button>
+        </Link>
+        <Link to="/explorar/bebidas">
+          <button
+            className="btn btn-success"
+            type="button"
+            data-testid="explore-drinks"
+          >
+            Explorar Bebidas
+          </button>
+        </Link>
+        <Link to="/explorar/comidas">
+          <button className="btn btn-success" type="button">Explorar Comidas</button>
+        </Link>
+        <Link to="/explorar/comidas/ingredientes">
+          <button className="btn btn-success" type="button">ingredientes</button>
+        </Link>
+      </section>
       <Footer />
-      <Link to="/explorar/comidas">
-        <button type="button">Explorar Comidas</button>
-      </Link>
-      <Link to="/explorar/comidas/ingredientes">
-        <button type="button">ingredientes</button>
-      </Link>
-    </>
+    </section>
   );
 }

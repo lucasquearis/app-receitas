@@ -22,6 +22,7 @@ export default function ExplorarComidas() {
       return (
         <Link to={ `/comidas/${receita[0].idMeal}` }>
           <button
+            className="btn btn-success"
             type="button"
             data-testid="explore-surprise"
           >
@@ -33,6 +34,7 @@ export default function ExplorarComidas() {
     return (
       <Link to="/comidas">
         <button
+          className="btn btn-success"
           type="button"
           data-testid="explore-surprise"
         >
@@ -43,27 +45,31 @@ export default function ExplorarComidas() {
   };
 
   return (
-    <main>
-      <section>
+    <main className="main-section">
+      <section className="header-section">
         <Header title="ExplorarComidas" searchIcon />
       </section>
-      <Link to="/explorar/comidas/ingredientes">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-        >
-          Por Ingredientes
-        </button>
-      </Link>
-      <Link to="/explorar/comidas/area">
-        <button
-          type="button"
-          data-testid="explore-by-area"
-        >
-          Por Local de Origem
-        </button>
-      </Link>
-      { getLink() }
+      <section className="profile-button">
+        <Link to="/explorar/comidas/ingredientes">
+          <button
+            className="btn btn-success"
+            type="button"
+            data-testid="explore-by-ingredient"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
+        <Link to="/explorar/comidas/area">
+          <button
+            className="btn btn-success"
+            type="button"
+            data-testid="explore-by-area"
+          >
+            Por Local de Origem
+          </button>
+        </Link>
+        { getLink() }
+      </section>
       <Footer />
     </main>
   );
