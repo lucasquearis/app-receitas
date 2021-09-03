@@ -31,7 +31,6 @@ export const getMeal = (search = '', type = 'Nome') => async (dispatch) => {
   dispatch(getAPIMeal());
   try {
     const fetchAPI = await fetchAPIMeal(search, type);
-    console.log(fetchAPI);
     dispatch(getAPIMealSucess(fetchAPI));
   } catch (error) {
     dispatch(getAPIMealError(error));

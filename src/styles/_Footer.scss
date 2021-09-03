@@ -2,12 +2,16 @@
   position: fixed;
   bottom: 0;
   width: 100vw;
-  background-color: $alice-blue;
+  background-color: $cool-green;
   justify-content: space-around;
   display: flex;
-  padding: 5px;
+  padding: 0 5px;
 
   img {
     width: 10vw;
   }
+}
+
+.currLocBtn {
+  box-shadow: 0 0 10px $off-white !important;
 }

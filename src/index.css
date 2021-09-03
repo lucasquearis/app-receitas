@@ -1,20 +1,3 @@
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  background-color: #ebf2fa;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 5px;
-}
-
-.footer img {
-  width: 10vw;
-}
-
 .selected-drink {
   background-color: #4279a1;
 }
@@ -149,6 +132,11 @@
   padding: 10px;
   width: 90vw;
   border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #00a9a2 !important;
+  border: none !important;
 }
 
 @font-face {
@@ -646,6 +634,28 @@
   }
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: #00a9a2;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 5px;
+}
+
+.footer img {
+  width: 10vw;
+}
+
+.currLocBtn {
+  -webkit-box-shadow: 0 0 10px #e5ece9 !important;
+          box-shadow: 0 0 10px #e5ece9 !important;
+}
+
 @font-face {
   font-family: KithcenHome;
   src: url("./fonts/KitchenHome-rg0gB.ttf");
@@ -663,23 +673,6 @@ main {
 body {
   border: 0;
   padding: 0;
-}
-
-.btn-primary {
-  background-color: #00a9a2 !important;
-  border: none !important;
-}
-
-.icon,
-.share-icon,
-.favorite-img {
-  -webkit-filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
-          filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
-}
-
-.btn-primary {
-  background-color: #00a9a2 !important;
-  border: none !important;
 }
 
 .icon,

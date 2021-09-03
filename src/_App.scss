@@ -1,15 +1,26 @@
 @import "./styles/colors";
-@import "./styles/Footer";
+
 @import "./styles/recipes-list";
+
 @import "./styles/details";
+
 @import "./styles/in-progress";
+
 @import "./styles/ingredients";
+
 @import "./styles/login";
+
 @import "./styles/header";
+
 @import "./styles/explores";
+
 @import "./styles/header";
+
 @import "./styles/profile";
+
 @import "./styles/loading";
+
+@import "./styles/Footer";
 
 @font-face {
   font-family: KithcenHome;
@@ -29,22 +40,6 @@ main {
 body {
   border: 0;
   padding: 0;
-}
-
-.btn-primary {
-  background-color: $cool-green !important;
-  border: none !important;
-}
-
-.icon,
-.share-icon,
-.favorite-img {
-  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(4deg) brightness(104%) contrast(101%);
-}
-
-.btn-primary {
-  background-color: $cool-green !important;
-  border: none !important;
 }
 
 .icon,
