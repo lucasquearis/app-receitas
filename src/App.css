@@ -94,6 +94,42 @@
   font-weight: 900;
 }
 
+.container-filter-btn {
+  display: flex;
+  justify-content: space-around;
+}
+
+.filter-btn {
+  background-color: #ef6a07;
+  border-color: #ef6a07;
+  border-radius: 5px;
+  color: white;
+  height: 7vh;
+  margin: 3vh 1vw;
+  width: 100%;
+}
+
+.recipe-done-card {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ef6a07;
+  display: flex;
+  margin-bottom: 5vh;
+  width: 100%;
+}
+
+.recipe-done-card-infos {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  margin-left: 16vw;
+}
+
+.share-button {
+  width: 12vw;
+}
+
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
