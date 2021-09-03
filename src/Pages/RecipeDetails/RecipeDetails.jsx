@@ -103,20 +103,24 @@ function RecipeDetails({ match: { params } }) {
     && singleRecipe[e] !== null && singleRecipe[e] !== '');
 
   return (
-    <>
+    <div className="recipe-details">
       <h1 { ...titleProps }>{singleRecipe.strMeal || singleRecipe.strDrink}</h1>
       <img alt="pgo" { ...imgProps } />
-      <IconButton { ...shareBtn } />
-      <IconButton { ...favBtn } />
-      <h2 { ...categoryProps }>
-        { singleRecipe.strAlcoholic
-          ? singleRecipe.strAlcoholic : singleRecipe.strCategory}
-      </h2>
+      <div className="buttons">
+        <h2 { ...categoryProps }>
+          { singleRecipe.strAlcoholic
+            ? singleRecipe.strAlcoholic : singleRecipe.strCategory}
+        </h2>
+        <IconButton { ...shareBtn } />
+        <IconButton { ...favBtn } />
+      </div>
+      <h3>Ingredientes</h3>
       {arr.map((e, i) => (<List
         primary={ `${singleRecipe[e]}: ${singleRecipe[`strMeasure${i + 1}`]}` }
         key={ i }
         testid={ `${i}-ingredient-name-and-measure` }
       />))}
+      <h3>Instruções</h3>
       <p { ...InstructionProps }>{singleRecipe.strInstructions}</p>
       <Vid { ...vidProps } />
       <div className="carousel">
@@ -126,7 +130,7 @@ function RecipeDetails({ match: { params } }) {
         ? <Link to={ `/${feedType}/${id}/in-progress` }><Btn { ...btnProps } /></Link>
         : null}
       <Modal { ...modalProps }>Link copiado!</Modal>
-    </>
+    </div>
   );
 }
 

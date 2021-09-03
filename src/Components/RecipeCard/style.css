@@ -2,9 +2,8 @@
   background: linear-gradient(-45deg, rgba(12,16,21,1) 0%, rgba(37,43,50,1) 100%);
   border-radius: 15px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.215);
-  height: 160px;
   margin: 7px;
-  width: calc(135px - 5px);
+  min-width: calc(135px - 5px);
   padding: 15px;
 }
 
@@ -30,5 +29,4 @@
   color: white;
   margin: 0;
   text-align: center;
-  height: 20px
 }

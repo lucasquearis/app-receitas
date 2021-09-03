@@ -1,22 +1,26 @@
 .ingredient-card {
-  align-items: center;
-  background-color: rgb(228, 228, 228);
   border: none;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  height: 180px;
-  margin: 0;
-  padding: 5px;
-  width: 40%;
+  background: linear-gradient(-45deg, rgba(12,16,21,1) 0%, rgba(37,43,50,1) 100%);
+  border-radius: 15px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.215);
+  margin: 7px;
+  width: 160px;
+  padding: 15px;
 }
 
 .ingredient-card p {
+  box-sizing: border-box;
+  color: white;
+  margin: 0;
   text-align: center;
-  width: 100px;
+  font-weight: 700;
+  font-size: 1rem
 }
 
 .ingredient-card img {
-  height: 100px;
-  width: 100px;
+  border-radius: 15px;
+  height: auto;
+  object-fit: cover;
+  width: 130px;
+  height: 130px;
 }
