@@ -1,11 +1,125 @@
-.details .drink-img, .details .meal-img {
+.details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.details .drink-img,
+.details .meal-img {
   width: 100vw;
+  margin-bottom: 10px;
 }
 
 .details .start {
   position: fixed;
   bottom: 0px;
-  right: 0;
+  width: 100vw;
+  border-radius: 5px 5px 0 0;
+}
+
+.detail-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 0 5px;
+}
+
+.share-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.details-btn-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.details-btn-div button {
+  height: 50px;
+}
+
+.details-btn-div .favorite-btn {
+  width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.list-ingredients ul {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.list-ingredients li {
+  margin-left: 10vw;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+iframe {
+  margin: auto;
+}
+
+.instructions {
+  text-align: justify;
+  padding: 10px;
+}
+
+.items-wrapper {
+  width: 95vw;
+  margin: auto;
+  margin-bottom: 50px;
+  padding: 5px;
+}
+
+.items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: auto;
+}
+
+.item {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  width: 50vw;
+  text-align: center;
 }
 
 .in-progress .in-progress-pic {

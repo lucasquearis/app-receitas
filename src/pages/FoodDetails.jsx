@@ -9,6 +9,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import functionSetFavoriteFood from '../utils/functionSetFavoriteFood';
 import functionRenderRecipe from '../utils/functionRenderRecipe';
+import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 
 function FoodDetails(props) {
   const { match: { params: { id } } } = props;
@@ -66,11 +67,10 @@ function FoodDetails(props) {
 
   return (
     <div>
-      <header className="header">
-        <h2>Detalhes</h2>
-      </header>
+      <HeaderWithoutSearch>Detalhes</HeaderWithoutSearch>
       {recipeRender.map((item) => (
         <div key={ v4() } className="details">
+
           <img
             alt="meal"
             key={ v4() }
@@ -78,44 +78,65 @@ function FoodDetails(props) {
             data-testid="recipe-photo"
             className="meal-img"
           />
-          <p data-testid="recipe-title">{item.strMeal}</p>
 
-          <ShareBtn id={ id } type="comida" className="btn-share" />
+          <div className="detail-card">
+            <h3 data-testid="recipe-title">{item.strMeal}</h3>
 
-          <Button
-            variant="danger"
-            type="button"
-            className="favorite-btn"
-            onClick={ () => functionSetFavoriteFood(recipeRender, id, setHeartColor) }
-          >
-            <img
-              id="fav-btn"
-              src={ heartColor ? blackHeartIcon : whiteHeartIcon }
-              alt="favoritar"
-              data-testid="favorite-btn"
-              className="favorite-img"
-            />
-          </Button>
+            <div className="details-btn-div">
+              <ShareBtn id={ id } type="comida" className="btn-share" />
 
-          <p data-testid="recipe-category">{item.strCategory}</p>
-
-          <ul>
-            {functionRenderRecipe(recipeRender)[0].map((ingredient, position) => (
-              <li
-                data-testid={ `${position}-ingredient-name-and-measure` }
-                key={ v4() }
+              <Button
+                variant="danger"
+                type="button"
+                className="favorite-btn"
+                onClick={ () => functionSetFavoriteFood(recipeRender, id, setHeartColor) }
               >
-                {ingredient}
-                {functionRenderRecipe(recipeRender)[1][position]}
-              </li>))}
-          </ul>
-          <p data-testid="instructions">{item.strInstructions}</p>
+                <img
+                  id="fav-btn"
+                  src={ heartColor ? blackHeartIcon : whiteHeartIcon }
+                  alt="favoritar"
+                  data-testid="favorite-btn"
+                  className="favorite-img"
+                />
+              </Button>
+            </div>
+          </div>
+
+          <p data-testid="recipe-category">
+            <span>Categoria: </span>
+            {item.strCategory}
+          </p>
+
+          <div className="list-ingredients">
+            <h4>Ingredientes</h4>
+            <ul>
+              {functionRenderRecipe(recipeRender)[0].map((ingredient, position) => (
+                <li
+                  data-testid={ `${position}-ingredient-name-and-measure` }
+                  key={ v4() }
+                >
+                  {ingredient}
+                  {functionRenderRecipe(recipeRender)[1][position]}
+                </li>))}
+            </ul>
+          </div>
+          <p
+            data-testid="instructions"
+            className="instructions"
+          >
+            <strong>
+              Instruções
+            </strong>
+            <br />
+            {item.strInstructions}
+          </p>
           <iframe
-            src={ item.strYoutube }
+            src={ item.strYoutube.replace('watch?v=', 'embed/') }
             title="title"
             data-testid="video"
           />
 
+          <strong>Combinações de Drinks</strong>
           <div className="items-wrapper">
             <div className="items">
               {drinksRecomendation.map((recomendation, position) => (

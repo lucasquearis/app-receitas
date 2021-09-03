@@ -3,24 +3,30 @@ import { v4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ShareBtn from '../components/ShareBtn';
 import useRedirect from '../hooks/useRedirect';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import fuctionSetFavorite from '../utils/functionSetFavorite';
 import functionRenderRecipe from '../utils/functionRenderRecipe';
+import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
+import Loading from '../components/Loading';
+import { setLoading } from '../redux/actions/loading';
 
 function DrinksDetails(props) {
   const { match: { params: { id } } } = props;
   const [recipeRender, setRecipeRender] = useState([]);
-  const [loading, setloading] = useState(true);
+  // const [loading, setloading] = useState(true);
   const { shouldRedirect, redirect } = useRedirect();
   const [mealsRecomendation, setmealsRecomendation] = useState([]);
   const [heartColor, setHeartColor] = useState(false);
   const [start, setStart] = useState(true);
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.reducerAPI);
 
   useEffect(() => {
-    setloading(true);
+    dispatch(setLoading(true));
     const fetchAPI = async () => {
       const END_POINT = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
       const response = await fetch(END_POINT);
@@ -28,8 +34,8 @@ function DrinksDetails(props) {
       setRecipeRender(drinks);
     };
     fetchAPI();
-    setloading(false);
-  }, [id]);
+    dispatch(setLoading(false));
+  }, [id, dispatch]);
 
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -45,7 +51,7 @@ function DrinksDetails(props) {
   }, [id]);
 
   useEffect(() => {
-    setloading(true);
+    dispatch(setLoading(true));
     const fetchAPIMeals = async () => {
       const SIX = 6;
       const urlDrinks = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -54,11 +60,11 @@ function DrinksDetails(props) {
       setmealsRecomendation(firstSix);
     };
     fetchAPIMeals();
-    setloading(false);
-  }, []);
+    dispatch(setLoading(false));
+  }, [dispatch]);
 
   if (loading) {
-    return <h1>...carregando</h1>;
+    return <Loading />;
   }
 
   if (redirect.should) {
@@ -67,10 +73,8 @@ function DrinksDetails(props) {
 
   return (
     <div>
-      <header className="header">
-        <h2>Detalhes</h2>
-      </header>
-      {!recipeRender ? 'loading'
+      <HeaderWithoutSearch>Detalhes</HeaderWithoutSearch>
+      {!recipeRender ? <Loading />
         : recipeRender.map((item) => (
           <div key={ v4() } className="details">
             <img
@@ -80,42 +84,61 @@ function DrinksDetails(props) {
               data-testid="recipe-photo"
               className="drink-img"
             />
-            <p data-testid="recipe-title">{item.strDrink}</p>
 
-            <ShareBtn id={ id } type="bebida" className="btn-share" />
+            <div className="detail-card">
 
-            <Button
-              variant="danger"
-              type="button"
-              className="favorite-btn"
-              onClick={ () => fuctionSetFavorite(recipeRender, id, setHeartColor) }
-            >
-              <img
-                id="fav-btn"
-                src={ heartColor ? blackHeartIcon : whiteHeartIcon }
-                alt="favoritar"
-                data-testid="favorite-btn"
-                className="favorite-img"
-              />
-            </Button>
+              <h3 data-testid="recipe-title">{item.strDrink}</h3>
 
-            <p data-testid="recipe-category">{item.strAlcoholic}</p>
-            <ul>
-              {functionRenderRecipe(recipeRender)[0].map((ingredient, position) => (
-                <li
-                  data-testid={ `${position}-ingredient-name-and-measure` }
-                  key={ v4() }
+              <div className="details-btn-div">
+                <ShareBtn id={ id } type="bebida" className="btn-share" />
+
+                <Button
+                  variant="danger"
+                  type="button"
+                  className="favorite-btn"
+                  onClick={ () => fuctionSetFavorite(recipeRender, id, setHeartColor) }
                 >
-                  {ingredient}
-                  {functionRenderRecipe(recipeRender)[1][position]}
-                </li>))}
-            </ul>
-            <p data-testid="instructions">{item.strInstructions}</p>
-            <iframe
-              src={ item.strYoutube }
-              title="title"
-              data-testid="video"
-            />
+                  <img
+                    id="fav-btn"
+                    src={ heartColor ? blackHeartIcon : whiteHeartIcon }
+                    alt="favoritar"
+                    data-testid="favorite-btn"
+                    className="favorite-img"
+                  />
+                </Button>
+              </div>
+            </div>
+
+            <p data-testid="recipe-category">
+              <span>Categoria: </span>
+              {item.strAlcoholic}
+            </p>
+
+            <div className="list-ingredients">
+
+              <h4>Ingredientes</h4>
+              <ul>
+                {functionRenderRecipe(recipeRender)[0].map((ingredient, position) => (
+                  <li
+                    data-testid={ `${position}-ingredient-name-and-measure` }
+                    key={ v4() }
+                  >
+                    {ingredient}
+                    {functionRenderRecipe(recipeRender)[1][position]}
+                  </li>))}
+              </ul>
+            </div>
+
+            <p
+              className="instructions"
+              data-testid="instructions"
+            >
+              <strong>
+                Instruções
+              </strong>
+              <br />
+              {item.strInstructions}
+            </p>
 
             <div className="items-wrapper">
               <div className="items">

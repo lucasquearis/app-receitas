@@ -6,7 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 
 function ShareBtn({ id, type }) {
   return (
-    <div>
+    <div className="share-btn">
       <Button
         type="button"
         className="btn-share"
@@ -18,13 +18,13 @@ function ShareBtn({ id, type }) {
           alt="Share Icon"
           className="share-icon"
         />
-        <p
-          id={ `copyMessage${id}` }
-          className="share-txt"
-        >
-          Compartilhar
-        </p>
       </Button>
+      <span
+        id={ `copyMessage${id}` }
+        className="share-txt"
+      >
+        Compartilhar
+      </span>
     </div>
   );
 }
