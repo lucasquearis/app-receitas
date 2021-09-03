@@ -1,8 +1,8 @@
 .page-explore-drinks-or-foods {
   display: flex;
   flex-direction: column;
-  position: relative;
   height: 100vh;
+  position: relative;
 }
 
 .page-explore-drinks-or-foods .explore-buttons {

@@ -1,26 +1,25 @@
 .ingredient-card {
+  background: linear-gradient(-45deg, rgba(12, 16, 21, 1) 0%, rgba(37, 43, 50, 1) 100%);
   border: none;
-  background: linear-gradient(-45deg, rgba(12,16,21,1) 0%, rgba(37,43,50,1) 100%);
   border-radius: 15px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.215);
   margin: 7px;
-  width: 160px;
   padding: 15px;
+  width: 160px;
 }
 
 .ingredient-card p {
   box-sizing: border-box;
   color: white;
+  font-size: 1rem;
+  font-weight: 700;
   margin: 0;
   text-align: center;
-  font-weight: 700;
-  font-size: 1rem
 }
 
 .ingredient-card img {
   border-radius: 15px;
-  height: auto;
+  height: 130px;
   object-fit: cover;
   width: 130px;
-  height: 130px;
 }

@@ -6,11 +6,10 @@ const INITIAL_LOGIN = {
   Email: '',
   Password: '',
 };
-const bana = true;
 
-const LoginHook = () => {
+const UseUserHook = () => {
   const [Login, setLogin] = useState(INITIAL_LOGIN);
-  const [disabled, setDisable] = useState(bana);
+  const [disabled, setDisable] = useState(true);
   const [redirect, setRedirect] = useState(false);
 
   const handleInput = (({ target: { name, value } }) => {
@@ -41,4 +40,4 @@ const LoginHook = () => {
   };
 };
 
-export default LoginHook;
+export default UseUserHook;
