@@ -34,7 +34,7 @@ function StartRecipeBtn({ recipe, pathname }) {
 }
 
 StartRecipeBtn.propTypes = {
-  recipe: PropTypes.objectOf(PropTypes.array).isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
   pathname: PropTypes.string.isRequired,
 };
 

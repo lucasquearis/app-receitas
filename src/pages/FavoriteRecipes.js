@@ -58,12 +58,14 @@ function FavoriteRecipes() {
         { favoriteRecipesStorage.map((recipe, index) => ((recipe.type === 'comida')
           ? (
             <FavoriteRecipesMeals
+              key={ index }
               recipe={ recipe }
               index={ index }
               removeRecipe={ setFavoriteRecipesStorage }
             />)
           : (
             <FavoriteRecipesDrinks
+              key={ index }
               recipe={ recipe }
               index={ index }
               removeRecipe={ setFavoriteRecipesStorage }
