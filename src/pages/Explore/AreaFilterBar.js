@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { fetchApi, MEALS_AREA_LIST } from '../../services';
 import AppContext from '../../context/AppContext';
 
+import { Select } from './style';
+
 function AreaFilterBar() {
   const [areasList, setAreasList] = useState([]);
 
@@ -20,7 +22,7 @@ function AreaFilterBar() {
   };
 
   return (
-    <select
+    <Select
       data-testid="explore-by-area-dropdown"
       value={ selectedArea }
       onChange={ handleChange }
@@ -41,7 +43,7 @@ function AreaFilterBar() {
           { strArea }
         </option>
       ))}
-    </select>
+    </Select>
   );
 }
 

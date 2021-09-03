@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Button from '../../style/elements/Button';
+
 function MainContent() {
   return (
     <>
@@ -8,23 +10,27 @@ function MainContent() {
         key="explore-food"
         to="/explorar/comidas"
       >
-        <button
+        <Button
           data-testid="explore-food"
           type="button"
+          bgColor="#34C95E"
+          shadowColor="#2CA64E"
         >
           Explorar Comidas
-        </button>
+        </Button>
       </Link>
       <Link
         key="explore-drinks"
         to="/explorar/bebidas"
       >
-        <button
+        <Button
           data-testid="explore-drinks"
           type="button"
+          bgColor="#34C95E"
+          shadowColor="#2CA64E"
         >
           Explorar Bebidas
-        </button>
+        </Button>
       </Link>
     </>
   );

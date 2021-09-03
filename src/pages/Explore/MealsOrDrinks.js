@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { fetchApi, RANDOM_MEAL, RANDOM_DRINK } from '../../services';
 
+import Button from '../../style/elements/Button';
+
 function MealsOrDrinks() {
   const { pathname } = useLocation();
   const { push } = useHistory();
@@ -12,9 +14,14 @@ function MealsOrDrinks() {
 
   const areaButton = (
     <Link to="/explorar/comidas/area">
-      <button data-testid="explore-by-area" type="button">
+      <Button
+        data-testid="explore-by-area"
+        type="button"
+        bgColor="#34C95E"
+        shadowColor="#2CA64E"
+      >
         Por Local de Origem
-      </button>
+      </Button>
     </Link>
   );
 
@@ -31,26 +38,34 @@ function MealsOrDrinks() {
       <Link
         to={ `/explorar/${recipeType}/ingredientes` }
       >
-        <button data-testid="explore-by-ingredient" type="button">
+        <Button
+          data-testid="explore-by-ingredient"
+          type="button"
+          bgColor="#34C95E"
+          shadowColor="#2CA64E"
+        >
           Por Ingredientes
-        </button>
+        </Button>
       </Link>
       { (pathname.includes('/explorar/comidas')) && areaButton }
-      <button
+      <Button
         data-testid="explore-surprise"
         onClick={ handleSuprise }
         type="button"
+        bgColor="#34C95E"
+        shadowColor="#2CA64E"
       >
         Me Surpreenda!
-      </button>
+      </Button>
     </>
   );
 
   return (
-    <div>
+    <>
       { (pathname === '/explorar/comidas' || pathname === '/explorar/bebidas')
         && mainContent }
-    </div>
+      { null }
+    </>
   );
 }
 

@@ -11,6 +11,8 @@ import AreaFilterBar from './AreaFilterBar';
 import RecipesList from '../../components/RecipesList';
 import IngrendientsList from './IngredientsList';
 
+import { ExploreContentWrapper } from './style';
+
 function Explorar() {
   const { pathname } = useLocation();
 
@@ -32,17 +34,19 @@ function Explorar() {
   return (
     <>
       <Header
-        showSearchBtn={ (pathname.includes('area')) }
+        showSearchBtn={ false }
       />
-      {(pathname === '/explorar') && <MainContent />}
-      {(pathname.includes('area')) && (
-        <>
-          <AreaFilterBar />
-          <RecipesList />
-        </>
-      )}
-      <MealsOrDrinks />
-      {(pathname.includes('ingredientes')) && <IngrendientsList />}
+      <ExploreContentWrapper>
+        {(pathname === '/explorar') && <MainContent />}
+        {(pathname.includes('area')) && (
+          <>
+            <AreaFilterBar />
+            <RecipesList />
+          </>
+        )}
+        <MealsOrDrinks />
+        {(pathname.includes('ingredientes')) && <IngrendientsList />}
+      </ExploreContentWrapper>
       <FooterBar />
     </>
   );
