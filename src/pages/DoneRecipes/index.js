@@ -34,9 +34,9 @@ function DoneRecipes() {
   return (
     <>
       <Header>Receitas Feitas</Header>
-      <div className="buttonfilter-container">
+      <div className="buttonfilter-container category-button-container">
         <button
-          className="btn-filter"
+          className="btn-filter category-button"
           data-testid="filter-by-all-btn"
           type="button"
           onClick={ () => setDoneRecipes(recipesDone) }
@@ -44,7 +44,7 @@ function DoneRecipes() {
           All
         </button>
         <button
-          className="btn-filter"
+          className="btn-filter category-button"
           data-testid="filter-by-food-btn"
           type="button"
           onClick={ () => setDoneRecipes(
@@ -54,7 +54,7 @@ function DoneRecipes() {
           Food
         </button>
         <button
-          className="btn-filter"
+          className="btn-filter category-button"
           data-testid="filter-by-drink-btn"
           type="button"
           onClick={ () => setDoneRecipes(
@@ -70,7 +70,7 @@ function DoneRecipes() {
             id, type, doneDate, tags, image, area, alcoholicOrNot, name }, index,
         ) => (
           <div
-            className="done-recipe-cards"
+            className="favorite-card"
             data-testid={ `${index}-recipe-card` }
             key={ index }
           >
@@ -82,7 +82,7 @@ function DoneRecipes() {
                 alt={ name }
               />
             </Link>
-            <div className="infos">
+            <div className="favorite-infos">
               {type === 'comida' ? mealInfo(index, category, area)
                 : drinkInfo(index, alcoholicOrNot)}
               <Link to={ `/${type}s/${id}` }>

@@ -1,10 +1,14 @@
 .header {
-  min-width: 100vw;
+  background-color: #4884ad;
+  color: white;
+  padding: 8px;
+  width: 100%;
 }
 
 .header :first-child {
+  background-color: transparent;
   border: 0;
-  left: 0;
+  left: 8px;
   position: absolute;
 }
 
@@ -14,7 +18,19 @@
 }
 
 .header-search {
+  background-color: #4884ad;
+  color: white;
   display: flex;
   justify-content: space-between;
   min-width: 100vw;
+  padding: 8px;
+}
+
+.header-search h2 {
+  margin: 0;
+}
+
+.header-search button {
+  background-color: transparent;
+  border: 0;
 }

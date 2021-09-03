@@ -27,6 +27,7 @@ export default function CategoryContainer() {
         type="button"
         value={ strCategory }
         onClick={ handleGetCategories }
+        className="category-button"
         data-testid={ `${strCategory}-category-filter` }
       >
         { strCategory }
@@ -34,12 +35,13 @@ export default function CategoryContainer() {
     ));
 
   return (
-    <div>
+    <div className="category-button-container">
       { createButtons() }
       <button
         type="button"
         value=""
         onClick={ handleGetCategories }
+        className="category-button"
         data-testid="All-category-filter"
       >
         All

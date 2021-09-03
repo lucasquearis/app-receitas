@@ -17,9 +17,10 @@ export default function FoodExplorer() {
   return (
     <div>
       <Header>Explorar Comidas</Header>
-      <main>
+      <main className="explore-container">
         <button
           type="button"
+          className="explore-button"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push('/explorar/comidas/ingredientes') }
         >
@@ -27,6 +28,7 @@ export default function FoodExplorer() {
         </button>
         <button
           type="button"
+          className="explore-button"
           data-testid="explore-by-area"
           onClick={ () => history.push('/explorar/comidas/area') }
         >
@@ -34,6 +36,7 @@ export default function FoodExplorer() {
         </button>
         <button
           type="button"
+          className="explore-button"
           data-testid="explore-surprise"
           onClick={ () => fetchRandomRecipe() }
         >

@@ -68,54 +68,75 @@ export default function DetailsPage() {
 
     return (
       <>
-        <CopyButton path={ pathname } />
-        <FavoriteButton recipeDetails={ recipeDetails } path={ pathname } />
         <img
           src={ recipeDetails.strDrinkThumb || recipeDetails.strMealThumb }
           data-testid="recipe-photo"
           alt={ recipeDetails.strDrink }
+          className="main-image"
         />
-        <p data-testid="recipe-title">
-          { recipeDetails.strDrink || recipeDetails.strMeal }
-        </p>
-        <p data-testid="recipe-category">
-          { recipeDetails.strAlcoholic || recipeDetails.strCategory }
-        </p>
-        <h2>Ingredients</h2>
-        <ul>
-          <ListDetails
-            ingredients={ ingredients }
-            measures={ measures }
-          />
-        </ul>
-        <h2>Instructions</h2>
-        <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
-        { recipeDetails.strDrink && <p>{ `Cup: ${recipeDetails.strGlass}` }</p> }
-        { type === 'food' && (
-          <ReactPlayer
-            url={ recipeDetails.strYoutube }
-            controls
-            data-testid="video"
-          />
-        ) }
-        <RecipesRecommendation type={ type } />
-        { !savedDones.some(({ id: savedId }) => savedId === id) && (
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-recipe-btn"
-            onClick={ () => history.push(`${path}/${id}/in-progress`) }
+        <div className="details-container">
+          <div className="details-title-container">
+            <h1 data-testid="recipe-title">
+              { recipeDetails.strDrink || recipeDetails.strMeal }
+            </h1>
+            <div>
+              <CopyButton path={ pathname } />
+              <FavoriteButton recipeDetails={ recipeDetails } path={ pathname } />
+            </div>
+          </div>
+          <hr />
+          <h2>Ingredients</h2>
+          <ul className="details-info-container">
+            <ListDetails
+              ingredients={ ingredients }
+              measures={ measures }
+            />
+          </ul>
+          <hr />
+          <h2>
+            { 'Category: ' }
+            <span data-testid="recipe-category">
+              { recipeDetails.strAlcoholic || recipeDetails.strCategory }
+            </span>
+          </h2>
+          <hr />
+          <h2>Instructions</h2>
+          <p
+            data-testid="instructions"
+            className="details-info-container"
           >
-            { allIdsInProgress[id]
-              ? 'Continuar Receita' : 'Iniciar Receita'}
-          </button>
-        ) }
+            { recipeDetails.strInstructions }
+          </p>
+          { recipeDetails.strDrink && <p>{ `Cup: ${recipeDetails.strGlass}` }</p> }
+          { type === 'food' && (
+            <ReactPlayer
+              url={ recipeDetails.strYoutube }
+              controls
+              width="100%"
+              height="200px"
+              data-testid="video"
+            />
+          ) }
+          <hr />
+          <RecipesRecommendation type={ type } />
+          { !savedDones.some(({ id: savedId }) => savedId === id) && (
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-recipe-btn"
+              onClick={ () => history.push(`${path}/${id}/in-progress`) }
+            >
+              { allIdsInProgress[id]
+                ? 'Continuar Receita' : 'Iniciar Receita'}
+            </button>
+          ) }
+        </div>
       </>
     );
   };
 
   return (
-    <div>
+    <div style={ { paddingBottom: '20px' } }>
       { !loading ? details() : <h1>Carregando...</h1> }
     </div>
   );

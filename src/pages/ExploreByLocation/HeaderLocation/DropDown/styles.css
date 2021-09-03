@@ -1,0 +1,10 @@
+.local-select {
+  display: block;
+  height: 40px;
+  margin: 24px auto 0;
+  width: 20%;
+}
+
+.local-select:hover {
+  cursor: pointer;
+}

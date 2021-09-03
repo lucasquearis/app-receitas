@@ -34,6 +34,7 @@ export default function ExploreByIngredients() {
         onClick={ () => (
           handleSendFilter(ingredient.strIngredient || ingredient.strIngredient1)
         ) }
+        className="main-cards"
       >
         <img
           data-testid={ `${index}-card-img` }
@@ -44,16 +45,18 @@ export default function ExploreByIngredients() {
           }
           alt={ ingredient.strIngredient || ingredient.strIngredient1 }
         />
-        <h4 data-testid={ `${index}-card-name` }>
+        <h5 data-testid={ `${index}-card-name` }>
           { ingredient.strIngredient || ingredient.strIngredient1 }
-        </h4>
+        </h5>
       </button>
     ));
 
   return (
     <div>
       <Header>Explorar Ingredientes</Header>
-      { loading ? <h1>Carregando...</h1> : ingredientsCards() }
+      <div className="main-cards-container">
+        { loading ? <h1>Carregando...</h1> : ingredientsCards() }
+      </div>
       <Footer />
     </div>
   );

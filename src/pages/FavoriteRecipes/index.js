@@ -29,9 +29,9 @@ export default function FavoriteRecipes() {
   return (
     <section>
       <Header>Receitas Favoritas</Header>
-      <section className="buttonfilter-container">
+      <section className="buttonfilter-container category-button-container">
         <button
-          className="btn-filter"
+          className="category-button filter-fav-btn"
           data-testid="filter-by-all-btn"
           type="button"
           onClick={ () => handleChangeByFilter() }
@@ -39,7 +39,7 @@ export default function FavoriteRecipes() {
           All
         </button>
         <button
-          className="btn-filter"
+          className="category-button filter-fav-btn"
           data-testid="filter-by-food-btn"
           type="button"
           onClick={ () => handleChangeByFilter('comida') }
@@ -47,7 +47,7 @@ export default function FavoriteRecipes() {
           Food
         </button>
         <button
-          className="btn-filter"
+          className="category-button filter-fav-btn"
           data-testid="filter-by-drink-btn"
           type="button"
           onClick={ () => handleChangeByFilter('bebida') }
@@ -73,9 +73,11 @@ export default function FavoriteRecipes() {
                 src={ image }
                 alt={ name }
               />
-              <h3 data-testid={ `${index}-horizontal-name` }>{ name }</h3>
             </Link>
             <div className="favorite-infos">
+              <Link to={ `/${type}s/${id}` }>
+                <h3 data-testid={ `${index}-horizontal-name` }>{ name }</h3>
+              </Link>
               {alcoholicOrNot
                 ? (
                   <h6 data-testid={ `${index}-horizontal-top-text` }>
@@ -86,15 +88,17 @@ export default function FavoriteRecipes() {
                     { `${area} - ${category}`}
                   </h6>
                 ) }
-              <button
-                type="button"
-                data-testid={ `${index}-horizontal-favorite-btn` }
-                src={ blackHeartIcon }
-                onClick={ () => handleRemove(id) }
-              >
-                <img src={ blackHeartIcon } alt="Botão de favorito" />
-              </button>
-              <CopyButton path={ `/${type}s/${id}` } index={ index } />
+              <div className="favorite-and-share-buttons">
+                <button
+                  type="button"
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                  src={ blackHeartIcon }
+                  onClick={ () => handleRemove(id) }
+                >
+                  <img src={ blackHeartIcon } alt="Botão de favorito" />
+                </button>
+                <CopyButton path={ `/${type}s/${id}` } index={ index } />
+              </div>
             </div>
           </div>
         )) }

@@ -8,6 +8,8 @@ import FavoriteButton from '../../components/FavoriteButton';
 import CheckList from './CheckList';
 import { dateToday, getSavedAssistent, saveAssistent } from '../../utils';
 
+import './styles.css';
+
 const savedIngredients = getSavedAssistent(
   'inProgressRecipes',
   { cocktails: {}, meals: {} },
@@ -97,46 +99,55 @@ export default function RecipesInProgress() {
               data-testid="recipe-photo"
               alt={ recipeDetails.strDrink }
               // estilo temporário para passar nos requisitos;
-              style={ { width: '200px' } }
+              className="main-image"
             />
-            <div>
-              <CopyButton path={ `/${url}s/${id}` } />
-              <FavoriteButton recipeDetails={ recipeDetails } path={ pathname } />
+            <div className="details-container">
+              <div className="details-title-container">
+                <h1 data-testid="recipe-title">
+                  { recipeDetails.strDrink || recipeDetails.strMeal }
+                </h1>
+                <div>
+                  <CopyButton path={ `/${url}s/${id}` } />
+                  <FavoriteButton recipeDetails={ recipeDetails } path={ pathname } />
+                </div>
+              </div>
+              <hr />
+              <p data-testid="recipe-category">
+                { recipeDetails.strCategory }
+              </p>
+              <h3>Ingredients</h3>
+              <ul className="details-info-container">
+                { infos.ingredients.map((ingredient, index) => (
+                  <CheckList
+                    key={ ingredient }
+                    type={ type }
+                    ingredient={ ingredient }
+                    measures={ infos.measures }
+                    checkedItems={ checkedItems }
+                    setCheckedItems={ setCheckedItems }
+                    id={ id }
+                    index={ index }
+                  />
+                )) }
+              </ul>
+              <button
+                type="button"
+                data-testid="finish-recipe-btn"
+                disabled={ !allChecked }
+                onClick={ () => {
+                  history.push('/receitas-feitas');
+                  saveAssistent('doneRecipes', [...savedDones, storageInfo]);
+                } }
+                className="finish-button"
+              >
+                Finalizar receita
+              </button>
+              <hr />
+              <h3>Instructions</h3>
+              <p data-testid="instructions" className="details-info-container">
+                { recipeDetails.strInstructions }
+              </p>
             </div>
-            <h1 data-testid="recipe-title">
-              { recipeDetails.strDrink || recipeDetails.strMeal }
-            </h1>
-            <p data-testid="recipe-category">
-              { recipeDetails.strCategory }
-            </p>
-            <h3>Ingredients</h3>
-            <ul>
-              { infos.ingredients.map((ingredient, index) => (
-                <CheckList
-                  key={ ingredient }
-                  type={ type }
-                  ingredient={ ingredient }
-                  measures={ infos.measures }
-                  checkedItems={ checkedItems }
-                  setCheckedItems={ setCheckedItems }
-                  id={ id }
-                  index={ index }
-                />
-              )) }
-            </ul>
-            <button
-              type="button"
-              data-testid="finish-recipe-btn"
-              disabled={ !allChecked }
-              onClick={ () => {
-                history.push('/receitas-feitas');
-                saveAssistent('doneRecipes', [...savedDones, storageInfo]);
-              } }
-            >
-              Finalizar receita
-            </button>
-            <h3>Instructions</h3>
-            <p data-testid="instructions">{ recipeDetails.strInstructions }</p>
           </>
         ) : <h1>Carregando...</h1> }
     </div>

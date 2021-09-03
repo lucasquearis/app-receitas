@@ -13,6 +13,7 @@ export default function ExploreByLocation() {
       <section
         key={ idMeal }
         data-testid={ `${index}-recipe-card` }
+        className="main-cards"
       >
         <Link to={ `/comidas/${idMeal}` }>
           <img
@@ -20,9 +21,9 @@ export default function ExploreByLocation() {
             src={ strMealThumb }
             alt={ strMeal }
           />
-          <h4 data-testid={ `${index}-card-name` }>
+          <h5 data-testid={ `${index}-card-name` }>
             { strMeal }
-          </h4>
+          </h5>
         </Link>
       </section>
     ));
@@ -31,7 +32,7 @@ export default function ExploreByLocation() {
     <div>
       <HeaderLocation>Explorar Origem</HeaderLocation>
       { loading && <h1>Carregando...</h1> }
-      { locationCards() }
+      <div className="main-cards-container">{ locationCards() }</div>
       <Footer />
     </div>
   );

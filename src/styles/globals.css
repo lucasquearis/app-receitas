@@ -1,0 +1,163 @@
+html {
+  min-height: 100vh;
+  position: relative;
+}
+
+.category-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 95%;
+}
+
+.category-button {
+  background-color: #4884ad;
+  border: 0;
+  border-radius: 6px;
+  color: white;
+  height: 50px;
+  margin-top: 20px;
+  width: 110px;
+}
+
+.main-cards-container {
+  color: #003043;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 32px 0 64px;
+}
+
+.main-cards-container a {
+  color: #003043;
+  text-decoration: none;
+}
+
+.main-cards {
+  background-color: transparent;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px , rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  margin: 0 4px 16px;
+  overflow: hidden;
+  width: 128px;
+}
+
+.main-cards h5 {
+  margin: 6px 0;
+  text-align: center;
+}
+
+.main-cards img {
+  width: 100%;
+}
+
+.explore-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-evenly;
+  padding-bottom: 64px;
+}
+
+.explore-button {
+  background-color: #4884ad;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  font-size: large;
+  padding: 16px;
+  width: 220px;
+}
+
+.main-image {
+  height: 200px; /* height of container */
+  object-fit: cover;
+  object-position: 50% 50%;  /* try 20px 10px */
+  width: 100%; /* width of container */
+}
+
+.details-container {
+  padding: 16px;
+}
+
+.details-title-container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.details-title-container h1 {
+  margin: 0;
+}
+
+.details-title-container div {
+  display: flex;
+  justify-content: space-around;
+  width: 90px;
+}
+
+.details-title-container button {
+  background-color: transparent;
+  border: none;
+}
+
+.favorite-and-share-buttons button {
+  background-color: transparent;
+  border: none;
+}
+
+.favorite-card button {
+  background-color: transparent;
+  border: none;
+}
+
+.details-title-container button:hover {
+  cursor: pointer;
+}
+
+
+.details-info-container {
+  background-color: #e7eff8;
+  list-style-type: square;
+  margin-bottom: 8px;
+  padding: 16px 32px;
+  text-align: justify;
+}
+
+.favorite-card {
+  background-color: white;
+  border: solid 0.5px lightgray;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px , rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  display: flex;
+  justify-content: flex-start;
+  margin: 24px auto 0;
+  width: 310px;
+}
+
+.favorite-card .recipe-image {
+  border-radius: 15px 0 0 15px;
+}
+
+
+.favorite-infos {
+  margin-left: 30px;
+}
+
+.favorite-infos p, .favorite-infos h2 {
+  margin-bottom: 0;
+}
+
+.favorite-infos a {
+  color: #003043;
+  text-decoration: none;
+}
+
+.filter-fav-btn {
+  height: 35px;
+  width: 90px;
+}
