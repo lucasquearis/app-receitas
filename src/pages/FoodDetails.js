@@ -30,6 +30,7 @@ const FoodDetails = () => {
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
+  const [buttonText, setButtonText] = useState('Iniciar receita');
   const RECOMENDATION_CARDS = 6;
 
   foodDetails.forEach(({ strYoutube }) => strYoutube.replace(/watch/i, 'embed/'));
@@ -43,10 +44,20 @@ const FoodDetails = () => {
     fetchMealDetailsApi(actualPath).then((data) => setFoodDetails(data.meals));
   }, [actualPath, setFoodDetails]);
 
+  function isInProgress() {
+    const id = actualPath;
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { meals: {}, cocktails: {} };
+    if (getLocalStorage.meals[id] && getLocalStorage.meals[id].length > 0) {
+      setButtonText('Continuar Receita');
+    }
+  }
+
   useEffect(() => {
     getFavoriteFood(foodDetails, setFavorite);
     getIngredients(foodDetails, setIngredients);
     getMeasure(foodDetails, setMeasures);
+    isInProgress();
   }, [foodDetails]);
 
   const responsive = {
@@ -154,7 +165,7 @@ const FoodDetails = () => {
                 type="button"
                 className="start-recipe-btn"
               >
-                Iniciar receita
+                { buttonText }
               </button>
             </Link>
           </div>))

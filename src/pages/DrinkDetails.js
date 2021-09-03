@@ -30,6 +30,7 @@ const DrinkDetails = () => {
   const [measures, setMeasures] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
+  const [buttonText, setButtonText] = useState('Iniciar receita');
   const RECOMENDATION_CARDS = 6;
 
   const copy = () => {
@@ -41,10 +42,20 @@ const DrinkDetails = () => {
     fetchDrinkDetailsApi(actualPath).then((data) => setDrinkDetails(data.drinks));
   }, [actualPath, setDrinkDetails]);
 
+  function isInProgress() {
+    const id = actualPath;
+    const getLocalStorage = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { meals: {}, cocktails: {} };
+    if (getLocalStorage.cocktails[id] && getLocalStorage.cocktails[id].length > 0) {
+      setButtonText('Continuar Receita');
+    }
+  }
+
   useEffect(() => {
     getFavoriteDrink(drinkDetails, setFavorite);
     getIngredients(drinkDetails, setIngredients);
     getMeasure(drinkDetails, setMeasures);
+    isInProgress();
   }, [drinkDetails]);
 
   const responsive = {
@@ -143,7 +154,7 @@ const DrinkDetails = () => {
                 type="button"
                 className="start-recipe-btn"
               >
-                Iniciar receita
+                { buttonText }
               </button>
             </Link>
           </div>))

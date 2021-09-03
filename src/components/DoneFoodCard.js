@@ -98,7 +98,7 @@ const DoneFoodCard = ({ recipe, index }) => {
             onClick={ onFavorite }
             data-testid={ `${index}-horizontal-favorite-btn` }
           />
-          { copy ? <p>Link copiado!</p> : undefined }
+          { copy ? <p>Link copiado!</p> : null }
           <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
           { tagsList.map((tag) => (
             <p key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>{ tag }</p>
