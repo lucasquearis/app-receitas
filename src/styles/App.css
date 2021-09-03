@@ -24,6 +24,46 @@
   width: 100%;
 }
 
+.voltar {
+  background-color: white;
+  height: 20px;
+  position: fixed;
+}
+
+.voltar1 {
+  background-color: transparent;
+  border: none;
+  height: 20px;
+  position: fixed;
+}
+
+.voltar2 {
+  background-color: transparent;
+  border: none;
+  height: 20px;
+  margin-left: 10px;
+  position: absolute;
+}
+
+.explore {
+  background-color: white;
+  height: 20px;
+}
+
+.explore1 {
+  background-color: transparent;
+  border: none;
+  height: 20px;
+  left: 50%;
+  margin-top: 5%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.voltar1:focus {
+  outline: none;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;

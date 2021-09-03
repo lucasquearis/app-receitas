@@ -19,7 +19,7 @@ function Foods(props) {
 
   useEffect(() => {
     if (search.meals === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (search.meals) {
       oneElementDetails();
@@ -37,7 +37,7 @@ function Foods(props) {
       />
 
       <CategoryFoodButtons />
-      <main>
+      <main className="food-cards">
         { search.meals && search.meals.map((meal, index) => index < doze && (<ItemCard
           title={ meal.strMeal }
           data-testid={ `${index}-recipe-card` }

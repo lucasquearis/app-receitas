@@ -1,8 +1,13 @@
 import React from 'react';
+import '../styles/Loading.css';
 
 function Loading() {
   return (
-    <h1>Carregando...</h1>
+    <div id="root">
+      <div className="loader-wrapper">
+        <div className="loader" />
+      </div>
+    </div>
   );
 }
 

@@ -1,17 +1,23 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { func, number, string, objectOf, oneOfType, object } from 'prop-types';
+import ArrowIcon from '../../images/ArrowIcon.svg';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import myContext from '../../context/myContext';
 
-function ExploreDrinks(props) {
-  const { history } = props;
-  const { randomDrink } = useContext(myContext);
+function ExploreDrinks() {
+  const { randomDrink, getRandomDrink } = useContext(myContext);
+  const history = useHistory();
+  const goToPreviousPath = () => {
+    history.goBack();
+  };
 
+  useEffect(() => {
+    getRandomDrink();
+  }, []);
   const handleClick = () => {
     history.push(`/bebidas/${randomDrink[0].idDrink}`);
-    console.log(randomDrink);
   };
 
   return (
@@ -34,6 +40,9 @@ function ExploreDrinks(props) {
           Me Surpreenda!
         </button>
       </div>
+      <button className="explore1" type="button" onClick={ goToPreviousPath }>
+        <img className="explore" src={ ArrowIcon } alt="voltar" />
+      </button>
       <Footer />
     </div>
   );

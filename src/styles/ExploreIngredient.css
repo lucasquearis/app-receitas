@@ -1,0 +1,10 @@
+.div-ingredients-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 20px;
+}
+
+.div-ingredient-card {
+  margin: 5px;
+}

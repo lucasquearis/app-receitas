@@ -8,8 +8,8 @@ import Footer from '../components/Footer';
 import CategoryDrinkButtons from '../components/CategoryDrinkButtons';
 
 function Drinks(props) {
-  const { history } = props;
   const doze = 12;
+  const { history } = props;
   const { search } = useSelector((state) => state.recipes);
   const oneElementDetails = () => {
     if (search.drinks.length === 1) {
@@ -19,7 +19,7 @@ function Drinks(props) {
 
   useEffect(() => {
     if (search.drinks === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (search.drinks) {
       oneElementDetails();
@@ -35,9 +35,9 @@ function Drinks(props) {
         dataId="search-top-btn"
         className="img-search"
       />
-      <CategoryDrinkButtons />
 
-      <main>
+      <CategoryDrinkButtons />
+      <main className="food-cards">
         { search.drinks && search.drinks.map((drink, index) => index < doze && (<ItemCard
           title={ drink.strDrink }
           thumb={ drink.strDrinkThumb }

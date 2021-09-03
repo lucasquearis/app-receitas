@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import '../styles/ItemCard.css';
 
 function ItemCard(props) {
-  const { title, thumb, id, index, to } = props;
+  const { title, thumb, index, to } = props;
   return (
     <div className="div-card" data-testid={ `${index}-recipe-card` }>
-      <Link to={ to }>
+      <Link style={ { textDecoration: 'none' } } to={ to }>
         <section className="section-card">
           <span
             className="card-title"
@@ -21,7 +21,6 @@ function ItemCard(props) {
             alt="thumb"
             data-testid={ `${index}-card-img` }
           />
-          <span>{id}</span>
         </section>
       </Link>
     </div>
