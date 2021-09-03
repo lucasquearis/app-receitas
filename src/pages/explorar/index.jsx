@@ -4,6 +4,8 @@ import Header from '../../components/header';
 import Footer from '../../components/Footer';
 import { ExploreButtons, ExploreWrapper } from './styles';
 import { RecipesContext } from '../../context/RecipesContext';
+import ExploreFood from '../../components/ExploreFood';
+import ExploreDrink from '../../components/ExploreDrink';
 
 const Explorar = ({ match: { params: { param1, param2 } } }) => {
   const { history } = useContext(RecipesContext);
@@ -29,8 +31,13 @@ const Explorar = ({ match: { params: { param1, param2 } } }) => {
       </>
     );
   }
-  return <h1>Loading</h1>;
+  return param1 === 'comidas' ? (
+    <ExploreFood />
+  ) : (
+    <ExploreDrink />
+  );
 };
+
 Explorar.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.objectOf(String),

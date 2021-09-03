@@ -7,8 +7,6 @@ const useCopy = () => {
 
   const share = (id, type) => {
     if (typeof id !== 'object') {
-      console.log(typeof id);
-      console.log('to aqui');
       let link = window.location.href;
       link = link.split('/', tres);
       link.push(type === 'Comida' ? 'bebidas' : 'comidas');
@@ -21,7 +19,6 @@ const useCopy = () => {
     link = link.split('/', quatro).join('/');
     navigator.clipboard.writeText(link);
     setCopy('Link copiado!');
-    console.log(link);
   };
   return {
     copy,
