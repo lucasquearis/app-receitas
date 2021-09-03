@@ -34,7 +34,7 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
   return (
     <div className="headerContainer">
       <div className="nameContainer">
-        <h3 data-testid="recipe-title">{recipeName}</h3>
+        <h2 data-testid="recipe-title">{recipeName}</h2>
         <h4 data-testid="recipe-category">{recipeCategory}</h4>
       </div>
       <div className="iconsContainer">
@@ -45,12 +45,12 @@ function RecipeDetailHeader({ recipe, type, recipeID }) {
         >
           <img src={ shareIcon } alt="Share Recipe" />
         </button>
+        <span style={ { display: displaycopymessage } }>Link copiado!</span>
         <RecipeDetailFavoriteButton
           recipe={ recipe }
           type={ recipeType }
           recipeID={ recipeID }
         />
-        <span style={ { display: displaycopymessage } }>Link copiado!</span>
       </div>
     </div>
   );

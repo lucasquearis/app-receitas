@@ -1,0 +1,13 @@
+.recipeInProgressButtonContainer {
+  width: 100%;
+}
+
+.recipeInProgressButtonContainer .recipeButton {
+  font-size: 21px;
+  width: 100%;
+}
+
+.recipeInProgressButtonContainer .recipeButton:disabled {
+  font-size: 21px;
+  width: 100%;
+}

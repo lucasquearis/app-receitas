@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import AppContext from '../Context/AppContext';
 
+import './RecipeInProgressButton.css';
+
 function RecipeInProgressButton({ type, recipe, recipeID }) {
   const { globalState } = useContext(AppContext);
 
@@ -58,6 +60,7 @@ function RecipeInProgressButton({ type, recipe, recipeID }) {
           variant="success"
           onClick={ () => finishRecipe() }
           disabled={ !globalState.madeRecipe }
+          className="recipeButton"
         >
           Finalizar Receita
         </Button>

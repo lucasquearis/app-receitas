@@ -50,18 +50,19 @@ function RecipesDetails({ type }) {
     return (
       <div className="recipeDetails">
         <img
-          width="100%"
-          height="200px"
           src={ recipe.strMealThumb || recipe.strDrinkThumb }
           alt="Recipe"
           data-testid="recipe-photo"
+          className="recipeDetailImage"
         />
-        <RecipeDetailHeader type={ type } recipe={ recipe } recipeID={ recipeID } />
-        <RecipeDetailIngredients recipe={ recipe } />
-        <RecipeDetailInstructions recipe={ recipe } />
-        {(type === 'food') && <RecipeDetailVideo videoSource={ recipe.strYoutube } />}
-        <RecipeDetailsRecomendations type={ type } />
-        <RecipeDetailButton type={ type } recipe={ recipe } recipeID={ recipeID } />
+        <div className="infoContainer">
+          <RecipeDetailHeader type={ type } recipe={ recipe } recipeID={ recipeID } />
+          <RecipeDetailIngredients recipe={ recipe } />
+          <RecipeDetailInstructions recipe={ recipe } />
+          {(type === 'food') && <RecipeDetailVideo videoSource={ recipe.strYoutube } />}
+          <RecipeDetailsRecomendations type={ type } />
+          <RecipeDetailButton type={ type } recipe={ recipe } recipeID={ recipeID } />
+        </div>
       </div>
     );
   }

@@ -44,6 +44,9 @@ function RecipeDetailsRecomendations({ type }) {
                 src={ (type === 'food' ? recipe.strDrinkThumb : recipe.strMealThumb) }
               />
               <Card.Body>
+                <Card.Subtitle className="">
+                  { (type === 'food' ? recipe.strCategory : recipe.strAlcoholic) }
+                </Card.Subtitle>
                 <Card.Title data-testid={ `${index}-recomendation-title` }>
                   { (type === 'food' ? recipe.strDrink : recipe.strMeal) }
                 </Card.Title>
