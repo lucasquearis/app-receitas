@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../Input';
+import Input from '../components/Input';
 
 const renderIngredientList = (ingredients, checked, handleCheck) => (
   ingredients.map((ingredient, index) => (

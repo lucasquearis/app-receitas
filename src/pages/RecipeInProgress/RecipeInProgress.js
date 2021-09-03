@@ -9,11 +9,11 @@ import {
   Ingredients,
   Instructions,
 } from '../../components/RecipeInProgress';
-import setDoneRecipes from '../../components/functions/setDoneRecipes';
-import renderIngredientList from '../../components/functions/renderIngredientList';
+import setDoneRecipes from '../../functions/setDoneRecipes';
+import renderIngredientList from '../../functions/renderIngredientList';
 import fetchRecipeDetails from '../../services/fetchRecipeDetails';
-import getNewIng from '../../components/functions/getNewIng';
-import addToStorage from '../../components/functions/addToStorage';
+import getNewIng from '../../functions/getNewIng';
+import addToStorage from '../../functions/addToStorage';
 
 function RecipeInProgress() {
   const max = 20;
