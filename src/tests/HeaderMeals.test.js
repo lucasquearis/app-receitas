@@ -25,6 +25,7 @@ const fetchEmptyMock = () => {
 const SEARCH_INPUT = 'search-input';
 const FIRST_LETTER = 'first-letter-search-radio';
 const SEARCH_BUTTON = 'search-top-btn';
+const EXEC_BUTTON = 'exec-search-btn'
 
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
@@ -76,11 +77,11 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const name = screen.getByTestId('name-search-radio');
     const searchInput4 = screen.getByTestId(SEARCH_INPUT);
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const execSearchBtn = screen.getByTestId(EXEC_BUTTON);
 
     userEvent.click(name);
     userEvent.type(searchInput4, 'Brown Stew Chicken');
-    userEvent.click(searchBtn);
+    userEvent.click(execSearchBtn);
     await act(() => promise);
   });
 
@@ -96,11 +97,11 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const firstLetter3 = screen.getByTestId(FIRST_LETTER);
     const searchInput3 = screen.getByTestId(SEARCH_INPUT);
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const execSearchBtn1 = screen.getByTestId(EXEC_BUTTON);
 
     userEvent.click(firstLetter3);
     userEvent.type(searchInput3, 'a');
-    userEvent.click(searchBtn);
+    userEvent.click(execSearchBtn1);
     await act(() => promise);
   });
 
@@ -113,8 +114,8 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
-    const searchBtn = screen.getByTestId('exec-search-btn');
-    userEvent.click(searchBtn);
+    const execSearchBtn4 = screen.getByTestId(EXEC_BUTTON);
+    userEvent.click(execSearchBtn4);
     await act(() => promise);
   });
 
@@ -129,11 +130,11 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const firstLetter2 = screen.getByTestId(FIRST_LETTER);
     const searchInput2 = screen.getByTestId(SEARCH_INPUT);
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const execSearchBtn12 = screen.getByTestId(EXEC_BUTTON);
 
     userEvent.click(firstLetter2);
     userEvent.type(searchInput2, 'aaa');
-    userEvent.click(searchBtn);
+    userEvent.click(execSearchBtn12);
     await act(() => promise);
 
     expect(window.alert);
@@ -150,11 +151,11 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const firstLetter1 = screen.getByTestId(FIRST_LETTER);
     const searchInput1 = screen.getByTestId(SEARCH_INPUT);
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const execSearchBtn5 = screen.getByTestId(EXEC_BUTTON);
 
     userEvent.click(firstLetter1);
     userEvent.type(searchInput1, 'ugwadawgb');
-    userEvent.click(searchBtn);
+    userEvent.click(execSearchBtn5);
 
     await act(() => promise);
 
