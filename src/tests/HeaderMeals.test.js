@@ -24,6 +24,7 @@ const fetchEmptyMock = () => {
 
 const SEARCH_INPUT = 'search-input';
 const FIRST_LETTER = 'first-letter-search-radio';
+const SEARCH_BUTTON = 'search-top-btn'
 
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
@@ -35,7 +36,7 @@ describe('Testa a página de detalhes das receitas', () => {
       renderWithRouter(<HeaderMeals />);
       const profileBtn = screen.getByTestId('profile-top-btn');
       const title = screen.getByTestId('page-title');
-      const btn = screen.getByTestId('search-top-btn');
+      const btn = screen.getByTestId(SEARCH_BUTTON);
 
       expect(profileBtn).toBeInTheDocument();
       expect(title).toBeInTheDocument();
@@ -50,11 +51,11 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
     userEvent.click(activeSearchBtn);
     const ingredients = screen.getByTestId('ingredient-search-radio');
     const input = screen.getByTestId(SEARCH_INPUT);
-    const btn1 = screen.getByTestId('search-top-btn');
+    const btn1 = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(ingredients);
     userEvent.type(input, 'chicken');
@@ -68,12 +69,12 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
     const name = screen.getByTestId('name-search-radio');
     const inpt = screen.getByTestId(SEARCH_INPUT);
-    const button = screen.getByTestId('search-top-btn');
+    const button = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(name);
     userEvent.type(inpt, 'Brown Stew Chicken');
@@ -88,12 +89,12 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
     const fl = screen.getByTestId(FIRST_LETTER);
     const i = screen.getByTestId(SEARCH_INPUT);
-    const b = screen.getByTestId('search-top-btn');
+    const b = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(fl);
     userEvent.type(i, 'a');
@@ -107,10 +108,10 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
-    const b1 = screen.getByTestId('search-top-btn');
+    const b1 = screen.getByTestId(SEARCH_BUTTON);
     userEvent.click(b1);
     await act(() => promise);
   });
@@ -121,12 +122,12 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(activeSearchBtn);
     const fl1 = screen.getByTestId(FIRST_LETTER);
     const input1 = screen.getByTestId(SEARCH_INPUT);
-    const btn2 = screen.getByTestId('search-top-btn');
+    const btn2 = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(fl1);
     userEvent.type(input1, 'aaa');
@@ -142,11 +143,11 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
-    const activeSearchBtn = screen.getByTestId('search-top-btn');
+    const activeSearchBtn = screen.getByTestId(SEARCH_BUTTON);
     userEvent.click(activeSearchBtn);
     const fl2 = 'first-letter-search-radio';
     const inpu80 = screen.getByTestId(SEARCH_INPUT);
-    const btn3 = screen.getByTestId('search-top-btn');
+    const btn3 = screen.getByTestId(SEARCH_BUTTON);
 
     userEvent.click(fl2);
     userEvent.type(inpu80, 'ugwadawgb');
