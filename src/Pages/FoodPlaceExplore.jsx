@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 function FoodPlaceExplore() {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('American');
   const [dataFilter, setDataFilter] = useState([]);
-
 
   useEffect(() => {
     const getArea = async () => {
