@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Inp from '../../Components/Inp';
 import Btn from '../../Components/Btn';
-import { ContextApp } from '../../Context/ContextApp';
+import UseLoginHook from '../../Hooks/UseUserHook';
 
 import cooking from '../../images/cooking.png';
 
 import './Login.css';
 
 function Login() {
-  const { handleInput, disabled, handleClick, redirect } = useContext(ContextApp);
+  const { handleInput, disabled, handleClick, redirect } = UseLoginHook();
   const emailProps = {
     name: 'Email',
     inputProps: {

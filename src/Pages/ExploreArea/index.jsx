@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 
 import Header from '../../Components/Header';
 import BottomMenu from '../../Components/Footer/BottomMenu';
-import fetchApi from '../../Helpers/fetchApi';
+import { fetchApi } from '../../Helpers/fetchApi';
 import { ContextApp } from '../../Context/ContextApp';
 import RecipesContainer from '../../Components/RecipesContainer';
 

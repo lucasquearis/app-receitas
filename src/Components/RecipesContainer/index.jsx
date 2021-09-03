@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { ContextApp } from '../../Context/ContextApp';
 import RecipeCard from '../RecipeCard';
 import './style.css';
 
-function RecipesContainer() {
+function RecipesContainer({ category }) {
   const { recipes } = useContext(ContextApp);
   const number = 12;
+  if (!recipes[category]) {
+    return <h1>Getting Recipes</h1>;
+  }
   return (
     <div className="recipe-container">
-      {recipes.slice(0, number).map((recipe, index) => (
+      {recipes[category].slice(0, number).map((recipe, index) => (
         <RecipeCard
           key={ index }
           name={ recipe.strMeal || recipe.strDrink }
@@ -22,5 +26,9 @@ function RecipesContainer() {
     </div>
   );
 }
+
+RecipesContainer.propTypes = {
+  category: PropTypes.string.isRequired,
+};
 
 export default RecipesContainer;
