@@ -24,10 +24,13 @@ function DrinkDetails() {
     verificatioinProgressRecipe } = required;
 
   useEffect(() => {
-    setRecipe(consultDrink(id));
-    setRecommendation(getMealsRecommendations());
-    setDoneRecipe(verificationDoneRecipe(id));
-    setProgressRecipe(verificatioinProgressRecipe(id));
+    async function waitingForReturn() {
+      setRecipe(await consultDrink(id));
+      setRecommendation(await getMealsRecommendations());
+      setDoneRecipe(verificationDoneRecipe(id));
+      setProgressRecipe(verificatioinProgressRecipe(id));
+    }
+    waitingForReturn();
   }, [id, consultDrink,
     getMealsRecommendations,
     verificationDoneRecipe,
@@ -47,7 +50,7 @@ function DrinkDetails() {
     <section>
       <RecipeHeader
         thumb={ recipe.strDrinkThumb }
-        title={ recipe.strDrinkThumb }
+        title={ recipe.strDrink }
         category={ recipe.strAlcoholic }
         recipe={ recipe }
         type="bebida"
