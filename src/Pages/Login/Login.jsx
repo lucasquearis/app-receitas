@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import Inp from '../../Components/Inp';
 import Btn from '../../Components/Btn';
-import UseLoginHook from '../../Hooks/UseUserHook';
+import { ContextApp } from '../../Context/ContextApp';
 
 function Login() {
-  const { handleInput, disabled, handleClick, redirect } = UseLoginHook();
+  const { handleInput, disabled, handleClick, redirect } = useContext(ContextApp);
   const emailProps = {
     name: 'Email',
     inputProps: {
@@ -41,6 +41,17 @@ function Login() {
       <Inp { ...emailProps } />
       <Inp { ...passwordProps } />
       <Btn { ...buttonProps } />
+      <div>
+        <iframe
+          width="360"
+          height="202"
+          src="https://www.youtube.com/embed/3npflgAdwcc"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
     </>
   );
 }

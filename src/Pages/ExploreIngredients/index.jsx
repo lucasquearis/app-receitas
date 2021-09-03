@@ -6,7 +6,7 @@ import Header from '../../Components/Header';
 import IngredientCard from '../../Components/IngredientCard';
 import BottomMenu from '../../Components/Footer/BottomMenu';
 import { ContextApp } from '../../Context/ContextApp';
-import { fetchApi } from '../../Helpers/fetchApi';
+import fetchApi from '../../Helpers/fetchApi';
 
 function ExploreIngredients() {
   const [ingredients, setIngredients] = useState([]);
