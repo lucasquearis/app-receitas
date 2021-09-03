@@ -1,10 +1,10 @@
 import React from 'react';
 import { screen, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import { HeaderDrinks } from '../components';
 import { bananaSearch, emptySearch } from './mocks/bananaSearch';
-import userEvent from '@testing-library/user-event';
 
 const fetchMock = () => {
   jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
@@ -22,10 +22,8 @@ const fetchEmptyMock = () => {
   }));
 };
 
-
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup); 
-
   fetchMock()
   it('Verifica se a página contém os elementos esperados', async () => {
     const promise = Promise.resolve();
