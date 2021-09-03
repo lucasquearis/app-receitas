@@ -1,7 +1,9 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import Profile from '../pages/Profile';
+import App from '../App';
 
 const PAGE_TITLE = 'page-title';
 
@@ -47,5 +49,35 @@ describe('Testa Pagina De Perfil!', () => {
     expect(drinkLink).toBeInTheDocument();
     expect(foodLink).toBeInTheDocument();
     expect(exploreLink).toBeInTheDocument();
+  });
+  it('Testa se ao clicar em sair ele volta para tela inicial', () => {
+    renderWithRouter(<App />, '/perfil');
+
+    const leaveButton = screen.getByRole('button', { name: /sair/i });
+    expect(leaveButton).toBeInTheDocument();
+
+    userEvent.click(leaveButton);
+
+    expect(leaveButton).not.toBeInTheDocument();
+  });
+  it('Testa se ao clicar em receitas feitas redireciona a pagina.', () => {
+    renderWithRouter(<App />, '/perfil');
+
+    const doneRecipes = screen.getByRole('button', { name: /receitas feitas/i });
+    expect(doneRecipes).toBeInTheDocument();
+
+    userEvent.click(doneRecipes);
+
+    expect(doneRecipes).not.toBeInTheDocument();
+  });
+  it('Testa se ao clicar em receitas Favoritas redireciona a pagina.', () => {
+    renderWithRouter(<App />, '/perfil');
+
+    const favoriteRecipes = screen.getByRole('button', { name: /receitas favoritas/i });
+    expect(favoriteRecipes).toBeInTheDocument();
+
+    userEvent.click(favoriteRecipes);
+
+    expect(favoriteRecipes).not.toBeInTheDocument();
   });
 });
