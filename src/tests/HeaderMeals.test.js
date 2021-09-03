@@ -1,11 +1,11 @@
 import React from 'react';
 import { screen, cleanup } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import { HeaderMeals } from '../components';
-import { justMealMockFetch } from './helpers/mockedFetchs';
+// import { justMealMockFetch } from './helpers/mockedFetchs';
 import { emptySearch, chickenSearch } from './mocks/chickenSearch';
-import userEvent from '@testing-library/user-event';
 
 const fetchMock = () => {
   jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
@@ -23,21 +23,18 @@ const fetchEmptyMock = () => {
   }));
 };
 
-
 describe('Testa a página de detalhes das receitas', () => {
-  // beforeAll(fetchMock);
   beforeEach(cleanup); 
+  fetchMock();
 
-  fetchMock()
   it('Verifica se a página contém os elementos esperados', async () => {
     const promise = Promise.resolve();
-
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
       const profileBtn = screen.getByTestId('profile-top-btn');
       const title = screen.getByTestId('page-title');
       const searchBtn = screen.getByTestId('search-top-btn');
-  
+
       expect(profileBtn).toBeInTheDocument();
       expect(title).toBeInTheDocument();
       expect(searchBtn).toBeInTheDocument();
@@ -45,15 +42,13 @@ describe('Testa a página de detalhes das receitas', () => {
     });
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa filtrando por ingredientes', async () => {
     const promise = Promise.resolve();
-
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
     });
     const activeSearchBtn = screen.getByTestId('search-top-btn');
-
     userEvent.click(activeSearchBtn);
     const ingredients = screen.getByTestId('ingredient-search-radio');
     const searchInput = screen.getByTestId('search-input');
@@ -65,7 +60,7 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(() => promise);
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa filtrando por nome', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -84,7 +79,7 @@ describe('Testa a página de detalhes das receitas', () => {
     await act(() => promise);
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa filtrando por primeira letra', async () => {
     const promise = Promise.resolve();
 
@@ -105,7 +100,7 @@ describe('Testa a página de detalhes das receitas', () => {
 
   });
 
-  fetchMock()
+  fetchMock();
   it('Faz pesquisa sem filtro', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -117,11 +112,9 @@ describe('Testa a página de detalhes das receitas', () => {
     const searchBtn = screen.getByTestId('exec-search-btn');
     userEvent.click(searchBtn);
     await act(() => promise);
-
-
   });
 
-  fetchMock()
+  fetchMock();
   it('Testa se aparece um alert quando a pesquisa por uma letra tem mais de uma letra', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -149,7 +142,6 @@ describe('Testa a página de detalhes das receitas', () => {
       renderWithRouter(<HeaderMeals />);
     });
     const activeSearchBtn = screen.getByTestId('search-top-btn');
-
     userEvent.click(activeSearchBtn);
     const firstLetter = screen.getByTestId('first-letter-search-radio');
     const searchInput = screen.getByTestId('search-input');
