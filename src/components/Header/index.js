@@ -41,7 +41,7 @@ function Header({ showSearchBtn }) { //
         /> }
       </HeaderWrapper>
       <HeaderSpace />
-    </>// ao clicar no ícone de busca, vai mudar o estado Global.
+    </>
   );
 }
 Header.propTypes = {

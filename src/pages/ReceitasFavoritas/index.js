@@ -19,6 +19,16 @@ const FavoriteRecipes = () => {
     }
   }, []);
 
+  function removeFavoriteRecipe(id) {
+    const favoritedRecipes = JSON.parse(localStorage.favoriteRecipes)
+      .filter((recipe) => recipe.id !== id);
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify(favoritedRecipes),
+    );
+    setFilteredRecipe(favoritedRecipes);
+  }
+
   function handleClickFilters({ target: { value } }) {
     if (value === 'comida') {
       setFilteredRecipe(recipes.filter((recipe) => recipe.type === 'comida'));
@@ -108,6 +118,7 @@ const FavoriteRecipes = () => {
               </button>
               <button
                 type="button"
+                onClick={ () => removeFavoriteRecipe(id) }
               >
                 <img
                   data-testid={ `${index}-horizontal-favorite-btn` }
