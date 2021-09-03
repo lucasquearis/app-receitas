@@ -1,101 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import CookedRecipesCard from '../components/CookedRecipesCard';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
 
 function CookedRecipies() {
-  return (
-    <>
-      <div>
-        <Header title="Receitas Feitas" />
-        <Button data-testid="filter-by-all-btn">All</Button>
-        <Button data-testid="filter-by-food-btn">Food</Button>
-        <Button data-testid="filter-by-drink-btn">Drinks</Button>
-      </div>
-      <div>
-        <img
-          data-testid="0-horizontal-image" // `${index}-horizontal-image`
-          src=""
-          alt="foto-da-api-"
-        />
-        <div>
-          <div>
-            <p
-              Data-testid="0-horizontal-top-text" // ${index}-horizontal-top-text
-            >
-              texto da categoria da receita
-            </p>
-            <img
-              data-testid="0-horizontal-share-btn" // `${index}-horizontal-share-btn`
-              src={ shareIcon }
-              alt="compartilhar-receita"
-            />
-          </div>
-          <p
-            data-testid="0-horizontal-name" // `${index}-horizontal-name`
-          >
-            texto do nome da receita
-          </p>
-          <p
-            data-testid="0-horizontal-done-date" // `${index}-horizontal-done-date`
-          >
-            texto da data da receita
-          </p>
-          <p
-            data-testid="0-Pasta-horizontal-tag" // ${index}-${tagName}-horizontal-tag
-          >
-            renderiza a primeira tag da receita
-          </p>
-          <p
-            data-testid="0-Curry-horizontal-tag" // ${index}-${tagName}-horizontal-tag
-          >
-            renderiza a segunda tag da receita
-          </p>
-        </div>
-      </div>
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const local = JSON.parse(localStorage.getItem('doneRecipes'));
+  useEffect(() => {
+    setDoneRecipes(local);
+  }, []);
 
-      <div>
-        <img
-          data-testid="1-horizontal-image" // `${index}-horizontal-image`
-          src=""
-          alt="foto-da-api"
-        />
-        <div>
-          <div>
-            <p
-              Data-testid="1-horizontal-top-text" // ${index}-horizontal-top-text
-            >
-              texto da categoria da receita
-            </p>
-            <img
-              data-testid="1-horizontal-share-btn" // `${index}-horizontal-share-btn`
-              src={ shareIcon }
-              alt="compartilhar-receita"
-            />
-          </div>
-          <p
-            data-testid="1-horizontal-name" // `${index}-horizontal-name`
-          >
-            texto do nome da receita
-          </p>
-          <p
-            data-testid="1-horizontal-done-date" // `${index}-horizontal-done-date`
-          >
-            texto da data da receita
-          </p>
-          <p
-            data-testid="1-Pasta-horizontal-tag" // ${index}-${tagName}-horizontal-tag
-          >
-            renderiza a primeira tag da receita
-          </p>
-          <p
-            data-testid="1-Curry-horizontal-tag" // ${index}-${tagName}-horizontal-tag
-          >
-            renderiza a segunda tag da receita
-          </p>
-        </div>
-      </div>
-    </>
+  const filterAll = () => {
+    setDoneRecipes(local);
+  };
+
+  const filterType = (type) => {
+    const filteredFood = doneRecipes.filter((item) => item.type === type);
+    setDoneRecipes(filteredFood);
+  };
+
+  if (!doneRecipes) {
+    return (
+      <>
+        <Header title="Receitas Feitas" />
+        <h1>ERRO</h1>
+      </>
+    );
+  }
+  return (
+    <div>
+      <Header title="Receitas Feitas" />
+      <Button
+        onClick={ filterAll }
+        data-testid="filter-by-all-btn"
+      >
+        All
+      </Button>
+      <Button
+        data-testid="filter-by-food-btn"
+        onClick={ () => filterType('comida') }
+      >
+        Food
+      </Button>
+      <Button
+        data-testid="filter-by-drink-btn"
+        onClick={ () => filterType('bebida') }
+      >
+        Drinks
+      </Button>
+      {doneRecipes.map((item, index) => (
+        <CookedRecipesCard
+          key={ item.id }
+          index={ index }
+          id={ item.id }
+          type={ item.type }
+          category={ item.category }
+          alcoholicOrNot={ item.alcoholicOrNot }
+          name={ item.name }
+          image={ item.image }
+          doneDate={ item.doneDate }
+          tags={ item.tags }
+          area={ item.area }
+        />))}
+    </div>
   );
 }
 
