@@ -5,10 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 function ShareButton() {
   const [copy, setCopy] = useState(false);
 
-  const path = () => {
-    const newPath = window.location.href.replace('/in-progress', '');
-    return (newPath);
-  };
+  const path = () => window.location.href.replace('/in-progress', '');
 
   return (
     <div className="share-button">

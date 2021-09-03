@@ -19,6 +19,25 @@ const responsive = {
 // }];
 // localStorage.setItem('doneRecipes', JSON.stringify(teste));
 
+const getIngredientsAndMeasures = (recipes, setIngredients, setMeasure) => {
+  const key = Object.keys(recipes[0])
+    .filter((item) => item.includes('strIngredient'));
+  const ingredientNotEmpty = key
+    .filter((item) => (
+      recipes[0][item] !== '' && recipes[0][item] !== null));
+  const ingredientsList = ingredientNotEmpty
+    .map((keyDrink) => recipes[0][keyDrink]);
+  setIngredients(ingredientsList);
+
+  const keyMeasure = Object.keys(recipes[0])
+    .filter((item) => item.includes('strMeasure'));
+  const measureNoEmpty = keyMeasure
+    .filter((item) => (
+      recipes[0][item] !== '' && recipes[0][item] !== null));
+  const measureList = measureNoEmpty.map((kMeasure) => recipes[0][kMeasure]);
+  setMeasure(measureList);
+};
+
 function DrinksDetails() {
   const [recipesDrink, setRecipesDrink] = useState([{}]);
   const [ingredients, setIngredients] = useState([]);
@@ -38,26 +57,10 @@ function DrinksDetails() {
   }, [id]);
 
   useEffect(() => {
-    const getIngredientsAndMeasures = () => {
-      const key = Object.keys(recipesDrink[0])
-        .filter((item) => item.includes('strIngredient'));
-      const ingredientNotEmpty = key
-        .filter((item) => (
-          recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
-      const ingredientsList = ingredientNotEmpty
-        .map((keyDrink) => recipesDrink[0][keyDrink]);
-      setIngredients(ingredientsList);
-
-      const keyMeasure = Object.keys(recipesDrink[0])
-        .filter((item) => item.includes('strMeasure'));
-      const measureNoEmpty = keyMeasure
-        .filter((item) => (
-          recipesDrink[0][item] !== '' && recipesDrink[0][item] !== null));
-      const measureList = measureNoEmpty.map((kMeasure) => recipesDrink[0][kMeasure]);
-      setMeasure(measureList);
-    };
-    getIngredientsAndMeasures();
-  }, [recipesDrink]);
+    if (recipesDrink !== undefined) {
+      getIngredientsAndMeasures(recipesDrink, setIngredients, setMeasure);
+    }
+  });
 
   useEffect(() => {
     const getRecommendations = async () => {
@@ -84,6 +87,8 @@ function DrinksDetails() {
       .filter((item) => item === id) : [];
     setInProgress(filterInProgress);
   }, [id, setDoneRecipes]);
+
+  if (recipesDrink === undefined) return <p>carregando ...</p>;
 
   return (
     <div>

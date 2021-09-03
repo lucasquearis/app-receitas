@@ -20,7 +20,7 @@ export default function FoodAreaExp() {
       setAreaLoading(false);
     };
     getAreas();
-  }, []);
+  });
 
   useEffect(() => {
     const filterSwitch = async () => {
