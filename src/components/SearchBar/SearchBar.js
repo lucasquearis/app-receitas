@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionStoreItems } from '../../actions/index';
 import { searchOnClick } from './utils';
+import './SearchBar.css';
 
 const SearchBar = ({ bool }) => {
   const dispatch = useDispatch();
@@ -67,40 +68,49 @@ const SearchBar = ({ bool }) => {
           data-testid="search-input"
           placeholder="Busque por uma receita"
           onChange={ handleChange }
+          className="searchBar-input"
         />
-        <div name="radioValue" onChange={ handleChange }>
+        <div
+          name="radioValue"
+          onChange={ handleChange }
+          className="searchBar-div"
+        >
           <label htmlFor="ingredients">
-            Ingredientes
             <input
+              className="searchBar-laybel"
               type="radio"
               id="ingredients"
               name="radioValue"
               value="Ingredientes"
               data-testid="ingredient-search-radio"
             />
+            Ingredientes
           </label>
           <label htmlFor="name">
-            Nome
             <input
+              className="searchBar-laybel"
               type="radio"
               id="name"
               name="radioValue"
               value="Nome"
               data-testid="name-search-radio"
             />
+            Nome
           </label>
           <label htmlFor="first-letter">
-            Primeira letra
             <input
+              className="searchBar-laybel"
               type="radio"
               id="first-letter"
               name="radioValue"
               value="Primeira letra"
               data-testid="first-letter-search-radio"
             />
+            Primeira letra
           </label>
         </div>
         <button
+          className="searchBar-button"
           type="button"
           data-testid="exec-search-btn"
           onClick={ () => searchOnClick(search, setItems) }

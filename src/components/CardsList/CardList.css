@@ -12,7 +12,7 @@
   justify-content: center;
   margin-left: 10px;
   margin-right: 10px;
-  width: 180px;
+  width: 160px;
 }
 
 .cardListDiv {
@@ -24,17 +24,18 @@
   flex-flow: wrap;
   flex-direction: row;
   font-size: 27px;
-  height: 185px;
+  height: 195px;
   justify-content: center;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 30px;
-  width: 180px;
+  overflow: hidden;
+  width: 160px;
 }
 
 .CardListText {
   color: black;
-  font-size: 17px;
+  font-size: 15px;
   margin-left: 10px;
   margin-top: 30px;
 }

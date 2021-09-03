@@ -75,6 +75,7 @@ const CategoriesFilterButtons = () => {
       {
         categories.map((categorie, index) => {
           const name = Object.values(categorie);
+          console.log('teste', name[0].split('/')[0]);
           return (
             <button
               className="buttonFilter"
@@ -85,7 +86,7 @@ const CategoriesFilterButtons = () => {
                 (event) => handleClick(categorie.strCategory, apiUrl, event)
               }
             >
-              {name[0]}
+              {name[0].split('/')[0]}
             </button>);
         })
       }
