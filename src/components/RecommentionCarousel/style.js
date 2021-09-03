@@ -10,7 +10,7 @@ export const CarouselWrapper = styled.div`  display: flex;
 export const RecommendationCard = styled.div`  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-left: 9px;
+  margin-left: 10px;
   margin-right: 9px;
   width: 157px;
 

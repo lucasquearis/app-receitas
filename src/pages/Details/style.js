@@ -29,7 +29,8 @@ export const BtnStart = styled.button`  background-color: #34c95e;
   }
 `;
 
-export const Img = styled.img`  border-radius: 20px;
+export const Img = styled.img`  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   width: 100vw;
 `;
 
@@ -79,4 +80,8 @@ export const CopyWrapper = styled.div`  display: flex;
     text-align: center;
     top: 430px;
   }
+`;
+
+export const IngredientsListWrapper = styled.div`  margin-bottom: 20px;
+  margin-top: 20px;
 `;

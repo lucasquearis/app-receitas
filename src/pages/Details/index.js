@@ -13,6 +13,7 @@ import {
   TitleTextWrapper,
   BtnWrapper,
   CopyWrapper,
+  IngredientsListWrapper,
 } from './style';
 
 import RecommendationCarousel from '../../components/RecommentionCarousel';
@@ -119,7 +120,9 @@ function Details({ recipeEndPoint, recommendationEndPoint }) {
         />}
       </BtnWrapper>
 
-      <IngredientsList recipe={ recipe } />
+      <IngredientsListWrapper>
+        <IngredientsList recipe={ recipe } />
+      </IngredientsListWrapper>
 
       <p data-testid="instructions">{recipe.strInstructions}</p>
 
