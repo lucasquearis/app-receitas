@@ -1,0 +1,5 @@
+.container-explore-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 51px;
+}

@@ -1,0 +1,17 @@
+.container-ingredients-card {
+  display: flex;
+  flex-direction: row;
+  height: 180px;
+  margin: auto;
+  width: 40vw;
+}
+
+.container-ingredients-card button {
+  background-color: #fed;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px gray;
+  color: #350;
+  font-family: Poppins , sans-serif;
+  margin: 10px 0;
+}

@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import IngredientsCard from '../../components/IngredientsCard';
 import { fetchIngredientsFoodsApi } from '../../services/fetchApi';
 import { setIngredient } from '../../redux/actions';
+import './exploreIngredientsFood.css';
 import Loading from '../../components/Loading';
 
 function ExploreIngredientsFood({ changeIngredient }) {
@@ -39,14 +40,16 @@ function ExploreIngredientsFood({ changeIngredient }) {
   return (
     <>
       <Header title="Explorar Ingredientes" />
-      {arrIngredients.slice(0, MAX_INDEX).map(({ strIngredient }, index) => (
-        <IngredientsCard
-          key={ strIngredient }
-          index={ index }
-          name={ strIngredient }
-          isFood
-          onClick={ () => filterForIngredient(strIngredient) }
-        />))}
+      <div className="container-explore-ingredients">
+        {arrIngredients.slice(0, MAX_INDEX).map(({ strIngredient }, index) => (
+          <IngredientsCard
+            key={ strIngredient }
+            index={ index }
+            name={ strIngredient }
+            isFood
+            onClick={ () => filterForIngredient(strIngredient) }
+          />))}
+      </div>
       <Footer />
     </>
   );
