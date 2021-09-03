@@ -15,6 +15,16 @@ export const updateProgressRecipe = (id, ing, type, category) => {
   }));
 };
 
+const getActualDate = () => {
+  const data = new Date();
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0');
+  const ano = data.getFullYear();
+  const dataAtual = `${dia}/${mes}/${ano}`;
+  console.log(dataAtual);
+  return dataAtual;
+};
+
 export const doneRecipesToStorage = (props) => {
   const {
     id,
@@ -36,7 +46,7 @@ export const doneRecipesToStorage = (props) => {
     alcoholicOrNot: alcoholic || '',
     name: type === 'comida' || type === 'meals' ? meal : drink,
     image: thumb,
-    doneDate: '31/08/2021',
+    doneDate: getActualDate(),
     tags: [tags] || [],
   }];
 
