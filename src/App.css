@@ -339,9 +339,9 @@ footer {
 
 .nameDrinkMealsInprogress p {
   display: flex;
-  margin-left: 30px;
   font-size: x-large;
   font-weight: 600;
+  margin-left: 30px;
   padding-top: 5px;
 }
 

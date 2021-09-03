@@ -26,8 +26,8 @@
   align-items: flex-start;
   display: flex;
   margin: auto;
-  width: 30%;
   margin-top: 5px;
+  width: 30%;
 }
 
 .contentBtn {
