@@ -1,6 +1,6 @@
 .login {
   align-items: center;
-  background-image: linear-gradient(to bottom, rgb(230, 230, 230), #ffffff);
+  background-image: linear-gradient(to bottom, #e6e6e6, #fff);
   display: flex;
   flex-direction: column;
   height: 100%;
