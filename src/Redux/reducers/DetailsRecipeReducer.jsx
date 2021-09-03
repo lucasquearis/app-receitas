@@ -1,14 +1,18 @@
-import { DETAILS_RECIPE } from '../actions/actionSetRecipeDetails';
+import { MEAL_RECIPE, DRINK_RECIPE } from '../actions/actionSetRecipeDetails';
 
 const INITIAL_STATE = {
-  recipeDetail: [],
+  mealDetail: [],
+  drinkDetail: [],
 };
 
 const recipeDetails = (state = INITIAL_STATE, action) => {
   const { payload, type } = action;
   switch (type) {
-  case DETAILS_RECIPE:
-    return { ...state, recipeDetails: payload };
+  case MEAL_RECIPE:
+    return { ...state, mealDetails: payload };
+
+  case DRINK_RECIPE:
+    return { ...state, drinkDetails: payload };
 
   default:
     return state;
