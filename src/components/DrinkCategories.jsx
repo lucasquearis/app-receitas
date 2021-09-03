@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { drinkListByCategoryFetch, drinkListFetch } from '../redux/actions/actionDrink';
+import './DrinkCategories.css';
 
 export default function DrinkCategories() {
   const [clickedCategory, setClickedCategory] = useState('');
@@ -25,10 +26,10 @@ export default function DrinkCategories() {
   };
 
   return (
-    <div>
+    <div className="drink-category">
       <Button
         data-testid="All-category-filter"
-        className="category-button"
+        className="drink-category-button"
         onClick={ withoutFilter }
       >
         All
@@ -36,7 +37,7 @@ export default function DrinkCategories() {
       {drinkCategoriesList.map((category) => (
         <Button
           data-testid={ `${category.strCategory}-category-filter` }
-          className="category-button"
+          className="drink-category-button"
           key={ category.strCategory }
           onClick={ () => filterByCategory(category.strCategory) }
         >

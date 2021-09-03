@@ -13,9 +13,10 @@
   font-family: sans-serif;
   height: 100%;
   justify-content: center;
-  padding-top: 25%;
   margin-bottom: 14%;
   margin-top: 0;
+  padding-top: 25%;
+  position: absolute; /* teste */
   width: 100%;
 
 }

@@ -4,6 +4,8 @@ import DrinkIngredientCard from '../components/DrinkIngredientCard';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { drinkIngredientsListFetch } from '../redux/actions/actionDrink';
+import './FoodCards.css';
+import './Explore.css';
 
 function DrinkPerIngredient() {
   const dispatch = useDispatch();
@@ -21,13 +23,15 @@ function DrinkPerIngredient() {
   return (
     <>
       <Header title="Explorar Ingredientes" />
-      {drinkIngredientsList.map((item, index) => (
-        <DrinkIngredientCard
-          key={ item.strIngredient1 }
-          title={ item }
-          index={ index }
-        />
-      ))}
+      <div className="fix-top map-cards">
+        {drinkIngredientsList.map((item, index) => (
+          <DrinkIngredientCard
+            key={ item.strIngredient1 }
+            title={ item }
+            index={ index }
+          />
+        ))}
+      </div>
       <Footer />
     </>
   );

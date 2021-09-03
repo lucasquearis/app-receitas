@@ -1,0 +1,13 @@
+.drink-category-button {
+  height: 55px;
+  margin-bottom: 6px;
+  width: 150px;
+}
+
+.drink-category {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+}

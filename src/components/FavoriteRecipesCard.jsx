@@ -5,6 +5,7 @@ import { Card } from 'react-bootstrap';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
 import './CookedAndFavoriteCard.css';
+import '../pages/CookedRecipies.css';
 
 export default function FavoriteRecipesCard({
   index,
@@ -17,26 +18,29 @@ export default function FavoriteRecipesCard({
   id,
 }) {
   return (
-    <Card>
+    <Card className="recip-card">
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <Card.Img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="foto-da-api-"
-          className="imageRecipes"
+          className="image-recipes"
         />
-        <p
-          data-testid={ `${index}-horizontal-name` }
-        >
-          { name }
-        </p>
       </Link>
       <div>
-        <div>
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            { alcoholicOrNot }
-            { `${area} - ${category}` }
-          </p>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          { alcoholicOrNot }
+          { `${area} - ${category}` }
+        </p>
+        <Link to={ `/${type}s/${id}` }>
+          <Card.Title
+            className="title-recip-cards"
+            data-testid={ `${index}-horizontal-name` }
+          >
+            { name }
+          </Card.Title>
+        </Link>
+        <div className="toptext-icon">
           <ShareButton
             datatestid={ `${index}-horizontal-share-btn` }
             id={ id }

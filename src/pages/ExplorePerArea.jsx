@@ -9,6 +9,8 @@ import {
   foodPerAreaFilterFetch,
   foodPerAreaListFetch,
 } from '../redux/actions/actionFood';
+import './FoodCards.css';
+import './Explore.css';
 
 function ExplorePerArea() {
   const dispatch = useDispatch();
@@ -32,21 +34,25 @@ function ExplorePerArea() {
   return (
     <>
       <Header title="Explorar Origem" />
-      <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
-        <option data-testid="All-option" value="All">All</option>
-        { foodPerAreaList.map((area) => (
-          <option
-            key={ area.strArea }
-            data-testid={ `${area.strArea}-option` }
-            value={ area.strArea }
-          >
-            { area.strArea }
-          </option>)) }
-      </select>
-      {foodPerAreaFilter.map((item, index) => (
-        <Link to={ `/comidas/${item.idMeal}` } key={ item.idMeal }>
-          <FoodCard food={ item } index={ index } />
-        </Link>))}
+      <div className="select-expl">
+        <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
+          <option data-testid="All-option" value="All">All</option>
+          { foodPerAreaList.map((area) => (
+            <option
+              key={ area.strArea }
+              data-testid={ `${area.strArea}-option` }
+              value={ area.strArea }
+            >
+              { area.strArea }
+            </option>)) }
+        </select>
+      </div>
+      <div className="map-cards">
+        {foodPerAreaFilter.map((item, index) => (
+          <Link to={ `/comidas/${item.idMeal}` } key={ item.idMeal }>
+            <FoodCard food={ item } index={ index } />
+          </Link>))}
+      </div>
       <Footer />
     </>
   );

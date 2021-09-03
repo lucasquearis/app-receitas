@@ -18,8 +18,9 @@ function DrinkIngredientCard({ title: { strIngredient1 }, index }) {
 
   return (
     <Link to="/bebidas" onClick={ handleClick }>
-      <Card data-testid={ `${index}-ingredient-card` }>
+      <Card className="food-card" data-testid={ `${index}-ingredient-card` }>
         <Card.Img
+          className="food-card-img"
           data-testid={ `${index}-card-img` }
           src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
           alt="foodandDrinkImages"

@@ -5,6 +5,7 @@ import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
 import StartContinueDoneButton from './StartContinueDoneButton';
 import IngredientCheckList from './IngredientCheckList';
+import './InProgressMount.css';
 
 export default function InProgressMount(props) {
   const { data } = props;
@@ -19,25 +20,27 @@ export default function InProgressMount(props) {
         src={ data.img }
         alt="detalhes"
       />
-      <h1 data-testid="recipe-title">{data.tittle}</h1>
-      <div>
-        <ShareButton
-          type={ type }
-          id={ id }
-          datatestid="share-btn"
-        />
-        <FavoriteButton
-          datatestid="favorite-btn"
-          recipe={ data }
-          id={ id }
-          type={ type }
-        />
+      <div className="header-details">
+        <h1 className="title-details" data-testid="recipe-title">{data.tittle}</h1>
+        <div>
+          <ShareButton
+            type={ type }
+            id={ id }
+            datatestid="share-btn"
+          />
+          <FavoriteButton
+            datatestid="favorite-btn"
+            recipe={ data }
+            id={ id }
+            type={ type }
+          />
+        </div>
       </div>
-      <h3 data-testid="recipe-category">{data.category}</h3>
+      <h3 className="title-details" data-testid="recipe-category">{data.category}</h3>
       { data && type === 'bebidas'
-        ? <h3 data-testid="recipe-category">{data.type}</h3>
+        ? <h3 className="title-details" data-testid="recipe-category">{data.type}</h3>
         : null}
-      <h2>Ingredientes</h2>
+      <h2 className="title-details">Ingredientes</h2>
 
       <div className="ingredients">
         <lo
@@ -48,8 +51,8 @@ export default function InProgressMount(props) {
           />
         </lo>
       </div>
-      <h2>Instruções</h2>
-      <p data-testid="instructions">{data.Instructions}</p>
+      <h2 className="title-details">Instruções</h2>
+      <p className="instructions" data-testid="instructions">{data.Instructions}</p>
       <Link to="/receitas-feitas">
         <StartContinueDoneButton
           id={ id }

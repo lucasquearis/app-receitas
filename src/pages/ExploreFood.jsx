@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { foodRandomFetch } from '../redux/actions/actionFood';
+import './Explore.css';
 
 function ExploreFood() {
   const dispatch = useDispatch();
@@ -16,27 +18,32 @@ function ExploreFood() {
   return (
     <>
       <Header title="Explorar Comidas" />
-      <Link to="/explorar/comidas/ingredientes" data-testid="explore-by-ingredient">
-        <button
-          type="button"
-        >
-          Por Ingredientes
-        </button>
-      </Link>
-      <Link to="/explorar/comidas/area" data-testid="explore-by-area">
-        <button
-          type="button"
-        >
-          Por Local de Origem
-        </button>
-      </Link>
-      <Link to={ `/comidas/${randomID}` } data-testid="explore-surprise">
-        <button
-          type="button"
-        >
-          Me Surpreenda!
-        </button>
-      </Link>
+      <div className="explore-drink">
+        <Link to="/explorar/comidas/ingredientes" data-testid="explore-by-ingredient">
+          <Button
+            className="btn-explore-food"
+            type="button"
+          >
+            Por Ingredientes
+          </Button>
+        </Link>
+        <Link to="/explorar/comidas/area" data-testid="explore-by-area">
+          <Button
+            className="btn-explore-food"
+            type="button"
+          >
+            Por Local de Origem
+          </Button>
+        </Link>
+        <Link to={ `/comidas/${randomID}` } data-testid="explore-surprise">
+          <Button
+            className="btn-explore-food"
+            type="button"
+          >
+            Me Surpreenda!
+          </Button>
+        </Link>
+      </div>
       <Footer />
     </>
   );

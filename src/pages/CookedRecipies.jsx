@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import CookedRecipesCard from '../components/CookedRecipesCard';
 import Header from '../components/Header';
+import './CookedRecipies.css';
 
 function CookedRecipies() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -30,24 +31,26 @@ function CookedRecipies() {
   return (
     <div>
       <Header title="Receitas Feitas" />
-      <Button
-        onClick={ filterAll }
-        data-testid="filter-by-all-btn"
-      >
-        All
-      </Button>
-      <Button
-        data-testid="filter-by-food-btn"
-        onClick={ () => filterType('comida') }
-      >
-        Food
-      </Button>
-      <Button
-        data-testid="filter-by-drink-btn"
-        onClick={ () => filterType('bebida') }
-      >
-        Drinks
-      </Button>
+      <div className="btn-cooked-recip">
+        <Button
+          onClick={ filterAll }
+          data-testid="filter-by-all-btn"
+        >
+          All
+        </Button>
+        <Button
+          data-testid="filter-by-food-btn"
+          onClick={ () => filterType('comida') }
+        >
+          Food
+        </Button>
+        <Button
+          data-testid="filter-by-drink-btn"
+          onClick={ () => filterType('bebida') }
+        >
+          Drinks
+        </Button>
+      </div>
       {doneRecipes.map((item, index) => (
         <CookedRecipesCard
           key={ item.id }

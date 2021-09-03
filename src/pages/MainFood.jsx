@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import FoodCard from '../components/FoodCard';
 import { foodCategoriesFetch, foodListFetch } from '../redux/actions/actionFood';
 import FoodCategories from '../components/FoodCategories';
+import './FoodCards.css';
 
 function MainFood() {
   const dispatch = useDispatch();
@@ -26,10 +27,12 @@ function MainFood() {
     <>
       <Header title="Comidas" />
       <FoodCategories />
-      {foodCardList.map((item, index) => (
-        <Link to={ `/comidas/${item.idMeal}` } key={ item.idMeal }>
-          <FoodCard food={ item } index={ index } />
-        </Link>))}
+      <div className="map-cards">
+        {foodCardList.map((item, index) => (
+          <Link to={ `/comidas/${item.idMeal}` } key={ item.idMeal }>
+            <FoodCard food={ item } index={ index } />
+          </Link>))}
+      </div>
       <Footer />
     </>
   );

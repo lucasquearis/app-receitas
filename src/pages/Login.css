@@ -1,9 +1,15 @@
-.login {
+.form-container {
+  height: 640px;
   margin-top: 0;
   padding-top: 0;
-  height: 640px;
+  width: 320px;
+}
+
+.form-group {
+  color: white;
+  display: flex;
 }
 
 .login-button {
-  width: 230px;
+  width: 320px;
 }

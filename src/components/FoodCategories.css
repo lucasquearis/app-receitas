@@ -1,6 +1,6 @@
 .category-button {
-  margin-bottom: 6px;
   height: 38px;
+  margin-bottom: 6px;
   width: 105px;
 }
 
@@ -11,15 +11,15 @@
 
 .food-card-img {
   height: auto;
-  max-width: 140px;
   max-height: 120px;
+  max-width: 140px;
   width: auto;
 }
 
 .food-category {
   display: flex;
+  flex-flow: wrap;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
   width: 90%;
 }

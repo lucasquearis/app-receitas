@@ -1,0 +1,13 @@
+.instructions {
+  background-color: #80808042;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 6px;
+  padding-left: 6px;
+}
+
+.title-details {
+  margin-top: -10px;
+  padding-left: 6px;
+}

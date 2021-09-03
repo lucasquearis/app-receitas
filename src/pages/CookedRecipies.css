@@ -1,0 +1,39 @@
+.btn-cooked-recip {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  width: 360px;
+}
+
+.image-recipes {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  height: 140px;
+  width: 140px;
+}
+
+.p-cooked-recip {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.recip-card {
+  background-color: #00640059;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 140px;
+  margin-top: 6px;
+  margin-left: 6px;
+  width: 347px;
+}
+
+.title-recip-cards {
+  color: black;
+}
+
+.toptext-icon {
+  display: flex;
+  justify-content: space-around;
+}

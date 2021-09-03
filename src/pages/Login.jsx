@@ -18,7 +18,7 @@ const Login = () => {
   };
 
   return (
-    <Form className="login">
+    <Form className="form-container">
       <Form.Group className="form-group">
         <Form.Label
           htmlFor="email"

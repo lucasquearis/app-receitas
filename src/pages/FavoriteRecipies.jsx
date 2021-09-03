@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Header from '../components/Header';
 import FavoriteRecipesCard from '../components/FavoriteRecipesCard';
+import './CookedRecipies.css';
 
 function FavoriteRecipies() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -29,24 +30,26 @@ function FavoriteRecipies() {
   return (
     <div>
       <Header title="Receitas Favoritas" />
-      <Button
-        onClick={ () => filterType('all') }
-        data-testid="filter-by-all-btn"
-      >
-        All
-      </Button>
-      <Button
-        data-testid="filter-by-food-btn"
-        onClick={ () => filterType('comida') }
-      >
-        Food
-      </Button>
-      <Button
-        data-testid="filter-by-drink-btn"
-        onClick={ () => filterType('bebida') }
-      >
-        Drinks
-      </Button>
+      <div className="btn-cooked-recip">
+        <Button
+          onClick={ () => filterType('all') }
+          data-testid="filter-by-all-btn"
+        >
+          All
+        </Button>
+        <Button
+          data-testid="filter-by-food-btn"
+          onClick={ () => filterType('comida') }
+        >
+          Food
+        </Button>
+        <Button
+          data-testid="filter-by-drink-btn"
+          onClick={ () => filterType('bebida') }
+        >
+          Drinks
+        </Button>
+      </div>
       {favoriteRecipes.map((item, index) => (
         <FavoriteRecipesCard
           key={ item.id }

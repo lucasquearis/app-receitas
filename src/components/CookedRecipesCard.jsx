@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 import ShareButton from './ShareButton';
-import './CookedAndFavoriteCard.css';
+import '../pages/CookedRecipies.css';
 
 export default function CookedRecipesCard({
   index,
@@ -18,46 +19,51 @@ export default function CookedRecipesCard({
 }) {
   const lenghtTag = 2;
   return (
-    <div>
+    <Card className="recip-card">
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <Card.Img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           alt="foto-da-api-"
-          className="imageRecipes"
+          className="image-recipes"
         />
-        <p
-          data-testid={ `${index}-horizontal-name` }
-        >
-          { name }
-        </p>
       </Link>
       <div>
-        <div>
+        <div className="toptext-icon">
+          <p className="p-cooked-recip" data-testid={ `${index}-horizontal-top-text` }>
+            { alcoholicOrNot }
+            { `${area} - ${category}` }
+          </p>
           <ShareButton
             id={ id }
             type={ `${type}s` }
             datatestid={ `${index}-horizontal-share-btn` }
           />
         </div>
-        <p data-testid={ `${index}-horizontal-top-text` }>
-          { alcoholicOrNot }
-          { `${area} - ${category}` }
-        </p>
+        <Link to={ `/${type}s/${id}` }>
+          <Card.Title
+            className="title-recip-cards"
+            data-testid={ `${index}-horizontal-name` }
+          >
+            { name }
+          </Card.Title>
+        </Link>
         <p
+          className="p-cooked-recip"
           data-testid={ `${index}-horizontal-done-date` }
         >
           { doneDate }
         </p>
         {tags.slice(0, lenghtTag).map((tag) => (
           <p
+            className="p-cooked-recip"
             key={ tag }
             data-testid={ `${index}-${tag}-horizontal-tag` }
           >
             { tag }
           </p>))}
       </div>
-    </div>
+    </Card>
 
   );
 }

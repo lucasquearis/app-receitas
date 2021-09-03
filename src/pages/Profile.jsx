@@ -19,34 +19,42 @@ function Profile() {
   return (
     <>
       <Header title="Perfil" />
-      <h3 className="profile-email" data-testid="profile-email">{ renderUser.email }</h3>
-      <Link to="receitas-feitas">
-        <Button
-          data-testid="profile-done-btn"
-          className="group-button-profile"
+      <div className="profile-container">
+        <h3
+          className="profile-email"
+          data-testid="profile-email"
         >
-          Receitas Feitas
+          { renderUser.email }
 
-        </Button>
-      </Link>
-      <Link to="receitas-favoritas">
-        <Button
-          data-testid="profile-favorite-btn"
-          className="group-button-profile"
-        >
-          Receitas Favoritas
+        </h3>
+        <Link to="receitas-feitas">
+          <Button
+            data-testid="profile-done-btn"
+            className="group-button-profile"
+          >
+            Receitas Feitas
 
-        </Button>
-      </Link>
-      <Link to="/">
-        <Button
-          className="group-button-profile"
-          data-testid="profile-logout-btn"
-          onClick={ handleLocalStorage }
-        >
-          Sair
-        </Button>
-      </Link>
+          </Button>
+        </Link>
+        <Link to="receitas-favoritas">
+          <Button
+            data-testid="profile-favorite-btn"
+            className="group-button-profile"
+          >
+            Receitas Favoritas
+
+          </Button>
+        </Link>
+        <Link to="/">
+          <Button
+            className="group-button-profile"
+            data-testid="profile-logout-btn"
+            onClick={ handleLocalStorage }
+          >
+            Sair
+          </Button>
+        </Link>
+      </div>
       <Footer />
     </>
   );

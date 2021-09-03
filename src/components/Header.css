@@ -4,7 +4,7 @@
 }
 
 .header {
-  background-color: darkgoldenrod;
+  background-color: #02635ab8;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -14,4 +14,8 @@
   top: 0;
   width: 100%;
   z-index: 1;
+}
+
+.title {
+  font-size: 2rem;
 }

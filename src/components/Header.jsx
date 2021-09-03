@@ -40,7 +40,7 @@ function Header({ title }) {
           />
         </button>
       </Link>
-      <h1 data-testid="page-title">{title}</h1>
+      <h1 className="title" data-testid="page-title">{title}</h1>
       {
         title !== 'Explorar'
           && title !== 'Explorar Comidas'
