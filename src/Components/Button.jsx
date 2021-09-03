@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import { string, objectOf } from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteRecipes from '../helper/setLocalStorage';
+import { verificationIsFavorite } from '../helper/requiredDetails';
 
 function Button({ recipe, type }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    let bool;
+    console.log(type, recipe);
+    if (type === 'comida') {
+      bool = verificationIsFavorite(recipe.idMeal);
+    } else {
+      bool = verificationIsFavorite(recipe.idDrink);
+    }
+    setIsFavorite(bool);
+  }, [recipe, type]);
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -25,26 +37,20 @@ function Button({ recipe, type }) {
 
   return (
     <>
-      <button
-        type="button"
+      <input
+        type="image"
         onClick={ handleShare }
-      >
-        <img
-          data-testid="share-btn"
-          src={ shareIcon }
-          alt="To share"
-        />
-      </button>
-      <button
-        type="button"
+        src={ shareIcon }
+        data-testid="share-btn"
+        alt="To share"
+      />
+      <input
+        type="image"
         onClick={ handleFavorite }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favorite"
-        />
-      </button>
+        src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+        alt="Favorite"
+        data-testid="favorite-btn"
+      />
       <Alert show={ show }>
         Link copiado!
       </Alert>

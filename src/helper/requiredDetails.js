@@ -47,3 +47,12 @@ export function verificatioinProgressRecipe(id) {
   const idRecipe = categories.map((item) => Object.keys(inProgress[item]));
   return idRecipe.some((item) => item[0] === id);
 }
+
+export function verificationIsFavorite(id) {
+  const favoriteRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (favoriteRecipe) {
+    const result = favoriteRecipe.some((item) => item.id === id);
+    console.log(result);
+    return result;
+  } return false;
+}

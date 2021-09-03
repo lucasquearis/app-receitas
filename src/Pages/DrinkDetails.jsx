@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import Loading from '../Components/Loading';
 import RecipeHeader from '../Components/RecipeHeader';
 import RenderRecommendations from '../Components/RenderRecommendations';
 import IngredientsAndMeasures from '../Components/IngredientsAndMeasures';
 import * as required from '../helper/requiredDetails';
-import { setDrinkDetails } from '../Redux/actions/actionSetRecipeDetails';
 
 function DrinkDetails() {
   const [recipe, setRecipe] = useState([]);
   const [recommendation, setRecommendation] = useState([]);
   const [doneRecipe, setDoneRecipe] = useState(true);
   const [progressRecipe, setProgressRecipe] = useState(false);
-  const dispatch = useDispatch();
 
   const { id } = useParams();
   const { push } = useHistory();
@@ -36,13 +33,6 @@ function DrinkDetails() {
     verificationDoneRecipe,
     verificatioinProgressRecipe]);
 
-  const handleRedirect = () => {
-    dispatch(setDrinkDetails(recipe));
-    push(`/bebidas/${id}/in-progress`);
-  };
-
-  console.log(recommendation);
-
   if (recipe.length === 0) {
     return <Loading />;
   }
@@ -59,6 +49,7 @@ function DrinkDetails() {
         recipe={ recipe }
       />
       <div>
+        <h1>Instructions</h1>
         <p data-testid="instructions">{recipe.strInstructions}</p>
       </div>
       <div>
@@ -72,7 +63,7 @@ function DrinkDetails() {
           <button
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ handleRedirect }
+            onClick={ () => push(`/bebidas/${id}/in-progress`) }
           >
             { progressRecipe ? 'Continuar Receita' : 'Iniciar Receita' }
           </button>
