@@ -19,7 +19,7 @@ background:
   height: 78vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   color: black;
   padding-top: 3vh;

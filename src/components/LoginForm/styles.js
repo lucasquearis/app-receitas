@@ -19,10 +19,10 @@ export const LoginSection = styled.section`
 
 export const LoginDiv = styled.div`
 background-color: rgba(255, 255, 255, 0.8);
-width: 60vw;
-height: 28vh;
+width: 70vw;
+height: 33vh;
 display: flex;
-justify-content: space-evenly;
+justify-content: space-around;
 flex-direction: column;
 align-items: center;
 padding: 40px 25px 25px 25px;
@@ -32,8 +32,8 @@ border-radius: 6px;
 export const LoginLogo = styled.img`
   width: 60px;
   border-radius: 100px;
-  transform: translateY(-78px);
-  margin-bottom: -78px;
+  transform: translateY(-84px);
+  margin-bottom: -84px;
   border: 1px solid rgba(255, 255, 255, 0.8);
 `;
 
@@ -42,7 +42,6 @@ export const Button = styled.button`
   background-color: rgb(232, 93, 4);
   color: whitesmoke;
   font-weight: 700;
-  letter-spacing: 2px;
   border-radius: 100px;
   border: none;
   padding: 8px 8px;

@@ -86,14 +86,12 @@ background:
           ),
     url('https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     background-size: cover;
-    padding-bottom: 30px;
   width: 100vw;
-  height: 78vh;
+  height: 86vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  color: black;
 `;
 
 export const ExploreBtn = styled.div`
@@ -104,18 +102,12 @@ export const ExploreBtn = styled.div`
   text-align: center;
   background-color: rgba(0,0,0,0.6);
   border-radius: 6px;
-  width: 40vw;
+  width: 55vw;
   p{
-    padding: 10px;
+    width: 100%;
+    padding-bottom: 5px;
     font-weight: 700;
     font-size: 20px;
-    color: whitesmoke;
-  }
-  span{
-    display: block;
-    padding: 10px;
-    font-weight: 700;
-    font-size: 16px;
     color: whitesmoke;
   }
   svg {

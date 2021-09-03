@@ -10,12 +10,12 @@ function MealIngredients() {
   const path = useLocation().pathname;
   useEffect(() => {
     dispatch(requestIngredientsList(path));
-  });
+  }, [dispatch, path]);
   const ingredients = useSelector(({ meals }) => meals.ingredients);
   if (!ingredients.meals) {
     return (
       <section>
-        <Header title="Comidas" searchIcon />
+        <Header title="Explorar Ingredientes" searchIcon />
         <MainBackGround>
           <Loading />
         </MainBackGround>

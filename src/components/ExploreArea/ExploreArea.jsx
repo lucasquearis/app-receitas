@@ -21,7 +21,8 @@ function ExploreArea() {
     } else {
       dispatch(requestByArea(area));
     }
-  });
+  }, [area, dispatch]);
+
   if (!areaList.meals) {
     return (
       <div>

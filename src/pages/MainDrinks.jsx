@@ -14,7 +14,7 @@ function MainDrinks() {
 
   useEffect(() => {
     dispatch(requestCategoryList('/bebidas'));
-  });
+  }, [dispatch]);
 
   if (filter !== 'explore') {
     UseInitialRecipes('drinks');

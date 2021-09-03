@@ -9,8 +9,7 @@ export const ExploreAreaBackGround = styled.div`
           ),
     url('https://images.pexels.com/photos/6546425/pexels-photo-6546425.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     background-size: cover;
-    padding-bottom: 30px;
-    padding-top: 10px;
+    height: 86vh;
 `;
 
 export const SelectOrigin = styled.select`

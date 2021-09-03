@@ -14,7 +14,7 @@ function MainMeals() {
 
   useEffect(() => {
     dispatch(requestCategoryList('/comidas'));
-  });
+  }, [dispatch]);
 
   if (filter !== 'explore') {
     UseInitialRecipes('meals');

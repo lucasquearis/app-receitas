@@ -3,11 +3,11 @@ import UseRecipes from '../../hook/UseRecipes';
 import { ListSection, ListDiv } from './styles';
 
 const RecipeList = () => {
-  const { chooser } = UseRecipes();
+  const { setDefault } = UseRecipes();
   return (
     <ListSection>
       <ListDiv>
-        {chooser()}
+        {setDefault()}
       </ListDiv>
     </ListSection>
   );

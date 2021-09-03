@@ -16,6 +16,9 @@ const UseRecipes = () => {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       fetchDefault(path);
     }
+  };
+
+  const setDefault = () => {
     if (recipes.meals) {
       return recipes.meals.map((e, index) => index <= maxItensIndexOnScreen
        && (
@@ -31,7 +34,7 @@ const UseRecipes = () => {
     }
   };
 
-  return { chooser };
+  return { chooser, setDefault };
 };
 
 export default UseRecipes;
