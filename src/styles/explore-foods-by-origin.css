@@ -1,0 +1,35 @@
+.explore-origin {
+  align-items: center;
+  background-color: #fefae0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+select {
+  background-color: white;
+  border: 0.125rem solid #606c38;
+  border-radius: 0.5rem;
+  box-shadow: 0.125rem 0.125rem 0.25rem #c5c5c5;
+  font-family: Lato , sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  height: 3.125rem;
+  margin: 1.25rem;
+  outline: none;
+  width: 70vw;
+}
+
+select:focus {
+  background-color: white;
+  border: 0.188rem solid #606c38;
+  border-radius: 0.5rem;
+  box-shadow: 0.125rem 0.125rem 0.25rem #c5c5c5;
+  font-family: Lato , sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  height: 3.125rem;
+  margin: 1.25rem;
+  outline: none;
+  width: 70vw;
+}

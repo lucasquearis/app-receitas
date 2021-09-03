@@ -12,26 +12,32 @@ function CardFavorite(props) {
 
   if (type === 'comida') {
     return (
-      <div key={ index } className="card-done">
+      <div key={ index } className="card-made-favorite">
         <Link to={ urlDetails }>
           <img
             data-testid={ `${index}-horizontal-image` }
-            className="img-card-done"
+            className="img-card"
             src={ image }
             alt={ name }
           />
         </Link>
-        <div className="card-done-infos">
-          <span data-testid={ `${index}-horizontal-top-text` }>
+        <div className="card-infos">
+          <span
+            data-testid={ `${index}-horizontal-top-text` }
+            className="card-category"
+          >
             { `${area} - ${category}` }
           </span>
           <Link
             data-testid={ `${index}-horizontal-name` }
+            className="recipe-name"
             to={ `/${type}s/${id}` }
           >
             { name }
           </Link>
           <div className="card-favorite-share">
+            { shareId === id
+                && <span style={ { display: copyMessage } }>Link copiado!</span> }
             <input
               data-testid={ `${index}-horizontal-share-btn` }
               className="icon-share"
@@ -40,8 +46,6 @@ function CardFavorite(props) {
               alt="Compartilhar"
               onClick={ () => copyPath(urlDetails, id) }
             />
-            { shareId === id
-              && <span style={ { display: copyMessage } }>Link copiado!</span> }
             <input
               data-testid={ `${index}-horizontal-favorite-btn` }
               className="icon-favorite"
@@ -57,24 +61,32 @@ function CardFavorite(props) {
   }
 
   return (
-    <div key={ index } className="card-done">
+    <div key={ index } className="card-made-favorite">
       <Link to={ urlDetails }>
         <img
           data-testid={ `${index}-horizontal-image` }
-          className="img-card-done"
+          className="img-card"
           src={ image }
           alt={ name }
         />
       </Link>
-      <div className="card-done-infos">
-        <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span>
+      <div className="card-infos">
+        <span
+          data-testid={ `${index}-horizontal-top-text` }
+          className="card-category"
+        >
+          { alcoholicOrNot }
+        </span>
         <Link
           data-testid={ `${index}-horizontal-name` }
+          className="recipe-name"
           to={ `/${type}s/${id}` }
         >
           { name }
         </Link>
         <div className="card-favorite-share">
+          { shareId === id
+              && <span style={ { display: copyMessage } }>Link copiado!</span> }
           <input
             data-testid={ `${index}-horizontal-share-btn` }
             className="icon-share"
@@ -83,8 +95,6 @@ function CardFavorite(props) {
             alt="Compartilhar"
             onClick={ () => copyPath(urlDetails, id) }
           />
-          { shareId === id
-            && <span style={ { display: copyMessage } }>Link copiado!</span> }
           <input
             data-testid={ `${index}-horizontal-favorite-btn` }
             className="icon-favorite"

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Spinner, Card } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
+import '../styles/explore-foods-by-origin.css';
 
 function ExploreFoodsByOrigin() {
   const [foods, setFoods] = useState([1]);
@@ -49,62 +52,69 @@ function ExploreFoodsByOrigin() {
   }
   if (foods.length === 0 || areas.length === 0) {
     return (
-      <Spinner animation="border" role="status">
+      <Spinner className="loading" animation="border" role="status">
         <span className="visually-hidden"> </span>
       </Spinner>
     );
   }
   return (
-    <>
-      <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
-        {areas.map((ar) => (
+    <div>
+      <Header titlePage="Explorar Origem" btSearch />
+      <div className="header-space"> </div>
+      <div className="explore-origin">
+        <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
+          {areas.map((ar) => (
+            <option
+              key={ ar.strArea }
+              value={ ar.strArea }
+              data-testid={ `${ar.strArea}-option` }
+            >
+              {ar.strArea}
+            </option>
+          ))}
           <option
-            key={ ar.strArea }
-            value={ ar.strArea }
-            data-testid={ `${ar.strArea}-option` }
+            value="All"
+            data-testid="All-option"
+            onChange={ handleChange }
           >
-            {ar.strArea}
+            All
           </option>
-        ))}
-        <option
-          value="All"
-          data-testid="All-option"
-          onChange={ handleChange }
-        >
-          All
-        </option>
-      </select>
-      <section className="main-cards">
-        { foods.map((item, index) => {
-          const numCards = 12;
-          if (index < numCards) {
-            return (
-              <Card
-                data-testid={ `${index}-recipe-card` }
-                key={ index }
-                className="main-card"
-                style={ { width: '8.75rem' } }
-                onClick={ () => getId(item.idMeal) }
-              >
-                <Card.Img
-                  data-testid={ `${index}-card-img` }
-                  variant="top"
-                  src={ item.strMealThumb }
-                />
-                <Card.Body>
-                  <Card.Title
-                    data-testid={ `${index}-card-name` }
-                  >
-                    { item.strMeal }
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            );
-          }
-          return null;
-        }) }
-      </section>
-    </>
+        </select>
+        <section className="container-cards">
+          { foods.map((item, index) => {
+            const numCards = 12;
+            if (index < numCards) {
+              return (
+                <button
+                  data-testid={ `${index}-recipe-card` }
+                  key={ index }
+                  type="button"
+                  className="horizontal-card"
+                  onClick={ () => getId(item.idMeal) }
+                >
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    className="img-horizontal-card"
+                    src={ item.strMealThumb }
+                    alt={ item.strMeal }
+                  />
+                  <div className="horizontal-card-infos">
+                    <span
+                      data-testid={ `${index}-card-name` }
+                      className="name-horizontal-card"
+                    >
+                      { item.strMeal }
+                    </span>
+                  </div>
+                </button>
+              );
+            }
+            return null;
+          }) }
+        </section>
+      </div>
+      <Footer />
+    </div>
   );
 }
 

@@ -1,10 +1,40 @@
 .header {
+  align-items: center;
+  background-color: #606c38;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  color: #fefae0;
   display: flex;
   justify-content: space-between;
+  padding: 0.313rem 0.75rem;
+  position: fixed;
   width: 100vw;
+}
+
+h3 {
+  font-family: Lato , sans-serif;
+  font-weight: 700;
+  margin: 0;
 }
 
 .header-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.header-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+button {
+  background-color: #606c38;
+  border: none;
+  outline: none;
+}
+
+button:focus {
+  background-color: #606c38;
+  border: none;
+  outline: none;
 }

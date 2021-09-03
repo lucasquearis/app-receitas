@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.pag-foods-drinks {
+  background-color: #fefae0;
+  color: #161616;
+  min-height: 100vh;
+}
+
+.card {
+  border: none;
+  border-radius: 2.5rem;
+  box-shadow: 0.125rem 0.125rem 0.25rem #c5c5c5;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  margin: 0.5rem;
+}
+
+.card-body {
+  min-height: 3.125rem;
+  padding: 0;
+  text-align: center;
+}
+
+.card-img-top {
+  border-top-left-radius: 2.5rem;
+  border-top-right-radius: 2.5rem;
+  height: 8.75rem;
+  width: 8.75rem;
+}
+
+.card-title {
+  color: #161616;
+  font-family: Lato , sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0.625rem 0;
+}
