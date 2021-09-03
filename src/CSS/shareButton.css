@@ -1,0 +1,9 @@
+.share-btn {
+  position: absolute;
+  left: 55%;
+  background: #ea5323;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px 1px #ea5323;
+}

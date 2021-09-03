@@ -1,0 +1,39 @@
+.toggle-button {
+  background-color: black;
+  color: white;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  background: #ea5323;
+  border-radius: 10px;
+  border: solid 1px gray;
+  padding: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+}
+
+.filter-button {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: 30px 30px;
+  justify-content: stretch;
+}
+
+.button-explore {
+  font-family: "Roboto", sans-serif;
+  background: #ea5323;
+  border-radius: 10px;
+  border: solid 1px gray;
+  padding: 8px;
+  max-width: 300px;
+  color: #FFFFFF;
+  font-size: 22px;
+}
+
+.div-button-explore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+}
