@@ -163,12 +163,13 @@ export default function ReceitasFeitas() {
   };
 
   return (
-    <>
-      <section>
+    <main className="main-section">
+      <section className="header-section">
         <Header title="Receitas Feitas" />
       </section>
-      <section>
+      <section className="filter-section">
         <button
+          className="btn btn-success"
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ renderFiltro }
@@ -177,6 +178,7 @@ export default function ReceitasFeitas() {
           All
         </button>
         <button
+          className="btn btn-success"
           type="button"
           data-testid="filter-by-food-btn"
           onClick={ renderFiltro }
@@ -185,6 +187,7 @@ export default function ReceitasFeitas() {
           Food
         </button>
         <button
+          className="btn btn-success"
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ renderFiltro }
@@ -198,6 +201,6 @@ export default function ReceitasFeitas() {
           renderMap()
         }
       </div>
-    </>
+    </main>
   );
 }

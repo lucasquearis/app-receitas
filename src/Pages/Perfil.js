@@ -20,7 +20,7 @@ export default function Perfil() {
   };
   return (
     <section className="main-section">
-      <section>
+      <section className="header-section">
         <Header title="Perfil" searchIcon={ false } />
       </section>
       <section className="profile-button">

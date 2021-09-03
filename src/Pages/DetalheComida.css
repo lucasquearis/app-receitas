@@ -78,7 +78,7 @@
 }
 
 .start-recipe-btn {
-  background-color: rgb(1, 129, 1);
+  background-color: rgb(1, 129, 1, 0.7);
   border: none;
   bottom: 0;
   font-size: 18px;
@@ -159,5 +159,4 @@
 .food-info {
   background: rgb(25, 62, 25) radial-gradient(circle, rgba(25, 62, 25, 1) 36%, black 85%);
   color: white;
-  height: 100%;
 }

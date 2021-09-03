@@ -47,17 +47,17 @@ export default function ExplorarLocalOrigem() {
   }, [selectedArea]);
 
   const getCard = (food, index) => (
-    <section key={ index } data-testid={ `${index}-recipe-card` }>
+    <section className="card" key={ index } data-testid={ `${index}-recipe-card` }>
       <Link to={ `/comidas/${food.idMeal}` }>
         <img src={ food.strMealThumb } data-testid={ `${index}-card-img` } alt="img" />
-        <p data-testid={ `${index}-card-name` }>{ food.strMeal }</p>
+        <h4 data-testid={ `${index}-card-name` }>{ food.strMeal }</h4>
       </Link>
     </section>
   );
 
   return (
-    <>
-      <section>
+    <main className="main-section">
+      <section className="header-section">
         <Header title="ExplorarLocalOrigem" searchIcon />
       </section>
       <select
@@ -76,6 +76,6 @@ export default function ExplorarLocalOrigem() {
       </select>
       { selectedFood.map((food, index) => getCard(food, index))}
       <Footer />
-    </>
+    </main>
   );
 }

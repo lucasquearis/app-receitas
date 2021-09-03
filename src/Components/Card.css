@@ -1,6 +1,8 @@
 .card {
+
   /* background-color: rgb(255, 255, 161);
   box-shadow: 5px 5px 10px rgb(255, 255, 161, 0.8); */
+
   /* background-color: rgb(224, 150, 0);
   box-shadow: 5px 5px 10px rgb(224, 150, 0, 0.8); */
   background-color: rgb(236, 232, 111);
@@ -15,6 +17,6 @@
 }
 
 .card h4 {
-  text-align: center;
   margin: 10px;
+  text-align: center;
 }

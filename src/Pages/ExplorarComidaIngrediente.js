@@ -41,12 +41,12 @@ export default function ExplorarComidaIngrediente() {
   };
 
   return (
-    <>
-      <section>
+    <main className="main-section">
+      <section className="header-section">
         <Header title="ExplorarComidaIngrediente" searchIcon />
       </section>
       { ingredients.map((ingredient, index) => cardIngredients(ingredient, index)) }
       <Footer />
-    </>
+    </main>
   );
 }

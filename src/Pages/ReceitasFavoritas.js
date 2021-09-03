@@ -64,10 +64,13 @@ export default function ReceitasFeitas() {
   }
 
   return (
-    <section>
-      <Header title="Receitas Favoritas" />
+    <section className="main-section">
+      <section className="header-section">
+        <Header title="Receitas Favoritas" />
+      </section>
       <div className="filter-section">
         <button
+          className="btn btn-success"
           data-testid="filter-by-all-btn"
           type="button"
           name="all"
@@ -76,6 +79,7 @@ export default function ReceitasFeitas() {
           All
         </button>
         <button
+          className="btn btn-success"
           data-testid="filter-by-food-btn"
           type="button"
           name="food"
@@ -84,6 +88,7 @@ export default function ReceitasFeitas() {
           Food
         </button>
         <button
+          className="btn btn-success"
           data-testid="filter-by-drink-btn"
           type="button"
           name="drink"

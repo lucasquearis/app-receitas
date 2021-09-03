@@ -50,7 +50,7 @@
 }
 
 .start-drink-recipe-btn {
-  background-color: rgb(1, 129, 1);
+  background-color: rgb(1, 129, 1, 0.7);
   border: none;
   bottom: 0;
   font-size: 18px;
