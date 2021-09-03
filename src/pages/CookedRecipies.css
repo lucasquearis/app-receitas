@@ -21,8 +21,8 @@
   background-color: #00640059;
   border-radius: 10px;
   display: flex;
-  flex-direction: row;
   flex-flow: nowrap;
+  flex-direction: row;
   height: 140px;
   margin-left: 6px;
   margin-top: 6px;
