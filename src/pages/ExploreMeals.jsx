@@ -13,25 +13,25 @@ export default function ExploreMeals() {
   return (
     <div>
       <Header title="Explorar Comidas" search={ false } />
-      <div className="explore-container">
+      <div className="explore-containerMeals">
         <Link
           to="/explorar/comidas/ingredientes"
           data-testid="explore-by-ingredient"
-          className="explore-btn"
+          className="explore-btnMeals"
         >
           Por Ingredientes
         </Link>
         <Link
           to="/explorar/comidas/area"
           data-testid="explore-by-area"
-          className="explore-btn"
+          className="explore-btnMeals"
         >
           Por Local de Origem
         </Link>
         <Link
           to={ `/comidas/${randomMeal}` }
           data-testid="explore-surprise"
-          className="explore-btn"
+          className="explore-btnMeals"
         >
           Me Surpreenda!
         </Link>

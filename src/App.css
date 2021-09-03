@@ -118,6 +118,7 @@
   width: 100%;
 }
 
+
 .recipe-done-card-infos {
   color: black;
   display: flex;
@@ -125,8 +126,34 @@
   margin-left: 16vw;
 }
 
+.name-recipe-done-card {
+  color: black;
+}
+
 .share-button {
   width: 12vw;
+}
+
+.recipe-favorite-card {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ef6a07;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5vh;
+  width: 100%;
+}
+
+.name-recipe-favorite-card {
+  color: black;
+  display: flex;
+  justify-content: center;
+
+}
+
+.icon-favorite-card {
+  padding: 2vh;
 }
 
 .meals > .logo {
@@ -148,6 +175,10 @@
   padding: 3vh 0;
 }
 
+.div-header a {
+  padding-left: 10px;
+}
+
 .header-brn {
   border-radius: 50px;
   height: 7vh;
@@ -156,6 +187,7 @@
 .header-title {
   color: white;
   font-weight: 800;
+  margin-left: 20px;
 }
 
 footer {
@@ -241,6 +273,10 @@ footer {
   text-shadow: 0.1em 0.1em 0.2em black;
 }
 
+.nameDrinkMealsDetails span {
+  margin-left: 10px;
+}
+
 .recomendadosMealDrinks {
   background-color: #5c5c5c;
   display: flex;
@@ -248,6 +284,96 @@ footer {
   margin: 10px;
   padding-bottom: 10px;
   text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.in-progress {
+  background-color: #ef6a07;
+}
+
+.main-infos {
+  align-items:center;
+  background-color: #5c5c5c;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  margin: 10px;
+  padding: 5px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.main-infos h1 {
+  padding-left: 30px;
+}
+
+.main-infos button {
+  border-radius: 10px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.nameDrinkMealsInprogress {
+  align-items: center;
+  background-color: #5c5c5c;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding-bottom: 15px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.nameDrinkMealsInprogress li {
+  list-style: none;
+}
+
+.nameDrinkMealsInprogress h2 {
+  margin-bottom: 30px;
+}
+
+.nameDrinkMealsInprogress label {
+  display: flex;
+  align-items: center;
+}
+
+.nameDrinkMealsInprogress p {
+  display: flex;
+  margin-left: 30px;
+  padding-top: 5px;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.nameDrinkMealsInprogress input {
+  transform: scale(1.5);
+}
+
+.explore-btn {
+  border-radius: 0;
+  background-color: #ef6a07;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.explore-container {
+  margin-top: 140px;
+}
+
+.explore-containerMeals {
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+}
+
+.explore-btnMeals {
+  border-radius: 0;
+  background-color: #ef6a07;
+  color: white;
+  font-size: x-large;
+  font-weight: 800;
+  height: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+  width: 100%;
 }
 
 @keyframes shake {

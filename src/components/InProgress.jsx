@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -82,61 +83,73 @@ export default function InProgress(props) {
 
   return (
     <div className="in-progress">
-      <img width="200px" src={ thumb } alt={ name } data-testid="recipe-photo" />
+      <img width="100%" src={ thumb } alt={ name } data-testid="recipe-photo" />
       <div className="main-infos">
         <h1 data-testid="recipe-title">{name}</h1>
-        {
-          clipBoardCopy && <p>Link copiado!</p>
-        }
-        <button
-          type="button"
-          onClick={ clipboard }
-        >
-          <img data-testid="share-btn" src={ shareIcon } alt="share" />
-        </button>
-        <button
-          type="button"
-          onClick={ () => setFavorite(!favorite) }
-        >
-          <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
-        </button>
+        <div>
+          {
+            clipBoardCopy && <p>Link copiado!</p>
+          }
+          <button
+            type="button"
+            onClick={ clipboard }
+          >
+            <img data-testid="share-btn" src={ shareIcon } alt="share" />
+          </button>
+          <button
+            type="button"
+            onClick={ () => setFavorite(!favorite) }
+          >
+            <img data-testid="favorite-btn" src={ favoriteIcon } alt="favorite" />
+          </button>
+        </div>
       </div>
-      {!alcoholic && <h2 data-testid="recipe-category">{category}</h2>}
-      {alcoholic && <h2 data-testid="recipe-category">{alcoholic}</h2>}
-      <ul>
-        {steps.map(({ step, checked }, i) => (
-          <li key={ i }>
-            <label
-              data-testid={ `${i}-ingredient-step` }
-              className={ checked ? 'step-done' : '' }
-              htmlFor={ `ingredient${i}` }
-            >
-              <input
-                type="checkbox"
-                checked={ checked }
-                name={ step }
-                id={ `ingredient${i}` }
-                onChange={ handleCheckBoxChange }
-              />
-              {step}
-            </label>
-          </li>
-        ))}
-      </ul>
-      <h3>Instructions</h3>
-      <p data-testid="instructions">
-        {instructions}
-      </p>
+      <div className="nameDrinkMealsInprogress">
+        {!alcoholic && <h2 data-testid="recipe-category">{category}</h2>}
+        {alcoholic && <h2 data-testid="recipe-category">{alcoholic}</h2>}
+        <ul>
+          {steps.map(({ step, checked }, i) => (
+            <li key={ i }>
+              <label
+                data-testid={ `${i}-ingredient-step` }
+                className={ checked ? 'step-done' : '' }
+                htmlFor={ `ingredient${i}` }
+              >
+                <input
+                  type="checkbox"
+                  checked={ checked }
+                  name={ step }
+                  id={ `ingredient${i}` }
+                  onChange={ handleCheckBoxChange }
+                />
+                <p>{step}</p>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="nameDrinkMealsDetails">
+        <h2>Instructions</h2>
+        <span data-testid="instructions">
+          {instructions}
+        </span>
+      </div>
       <Link to="/receitas-feitas">
-        <button
+        <Button
           type="button"
           data-testid="finish-recipe-btn"
           disabled={ !steps.every(({ checked }) => checked) }
           onClick={ handleFinish }
+          className="contentBtn"
+          style={ { backgroundColor: '#5c5c5c',
+            border: 'none',
+            borderRadius: '0',
+            fontSize: '20px',
+            fontWeight: '700' } }
         >
           Finish
 
-        </button>
+        </Button>
       </Link>
     </div>
   );

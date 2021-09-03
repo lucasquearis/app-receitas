@@ -52,40 +52,45 @@ export default function FavoriteRecipesCard(props) {
   const origin = `${area} - ${c}`;
 
   return (
-    <section>
+    <section className="recipe-favorite-card">
       <Link to={ `${urlType}/${id}` }>
         <img
-          width="350px"
+          width="300px"
           data-testid={ `${index}-horizontal-image` }
           src={ thumb }
           alt={ name }
         />
         {!a && <p data-testid={ `${index}-horizontal-top-text` }>{ origin }</p>}
         {a && <p data-testid={ `${index}-horizontal-top-text` }>{ a }</p>}
-        <h1 data-testid={ `${index}-horizontal-name` }>{name}</h1>
+
+        <h1
+          data-testid={ `${index}-horizontal-name` }
+          className="name-recipe-favorite-card"
+        >
+          {name}
+
+        </h1>
       </Link>
-      <input
-        type="image"
-        onClick={ clipboard }
-        src={ shareIcon }
-        alt="share"
-        data-testid={ `${index}-horizontal-share-btn` }
-      />
-      {clipBoardCopy && <p>Link copiado!</p>}
-      <input
-        name={ name }
-        type="image"
-        alt="favorite"
-        src={ heartIcon }
-        data-testid={ `${index}-horizontal-favorite-btn` }
-        onClick={ () => setFavorite(!favorite) }
-      />
-      {/* <img
-            src={ heartIcon }
-            alt="share"
-            data-testid={ `${index}-horizontal-favorite-btn` }
-          /> */}
-      {/* </input> */}
+      <div>
+        <input
+          type="image"
+          onClick={ clipboard }
+          src={ shareIcon }
+          alt="share"
+          data-testid={ `${index}-horizontal-share-btn` }
+          className="icon-favorite-card"
+        />
+        {clipBoardCopy && <p>Link copiado!</p>}
+        <input
+          name={ name }
+          type="image"
+          alt="favorite"
+          src={ heartIcon }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          onClick={ () => setFavorite(!favorite) }
+          className="icon-favorite-card"
+        />
+      </div>
     </section>
   );
 }

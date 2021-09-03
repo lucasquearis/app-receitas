@@ -95,6 +95,7 @@ function Login() {
           data-testid="login-submit-btn"
           disabled={ disabledButton }
           onClick={ handleClick }
+          style={ { backgroundColor: 'black' } }
         >
           Entrar
         </Button>
