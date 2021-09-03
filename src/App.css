@@ -82,9 +82,15 @@
 @media only screen and ( max-width : 360px ) {
 
   .header-profile {
-    background-color: aquamarine;
+    background-color: lightgreen;
+    border: 3px solid black;
     display: flex;
     flex-direction: column;
+    height: 10vh;
+  }
+
+  .title {
+    font-size: 9vw;
   }
 
   .search-input {

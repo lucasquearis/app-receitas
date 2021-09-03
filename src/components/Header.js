@@ -26,7 +26,7 @@ class HeaderSearch extends React.Component {
               alt="imagem do link do perfil"
             />
           </Link>
-          <h1 data-testid="page-title">{title}</h1>
+          <h1 data-testid="page-title" className="title">{title}</h1>
         </div>
       </div>
     );
