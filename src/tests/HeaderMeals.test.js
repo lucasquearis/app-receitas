@@ -23,9 +23,7 @@ const fetchEmptyMock = () => {
 };
 
 const SEARCH_INPUT = 'search-input';
-const SEARCH_BTN = 'search-top-btn';
 const FIRST_LETTER = 'first-letter-search-radio';
-
 
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
@@ -37,7 +35,7 @@ describe('Testa a página de detalhes das receitas', () => {
       renderWithRouter(<HeaderMeals />);
       const profileBtn = screen.getByTestId('profile-top-btn');
       const title = screen.getByTestId('page-title');
-      const btn = screen.getByTestId(SEARCH_BTN);
+      const btn = screen.getByTestId('search-top-btn');
 
       expect(profileBtn).toBeInTheDocument();
       expect(title).toBeInTheDocument();
@@ -56,7 +54,7 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const ingredients = screen.getByTestId('ingredient-search-radio');
     const input = screen.getByTestId(SEARCH_INPUT);
-    const btn1 = screen.getByTestId(SEARCH_BTN);
+    const btn1 = screen.getByTestId('search-top-btn');
 
     userEvent.click(ingredients);
     userEvent.type(input, 'chicken');
@@ -75,7 +73,7 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const name = screen.getByTestId('name-search-radio');
     const inpt = screen.getByTestId(SEARCH_INPUT);
-    const button = screen.getByTestId(SEARCH_BTN);
+    const button = screen.getByTestId('search-top-btn');
 
     userEvent.click(name);
     userEvent.type(inpt, 'Brown Stew Chicken');
@@ -95,7 +93,7 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const fl = screen.getByTestId(FIRST_LETTER);
     const i = screen.getByTestId(SEARCH_INPUT);
-    const b = screen.getByTestId(SEARCH_BTN);
+    const b = screen.getByTestId('search-top-btn');
 
     userEvent.click(fl);
     userEvent.type(i, 'a');
@@ -112,7 +110,7 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
 
     userEvent.click(activeSearchBtn);
-    const b1 = screen.getByTestId(SEARCH_BTN);
+    const b1 = screen.getByTestId('search-top-btn');
     userEvent.click(b1);
     await act(() => promise);
   });
@@ -128,7 +126,7 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const fl1 = screen.getByTestId(FIRST_LETTER);
     const input1 = screen.getByTestId(SEARCH_INPUT);
-    const btn2 = screen.getByTestId(SEARCH_BTN);
+    const btn2 = screen.getByTestId('search-top-btn');
 
     userEvent.click(fl1);
     userEvent.type(input1, 'aaa');
@@ -148,7 +146,7 @@ describe('Testa a página de detalhes das receitas', () => {
     userEvent.click(activeSearchBtn);
     const fl2 = 'first-letter-search-radio';
     const inpu80 = screen.getByTestId(SEARCH_INPUT);
-    const btn3 = screen.getByTestId(SEARCH_BTN);
+    const btn3 = screen.getByTestId('search-top-btn');
 
     userEvent.click(fl2);
     userEvent.type(inpu80, 'ugwadawgb');
