@@ -1,6 +1,6 @@
 .header-noSearch {
   align-items: center;
-  background-color: #ED5F65;
+  background-color: #ed5f65;
   display: flex;
   flex-direction: row;
   height: 120px;
@@ -8,7 +8,7 @@
 }
 
 .header-noSearchImagem {
-  background-color: #ED5F65;
+  background-color: #ed5f65;
   display: flex;
   margin-left: auto;
   width: 120%;
@@ -23,6 +23,6 @@
 }
 
 .header-noSearchButton {
-  background-color: #ED5F65;
+  background-color: #ed5f65;
   border: none;
 }
