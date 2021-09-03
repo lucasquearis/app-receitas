@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../styles/Cards.css';
 
 import { Link } from 'react-router-dom';
 
@@ -10,12 +11,12 @@ function Cards({ element, index, type }) {
         type === 'Meal' ? `/comidas/${element.idMeal}` : `/bebidas/${element.idDrink}`
       }
     >
-      <section data-testid={ `${index}-recipe-card` }>
+      <section className="card" data-testid={ `${index}-recipe-card` }>
         <img
           src={ type === 'Meal' ? element.strMealThumb : element.strDrinkThumb }
           data-testid={ `${index}-card-img` }
           alt="Thumbnail"
-          width="130"
+          width="99%"
         />
         <p
           data-testid={ `${index}-card-name` }
@@ -24,7 +25,6 @@ function Cards({ element, index, type }) {
         </p>
       </section>
     </Link>
-
   );
 }
 

@@ -1,0 +1,22 @@
+.divButtonsHeader {
+  justify-content: space-around;
+}
+
+.headerPags {
+  align-items: center;
+  background-color: rgb(34, 205, 34);
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.h1Header {
+  margin-bottom: 0;
+}
+
+.buttonShowSearch {
+  background-color: transparent;
+  border: none;
+}

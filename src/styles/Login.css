@@ -1,0 +1,9 @@
+.divLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 55%;
+  min-height: 40%;
+  text-align: center;
+  width: 100%;
+}

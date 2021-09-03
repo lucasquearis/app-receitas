@@ -49,7 +49,7 @@ function Food() {
         <CategoriesButtons categories={ foodCategories } type="Meal" />
       </div>
 
-      <main>
+      <main className="d-flex flex-column justify-content-center align-items-center">
         {
           foods.slice(0, recipeLimit).map((element, index) => (
             <Cards
