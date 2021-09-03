@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { getFromLocalStorage } from '../../helpers';
 
-import { Main, Form, Title, Button } from './style';
+import { PageBackground, Main, Form, Title, Button, Logo } from './style';
+
+import recipeLogo from './images/recipesAppLogo.svg';
 
 function Login() {
   const {
@@ -11,6 +13,8 @@ function Login() {
     setFavoriteRecipes,
     setInProgressRecipes,
   } = useContext(AppContext);
+
+  const { push } = useHistory();
 
   const [inputLogin, setInputLogin] = useState({
     email: '',
@@ -34,6 +38,8 @@ function Login() {
       meals: [],
     }));
     setFavoriteRecipes(getFromLocalStorage('favoriteRecipes', []));
+
+    push('/comidas');
   };
 
   const verifyLogin = () => {
@@ -47,28 +53,30 @@ function Login() {
   };
 
   return (
-    <Main>
-      <Title>Recipe App</Title>
-      <Form>
-        <label htmlFor="email-input">
-          <input
-            data-testid="email-input"
-            id="email"
-            type="text"
-            placeholder="Email"
-            onChange={ handleChange }
-          />
-        </label>
-        <label htmlFor="password-input">
-          <input
-            data-testid="password-input"
-            id="password"
-            type="password"
-            placeholder="Senha"
-            onChange={ handleChange }
-          />
-        </label>
-        <Link to="/comidas">
+    <>
+      <PageBackground />
+      <Main>
+        <Logo src={ recipeLogo } alt="recipe-logo" />
+        <Title>Login</Title>
+        <Form>
+          <label htmlFor="email-input">
+            <input
+              data-testid="email-input"
+              id="email"
+              type="text"
+              placeholder="Email"
+              onChange={ handleChange }
+            />
+          </label>
+          <label htmlFor="password-input">
+            <input
+              data-testid="password-input"
+              id="password"
+              type="password"
+              placeholder="Senha"
+              onChange={ handleChange }
+            />
+          </label>
           <Button
             data-testid="login-submit-btn"
             type="button"
@@ -77,9 +85,9 @@ function Login() {
           >
             Entrar
           </Button>
-        </Link>
-      </Form>
-    </Main>
+        </Form>
+      </Main>
+    </>
   );
 }
 
