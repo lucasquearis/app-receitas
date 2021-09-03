@@ -1,5 +1,6 @@
 .login {
   align-items: center;
+  background-image: linear-gradient(to bottom, rgb(230, 230, 230), #ffffff);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -10,7 +11,7 @@
 .login__form {
   align-items: center;
   border-radius: 10px;
-  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.24);
+  box-shadow: 1px 3px 6px rgba(110, 116, 134, 0.53);
   column-gap: 10%;
   display: flex;
   flex-direction: column;
@@ -32,11 +33,25 @@
   z-index: 1;
 }
 
-.login h1 {
+.title__container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10vh;
+  text-align: center;
+}
+
+.logo__img {
+  height: auto;
+  width: 10vw;
+}
+
+.title__container h1 {
   color: #24997f;
   cursor: default;
-  font-size: calc(20px + 2vw);
-  margin: 2px 0 30px 2px;
+  font-size: calc(20px + 3vw);
+  margin-left: 15px;
+  text-align: center;
 }
 
 .login__form input {
