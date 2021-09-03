@@ -77,6 +77,8 @@ export default function SearchBar({ title }) {
     return search;
   };
 
+  // teste
+
   return (
     <form className="search-form">
       <input
