@@ -7,11 +7,13 @@ import * as serviceWorker from './serviceWorker';
 import Provider from './context/Provider';
 import Reset from './style/generic/Reset';
 import Font from './style/generic/Font';
+import Background from './style/generic/Background';
 
 ReactDOM.render(
   <Provider>
     <BrowserRouter>
       <Reset />
+      <Background />
       <Font />
       <App />
     </BrowserRouter>

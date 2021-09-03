@@ -10,7 +10,7 @@ import {
 import Header from '../../components/Header';
 import RecipesList from '../../components/RecipesList';
 import FooterBar from '../../components/FooterBar';
-import BarraDeBusca from '../../components/BarraDeBusca';
+import SearchBar from '../../components/SearchBar';
 import CategoryBar from '../../components/CategoryBar';
 
 function Principal({
@@ -97,7 +97,7 @@ function Principal({
   ]);
 
   const renderBars = () => {
-    if (showBar) return <BarraDeBusca />;
+    if (showBar) return <SearchBar />;
     return (<CategoryBar
       categoriesList={ categories }
       whatIsTheType={ pathname }

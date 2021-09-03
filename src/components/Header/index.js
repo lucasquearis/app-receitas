@@ -3,7 +3,7 @@ import { Redirect, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from '../../context/AppContext';
 import { useHeaderTitle } from '../../hooks';
-import { HeaderWrapper } from './style';
+import { HeaderWrapper, HeaderSpace } from './style';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 
@@ -18,27 +18,30 @@ function Header({ showSearchBtn }) { //
     return <Redirect to="/perfil" />;
   }
   return (
-    <HeaderWrapper>
-      <input
-        type="image"
-        data-testid="profile-top-btn"
-        alt="icone-perfil"
-        src={ profileIcon }
-        onClick={ () => setRedirect(true) }
-      />
-      <h1
-        data-testid="page-title"
-      >
-        { headerTitle }
-      </h1>
-      { showSearchBtn && <input
-        type="image"
-        data-testid="search-top-btn"
-        alt="icone-busca"
-        src={ searchIcon }
-        onClick={ () => setShowBar(!showBar) }
-      /> }
-    </HeaderWrapper> // ao clicar no ícone de busca, vai mudar o estado Global.
+    <>
+      <HeaderWrapper>
+        <input
+          type="image"
+          data-testid="profile-top-btn"
+          alt="icone-perfil"
+          src={ profileIcon }
+          onClick={ () => setRedirect(true) }
+        />
+        <h1
+          data-testid="page-title"
+        >
+          { headerTitle }
+        </h1>
+        { showSearchBtn && <input
+          type="image"
+          data-testid="search-top-btn"
+          alt="icone-busca"
+          src={ searchIcon }
+          onClick={ () => setShowBar(!showBar) }
+        /> }
+      </HeaderWrapper>
+      <HeaderSpace />
+    </>// ao clicar no ícone de busca, vai mudar o estado Global.
   );
 }
 Header.propTypes = {

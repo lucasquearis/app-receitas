@@ -1,16 +1,23 @@
 import styled from 'styled-components';
 
-export const Footer = styled.footer`  background-color: white;
+import footerBackground from './images/footerBackground.png';
+
+export const Footer = styled.footer`  background-color: transparent;
+  background-image: url(${footerBackground});
+  background-size: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   bottom: 0;
   display: flex;
+  height: 100px;
   justify-content: space-between;
-  padding: 10px;
+  padding: 5px;
+  padding-top: 50px;
   position: fixed;
   width: 100%;
 
   a {
-    max-width: 80px;
-    width: 13%;
+    width: 40px;
   }
 
   img {
