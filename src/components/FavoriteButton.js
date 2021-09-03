@@ -18,7 +18,7 @@ function FavoriteButton(props) {
       localStorage.setItem('favoriteRecipes', []);
     }
     setFavorite(getFavorite().some((currentInfos) => currentInfos.id === id));
-  }, [setFavorite, id, favorite]);
+  }, [setFavorite, id]);
 
   const removeFavorite = (currentId) => {
     const filtered = getFavorite().filter((ids) => ids.id !== currentId) || [];
@@ -43,7 +43,6 @@ function FavoriteButton(props) {
           if (!filtered) { // id já existe? se sim remove
             addFavorite(infos);
           } else { // vai copiar o q já tinha e adiciona uma novo obj de uma nova receita
-            console.log('else');
             removeFavorite(id);
           }
           // }
