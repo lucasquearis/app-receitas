@@ -1,4 +1,4 @@
-.details {
+.details, .in-progress {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -9,12 +9,13 @@
 }
 
 .details .drink-img,
-.details .meal-img {
+.details .meal-img, .in-progress .drink-img,
+.in-progress .meal-img {
   width: 100vw;
   margin-bottom: 10px;
 }
 
-.details .start {
+.details .start, .details .finishRecipe, .in-progress .start, .in-progress .finishRecipe {
   position: fixed;
   bottom: 0px;
   width: 100vw;
@@ -98,6 +99,8 @@ iframe {
 .instructions {
   text-align: justify;
   padding: 10px;
+  margin: 0;
+  margin-bottom: 50px;
 }
 
 .items-wrapper {
@@ -120,6 +123,10 @@ iframe {
           flex: none;
   width: 50vw;
   text-align: center;
+}
+
+.in-progress-list {
+  list-style: none;
 }
 
 .in-progress .in-progress-pic {

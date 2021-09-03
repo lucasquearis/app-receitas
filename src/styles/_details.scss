@@ -1,4 +1,4 @@
-.details {
+.details, .in-progress {
   display: flex;
   flex-direction: column;
 
@@ -8,7 +8,7 @@
     margin-bottom: 10px;
   }
 
-  .start {
+  .start, .finishRecipe {
     position: fixed;
     bottom: 0px;
     width: 100vw;
@@ -66,6 +66,8 @@ iframe {
 .instructions {
   text-align: justify;
   padding: 10px;
+  margin: 0;
+  margin-bottom: 50px;
 }
 
 .items-wrapper {
@@ -84,4 +86,8 @@ iframe {
   flex: none;
   width: 50vw;
   text-align: center;
+}
+
+.in-progress-list {
+  list-style: none;
 }

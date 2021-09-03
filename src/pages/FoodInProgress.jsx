@@ -6,6 +6,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { foodById } from '../utils/fetchAPIbyID';
 import useRedirect from '../hooks/useRedirect';
+import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 
 function FoodInProgress() {
   const { id } = useParams();
@@ -91,7 +92,6 @@ function FoodInProgress() {
       setDisabled(false);
     }
   };
-
   const finishRecipe = () => {
     const { strArea, strCategory, strMealThumb, strMeal, strTags } = foodDetails;
     const d = new Date();
@@ -130,10 +130,8 @@ function FoodInProgress() {
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     shouldRedirect('/receitas-feitas');
   };
-
   const setFavorite = () => {
     const { strArea, strCategory, strMealThumb, strMeal } = foodDetails;
-
     const favoriteRecipeToken = {
       id,
       type: 'comida',
@@ -143,7 +141,6 @@ function FoodInProgress() {
       name: strMeal,
       image: strMealThumb,
     };
-
     let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteRecipes) {
       if (favoriteRecipes.some((recipe) => recipe.id !== favoriteRecipeToken.id)) {
@@ -163,60 +160,80 @@ function FoodInProgress() {
       localStorage.removeItem('favoriteRecipes');
     }
   };
-  console.log(foodDetails);
-
   return (
     <div onChange={ isDisabled } className="in-progress">
       { redirect.should && <Redirect to={ redirect.path } />}
+      <HeaderWithoutSearch>Receita em Progresso</HeaderWithoutSearch>
       <img
         src={ foodDetails.strMealThumb }
         alt="imagem da comida"
         data-testid="recipe-photo"
         className="in-progress-pic"
       />
-      <h1 data-testid="recipe-title">{ foodDetails.strMeal }</h1>
+      <div className="detail-card">
+        <h3 data-testid="recipe-title">{ foodDetails.strMeal }</h3>
+        <div className="details-btn-div">
 
-      <ShareBtn id={ id } type="comida" />
-      <Button variant="danger" type="button" onClick={ setFavorite }>
-        <img
-          id="fav-btn"
-          src={ whiteHeartIcon }
-          alt="favoritar"
-          data-testid="favorite-btn"
-        />
-      </Button>
-      <h2 data-testid="recipe-category">{ foodDetails.strCategory }</h2>
-      <h3>Ingredientes:</h3>
-      <ul>
-        {listIngredients.map((ingredient, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-step` }
+          <ShareBtn id={ id } type="comida" />
+          <Button
+            variant="danger"
+            type="button"
+            onClick={ setFavorite }
+            className="favorite-btn"
           >
-            <Form.Group className="mb-3" controlId={ `${index}-ingredient-step` }>
-              <Form.Check
-                type="checkbox"
-                id={ `${index}-ingredient-step` }
-                label={ filterAlcoohol[index] ? (
-                  `${ingredient[1]} - ${filterAlcoohol[index][1]}`
-                ) : (ingredient[1]) }
-                onChange={ ({ target }) => {
-                  const label = target.parentElement.querySelector('label');
-                  progressRecipe(label.innerText);
-                  if (target.checked) {
-                    label.style.textDecoration = 'line-through';
-                  } else if (!target.checked) {
-                    target.defaultChecked = false;
-                    label.style.textDecoration = 'none';
-                  }
-                } }
-              />
-            </Form.Group>
-          </li>
-        ))}
-      </ul>
-      <h4>Instructions: </h4>
-      <h2 data-testid="instructions">{ foodDetails.strInstructions }</h2>
+            <img
+              id="fav-btn"
+              className="icon"
+              src={ whiteHeartIcon }
+              alt="favoritar"
+              data-testid="favorite-btn"
+            />
+          </Button>
+        </div>
+      </div>
+      <p data-testid="recipe-category">
+        <span>Categoria: </span>
+        { foodDetails.strCategory }
+      </p>
+      <div className="list-ingredients">
+        <h4>Ingredientes</h4>
+        <ul>
+          {listIngredients.map((ingredient, index) => (
+            <li
+              className="in-progress-list"
+              key={ index }
+              data-testid={ `${index}-ingredient-step` }
+            >
+              <Form.Group className="mb-3" controlId={ `${index}-ingredient-step` }>
+                <Form.Check
+                  type="checkbox"
+                  id={ `${index}-ingredient-step` }
+                  label={ filterAlcoohol[index] ? (
+                    `${ingredient[1]} - ${filterAlcoohol[index][1]}`
+                  ) : (ingredient[1]) }
+                  onChange={ ({ target }) => {
+                    const label = target.parentElement.querySelector('label');
+                    progressRecipe(label.innerText);
+                    if (target.checked) {
+                      label.style.textDecoration = 'line-through';
+                    } else if (!target.checked) {
+                      target.defaultChecked = false;
+                      label.style.textDecoration = 'none';
+                    }
+                  } }
+                />
+              </Form.Group>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <strong>Instruções</strong>
+      <p
+        className="instructions"
+        data-testid="instructions"
+      >
+        { foodDetails.strInstructions }
+      </p>
       <Button
         disabled={ disabled }
         type="button"
@@ -229,5 +246,4 @@ function FoodInProgress() {
     </div>
   );
 }
-
 export default FoodInProgress;
