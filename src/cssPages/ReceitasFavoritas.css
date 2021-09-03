@@ -46,3 +46,7 @@
 .listaReceitas {
   display: flex;
 }
+
+.cardRecipe {
+  margin-bottom: 15px;
+}
