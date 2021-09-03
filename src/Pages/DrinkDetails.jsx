@@ -6,7 +6,7 @@ import RecipeHeader from '../Components/RecipeHeader';
 import RenderRecommendations from '../Components/RenderRecommendations';
 import IngredientsAndMeasures from '../Components/IngredientsAndMeasures';
 import * as required from '../helper/requiredDetails';
-import { setRecipeDetails } from '../Redux/actions/actionSetRecipeDetails';
+import { setDrinkDetails } from '../Redux/actions/actionSetRecipeDetails';
 
 function DrinkDetails() {
   const [recipe, setRecipe] = useState([]);
@@ -24,21 +24,22 @@ function DrinkDetails() {
     verificatioinProgressRecipe } = required;
 
   useEffect(() => {
-    setRecipe(consultDrink(id));
-    setRecommendation(getMealsRecommendations());
-    setDoneRecipe(verificationDoneRecipe(id));
-    setProgressRecipe(verificatioinProgressRecipe(id));
+    async function waitingForReturn() {
+      setRecipe(await consultDrink(id));
+      setRecommendation(await getMealsRecommendations());
+      setDoneRecipe(verificationDoneRecipe(id));
+      setProgressRecipe(verificatioinProgressRecipe(id));
+    }
+    waitingForReturn();
   }, [id, consultDrink,
     getMealsRecommendations,
     verificationDoneRecipe,
     verificatioinProgressRecipe]);
 
   const handleRedirect = () => {
-    dispatch(setRecipeDetails(recipe));
+    dispatch(setDrinkDetails(recipe));
     push(`/bebidas/${id}/in-progress`);
   };
-
-  console.log(recommendation);
 
   if (recipe.length === 0) {
     return <Loading />;
@@ -47,7 +48,7 @@ function DrinkDetails() {
     <section>
       <RecipeHeader
         thumb={ recipe.strDrinkThumb }
-        title={ recipe.strDrinkThumb }
+        title={ recipe.strDrink }
         category={ recipe.strAlcoholic }
         recipe={ recipe }
         type="bebida"
