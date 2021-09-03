@@ -112,8 +112,11 @@ export default function RecipesInProgress() {
                 </div>
               </div>
               <hr />
-              <p data-testid="recipe-category">
-                { recipeDetails.strCategory }
+              <p>
+                { 'Category: ' }
+                <span data-testid="recipe-category">
+                  { recipeDetails.strCategory }
+                </span>
               </p>
               <h3>Ingredients</h3>
               <ul className="details-info-container">
