@@ -9,8 +9,8 @@ import {
   FIRSTLETTER_MEALS,
   FIRSTLETTER_DRINKS,
 
-} from '../services';
-import AppContext from '../context/AppContext';
+} from '../../services';
+import AppContext from '../../context/AppContext';
 
 function BarraDeBusca() {
   const [bar, setBar] = useState({
