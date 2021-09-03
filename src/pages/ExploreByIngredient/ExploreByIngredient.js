@@ -4,6 +4,7 @@ import { useData } from '../../Context/DataContext';
 import Header from '../../components/Header';
 import IngredientsList from '../../components/ExploreByIngredient/IngredientsList';
 import Footer from '../../components/Footer/Footer';
+import './ExploreByIngredient.css';
 
 function ExploreByIngredients() {
   const location = useLocation();
@@ -44,7 +45,7 @@ function ExploreByIngredients() {
   };
 
   return (
-    <div>
+    <div className="explo-ingre-container">
       <Header title="Explorar Ingredientes" />
       <IngredientsList
         ingredientsData={ ingredientsData }

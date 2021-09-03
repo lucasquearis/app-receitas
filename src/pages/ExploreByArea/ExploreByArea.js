@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import RecipesList from '../../components/RecipesMainPage/RecipesList';
 import Footer from '../../components/Footer/Footer';
+import './ExploreByArea.css';
 
 function ExploreByArea() {
   const [recipesData, setRecipesData] = useState([]);
@@ -39,11 +40,12 @@ function ExploreByArea() {
   ));
 
   return (
-    <div>
+    <div className="explo-byArea-container">
       <Header title="Explorar Origem" />
       <select
         data-testid="explore-by-area-dropdown"
         onChange={ (event) => setSelArea(event.target.value) }
+        className="area-dropdown"
       >
         { renderAreaSelect() }
       </select>

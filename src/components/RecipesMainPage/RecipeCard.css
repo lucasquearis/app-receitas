@@ -17,6 +17,10 @@
   width: 161px;
 }
 
+.card-container:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
 .card-container h5 {
   color: black;
   font-size: 18px;

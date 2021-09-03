@@ -1,0 +1,23 @@
+.explo-byArea-container {
+  border: solid #c4c4c4 1px;
+  min-height: 640px;
+  width: 360px;
+}
+
+.area-dropdown {
+  border: solid 2px darkgray;
+  border-radius: 7px;
+  margin: 10px 4px;
+  padding: 5px;
+  width: 350px;
+}
+
+.area-dropdown:hover {
+  border: solid 2px blue;
+}
+
+.area-dropdown:focus {
+  background-color: #c4c4c4;
+  border: solid 2px blue;
+}
+
