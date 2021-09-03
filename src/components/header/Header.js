@@ -44,10 +44,10 @@ const Header = ({ children }) => {
             data-testid="search-top-btn"
           />
         </button>
-        <div>
-          <SearchBar bool={ withSearchBar } />
-        </div>
       </header>
+      <div>
+        <SearchBar bool={ withSearchBar } />
+      </div>
     </div>
   );
 };

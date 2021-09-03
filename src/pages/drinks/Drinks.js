@@ -38,6 +38,7 @@ const Drinks = () => {
         <Header>Comidas</Header>
         <CategoriesFilterButtons />
         <CardsList array={ ingredient } teste="recipe-card" className="cardList" />
+        <FooterMenu />
       </div>
     );
   }
@@ -47,6 +48,7 @@ const Drinks = () => {
         <Header>Bebidas</Header>
         <CategoriesFilterButtons />
         <CardsList array={ items } teste="recipe-card" />
+        <FooterMenu />
       </div>
     );
   }

@@ -1,0 +1,24 @@
+.searchBar-input {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 1%;
+}
+
+.searchBar-div {
+  margin-left: 5%;
+  margin-top: 1%;
+}
+
+.searchBar-laybel {
+  margin-left: 6px;
+  margin-right: 4px;
+}
+
+.searchBar-button {
+  background-color: #F7CE5D;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 5px 10px rgb(250, 194, 194);
+  width: 85px;
+  margin-left: 5%;
+}

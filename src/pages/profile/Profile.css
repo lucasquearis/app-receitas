@@ -4,10 +4,15 @@
   flex-direction: column;
   font-size: 20px;
   margin-top: 50px;
+
 }
 
 .profile-button {
   margin: 10px;
   padding: 10px;
   width: 80%;
+  background-color: #F7CE5D;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 5px 10px rgb(250, 194, 194);
 }

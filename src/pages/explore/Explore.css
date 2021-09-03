@@ -1,8 +1,8 @@
 .explore-btn {
-  background-color: white;
+  background-color: #F7CE5D;
   border: white;
   border-radius: 5px;
-  box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  box-shadow: 1px 5px 10px rgb(250, 194, 194);
   display: flex;
   flex-direction: column;
   font-size: 27px;

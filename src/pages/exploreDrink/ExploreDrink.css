@@ -1,8 +1,8 @@
 .exploreDrink-btn {
-  background-color: white;
+  background-color: #F7CE5D;
   border: white;
   border-radius: 5px;
-  box-shadow: 1px 5px 10px rgb(204, 201, 201);
+  box-shadow: 1px 5px 10px rgb(250, 194, 194);
   display: inline-flex;
   flex-direction: row;
   font-size: 27px;
@@ -11,5 +11,5 @@
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 30px;
-  width: 45%;
+  width: 44%;
 }
