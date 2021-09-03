@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchDrinkById } from '../services/cocktailAPI';
 import '../styles/mainFoodInProgress.css';
 import shareImage from '../images/shareIcon.svg';
-import { getFavorites, handleFavoriteAuxiliar }
+import { getFavorites, handleFavoriteAuxiliar, handleShare }
   from '../auxiliar/auxiliarFunctions';
 
 function MainDrinkInProgress({ history, match: { params: { id } } }) {
@@ -118,19 +118,6 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
     });
   };
 
-  const handleLinks = () => {
-    setLink('Link copiado!');
-    const actualLocation = String(window.location.href);
-    const a = actualLocation.split('/');
-    const actual = `${a[0]}//${a[1]}${a[2]}/${a[3]}/${a[4]}`;
-    const input = document.createElement('input');
-    document.body.appendChild(input);
-    input.value = actual;
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
-  };
-
   const verifyChecked = () => {
     const input = document.querySelectorAll('.inputs-checkbox');
     input.forEach((inputs) => {
@@ -169,12 +156,20 @@ function MainDrinkInProgress({ history, match: { params: { id } } }) {
             <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
             <h2 data-testid="recipe-category">{ drink.strCategory }</h2>
             <p>{ link }</p>
-            <button type="button" data-testid="share-btn" onClick={ handleLinks }>
-              <img src={ shareImage } alt="botao-compartilhar" />
-            </button>
-            <button type="button" onClick={ handleFavorite }>
-              <img src={ icon } alt="icone-de-favoritar" data-testid="favorite-btn" />
-            </button>
+            <input
+              type="image"
+              alt="share"
+              src={ shareImage }
+              data-testid="share-btn"
+              onClick={ () => handleShare(setLink, '', true) }
+            />
+            <input
+              type="image"
+              alt="fav"
+              src={ icon }
+              data-testid="favorite-btn"
+              onClick={ handleFavorite }
+            />
             <p data-testid="instructions">{ drink.strInstructions }</p>
           </div>
         );
