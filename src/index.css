@@ -785,12 +785,65 @@ iframe {
       flex-wrap: wrap;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  margin-top: 10px;
 }
 
 .cat {
   width: 33%;
   margin: 5px 0;
   word-wrap: break-word;
+}
+
+.done-recipe-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90vw;
+  margin: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 5px black;
+          box-shadow: 0 2px 5px black;
+}
+
+.done-recipe-card button {
+  width: 85vw;
+}
+
+.done-img {
+  width: 120px;
+  border-radius: 5px 0 5px 0;
+}
+
+.name-photo {
+  position: relative;
+  left: -11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 120px;
+}
+
+.done-details {
+  text-align: center;
 }
 
 @font-face {
