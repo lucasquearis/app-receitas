@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   ingredients: [],
   areas: [],
   isLoading: true,
+  doneRecipes: [],
 };
 
 export default (state = INITIAL_STATE, action) => {

@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import ingredientsDetails from '../helpers/getIngredients';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import useProgressRecipes from '../hooks/useProgressRecipes';
 import useLocalStorageRecipes from '../hooks/useLocalStorageRecipes';
-import { saveInProgressRecipes, saveOnLocalStorage } from '../helpers/saveOnLocalStorage';
+import {
+  saveInProgressRecipes,
+  saveOnLocalStorage,
+  saveNewDoneRecipe,
+  getDataFromLocalStorage,
+} from '../helpers/saveOnLocalStorage';
+import { doneFood, doneDrink } from '../redux/actions/doneRecipesActions';
 
 export default function ProgressRecipes() {
   const location = useLocation();
@@ -13,6 +20,7 @@ export default function ProgressRecipes() {
   const { loading, recipes, data } = useProgressRecipes();
   const { inProgressRecipes } = useLocalStorageRecipes();
   const [checkedIngredients, setCheckedIngredients] = useState(0);
+  const dispatch = useDispatch();
 
   function valueIngredients({ target }) {
     if (currentPage.includes('comidas')) {
@@ -22,6 +30,26 @@ export default function ProgressRecipes() {
     const savedata = ((saveInProgressRecipes(target.id, recipes)));
     saveOnLocalStorage('inProgressRecipes', savedata);
     setCheckedIngredients((prevState) => prevState + 1);
+  }
+
+  function handleClick() {
+    let type;
+
+    if (currentPage.includes('comidas')) {
+      type = 'comidas';
+    } else {
+      type = 'bebidas';
+    }
+
+    const recipe = saveNewDoneRecipe(recipes, type);
+    const localRecipes = getDataFromLocalStorage('doneRecipes');
+    saveOnLocalStorage('doneRecipes', [...localRecipes, recipe]);
+
+    if (currentPage.includes('comidas')) {
+      dispatch(doneFood(recipe));
+    } else {
+      dispatch(doneDrink(recipe));
+    }
   }
 
   const lengthItems = ingredientsDetails(recipes).map((item) => item).length;
@@ -38,6 +66,7 @@ export default function ProgressRecipes() {
           img={ data.image }
           title={ data.title }
           category={ data.alcoholic }
+          handleClick={ handleClick }
           ingredients={
             data.recipeId ? ingredientsDetails(recipes).map((item, index) => (
               <div key={ index } className="recipes-checkbox">
