@@ -162,7 +162,7 @@ function MainFoodsInProgress({ history, match: { params: { id } } }) {
               alt="share"
               src={ shareImage }
               data-testid="share-btn"
-              onClick={ () => handleShare(setLink) }
+              onClick={ () => handleShare(setLink, '', true) }
             />
             <input
               type="image"

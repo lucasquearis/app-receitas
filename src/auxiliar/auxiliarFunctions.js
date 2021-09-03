@@ -45,13 +45,17 @@ export const handleButton = (history) => {
   );
 };
 
-export const handleShare = (setLink, id = '') => {
+export const handleShare = (setLink, id = '', progress = false) => {
   setLink('Link copiado!');
   let actualLocation;
   if (id.length) {
     actualLocation = `${document.location.origin}/${id}`;
   } else {
     actualLocation = window.location.href;
+  }
+  if (progress) {
+    const [first] = actualLocation.split('/in-progress');
+    actualLocation = first;
   }
   const dummy = document.createElement('input');
   document.body.appendChild(dummy);
