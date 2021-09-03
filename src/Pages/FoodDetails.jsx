@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import ReactPlayer from 'react-player';
 import Loading from '../Components/Loading';
 import RecipeHeader from '../Components/RecipeHeader';
+import RenderRecommendations from '../Components/RenderRecommendations';
 import IngredientsAndMeasures from '../Components/IngredientsAndMeasures';
 import * as required from '../helper/requiredDetails';
-import RenderRecommendations from '../Components/RenderRecommendations';
+import { setMealDetails } from '../Redux/actions/actionSetRecipeDetails';
 
 function FoodDetails() {
   const [recipe, setRecipe] = useState([]);
   const [recommendation, setRecommendation] = useState([]);
   const [doneRecipe, setDoneRecipe] = useState(true);
   const [progressRecipe, setProgressRecipe] = useState(false);
+  const dispatch = useDispatch();
 
   const { id } = useParams();
   const { push } = useHistory();
@@ -35,9 +38,8 @@ function FoodDetails() {
     verificatioinProgressRecipe]);
 
   const handleRedirect = () => {
-    push({ pathname: `/comidas/${id}/in-progress`,
-      search: '?query=abc',
-      state: recipe });
+    dispatch(setMealDetails(recipe));
+    push(`/comidas/${id}/in-progress`);
   };
 
   if (recipe.length === 0) {
