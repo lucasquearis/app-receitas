@@ -29,7 +29,7 @@ function ShareButton({ recipeDetails }) {
       <img
         src={ icon }
         alt="share button"
-        style={ { width: '30px' } }
+        style={ { width: '58px' } }
       />
       {isCopied && 'Link copiado!'}
     </button>

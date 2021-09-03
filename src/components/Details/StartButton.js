@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
-import './StartButton.css';
 
 export default function StartButton(props) {
   const { category, id } = props;
