@@ -2,14 +2,12 @@ import React from 'react';
 import { arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import RecipeCard from '../../components/RecipeCard';
-import './foodRecipeCards.css';
 
 const TWELVE = 12;
 
 function FoodRecipeCards({ recipes }) {
   return (
-    <section className="food-recipes">
-
+    <section className="main-recipes">
       {recipes.reduce((acc, recipe, index) => {
         if (index < TWELVE) {
           acc = [...acc, <RecipeCard

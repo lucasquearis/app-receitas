@@ -11,6 +11,7 @@ function FiltersRecipesDrinks({ getCategory, recipesNotFilter }) {
   const [isMounted, setIsMounted] = useState(false);
   const [isToggle, setIsToggle] = useState('');
   const [isFilteredCategory, setFilteredCategory] = useState(false);
+  const [category, setCategory] = useState('All');
 
   const getCategories = () => {
     const fetchCategories = async () => {
@@ -25,42 +26,50 @@ function FiltersRecipesDrinks({ getCategory, recipesNotFilter }) {
 
   useEffect(getCategories);
 
-  function handleClick({ target: { value } }) {
-    if (!isFilteredCategory || isToggle !== value) {
-      getCategory(value);
+  function handleClick({ target: { name } }) {
+    if (!isFilteredCategory || isToggle !== name) {
+      setCategory(name);
+      getCategory(name);
       setFilteredCategory(true);
-      return setIsToggle(value);
+      return setIsToggle(name);
     }
+    setCategory('All');
     recipesNotFilter();
     setFilteredCategory(false);
   }
 
   function setCategoryAll() {
+    setCategory('All');
     recipesNotFilter();
     setFilteredCategory(false);
   }
 
   return (
-    <>
+    <div className="filter-recipes">
       {categories.map(({ strCategory }) => (
         <button
+          className="filter-recipes-btn"
           key={ strCategory }
           type="button"
           data-testid={ `${strCategory}-category-filter` }
-          value={ strCategory }
+          name={ strCategory }
           onClick={ handleClick }
+          style={ { backgroundColor: category === strCategory ? '#350' : '#673' } }
         >
-          {strCategory}
+          {strCategory.replace(' / Float / Shake', '')}
         </button>
       ))}
       <button
+        className="filter-recipes-btn"
+        style={ { backgroundColor: category === 'All' ? '#350' : '#673' } }
         type="button"
         data-testid="All-category-filter"
         onClick={ setCategoryAll }
+        name="All"
       >
         All
       </button>
-    </>
+    </div>
   );
 }
 

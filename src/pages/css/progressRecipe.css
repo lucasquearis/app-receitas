@@ -1,9 +1,9 @@
-.progress-food {
+.progress-recipe {
   padding-bottom: 80px;
   width: 100vw;
 }
 
-.progress-food .loading-container {
+.progress-recipe .loading-container {
   height: 100vh;
   position: fixed;
   width: 100vw;
@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-.progress-food a {
+.progress-recipe a {
   color: #350;
   font-size: 18px;
   font-weight: 500;
@@ -55,18 +55,18 @@
   padding-right: 10px;
 }
 
-.progress-food-ingredients {
+.progress-recipe-ingredients {
   background-color: #fed;
   margin: 20px auto;
   padding: 10px;
   width: 95%;
 }
 
-.progress-food-ingredients li {
+.progress-recipe-ingredients li {
   list-style: none;
 }
 
-.progress-food-ingredients input {
+.progress-recipe-ingredients input {
   margin-right: 5px;
 }
 

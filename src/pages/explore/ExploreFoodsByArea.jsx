@@ -76,7 +76,7 @@ export default function ExploreFoodsByArea() {
           ))}
         </select>
       </section>
-      <section className="food-recipes">
+      <section className="main-recipes">
         {isLoading
           ? <Loading />
           : recipes.map((recipe, index) => (

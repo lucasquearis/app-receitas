@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import DrinkRecipeCards from './DrinkRecipeCards';
 import FiltersRecipesDrinks from './FiltersRecipesDrinks';
+import '../css/mainRecipes.css';
+import Loading from '../../components/Loading';
 
 function Drinks({ setRecipes, isFetching, selectIngredient, changeIngredient }) {
   const [isMount, setIsMount] = useState(false);
@@ -26,7 +28,7 @@ function Drinks({ setRecipes, isFetching, selectIngredient, changeIngredient }) 
       <Header title="Bebidas" showButton />
       <FiltersRecipesDrinks />
       {isFetching
-        ? <div>Carregando ...</div>
+        ? <Loading />
         : <DrinkRecipeCards />}
       <Footer />
     </>

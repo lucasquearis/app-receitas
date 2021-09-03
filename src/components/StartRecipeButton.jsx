@@ -8,7 +8,7 @@ export default function StartRecipeButton({ doneRecipe, inProgress, id, isFood }
       ? (
         <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${id}/in-progress` }>
           <button
-            className={ `start-recipe-${isFood ? 'food' : 'drink'}-btn` }
+            className="start-recipe-btn"
             type="button"
             data-testid="start-recipe-btn"
           >
