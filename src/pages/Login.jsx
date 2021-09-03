@@ -62,7 +62,7 @@ export default function Login() {
 
   return (
     <main className="vh-100 d-flex flex-column align-items-center justify-content-center">
-      <img src={ logo } alt="logo" className="image" />
+      <img src={ logo } alt="logo" className="logo" />
       <Form className="w-75 d-flex flex-column justify-content-center">
         <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>
@@ -85,7 +85,7 @@ export default function Login() {
           />
         </Form.Group>
         <Button
-          variant="success"
+          variant="primary"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ buttonDisabled }

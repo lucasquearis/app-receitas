@@ -29,44 +29,57 @@ export default function FavoriteCard({
   };
 
   return (
-    <Card style={ { width: '90%' } }>
-      <Link to={ type === 'comida' ? `comidas/${id}` : `bebidas/${id}` }>
+    <Card
+      className="d-flex flex-row p-3"
+    >
+      <Link
+        to={ type === 'comida' ? `comidas/${id}` : `bebidas/${id}` }
+      >
         <Card.Img
-          style={ { width: '100px' } }
+          style={ { width: '150px' } }
           data-testid={ `${index}-horizontal-image` }
           src={ img }
         />
-        <Card.Title
-          data-testid={ `${index}-horizontal-top-text` }
-        >
-          {category}
-        </Card.Title>
-        <Card.Title data-testid={ `${index}-horizontal-name` }>{title}</Card.Title>
       </Link>
       <div>
-        <p>{msgLink}</p>
-        <button
-          type="button"
-          style={ { border: 'none', background: 'none' } }
-          onClick={ onClickShare }
+        <Link
+          to={ type === 'comida' ? `comidas/${id}` : `bebidas/${id}` }
+          className="w-50"
         >
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            alt="Compartilhar"
-          />
-        </button>
-        <button
-          type="button"
-          style={ { border: 'none', background: 'none' } }
-          onClick={ handleDelete }
-        >
-          <img
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            src={ favIconChecked }
-            alt="Favoritar"
-          />
-        </button>
+          <Card.Body className="d-flex flex-column">
+            <Card.Title data-testid={ `${index}-horizontal-name` }>{title}</Card.Title>
+            <Card.Text
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              {category}
+            </Card.Text>
+          </Card.Body>
+        </Link>
+        <div className="d-flex justify-content-start pl-4">
+          <p>{msgLink}</p>
+          <button
+            type="button"
+            className="bg-transparent border-0 mr-3"
+            onClick={ onClickShare }
+          >
+            <img
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ shareIcon }
+              alt="Compartilhar"
+            />
+          </button>
+          <button
+            type="button"
+            className="bg-transparent border-0"
+            onClick={ handleDelete }
+          >
+            <img
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              src={ favIconChecked }
+              alt="Favoritar"
+            />
+          </button>
+        </div>
       </div>
     </Card>
   );

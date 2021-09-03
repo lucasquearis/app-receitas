@@ -31,46 +31,56 @@ export default function RecipeDetailCard({
   };
 
   return (
-    <section>
-      <div>
+    <section className="d-flex flex-column w-100">
+      <div className="d-flex flex-column">
         <img
-          style={ { width: '120px' } }
+          className="w-100 border"
           data-testid="recipe-photo"
           src={ img }
           alt="Foto do produto"
         />
-        <h3 data-testid="recipe-title">{title}</h3>
-        <p data-testid="recipe-category">{category}</p>
-        <ShareAndFavBtns recipes={ data } />
+        <div className="d-flex p-3 justify-content-between align-items-center bg-color">
+          <div className="d-flex flex-column">
+            <h3 data-testid="recipe-title">{title}</h3>
+            <p data-testid="recipe-category">{category}</p>
+          </div>
+          <ShareAndFavBtns recipes={ data } />
+        </div>
       </div>
-      <div>
+      <div className="p-3 border">
         <h3>Ingredients</h3>
-        <ul>{ingredients}</ul>
+        <ul
+          className="m-0"
+          style={ { padding: '20px' } }
+        >
+          {ingredients}
+        </ul>
       </div>
-      <div>
+      <div className="p-3">
         <h3>Instructions</h3>
-        <p data-testid="instructions">{instructions}</p>
+        <p data-testid="instructions" className="text-justify">{instructions}</p>
       </div>
-      <div>
-        <h3>Video</h3>
-        <iframe
-          data-testid="video"
-          width="340"
-          height="240"
-          src={ video === null ? null : video.replace('watch?v=', 'embed/') }
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-      <div />
-      <div>
-        {showRecomendations ? recomendationPage() : null}
-      </div>
+      { !(currentPage.includes('bebidas') || currentPage.includes('progress'))
+        ? (
+          <div className="p-3 border">
+            <h3>Video</h3>
+            <iframe
+              className="pt-3"
+              data-testid="video"
+              width="324"
+              height="240"
+              src={ video === null ? null : video.replace('watch?v=', 'embed/') }
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        ) : null }
+      {showRecomendations ? recomendationPage() : null}
       {!doneRecipe && showRecomendations ? (
         <Button
-          style={ { position: 'fixed', bottom: '0', width: '100%' } }
+          className="fixed-bottom w-100"
           data-testid="start-recipe-btn"
           type="button"
           onClick={ handleClick }
@@ -81,7 +91,7 @@ export default function RecipeDetailCard({
       {!showRecomendations ? (
         <Link to="/receitas-feitas">
           <Button
-            style={ { position: 'fixed', bottom: '0', width: '100%' } }
+            className="fixed-bottom w-100"
             data-testid="finish-recipe-btn"
             type="button"
             onClick={ handleClick }

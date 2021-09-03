@@ -6,7 +6,6 @@ import ingredientsDetails from '../helpers/getIngredients';
 import RecipeDetailCard from '../components/RecipeDetailCard';
 import useProgressRecipes from '../hooks/useProgressRecipes';
 import useLocalStorageRecipes from '../hooks/useLocalStorageRecipes';
-import '../styles/progressRecipes.css';
 import {
   saveInProgressRecipes,
   saveOnLocalStorage,
@@ -54,9 +53,8 @@ export default function ProgressRecipes() {
   }
 
   const lengthItems = ingredientsDetails(recipes).map((item) => item).length;
-  console.log(checkedIngredients);
   return (
-    <div>
+    <div className="pb-5">
       {loading ? (
         <Spinner animation="border" />
       ) : (

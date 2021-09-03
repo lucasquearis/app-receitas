@@ -9,6 +9,7 @@ export default function Categories({ categories, onClick }) {
         {
           categories.map(({ strCategory }, index) => (
             <Button
+              style={ { height: '60px' } }
               className="col border"
               variant="light"
               key={ index + 1 }

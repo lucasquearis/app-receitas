@@ -29,8 +29,6 @@ export default function FavoriteRecipes() {
     setFavRecipes(favRecipes.filter((data) => data.type === 'bebida'));
   };
 
-  console.log(favRecipes.filter((data) => data.type === 'comida'));
-
   return (
     <section className="body">
       <Header
@@ -38,38 +36,48 @@ export default function FavoriteRecipes() {
         pageTitle="Receitas Favoritas"
         onClickShowInput={ () => {} }
       />
-      <Button
-        onClick={ clearFilter }
-        data-testid="filter-by-all-btn"
-        type="button"
-      >
-        All
-      </Button>
-      <Button
-        onClick={ handleFoodFilter }
-        data-testid="filter-by-food-btn"
-        type="button"
-      >
-        Food
-      </Button>
-      <Button
-        onClick={ handleDrinkFilter }
-        data-testid="filter-by-drink-btn"
-        type="button"
-      >
-        Drinks
-      </Button>
-      {favRecipes.map((recipe, index) => (
-        <FavoriteCard
-          key={ recipe.id }
-          category={ `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
-          title={ recipe.name }
-          img={ recipe.image }
-          index={ index }
-          recipes={ recipe }
-          handleDelete={ () => handleDelete(recipe.id) }
-        />
-      ))}
+      <main className="d-flex flex-column w-100 p-3">
+        <div className="d-flex justify-content-around pb-2">
+          <Button
+            style={ { height: '60px' } }
+            className="border bg-color w-25"
+            onClick={ clearFilter }
+            data-testid="filter-by-all-btn"
+            type="button"
+          >
+            All
+          </Button>
+          <Button
+            style={ { height: '60px' } }
+            className="border bg-color w-25"
+            onClick={ handleFoodFilter }
+            data-testid="filter-by-food-btn"
+            type="button"
+          >
+            Foods
+          </Button>
+          <Button
+            style={ { height: '60px' } }
+            className="border bg-color w-25"
+            onClick={ handleDrinkFilter }
+            data-testid="filter-by-drink-btn"
+            type="button"
+          >
+            Drinks
+          </Button>
+        </div>
+        {favRecipes.map((recipe, index) => (
+          <FavoriteCard
+            key={ recipe.id }
+            category={ `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
+            title={ recipe.name }
+            img={ recipe.image }
+            index={ index }
+            recipes={ recipe }
+            handleDelete={ () => handleDelete(recipe.id) }
+          />
+        ))}
+      </main>
     </section>
   );
 }

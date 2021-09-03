@@ -16,13 +16,14 @@ export default function DrinksRecomendations() {
       autoPlaySpeed={ 3000 }
       centerMode={ false }
       className=""
-      containerClass="container-with-dots"
+      containerClass="pt-2"
       dotListClass=""
       draggable
       focusOnSelect={ false }
-      infinite={ false }
+      infinite
       itemClass=""
       keyBoardControl
+      partialVisible={ false }
       minimumTouchDrag={ 80 }
       renderButtonGroupOutside={ false }
       renderDotsOutside={ false }
@@ -33,7 +34,6 @@ export default function DrinksRecomendations() {
             min: 1024,
           },
           items: 3,
-          partialVisibilityGutter: 40,
         },
         mobile: {
           breakpoint: {
@@ -41,7 +41,6 @@ export default function DrinksRecomendations() {
             min: 0,
           },
           items: 2,
-          partialVisibilityGutter: 30,
         },
         tablet: {
           breakpoint: {
@@ -49,7 +48,6 @@ export default function DrinksRecomendations() {
             min: 464,
           },
           items: 2,
-          partialVisibilityGutter: 30,
         },
       } }
       showDots={ false }
@@ -65,20 +63,29 @@ export default function DrinksRecomendations() {
       }, index) => {
         if (index < maxLength) {
           return (
-            <Card.Body
-              key={ idDrink }
-              data-testid={ `${index}-recomendation-card` }
-            >
+            <Card className="border" key={ index }>
               <Card.Img
-                style={ { width: '200px' } }
                 src={ strDrinkThumb }
                 alt="Foto do drink"
               />
-              <Card.Title>{strAlcoholic}</Card.Title>
-              <Card.Title data-testid={ `${index}-recomendation-title` }>
-                {strDrink}
-              </Card.Title>
-            </Card.Body>
+              <Card.Body
+                className="bg-color p-2"
+                key={ idDrink }
+                data-testid={ `${index}-recomendation-card` }
+              >
+                <Card.Title
+                  className="m-0"
+                  data-testid={ `${index}-recomendation-title` }
+                >
+                  {strDrink}
+                </Card.Title>
+                <Card.Text
+                  className="m-0"
+                >
+                  {strAlcoholic}
+                </Card.Text>
+              </Card.Body>
+            </Card>
           );
         }
         return null;

@@ -53,15 +53,15 @@ export default function ShareAndFavBtns({ recipes }) {
     <div>
       <p>{msgLink}</p>
       <button
+        className="border-0 bg-transparent"
         type="button"
-        style={ { border: 'none', background: 'none' } }
         onClick={ onClickShare }
       >
         <img data-testid="share-btn" src={ shareIcon } alt="Compartilhar" />
       </button>
       <button
+        className="ml-2 border-0 bg-transparent"
         type="button"
-        style={ { border: 'none', background: 'none' } }
         onClick={ onClickFavorite }
       >
         <img

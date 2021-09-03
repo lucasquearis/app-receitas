@@ -21,44 +21,49 @@ export default function DoneRecipes() {
   }, [filter]);
 
   return (
-    <div>
-      <section>
-        <Header showExploreIcon pageTitle="Receitas Feitas" />
-      </section>
-      <Button
-        variant="light"
-        data-testid="filter-by-all-btn"
-        onClick={ () => setFilter('All') }
-      >
-        All
-      </Button>
-      <Button
-        variant="light"
-        data-testid="filter-by-food-btn"
-        onClick={ () => setFilter('Food') }
-      >
-        Food
-      </Button>
-      <Button
-        variant="light"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => setFilter('Drinks') }
-      >
-        Drinks
-      </Button>
-      {data.map((recipe, index) => (
-        <CardDoneRecipes
-          key={ recipe.id }
-          id={ recipe.id }
-          type={ recipe.type }
-          thumb={ recipe.image }
-          title={ recipe.name }
-          category={ `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
-          date={ recipe.doneDate }
-          tags={ recipe.tags }
-          index={ index }
-        />
-      ))}
+    <div className="body">
+      <Header showExploreIcon pageTitle="Receitas Feitas" />
+      <main className="d-flex flex-column w-100 p-3">
+        <div className="d-flex justify-content-around pb-2">
+          <Button
+            style={ { height: '60px' } }
+            className="border bg-color w-25"
+            data-testid="filter-by-all-btn"
+            onClick={ () => setFilter('All') }
+          >
+            All
+          </Button>
+          <Button
+            style={ { height: '60px' } }
+            className="border bg-color w-25"
+            data-testid="filter-by-food-btn"
+            onClick={ () => setFilter('Food') }
+          >
+            Food
+          </Button>
+          <Button
+            style={ { height: '60px' } }
+            className="border bg-color w-25"
+            data-testid="filter-by-drink-btn"
+            onClick={ () => setFilter('Drinks') }
+          >
+            Drinks
+          </Button>
+        </div>
+        {data.map((recipe, index) => (
+          <CardDoneRecipes
+            key={ recipe.id }
+            id={ recipe.id }
+            type={ recipe.type }
+            thumb={ recipe.image }
+            title={ recipe.name }
+            category={ `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
+            date={ recipe.doneDate }
+            tags={ recipe.tags }
+            index={ index }
+          />
+        ))}
+      </main>
     </div>
   );
 }

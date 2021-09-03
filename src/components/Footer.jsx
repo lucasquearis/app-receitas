@@ -11,13 +11,13 @@ export default function Footer() {
       className="d-flex navbar fixed-bottom justify-content-around bg-color"
       data-testid="footer"
     >
-      <Link to="/bebidas">
+      <Link to="/comidas">
         <img
-          name="drinks-botton"
-          className="drinks-botton"
-          data-testid="drinks-bottom-btn"
-          src={ drinkIcon }
-          alt="drinks-button"
+          name="food-bottom"
+          className="food-botton"
+          data-testid="food-bottom-btn"
+          src={ mealIcon }
+          alt="food-button"
         />
       </Link>
       <Link to="/explorar">
@@ -29,13 +29,13 @@ export default function Footer() {
           alt="explore-button"
         />
       </Link>
-      <Link to="/comidas">
+      <Link to="/bebidas">
         <img
-          name="food-bottom"
-          className="food-botton"
-          data-testid="food-bottom-btn"
-          src={ mealIcon }
-          alt="food-button"
+          name="drinks-botton"
+          className="drinks-botton"
+          data-testid="drinks-bottom-btn"
+          src={ drinkIcon }
+          alt="drinks-button"
         />
       </Link>
     </footer>

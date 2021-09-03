@@ -35,7 +35,9 @@ export default function FoodDetails() {
   const { progress, doneRecipes } = useLocalStorageRecipes();
 
   return (
-    <div>
+    <div
+      className="d-flex pb-5 justify-content-center align-items-center min-vh-100"
+    >
       {loading ? (
         <Spinner animation="border" />
       ) : (

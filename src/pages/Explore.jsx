@@ -14,20 +14,24 @@ export default function Explore() {
   return (
     <section className="body">
       <Header showExploreIcon pageTitle="Explorar" />
-      <Button
-        variant="light"
-        onClick={ () => changeRoute(`${pathname}/comidas`) }
-        data-testid="explore-food"
-      >
-        Explorar Comidas
-      </Button>
-      <Button
-        variant="light"
-        data-testid="explore-drinks"
-        onClick={ () => changeRoute(`${pathname}/bebidas`) }
-      >
-        Explorar Bebidas
-      </Button>
+      <main className="d-flex flex-column w-100 p-3">
+        <Button
+          style={ { 'font-size': '20pt' } }
+          className="border bg-color w-100"
+          onClick={ () => changeRoute(`${pathname}/comidas`) }
+          data-testid="explore-food"
+        >
+          Explorar Comidas
+        </Button>
+        <Button
+          style={ { 'font-size': '20pt' } }
+          className="border bg-color w-100 mt-2"
+          data-testid="explore-drinks"
+          onClick={ () => changeRoute(`${pathname}/bebidas`) }
+        >
+          Explorar Bebidas
+        </Button>
+      </main>
       <Footer />
     </section>
   );

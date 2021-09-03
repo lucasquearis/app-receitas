@@ -15,15 +15,15 @@ export default function FoodRecomendations() {
       arrows
       autoPlaySpeed={ 3000 }
       centerMode={ false }
-      className=""
-      containerClass="container-with-dots"
+      containerClass="pt-2"
       dotListClass=""
       draggable
       focusOnSelect={ false }
-      infinite={ false }
+      infinite
       itemClass=""
       keyBoardControl
       minimumTouchDrag={ 80 }
+      partialVisible={ false }
       renderButtonGroupOutside={ false }
       renderDotsOutside={ false }
       responsive={ {
@@ -33,7 +33,6 @@ export default function FoodRecomendations() {
             min: 1024,
           },
           items: 3,
-          partialVisibilityGutter: 40,
         },
         mobile: {
           breakpoint: {
@@ -41,7 +40,6 @@ export default function FoodRecomendations() {
             min: 0,
           },
           items: 2,
-          partialVisibilityGutter: 30,
         },
         tablet: {
           breakpoint: {
@@ -49,7 +47,6 @@ export default function FoodRecomendations() {
             min: 464,
           },
           items: 2,
-          partialVisibilityGutter: 30,
         },
       } }
       showDots={ false }
@@ -65,24 +62,27 @@ export default function FoodRecomendations() {
       }, index) => {
         if (index < maxLength) {
           return (
-            <Card.Body
-              key={ idMeal }
-              data-testid={ `${index}-recomendation-card` }
-            >
+            <Card className="border" key={ index }>
               <Card.Img
-                style={ { width: '100px' } }
                 src={ strMealThumb }
                 alt="Foto do drink"
               />
-              <Card.Title
-                data-testid={ `${index}-recomendation-title` }
+              <Card.Body
+                className="bg-color p-2"
+                key={ idMeal }
+                data-testid={ `${index}-recomendation-card` }
               >
-                {strMeal}
-              </Card.Title>
-              <Card.Title>
-                {strCategory}
-              </Card.Title>
-            </Card.Body>
+                <Card.Title
+                  className="m-0"
+                  data-testid={ `${index}-recomendation-title` }
+                >
+                  {strMeal}
+                </Card.Title>
+                <Card.Text>
+                  {strCategory}
+                </Card.Text>
+              </Card.Body>
+            </Card>
           );
         }
         return null;

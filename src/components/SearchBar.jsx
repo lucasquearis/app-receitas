@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
 export default function SearchBar(
   {
@@ -12,7 +13,10 @@ export default function SearchBar(
   },
 ) {
   return (
-    <div className="d-flex flex-column navbar fixed-top bg-light search">
+    <div
+      className="d-flex flex-column navbar fixed-top search justify-content-around"
+      style={ { height: '134px' } }
+    >
       <div className="w-100">
         <input
           className="w-100"
@@ -23,7 +27,7 @@ export default function SearchBar(
         />
       </div>
       <div className="w-100 d-flex justify-content-around">
-        <label htmlFor="ingredient-radio">
+        <label htmlFor="ingredient-radio" className="m-0">
           <input
             className="mr-1"
             name="search"
@@ -34,7 +38,7 @@ export default function SearchBar(
           />
           Ingrediente
         </label>
-        <label htmlFor="name-radio">
+        <label htmlFor="name-radio" className="m-0">
           <input
             className="mr-1"
             name="search"
@@ -45,7 +49,7 @@ export default function SearchBar(
           />
           Nome
         </label>
-        <label htmlFor="letter-radio">
+        <label htmlFor="letter-radio" className="m-0">
           <input
             className="mr-1"
             name="search"
@@ -58,9 +62,14 @@ export default function SearchBar(
         </label>
       </div>
       <div className="w-100 d-flex">
-        <button onClick={ handleClick } type="button" data-testid="exec-search-btn">
+        <Button
+          className="p-1 w-100 border bg-color"
+          onClick={ handleClick }
+          type="button"
+          data-testid="exec-search-btn"
+        >
           Buscar
-        </button>
+        </Button>
       </div>
     </div>
   );

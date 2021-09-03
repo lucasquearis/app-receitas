@@ -17,19 +17,28 @@ export default function CardDoneRecipes({
   alcoholicOrNot,
 }) {
   return (
-    <div>
+    <Card
+      className="d-flex flex-row p-3"
+    >
       <Link
         key="first"
         to={ `${type}s/${id}` }
       >
-        <Card>
-          <Card.Img
-            key="second"
-            data-testid={ `${index}-horizontal-image` }
-            src={ thumb }
-            alt={ title }
-          />
-          <Card.Body>
+        <Card.Img
+          style={ { width: '150px' } }
+          key="second"
+          data-testid={ `${index}-horizontal-image` }
+          src={ thumb }
+          alt={ title }
+        />
+      </Link>
+      <div>
+        <Link
+          key="first"
+          to={ `${type}s/${id}` }
+          className="w-50"
+        >
+          <Card.Body className="d-flex flex-column">
             <Card.Title
               key="third"
               data-testid={ `${index}-horizontal-name` }
@@ -74,14 +83,16 @@ export default function CardDoneRecipes({
               { alcoholicOrNot }
             </Card.Text>
           </Card.Body>
-        </Card>
-      </Link>
-      <ShareButton
-        type={ type }
-        id={ id }
-        testId={ `${index}-horizontal-share-btn` }
-      />
-    </div>
+        </Link>
+        <div className="d-flex justify-content-start pl-4">
+          <ShareButton
+            type={ type }
+            id={ id }
+            testId={ `${index}-horizontal-share-btn` }
+          />
+        </div>
+      </div>
+    </Card>
   );
 }
 
