@@ -8,8 +8,9 @@ function FoodInfo({ foodDetails }) {
         src={ foodDetails.strMealThumb }
         alt={ foodDetails.strMeal }
         data-testid="recipe-photo"
+        className="img-detail"
       />
-      <h2 data-testid="recipe-title">{ foodDetails.strMeal }</h2>
+      <h2 className="drink-name" data-testid="recipe-title">{ foodDetails.strMeal }</h2>
     </section>
   );
 }

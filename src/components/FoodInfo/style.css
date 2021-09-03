@@ -1,0 +1,15 @@
+.img-detail {
+  border-radius: 5px;
+  box-shadow: 0 2px 8px black;
+  width: 100%;
+}
+
+.drink-name {
+  font-size: 3.5rem;
+  text-shadow: 3px 1px 10px grey;
+}
+
+.strAlcoholic {
+  font-size: 1.7rem;
+  text-shadow: 3px 1px 10px grey;
+}

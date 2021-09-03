@@ -10,6 +10,7 @@ import FavoriteFoodBtn from '../../components/FavoriteFoodBtn';
 import BtnFoods from '../../components/BtnFoods';
 import '../../components/foodDrinks.css';
 import CarouselFood from '../../components/CarouselFood';
+import './style.css';
 
 function FoodsDetails() {
   const { id } = useParams();
@@ -19,7 +20,6 @@ function FoodsDetails() {
 
   const getFoodAndDrinks = useCallback(() => {
     dispatch(fetchMealDetails(id));
-    // dispatch(fetchDrinksRedux);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -44,23 +44,25 @@ function FoodsDetails() {
     .map((e, index) => `${foodDetails[e]} - ${foodDetails[filterObjMeasure[index]]}`);
 
   return (
-    <section>
+    <body className="details-drink">
       <FoodInfo foodDetails={ foodDetails } />
 
-      <IconBtn
-        dataId="share-btn"
-        onClick={ () => setShare(copyToClipboard) }
-        type="button"
-        src={ shareIcon }
-        alt="shareIt"
-      />
-      { share && <span>Link copiado!</span> }
+      <section className="share-fav-btn">
+        <IconBtn
+          dataId="share-btn"
+          onClick={ () => setShare(copyToClipboard) }
+          type="button"
+          src={ shareIcon }
+          alt="shareIt"
+        />
+        { share && <span>Link copiado!</span> }
 
-      <FavoriteFoodBtn
-        details={ details }
-        dataId="favorite-btn"
-        alt="favorite"
-      />
+        <FavoriteFoodBtn
+          details={ details }
+          dataId="favorite-btn"
+          alt="favorite"
+        />
+      </section>
 
       <p data-testid="recipe-category">{ foodDetails.strCategory }</p>
 
@@ -69,6 +71,7 @@ function FoodsDetails() {
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
             key={ index }
+            className="ingredients-list"
           >
             { ingredient }
           </li>)) }
@@ -77,13 +80,17 @@ function FoodsDetails() {
       <p data-testid="instructions">{ foodDetails.strInstructions }</p>
 
       <iframe
+        className="embed-video"
         data-testid="video"
         width="50%"
         src={ foodDetails.strYoutube.replace('watch?v=', 'embed/') }
         title={ foodDetails.strMeal }
+        allowFullScreen
       />
 
       <CarouselFood />
+
+      <p className="gambi" />
 
       <Link to={ `/comidas/${id}/in-progress` }>
         <BtnFoods
@@ -94,7 +101,7 @@ function FoodsDetails() {
         />
       </Link>
 
-    </section>
+    </body>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import logo from '../../images/meals_of_undefined-removebg-preview.png';
 import './style.css';
 
 function Login({ history }) {
@@ -35,7 +36,8 @@ function Login({ history }) {
   return (
     <main className="main-login">
       <section className="login-page">
-        <h2 className="h2-title">Login</h2>
+        <img className="logo" src={ logo } alt="logo" />
+        {/* <h2 className="h2-title">Login</h2> */}
         <div className="form-group">
           <label className="label-login" htmlFor="email">
             Email

@@ -37,6 +37,7 @@ function Foods() {
           ),
         )}
       </div>
+      <p className="gambi" />
       <Footer />
     </section>
   );

@@ -1,0 +1,15 @@
+.recomendation-carousel {
+  width: 50vw;
+}
+
+.carousel-list {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.recomendation-food {
+  color: black;
+  font-size: 1.2em;
+  text-align: center;
+  text-decoration: 1px 1px 10px black;
+}
