@@ -1,45 +1,44 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
 export default function FilterButtons({ setFilterRecipes }) {
   return (
-    <section>
-      <Button
-        variant="primary"
+    <section className="container-filter-btn">
+      <button
         type="button"
         data-testid="filter-by-food-btn"
         onClick={ () => setFilterRecipes({
           filterMeals: true,
           filterDrinks: false,
         }) }
+        className="filter-btn"
       >
-        Food
-      </Button>
+        <span className="label-btn">Food</span>
+      </button>
 
-      <Button
-        variant="primary"
+      <button
         type="button"
         data-testid="filter-by-drink-btn"
         onClick={ () => setFilterRecipes({
           filterMeals: false,
           filterDrinks: true,
         }) }
+        className="filter-btn"
       >
-        Drinks
-      </Button>
+        <span className="label-btn">Drinks</span>
+      </button>
 
-      <Button
-        variant="primary"
+      <button
         type="button"
         data-testid="filter-by-all-btn"
         onClick={ () => setFilterRecipes({
           filterMeals: false,
           filterDrinks: false,
         }) }
+        className="filter-btn"
       >
-        All
-      </Button>
+        <span className="label-btn">All</span>
+      </button>
     </section>
   );
 }

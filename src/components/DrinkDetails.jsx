@@ -144,6 +144,9 @@ export default function DrinksDetails(props) {
               type="button"
               onClick={ getButton }
               data-testid="start-recipe-btn"
+              style={ { backgroundColor: '#5c5c5c',
+                border: 'none',
+                borderRadius: '0' } }
             >
               Continuar Receita
             </Button>
@@ -153,6 +156,9 @@ export default function DrinksDetails(props) {
               variant="success"
               type="button"
               onClick={ getButton }
+              style={ { backgroundColor: '#5c5c5c',
+                border: 'none',
+                borderRadius: '0' } }
             >
               Iniciar Receita
             </Button>

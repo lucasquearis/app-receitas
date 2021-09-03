@@ -2,18 +2,17 @@
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  width: 100vw;
 }
 
 .card {
-  background-color: #5c5c5c;
-  box-shadow: 5px 5px 5px #ebfc02;
+  background-color: #ef6a07;
+  box-shadow: 5px 5px 5px #5c5c5c;
   color: rgb(0, 0, 0);
   display: inline-block;
   font-weight: 700;
   height: 250px;
   margin: 5px 5px 50px 10px;
-  text-shadow: 0.1em 0.1em 0.2em #ebfc02;
+  text-shadow: 0.1em 0.1em 0.2em #5c5c5c;
   width: 45vw;
 }
 
