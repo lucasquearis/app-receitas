@@ -1,0 +1,15 @@
+.finish-button {
+  background-color: #ad312b;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  opacity: 0.8;
+  padding: 8px;
+  width: 100%;
+}
+
+.finish-button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+

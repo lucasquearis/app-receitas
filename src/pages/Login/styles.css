@@ -1,18 +1,27 @@
-h1 {
-  margin: 100px 0 64px;
-  text-align: center;
+.logo {
+  margin-bottom: 40px;
+  width: 150px;
 }
 
 .login-form {
+  align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: auto;
+  min-height: 100vh;
+  position: relative;
   width: 70%;
+}
+
+.login-form .form-floating {
+  width: 100%;
 }
 
 .login-form button {
   background-color: #4884ad;
   border: none;
+  width: 100%;
 }
 
 .login-form button:hover {
@@ -35,5 +44,9 @@ h1 {
 
   .login-form {
     width: 30%;
+  }
+
+  .logo {
+    width: 200px;
   }
 }

@@ -17,9 +17,10 @@ export default function DrinkExplorer() {
   return (
     <div>
       <Header>Explorar Bebidas</Header>
-      <main>
+      <main className="explore-container">
         <button
           type="button"
+          className="explore-button"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push('/explorar/bebidas/ingredientes') }
         >
@@ -28,6 +29,7 @@ export default function DrinkExplorer() {
 
         <button
           type="button"
+          className="explore-button"
           data-testid="explore-surprise"
           onClick={ () => fetchRandomRecipe() }
         >

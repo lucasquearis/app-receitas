@@ -14,6 +14,7 @@ export default function Footer() {
     <div data-testid="footer" className="footer">
       <button
         type="button"
+        className="footer-button"
         data-testid="drinks-bottom-btn"
         onClick={ () => history.push('/bebidas') }
         src={ DrinkIcon }
@@ -22,6 +23,7 @@ export default function Footer() {
       </button>
       <button
         type="button"
+        className="footer-button"
         data-testid="explore-bottom-btn"
         onClick={ () => history.push('/explorar') }
         src={ ExploreIcon }
@@ -30,6 +32,7 @@ export default function Footer() {
       </button>
       <button
         type="button"
+        className="footer-button"
         data-testid="food-bottom-btn"
         onClick={ () => history.push('/comidas') }
         src={ MealIcon }

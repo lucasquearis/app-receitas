@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDataContext } from '../../../../context/DataProvider';
 import { fetchAreas } from '../../../../services';
 
+import './styles.css';
+
 export default function DropDown() {
   const { areas } = useDataContext();
   const { setLocationData, setLoading } = useDataContext();
@@ -41,6 +43,7 @@ export default function DropDown() {
       value={ selected }
       data-testid="explore-by-area-dropdown"
       onChange={ handleSetSelected }
+      className="local-select"
     >
       { createButtons() }
       <option

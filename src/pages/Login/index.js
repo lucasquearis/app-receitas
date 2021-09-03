@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { saveAssistent } from '../../utils';
 
 import './styles.css';
+import leFour from '../../images/leFour.svg';
 
 export default function Login() {
   const history = useHistory();
@@ -34,8 +35,8 @@ export default function Login() {
 
   return (
     <div>
-      <h1>Le.four</h1>
       <form onSubmit={ (e) => e.preventDefault() } className="login-form">
+        <img src={ leFour } alt="Logo" className="logo" />
         <FloatingLabel
           controlId="floatingInput"
           label="Email"

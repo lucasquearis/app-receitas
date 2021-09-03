@@ -1,8 +1,16 @@
 .footer {
   align-items: center;
+  background-color: #4884ad;
+  border-radius: 15px 15px 0 0;
   bottom: 0;
   display: flex;
   justify-content: space-between;
-  min-width: 100vw;
+  padding: 8px 3px;
   position: fixed;
+  width: 100%;
+}
+
+.footer-button {
+  background: transparent;
+  border: none;
 }

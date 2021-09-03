@@ -7,13 +7,27 @@ export default function Explorer() {
   return (
     <div>
       <Header>Explorar</Header>
-      <Link to="/explorar/comidas">
-        <button type="button" data-testid="explore-food">Explorar Comidas</button>
-      </Link>
-      <Link to="/explorar/bebidas">
-        <button type="button" data-testid="explore-drinks">Explorar Bebidas</button>
-      </Link>
-      <Footer />
+      <div className="explore-container">
+        <Link to="/explorar/comidas">
+          <button
+            type="button"
+            className="explore-button"
+            data-testid="explore-food"
+          >
+            Explorar Comidas
+          </button>
+        </Link>
+        <Link to="/explorar/bebidas">
+          <button
+            type="button"
+            className="explore-button"
+            data-testid="explore-drinks"
+          >
+            Explorar Bebidas
+          </button>
+        </Link>
+        <Footer />
+      </div>
     </div>
   );
 }

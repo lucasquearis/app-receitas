@@ -19,6 +19,7 @@ export default function Home() {
       <section
         key={ recipe.idMeal || recipe.idDrink }
         data-testid={ `${index}-recipe-card` }
+        className="main-cards"
       >
         <Link to={ `${types.url}/${recipe.idMeal || recipe.idDrink}` }>
           <img
@@ -26,9 +27,9 @@ export default function Home() {
             src={ recipe.strMealThumb || recipe.strDrinkThumb }
             alt={ recipe.strMeal || recipe.strDrink }
           />
-          <h4 data-testid={ `${index}-card-name` }>
+          <h5 data-testid={ `${index}-card-name` }>
             { recipe.strMeal || recipe.strDrink }
-          </h4>
+          </h5>
         </Link>
       </section>
     ));
@@ -36,7 +37,8 @@ export default function Home() {
   return (
     <div>
       <SearchHeader>{types.type === 'food' ? 'Comidas' : 'Bebidas'}</SearchHeader>
-      { loading ? <h1>Carregando...</h1> : recipeCards() }
+      { loading ? <h1>Carregando...</h1>
+        : <div className="main-cards-container">{ recipeCards() }</div> }
       <Footer />
     </div>
   );

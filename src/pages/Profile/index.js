@@ -25,12 +25,13 @@ export default function Profile() {
   return (
     <div>
       <Header>Perfil</Header>
-      <main>
+      <main className="explore-container">
         <h2 data-testid="profile-email">{ userEmail }</h2>
         <button
           type="button"
           data-testid="profile-done-btn"
           onClick={ () => history.push('/receitas-feitas') }
+          className="explore-button"
         >
           Receitas Feitas
         </button>
@@ -38,6 +39,7 @@ export default function Profile() {
           type="button"
           data-testid="profile-favorite-btn"
           onClick={ () => history.push('/receitas-favoritas') }
+          className="explore-button"
         >
           Receitas Favoritas
         </button>
@@ -45,6 +47,7 @@ export default function Profile() {
           type="button"
           data-testid="profile-logout-btn"
           onClick={ () => handleLogoutButton() }
+          className="explore-button"
         >
           Sair
         </button>
