@@ -19,7 +19,7 @@ export default function IgredientesFood() {
   }, []);
   return (
     <div>
-      <Header title="Explorar Origem" />
+      <Header title="Explorar Ingredientes" />
       <div className="card-img">
         {ingredients.length > 0 && ingredients.map((ingredient, index) => (
           <div
@@ -31,7 +31,6 @@ export default function IgredientesFood() {
           >
             <img
               data-testid={ `${index}-card-img` }
-              width="100px"
               src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
               alt=""
             />

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import MenuFooter from '../../../components/MenuFooter';
 import Header from '../../../components/Header';
 import { fetchDrinks } from '../../../services/FetchDrinks';
+import '../style/style.css';
 
 export default function IgredientesDrinks() {
   const history = useHistory();
@@ -18,8 +19,8 @@ export default function IgredientesDrinks() {
   }, []);
   return (
     <div>
-      <Header title="Explorar Origem" />
-      <div>
+      <Header title="Explorar Ingredientes" />
+      <div className="div-cards-ingredients">
         {ingredients.length > 0 && ingredients.map((ingredient, index) => (
           <div
             role="presentation"
@@ -30,11 +31,10 @@ export default function IgredientesDrinks() {
           >
             <img
               data-testid={ `${index}-card-img` }
-              width="100px"
               src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
               alt=""
             />
-            <p data-testid={ `${index}-card-name` }>{ingredient.strIngredient}</p>
+            <p data-testid={ `${index}-card-name` }>{ingredient.strIngredient1}</p>
           </div>
         ))}
       </div>
