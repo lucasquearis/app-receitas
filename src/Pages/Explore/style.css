@@ -8,11 +8,11 @@
 .page-explore .explore-buttons {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  width: 75%;
   left: 50%;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%) translateX(-50%);
+  width: 75%;
 }
 
 .explore-buttons button {
