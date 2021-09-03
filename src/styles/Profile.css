@@ -8,8 +8,9 @@
 
 .profile-email {
   background-color: green;
-  border: 2vw solid goldenrod;
+  border: 0.5vw solid black;
   border-radius: 12vw;
+  box-shadow: 3px 2px black;
   color: goldenrod;
   font-family: sans-serif;
   font-size: 6vw;
@@ -27,6 +28,7 @@
   background-color: green;
   border: 15px solid green;
   border-radius: 15px;
+  box-shadow: 3px 2px black;
   color: goldenrod;
   font-family: sans-serif;
   font-size: 6vw;
@@ -37,16 +39,17 @@
 }
 
 .profile-logout-button {
-  background-color: goldenrod;
-  border: 2.5vw solid black;
+  background-color: #b17008;
+  border: 1vw solid black;
   border-radius: 15vw;
   bottom: 60px;
-  color: darkgreen;
+  color: black;
   font-family: sans-serif;
   font-size: 12vw;
   font-weight: 700;
-  height: 12vh;
+  height: 9vh;
   left: 15vw;
+  line-height: 8vh;
   position: fixed;
   width: 70vw;
 }
