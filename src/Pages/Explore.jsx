@@ -7,7 +7,7 @@ import '../styles/explorePages.css';
 function Explore() {
   return (
     <main>
-      <Header title="Comidas" loading={ false } />
+      <Header title="Explorar" />
       <div className="explore-buttons">
         <Link
           to="/explorar/comidas"

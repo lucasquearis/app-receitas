@@ -2,6 +2,7 @@ import getFood from '../../services/FetchFoods';
 import getDrink from '../../services/FetchDrinks';
 
 export const CHANGE_FOOD_SEARCH = 'CHANGE_FOOD_SEARCH';
+export const CHANGE_DRINK_SEARCH = 'CHANGE_DRINK_SEARCH';
 export const GET_FOODS_SUCCESS = 'GET_FOODS_SUCCESS';
 export const GET_DRINKS_SUCCESS = 'GET_DRINKS_SUCCESS';
 export const CHANGE_SHOWBAR = 'CHANGE_SHOWBAR';
@@ -38,5 +39,10 @@ export function getDrinksApi(api) {
 
 export const changeFoodSearch = (search) => ({
   type: CHANGE_FOOD_SEARCH,
+  payload: search,
+});
+
+export const changeDrinkSearch = (search) => ({
+  type: CHANGE_DRINK_SEARCH,
   payload: search,
 });

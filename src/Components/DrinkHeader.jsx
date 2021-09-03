@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import CategoryFoodButtons from './CategoryFoodButtons';
-import FoodSearchBar from './FoodSearchBar';
-import { changeShowBar, getFoodsApi } from '../Redux/actions/apiActions';
-import mealApi from '../services/GetUrl';
+import CategoryDrinkButtons from './CategoryDrinkButtons';
+import DrinkSearchBar from './DrinkSearchBar';
+import { changeShowBar, getDrinksApi } from '../Redux/actions/apiActions';
+import drinkApi from '../services/GetDrinkUrl';
 
 function FoodHeader({ title }) {
   const { showBar, foodSearch: { type, entry } } = useSelector((state) => state.mainPage);
@@ -16,8 +16,8 @@ function FoodHeader({ title }) {
 
   const handleClick = () => {
     dispatch(changeShowBar(!showBar));
-    const url = mealApi(type, entry);
-    dispatch(getFoodsApi(url));
+    const url = drinkApi(type, entry);
+    dispatch(getDrinksApi(url));
   };
 
   if (showBar === false) {
@@ -41,7 +41,7 @@ function FoodHeader({ title }) {
             <img src={ searchIcon } alt="search icon" />
           </button>
         </header>
-        <CategoryFoodButtons />
+        <CategoryDrinkButtons />
       </section>
     );
   }
@@ -66,7 +66,7 @@ function FoodHeader({ title }) {
           <img src={ searchIcon } alt="search icon" />
         </button>
       </header>
-      <FoodSearchBar />
+      <DrinkSearchBar />
     </section>
   );
 }

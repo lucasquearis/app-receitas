@@ -1,11 +1,12 @@
 import { GET_FOODS_SUCCESS,
   GET_DRINKS_SUCCESS,
   CHANGE_FOOD_SEARCH,
+  CHANGE_DRINK_SEARCH,
   CHANGE_SHOWBAR } from '../actions/apiActions';
 
 const INICIAL_STATE = {
   mealsBar: [],
-  drinks: [],
+  drinksBar: [],
   foodSearch: {
     type: '',
     entry: '',
@@ -27,10 +28,13 @@ const mainPage = (state = INICIAL_STATE, action) => {
     return { ...state, mealsBar: payload.meals.slice(0, DOZE) };
 
   case GET_DRINKS_SUCCESS:
-    return { ...state, drinks: payload };
+    return { ...state, drinksBar: payload.drinks.slice(0, DOZE) };
 
   case CHANGE_FOOD_SEARCH:
     return { ...state, foodSearch: payload };
+
+  case CHANGE_DRINK_SEARCH:
+    return { ...state, drinkSearch: payload };
 
   case CHANGE_SHOWBAR:
     return {

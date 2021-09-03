@@ -20,7 +20,7 @@ function FoodExplore() {
 
   return (
     <div>
-      <Header title="Comidas" loading />
+      <Header title="Explorar Comidas" />
       <div className="explore-buttons">
         <ButtonCard
           page="/explorar/comidas/ingredientes"

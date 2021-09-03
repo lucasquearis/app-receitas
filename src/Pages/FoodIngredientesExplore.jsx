@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../Components/Header';
 
 function FoodIngredientesExplore() {
   const [data, setData] = useState([]);
@@ -18,6 +19,7 @@ function FoodIngredientesExplore() {
   const MNumber = '12';
   return (
     <>
+      <Header title="Explorar Ingredientes" />
       {data
         .slice(0, MNumber)
         .map(({ strIngredient, idIngredient }, index) => (

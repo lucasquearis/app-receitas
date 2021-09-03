@@ -30,7 +30,7 @@ function CategoryDrinkButtons() {
 
   if (!isLoading) {
     return (
-      <session className="btn-session">
+      <section className="btn-session">
         { drinksCategories.map((category) => (
           <button
             type="button"
@@ -51,7 +51,7 @@ function CategoryDrinkButtons() {
         >
           All
         </button>
-      </session>
+      </section>
     );
   }
   return <ReactBootstrap.Spinner animation="border" variant="danger" />;

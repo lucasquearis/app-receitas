@@ -14,7 +14,7 @@ function FoodMainPage() {
     return <Spinner animation="border" variant="danger" />;
   }
 
-  if (!showBar) {
+  if (showBar === false) {
     return (
       <div className="container">
         <FoodHeader title="Comidas" />

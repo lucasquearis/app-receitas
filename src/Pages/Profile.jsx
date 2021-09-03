@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 import ButtonCard from '../Components/ButtonCard';
 
 function Profile() {
@@ -13,7 +12,7 @@ function Profile() {
 
   return (
     <>
-      <Header title="Perfil" loading={ false } />
+      <Header title="Perfil" />
       <h3
         data-testid="profile-email"
       >
@@ -35,7 +34,6 @@ function Profile() {
         onClick={ onClickLogout }
         buttonText="Sair"
       />
-      <Footer />
     </>
   );
 }

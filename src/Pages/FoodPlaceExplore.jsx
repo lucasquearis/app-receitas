@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../Components/Header';
 
 function FoodPlaceExplore() {
   const [data, setData] = useState([]);
@@ -41,6 +42,7 @@ function FoodPlaceExplore() {
 
   return (
     <div>
+      <Header title="Explorar Origem" />
       <select
         data-testid="explore-by-area-dropdown"
         value={ filter }

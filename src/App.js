@@ -12,7 +12,6 @@ import Profile from './Pages/Profile';
 import FoodDetails from './Pages/FoodDetails';
 import DrinkDetails from './Pages/DrinkDetails';
 import DrinkIngredientesExplore from './Pages/DrinksIngredientExplore';
-import NotFound from './Pages/NotFound';
 import DoneRecipes from './Pages/DoneRecipes';
 
 function App() {
@@ -43,7 +42,6 @@ function App() {
       <Route exact path="/bebidas" component={ DrinkMainPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
-      <Route exact path="*" component={ NotFound } />
     </Switch>
   );
 }

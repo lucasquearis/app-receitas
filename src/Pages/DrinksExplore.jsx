@@ -21,7 +21,7 @@ function DrinksExplore() {
 
   return (
     <div>
-      <Header title="Bebidas" loading />
+      <Header title="Explorar Bebidas" />
       <div className="explore-buttons">
         <ButtonCard
           page="/explorar/bebidas/ingredientes"

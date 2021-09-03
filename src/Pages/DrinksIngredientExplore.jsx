@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../Components/Header';
 
 function DrinkIngredientesExplore() {
   const [data, setData] = useState([]);
@@ -18,6 +19,7 @@ function DrinkIngredientesExplore() {
   const MNumber = '12';
   return (
     <>
+      <Header title="Explorar Ingredientes" />
       {data
         .filter((_, item) => (item < MNumber))
         .map(({ strIngredient1 }, index) => (
