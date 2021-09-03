@@ -5,6 +5,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function favoriteRecipes(addOrRemove, setAddOrRemove, recipe, pathname) {
   let favoriteRecipesStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   if (!addOrRemove) {
@@ -44,7 +46,7 @@ function ShareAndFavBtn({ recipe }) {
         src={ shareIcon }
         type="button"
         onClick={ () => {
-          navigator.clipboard.writeText(window.location.href);
+          copy(window.location.href);
           setCopyOk(true);
         } }
       >

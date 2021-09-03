@@ -20,6 +20,11 @@ function getIngredientsAndMeasures(recipe, setIngredientsList, setMeasureList) {
   }
 }
 
+function isRecipeFinished() {
+  const tags = document.getElementsByTagName('input');
+  return tags.every((tag) => tag.checked);
+}
+
 function RecipeInProgress() {
   const [recipe, setRecipe] = useState();
   const [ingredientsList, setIngredientsList] = useState([]);
@@ -77,7 +82,9 @@ function RecipeInProgress() {
         <h3>Instructions</h3>
         <p data-testid="instructions">{recipe.strInstructions}</p>
       </div>
-      <button data-testid="finish-recipe-btn" type="button">Finish Recipe</button>
+      { isRecipeFinished
+        ? <button data-testid="finish-recipe-btn" type="button">Finish Recipe</button>
+        : null}
     </section>
   ) : <p>Loading</p>;
 }
