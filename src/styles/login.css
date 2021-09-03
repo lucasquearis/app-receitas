@@ -13,8 +13,8 @@
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
-  justify-content: center;
   height: 100vh;
+  justify-content: center;
   width: 100vw;
 }
 
