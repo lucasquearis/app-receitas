@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Proptypes from 'prop-types';
 import empty from '../images/whiteHeartIcon.svg';
 import full from '../images/blackHeartIcon.svg';
-import './Buttons.css';
 
 function FavoriteButton({ recipeDetails }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -69,7 +68,7 @@ function FavoriteButton({ recipeDetails }) {
       <img
         src={ isFavorite ? full : empty }
         alt={ isFavorite ? 'favorite' : 'not favorite' }
-        style={ { width: '30px' } }
+        style={ { width: '58px' } }
       />
     </button>
   );
