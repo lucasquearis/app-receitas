@@ -67,7 +67,7 @@
 }
 
 .serchBar {
-  background-color: whitesmoke;
+  background-color: rgb(167, 165, 165);
   border-radius: 0 0 0.5em 0.5em;
   max-width: 800px;
   padding-top: 1vh;
@@ -77,4 +77,28 @@
   transform: translateX(50%);
   width: 100vw;
   z-index: 3;
+}
+
+.buttonSearch {
+  border-radius: 10px;
+  margin-left: 30px;
+}
+
+.barraDeBusca {
+  height: 25px;
+  margin-left: 15px;
+}
+
+.labelRadio {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.radio {
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+.initialRadio {
+  margin-right: 5px;
 }

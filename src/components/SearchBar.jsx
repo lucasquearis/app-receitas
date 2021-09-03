@@ -63,14 +63,26 @@ function SearchBar() {
   };
   return (
     <div className="serchBar">
-      <input
-        data-testid="search-input"
-        name="pesquisa"
-        type="text"
-        onChange={ handeChange }
-      />
-      <label htmlFor="filter">
+      <div>
         <input
+          className="barraDeBusca"
+          data-testid="search-input"
+          name="pesquisa"
+          type="text"
+          onChange={ handeChange }
+        />
+        <button
+          className="buttonSearch"
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ handleSubmit }
+        >
+          Buscar
+        </button>
+      </div>
+      <label htmlFor="filter" className="labelRadio">
+        <input
+          className="initialRadio"
           id="ingredientes"
           name="filter"
           type="radio"
@@ -79,6 +91,7 @@ function SearchBar() {
         />
         Ingrediente
         <input
+          className="radio"
           id="procuraComida"
           name="filter"
           type="radio"
@@ -87,6 +100,7 @@ function SearchBar() {
         />
         Nome
         <input
+          className="radio"
           id="primeiraLetra"
           name="filter"
           type="radio"
@@ -94,13 +108,6 @@ function SearchBar() {
           onChange={ handeChange }
         />
         Primeira Letra
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ handleSubmit }
-        >
-          Buscar
-        </button>
       </label>
     </div>
   );
