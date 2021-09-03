@@ -59,7 +59,7 @@ class DetailsFood extends Component {
                   <h2 data-testid="recipe-category">{ strCategory }</h2>
                 </div>
                 <div className="buttons">
-                  <ShareButton />
+                  <ShareButton position={ index } id={ id } type="comida" />
                   <FavoriteButton />
                 </div>
                 <Ingredients />
