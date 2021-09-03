@@ -25,15 +25,7 @@ export default function ExplorarBebidas() {
             Por Ingredientes
           </button>
         </Link>
-        <Link to="/explorar/bebidas/area">
-          <button
-            className="btn btn-warning button-size"
-            type="button"
-            data-testid="explore-by-area"
-          >
-            Por Local de Origem
-          </button>
-        </Link>
+
         <button
           className="btn btn-warning button-size"
           type="button"
