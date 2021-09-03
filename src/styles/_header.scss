@@ -11,7 +11,7 @@
   width: 100vw;
   font-family: KithcenHome, sans-serif;
   padding: 5px;
-  color: #e5ece9;
+  color: $off-white;
 
   h2 {
     font-weight: 600;
@@ -29,7 +29,7 @@
   transition: all 1s;
   top: 51px;
   height: fit-content;
-  background-color: #e5ece9;
+  background-color: $off-white;
   width: 100vw;
   border-radius: 0 0 5px 5px;
 }

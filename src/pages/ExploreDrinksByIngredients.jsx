@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
+import Loading from '../components/Loading';
 import useIngredients from '../hooks/useIngredients';
 import useRedirect from '../hooks/useRedirect';
 import { switchSearch } from '../redux/actions';
@@ -15,7 +16,7 @@ function ExploreDrinksByIngredients() {
 
   const { shouldRedirect, redirect } = useRedirect();
 
-  if (loading) return 'Loading';
+  if (loading) return <Loading />;
 
   const handleClick = (ingredient) => {
     dispatch(switchSearch(ingredient, 'Ingrediente'));

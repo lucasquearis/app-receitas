@@ -6,6 +6,7 @@ import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
 import useIngredients from '../hooks/useIngredients';
 import { switchSearch } from '../redux/actions';
 import useRedirect from '../hooks/useRedirect';
+import Loading from '../components/Loading';
 
 function ExploreFoodByIngredients() {
   const ingredients = useIngredients('meal');
@@ -13,7 +14,7 @@ function ExploreFoodByIngredients() {
   const dispatch = useDispatch();
   const { shouldRedirect, redirect } = useRedirect();
 
-  if (loading) return 'Loading';
+  if (loading) return <Loading />;
 
   const handleClick = (ingredient) => {
     dispatch(switchSearch(ingredient, 'Ingrediente'));

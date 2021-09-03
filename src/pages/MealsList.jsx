@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import useCategories from '../hooks/useCategories';
 import { setLoading } from '../redux/actions/loading';
 import useRedirect from '../hooks/useRedirect';
+import LoadingSmall from '../components/LoadingSmall';
 
 function MealsList() {
   const { reducerAPI: { loading, meals } } = useSelector((state) => state);
@@ -94,7 +95,7 @@ function MealsList() {
         </button>
       </div>
       <div className="cards-list">
-        { loading ? 'Loading' : renderedMeals.map((item, index) => (
+        { loading ? <LoadingSmall /> : renderedMeals.map((item, index) => (
           <button
             type="button"
             onClick={ () => shouldRedirect(`/comidas/${item.idMeal}`) }

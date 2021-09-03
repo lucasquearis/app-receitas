@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import HeaderWithSearch from '../components/HeaderWithSearch';
 import { getMeal } from '../redux/actions';
 import useRedirect from '../hooks/useRedirect';
+import Loading from '../components/Loading';
 
 function FoodByOrigin() {
   const [originsListFilter, setOriginsListFilter] = useState([]);
@@ -69,8 +70,9 @@ function FoodByOrigin() {
   };
 
   if (loading) {
-    return <h2>Carregando...</h2>;
+    return <Loading />;
   }
+
   if (redirect.should) {
     return <Redirect to={ redirect.path } />;
   }
