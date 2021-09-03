@@ -152,3 +152,68 @@ export const IngredientsBackground = styled.div`
     align-items: center;
     padding-top: 10vh;
 `;
+
+export const FavoriteList = styled.div`
+  width: 100vw;
+  min-height: 86vh;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+`;
+
+export const FavoriteMain = styled.main`
+  background: 
+    linear-gradient(
+            rgba(0, 0, 0, 0.9), 
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.6)
+          ),
+    url('https://images.pexels.com/photos/3789885/pexels-photo-3789885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
+`;
+
+export const ButtonFilterDiv = styled.div`
+    width: 100vw;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 10px 0 30px 0;
+`;
+
+export const FilterButton = styled.button`
+    background-color: rgb(232, 93, 4);
+  border-radius: 100px;
+  width: 100px;
+  height: 40px;
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  word-wrap: normal;
+`;
+
+export const DoneMain = styled.main`
+    background: 
+    linear-gradient(
+            rgba(0, 0, 0, 0.9), 
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.6)
+          ),
+    url('https://images.pexels.com/photos/286283/pexels-photo-286283.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
+`;
+
+export const DoneRecipeList = styled.section`
+    width: 100vw;
+  min-height: 86vh;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+`;

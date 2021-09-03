@@ -1,6 +1,8 @@
 import React from 'react';
 import UseFavoriteRecipes from '../hook/UseFavoriteRecipes';
 import { Header, FavoriteCard } from '../components';
+import { FavoriteList, FavoriteMain,
+  ButtonFilterDiv, FilterButton } from '../UI globalStyles';
 
 function FavoriteRecipes() {
   const {
@@ -11,27 +13,37 @@ function FavoriteRecipes() {
     removeFavFromLocal } = UseFavoriteRecipes();
 
   return (
-    <main>
+    <FavoriteMain>
       <Header title="Receitas Favoritas" />
-      <div>
-        <button type="button" data-testid="filter-by-all-btn" onClick={ allFilter }>
+      <ButtonFilterDiv>
+        <FilterButton type="button" data-testid="filter-by-all-btn" onClick={ allFilter }>
           All
-        </button>
-        <button type="button" data-testid="filter-by-food-btn" onClick={ mealFilter }>
+        </FilterButton>
+        <FilterButton
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ mealFilter }
+        >
           Food
-        </button>
-        <button type="button" data-testid="filter-by-drink-btn" onClick={ drinkFilter }>
+        </FilterButton>
+        <FilterButton
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ drinkFilter }
+        >
           Drinks
-        </button>
-      </div>
-      {(filteredFav) ? filteredFav.map((recipe, index) => (
-        <FavoriteCard
-          key={ index }
-          recipe={ recipe }
-          cardIndex={ index }
-          handleClick={ removeFavFromLocal }
-        />)) : <h1>Você não tem receitas favoritas ainda!</h1>}
-    </main>
+        </FilterButton>
+      </ButtonFilterDiv>
+      <FavoriteList>
+        {(filteredFav) ? filteredFav.map((recipe, index) => (
+          <FavoriteCard
+            key={ index }
+            recipe={ recipe }
+            cardIndex={ index }
+            handleClick={ removeFavFromLocal }
+          />)) : <h1>Você não tem receitas favoritas ainda!</h1>}
+      </FavoriteList>
+    </FavoriteMain>
   );
 }
 

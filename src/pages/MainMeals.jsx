@@ -5,10 +5,12 @@ import { requestCategoryList } from '../redux/actions/fetchActions';
 import { Header, RecipeList, Footer, CategoryFilter, Loading } from '../components';
 import UseInitialRecipes from '../hook/UseInitialRecipes';
 import { MainBackGround } from '../UI globalStyles';
+import UseRecipes from '../hook/UseRecipes';
 
 function MainMeals() {
   const dispatch = useDispatch();
   const filter = useSelector(({ meals }) => meals.filter);
+  const { chooser } = UseRecipes();
 
   useEffect(() => {
     dispatch(requestCategoryList('/comidas'));
@@ -23,6 +25,7 @@ function MainMeals() {
     return <Redirect to={ `/comidas/${mealId}` } />;
   }
   if (!recipes.meals) {
+    chooser('/comidas');
     return (
       <div>
         <Header title="Comidas" searchIcon />

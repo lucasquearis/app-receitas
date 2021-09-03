@@ -6,6 +6,7 @@ import UseModal from '../../hook/UseModal';
 import ModalCopy from '../ModalCopy/ModalCopy';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import shareButtonIcon from '../../images/shareIcon.svg';
+import { CardSection, CardImg, CardH2, P, Button, ButtonDiv } from './styles';
 
 function FavoriteCard({ recipe, cardIndex, handleClick }) {
   const { name, area, category, type, id, image, alcoholicOrNot } = recipe;
@@ -18,31 +19,29 @@ function FavoriteCard({ recipe, cardIndex, handleClick }) {
   Modal.setAppElement('#root');
 
   return (
-    <section>
+    <CardSection>
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <CardImg
           src={ image }
           alt={ name }
-          width="150px"
-          height="150px"
           data-testid={ `${cardIndex}-horizontal-image` }
         />
       </Link>
-      <div>
-        <p data-testid={ `${cardIndex}-horizontal-top-text` }>
+      <Link to={ `/${type}s/${id}` }>
+        <CardH2 data-testid={ `${cardIndex}-horizontal-name` }>{name}</CardH2>
+        <P data-testid={ `${cardIndex}-horizontal-top-text` }>
           {type === 'comida' ? `${area} - ${category}` : alcoholicOrNot}
-        </p>
-        <Link to={ `/${type}s/${id}` }>
-          <p data-testid={ `${cardIndex}-horizontal-name` }>{name}</p>
-        </Link>
-        <button
+        </P>
+      </Link>
+      <ButtonDiv>
+        <Button
           type="button"
           data-testid={ `${cardIndex}-horizontal-share-btn` }
           onClick={ () => copyLinkFromDone(type, id) }
           src={ shareButtonIcon }
         >
           <img src={ shareButtonIcon } alt="share-button" />
-        </button>
+        </Button>
         <Modal
           isOpen={ modalIsOpen }
           onRequestClose={ closeModal }
@@ -51,7 +50,7 @@ function FavoriteCard({ recipe, cardIndex, handleClick }) {
         >
           <ModalCopy />
         </Modal>
-        <button
+        <Button
           src={ blackHeartIcon }
           type="button"
           data-testid={ `${cardIndex}-horizontal-favorite-btn` }
@@ -60,12 +59,10 @@ function FavoriteCard({ recipe, cardIndex, handleClick }) {
           <img
             src={ blackHeartIcon }
             alt="favorite-button"
-            width="20px"
-            height="20px"
           />
-        </button>
-      </div>
-    </section>
+        </Button>
+      </ButtonDiv>
+    </CardSection>
   );
 }
 

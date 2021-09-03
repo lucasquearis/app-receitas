@@ -1,15 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard/RecipeCard';
+import { requestDefault } from '../redux/actions/fetchActions';
 
 const UseRecipes = () => {
   const recipes = useSelector((state) => state.meals.recipes);
   const maxItensIndexOnScreen = 11;
+  const dispatch = useDispatch();
 
-  const chooser = () => {
+  const fetchDefault = (path) => dispatch(requestDefault(path));
+
+  const chooser = (path) => {
     if (recipes.meals === null || recipes.drinks === null) {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      fetchDefault(path);
     }
     if (recipes.meals) {
       return recipes.meals.map((e, index) => index <= maxItensIndexOnScreen

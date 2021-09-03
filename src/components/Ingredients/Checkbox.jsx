@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import UseCheckbox from '../../hook/UseCheckbox';
+import { IngredintLi, IngredintItem } from './styles';
 
 function Checkbox({ recipe, type, allChecked }) {
   const { ingredients, measures,
@@ -17,7 +18,7 @@ function Checkbox({ recipe, type, allChecked }) {
         {ingredients.map((ingredient, index) => {
           const checked = checkedOptions.some((check) => check === ingredient);
           return (
-            <div key={ index } data-testid={ `${index}-ingredient-step` }>
+            <IngredintLi key={ index } data-testid={ `${index}-ingredient-step` }>
               <input
                 type="checkbox"
                 id={ ingredient }
@@ -26,9 +27,9 @@ function Checkbox({ recipe, type, allChecked }) {
                 defaultChecked={ checked }
               />
               <label htmlFor={ ingredient }>
-                {`${ingredient} - ${measures[index]}`}
+                <IngredintItem>{`${ingredient} - ${measures[index]}`}</IngredintItem>
               </label>
-            </div>
+            </IngredintLi>
           );
         })}
       </div>

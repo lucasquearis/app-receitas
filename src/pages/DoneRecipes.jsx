@@ -1,27 +1,43 @@
 import React from 'react';
 import { Header, DoneRecipeCard } from '../components';
 import UseDoneRecipes from '../hook/UseDoneRecipes';
+import { DoneMain, ButtonFilterDiv,
+  FilterButton, DoneRecipeList } from '../UI globalStyles';
 
 function DoneRecipes() {
   const { filteredRecipes, resetFilter, foodFilter, drinksFilter } = UseDoneRecipes();
 
   return (
-    <main>
+    <DoneMain>
       <Header title="Receitas Feitas" />
-      <div>
-        <button type="button" data-testid="filter-by-all-btn" onClick={ resetFilter }>
+      <ButtonFilterDiv>
+        <FilterButton
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ resetFilter }
+        >
           All
-        </button>
-        <button type="button" data-testid="filter-by-food-btn" onClick={ foodFilter }>
+        </FilterButton>
+        <FilterButton
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ foodFilter }
+        >
           Food
-        </button>
-        <button type="button" data-testid="filter-by-drink-btn" onClick={ drinksFilter }>
+        </FilterButton>
+        <FilterButton
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ drinksFilter }
+        >
           Drinks
-        </button>
-      </div>
-      {filteredRecipes.map((recipe, index) => (
-        <DoneRecipeCard key={ index } recipe={ recipe } cardIndex={ index } />))}
-    </main>
+        </FilterButton>
+      </ButtonFilterDiv>
+      <DoneRecipeList>
+        {filteredRecipes.map((recipe, index) => (
+          <DoneRecipeCard key={ index } recipe={ recipe } cardIndex={ index } />))}
+      </DoneRecipeList>
+    </DoneMain>
   );
 }
 

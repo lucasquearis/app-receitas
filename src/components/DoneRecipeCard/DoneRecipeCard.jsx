@@ -5,6 +5,8 @@ import Modal from 'react-modal';
 import shareButtonIcon from '../../images/shareIcon.svg';
 import UseModal from '../../hook/UseModal';
 import ModalCopy from '../ModalCopy/ModalCopy';
+import { DoneSectionCard, CardImg, CardH2, P, Date, Button,
+  Span, BottomDiv } from './styles';
 
 function DoneRecipeCard({ recipe, cardIndex }) {
   const { image, name, type, area, category,
@@ -17,50 +19,50 @@ function DoneRecipeCard({ recipe, cardIndex }) {
   Modal.setAppElement('#root');
 
   return (
-    <section>
+    <DoneSectionCard>
       <Link to={ `/${type}s/${id}` }>
-        <img
+        <CardImg
           src={ image }
           alt={ name }
-          width="150px"
-          height="150px"
           data-testid={ `${cardIndex}-horizontal-image` }
         />
       </Link>
-      <div>
-        <p data-testid={ `${cardIndex}-horizontal-top-text` }>
+      <Link to={ `/${type}s/${id}` }>
+        <CardH2 data-testid={ `${cardIndex}-horizontal-name` }>{name}</CardH2>
+        <P data-testid={ `${cardIndex}-horizontal-top-text` }>
           {type === 'comida' ? `${area} - ${category}` : alcoholicOrNot}
-        </p>
-        <Link to={ `/${type}s/${id}` }>
-          <p data-testid={ `${cardIndex}-horizontal-name` }>{name}</p>
-        </Link>
-        <p data-testid={ `${cardIndex}-horizontal-done-date` }>
+        </P>
+        <Date data-testid={ `${cardIndex}-horizontal-done-date` }>
           {`Feita em: ${doneDate}`}
-        </p>
-        <button
-          type="button"
-          data-testid={ `${cardIndex}-horizontal-share-btn` }
-          src={ shareButtonIcon }
-          onClick={ () => copyLinkFromDone(type, id) }
-        >
-          <img src={ shareButtonIcon } alt="share-button" />
-        </button>
-        <Modal
-          isOpen={ modalIsOpen }
-          onRequestClose={ closeModal }
-          style={ customStyles }
-          contentLabel="Example Modal"
-        >
-          <ModalCopy />
-        </Modal>
+        </Date>
+      </Link>
+      <BottomDiv>
         <div>
           {tags.map((tag) => (
-            <span key={ tag } data-testid={ `${cardIndex}-${tag}-horizontal-tag` }>
+            <Span key={ tag } data-testid={ `${cardIndex}-${tag}-horizontal-tag` }>
               {tag}
-            </span>))}
+            </Span>))}
         </div>
-      </div>
-    </section>
+        <div>
+          <Button
+            type="button"
+            data-testid={ `${cardIndex}-horizontal-share-btn` }
+            src={ shareButtonIcon }
+            onClick={ () => copyLinkFromDone(type, id) }
+          >
+            <img src={ shareButtonIcon } alt="share-button" />
+          </Button>
+          <Modal
+            isOpen={ modalIsOpen }
+            onRequestClose={ closeModal }
+            style={ customStyles }
+            contentLabel="Example Modal"
+          >
+            <ModalCopy />
+          </Modal>
+        </div>
+      </BottomDiv>
+    </DoneSectionCard>
   );
 }
 

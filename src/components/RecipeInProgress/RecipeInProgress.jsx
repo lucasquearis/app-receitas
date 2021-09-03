@@ -5,6 +5,8 @@ import Checkbox from '../Ingredients/Checkbox';
 import HeroDetails from '../HeroDetails/HeroDetails';
 import Video from '../Video/Video';
 import UseFinishRecipe from '../../hook/UseFinishRecipe';
+import { IngredientH3, Div, IngredintSection, P,
+  Main, VideoSection, Section, FinishBtn } from './styles';
 
 function RecipeInProgress({ recipe, type }) {
   const [allChecked, setAllCheked] = useState(false);
@@ -23,15 +25,29 @@ function RecipeInProgress({ recipe, type }) {
   }
 
   return (
-    <>
+    <Main>
       <HeroDetails recipe={ recipe } type={ type } />
-      <Checkbox recipe={ recipe } type={ type } allChecked={ allIngredientsChecked } />
-      <section>
-        <h3>Instructions</h3>
-        <p data-testid="instructions">{recipe.strInstructions}</p>
-      </section>
-      { recipe.strYoutube && <Video recipe={ recipe } />}
-      <button
+      <IngredintSection>
+        <Div>
+          <Checkbox
+            recipe={ recipe }
+            type={ type }
+            allChecked={ allIngredientsChecked }
+          />
+        </Div>
+      </IngredintSection>
+      <IngredintSection>
+        <Div>
+          <IngredientH3>Instructions</IngredientH3>
+          <P data-testid="instructions">{recipe.strInstructions}</P>
+        </Div>
+      </IngredintSection>
+      <Section>
+        <VideoSection>
+          { recipe.strYoutube && <Video recipe={ recipe } />}
+        </VideoSection>
+      </Section>
+      <FinishBtn
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ !allChecked }
@@ -39,8 +55,8 @@ function RecipeInProgress({ recipe, type }) {
         onClick={ finishRecipe }
       >
         Finalizar Receita
-      </button>
-    </>
+      </FinishBtn>
+    </Main>
   );
 }
 
