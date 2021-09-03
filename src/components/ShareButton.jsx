@@ -5,7 +5,13 @@ import shareIcon from '../images/shareIcon.svg';
 function ShareButton() {
   const [showMsg, setShowMsg] = useState(false);
   const { pathname } = useLocation();
-  const local = `http://localhost:3000${pathname}`;
+  let path = pathname;
+  if (pathname.includes('/in-progress')) {
+    [path] = [pathname.split('/in-progress')[0]];
+    console.log(path);
+  }
+
+  const local = `http://localhost:3000${path}`;
 
   const handleShare = () => {
     navigator.clipboard.writeText(local);

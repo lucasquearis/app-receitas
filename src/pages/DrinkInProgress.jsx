@@ -3,9 +3,8 @@ import '../styles/RecipeInProgress.css';
 import moment from 'moment';
 import { Link, useHistory } from 'react-router-dom';
 import ShareButton from '../components/ShareButton';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MyContext from '../context/MyContext';
+import FavoriteButtonDrinks from '../components/FavoriteButtonDrinks';
 
 // função para puxar os ingredientes e sua medidas
 const listIgredientsAndMeasure = (getRecipe, setIngredient, setMeasure) => {
@@ -113,20 +112,6 @@ function DrinkInProgess() {
     return localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
 
-  const favorites = () => {
-    const recipes = {
-      id,
-      type: 'bebida',
-      area: '',
-      category: getRecipe.strCategory,
-      alcoholicOrNot: getRecipe.strAlcoholic,
-      name: getRecipe.strDrink,
-      image: getRecipe.strDrinkThumb,
-    };
-    setLocalStorageItems(...localStorageItems, recipes);
-    return localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
-  };
-
   return (
     <div>
       <div>
@@ -140,13 +125,7 @@ function DrinkInProgess() {
       <div>
         <h2 data-testid="recipe-title">{ getRecipe.strDrink }</h2>
         <ShareButton />
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          onClick={ favorites }
-        >
-          <img src={ whiteHeartIcon } alt="Favorite" />
-        </button>
+        <FavoriteButtonDrinks />
         <p data-testid="recipe-category">
           { getRecipe
             .strCategory === 'Cocktail' ? getRecipe.strAlcoholic : getRecipe.strCategory }
