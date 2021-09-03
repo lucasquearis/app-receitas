@@ -1,69 +1,56 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import { ContextApp } from '../../Context/ContextApp';
 import './style.css';
+import CategoryHook from '../../Hooks/CategoryHook';
+import Btn from '../Btn';
 
 const BtnCategory = ({ category }) => {
   const maxCategory = 5;
-  const { searchRecipes, setRecipes } = useContext(ContextApp);
-  const history = useHistory();
-  const { location: { pathname } } = history;
-  const currentRout = pathname.includes('/comidas');
-  const url = currentRout ? 'https://www.themealdb.com/api/json/v1/1/' : 'https://www.thecocktaildb.com/api/json/v1/1/';
+  const { recipeCategory } = useContext(ContextApp);
+  const { handleCatClick, resetFilter } = CategoryHook();
 
   const [currentCategory, setCurrentCategory] = useState('All');
 
-  if (category === undefined) {
-    return <div>loding</div>;
+  if (!recipeCategory[category]) {
+    return <h2>Getting Categories...</h2>;
   }
-  const returnAll = () => {
-    setRecipes([]);
+
+  const btnAllProps = {
+    className: currentCategory === 'All' ? 'selected' : null,
+    type: 'button',
+    name: 'All',
+    'data-testid': 'All-category-filter',
+    onClick: () => {
+      setCurrentCategory('All');
+      resetFilter();
+    },
+    variant: 'contained',
   };
+  const btnCategoryProps = {
+    variant: 'contained',
+    type: 'button',
+  };
+
   return (
     <div className="category-container">
-      <button
-        className={ currentCategory === 'All' ? 'selected' : null }
-        type="button"
-        name="All"
-        key="All"
-        value="All"
-        data-testid="All-category-filter"
-        onClick={ () => {
-          returnAll();
-          setCurrentCategory('All');
-        } }
-      >
-        All
-      </button>
-      {category.slice(0, maxCategory).map(({ strCategory }) => (
-        <button
-          className={ currentCategory === strCategory ? 'selected' : null }
-          type="button"
+      <Btn { ...btnAllProps } />
+      {recipeCategory[category].slice(0, maxCategory).map(({ strCategory }) => (
+        <Btn
+          { ...btnCategoryProps }
           name={ strCategory }
-          Key={ strCategory }
+          key={ strCategory }
           value={ strCategory }
+          className={ currentCategory === strCategory ? 'selected' : null }
           data-testid={ `${strCategory}-category-filter` }
-          onClick={ ({ target: { value } }) => {
-            if (value === currentCategory) {
-              return setRecipes([]);
-            }
-            setCurrentCategory(value);
-            const searchInput = {
-              type: 'category',
-              input: value,
-            };
-            searchRecipes(searchInput, currentRout, url);
-          } }
-        >
-          { strCategory }
-        </button>))}
+          onClick={ () => handleCatClick(strCategory, category) }
+        />))}
     </div>
   );
 };
 
 BtnCategory.propTypes = {
-  category: PropTypes.objectOf(PropTypes.object).isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default BtnCategory;
