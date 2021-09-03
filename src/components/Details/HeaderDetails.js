@@ -12,17 +12,21 @@ export default function HeaderDetails(props) {
   } = props;
 
   return (
-    <div>
-      <img src={ photo } alt="" data-testid="recipe-photo" />
-      <div>
-        <h2 data-testid="recipe-title">{ title }</h2>
-        <h4 data-testid="recipe-category">{ category }</h4>
+    <>
+      <div className="header-img">
+        <img src={ photo } alt="" data-testid="recipe-photo" />
       </div>
-      <div>
-        <ShareButton recipeDetails={ data } />
-        <FavoriteButton recipeDetails={ data } />
+      <div className="step1-container">
+        <h3 data-testid="recipe-title">{ title }</h3>
+        <div className="share-fav-btn-container">
+          <ShareButton recipeDetails={ data } />
+          <FavoriteButton recipeDetails={ data } />
+        </div>
       </div>
-    </div>
+      <div className="category-container">
+        <h6 data-testid="recipe-category">{ category }</h6>
+      </div>
+    </>
   );
 }
 

@@ -4,8 +4,8 @@ import { string } from 'prop-types';
 export default function Instructions(props) {
   const { instructions } = props;
   return (
-    <div>
-      <h2>Instructions</h2>
+    <div className="instructions-container-det">
+      <h5>Instructions</h5>
       <p data-testid="instructions">{ instructions }</p>
     </div>
   );

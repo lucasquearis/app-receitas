@@ -7,8 +7,12 @@
   width: 360px;
 }
 
+.login-container img {
+  margin-top: 20px;
+}
+
 .login-container h2 {
-  margin-top: 130px;
+  margin-top: 20px;
 }
 
 .login-form {
@@ -32,3 +36,21 @@
   transition: all 0.5s ease-in-out;
   width: 320px;
 }
+
+.footer-login {
+  margin-top: 150px;
+}
+
+.footer-login p {
+  color: #c4c4c4;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.footer-login p:nth-child( 1 ) {
+  color: #c4c4c4;
+  font-size: 16px;
+}
+

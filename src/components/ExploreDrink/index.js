@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../Button';
+import './index.css';
 
 function ExploreDrink() {
   async function getRandomDrink() {
@@ -21,27 +22,24 @@ function ExploreDrink() {
   });
 
   return (
-    <section>
-      <div className="container">
+    <div className="explo-drink-container">
+      <Button
+        link="/explorar/bebidas/ingredientes"
+        className="myButton"
+        testId="explore-by-ingredient"
+        type="button"
+        name="Por Ingredientes"
+      />
 
-        <Button
-          link="/explorar/bebidas/ingredientes"
-          className="myButton"
-          testId="explore-by-ingredient"
-          type="button"
-          name="Por Ingredientes"
-        />
+      <Button
+        link={ `/bebidas/${idDrink}` }
+        className="myButton2"
+        testId="explore-surprise"
+        type="button"
+        name="Me Surpreenda!"
+      />
 
-        <Button
-          link={ `/bebidas/${idDrink}` }
-          className="myButton2"
-          testId="explore-surprise"
-          type="button"
-          name="Me Surpreenda!"
-        />
-
-      </div>
-    </section>
+    </div>
   );
 }
 

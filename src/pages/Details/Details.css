@@ -1,5 +1,87 @@
 .btn {
   background-color: green;
   bottom: 0;
+  margin: 0 auto;
   position: fixed;
+  transition: all 0.5s ease-in-out;
+  width: 170px;
 }
+
+.btn:hover {
+  background-color: rgb(4, 206, 4);
+  color: white;
+  font-weight: 700;
+  margin-bottom: 10px;
+  width: 359px;
+}
+
+
+.details-container {
+  border: solid #c4c4c4 1px;
+  border-radius: 10px;
+  min-height: 640px;
+  width: 360px;
+}
+
+.header-img img {
+  border-radius: 10px;
+  height: 255px;
+  width: 360px;
+}
+
+.step1-container {
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+}
+
+.share-fav-btn-container {
+  display: flex;
+  margin-right: 5px;
+}
+
+.share-fav-btn-container button {
+  background-color: white;
+  border: none;
+  height: 30px;
+  padding: 0;
+  width: 50px;
+}
+
+.share-fav-btn-container button img {
+  height: 22px;
+}
+
+.category-container {
+  color: darkgray;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 25px;
+  margin-top: 0;
+}
+
+.list-ingredient-details {
+  background: #ececec;
+  border: none;
+  border-radius: 4px;
+  list-style: inside;
+  margin: 0 auto 10px;
+  padding: 10px 5px;
+  width: 341px;
+}
+
+.list-ingredient-details input {
+  margin-right: 10px;
+}
+
+.instructions-container-det p {
+  background: #ececec;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 0 auto 10px;
+  padding: 10px 9px;
+  width: 341px;
+}
+

@@ -12,17 +12,19 @@ export default function Ingredients(props) {
   }
   return (
     <div>
-      <h2>Ingredients</h2>
-      {
-        ingredients.map((ingredient, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            { ingredient }
-          </li>
-        ))
-      }
+      <h5 style={ { margin: '15px 0 5px' } }>Ingredients</h5>
+      <ul className="list-ingredient-details">
+        {
+          ingredients.map((ingredient, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { ingredient }
+            </li>
+          ))
+        }
+      </ul>
     </div>
   );
 }
