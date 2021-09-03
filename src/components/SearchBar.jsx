@@ -7,7 +7,6 @@ import {
   clearSearch,
 } from '../redux/actions/mainActions';
 import myContext from '../context/myContext';
-import '../styles/SearchBar.css';
 
 function SearchBar() {
   const [search, setSearch] = useState({ result: '', type: '' });

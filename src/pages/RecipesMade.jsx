@@ -16,15 +16,19 @@ function RecipesMade() {
   }, []);
 
   const handleAllClick = () => {
-    setRecipesList(doneRecipes);
+    if (doneRecipes) return setRecipesList(doneRecipes);
   };
 
   const handleFoodClick = () => {
-    setRecipesList(doneRecipes.filter((recipe) => recipe.type === 'comida'));
+    if (doneRecipes) {
+      setRecipesList(doneRecipes.filter((recipe) => recipe.type === 'comida'));
+    }
   };
 
   const handleDrinkClick = () => {
-    setRecipesList(doneRecipes.filter((recipe) => recipe.type === 'bebida'));
+    if (doneRecipes) {
+      setRecipesList(doneRecipes.filter((recipe) => recipe.type === 'bebida'));
+    }
   };
 
   const renderFilterButtons = () => (
@@ -113,6 +117,7 @@ function RecipesMade() {
     <div>
       <Header brand="Receitas Feitas" />
       {renderFilterButtons()}
+      { !recipesList && <span>Nenhuma Receita Feita</span> }
       {recipesList && renderDoneCards()}
     </div>
   );

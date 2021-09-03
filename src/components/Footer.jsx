@@ -6,7 +6,6 @@ import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import { clearSearch } from '../redux/actions/mainActions';
-import '../styles/Footer.css';
 
 function Footer() {
   const dispatch = useDispatch();

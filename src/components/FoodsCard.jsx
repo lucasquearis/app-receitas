@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import myContext from '../context/myContext';
 import { fetchFoods } from '../redux/actions/mainActions';
 import ItemCard from './ItemCard';
-import '../styles/ItemCard.css';
 
 function FoodsCard() {
   const doze = 12;
