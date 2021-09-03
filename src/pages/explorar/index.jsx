@@ -8,7 +8,7 @@ export default class Explorar extends Component {
   render() {
     return (
       <div>
-        <Header title="Explorar" />
+        <Header title="Explorar" showSearchBottom={ false } />
         <div className="container-button-explorar">
 
           <Link to="/explorar/comidas" data-testid="explore-food">

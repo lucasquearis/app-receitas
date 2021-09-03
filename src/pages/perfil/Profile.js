@@ -12,7 +12,7 @@ export default function Profile() {
 
   return (
     <div>
-      <Header title="Perfil" />
+      <Header title="Perfil" showSearchBottom={ false } />
       <p data-testid="profile-email">{userEmail}</p>
       <Link to="receitas-feitas">
         <button type="button" data-testid="profile-done-btn">

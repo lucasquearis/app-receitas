@@ -32,6 +32,7 @@ export default function MenuFooter() {
             alt="icon food"
           />
         </Link>
+
       </footer>
     </div>
   );

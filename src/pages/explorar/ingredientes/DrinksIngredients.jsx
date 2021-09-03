@@ -19,7 +19,7 @@ export default function IgredientesDrinks() {
   }, []);
   return (
     <div>
-      <Header title="Explorar Ingredientes" />
+      <Header title="Explorar Ingredientes" showSearchBottom={ false } />
       <div className="div-cards-ingredients">
         {ingredients.length > 0 && ingredients.map((ingredient, index) => (
           <div

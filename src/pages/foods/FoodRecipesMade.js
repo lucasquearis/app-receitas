@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterRecipesMade from '../../components/FilterRecipesMade';
+import Header from '../../components/Header';
 import RecipesMadeList from '../../components/RecipesMadeList';
 
 class FoodRecipesMade extends Component {
@@ -78,6 +79,7 @@ class FoodRecipesMade extends Component {
 
     return (
       <div>
+        <Header title="Receitas Feitas" showSearchBottom={ false } />
         <FilterRecipesMade
           categories={ categories }
           handleClick={ this.filterRecipesDone }

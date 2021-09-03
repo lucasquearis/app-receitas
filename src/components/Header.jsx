@@ -25,7 +25,7 @@ export default class Header extends Component {
 
   render() {
     const { searchBar } = this.state;
-    const { title } = this.props;
+    const { title, showSearchBottom } = this.props;
     return (
       <div className="header">
         <header className="header">
@@ -37,16 +37,17 @@ export default class Header extends Component {
             </button>
           </Link>
           <h2 data-testid="page-title">{ title }</h2>
-          <button
-            type="button"
-            onClick={ this.handleSearch }
-          >
-            <img
-              src={ search }
-              alt="search"
-              data-testid="search-top-btn"
-            />
-          </button>
+          { showSearchBottom ? (
+            <button
+              type="button"
+              onClick={ this.handleSearch }
+            >
+              <img
+                src={ search }
+                alt="search"
+                data-testid="search-top-btn"
+              />
+            </button>) : null }
         </header>
         { searchBar ? <Search /> : null }
       </div>
@@ -56,4 +57,5 @@ export default class Header extends Component {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  showSearchBottom: PropTypes.bool.isRequired,
 };
