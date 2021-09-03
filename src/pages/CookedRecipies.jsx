@@ -19,6 +19,14 @@ function CookedRecipies() {
     setDoneRecipes(filteredFood);
   };
 
+  if (!doneRecipes) {
+    return (
+      <>
+        <Header title="Receitas Feitas" />
+        <h1>ERRO</h1>
+      </>
+    );
+  }
   return (
     <div>
       <Header title="Receitas Feitas" />

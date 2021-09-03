@@ -18,9 +18,17 @@ function FavoriteRecipies() {
       setFavoriteRecipes(filteredFood);
     }
   };
+  if (!favoriteRecipes) {
+    return (
+      <>
+        <Header title="Receitas Favoritas" />
+        <h1>ERRO</h1>
+      </>
+    );
+  }
   return (
     <div>
-      <Header title="Receitas Feitas" />
+      <Header title="Receitas Favoritas" />
       <Button
         onClick={ () => filterType('all') }
         data-testid="filter-by-all-btn"
