@@ -10,8 +10,8 @@ import useRedirect from '../hooks/useRedirect';
 
 function RecipesDone() {
   const { shouldRedirect, redirect } = useRedirect();
-
   const [recipes, setRecipes] = useState([]);
+  const [typeRecipes, setTypeRecipes] = useState('All');
   const { loading } = useSelector((state) => state);
 
   useEffect(() => {
@@ -28,9 +28,26 @@ function RecipesDone() {
   //   setRenderedMeals(newMeals);
   // };
 
+  const filterRecipes = (param, cards) => {
+    // if (param ===) {
+    //   results = cards;
+    //   return results;
+    // } else {
+    //   return cards
+    // }
+    // const filterFood = cards.type === 'comida');
+    // const filterdrink = cards.type === 'bebida') || [];
+    switch (param) {
+    case 'comida':
+      return cards.type === 'comida';
+    case 'bebida':
+      return cards.type === 'bebida';
+    default:
+      return cards;
+    }
+  };
+
   function doneCard(cards, index) {
-    // const filterFood = cards.filter((card) => card.type === 'comida');
-    // const filterDrink = cards.filter((card) => card.type === 'bebida');
     const {
       area = '',
       alcoholicOrNot = '',
@@ -41,7 +58,7 @@ function RecipesDone() {
       tags,
       type,
       id,
-    } = cards;
+    } = filterRecipes(typeRecipes, cards);
 
     const types = type === 'comida' ? 'comida' : 'bebida';
     if (redirect.should) return <Redirect to={ redirect.path } />;
@@ -106,26 +123,6 @@ function RecipesDone() {
       </div>
     );
   }
-
-  // { catList.map(({ strCategory }) => (
-  //   <button
-  //     type="button"
-  //     key={ v4() }
-  //     onClick={ ({ target }) => handleClick(target, strCategory) }
-  //     data-testid={ `${strCategory}-category-filter` }
-  //     className={ selected === strCategory ? SELECTED_MEAL : 'not-selected' }
-  //   >
-  //     {strCategory}
-  //   </button>
-  // ))}
-  // <button
-  //   type="button"
-  //   onClick={ handleClickAll }
-  //   data-testid="All-category-filter"
-  //   className={ selected === 'all' ? SELECTED_MEAL : 'not-selected' }
-  // >
-  //   All
-  // </button>
   return (
     <div>
       <HeaderWithoutSearch>Receitas Feitas</HeaderWithoutSearch>
@@ -134,6 +131,7 @@ function RecipesDone() {
           variant="success"
           type="button"
           data-testid="filter-by-all-btn"
+          onClick={ () => setTypeRecipes('All') }
         >
           All
         </Button>
@@ -141,6 +139,7 @@ function RecipesDone() {
           variant="success"
           type="button"
           data-testid="filter-by-food-btn"
+          onClick={ () => setTypeRecipes('comida') }
         >
           Food
         </Button>
@@ -148,6 +147,7 @@ function RecipesDone() {
           variant="success"
           type="button"
           data-testid="filter-by-drink-btn"
+          onClick={ () => setTypeRecipes('bebida') }
         >
           Drinks
         </Button>
