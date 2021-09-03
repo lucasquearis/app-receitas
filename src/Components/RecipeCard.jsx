@@ -1,5 +1,5 @@
-import { React } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { string, number } from 'prop-types';
 import { useLocation, Link } from 'react-router-dom';
 
 function RecipeCard(props) {
@@ -7,7 +7,7 @@ function RecipeCard(props) {
   const { id, thumbnail, title, index } = props;
 
   return (
-    <Link to={ `${pathname}:${id}` }>
+    <Link className="recipe-cards" to={ `${pathname}/${id}` }>
       <div data-testid={ `${index}-recipe-card` }>
         <img
           src={ thumbnail }
@@ -23,8 +23,6 @@ function RecipeCard(props) {
     </Link>
   );
 }
-
-const { string, number } = PropTypes;
 
 RecipeCard.propTypes = {
   id: string.isRequired,
