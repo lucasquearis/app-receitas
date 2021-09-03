@@ -31,7 +31,7 @@ export default function DrinkCategoryButtons() {
   };
 
   return (
-    <ul>
+    <ul className="drinks-category-buttons">
       <button
         type="button"
         name="All"

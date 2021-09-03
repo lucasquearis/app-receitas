@@ -31,7 +31,7 @@ export default function MealCategoryButtons() {
   };
 
   return (
-    <ul>
+    <ul className="category-buttons">
       <button
         type="button"
         name="All"

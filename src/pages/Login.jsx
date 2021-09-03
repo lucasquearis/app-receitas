@@ -39,8 +39,11 @@ export default function Login() {
   if (shouldRedirect) return <Redirect to="/comidas" />;
 
   return (
-    <div className="login-div">
-      <img src={ logoHowToChef } alt="logo da marca" className="logo-howtochef" />
+    <main className="login-div">
+      <div className="logo-howtochef">
+        <img src={ logoHowToChef } alt="logo da marca" />
+      </div>
+      <h1>Login</h1>
       <form className="form">
         <input
           className="login-input"
@@ -57,6 +60,7 @@ export default function Login() {
           onChange={ handlePassword }
           placeholder="Senha"
         />
+        <p><span>Esqueceu sua senha?</span></p>
         <button
           type="button"
           className="login-button"
@@ -66,7 +70,12 @@ export default function Login() {
         >
           Login
         </button>
+        <p>
+          Ainda não tem uma conta?
+          <br />
+          <span> Registre-se aqui</span>
+        </p>
       </form>
-    </div>
+    </main>
   );
 }

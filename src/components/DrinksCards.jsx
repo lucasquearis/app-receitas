@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Context from '../context/Context';
 import DrinkCard from './DrinkCard';
+import Loading from './Loading';
 import { useFetchApiDrinks } from '../customHooks/useFetchApi';
 
 export default function DrinksCards() {
@@ -42,11 +43,11 @@ export default function DrinksCards() {
   };
 
   if (loading === true) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (
-    <ul>
+    <ul className="recipes-cards">
       {
         (searchDataDrinks === null || searchDataDrinks === undefined)
         && showAlert(alert, msgNotRecipe)

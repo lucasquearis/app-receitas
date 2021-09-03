@@ -1,0 +1,15 @@
+.loading-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  justify-content: center;
+}
+
+.loading-gif {
+  width: 50vw;
+}
+
+.loading-wrapper p {
+  font-weight: 900;
+}

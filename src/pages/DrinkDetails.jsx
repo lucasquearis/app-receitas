@@ -93,35 +93,45 @@ export default function DrinkDetails(props) {
 
     return (
       <main>
-        <img
-          className="recipe-photo"
-          data-testid="recipe-photo"
-          alt="imagem da receita"
-          src={ details.strDrinkThumb }
-        />
-        <div className="title-and-btns">
-          <h1 data-testid="recipe-title">{ details.strDrink }</h1>
+        <div className="img-wrapper">
           <DetailsShareFaveBtns details={ modifyDetailProp() } />
+          <img
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            alt="imagem da receita"
+            src={ details.strDrinkThumb }
+          />
         </div>
-        <p data-testid="recipe-category">{ details.strAlcoholic }</p>
-        {
-          validIngredientKeys.map((key, index) => (
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-              key={ key }
-            >
-              { details[key] }
-              :
-              &nbsp;
-              {
-                !details[validMeasuresKeys[index]]
-                  ? 'à gosto' : details[validMeasuresKeys[index]]
-              }
-            </p>
-          ))
-        }
-        <p data-testid="instructions">{ details.strInstructions }</p>
-        <h3>Recomendações para acompanhar esse drink</h3>
+        <div className="recipe-details-wrapper">
+          <h1 className="recipe-name" data-testid="recipe-title">{ details.strDrink }</h1>
+          <p
+            className="category-name"
+            data-testid="recipe-category"
+          >
+            Category:
+            { ' ' }
+            { details.strAlcoholic }
+          </p>
+          <h4>Ingredients</h4>
+          {
+            validIngredientKeys.map((key, index) => (
+              <p
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ key }
+              >
+                { details[key] }
+                :
+                &nbsp;
+                {
+                  !details[validMeasuresKeys[index]]
+                    ? 'to taste' : details[validMeasuresKeys[index]]
+                }
+              </p>
+            ))
+          }
+          <p data-testid="instructions">{ details.strInstructions }</p>
+          <h3>Meals to enjoy with this recipe:</h3>
+        </div>
         <Carousel>
           {
             mealsRecommended.map((meal, index) => (
@@ -130,7 +140,16 @@ export default function DrinkDetails(props) {
                   className="d-block w-100"
                   data-testid={ `${index}-recomendation-card` }
                 >
-                  <p data-testid={ `${index}-recomendation-title` }>{ meal.strMeal }</p>
+                  <img
+                    className="recipe-photo"
+                    data-testid={ `${index}-recomendation-title` }
+                    src={ meal.strMealThumb }
+                    alt="imagem da receita"
+                  />
+                  <Carousel.Caption>
+                    <h4>{ meal.strMeal }</h4>
+                    <p>{ `${meal.strCategory} - ${meal.strArea}` }</p>
+                  </Carousel.Caption>
                 </div>
               </Carousel.Item>
             ))

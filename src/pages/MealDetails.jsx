@@ -104,40 +104,51 @@ export default function MealDetails(props) {
 
     return (
       <main>
-        <img
-          className="recipe-photo"
-          data-testid="recipe-photo"
-          alt="imagem da receita"
-          src={ details.strMealThumb }
-        />
-        <div className="title-and-btns">
-          <h1 data-testid="recipe-title">{ details.strMeal }</h1>
+        <div className="img-wrapper">
           <DetailsShareFaveBtns details={ modifyDetailProp() } />
-        </div>
-        <p data-testid="recipe-category">{ details.strCategory }</p>
-        {
-          validIngredientKeys.map((key, index) => (
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-              key={ key }
-            >
-              { details[key] }
-              :
-              &nbsp;
-              { details[validMeasuresKeys[index]] }
-            </p>
-          ))
-        }
-        <p data-testid="instructions">{ details.strInstructions }</p>
-        <div data-testid="video">
-          <iframe
-            title="recipe title"
-            width="360"
-            height="315"
-            src={ `https://youtube.com/embed/${getYouTubeId(details.strYoutube)}` }
+          <img
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            alt="imagem da receita"
+            src={ details.strMealThumb }
           />
         </div>
-        <h3>Recomendações para acompanhar essa receita</h3>
+        <div className="recipe-details-wrapper">
+          <h1 className="recipe-name" data-testid="recipe-title">{ details.strMeal }</h1>
+          <p
+            className="category-name"
+            data-testid="recipe-category"
+          >
+            Category:
+            { ' ' }
+            { details.strCategory }
+          </p>
+          <h4>Ingredients</h4>
+          {
+            validIngredientKeys.map((key, index) => (
+              <p
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ key }
+              >
+                { details[key] }
+                :
+                &nbsp;
+                { details[validMeasuresKeys[index]] }
+              </p>
+            ))
+          }
+          <h4>Instructions</h4>
+          <p data-testid="instructions">{ details.strInstructions }</p>
+          <div data-testid="video">
+            <iframe
+              title="recipe title"
+              width="340"
+              height="315"
+              src={ `https://youtube.com/embed/${getYouTubeId(details.strYoutube)}` }
+            />
+          </div>
+          <h3>Drinks to enjoy with this recipe:</h3>
+        </div>
         <Carousel>
           {
             drinksRecommended.map((drink, index) => (
@@ -146,7 +157,16 @@ export default function MealDetails(props) {
                   className="d-block w-100"
                   data-testid={ `${index}-recomendation-card` }
                 >
-                  <p data-testid={ `${index}-recomendation-title` }>{ drink.strDrink }</p>
+                  <img
+                    className="recipe-photo"
+                    data-testid={ `${index}-recomendation-title` }
+                    src={ drink.strDrinkThumb }
+                    alt="imagem da receita"
+                  />
+                  <Carousel.Caption>
+                    <h4>{ drink.strDrink }</h4>
+                    <p>{ `${drink.strCategory} - ${drink.strAlcoholic}` }</p>
+                  </Carousel.Caption>
                 </div>
               </Carousel.Item>
             ))

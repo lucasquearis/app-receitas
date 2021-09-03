@@ -5,10 +5,6 @@
   justify-content: space-evenly;
 }
 
-.recipe-photo {
-  width: 200px;
-}
-
 .lista {
   display: flex;
   flex-direction: column;

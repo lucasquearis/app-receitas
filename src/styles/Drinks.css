@@ -1,0 +1,22 @@
+.main-content-wrapper {
+  background-color: #fff7eb;
+}
+
+.drinks-category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: -5px;
+  padding: 10px;
+}
+
+.drinks-category-buttons button {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin: 0 auto;
+}
+
+.drinks-category-buttons button:nth-child( 1 ) {
+  padding-left: 35px;
+  width: 86px;
+}

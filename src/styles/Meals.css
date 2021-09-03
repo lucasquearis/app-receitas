@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content-wrapper {
+  background-color: #fff7eb;
+  height: max-content;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: -5px;
+  padding: 10px;
+}
+
+.category-buttons button {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  flex-basis: 6.5em;
+  margin: 0 auto;
+}
+
+.recipes-cards {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5em;
+}

@@ -85,6 +85,41 @@ export default function SearchBar({ title }) {
         type="text"
         onChange={ ({ target: { value } }) => setSearchInput(value) }
       />
+      <div className="search-radio-btns">
+        <input
+          name="radio-btns-search"
+          data-testid="ingredient-search-radio"
+          id="radio-ingredients"
+          type="radio"
+          value="ingrediente"
+          onChange={ ({ target: { value } }) => setSearchRadio(value) }
+        />
+        <label htmlFor="radio-ingredients">
+          Ingredientes
+        </label>
+        <input
+          name="radio-btns-search"
+          data-testid="name-search-radio"
+          id="radio-name"
+          type="radio"
+          value="nome"
+          onChange={ ({ target: { value } }) => setSearchRadio(value) }
+        />
+        <label htmlFor="radio-name">
+          Nome
+        </label>
+        <input
+          name="radio-btns-search"
+          data-testid="first-letter-search-radio"
+          id="radio-first-letter"
+          type="radio"
+          value="primeira-letra"
+          onChange={ ({ target: { value } }) => setSearchRadio(value) }
+        />
+        <label htmlFor="radio-first-letter">
+          Primeira letra
+        </label>
+      </div>
       <button
         type="button"
         data-testid="exec-search-btn"
@@ -92,41 +127,6 @@ export default function SearchBar({ title }) {
       >
         Buscar
       </button>
-      <div className="search-radio-btns">
-        <label htmlFor="radio-ingredients">
-          Ingredientes
-          <input
-            name="radio-btns-search"
-            data-testid="ingredient-search-radio"
-            id="radio-ingredients"
-            type="radio"
-            value="ingrediente"
-            onChange={ ({ target: { value } }) => setSearchRadio(value) }
-          />
-        </label>
-        <label htmlFor="radio-name">
-          Nome
-          <input
-            name="radio-btns-search"
-            data-testid="name-search-radio"
-            id="radio-name"
-            type="radio"
-            value="nome"
-            onChange={ ({ target: { value } }) => setSearchRadio(value) }
-          />
-        </label>
-        <label htmlFor="radio-first-letter">
-          Primeira letra
-          <input
-            name="radio-btns-search"
-            data-testid="first-letter-search-radio"
-            id="radio-first-letter"
-            type="radio"
-            value="primeira-letra"
-            onChange={ ({ target: { value } }) => setSearchRadio(value) }
-          />
-        </label>
-      </div>
     </form>
   );
 }

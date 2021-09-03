@@ -61,7 +61,7 @@ function DetailsShareFaveBtns({ details }) {
   return (
     <div className="share-fave-btns">
       { isCopied
-        ? <div className="copy-div">Link copiado! </div>
+        ? <div className="copy-div">Link copiado!</div>
         : <div className="copy-div" /> }
       <button
         type="button"

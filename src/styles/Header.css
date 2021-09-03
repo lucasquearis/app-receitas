@@ -1,6 +1,12 @@
+@font-face {
+  font-family: Amarillo;
+  src: url('./fonts/Amarillo.otf');
+}
+
 header {
   background-color: #eb6424;
-  display: block;
+  border-radius: 5px;
+  padding: 1em;
 }
 
 input {
@@ -8,10 +14,10 @@ input {
 }
 
 .header-div {
-  padding: 5px;
+  align-items: center;
   display: flex;
-  flex-direction: row wrap;
   justify-content: space-between;
+  padding: 5px;
 }
 
 .profile-icon {
@@ -23,29 +29,51 @@ input {
   border: none;
   cursor: pointer;
   margin: 0;
+  padding: 0;
   text-align: center;
   text-decoration: none;
+}
+
+.search-button:active {
+  box-shadow: 0;
 }
 
 .search-button img {
   filter: invert(100%);
 }
 
-.profile-link {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.header-title {
+.header-div p {
   color: #fff7eb;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Capriola', sans-serif;
-  justify-content: center;
-  margin: 0px;
+  font-family: Amarillo , sans-serif;
+  font-size: 25px;
+  margin: 0;
 }
 
 .search-form {
+  background-color: #eb6424;
+  border-radius: 5px;
+  color: #fff7eb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+}
+
+.search-form input {
+  border: 0.5px solid #a3a19f;
+  border-radius: 20px;
+  padding: 5px;
+  text-align: center;
+}
+
+.search-form button {
   background-color: #fa9500;
+  box-shadow: 10px 10px 5px 0 rgba(65, 64, 64, 0.3);
+  color: white;
+  font-size: large;
+  font-weight: 900;
+}
+
+.search-radio-btns {
+  margin: 10px 0 0 5px;
 }

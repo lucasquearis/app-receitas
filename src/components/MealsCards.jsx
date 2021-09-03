@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Context from '../context/Context';
 import MealCard from './MealCard';
+import Loading from './Loading';
 import { useFetchApiMeals } from '../customHooks/useFetchApi';
 
 export default function MealsCard() {
@@ -42,11 +43,11 @@ export default function MealsCard() {
   };
 
   if (loading === true) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (
-    <ul>
+    <ul className="recipes-cards">
       {
         (searchDataMeals === null || searchDataMeals === undefined)
         && showAlert(alert, msgNotRecipe)
