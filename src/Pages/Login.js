@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import LoginContext from '../Context/LoginContext';
+import letsCook from '../images/LetsCook.png';
+import letsCookIcon from '../images/letsCookIcon.png';
+import './Login.css';
 import Input from '../Components/Forms/Input';
 
 export default function Login() {
@@ -27,12 +30,9 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="main-section">
       { userInfo.redirect && <Redirect to="/comidas" />}
-      <h1>
-        Receitas
-      </h1>
-      <p>Título a decidir </p>
+      <img className="title" src={ letsCook } alt="title" />
       <div className="login-container">
         <Input
           testId="email-input"
@@ -49,15 +49,17 @@ export default function Login() {
           value={ userInfo.password }
           handleChange={ handleChange }
         />
+        <button
+          className="button"
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ validateLogin() }
+          onClick={ goToAPP }
+        >
+          Entrar
+        </button>
       </div>
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ validateLogin() }
-        onClick={ goToAPP }
-      >
-        Entrar
-      </button>
+      <img className="logo" src={ letsCookIcon } alt="logo" />
     </div>
   );
 }

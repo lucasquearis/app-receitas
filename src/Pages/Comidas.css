@@ -1,0 +1,24 @@
+.main-recipe-section {
+  background: rgb(25,62,25);
+  background: radial-gradient(circle, rgba(25,62,25,1) 36%, rgba(0,0,0,1) 85%);
+}
+
+.filter-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.filter-button button {
+  margin: 10px 0;
+  width: 30%;
+}
+
+.recipe-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  width: 100%;
+}
