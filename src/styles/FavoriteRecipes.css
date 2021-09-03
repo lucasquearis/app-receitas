@@ -1,25 +1,24 @@
 .container {
-  background-color: #669966;
+  background-color: #696;
   height: 100%;
   min-height: 100vh;
 }
 
 .favorite-card {
-  background-color: #99dd99;
+  background-color: #9d9;
   border: 2px solid black;
   border-radius: 2px;
-  display:flex;
+  display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  margin: 2vh 1vw ;
+  margin: 2vh 1vw;
 }
 
 .favorite-info {
-  width: 40vw;
-  margin: 0 1vw;
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  margin: 0 1vw;
+  width: 40vw;
 }
 
 .favorite-category {
@@ -27,8 +26,8 @@
 }
 
 .favorite-name {
-  font-size: 4.5vw;
   color: darkgoldenrod;
+  font-size: 4.5vw;
 }
 
 .filter-buttons {
@@ -68,6 +67,6 @@
 
 .filter-button {
   background-color: green;
-  width: 30.5vw;
   color: goldenrod;
+  width: 30.5vw;
 }
