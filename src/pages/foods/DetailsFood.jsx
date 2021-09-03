@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { fetchFoodById, fetchSearchDrinksApi } from '../../services/fetchApi';
 import RecommendationCard from '../../components/RecommendationCard';
@@ -75,6 +76,9 @@ function DetailsFood({ match: { params: { id } } }) {
 
   return (
     <div className="detailsRecipe">
+      <Link className="to-home" to="/comidas">
+        <i className="bi bi-house-fill" />
+      </Link>
       <img
         src={ food.strMealThumb }
         alt="recipe"

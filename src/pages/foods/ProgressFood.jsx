@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { fetchFoodById } from '../../services/fetchApi';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
@@ -74,6 +74,9 @@ const ProgressFood = ({ match: { params: { id } } }) => {
 
   return (
     <div className="progress-recipe">
+      <Link className="to-home" to="/comidas">
+        <i className="bi bi-house-fill" />
+      </Link>
       {isLoading ? <Loading /> : ''}
       <img
         className="progress-img"

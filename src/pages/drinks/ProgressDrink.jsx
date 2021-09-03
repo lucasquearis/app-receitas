@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { fetchDrinkById } from '../../services/fetchApi';
 import FavoriteAndShare from '../../components/FavoriteAndShare';
@@ -77,6 +77,9 @@ export default function ProgressDrink({ match: { params: { id } } }) {
 
   return (
     <div className="progress-recipe">
+      <Link className="to-home" to="/bebidas">
+        <i className="bi bi-house-fill" />
+      </Link>
       {isLoading ? <Loading /> : ''}
       <img
         className="progress-img"

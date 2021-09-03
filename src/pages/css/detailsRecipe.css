@@ -7,6 +7,7 @@
 
 .detailsRecipe {
   padding-bottom: 80px;
+  position: relative;
   width: 100vw;
 }
 
@@ -15,6 +16,15 @@
   font-size: 18px;
   font-weight: 500;
   text-align: center;
+}
+
+.to-home {
+  left: 5px;
+  position: absolute;
+}
+
+.to-home i {
+  font-size: 30px;
 }
 
 .recipe-title-container {
@@ -64,10 +74,6 @@
   margin: 30px auto;
 }
 
-.recipe-ingredients {
-  padding: 25px;
-}
-
 .recommendations-recipes {
   box-shadow: 5px 5px 5px gray;
   display: flex;
@@ -88,6 +94,7 @@
 
 .container-details-ingredients {
   background-color: #fed;
+  padding: 0 10px;
 }
 
 .detailsRecipe ul {
