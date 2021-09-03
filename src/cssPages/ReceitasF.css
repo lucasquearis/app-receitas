@@ -1,10 +1,9 @@
-.btnFavoriteRecipes {
+/* .btnFavoriteRecipes {
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 2vh;
-}
+} */
 
 .pageRF {
   background: url('../images/background5.jpg');
@@ -20,19 +19,16 @@
   width: 100vw;
 }
 
-.btnFavoriteRecipes button {
+.btnFiltro {
+  display: flex;
+  justify-content: center;
+}
+
+.btnFiltro button {
   border-radius: 5px;
-  margin: 3vh 0.7vh 5vh;
+  margin: 3vh 0.5vw;
   padding: 5px 25px;
 }
-
-@media only screen and (max-width : 360px) {
-
-  .btnFavoriteRecipes button {
-    border-radius: 5px;
-  }
-}
-
 
 .paizao {
   display: flex;
@@ -48,6 +44,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   justify-content: center;
 }
 
@@ -56,6 +53,3 @@
   border: none;
 }
 
-.listaReceitas {
-  display: flex;
-}
