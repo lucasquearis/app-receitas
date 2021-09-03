@@ -1,9 +1,10 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
+import { waitForDomChange } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-const URL = '/explorar/comidas/ingredientes';
+const URL = '/explorar/bebidas/ingredientes';
 
 describe('Testa pagina de explorar comida por area', () => {
   it('Verifica title', () => {
@@ -28,10 +29,23 @@ describe('Testa pagina de explorar comida por area', () => {
     expect(foodButton).toBeInTheDocument();
     expect(exploreButton).toBeInTheDocument();
   });
+  it('Testa se as bebidas aparecem na tela', async () => {
+    Object.defineProperty(window, 'location', {
+      get() {
+        return { href: 'http://localhost/explorar/bebidas/ingredientes' };
+      },
+    });
+    renderWithRouter(<App />, URL);
+    await waitForDomChange();
 
-  it('Testa se rota esta correta', () => {
-    const { history } = renderWithRouter(<App />, URL);
-    const path = history.location.pathname;
-    expect(path).toBe('/explorar/comidas/ingredientes');
+    const ELEMENTS = 11;
+    for (let i = 0; i <= ELEMENTS; i += 1) {
+      const card = screen.getByTestId(`${i}-ingredient-card`);
+      const image = screen.getByTestId(`${i}-card-img`);
+      const name = screen.getByTestId(`${i}-card-name`);
+      expect(card).toBeInTheDocument();
+      expect(image).toBeInTheDocument();
+      expect(name).toBeInTheDocument();
+    }
   });
 });
