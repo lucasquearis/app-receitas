@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 function CategorySubTitle({ recipe }) {
   return (
-    <p
+    <h2
       data-testid="recipe-category"
     >
       { (recipe.strAlcoholic) ? recipe.strAlcoholic : recipe.strCategory}
-    </p>
+    </h2>
   );
 }
 

@@ -32,3 +32,51 @@ export const BtnStart = styled.button`  background-color: #34c95e;
 export const Img = styled.img`  border-radius: 20px;
   width: 100vw;
 `;
+
+export const TitleTextWrapper = styled.div`  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.4);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: -60px;
+  padding-top: 10px;
+  text-align: center;
+
+  h1 {
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  h2 {
+    color: black;
+    font-size: 20px;
+  }
+`;
+
+export const BtnWrapper = styled.div`  display: flex;
+  justify-content: flex-end;
+
+  input {
+    margin-right: 10px;
+    width: 26px;
+  }
+`;
+
+export const CopyWrapper = styled.div`  display: flex;
+  flex-direction: column;
+
+  input {
+    width: 26px;
+  }
+
+  h5 {
+    position: absolute;
+    text-align: center;
+    top: 430px;
+  }
+`;

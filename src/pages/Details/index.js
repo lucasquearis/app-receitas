@@ -10,6 +10,9 @@ import {
   VideoWrapper,
   BtnStart,
   Img,
+  TitleTextWrapper,
+  BtnWrapper,
+  CopyWrapper,
 } from './style';
 
 import RecommendationCarousel from '../../components/RecommentionCarousel';
@@ -90,26 +93,31 @@ function Details({ recipeEndPoint, recommendationEndPoint }) {
         src={ recipe[`str${keyType}Thumb`] }
         className="main-img"
       />
-      <h1 data-testid="recipe-title">{ recipe[`str${keyType}`] }</h1>
-      <input
-        alt="share-btn"
-        data-testid="share-btn"
-        onClick={ shareClick }
-        src={ shareIcon }
-        type="image"
-      />
-      {showCopyMessage && <h5>Link copiado!</h5>}
-      {(recipe[`str${keyType}Thumb`]) && <FavoriteBtn
-        id={ id }
-        type={ (keyType === 'Meal') ? 'comida' : 'bebida' }
-        area={ recipe.strArea }
-        category={ recipe.strCategory }
-        alcoholicOrNot={ recipe.strAlcoholic }
-        name={ recipe[`str${keyType}`] }
-        image={ recipe[`str${keyType}Thumb`] }
-      />}
-
-      <CategorySubTitle recipe={ recipe } />
+      <TitleTextWrapper>
+        <h1 data-testid="recipe-title">{ recipe[`str${keyType}`] }</h1>
+        <CategorySubTitle recipe={ recipe } />
+      </TitleTextWrapper>
+      <BtnWrapper>
+        <CopyWrapper>
+          <input
+            alt="share-btn"
+            data-testid="share-btn"
+            onClick={ shareClick }
+            src={ shareIcon }
+            type="image"
+          />
+          {showCopyMessage && <h5>Link copiado!</h5>}
+        </CopyWrapper>
+        {(recipe[`str${keyType}Thumb`]) && <FavoriteBtn
+          id={ id }
+          type={ (keyType === 'Meal') ? 'comida' : 'bebida' }
+          area={ recipe.strArea }
+          category={ recipe.strCategory }
+          alcoholicOrNot={ recipe.strAlcoholic }
+          name={ recipe[`str${keyType}`] }
+          image={ recipe[`str${keyType}Thumb`] }
+        />}
+      </BtnWrapper>
 
       <IngredientsList recipe={ recipe } />
 
