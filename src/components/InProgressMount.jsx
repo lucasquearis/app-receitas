@@ -21,8 +21,17 @@ export default function InProgressMount(props) {
       />
       <h1 data-testid="recipe-title">{data.tittle}</h1>
       <div>
-        <ShareButton type={ type } id={ id } />
-        <FavoriteButton recipe={ data } id={ id } type={ type } />
+        <ShareButton
+          type={ type }
+          id={ id }
+          datatestid="share-btn"
+        />
+        <FavoriteButton
+          datatestid="favorite-btn"
+          recipe={ data }
+          id={ id }
+          type={ type }
+        />
       </div>
       <h3 data-testid="recipe-category">{data.category}</h3>
       { data && type === 'bebidas'

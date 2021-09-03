@@ -44,7 +44,7 @@ const setNewdoneobj = (ID, type, ingredients) => {
     name: ingredients.tittle,
     image: ingredients.img,
     doneDate: new Date().toLocaleString(),
-    tags: ingredients.tag ? ingredients.tag.split(',') : null,
+    tags: ingredients.tag ? ingredients.tag.split(',') : [],
   };
   if (donejson) { donejson.push(objdonemount); }
   const doneReturn = donejson || [objdonemount];

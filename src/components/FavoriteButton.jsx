@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import getFavorite from '../services/getFavorite';
+import urlApiHandle, { DataManeger } from '../services/urlApiHandle';
 import wIcon from '../images/whiteHeartIcon.svg';
 import bIcon from '../images/blackHeartIcon.svg';
 
@@ -33,27 +34,44 @@ const FavoriteChanger = (itFavoriteOrNot, Recipe, id, type) => {
     FavoriteRemoverHandle(id);
     return wIcon;
   }
-  FavoriteChangerHandle(Recipe, id, type);
-  return bIcon;
+  if (Recipe) {
+    console.log('fon');
+    FavoriteChangerHandle(Recipe, id, type);
+    return bIcon;
+  }
 };
 
 function FavoriteButton(props) {
-  const { id, recipe, type } = props;
+  const { id, recipe, type, datatestid } = props;
   const initialfavorite = getFavorite(id);
   const [favorbutton, setfavorite] = useState(initialfavorite ? bIcon : wIcon);
+  const [favorrecipe, setrecipe] = useState(null);
+  const Recipe = recipe || favorrecipe;
+  console.log(type);
 
   useEffect(() => {
     setfavorite(getFavorite(id) ? bIcon : wIcon);
-  }, [id]);
+    const getapifavorite = async () => {
+      try {
+        const fetchApi = await fetch(urlApiHandle(id, type)[0]);
+        const thedata = await fetchApi.json();
+        const finaldata = DataManeger(thedata, type);
+        setrecipe(finaldata);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getapifavorite();
+  }, [id, type, favorbutton]);
 
   return (
     <button
       type="button"
       onClick={ () => {
-        setfavorite(FavoriteChanger(getFavorite(id), recipe, id, type));
+        setfavorite(FavoriteChanger(getFavorite(id), Recipe, id, type));
       } }
     >
-      <img data-testid="favorite-btn" src={ favorbutton } alt="white-heart" />
+      <img data-testid={ datatestid } src={ favorbutton } alt="white-heart" />
     </button>
   );
 }
@@ -72,6 +90,7 @@ FavoriteButton.propTypes = {
     ingredients: string.isRequired,
     measures: string.isRequired,
   }).isRequired,
+  datatestid: string.isRequired,
 
 };
 
