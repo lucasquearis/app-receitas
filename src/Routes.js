@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
-import FoodsDet from './pages/Details/FoodsDet';
-import DrinksDet from './pages/Details/DrinksDet';
+// import FoodsDet from './pages/Details/FoodsDet';
+// import DrinksDet from './pages/Details/DrinksDet';
 import Explore from './pages/Explore/Explore';
 import FoodExp from './pages/Explore/FoodExp';
 import DrinkExp from './pages/Explore/DrinkExp';
@@ -29,8 +29,8 @@ function Routes() {
         <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
         <Route path="/explorar/comidas/area" component={ FoodAreaExp } />
         <Route path="/explorar/bebidas/area" component={ NotFound } />
-        <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
-        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } />
+        {/* <Route path="/comidas/:id" render={ (props) => <FoodsDet { ...props } /> } />
+        <Route path="/bebidas/:id" render={ (props) => <DrinksDet { ...props } /> } /> */}
         <Route path="/explorar/comidas" component={ FoodExp } />
         <Route path="/explorar/bebidas" component={ DrinkExp } />
         <Route path="/comidas" component={ Foods } />
