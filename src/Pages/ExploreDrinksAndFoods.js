@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Redirect, useLocation, Link } from 'react-router-dom';
 import useRandom from '../hooks/useRandom';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
 
 function ExploreDrinksAndFoods() {
   const { pathname } = useLocation();
@@ -9,6 +10,11 @@ function ExploreDrinksAndFoods() {
     ingredients: false,
     surprise: false });
   const [id] = useRandom();
+  let pag = 'Explorar Comidas';
+
+  if (pathname === '/explorar/bebidas') {
+    pag = 'Explorar Bebidas';
+  }
 
   const handleClick = ({ target }) => {
     setRedirectTo({ ...redirectTo, [target.name]: true });
@@ -28,33 +34,40 @@ function ExploreDrinksAndFoods() {
       return <Redirect to={ `/comidas/${id}` } />;
     }
     return (
-      <>
-        <Button
-          name="ingredients"
-          data-testid="explore-by-ingredient"
-          variant="link"
-          onClick={ handleClick }
-        >
-          Por Ingredientes
-        </Button>
-        <Link to="/explorar/comidas/area">
-          <Button
-            name="area"
-            data-testid="explore-by-area"
-            variant="link"
+      <div className="page">
+        <Header titlePage={ pag } />
+        <div className="container-buttons">
+          <button
+            type="button"
+            name="ingredients"
+            data-testid="explore-by-ingredient"
+            className="button-general"
+            onClick={ handleClick }
           >
-            Por Local de Origem
-          </Button>
-        </Link>
-        <Button
-          name="surprise"
-          data-testid="explore-surprise"
-          variant="link"
-          onClick={ handleSurpriseClick }
-        >
-          Me Surpreenda!
-        </Button>
-      </>
+            Por Ingredientes
+          </button>
+          <Link to="/explorar/comidas/area">
+            <button
+              type="button"
+              name="area"
+              data-testid="explore-by-area"
+              className="button-general"
+            >
+              Por Local de Origem
+            </button>
+          </Link>
+          <button
+            type="button"
+            name="surprise"
+            data-testid="explore-surprise"
+            className="button-general"
+            onClick={ handleSurpriseClick }
+          >
+            Me Surpreenda!
+          </button>
+        </div>
+        <Footer />
+      </div>
     );
   }
 
@@ -66,24 +79,32 @@ function ExploreDrinksAndFoods() {
       return <Redirect to={ `/bebidas/${id}` } />;
     }
     return (
-      <>
-        <Button
-          name="ingredients"
-          data-testid="explore-by-ingredient"
-          variant="link"
-          onClick={ handleClick }
-        >
-          Por Ingredientes
-        </Button>
-        <Button
-          name="surprise"
-          data-testid="explore-surprise"
-          variant="link"
-          onClick={ handleSurpriseClick }
-        >
-          Me Surpreenda!
-        </Button>
-      </>
+      <div className="page">
+        <Header titlePage={ pag } />
+        <div className="container-buttons">
+          <button
+            type="button"
+            name="ingredients"
+            data-testid="explore-by-ingredient"
+            className="button-general"
+            variant="link"
+            onClick={ handleClick }
+          >
+            Por Ingredientes
+          </button>
+          <button
+            type="button"
+            name="surprise"
+            data-testid="explore-surprise"
+            className="button-general"
+            variant="link"
+            onClick={ handleSurpriseClick }
+          >
+            Me Surpreenda!
+          </button>
+        </div>
+        <Footer />
+      </div>
     );
   }
 }

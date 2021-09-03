@@ -1,7 +1,38 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 [ data-testid = 'footer' ] {
+  align-items: center;
+  background-color: #606c38;
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
   bottom: 0;
+  color: #fefae0;
+  display: flex;
+  flex-flow: row wrap;
+  height: auto;
+  justify-content: space-evenly;
   left: 0;
+  padding: 0;
   position: fixed;
   text-align: center;
   width: 100vw;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.footer-icon {
+  height: 2rem;
+  width: 2rem;
+}
+
+.footer-buttons {
+  padding: 0.313rem;
 }

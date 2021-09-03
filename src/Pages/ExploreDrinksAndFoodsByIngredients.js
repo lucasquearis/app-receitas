@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 import { Redirect, useLocation } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
 import AppContext from '../Context/AppContext';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
 
 function ExploreDrinksAndFoodsByIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -48,31 +50,36 @@ function ExploreDrinksAndFoodsByIngredients() {
       const number = 12;
       return (
         <div>
-          { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
-            .map((ingredient, index) => (
-              <button
-                type="button"
-                onClick={ () => handleClickComidas(ingredient.strIngredient) }
-                data-testid={ `${index}-ingredient-card` }
-                key={ index }
-              >
-                <Card
-                  style={ { width: '8.75rem' } }
+          <Header titlePage="Explorar Ingredientes" />
+          <div className="header-space"> </div>
+          <div className="container-cards">
+            { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
+              .map((ingredient, index) => (
+                <button
+                  data-testid={ `${index}-ingredient-card` }
+                  className="horizontal-card"
+                  key={ index }
+                  type="button"
+                  onClick={ () => handleClickComidas(ingredient.strIngredient) }
                 >
-                  <Card.Img
-                    variant="top"
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    className="img-horizontal-card"
                     src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
                     alt="ingredient ilustration"
-                    data-testid={ `${index}-card-img` }
                   />
-                  <Card.Title
-                    data-testid={ `${index}-card-name` }
-                  >
-                    {ingredient.strIngredient}
-                  </Card.Title>
-                </Card>
-              </button>
-            ))}
+                  <div className="horizontal-card-infos">
+                    <span
+                      data-testid={ `${index}-card-name` }
+                      className="name-horizontal-card"
+                    >
+                      {ingredient.strIngredient}
+                    </span>
+                  </div>
+                </button>
+              ))}
+          </div>
+          <Footer />
         </div>
       );
     }
@@ -84,36 +91,45 @@ function ExploreDrinksAndFoodsByIngredients() {
       const number = 12;
       return (
         <div>
-          { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
-            .map((ingredient, index) => (
-              <button
-                type="button"
-                data-testid={ `${index}-ingredient-card` }
-                key={ index }
-                onClick={ () => handleClickBebidas(ingredient.strIngredient1) }
-              >
-                <Card
-                  style={ { width: '8.75rem' } }
+          <Header titlePage="Explorar Ingredientes" />
+          <div className="header-space"> </div>
+          <div className="container-cards">
+            { ingredients.filter((ingredient) => ingredients.indexOf(ingredient) < number)
+              .map((ingredient, index) => (
+                <button
+                  data-testid={ `${index}-ingredient-card` }
+                  className="horizontal-card"
+                  type="button"
+                  key={ index }
+                  onClick={ () => handleClickBebidas(ingredient.strIngredient1) }
                 >
-                  <Card.Img
-                    variant="top"
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    className="img-horizontal-card"
                     src={ `${api}${ingredient.strIngredient1}-Small.png` }
                     alt="ingredient ilustration"
-                    data-testid={ `${index}-card-img` }
                   />
-                  <Card.Title
-                    data-testid={ `${index}-card-name` }
-                  >
-                    {ingredient.strIngredient1}
-                  </Card.Title>
-                </Card>
-              </button>
-            ))}
+                  <div className="horizontal-card-infos">
+                    <span
+                      data-testid={ `${index}-card-name` }
+                      className="name-horizontal-card"
+                    >
+                      {ingredient.strIngredient1}
+                    </span>
+                  </div>
+                </button>
+              ))}
+          </div>
+          <Footer />
         </div>
       );
     }
   }
-  return <p>Carregando...</p>;
+  return (
+    <Spinner className="loading" animation="border" role="status">
+      <span className="visually-hidden"> </span>
+    </Spinner>
+  );
 }
 
 export default ExploreDrinksAndFoodsByIngredients;

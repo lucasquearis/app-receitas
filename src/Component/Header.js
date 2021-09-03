@@ -19,7 +19,11 @@ function Header({ titlePage, btSearch = false }) {
     <header>
       <div className="header">
         <Link to="/perfil" data-testid="profile-top-btn" src={ iconProfile }>
-          <img src={ iconProfile } width="35px" height="35px" alt="icone do perfil" />
+          <img
+            className="header-icon"
+            src={ iconProfile }
+            alt="icone do perfil"
+          />
         </Link>
         <h3 data-testid="page-title">{titlePage}</h3>
         <div className="header-buttons">
@@ -31,16 +35,14 @@ function Header({ titlePage, btSearch = false }) {
               src={ iconSearch }
             >
               <img
+                className="header-icon"
                 src={ iconSearch }
                 alt="Icone de pesquisa"
-                width="35px"
-                height="35px"
               />
             </button>) }
-          {show && <SearchBar />}
         </div>
-
       </div>
+      {show && <SearchBar />}
     </header>
   );
 }

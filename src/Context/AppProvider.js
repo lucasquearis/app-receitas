@@ -9,9 +9,9 @@ function Provider({ children }) {
   const [drinks, setDrinks] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
-  const [madeRecipe, setMadeRecipe] = useState(false);
   const [ingredientFilter, setIngredientFilter] = useState('');
   const [foodOrDrink, setFoodOrDrink] = useState('');
+  const [madeRecipe, setMadeRecipe] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [search, setSearch] = useState([]);
   const [loadSearch, setLoadSearch] = useState(false);

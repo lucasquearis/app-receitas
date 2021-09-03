@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import Header from '../Component/Header';
 import Footer from '../Component/Footer';
@@ -19,22 +18,26 @@ function Explore() {
   return (
     <>
       <Header titlePage=" Explorar " />
-      <Button
-        name="foods"
-        variant="link"
-        data-testid="explore-food"
-        onClick={ handleClick }
-      >
-        Explorar Comidas
-      </Button>
-      <Button
-        name="drinks"
-        variant="link"
-        data-testid="explore-drinks"
-        onClick={ handleClick }
-      >
-        Explorar Bebidas
-      </Button>
+      <div className="container-buttons">
+        <button
+          type="button"
+          name="foods"
+          data-testid="explore-food"
+          className="button-general"
+          onClick={ handleClick }
+        >
+          Explorar Comidas
+        </button>
+        <button
+          type="button"
+          name="drinks"
+          data-testid="explore-drinks"
+          className="button-general"
+          onClick={ handleClick }
+        >
+          Explorar Bebidas
+        </button>
+      </div>
       <Footer />
     </>
   );

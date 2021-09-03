@@ -1,15 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { Redirect, useLocation } from 'react-router-dom';
 import AppContext from '../Context/AppContext';
 import useFilter from '../hooks/useFilter';
 import useFilterIngredient from '../hooks/useFilterIngredient';
+import Header from '../Component/Header';
+import Footer from '../Component/Footer';
+import '../styles/foods-drinks.css';
 
 function FoodsAndDrinks() {
-  const { globalState } = useContext(AppContext);
-  const { meals, drinks, mealsCategories, drinksCategories } = globalState;
+  const { globalState, setLoadSearch } = useContext(AppContext);
+  const { meals, drinks, mealsCategories, drinksCategories,
+    loadSearch, search } = globalState;
   const { pathname } = useLocation();
   const { filter, setFilter, category, setCategory } = useFilter();
   const { itemsByIngredient, setItemsByIngredient } = useFilterIngredient();
@@ -19,6 +21,7 @@ function FoodsAndDrinks() {
   let type = 'Meal';
   let cards = meals;
   let buttons = mealsCategories;
+  let pag = 'Comidas';
 
   useEffect(() => {
     if (itemsByIngredient.length !== 0) {
@@ -31,11 +34,12 @@ function FoodsAndDrinks() {
     type = 'Drink';
     cards = drinks;
     buttons = drinksCategories;
+    pag = 'Bebidas';
   }
 
   if (!cards.length || !buttons.length) {
     return (
-      <Spinner animation="border" role="status">
+      <Spinner className="loading" animation="border" role="status">
         <span className="visually-hidden"> </span>
       </Spinner>
     );
@@ -49,19 +53,22 @@ function FoodsAndDrinks() {
     } else {
       setFilter(value);
     }
+    setLoadSearch(false);
   };
 
   const getButtons = () => {
     const buttonList = buttons.map(({ strCategory }, index) => (
-      <Button
+      <button
         data-testid={ `${strCategory}-category-filter` }
+        className="button-filter"
+        type="button"
         key={ index }
         variant="secondary"
         value={ strCategory }
         onClick={ filterCategory }
       >
         { `${strCategory}` }
-      </Button>
+      </button>
     ));
     return buttonList;
   };
@@ -72,51 +79,59 @@ function FoodsAndDrinks() {
   };
 
   const fillCards = () => {
+    let cardList = loadSearch ? search : category;
+
     if (!category.length) return <span>Nenhum resultado encontrado</span>;
 
-    const cardList = category.map((item, index) => (
-      <Card
+    cardList = cardList.map((item, index) => (
+      <button
         data-testid={ `${index}-recipe-card` }
+        type="button"
         key={ index }
-        className="main-card"
-        style={ { width: '8.75rem' } }
+        className="horizontal-card"
         onClick={ () => redirectToRecipe(item[`id${type}`]) }
       >
-        <Card.Img
+        <img
           data-testid={ `${index}-card-img` }
-          variant="top"
+          className="img-horizontal-card"
+          alt={ item[`str${type}`] }
           src={ item[`str${type}Thumb`] }
         />
-        <Card.Body>
-          <Card.Title
+        <div className="horizontal-card-infos">
+          <span
             data-testid={ `${index}-card-name` }
+            className="name-horizontal-card"
           >
             { item[`str${type}`] }
-          </Card.Title>
-        </Card.Body>
-      </Card>
+          </span>
+        </div>
+      </button>
     ));
     return cardList;
   };
 
   return (
-    <>
+    <div className="pag-foods-drinks">
+      <Header titlePage={ pag } btSearch />
       { redirect && <Redirect to={ `${pathname}/${id}` } /> }
-      <section className="main-buttons">
-        <Button
+      <section className="container-button-filter">
+        <button
           data-testid="All-category-filter"
+          className="button-filter"
+          type="button"
           variant="secondary"
           value="All"
           onClick={ filterCategory }
         >
           All
-        </Button>
+        </button>
         { getButtons() }
       </section>
-      <section className="main-cards">
+      <section className="container-cards">
         { fillCards() }
       </section>
-    </>
+      <Footer />
+    </div>
   );
 }
 
