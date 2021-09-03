@@ -4,7 +4,7 @@
   padding: 12px;
 }
 
-.recipe-img{
+.recipe-img {
   width: 100%;
 }
 
@@ -20,7 +20,7 @@
 
 .instructions-progress {
   background-color: rgb(40, 100, 38);
-  margin: 15px 0 50px 0;
+  margin: 15px 0 50px;
   padding: 10px;
   text-align: justify;
 }

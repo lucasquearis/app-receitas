@@ -1,0 +1,18 @@
+.error-section {
+  align-items: center;
+  background: rgb(25, 62, 25) radial-gradient(circle, rgba(25, 62, 25, 1) 36%, black 85%);
+  color: yellow;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.error-section h1 {
+  font-weight: 700;
+}
+
+.error-section img {
+  border-radius: 15px;
+  margin-top: 15px;
+}
