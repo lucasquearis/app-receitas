@@ -55,7 +55,7 @@ export default function Details() {
   }, [category, setRecommendationsData]);
 
   return (
-    <div>
+    <div className="details-container">
       <HeaderDetails
         title={ detailsData.strMeal || detailsData.strDrink }
         category={ `${detailsData.strAlcoholic || detailsData.strCategory}` }

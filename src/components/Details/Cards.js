@@ -17,10 +17,10 @@ export default function Cards() {
             className="card"
           >
             <img src={ recipe.strMealThumb || recipe.strDrinkThumb } alt="Recipe" />
-            <h2 data-testid={ `${index}-recomendation-title` }>
+            <h4 data-testid={ `${index}-recomendation-title` }>
               { recipe.strMeal || recipe.strDrink }
-            </h2>
-            <h3 data-testid="recipe-category">{ recipe.strCategory }</h3>
+            </h4>
+            <h6 data-testid="recipe-category">{ recipe.strCategory }</h6>
           </li>
         ))
       }
