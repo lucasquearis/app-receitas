@@ -17,6 +17,7 @@ import FoodIngredients from './pages/explorar/ingredientes/FoodIngredients';
 import AreaFood from './pages/explorar/area/AreaFood';
 import AreaDrink from './pages/explorar/area/AreaDrinks';
 import FoodRecipesMade from './pages/foods/FoodRecipesMade';
+import FavoriteFoods from './pages/foods/FavoriteFoods';
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
         <Route path="/explorar/bebidas/ingredientes" component={ DrinksIngredients } />
         <Route path="/explorar/comidas/area" component={ AreaFood } />
         <Route path="/explorar/bebidas/area" component={ AreaDrink } />
+        <Route path="/receitas-favoritas" component={ FavoriteFoods } />
       </Switch>
     </div>
   );

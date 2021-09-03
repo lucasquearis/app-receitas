@@ -6,11 +6,7 @@ import Header from '../../../components/Header';
 export default function AreaFood() {
   return (
     <div>
-      <Header title="Explorar Origem" showSearchBottom={ false } />
-      <div>
-        Explorar por Origem
-
-      </div>
+      <Header title="Explorar Origem" showSearchBottom />
       <MenuFooter />
     </div>
   );
