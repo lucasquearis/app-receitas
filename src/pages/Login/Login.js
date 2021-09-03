@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import loginImg from '../../images/login-theme.png';
 import './Login.css';
 
 function Login() {
@@ -24,6 +25,7 @@ function Login() {
   const newBtnColor = { background: '#6ce34f', color: 'white' };
   return (
     <div className="login-container">
+      <img src={ loginImg } alt="login-theme" width="150px" />
       <h2>Login</h2>
       <form className="login-form">
         <Input
@@ -51,6 +53,11 @@ function Login() {
           style={ !checkInput() ? newBtnColor : {} }
         />
       </form>
+      <footer className="footer-login">
+        <p>Grupo 33 - Turma 12</p>
+        <p> Eric Faria, Guilherme Cesconeto, Lucas Peixoto</p>
+        <p>Thiago Prado, Wesley de Almeida</p>
+      </footer>
     </div>
   );
 }
