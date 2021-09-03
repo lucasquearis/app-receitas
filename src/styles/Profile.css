@@ -1,0 +1,52 @@
+.profile-container {
+  align-items: center;
+  background-color: #669966;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.profile-email {
+  background-color: green;
+  border: 2vw solid goldenrod;
+  border-radius: 12vw;
+  color: goldenrod;
+  font-family: sans-serif;
+  font-size: 6vw;
+  font-weight: 700;
+  height: 10vh;
+  line-height: 8vh;
+  margin-top: 6vh;
+  margin-bottom: 8vh;
+  text-align: center;
+  vertical-align: middle;
+  width: 100vw;
+}
+
+.profile-button {
+  background-color: green;
+  border: 15px solid green;
+  border-radius: 15px;
+  color: goldenrod;
+  font-family: sans-serif;
+  font-size: 6vw;
+  font-weight: 700;
+  height: 14vh;
+  margin: 1vh 0;
+  width: 80vw;
+}
+
+.profile-logout-button {
+  background-color: goldenrod;
+  border: 2.5vw solid black;
+  border-radius: 15vw;
+  bottom: 60px;
+  left: 15vw;
+  color: darkgreen;
+  font-family: sans-serif;
+  font-size: 12vw;
+  font-weight: 700;
+  height: 12vh;
+  position: fixed;
+  width: 70vw;
+}

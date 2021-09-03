@@ -1,0 +1,43 @@
+.container {
+  background-color: #669966;
+}
+
+.favorite-card {
+  background-color: #99dd99;
+  border: 2px solid black;
+  border-radius: 2px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 2vh 1vw ;
+}
+
+.favorite-info {
+  width: 40vw;
+  margin: 0 1vw;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite-category {
+  font-size: 14px;
+}
+
+.favorite-name {
+  font-size: 7vw;
+  color: darkgoldenrod;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100vw;
+}
+
+.filter-button {
+  background-color: green;
+  width: 30.5vw;
+  color: goldenrod;
+}
