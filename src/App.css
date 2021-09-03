@@ -206,16 +206,18 @@ footer {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 30%;
+  margin-top: 140px;
 }
 
 .explore-btn {
-  background-color: lightblue;
-  border-radius: 20px;
+  background-color: #ef6a07;
+  border-radius: 0;
   color: white;
   font-size: 30px;
   margin: 10px;
+  margin-bottom: 50px;
   padding: 10px 20px;
+  width: 100%;
 }
 
 .cardFoodDrinkExplore {
@@ -224,6 +226,10 @@ footer {
   display: inline-flex;
   margin: 5px 20px 10px 10px;
   width: 150px;
+}
+
+.mainDetail h1, h2, span, li {
+  color: white;
 }
 
 .cardFoodDrinkExplore h2 {
@@ -259,10 +265,6 @@ footer {
   background-color: #ef6a07;
 }
 
-.mainDetail h1, h2, span, li {
-  color: white;
-}
-
 .nameDrinkMealsDetails {
   align-items: center;
   background-color: #5c5c5c;
@@ -291,7 +293,7 @@ footer {
 }
 
 .main-infos {
-  align-items:center;
+  align-items: center;
   background-color: #5c5c5c;
   color: white;
   display: flex;
@@ -331,31 +333,20 @@ footer {
 }
 
 .nameDrinkMealsInprogress label {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .nameDrinkMealsInprogress p {
   display: flex;
   margin-left: 30px;
-  padding-top: 5px;
   font-size: x-large;
   font-weight: 600;
+  padding-top: 5px;
 }
 
 .nameDrinkMealsInprogress input {
   transform: scale(1.5);
-}
-
-.explore-btn {
-  border-radius: 0;
-  background-color: #ef6a07;
-  margin-bottom: 50px;
-  width: 100%;
-}
-
-.explore-container {
-  margin-top: 140px;
 }
 
 .explore-containerMeals {
@@ -365,8 +356,8 @@ footer {
 }
 
 .explore-btnMeals {
-  border-radius: 0;
   background-color: #ef6a07;
+  border-radius: 0;
   color: white;
   font-size: x-large;
   font-weight: 800;
