@@ -85,7 +85,7 @@ export default function Login() {
           />
         </Form.Group>
         <Button
-          className="bg-color"
+          variant="primary"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ buttonDisabled }

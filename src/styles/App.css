@@ -1,6 +1,6 @@
 *, p, h1, h2, h3, h4, h5 {
   box-sizing: border-box;
-  color: #232323;
+  color: #222;
   margin: 0;
   padding: 0;
 }
@@ -15,8 +15,8 @@
 }
 
 .bg-color {
-  background-color: #b2b5bf;
-  color: #232323;
+  background-color: #a0acd6;
+  color: #222;
 }
 
 .logo {

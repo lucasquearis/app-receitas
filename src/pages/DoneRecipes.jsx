@@ -21,31 +21,33 @@ export default function DoneRecipes() {
   }, [filter]);
 
   return (
-    <div>
+    <div className="body">
       <section>
         <Header showExploreIcon pageTitle="Receitas Feitas" />
       </section>
-      <Button
-        variant="light"
-        data-testid="filter-by-all-btn"
-        onClick={ () => setFilter('All') }
-      >
-        All
-      </Button>
-      <Button
-        variant="light"
-        data-testid="filter-by-food-btn"
-        onClick={ () => setFilter('Food') }
-      >
-        Food
-      </Button>
-      <Button
-        variant="light"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => setFilter('Drinks') }
-      >
-        Drinks
-      </Button>
+      <div className="d-flex justify-content-around pb-2">
+        <Button
+          className="border bg-color w-25"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilter('All') }
+        >
+          All
+        </Button>
+        <Button
+          className="border bg-color w-25"
+          data-testid="filter-by-food-btn"
+          onClick={ () => setFilter('Food') }
+        >
+          Food
+        </Button>
+        <Button
+          className="border bg-color w-25"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => setFilter('Drinks') }
+        >
+          Drinks
+        </Button>
+      </div>
       {data.map((recipe, index) => (
         <CardDoneRecipes
           key={ recipe.id }

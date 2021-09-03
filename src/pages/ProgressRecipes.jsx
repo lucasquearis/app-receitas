@@ -53,7 +53,6 @@ export default function ProgressRecipes() {
   }
 
   const lengthItems = ingredientsDetails(recipes).map((item) => item).length;
-  console.log(checkedIngredients);
   return (
     <div className="pb-5">
       {loading ? (
