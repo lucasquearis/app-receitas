@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const SearchBarWrapper = styled.div`  background-color: #909090;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 0 2px black;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0 3px #6c6c6c;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
