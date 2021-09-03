@@ -22,8 +22,10 @@ const fetchEmptyMock = () => {
   }));
 };
 
-const SEARCH_BTN = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
+const SEARCH_BTN = 'search-top-btn';
+const FIRST_LETTER = 'first-letter-search-radio';
+
 
 describe('Testa a página de detalhes das receitas', () => {
   beforeEach(cleanup);
@@ -91,11 +93,11 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
 
     userEvent.click(activeSearchBtn);
-    const firstLetter = screen.getByTestId('first-letter-search-radio');
+    const fl = screen.getByTestId(FIRST_LETTER);
     const i = screen.getByTestId(SEARCH_INPUT);
     const b = screen.getByTestId(SEARCH_BTN);
 
-    userEvent.click(firstLetter);
+    userEvent.click(fl);
     userEvent.type(i, 'a');
     userEvent.click(b);
     await act(() => promise);
@@ -124,11 +126,11 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
 
     userEvent.click(activeSearchBtn);
-    const firstLetter = screen.getByTestId('first-letter-search-radio');
+    const fl1 = screen.getByTestId(FIRST_LETTER);
     const input1 = screen.getByTestId(SEARCH_INPUT);
     const btn2 = screen.getByTestId(SEARCH_BTN);
 
-    userEvent.click(firstLetter);
+    userEvent.click(fl1);
     userEvent.type(input1, 'aaa');
     userEvent.click(btn2);
     await act(() => promise);
@@ -144,11 +146,11 @@ describe('Testa a página de detalhes das receitas', () => {
     });
     const activeSearchBtn = screen.getByTestId('search-top-btn');
     userEvent.click(activeSearchBtn);
-    const firstLetter = screen.getByTestId('first-letter-search-radio');
+    const fl2 = 'first-letter-search-radio';
     const inpu80 = screen.getByTestId(SEARCH_INPUT);
     const btn3 = screen.getByTestId(SEARCH_BTN);
 
-    userEvent.click(firstLetter);
+    userEvent.click(fl2);
     userEvent.type(inpu80, 'ugwadawgb');
     userEvent.click(btn3);
 

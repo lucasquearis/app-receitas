@@ -135,7 +135,7 @@ describe('Testa a página de detalhes das receitas', () => {
     expect(window.alert);
   });
 
-  fetchEmptyMock()
+  fetchEmptyMock();
   it('Testa cenario em que a pesquisa nao tem correspondencia', async () => {
     const promise = Promise.resolve();
     await act(async () => {
