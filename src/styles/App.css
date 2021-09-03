@@ -7,15 +7,17 @@
 
 .body {
   font-family: Arial , Helvetica , sans-serif;
-  padding-top: 64px;
+  min-height: 100vh;
+  padding-top: 48px;
 }
 
 .search {
-  top: 58px;
+  background-color: white;
+  top: 48px;
 }
 
 .bg-color {
-  background-color: #a0acd6;
+  background-color: #a3c2db;
   color: #222;
 }
 
@@ -52,4 +54,8 @@
 :checked + span {
   color: black;
   text-decoration: line-through;
+}
+
+select {
+  font-size: 18pt;
 }

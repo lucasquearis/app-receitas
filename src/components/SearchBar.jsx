@@ -13,7 +13,10 @@ export default function SearchBar(
   },
 ) {
   return (
-    <div className="d-flex flex-column navbar fixed-top bg-light search">
+    <div
+      className="d-flex flex-column navbar fixed-top search justify-content-around"
+      style={ { height: '134px' } }
+    >
       <div className="w-100">
         <input
           className="w-100"
@@ -24,7 +27,7 @@ export default function SearchBar(
         />
       </div>
       <div className="w-100 d-flex justify-content-around">
-        <label htmlFor="ingredient-radio">
+        <label htmlFor="ingredient-radio" className="m-0">
           <input
             className="mr-1"
             name="search"
@@ -35,7 +38,7 @@ export default function SearchBar(
           />
           Ingrediente
         </label>
-        <label htmlFor="name-radio">
+        <label htmlFor="name-radio" className="m-0">
           <input
             className="mr-1"
             name="search"
@@ -46,7 +49,7 @@ export default function SearchBar(
           />
           Nome
         </label>
-        <label htmlFor="letter-radio">
+        <label htmlFor="letter-radio" className="m-0">
           <input
             className="mr-1"
             name="search"
@@ -60,8 +63,7 @@ export default function SearchBar(
       </div>
       <div className="w-100 d-flex">
         <Button
-          className="p-1"
-          variant="outline-dark"
+          className="p-1 w-100 border bg-color"
           onClick={ handleClick }
           type="button"
           data-testid="exec-search-btn"

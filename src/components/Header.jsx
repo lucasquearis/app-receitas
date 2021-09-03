@@ -14,8 +14,10 @@ export default function Header(
 ) {
   return (
     <div>
-      <header className="d-flex navbar fixed-top justify-content-around bg-color">
-        <nav>
+      <header className="d-flex navbar fixed-top justify-content-between bg-color">
+        <nav
+          style={ { width: '30px' } }
+        >
           {!showProfileIcon
             ? (
               <Link to="/perfil">
@@ -25,9 +27,16 @@ export default function Header(
             : null}
         </nav>
         <nav>
-          <h2 data-testid="page-title">{pageTitle}</h2>
+          <h3
+            data-testid="page-title"
+            style={ { 'font-weight': '700' } }
+          >
+            {pageTitle}
+          </h3>
         </nav>
-        <nav>
+        <nav
+          style={ { width: '30px' } }
+        >
           {!showExploreIcon
             ? (
               <button

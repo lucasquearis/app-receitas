@@ -39,7 +39,7 @@ export default function RecipeDetailCard({
           src={ img }
           alt="Foto do produto"
         />
-        <div className="d-flex p-2 justify-content-between align-items-center bg-color">
+        <div className="d-flex p-3 justify-content-between align-items-center bg-color">
           <div className="d-flex flex-column">
             <h3 data-testid="recipe-title">{title}</h3>
             <p data-testid="recipe-category">{category}</p>
@@ -47,22 +47,27 @@ export default function RecipeDetailCard({
           <ShareAndFavBtns recipes={ data } />
         </div>
       </div>
-      <div className="p-2 border">
+      <div className="p-3 border">
         <h3>Ingredients</h3>
-        <ul className="p-3 m-0">{ingredients}</ul>
+        <ul
+          className="m-0"
+          style={ { padding: '20px' } }
+        >
+          {ingredients}
+        </ul>
       </div>
-      <div className="p-2">
+      <div className="p-3">
         <h3>Instructions</h3>
-        <p data-testid="instructions" className="text-justify p-3">{instructions}</p>
+        <p data-testid="instructions" className="text-justify">{instructions}</p>
       </div>
       { !(currentPage.includes('bebidas') || currentPage.includes('progress'))
         ? (
-          <div className="p-2 border">
+          <div className="p-3 border">
             <h3>Video</h3>
             <iframe
               className="pt-3"
               data-testid="video"
-              width="340"
+              width="324"
               height="240"
               src={ video === null ? null : video.replace('watch?v=', 'embed/') }
               title="YouTube video player"

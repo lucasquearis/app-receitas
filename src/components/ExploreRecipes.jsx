@@ -31,9 +31,10 @@ export default function ExploreRecipes({ foods }) {
   };
 
   return (
-    <section>
+    <div className="d-flex flex-column w-100 p-3">
       <Button
-        variant="light"
+        style={ { 'font-size': '20pt' } }
+        className="border bg-color flex-grow-1"
         onClick={ () => changeRoute(`${pathname}/ingredientes`) }
         data-testid="explore-by-ingredient"
       >
@@ -43,7 +44,8 @@ export default function ExploreRecipes({ foods }) {
         foods
         && (
           <Button
-            variant="light"
+            style={ { 'font-size': '20pt' } }
+            className="border bg-color flex-grow-1 mt-2"
             data-testid="explore-by-area"
             onClick={ () => changeRoute(`${pathname}/area`) }
           >
@@ -52,13 +54,14 @@ export default function ExploreRecipes({ foods }) {
         )
       }
       <Button
-        variant="light"
+        style={ { 'font-size': '20pt' } }
+        className="border bg-color flex-grow-1 mt-2"
         onClick={ randomRecipe }
         data-testid="explore-surprise"
       >
         Me Surpreenda!
       </Button>
-    </section>
+    </div>
   );
 }
 
