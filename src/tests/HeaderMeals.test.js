@@ -23,8 +23,13 @@ const fetchEmptyMock = () => {
   }));
 };
 
+const SEARCH_BTN = 'search-top-btn';
+const SEARCH_INPUT = 'search-input';
+
+
+
 describe('Testa a página de detalhes das receitas', () => {
-  beforeEach(cleanup); 
+  beforeEach(cleanup);
   fetchMock();
 
   it('Verifica se a página contém os elementos esperados', async () => {
@@ -33,11 +38,11 @@ describe('Testa a página de detalhes das receitas', () => {
       renderWithRouter(<HeaderMeals />);
       const profileBtn = screen.getByTestId('profile-top-btn');
       const title = screen.getByTestId('page-title');
-      const searchBtn = screen.getByTestId('search-top-btn');
+      const btn = screen.getByTestId(SEARCH_BTN);
 
       expect(profileBtn).toBeInTheDocument();
       expect(title).toBeInTheDocument();
-      expect(searchBtn).toBeInTheDocument();
+      expect(btn).toBeInTheDocument();
       await act(() => promise);
     });
   });
@@ -51,12 +56,12 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
     userEvent.click(activeSearchBtn);
     const ingredients = screen.getByTestId('ingredient-search-radio');
-    const searchInput = screen.getByTestId('search-input');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const input = screen.getByTestId(SEARCH_INPUT);
+    const btn1 = screen.getByTestId(SEARCH_BTN);
 
     userEvent.click(ingredients);
-    userEvent.type(searchInput, 'chicken')
-    userEvent.click(searchBtn);
+    userEvent.type(input, 'chicken');
+    userEvent.click(btn1);
     await act(() => promise);
   });
 
@@ -70,12 +75,12 @@ describe('Testa a página de detalhes das receitas', () => {
 
     userEvent.click(activeSearchBtn);
     const name = screen.getByTestId('name-search-radio');
-    const searchInput = screen.getByTestId('search-input');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const inpt = screen.getByTestId(SEARCH_INPUT);
+    const button = screen.getByTestId(SEARCH_BTN);
 
     userEvent.click(name);
-    userEvent.type(searchInput, 'Brown Stew Chicken')
-    userEvent.click(searchBtn);
+    userEvent.type(inpt, 'Brown Stew Chicken');
+    userEvent.click(button);
     await act(() => promise);
   });
 
@@ -90,12 +95,12 @@ describe('Testa a página de detalhes das receitas', () => {
 
     userEvent.click(activeSearchBtn);
     const firstLetter = screen.getByTestId('first-letter-search-radio');
-    const searchInput = screen.getByTestId('search-input');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const i = screen.getByTestId(SEARCH_INPUT);
+    const b = screen.getByTestId(SEARCH_BTN);
 
     userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'a')
-    userEvent.click(searchBtn);
+    userEvent.type(i, 'a');
+    userEvent.click(b);
     await act(() => promise);
 
   });
@@ -109,13 +114,13 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
 
     userEvent.click(activeSearchBtn);
-    const searchBtn = screen.getByTestId('exec-search-btn');
-    userEvent.click(searchBtn);
+    const b1 = screen.getByTestId(SEARCH_BTN);
+    userEvent.click(b1);
     await act(() => promise);
   });
 
   fetchMock();
-  it('Testa se aparece um alert quando a pesquisa por uma letra tem mais de uma letra', async () => {
+  it('Faz pesquisa com mais de uma letra com o filtro de uma letra', async () => {
     const promise = Promise.resolve();
     await act(async () => {
       renderWithRouter(<HeaderMeals />);
@@ -124,18 +129,18 @@ describe('Testa a página de detalhes das receitas', () => {
 
     userEvent.click(activeSearchBtn);
     const firstLetter = screen.getByTestId('first-letter-search-radio');
-    const searchInput = screen.getByTestId('search-input');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+    const input1 = screen.getByTestId(SEARCH_INPUT);
+    const btn2 = screen.getByTestId(SEARCH_BTN);
 
     userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'aaa')
-    userEvent.click(searchBtn);
+    userEvent.type(input1, 'aaa');
+    userEvent.click(btn2);
     await act(() => promise);
 
-    expect(window.alert)
+    expect(window.alert);
   });
 
-  fetchEmptyMock()
+  fetchEmptyMock();
   it('Testa cenario em que a pesquisa nao tem correspondencia', async () => {
     const promise = Promise.resolve();
     await act(async () => {
@@ -144,15 +149,15 @@ describe('Testa a página de detalhes das receitas', () => {
     const activeSearchBtn = screen.getByTestId('search-top-btn');
     userEvent.click(activeSearchBtn);
     const firstLetter = screen.getByTestId('first-letter-search-radio');
-    const searchInput = screen.getByTestId('search-input');
-    const searchBtn = screen.getByTestId('exec-search-btn');
+     const inpu80 = screen.getByTestId(SEARCH_INPUT);
+     const btn3 = screen.getByTestId(SEARCH_BTN);
 
     userEvent.click(firstLetter);
-    userEvent.type(searchInput, 'ugwadawgb')
-    userEvent.click(searchBtn);
+    userEvent.type(inpu80, 'ugwadawgb');
+    userEvent.click(btn3);
 
     await act(() => promise);
 
-    expect(window.alert)
+    expect(window.alert);
   });
 });

@@ -4,7 +4,6 @@ import renderWithRouter from './helpers/renderWithRouter';
 import { MealsByIngredients } from '../pages';
 import { justDrinkMockFetch } from './helpers/mockedFetchs';
 
-
 describe('Testa a página de receitas feitas', () => {
   beforeEach(() => jest.clearAllMocks());
 
