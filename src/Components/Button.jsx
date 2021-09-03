@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import { string, objectOf } from 'prop-types';
-import whiteHeart from '../images/whiteHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import blackHeart from '../images/blackHeartIcon.svg';
 import favoriteRecipes from '../helper/setLocalStorage';
 
 function Button({ recipe, type }) {
@@ -41,7 +41,7 @@ function Button({ recipe, type }) {
       >
         <img
           data-testid="favorite-btn"
-          src={ isFavorite ? blackHeart : whiteHeart }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
           alt="Favorite"
         />
       </button>
