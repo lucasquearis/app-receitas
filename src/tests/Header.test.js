@@ -3,13 +3,13 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import App from '../App';
-import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 const profileButton = 'profile-top-btn';
 const pageTitle = 'page-title';
 const searchButton = 'search-top-btn';
 const searchInput = 'search-input';
+const IMG_URL = 'https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png';
 
 describe('9 - Verifica elementos do Header', () => {
   it('Verifica existencia do botão de perfil, título e botão de pesquisa', () => {
@@ -23,7 +23,7 @@ describe('9 - Verifica elementos do Header', () => {
 describe('10 - Verifica existencia do Header de acordo com protótipo', () => {
   const hasHeader = (title = '', haveSearchButton = true) => {
     expect(screen.getByTestId(profileButton).firstChild)
-      .toHaveProperty('src', `http://localhost/${profileIcon}`);
+      .toHaveProperty('src', IMG_URL);
     expect(screen.getByTestId(pageTitle).innerHTML).toBe(title);
     if (haveSearchButton) {
       expect(screen.getByTestId(searchButton).firstChild)

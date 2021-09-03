@@ -28,7 +28,7 @@ function MainDrinks() {
     chooser('/bebidas');
     return (
       <div>
-        <Header title="Comidas" searchIcon />
+        <Header title="Bebidas" searchIcon />
         <MainBackGround>
           <Loading />
         </MainBackGround>

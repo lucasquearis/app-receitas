@@ -17,12 +17,9 @@ function DrinkDetails({ match: { params: { id } } }) {
       const details = result.meals || result.drinks;
       setRecipe(details);
     };
-    fetchRecipe();
-  }, [id]);
-
-  useEffect(() => {
     dispatch({ type: 'CLEAR' });
-  }, [dispatch]);
+    fetchRecipe();
+  }, [id, dispatch]);
 
   return (
     <DatailsMain>

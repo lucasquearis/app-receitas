@@ -14,11 +14,10 @@ const LoginForm = () => {
     label: 'E-mail:',
     type: 'email',
     value: email,
-    defaultValue: 'Default Value',
     helperText: 'Digite seu melhor e-mail!',
     variant: 'outlined',
     onChange: ({ target }) => handleChange(target),
-    inputProps: { 'data-testid': 'email-input', autocomplete: 'off' },
+    inputProps: { 'data-testid': 'email-input', autoComplete: 'off' },
   };
 
   const passwordProps = {
@@ -27,7 +26,6 @@ const LoginForm = () => {
     label: 'Senha:',
     type: 'password',
     value: password,
-    defaultValue: 'Default Value',
     helperText: 'Pelo menos 7 digitos',
     variant: 'outlined',
     onChange: ({ target }) => handleChange(target),

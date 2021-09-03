@@ -15,7 +15,7 @@ function MealIngredients() {
   if (!ingredients.meals) {
     return (
       <section>
-        <Header title="Explorar Ingredientes" searchIcon />
+        <Header title="Explorar Ingredientes" />
         <MainBackGround>
           <Loading />
         </MainBackGround>

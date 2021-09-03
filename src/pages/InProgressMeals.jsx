@@ -13,7 +13,7 @@ function InProgressMeals({ match: { params: { id } } }) {
       setRecipe(details);
     };
     fetchRecipe();
-  }, [id]);
+  }, [id, setRecipe]);
 
   return (
     <main>
