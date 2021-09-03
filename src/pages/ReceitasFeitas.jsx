@@ -35,7 +35,7 @@ function ReceitasFeitas() {
     <>
       <Header titulo="Receitas Feitas" pesquisa="false" className="textPerfil" />
       <main className="pageRF">
-        <div className="btnFavoriteRecipes">
+        <div className="btnFiltro">
           <button
             name=""
             type="button"
@@ -68,6 +68,7 @@ function ReceitasFeitas() {
           {showRecipes.length === 0
             ? 'Lista vazia!' : showRecipes.map((recipe, index) => (
               <Card
+                className="listaReceitas"
                 name={ recipe.name }
                 style={ { width: '18rem' } }
                 key={ index }

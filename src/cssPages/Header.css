@@ -43,13 +43,13 @@
 
 .textPerfil {
   display: inline;
-  margin-right: 200px;
+  margin-right: 130px;
 }
 
 @media only screen and ( max-width : 360px ) {
 
   .textPerfil {
-    margin-right: 80px;
+    margin-right: 25px;
   }
 }
 

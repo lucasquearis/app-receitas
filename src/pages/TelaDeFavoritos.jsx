@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
+import '../cssPages/ReceitasFavoritas.css';
 import blackHeart from '../images/blackHeartIcon.svg';
-import '../cssPages/ReceitasF.css';
 import ShareButton from '../components/ShareButton';
 
 function ReceitasFeitas() {
@@ -40,7 +40,7 @@ function ReceitasFeitas() {
   if (redirect) return <Redirect to={ redirect } />;
   return (
     <>
-      <Header titulo="Receitas Favoritas" pesquisa="false" className="textFavorites" />
+      <Header titulo="Receitas Favoritas" pesquisa="false" className="textPerfil " />
       <main className="pageRF">
         <div className="btnFavoriteRecipes">
           <button
@@ -78,6 +78,7 @@ function ReceitasFeitas() {
                 name={ recipe.name }
                 style={ { width: '18rem' } }
                 key={ index }
+                className="cardRecipe"
               >
                 <Card.Img
                   data-testid={ `${index}-horizontal-image` }
