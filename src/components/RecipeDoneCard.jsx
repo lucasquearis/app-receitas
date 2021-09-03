@@ -61,21 +61,26 @@ export default function RecipeDoneCard({
 
   if (type === 'comida') {
     return (
-      <Link
-        to={ `/comidas/${id}` }
-        className="recipe-done-card"
-        data-testid={ `${id}-recipe-card` }
-      >
-        <img
-          width="150px"
-          src={ image }
-          alt={ name }
-          data-testid={ `${index}-horizontal-image` }
-        />
-        <div className="recipe-done-card-infos">
-          <h2 data-testid={ `${index}-horizontal-name` }>
+      <div className="recipe-done-card">
+        <Link
+          to={ `/comidas/${id}` }
+          data-testid={ `${id}-recipe-card` }
+        >
+          <img
+            width="150px"
+            src={ image }
+            alt={ name }
+            data-testid={ `${index}-horizontal-image` }
+          />
+          <h2
+            data-testid={ `${index}-horizontal-name` }
+            className="name-recipe-done-card"
+          >
             {name}
           </h2>
+
+        </Link>
+        <div className="recipe-done-card-infos">
 
           <span data-testid={ `${index}-horizontal-top-text` }>
             { `${area} - ${category}` }
@@ -85,28 +90,31 @@ export default function RecipeDoneCard({
           { clickShare
             ? <span>Link copiado!</span> : renderShareButton('share-meal-btn') }
         </div>
-
-      </Link>
-
+      </div>
     );
   }
   return (
-    <Link
-      to={ `/bebidas/${id}` }
-      className="recipe-done-card"
-      data-testid={ `${id}-recipe-card` }
-    >
-      <img
-        width="150px"
-        src={ image }
-        alt={ name }
-        data-testid={ `${index}-horizontal-image` }
-      />
+    <div className="recipe-done-card">
+      <Link
+        to={ `/bebidas/${id}` }
+        data-testid={ `${id}-recipe-card` }
+      >
+        <img
+          width="150px"
+          src={ image }
+          alt={ name }
+          data-testid={ `${index}-horizontal-image` }
+        />
 
-      <div className="recipe-done-card-infos">
-        <h2 data-testid={ `${index}-horizontal-name` }>
+        <h2
+          data-testid={ `${index}-horizontal-name` }
+          className="name-recipe-done-card"
+        >
           {name}
         </h2>
+
+      </Link>
+      <div className="recipe-done-card-infos">
 
         <span data-testid={ `${index}-horizontal-top-text` }>
           { alcoholicOrNot }
@@ -115,8 +123,7 @@ export default function RecipeDoneCard({
         { renderDoneDateAndTagsName() }
         { clickShare ? <span>Link copiado!</span> : renderShareButton('share-drink-btn') }
       </div>
-
-    </Link>
+    </div>
   );
 }
 
