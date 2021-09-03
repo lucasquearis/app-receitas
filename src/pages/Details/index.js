@@ -9,6 +9,7 @@ import {
   DetailsWrapper,
   VideoWrapper,
   BtnStart,
+  Img,
 } from './style';
 
 import RecommendationCarousel from '../../components/RecommentionCarousel';
@@ -83,7 +84,7 @@ function Details({ recipeEndPoint, recommendationEndPoint }) {
 
   return (
     <DetailsWrapper>
-      <img
+      <Img
         alt={ recipe[`str${keyType}`] }
         data-testid="recipe-photo"
         src={ recipe[`str${keyType}Thumb`] }

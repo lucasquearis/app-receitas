@@ -5,7 +5,7 @@ import Principal from './pages/Principal';
 import Profile from './pages/Profile';
 import Explore from './pages/Explore';
 import NotFound from './pages/NotFound';
-import DetailsMeals from './pages/DetailsMeals';
+import Details from './pages/Details';
 import DoneRecepies from './pages/ReceitasFeitas';
 import FavoriteRecipes from './pages/ReceitasFavoritas';
 
@@ -68,7 +68,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
         exact
         path="/comidas/:id"
         render={ (props) => (
-          <DetailsMeals
+          <Details
             { ...props }
             recipeEndPoint={ MEAL_DETAIL }
             recommendationEndPoint={ DRINKS_LIST }
@@ -79,7 +79,7 @@ function Routes() { // Esse arquivo com nome "Principal" é ainda muito provisó
         exact
         path="/bebidas/:id"
         render={ (props) => (
-          <DetailsMeals
+          <Details
             { ...props }
             recipeEndPoint={ DRINK_DETAIL }
             recommendationEndPoint={ MEALS_LIST }

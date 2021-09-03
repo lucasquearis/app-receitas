@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import { CarouselWrapper, RecommendationCard } from './style';
+import { CarouselWrapper, RecommendationCard, CardTextWrapper } from './style';
 
 function RecommendationCarousel({ suggestionList }) {
   const { pathname } = useLocation();
@@ -21,12 +21,14 @@ function RecommendationCarousel({ suggestionList }) {
                 src={ item[`str${recipeType}Thumb`] }
                 alt={ `${item[`str${recipeType}`]}-suggestion-card` }
               />
-              <h2>{ item.strAlcoholic }</h2>
-              <h1
-                data-testid={ `${index}-recomendation-title` }
-              >
-                { item[`str${recipeType}`] }
-              </h1>
+              <CardTextWrapper>
+                <h2>{ item.strAlcoholic }</h2>
+                <h1
+                  data-testid={ `${index}-recomendation-title` }
+                >
+                  { item[`str${recipeType}`] }
+                </h1>
+              </CardTextWrapper>
             </RecommendationCard>
           );
         }
