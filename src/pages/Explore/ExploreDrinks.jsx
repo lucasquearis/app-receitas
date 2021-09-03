@@ -22,20 +22,30 @@ function ExploreDrinks() {
     <div>
       <Header { ...headerProps } />
       <Link to="/explorar/bebidas/ingredientes">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-        >
-          Por Ingredientes
-        </button>
+        <section className="explore-food-father">
+          <section className="explore-ingredient-drink">
+            <button
+              type="button"
+              className="explore-btn"
+              data-testid="explore-by-ingredient"
+            >
+              Por Ingredientes
+            </button>
+          </section>
+        </section>
       </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => SurpriseMe() }
-      >
-        Me Surpreenda!
-      </button>
+      <section className="explore-food-father">
+        <section className="explore-surprise-me">
+          <button
+            type="button"
+            className="explore-btn"
+            data-testid="explore-surprise"
+            onClick={ () => SurpriseMe() }
+          >
+            Me Surpreenda!
+          </button>
+        </section>
+      </section>
       <Footer />
     </div>
   );

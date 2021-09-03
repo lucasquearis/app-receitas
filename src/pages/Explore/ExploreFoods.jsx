@@ -22,28 +22,43 @@ function ExploreFoods() {
     <div>
       <Header { ...headerProps } />
       <Link to="/explorar/comidas/ingredientes">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-        >
-          Por Ingredientes
-        </button>
+        <section className="explore-food-father">
+          <section className="explore-ingredient">
+            <button
+              type="button"
+              className="explore-btn"
+              data-testid="explore-by-ingredient"
+            >
+              Por Ingredientes
+            </button>
+          </section>
+        </section>
       </Link>
       <Link to="/explorar/comidas/area">
-        <button
-          type="button"
-          data-testid="explore-by-area"
-        >
-          Por Local de Origem
-        </button>
+        <section className="explore-food-father">
+          <section className="explore-origin">
+            <button
+              type="button"
+              className="explore-btn"
+              data-testid="explore-by-area"
+            >
+              Por Local de Origem
+            </button>
+          </section>
+        </section>
       </Link>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => SurpriseMe() }
-      >
-        Me Surpreenda!
-      </button>
+      <section className="explore-food-father">
+        <section className="surprise-me">
+          <button
+            type="button"
+            className="explore-btn"
+            data-testid="explore-surprise"
+            onClick={ () => SurpriseMe() }
+          >
+            Me Surpreenda!
+          </button>
+        </section>
+      </section>
       <Footer />
     </div>
   );

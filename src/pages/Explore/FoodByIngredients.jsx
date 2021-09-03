@@ -27,15 +27,18 @@ function ExploreFoodByIngredients() {
   return (
     <div>
       <Header { ...headerProps } />
-      { ingredients.slice(0, exploreLimits).map((ingredient, index) => (
-        <IngredientsCard
-          key={ index }
-          ingredientImg={ ingredient.strIngredient }
-          ingredientName={ ingredient.strIngredient }
-          index={ index }
-          path="themealdb"
-        />
-      ))}
+      <section className="explore-ingredients-list">
+        { ingredients.slice(0, exploreLimits).map((ingredient, index) => (
+          <IngredientsCard
+            key={ index }
+            ingredientImg={ ingredient.strIngredient }
+            ingredientName={ ingredient.strIngredient }
+            index={ index }
+            path="themealdb"
+          />
+        ))}
+      </section>
+      <p className="gambi" />
       <Footer />
     </div>
   );

@@ -28,15 +28,18 @@ function ExploreDrinksByIngredients() {
   return (
     <div>
       <Header { ...headerProps } />
-      { ingredients.slice(0, exploreLimits).map((ingredient, index) => (
-        <IngredientsCard
-          key={ index }
-          ingredientImg={ ingredient.strIngredient1 }
-          ingredientName={ ingredient.strIngredient1 }
-          index={ index }
-          path="thecocktaildb"
-        />
-      ))}
+      <section className="explore-ingredients-list">
+        { ingredients.slice(0, exploreLimits).map((ingredient, index) => (
+          <IngredientsCard
+            key={ index }
+            ingredientImg={ ingredient.strIngredient1 }
+            ingredientName={ ingredient.strIngredient1 }
+            index={ index }
+            path="thecocktaildb"
+          />
+        ))}
+      </section>
+      <p className="gambi" />
       <Footer />
     </div>
   );

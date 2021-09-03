@@ -1,0 +1,69 @@
+.explore-food {
+  background-image: url('../../images//farhad-ibrahimzade-pID2j99Vyy0-unsplash.jpg');
+  opacity: 0.9;
+  padding: 80px;
+}
+
+.explore-ingredient-drink {
+  background-image: url('../../images//rohit-tandon-fLNStYwV01Y-unsplash.jpg');
+  opacity: 0.9;
+  padding: 90px;
+}
+
+.explore-ingredient {
+  background-image: url('../../images//marisol-benitez-QvkAQTNj4zk-unsplash.jpg');
+  opacity: 0.9;
+  padding: 62px;
+}
+
+.explore-origin {
+  background-image: url('../../images//vernon-raineil-cenzon-6rEPAbrXNaY-unsplash.jpg');
+  opacity: 0.9;
+  padding: 62px;
+}
+
+.surprise-me {
+  background-image: url('../../images//brooke-cagle-ZuQnhpFjvHI-unsplash.jpg');
+  opacity: 0.9;
+  padding: 70px;
+}
+
+.explore-drink {
+  background-image: url('../../images/kelsey-knight-udj2tD3WKsY-unsplash.jpg');
+  opacity: 0.9;
+  padding: 80px;
+}
+
+.explore-surprise-me {
+  background-image: url('../../images//etty-fidele-nWdhpUrXxYY-unsplash.jpg');
+  opacity: 0.9;
+  padding: 100px;
+}
+
+.explore-drink-father {
+  background-color: black;
+}
+
+.explore-food-father {
+  background-color: black;
+}
+
+.explore-food-btn {
+  font-size: 1.8em;
+  font-weight: 400;
+  text-shadow: 0.1px 4px 5px grey;
+}
+
+.explore-btn {
+  color: white;
+  font-size: 1em;
+  font-weight: 700;
+  text-shadow: 0.1px 4px 5px black;
+}
+
+.explore-ingredients-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  text-align: center;
+}

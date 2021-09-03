@@ -15,5 +15,6 @@ nav {
 }
 
 .title {
+  text-align: center;
   text-shadow: 0.2px 5px 5px lightgray;
 }
