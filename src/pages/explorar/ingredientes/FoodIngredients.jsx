@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import MenuFooter from '../../../components/MenuFooter';
 import Header from '../../../components/Header';
 import { fetchFood } from '../../../services/FetchFood';
+import '../style/style.css';
 
 export default function IgredientesFood() {
   const history = useHistory();
@@ -18,8 +19,8 @@ export default function IgredientesFood() {
   }, []);
   return (
     <div>
-      <Header title="Explorar Origem" />
-      <div>
+      <Header title="Explorar Ingredientes" />
+      <div className="card-img">
         {ingredients.length > 0 && ingredients.map((ingredient, index) => (
           <div
             role="presentation"
@@ -30,7 +31,6 @@ export default function IgredientesFood() {
           >
             <img
               data-testid={ `${index}-card-img` }
-              width="100px"
               src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
               alt=""
             />
