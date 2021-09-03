@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(5px);
 
   h3 {
     margin-top: 50px;

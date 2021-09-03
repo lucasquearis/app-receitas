@@ -1,6 +1,7 @@
 .details, .in-progress {
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(5px);
 
   .drink-img,
   .meal-img {

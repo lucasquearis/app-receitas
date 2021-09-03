@@ -6,6 +6,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 
 .details .drink-img,
@@ -403,6 +405,8 @@ iframe {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 
 .profile-body h3 {
@@ -812,6 +816,8 @@ iframe {
   border-radius: 5px;
   -webkit-box-shadow: 0 2px 5px black;
           box-shadow: 0 2px 5px black;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 
 .done-recipe-card button {
@@ -861,8 +867,6 @@ main {
 }
 
 body {
-  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40' patternTransform='scale(13) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(154, 16%, 91%, 1)'/><path d='M20-5V5m0 30v10m20-30v10M0 15v10'  stroke-linejoin='round' stroke-linecap='round' stroke-width='0.5' stroke='hsla(354, 70%, 54%, 1)' fill='none'/><path d='M-5 40H5M-5 0H5m30 0h10M35 40h10M15 20h10'  stroke-linejoin='round' stroke-linecap='round' stroke-width='0.5' stroke='hsla(178, 100%, 33%, 1)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-117,-182)' fill='url(%23a)'/></svg>");
-  background-attachment: fixed;
   border: 0;
   padding: 0;
   height: 100vh;
