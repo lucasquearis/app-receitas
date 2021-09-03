@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import { string, objectOf } from 'prop-types';
-import whiteHeart from '../images/whiteHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import blackHeart from '../images/blackHeartIcon.svg';
 import favoriteRecipes from '../helper/setLocalStorage';
 
-function Button({ recipe }) {
+function Button({ recipe, type }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
     localStorage.setItem('favoriteRecipes',
-      JSON.stringify(favoriteRecipes(recipe, 'comida')));
+      JSON.stringify(favoriteRecipes(recipe, type)));
   };
 
   const handleShare = async () => {
@@ -41,7 +41,7 @@ function Button({ recipe }) {
       >
         <img
           data-testid="favorite-btn"
-          src={ isFavorite ? blackHeart : whiteHeart }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
           alt="Favorite"
         />
       </button>
@@ -54,6 +54,7 @@ function Button({ recipe }) {
 
 Button.propTypes = {
   recipe: objectOf(string).isRequired,
+  type: string.isRequired,
 };
 
 export default Button;

@@ -4,6 +4,8 @@ import getDrink from '../../services/FetchDrinks';
 export const CHANGE_FOOD_SEARCH = 'CHANGE_FOOD_SEARCH';
 export const GET_FOODS_SUCCESS = 'GET_FOODS_SUCCESS';
 export const GET_DRINKS_SUCCESS = 'GET_DRINKS_SUCCESS';
+export const CHANGE_SHOWBAR = 'CHANGE_SHOWBAR';
+export const GET_URL = 'GET_URL';
 
 export const getFoodsSuccess = (meal) => ({
   type: GET_FOODS_SUCCESS,
@@ -13,6 +15,11 @@ export const getFoodsSuccess = (meal) => ({
 export const getDrinksSuccess = (cocktail) => ({
   type: GET_DRINKS_SUCCESS,
   payload: cocktail,
+});
+
+export const changeShowBar = (showBar) => ({
+  type: CHANGE_SHOWBAR,
+  payload: showBar,
 });
 
 export function getFoodsApi(api) {

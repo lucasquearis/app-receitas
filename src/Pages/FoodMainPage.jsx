@@ -8,13 +8,13 @@ import '../styles/MainPages.css';
 
 function FoodMainPage() {
   const { meals } = useSelector((state) => state.foodcategories);
-  const { mealsBar } = useSelector((state) => state.mainPage);
+  const { mealsBar, showBar } = useSelector((state) => state.mainPage);
 
   if (!meals) {
     return <Spinner animation="border" variant="danger" />;
   }
 
-  if (!mealsBar) {
+  if (!showBar) {
     return (
       <div className="container">
         <FoodHeader title="Comidas" />
@@ -37,7 +37,7 @@ function FoodMainPage() {
     <div className="container">
       <FoodHeader title="Comidas" />
       <section className="cards">
-        { mealsBar.map(({ meal }) => (
+        { mealsBar.map((meal) => (
           <RecipeCard
             key={ meal.idMeal }
             id={ meal.idMeal }

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { changeFoodSearch } from '../Redux/actions/apiActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFoodSearch, getFoodsApi } from '../Redux/actions/apiActions';
+import mealApi from '../services/GetUrl';
 
 function FoodSearchBar() {
   const [search, setSearch] = useState({ type: '', entry: '' });
+  const { foodSearch: { type, entry } } = useSelector((state) => state.mainPage);
   const dispatch = useDispatch();
 
   return (
@@ -53,6 +55,7 @@ function FoodSearchBar() {
         className="btn btn-outline-danger btn-sm"
         onClick={ () => {
           dispatch(changeFoodSearch(search));
+          dispatch(getFoodsApi(mealApi(type, entry)));
         } }
       >
         Buscar

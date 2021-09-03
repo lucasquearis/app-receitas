@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import CategoryFoodButtons from './CategoryFoodButtons';
 import FoodSearchBar from './FoodSearchBar';
+import { changeShowBar } from '../Redux/actions/apiActions';
 
 function FoodHeader({ title }) {
   const [showBar, setShowBar] = useState(false);
 
+  const dispatch = useDispatch();
+
   const renderSearchBar = () => (showBar ? setShowBar(false) : setShowBar(true));
+  const handleClick = () => {
+    renderSearchBar();
+    dispatch(changeShowBar(showBar));
+  };
 
   if (!showBar) {
     return (
-      <section>
+      <section className="fixing">
         <header className="header-container">
           <Link to="/perfil">
             <img
@@ -27,7 +35,7 @@ function FoodHeader({ title }) {
             className="header-button"
             type="button"
             data-test-id="search-top-btn"
-            onClick={ renderSearchBar }
+            onClick={ handleClick }
           >
             <img src={ searchIcon } alt="search icon" />
           </button>
@@ -38,7 +46,7 @@ function FoodHeader({ title }) {
   }
 
   return (
-    <section>
+    <section className="fixing">
       <header className="header-container">
         <Link to="/perfil">
           <img

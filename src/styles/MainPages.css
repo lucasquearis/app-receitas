@@ -4,7 +4,7 @@
 main body section {
   display: grid;
   grid-template-areas: 'header''btns''cards''footer';
-  grid-template-rows: 0.2fr 0.6fr 3fr 0.2fr;
+  grid-template-rows: 0.6fr 0.6fr 3fr 0.6fr;
   max-height: 640px;
   max-width: 360px;
 }
@@ -26,7 +26,8 @@ main body section {
   display: flex;
   grid-area: header;
   justify-content: space-around;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
 }
 
@@ -46,8 +47,8 @@ main body section {
   display: flex;
   font-size: 8px;
   grid-area: btns;
-  margin-top: 68px;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
 }
 
@@ -57,6 +58,7 @@ main body section {
   display: flex;
   flex-flow: row wrap;
   grid-area: cards;
+  justify-content: space-around;
   scroll-behavior: smooth;
   width: 100%;
 }
@@ -77,12 +79,12 @@ footer {
   color: #940022;
   font-family: Leckerli One , Courier New , Courier , monospace;
   font-size: 16px;
-  height: 180px;
+  height: 160px;
   margin: 5px;
   padding: 15px;
   text-align: center;
   text-decoration: none;
-  width: 30%;
+  width: 35%;
 }
 
 .recipe-cards img {
@@ -93,7 +95,12 @@ footer {
 
 .search-bar {
   background-color: white;
-  margin-top: 68px;
-  position: fixed;
+  grid-area: btns;
+  position: sticky;
+}
+
+.fixing {
+  position: sticky;
+  top: 0;
 }
 
