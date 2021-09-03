@@ -61,13 +61,6 @@ function DrinkDetails() {
         <div className="icons">
           <ShareButton />
           <FavoriteButtonDrinks />
-          {/* <button type="button" onClick={ favorited }>
-            <img
-              src={ favorite ? blackHeartIcon : whiteHeartIcon }
-              data-testid="favorite-btn"
-              alt="botão de favorito"
-            />
-          </button> */}
         </div>
         <p data-testid="recipe-category">
           { getRecipe.strCategory === 'Cocktail'

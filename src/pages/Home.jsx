@@ -5,6 +5,7 @@ function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [button, setButton] = useState(true);
+  // localStorage.setItem('doneRecipes', []);
 
   useEffect(() => {
     const validEntries = () => {

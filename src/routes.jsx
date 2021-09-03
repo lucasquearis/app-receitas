@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Food from './pages/Food';
 import Home from './pages/Home';
 import Drink from './pages/Drink';
+import NotFound from './pages/NotFound';
 import Explore from './pages/Explore';
 import Perfil from './pages/Perfil';
 import DoneRecipes from './pages/DoneRecipes';
@@ -26,12 +27,16 @@ function Routes() {
       <Route exact path="/explorar/comidas/area" component={ ExploreArea } />
       <Route exact path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
       <Route exact path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
-      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
       <Route path="/bebidas/:id/in-progress" component={ DrinkInProgess } />
+      <Route path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/comidas/:id" component={ FoodDetails } />
       <Route path="/bebidas/:id" component={ DrinkDetails } />
       <Route exact path="/explorar" component={ Explore } />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
+      <Route path="/explorar/comidas/area" component={ ExploreArea } />
+      <Route path="/explorar/comidas/ingredientes" component={ null } />
+      <Route path="/explorar/bebidas/ingredientes" component={ null } />
       <Route path="/explorar/comidas" component={ ExploreFoods } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route exact path="/perfil" component={ Perfil } />
