@@ -1,7 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-// import MutationObserver from '@sheerun/mutationobserver-shim';
 import Header from '../components/Header';
 import renderWithRouter from './renderWithRouter';
 

@@ -8,8 +8,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './pageCSS/FavoriteRecipes.css';
 
 export default function FavoriteRecipes() {
-  const allRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  // const recipes = allRecipes ? allRecipes : [];
+  const allRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const [favoriteRecipes, setFavoriteRecipes] = useState(allRecipes || []);
   const [linkShare, setLinkShare] = useState(false);
 

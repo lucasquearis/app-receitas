@@ -33,7 +33,6 @@ const FavoriteButton = (props) => {
         image,
       };
       setFavoriteRecipe(true);
-      console.log('Favoritou');
       localStorage
         .setItem('favoriteRecipes', JSON
           .stringify([...parseLocalStorage, defaultRecipe]));
@@ -43,7 +42,6 @@ const FavoriteButton = (props) => {
         .setItem('favoriteRecipes', JSON
           .stringify([...removeFavorite]));
       setFavoriteRecipe(false);
-      console.log('Desfavoritou');
     }
   };
   return (

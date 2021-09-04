@@ -3,7 +3,6 @@ import './pageCSS/Login.css';
 import { Link } from 'react-router-dom';
 import loginBackground from '../images/loginBg.png';
 
-// prettier-ignore
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
   const [btnDisabled, setBtnDisabled] = useState(true);

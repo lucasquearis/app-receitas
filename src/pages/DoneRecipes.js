@@ -7,10 +7,8 @@ import './pageCSS/DoneRecipes.css';
 
 export default function DoneRecipes() {
   const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  // const recipes = allRecipes ? allRecipes : [];
   const [filteredRecipes, setFilteredRecipes] = useState(allRecipes || []);
   const [linkShare, setLinkShare] = useState(false);
-  // const { pathname } = useLocation();
 
   const setFilterData = async ({ target: { value } }) => {
     if (value === 'comida' || value === 'bebida') {

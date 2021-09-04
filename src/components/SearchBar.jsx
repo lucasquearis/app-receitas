@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from '../context/index';
-// FOODS API'S
 import nameSearchFoodsAPI
   from '../services/Header-SearchBar/Foods/searchFoodsByName';
 import ingredientSearcFoodsAPI
   from '../services/Header-SearchBar/Foods/searchFoodsByIngredient';
 import firstLetterSearchFoodsAPI
   from '../services/Header-SearchBar/Foods/searchFoodsByFirstLetter';
-// DRINKS API'S
 import firstLetterSearchDrinkdsAPI
   from '../services/Header-SearchBar/Drinks/searchDrinksByFirstLetter';
 import ingredientSearchDrinksAPI

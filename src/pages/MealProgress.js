@@ -38,6 +38,29 @@ const MealProgress = (props) => {
     }
   }, [checkedIngredients, resultAPIMeals]);
 
+  const handleClick = () => {
+    const { strArea, strCategory, strMeal, strMealThumb, strTags } = resultAPIMeals[0];
+    const parseLocalStorage = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    const data = new Date();
+    const defaultObject = {
+      id,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      doneDate: `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()} `,
+      tags: [strTags],
+    };
+    const verifyLocalStorage = parseLocalStorage.some((recipe) => recipe.id === id);
+    if (!verifyLocalStorage) {
+      localStorage
+        .setItem('doneRecipes', JSON
+          .stringify([...parseLocalStorage, defaultObject]));
+    }
+  };
+
   return (
     <>
       <MealsIngredientsList id={ id } />
@@ -45,6 +68,7 @@ const MealProgress = (props) => {
         <button
           data-testid="finish-recipe-btn"
           type="button"
+          onClick={ handleClick }
           disabled={ !isFullyChecked }
         >
           Finalizar Receita

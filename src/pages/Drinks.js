@@ -51,7 +51,7 @@ export default function Drinks() {
     if (!resultList) {
       return (
         feed.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-          <Link key={ idDrink } to={ `bebidas/${idDrink}` }>
+          <Link key={ Math.random() } to={ `bebidas/${idDrink}` }>
             <div
               data-testid={ `${index}-recipe-card` }
             >

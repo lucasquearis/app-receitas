@@ -38,6 +38,36 @@ const DrinkProgress = (props) => {
     }
   }, [checkedIngredients, resultAPIDrinks]);
 
+  const handleClick = () => {
+    const {
+      strAlcoholic,
+      strCategory,
+      strDrink,
+      strDrinkThumb,
+      strTags,
+    } = resultAPIDrinks[0];
+
+    const parseLocalStorage = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    const data = new Date();
+    const defaultObject = {
+      id,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()} `,
+      tags: [strTags],
+    };
+    const verifyLocalStorage = parseLocalStorage.some((recipe) => recipe.id === id);
+    if (!verifyLocalStorage) {
+      localStorage
+        .setItem('doneRecipes', JSON
+          .stringify([...parseLocalStorage, defaultObject]));
+    }
+  };
+
   return (
     <>
       <DrinksIngredientsList id={ id } />
@@ -46,6 +76,7 @@ const DrinkProgress = (props) => {
           data-testid="finish-recipe-btn"
           type="button"
           disabled={ !isFullyChecked }
+          onClick={ handleClick }
         >
           Finalizar Receita
         </button>

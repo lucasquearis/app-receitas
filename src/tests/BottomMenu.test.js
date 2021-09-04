@@ -1,6 +1,5 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 import BottomMenu from '../components/BottomMenu';
 import DoneRecipes from '../pages/DoneRecipes';
 import DrinkProcess from '../pages/DrinkProgress';
