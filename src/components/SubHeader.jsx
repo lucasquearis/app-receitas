@@ -8,7 +8,7 @@ export default function SubHeader({ title }) {
     <div className="header__first-div">
       <Link
         to="/perfil"
-        className="profile-btn"
+        className="header__profile-btn"
       >
         <img
           alt="button-icon"

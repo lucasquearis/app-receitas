@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './componentCSS/HeaderFood.css';
 import SearchBar from './SearchBar';
 import searchIcon from '../images/searchIcon.svg';
+import headerBg from '../images/header_bg.png';
 import SubHeader from './SubHeader';
 
 export default function Header({ title }) {
@@ -10,11 +10,12 @@ export default function Header({ title }) {
   const showSearch = () => setSearch(!search);
 
   return (
-    <header className="header-food">
+    <header className="header__whole-div">
+      <img className="header__background_img" src={ headerBg } alt="Header Bg" />
       <SubHeader title={ title } />
       <button
         type="button"
-        className="search-btn"
+        className="header__search-btn"
         onClick={ showSearch }
       >
         <img

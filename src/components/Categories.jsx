@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import MyContext from '../context';
-import './componentCSS/Categories.css';
 
 export default function Categories() {
   const { setFeed, setFeedDataFilter } = useContext(MyContext);
@@ -72,7 +71,7 @@ export default function Categories() {
         onClick={ () => setFeedDataFilter([]) }
 
       >
-        ALL
+        All
 
       </button>
       {categoriesMeals.map((item, index) => (

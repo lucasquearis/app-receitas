@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MealsIngredientsList from '../components/MealsIngredientsList';
 import MyContext from '../context';
-import './pageCSS/MealProcess.css';
 
 const MealProgress = (props) => {
   const { match: { params: { id } } } = props;
@@ -62,19 +61,20 @@ const MealProgress = (props) => {
   };
 
   return (
-    <>
+    <div className="recipe-details__div">
       <MealsIngredientsList id={ id } />
       <Link to="/receitas-feitas">
         <button
           data-testid="finish-recipe-btn"
           type="button"
           onClick={ handleClick }
+          className="recipe-progress__finish-btn"
           disabled={ !isFullyChecked }
         >
           Finalizar Receita
         </button>
       </Link>
-    </>
+    </div>
   );
 };
 

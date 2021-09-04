@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import DrinksIngredientsList from '../components/DrinkIngredientsList';
 import MyContext from '../context';
-import './pageCSS/DrinkProcess.css';
 
 const DrinkProgress = (props) => {
   const { match: { params: { id } } } = props;
@@ -69,24 +68,25 @@ const DrinkProgress = (props) => {
   };
 
   return (
-    <>
+    <div className="recipe-details__div">
       <DrinksIngredientsList id={ id } />
       <Link to="/receitas-feitas">
         <button
           data-testid="finish-recipe-btn"
           type="button"
+          className="recipe-progress__finish-btn"
           disabled={ !isFullyChecked }
           onClick={ handleClick }
         >
           Finalizar Receita
         </button>
       </Link>
-    </>
+    </div>
   );
 };
-
-export default DrinkProgress;
 
 DrinkProgress.propTypes = {
   id: PropTypes.number,
 }.isRequired;
+
+export default DrinkProgress;

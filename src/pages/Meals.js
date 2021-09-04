@@ -7,7 +7,6 @@ import Categories from '../components/Categories';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import searchFoodsByIngredient from
   '../services/Header-SearchBar/Foods/searchFoodsByIngredient';
-import './pageCSS/Meals.css';
 
 export default function Meals() {
   const {
@@ -55,9 +54,11 @@ export default function Meals() {
           <Link key={ Math.random() } to={ `comidas/${idMeal}` }>
             <div
               data-testid={ `${index}-recipe-card` }
+              className="card__recipe-card"
             >
               <img
                 data-testid={ `${index}-card-img` }
+                className="card__recipe-thumb"
                 src={ strMealThumb }
                 alt={ strMeal }
               />
@@ -102,11 +103,13 @@ export default function Meals() {
       </ul>
     );
   };
+
   return (
     <>
       <Header title="Comidas" />
       <Categories />
       {renderList()}
+      <br />
       <BottomMenu />
     </>
   );

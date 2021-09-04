@@ -5,8 +5,6 @@ import HeaderNoSearch from '../components/HeaderNoSearch';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-import './pageCSS/FavoriteRecipes.css';
-
 export default function FavoriteRecipes() {
   const allRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const [favoriteRecipes, setFavoriteRecipes] = useState(allRecipes || []);
@@ -32,28 +30,40 @@ export default function FavoriteRecipes() {
   const cardMeals = (recipe, index) => {
     const { id, type, name, image, area, category } = recipe;
     return (
-      <div key={ index } className="done__card">
-        <Link to={ `/${type}s/${id}` }>
-          <img
-            data-testid={ `${index}-horizontal-image` }
-            className="done__card-img"
-            src={ image }
-            alt={ name }
-          />
-        </Link>
-
-        <div className="done__card-infos">
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}` }
-          </span>
-          <Link
-            data-testid={ `${index}-horizontal-name` }
-            to={ `/${type}s/${id}` }
-          >
-            { name }
-          </Link>
-          <div className="favorite__card-share">
-
+      <div className="done__article">
+        <div key={ index } className="done__card">
+          <div className="done__card-thumb">
+            <Link to={ `/${type}s/${id}` }>
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                className="done__card-img"
+                src={ image }
+                alt={ name }
+              />
+            </Link>
+          </div>
+        </div>
+        <div className="done__text-section">
+          <div className="done__card-infos">
+            <span data-testid={ `${index}-horizontal-top-text` }>
+              { `${area} - ${category}` }
+            </span>
+            <Link
+              data-testid={ `${index}-horizontal-name` }
+              to={ `/${type}s/${id}` }
+            >
+              { name }
+            </Link>
+          </div>
+          <div className="done__card-share">
+            <input
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              className="details__icon-favorite"
+              type="image"
+              src={ blackHeartIcon }
+              alt="Favorite"
+              onClick={ () => removeFavorites(id) }
+            />
             <button
               onClick={ () => {
                 copy(`http://localhost:3000/${type}s/${id}`);
@@ -67,15 +77,7 @@ export default function FavoriteRecipes() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-            { linkShare && 'Link copiado!' }
-            <input
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              className="icon-favorite"
-              type="image"
-              src={ blackHeartIcon }
-              alt="Favorite"
-              onClick={ () => removeFavorites(id) }
-            />
+            { linkShare && <span className="favorite__copy-span">Link copiado!</span>}
           </div>
         </div>
       </div>
@@ -104,6 +106,14 @@ export default function FavoriteRecipes() {
             { name }
           </Link>
           <div className="favorite__card-share">
+            <input
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              className="details__icon-favorite"
+              type="image"
+              src={ blackHeartIcon }
+              alt="Favorite"
+              onClick={ () => removeFavorites(id) }
+            />
             <button
               onClick={ () => {
                 copy(`http://localhost:3000/${type}s/${id}`);
@@ -117,15 +127,7 @@ export default function FavoriteRecipes() {
                 data-testid={ `${index}-horizontal-share-btn` }
               />
             </button>
-            { linkShare && 'Link copiado!' }
-            <input
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              className="icon-favorite"
-              type="image"
-              src={ blackHeartIcon }
-              alt="Favorite"
-              onClick={ () => removeFavorites(id) }
-            />
+            { linkShare && <span className="favorite__copy-span">Link copiado!</span>}
           </div>
         </div>
       </div>
@@ -144,8 +146,8 @@ export default function FavoriteRecipes() {
 
   return (
     <div>
-      <HeaderNoSearch title="Receitas Favoritas" />
-      <section className="favorite__filter-btn-section">
+      <HeaderNoSearch title="Favoritos" />
+      <section className="favorite__category-container ">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -172,7 +174,7 @@ export default function FavoriteRecipes() {
         </button>
 
       </section>
-      <section>
+      <section className="favorite__cards-div">
         { fillCardsMealsAndDrinks() }
       </section>
     </div>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import './pageCSS/MealRecipeDetails.css';
 import { Link } from 'react-router-dom';
-import searchMealAPI
-  from '../services/Header-SearchBar/Foods/searchFoodId';
+import searchMealAPI from '../services/Header-SearchBar/Foods/searchFoodId';
 import RecomendationCard from '../components/RecomendationCard';
 import Loading from '../components/Loading';
 import FavoriteButton from '../components/FavoriteButton';
@@ -56,33 +54,36 @@ export default function MealRecipeDetails(props) {
       .includes('strIngredient'));
     const listMeasures = keysIngredients.filter((item) => item.includes('strMeasure'));
     return (
-      <>
+      <div className="recipe-details__div">
         <h1 data-testid="recipe-title">{strMeal}</h1>
         <img
-          className="cards"
+          className="recipe-details__thumb"
           data-testid="recipe-photo"
           src={ strMealThumb }
           alt={ strMeal }
         />
-        <FavoriteButton
-          id={ id }
-          type="comida"
-          category={ strCategory }
-          alcoholicOrNot=""
-          name={ strMeal }
-          image={ strMealThumb }
-          favoriteRecipe={ favoriteRecipe }
-          setFavoriteRecipe={ setFavoriteRecipe }
-          area={ strArea }
-        />
-        <ShareButton
-          id={ id }
-          setLinkShare={ setLinkShare }
-          type="comidas"
-        />
-        { linkShare && 'Link copiado!' }
-        <span>Categoria: </span>
-        <span data-testid="recipe-category">{strCategory}</span>
+        <div className="recipe-details__category-name-div">
+          <p data-testid="recipe-category"><b>{strCategory}</b></p>
+        </div>
+        <div className="recipe-details__share-and-favorite-btn-div">
+          <ShareButton
+            id={ id }
+            setLinkShare={ setLinkShare }
+            type="comidas"
+          />
+          { linkShare && 'Link copiado!' }
+          <FavoriteButton
+            id={ id }
+            type="comida"
+            category={ strCategory }
+            alcoholicOrNot=""
+            name={ strMeal }
+            image={ strMealThumb }
+            favoriteRecipe={ favoriteRecipe }
+            setFavoriteRecipe={ setFavoriteRecipe }
+            area={ strArea }
+          />
+        </div>
         <ul>
           {listIngredients.map((ingredient, index) => {
             if (resultMealRecipe[0][ingredient]) {
@@ -102,7 +103,7 @@ export default function MealRecipeDetails(props) {
             return false;
           })}
         </ul>
-        <h2>Instruções:</h2>
+        <h2>Instruções</h2>
         <p data-testid="instructions">{strInstructions}</p>
         <iframe
           data-testid="video"
@@ -113,11 +114,12 @@ export default function MealRecipeDetails(props) {
           frameBorder="0"
           allowFullScreen
         />
+        <h2 className="recipe-details__combine-title">Combina com...</h2>
         <RecomendationCard page="meals" />
-        <div className="div-btn-start-recipe">
+        <div className="details__div-btn-start-recipe">
           <Link to={ `/comidas/${id}/in-progress` }>
             <button
-              className="finish-btn"
+              className="recipe-details__finish-btn"
               data-testid="start-recipe-btn"
               type="button"
             >
@@ -125,7 +127,7 @@ export default function MealRecipeDetails(props) {
             </button>
           </Link>
         </div>
-      </>
+      </div>
     );
   }
   return <Loading />;

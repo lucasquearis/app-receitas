@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
-import './pageCSS/ExploreMealsByIngredient.css';
 import fetchIngredients from '../services/Header-SearchBar/Foods/fetchIngredients';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import Loading from '../components/Loading';
@@ -21,21 +20,23 @@ export default function ExploreMealsByIngredient() {
   const cardIngredient = (index, data) => {
     const { strIngredient } = data;
     return (
-      <Link
-        to="/comidas"
-        onClick={ () => setSelectedIngredient(strIngredient) }
-      >
-        <div
-          data-testid={ `${index}-ingredient-card` }
+      <div className="explore-ingredients--meals__card">
+        <Link
+          to="/comidas"
+          onClick={ () => setSelectedIngredient(strIngredient) }
         >
-          <img
-            src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-            alt={ strIngredient }
-            data-testid={ `${index}-card-img` }
-          />
-          <p data-testid={ `${index}-card-name` }>{ strIngredient }</p>
-        </div>
-      </Link>
+          <div
+            data-testid={ `${index}-ingredient-card` }
+          >
+            <img
+              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+              alt={ strIngredient }
+              data-testid={ `${index}-card-img` }
+            />
+            <h3 data-testid={ `${index}-card-name` }>{ strIngredient }</h3>
+          </div>
+        </Link>
+      </div>
     );
   };
 
@@ -48,8 +49,11 @@ export default function ExploreMealsByIngredient() {
   if (ingredients) {
     return (
       <>
-        <HeaderNoSearch title="Explorar Ingredientes" />
-        { fillIngredients() }
+        <HeaderNoSearch title="Ingredientes" />
+        <div className="explore-ingredients--meals__card-div">
+          { fillIngredients() }
+        </div>
+        <br />
         <BottomMenu />
       </>
     );

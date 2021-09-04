@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import BottomMenu from '../components/BottomMenu';
-import './pageCSS/ExploreMealsByOrigin.css';
 import fetchCategories from '../services/Category/fetchCategories';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import fetchFoodbyArea from '../services/Header-SearchBar/Foods/fetchFoodbyArea';
@@ -67,14 +66,18 @@ export default function ExploreMealsByOrigin() {
   );
   return (
     <>
-      <Header title="Explorar Origem" />
-      <select
-        data-testid="explore-by-area-dropdown"
-        onChange={ setDataMealsctedArea }
-      >
-        { fillSelectItems() }
-      </select>
-      { fillCardsMeals() }
+      <Header title="Origem" />
+      <div className="origin__card-div">
+        <select
+          data-testid="explore-by-area-dropdown"
+          onChange={ setDataMealsctedArea }
+          className="origin__country-selection"
+          id="multi-state"
+        >
+          { fillSelectItems() }
+        </select>
+        { fillCardsMeals() }
+      </div>
       <BottomMenu />
     </>
   );

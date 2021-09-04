@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import fetchDrinks from '../services/Header-SearchBar/Drinks/fetchDrinks';
 import fetchFoods from '../services/Header-SearchBar/Foods/fetchFoods';
 import Loading from './Loading';
-import './componentCSS/RecomendationCard.css';
 
 const RecomendationCard = ({ page }) => {
   const [recomendationCards, setRecomendationCards] = useState([]);

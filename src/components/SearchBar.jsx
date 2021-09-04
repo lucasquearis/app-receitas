@@ -82,19 +82,9 @@ function SearchBar({ title }) {
 
   return (
     <div className="header__second-div">
-      <form>
+      <form className="pure-form header__search-form">
         <fieldset>
-          <label htmlFor="search-input">
-            Filtrar por:
-            <input
-              name="searchInput"
-              data-testid="search-input"
-              onChange={ handleChange }
-              value={ searchInput }
-            />
-          </label>
           <label htmlFor="searchByIngredient">
-            Ingrediente
             <input
               id="searchByIngredient"
               name="searchBy"
@@ -102,9 +92,9 @@ function SearchBar({ title }) {
               type="radio"
               onClick={ () => setSearchBy('ingredient') }
             />
+            Ingrediente
           </label>
           <label htmlFor="searchByName">
-            Nome
             <input
               id="searchByName"
               name="searchBy"
@@ -112,9 +102,9 @@ function SearchBar({ title }) {
               type="radio"
               onClick={ () => setSearchBy('name') }
             />
+            Nome
           </label>
           <label htmlFor="searchByFirstLetter">
-            Primeira letra
             <input
               name="searchBy"
               id="searchByFirstLetter"
@@ -122,13 +112,24 @@ function SearchBar({ title }) {
               type="radio"
               onClick={ () => setSearchBy('firstLetter') }
             />
+            Primeira letra
+          </label>
+          <label htmlFor="search-input">
+            <input
+              placeholder="Termo da pesquisa..."
+              name="searchInput"
+              data-testid="search-input"
+              onChange={ handleChange }
+              value={ searchInput }
+            />
           </label>
           <button
             onClick={ handleClick }
-            data-testid="exec-search-btn"
+            className="pure-button-primary"
+            data-testid="exec-header__search-btn"
             type="button"
           >
-            Search
+            Pesquisar
           </button>
         </fieldset>
       </form>

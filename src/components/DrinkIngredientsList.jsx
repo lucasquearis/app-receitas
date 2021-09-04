@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import searchDrinkId from '../services/Header-SearchBar/Drinks/searchDrinkId';
-import '../pages/pageCSS/MealProcess.css';
 import Loading from './Loading';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
@@ -52,6 +51,7 @@ const DrinksIngredientsList = ({ id }) => {
               name] } }));
       return false;
     }
+
     localStorage.setItem('inProgressRecipes', JSON
       .stringify({
         ...getLocalStorage(),
@@ -86,24 +86,34 @@ const DrinksIngredientsList = ({ id }) => {
         .includes('strMeasure'));
     return (
       <>
-        <img data-testid="recipe-photo" src={ strDrinkThumb } alt={ strDrink } />
-        <FavoriteButton
-          id={ id }
-          type="bebida"
-          category={ strCategory }
-          alcoholicOrNot={ strAlcoholic }
-          name={ strDrink }
-          image={ strDrinkThumb }
-          favoriteRecipe={ favoriteRecipe }
-          setFavoriteRecipe={ setFavoriteRecipe }
-        />
-        <ShareButton
-          id={ id }
-          setLinkShare={ setLinkShare }
-          type="bebidas"
-        />
         <h1 data-testid="recipe-title">{ strDrink }</h1>
-        <p data-testid="recipe-category">{ strCategory }</p>
+        <img
+          data-testid="recipe-photo"
+          className="recipe-details__thumb"
+          src={ strDrinkThumb }
+          alt={ strDrink }
+        />
+        <div className="recipe-progress__category-name-div">
+          <p data-testid="recipe-category">{ strCategory }</p>
+        </div>
+        <div className="recipe-progress__share-and-favorite-btn-div">
+          <FavoriteButton
+            id={ id }
+            type="bebida"
+            category={ strCategory }
+            alcoholicOrNot={ strAlcoholic }
+            name={ strDrink }
+            image={ strDrinkThumb }
+            favoriteRecipe={ favoriteRecipe }
+            setFavoriteRecipe={ setFavoriteRecipe }
+          />
+          <ShareButton
+            id={ id }
+            setLinkShare={ setLinkShare }
+            type="bebidas"
+          />
+          {linkShare && 'Link copiado!'}
+        </div>
         <ul className="progress__checkbox-list">
           {filteredIngredients.map((ingredient, index) => {
             if (resultAPIDrinks[0][ingredient]) {
@@ -133,8 +143,8 @@ const DrinksIngredientsList = ({ id }) => {
             return true;
           })}
         </ul>
+        <h2>Instruções</h2>
         <p data-testid="instructions">{ strInstructions }</p>
-        {linkShare && 'Link copiado!'}
       </>
     );
   }

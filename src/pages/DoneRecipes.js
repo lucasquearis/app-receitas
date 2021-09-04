@@ -3,7 +3,6 @@ import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import HeaderNoSearch from '../components/HeaderNoSearch';
 import shareIcon from '../images/shareIcon.svg';
-import './pageCSS/DoneRecipes.css';
 
 export default function DoneRecipes() {
   const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -32,6 +31,7 @@ export default function DoneRecipes() {
             alt={ name }
           />
         </Link>
+
         <div className="done__card-infos">
           <div className="done__card-share">
             <span data-testid={ `${index}-horizontal-top-text` }>
@@ -131,8 +131,8 @@ export default function DoneRecipes() {
 
   return (
     <div>
-      <HeaderNoSearch title="Receitas Feitas" />
-      <section className="done__filter-btn-section">
+      <HeaderNoSearch title="Finalizadas" />
+      <section className="done__filter-btn-section favorite__category-container">
         <button
           type="button"
           data-testid="filter-by-all-btn"
