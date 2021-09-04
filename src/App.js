@@ -56,7 +56,7 @@ function App() {
           path="/app-receitas/receitas-favoritas"
           component={ FavoriteRecipes }
         />
-        <Route path="app-receitas/*" component={ NotFound } />
+        <Route path="*" component={ NotFound } />
       </Switch>
     </Provider>
   );
