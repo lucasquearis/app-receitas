@@ -18,7 +18,7 @@ export default function Profile() {
         <img src={ NaaruNoBg } className="profile__icon" alt="Naaru Profile" />
         <spam data-testid="profile-email" className="profile__email">{ user.email }</spam>
         <section className="profile__btn-section">
-          <Link to="/receitas-feitas">
+          <Link to="/app-receitas/receitas-feitas">
             <button
               type="button"
               className="pure-button pure-button-primary"
@@ -27,7 +27,7 @@ export default function Profile() {
               Receitas feitas
             </button>
           </Link>
-          <Link to="/receitas-favoritas">
+          <Link to="/app-receitas/receitas-favoritas">
             <button
               type="button"
               className="pure-button pure-button-primary"
@@ -36,7 +36,7 @@ export default function Profile() {
               Receitas favoritas
             </button>
           </Link>
-          <Link to="/">
+          <Link to="/app-receitas/">
             <button
               type="button"
               className="pure-button pure-button-logout"

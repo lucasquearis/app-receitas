@@ -7,7 +7,7 @@ export default function Card({ id, str, strThumb, idType }) {
   const history = useHistory();
   const { location: { pathname } } = history;
   return (
-    <Link to={ `${pathname}/${idType}` }>
+    <Link to={ `app-receitas/${pathname}/${idType}` }>
       <div
         className="card__recipe-card"
         data-testid={ `${id}-recipe-card` }

@@ -24,7 +24,7 @@ export default function ExploreMeals() {
         <div className="explore-meals__link-button">
           <Link
             data-testid="explore-by-ingredient"
-            to="/explorar/comidas/ingredientes"
+            to="/app-receitas/explorar/comidas/ingredientes"
           >
             Por ingredientes
           </Link>
@@ -32,7 +32,7 @@ export default function ExploreMeals() {
         <div className="explore-meals__link-button">
           <Link
             data-testid="explore-by-area"
-            to="/explorar/comidas/area"
+            to="/app-receitas/explorar/comidas/area"
           >
             Por local de origem
           </Link>
@@ -40,7 +40,7 @@ export default function ExploreMeals() {
         <div className="explore-meals__link-button">
           <Link
             data-testid="explore-surprise"
-            to={ `/comidas/${random}` }
+            to={ `/app-receitas/comidas/${random}` }
           >
             Surpreenda-me!
           </Link>

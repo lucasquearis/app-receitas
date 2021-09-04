@@ -21,7 +21,10 @@ export default function ExploreDrinksByIngredient() {
     const { strIngredient1 } = data;
     return (
       <div className="explore-ingredients--drinks__card">
-        <Link to="/bebidas" onClick={ () => setSelectedIngredient(strIngredient1) }>
+        <Link
+          to="/app-receitas/bebidas"
+          onClick={ () => setSelectedIngredient(strIngredient1) }
+        >
           <div
             data-testid={ `${index}-ingredient-card` }
           >

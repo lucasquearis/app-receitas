@@ -63,7 +63,7 @@ const MealProgress = (props) => {
   return (
     <div className="recipe-details__div">
       <MealsIngredientsList id={ id } />
-      <Link to="/receitas-feitas">
+      <Link to="/app-receitas/receitas-feitas">
         <button
           data-testid="finish-recipe-btn"
           type="button"

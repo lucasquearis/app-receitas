@@ -23,7 +23,7 @@ export default function DoneRecipes() {
     const { id, type, name, image, area, category, doneDate, tags } = recipe;
     return (
       <div key={ id } className="done__card">
-        <Link to={ `/${type}s/${id}` }>
+        <Link to={ `/app-receitas/${type}s/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="done__card-img"
@@ -54,7 +54,7 @@ export default function DoneRecipes() {
           </div>
           <Link
             data-testid={ `${index}-horizontal-name` }
-            to={ `/${type}s/${id}` }
+            to={ `/app-receitas/${type}s/${id}` }
           >
             { name }
           </Link>
@@ -80,7 +80,7 @@ export default function DoneRecipes() {
 
     return (
       <div key={ id } className="done__card">
-        <Link to={ `/${type}s/${id}` }>
+        <Link to={ `/app-receitas/${type}s/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="done__card-img"
@@ -109,7 +109,7 @@ export default function DoneRecipes() {
           </div>
           <Link
             data-testid={ `${index}-horizontal-name` }
-            to={ `/${type}s/${id}` }
+            to={ `/app-receitas/${type}s/${id}` }
           >
             { name }
           </Link>

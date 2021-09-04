@@ -9,7 +9,7 @@ export default function HeaderNoSearch({ title }) {
     <header className="header__header-no-search">
       <img className="header__background_img" src={ headerBg } alt="Header Bg" />
       <Link
-        to="/perfil"
+        to="/app-receitas/perfil"
         className="header__profile-btn"
       >
         <img

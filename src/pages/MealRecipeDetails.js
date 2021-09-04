@@ -117,7 +117,7 @@ export default function MealRecipeDetails(props) {
         <h2 className="recipe-details__combine-title">Combina com...</h2>
         <RecomendationCard page="meals" />
         <div className="details__div-btn-start-recipe">
-          <Link to={ `/comidas/${id}/in-progress` }>
+          <Link to={ `/app-receitas/comidas/${id}/in-progress` }>
             <button
               className="recipe-details__finish-btn"
               data-testid="start-recipe-btn"

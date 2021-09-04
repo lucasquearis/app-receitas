@@ -11,14 +11,14 @@ export default function Explore() {
       <HeaderNoSearch title="Explorar" />
       <div className="explore">
         <div className="explore__link-button">
-          <Link data-testid="explore-food" to="/explorar/comidas">
+          <Link data-testid="explore-food" to="/app-receitas/explorar/comidas">
             <img src={ mealIcon } className="explore__icons" alt="Explore Meal Icon" />
             <br />
             Explorar Comidas
           </Link>
         </div>
         <div className="explore__link-button">
-          <Link data-testid="explore-drinks" to="/explorar/bebidas">
+          <Link data-testid="explore-drinks" to="/app-receitas/explorar/bebidas">
             <img src={ drinkIcon } className="explore__icons" alt="Explore Drink Icon" />
             <br />
             Explorar Bebidas

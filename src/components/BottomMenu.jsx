@@ -14,9 +14,23 @@ export default function BottomMenu() {
   return (
     <footer data-testid="footer" className="footer__navigation">
       <div className="footer__bottom-menu-icon-div">
-        {renderIconLink('/comidas', mealIcon, 'Ícone de Comidas', 'food-bottom-btn')}
-        {renderIconLink('/explorar', exploreIcon, 'Ícone Explorar', 'explore-bottom-btn')}
-        {renderIconLink('/bebidas', drinkIcon, 'Ícone de Bebidas', 'drinks-bottom-btn')}
+        {renderIconLink(
+          '/app-receitas/comidas',
+          mealIcon,
+          'Ícone de Comidas',
+          'food-bottom-btn',
+        )}
+        {renderIconLink(
+          '/app-receitas/explorar',
+          exploreIcon, 'Ícone Explorar',
+          'explore-bottom-btn',
+        )}
+        {renderIconLink(
+          '/app-receitas/bebidas',
+          drinkIcon,
+          'Ícone de Bebidas',
+          'drinks-bottom-btn',
+        )}
       </div>
     </footer>
   );
