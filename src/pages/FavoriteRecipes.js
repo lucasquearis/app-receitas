@@ -33,7 +33,7 @@ export default function FavoriteRecipes() {
       <div className="done__article">
         <div key={ index } className="done__card">
           <div className="done__card-thumb">
-            <Link to={ `/app-receitas/${type}s/${id}` }>
+            <Link to={ `/${type}s/${id}` }>
               <img
                 data-testid={ `${index}-horizontal-image` }
                 className="done__card-img"
@@ -50,7 +50,7 @@ export default function FavoriteRecipes() {
             </span>
             <Link
               data-testid={ `${index}-horizontal-name` }
-              to={ `/app-receitas/${type}s/${id}` }
+              to={ `/${type}s/${id}` }
             >
               { name }
             </Link>
@@ -66,7 +66,7 @@ export default function FavoriteRecipes() {
             />
             <button
               onClick={ () => {
-                copy(`https://lucasquearis.github.io/app-receitas/${type}s/${id}`);
+                copy(`https://lucasquearis.github.io/${type}s/${id}`);
                 setLinkShare(true);
               } }
               type="button"
@@ -89,7 +89,7 @@ export default function FavoriteRecipes() {
 
     return (
       <div key={ index } className="done__card">
-        <Link to={ `/app-receitas/${type}s/${id}` }>
+        <Link to={ `/${type}s/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
             className="done__card-img"
@@ -101,7 +101,7 @@ export default function FavoriteRecipes() {
           <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span>
           <Link
             data-testid={ `${index}-horizontal-name` }
-            to={ `/app-receitas/${type}s/${id}` }
+            to={ `/${type}s/${id}` }
           >
             { name }
           </Link>
@@ -116,7 +116,7 @@ export default function FavoriteRecipes() {
             />
             <button
               onClick={ () => {
-                copy(`https://lucasquearis.github.io/app-receitas/${type}s/${id}`);
+                copy(`https://lucasquearis.github.io/${type}s/${id}`);
                 setLinkShare(true);
               } }
               type="button"

@@ -46,7 +46,7 @@ export default function ExploreMealsByOrigin() {
 
   const fillCardsMeals = () => (
     mealsData.slice(0, max).map((meal, index) => (
-      <Link to={ `/app-receitas/comidas/${meal.idMeal}` } key={ index }>
+      <Link to={ `/comidas/${meal.idMeal}` } key={ index }>
         <div
           className="card-container"
           data-testid={ `${index}-recipe-card` }

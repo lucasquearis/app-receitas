@@ -40,7 +40,7 @@ export default function ExploreMeals() {
         <div className="explore-meals__link-button">
           <Link
             data-testid="explore-surprise"
-            to={ `/app-receitas/comidas/${random}` }
+            to={ `/comidas/${random}` }
           >
             Surpreenda-me!
           </Link>

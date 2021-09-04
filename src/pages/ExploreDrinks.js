@@ -33,7 +33,7 @@ export default function ExploreDrinks() {
         <div className="explore-drinks__link-button">
           <Link
             data-testid="explore-surprise"
-            to={ `/app-receitas/bebidas/${random}` }
+            to={ `/bebidas/${random}` }
           >
             Surpreenda-me!
           </Link>
