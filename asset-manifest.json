@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/app-receitas/static/css/main.6819ec4c.chunk.css",
-    "main.js": "/app-receitas/static/js/main.e0eb28c9.chunk.js",
-    "main.js.map": "/app-receitas/static/js/main.e0eb28c9.chunk.js.map",
+    "main.js": "/app-receitas/static/js/main.6490869c.chunk.js",
+    "main.js.map": "/app-receitas/static/js/main.6490869c.chunk.js.map",
     "runtime-main.js": "/app-receitas/static/js/runtime-main.0f6d492e.js",
     "runtime-main.js.map": "/app-receitas/static/js/runtime-main.0f6d492e.js.map",
     "static/css/2.95258f03.chunk.css": "/app-receitas/static/css/2.95258f03.chunk.css",
     "static/js/2.847b558f.chunk.js": "/app-receitas/static/js/2.847b558f.chunk.js",
     "static/js/2.847b558f.chunk.js.map": "/app-receitas/static/js/2.847b558f.chunk.js.map",
     "index.html": "/app-receitas/index.html",
-    "precache-manifest.4e5ac53b499013e5f40ce7ffddaea079.js": "/app-receitas/precache-manifest.4e5ac53b499013e5f40ce7ffddaea079.js",
+    "precache-manifest.f7e087e58c484c5fa056a03c777a961e.js": "/app-receitas/precache-manifest.f7e087e58c484c5fa056a03c777a961e.js",
     "service-worker.js": "/app-receitas/service-worker.js",
     "static/css/2.95258f03.chunk.css.map": "/app-receitas/static/css/2.95258f03.chunk.css.map",
     "static/css/main.6819ec4c.chunk.css.map": "/app-receitas/static/css/main.6819ec4c.chunk.css.map",
@@ -30,6 +30,6 @@
     "static/css/2.95258f03.chunk.css",
     "static/js/2.847b558f.chunk.js",
     "static/css/main.6819ec4c.chunk.css",
-    "static/js/main.e0eb28c9.chunk.js"
+    "static/js/main.6490869c.chunk.js"
   ]
 }
