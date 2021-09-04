@@ -68,7 +68,7 @@ export default function Login() {
               value={ loginInfo.password }
             />
           </label>
-          <Link to="/app-receitas/comidas">
+          <Link to="/comidas">
             <button
               type="button"
               className="pure-button pure-button-primary"

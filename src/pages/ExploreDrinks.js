@@ -25,7 +25,7 @@ export default function ExploreDrinks() {
         <div className="explore-drinks__link-button">
           <Link
             data-testid="explore-by-ingredient"
-            to="/app-receitas/explorar/bebidas/ingredientes"
+            to="/explorar/bebidas/ingredientes"
           >
             Por ingredientes
           </Link>

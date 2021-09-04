@@ -7,7 +7,7 @@ export default function SubHeader({ title }) {
   return (
     <div className="header__first-div">
       <Link
-        to="/app-receitas/perfil"
+        to="/perfil"
         className="header__profile-btn"
       >
         <img

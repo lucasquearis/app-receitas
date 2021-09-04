@@ -26,34 +26,34 @@ function App() {
   return (
     <Provider>
       <Switch>
-        <Route exact path="/app-receitas/" component={ Login } />
-        <Route exact path="/app-receitas/comidas" component={ Meals } />
-        <Route exact path="/app-receitas/bebidas" component={ Drinks } />
-        <Route exact path="/app-receitas/comidas/:id" component={ MealRecipeDetails } />
-        <Route exact path="/app-receitas/bebidas/:id" component={ DrinkRecipeDetails } />
-        <Route path="/app-receitas/comidas/:id/in-progress" component={ MealProgress } />
-        <Route path="/app-receitas/bebidas/:id/in-progress" component={ DrinkProgress } />
-        <Route exact path="/app-receitas/explorar" component={ Explore } />
-        <Route exact path="/app-receitas/explorar/comidas" component={ ExploreMeals } />
-        <Route exact path="/app-receitas/explorar/bebidas" component={ ExploreDrinks } />
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/comidas" component={ Meals } />
+        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas/:id" component={ MealRecipeDetails } />
+        <Route exact path="/bebidas/:id" component={ DrinkRecipeDetails } />
+        <Route path="/comidas/:id/in-progress" component={ MealProgress } />
+        <Route path="/bebidas/:id/in-progress" component={ DrinkProgress } />
+        <Route exact path="/explorar" component={ Explore } />
+        <Route exact path="/explorar/comidas" component={ ExploreMeals } />
+        <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route
-          path="/app-receitas/explorar/comidas/ingredientes"
+          path="/explorar/comidas/ingredientes"
           component={ ExploreMealsByIngredient }
         />
         <Route
-          path="/app-receitas/explorar/bebidas/ingredientes"
+          path="/explorar/bebidas/ingredientes"
           component={ ExploreDrinksByIngredient }
         />
         <Route
-          path="/app-receitas/explorar/comidas/area"
+          path="/explorar/comidas/area"
           component={ ExploreMealsByOrigin }
         />
-        <Route path="/app-receitas/explorar/bebidas/area" component={ NotFound } />
-        <Route exact path="/app-receitas/perfil" component={ Profile } />
-        <Route exact path="/app-receitas/receitas-feitas" component={ DoneRecipes } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
+        <Route exact path="/perfil" component={ Profile } />
+        <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         <Route
           exact
-          path="/app-receitas/receitas-favoritas"
+          path="/receitas-favoritas"
           component={ FavoriteRecipes }
         />
         <Route path="*" component={ NotFound } />

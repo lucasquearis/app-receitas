@@ -70,7 +70,7 @@ const DrinkProgress = (props) => {
   return (
     <div className="recipe-details__div">
       <DrinksIngredientsList id={ id } />
-      <Link to="/app-receitas/receitas-feitas">
+      <Link to="/receitas-feitas">
         <button
           data-testid="finish-recipe-btn"
           type="button"

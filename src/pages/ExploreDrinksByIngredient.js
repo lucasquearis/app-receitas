@@ -22,7 +22,7 @@ export default function ExploreDrinksByIngredient() {
     return (
       <div className="explore-ingredients--drinks__card">
         <Link
-          to="/app-receitas/bebidas"
+          to="/bebidas"
           onClick={ () => setSelectedIngredient(strIngredient1) }
         >
           <div
