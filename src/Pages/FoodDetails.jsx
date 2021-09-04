@@ -13,6 +13,7 @@ function FoodDetails() {
   const [doneRecipe, setDoneRecipe] = useState(true);
   const [progressRecipe, setProgressRecipe] = useState(false);
 
+
   const { id } = useParams();
   const { push } = useHistory();
 
