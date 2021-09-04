@@ -66,7 +66,7 @@ export default function FavoriteRecipes() {
             />
             <button
               onClick={ () => {
-                copy(`http://localhost:3000/${type}s/${id}`);
+                copy(`https://lucasquearis.github.io/app-receitas/${type}s/${id}`);
                 setLinkShare(true);
               } }
               type="button"
@@ -116,7 +116,7 @@ export default function FavoriteRecipes() {
             />
             <button
               onClick={ () => {
-                copy(`http://localhost:3000/${type}s/${id}`);
+                copy(`https://lucasquearis.github.io/app-receitas/${type}s/${id}`);
                 setLinkShare(true);
               } }
               type="button"

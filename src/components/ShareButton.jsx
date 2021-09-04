@@ -8,7 +8,7 @@ const ShareButton = ({ id, setLinkShare, type }) => (
     data-testid="share-btn"
     className="details__share-btn"
     onClick={ () => {
-      copy(`http://localhost:3000/${type}/${id}`);
+      copy(`https://lucasquearis.github.io/app-receitas/${type}/${id}`);
       setLinkShare(true);
     } }
     type="button"

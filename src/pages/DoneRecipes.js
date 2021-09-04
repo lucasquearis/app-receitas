@@ -39,7 +39,7 @@ export default function DoneRecipes() {
             </span>
             <button
               onClick={ () => {
-                copy(`http://localhost:3000/${type}s/${id}`);
+                copy(`https://lucasquearis.github.io/app-receitas/${type}s/${id}`);
                 setLinkShare(true);
               } }
               type="button"
@@ -94,7 +94,7 @@ export default function DoneRecipes() {
             <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span>
             <button
               onClick={ () => {
-                copy(`http://localhost:3000/${type}s/${id}`);
+                copy(`https://lucasquearis.github.io/app-receitas/${type}s/${id}`);
                 setLinkShare(true);
               } }
               type="button"
