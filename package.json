@@ -22,7 +22,11 @@
     "react-scripts": "3.4.1",
     "websocket-extensions": ">=0.1.4"
   },
+
+  "homepage": "https://lucasquearis.github.io/app-receitas",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "cy": "cypress run",
     "cy:open": "cypress open",
     "start": "react-scripts start",
@@ -56,6 +60,7 @@
     "eslint-config-trybe-frontend": "1.2.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "fs-extra": "^9.0.1",
+    "gh-pages": "^3.2.3",
     "mocha": "^8.0.1",
     "mochawesome": "^6.1.1",
     "mochawesome-merge": "^4.1.0",
