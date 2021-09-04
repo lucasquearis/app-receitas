@@ -1,0 +1,10 @@
+.footer__navigation {
+  bottom: 0;
+  position: fixed;
+}
+
+.footer__navigation img {
+  height: 35px;
+  margin: 0 27.5px;
+  padding: 5px;
+}

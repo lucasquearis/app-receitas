@@ -1,0 +1,22 @@
+.login__bg {
+  height: 580px;
+  width: 360px;
+}
+
+.login__body form {
+  left: 85px;
+  position: absolute;
+  top: 450px;
+}
+
+form input {
+  border-radius: 20px;
+  text-align: center;
+}
+
+.pure-button-primary {
+  background-color: #821d30;
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 197px;
+}

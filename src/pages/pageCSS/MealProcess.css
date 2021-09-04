@@ -1,0 +1,12 @@
+.progress__checkbox-list {
+  margin-top: 10px;
+}
+
+.progress__checkbox-list input {
+  margin-right: 10px;
+}
+
+.progress__checkbox-list input:checked + span {
+  text-decoration: line-through;
+}
+

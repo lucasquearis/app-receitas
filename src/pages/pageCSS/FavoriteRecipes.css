@@ -1,0 +1,41 @@
+.done__card-img {
+  width: 50vw;
+}
+
+.favorite__filter-btn-section {
+  margin-top: 60px;
+}
+
+.done__card {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.done__card-infos {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+}
+
+.done__card-share {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.done__card-tags {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.favorite__card-share {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.icon-share, .icon-favorite {
+  width: 1.25rem;
+}

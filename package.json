@@ -11,9 +11,10 @@
     "bootstrap": "^4.5.3",
     "clipboard-copy": "^3.1.0",
     "history": "^4.7.2",
+    "jest": "^24.9.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
     "react-logger": "^1.1.0",
@@ -29,7 +30,8 @@
     "test": "react-scripts test",
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx"
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
+    "lint:styles": "npx stylelint '**/*.css'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,7 +50,7 @@
   },
   "devDependencies": {
     "clipboardy": "^2.1.0",
-    "cypress": "^3.7.0",
+    "cypress": "^3.8.3",
     "cypress-multi-reporters": "^1.4.0",
     "eslint": "6.8.0",
     "eslint-config-trybe-frontend": "1.2.0",

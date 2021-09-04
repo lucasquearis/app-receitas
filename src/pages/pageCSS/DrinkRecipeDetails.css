@@ -1,0 +1,33 @@
+.no-empty-for-lint-only {
+  display: none;
+}
+
+.cards {
+  width: 200px;
+}
+
+.div-btn-start-recipe {
+  height: 80px;
+}
+
+.favorite-btn {
+  background-color: white;
+  border: none;
+  padding: 0;
+}
+
+.share-btn {
+  background-color: white;
+  border: none;
+  padding: 0;
+}
+
+.finish-btn {
+  background-color: #6ce34f;
+  border: none;
+  bottom: 0;
+  display: block;
+  height: 70px;
+  position: fixed;
+  width: 360px;
+}

@@ -1,0 +1,9 @@
+.no-empty-for-lint-only {
+  display: none;
+}
+
+.explore {
+  display: grid;
+  justify-content: center;
+  margin-top: 100px;
+}
