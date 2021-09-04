@@ -51,7 +51,7 @@ export default function Drinks() {
     if (!resultList) {
       return (
         feed.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-          <Link key={ Math.random() } to={ `app-receitas/bebidas/${idDrink}` }>
+          <Link key={ Math.random() } to={ `/bebidas/${idDrink}` }>
             <div
               data-testid={ `${index}-recipe-card` }
               className="card__recipe-card"
@@ -81,7 +81,7 @@ export default function Drinks() {
           const MAX_ITENS = 12;
           if (index < MAX_ITENS) {
             return (
-              <Link key={ item.idDrink } to={ `app-receitas/bebidas${item.idDrink}` }>
+              <Link key={ item.idDrink } to={ `/bebidas${item.idDrink}` }>
                 <li
                   data-testid={ `${index}-recipe-card` }
                 >
